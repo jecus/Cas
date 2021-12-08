@@ -47,6 +47,7 @@ namespace CAS.UI.UIControls.MainControls
             this.panelBottomAircraftContainer = new System.Windows.Forms.Panel();
             this.pictureBoxSplitter = new System.Windows.Forms.PictureBox();
             this.pictureBoxTopAircraft = new System.Windows.Forms.PictureBox();
+            this.pictureBoxTopText = new System.Windows.Forms.PictureBox();
             this.copyrightControlWide1 = new CAS.UI.UIControls.Auxiliary.CopyrightControl();
             labelCodeName = new System.Windows.Forms.Label();
             labelName = new System.Windows.Forms.Label();
@@ -61,6 +62,7 @@ namespace CAS.UI.UIControls.MainControls
             this.panelSplitterContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSplitter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTopAircraft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTopText)).BeginInit();
             this.SuspendLayout();
             // 
             // labelCodeName
@@ -102,7 +104,7 @@ namespace CAS.UI.UIControls.MainControls
             this.panelBottomContentContainer.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottomContentContainer.Location = new System.Drawing.Point(0, 239);
             this.panelBottomContentContainer.Name = "panelBottomContentContainer";
-            this.panelBottomContentContainer.Size = new System.Drawing.Size(1021, 358);
+            this.panelBottomContentContainer.Size = new System.Drawing.Size(1021, 300);
             this.panelBottomContentContainer.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -186,13 +188,23 @@ namespace CAS.UI.UIControls.MainControls
             // 
             // pictureBoxTopAircraft
             // 
-            this.pictureBoxTopAircraft.Image = global::CAS.UI.Properties.Resources.LoginPageTopAircraft;
-            this.pictureBoxTopAircraft.Location = new System.Drawing.Point(205, 0);
+            this.pictureBoxTopAircraft.Image = global::CAS.UI.Properties.Resources.ÃåðáTop;
+            this.pictureBoxTopAircraft.Location = new System.Drawing.Point(185, 0);
             this.pictureBoxTopAircraft.Name = "pictureBoxTopAircraft";
             this.pictureBoxTopAircraft.Size = new System.Drawing.Size(341, 368);
             this.pictureBoxTopAircraft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBoxTopAircraft.TabIndex = 3;
             this.pictureBoxTopAircraft.TabStop = false;
+            // 
+            // pictureBoxTopText
+            // 
+            this.pictureBoxTopText.Image = global::CAS.UI.Properties.Resources.ÔÑÎ;
+            this.pictureBoxTopText.Location = new System.Drawing.Point(553, 440);
+            this.pictureBoxTopText.Name = "pictureBoxTopAircraft";
+            this.pictureBoxTopText.Size = new System.Drawing.Size(341, 368);
+            this.pictureBoxTopText.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBoxTopText.TabIndex = 3;
+            this.pictureBoxTopText.TabStop = false;
             // 
             // copyrightControlWide1
             // 
@@ -209,9 +221,10 @@ namespace CAS.UI.UIControls.MainControls
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.panelDescription);
+            //this.Controls.Add(this.panelDescription);
             this.Controls.Add(this.panelBottomContentContainer);
             this.Controls.Add(this.pictureBoxTopAircraft);
+            this.Controls.Add(this.pictureBoxTopText);
             this.Controls.Add(this.copyrightControlWide1);
             this.Name = "UILoginPage";
             this.Size = new System.Drawing.Size(1021, 637);
@@ -224,6 +237,7 @@ namespace CAS.UI.UIControls.MainControls
             this.panelSplitterContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSplitter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTopAircraft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTopText)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,6 +250,7 @@ namespace CAS.UI.UIControls.MainControls
         private Panel panelLoginControlContainer;
         private ReferenceUILoginControl referenceLoginControl;
         private PictureBox pictureBoxTopAircraft;
+        private PictureBox pictureBoxTopText;
         private Panel panelDescription;
         private PictureBox pictureBoxBottomAircraft;
         private Panel panelBottomAircraftContainer;

@@ -547,4 +547,10 @@
   <data name="DocumentGear" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DocumentGear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ГербTop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\гербtop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ФСО" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\фсо.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -300,8 +300,10 @@ namespace CAS.UI.UIControls.Auxiliary
             // panelConnectionSettingsContainer
             //
             panelConnectionSettingsContainer.TabIndex = 2;
+            //panelConnectionSettingsContainer.Location =
+                //new Point(PADDING, panelLoginPasswordContainer.Top + panelLoginPasswordContainer.Height + 10);
             panelConnectionSettingsContainer.Location =
-                new Point(PADDING, panelLoginPasswordContainer.Top + panelLoginPasswordContainer.Height + 10);
+                new Point(PADDING, panelLoginPasswordContainer.Top + panelLoginPasswordContainer.Height - 10);
             panelConnectionSettingsContainer.Size = new Size(Width - 2 * PADDING, 200);
             panelConnectionSettingsContainer.BackColor = Color.Transparent;
             //panelConnectionSettingsContainer.Visible = false;
@@ -313,7 +315,7 @@ namespace CAS.UI.UIControls.Auxiliary
             labelLogin.Font = labelFont;
             labelLogin.ForeColor = Color.White;
             labelLogin.TextAlign = ContentAlignment.MiddleLeft;
-            labelLogin.Text = "User name:";
+            labelLogin.Text = "Login:";
             //
             // labelPassword
             //
@@ -343,7 +345,7 @@ namespace CAS.UI.UIControls.Auxiliary
             labelServerName.Font = labelFont;
             labelServerName.ForeColor = Color.White;
             labelServerName.TextAlign = ContentAlignment.MiddleLeft;
-            labelServerName.Text = "Server name:";
+            labelServerName.Text = "Server:";
             //
             // textBoxLogin
             //

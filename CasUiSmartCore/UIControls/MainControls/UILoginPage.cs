@@ -110,10 +110,17 @@ namespace CAS.UI.UIControls.MainControls
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
-            int aircraftOffset = -50;
+            int aircraftOffset = -500;
             int descriptionOffset = 50;
             pictureBoxTopAircraft.Left = (Width - pictureBoxTopAircraft.Width) / 2 + aircraftOffset;
             pictureBoxTopAircraft.Top = (panelBottomContentContainer.Top - pictureBoxTopAircraft.Height) / 2;
+
+            //pictureBoxTopText.Left = (Width - pictureBoxTopText.Width) / 2 + aircraftOffset;
+            //pictureBoxTopText.Top = (panelBottomContentContainer.Top - pictureBoxTopText.Height) / 2;
+
+            pictureBoxTopText.Top = pictureBoxTopAircraft.Top + (pictureBoxTopAircraft.Height - pictureBoxTopText.Height) / 2;
+            pictureBoxTopText.Left = pictureBoxTopAircraft.Left + pictureBoxTopAircraft.Width + descriptionOffset;
+
             panelDescription.Top = pictureBoxTopAircraft.Top + (pictureBoxTopAircraft.Height - panelDescription.Height) / 2;
             panelDescription.Left = pictureBoxTopAircraft.Left + pictureBoxTopAircraft.Width + descriptionOffset;
         }
