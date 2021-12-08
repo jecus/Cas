@@ -77,113 +77,10 @@ namespace CAS.UI
 
         static Program()
         {
-	        var exePath = Path.GetDirectoryName(Application.ExecutablePath);
-	        var path = Path.Combine(exePath, "AppSettings.json");
-	        var json = File.ReadAllText(path);
-	        GlobalObjects.Config = JsonConvert.DeserializeObject<JObject>(json);
-
-	        AuditContext auditContext = null;
-
-			try
-	        {
-		        auditContext = new AuditContext((string)GlobalObjects.Config["ConnectionStrings"]["Audit"]);
-			}
-	        catch {}
-	        GlobalObjects.AuditRepository = new AuditRepository(auditContext);
-	        GlobalObjects.AuditContext = auditContext;
-
-			var environment = DbTypes.CasEnvironment = new CasEnvironment();
-			environment.AuditRepository = GlobalObjects.AuditRepository;
-			environment.ApiProvider = new ApiProvider((string)GlobalObjects.Config["ConnectionStrings"]["ScatTest"]);
-
-			var nonRoutineJobDataAccess = new NonRoutineJobDataAccess(environment.Loader, environment.Keeper);
-			var itemsRelationsDataAccess = new ItemsRelationsDataAccess(environment);
-			var filesDataAccess = new FilesDataAccess(environment.NewLoader);
-			var workPackageRecordsDataAccess = new WorkPackageRecordsDataAccess(environment);
-			
-
-			var storeService = new StoreCore(environment);
-			var aircraftService = new AircraftsCore(environment.Loader, environment.NewKeeper, environment.NewLoader);
-			var compontntService = new ComponentCore(environment, environment.Loader, environment.NewLoader, environment.NewKeeper, aircraftService, itemsRelationsDataAccess);
-			var averageUtilizationService = new AverageUtilizationCore(aircraftService, storeService, compontntService);
-			var directiveService = new DirectiveCore(environment.NewKeeper, environment.NewLoader, environment.Keeper,  environment.Loader, itemsRelationsDataAccess);
-			var aircraftFlightService = new AircraftFlightCore(environment, environment.Loader, environment.NewLoader, directiveService, environment.Manipulator, compontntService, environment.NewKeeper,aircraftService);
-			var flightTrackService = new FlightTrackCore(environment.NewLoader, environment.Loader, environment);
-			var calculator = new Calculator(environment,compontntService, aircraftFlightService, aircraftService);
-	        var mtopCalculator = new MTOPCalculator(calculator, aircraftService, averageUtilizationService);
-			var planOpsCalculator = new PlanOpsCalculator(environment.NewLoader, environment.NewKeeper, aircraftService,flightTrackService);
-			var performanceCalculator = new PerformanceCalculator(calculator, averageUtilizationService, mtopCalculator);
-			var packageService = new PackagesCore(environment, environment.NewKeeper, environment.Loader, aircraftService, compontntService);
-            var purchaseService = new PurchaseCore(environment, environment.NewLoader, environment.Loader, packageService, environment.NewKeeper, performanceCalculator);
-			var calcStockService = new StockCalculator(environment, environment.NewLoader, compontntService);
-			var documentService = new DocumentCore(environment, environment.NewLoader, environment.Loader, aircraftService, environment.NewKeeper, compontntService);
-	        var maintenanceService = new MaintenanceCore(environment, environment.NewLoader, environment.NewKeeper, itemsRelationsDataAccess, aircraftService);
-			var maintenanceCheckCalculator = new MaintenanceCheckCalculator(calculator, averageUtilizationService, performanceCalculator);
-			var analystService = new AnalystCore(compontntService, maintenanceService, directiveService, maintenanceCheckCalculator, performanceCalculator);
-	        var discrepanciesService = new DiscrepanciesCore(environment.Loader, environment.NewLoader, directiveService,  aircraftFlightService);
-			var kitsService = new KitsCore(environment, environment.Loader, environment.NewKeeper, compontntService, nonRoutineJobDataAccess);
-			var smsService = new SMSCore(environment.Manipulator);
-	        var personelService = new PersonnelCore(environment);
-			var transferRecordCore = new TransferRecordCore(environment.NewLoader, environment.NewKeeper, compontntService, aircraftService, calculator, storeService, filesDataAccess);		
-			var bindedItemsService = new BindedItemsCore(compontntService, directiveService, maintenanceService);
-			var performanceService = new PerformanceCore(environment.NewKeeper, environment.Keeper, calculator, bindedItemsService);
-			var workPackageService = new WorkPackageCore(environment, environment.NewLoader, maintenanceService, environment.NewKeeper, calculator, compontntService, aircraftService, nonRoutineJobDataAccess, directiveService, filesDataAccess, performanceCalculator, performanceService, bindedItemsService, workPackageRecordsDataAccess, mtopCalculator, averageUtilizationService);
-			var nonRoutineJobService = new NonRoutineJobCore(environment, workPackageService, nonRoutineJobDataAccess, environment.NewLoader);
-			var auditService = new AuditCore(environment, environment.Loader, environment.NewLoader, environment.NewKeeper, calculator, performanceCalculator, performanceService);
-
-			DbTypes.AircraftsCore = aircraftService;
-
-			GlobalObjects.CasEnvironment = environment;
-            GlobalObjects.PackageCore = packageService;
-            GlobalObjects.PurchaseCore = purchaseService;
-	        GlobalObjects.ComponentCore = compontntService;
-	        GlobalObjects.AnalystCore = analystService;
-	        GlobalObjects.StockCalculator = calcStockService;
-	        GlobalObjects.DocumentCore = documentService;
-	        GlobalObjects.AuditCore = auditService;
-	        GlobalObjects.MaintenanceCore = maintenanceService;
-	        GlobalObjects.WorkPackageCore = workPackageService;
-	        GlobalObjects.NonRoutineJobCore = nonRoutineJobService;
-	        GlobalObjects.DirectiveCore = directiveService;
-	        GlobalObjects.AircraftFlightsCore = aircraftFlightService;
-	        GlobalObjects.DiscrepanciesCore = discrepanciesService;
-	        GlobalObjects.KitsCore = kitsService;
-	        GlobalObjects.SmsCore = smsService;
-	        GlobalObjects.PersonnelCore = personelService;
-	        GlobalObjects.TransferRecordCore = transferRecordCore;
-	        GlobalObjects.AircraftsCore = aircraftService;
-	        GlobalObjects.ItemsRelationsDataAccess = itemsRelationsDataAccess;
-	        GlobalObjects.StoreCore = storeService;
-	        GlobalObjects.BindedItemsCore = bindedItemsService;
-	        GlobalObjects.AverageUtilizationCore = averageUtilizationService;
-	        GlobalObjects.MaintenanceCheckCalculator = maintenanceCheckCalculator;
-	        GlobalObjects.MTOPCalculator = mtopCalculator;
-	        GlobalObjects.PerformanceCalculator = performanceCalculator;
-	        GlobalObjects.PlanOpsCalculator = planOpsCalculator;
-	        GlobalObjects.PerformanceCore = performanceService;
-	        GlobalObjects.FlightTrackCore = flightTrackService;
-
-			environment.SetAircraftCore(aircraftService);
-			environment.Calculator = calculator;
-            environment.Manipulator.PurchaseService = GlobalObjects.PurchaseCore;
-	        environment.Manipulator.MaintenanceCore = GlobalObjects.MaintenanceCore;
-	        environment.Manipulator.WorkPackageCore = GlobalObjects.WorkPackageCore;
-	        environment.Manipulator.AircraftFlightCore = GlobalObjects.AircraftFlightsCore;
-	        environment.Manipulator.ComponentCore = GlobalObjects.ComponentCore;
-	        environment.Manipulator.AircraftsCore = GlobalObjects.AircraftsCore;
-	        environment.Manipulator.BindedItemCore = GlobalObjects.BindedItemsCore;
-
             InitLoadingVariants();
-            InitializePresenters();
         }
 
-        private static void InitializePresenters()
-        {
-            //presenters = new Presenters(
-               // new AircraftsPresenter(), 
-               // new StoresPresenter(),
-                //new DetailsPresenter());
-        }
+
        
 
         /// <summary>
@@ -208,7 +105,7 @@ namespace CAS.UI
                                                                   }
                                                                   finally
                                                                   {
-                                                                      GlobalObjects.CasEnvironment.Disconnect();
+                                                                      GlobalObjects.CasEnvironment?.Disconnect();
                                                                   }
                                                               }
                                                               )
@@ -237,7 +134,7 @@ namespace CAS.UI
                                                                 finally
                                                                 {
                                                                     // if (ConnectionManager.IsConnected)
-                                                                    GlobalObjects.CasEnvironment.Disconnect();   
+                                                                    GlobalObjects.CasEnvironment?.Disconnect();   
                                                                 }
                                                             } 
                                                             )
@@ -329,8 +226,8 @@ namespace CAS.UI
                 _mainDispatcher.DefaultProxy.Remove(displayer, false);
             }
 
-            var user = GlobalObjects.CasEnvironment.IdentityUser;
-			if(user.ItemId > 0)
+            var user = GlobalObjects.CasEnvironment?.IdentityUser;
+			if(user?.ItemId > 0)
 				GlobalObjects.AuditRepository.WriteAsync(new SmartCore.Entities.User(user), AuditOperation.SignOut, user);
         }
 

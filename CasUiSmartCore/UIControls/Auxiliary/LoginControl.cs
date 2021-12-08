@@ -10,14 +10,50 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.Properties;
 using CAS.UI.Events;
+using CAS.UI.Helpers;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Microsoft.SqlServer.Management.Common;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SmartCore;
+using SmartCore.AircraftFlights;
+using SmartCore.Aircrafts;
+using SmartCore.Analyst;
+using SmartCore.AuditMongo;
+using SmartCore.AuditMongo.Repository;
+using SmartCore.Audits;
+using SmartCore.AverageUtilizations;
+using SmartCore.Calculations;
+using SmartCore.Calculations.MTOP;
+using SmartCore.Calculations.PerformanceCalculator;
+using SmartCore.Calculations.PlanOpsCalculator;
+using SmartCore.Calculations.StockCalculator;
+using SmartCore.Component;
+using SmartCore.DataAccesses.ItemsRelation;
+using SmartCore.DataAccesses.NonRoutines;
+using SmartCore.DataAccesses.WorkPackageRecords;
+using SmartCore.Directives;
+using SmartCore.Discrepancies;
+using SmartCore.Documents;
 using SmartCore.Entities;
+using SmartCore.Files;
+using SmartCore.Kits;
+using SmartCore.Maintenance;
 using SmartCore.Management;
 using SmartCore.Management.Settings;
+using SmartCore.NonRoutineJobs;
+using SmartCore.Packages;
+using SmartCore.Personnel;
+using SmartCore.Purchase;
+using SmartCore.RegisterPerformances;
+using SmartCore.Relation;
+using SmartCore.Sms;
+using SmartCore.Stores;
+using SmartCore.TrackCore;
+using SmartCore.TransferRec;
+using SmartCore.WorkPackages;
 using HelpEventHandler = CAS.UI.Events.HelpEventHandler;
 
 namespace CAS.UI.UIControls.Auxiliary
@@ -41,7 +77,6 @@ namespace CAS.UI.UIControls.Auxiliary
         private PictureBox pictureBoxPasswordBorder;
         private PictureBox pictureBoxLoginBorder;
         private PictureBox pictureBoxServerNameBorder;
-        private PictureBox pictureBoxAuthenticationBorder;
         private PictureBox pictureBoxConnectionStatus;
 
         private Label labelServerName;
@@ -50,7 +85,6 @@ namespace CAS.UI.UIControls.Auxiliary
         private Label labelLogin;
         private Label labelPassword;
         private ComboBox comboBoxServerName;
-        private ComboBox comboBoxAuthentication;
         private Button buttonConnect;
         private Button buttonExit;
         private HelpRequestingLink linkHelp;
@@ -230,7 +264,6 @@ namespace CAS.UI.UIControls.Auxiliary
             labelLogin = new Label();
             labelPassword = new Label();
             comboBoxServerName = new ComboBox();
-            comboBoxAuthentication = new ComboBox();
             textBoxLogin = new TextBox();
             textBoxPassword = new TextBox();
             buttonConnect = new Button();
@@ -243,7 +276,6 @@ namespace CAS.UI.UIControls.Auxiliary
             pictureBoxLoginBorder = new PictureBox();
             pictureBoxPasswordBorder = new PictureBox();
             pictureBoxServerNameBorder = new PictureBox();
-            pictureBoxAuthenticationBorder = new PictureBox();
             linkLabelShowConnectionSettings = new LinkLabel();
             //
             // labelTitle
@@ -276,7 +308,7 @@ namespace CAS.UI.UIControls.Auxiliary
                 new Point(PADDING, panelLoginPasswordContainer.Top + panelLoginPasswordContainer.Height + 10);
             panelConnectionSettingsContainer.Size = new Size(Width - 2 * PADDING, 200);
             panelConnectionSettingsContainer.BackColor = Color.Transparent;
-            panelConnectionSettingsContainer.Visible = false;
+            //panelConnectionSettingsContainer.Visible = false;
             //
             // labelLogin 
             //
@@ -307,21 +339,6 @@ namespace CAS.UI.UIControls.Auxiliary
             comboBoxServerName.FlatStyle = FlatStyle.Flat;
             comboBoxServerName.BackColor = Color.FromArgb(52, 121, 191);
             comboBoxServerName.PreviewKeyDown += EnterPressed;
-            //
-            // comboBoxAuthentication
-            //
-            comboBoxAuthentication.Size = comboBoxSize;
-            comboBoxAuthentication.Location = new Point(186, 50);
-            comboBoxAuthentication.Font = labelFont;
-            comboBoxAuthentication.ForeColor = Color.White;
-            comboBoxAuthentication.TabIndex = 7;
-            comboBoxAuthentication.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxAuthentication.Items.Add("Simple");
-            comboBoxAuthentication.Items.Add("Windows");
-            comboBoxAuthentication.FlatStyle = FlatStyle.Flat;
-            comboBoxAuthentication.BackColor = Color.FromArgb(52, 121, 191);
-            comboBoxAuthentication.SelectedIndexChanged += comboBoxAuthentication_SelectedIndexChanged;
-            comboBoxAuthentication.PreviewKeyDown += EnterPressed;
             //
             // labelServerName 
             //
@@ -376,12 +393,6 @@ namespace CAS.UI.UIControls.Auxiliary
             pictureBoxLoginBorder.Location = new Point(textBoxLogin.Left - 2, textBoxLogin.Top - 2);
             pictureBoxLoginBorder.Size = new Size(textBoxLogin.Width + 4, textBoxLogin.Height - 3);
             pictureBoxLoginBorder.BackColor = Color.White;
-            //
-            // pictureBoxAuthenticationBorder
-            //
-            pictureBoxAuthenticationBorder.Location = new Point(185, 49);
-            pictureBoxAuthenticationBorder.Size = new Size(comboBoxAuthentication.Width + 2, 28);
-            pictureBoxAuthenticationBorder.BackColor = Color.White;
             //
             // pictureBoxServerNameBorder
             //
@@ -470,8 +481,6 @@ namespace CAS.UI.UIControls.Auxiliary
             panelConnectionSettingsContainer.Controls.Add(labelServerName);
             panelConnectionSettingsContainer.Controls.Add(labelAuthentication);
             panelConnectionSettingsContainer.Controls.Add(comboBoxServerName);
-            panelConnectionSettingsContainer.Controls.Add(comboBoxAuthentication);
-            panelConnectionSettingsContainer.Controls.Add(pictureBoxAuthenticationBorder);
             panelConnectionSettingsContainer.Controls.Add(pictureBoxServerNameBorder);
 
             Controls.Add(panelLoginPasswordContainer);
@@ -558,47 +567,6 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #endregion
 
-        #region private void LoadSettings()
-        /// <summary>
-        /// Создает новый элемент управления для подключения к базе данных
-        /// </summary>
-        private void LoadSettings()
-        {
-            LoginSettingsContainer settings = LoginSettingsProvider.ReadSettings();
-            string[] servers = settings.Servers;
-            if (servers != null)
-            {
-                comboBoxServerName.Items.Clear();
-                comboBoxServerName.Items.AddRange(servers);
-            }
-            comboBoxServerName.Text = settings.LastConnectedServer;
-            _isSimple = settings.IsSimpleAuthentication;
-            if (_isSimple)
-            {
-                comboBoxAuthentication.SelectedIndex = 0;
-                checkBoxRememberLogin.Checked = settings.SaveUsernamePassword;
-                textBoxLogin.Text = settings.Username;
-            }
-            else
-            {
-                comboBoxAuthentication.SelectedIndex = 1;
-            }
-            SetEnabled(true, _isSimple);
-        }
-        #endregion
-
-        #region private void SaveSettings()
-        private void SaveSettings()
-        {
-            string[] servers = new string[comboBoxServerName.Items.Count];
-            for (int i = 0; i < comboBoxServerName.Items.Count; i++)
-                servers[i] = (string)comboBoxServerName.Items[i];
-            LoginSettingsContainer settings =
-                new LoginSettingsContainer(servers, comboBoxServerName.Text, _isSimple, checkBoxRememberLogin.Checked,
-                                           textBoxLogin.Text, "");
-            LoginSettingsProvider.SaveSettings(settings);
-        }
-        #endregion
 
         #region private void SetEnabled(bool value, bool authentication)
         /// <summary>
@@ -614,7 +582,6 @@ namespace CAS.UI.UIControls.Auxiliary
             //labelLogin.Enabled = value;
             //labelPassword.Enabled = value;
             comboBoxServerName.Enabled = value;
-            comboBoxAuthentication.Enabled = value;
             buttonConnect.Enabled = value && _casServerFound;
             //linkHelp.Enabled = value;
             checkBoxRememberLogin.Enabled = value && authentication;
@@ -660,7 +627,9 @@ namespace CAS.UI.UIControls.Auxiliary
 			serverName = comboBoxServerName.Text;
 #endif
 
-			var settings = new ConnectionSettingsContainer(_settings.ConnectionStrings[serverName], textBoxLogin.Text, textBoxPassword.Text, _isSimple);
+            Init(_settings.ConnectionStrings[serverName]);
+
+			var settings = new ConnectionSettingsContainer(_settings.ConnectionStrings[serverName].Connection, textBoxLogin.Text, textBoxPassword.Text, _isSimple);
             Connect(settings);
             //connectionThread = new Thread(Connect);
             //connectionThread.Start(settings);
@@ -668,14 +637,6 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #endregion
 
-        #region private void comboBoxAuthentication_SelectedIndexChanged(object sender, EventArgs e)
-        private void comboBoxAuthentication_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            bool value = (comboBoxAuthentication.SelectedIndex == 0);
-            _isSimple = value;
-            SetEnabled(true, _isSimple);
-        }
-        #endregion
 
         #region private void ButtonExitClick(object sender, EventArgs e)
         private void ButtonExitClick(object sender, EventArgs e)
@@ -785,7 +746,7 @@ namespace CAS.UI.UIControls.Auxiliary
             //    {
 
 //                }
-                GlobalObjects.CasEnvironment.Disconnect();
+                GlobalObjects.CasEnvironment?.Disconnect();
                 OnDisconnected();
   //          }
         }
@@ -839,10 +800,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
 			_casServerFound = true;
             if (comboBoxServerName.Items.Count == 0)
-            {
                 panelConnectionSettingsContainer.Visible = true;
-                comboBoxAuthentication.SelectedIndex = 0;
-            }
             buttonConnect.Enabled = true;
         }
 
@@ -882,41 +840,109 @@ namespace CAS.UI.UIControls.Auxiliary
 				}
 			}
 
-			comboBoxAuthentication.SelectedIndex = 0;
 			SetEnabled(true, _isSimple);
 		}
 
-		#region private void NetworkObserverCasServerFound(string database)
 
-		private void NetworkObserverCasServerFound(string database)
+        private void Init(ConnectionStrings con)
         {
-            if (InvokeRequired)
+            var exePath = Path.GetDirectoryName(Application.ExecutablePath);
+            var path = Path.Combine(exePath, "AppSettings.json");
+            var json = File.ReadAllText(path);
+            GlobalObjects.Config = JsonConvert.DeserializeObject<JObject>(json);
+
+            AuditContext auditContext = null;
+
+            try
             {
-                Invoke(
-                    new CasNetworkObserver.CasNetworkObserver.CasServerFoundEventHandler(NetworkObserverCasServerFound),
-                    new object[] { database });
+                auditContext = new AuditContext(con.Audit);
             }
-            else
-            {
-                LoadSettings();
-                _casServerFound = true;
-                if (database != "")
-                {
-                    if (!comboBoxServerName.Items.Contains(database))
-                        comboBoxServerName.Items.Add(database);
-                    comboBoxServerName.Text = database;
-                    comboBoxAuthentication.SelectedIndex = 0;
-                }
-                if (comboBoxServerName.Items.Count == 0)
-                {
-                    panelConnectionSettingsContainer.Visible = true;
-                    comboBoxAuthentication.SelectedIndex = 0;
-                }
-                buttonConnect.Enabled = true;
-            }
+            catch { }
+            GlobalObjects.AuditRepository = new AuditRepository(auditContext);
+            GlobalObjects.AuditContext = auditContext;
+
+            var environment = DbTypes.CasEnvironment = new CasEnvironment();
+            environment.AuditRepository = GlobalObjects.AuditRepository;
+            environment.ApiProvider = new ApiProvider(con.Connection);
+
+            var nonRoutineJobDataAccess = new NonRoutineJobDataAccess(environment.Loader, environment.Keeper);
+            var itemsRelationsDataAccess = new ItemsRelationsDataAccess(environment);
+            var filesDataAccess = new FilesDataAccess(environment.NewLoader);
+            var workPackageRecordsDataAccess = new WorkPackageRecordsDataAccess(environment);
+
+
+            var storeService = new StoreCore(environment);
+            var aircraftService = new AircraftsCore(environment.Loader, environment.NewKeeper, environment.NewLoader);
+            var compontntService = new ComponentCore(environment, environment.Loader, environment.NewLoader, environment.NewKeeper, aircraftService, itemsRelationsDataAccess);
+            var averageUtilizationService = new AverageUtilizationCore(aircraftService, storeService, compontntService);
+            var directiveService = new DirectiveCore(environment.NewKeeper, environment.NewLoader, environment.Keeper, environment.Loader, itemsRelationsDataAccess);
+            var aircraftFlightService = new AircraftFlightCore(environment, environment.Loader, environment.NewLoader, directiveService, environment.Manipulator, compontntService, environment.NewKeeper, aircraftService);
+            var flightTrackService = new FlightTrackCore(environment.NewLoader, environment.Loader, environment);
+            var calculator = new Calculator(environment, compontntService, aircraftFlightService, aircraftService);
+            var mtopCalculator = new MTOPCalculator(calculator, aircraftService, averageUtilizationService);
+            var planOpsCalculator = new PlanOpsCalculator(environment.NewLoader, environment.NewKeeper, aircraftService, flightTrackService);
+            var performanceCalculator = new PerformanceCalculator(calculator, averageUtilizationService, mtopCalculator);
+            var packageService = new PackagesCore(environment, environment.NewKeeper, environment.Loader, aircraftService, compontntService);
+            var purchaseService = new PurchaseCore(environment, environment.NewLoader, environment.Loader, packageService, environment.NewKeeper, performanceCalculator);
+            var calcStockService = new StockCalculator(environment, environment.NewLoader, compontntService);
+            var documentService = new DocumentCore(environment, environment.NewLoader, environment.Loader, aircraftService, environment.NewKeeper, compontntService);
+            var maintenanceService = new MaintenanceCore(environment, environment.NewLoader, environment.NewKeeper, itemsRelationsDataAccess, aircraftService);
+            var maintenanceCheckCalculator = new MaintenanceCheckCalculator(calculator, averageUtilizationService, performanceCalculator);
+            var analystService = new AnalystCore(compontntService, maintenanceService, directiveService, maintenanceCheckCalculator, performanceCalculator);
+            var discrepanciesService = new DiscrepanciesCore(environment.Loader, environment.NewLoader, directiveService, aircraftFlightService);
+            var kitsService = new KitsCore(environment, environment.Loader, environment.NewKeeper, compontntService, nonRoutineJobDataAccess);
+            var smsService = new SMSCore(environment.Manipulator);
+            var personelService = new PersonnelCore(environment);
+            var transferRecordCore = new TransferRecordCore(environment.NewLoader, environment.NewKeeper, compontntService, aircraftService, calculator, storeService, filesDataAccess);
+            var bindedItemsService = new BindedItemsCore(compontntService, directiveService, maintenanceService);
+            var performanceService = new PerformanceCore(environment.NewKeeper, environment.Keeper, calculator, bindedItemsService);
+            var workPackageService = new WorkPackageCore(environment, environment.NewLoader, maintenanceService, environment.NewKeeper, calculator, compontntService, aircraftService, nonRoutineJobDataAccess, directiveService, filesDataAccess, performanceCalculator, performanceService, bindedItemsService, workPackageRecordsDataAccess, mtopCalculator, averageUtilizationService);
+            var nonRoutineJobService = new NonRoutineJobCore(environment, workPackageService, nonRoutineJobDataAccess, environment.NewLoader);
+            var auditService = new AuditCore(environment, environment.Loader, environment.NewLoader, environment.NewKeeper, calculator, performanceCalculator, performanceService);
+
+            DbTypes.AircraftsCore = aircraftService;
+
+            GlobalObjects.CasEnvironment = environment;
+            GlobalObjects.PackageCore = packageService;
+            GlobalObjects.PurchaseCore = purchaseService;
+            GlobalObjects.ComponentCore = compontntService;
+            GlobalObjects.AnalystCore = analystService;
+            GlobalObjects.StockCalculator = calcStockService;
+            GlobalObjects.DocumentCore = documentService;
+            GlobalObjects.AuditCore = auditService;
+            GlobalObjects.MaintenanceCore = maintenanceService;
+            GlobalObjects.WorkPackageCore = workPackageService;
+            GlobalObjects.NonRoutineJobCore = nonRoutineJobService;
+            GlobalObjects.DirectiveCore = directiveService;
+            GlobalObjects.AircraftFlightsCore = aircraftFlightService;
+            GlobalObjects.DiscrepanciesCore = discrepanciesService;
+            GlobalObjects.KitsCore = kitsService;
+            GlobalObjects.SmsCore = smsService;
+            GlobalObjects.PersonnelCore = personelService;
+            GlobalObjects.TransferRecordCore = transferRecordCore;
+            GlobalObjects.AircraftsCore = aircraftService;
+            GlobalObjects.ItemsRelationsDataAccess = itemsRelationsDataAccess;
+            GlobalObjects.StoreCore = storeService;
+            GlobalObjects.BindedItemsCore = bindedItemsService;
+            GlobalObjects.AverageUtilizationCore = averageUtilizationService;
+            GlobalObjects.MaintenanceCheckCalculator = maintenanceCheckCalculator;
+            GlobalObjects.MTOPCalculator = mtopCalculator;
+            GlobalObjects.PerformanceCalculator = performanceCalculator;
+            GlobalObjects.PlanOpsCalculator = planOpsCalculator;
+            GlobalObjects.PerformanceCore = performanceService;
+            GlobalObjects.FlightTrackCore = flightTrackService;
+
+            environment.SetAircraftCore(aircraftService);
+            environment.Calculator = calculator;
+            environment.Manipulator.PurchaseService = GlobalObjects.PurchaseCore;
+            environment.Manipulator.MaintenanceCore = GlobalObjects.MaintenanceCore;
+            environment.Manipulator.WorkPackageCore = GlobalObjects.WorkPackageCore;
+            environment.Manipulator.AircraftFlightCore = GlobalObjects.AircraftFlightsCore;
+            environment.Manipulator.ComponentCore = GlobalObjects.ComponentCore;
+            environment.Manipulator.AircraftsCore = GlobalObjects.AircraftsCore;
+            environment.Manipulator.BindedItemCore = GlobalObjects.BindedItemsCore;
         }
 
-        #endregion
 
         #endregion
 

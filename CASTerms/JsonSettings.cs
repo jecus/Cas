@@ -7,10 +7,19 @@ namespace CASTerms
 	public class JsonSettings
 	{
 		[JsonProperty("ConnectionStrings")]
-		public Dictionary<string, string> ConnectionStrings { get; set; }
+		public Dictionary<string, ConnectionStrings> ConnectionStrings { get; set; }
 
 		[JsonProperty("Last")]
 		public LastInformation LastInformation { get; set; }
+	}
+
+    [JsonObject]
+    public class ConnectionStrings
+    {
+        [JsonProperty("Connection")]
+        public string Connection { get; set; }
+        [JsonProperty("Audit")]
+        public string Audit { get; set; }
 	}
 
 	[JsonObject]
