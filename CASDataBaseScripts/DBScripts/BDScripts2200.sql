@@ -320,3 +320,5 @@ GO
 CREATE NONCLUSTERED INDEX [IX_ParentId_Deleted] ON [dbo].[TransferRecords]  
 ( [IsDeleted],[ParentID] ) INCLUDE ( [ParentType],[FromAircraftID],[FromStoreID],[DestinationObjectID],[DestinationObjectType],[ConsumableId],[TransferDate],[DestConfirmTransferDate],[WorkPackageID],[PerformanceNum],[Remarks],[Reference],[PODR],[DODR],[Position],[FromBaseComponentID],[Description],[ReasonId],[State],[ReplaceComponentId],[IsReplaceComponentRemoved],[ReceivedSpecialistId],[ReleasedSpecialistId],[FromSupplierId],[SupplierReceiptDate],[SupplierNotify],[FromSpecialistId],[PreConfirmTransfer],[Corrector],[Updated] )
 GO
+
+CREATE NONCLUSTERED INDEX [IX_ParentId_ParentTypeId] ON [dbo].[ItemsFilesLinks]  ( [ParentId],[ParentTypeId] ) INCLUDE ( [IsDeleted],[LinkType],[FileId],[Corrector],[Updated] )
