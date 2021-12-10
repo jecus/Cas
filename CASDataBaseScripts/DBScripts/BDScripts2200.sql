@@ -322,3 +322,4 @@ CREATE NONCLUSTERED INDEX [IX_ParentId_Deleted] ON [dbo].[TransferRecords]
 GO
 
 CREATE NONCLUSTERED INDEX [IX_ParentId_ParentTypeId] ON [dbo].[ItemsFilesLinks]  ( [ParentId],[ParentTypeId] ) INCLUDE ( [IsDeleted],[LinkType],[FileId],[Corrector],[Updated] )
+CREATE NONCLUSTERED INDEX [IX_ParentID_ParentTypeId_isDeleted] ON [dbo].[DirectivesRecords]  ( [isDeleted],[ParentID],[ParentTypeId] ) INCLUDE ( [NumGroup],[RecordTypeID],[Remarks],[RecordDate],[OnLifelength],[WorkPackageID],[Dispatched],[Completed],[Reference],[ODR],[MaintenanceOrganization],[MaintenanceDirectiveRecordId],[MaintenanceCheckRecordId],[Corrector],[Updated] )
