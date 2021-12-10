@@ -166,28 +166,16 @@ namespace EntityCore.DTO.General
 		public int? FlightNumberId { get; set; }
 
 
-		
-		[Include]
 		public FlightNumDTO FlightNumber { get; set; }
 
-		
-		[Include]
 		public CruiseLevelDTO Level { get; set; }
 
-		
-		[Include]
 		public AirportCodeDTO StationFromDto { get; set; }
 
-		
-		[Include]
 		public AirportCodeDTO StationToDto { get; set; }
 
-		
-		[Include]
 		public ReasonDTO DelayReason { get; set; }
 
-		
-		[Include]
 		public ReasonDTO CancelReason { get; set; }
 
 

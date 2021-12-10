@@ -66,26 +66,22 @@ namespace EntityCore.Repository
 
 		public async Task<T> GetObjectByIdAsync(int id, bool loadChild = false)
 		{
-			using (_context)
-				return await getAllQueryable(new[] { new Filter.Filter("ItemId", id) }, loadChild).AsNoTracking().FirstOrDefaultAsync();
+            return await getAllQueryable(new[] { new Filter.Filter("ItemId", id) }, loadChild).AsNoTracking().FirstOrDefaultAsync();
 		}
 
 		public async Task<T> GetObjectAsync(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
 		{
-			using (_context)
-				return await getAllQueryable(filters, loadChild, getDeleted, getAll).AsNoTracking().FirstOrDefaultAsync();
+            return await getAllQueryable(filters, loadChild, getDeleted, getAll).AsNoTracking().FirstOrDefaultAsync();
 		}
 
 		public async Task<IList<T>> GetObjectListAsync(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
-			using (_context)
-				return await getAllQueryable(filters, loadChild, getDeleted).AsNoTracking().ToListAsync();
+            return await getAllQueryable(filters, loadChild, getDeleted).AsNoTracking().ToListAsync();
 		}
 
 		public async Task<IList<T>> GetObjectListAllAsync(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
-			using (_context)
-				return await getAllQueryable(filters, loadChild, getDeleted, true).AsNoTracking().ToListAsync();
+            return await getAllQueryable(filters, loadChild, getDeleted, true).AsNoTracking().ToListAsync();
 		}
 
 		public async Task<int> SaveAsync(T entity)
