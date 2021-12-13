@@ -145,9 +145,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 			var applicabilityString = item.Applicability;
 			var ata = item.ATAChapter;
 
-			if (item.ServiceBulletinFile == null)
+			if (!item.HasSdFile)
 				sbColor = Color.MediumVioletRed;
-			if (item.EngineeringOrderFile == null)
+			if (!item.HasEoFile)
 				eoColor = Color.MediumVioletRed;
 
 			subItems.Add(CreateRow(titleString, titleString));

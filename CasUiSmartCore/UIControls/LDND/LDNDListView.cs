@@ -175,28 +175,9 @@ namespace CAS.UI.UIControls.LDND
 			var description = item.Description;
 			if (item.Parent is Directive directive)
 			{
-				//if (directive.DirectiveType == DirectiveType.SB)
-				//{
-				//	title = directive.ServiceBulletinNo;
-				//	if (directive.ServiceBulletinFile == null)
-				//		tcnColor = Color.MediumVioletRed;
-				//}
-				//else if (directive.DirectiveType == DirectiveType.EngineeringOrders)
-				//{
-				//	title = directive.EngineeringOrders;
-				//	if (directive.EngineeringOrderFile == null)
-				//		tcnColor = Color.MediumVioletRed;
-				//}
-				//else
-				//{
-				//	card = directive.Title;
-				//	if (directive.ADNoFile == null)
-				//		tcnColor = Color.MediumVioletRed;
-				//}
-
-				title = directive.Title;
+                title = directive.Title;
 				card = directive.EngineeringOrders;
-				if (directive.EngineeringOrderFile == null)
+				if (!directive.HasEoFile)
 					tcnColor = Color.MediumVioletRed;
 
 				access = directive.DirectiveAccess;
@@ -206,7 +187,7 @@ namespace CAS.UI.UIControls.LDND
 			}
 			else if (item.Parent is MaintenanceDirective d)
 			{
-				if (d.TaskCardNumberFile == null)
+				if (!d.HasTaskCardFile)
 					tcnColor = Color.MediumVioletRed;
 				card = d.TaskCardNumber;
 				access = d.Access;
@@ -216,7 +197,7 @@ namespace CAS.UI.UIControls.LDND
 			}
 			else if (item.Parent is ComponentDirective c)
 			{
-				if (c.MaintenanceDirective?.TaskCardNumberFile == null)
+				if (!(bool) c.MaintenanceDirective?.HasTaskCardFile)
 					tcnColor = Color.MediumVioletRed;
 				description = item.Title;
 				title = c.MaintenanceDirective?.TaskNumberCheck ?? "";

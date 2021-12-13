@@ -381,6 +381,10 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		#endregion
 
+
+        public bool HasTaskCardFile => Files.Any(i => i.LinkType == (int)FileLinkType.MaintenanceTaskCardNumberFile);
+        public int FileTaskCardId => Files.FirstOrDefault(i => i.LinkType == (int)FileLinkType.MaintenanceTaskCardNumberFile)?.FileId ?? -1;
+
 		#region public AttachedFile TaskCardNumberFile { get; set; }
 		[NonSerialized]
 		private AttachedFile _taskCardNumberFile;

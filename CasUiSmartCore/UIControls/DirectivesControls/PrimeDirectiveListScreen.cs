@@ -934,13 +934,18 @@ namespace CAS.UI.UIControls.DirectivesControls
 				dir = (Directive)parent;
 			}
 
-			AttachedFile attachedFile = null;
+            AttachedFile attachedFile = null;
+			int? fileId = null;
 			if (sender == _toolStripMenuItemShowADFile && dir != null)
-				attachedFile = dir.ADNoFile;
+                fileId = dir.FileAdId;
 			if (sender == _toolStripMenuItemShowSBFile && dir != null)
-				attachedFile = dir.ServiceBulletinFile;
+                fileId = dir.FileSBId;
 			if (sender == _toolStripMenuItemShowEOFile && dir != null)
-				attachedFile = dir.EngineeringOrderFile;
+                fileId = dir.FileEOId;
+
+			if(fileId > -1)
+			    attachedFile = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<AttachedFileDTO, AttachedFile>(fileId.Value);
+
 			if (attachedFile == null)
 			{
 				MessageBox.Show("Not set required File", (string)new GlobalTermsProvider()["SystemName"],
@@ -963,7 +968,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			catch (Exception ex)
 			{
 				string errorDescriptionSctring =
-					$"Error while Open Attached File for {dir}, id {dir.ItemId}. \nFileId {attachedFile.ItemId}";
+					$"Error while Open Attached File for {dir}, id {dir.ItemId}. \nFileId {fileId}";
 				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
 			}
 		}
@@ -1046,17 +1051,17 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 					if (parent is Directive dir)
 					{
-						_toolStripMenuItemShowEOFile.Enabled = dir.EngineeringOrderFile != null;
-						_toolStripMenuItemShowSBFile.Enabled = dir.ServiceBulletinFile != null;
-						_toolStripMenuItemShowADFile.Enabled = dir.ADNoFile != null;
+						_toolStripMenuItemShowEOFile.Enabled = dir.HasEoFile;
+						_toolStripMenuItemShowSBFile.Enabled = dir.HasSdFile;
+						_toolStripMenuItemShowADFile.Enabled = dir.HasAdFile;
 						if (dir.NextPerformanceIsBlocked)
 							_toolStripMenuItemsWShowWP.Enabled = true;
 					}
 					if (parent is DamageItem dam)
 					{
-						_toolStripMenuItemShowEOFile.Enabled = dam.EngineeringOrderFile != null;
-						_toolStripMenuItemShowSBFile.Enabled = dam.ServiceBulletinFile != null;
-						_toolStripMenuItemShowADFile.Enabled = dam.ADNoFile != null;
+						_toolStripMenuItemShowEOFile.Enabled = dam.HasEoFile;
+						_toolStripMenuItemShowSBFile.Enabled = dam.HasSdFile;
+						_toolStripMenuItemShowADFile.Enabled = dam.HasAdFile;
 						if (dam.NextPerformanceIsBlocked)
 							_toolStripMenuItemsWShowWP.Enabled = true;
 					}

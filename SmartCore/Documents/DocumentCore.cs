@@ -6,6 +6,7 @@ using EntityCore.Filter;
 using SmartCore.Aircrafts;
 using SmartCore.Component;
 using SmartCore.Entities;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
@@ -288,7 +289,10 @@ namespace SmartCore.Documents
 							Name = "Can't find operator with id = " + document.ParentId
 						};
 					}
-				}
+
+
+                    document.Files =new CommonCollection<ItemFileLink>(links.Where(i => i.ParentId == document.ItemId));
+                }
 				return result.ToList();
 			}
 		}

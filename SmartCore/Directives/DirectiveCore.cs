@@ -215,6 +215,20 @@ namespace SmartCore.Directives
 
 			var itemsRelations = _itemsRelationsDataAccess.GetRelations(directive.ItemId, directive.SmartCoreObjectType.ItemId);
 
+			var fileIds = directive.Files.Where(i => i.FileId.HasValue).Select(i => i.FileId.Value);
+            if (fileIds.Any())
+            {
+                var files = _newLoader.GetObjectList<AttachedFileDTO, AttachedFile>(new Filter("ItemId", values: fileIds));
+                foreach (var file in directive.Files)
+                {
+                    var f = files.FirstOrDefault(i => i.ItemId == file.FileId)?.GetCopyUnsaved(false);
+                    if (f == null) continue;
+                    f.ItemId = file.FileId.Value;
+                    file.File = (AttachedFile)f;
+
+                }
+            }
+
 			directive.ItemRelations.AddRange(itemsRelations);
 
 			return directive;

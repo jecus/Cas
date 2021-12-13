@@ -1115,6 +1115,7 @@ namespace SmartCore.DtoHelper
 				ParentId = link.ParentId ?? -1,
 				ParentTypeId = link.ParentTypeId,
 				LinkType = link.LinkType,
+				FileId = link.FileId,
 				File = link.File?.Convert()
 			};
 		}

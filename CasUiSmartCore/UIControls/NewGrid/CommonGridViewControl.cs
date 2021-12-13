@@ -210,10 +210,11 @@ namespace CAS.UI.UIControls.NewGrid
 			_addBaseMenu = false;
 		}
 
-		public void AddMenuItems(params RadMenuItemBase[] items)
+		public void AddMenuItems(RadMenuItemBase[] items)
 		{
 			_customMenu.Items.Clear();
-			_customMenu.Items.AddRange(items);
+			if(items != null)
+			    _customMenu.Items.AddRange(items.Where(i => i != null).ToArray());
 
 			if (!_addBaseMenu)
 				return;

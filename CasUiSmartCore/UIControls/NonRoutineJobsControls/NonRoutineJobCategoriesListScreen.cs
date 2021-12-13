@@ -14,6 +14,7 @@ using CASTerms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.WorkPackage;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.NonRoutineJobsControls
 {
@@ -86,13 +87,13 @@ namespace CAS.UI.UIControls.NonRoutineJobsControls
 			DirectivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			DirectivesViewer.Dock = DockStyle.Fill;
 			DirectivesViewer.ViewedType = typeof(NonRoutineJob);
-			DirectivesViewer.AddMenuItems(_toolStripMenuItemOpen,
+			DirectivesViewer.AddMenuItems(new RadMenuItemBase[]{_toolStripMenuItemOpen,
 				_toolStripMenuItemShowTaskCard,
 				_toolStripSeparatorOpenOperation,
 				_toolStripMenuItemHighlight,
 				_toolStripSeparatorHighlightOperation,
 				_toolStripMenuItemComposeWorkPackage,
-				_toolStripMenuItemsWorkPackages);
+				_toolStripMenuItemsWorkPackages});
 
 			DirectivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 

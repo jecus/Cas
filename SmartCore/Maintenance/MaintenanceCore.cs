@@ -228,6 +228,20 @@ namespace SmartCore.Maintenance
 			var itemRelation = _itemsRelationsDataAccess.GetRelations(directive.ItemId, directive.SmartCoreObjectType.ItemId);
 			directive.ItemRelations.AddRange(itemRelation);
 
+            var fileIds = directive.Files.Where(i => i.FileId.HasValue).Select(i => i.FileId.Value);
+            if (fileIds.Any())
+            {
+                var files = _newLoader.GetObjectList<AttachedFileDTO, AttachedFile>(new Filter("ItemId",values:fileIds));
+                foreach (var file in directive.Files)
+                {
+                    var f = files.FirstOrDefault(i => i.ItemId == file.FileId)?.GetCopyUnsaved(false);
+                    if (f == null) continue;
+                    f.ItemId = file.FileId.Value;
+                    file.File = (AttachedFile)f;
+
+                }
+            }
+
 			return directive;
 		}
 

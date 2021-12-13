@@ -125,7 +125,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 				? "/WF"
 				: "/WL") : "";
 
-			if (item.TaskCardNumberFile == null)
+			if (!item.HasTaskCardFile)
 				tcnColor = Color.MediumVioletRed;
 
 

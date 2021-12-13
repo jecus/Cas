@@ -203,7 +203,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 				i.FirtsItemTypeId == SmartCoreType.ComponentDirective.ItemId ||
 				i.SecondItemTypeId == SmartCoreType.ComponentDirective.ItemId)?.AdditionalInformation?.Component;
 
-			if (item.TaskCardNumberFile == null)
+			if (!item.HasTaskCardFile)
 				tcnColor = Color.MediumVioletRed;
 
 			if(item.KitsApplicable && item.Kits.Count == 0)

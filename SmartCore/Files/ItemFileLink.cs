@@ -64,13 +64,16 @@ namespace SmartCore.Files
 		/// Привязанный файл
 		/// </summary>
 		[TableColumn("FileId")]
-		[Child]
+		//[Child]
 		public AttachedFile File { get; set; }
 		public static PropertyInfo FileIdProperty
 		{
 			get { return GetCurrentType().GetProperty("File"); }
 		}
 		#endregion
+
+        [TableColumn("FileId")]
+		public int? FileId { get; set; }
 
 		#endregion
 

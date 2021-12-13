@@ -276,6 +276,8 @@ namespace SmartCore.Entities.General
 		}
 		#endregion
 
+        public int FileId => Files.FirstOrDefault(i => i.LinkType == (int)FileLinkType.DocumentAttachedFile)?.FileId ?? -1;
+
 		#region public AttachedFile AttachedFile { get; set; }
 
 		private AttachedFile _attachedFile;

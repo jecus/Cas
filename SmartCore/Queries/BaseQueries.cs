@@ -1078,27 +1078,6 @@ namespace SmartCore.Queries
 			//Определение атрибута сохраняемой таблицы
 			TableAttribute currentTypeTable = (TableAttribute)type.GetCustomAttributes(typeof(TableAttribute), true).FirstOrDefault();
 
-			//if (parentTable != null && parentColumn != null)
-			//{
-			//    //формирование запроса для отношения 1 к 1
-
-			//    //Формирования табличного префикса в названии каждой колнки
-			//    //из названия родтелькой таблицы и колонки
-			//    string tablePrefix = parentTable.TableName + parentColumn.ColumnName;
-
-			//    fields.Add(GetTypeFieldsOnly(type, tablePrefix));
-			//    string leftJoin = "";
-			//    leftJoin += String.Format("LEFT JOIN {0}.{1} {2} ON {3}.{4} = {5}.{6}.{7} \n",
-			//                                          currentTypeTable.TableScheme, currentTypeTable.TableName, tablePrefix,
-			//                                          tablePrefix, currentTypeTable.PrimaryKey,
-			//                                          parentTable.TableScheme, parentTable.TableName, parentColumn.ColumnName);
-			//    joins.Add(leftJoin);
-			//}
-			//else
-			//{
-			//    //Формирование строки запроса из полей заданного типа
-			//    fields.Add(GetTypeFieldsOnly(type, includeTableNamePrefix ? "" : null, checkType, selectForced));
-			//}
 			if (parentTable != null && parentColumn != null)
 			{
 				//формирование запроса для отношения 1 к 1

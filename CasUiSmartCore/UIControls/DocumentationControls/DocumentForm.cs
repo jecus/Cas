@@ -148,7 +148,21 @@ namespace CAS.UI.UIControls.DocumentationControls
 				new Filter("ParentTypeId",_currentDocument.SmartCoreObjectType.ItemId)
 			}, true);
 
-            _currentDocument.Files.Clear();
+            var fileIds = links.Where(i => i.FileId.HasValue).Select(i => i.FileId.Value);
+            if (fileIds.Any())
+            {
+                var files = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AttachedFileDTO, AttachedFile>(new Filter("ItemId", values: fileIds));
+                foreach (var file in links)
+                {
+                    var f = files.FirstOrDefault(i => i.ItemId == file.FileId)?.GetCopyUnsaved(false);
+                    if (f == null) continue;
+                    f.ItemId = file.FileId.Value;
+                    file.File = (AttachedFile)f;
+
+                }
+            }
+
+			_currentDocument.Files.Clear();
 			_currentDocument.Files.AddRange(links);
 
 			_animatedThreadWorker.ReportProgress(80, "Loading Suppliers");

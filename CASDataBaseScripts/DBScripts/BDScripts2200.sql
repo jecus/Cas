@@ -323,3 +323,14 @@ GO
 
 CREATE NONCLUSTERED INDEX [IX_ParentId_ParentTypeId] ON [dbo].[ItemsFilesLinks]  ( [ParentId],[ParentTypeId] ) INCLUDE ( [IsDeleted],[LinkType],[FileId],[Corrector],[Updated] )
 CREATE NONCLUSTERED INDEX [IX_ParentID_ParentTypeId_isDeleted] ON [dbo].[DirectivesRecords]  ( [isDeleted],[ParentID],[ParentTypeId] ) INCLUDE ( [NumGroup],[RecordTypeID],[Remarks],[RecordDate],[OnLifelength],[WorkPackageID],[Dispatched],[Completed],[Reference],[ODR],[MaintenanceOrganization],[MaintenanceDirectiveRecordId],[MaintenanceCheckRecordId],[Corrector],[Updated] )
+
+
+
+
+delete from dbo.ItemsFilesLinks where ItemId in (
+select l.ItemId from dbo.ItemsFilesLinks l
+outer apply 
+(
+	select * from dbo.Files where ItemId = l.FileId
+) f
+where  f.ItemID is null)

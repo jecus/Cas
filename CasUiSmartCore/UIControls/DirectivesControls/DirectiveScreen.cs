@@ -227,7 +227,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 
             try
             {
-                if (_currentDirective.ItemId > 0 && _needReload)
+                if (_currentDirective.ItemId > 0)
                 {
                     _currentDirective = GlobalObjects.DirectiveCore.GetDirectiveById(_currentDirective.ItemId, _currentDirective.DirectiveType);
                 }

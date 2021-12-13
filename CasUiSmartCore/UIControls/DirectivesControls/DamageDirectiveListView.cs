@@ -158,11 +158,11 @@ namespace CAS.UI.UIControls.DirectivesControls
 			var sbColor = radGridView1.ForeColor;
 			var eoColor = radGridView1.ForeColor;
 
-			if (item.ADNoFile == null)
+			if (!item.HasAdFile)
 				adColor = Color.MediumVioletRed;
-			if (item.ServiceBulletinFile == null)
+			if (!item.HasSdFile)
 				sbColor = Color.MediumVioletRed;
-			if (item.EngineeringOrderFile == null)
+			if (!item.HasEoFile)
 				eoColor = Color.MediumVioletRed;
 
 			subItems.Add(CreateRow(titleString, titleString, adColor));

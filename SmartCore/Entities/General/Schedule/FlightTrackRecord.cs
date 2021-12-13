@@ -57,11 +57,11 @@ namespace SmartCore.Entities.General.Schedule
 
 		public TripName TripName { get { return FlightTrack.TripName ?? TripName.Unknown; } }
 		public DayofWeek DayOfWeek { get { return FlightTrack.DayOfWeek; } }
-		public FlightNum FlightNo { get { return FlightNumberPeriod.FlightNo; } }
+		public FlightNum FlightNo { get { return FlightNumberPeriod?.FlightNo; } }
 		public AirportsCodes StationFrom { get { return FlightNumberPeriod.StationFrom; } }
 		public AirportsCodes StationTo { get { return FlightNumberPeriod.StationTo; } }
 		public FlightAircraftCode FlightAircraftCode { get { return FlightNumberPeriod.FlightAircraftCode; } }
-		public FlightType FlightType { get { return FlightNumberPeriod.FlightType; } }
+		public FlightType FlightType { get { return FlightNumberPeriod?.FlightType; } }
 		public FlightCategory FlightCategory { get { return FlightNumberPeriod.FlightCategory; } }
 		public Dictionaries.Schedule Schedule { get { return FlightNumberPeriod.Schedule; } }
 

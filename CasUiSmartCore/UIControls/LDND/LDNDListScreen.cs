@@ -13,6 +13,7 @@ using CAS.UI.UIControls.PurchaseControls;
 using CAS.UI.UIControls.WorkPakage;
 using CASReports.Builders;
 using CASTerms;
+using EntityCore.DTO.General;
 using SmartCore.Calculations;
 using SmartCore.Calculations.MTOP;
 using SmartCore.Entities.Collections;
@@ -724,7 +725,8 @@ namespace CAS.UI.UIControls.LDND
 				try
 				{
 					string message;
-					GlobalObjects.CasEnvironment.OpenFile(mpd.EngineeringOrderFile, out message);
+                    var attachedFile = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<AttachedFileDTO, AttachedFile>(mpd.FileEOId);
+					GlobalObjects.CasEnvironment.OpenFile(attachedFile, out message);
 					if (message != "")
 					{
 						MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
@@ -754,7 +756,8 @@ namespace CAS.UI.UIControls.LDND
 				try
 				{
 					string message;
-					GlobalObjects.CasEnvironment.OpenFile(mpd.TaskCardNumberFile, out message);
+                    var attachedFile = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<AttachedFileDTO, AttachedFile>(mpd.FileTaskCardId);
+					GlobalObjects.CasEnvironment.OpenFile(attachedFile, out message);
 					if (message != "")
 					{
 						MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
@@ -785,7 +788,8 @@ namespace CAS.UI.UIControls.LDND
 				try
 				{
 					string message;
-					GlobalObjects.CasEnvironment.OpenFile(mpd.TaskCardNumberFile, out message);
+                    var attachedFile = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<AttachedFileDTO, AttachedFile>(mpd.FileTaskCardId);
+					GlobalObjects.CasEnvironment.OpenFile(attachedFile, out message);
 					if (message != "")
 					{
 						MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],

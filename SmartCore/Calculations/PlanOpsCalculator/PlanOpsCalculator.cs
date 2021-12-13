@@ -58,8 +58,8 @@ namespace SmartCore.Calculations.PlanOpsCalculator
 					FlightTrackRecord = record,
 					FlightTrackRecordId = record.ItemId,
 					ParentFlightPlanOps = currentPlanOps,
-					PeriodFrom = record.FlightNumberPeriod.PeriodFrom,
-					PeriodTo = record.FlightNumberPeriod.PeriodTo
+					PeriodFrom = record.FlightNumberPeriod?.PeriodFrom ?? 0,
+					PeriodTo = record.FlightNumberPeriod?.PeriodTo ?? 0
 				};
 
 				preResult.Add(newOps);
@@ -166,7 +166,7 @@ namespace SmartCore.Calculations.PlanOpsCalculator
 			foreach (var record in records)
 			{
 				record.FlightTrackRecord = trackRecords.FirstOrDefault(i => i.ItemId == record.FlightTrackRecordId);
-				record.ParentFlight = flights.FirstOrDefault(i => i.ItemId == record.ParentFlightId);
+				record.ParentFlight = flights.FirstOrDefault(i => i.ItemId == record.ParentFlightId) ?? new AircraftFlight();
 				record.Aircraft = _aircraftsCore.GetAircraftById(record.AircraftId);
 				record.AircraftExchange = _aircraftsCore.GetAircraftById(record.AircraftExchangeId);
 			}

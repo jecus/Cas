@@ -54,11 +54,19 @@ namespace SmartCore.DataAccesses.ItemsRelation
 			var idsString = string.Join(",", directiveIds.Select(d => d.ToString(CultureInfo.InvariantCulture)).ToArray());
 
 			//TODO:(Evgenii Babak) не использовать рукописные запросы
-			var qr = BaseQueries.GetSelectQuery<Relation.ItemsRelation>(true) +
-					 $" WHERE (FirstItemId in ({idsString}) AND FirtsItemTypeId = {typeId} OR SecondItemId in ({idsString}) AND SecondItemTypeId = {typeId}) AND IsDeleted = 0";
+			var qr1 = BaseQueries.GetSelectQuery<Relation.ItemsRelation>(true) +
+					 $" WHERE (FirstItemId in ({idsString}) AND FirtsItemTypeId = {typeId}) AND IsDeleted = 0";
 
-			var ds = _casEnvironment.Execute(qr);
-			return BaseQueries.GetObjectList<Relation.ItemsRelation>(ds.Tables[0]);
+            var qr2 = BaseQueries.GetSelectQuery<Relation.ItemsRelation>(true) +
+                      $" WHERE (SecondItemId in ({idsString}) AND SecondItemTypeId = {typeId}) AND IsDeleted = 0";
+
+			var ds1 = _casEnvironment.Execute(qr1);
+			var ds2 = _casEnvironment.Execute(qr2);
+            var res = new List<Relation.ItemsRelation>();
+			res.AddRange(BaseQueries.GetObjectList<Relation.ItemsRelation>(ds1.Tables[0]));
+			res.AddRange(BaseQueries.GetObjectList<Relation.ItemsRelation>(ds2.Tables[0]));
+
+			return res;
 		}
 	}
 }

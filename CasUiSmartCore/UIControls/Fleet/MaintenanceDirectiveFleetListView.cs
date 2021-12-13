@@ -191,7 +191,7 @@ namespace CAS.UI.UIControls.Fleet
 				? "/WF"
 				: "/WL") : "";
 
-			if (item.TaskCardNumberFile == null)
+			if (!item.HasTaskCardFile)
 				tcnColor = Color.MediumVioletRed;
 
 			if (item.KitsApplicable && item.Kits.Count == 0)

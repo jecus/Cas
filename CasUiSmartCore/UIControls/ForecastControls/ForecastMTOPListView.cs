@@ -197,7 +197,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			}
 			else if (item.Parent is MaintenanceDirective d)
 			{
-				if (d.TaskCardNumberFile == null)
+				if (!d.HasTaskCardFile)
 					tcnColor = Color.MediumVioletRed;
 				card = d.TaskCardNumber;
 			}

@@ -215,7 +215,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
 					var document = _directivesViewer.SelectedItems[0];
-					_toolStripMenuItemSaveAsTaskCard.Enabled = _toolStripMenuItemShowTaskCard.Enabled = document.AttachedFile != null;
+					_toolStripMenuItemSaveAsTaskCard.Enabled = _toolStripMenuItemShowTaskCard.Enabled = document.HaveFile;
 				}
 			};
 
@@ -276,7 +276,8 @@ namespace CAS.UI.UIControls.DocumentationControls
 			try
 			{
 				string message;
-				GlobalObjects.CasEnvironment.OpenFile(document.AttachedFile, out message);
+                var attachedFile = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<AttachedFileDTO, AttachedFile>(document.FileId);
+				GlobalObjects.CasEnvironment.OpenFile(attachedFile, out message);
 				if (message != "")
 				{
 					MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
@@ -310,7 +311,8 @@ namespace CAS.UI.UIControls.DocumentationControls
 					return;
 
 				string message;
-				GlobalObjects.CasEnvironment.SaveAsFile(document.AttachedFile, saveFileDialog.FileName, out message);
+                var attachedFile = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<AttachedFileDTO, AttachedFile>(document.FileId);
+				GlobalObjects.CasEnvironment.SaveAsFile(attachedFile, saveFileDialog.FileName, out message);
 				if (message != "")
 				{
 					MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],

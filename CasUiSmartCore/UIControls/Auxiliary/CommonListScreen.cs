@@ -54,8 +54,7 @@ namespace CAS.UI.UIControls.Auxiliary
 		protected RadMenuSeparatorItem _toolStripSeparatorOpenOperation;
 		protected RadMenuItem _toolStripMenuItemHighlight;
 		protected RadMenuSeparatorItem _toolStripSeparatorHighlightOperation;
-		protected RadMenuSeparatorItem _toolStripSeparatorQuotationtOperation;
-		protected RadMenuItem _toolStripMenuItemComposeWorkPackage;
+        protected RadMenuItem _toolStripMenuItemComposeWorkPackage;
 		protected RadMenuItem _toolStripMenuItemsWorkPackages;
 		protected RadMenuSeparatorItem _toolStripSeparatorWorkPackageOperation;
 
@@ -592,13 +591,13 @@ namespace CAS.UI.UIControls.Auxiliary
 				}
 			};
 
-			DirectivesViewer.AddMenuItems(_toolStripMenuItemOpen,
+			DirectivesViewer.AddMenuItems(new RadMenuItemBase[]{_toolStripMenuItemOpen,
 				_toolStripMenuItemShowTaskCard,
 				_toolStripSeparatorOpenOperation,
 				_toolStripMenuItemHighlight,
 				_toolStripSeparatorHighlightOperation,
 				_toolStripMenuItemComposeWorkPackage,
-				_toolStripMenuItemsWorkPackages);
+				_toolStripMenuItemsWorkPackages});
 
 			DirectivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 			panel1.Controls.Add(DirectivesViewer);

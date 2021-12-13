@@ -234,13 +234,13 @@ namespace CAS.UI.UIControls.DirectivesControls
 				? "/WF"
 				: "/WL") : "";
 
-			if (item.ADNoFile == null)
+			if (!item.HasAdFile)
 				adColor = Color.MediumVioletRed;
-			if (item.ServiceBulletinFile == null)
+			if (!item.HasSdFile)
 				sbColor = Color.MediumVioletRed;
-			if (item.EngineeringOrderFile == null)
+			if (!item.HasEoFile)
 				eoColor = Color.MediumVioletRed;
-			if (item.STCFile == null)
+			if (!item.HasSTCFile)
 				stcColor = Color.MediumVioletRed;
 
 			string s1 = "";

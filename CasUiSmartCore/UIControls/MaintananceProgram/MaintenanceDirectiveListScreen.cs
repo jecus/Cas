@@ -19,6 +19,7 @@ using CAS.UI.UIControls.PurchaseControls;
 using CAS.UI.UIControls.WorkPakage;
 using CASReports.Builders;
 using CASTerms;
+using EntityCore.DTO.General;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -650,7 +651,10 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			if (_directivesViewer.SelectedItems == null || 
 				_directivesViewer.SelectedItems.Count == 0) return;
 			MaintenanceDirective mpd = _directivesViewer.SelectedItems[0];
-			if (mpd == null || mpd.TaskCardNumberFile == null)
+
+            var attachedFile = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<AttachedFileDTO, AttachedFile>(mpd.FileTaskCardId);
+
+			if (attachedFile == null)
 			{
 				MessageBox.Show("Not set Task Card File", (string)new GlobalTermsProvider()["SystemName"],
 								MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
@@ -661,7 +665,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			try
 			{
 				string message;
-				GlobalObjects.CasEnvironment.OpenFile(mpd.TaskCardNumberFile, out message);
+				GlobalObjects.CasEnvironment.OpenFile(attachedFile, out message);
 				if (message != "")
 				{
 					MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],

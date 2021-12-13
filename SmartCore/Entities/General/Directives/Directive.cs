@@ -39,6 +39,18 @@ namespace SmartCore.Entities.General.Directives
 		public String Title { get; set; }
 		#endregion
 
+
+        public bool HasAdFile => Files.Any(i => i.LinkType == (int) FileLinkType.ADFile);
+        public bool HasSdFile => Files.Any(i => i.LinkType == (int) FileLinkType.SBFile);
+        public bool HasEoFile => Files.Any(i => i.LinkType == (int) FileLinkType.EOFile);
+        public bool HasSTCFile => Files.Any(i => i.LinkType == (int) FileLinkType.STCFile);
+
+        public int FileAdId => Files.FirstOrDefault(i => i.LinkType == (int)FileLinkType.ADFile)?.FileId ?? -1;
+        public int FileSBId => Files.FirstOrDefault(i => i.LinkType == (int)FileLinkType.SBFile)?.FileId ?? -1;
+        public int FileEOId => Files.FirstOrDefault(i => i.LinkType == (int)FileLinkType.EOFile)?.FileId ?? -1;
+        public int FileSTCId => Files.FirstOrDefault(i => i.LinkType == (int)FileLinkType.STCFile)?.FileId ?? -1;
+
+
 		#region  public AttachedFile ADNoFile { get; set; }
 		[NonSerialized]
 		private AttachedFile _aDNoFile;
