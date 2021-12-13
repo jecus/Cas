@@ -470,7 +470,7 @@ namespace EntityCore.Repository
 			var isDel = Expression.Equal(isDelExpression, Expression.Convert(Expression.Constant(deletedCondition), isDeltype.PropertyType));
 
 			var lambdaForWhere = Expression.Lambda(isDel, itemFileLinkExpression);
-			var whereCall = Expression.Call(null, whereMethodGeneric, filesPropertyExpression, lambdaForWhere);
+			var whereCall = Expression.Call( whereMethodGeneric, filesPropertyExpression, lambdaForWhere);
 			var lambda = Expression.Lambda(whereCall, aircraftFlightObject);
 
 			if (typeCollection.Contains("ItemFileLinkDTO"))

@@ -5,6 +5,6 @@ namespace CasApiNew.Infrastructure
 {
 	public interface IWorker : IDisposable
 	{
-		Task Start();
+		void Start();
 	}
 }

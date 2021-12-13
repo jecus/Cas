@@ -24,7 +24,7 @@ namespace CasApiNew.Infrastructure
 			
 		}
 
-		public async Task Start()
+		public async void Start()
 		{
 			while (true)
 			{
