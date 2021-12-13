@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using CasApiNew.Abstractions.Helpers;
 using CasApiNew.Abstractions.Middleware;
 using CasApiNew.Infrastructure;
+using Microsoft.AspNetCore.ResponseCompression;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -39,6 +41,16 @@ namespace CasApiNew
             RegisterWorkers(services);
             RegisterSwagger(services);
             RegisterHealthCheck(services);
+
+            services.Configure<GzipCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Optimal;
+            });
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<GzipCompressionProvider>();
+                options.EnableForHttps = true;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -46,7 +58,7 @@ namespace CasApiNew
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-
+            app.UseResponseCompression();
             app.UseMiddleware(typeof(ErrorHandlerMiddleware));
 
             app.UseCors(builder => builder.AllowAnyOrigin());
