@@ -1,9 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
-using EntityCore.DTO.Dictionaries;
-using ReasonDTO = Entity.Models.DTO.Dictionaries.ReasonDTO;
+using Entity.Models.DTO.Dictionaries;
 
 namespace Entity.Models.DTO.General
 {

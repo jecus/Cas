@@ -2,13 +2,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
+using Entity.Models.DTO.General;
 using Newtonsoft.Json;
-using ComponentDTO = Entity.Models.DTO.General.ComponentDTO;
-using DirectiveDTO = Entity.Models.DTO.General.DirectiveDTO;
-using DiscrepancyDTO = Entity.Models.DTO.General.DiscrepancyDTO;
-using JobCardDTO = Entity.Models.DTO.General.JobCardDTO;
-using MaintenanceDirectiveDTO = Entity.Models.DTO.General.MaintenanceDirectiveDTO;
+
 
 namespace Entity.Models.DTO.Dictionaries
 {

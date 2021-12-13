@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using EntityCore.DTO;
+using Entity.Models.DTO.General;
 using Newtonsoft.Json;
-using AircraftFlightDTO = Entity.Models.DTO.General.AircraftFlightDTO;
-using FlightPlanOpsRecordsDTO = Entity.Models.DTO.General.FlightPlanOpsRecordsDTO;
 
 namespace Entity.Models.DTO.Dictionaries
 {

@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
 
 namespace Entity.Models.DTO.Dictionaries
 {

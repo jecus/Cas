@@ -2,10 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
-using EntityCore.DTO.Dictionaries;
+using Entity.Models.DTO.Dictionaries;
 using Newtonsoft.Json;
-using DefferedCategorieDTO = Entity.Models.DTO.Dictionaries.DefferedCategorieDTO;
+
 
 namespace Entity.Models.DTO.General
 {

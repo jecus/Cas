@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
+using Entity.Models.DTO.General;
 using Newtonsoft.Json;
-using AircraftEquipmentDTO = Entity.Models.DTO.General.AircraftEquipmentDTO;
+
 
 namespace Entity.Models.DTO.Dictionaries
 {

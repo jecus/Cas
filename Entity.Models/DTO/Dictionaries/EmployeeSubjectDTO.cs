@@ -2,8 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
-using SpecialistTrainingDTO = Entity.Models.DTO.General.SpecialistTrainingDTO;
+using Entity.Models.DTO.General;
 
 namespace Entity.Models.DTO.Dictionaries
 {

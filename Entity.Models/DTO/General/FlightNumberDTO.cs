@@ -2,12 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
-using EntityCore.DTO.Dictionaries;
+using Entity.Models.DTO.Dictionaries;
 using Newtonsoft.Json;
-using AirportCodeDTO = Entity.Models.DTO.Dictionaries.AirportCodeDTO;
-using CruiseLevelDTO = Entity.Models.DTO.Dictionaries.CruiseLevelDTO;
-using FlightNumDTO = Entity.Models.DTO.Dictionaries.FlightNumDTO;
+
 
 namespace Entity.Models.DTO.General
 {

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using EntityCore.DTO;
 using Newtonsoft.Json;
 
 namespace Entity.Models.DTO.General

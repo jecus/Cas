@@ -77,8 +77,17 @@ namespace Entity.Core.Repository
 
 		public async Task<IList<T>> GetObjectListAsync(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
-			using (_context)
-				return await getAllQueryable(filters, loadChild, getDeleted).AsNoTracking().ToListAsync();
+            try
+            {
+                using (_context)
+                    return await getAllQueryable(filters, loadChild, getDeleted).AsNoTracking().ToListAsync();
+			}
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+			
 		}
 
 		public async Task<IList<T>> GetObjectListAllAsync(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)

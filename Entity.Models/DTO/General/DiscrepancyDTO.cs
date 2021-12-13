@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
-using EntityCore.DTO.Dictionaries;
-using ATAChapterDTO = Entity.Models.DTO.Dictionaries.ATAChapterDTO;
+using Entity.Models.DTO.Dictionaries;
+
 
 namespace Entity.Models.DTO.General
 {

@@ -2,9 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
-using EntityCore.DTO.Dictionaries;
-using TripNameDTO = Entity.Models.DTO.Dictionaries.TripNameDTO;
+using Entity.Models.DTO.Dictionaries;
+
 
 namespace Entity.Models.DTO.General
 {

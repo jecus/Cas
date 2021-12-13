@@ -3,13 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
-using EntityCore.DTO.Dictionaries;
-using EntityCore.Interfaces;
-using AirportCodeDTO = Entity.Models.DTO.Dictionaries.AirportCodeDTO;
-using CruiseLevelDTO = Entity.Models.DTO.Dictionaries.CruiseLevelDTO;
-using FlightNumDTO = Entity.Models.DTO.Dictionaries.FlightNumDTO;
-using ReasonDTO = Entity.Models.DTO.Dictionaries.ReasonDTO;
+using Entity.Models.DTO.Dictionaries;
 
 namespace Entity.Models.DTO.General 
 {

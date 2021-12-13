@@ -2,12 +2,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
+using Entity.Models.DTO.General;
 using Newtonsoft.Json;
-using DirectiveDTO = Entity.Models.DTO.General.DirectiveDTO;
-using InitialOrderRecordDTO = Entity.Models.DTO.General.InitialOrderRecordDTO;
-using RequestForQuotationRecordDTO = Entity.Models.DTO.General.RequestForQuotationRecordDTO;
-
 namespace Entity.Models.DTO.Dictionaries
 {
 	[Table("DefferedCategories", Schema = "Dictionaries")]

@@ -2,12 +2,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
+using Entity.Models.DTO.General;
 using Newtonsoft.Json;
-using DocumentDTO = Entity.Models.DTO.General.DocumentDTO;
-using FlightCrewRecordDTO = Entity.Models.DTO.General.FlightCrewRecordDTO;
-using FlightNumberCrewRecordDTO = Entity.Models.DTO.General.FlightNumberCrewRecordDTO;
-using SpecialistDTO = Entity.Models.DTO.General.SpecialistDTO;
 
 namespace Entity.Models.DTO.Dictionaries
 {

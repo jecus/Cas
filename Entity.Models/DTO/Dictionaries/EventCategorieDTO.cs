@@ -2,10 +2,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
+using Entity.Models.DTO.General;
 using Newtonsoft.Json;
-using EventDTO = Entity.Models.DTO.General.EventDTO;
-using EventTypeRiskLevelChangeRecordDTO = Entity.Models.DTO.General.EventTypeRiskLevelChangeRecordDTO;
 
 namespace Entity.Models.DTO.Dictionaries
 {

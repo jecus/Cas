@@ -3,15 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
-using EntityCore.DTO.Dictionaries;
+using Entity.Models.DTO.Dictionaries;
 using Newtonsoft.Json;
-using DepartmentDTO = Entity.Models.DTO.Dictionaries.DepartmentDTO;
-using DocumentSubTypeDTO = Entity.Models.DTO.Dictionaries.DocumentSubTypeDTO;
-using LocationDTO = Entity.Models.DTO.Dictionaries.LocationDTO;
-using NomenclatureDTO = Entity.Models.DTO.Dictionaries.NomenclatureDTO;
-using ServiceTypeDTO = Entity.Models.DTO.Dictionaries.ServiceTypeDTO;
-using SpecializationDTO = Entity.Models.DTO.Dictionaries.SpecializationDTO;
 
 namespace Entity.Models.DTO.General
 {

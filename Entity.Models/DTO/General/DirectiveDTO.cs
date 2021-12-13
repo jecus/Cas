@@ -2,11 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
-using EntityCore.DTO.Dictionaries;
-using EntityCore.Interfaces;
-using ATAChapterDTO = Entity.Models.DTO.Dictionaries.ATAChapterDTO;
-using DefferedCategorieDTO = Entity.Models.DTO.Dictionaries.DefferedCategorieDTO;
+using Entity.Models.DTO.Dictionaries;
 
 namespace Entity.Models.DTO.General
 {

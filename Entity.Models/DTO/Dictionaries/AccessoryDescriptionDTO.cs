@@ -2,18 +2,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
+using Entity.Models.DTO.General;
 using Newtonsoft.Json;
-using AccessoryRequiredDTO = Entity.Models.DTO.General.AccessoryRequiredDTO;
-using AircraftDTO = Entity.Models.DTO.General.AircraftDTO;
-using CategoryRecordDTO = Entity.Models.DTO.General.CategoryRecordDTO;
-using ComponentDTO = Entity.Models.DTO.General.ComponentDTO;
-using FlightNumberAircraftModelRelationDTO = Entity.Models.DTO.General.FlightNumberAircraftModelRelationDTO;
-using KitSuppliersRelationDTO = Entity.Models.DTO.General.KitSuppliersRelationDTO;
-using SpecialistLicenseDTO = Entity.Models.DTO.General.SpecialistLicenseDTO;
-using SpecialistTrainingDTO = Entity.Models.DTO.General.SpecialistTrainingDTO;
-using StockComponentInfoDTO = Entity.Models.DTO.General.StockComponentInfoDTO;
-using VehicleDTO = Entity.Models.DTO.General.VehicleDTO;
 
 namespace Entity.Models.DTO.Dictionaries
 {

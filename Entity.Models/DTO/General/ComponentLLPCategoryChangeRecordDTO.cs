@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
-using EntityCore.DTO.Dictionaries;
-using EntityCore.Interfaces;
+using Entity.Models.DTO.Dictionaries;
 using Newtonsoft.Json;
-using LifeLimitCategorieDTO = Entity.Models.DTO.Dictionaries.LifeLimitCategorieDTO;
 
 namespace Entity.Models.DTO.General
 {

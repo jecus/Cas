@@ -2,10 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
-using EntityCore.DTO.Dictionaries;
-using EventCategorieDTO = Entity.Models.DTO.Dictionaries.EventCategorieDTO;
-using EventClassDTO = Entity.Models.DTO.Dictionaries.EventClassDTO;
+using Entity.Models.DTO.Dictionaries;
 
 namespace Entity.Models.DTO.General
 {

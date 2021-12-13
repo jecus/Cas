@@ -1,11 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Models.Attributte;
-using EntityCore.DTO;
-using EntityCore.DTO.Dictionaries;
+using Entity.Models.DTO.Dictionaries;
 using Newtonsoft.Json;
-using LicenseRemarkRightDTO = Entity.Models.DTO.Dictionaries.LicenseRemarkRightDTO;
-using RestrictionDTO = Entity.Models.DTO.Dictionaries.RestrictionDTO;
+
 
 namespace Entity.Models.DTO.General
 {
