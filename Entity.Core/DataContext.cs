@@ -163,7 +163,7 @@ namespace Entity.Core
 				var paramRangeLastValue = new SqlParameter("@rangelastvalue", SqlDbType.Variant) { Direction = ParameterDirection.Output };
 				var paramSequenceIncrement = new SqlParameter("@sequenceincrement", SqlDbType.Variant) { Direction = ParameterDirection.Output };
 
-				Database.ExecuteSqlCommand(
+				Database.ExecuteSqlRaw(
 					"EXEC sys.sp_sequence_get_range " +
 					"@sequence_name = @sequencename, " +
 					"@range_size = @rangesize, " +

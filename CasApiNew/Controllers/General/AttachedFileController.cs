@@ -1,0 +1,16 @@
+﻿using Entity.Core;
+using Entity.Models.DTO.General;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
+namespace CasApiNew.Controllers.General
+{
+	[Route("attachedfile")]
+	public class AttachedFileController : BaseController<AttachedFileDTO>
+	{
+		public AttachedFileController(DataContext context, ILogger<BaseController<AttachedFileDTO>> logger) : base(context, logger)
+		{
+
+		}
+	}
+}

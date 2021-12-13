@@ -4,13 +4,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
-using EntityCore;
-using EntityCore.Attributte;
-using EntityCore.DTO;
-using EntityCore.DTO.General;
-using EntityCore.Interfaces;
+using Entity.Models.Attributte;
+using Entity.Models.DTO;
+using Entity.Models.DTO.General;
+using Entity.Models.Filter;
 using Microsoft.EntityFrameworkCore;
-using Z.EntityFramework.Plus; //using EFCore.BulkExtensions;
+using Z.EntityFramework.Plus;
 
 namespace Entity.Core.Repository
 {
@@ -19,7 +18,7 @@ namespace Entity.Core.Repository
 		protected DbContext _context;
 		protected DbSet<T> _dbset;
 
-		public Repository(EntityCore.DTO.DataContext context)
+		public Repository(DataContext context)
 		{
 			_context = context;
 			_dbset = context.Set<T>();
@@ -32,7 +31,7 @@ namespace Entity.Core.Repository
 
 		#region Async
 
-		public async Task<IList<int>> GetSelectColumnOnlyAsync(IEnumerable<EntityCore.Filter.Filter> filters, string selectProperty)
+		public async Task<IList<int>> GetSelectColumnOnlyAsync(IEnumerable<Filter> filters, string selectProperty)
 		{
 			using (_context)
 			{
@@ -67,22 +66,22 @@ namespace Entity.Core.Repository
 		public async Task<T> GetObjectByIdAsync(int id, bool loadChild = false)
 		{
 			using (_context)
-				return await getAllQueryable(new[] { new EntityCore.Filter.Filter("ItemId", id) }, loadChild).AsNoTracking().FirstOrDefaultAsync();
+				return await getAllQueryable(new[] { new Filter("ItemId", id) }, loadChild).AsNoTracking().FirstOrDefaultAsync();
 		}
 
-		public async Task<T> GetObjectAsync(IEnumerable<EntityCore.Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
+		public async Task<T> GetObjectAsync(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
 		{
 			using (_context)
 				return await getAllQueryable(filters, loadChild, getDeleted, getAll).AsNoTracking().FirstOrDefaultAsync();
 		}
 
-		public async Task<IList<T>> GetObjectListAsync(IEnumerable<EntityCore.Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false)
+		public async Task<IList<T>> GetObjectListAsync(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
 			using (_context)
 				return await getAllQueryable(filters, loadChild, getDeleted).AsNoTracking().ToListAsync();
 		}
 
-		public async Task<IList<T>> GetObjectListAllAsync(IEnumerable<EntityCore.Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false)
+		public async Task<IList<T>> GetObjectListAllAsync(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
 			using (_context)
 				return await getAllQueryable(filters, loadChild, getDeleted, true).AsNoTracking().ToListAsync();
@@ -167,7 +166,7 @@ namespace Entity.Core.Repository
 		#endregion
 
 
-		private IQueryable<T> getAllQueryable(IEnumerable<EntityCore.Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
+		private IQueryable<T> getAllQueryable(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
 		{
 			IQueryable<T> query = _dbset;
 
