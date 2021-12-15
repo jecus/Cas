@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
-using ItemFileLinkDTO = Entity.Models.DTO.General.ItemFileLinkDTO;
+using Entity.Abstractions;
+using Entity.Models.DTO.General;
+
 
 namespace Entity.Models.DTO
 {
-	public interface IFileDtoContainer : Entity.Models.DTO.IBaseEntity
+	public interface IFileDtoContainer : IBaseEntity
 	{
 		ICollection<ItemFileLinkDTO> Files { get; set; }
 	}

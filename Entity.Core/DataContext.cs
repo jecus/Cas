@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Entity.Models.DTO.Dictionaries;
 using Entity.Models.DTO.General;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace Entity.Core

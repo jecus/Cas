@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Entity.Models.Attributte
+namespace Entity.Abstractions.Attributte
 {
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 	public class ConditionAttribute : Attribute

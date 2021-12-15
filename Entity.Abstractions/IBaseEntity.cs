@@ -1,4 +1,4 @@
-﻿namespace Entity.Models.DTO
+﻿namespace Entity.Abstractions
 {
 	public interface IBaseEntity
 	{

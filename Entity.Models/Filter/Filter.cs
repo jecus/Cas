@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Entity.Models.Attributte;
+using Entity.Abstractions.Attributte;
 
 namespace Entity.Models.Filter
 {

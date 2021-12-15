@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace Entity.Models.Attributte
+namespace Entity.Abstractions.Attributte
 {
 	
 	public enum FilterType

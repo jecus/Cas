@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CasApiNew.Infrastructure;
+using Entity.Abstractions;
 using Entity.Core;
 using Entity.Models.DTO;
 using Entity.Models.Filter;

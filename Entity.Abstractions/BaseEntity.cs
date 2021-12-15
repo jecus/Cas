@@ -2,7 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Entity.Models.DTO
+
+namespace Entity.Abstractions
 {
 	
 	public class BaseEntity : IBaseEntity

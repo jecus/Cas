@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entity.Abstractions;
 using Entity.Models.DTO.General;
 using Newtonsoft.Json;
 

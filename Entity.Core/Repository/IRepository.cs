@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Entity.Models.DTO;
+using Entity.Abstractions;
 using Entity.Models.Filter;
 
 namespace Entity.Core.Repository

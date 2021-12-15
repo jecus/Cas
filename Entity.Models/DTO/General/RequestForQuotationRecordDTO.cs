@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Entity.Models.Attributte;
+using Entity.Abstractions;
+using Entity.Abstractions.Attributte;
 using Entity.Models.DTO.Dictionaries;
 using Newtonsoft.Json;
 
