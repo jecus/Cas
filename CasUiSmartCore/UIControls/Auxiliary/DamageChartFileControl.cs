@@ -126,7 +126,7 @@ namespace CAS.UI.UIControls.Auxiliary
                                                    ? _currentDocument.DamageDocFile.FileName
                                                    : "Please, add file";
             var damageCharts = 
-                GlobalObjects.CasEnvironment.NewLoader.GetDamageChartsByAircraftModel(_currentAircraft.Model);
+                GlobalObjects.CasEnvironment.GetDamageChartsByAircraftModel(_currentAircraft.Model);
             comboBoxDamageCharts.Items.Clear();
             comboBoxDamageCharts.Items.AddRange(damageCharts.ToArray());
             comboBoxDamageCharts.SelectedItem =
@@ -191,7 +191,7 @@ namespace CAS.UI.UIControls.Auxiliary
             if(dc.AttachedFile != null)
             {
                fileControlChartFile.AttachedFile = 
-                   GlobalObjects.CasEnvironment.NewLoader.GetAttachedFileById(dc.AttachedFile.ItemId);
+                   GlobalObjects.CasEnvironment.GetAttachedFileById(dc.AttachedFile.ItemId);
                 fileControlChartFile.AttachedFile.ItemId = 0;
             }
             else fileControlChartFile.AttachedFile = dc.AttachedFile;

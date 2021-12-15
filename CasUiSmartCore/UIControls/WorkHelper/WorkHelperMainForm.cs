@@ -99,8 +99,6 @@ namespace CAS.UI.UIControls.WorkHelper
                 textBoxTableName.Text = dbTable.TableName;
                 try
                 {
-                    GlobalObjects.CasEnvironment.CheckTablesFor(type);
-                    
                     labelStatusValue.Text = "OK";
                     checkBoxTableInstall.Enabled = false;
                     checkBoxTableInstall.Text = "...";
@@ -162,7 +160,6 @@ namespace CAS.UI.UIControls.WorkHelper
 
                 try
                 {
-                    GlobalObjects.CasEnvironment.CheckTablesFor(type);
                     MessageBox.Show(
                         "Таблица " + dbTable.TableScheme + "." + dbTable.TableName + " полностью соответсввует типу "
                                    + type.Name, "Сообщение", MessageBoxButtons.OK);
@@ -183,7 +180,6 @@ namespace CAS.UI.UIControls.WorkHelper
 
                     try
                     {
-                        GlobalObjects.CasEnvironment.CreateTablesFor(type);
                         MessageBox.Show(
                         "Таблица " + dbTable.TableScheme + "." + dbTable.TableName + " полностью соответсввует типу "
                                    + type.Name, "Сообщение", MessageBoxButtons.OK);

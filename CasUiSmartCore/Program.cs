@@ -112,9 +112,6 @@ namespace CAS.UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.CurrentCulture = new CultureInfo("en-US");
-
-            // ѕредварительно провер€ем некоторые вещи
-            Launcher.Prepare();
             // ќпределени€ варианта запуска приложени€
             String mode = "release";
 #if RELEASE

@@ -1054,7 +1054,7 @@ namespace SmartCore.TransferRec
 							transferRecord.ParentComponent.TransferRecords.Remove(transferRecord);
 
 							// Обновляем состояние объекта
-							_newLoader.SetDestinations(transferRecord.ParentComponent);
+                            _componentCore.SetDestinations(transferRecord.ParentComponent);
 
 							if (transferRecord.ParentComponent is BaseComponent)
 								_calculator.ResetMath((BaseComponent)transferRecord.ParentComponent);
@@ -1072,7 +1072,7 @@ namespace SmartCore.TransferRec
 						transferRecord.ParentComponent.TransferRecords.Remove(transferRecord);
 
 						// Обновляем состояние объекта
-						_newLoader.SetDestinations(transferRecord.ParentComponent);
+                        _componentCore.SetDestinations(transferRecord.ParentComponent);
 
 						if (transferRecord.ParentComponent is BaseComponent)
 							_calculator.ResetMath((BaseComponent)transferRecord.ParentComponent);
@@ -1086,7 +1086,7 @@ namespace SmartCore.TransferRec
 					transferRecord.ParentComponent.TransferRecords.Remove(transferRecord);
 
 					// Обновляем состояние объекта
-					_newLoader.SetDestinations(transferRecord.ParentComponent);
+                    _componentCore.SetDestinations(transferRecord.ParentComponent);
 
 					if (transferRecord.ParentComponent is BaseComponent)
 						_calculator.ResetMath((BaseComponent)transferRecord.ParentComponent);

@@ -9,9 +9,9 @@ namespace SmartCore.DataAccesses.WorkPackageRecords
 {
 	public class WorkPackageRecordsDataAccess : IWorkPackageRecordsDataAccess
 	{
-		private readonly CasEnvironment _environment;
+		private readonly ICasEnvironment _environment;
 
-		public WorkPackageRecordsDataAccess(CasEnvironment environment)
+		public WorkPackageRecordsDataAccess(ICasEnvironment environment)
 		{
 			_environment = environment;
 		}

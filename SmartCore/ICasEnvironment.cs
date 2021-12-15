@@ -6,11 +6,15 @@ using System.Data.SqlClient;
 using CAS.UI.Helpers;
 using EntityCore.DTO.General;
 using SmartCore.Aircrafts;
+using SmartCore.AuditMongo.Repository;
 using SmartCore.Calculations;
+using SmartCore.Component;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Deprecated;
 using SmartCore.Entities.General.Hangar;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Store;
@@ -21,13 +25,29 @@ using SmartCore.Queries;
 
 namespace SmartCore
 {
-	public interface ICasEnvironment
+    public interface IBaseEnvironment
+    {
+        IAuditRepository AuditRepository { get; set; }
+		ApiProvider ApiProvider { get; set; }
+
+        
+        DataSet Execute(string sql);
+        DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results);
+        DataSet Execute(string query, SqlParameter[] parameters);
+
+        void AddDictionary(Type t, IDictionaryCollection dictionary);
+        void ClearDictionaries();
+
+
+
+	}
+
+	public interface ICasEnvironment : IBaseEnvironment
 	{
 		/// <summary>
 		/// Свойства
 		/// </summary>
-		ApiProvider ApiProvider { get; }
-		OperatorCollection Operators { get; }
+        OperatorCollection Operators { get; }
 		CommonCollection<Vehicle> Vehicles { get; }
 		CommonCollection<Store> Stores { get; }
 		CommonCollection<Hangar> Hangars { get; }
@@ -40,7 +60,7 @@ namespace SmartCore
 		ILoader Loader { get; }
 		INewLoader NewLoader { get; }
 		INewKeeper NewKeeper { get; }
-		Calculator Calculator { get; }
+		Calculator Calculator { get; set; }
 		Keeper Keeper { get; }
 		Manipulator Manipulator { get; }
 
@@ -61,10 +81,6 @@ namespace SmartCore
 
 		void UpdateUser(string password);
 
-		void CheckTablesFor(Type type);
-
-		void CreateTablesFor(Type type);
-
 		IDictionaryCollection GetDictionary<T>() where T : IDictionaryItem;
 
 		IDictionaryCollection GetDictionary(Type type);
@@ -81,9 +97,23 @@ namespace SmartCore
 
 		void SaveAsFile(AttachedFile attachedFile, string filePath, out string message);
 
-		T CloneObject<T>(T source);
+        void SetAircraftCore(IAircraftsCore aircraftsCore);
+        void SetComponentCore(IComponentCore componentCore);
 
-		void SetAircraftCore(IAircraftsCore aircraftsCore);
+
+		void FirstLoad();
+        void GetDictionaries();
+
+        void SetParentsToStores();
+
+        IList<DamageChart> GetDamageChartsByAircraftModel(AircraftModel aircraftModel);
+
+        AttachedFile GetAttachedFileById(int id);
+
+        ICommonCollection<EmployeeSubject> GetEmployeeSubject(params object[] parametres);
+        ICommonCollection<ComponentModel> GetComponentModels(params object[] type);
+
+        ICommonCollection<JobCard> GetJobCard(params object[] parametres);
 
 	}
 }

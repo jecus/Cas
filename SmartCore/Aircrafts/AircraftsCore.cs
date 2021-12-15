@@ -83,17 +83,6 @@ namespace SmartCore.Aircrafts
 				_aircrafts.Add(aircraft);
 		}
 
-		/// <summary>
-		/// Выполняет перезакрузку ВС, его базовых агрегатов и полетов, а также выполеняет перерасчет наработки
-		/// </summary>
-		public void ResetAircraft(Aircraft aircraft)
-		{
-			if (aircraft == null)
-				return;
-
-			_newLoader.LoadBaseComponents(aircraft);
-			_newLoader.SetParentsToBaseComponents();
-		}
 
 		/// <summary>
 		/// Пытается получить Aircraft для всех типов объектов

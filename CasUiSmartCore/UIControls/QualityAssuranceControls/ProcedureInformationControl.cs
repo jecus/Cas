@@ -230,7 +230,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
                 lookupComboboxCheckList.SetItemsScreenControl<CommonListScreen>(new[] { _currentDirective.ParentOperator }, maintenanceScreenDisplayerText);
                 lookupComboboxCheckList.SetEditScreenControl<JobCardScreen>(maintenanceScreenDisplayerText);
                 lookupComboboxCheckList.SetAddScreenControl<JobCardScreen>(new object[] { _currentDirective }, _currentDirective + ". New Job Card");
-                lookupComboboxCheckList.LoadObjectsFunc = GlobalObjects.CasEnvironment.NewLoader.GetJobCard;
+                lookupComboboxCheckList.LoadObjectsFunc = GlobalObjects.CasEnvironment.GetJobCard;
                 lookupComboboxCheckList.FilterParam1 = _currentDirective;
                 lookupComboboxCheckList.SelectedItemId = _currentDirective.JobCard != null
                     ? _currentDirective.JobCard.ItemId

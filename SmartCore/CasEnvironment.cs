@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,13 +7,13 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
 using CAS.UI.Helpers;
 using EntityCore.DTO.General;
 using EntityCore.DTO.Dictionaries;
+using EntityCore.Filter;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Hangar;
 using SmartCore.Entities.General.Store;
@@ -23,10 +24,14 @@ using SmartCore.AuditMongo.Repository;
 using SmartCore.Entities.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Calculations;
+using SmartCore.Component;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities;
+using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Deprecated;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.NewLoader;
+using SmartCore.Files;
 using SmartCore.ObjectCache;
 using SmartCore.Queries;
 
@@ -151,11 +156,7 @@ namespace SmartCore
         /// <param name="database"></param>
         public void Connect(string serverName, string userName, string pass, string database)
         {
-	        _ipServer = serverName;
-
-	        //_apiProvider = new ApiProvider(serverName);
-
-	        _apiProvider.CheckAPIConnection();
+            _apiProvider.CheckAPIConnection();
 
 	        var user = _apiProvider.GetUserAsync(userName, pass);
 	        if(user == null)
@@ -172,20 +173,6 @@ namespace SmartCore
 		{
 			_apiProvider.UpdatePassword(IdentityUser.ItemId, password);
 		}
-
-		#region public void CheckTablesFor(Type type)
-        public void CheckTablesFor(Type type)
-        {
-           
-        }
-        #endregion
-
-        #region public void CreateTablesFor(Type type)
-        public void CreateTablesFor(Type type)
-        {
-            
-        }
-        #endregion
 
         #region public override string ToString()
         /// <summary>
@@ -252,9 +239,7 @@ namespace SmartCore
             get
             {
                 if (_operators.Count == 0 || _stores == null || _baseComponents == null)
-                {
-	                NewLoader.FirstLoad();
-                }
+                    FirstLoad();
                 //
                 return _operators;
             }
@@ -274,11 +259,9 @@ namespace SmartCore
         {
             get
             {
-                if (_operators.Count == 0 || _stores == null || _baseComponents == null)
-                {
-	                NewLoader.FirstLoad();
-                }
-                //
+                if (_operators.Count == 0 || _stores == null || _baseComponents == null) 
+                    FirstLoad();
+                    //
                 return _vehicles ?? (_vehicles = new CommonCollection<Vehicle>());
             }
             internal set
@@ -301,9 +284,8 @@ namespace SmartCore
             get
             {
                 if (_operators.Count == 0 || _stores == null || _baseComponents == null)
-                {
-	                NewLoader.FirstLoad();
-                }
+                    FirstLoad();
+                
                 //
                 return _stores;
             }
@@ -332,9 +314,8 @@ namespace SmartCore
             get
             {
                 if (_operators.Count == 0 || _stores == null || _baseComponents == null)
-                {
-	                NewLoader.FirstLoad();
-                }
+                    FirstLoad();
+                
                 //
                 return _hangars ?? (_hangars = new CommonCollection<Hangar>());
             }
@@ -358,9 +339,7 @@ namespace SmartCore
             get
             {
                 if (_operators.Count == 0 || _stores == null || _baseComponents == null)
-                {
-	                NewLoader.FirstLoad();
-                }
+                    FirstLoad();
                 //
                 return _workShops ?? (_workShops = new CommonCollection<WorkShop>());
             }
@@ -384,9 +363,8 @@ namespace SmartCore
 	        get
 	        {
 		        if (_operators.Count == 0 || _stores == null || _baseComponents == null)
-		        {
-			        NewLoader.FirstLoad();
-		        }
+		            FirstLoad();
+		        
 		        //
 		        return _workStations ?? (_workStations = new CommonCollection<WorkStation>());
 	        }
@@ -410,9 +388,8 @@ namespace SmartCore
             get
             {
                 if (_operators.Count == 0 || _stores == null || _baseComponents == null)
-                {
-	                NewLoader.FirstLoad();
-                }
+                    FirstLoad();
+                
                 //
                 return _baseComponents;
             }
@@ -556,13 +533,162 @@ namespace SmartCore
         }
         #endregion
 
+        #region public void FirstLoad()
 
+        /// <summary>
+        /// Выполняет первую загрузку ядра
+        /// </summary>
+        public void FirstLoad()
+        {
+            //Временные коллекции
+            TempCollections = new Dictionary<string, ICommonCollection>();
 
-		#region public void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState)
-		/// <summary>
-		/// Загружает все данные из базы, необходимые для функционирования ядра
-		/// </summary>
-		public void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState)
+            //Загрузка всех словарей
+            GetDictionaries();
+
+            // Загрузка всех операторов
+            Operators = new OperatorCollection(_newLoader.GetObjectList<OperatorDTO, Operator>().ToArray());
+
+            // Загрузка всех воздушных судов 
+
+#if !KAC
+            //Загрузка всех транспортный средств
+            Vehicles = new CommonCollection<Vehicle>(_newLoader.GetObjectListAll<VehicleDTO, Vehicle>());
+            //Загрузка всех ангаров
+            Hangars = new CommonCollection<Hangar>(_newLoader.GetObjectListAll<HangarDTO, Hangar>());
+#endif
+            // Загрузка всех складов
+            Stores = new CommonCollection<Store>(_newLoader.GetObjectListAll<StoreDTO, Store>());
+            //Загрузка всех лабораторий
+#if !KAC
+           WorkShops = new CommonCollection<WorkShop>(_newLoader.GetObjectListAll<WorkShopDTO, WorkShop>());
+#endif
+            // Загрузка всех базовых агрегатов
+            BaseComponents = new BaseComponentCollection(_newLoader.GetObjectListAll<BaseComponentDTO, BaseComponent>(loadChild: true)); //GetBaseDetails();
+
+            // Выставляем ссылки между объектами
+
+            SetParentsToStores();
+            _componentCore.SetParentsToBaseComponents();
+#if !KAC
+            foreach (var store in Hangars)
+                store.Operator = Operators.GetOperatorById(store.OperatorId);
+            foreach (var store in WorkShops)
+                store.Operator = Operators.GetOperatorById(store.OperatorId);
+#endif
+        }
+
+        #endregion
+
+        public void GetDictionaries()
+        {
+            ClearDictionaries();
+
+            var assembly = Assembly.GetAssembly(typeof(BaseEntityObject));
+            var types = assembly.GetTypes()
+                .Where(t => t.Namespace != null && t.IsClass && t.Namespace.StartsWith("SmartCore.Entities.Dictionaries"));
+
+            var staticDictionaryType = types.Where(t => t.IsSubclassOf(typeof(StaticDictionary))
+                                                            && t.GetCustomAttributes(typeof(TableAttribute), false).Length > 0).ToList();
+
+            foreach (var type in staticDictionaryType)
+            {
+                try
+                {
+                    string qr = BaseQueries.GetSelectQueryWithWhere(type, loadChild: true);
+                    DataSet ds = Execute(qr);
+
+                    //поиск в типе своиства Items
+                    PropertyInfo itemsProp = type.GetProperty("Items");
+                    //поиск у типа конструктора беза параметров
+                    ConstructorInfo ci = type.GetConstructor(new Type[0]);
+                    //создание экземпляра статического словаря 
+                    //(при этом будут созданы все его статические элементы, 
+                    // которые будут доступны через статическое своиство Items)
+                    StaticDictionary instance = (StaticDictionary)ci.Invoke(null);
+                    //Получение элементов статического своиства Items
+                    IEnumerable staticList = (IEnumerable)itemsProp.GetValue(instance, null);
+
+                    BaseQueries.SetFields(staticList, ds);
+                }
+                catch (Exception)
+                {
+                    continue;
+                    //throw ex;
+                }
+            }
+
+            var abstractDictionaryTypes = types.Where(t => t.IsSubclassOf(typeof(AbstractDictionary))
+                                                               && !t.IsAbstract)
+                                                      .ToList();
+            //коллекция дл типов, которые не удалось загрузить сразу
+            //по причине отсутствия другого словаря в коллекции словарей ядра
+            var defferedTypes = new List<Type>();
+            foreach (var type in abstractDictionaryTypes)
+            {
+                try
+                {
+                    var dca = (DictionaryCollectionAttribute)type.GetCustomAttributes(typeof(DictionaryCollectionAttribute), false).FirstOrDefault();
+                    var bl = (DtoAttribute)type.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
+
+                    var typeDict = dca == null
+                        ? new CommonDictionaryCollection<AbstractDictionary>()
+                        : dca.GetInstance();
+
+                    IEnumerable items = _newLoader.GetObjectList(bl.Type, type, true);
+                    typeDict.AddRange((IEnumerable<IDictionaryItem>)items);
+                    AddDictionary(type, typeDict);
+
+                }
+                catch (KeyNotFoundException)
+                {
+                    defferedTypes.Add(type);
+                    continue;
+                }
+                catch (Exception)
+                {
+                    continue;
+                    //throw ex;
+                }
+            }
+
+            //Повторная попытка загрузить типы данных, которые не удалось загрузить с первого раза
+            foreach (var type in defferedTypes)
+            {
+                try
+                {
+                    var dca = (DictionaryCollectionAttribute)type.GetCustomAttributes(typeof(DictionaryCollectionAttribute), false).FirstOrDefault();
+                    var bl = (DtoAttribute)type.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
+                    var typeDict = dca == null
+                        ? new CommonDictionaryCollection<AbstractDictionary>()
+                        : dca.GetInstance();
+                    IEnumerable items = _newLoader.GetObjectList(bl.Type, type, true);
+                    typeDict.AddRange((IEnumerable<IDictionaryItem>)items);
+                    AddDictionary(type, typeDict);
+                }
+                catch (Exception)
+                {
+                    continue;
+                    //throw ex;
+                }
+            }
+        }
+
+        #region public void SetParentsToStores()
+
+        public void SetParentsToStores()
+        {
+            foreach (var store in Stores)
+                store.Operator = Operators.GetOperatorById(store.OperatorId);
+        }
+
+        #endregion
+
+        #region public void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState)
+        /// <summary>
+        /// Загружает все данные из базы, необходимые для функционирования ядра
+        /// </summary>
+        public void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState)
         {
 			if ( backgroundWorker == null )return;
             
@@ -602,7 +728,7 @@ namespace SmartCore
             loadingState.CurrentPersentageDescription = "Loading Dictionaries";
             backgroundWorker.ReportProgress(1, loadingState);
 
-            NewLoader.GetDictionaries();
+            GetDictionaries();
             
             if (backgroundWorker.CancellationPending)
             {
@@ -713,8 +839,8 @@ namespace SmartCore
             loadingState.CurrentPersentageDescription = "Set Links";
             backgroundWorker.ReportProgress(1, loadingState);
 
-			_newLoader.SetParentsToStores();
-            _newLoader.SetParentsToBaseComponents();
+			SetParentsToStores();
+            _componentCore.SetParentsToBaseComponents();
 
             //foreach (Vehicle vehicle in Vehicles)
             //    vehicle.Operator = Operators.GetOperatorById(vehicle.OperatorId);
@@ -728,6 +854,85 @@ namespace SmartCore
             _tempFileMonitoringThread = new Thread(TempFileDeleting) {IsBackground = true};
             _tempFileMonitoringThread.Start();
         }
+        #endregion
+
+        #region public BaseItemsCollection<DamageChart> GetDamageChartsByAircraftModel(AircraftModel aircraftModel)
+
+        public IList<DamageChart> GetDamageChartsByAircraftModel(AircraftModel aircraftModel)
+        {
+            var res = _newLoader.GetObjectListAll<DamageChartDTO, DamageChart>(new Filter("AircraftModelId", aircraftModel.ItemId), true);
+            var ids = res.Select(i => i.ItemId);
+            var links = _newLoader.GetObjectListAll<ItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+            {
+                new Filter("ParentId",ids),
+                new Filter("ParentTypeId",SmartCoreType.DamageChart.ItemId)
+            }, true);
+
+
+            foreach (var damageChart in res)
+            {
+                damageChart.Files.AddRange(links.Where(i => i.ParentId == damageChart.ItemId));
+            }
+
+            return res;
+        }
+        #endregion
+
+        #region public AttachedFile GetAttachedFileById(Int32 id)
+
+        public AttachedFile GetAttachedFileById(int id)
+        {
+            AttachedFile attachedFile = null;
+
+            if (id > 0)
+                attachedFile = _newLoader.GetObject<AttachedFileDTO, AttachedFile>(new Filter("ItemId", id));
+
+            return attachedFile;
+        }
+
+        #endregion
+
+        #region public ICommonCollection<EmployeeSubject> GetEmployeeSubject(params object[] parametres)
+
+        public ICommonCollection<EmployeeSubject> GetEmployeeSubject(params object[] parametres)
+        {
+            if (parametres[0] is int)
+            {
+                var type = (int)parametres[0];
+                return new CommonCollection<EmployeeSubject>(_newLoader.GetObjectListAll<EmployeeSubjectDTO, EmployeeSubject>(new Filter("LicenceTypeId", type), true));
+            }
+            throw new ArgumentException("must be EmployeeLicenceType", "parametres");
+        }
+
+        #endregion
+
+        public ICommonCollection<ComponentModel> GetComponentModels(params object[] type)
+        {
+            var ids = new List<int>() { GoodsClass.AircraftBaseComponents.ItemId };
+            var res = new CommonCollection<ComponentModel>(_newLoader.GetObjectList<AccessoryDescriptionDTO, ComponentModel>(new Filter("ComponentClass", ids)));
+            return res;
+        }
+
+        #region public ICommonCollection<JobCard> GetJobCard(params object[] parametres)
+
+        public ICommonCollection<JobCard> GetJobCard(params object[] parametres)
+        {
+            if (parametres == null || parametres.Length == 0 || parametres[0] == null)
+                return null;
+            if (parametres[0] is BaseEntityObject)
+            {
+                var a = (BaseEntityObject)parametres[0];
+                if (a.ItemId == -1)
+                    return null;
+                return new CommonCollection<JobCard>(_newLoader.GetObjectListAll<JobCardDTO, JobCard>(new List<Filter>()
+                {
+                    new Filter("ParentId",a.ItemId),
+                    new Filter("ParentTypeId",  a.SmartCoreObjectType.ItemId)
+                }, true, true));
+            }
+            throw new ArgumentException("must be Aircraft or BaseComponent or Store or List<BaseComponent>", "parametres");
+        }
+
         #endregion
 
         /*
@@ -1023,8 +1228,8 @@ namespace SmartCore
 	    #endregion
 
 		private IAircraftsCore _aircraftsCore;
+		private IComponentCore _componentCore;
 
-	    private string _ipServer;
 	    private IAuditRepository _auditRepository;
 
 	    //TODO: врменный метод. IAircraftsCore должен передаваться через конструктор
@@ -1033,35 +1238,9 @@ namespace SmartCore
 		    _aircraftsCore = aircraftsCore;
 	    }
 
-		/*
-		 * Реализация
-		*/
-
-	    #region public  T CloneObject<T>(T source)
-
-		public T CloneObject<T>(T source)
+        public void SetComponentCore(IComponentCore componentCore)
         {
-            if (!typeof(T).IsSerializable)
-            {
-                throw new ArgumentException("The type must be serializable.", "source");
-            }
-
-            // Don't serialize a null object, simply return the default for that object
-            if (ReferenceEquals(source, null))
-            {
-                return default(T);
-            }
-
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new MemoryStream();
-            using (stream)
-            {
-                formatter.Serialize(stream, source);
-                stream.Seek(0, SeekOrigin.Begin);
-                return (T)formatter.Deserialize(stream);
-            }
+            _componentCore = componentCore;
         }
-
-        #endregion
     }
 }

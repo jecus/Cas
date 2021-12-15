@@ -24,8 +24,14 @@ namespace SmartCore.Management
     /// </summary>
     public static class DbTypes
     {
-        private static CasEnvironment _casEnvironment;
-        public static CasEnvironment CasEnvironment
+        private static ICaaEnvironment _caaEnvironment;
+        public static ICaaEnvironment CaaEnvironment
+        {
+            set { _caaEnvironment = value; }
+        }
+
+        private static ICasEnvironment _casEnvironment;
+        public static ICasEnvironment CasEnvironment
         {
             set { _casEnvironment = value; }
         }
@@ -633,26 +639,6 @@ namespace SmartCore.Management
         }
         #endregion
 
-        //#region  public static void SetValue(TableColumnAttribute tca, BaseEntityObject item, PropertyInfo currentProperty, object value)
-        //public static void SetValue(TableColumnAttribute tca, BaseEntityObject item, PropertyInfo currentProperty, object value)
-        //{
-        //    object objectValue;
-        //    if (!(string.IsNullOrEmpty(tca.TypeBy)))
-        //    {
-        //        PropertyInfo typeProperty = item.GetType().GetProperties().Where(p => p.Name == tca.TypeBy).First();
-        //        if (typeProperty != null)
-        //        {
-        //            SmartCoreType coreType = typeProperty.GetValue(item, null) as SmartCoreType;
-        //            if (coreType != null && coreType.ObjectType != null)
-        //                objectValue = GetValue(coreType.ObjectType, value);
-        //            else objectValue = GetValue(currentProperty.PropertyType, value);
-        //        }
-        //        else objectValue = GetValue(currentProperty.PropertyType, value);
-        //    }
-        //    else objectValue = GetValue(currentProperty.PropertyType, value);
-
-        //    currentProperty.SetValue(item, objectValue, null);
-        //}
         //#endregion
 
         #region  public static void Fill(Type type, object value)

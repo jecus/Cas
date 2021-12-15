@@ -76,7 +76,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             if (_currentAircraft == null) return;
 
             _damageCharts =
-                GlobalObjects.CasEnvironment.NewLoader.GetDamageChartsByAircraftModel(_currentAircraft.Model);
+                GlobalObjects.CasEnvironment.GetDamageChartsByAircraftModel(_currentAircraft.Model);
 
             listViewDamageCharts.Items.Clear();
             List<DamageChart> records = new List<DamageChart>();

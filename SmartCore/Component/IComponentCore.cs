@@ -14,6 +14,10 @@ namespace SmartCore.Component
 {
 	public interface IComponentCore
 	{
+
+        void SetParentsToBaseComponents();
+		void SetDestinations(Entities.General.Accessory.Component component);
+		void SetDestinations(BaseComponent baseComponent);
 		IList<Entities.General.Accessory.Component> GetComponents();
 		ComponentCollection GetComponents(params object[] parametres);
 
@@ -100,6 +104,8 @@ namespace SmartCore.Component
 		/// <param name="baseComponentId"></param>
 		/// <returns></returns>
 		BaseComponent GetBaseComponentById(int baseComponentId);
+
+        void ResetAircraft(Aircraft aircraft);
 
 		void LoadBaseComponentsDirectives(Aircraft aircraft = null);
 

@@ -240,7 +240,7 @@ namespace SmartCore.WorkPackages
 							if (bindedItems.ContainsKey(componentDirective))
 							{
 								var mpd = (MaintenanceDirective) bindedItems[componentDirective].SingleOrDefault();
-								mpd.TaskCardNumberFile = _newLoader.GetAttachedFileById(mpd.TaskCardNumberFile.ItemId);
+								mpd.TaskCardNumberFile = _casEnvironment.GetAttachedFileById(mpd.TaskCardNumberFile.ItemId);
 								componentDirective.MaintenanceDirective = mpd;
 							}
 						}

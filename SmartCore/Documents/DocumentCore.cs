@@ -207,7 +207,7 @@ namespace SmartCore.Documents
 
 						if (comp != null)
 						{
-							_newLoader.SetDestinations(comp);
+							_componentCore.SetDestinations(comp);
 							if (comp.ParentAircraftId > 0)
 								document.Parent = _aircraftsCore.GetAircraftById(comp.ParentAircraftId);
 							else if(comp.ParentStoreId > 0)

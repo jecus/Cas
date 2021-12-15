@@ -13,8 +13,7 @@ namespace SmartCore.Aircrafts
 		void RegisterAircraft(Aircraft aircraft, int operatorId);
 		void DeleteAircraft(int aircraftId);
 		void UpdateAircraft(Aircraft aircraft);
-		void ResetAircraft(Aircraft aircraft);
-		Aircraft GetParentAircraft(IBaseEntityObject item);
+        Aircraft GetParentAircraft(IBaseEntityObject item);
 
 	}
 }

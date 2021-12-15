@@ -483,7 +483,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 				lookupComboboxJobCard.SetItemsScreenControl<CommonListScreen>(new[] { parentAircraft }, maintenanceScreenDisplayerText);
                 lookupComboboxJobCard.SetEditScreenControl<JobCardScreen>(maintenanceScreenDisplayerText);
                 lookupComboboxJobCard.SetAddScreenControl<JobCardScreen>(new object[] { _currentDirective }, _currentDirective + ". New Job Card");
-                lookupComboboxJobCard.LoadObjectsFunc = GlobalObjects.CasEnvironment.NewLoader.GetJobCard;
+                lookupComboboxJobCard.LoadObjectsFunc = GlobalObjects.CasEnvironment.GetJobCard;
                 lookupComboboxJobCard.FilterParam1 = _currentDirective;
                 lookupComboboxJobCard.SelectedItemId = _currentDirective.JobCard != null
                     ? _currentDirective.JobCard.ItemId

@@ -47,27 +47,5 @@ namespace SmartCore.Entities.NewLoader
 		IList<TOut> GetObjectListAll<T, TOut>(Filter filter, bool loadChild = false,
 			bool getDeleted = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new();
 
-		void GetDictionaries();
-
-		void FirstLoad();
-
-		void SetParentsToStores();
-
-		void SetParentsToBaseComponents();
-
-		void SetDestinations(BaseComponent baseComponent);
-
-		void SetDestinations(General.Accessory.Component component);
-
-		void LoadBaseComponents(Aircraft aircraft);
-
-		IList<DamageChart> GetDamageChartsByAircraftModel(AircraftModel aircraftModel);
-
-		AttachedFile GetAttachedFileById(int id);
-
-		ICommonCollection<EmployeeSubject> GetEmployeeSubject(params object[] parametres);
-		ICommonCollection<ComponentModel> GetComponentModels(params object[] type);
-
-		ICommonCollection<JobCard> GetJobCard(params object[] parametres);
 	}
 }

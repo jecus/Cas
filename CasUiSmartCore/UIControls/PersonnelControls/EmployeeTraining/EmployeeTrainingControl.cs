@@ -59,7 +59,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeTraining
 			comboBoxTrainingType.Items.AddRange(TrainingType.Items.ToArray());
 
 
-			lookupComboboxSubject.LoadObjectsFunc = GlobalObjects.CasEnvironment.NewLoader.GetEmployeeSubject;
+			lookupComboboxSubject.LoadObjectsFunc = GlobalObjects.CasEnvironment.GetEmployeeSubject;
 			lookupComboboxSubject.FilterParam1 = categoryId;
 			lookupComboboxSubject.Type = typeof(EmployeeSubject);
 			lookupComboboxSubject.SelectedItem = _training.EmployeeSubject;
@@ -94,7 +94,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeTraining
 		{
 			var selectedCategory = (EmployeeLicenceType)sender;
 
-			lookupComboboxSubject.LoadObjectsFunc = GlobalObjects.CasEnvironment.NewLoader.GetEmployeeSubject;
+			lookupComboboxSubject.LoadObjectsFunc = GlobalObjects.CasEnvironment.GetEmployeeSubject;
 			lookupComboboxSubject.FilterParam1 = selectedCategory.ItemId;
 			lookupComboboxSubject.UpdateInformation();
 		}

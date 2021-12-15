@@ -107,7 +107,7 @@ namespace CAS.UI.UIControls.AircraftsControls
 			#region Загрузка элементов
 
 			AnimatedThreadWorker.ReportProgress(0, "Check Aircraft");
-			GlobalObjects.AircraftsCore.ResetAircraft(CurrentAircraft);
+			GlobalObjects.ComponentCore.ResetAircraft(CurrentAircraft);
 
 			var aircraftEquip = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AircraftEquipmentDTO, AircraftEquipments>(new Filter("AircraftId", EntityCore.Attributte.FilterType.Equal, CurrentAircraft.ItemId), true);
 			CurrentAircraft.AircraftEquipments.Clear();

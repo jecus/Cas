@@ -298,7 +298,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
             if (_currentBaseComponent == null)
                 return;
             
-            comboBoxEngineModel.LoadObjectsFunc = GlobalObjects.CasEnvironment.NewLoader.GetComponentModels;
+            comboBoxEngineModel.LoadObjectsFunc = GlobalObjects.CasEnvironment.GetComponentModels;
             comboBoxEngineModel.FilterParam1 = 6;
             comboBoxEngineModel.Type = typeof (ComponentModel);
             lifelengthViewerInstallation.MinLifelength = Lifelength.Zero;
