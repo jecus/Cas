@@ -16,7 +16,10 @@ namespace CAS.API
                 .UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration))
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder
+                        .UseIIS()
+                        .UseIISIntegration()
+                        .UseStartup<Startup>();
                 });
     }
 }
