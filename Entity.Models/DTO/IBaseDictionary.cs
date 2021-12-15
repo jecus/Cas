@@ -1,4 +1,4 @@
-﻿namespace Entity.Models.DTO
+﻿namespace CAS.Entity.Models.DTO
 {
 	public interface IBaseDictionary
 	{

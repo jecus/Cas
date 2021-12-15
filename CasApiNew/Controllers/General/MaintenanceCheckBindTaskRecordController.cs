@@ -1,9 +1,9 @@
-﻿using Entity.Core;
-using Entity.Models.DTO.General;
+﻿using CAS.Entity.Core;
+using CAS.Entity.Models.DTO.General;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace CasApiNew.Controllers.General
+namespace CAS.API.Controllers.General
 {
 	[Route("maintenancecheckbindtaskrecord")]
 	public class MaintenanceCheckBindTaskRecordController : BaseController<MaintenanceCheckBindTaskRecordDTO>

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Entity.Models.DTO;
-using Entity.Models.DTO.General;
+using CAS.Entity.Models.DTO;
+using CAS.Entity.Models.DTO.General;
 
-
-namespace CasApiNew.Infrastructure
+namespace CAS.API.Infrastructure
 {
 	public  static class GlobalObjects
 	{

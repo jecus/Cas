@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Threading;
-using System.Threading.Tasks;
-using Entity.Core;
-using Entity.Core.Repository;
-using Entity.Models.DTO.General;
+using CAS.Entity.Core;
+using CAS.Entity.Core.Repository;
+using CAS.Entity.Models.DTO.General;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CasApiNew.Infrastructure
+namespace CAS.API.Infrastructure
 {
 	public class BaseComponentWorker : IWorker
 	{

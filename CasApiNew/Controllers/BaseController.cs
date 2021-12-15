@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CAS.Entity.Core;
+using CAS.Entity.Core.Repository;
+using CAS.Entity.Models.Filter;
 using Entity.Abstractions;
-using Entity.Core;
-using Entity.Core.Repository;
-using Entity.Models.DTO;
-using Entity.Models.Filter;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace CasApiNew.Controllers
+namespace CAS.API.Controllers
 {
 	[ApiController]
 	public class BaseController<T> : ControllerBase where  T : BaseEntity

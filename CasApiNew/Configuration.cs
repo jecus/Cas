@@ -1,14 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using CasApiNew.Infrastructure;
-using Entity.Core;
+using CAS.API.Infrastructure;
+using CAS.Entity.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace CasApiNew
+namespace CAS.API
 {
     public partial class Startup
     {

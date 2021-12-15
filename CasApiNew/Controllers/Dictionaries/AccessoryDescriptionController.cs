@@ -1,10 +1,10 @@
 ﻿using System;
-using Entity.Core;
-using Entity.Models.DTO.Dictionaries;
+using CAS.Entity.Core;
+using CAS.Entity.Models.DTO.Dictionaries;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace CasApiNew.Controllers.Dictionaries
+namespace CAS.API.Controllers.Dictionaries
 {
 	[Route("accessorydescription")]
 	public class AccessoryDescriptionController : BaseController<AccessoryDescriptionDTO>

@@ -3,7 +3,7 @@ using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
 using Newtonsoft.Json;
 
-namespace Entity.Models.DTO.General
+namespace CAS.Entity.Models.DTO.General
 {
 	[Table("ProcedureDocumentReferences", Schema = "dbo")]
 	

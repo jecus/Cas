@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Entity.Models.Filter;
+using CAS.Entity.Models.Filter;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CasApiNew.Infrastructure
+namespace CAS.API.Infrastructure
 {
 	public static class WorkerExtensions
 	{

@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CAS.Entity.Models.DTO.Dictionaries;
 using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
-using Entity.Models.DTO.Dictionaries;
 
-namespace Entity.Models.DTO.General
+namespace CAS.Entity.Models.DTO.General
 {
 	[Table("AircraftEquipments", Schema = "dbo")]
 	

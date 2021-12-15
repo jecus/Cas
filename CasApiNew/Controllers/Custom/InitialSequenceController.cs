@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Entity.Core;
+using CAS.Entity.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace CasApiNew.Controllers.Custom
+namespace CAS.API.Controllers.Custom
 {
 	[Route("initialequence")]
 	public class InitialSequenceController : ControllerBase

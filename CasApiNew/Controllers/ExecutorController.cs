@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace CasApiNew.Controllers
+namespace CAS.API.Controllers
 {
 	[ApiController]
 	[Route("executor")]

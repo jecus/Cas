@@ -2,7 +2,7 @@
 using Entity.Abstractions;
 using Newtonsoft.Json;
 
-namespace Entity.Models.DTO.General
+namespace CAS.Entity.Models.DTO.General
 {
 	[Table("EventConditions", Schema = "dbo")]
 	

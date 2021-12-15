@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Abstractions;
 
-namespace Entity.Models.DTO.General
+namespace CAS.Entity.Models.DTO.General
 {
 	[Table("ItemsRelations", Schema = "dbo")]
 	

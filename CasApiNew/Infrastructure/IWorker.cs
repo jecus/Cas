@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 
-namespace CasApiNew.Infrastructure
+namespace CAS.API.Infrastructure
 {
 	public interface IWorker : IDisposable
 	{

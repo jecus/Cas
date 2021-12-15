@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace CasApiNew.Abstractions.Middleware
+namespace CAS.API.Abstractions.Middleware
 {
     public class ErrorHandlerMiddleware
     {

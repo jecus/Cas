@@ -1,4 +1,4 @@
-﻿namespace Entity.Models.DTO.General
+﻿namespace CAS.Entity.Models.DTO.General
 {
 	public class BaseComponentDTO : ComponentDTO
 	{

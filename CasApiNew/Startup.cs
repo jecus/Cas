@@ -1,19 +1,19 @@
 using System.IO.Compression;
+using System.Threading.Tasks;
+using CAS.API.Abstractions.Helpers;
+using CAS.API.Abstractions.Middleware;
+using CAS.API.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Threading.Tasks;
-using CasApiNew.Abstractions.Helpers;
-using CasApiNew.Abstractions.Middleware;
-using CasApiNew.Infrastructure;
-using Microsoft.AspNetCore.ResponseCompression;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace CasApiNew
+namespace CAS.API
 {
     public partial class Startup
     {

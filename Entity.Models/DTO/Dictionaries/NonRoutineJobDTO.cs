@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
 
-namespace Entity.Models.DTO.Dictionaries
+namespace CAS.Entity.Models.DTO.Dictionaries
 {
 	[Table("NonRoutineJobs", Schema = "Dictionaries")]
 	

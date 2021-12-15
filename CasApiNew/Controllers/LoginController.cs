@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Entity.Core;
-using Entity.Models.DTO.General;
+using CAS.Entity.Core;
+using CAS.Entity.Models.DTO.General;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace CasApiNew.Controllers
+namespace CAS.API.Controllers
 {
 	[ApiController]
 	[Route("user")]

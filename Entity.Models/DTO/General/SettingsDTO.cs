@@ -2,7 +2,7 @@
 using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
 
-namespace Entity.Models.DTO.General
+namespace CAS.Entity.Models.DTO.General
 {
 	[Table("Setting", Schema = "dbo")]
 

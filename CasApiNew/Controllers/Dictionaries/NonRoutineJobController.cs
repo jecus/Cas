@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CasApiNew.Infrastructure;
-using Entity.Core;
-using Entity.Models.DTO.Dictionaries;
-using Entity.Models.Filter;
+using CAS.API.Infrastructure;
+using CAS.Entity.Core;
+using CAS.Entity.Models.DTO.Dictionaries;
+using CAS.Entity.Models.Filter;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace CasApiNew.Controllers.Dictionaries
+namespace CAS.API.Controllers.Dictionaries
 {
 	[Route("nonroutinejob")]
 	public class NonRoutineJobController : BaseController<NonRoutineJobDTO>

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Abstractions;
 using Newtonsoft.Json;
 
-namespace Entity.Models.DTO.General
+namespace CAS.Entity.Models.DTO.General
 {
 	[Table("SmsEventTypes", Schema = "dbo")]
 	

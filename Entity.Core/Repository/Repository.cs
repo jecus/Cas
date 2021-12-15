@@ -4,14 +4,14 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
+using CAS.Entity.Models.DTO.General;
+using CAS.Entity.Models.Filter;
 using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
-using Entity.Models.DTO.General;
-using Entity.Models.Filter;
 using Microsoft.EntityFrameworkCore;
 using Z.EntityFramework.Plus;
 
-namespace Entity.Core.Repository
+namespace CAS.Entity.Core.Repository
 {
 	public class Repository<T> : IRepository<T> where T : BaseEntity
 	{

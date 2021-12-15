@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Entity.Core;
-using Entity.Core.Repository;
-using Entity.Models.DTO;
-using Entity.Models.DTO.Dictionaries;
+using CAS.Entity.Core;
+using CAS.Entity.Core.Repository;
+using CAS.Entity.Models.DTO;
+using CAS.Entity.Models.DTO.Dictionaries;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CasApiNew.Infrastructure
+namespace CAS.API.Infrastructure
 {
 	public class DictionaryWorker : IWorker
 	{

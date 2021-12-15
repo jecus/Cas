@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using CAS.Entity.Models.Filter;
 using Entity.Abstractions;
-using Entity.Models.Filter;
 
-namespace Entity.Core.Repository
+namespace CAS.Entity.Core.Repository
 {
 
 	public interface IRepository<T> where T : BaseEntity

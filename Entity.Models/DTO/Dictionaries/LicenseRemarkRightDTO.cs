@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CAS.Entity.Models.DTO.General;
 using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
-using Entity.Models.DTO.General;
 using Newtonsoft.Json;
 
-namespace Entity.Models.DTO.Dictionaries
+namespace CAS.Entity.Models.DTO.Dictionaries
 {
 	[Table("LicenseRemarkRights", Schema = "Dictionaries")]
 	

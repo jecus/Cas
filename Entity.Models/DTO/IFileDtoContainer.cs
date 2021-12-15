@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
+using CAS.Entity.Models.DTO.General;
 using Entity.Abstractions;
-using Entity.Models.DTO.General;
 
-
-namespace Entity.Models.DTO
+namespace CAS.Entity.Models.DTO
 {
 	public interface IFileDtoContainer : IBaseEntity
 	{

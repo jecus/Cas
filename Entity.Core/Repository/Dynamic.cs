@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using Label = System.Reflection.Emit.Label;
 
-namespace Entity.Core.Repository
+namespace CAS.Entity.Core.Repository
 {
     public static class DynamicQueryable
     {

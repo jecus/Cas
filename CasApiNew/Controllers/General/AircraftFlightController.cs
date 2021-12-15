@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Entity.Core;
-using Entity.Models.DTO.Dictionaries;
-using Entity.Models.DTO.General;
-using Entity.Models.Filter;
+using CAS.Entity.Core;
+using CAS.Entity.Models.DTO.Dictionaries;
+using CAS.Entity.Models.DTO.General;
+using CAS.Entity.Models.Filter;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace CasApiNew.Controllers.General
+namespace CAS.API.Controllers.General
 {
 	[Route("aircraftflight")]
 	public class AircraftFlightController : BaseController<AircraftFlightDTO>

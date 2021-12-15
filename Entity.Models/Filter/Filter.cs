@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Entity.Abstractions.Attributte;
 
-namespace Entity.Models.Filter
+namespace CAS.Entity.Models.Filter
 {
 	
 	public class Filter
