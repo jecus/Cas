@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using CAS.Entity.Core;
 using CAS.Entity.Core.Repository;
-using CAS.Entity.Models.Filter;
 using Entity.Abstractions;
+using Entity.Abstractions.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

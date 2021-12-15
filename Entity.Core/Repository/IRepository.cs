@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CAS.Entity.Models.Filter;
 using Entity.Abstractions;
+using Entity.Abstractions.Filters;
 
 namespace CAS.Entity.Core.Repository
 {

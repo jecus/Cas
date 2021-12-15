@@ -5,9 +5,9 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 using CAS.Entity.Models.DTO.General;
-using CAS.Entity.Models.Filter;
 using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
+using Entity.Abstractions.Filters;
 using Microsoft.EntityFrameworkCore;
 using Z.EntityFramework.Plus;
 

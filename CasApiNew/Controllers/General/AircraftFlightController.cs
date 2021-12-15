@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using CAS.Entity.Core;
 using CAS.Entity.Models.DTO.Dictionaries;
 using CAS.Entity.Models.DTO.General;
-using CAS.Entity.Models.Filter;
+using Entity.Abstractions.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

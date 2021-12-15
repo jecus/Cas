@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CAS.Entity.Models.Filter;
+using Entity.Abstractions.Filters;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CAS.API.Infrastructure
