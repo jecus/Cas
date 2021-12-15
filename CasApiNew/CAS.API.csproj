@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\API.Abstractions\API.Abstractions.csproj" />
     <ProjectReference Include="..\Entity.Core\CAS.Entity.Core.csproj" />
     <ProjectReference Include="..\EntityCore\EntityCore.csproj" />
   </ItemGroup>

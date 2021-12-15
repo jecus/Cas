@@ -1,19 +1,21 @@
-using System.IO.Compression;
-using System.Threading.Tasks;
-using API.Abstractions.Abstractions.Helpers;
-using API.Abstractions.Abstractions.Middleware;
-using CAS.API.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Collections.Generic;
+using System.IO.Compression;
+using System.Linq;
+using System.Threading.Tasks;
+using API.Abstractions.Abstractions.Helpers;
+using API.Abstractions.Abstractions.Middleware;
+using Microsoft.AspNetCore.ResponseCompression;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace CAS.API
+namespace CAA.API
 {
     public partial class Startup
     {
@@ -38,7 +40,6 @@ namespace CAS.API
             });
 
             RegisterDataBase(services);
-            RegisterWorkers(services);
             RegisterSwagger(services);
             RegisterHealthCheck(services);
 
@@ -78,18 +79,7 @@ namespace CAS.API
                 o.RoutePrefix = "swagger";
                 o.SwaggerEndpoint("v1/swagger.json", "Cas API v1");
             });
-
-
-            Initialize(app);
         }
 
-
-        public void Initialize(IApplicationBuilder app)
-        {
-            var scope = app.ApplicationServices.CreateScope();
-            var workers = scope.ServiceProvider.GetServices<IWorker>();
-            foreach (var worker in workers)
-                Task.Run(() => worker.Start());
-        }
     }
 }

@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace CAS.API.Abstractions.Helpers
+namespace API.Abstractions.Abstractions.Helpers
 {
     public class OrderedContractResolver : DefaultContractResolver
     {
