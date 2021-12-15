@@ -119,12 +119,6 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #endregion
 
-        #region Delegates
-        private delegate void eventInvoker();
-
-        private delegate void failureEventInvoker(string reason);
-        #endregion
-
         #region Events
 
         #region public event EventHandler Connected
