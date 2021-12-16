@@ -17,6 +17,7 @@ namespace CAA.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
+                        .UseKestrel()
                         .UseIIS()
                         .UseIISIntegration()
                         .UseStartup<Startup>();
