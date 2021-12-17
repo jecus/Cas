@@ -13,6 +13,7 @@ namespace CAA.Entity.Core
         #region dbo
 
         public DbSet<CAAUserDTO> UserDtos { get; set; }
+        public DbSet<CAAOperatorDTO> OperatorDtos { get; set; }
 
         #endregion
     }

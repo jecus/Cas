@@ -32,7 +32,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         /// </summary>
         private void InitializeComponent()
         {
-	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+	        var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.flowLayoutPanelMain = new System.Windows.Forms.FlowLayoutPanel();
             this.extendableRichContainerSummary = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
             this.flightGeneralInformatonControl = new CAS.UI.UIControls.AircraftTechnicalLogBookControls.FlightGeneralInformatonControl();

@@ -72,7 +72,7 @@ namespace CAS.UI.UIControls.Users
 			 _setting.GlobalSetting.PurchaseSettings.Parameters["Routine"][0] = lifelengthViewerDeadlineRoutine.Lifelength;
 			 _setting.GlobalSetting.PurchaseSettings.Parameters["Routine"][1] = lifelengthViewerNotifyRoutine.Lifelength;
 
-			GlobalObjects.CasEnvironment.NewKeeper.Save(_setting);
+			GlobalObjects.NewKeeper.Save(_setting);
 
 			DialogResult = DialogResult.OK;
 				Close();

@@ -305,7 +305,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 					Number = initial.Number,
 				};
 
-				GlobalObjects.CasEnvironment.NewKeeper.Save(quatation);
+				GlobalObjects.NewKeeper.Save(quatation);
 
 				var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", initial.ItemId));
 				var ids = initialRecords.Select(i => i.ProductId);
@@ -338,7 +338,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				initial.PublishingDate = DateTime.Now;
 				initial.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 				initial.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
-				GlobalObjects.CasEnvironment.NewKeeper.Save(initial);
+				GlobalObjects.NewKeeper.Save(initial);
 
 				var form = new QuatationOrderFormNew(quatation);
 				form.ShowDialog();
@@ -377,7 +377,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 					rfq.ClosingDate = DateTime.Now;
 					rfq.CloseByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 					rfq.ClosedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
-					GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
+					GlobalObjects.NewKeeper.Save(rfq);
 
 					//var initial = _directivesViewer.SelectedItem;
 					//      var quatation = new RequestForQuotation
@@ -391,7 +391,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 					//       Remarks = initial.Remarks,
 					//      };
 
-					//      GlobalObjects.CasEnvironment.NewKeeper.Save(quatation);
+					//      GlobalObjects.NewKeeper.Save(quatation);
 
 					//      var initialRecords =
 					//       GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
@@ -548,7 +548,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			{
 				List<InitialOrder> selectedItems = new List<InitialOrder>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
 			else

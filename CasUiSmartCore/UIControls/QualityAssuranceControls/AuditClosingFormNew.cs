@@ -309,7 +309,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 				foreach (DirectiveRecord mpdsRecord in bindedMpdsRecords)
 				{
 					mpdsRecord.MaintenanceCheckRecordId = mcRecord.ItemId;
-					GlobalObjects.CasEnvironment.NewKeeper.Save(mpdsRecord, false);
+					GlobalObjects.NewKeeper.Save(mpdsRecord, false);
 				}
 			}
 		}
@@ -341,7 +341,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 				_currentAudit.PublishingDate = _currentAudit.OpeningDate;
 			try
 			{
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_currentAudit);
+				GlobalObjects.NewKeeper.Save(_currentAudit);
 				SaveData();
 			}
 			catch (Exception ex)

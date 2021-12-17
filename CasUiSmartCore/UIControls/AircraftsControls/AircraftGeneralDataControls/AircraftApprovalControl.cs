@@ -82,7 +82,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 				_aircraft.AircraftEquipments.Add(_aircraftEquipment);
 			}
 
-			GlobalObjects.CasEnvironment.NewKeeper.Save(_aircraftEquipment);
+			GlobalObjects.NewKeeper.Save(_aircraftEquipment);
 				
 		}
 

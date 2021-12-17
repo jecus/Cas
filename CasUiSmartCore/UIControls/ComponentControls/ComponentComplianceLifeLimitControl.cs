@@ -507,7 +507,7 @@ namespace CAS.UI.UIControls.ComponentControls
 						            ComponentId = d.ItemId
 					            };
 					            d.LLPData.Add(llpData);
-					            GlobalObjects.CasEnvironment.NewKeeper.Save(llpData);
+					            GlobalObjects.NewKeeper.Save(llpData);
 				            }
 
 				            var lastRecord = d.ChangeLLPCategoryRecords.GetLast();
@@ -522,7 +522,7 @@ namespace CAS.UI.UIControls.ComponentControls
 							            if (!llpData.LLPCurrent.IsEqual(llpData.LLPTemp))
 							            {
 								            llpData.LLPTemp = new Lifelength(llpData.LLPCurrent);
-								            GlobalObjects.CasEnvironment.NewKeeper.Save(llpData);
+								            GlobalObjects.NewKeeper.Save(llpData);
 							            }
 									}
 					            }

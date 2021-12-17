@@ -251,7 +251,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 			{
 				var selectedItems = new List<TransferRecord>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;

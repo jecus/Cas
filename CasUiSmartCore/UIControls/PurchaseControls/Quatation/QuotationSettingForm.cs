@@ -93,7 +93,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 			ApplyInitialData();
 			//сохранение запросного ордера
-			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
+			GlobalObjects.NewKeeper.Save(_order);
 		}
 
 		private void buttonCancel_Click(object sender, EventArgs e)

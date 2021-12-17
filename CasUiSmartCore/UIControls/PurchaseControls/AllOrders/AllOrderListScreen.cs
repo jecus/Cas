@@ -372,7 +372,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 					rfq.ClosingDate = DateTime.Now;
 					rfq.CloseByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 					rfq.ClosedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
-					GlobalObjects.CasEnvironment.NewKeeper.Save(rfq as BaseEntityObject);
+					GlobalObjects.NewKeeper.Save(rfq as BaseEntityObject);
 				}
 			}
 			catch (Exception ex)
@@ -415,7 +415,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 						rfq.PublishingDate = DateTime.Now;
 						rfq.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 						rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
-						GlobalObjects.CasEnvironment.NewKeeper.Save(rfq as BaseEntityObject);
+						GlobalObjects.NewKeeper.Save(rfq as BaseEntityObject);
 
 						SendQuotationOrder(rfq as RequestForQuotation);
 					}
@@ -436,7 +436,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 					Number = initial.Number,
 				};
 
-				GlobalObjects.CasEnvironment.NewKeeper.Save(quatation);
+				GlobalObjects.NewKeeper.Save(quatation);
 
 				var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", initial.ItemId));
 				var ids = initialRecords.Select(i => i.ProductId);
@@ -467,7 +467,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 				initial.PublishingDate = DateTime.Now;
 				initial.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 				initial.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
-				GlobalObjects.CasEnvironment.NewKeeper.Save(initial);
+				GlobalObjects.NewKeeper.Save(initial);
 
 				var form = new QuatationOrderFormNew(quatation);
 				if (form.ShowDialog() == DialogResult.OK)
@@ -487,7 +487,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 					purch.PublishingDate = DateTime.Now;
 					purch.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 					purch.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
-					GlobalObjects.CasEnvironment.NewKeeper.Save(purch);
+					GlobalObjects.NewKeeper.Save(purch);
 					SendPurchaseOrder(purch);
 				//}
 				AnimatedThreadWorker.RunWorkerAsync();
@@ -565,7 +565,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			{
 				var selectedItems = new List<ILogistic>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
 			else

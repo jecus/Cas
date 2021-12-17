@@ -300,7 +300,7 @@ namespace CAS.UI.UIControls.ComponentControls
 							                if (max.Equals(relation.Updated))
 								                continue;
 
-                                            GlobalObjects.CasEnvironment.NewKeeper.Delete(relation);
+                                            GlobalObjects.NewKeeper.Delete(relation);
                                             deleted.Add(relation);
 						                }
 
@@ -754,7 +754,7 @@ namespace CAS.UI.UIControls.ComponentControls
 	            if (tr.PreConfirmTransfer)
 	            {
 					tr.PreConfirmTransfer = false;
-					GlobalObjects.CasEnvironment.NewKeeper.Save(tr);
+					GlobalObjects.NewKeeper.Save(tr);
 				}
 
 				if(_currentComponent is Component && _currentComponent.LLPCategories)

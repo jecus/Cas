@@ -99,7 +99,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
             textBoxName.Text = "";
 
-            GlobalObjects.CasEnvironment.NewKeeper.Save(newSubType);
+            GlobalObjects.NewKeeper.Save(newSubType);
             dst.Add(newSubType);
         }
         #endregion
@@ -137,7 +137,7 @@ namespace CAS.UI.UIControls.Auxiliary
             }
             DocumentSubType docSubType = ((DocumentSubType)listViewDocTypes.Items[e.Item].Tag);
             docSubType.FullName = e.Label.Trim();
-            GlobalObjects.CasEnvironment.NewKeeper.Save(docSubType);
+            GlobalObjects.NewKeeper.Save(docSubType);
         }
         #endregion
 

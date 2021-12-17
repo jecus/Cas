@@ -229,7 +229,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			try
 			{
 				foreach (var product in unsaved)
-					GlobalObjects.CasEnvironment.NewKeeper.Save(product);
+					GlobalObjects.NewKeeper.Save(product);
 
 				MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
 					MessageBoxIcon.Information);
@@ -271,7 +271,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				var selectedItems = new List<Product>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
 
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;

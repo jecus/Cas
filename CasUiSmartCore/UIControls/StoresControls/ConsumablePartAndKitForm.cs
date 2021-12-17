@@ -669,7 +669,7 @@ namespace CAS.UI.UIControls.StoresControls
 				//				ATAChapter = product.ATAChapter
 				//			};
 
-				//			GlobalObjects.CasEnvironment.NewKeeper.Save(newModel);
+				//			GlobalObjects.NewKeeper.Save(newModel);
 				//			_consumablePart.Model = newModel;
 				//		}
 				//		else
@@ -695,7 +695,7 @@ namespace CAS.UI.UIControls.StoresControls
                 {
                     GlobalObjects.ComponentCore.Save(_consumablePart);
                     var record = _consumablePart.TransferRecords.GetLast();
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+                    GlobalObjects.NewKeeper.Save(record);
 
 	                foreach (var productCost in _consumablePart.ProductCosts)
 	                {
@@ -703,7 +703,7 @@ namespace CAS.UI.UIControls.StoresControls
 						productCost.ParentTypeId = _consumablePart.SmartCoreType.ItemId;
 		                productCost.SupplierId = _consumablePart.FromSupplier.ItemId;
 		                productCost.KitId = _consumablePart.Product?.ItemId ?? -1;
-						GlobalObjects.CasEnvironment.NewKeeper.Save(productCost);
+						GlobalObjects.NewKeeper.Save(productCost);
 					}
                 }
             }

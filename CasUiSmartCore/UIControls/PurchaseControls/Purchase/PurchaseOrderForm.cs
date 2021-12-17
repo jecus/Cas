@@ -344,11 +344,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			else
 			{
 				//сохранение запросного ордера
-				//GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
+				//GlobalObjects.NewKeeper.Save(_order);
 
 				foreach (var record in _addedRecord)
 				{
-					GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+					GlobalObjects.NewKeeper.Save(record);
 				}
 
 				DialogResult = DialogResult.OK;

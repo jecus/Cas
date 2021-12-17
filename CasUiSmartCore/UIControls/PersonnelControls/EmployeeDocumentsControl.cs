@@ -418,7 +418,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 				{
 					try
 					{
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems[i]);
+						GlobalObjects.NewKeeper.Delete(selectedItems[i]);
 					}
 					catch (Exception ex)
 					{

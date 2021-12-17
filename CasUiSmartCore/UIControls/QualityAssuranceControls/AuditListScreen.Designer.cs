@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
         /// </summary>
         private void InitializeComponent()
         {
-	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+	        var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.labelDateAsOf = new System.Windows.Forms.Label();
             this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();

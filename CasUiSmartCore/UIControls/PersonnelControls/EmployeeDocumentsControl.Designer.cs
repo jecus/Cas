@@ -37,7 +37,7 @@ namespace CAS.UI.UIControls.PersonnelControls
         /// </summary>
         private void InitializeComponent()
         {
-	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+	        var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.labelBiWeeklyReport = new System.Windows.Forms.Label();
 			this.textboxBiWeeklyReport = new System.Windows.Forms.TextBox();
 			this.documentationListView = new CAS.UI.UIControls.DocumentationControls.DocumentationListView();

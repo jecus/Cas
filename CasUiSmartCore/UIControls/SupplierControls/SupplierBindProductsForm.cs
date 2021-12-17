@@ -226,7 +226,7 @@ namespace CAS.UI.UIControls.SupplierControls
 
                 try
                 {
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+                    GlobalObjects.NewKeeper.Save(record);
 
                     product.SupplierRelations.Add(record);
                 }
@@ -255,7 +255,7 @@ namespace CAS.UI.UIControls.SupplierControls
 
                 try
                 {
-                    GlobalObjects.CasEnvironment.NewKeeper.Delete(ksr);
+                    GlobalObjects.NewKeeper.Delete(ksr);
                 }
                 catch (Exception ex)
                 {

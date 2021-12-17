@@ -204,7 +204,7 @@ namespace CAS.UI.UIControls.MailControls
 			try
 			{
 				ApplyChanges();
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_currentRecords);
+				GlobalObjects.NewKeeper.Save(_currentRecords);
 
 
 				if (_currentRecords.DocClass == DocumentClass.Inbox || _currentRecords.DocClass == DocumentClass.InternalDoc)
@@ -216,7 +216,7 @@ namespace CAS.UI.UIControls.MailControls
 				{
 					_currentRecords.MailNumber = _currentRecords.ItemId.ToString();
 				}
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_currentRecords);
+				GlobalObjects.NewKeeper.Save(_currentRecords);
 
 				DialogResult = DialogResult.OK;
 				Close();

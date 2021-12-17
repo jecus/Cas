@@ -142,7 +142,7 @@ namespace CAS.UI.UIControls.Auxiliary
             //SaveSettings();
 
             if (Connected != null)
-                Connected(this, new EventArgs());
+                Connected(_isCAA, new EventArgs());
         }
         #endregion
 
@@ -488,12 +488,13 @@ namespace CAS.UI.UIControls.Auxiliary
 
                 backgroundWorker.ReportProgress(1, _loadingState);
 
-                if (!_isCAA)
+                if (_isCAA)
                 {
-
+                    GlobalObjects.CaaEnvironment.InitAsync(backgroundWorker, _loadingState);
                 }
                 else
                 {
+                    
                     GlobalObjects.CasEnvironment.Reset();
                     GlobalObjects.CasEnvironment.InitAsync(backgroundWorker, _loadingState);
 
@@ -808,7 +809,7 @@ namespace CAS.UI.UIControls.Auxiliary
             GlobalObjects.AuditRepository = new AuditRepository(auditContext);
             GlobalObjects.AuditContext = auditContext;
 
-            if (GlobalObjects.Config.ContainsKey("IsCAA") && GlobalObjects.Config["IsCAA"].Value<bool>())
+            if (con.IsCAA)
             {
                 _isCAA = true;
                 var environment = DbTypes.CaaEnvironment = new CaaEnvironment();

@@ -18,7 +18,7 @@ namespace SmartCore.Entities
 	{
 		#region Fields
 
-		private readonly CasEnvironment _casEnvironment;
+		private readonly IBaseEnvironment _casEnvironment;
 		private readonly IAuditRepository _auditRepository;
 		private readonly FilesSmartCore _filesSmartCore;
 		private ApiProvider _apiProvider;
@@ -27,7 +27,7 @@ namespace SmartCore.Entities
 
 		#region Constructor
 
-		public NewKeeper(CasEnvironment casEnvironment, IAuditRepository auditRepository)
+		public NewKeeper(IBaseEnvironment casEnvironment, IAuditRepository auditRepository)
 		{
 			_casEnvironment = casEnvironment;
 			_auditRepository = auditRepository;

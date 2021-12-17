@@ -389,7 +389,7 @@ namespace CAS.UI.UIControls.ComplianceControls
             try
             {
                 //currentRecord.Save(true);
-                GlobalObjects.CasEnvironment.NewKeeper.Save(_currentRecord);
+                GlobalObjects.NewKeeper.Save(_currentRecord);
                 if (RecordChanged != null)
                     RecordChanged(this, EventArgs.Empty);
             }

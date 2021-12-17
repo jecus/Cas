@@ -2,9 +2,11 @@ using System;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
+using CAS.UI.UICAAControls;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.OpepatorsControls;
 using CASTerms;
+using SmartCore.Entities.General;
 
 namespace CAS.UI.UIControls.MainControls
 {
@@ -70,18 +72,19 @@ namespace CAS.UI.UIControls.MainControls
         protected virtual void DispatcheredLoginControlConnected(object sender, EventArgs e)
         {
             ScreenControl s;
-#if !KAC
-            s = new OperatorSymmaryDemoScreen(GlobalObjects.CasEnvironment.Operators[0]);
-#else
-            s = new OperatorSummaryScreen(GlobalObjects.CasEnvironment.Operators[0]);
-#endif
+
+
+            var isCAA = (bool)sender;
+            if(isCAA)
+                s = new OperatorSymmaryCAADemoScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            else s = new OperatorSymmaryDemoScreen(GlobalObjects.CasEnvironment.Operators[0]);
 
 #if RELEASE
             try
             {
 #endif
             referenceLoginControl.DisplayObject(
-               new ReferenceEventArgs(s, ReflectionTypes.DisplayInNew, GlobalObjects.CasEnvironment.Operators[0].Name));
+               new ReferenceEventArgs(s, ReflectionTypes.DisplayInNew, GlobalObjects.CasEnvironment?.Operators[0].Name ?? "CAA"));
             //referenceLoginControl.DisplayObject(
             //    new ReferenceEventArgs(new DispatcheredAircraftCollectionScreen(), ReflectionTypes.DisplayInNew,
             //                               "Operators"));

@@ -32,7 +32,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.buttonAddNonRoutineJob = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBoxS1 = new System.Windows.Forms.PictureBox();

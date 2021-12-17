@@ -342,7 +342,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			if (confirmResult == DialogResult.Yes)
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(directives.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(directives.OfType<BaseEntityObject>().ToList(), true);
 				_directivesViewer.radGridView1.EndUpdate();
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;

@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
 			this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
 			this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();

@@ -95,7 +95,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
             _maintenanceLiminationItem.CheckType = comboBoxCheckType.SelectedItem as MaintenanceCheckType ?? MaintenanceCheckType.Unknown;
             _maintenanceLiminationItem.Interval = _lifelengthViewerInterval.Lifelength;
             
-            GlobalObjects.CasEnvironment.NewKeeper.Save(_maintenanceLiminationItem);
+            GlobalObjects.NewKeeper.Save(_maintenanceLiminationItem);
         }
 
         #endregion

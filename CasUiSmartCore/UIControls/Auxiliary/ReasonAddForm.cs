@@ -107,7 +107,7 @@ namespace CAS.UI.UIControls.Auxiliary
             }
             Reason docSubType = ((Reason)listView.Items[e.Item].Tag);
             docSubType.FullName = e.Label.Trim();
-            GlobalObjects.CasEnvironment.NewKeeper.Save(docSubType);
+            GlobalObjects.NewKeeper.Save(docSubType);
         }
         #endregion
 

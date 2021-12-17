@@ -90,7 +90,7 @@ namespace CAS.UI.UIControls.MTOP
 			try
 			{
 				ApplyChanges();
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_checkRecord);
+				GlobalObjects.NewKeeper.Save(_checkRecord);
 			}
 			catch (Exception ex)
 			{

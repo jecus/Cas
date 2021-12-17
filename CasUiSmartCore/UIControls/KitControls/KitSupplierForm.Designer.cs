@@ -32,7 +32,7 @@ namespace CAS.UI.UIControls.KitControls
         /// </summary>
         private void InitializeComponent()
         {
-	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+	        var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.flowLayoutPanelCharts = new System.Windows.Forms.FlowLayoutPanel();
 			this.panelLabelCharts = new MetroFramework.Controls.MetroPanel();
 			this.labelFilesCaption = new MetroFramework.Controls.MetroLabel();

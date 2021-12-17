@@ -47,7 +47,7 @@ namespace CAS.UI.UIControls.Auxiliary
         /// </summary>
         private void InitializeComponent()
         {
-	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+	        var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonCloseTab = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.pictureBoxH = new System.Windows.Forms.PictureBox();

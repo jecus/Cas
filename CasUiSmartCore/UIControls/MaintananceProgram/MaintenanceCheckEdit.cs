@@ -234,7 +234,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
             //        (LifelengthSubResource)comboBoxMainSource.SelectedItem;
             //}
 
-            GlobalObjects.CasEnvironment.NewKeeper.Save(_maintenanceLiminationItem);
+            GlobalObjects.NewKeeper.Save(_maintenanceLiminationItem);
         }
 
         #endregion

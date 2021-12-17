@@ -1280,7 +1280,7 @@ namespace CAS.UI.UIControls.Auxiliary
             {
                 foreach (BaseEntityObject o in _sourceCollection)
                 {
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(o);
+                    GlobalObjects.NewKeeper.Save(o);
                 }
                 //в исходной коллекции остаются только действительные элементы
                 _sourceCollection = _sourceCollection.Where(i => i.ItemId > 0 && i.IsDeleted == false).ToList();

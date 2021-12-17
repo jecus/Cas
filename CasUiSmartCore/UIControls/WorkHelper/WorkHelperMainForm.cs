@@ -235,7 +235,7 @@ namespace CAS.UI.UIControls.WorkHelper
                     file.FileName = listViewItem.SubItems[0].Text;
                     file.FileSize = file.FileData.Length;
 
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(file);
+                    GlobalObjects.NewKeeper.Save(file);
                 }
             }
             catch (Exception ex)

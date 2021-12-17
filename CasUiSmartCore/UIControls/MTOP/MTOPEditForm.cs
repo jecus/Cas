@@ -119,7 +119,7 @@ namespace CAS.UI.UIControls.MTOP
 			{
 				ApplyChanges();
 
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_currentCheck);
+				GlobalObjects.NewKeeper.Save(_currentCheck);
 				DialogResult = DialogResult.OK;
 			}
 			catch (Exception ex)

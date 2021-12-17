@@ -368,7 +368,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 						try
 						{
-							GlobalObjects.CasEnvironment.NewKeeper.Save(ksr);
+							GlobalObjects.NewKeeper.Save(ksr);
 						}
 						catch (Exception ex)
 						{

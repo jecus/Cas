@@ -698,12 +698,12 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			if (confirmResult == DialogResult.Yes)
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(directives.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(directives.OfType<BaseEntityObject>().ToList(), true);
 				foreach (var directive in directives)
 				{
 					foreach (var relation in directive.ItemRelations)
 					{
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(relation, true);
+						GlobalObjects.NewKeeper.Delete(relation, true);
 					}
 				}
 				_directivesViewer.radGridView1.EndUpdate();

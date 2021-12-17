@@ -694,7 +694,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			if (confirmResult == DialogResult.Yes)
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(directives.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(directives.OfType<BaseEntityObject>().ToList(), true);
 				_directivesViewer.radGridView1.EndUpdate();
 
 				List<Directive> unsaved = _directivesViewer.GetItemsArray().Where(i => i.ItemId <= 0).ToList();

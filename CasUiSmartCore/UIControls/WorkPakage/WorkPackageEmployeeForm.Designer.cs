@@ -32,7 +32,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.buttonDelete = new System.Windows.Forms.Button();
 			this.buttonAdd = new System.Windows.Forms.Button();
 			this.buttonClose = new System.Windows.Forms.Button();

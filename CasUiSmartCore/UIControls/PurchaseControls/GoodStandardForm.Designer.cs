@@ -33,7 +33,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GoodStandardForm));
 			this.labelRemarks = new System.Windows.Forms.Label();
 			this.textBoxRemarks = new System.Windows.Forms.TextBox();

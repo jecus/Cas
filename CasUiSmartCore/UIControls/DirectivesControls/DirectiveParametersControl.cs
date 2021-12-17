@@ -1643,7 +1643,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 					{
 						itemsRelation.AdditionalInformation.Ad = _currentDirective.Title;
 						itemsRelation.AdditionalInformation.Mpd = currentRelatedItem.Title;
-						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
+						GlobalObjects.NewKeeper.Save(itemsRelation);
 					}
 				}
 				else
@@ -1652,7 +1652,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 					{
 						itemsRelation.AdditionalInformation = null;
 						DeleteItemRelation(itemsRelation);
-						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
+						GlobalObjects.NewKeeper.Save(itemsRelation);
 					}
 				}
 			}

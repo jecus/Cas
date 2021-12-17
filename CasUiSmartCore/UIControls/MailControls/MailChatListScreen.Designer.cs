@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.MailControls
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.buttonAddRecord = new AvControls.AvButtonT.AvButtonT();
 			this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
 			this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();

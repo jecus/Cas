@@ -229,7 +229,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
                 try
                 {
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+                    GlobalObjects.NewKeeper.Save(record);
                 }
                 catch (Exception ex)
                 {
@@ -261,7 +261,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
                 try
                 {
-                    GlobalObjects.CasEnvironment.NewKeeper.Delete(record);
+                    GlobalObjects.NewKeeper.Delete(record);
                 }
                 catch (Exception ex)
                 {

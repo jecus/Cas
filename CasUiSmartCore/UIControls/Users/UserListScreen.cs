@@ -162,7 +162,7 @@ namespace CAS.UI.UIControls.Users
 			{
 				var selectedItems = new List<User>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;

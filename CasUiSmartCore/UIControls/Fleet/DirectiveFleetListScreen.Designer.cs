@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.Fleet
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBoxS2 = new System.Windows.Forms.PictureBox();

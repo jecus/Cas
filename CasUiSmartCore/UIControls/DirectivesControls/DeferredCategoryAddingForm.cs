@@ -127,7 +127,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 
             try
             {
-                GlobalObjects.CasEnvironment.NewKeeper.Save(_defferedCategory);
+                GlobalObjects.NewKeeper.Save(_defferedCategory);
             }
             catch(Exception exception)
             {

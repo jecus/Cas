@@ -1,8 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
 using CAS.UI.Helpers;
 using EntityCore.DTO.General;
 using SmartCore.AuditMongo.Repository;
+using SmartCore.Entities;
+using SmartCore.Entities.Collections;
+using SmartCore.Entities.General;
 using SmartCore.Entities.NewLoader;
+using SmartCore.Management;
+using SmartCore.Queries;
 
 namespace SmartCore
 {
@@ -13,8 +23,24 @@ namespace SmartCore
 
     public class CaaEnvironment : ICaaEnvironment
     {
+        public OperatorCollection Operators { get; set; }
         public IAuditRepository AuditRepository { get; set; }
         public ApiProvider ApiProvider { get; set; }
+
+        public DataSet Execute(string sql)
+        {
+            return _newLoader.Execute(sql);
+        }
+
+        public DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results)
+        {
+            return _newLoader.Execute(dbQueries, out results);
+        }
+
+        public DataSet Execute(string query, SqlParameter[] parameters)
+        {
+            return _newLoader.Execute(query, parameters);
+        }
 
         #region public IIdentityUser IdentityUser { get; }
         /// <summary>
@@ -35,6 +61,40 @@ namespace SmartCore
                 return _currentUser;
             }
             set { _currentUser = value; }
+        }
+
+        public void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState)
+        {
+            // Загрузка всех операторов
+            loadingState.CurrentPersentage = 3;
+            loadingState.CurrentPersentageDescription = "Loading Operators";
+            backgroundWorker.ReportProgress(1, loadingState);
+
+            Operators = new OperatorCollection(_newLoader.GetObjectList<OperatorDTO, Operator>().ToArray());
+
+            if (backgroundWorker.CancellationPending)
+            {
+                return;
+            }
+        }
+
+        #endregion
+
+        #region public NewKeeper NewKeeper { get; }
+        /// <summary>
+        /// Загрузчик данных
+        /// </summary>
+        private INewKeeper _newKeeper;
+        /// <summary>
+        /// Загрузчик данных - За загрузку объектов отвечает отдельный класс
+        /// </summary>
+        public INewKeeper NewKeeper
+        {
+            get
+            {
+                if (_newKeeper == null) _newKeeper = new NewKeeper(this, AuditRepository);
+                return _newKeeper;
+            }
         }
         #endregion
 

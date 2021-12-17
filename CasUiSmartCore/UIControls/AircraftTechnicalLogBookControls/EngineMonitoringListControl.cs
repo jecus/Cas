@@ -299,7 +299,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
                 {
                     try
                     {
-                        GlobalObjects.CasEnvironment.NewKeeper.Delete(ec);
+                        GlobalObjects.NewKeeper.Delete(ec);
                     }
                     catch (Exception ex)
                     {

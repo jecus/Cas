@@ -141,7 +141,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 				ApplyChanges();
 
 				foreach (var period in _schedulePeriods)
-					GlobalObjects.CasEnvironment.NewKeeper.Save(period);
+					GlobalObjects.NewKeeper.Save(period);
 
 				DialogResult = DialogResult.OK;
 				Close();

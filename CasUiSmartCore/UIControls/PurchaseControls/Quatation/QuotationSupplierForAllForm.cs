@@ -118,7 +118,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		private void ButtonOk_Click(object sender, System.EventArgs e)
 		{
 			DialogResult = DialogResult.OK;
-			GlobalObjects.CasEnvironment.NewKeeper.Save(_settings);
+			GlobalObjects.NewKeeper.Save(_settings);
 			
 		}
 

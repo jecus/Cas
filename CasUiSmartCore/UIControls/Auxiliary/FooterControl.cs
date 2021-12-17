@@ -37,7 +37,7 @@ namespace CAS.UI.UIControls.Auxiliary
             Dock = DockStyle.Bottom;
             try
             {
-                var currentUser = GlobalObjects.CasEnvironment.IdentityUser;
+                var currentUser = GlobalObjects.CasEnvironment?.IdentityUser ?? GlobalObjects.CaaEnvironment?.IdentityUser;
                 if (currentUser != null)
                 {
                     _userName = currentUser.ToString();

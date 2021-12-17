@@ -83,7 +83,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
                 try
                 {
-                        GlobalObjects.CasEnvironment.NewKeeper.Save(CurrentOperator);
+                        GlobalObjects.NewKeeper.Save(CurrentOperator);
                 }
                 catch (Exception ex)
                 {

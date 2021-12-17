@@ -230,7 +230,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				rfq.ClosingDate = DateTime.Now;
 				rfq.CloseByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 				rfq.ClosedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
-				GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
+				GlobalObjects.NewKeeper.Save(rfq);
 			}
 
 			AnimatedThreadWorker.RunWorkerAsync();
@@ -262,7 +262,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				_directivesViewer.SelectedItems[0].PublishingDate = DateTime.Now;
 				_directivesViewer.SelectedItems[0].PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 				_directivesViewer.SelectedItems[0].PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_directivesViewer.SelectedItems[0]);
+				GlobalObjects.NewKeeper.Save(_directivesViewer.SelectedItems[0]);
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
 		}
@@ -367,7 +367,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			{
 				List<RequestForQuotation> selectedItems = new List<RequestForQuotation>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
 			else

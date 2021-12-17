@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
         /// </summary>
         private void InitializeComponent()
         {
-	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+	        var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;
 			this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
             this.SuspendLayout();
             // 

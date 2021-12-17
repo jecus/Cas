@@ -431,8 +431,8 @@ namespace CAS.UI.UIControls.Fleet
 				try
 				{
 					_directivesViewer.radGridView1.BeginUpdate();
-					GlobalObjects.CasEnvironment.NewKeeper.Delete(_directivesViewer.SelectedItems.Where(i => i is Component).OfType<BaseEntityObject>().ToList(), true);
-					GlobalObjects.CasEnvironment.NewKeeper.Delete(_directivesViewer.SelectedItems.Where(i => i is ComponentDirective).OfType<BaseEntityObject>().ToList(), true);
+					GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.Where(i => i is Component).OfType<BaseEntityObject>().ToList(), true);
+					GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.Where(i => i is ComponentDirective).OfType<BaseEntityObject>().ToList(), true);
 					_directivesViewer.radGridView1.EndUpdate();
 
 					AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;

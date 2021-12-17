@@ -114,7 +114,7 @@ namespace CAS.UI.UIControls.MailControls
 			try
 			{
 				ApplyChanges();
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_mailChats);
+				GlobalObjects.NewKeeper.Save(_mailChats);
 
 				DialogResult = DialogResult.OK;
 				Close();

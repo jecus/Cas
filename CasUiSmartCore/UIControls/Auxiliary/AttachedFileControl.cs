@@ -318,8 +318,8 @@ namespace CAS.UI.UIControls.Auxiliary
             {
                 if(_file == null)return;
                 if(_file.ItemId > 0 && _file.IsDeleted)
-                    GlobalObjects.CasEnvironment.NewKeeper.Delete(_file);
-                else GlobalObjects.CasEnvironment.NewKeeper.Save(_file);
+                    GlobalObjects.NewKeeper.Delete(_file);
+                else GlobalObjects.NewKeeper.Save(_file);
             }
             catch (Exception ex)
             {

@@ -523,7 +523,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 {
                     dir.MaintenanceCheck = maintenanceCheck;
 
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(dir, false);
+                    GlobalObjects.NewKeeper.Save(dir, false);
 
                     maintenanceCheck.BindMpds.Add(dir);
                 }
@@ -639,7 +639,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
         private void ComboBoxCheckNamingSelectedIndexChanged(object sender, EventArgs e)
         {
             _currentAircraft.MaintenanceProgramCheckNaming = comboBoxCheckNaming.SelectedIndex > 0;
-            GlobalObjects.CasEnvironment.NewKeeper.Save(_currentAircraft);
+            GlobalObjects.NewKeeper.Save(_currentAircraft);
         }
 
         #endregion
@@ -648,7 +648,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
         private void ComboBoxScheduleSelectedIndexChanged(object sender, EventArgs e)
         {
             _currentAircraft.Schedule = comboBoxSchedule.SelectedIndex == 0;
-            GlobalObjects.CasEnvironment.NewKeeper.Save(_currentAircraft);
+            GlobalObjects.NewKeeper.Save(_currentAircraft);
         }
 
         #endregion
@@ -761,7 +761,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 {
                     dir.MaintenanceCheck = null;
 
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(dir, false);
+                    GlobalObjects.NewKeeper.Save(dir, false);
 
                     maintenanceCheck.BindMpds.RemoveById(dir.ItemId);
                 }

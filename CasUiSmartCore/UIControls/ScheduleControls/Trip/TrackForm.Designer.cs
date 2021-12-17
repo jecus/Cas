@@ -33,7 +33,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			MetroFramework.Controls.MetroLabel labelNumber;
 			MetroFramework.Controls.MetroLabel label1;
 			MetroFramework.Controls.MetroLabel label2;

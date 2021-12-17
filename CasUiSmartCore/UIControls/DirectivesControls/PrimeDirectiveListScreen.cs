@@ -714,7 +714,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			foreach (var directive in _directivesViewer.SelectedItems)
 				directive.DirectiveType = DirectiveType.AirworthenessDirectives;
 			
-			GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate<Directive, DirectiveDTO>(_directivesViewer.SelectedItems.Cast<BaseEntityObject>().ToList());
+			GlobalObjects.NewKeeper.BulkUpdate<Directive, DirectiveDTO>(_directivesViewer.SelectedItems.Cast<BaseEntityObject>().ToList());
 			AnimatedThreadWorker.RunWorkerAsync();
 		}
 
@@ -1276,7 +1276,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			if (confirmResult == DialogResult.Yes)
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(directives.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(directives.OfType<BaseEntityObject>().ToList(), true);
 				
 				_directivesViewer.radGridView1.EndUpdate();
 

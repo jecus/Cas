@@ -1418,7 +1418,7 @@ namespace CAS.UI.UIControls.ComponentControls
 					OnLifelength = Lifelength.Zero
 				});
 
-				GlobalObjects.CasEnvironment.NewKeeper.Save(d.ChangeLLPCategoryRecords[0]);
+				GlobalObjects.NewKeeper.Save(d.ChangeLLPCategoryRecords[0]);
 
 				if (d.LLPData.Count == 0 && list != null)
 					foreach (LLPLifeLimitCategory category in list)
@@ -1429,7 +1429,7 @@ namespace CAS.UI.UIControls.ComponentControls
 							ParentCategory = category,
 							ComponentId = d.ItemId
 						});
-						GlobalObjects.CasEnvironment.NewKeeper.Save(d.LLPData.Last());
+						GlobalObjects.NewKeeper.Save(d.LLPData.Last());
 					}
 			}
 			if (LLPMarkChecked != null) LLPMarkChecked(this, e); 
@@ -1488,7 +1488,7 @@ namespace CAS.UI.UIControls.ComponentControls
 						RecordDate = detail.ManufactureDate,
 						OnLifelength = Lifelength.Zero
 					});
-					GlobalObjects.CasEnvironment.NewKeeper.Save(detail.ChangeLLPCategoryRecords[0]);
+					GlobalObjects.NewKeeper.Save(detail.ChangeLLPCategoryRecords[0]);
 				}
 				
 			}
@@ -1787,7 +1787,7 @@ namespace CAS.UI.UIControls.ComponentControls
 								ComponentId = component.ItemId
 							};
 							component.LLPData.Add(llpData);
-							GlobalObjects.CasEnvironment.NewKeeper.Save(llpData);
+							GlobalObjects.NewKeeper.Save(llpData);
 						}
 					}
 

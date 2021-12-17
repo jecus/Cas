@@ -164,7 +164,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 					List<ATLB> selectedItems = new List<ATLB>(_directivesViewer.SelectedItems);
 					_directivesViewer.radGridView1.BeginUpdate();
-					GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
+					GlobalObjects.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 					_directivesViewer.radGridView1.EndUpdate();
 				}
 				catch (Exception ex)

@@ -308,7 +308,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 				{
 					List<AircraftFlight> selectedItems = new List<AircraftFlight>(_directivesViewer.SelectedItems);
 					_directivesViewer.radGridView1.BeginUpdate();
-					GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
+					GlobalObjects.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 
 					GlobalObjects.CasEnvironment.Calculator.ResetMath(CurrentAircraft);
 

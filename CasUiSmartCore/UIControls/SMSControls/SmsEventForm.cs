@@ -290,7 +290,7 @@ namespace CAS.UI.UIControls.SMSControls
                 //и получен положительный ответ на ее удаление
                 try
                 {
-                    GlobalObjects.CasEnvironment.NewKeeper.Delete(cond);
+                    GlobalObjects.NewKeeper.Delete(cond);
                     _smsEvent.EventConditions.Remove(cond);
                 }
                 catch (Exception ex)

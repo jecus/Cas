@@ -204,7 +204,7 @@ namespace CAS.UI.UIControls.MailControls
 
 			try
 			{
-				GlobalObjects.CasEnvironment.NewKeeper.Save(mail);
+				GlobalObjects.NewKeeper.Save(mail);
 			}
 			catch (Exception ex)
 			{
@@ -230,7 +230,7 @@ namespace CAS.UI.UIControls.MailControls
 
 			try
 			{
-				GlobalObjects.CasEnvironment.NewKeeper.Save(mail);
+				GlobalObjects.NewKeeper.Save(mail);
 			}
 			catch (Exception ex)
 			{
@@ -417,7 +417,7 @@ namespace CAS.UI.UIControls.MailControls
 			{
 				var selectedItems = new List<MailRecords>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;

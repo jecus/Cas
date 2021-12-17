@@ -298,7 +298,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 				if (_flightTrack.ItemId <= 0 || GetChangeStatus())
 				{
 					ApplyChanges();
-					GlobalObjects.CasEnvironment.NewKeeper.Save(_flightTrack);
+					GlobalObjects.NewKeeper.Save(_flightTrack);
 				}
 					
 				foreach (var item in flightNumberListViewAll.SelectedItems.Cast<FlightNumberPeriod>().GroupBy(g => g.FlightNum))
@@ -341,7 +341,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 							FlightPeriodId = period.ItemId,
 							FlightTripId = _flightTrack.ItemId
 						};
-						GlobalObjects.CasEnvironment.NewKeeper.Save(flightTripRecord);
+						GlobalObjects.NewKeeper.Save(flightTripRecord);
 						_flightTrack.FlightTripRecord.Add(flightTripRecord);
 					}
 				}
@@ -369,7 +369,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 				{
 					var period = _flightTrack.FlightTripRecord.FirstOrDefault(x => x.FlightPeriodId == item.ItemId);
 					if (period != null)
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(period);
+						GlobalObjects.NewKeeper.Delete(period);
 				}
 				catch (Exception ex)
 				{
@@ -417,7 +417,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 							FlightPeriodId = p.ItemId,
 							FlightTripId = _flightTrack.ItemId
 						};
-						GlobalObjects.CasEnvironment.NewKeeper.Save(flightTripRecord);
+						GlobalObjects.NewKeeper.Save(flightTripRecord);
 						_flightTrack.FlightTripRecord.Add(flightTripRecord);
 					}
 				}

@@ -289,21 +289,21 @@ namespace CAS.UI.UIControls.NewGrid
 					var deleteCD = components.SelectMany(i => i.ComponentDirectives);
 					if (components.Any())
 					{
-						GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(components.Cast<BaseEntityObject>().ToList());
+						GlobalObjects.NewKeeper.BulkUpdate(components.Cast<BaseEntityObject>().ToList());
 						foreach (var item in components)
 							radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
 					}
 
 					if (deleteCD.Any())
 					{
-						GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(deleteCD.Cast<BaseEntityObject>().ToList()); 
+						GlobalObjects.NewKeeper.BulkUpdate(deleteCD.Cast<BaseEntityObject>().ToList()); 
 						foreach (var item in deleteCD)
 							radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
 					}
 				}
 				else
 				{
-					GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(deletedItems);
+					GlobalObjects.NewKeeper.BulkUpdate(deletedItems);
 					foreach (var item in deletedItems)
 						radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
 				}
@@ -1099,12 +1099,12 @@ namespace CAS.UI.UIControls.NewGrid
 						if(components.Count == 0)
 							return;
 
-						GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(components);
+						GlobalObjects.NewKeeper.BulkInsert(components);
 						objectToPaste.AddRange(components.Cast<T>());
 					}
 					else
 					{
-						GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(pds.Cast<BaseEntityObject>().ToList());
+						GlobalObjects.NewKeeper.BulkInsert(pds.Cast<BaseEntityObject>().ToList());
 						objectToPaste.AddRange(pds);
 					}
 					
@@ -1133,7 +1133,7 @@ namespace CAS.UI.UIControls.NewGrid
 				}
 
 				if (objectToPaste.Any(i => i is ComponentDirective))
-					GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(objectToPaste.Where(i => i is ComponentDirective).Cast<BaseEntityObject>().ToList());
+					GlobalObjects.NewKeeper.BulkInsert(objectToPaste.Where(i => i is ComponentDirective).Cast<BaseEntityObject>().ToList());
 
 
 				InsertItems(objectToPaste.ToArray());

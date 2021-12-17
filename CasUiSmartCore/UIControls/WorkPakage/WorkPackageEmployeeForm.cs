@@ -133,7 +133,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				{
 					var wpSpecialist = new WorkPackageSpecialists {SpecialistId = selectedItem.ItemId, WorkPackageId = _currentWorkPackage.ItemId };
 					 _wpSpecialists.Add(selectedItem);
-					GlobalObjects.CasEnvironment.NewKeeper.Save(wpSpecialist);
+					GlobalObjects.NewKeeper.Save(wpSpecialist);
 					_workPackageSpecialists.Add(wpSpecialist);
 				}
 				catch (Exception ex)
@@ -162,7 +162,7 @@ namespace CAS.UI.UIControls.WorkPakage
 					
 					var wpSpecialist = _workPackageSpecialists.First(s => s.SpecialistId == selectedItem.ItemId);
 					if(wpSpecialist != null)
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(wpSpecialist);
+						GlobalObjects.NewKeeper.Delete(wpSpecialist);
 
 					_wpSpecialists.Remove(selectedItem);
 					workPackageEmployeeListView2.SetItemsArray(_wpSpecialists.ToArray());
@@ -184,7 +184,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
 			try
 			{
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_currentWorkPackage);
+				GlobalObjects.NewKeeper.Save(_currentWorkPackage);
 			}
 			catch (Exception ex)
 			{

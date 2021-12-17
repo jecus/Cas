@@ -225,12 +225,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				//запись новой информации в запросный ордер
 				ApplyInitialData();
 				//сохранение запросного ордера
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
+				GlobalObjects.NewKeeper.Save(_order);
 
 				foreach (var record in _addedInitialOrderRecords)
 				{
 					record.ParentPackageId = _order.ItemId;
-					GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+					GlobalObjects.NewKeeper.Save(record);
 
 					if (record.Product != null)
 					{
@@ -243,7 +243,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 								try
 								{
-									GlobalObjects.CasEnvironment.NewKeeper.Save(ksr);
+									GlobalObjects.NewKeeper.Save(ksr);
 								}
 								catch (Exception ex)
 								{
@@ -256,7 +256,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				}
 
 				foreach (var record in _deleteExistInitialOrderRecords)
-					GlobalObjects.CasEnvironment.NewKeeper.Delete(record);
+					GlobalObjects.NewKeeper.Delete(record);
 				DialogResult = DialogResult.OK;
 			}
 			

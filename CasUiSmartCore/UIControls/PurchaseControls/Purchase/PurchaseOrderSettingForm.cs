@@ -170,7 +170,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			//запись новой информации в запросный ордер
 			ApplyPurchaseData();
 			//сохранение запросного ордера
-			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
+			GlobalObjects.NewKeeper.Save(_order);
 		}
 
 		private void buttonCancel_Click(object sender, EventArgs e)

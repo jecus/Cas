@@ -443,7 +443,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				                    AverageUtilization = frame.AverageUtilization
 			                    };
 
-			                    GlobalObjects.CasEnvironment.NewKeeper.Save(checkRecord);
+			                    GlobalObjects.NewKeeper.Save(checkRecord);
 							}
 
 							
@@ -483,7 +483,7 @@ namespace CAS.UI.UIControls.WorkPakage
                                                 GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnEndOfDay(comp, performDate);
                                         }
                                         actual.RecordDate = performDate;
-                                        GlobalObjects.CasEnvironment.NewKeeper.Save(actual);
+                                        GlobalObjects.NewKeeper.Save(actual);
                                     }
                                     else if (tr.StartTransferDate < performDate)
                                     {
@@ -532,7 +532,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
 
                     wpr.IsClosed = true;
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(wpr);
+                    GlobalObjects.NewKeeper.Save(wpr);
 
                     if (wpr.Task is IMtopCalc mtop)
                     {
@@ -540,7 +540,7 @@ namespace CAS.UI.UIControls.WorkPakage
 	                    {
 		                    mtop.Extension = 0;
 		                    mtop.IsExtension = false;
-		                    GlobalObjects.CasEnvironment.NewKeeper.Save(mtop as BaseEntityObject);
+		                    GlobalObjects.NewKeeper.Save(mtop as BaseEntityObject);
                         }
                     }
 
@@ -574,7 +574,7 @@ namespace CAS.UI.UIControls.WorkPakage
                 foreach (DirectiveRecord mpdsRecord in bindedMpdsRecords)
                 {
                     mpdsRecord.MaintenanceCheckRecordId = mcRecord.ItemId;
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(mpdsRecord, false);
+                    GlobalObjects.NewKeeper.Save(mpdsRecord, false);
                 }
             }
         }
@@ -606,7 +606,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		                _workPackage.PublishedBy = GlobalObjects.CasEnvironment.IdentityUser.Login;
 	                if (_workPackage.PublishingDate <= _workPackage.OpeningDate)
 		                _workPackage.PublishingDate = _workPackage.OpeningDate;
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(_workPackage);
+                    GlobalObjects.NewKeeper.Save(_workPackage);
                 }
 
             }

@@ -226,7 +226,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
 			try
 			{
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_currentWorkPackageRecord);
+				GlobalObjects.NewKeeper.Save(_currentWorkPackageRecord);
 			}
 			catch (Exception ex)
 			{

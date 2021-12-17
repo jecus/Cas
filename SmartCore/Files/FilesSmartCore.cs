@@ -18,14 +18,14 @@ namespace SmartCore.Files
 
 	public class FilesSmartCore : IFilesSmartCore
 	{
-		private readonly ICasEnvironment _environment;
+		private readonly IBaseEnvironment _environment;
 
 
 		#region public FilesSmartCore(DatabaseManager databaseManager)
 		/// <summary>
 		/// Создает Ядро для работы с файлами
 		/// </summary>
-		public FilesSmartCore(ICasEnvironment environment)
+		public FilesSmartCore(IBaseEnvironment environment)
 		{
 			_environment = environment;
 		}

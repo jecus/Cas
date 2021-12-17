@@ -358,7 +358,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
                 //и получен положительный ответ на ее удаление
                 try
                 {
-                    GlobalObjects.CasEnvironment.NewKeeper.Delete(cond);
+                    GlobalObjects.NewKeeper.Delete(cond);
                     Event.EventConditions.Remove(cond);
                 }
                 catch (Exception ex)

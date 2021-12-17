@@ -92,13 +92,13 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 				{
 					_initialFlightOpsRecordArray.AddRange(calculatedItem);
 					foreach (var rec in calculatedItem)
-						GlobalObjects.CasEnvironment.NewKeeper.Save(rec);
+						GlobalObjects.NewKeeper.Save(rec);
 				}
 				else
 				{
 					foreach (var rec in calculatedItem.Where(i => _initialFlightOpsRecordArray.All(q => q.FlightTrackRecordId != i.FlightTrackRecordId)))
 					{
-						GlobalObjects.CasEnvironment.NewKeeper.Save(rec);
+						GlobalObjects.NewKeeper.Save(rec);
 						_initialFlightOpsRecordArray.Add(rec);
 					}
 				}

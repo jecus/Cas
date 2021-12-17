@@ -1045,7 +1045,7 @@ namespace CAS.UI.UIControls.StoresControls
 							c.TransferRecords.Clear();
 							c.TransferRecords.Add(first);
 
-							GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(c.TransferRecords.Cast<BaseEntityObject>().ToList());
+							GlobalObjects.NewKeeper.BulkInsert(c.TransferRecords.Cast<BaseEntityObject>().ToList());
 						}
 
 					}
@@ -1159,7 +1159,7 @@ namespace CAS.UI.UIControls.StoresControls
 				try
 				{
 					_directivesViewer.radGridView1.BeginUpdate();
-					GlobalObjects.CasEnvironment.NewKeeper.Delete(directives.OfType<BaseEntityObject>().ToList(), true);
+					GlobalObjects.NewKeeper.Delete(directives.OfType<BaseEntityObject>().ToList(), true);
 					_directivesViewer.radGridView1.EndUpdate();
 
 					AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
@@ -1315,7 +1315,7 @@ namespace CAS.UI.UIControls.StoresControls
 							foreach (var transferRecord in component.TransferRecords)
 							{
 								transferRecord.ParentId = component.ItemId;
-								GlobalObjects.CasEnvironment.NewKeeper.Save(transferRecord);
+								GlobalObjects.NewKeeper.Save(transferRecord);
 							}
 						}
 						else

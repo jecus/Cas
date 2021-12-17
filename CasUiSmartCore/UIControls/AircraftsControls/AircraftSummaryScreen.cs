@@ -395,7 +395,7 @@ namespace CAS.UI.UIControls.AircraftsControls
                 try
                 {
                     //currentAircraft.Save(true);
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(CurrentAircraft);
+                    GlobalObjects.NewKeeper.Save(CurrentAircraft);
                 }
                 catch (Exception ex)
                 {

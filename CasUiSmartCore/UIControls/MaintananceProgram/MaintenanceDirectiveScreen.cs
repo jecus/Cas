@@ -343,12 +343,12 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
             try
             {
-                GlobalObjects.CasEnvironment.NewKeeper.Save(_currentDirective);
+                GlobalObjects.NewKeeper.Save(_currentDirective);
 
 	            foreach (var kit in _currentDirective.Kits)
 	            {
 		            if(kit.IsDeleted)
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(kit);
+						GlobalObjects.NewKeeper.Delete(kit);
 	            }
             }
             catch (Exception ex)

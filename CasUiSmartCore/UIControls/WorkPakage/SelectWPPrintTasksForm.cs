@@ -2208,7 +2208,7 @@ if (!_isWorkOrder)
 
                     try
                     {
-                        GlobalObjects.CasEnvironment.NewKeeper.Save(mpd, false);
+                        GlobalObjects.NewKeeper.Save(mpd, false);
                     }
                     catch (Exception ex)
                     {

@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();

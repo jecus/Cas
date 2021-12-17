@@ -1023,7 +1023,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			if (confirmResult == DialogResult.Yes)
 			{
 				DirectivesViewer.radGridView1.BeginUpdate();
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(DirectivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(DirectivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
 				DirectivesViewer.radGridView1.EndUpdate();
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;

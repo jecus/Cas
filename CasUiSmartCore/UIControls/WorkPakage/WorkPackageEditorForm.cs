@@ -120,7 +120,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			try
 			{
 				ApplyChanges();
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_currentWp);
+				GlobalObjects.NewKeeper.Save(_currentWp);
 
 				DialogResult = DialogResult.OK;
 				Close();

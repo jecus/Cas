@@ -274,7 +274,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 				{
 					List<AircraftFlight> selectedItems = new List<AircraftFlight>(_directivesViewer.SelectedItems);
 					_directivesViewer.radGridView1.BeginUpdate();
-					GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
+					GlobalObjects.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 					GlobalObjects.CasEnvironment.Calculator.ResetMath(CurrentAircraft);
 					_directivesViewer.radGridView1.EndUpdate(); 
 				}

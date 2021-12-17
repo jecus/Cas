@@ -299,7 +299,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._adminContainer.Size = new System.Drawing.Size(105, 42);
 			this._adminContainer.TabIndex = 1;
 			this._adminContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
-			this._adminContainer.Visible = GlobalObjects.CasEnvironment.IdentityUser.UserType == UsetType.Admin;
+			this._adminContainer.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UsetType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.UserType == UsetType.Admin;
 			// 
 			// _settingContainer
 			// 
@@ -331,7 +331,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._settingContainer.Size = new System.Drawing.Size(105, 42);
 			this._settingContainer.TabIndex = 1;
 			this._settingContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
-			this._settingContainer.Visible = GlobalObjects.CasEnvironment.IdentityUser.UserType == UsetType.Admin;
+			this._settingContainer.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UsetType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.UserType == UsetType.Admin;
 			// 
 			// ExportMonthly
 			// 
@@ -1086,7 +1086,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkPersonnel.Status = AvControls.Statuses.Satisfactory;
 			this.LinkPersonnel.TabIndex = 8;
 			this.LinkPersonnel.Text = "Personnel";
-			this.LinkPersonnel.Visible = GlobalObjects.CasEnvironment.IdentityUser.UserType == UsetType.Admin;
+			this.LinkPersonnel.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UsetType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.UserType == UsetType.Admin;
 			this.LinkPersonnel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkPersonnel.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.LinkPersonnel.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkPersonnelDisplayerRequested);

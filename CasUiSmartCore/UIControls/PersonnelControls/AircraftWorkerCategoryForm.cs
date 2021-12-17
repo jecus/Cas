@@ -180,7 +180,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 
                 foreach (ModuleRecord relation in _currentItem.ModuleRecords)
                 {
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(relation);
+                    GlobalObjects.NewKeeper.Save(relation);
                 }
             }
             catch (Exception ex)
@@ -219,7 +219,7 @@ namespace CAS.UI.UIControls.PersonnelControls
                 //и получен положительный ответ на ее удаление
                 try
                 {
-                    GlobalObjects.CasEnvironment.NewKeeper.Delete(cond);
+                    GlobalObjects.NewKeeper.Delete(cond);
                 }
                 catch (Exception ex)
                 {

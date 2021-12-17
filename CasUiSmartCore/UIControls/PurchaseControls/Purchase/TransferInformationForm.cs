@@ -59,7 +59,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			foreach (var record in _addedRecord)
 			{
 				record.TransferInformation.AddRange(_records);
-				GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+				GlobalObjects.NewKeeper.Save(record);
 			}
 
 			DialogResult = DialogResult.OK;

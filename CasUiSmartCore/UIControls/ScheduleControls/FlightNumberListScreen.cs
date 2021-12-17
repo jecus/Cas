@@ -477,7 +477,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 			if (confirmResult == DialogResult.Yes)
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
 				_directivesViewer.radGridView1.EndUpdate();
 				AnimatedThreadWorker.RunWorkerAsync();
 			}

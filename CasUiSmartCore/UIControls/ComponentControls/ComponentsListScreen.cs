@@ -1547,13 +1547,13 @@ namespace CAS.UI.UIControls.ComponentControls
 				try
 				{
 					_directivesViewer.radGridView1.BeginUpdate();
-					GlobalObjects.CasEnvironment.NewKeeper.Delete(_directivesViewer.SelectedItems.Where(i => i is Component).OfType<BaseEntityObject>().ToList(), true);
+					GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.Where(i => i is Component).OfType<BaseEntityObject>().ToList(), true);
 					foreach (var baseEntityObject in _directivesViewer.SelectedItems.Where(i => i is ComponentDirective).Cast<ComponentDirective>())
 					{
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(baseEntityObject, true);
+						GlobalObjects.NewKeeper.Delete(baseEntityObject, true);
 						foreach (var relation in baseEntityObject.ItemRelations)
 						{
-							GlobalObjects.CasEnvironment.NewKeeper.Delete(relation, true);
+							GlobalObjects.NewKeeper.Delete(relation, true);
 						}
 					}
 
@@ -1641,7 +1641,7 @@ namespace CAS.UI.UIControls.ComponentControls
 							c.TransferRecords.Clear();
 							c.TransferRecords.Add(first);
 
-							GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(c.TransferRecords.Cast<BaseEntityObject>().ToList());
+							GlobalObjects.NewKeeper.BulkInsert(c.TransferRecords.Cast<BaseEntityObject>().ToList());
 						}
 					}
 				}

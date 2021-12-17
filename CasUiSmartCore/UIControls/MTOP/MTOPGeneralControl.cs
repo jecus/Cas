@@ -82,7 +82,7 @@ namespace CAS.UI.UIControls.MTOP
 					mtopCheckListView1.radGridView1.BeginUpdate();
 
 					foreach (var item in mtopCheckListView1.SelectedItems)
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(item, true);
+						GlobalObjects.NewKeeper.Delete(item, true);
 
 					mtopCheckListView1.radGridView1.EndUpdate();
 				}
@@ -118,7 +118,7 @@ namespace CAS.UI.UIControls.MTOP
 			foreach (var engine in engines)
 			{
 				engine.AverageUtilization = au;
-				GlobalObjects.CasEnvironment.NewKeeper.Save(engine);
+				GlobalObjects.NewKeeper.Save(engine);
 			}
 
 			return averageUtilizationItemControl1.SaveData();

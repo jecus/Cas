@@ -83,7 +83,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 					record.AircraftId = selectedAircraft.ItemId;
 					record.Aircraft = selectedAircraft;
 
-					GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+					GlobalObjects.NewKeeper.Save(record);
 				}
 			}
 			catch (Exception ex)

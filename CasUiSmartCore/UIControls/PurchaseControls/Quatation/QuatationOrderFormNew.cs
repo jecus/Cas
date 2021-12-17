@@ -241,12 +241,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			else
 			{
 				if (_order.ItemId < 0)
-					GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
+					GlobalObjects.NewKeeper.Save(_order);
 
 				foreach (var record in _addedQuatationOrderRecords)
 				{
 					record.ParentPackageId = _order.ItemId;
-					GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+					GlobalObjects.NewKeeper.Save(record);
 
 					if (record.Product != null)
 					{
@@ -259,7 +259,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 								try
 								{
-									GlobalObjects.CasEnvironment.NewKeeper.Save(ksr);
+									GlobalObjects.NewKeeper.Save(ksr);
 								}
 								catch (Exception ex)
 								{
@@ -272,7 +272,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				}
 
 				foreach (var record in _deleteExistQuatationOrderRecords)
-					GlobalObjects.CasEnvironment.NewKeeper.Delete(record);
+					GlobalObjects.NewKeeper.Delete(record);
 
 				DialogResult = System.Windows.Forms.DialogResult.OK;
 			}

@@ -121,13 +121,13 @@ namespace CAS.UI.UIControls.MaintananceProgram
 				foreach (var item in _calcItems)
 				{
 					item.APUCalc = true;
-					GlobalObjects.CasEnvironment.NewKeeper.Save(item);
+					GlobalObjects.NewKeeper.Save(item);
 				}
 
 				foreach (var item in _remove)
 				{
 					item.APUCalc = false;
-					GlobalObjects.CasEnvironment.NewKeeper.Save(item);
+					GlobalObjects.NewKeeper.Save(item);
 				}
 
 			}

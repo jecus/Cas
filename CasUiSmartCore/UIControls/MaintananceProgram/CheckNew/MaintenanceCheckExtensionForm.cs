@@ -279,7 +279,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 					q.Add(item);
 				}
 				if (_mpdForSelect.Count > 0)
-					GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(q);
+					GlobalObjects.NewKeeper.BulkUpdate(q);
 
 
 				Sort();
@@ -309,7 +309,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 				list.Add(item);
 			}
 			if(list.Count > 0)
-				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(list.Cast<BaseEntityObject>().ToList());
+				GlobalObjects.NewKeeper.BulkUpdate(list.Cast<BaseEntityObject>().ToList());
 			Sort();
 
 			MessageBox.Show(@"Tasks reset successful!",

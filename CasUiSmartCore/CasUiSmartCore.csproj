@@ -805,6 +805,12 @@
     <Compile Include="ExcelExport\ExcelExportProvider.cs" />
     <Compile Include="Extentions.cs" />
     <Compile Include="Helpers\CmbScrollHelper.cs" />
+    <Compile Include="UICAAControls\OperatorSymmaryCAADemoScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\OperatorSymmaryCAADemoScreen.Designer.cs">
+      <DependentUpon>OperatorSymmaryCAADemoScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\MaintananceProgram\MaintenanceDirectiveBindMPDForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3981,6 +3987,9 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UICAAControls\OperatorSymmaryCAADemoScreen.resx">
+      <DependentUpon>OperatorSymmaryCAADemoScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\MaintananceProgram\MaintenanceDirectiveBindMPDForm.resx">
       <DependentUpon>MaintenanceDirectiveBindMPDForm.cs</DependentUpon>
       <SubType>Designer</SubType>

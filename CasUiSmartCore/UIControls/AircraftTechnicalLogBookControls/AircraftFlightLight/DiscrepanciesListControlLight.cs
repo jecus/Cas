@@ -515,7 +515,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls.AircraftFlightLight
                 //и получен положительный ответ на ее удаление
                 try
                 {
-                    GlobalObjects.CasEnvironment.NewKeeper.Delete(cond);
+                    GlobalObjects.NewKeeper.Delete(cond);
                 }
                 catch (Exception ex)
                 {

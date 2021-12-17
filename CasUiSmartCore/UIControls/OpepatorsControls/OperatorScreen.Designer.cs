@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
         /// </summary>
         private void InitializeComponent()
         {
-	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+	        var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.OperatorControl = new OperatorControl(new SmartCore.Entities.General.Operator());
             this._buttonDeleteOperator = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.headerControl.SuspendLayout();
@@ -89,7 +89,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             _buttonDeleteOperator.TextMain = "Delete";
             _buttonDeleteOperator.TextSecondary = "operator";
             _buttonDeleteOperator.DisplayerRequested += buttonDeleteOperator_DisplayerRequested;
-            _buttonDeleteOperator.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+            _buttonDeleteOperator.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly || userType == UsetType.SaveOnly);
 			// 
 			// NonRoutineJobsListScreen
 			// 

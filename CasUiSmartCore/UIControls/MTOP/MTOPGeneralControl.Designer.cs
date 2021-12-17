@@ -32,7 +32,7 @@ namespace CAS.UI.UIControls.MTOP
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.avButtonAddCheck = new AvControls.AvButtonT.AvButtonT();
 			this.avButtonEditCheck = new AvControls.AvButtonT.AvButtonT();
 			this.avButtonDeleteCheck = new AvControls.AvButtonT.AvButtonT();

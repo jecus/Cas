@@ -65,7 +65,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 				if (_flightPlanOps.From.DayOfWeek == DayOfWeek.Monday)
 				{
 					if(_flightPlanOps.ItemId <= 0)
-						GlobalObjects.CasEnvironment.NewKeeper.Save(_flightPlanOps);
+						GlobalObjects.NewKeeper.Save(_flightPlanOps);
 					else GlobalObjects.PlanOpsCalculator.CreateCopyFromExistPlan(_flightPlanOps);
 
 					DialogResult = DialogResult.OK;

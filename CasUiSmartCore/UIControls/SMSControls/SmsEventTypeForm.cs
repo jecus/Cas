@@ -216,7 +216,7 @@ namespace CAS.UI.UIControls.SMSControls
 
                     try
                     {
-                        GlobalObjects.CasEnvironment.NewKeeper.Delete(changeRecord, true);
+                        GlobalObjects.NewKeeper.Delete(changeRecord, true);
                     }
                     catch (Exception ex)
                     {
@@ -428,7 +428,7 @@ namespace CAS.UI.UIControls.SMSControls
                 //и получен положительный ответ на ее удаление
                 try
                 {
-                    GlobalObjects.CasEnvironment.NewKeeper.Delete(cond);
+                    GlobalObjects.NewKeeper.Delete(cond);
                     _smsEventType.EventConditions.Remove(cond);
                 }
                 catch (Exception ex)

@@ -581,7 +581,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
 
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
 				_directivesViewer.radGridView1.EndUpdate();
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;

@@ -46,7 +46,7 @@ namespace CAS.UI.UIControls.Auxiliary
         /// </summary>
         private void InitializeComponent()
         {
-	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+	        var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.panelContainer = new System.Windows.Forms.Panel();
             this.ButtonRegisterActualState = new AvControls.AvButtonT.AvButtonT();

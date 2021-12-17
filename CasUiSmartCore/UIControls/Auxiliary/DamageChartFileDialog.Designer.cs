@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.Auxiliary
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.flowLayoutPanelCharts = new System.Windows.Forms.FlowLayoutPanel();
 			this.panelLabelCharts = new System.Windows.Forms.Panel();
 			this.labelFilesCaption = new System.Windows.Forms.Label();

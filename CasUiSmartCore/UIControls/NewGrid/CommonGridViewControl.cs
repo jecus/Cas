@@ -283,7 +283,7 @@ namespace CAS.UI.UIControls.NewGrid
 				foreach (var item in deletedItems)
 					item.IsDeleted = true;
 
-				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(deletedItems);
+				GlobalObjects.NewKeeper.BulkUpdate(deletedItems);
 				foreach (var item in deletedItems)
 					radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
 			}
@@ -918,7 +918,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 				if (pds.Count > 0)
 				{
-					GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(pds.Cast<BaseEntityObject>().ToList());
+					GlobalObjects.NewKeeper.BulkInsert(pds.Cast<BaseEntityObject>().ToList());
 					InsertItems(pds.ToList());
 				}
 
@@ -934,7 +934,7 @@ namespace CAS.UI.UIControls.NewGrid
 							cd.ComponentId = component.ItemId;
 
 
-						GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(component.ComponentDirectives.Cast<BaseEntityObject>().ToList());
+						GlobalObjects.NewKeeper.BulkInsert(component.ComponentDirectives.Cast<BaseEntityObject>().ToList());
 					}
 				}
 			}

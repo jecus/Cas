@@ -669,12 +669,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 							_quotation.AdditionalInformation.QualificationNumbers[g.Key.ItemId];
 
 					//сохранение запросного ордера
-					GlobalObjects.CasEnvironment.NewKeeper.Save(copy);
+					GlobalObjects.NewKeeper.Save(copy);
 
 					foreach (var record in g)
 					{
 						record.ParentPackageId = copy.ItemId;
-						GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+						GlobalObjects.NewKeeper.Save(record);
 					}
 				}
 

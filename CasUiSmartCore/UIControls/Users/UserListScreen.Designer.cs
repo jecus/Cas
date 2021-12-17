@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.Users
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
 			this.buttonAddDocument = new AvControls.AvButtonT.AvButtonT();
 			this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();

@@ -276,7 +276,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
 			if (form.ShowDialog() == DialogResult.OK)
 			{
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_directivesViewer.SelectedItem);
+				GlobalObjects.NewKeeper.Save(_directivesViewer.SelectedItem);
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
 				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
@@ -596,7 +596,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
 
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
 				_directivesViewer.radGridView1.EndUpdate();
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;

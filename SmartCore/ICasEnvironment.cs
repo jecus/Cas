@@ -27,12 +27,20 @@ namespace SmartCore
 {
     public interface IBaseEnvironment
     {
-        IAuditRepository AuditRepository { get; set; }
+        OperatorCollection Operators { get; }
+		IAuditRepository AuditRepository { get; set; }
 		ApiProvider ApiProvider { get; set; }
         INewLoader NewLoader { get; }
+        INewKeeper NewKeeper { get; }
 
-        void Connect(String serverName, String userName, String pass, String database);
+
+        DataSet Execute(string sql);
+        DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results);
+        DataSet Execute(string query, SqlParameter[] parameters);
+
+		void Connect(String serverName, String userName, String pass, String database);
         IIdentityUser IdentityUser { get; }
+        void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState);
 
 
 	}
@@ -42,7 +50,7 @@ namespace SmartCore
 		/// <summary>
 		/// Свойства
 		/// </summary>
-        OperatorCollection Operators { get; }
+        
 		CommonCollection<Vehicle> Vehicles { get; }
 		CommonCollection<Store> Stores { get; }
 		CommonCollection<Hangar> Hangars { get; }
@@ -52,16 +60,10 @@ namespace SmartCore
 		Dictionary<string, ICommonCollection> TempCollections { get; }
 		ReasonCollection Reasons { get; }
         ILoader Loader { get; }
-		
-		INewKeeper NewKeeper { get; }
-		Calculator Calculator { get; set; }
+        Calculator Calculator { get; set; }
 		Keeper Keeper { get; }
 		Manipulator Manipulator { get; }
 
-
-        DataSet Execute(string sql);
-        DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results);
-        DataSet Execute(string query, SqlParameter[] parameters);
 
 		/// <summary>
 		/// Методы
@@ -84,9 +86,7 @@ namespace SmartCore
 
 		void Reset();
 
-		void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState);
-
-		void OpenFile(AttachedFile attachedFile, out string message);
+        void OpenFile(AttachedFile attachedFile, out string message);
 
 		void SaveAsFile(AttachedFile attachedFile, string filePath, out string message);
 

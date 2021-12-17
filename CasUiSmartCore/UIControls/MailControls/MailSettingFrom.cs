@@ -72,7 +72,7 @@ namespace CAS.UI.UIControls.MailControls
 			try
 			{
 				ApplyChanges();
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_op);
+				GlobalObjects.NewKeeper.Save(_op);
 
 				DialogResult = DialogResult.OK;
 				Close();

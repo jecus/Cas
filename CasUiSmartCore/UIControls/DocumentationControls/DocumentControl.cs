@@ -95,7 +95,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			{
 				try
 				{
-					GlobalObjects.CasEnvironment.NewKeeper.Delete(_currentDocument);
+					GlobalObjects.NewKeeper.Delete(_currentDocument);
 					_currentDocument = null;
 					UpdateDocument();
 				}

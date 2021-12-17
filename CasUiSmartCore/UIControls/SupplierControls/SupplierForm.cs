@@ -215,7 +215,7 @@ namespace CAS.UI.UIControls.SupplierControls
         {
             try
             {
-                GlobalObjects.CasEnvironment.NewKeeper.Save(_currentSupplier);
+                GlobalObjects.NewKeeper.Save(_currentSupplier);
             }
             catch (Exception ex)
             {
@@ -229,7 +229,7 @@ namespace CAS.UI.UIControls.SupplierControls
                 document.ParentId = _currentSupplier.ItemId;
                 document.ParentTypeId = _currentSupplier.SmartCoreObjectType.ItemId;
 
-                GlobalObjects.CasEnvironment.NewKeeper.Save(document);
+                GlobalObjects.NewKeeper.Save(document);
             }
         }
 
@@ -326,7 +326,7 @@ namespace CAS.UI.UIControls.SupplierControls
                 {
                     try
                     {
-                        GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems[i]);
+                        GlobalObjects.NewKeeper.Delete(selectedItems[i]);
                     }
                     catch (Exception ex)
                     {

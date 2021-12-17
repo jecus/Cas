@@ -166,7 +166,7 @@ namespace CAS.UI.UIControls.KitControls
             _currentKitSupplier.CostServiceable = (double)numericCostServiceable.Value;
             try
             {
-                GlobalObjects.CasEnvironment.NewKeeper.Save(_currentKitSupplier);
+                GlobalObjects.NewKeeper.Save(_currentKitSupplier);
             }
             catch (Exception ex)
             {

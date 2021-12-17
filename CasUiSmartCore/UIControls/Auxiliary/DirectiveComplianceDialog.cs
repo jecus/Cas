@@ -295,7 +295,7 @@ namespace CAS.UI.UIControls.Auxiliary
 						if (newRecord.Document?.ParentId <= 0)
 				        {
 					        newRecord.Document.ParentId = newRecord.ItemId;
-					        GlobalObjects.CasEnvironment.NewKeeper.Save(newRecord.Document);
+					        GlobalObjects.NewKeeper.Save(newRecord.Document);
 				        }
 
 				        if (checkBox1.Checked && !checkClosed)
@@ -315,7 +315,7 @@ namespace CAS.UI.UIControls.Auxiliary
 						        AverageUtilization = _averageUtilization
 							};
 
-					        GlobalObjects.CasEnvironment.NewKeeper.Save(checkRecord);
+					        GlobalObjects.NewKeeper.Save(checkRecord);
 				        }
 
 
@@ -357,7 +357,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			        if (_currentDirectiveRecord.Document?.ParentId <= 0)
 			        {
 				        _currentDirectiveRecord.Document.ParentId = _currentDirectiveRecord.ItemId;
-				        GlobalObjects.CasEnvironment.NewKeeper.Save(_currentDirectiveRecord.Document);
+				        GlobalObjects.NewKeeper.Save(_currentDirectiveRecord.Document);
 			        }
 		        }
 		        catch (Exception ex)

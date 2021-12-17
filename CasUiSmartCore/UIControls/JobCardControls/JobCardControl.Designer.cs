@@ -35,7 +35,7 @@ namespace CAS.UI.UIControls.JobCardControls
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.labelBiWeeklyReport = new System.Windows.Forms.Label();
 			this.labelFooter = new System.Windows.Forms.Label();
 			this.textboxBiWeeklyReport = new System.Windows.Forms.TextBox();

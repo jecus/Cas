@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.StoresControls
         /// </summary>
         private void InitializeComponent()
         {
-	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+	        var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;
 			this.ReferenceButtonAdd = new CAS.UI.Management.Dispatchering.RichReferenceButton();
 			this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
 			this.extendableRichContainer = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();

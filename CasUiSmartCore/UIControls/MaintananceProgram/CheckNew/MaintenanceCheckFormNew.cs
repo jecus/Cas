@@ -266,7 +266,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 				}
 
 				if(_mpdForSelect.Count > 0)
-					GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
+					GlobalObjects.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
 				Sort();
 
 				//_animatedThreadWorker.RunWorkerAsync();
@@ -331,7 +331,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
 			if (res == DialogResult.Yes)
 			{
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(comboBox1.SelectedItem as MaintenanceCheck);
+				GlobalObjects.NewKeeper.Delete(comboBox1.SelectedItem as MaintenanceCheck);
 				_animatedThreadWorker.RunWorkerAsync();
 			}
 		}

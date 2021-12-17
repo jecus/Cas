@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
 			this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
 			this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();

@@ -119,7 +119,7 @@ namespace CAS.UI.UIControls.KitControls
             KitSuppliersRelation ksr = control.KitSuppliersRelation;
             //У связи поставщика с китами нет дочерних объектов для сохранения
             //поэтому он удаляется напрямую - через Keeper, а не Manipulator
-            GlobalObjects.CasEnvironment.NewKeeper.Delete(ksr);
+            GlobalObjects.NewKeeper.Delete(ksr);
             
             _parentKit.SupplierRelations.Remove(ksr);
             _kitSuppliersControls.Remove(control);

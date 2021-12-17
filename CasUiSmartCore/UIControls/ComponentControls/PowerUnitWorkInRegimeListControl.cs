@@ -87,7 +87,7 @@ namespace CAS.UI.UIControls.DetailsControls
         public override void SaveData()
         {
 	        foreach (var workParam in BaseComponent.ComponentWorkParams)
-		        GlobalObjects.CasEnvironment.NewKeeper.Save(workParam);
+		        GlobalObjects.NewKeeper.Save(workParam);
 
         }
 

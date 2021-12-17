@@ -306,7 +306,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 						aircraftFlightEdit.DelayReason = delayComboBox.SelectedReason;
 						aircraftFlightEdit.CancelReason = reasonComboBoxCancel.SelectedReason;
 
-						GlobalObjects.CasEnvironment.NewKeeper.Save(aircraftFlightEdit);
+						GlobalObjects.NewKeeper.Save(aircraftFlightEdit);
 
 						if (_planOpsRecord.ParentFlight != null && _planOpsRecord.ParentFlight.ItemId != aircraftFlightEdit.ItemId)
 						{
@@ -321,13 +321,13 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 						if (aircraftFlightEdit.Document?.ParentId <= 0)
 						{
 							aircraftFlightEdit.Document.ParentId = aircraftFlightEdit.ItemId;
-							GlobalObjects.CasEnvironment.NewKeeper.Save(aircraftFlightEdit.Document);
+							GlobalObjects.NewKeeper.Save(aircraftFlightEdit.Document);
 						}
 					}
 				}
 
 				ApplyChanges();
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_planOpsRecord);
+				GlobalObjects.NewKeeper.Save(_planOpsRecord);
 			}
 			catch (Exception ex)
 			{

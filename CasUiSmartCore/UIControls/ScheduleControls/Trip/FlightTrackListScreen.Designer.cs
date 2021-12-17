@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
 			this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
 			this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();

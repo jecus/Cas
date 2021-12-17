@@ -143,7 +143,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			{
 				_order.AdditionalInformation.PurchaseShippers.Clear();
 				_order.AdditionalInformation.PurchaseShippers.AddRange(_addedRecord);
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
+				GlobalObjects.NewKeeper.Save(_order);
 				DialogResult = DialogResult.OK;
 			}
 		}
@@ -249,7 +249,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			_order.AdditionalInformation.СurrencyFreightId = purchaseRecordListView1.SelectedItem.CurrencyId;
 			_order.ShipCompanyId = purchaseRecordListView1.SelectedItem.ShipperId;
 			_order.ShipCompany = purchaseRecordListView1.SelectedItem.Shipper;
-			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
+			GlobalObjects.NewKeeper.Save(_order);
 		}
 	}
 }

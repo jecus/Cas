@@ -16,6 +16,7 @@ using SmartCore.DataAccesses.ItemsRelation;
 using SmartCore.Directives;
 using SmartCore.Discrepancies;
 using SmartCore.Documents;
+using SmartCore.Entities;
 using SmartCore.Kits;
 using SmartCore.Maintenance;
 using SmartCore.NonRoutineJobs;
@@ -45,6 +46,7 @@ namespace CASTerms
 		public static AuditContext  AuditContext { get; set; }
 		public static IAuditRepository  AuditRepository { get; set; }
         public static ICasEnvironment CasEnvironment { get; set; }
+        public static INewKeeper NewKeeper => CasEnvironment?.NewKeeper ?? CaaEnvironment.NewKeeper;
         public static ICaaEnvironment CaaEnvironment { get; set; }
         public static IPackageCore PackageCore { get; set; }
         public static IPurchaseCore PurchaseCore { get; set; }

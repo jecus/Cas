@@ -42,7 +42,7 @@ namespace CAS.UI.UIControls.HangarControls
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.extendableRichContainer = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
 			this.avButtonReload = new AvControls.AvButtonT.AvButtonT();
 			this.buttonDelete = new AvControls.AvButtonT.AvButtonT();

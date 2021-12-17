@@ -148,7 +148,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 {
                     dir.MaintenanceCheck = _maintenanceCheck;
 
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(dir, false);
+                    GlobalObjects.NewKeeper.Save(dir, false);
                    
                     _maintenanceCheck.BindMpds.Add(dir);
                 }
@@ -179,7 +179,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 {
                     dir.MaintenanceCheck = null;
 
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(dir, false);
+                    GlobalObjects.NewKeeper.Save(dir, false);
 
                     _maintenanceCheck.BindMpds.RemoveById(dir.ItemId);
                 }

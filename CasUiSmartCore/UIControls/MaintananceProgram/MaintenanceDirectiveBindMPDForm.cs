@@ -273,7 +273,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			foreach (var newItem in _newBindedItems)
 		    {
 			    var itemRelation = CreateItemRelation(newItem, selectedRelationType);
-			    GlobalObjects.CasEnvironment.NewKeeper.Save(itemRelation);
+			    GlobalObjects.NewKeeper.Save(itemRelation);
 		    }
 
 			//Удаление связанных задач
@@ -284,7 +284,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			    foreach (var itemsRelationToDelete in itemsRelationsToDelete)
 			    {
 				    itemsRelationToDelete.IsDeleted = true;
-				    GlobalObjects.CasEnvironment.NewKeeper.Delete(itemsRelationToDelete);
+				    GlobalObjects.NewKeeper.Delete(itemsRelationToDelete);
 
 				    _directive.ItemRelations.Remove(itemsRelationToDelete);
 				    detailDirective.ItemRelations.Remove(itemsRelationToDelete);
@@ -307,7 +307,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		    foreach (var itemRelation in currentItem.ItemRelations)
 		    {
 				itemRelation.RelationTypeId = ItemRelationHelper.ConvertUIItemRelationToBLItem(relationTypeUI, currentItem.IsFirst);
-			    GlobalObjects.CasEnvironment.NewKeeper.Save(itemRelation);
+			    GlobalObjects.NewKeeper.Save(itemRelation);
 		    }
 	    }
 

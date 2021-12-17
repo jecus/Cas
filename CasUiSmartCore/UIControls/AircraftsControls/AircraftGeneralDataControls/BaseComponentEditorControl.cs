@@ -238,7 +238,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
                             //Дата установки изменена на более раннюю
                             actual.OnLifelength = lifelengthViewerInstallation.Lifelength;
                             actual.RecordDate = dateTimePickerInstallation.Value;
-                            GlobalObjects.CasEnvironment.NewKeeper.Save(actual);
+                            GlobalObjects.NewKeeper.Save(actual);
                         }
                         else if (record.TransferDate < dateTimePickerInstallation.Value)
                         {
@@ -257,7 +257,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
                         GlobalObjects.ComponentCore.RegisterActualState(_currentBaseComponent, actual);   
                     }
                     record.TransferDate = dateTimePickerInstallation.Value;
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+                    GlobalObjects.NewKeeper.Save(record);
                 }
 
                 //GlobalObjects.CasEnvironment.Keeper.Save(_currentBaseDetail.TransferRecords.GetLast());

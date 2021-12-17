@@ -343,7 +343,7 @@ namespace CAS.UI.UIControls.ComponentControls
                             actual.RecordDate = replacedItem.ConfirmDate;
 							//TODO:(Evgenii Babak) пересмотреть подход, наработка считается на начало дня, а в метод передаем DateTime.Now(может быть и концом дня)
 							actual.OnLifelength = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnStartOfDay(bd, replacedItem.ConfirmDate);
-							GlobalObjects.CasEnvironment.NewKeeper.Save(actual);    
+							GlobalObjects.NewKeeper.Save(actual);    
                         }
                         else
                         {
@@ -360,7 +360,7 @@ namespace CAS.UI.UIControls.ComponentControls
                         bd.TransferRecords.GetLast().DODR = true;
                         bd.TransferRecords.GetLast().PreConfirmTransfer = true;
                         bd.TransferRecords.GetLast().TransferDate = replacedItem.ConfirmDate;
-                        GlobalObjects.CasEnvironment.NewKeeper.Save(bd.TransferRecords.GetLast());
+                        GlobalObjects.NewKeeper.Save(bd.TransferRecords.GetLast());
                     }
                     else
                     {
@@ -372,7 +372,7 @@ namespace CAS.UI.UIControls.ComponentControls
                             actual.RecordDate = replacedItem.ConfirmDate;
 							//TODO:(Evgenii Babak) пересмотреть подход, наработка считается на начало дня, а в метод передаем DateTime.Now(может быть и началом дня)
 							actual.OnLifelength = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnEndOfDay(replacedItem.ParentComponent, DateTime.Now);
-							GlobalObjects.CasEnvironment.NewKeeper.Save(actual);   
+							GlobalObjects.NewKeeper.Save(actual);   
                         }
                         else
                         {
@@ -393,7 +393,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			                    var newDirective = directive.GetCopyUnsaved();
 			                    newDirective.ComponentId = replacedItem.ParentComponent.ItemId;
 			                    newDirective.ParentComponent = replacedItem.ParentComponent;
-								GlobalObjects.CasEnvironment.NewKeeper.Save(newDirective);
+								GlobalObjects.NewKeeper.Save(newDirective);
 		                    }
 	                    }
 
@@ -409,7 +409,7 @@ namespace CAS.UI.UIControls.ComponentControls
                             replacedItem.ParentComponent.ParentBaseComponent.ComponentCount++;
                             GlobalObjects.ComponentCore.Save(replacedItem.ParentComponent.ParentBaseComponent);//TODO:(Evgenii Babak) заменить на использование ComponentCore 
                         }
-                        GlobalObjects.CasEnvironment.NewKeeper.Save(replacedItem.ParentComponent.TransferRecords.GetLast());
+                        GlobalObjects.NewKeeper.Save(replacedItem.ParentComponent.TransferRecords.GetLast());
                     }
                     _installedComponents.Remove(replacedItem.ParentComponent);
                     TransferRecord record = _installedTransfers.GetRecordByComponentId(replacedItem.ParentComponent.ItemId);
@@ -421,7 +421,7 @@ namespace CAS.UI.UIControls.ComponentControls
 						{
 							record.ReplaceComponentId = replacedItem.ReplacedByComponent.ItemId;
 							record.IsReplaceComponentRemoved = true;
-							GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+							GlobalObjects.NewKeeper.Save(record);
 						}
 					}
                 }
@@ -433,7 +433,7 @@ namespace CAS.UI.UIControls.ComponentControls
                     {
                         _removedTransfers.Remove(record);
                         record.PODR = true;
-                        GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+                        GlobalObjects.NewKeeper.Save(record);
 
                         BaseComponent from = GlobalObjects.ComponentCore.GetBaseComponentById(record.FromBaseComponentId);
                         //уменьшение необходимого кол-ва деталей родительского компонента
@@ -536,7 +536,7 @@ namespace CAS.UI.UIControls.ComponentControls
 						record.IsReplaceComponentRemoved = false;
 					}
 
-					GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+					GlobalObjects.NewKeeper.Save(record);
 
                     BaseComponent from = GlobalObjects.ComponentCore.GetBaseComponentById(record.FromBaseComponentId);
                     //уменьшение необходимого кол-ва деталей родительского компонента
@@ -558,7 +558,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
                     actual.RecordDate = replacedItem.ReplacedByDate;
                     actual.OnLifelength = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnEndOfDay(replacedItem.ReplacedByComponent, DateTime.Now);//TODO:(Evgenii Babak) пересмотреть подход, наработка считается на начало дня, а в метод передаем DateTime.Now(может быть и началом дня)
-					GlobalObjects.CasEnvironment.NewKeeper.Save(actual);
+					GlobalObjects.NewKeeper.Save(actual);
 
                     replacedItem.ReplacedByComponent.TransferRecords.GetLast().DODR = true;
                     replacedItem.ReplacedByComponent.TransferRecords.GetLast().TransferDate =
@@ -570,7 +570,7 @@ namespace CAS.UI.UIControls.ComponentControls
                         replacedItem.ReplacedByComponent.ParentBaseComponent.ComponentCount++;
                         GlobalObjects.ComponentCore.Save(replacedItem.ReplacedByComponent.ParentBaseComponent); 
                     }
-                    GlobalObjects.CasEnvironment.NewKeeper.Save(replacedItem.ReplacedByComponent.TransferRecords.GetLast());
+                    GlobalObjects.NewKeeper.Save(replacedItem.ReplacedByComponent.TransferRecords.GetLast());
                     _installedComponents.Remove(replacedItem.ReplacedByComponent);
                     TransferRecord record = _installedTransfers.GetRecordByComponentId(replacedItem.ReplacedByComponent.ItemId);
                     if (record != null) _installedTransfers.Remove(record);

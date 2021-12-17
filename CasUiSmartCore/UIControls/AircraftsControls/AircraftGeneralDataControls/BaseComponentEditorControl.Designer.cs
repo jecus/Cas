@@ -35,7 +35,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			System.Windows.Forms.GroupBox groupBox1;
 			System.Windows.Forms.GroupBox groupBox2;
 			System.Windows.Forms.GroupBox groupBox3;

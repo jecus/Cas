@@ -550,7 +550,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		{
 			try
 			{
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_currentComponentDirective);
+				GlobalObjects.NewKeeper.Save(_currentComponentDirective);
 
 				var currentRelatedItem = lookupComboboxMaintenanceDirective.SelectedItem as MaintenanceDirective;
 				var selectedRelationType = (WorkItemsRelationTypeUI)comboBoxRelationType.SelectedValue;
@@ -563,7 +563,7 @@ namespace CAS.UI.UIControls.ComponentControls
 					{
 						itemsRelation.AdditionalInformation.Component = _currentComponentDirective.PartNumber;
 						itemsRelation.AdditionalInformation.Mpd = currentRelatedItem.TaskCardNumber;
-						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
+						GlobalObjects.NewKeeper.Save(itemsRelation);
 					}
 				}
 				else
@@ -572,7 +572,7 @@ namespace CAS.UI.UIControls.ComponentControls
 					{
 						itemsRelation.AdditionalInformation = null;
 						DeleteItemRelation(itemsRelation);
-						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
+						GlobalObjects.NewKeeper.Save(itemsRelation);
 					}
 				}
 			}
@@ -612,7 +612,7 @@ namespace CAS.UI.UIControls.ComponentControls
 					{
 						itemsRelation.AdditionalInformation = null;
 						DeleteItemRelation(itemsRelation);
-						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
+						GlobalObjects.NewKeeper.Save(itemsRelation);
 					}
 				}
 			}
