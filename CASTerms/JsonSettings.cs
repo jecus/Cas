@@ -20,6 +20,8 @@ namespace CASTerms
         public string Connection { get; set; }
         [JsonProperty("Audit")]
         public string Audit { get; set; }
+        [JsonProperty("IsCAA")]
+		public bool IsCAA { get; set; }
 	}
 
 	[JsonObject]

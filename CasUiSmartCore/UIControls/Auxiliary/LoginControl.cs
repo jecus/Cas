@@ -103,6 +103,7 @@ namespace CAS.UI.UIControls.Auxiliary
         private bool _isSimple = true;
         private string _topicId = "system_openning_system_login_types_of_authorization";
         private bool _casServerFound;
+        private bool _isCAA = false;
         private JsonSettings _settings;
 
         #endregion
@@ -487,18 +488,25 @@ namespace CAS.UI.UIControls.Auxiliary
 
                 backgroundWorker.ReportProgress(1, _loadingState);
 
-                GlobalObjects.CasEnvironment.Reset();
-                GlobalObjects.CasEnvironment.InitAsync(backgroundWorker, _loadingState);
+                if (!_isCAA)
+                {
 
-                _loadingState.CurrentStage = 2;
-                _loadingState.CurrentStageDescription = "Calculator Initialization";
-                _loadingState.CurrentPersentage = 0;
-                _loadingState.MaxPersentage = 0;
-                _loadingState.CurrentPersentageDescription = "";
+                }
+                else
+                {
+                    GlobalObjects.CasEnvironment.Reset();
+                    GlobalObjects.CasEnvironment.InitAsync(backgroundWorker, _loadingState);
 
-                backgroundWorker.ReportProgress(2, _loadingState);
+                    _loadingState.CurrentStage = 2;
+                    _loadingState.CurrentStageDescription = "Calculator Initialization";
+                    _loadingState.CurrentPersentage = 0;
+                    _loadingState.MaxPersentage = 0;
+                    _loadingState.CurrentPersentageDescription = "";
 
-                GlobalObjects.CasEnvironment.Calculator.InitAsync(backgroundWorker, _loadingState);
+                    backgroundWorker.ReportProgress(2, _loadingState);
+
+                    GlobalObjects.CasEnvironment.Calculator.InitAsync(backgroundWorker, _loadingState);
+                }
             }
             catch (Exception ex)
             {
@@ -594,19 +602,11 @@ namespace CAS.UI.UIControls.Auxiliary
 
         private void StartConnection()
         {
-	        string serverName;
-#if DemoDebug
-			serverName = "91.213.233.139,1433\\MSSQLSERVER@CASDBTest";
-#else
-			serverName = comboBoxServerName.Text;
-#endif
-
+            var serverName = comboBoxServerName.Text;
             Init(_settings.ConnectionStrings[serverName]);
 
 			var settings = new ConnectionSettingsContainer(_settings.ConnectionStrings[serverName].Connection, textBoxLogin.Text, textBoxPassword.Text, _isSimple);
-            Connect(settings);
-            //connectionThread = new Thread(Connect);
-            //connectionThread.Start(settings);
+            ConnectionAction(settings);
         }
 
         #endregion
@@ -627,34 +627,21 @@ namespace CAS.UI.UIControls.Auxiliary
         #endregion
 
         #region private void Connect(object obj)
-        private void Connect(object obj)
-        {
-            //ModeProvider provider = Program.Provider;
-            //ILogger currentLogger = provider.Logger;
-            //currentLogger.BeginProcess(ConnectionAction, obj);
-            ConnectionAction(obj);
-        }
 
-        private void ConnectionAction(Object obj)
+        private void ConnectionAction(ConnectionSettingsContainer settings)
         {
-            ConnectionSettingsContainer settings = obj as ConnectionSettingsContainer;
             if (settings != null)
             {
-	            AuthenticationType authentication = AuthenticationType.Windows;
-	            if (settings.IsSimple)
-		            authentication = AuthenticationType.SqlServer;
-	            OnConnecting();
-	            string message;
-	            //if (settings.ServerName.Split('@').Length >= 2)
-	            //{
-	            //    string serverName = settings.ServerName.Split('@')[0];
-	            //    string baseName = settings.ServerName.Split('@')[1];
+                OnConnecting();
 
-	            try
+                try
 	            {
-		            //GlobalObjects.CasEnvironment.Connect(serverName, settings.Username, settings.Password, baseName);
-		            GlobalObjects.CasEnvironment.Connect(settings.ServerName, settings.Username, settings.Password, "");
-		            SaveJsonSetting(settings.Username);
+                    if(_isCAA)
+                        GlobalObjects.CaaEnvironment.Connect(settings.ServerName, settings.Username, settings.Password, "");
+                    else GlobalObjects.CasEnvironment.Connect(settings.ServerName, settings.Username, settings.Password, "");
+
+
+                    SaveJsonSetting(settings.Username);
 	            }
 	            catch (ConnectionFailureException ex)
 	            {
@@ -710,19 +697,9 @@ namespace CAS.UI.UIControls.Auxiliary
         #region private void Disconnect()
         private void Disconnect()
         {
-            //if (connectionThread.IsAlive)
-            //{
-            //    try
-            //    {
-            //        connectionThread.Abort();
-            //    }
-            //    catch
-            //    {
-
-//                }
+            if(!_isCAA)
                 GlobalObjects.CasEnvironment?.Disconnect();
-                OnDisconnected();
-  //          }
+             OnDisconnected(); 
         }
         #endregion
 
@@ -736,7 +713,8 @@ namespace CAS.UI.UIControls.Auxiliary
             catch
             { }
             ConnectingFinished();
-            GlobalObjects.CasEnvironment.Disconnect();
+            if (!_isCAA)
+                GlobalObjects.CasEnvironment.Disconnect();
             OnDisconnected();
         }
         #endregion
@@ -763,10 +741,6 @@ namespace CAS.UI.UIControls.Auxiliary
             textBoxPassword.Focus();
             if (textBoxPassword.ReadOnly || !textBoxPassword.Enabled)
                 buttonConnect.Focus();
-
-            //CasNetworkObserver.CasNetworkObserver networkObserver = new CasNetworkObserver.CasNetworkObserver();
-            //networkObserver.CasServerFound += NetworkObserverCasServerFound;
-            //networkObserver.FindServers();
 
             //LoadSettings();
             LoadJsonSettings();
@@ -834,10 +808,14 @@ namespace CAS.UI.UIControls.Auxiliary
             GlobalObjects.AuditRepository = new AuditRepository(auditContext);
             GlobalObjects.AuditContext = auditContext;
 
-            if (GlobalObjects.Config.ContainsKey("IsCAA") && GlobalObjects.Config["IsCAA"].Value<bool>() == true)
+            if (GlobalObjects.Config.ContainsKey("IsCAA") && GlobalObjects.Config["IsCAA"].Value<bool>())
             {
+                _isCAA = true;
                 var environment = DbTypes.CaaEnvironment = new CaaEnvironment();
-                //environment.ApiProvider = new ApiProvider(con.Connection);
+                environment.AuditRepository = GlobalObjects.AuditRepository;
+                environment.ApiProvider = new ApiProvider(con.Connection);
+                GlobalObjects.CaaEnvironment = environment;
+
             }
             else
             {

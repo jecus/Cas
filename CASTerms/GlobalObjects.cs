@@ -45,6 +45,7 @@ namespace CASTerms
 		public static AuditContext  AuditContext { get; set; }
 		public static IAuditRepository  AuditRepository { get; set; }
         public static ICasEnvironment CasEnvironment { get; set; }
+        public static ICaaEnvironment CaaEnvironment { get; set; }
         public static IPackageCore PackageCore { get; set; }
         public static IPurchaseCore PurchaseCore { get; set; }
 		public static IComponentCore ComponentCore { get; set; }

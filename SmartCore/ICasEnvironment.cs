@@ -29,15 +29,10 @@ namespace SmartCore
     {
         IAuditRepository AuditRepository { get; set; }
 		ApiProvider ApiProvider { get; set; }
+        INewLoader NewLoader { get; }
 
-        
-        DataSet Execute(string sql);
-        DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results);
-        DataSet Execute(string query, SqlParameter[] parameters);
-
-        void AddDictionary(Type t, IDictionaryCollection dictionary);
-        void ClearDictionaries();
-
+        void Connect(String serverName, String userName, String pass, String database);
+        IIdentityUser IdentityUser { get; }
 
 
 	}
@@ -56,25 +51,23 @@ namespace SmartCore
 		BaseComponentCollection BaseComponents { get; }
 		Dictionary<string, ICommonCollection> TempCollections { get; }
 		ReasonCollection Reasons { get; }
-		IIdentityUser IdentityUser { get; }
-		ILoader Loader { get; }
-		INewLoader NewLoader { get; }
+        ILoader Loader { get; }
+		
 		INewKeeper NewKeeper { get; }
 		Calculator Calculator { get; set; }
 		Keeper Keeper { get; }
 		Manipulator Manipulator { get; }
 
 
-		DataSet Execute(string sql);
-		DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results);
-		DataSet Execute(String query, SqlParameter[] parameters);
+        DataSet Execute(string sql);
+        DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results);
+        DataSet Execute(string query, SqlParameter[] parameters);
 
 		/// <summary>
 		/// Методы
 		/// </summary>
 		void Disconnect();
 
-		void Connect(String serverName, String userName, String pass, String database);
 
 		string GetCorrector(int id);
 		string GetCorrector(IBaseEntityObject entity);
