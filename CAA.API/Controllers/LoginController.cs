@@ -23,21 +23,21 @@ namespace CAS.API.Controllers
 		}
 
 		[HttpGet("get")]
-		public async Task<ActionResult<UserDTO>> GetUser(string login, string password)
+		public async Task<ActionResult<CAAUserDTO>> GetUser(string login, string password)
 		{
             var res = await _context.UserDtos.FirstOrDefaultAsync(i => !i.IsDeleted && i.Login.Equals(login) && i.Password.Equals(password));
             return Ok(res);
 		}
 
 		[HttpGet("getall")]
-		public async Task<ActionResult<List<UserDTO>>> GetAllList()
+		public async Task<ActionResult<List<CAAUserDTO>>> GetAllList()
 		{
             var res = await _context.UserDtos.Where(i => !i.IsDeleted).ToListAsync();
             return Ok(res);
 		}
 
 		[HttpGet("{userId}")]
-		public async Task<ActionResult<UserDTO>> GetById(int userId)
+		public async Task<ActionResult<CAAUserDTO>> GetById(int userId)
 		{
 			var res = await _context.UserDtos.Where(i => !i.IsDeleted).FirstOrDefaultAsync(i => !i.IsDeleted && i.ItemId == userId);
 			return Ok(res);
@@ -65,24 +65,24 @@ namespace CAS.API.Controllers
 		}
 
 		[HttpPost("addorupdate")]
-		public async Task<ActionResult> AddOrUpdateUser(UserDTO user)
+		public async Task<ActionResult> AddOrUpdateUser(CAAUserDTO caaUser)
 		{
-            if (user.ItemId > 0)
+            if (caaUser.ItemId > 0)
             {
-                var updateUser = await _context.UserDtos.FirstOrDefaultAsync(i => i.ItemId == user.ItemId);
-                updateUser.Login = user.Login;
-                updateUser.Password = user.Password;
-                updateUser.Name = user.Name;
-                updateUser.Surname = user.Surname;
+                var updateUser = await _context.UserDtos.FirstOrDefaultAsync(i => i.ItemId == caaUser.ItemId);
+                updateUser.Login = caaUser.Login;
+                updateUser.Password = caaUser.Password;
+                updateUser.Name = caaUser.Name;
+                updateUser.Surname = caaUser.Surname;
             }
             else
             {
-                var newUser = new UserDTO
+                var newUser = new CAAUserDTO
                 {
-                    Login = user.Login,
-                    Password = user.Password,
-                    Name = user.Name,
-                    Surname = user.Surname,
+                    Login = caaUser.Login,
+                    Password = caaUser.Password,
+                    Name = caaUser.Name,
+                    Surname = caaUser.Surname,
                 };
 
                 _context.UserDtos.Add(newUser);

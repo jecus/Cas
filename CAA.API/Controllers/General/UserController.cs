@@ -6,9 +6,9 @@ using Microsoft.Extensions.Logging;
 namespace CAA.API.Controllers.General
 {
 	[Route("user")]
-	public class UserController : BaseController<UserDTO>
+	public class UserController : BaseController<CAAUserDTO>
 	{
-		public UserController(DataContext context, ILogger<BaseController<UserDTO>> logger) : base(context, logger)
+		public UserController(DataContext context, ILogger<BaseController<CAAUserDTO>> logger) : base(context, logger)
 		{
 
 		}

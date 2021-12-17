@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Entity.Abstractions\Entity.Abstractions.csproj" />
+    <ProjectReference Include="..\Entity.Models\CAS.Entity.Models.csproj" />
   </ItemGroup>
 
 </Project>

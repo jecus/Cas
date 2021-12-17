@@ -8,7 +8,7 @@ namespace CAA.Entity.Models.DTO
     [Table("Users", Schema = "dbo")]
 	
 	[Condition("IsDeleted", 0)]
-	public class UserDTO : BaseEntity, IIdentityCAAUser
+	public class CAAUserDTO : BaseEntity, IIdentityUser
 	{
 		
 		[Column("Name"), MaxLength(100)]
@@ -26,18 +26,22 @@ namespace CAA.Entity.Models.DTO
 		[Column("Password"), MaxLength(100)]
 		public string Password { get; set; }
 
+        [Column("UserType")]
+        public UsetType UserType { get; set; }
 
-		public override string ToString()
+
+        public override string ToString()
 		{
 			return Name.Equals(Surname) ? Name : $"{Surname} {Name}";
 		}
 	}
 
-	public interface IIdentityCAAUser : IBaseEntity
-	{
-		string Name { get; set; }
-		string Surname { get; set; }
-		string Login { get; set; }
-		string Password { get; set; }
+    public interface IIdentityUser : IBaseEntity
+    {
+        string Name { get; set; }
+        string Surname { get; set; }
+        string Login { get; set; }
+        string Password { get; set; }
+        UsetType UserType { get; set; }
     }
 }
