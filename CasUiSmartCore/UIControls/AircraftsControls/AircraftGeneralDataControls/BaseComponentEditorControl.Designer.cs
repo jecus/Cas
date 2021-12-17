@@ -2,8 +2,8 @@
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using EntityCore.DTO.General;
 using CAS.UI.Helpers;
+using Entity.Abstractions;
 
 namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 {

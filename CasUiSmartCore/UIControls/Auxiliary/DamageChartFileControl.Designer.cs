@@ -1,7 +1,6 @@
 ﻿using CASTerms;
-using EntityCore.DTO.General;
 using CAS.UI.Helpers;
-
+using Entity.Abstractions;
 namespace CAS.UI.UIControls.Auxiliary
 {
 	partial class DamageChartFileControl

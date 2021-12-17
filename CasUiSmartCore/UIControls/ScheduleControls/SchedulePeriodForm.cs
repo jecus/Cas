@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.Dictionaries;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
-using EntityCore.DTO.Dictionaries;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 

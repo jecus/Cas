@@ -1,5 +1,6 @@
 ﻿using System;
-using EntityCore.DTO.General;
+using CAS.Entity.Models.DTO.General;
+using Entity.Abstractions;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;

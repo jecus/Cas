@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.General;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Events;
 using CASTerms;
-using EntityCore.DTO.General;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Quality;
 

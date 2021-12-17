@@ -1,6 +1,6 @@
 ﻿using CAS.UI.UIControls.NewGrid;
 using CASTerms;
-using EntityCore.DTO.General;
+using Entity.Abstractions;
 
 namespace CAS.UI.UIControls.MTOP
 {

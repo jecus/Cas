@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.Dictionaries;
 using CAS.UI.Interfaces;
 using CASTerms;
-using EntityCore.DTO.Dictionaries;
-using EntityCore.Filter;
+using Entity.Abstractions.Filters;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.SMS;

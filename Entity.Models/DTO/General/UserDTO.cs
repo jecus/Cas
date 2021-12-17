@@ -5,12 +5,7 @@ using Entity.Abstractions.Attributte;
 
 namespace CAS.Entity.Models.DTO.General
 {
-    public enum UiType
-	{
-		All
-	}
-
-	[Table("Users", Schema = "dbo")]
+    [Table("Users", Schema = "dbo")]
 	
 	[Condition("IsDeleted", 0)]
 	public class UserDTO : BaseEntity, IIdentityUser

@@ -704,8 +704,8 @@
     <Reference Include="MongoDB.Driver.Core, Version=2.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MongoDB.Driver.Core.2.8.1\lib\net452\MongoDB.Driver.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PdfSharp, Version=1.50.4000.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp.1.50.4000-beta3b\lib\net20\PdfSharp.dll</HintPath>
@@ -5619,9 +5619,13 @@
       <Project>{0e490ce9-c51f-408c-a6fb-39a8ce185817}</Project>
       <Name>CASGlobalTerms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EntityCore\EntityCore.csproj">
-      <Project>{A04296A8-8CBD-41E9-9E91-1A4A56004CDE}</Project>
-      <Name>EntityCore</Name>
+    <ProjectReference Include="..\Entity.Abstractions\Entity.Abstractions.csproj">
+      <Project>{738CB943-056E-4E9C-BDF2-988700A1151C}</Project>
+      <Name>Entity.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity.Models\CAS.Entity.Models.csproj">
+      <Project>{43AC7C4C-1467-4130-8FA5-A36013DBC253}</Project>
+      <Name>CAS.Entity.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\SmartControls\SmartControls.csproj">
       <Project>{9C7822B3-F9CC-436A-97A0-FDF02E31524D}</Project>

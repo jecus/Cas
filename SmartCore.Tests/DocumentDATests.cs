@@ -1,6 +1,4 @@
 ﻿using System;
-using EntityCore.DTO.General;
-using EntityCore.Filter;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Management;

@@ -1,8 +1,5 @@
 ﻿using System;
 using Auxiliary;
-using EntityCore.DTO.Dictionaries;
-using EntityCore.DTO.General;
-using EntityCore.Filter;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;

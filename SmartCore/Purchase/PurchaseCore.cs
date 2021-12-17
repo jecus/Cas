@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using EntityCore.DTO.Dictionaries;
-using EntityCore.DTO.General;
-using EntityCore.Filter;
+using CAS.Entity.Models.DTO.Dictionaries;
+using CAS.Entity.Models.DTO.General;
+using Entity.Abstractions.Filters;
 using SmartCore.Calculations.Maintenance;
 using SmartCore.Calculations.PerformanceCalculator;
 using SmartCore.Entities;

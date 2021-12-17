@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.General;
 using CASTerms;
-using EntityCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;

@@ -1,6 +1,6 @@
 using System;
 using System.Reflection;
-using EntityCore.DTO.General;
+using CAS.Entity.Models.DTO.General;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;

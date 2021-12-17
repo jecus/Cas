@@ -1,7 +1,7 @@
 ﻿using CAS.UI.UIControls.HangarControls;
 using CAS.UI.UIControls.ReferenceControls;
 using CASTerms;
-using EntityCore.DTO.General;
+using Entity.Abstractions;
 
 namespace CAS.UI.UICAAControls
 {

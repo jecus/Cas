@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using EntityCore.DTO.General;
+using Entity.Abstractions;
 using SmartCore.Entities.General.Interfaces;
 
 namespace SmartCore.AuditMongo.Repository

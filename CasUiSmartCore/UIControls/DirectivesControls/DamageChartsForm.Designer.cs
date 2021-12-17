@@ -1,6 +1,5 @@
 ﻿using AvControls.AvButtonT;
 using CASTerms;
-using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.DirectivesControls
 {

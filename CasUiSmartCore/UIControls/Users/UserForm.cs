@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.General;
 using CASTerms;
-using EntityCore.DTO.General;
+using Entity.Abstractions;
 using MetroFramework.Forms;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;

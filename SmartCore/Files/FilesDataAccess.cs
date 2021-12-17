@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using EntityCore.DTO.General;
-using EntityCore.Filter;
+using CAS.Entity.Models.DTO.General;
+using Entity.Abstractions.Filters;
 using SmartCore.Entities.NewLoader;
 
 namespace SmartCore.Files

@@ -32,7 +32,7 @@ using CAS.UI.UIControls.Users;
 using CAS.UI.UIControls.WorkPakage;
 using CASReports.Builders;
 using CASTerms;
-using EntityCore.Filter;
+using Entity.Abstractions.Filters;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;

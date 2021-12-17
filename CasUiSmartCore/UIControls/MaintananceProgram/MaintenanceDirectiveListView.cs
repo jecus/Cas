@@ -11,7 +11,6 @@ using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using Telerik.WinControls.UI;
-using Convert = System.Convert;
 
 namespace CAS.UI.UIControls.MaintananceProgram
 {

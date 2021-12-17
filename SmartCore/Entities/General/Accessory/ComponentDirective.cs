@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using EntityCore.DTO.General;
+using CAS.Entity.Models.DTO.General;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
 using SmartCore.Calculations.MTOP;

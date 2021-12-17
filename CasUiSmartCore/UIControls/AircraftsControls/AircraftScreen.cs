@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using AvControls;
+using CAS.Entity.Models.DTO.General;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AircraftTechnicalLogBookControls;
@@ -27,8 +28,7 @@ using CAS.UI.UIControls.PurchaseControls;
 using CAS.UI.UIControls.SMSControls;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
-using EntityCore.DTO.General;
-using EntityCore.Filter;
+using Entity.Abstractions.Filters;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -109,7 +109,7 @@ namespace CAS.UI.UIControls.AircraftsControls
 			AnimatedThreadWorker.ReportProgress(0, "Check Aircraft");
 			GlobalObjects.ComponentCore.ResetAircraft(CurrentAircraft);
 
-			var aircraftEquip = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AircraftEquipmentDTO, AircraftEquipments>(new Filter("AircraftId", EntityCore.Attributte.FilterType.Equal, CurrentAircraft.ItemId), true);
+			var aircraftEquip = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AircraftEquipmentDTO, AircraftEquipments>(new Filter("AircraftId",global::Entity.Abstractions.Attributte.FilterType.Equal , CurrentAircraft.ItemId), true);
 			CurrentAircraft.AircraftEquipments.Clear();
 			CurrentAircraft.AircraftEquipments.AddRange(aircraftEquip);
 

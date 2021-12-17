@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using AvControls;
+using CAS.Entity.Models.DTO.General;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AircraftTechnicalLogBookControls;
@@ -12,7 +13,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASReports.Builders;
 using CASTerms;
-using EntityCore.DTO.General;
+using Entity.Abstractions.Filters;
 using SmartCore.Calculations;
 using SmartCore.Calculations.Maintenance;
 using SmartCore.Entities.Collections;
@@ -24,7 +25,7 @@ using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
-using Filter = EntityCore.Filter.Filter;
+
 
 namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 {

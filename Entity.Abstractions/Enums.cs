@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Entity.Abstractions
+﻿namespace Entity.Abstractions
 {
 	public enum UsetType
     {
@@ -12,5 +6,10 @@ namespace Entity.Abstractions
         SuperUser,
         ReadOnly,
         SaveOnly
+    }
+
+    public enum UiType
+    {
+        All
     }
 }

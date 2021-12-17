@@ -1,5 +1,4 @@
-﻿using EntityCore.DTO.General;
-using SmartCore.Auxiliary;
+﻿using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -25,6 +24,7 @@ using SmartCore.Relation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CAS.Entity.Models.DTO.General;
 using SmartCore.Entities.General.Setting;
 
 namespace SmartCore.DtoHelper

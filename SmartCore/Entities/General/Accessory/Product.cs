@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using EntityCore.DTO.Dictionaries;
+using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;

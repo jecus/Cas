@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using EntityCore.DTO.General;
+using CAS.Entity.Models.DTO.General;
 using Newtonsoft.Json;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;

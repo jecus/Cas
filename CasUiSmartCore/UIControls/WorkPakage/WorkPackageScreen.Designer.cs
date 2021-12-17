@@ -1,5 +1,5 @@
 ﻿using CASTerms;
-using EntityCore.DTO.General;
+using Entity.Abstractions;
 using System.Windows.Forms;
 
 namespace CAS.UI.UIControls.WorkPakage

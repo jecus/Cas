@@ -4,12 +4,13 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.Dictionaries;
+using CAS.Entity.Models.DTO.General;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
-using EntityCore.DTO.Dictionaries;
-using EntityCore.DTO.General;
+using Entity.Abstractions.Filters;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -17,7 +18,7 @@ using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
-using Filter = EntityCore.Filter.Filter;
+
 
 namespace CAS.UI.UIControls.PurchaseControls
 {

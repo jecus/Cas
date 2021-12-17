@@ -1,5 +1,5 @@
 ﻿using CASTerms;
-using EntityCore.DTO.General;
+using Entity.Abstractions;
 using CAS.UI.UIControls.Auxiliary;
 using MetroFramework.Controls;
 using CAS.UI.Helpers;

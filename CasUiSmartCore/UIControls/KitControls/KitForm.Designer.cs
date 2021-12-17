@@ -1,6 +1,6 @@
 ﻿using MetroFramework.Controls;
 using CASTerms;
-using EntityCore.DTO.General;
+using Entity.Abstractions;
 
 namespace CAS.UI.UIControls.KitControls
 {

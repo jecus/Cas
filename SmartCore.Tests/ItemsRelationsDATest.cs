@@ -1,6 +1,4 @@
-﻿
-using EntityCore.DTO.General;
-using SmartCore.DataAccesses.ItemsRelation;
+﻿using SmartCore.DataAccesses.ItemsRelation;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;

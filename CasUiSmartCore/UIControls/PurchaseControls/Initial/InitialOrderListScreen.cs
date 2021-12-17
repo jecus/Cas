@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.Dictionaries;
+using CAS.Entity.Models.DTO.General;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
@@ -14,8 +16,7 @@ using CASReports.Builders;
 using CASReports.ReportTemplates;
 using CASTerms;
 using CrystalDecisions.Shared;
-using EntityCore.DTO.Dictionaries;
-using EntityCore.DTO.General;
+using Entity.Abstractions.Filters;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -27,7 +28,7 @@ using SmartCore.Filters;
 using SmartCore.Purchase;
 using SmartCore.Queries;
 using Telerik.WinControls.UI;
-using Filter = EntityCore.Filter.Filter;
+
 
 namespace CAS.UI.UIControls.PurchaseControls
 {

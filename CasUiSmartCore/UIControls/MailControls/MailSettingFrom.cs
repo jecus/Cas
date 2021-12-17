@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.General;
 using CASTerms;
-using EntityCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Entities.General.Setting;
 

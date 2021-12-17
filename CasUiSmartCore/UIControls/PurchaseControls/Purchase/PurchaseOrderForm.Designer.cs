@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using MetroFramework.Controls;
 using CASTerms;
-using EntityCore.DTO.General;
+
 using CAS.UI.Helpers;
 using CAS.UI.UIControls.NewGrid;
 

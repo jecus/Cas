@@ -1,7 +1,4 @@
-﻿
-using EntityCore.DTO.General;
-using EntityCore.Filter;
-using SmartCore.Entities.General;
+﻿using SmartCore.Entities.General;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Management;
 using SmartCore.RegisterPerformances;

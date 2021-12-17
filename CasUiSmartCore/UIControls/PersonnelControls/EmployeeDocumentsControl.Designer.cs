@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using EntityCore.DTO.General;
+using Entity.Abstractions;
 
 namespace CAS.UI.UIControls.PersonnelControls
 {

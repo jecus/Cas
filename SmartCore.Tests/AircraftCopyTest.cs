@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using CAS.UI.Helpers;
-using EntityCore.DTO.General;
-using EntityCore.Filter;
 using SmartCore.Aircrafts;
 using SmartCore.Component;
 using SmartCore.DataAccesses.ItemsRelation;

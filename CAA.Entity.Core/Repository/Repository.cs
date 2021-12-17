@@ -8,7 +8,6 @@ using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
 using Entity.Abstractions.Filters;
 using Microsoft.EntityFrameworkCore;
-using Z.EntityFramework.Plus;
 
 namespace CAA.Entity.Core.Repository
 {

@@ -1,7 +1,4 @@
-﻿
-using EntityCore.DTO.Dictionaries;
-using EntityCore.Filter;
-using SmartCore.Entities.Dictionaries;
+﻿using SmartCore.Entities.Dictionaries;
 
 namespace SmartCore.Tests
 {

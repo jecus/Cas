@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.General;
 using CASTerms;
-using EntityCore.DTO.General;
-using EntityCore.Filter;
+using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;

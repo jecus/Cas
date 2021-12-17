@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using EntityCore.DTO.General;
+using Entity.Abstractions;
 using SmartCore.Entities.Collections;
 using SmartCore.AuditMongo.Repository;
 using SmartCore.DataAccesses;

@@ -8,7 +8,6 @@ using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
-using CAS.UI.Properties;
 using CAS.UI.Events;
 using CAS.UI.Helpers;
 using CAS.UI.Management.Dispatchering;

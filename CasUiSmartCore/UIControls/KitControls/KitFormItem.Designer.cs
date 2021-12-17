@@ -1,5 +1,5 @@
 ﻿using CASTerms;
-using EntityCore.DTO.General;
+
 using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.KitControls

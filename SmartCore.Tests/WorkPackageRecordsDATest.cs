@@ -1,7 +1,4 @@
-﻿
-using EntityCore.DTO.General;
-using EntityCore.Filter;
-using SmartCore.DataAccesses.WorkPackageRecords;
+﻿using SmartCore.DataAccesses.WorkPackageRecords;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.WorkPackage;

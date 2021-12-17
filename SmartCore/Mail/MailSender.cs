@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using EntityCore.DTO.General;
+using CAS.Entity.Models.DTO.General;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.Setting;

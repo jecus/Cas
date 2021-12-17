@@ -3,13 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using EntityCore.DTO;
-using EntityCore.Filter;
-using SmartCore.Entities.Collections;
-using SmartCore.Entities.Dictionaries;
+using Entity.Abstractions;
+using Entity.Abstractions.Filters;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Deprecated;
 using SmartCore.Management;
 using SmartCore.Queries;
 

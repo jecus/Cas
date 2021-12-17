@@ -4,18 +4,18 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.General;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASReports.Builders;
 using CASTerms;
-using EntityCore.DTO.General;
+using Entity.Abstractions.Filters;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
-using Filter = EntityCore.Filter.Filter;
 
 namespace CAS.UI.UIControls.DocumentationControls
 {

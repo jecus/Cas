@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using EntityCore.DTO.Dictionaries;
+using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Calculations;
 using SmartCore.Entities.General.Attributes;
 

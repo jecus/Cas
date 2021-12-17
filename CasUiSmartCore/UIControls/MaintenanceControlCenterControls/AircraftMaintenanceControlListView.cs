@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.Dictionaries;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
-using EntityCore.DTO.Dictionaries;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;

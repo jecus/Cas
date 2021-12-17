@@ -29,19 +29,15 @@ namespace CAA.Entity.Models.DTO
         [Column("UserType")]
         public UsetType UserType { get; set; }
 
+		[NotMapped]
+        public UiType UiType { get; set; }
+        [NotMapped]
+		public int PersonnelId { get; set; }
+
 
         public override string ToString()
 		{
 			return Name.Equals(Surname) ? Name : $"{Surname} {Name}";
 		}
 	}
-
-    public interface IIdentityUser : IBaseEntity
-    {
-        string Name { get; set; }
-        string Surname { get; set; }
-        string Login { get; set; }
-        string Password { get; set; }
-        UsetType UserType { get; set; }
-    }
 }

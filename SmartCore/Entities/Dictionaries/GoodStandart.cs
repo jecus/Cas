@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using EntityCore.DTO.Dictionaries;
+using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;

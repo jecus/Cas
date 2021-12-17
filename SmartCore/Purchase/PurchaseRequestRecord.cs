@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using EntityCore.DTO.General;
+using CAS.Entity.Models.DTO.General;
 using Newtonsoft.Json;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities;

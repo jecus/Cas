@@ -1,6 +1,6 @@
 ﻿using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using EntityCore.DTO.General;
+
 using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.WorkPakage

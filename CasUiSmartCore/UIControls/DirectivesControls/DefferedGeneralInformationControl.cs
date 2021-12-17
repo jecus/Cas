@@ -1,14 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.General;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AircraftTechnicalLogBookControls;
 using CAS.UI.UIControls.Auxiliary.Events;
 using CASTerms;
-using EntityCore.DTO.General;
-using EntityCore.Filter;
+using Entity.Abstractions.Filters;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;

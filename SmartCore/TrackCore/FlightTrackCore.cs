@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using EntityCore.Attributte;
-using EntityCore.DTO.General;
-using EntityCore.Filter;
+using CAS.Entity.Models.DTO.General;
+using Entity.Abstractions.Attributte;
+using Entity.Abstractions.Filters;
 using SmartCore.DtoHelper;
 using SmartCore.Entities;
 using SmartCore.Entities.Dictionaries;

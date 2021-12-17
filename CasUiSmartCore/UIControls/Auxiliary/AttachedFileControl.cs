@@ -7,8 +7,8 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using Auxiliary;
+using CAS.Entity.Models.DTO.General;
 using CASTerms;
-using EntityCore.DTO.General;
 using SmartCore.Entities.General;
 
 namespace CAS.UI.UIControls.Auxiliary

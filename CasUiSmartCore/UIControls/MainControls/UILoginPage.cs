@@ -6,7 +6,6 @@ using CAS.UI.UICAAControls;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.OpepatorsControls;
 using CASTerms;
-using SmartCore.Entities.General;
 
 namespace CAS.UI.UIControls.MainControls
 {

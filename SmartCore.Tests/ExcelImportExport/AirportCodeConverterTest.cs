@@ -1,5 +1,4 @@
-﻿using EntityCore.DTO.General;
-using SmartCore.Entities.Dictionaries;
+﻿using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Management;
 

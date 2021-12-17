@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.Dictionaries;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using EntityCore.DTO.Dictionaries;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Schedule;
 

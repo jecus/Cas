@@ -338,8 +338,8 @@
     <Reference Include="MongoDB.Driver.Core, Version=2.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MongoDB.Driver.Core.2.8.0\lib\net452\MongoDB.Driver.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -909,9 +909,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EntityCore\EntityCore.csproj">
-      <Project>{a04296a8-8cbd-41e9-9e91-1a4a56004cde}</Project>
-      <Name>EntityCore</Name>
+    <ProjectReference Include="..\Entity.Abstractions\Entity.Abstractions.csproj">
+      <Project>{738CB943-056E-4E9C-BDF2-988700A1151C}</Project>
+      <Name>Entity.Abstractions</Name>
+      <SetTargetFramework>TargetFramework=netstandard2.0</SetTargetFramework>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity.Models\CAS.Entity.Models.csproj">
+      <Project>{43ac7c4c-1467-4130-8fa5-a36013dbc253}</Project>
+      <Name>CAS.Entity.Models</Name>
+      <SetTargetFramework>TargetFramework=netstandard2.0</SetTargetFramework>
     </ProjectReference>
     <ProjectReference Include="..\TextProcessing\TextProcessing.csproj">
       <Project>{C56BB11D-5043-4A8B-8288-A7199B76B570}</Project>

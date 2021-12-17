@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using EntityCore.DTO.General;
-using EntityCore.Filter;
+using CAS.Entity.Models.DTO.General;
+using Entity.Abstractions.Filters;
 using SmartCore.AircraftFlights;
 using SmartCore.Aircrafts;
 using SmartCore.AuditMongo.Repository;

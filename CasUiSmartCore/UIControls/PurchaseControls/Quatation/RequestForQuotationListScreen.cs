@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.General;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
@@ -13,7 +14,7 @@ using CAS.UI.UIControls.PurchaseControls.Initial;
 using CAS.UI.UIControls.PurchaseControls.Purchase;
 using CASReports.Builders;
 using CASTerms;
-using EntityCore.DTO.General;
+using Entity.Abstractions.Filters;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -22,7 +23,7 @@ using SmartCore.Filters;
 using SmartCore.Purchase;
 using SmartCore.Queries;
 using Telerik.WinControls.UI;
-using Filter = EntityCore.Filter.Filter;
+
 
 namespace CAS.UI.UIControls.PurchaseControls
 {

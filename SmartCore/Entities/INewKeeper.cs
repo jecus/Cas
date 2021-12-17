@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using EntityCore.DTO;
+using Entity.Abstractions;
 using SmartCore.Entities.General;
 
 namespace SmartCore.Entities

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Entity.Abstractions
+﻿namespace Entity.Abstractions
 {
     public interface IIdentityUser : IBaseEntity
     {
@@ -13,5 +7,7 @@ namespace Entity.Abstractions
         string Login { get; set; }
         string Password { get; set; }
         UsetType UserType { get; set; }
+        UiType UiType { get; set; }
+        int PersonnelId { get; set; }
     }
 }

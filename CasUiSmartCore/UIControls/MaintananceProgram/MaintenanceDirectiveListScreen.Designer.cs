@@ -1,7 +1,7 @@
 ﻿using System;
 using CAS.UI.Interfaces;
 using CASTerms;
-using EntityCore.DTO.General;
+using Entity.Abstractions;
 
 namespace CAS.UI.UIControls.MaintananceProgram
 {

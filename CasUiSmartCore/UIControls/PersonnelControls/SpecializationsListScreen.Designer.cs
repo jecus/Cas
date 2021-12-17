@@ -1,6 +1,6 @@
 ﻿using CASTerms;
-using EntityCore.DTO.General;
-
+using Entity.Abstractions;
+using Entity.Abstractions;
 namespace CAS.UI.UIControls.PersonnelControls
 {
     partial class SpecializationsListScreen

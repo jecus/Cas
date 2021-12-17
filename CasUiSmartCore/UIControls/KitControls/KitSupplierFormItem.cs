@@ -2,10 +2,10 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.Dictionaries;
+using CAS.Entity.Models.DTO.General;
 using CASTerms;
-using EntityCore.DTO.Dictionaries;
-using EntityCore.DTO.General;
-using EntityCore.Filter;
+using Entity.Abstractions.Filters;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Purchase;
 

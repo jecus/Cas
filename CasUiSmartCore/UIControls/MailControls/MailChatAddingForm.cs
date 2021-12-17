@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.General;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
-using EntityCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Entities.General.Mail;
 using SmartCore.Purchase;

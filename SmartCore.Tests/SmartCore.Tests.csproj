@@ -148,10 +148,6 @@
       <Project>{8988CAE1-D7C1-499B-B595-9B544FCCF7FB}</Project>
       <Name>Auxiliary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EntityCore\EntityCore.csproj">
-      <Project>{a04296a8-8cbd-41e9-9e91-1a4a56004cde}</Project>
-      <Name>EntityCore</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SmartCore\SmartCore.csproj">
       <Project>{48b63705-4573-4bb2-b04d-67a406b09ab6}</Project>
       <Name>SmartCore</Name>
