@@ -606,7 +606,7 @@ namespace CAS.UI.UIControls.Auxiliary
             Init(_settings.ConnectionStrings[serverName]);
 
 			var settings = new ConnectionSettingsContainer(_settings.ConnectionStrings[serverName].Connection, textBoxLogin.Text, textBoxPassword.Text, _isSimple);
-            ConnectionAction(settings);
+            ConnectionAction(settings, serverName);
         }
 
         #endregion
@@ -628,7 +628,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region private void Connect(object obj)
 
-        private void ConnectionAction(ConnectionSettingsContainer settings)
+        private void ConnectionAction(ConnectionSettingsContainer settings, string serverName)
         {
             if (settings != null)
             {
@@ -641,7 +641,7 @@ namespace CAS.UI.UIControls.Auxiliary
                     else GlobalObjects.CasEnvironment.Connect(settings.ServerName, settings.Username, settings.Password, "");
 
 
-                    SaveJsonSetting(settings.Username);
+                    SaveJsonSetting(settings.Username, serverName);
 	            }
 	            catch (ConnectionFailureException ex)
 	            {
@@ -753,17 +753,18 @@ namespace CAS.UI.UIControls.Auxiliary
 
 		#endregion
 
-		private void SaveJsonSetting(string login)
+		private void SaveJsonSetting(string login, string server)
 		{
 			var exePath = Path.GetDirectoryName(Application.ExecutablePath);
 			var path = Path.Combine(exePath, "AppSettings.json");
 			var json = File.ReadAllText(path);
 			_settings = JsonConvert.DeserializeObject<JsonSettings>(json);
 
-			if (_settings.LastInformation.Login.Equals(login))
+			if (_settings.LastInformation.Server.Equals(server))
 				return;
 
 			_settings.LastInformation.Login = login;
+			_settings.LastInformation.Server = server;
 			var output = JsonConvert.SerializeObject(_settings, Newtonsoft.Json.Formatting.Indented);
 			File.WriteAllText(path, output);
 		}

@@ -78,8 +78,11 @@ namespace CAS.UI.UIControls.Auxiliary
             if (ControlRequest != null)
                 ControlRequest(this, new ApplicationControlRequestArgs(ControlType.LogOut));
 
-            GlobalObjects.AuditRepository.WriteAsync(new SmartCore.Entities.User(GlobalObjects.CasEnvironment.IdentityUser), AuditOperation.SignOut, GlobalObjects.CasEnvironment.IdentityUser);
-		}
+            if(GlobalObjects.CasEnvironment != null)
+             GlobalObjects.AuditRepository.WriteAsync(new SmartCore.Entities.User(GlobalObjects.CasEnvironment.IdentityUser), AuditOperation.SignOut, GlobalObjects.CasEnvironment.IdentityUser);
+            else
+                GlobalObjects.AuditRepository.WriteAsync(new SmartCore.Entities.User(GlobalObjects.CaaEnvironment.IdentityUser), AuditOperation.SignOut, GlobalObjects.CaaEnvironment.IdentityUser);
+        }
         #endregion
 
         #region private void AvButtonLogoutLocationChanged(object sender, EventArgs e)

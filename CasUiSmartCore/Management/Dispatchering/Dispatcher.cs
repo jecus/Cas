@@ -209,7 +209,7 @@ namespace CAS.UI.Management.Dispatchering
                         _defaultProxy.Remove(displayer, false);
                     }
                 }
-                GlobalObjects.CasEnvironment.Disconnect();
+                GlobalObjects.CasEnvironment?.Disconnect();
 
                 _defaultProxy.ContainedDisplayers[0].Text = "Login";
                 _defaultProxy.ContainedDisplayers[0].Entity =
