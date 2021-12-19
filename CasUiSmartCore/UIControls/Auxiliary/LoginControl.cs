@@ -714,7 +714,7 @@ namespace CAS.UI.UIControls.Auxiliary
             { }
             ConnectingFinished();
             if (!_isCAA)
-                GlobalObjects.CasEnvironment.Disconnect();
+                GlobalObjects.CasEnvironment?.Disconnect();
             OnDisconnected();
         }
         #endregion
@@ -808,6 +808,9 @@ namespace CAS.UI.UIControls.Auxiliary
             catch { }
             GlobalObjects.AuditRepository = new AuditRepository(auditContext);
             GlobalObjects.AuditContext = auditContext;
+
+            GlobalObjects.CaaEnvironment = null;
+            GlobalObjects.CasEnvironment = null;
 
             if (con.IsCAA)
             {

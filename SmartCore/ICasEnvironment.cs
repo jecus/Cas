@@ -41,6 +41,7 @@ namespace SmartCore
         IIdentityUser IdentityUser { get; }
         void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState);
         void UpdateUser(string password);
+        void Disconnect();
 
 	}
 
@@ -67,10 +68,9 @@ namespace SmartCore
 		/// <summary>
 		/// Методы
 		/// </summary>
-		void Disconnect();
 
 
-		string GetCorrector(int id);
+        string GetCorrector(int id);
 		string GetCorrector(IBaseEntityObject entity);
 
 		
