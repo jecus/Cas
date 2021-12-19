@@ -41,9 +41,8 @@ namespace SmartCore
         IIdentityUser IdentityUser { get; }
         void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState);
         void UpdateUser(string password);
-        void Disconnect();
 
-	}
+    }
 
 	public interface ICasEnvironment : IBaseEnvironment
 	{
@@ -69,8 +68,8 @@ namespace SmartCore
 		/// Методы
 		/// </summary>
 
-
-        string GetCorrector(int id);
+        void Disconnect();
+		string GetCorrector(int id);
 		string GetCorrector(IBaseEntityObject entity);
 
 		
