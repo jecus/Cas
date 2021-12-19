@@ -323,8 +323,12 @@ GO
 
 CREATE NONCLUSTERED INDEX [IX_ParentId_ParentTypeId] ON [dbo].[ItemsFilesLinks]  ( [ParentId],[ParentTypeId] ) INCLUDE ( [IsDeleted],[LinkType],[FileId],[Corrector],[Updated] )
 CREATE NONCLUSTERED INDEX [IX_ParentID_ParentTypeId_isDeleted] ON [dbo].[DirectivesRecords]  ( [isDeleted],[ParentID],[ParentTypeId] ) INCLUDE ( [NumGroup],[RecordTypeID],[Remarks],[RecordDate],[OnLifelength],[WorkPackageID],[Dispatched],[Completed],[Reference],[ODR],[MaintenanceOrganization],[MaintenanceDirectiveRecordId],[MaintenanceCheckRecordId],[Corrector],[Updated] )
+CREATE NONCLUSTERED INDEX [IX_ComponentId] ON [dbo].[ComponentLLPCategoryData]  ( [ComponentId] ) INCLUDE ( [IsDeleted],[LLPCategoryId],[LLPLifeLength],[LLPLifeLimit],[Notify],[LLPLifeLengthCurrent],[LLPLifeLengthForDate],[Date],[Corrector],[Updated] )
 
+CREATE NONCLUSTERED INDEX [IX_ParentID] ON [dbo].[TransferRecords]  ( [ParentID] ) INCLUDE ( [IsDeleted],[ParentType],[FromAircraftID],[FromStoreID],[DestinationObjectID],[DestinationObjectType],[ConsumableId],[TransferDate],[DestConfirmTransferDate],[WorkPackageID],[PerformanceNum],[Remarks],[Reference],[PODR],[DODR],[Position],[FromBaseComponentID],[Description],[ReasonId],[State],[ReplaceComponentId],[IsReplaceComponentRemoved],[ReceivedSpecialistId],[ReleasedSpecialistId],[FromSupplierId],[SupplierReceiptDate],[SupplierNotify],[FromSpecialistId],[PreConfirmTransfer],[Corrector],[Updated] )
 
+CREATE NONCLUSTERED INDEX [IX_ComponentId] ON [dbo].[ComponentDirectives]  ( [ComponentId] ) INCLUDE ( [IsDeleted],[DirectiveType],[Threshold],[ManHours],[Remarks],[Cost],[Highlight],[KitRequired],[FaaFormFileID],[HiddenRemarks],[IsClosed],[MPDTaskTypeId],[NDTType],[ZoneArea],[AccessDirective],[AAM],[CMM],[Corrector],[Updated],[ExpiryDate],[ExpiryRemainNotify],[IsExpiry] )
+CREATE NONCLUSTERED INDEX [IX_ParentID_ParentTypeId] ON [dbo].[DirectivesRecords]  ( [ParentID],[ParentTypeId] ) INCLUDE ( [isDeleted],[NumGroup],[RecordTypeID],[Remarks],[RecordDate],[OnLifelength],[Unused],[Overused],[WorkPackageID],[Dispatched],[Completed],[Reference],[ODR],[MaintenanceOrganization],[MaintenanceDirectiveRecordId],[MaintenanceCheckRecordId],[PerformanceNum],[IsControlPoint],[CalculatedPerformanceSource],[ComplianceCheckName],[Corrector],[Updated] )
 
 
 delete from dbo.ItemsFilesLinks where ItemId in (
