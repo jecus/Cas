@@ -329,7 +329,7 @@ CREATE NONCLUSTERED INDEX [IX_ParentID] ON [dbo].[TransferRecords]  ( [ParentID]
 
 CREATE NONCLUSTERED INDEX [IX_ComponentId] ON [dbo].[ComponentDirectives]  ( [ComponentId] ) INCLUDE ( [IsDeleted],[DirectiveType],[Threshold],[ManHours],[Remarks],[Cost],[Highlight],[KitRequired],[FaaFormFileID],[HiddenRemarks],[IsClosed],[MPDTaskTypeId],[NDTType],[ZoneArea],[AccessDirective],[AAM],[CMM],[Corrector],[Updated],[ExpiryDate],[ExpiryRemainNotify],[IsExpiry] )
 CREATE NONCLUSTERED INDEX [IX_ParentID_ParentTypeId] ON [dbo].[DirectivesRecords]  ( [ParentID],[ParentTypeId] ) INCLUDE ( [isDeleted],[NumGroup],[RecordTypeID],[Remarks],[RecordDate],[OnLifelength],[Unused],[Overused],[WorkPackageID],[Dispatched],[Completed],[Reference],[ODR],[MaintenanceOrganization],[MaintenanceDirectiveRecordId],[MaintenanceCheckRecordId],[PerformanceNum],[IsControlPoint],[CalculatedPerformanceSource],[ComplianceCheckName],[Corrector],[Updated] )
-
+CREATE NONCLUSTERED INDEX [IX_ATLBID] ON [dbo].[AircraftFlights]  ( [ATLBID] ) INCLUDE ( [IsDeleted],[AircraftId],[FlightNo],[Remarks],[FlightDate],[StationFrom],[StationTo],[DelayTime],[DelayReasonId],[OutTime],[InTime],[TakeOffTime],[LDGTime],[NightTime],[CRSID],[FileID],[Tanks],[Fluids],[EnginesGeneralCondition],[Highlight],[Correct],[Reference],[Cycles],[PageNo],[FlightType],[Level],[Distance],[DistanceMeasure],[TakeOffWeight],[AlignmentBefore],[AlignmentAfter],[FlightCategory],[AtlbRecordType],[FlightAircraftCode],[CancelReasonId],[StationFromId],[StationToId],[FlightNumber],[Corrector],[Updated] )
 
 delete from dbo.ItemsFilesLinks where ItemId in (
 select l.ItemId from dbo.ItemsFilesLinks l
