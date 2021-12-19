@@ -40,7 +40,7 @@ namespace SmartCore
 		void Connect(String serverName, String userName, String pass, String database);
         IIdentityUser IdentityUser { get; }
         void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState);
-
+        void UpdateUser(string password);
 
 	}
 
@@ -73,7 +73,7 @@ namespace SmartCore
 		string GetCorrector(int id);
 		string GetCorrector(IBaseEntityObject entity);
 
-		void UpdateUser(string password);
+		
 
 		IDictionaryCollection GetDictionary<T>() where T : IDictionaryItem;
 

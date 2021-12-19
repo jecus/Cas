@@ -81,6 +81,12 @@ namespace SmartCore
 
         #endregion
 
+        public void UpdateUser(string password)
+        {
+            ApiProvider.UpdatePassword(IdentityUser.ItemId, password);
+        }
+
+
         #region public NewKeeper NewKeeper { get; }
         /// <summary>
         /// Загрузчик данных

@@ -22,8 +22,10 @@ namespace CAS.UI.UIControls.OpepatorsControls
 	    {
 		    if (CheckPass())
 		    {
-			    GlobalObjects.CasEnvironment.UpdateUser(textBoxNewPassword.Text);
-			    MessageBox.Show("Password changed successful", "Information", MessageBoxButtons.OK,
+				if (GlobalObjects.CasEnvironment != null)
+			        GlobalObjects.CasEnvironment.UpdateUser(textBoxNewPassword.Text);
+				else GlobalObjects.CaaEnvironment.UpdateUser(textBoxNewPassword.Text);
+				MessageBox.Show("Password changed successful", "Information", MessageBoxButtons.OK,
 				    MessageBoxIcon.Information);
 			    Close();
 		    }
