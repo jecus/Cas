@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
+using CAS.UI.UICAAControls.Activity;
 using CAS.UI.UICAAControls.Users;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
@@ -110,6 +111,11 @@ namespace CAS.UI.UICAAControls
             e.RequestedEntity = new CAAUserListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
         }
 
+        private void Activity_DisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = "Activity";
+            e.RequestedEntity = new CAAActivityListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+        }
 
 		#endregion
 

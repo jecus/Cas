@@ -805,6 +805,18 @@
     <Compile Include="ExcelExport\ExcelExportProvider.cs" />
     <Compile Include="Extentions.cs" />
     <Compile Include="Helpers\CmbScrollHelper.cs" />
+    <Compile Include="UICAAControls\Activity\CAAActivityListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Activity\CAAActivityListScreen.Designer.cs">
+      <DependentUpon>CAAActivityListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\Activity\CAAActivityListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Activity\CAAActivityListView.Designer.cs">
+      <DependentUpon>CAAActivityListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\OperatorSymmaryCAADemoScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4005,6 +4017,10 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UICAAControls\Activity\CAAActivityListScreen.resx">
+      <DependentUpon>CAAActivityListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\OperatorSymmaryCAADemoScreen.resx">
       <DependentUpon>OperatorSymmaryCAADemoScreen.cs</DependentUpon>
     </EmbeddedResource>
