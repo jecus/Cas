@@ -76,16 +76,16 @@ namespace CAS.UI.UICAAControls.Users
 		{
 			if (SelectedItem != null)
 			{
-				//var form = new UserForm(SelectedItem, Specialists);
-				//if (form.ShowDialog() == DialogResult.OK)
-				//{
-				//	var subs = GetListViewSubItems(SelectedItem);
-				//	for (int i = 0; i < subs.Count; i++)
-				//		radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
+                var form = new CAAUserForm(SelectedItem, Specialists);
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    var subs = GetListViewSubItems(SelectedItem);
+                    for (int i = 0; i < subs.Count; i++)
+                        radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
 
-				//	AnimatedThreadWorker.RunWorkerAsync();
-				//}
-			}
+                    AnimatedThreadWorker.RunWorkerAsync();
+                }
+            }
 		}
 		#endregion
 

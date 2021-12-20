@@ -823,6 +823,12 @@
     <Compile Include="UICAAControls\Users\CAAUserListView.Designer.cs">
       <DependentUpon>CAAUserListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\Users\CAAUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Users\CAAUserForm.Designer.cs">
+      <DependentUpon>CAAUserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\MaintananceProgram\MaintenanceDirectiveBindMPDForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4005,6 +4011,9 @@
     <EmbeddedResource Include="UICAAControls\Users\CAAUserListScreen.resx">
       <DependentUpon>CAAUserListScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\Users\CAAUserForm.resx">
+      <DependentUpon>CAAUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\MaintananceProgram\MaintenanceDirectiveBindMPDForm.resx">
       <DependentUpon>MaintenanceDirectiveBindMPDForm.cs</DependentUpon>
