@@ -68,7 +68,7 @@ namespace CAS.UI.UIControls.MTOP
 			this.avButtonAddCheck.TextSecondary = "";
 			this.avButtonAddCheck.ToolTipText = "Add";
 			this.avButtonAddCheck.Click += new System.EventHandler(this.avButtonAddCheck_Click);
-			this.avButtonAddCheck.Enabled = !(userType == UsetType.ReadOnly);
+			this.avButtonAddCheck.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// avButtonEditCheck
 			// 
@@ -97,7 +97,7 @@ namespace CAS.UI.UIControls.MTOP
 			this.avButtonEditCheck.TextSecondary = "";
 			this.avButtonEditCheck.ToolTipText = "Edit";
 			this.avButtonEditCheck.Click += new System.EventHandler(this.avButtonEditCheck_Click);
-			this.avButtonEditCheck.Enabled = !(userType == UsetType.ReadOnly);
+			this.avButtonEditCheck.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// avButtonDeleteCheck
 			// 
@@ -126,7 +126,7 @@ namespace CAS.UI.UIControls.MTOP
 			this.avButtonDeleteCheck.TextSecondary = "";
 			this.avButtonDeleteCheck.ToolTipText = "Delete";
 			this.avButtonDeleteCheck.Click += new System.EventHandler(this.avButtonDeleteCheck_Click);
-			this.avButtonDeleteCheck.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.avButtonDeleteCheck.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// mtopCheckListView1
 			// 

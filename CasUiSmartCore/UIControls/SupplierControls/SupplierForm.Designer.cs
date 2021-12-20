@@ -100,7 +100,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			this.buttonSave.TabIndex = 17;
 			this.buttonSave.Text = "Save";
 			this.buttonSave.Click += new System.EventHandler(this.ButtonSaveClick);
-			this.buttonSave.Enabled = !(userType == UsetType.ReadOnly);
+			this.buttonSave.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// textBoxEmail
 			// 
@@ -516,7 +516,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			this.ButtonAddDoc.TextSecondary = "";
 			this.ButtonAddDoc.ToolTipText = "Add Item";
 			this.ButtonAddDoc.Click += new System.EventHandler(this.ButtonAddFileClick);
-			this.ButtonAddDoc.Enabled = !(userType == UsetType.ReadOnly);
+			this.ButtonAddDoc.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonDeleteDoc
 			// 
@@ -546,7 +546,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			this.buttonDeleteDoc.TextSecondary = "";
 			this.buttonDeleteDoc.ToolTipText = "Delete";
 			this.buttonDeleteDoc.Click += new System.EventHandler(this.ButtonDeleteClick);
-			this.buttonDeleteDoc.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.buttonDeleteDoc.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// labelImageCaption
 			// 

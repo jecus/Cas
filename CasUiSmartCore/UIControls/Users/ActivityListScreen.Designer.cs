@@ -155,7 +155,7 @@ namespace CAS.UI.UIControls.Users
 			this.buttonOK.Width = 70;
 			this.buttonOK.Text = "OK";
 			this.buttonOK.Click += ButtonOkClick;
-			this.buttonOK.Enabled = !(userType == UsetType.ReadOnly);
+			this.buttonOK.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonExport
 			// 

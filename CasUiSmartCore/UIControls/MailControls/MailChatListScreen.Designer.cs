@@ -87,7 +87,7 @@ namespace CAS.UI.UIControls.MailControls
 			this.buttonAddRecord.TextSecondary = "";
 			this.buttonAddRecord.ToolTipText = "Add new";
 			this.buttonAddRecord.Click += new System.EventHandler(this.ButtonAddClick);
-			this.buttonAddRecord.Enabled = !(userType == UsetType.ReadOnly);
+			this.buttonAddRecord.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonApplyFilter
 			// 
@@ -143,7 +143,7 @@ namespace CAS.UI.UIControls.MailControls
 			this.buttonDeleteSelected.TextSecondary = "";
 			this.buttonDeleteSelected.ToolTipText = "Delete selected";
 			this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
-			this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.buttonDeleteSelected.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// pictureBox1
 			// 

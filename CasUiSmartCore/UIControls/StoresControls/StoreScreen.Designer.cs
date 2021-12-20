@@ -169,7 +169,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.buttonDeleteSelected.TextSecondary = "";
 			this.buttonDeleteSelected.ToolTipText = "Delete selected";
 			this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
-			this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.buttonDeleteSelected.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// pictureBoxSeparatorD
 			// 
@@ -222,7 +222,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this._buttonAddConsumablePartAndKit.TextSecondary = "";
 			this._buttonAddConsumablePartAndKit.ToolTipText = "Equipment&Material";
 			this._buttonAddConsumablePartAndKit.Click += new System.EventHandler(this.ButtonAddConsumablePartAndKit);
-			this._buttonAddConsumablePartAndKit.Enabled = !(userType == UsetType.ReadOnly);
+			this._buttonAddConsumablePartAndKit.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// pictureBoxSeparatorCPK
 			// 
@@ -268,7 +268,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this._buttonAddDetail.TextSecondary = "";
 			this._buttonAddDetail.ToolTipText = "Add new component";
 			this._buttonAddDetail.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ButtonAddDetailDisplayerRequested);
-			this._buttonAddDetail.Enabled = !(userType == UsetType.ReadOnly);
+			this._buttonAddDetail.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// pictureBoxSeparatorC
 			// 
@@ -311,7 +311,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this._buttonTransferDetails.TextSecondary = "";
 			this._buttonTransferDetails.ToolTipText = "Transfered details";
 			this._buttonTransferDetails.Click += new System.EventHandler(this.ButtonTransferedDetailsClick);
-			this._buttonTransferDetails.Enabled = !(userType == UsetType.ReadOnly);
+			this._buttonTransferDetails.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// pictureBoxSeparatorTC
 			// 

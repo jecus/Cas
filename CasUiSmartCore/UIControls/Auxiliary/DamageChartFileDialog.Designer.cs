@@ -127,7 +127,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			this.ButtonAddChart.TextSecondary = "";
 			this.ButtonAddChart.ToolTipText = "";
 			this.ButtonAddChart.Click += new System.EventHandler(this.ButtonAddChartClick);
-			this.ButtonAddChart.Enabled = !(userType == UsetType.ReadOnly);
+			this.ButtonAddChart.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// flowLayoutPanelImages
 			// 
@@ -197,7 +197,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			this.ButtonAddImage.TextSecondary = "";
 			this.ButtonAddImage.ToolTipText = "";
 			this.ButtonAddImage.Click += new System.EventHandler(this.ButtonAddImageClick);
-			this.ButtonAddImage.Enabled = !(userType == UsetType.ReadOnly);
+			this.ButtonAddImage.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// panelButtons
 			// 
@@ -222,7 +222,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			this.buttonOK.TabIndex = 14;
 			this.buttonOK.Text = "OK";
 			this.buttonOK.Click += new System.EventHandler(this.ButtonOkClick);
-			this.buttonOK.Enabled = !(userType == UsetType.ReadOnly);
+			this.buttonOK.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonCancel
 			// 

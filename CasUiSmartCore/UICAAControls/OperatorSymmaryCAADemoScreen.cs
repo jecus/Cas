@@ -20,18 +20,7 @@ namespace CAS.UI.UICAAControls
 
 		#endregion
 
-		#region protected Operator CurrentOperator
-		/// <summary>
-		/// Текущий эксплуатант
-		/// </summary>
-		public Operator CurrentOperator
-		{
-			get { return _currentOperator; }
-			set { _currentOperator = value; }
-		}
-		#endregion
-
-		#region Constructors
+        #region Constructors
 
 		#region private OperatorSymmaryDemoScreen()
 		///<summary>

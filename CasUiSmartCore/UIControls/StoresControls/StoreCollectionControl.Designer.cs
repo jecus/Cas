@@ -75,7 +75,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.ReferenceButtonAdd.TextSecondary = "";
 			this.ReferenceButtonAdd.ToolTipText = "";
 			this.ReferenceButtonAdd.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ReferenceButtonAddDisplayerRequested);
-			this.ReferenceButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
+			this.ReferenceButtonAdd.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// ButtonDelete
 			// 
@@ -104,7 +104,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.ButtonDelete.TextSecondary = "";
 			this.ButtonDelete.ToolTipText = "";
 			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
-			this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.ButtonDelete.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// extendableRichContainer
 			// 

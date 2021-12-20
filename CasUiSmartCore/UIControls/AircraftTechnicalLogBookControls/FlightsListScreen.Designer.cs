@@ -107,7 +107,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.buttonAddNew.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonAddNew.Name = "buttonAddNew";
             this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
-            this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
+            this.buttonAddNew.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonAddNewLight
 			// 
@@ -127,7 +127,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.buttonAddNewLight.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonAddNewLight.Name = "buttonAddNew";
             this.buttonAddNewLight.DisplayerRequested += ButtonAddLightDisplayerRequested;
-            this.buttonAddNewLight.Enabled = !(userType == UsetType.ReadOnly);
+            this.buttonAddNewLight.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonAddNewFull
 			// 
@@ -147,7 +147,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.buttonAddNewFull.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonAddNewFull.Name = "buttonAddNew";
             this.buttonAddNewFull.DisplayerRequested += ButtonAddFullDisplayerRequested;
-            this.buttonAddNewFull.Enabled = !(userType == UsetType.ReadOnly);
+            this.buttonAddNewFull.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonDeleteSelected
 			// 
@@ -168,7 +168,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.buttonDeleteSelected.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
             this.buttonDeleteSelected.TextMain = "Delete";
             this.buttonDeleteSelected.TextSecondary = "selected";
-            this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+            this.buttonDeleteSelected.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// buttonAddTripFlight
 			// 
@@ -189,7 +189,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 	        this.buttonAddTripFlight.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
 	        this.buttonAddTripFlight.TextMain = "Add ";
 	        this.buttonAddTripFlight.TextSecondary = "Track";
-	        this.buttonAddTripFlight.Enabled = !(userType == UsetType.ReadOnly);
+	        this.buttonAddTripFlight.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// labelDateAsOf
 			// 

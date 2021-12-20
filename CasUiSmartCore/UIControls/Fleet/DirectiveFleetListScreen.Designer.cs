@@ -135,7 +135,7 @@ namespace CAS.UI.UIControls.Fleet
 			this.buttonDeleteSelected.TextSecondary = "";
 			this.buttonDeleteSelected.ToolTipText = "Delete selected";
 			this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
-			this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.buttonDeleteSelected.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// pictureBoxS2
 			// 
@@ -208,7 +208,7 @@ namespace CAS.UI.UIControls.Fleet
 			this.buttonAddAD.TextSecondary = "";
 			this.buttonAddAD.ToolTipText = "Add new";
 			this.buttonAddAD.Click += new System.EventHandler(this.ButtonAddADClick);
-			this.buttonAddAD.Enabled = !(userType == UsetType.ReadOnly);
+			this.buttonAddAD.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// pictureBoxS3
 			// 

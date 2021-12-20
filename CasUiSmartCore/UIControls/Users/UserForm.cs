@@ -47,7 +47,7 @@ namespace CAS.UI.UIControls.Users
 			textBoxLogin.Text = _user.Login;
 			textBoxPassword.Text = _user.Password;
 
-			metroComboBox1.DataSource = Enum.GetValues(typeof(UsetType));
+			metroComboBox1.DataSource = Enum.GetValues(typeof(UserType));
 			metroComboBox1.SelectedItem = _user.UserType;
 
 			metroComboBoxUiType.DataSource = Enum.GetValues(typeof(UiType));
@@ -68,7 +68,7 @@ namespace CAS.UI.UIControls.Users
 			_user.Name = textBoxName.Text;
 			_user.Login = textBoxLogin.Text;
 			_user.Password = textBoxPassword.Text;
-			_user.UserType = (UsetType)metroComboBox1.SelectedItem;
+			_user.UserType = (UserType)metroComboBox1.SelectedItem;
 			_user.UiType = (UiType)metroComboBoxUiType.SelectedItem;
 			_user.PersonnelId = ((BaseEntityObject) metroComboBoxPersonnel.SelectedItem).ItemId;
 		}

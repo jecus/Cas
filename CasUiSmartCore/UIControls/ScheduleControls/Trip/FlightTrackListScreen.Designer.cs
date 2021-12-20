@@ -103,7 +103,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			this.buttonAddNew.TextSecondary = "";
 			this.buttonAddNew.ToolTipText = "Add new";
 			this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
-			this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
+			this.buttonAddNew.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonDeleteSelected
 			// 
@@ -127,7 +127,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			this.buttonDeleteSelected.TextSecondary = "";
 			this.buttonDeleteSelected.ToolTipText = "Delete selected";
 			this.buttonDeleteSelected.Click += ButtonDeleteClick;
-			this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.buttonDeleteSelected.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// pictureBox1
 			// 

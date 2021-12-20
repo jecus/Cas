@@ -104,7 +104,7 @@ namespace CAS.UI.UIControls.Users
 			this.buttonAddDocument.TextSecondary = "";
 			this.buttonAddDocument.ToolTipText = "Add new";
 			this.buttonAddDocument.Click += new System.EventHandler(this.ButtonAddNonRoutineJobClick);
-			this.buttonAddDocument.Enabled = !(userType == UsetType.ReadOnly);
+			this.buttonAddDocument.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonApplyFilter
 			// 
@@ -154,7 +154,7 @@ namespace CAS.UI.UIControls.Users
 			this.buttonDeleteSelected.TextSecondary = "";
 			this.buttonDeleteSelected.ToolTipText = "Delete selected";
 			this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
-			this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.buttonDeleteSelected.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// pictureBox1
 			// 

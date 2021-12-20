@@ -38,7 +38,7 @@ namespace SmartCore.Entities
 
 		public void SaveGeneric<T, TOut>(T value, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
-			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+			if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly)
 				return;
 
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
@@ -61,7 +61,7 @@ namespace SmartCore.Entities
 		}
 		public void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true)
 		{
-			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+			if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly)
 				return;
 
 			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
@@ -84,7 +84,7 @@ namespace SmartCore.Entities
 
 		public void BulkInsert<T, TOut>(List<BaseEntityObject> values, int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
-			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+			if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly)
 				return;
 
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
@@ -111,7 +111,7 @@ namespace SmartCore.Entities
 		}
 		public void BulkInsert(List<BaseEntityObject> value, int? batchSize = null)
 		{
-			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+			if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly)
 				return;
 
 			foreach (var o in value)
@@ -130,7 +130,7 @@ namespace SmartCore.Entities
 
 		public void BulkUpdate<T, TOut>(List<BaseEntityObject> values, int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
-			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+			if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly)
 				return;
 
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
@@ -150,7 +150,7 @@ namespace SmartCore.Entities
 		}
 		public void BulkUpdate(List<BaseEntityObject> value, int? batchSize = null)
 		{
-			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+			if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly)
 				return;
 
 			foreach (var o in value)
@@ -170,7 +170,7 @@ namespace SmartCore.Entities
 
 		public void BulkDelete<T, TOut>(List<BaseEntityObject> values, int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
-			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+			if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly)
 				return;
 
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
@@ -189,7 +189,7 @@ namespace SmartCore.Entities
 		}
 		public void BulkDelete(List<BaseEntityObject> value,int? batchSize = null)
 		{
-			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly || _casEnvironment.IdentityUser.UserType == UsetType.SaveOnly)
+			if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly || _casEnvironment.IdentityUser.UserType == UserType.SaveOnly)
 				return;
 
 			foreach (var o in value)
@@ -206,7 +206,7 @@ namespace SmartCore.Entities
 
 		public void DeleteGeneric<T, TOut>(T value, bool isDeletedOnly = false, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
-			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly || _casEnvironment.IdentityUser.UserType == UsetType.SaveOnly)
+			if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly || _casEnvironment.IdentityUser.UserType == UserType.SaveOnly)
 				return;
 
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
@@ -232,7 +232,7 @@ namespace SmartCore.Entities
 		}
 		public void Delete(BaseEntityObject value, bool isDeletedOnly = false, bool saveAttachedFile = true)
 		{
-			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly || _casEnvironment.IdentityUser.UserType == UsetType.SaveOnly)
+			if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly || _casEnvironment.IdentityUser.UserType == UserType.SaveOnly)
 				return;
 
 			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;

@@ -110,7 +110,7 @@ namespace CAS.UI.UIControls.Auxiliary
             this.ButtonRegisterActualState.TextSecondary = "Actual State";
             this.ButtonRegisterActualState.ToolTipText = "";
             this.ButtonRegisterActualState.Visible = false;
-            this.ButtonRegisterActualState.Enabled = !(userType == UsetType.ReadOnly);
+            this.ButtonRegisterActualState.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// ButtonDelete
 			// 
@@ -140,7 +140,7 @@ namespace CAS.UI.UIControls.Auxiliary
             this.ButtonDelete.TextMain = "Delete";
             this.ButtonDelete.TextSecondary = "";
             this.ButtonDelete.ToolTipText = "";
-            this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+            this.ButtonDelete.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// ButtonEdit
 			// 
@@ -170,7 +170,7 @@ namespace CAS.UI.UIControls.Auxiliary
             this.ButtonEdit.TextMain = "Edit";
             this.ButtonEdit.TextSecondary = "";
             this.ButtonEdit.ToolTipText = "";
-            this.ButtonEdit.Enabled = !(userType == UsetType.ReadOnly);
+            this.ButtonEdit.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// ButtonAdd
 			// 
@@ -199,7 +199,7 @@ namespace CAS.UI.UIControls.Auxiliary
             this.ButtonAdd.TextMain = "Add";
             this.ButtonAdd.TextSecondary = "";
             this.ButtonAdd.ToolTipText = "";
-            this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
+            this.ButtonAdd.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// listViewCompliance
 			// 

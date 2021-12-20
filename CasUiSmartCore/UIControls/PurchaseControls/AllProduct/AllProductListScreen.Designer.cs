@@ -87,7 +87,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.buttonAddProduct.TextSecondary = "";
 			this.buttonAddProduct.ToolTipText = "Add new";
 			this.buttonAddProduct.Click += new System.EventHandler(this.ButtonAddProductClick);
-			this.buttonAddProduct.Enabled = !(userType == UsetType.ReadOnly);
+			this.buttonAddProduct.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonApplyFilter
 			// 
@@ -143,7 +143,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.buttonDeleteSelected.TextSecondary = "";
 			this.buttonDeleteSelected.ToolTipText = "Delete selected";
 			this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
-			this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.buttonDeleteSelected.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// pictureBox1
 			// 

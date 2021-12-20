@@ -129,7 +129,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.buttonAddAtlb.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
             this.buttonAddAtlb.TextMain = "Add new";
             this.buttonAddAtlb.TextSecondary = "ATLB";
-            this.buttonAddAtlb.Enabled = !(userType == UsetType.ReadOnly);
+            this.buttonAddAtlb.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// flowLayoutPanelMain
 			// 

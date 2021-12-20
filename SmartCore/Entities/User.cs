@@ -24,7 +24,7 @@ namespace SmartCore.Entities
 		public string Password { get; set; }
 
 		[Filter("UserType:")]
-		public UsetType UserType { get; set; }
+		public UserType UserType { get; set; }
 
 		[Filter("UiType:")]
 		public UiType UiType { get; set; }

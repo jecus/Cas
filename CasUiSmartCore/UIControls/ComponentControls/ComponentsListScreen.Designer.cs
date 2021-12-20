@@ -135,7 +135,7 @@ namespace CAS.UI.UIControls.ComponentControls
             this.buttonDeleteSelected.TextSecondary = "";
             this.buttonDeleteSelected.ToolTipText = "Delete selected";
             this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
-            this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+            this.buttonDeleteSelected.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// pictureBox1
 			// 
@@ -221,7 +221,7 @@ namespace CAS.UI.UIControls.ComponentControls
             this.buttonAddNew.TextSecondary = "";
             this.buttonAddNew.ToolTipText = "Add New";
             this.buttonAddNew.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ButtonAddDisplayerRequested);
-            this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
+            this.buttonAddNew.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// pictureBox2
 			// 

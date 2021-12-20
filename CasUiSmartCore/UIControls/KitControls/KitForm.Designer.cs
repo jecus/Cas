@@ -123,7 +123,7 @@ namespace CAS.UI.UIControls.KitControls
 			this.ButtonAdd.TextSecondary = "";
 			this.ButtonAdd.ToolTipText = "";
 			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAddClick);
-			this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
+			this.ButtonAdd.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonOk
 			// 
@@ -138,7 +138,7 @@ namespace CAS.UI.UIControls.KitControls
 			this.buttonOk.Text = "Ok";
 			this.buttonOk.UseVisualStyleBackColor = true;
 			this.buttonOk.Click += new System.EventHandler(this.ButtonOkClick);
-			this.buttonOk.Enabled = !(userType == UsetType.ReadOnly);
+			this.buttonOk.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonCancel
 			// 

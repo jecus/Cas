@@ -293,7 +293,7 @@ namespace CAS.UI.UIControls.Auxiliary
             this.richReferenceButtonSave2.ToolTipText = "Save And Add Another";
             this.richReferenceButtonSave2.Visible = false;
             this.richReferenceButtonSave2.Click += new System.EventHandler(this.ButtonSave2Click);
-            this.richReferenceButtonSave2.Enabled = !(userType == UsetType.ReadOnly);
+            this.richReferenceButtonSave2.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// pictureBoxS
 			// 
@@ -340,7 +340,7 @@ namespace CAS.UI.UIControls.Auxiliary
             this.richReferenceButtonSave.Visible = false;
             this.richReferenceButtonSave.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ButtonSaveDisplayerRequested);
             this.richReferenceButtonSave.Click += new System.EventHandler(this.ButtonSaveClick);
-            this.richReferenceButtonSave.Enabled = !(userType == UsetType.ReadOnly);
+            this.richReferenceButtonSave.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// pictureBoxE
 			// 

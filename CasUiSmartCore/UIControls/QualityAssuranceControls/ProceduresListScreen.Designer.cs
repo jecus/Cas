@@ -120,7 +120,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
             this.buttonDeleteSelected.TextSecondary = "";
             this.buttonDeleteSelected.ToolTipText = "Delete selected";
             this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
-            this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+            this.buttonDeleteSelected.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// pictureBoxSeparatorBD
 			// 
@@ -165,7 +165,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
             this.buttonAddNew.TextSecondary = "";
             this.buttonAddNew.ToolTipText = "Add new";
             this.buttonAddNew.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ButtonAddDisplayerRequested);
-            this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
+            this.buttonAddNew.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// pictureBoxSeperatorBAN
 			// 

@@ -118,7 +118,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.ButtonDelete.TextSecondary = "components";
 			this.ButtonDelete.ToolTipText = null;
 			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
-			this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.ButtonDelete.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// ButtonAdd
 			// 
@@ -147,7 +147,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.ButtonAdd.TextSecondary = "components";
 			this.ButtonAdd.ToolTipText = null;
 			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
-			this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
+			this.ButtonAdd.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// ButtonCancel
 			// 

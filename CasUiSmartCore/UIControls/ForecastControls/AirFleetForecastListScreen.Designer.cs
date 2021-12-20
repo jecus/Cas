@@ -108,7 +108,7 @@ namespace CAS.UI.UIControls.ForecastControls
             this._buttonComposeWorkPackage.TextAlignSecondary = System.Drawing.ContentAlignment.TopLeft;
             this._buttonComposeWorkPackage.TextMain = "Compose a";
             this._buttonComposeWorkPackage.TextSecondary = "work package";
-            this._buttonComposeWorkPackage.Enabled = !(userType == UsetType.ReadOnly);
+            this._buttonComposeWorkPackage.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// RequestForQuotationListScreen
 			// 

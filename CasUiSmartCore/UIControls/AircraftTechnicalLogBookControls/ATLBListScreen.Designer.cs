@@ -97,7 +97,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.buttonAddNew.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonAddNew.Name = "buttonAddNew";
             this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
-            this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
+            this.buttonAddNew.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonDeleteSelected
 			// 
@@ -118,7 +118,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.buttonDeleteSelected.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
             this.buttonDeleteSelected.TextMain = "Delete";
             this.buttonDeleteSelected.TextSecondary = "selected";
-            this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+            this.buttonDeleteSelected.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// labelDateAsOf
 			// 

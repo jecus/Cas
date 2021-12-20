@@ -59,7 +59,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
             this.ButtonAdd.TextMain = "Add new";
             this.ButtonAdd.TextSecondary = "";
             this.ButtonAdd.Click += new System.EventHandler(this.ButtonAddClick);
-            this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
+            this.ButtonAdd.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// PowerPlantsControl
 			// 

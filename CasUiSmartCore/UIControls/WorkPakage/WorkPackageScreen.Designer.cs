@@ -183,7 +183,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.buttonAddNonRoutineJob.TextSecondary = "";
 			this.buttonAddNonRoutineJob.ToolTipText = "Add Non-Routine Job";
 			this.buttonAddNonRoutineJob.Click += new System.EventHandler(this.ButtonAddNonRoutineJobClick);
-			this.buttonAddNonRoutineJob.Enabled = !(userType == UsetType.ReadOnly);
+			this.buttonAddNonRoutineJob.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// pictureBoxS1
 			// 
@@ -267,7 +267,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.buttonPublish.TextSecondary = "";
 			this.buttonPublish.ToolTipText = "Publish";
 			this.buttonPublish.Click += new System.EventHandler(this.ButtonPublishClick);
-			this.buttonPublish.Enabled = !(userType == UsetType.ReadOnly);
+			this.buttonPublish.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// pictureBoxS3
 			// 

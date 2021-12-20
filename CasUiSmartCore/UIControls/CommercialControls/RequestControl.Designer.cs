@@ -394,7 +394,7 @@ namespace CAS.UI.UIControls.CommercialControls
 			this.buttonAddTask.TextSecondary = "";
 			this.buttonAddTask.ToolTipText = "Add Item";
 			this.buttonAddTask.Click += new System.EventHandler(this.ButtonAddTaskClick);
-			this.buttonAddTask.Enabled = !(userType == UsetType.ReadOnly);
+			this.buttonAddTask.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonDeleteTask
 			// 
@@ -424,7 +424,7 @@ namespace CAS.UI.UIControls.CommercialControls
 			this.buttonDeleteTask.TextSecondary = "";
 			this.buttonDeleteTask.ToolTipText = "Delete";
 			this.buttonDeleteTask.Click += new System.EventHandler(this.ButtonDeleteTaskClick);
-			this.buttonDeleteTask.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.buttonDeleteTask.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// workOrderViewControl
 			// 
@@ -996,7 +996,7 @@ namespace CAS.UI.UIControls.CommercialControls
 			this.ButtonAdd.TextSecondary = "";
 			this.ButtonAdd.ToolTipText = "Add Item";
 			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAddClick);
-			this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
+			this.ButtonAdd.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonDelete
 			// 
@@ -1026,7 +1026,7 @@ namespace CAS.UI.UIControls.CommercialControls
 			this.buttonDelete.TextSecondary = "";
 			this.buttonDelete.ToolTipText = "Delete";
 			this.buttonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
-			this.buttonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.buttonDelete.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// numericUpDownMan
 			// 

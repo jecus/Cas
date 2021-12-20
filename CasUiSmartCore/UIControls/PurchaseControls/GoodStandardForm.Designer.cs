@@ -243,7 +243,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.ButtonAdd.TextSecondary = "";
 			this.ButtonAdd.ToolTipText = "Add Item";
 			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAddClick);
-			this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
+			this.ButtonAdd.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonDelete
 			// 
@@ -272,7 +272,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.buttonDelete.TextSecondary = "";
 			this.buttonDelete.ToolTipText = "Delete";
 			this.buttonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
-			this.buttonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.buttonDelete.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 
 			this.panelMain.Controls.Add(this.labelName);
 			this.panelMain.Controls.Add(this.textBoxName);

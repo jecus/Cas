@@ -146,7 +146,7 @@ namespace CAS.UI.UIControls.HangarControls
 			this.buttonDelete.TextSecondary = "";
 			this.buttonDelete.ToolTipText = "Delete";
 			this.buttonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
-			this.buttonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.buttonDelete.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// labelProcess
 			// 

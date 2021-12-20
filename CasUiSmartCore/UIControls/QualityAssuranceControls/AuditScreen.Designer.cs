@@ -193,7 +193,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
             this.buttonPublish.TextMain = "Publish";
             this.buttonPublish.TextSecondary = "";
             this.buttonPublish.ToolTipText = "";
-            this.buttonPublish.Enabled = !(userType == UsetType.ReadOnly);
+            this.buttonPublish.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonAddNonRoutineJob
 			// 
@@ -223,7 +223,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
             this.buttonAddNonRoutineJob.TextMain = "Add Non-";
             this.buttonAddNonRoutineJob.TextSecondary = "Routine Job";
             this.buttonAddNonRoutineJob.ToolTipText = "";
-            this.buttonAddNonRoutineJob.Enabled = !(userType == UsetType.ReadOnly);
+            this.buttonAddNonRoutineJob.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// WorkPackageScreen
 			// 

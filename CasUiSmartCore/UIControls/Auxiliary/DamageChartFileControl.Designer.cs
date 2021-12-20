@@ -208,7 +208,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			this.ButtonDelete.TextSecondary = "";
 			this.ButtonDelete.ToolTipText = null;
 			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
-			this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.ButtonDelete.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// DamageChartFileControl
 			// 

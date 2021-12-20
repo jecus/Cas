@@ -166,7 +166,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
             this.buttonOK.Width = 70;
             this.buttonOK.Text = "OK";
             this.buttonOK.Click += ButtonOkClick;
-            this.buttonOK.Enabled = !(userType == UsetType.ReadOnly);
+            this.buttonOK.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// labelAvgUtilization
 			// 
@@ -207,7 +207,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
             this.buttonAddNew.Name = "buttonAddNew";
             this.buttonAddNew.Visible = false;
             this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
-            this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
+            this.buttonAddNew.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonDeleteSelected
 			// 
@@ -228,7 +228,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
             this.buttonDeleteSelected.TextMain = "";
             this.buttonDeleteSelected.TextSecondary = "";
             this.buttonDeleteSelected.ToolTipText = "Delete selected";
-            this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+            this.buttonDeleteSelected.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// buttonApplyFilter
 			// 

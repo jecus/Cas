@@ -61,7 +61,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.buttonDelete.TabIndex = 18;
 			this.buttonDelete.Text = "Delete";
 			this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
-			//this.buttonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			//this.buttonDelete.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// buttonAdd
 			// 
@@ -75,7 +75,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.buttonAdd.TabIndex = 16;
 			this.buttonAdd.Text = "Add";
 			this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
-			//this.buttonAdd.Enabled = !(userType == UsetType.ReadOnly);
+			//this.buttonAdd.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonClose
 			// 

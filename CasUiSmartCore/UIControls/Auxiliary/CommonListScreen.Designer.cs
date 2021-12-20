@@ -177,7 +177,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			this.buttonAddNew.TextSecondary = "";
 			this.buttonAddNew.ToolTipText = "Add new";
 			this.buttonAddNew.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ButtonAddDisplayerRequested);
-			this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
+			this.buttonAddNew.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonAddNew
 			// 
@@ -210,7 +210,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			this.buttonExport.TextSecondary = "";
 			this.buttonExport.ToolTipText = "Export";
 			this.buttonExport.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ButtonExportDisplayerRequested);
-			this.buttonExport.Enabled = !(userType == UsetType.ReadOnly);
+			this.buttonExport.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// pictureBox2
 			// 

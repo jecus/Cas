@@ -116,7 +116,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.buttonAddNew.TextSecondary = "";
 			this.buttonAddNew.ToolTipText = "Add new";
 			this.buttonAddNew.Click += ButtonAddNewClick;
-			this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
+			this.buttonAddNew.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonApplyFilter
 			// 

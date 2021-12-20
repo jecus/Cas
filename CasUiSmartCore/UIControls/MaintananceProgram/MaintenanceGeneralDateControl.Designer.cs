@@ -221,7 +221,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.avButtonAddCheck.TextSecondary = "";
 			this.avButtonAddCheck.ToolTipText = "Add";
 			this.avButtonAddCheck.Click += new System.EventHandler(this.AvButtonAddClick);
-			this.avButtonAddCheck.Enabled = !(userType == UsetType.ReadOnly);
+			this.avButtonAddCheck.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// avButtonEditCheck
 			// 
@@ -250,7 +250,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.avButtonEditCheck.TextSecondary = "";
 			this.avButtonEditCheck.ToolTipText = "Edit";
 			this.avButtonEditCheck.Click += new System.EventHandler(this.AvButtonEditClick);
-			this.avButtonEditCheck.Enabled = !(userType == UsetType.ReadOnly);
+			this.avButtonEditCheck.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// avButtonDeleteCheck
 			// 
@@ -279,7 +279,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.avButtonDeleteCheck.TextSecondary = "";
 			this.avButtonDeleteCheck.ToolTipText = "Delete";
 			this.avButtonDeleteCheck.Click += new System.EventHandler(this.AvButtonDeleteClick);
-			this.avButtonDeleteCheck.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.avButtonDeleteCheck.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// columnHeaderTitle
 			// 
@@ -343,7 +343,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.avButtonAddJobCard.TextSecondary = "";
 			this.avButtonAddJobCard.ToolTipText = "Add Item";
 			this.avButtonAddJobCard.Click += new System.EventHandler(this.AvButtonAddJobCardClick);
-			this.avButtonAddJobCard.Enabled = !(userType == UsetType.ReadOnly);
+			this.avButtonAddJobCard.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// avButtonViewJobCard
 			// 
@@ -400,7 +400,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.avButtonEditJobCard.TextSecondary = "";
 			this.avButtonEditJobCard.ToolTipText = "Edit Item";
 			this.avButtonEditJobCard.Click += new System.EventHandler(this.AvButtonEditJobCardClick);
-			this.avButtonEditJobCard.Enabled = !(userType == UsetType.ReadOnly);
+			this.avButtonEditJobCard.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// delimiter1
 			// 
@@ -573,7 +573,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.buttonDelete.TextSecondary = "";
 			this.buttonDelete.ToolTipText = "Delete";
 			this.buttonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
-			this.buttonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			this.buttonDelete.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
 			// 
 			// MaintenanceGeneralDateControl
 			// 

@@ -26,10 +26,13 @@ namespace CAA.Entity.Models.DTO
 		[Column("Password"), MaxLength(100)]
 		public string Password { get; set; }
 
-        [Column("UserType")]
-        public UsetType UserType { get; set; }
+        [Column("CAAUserType")]
+		public CAAUserType CAAUserType { get; set; }
 
 		[NotMapped]
+		public UserType UserType { get; set; }
+
+        [NotMapped]
         public UiType UiType { get; set; }
         [NotMapped]
 		public int PersonnelId { get; set; }

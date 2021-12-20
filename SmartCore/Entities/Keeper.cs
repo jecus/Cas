@@ -65,7 +65,7 @@ namespace SmartCore.Entities
 		/// <param name="saveAttachedFile">Сохранять прикрепленные файлы</param>
 		public void Save(BaseEntityObject obj, bool saveAttachedFile = true)
         {
-			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+			if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly)
 				return;
 
 	        obj.CorrectorId = _casEnvironment.IdentityUser.ItemId;
@@ -104,7 +104,7 @@ namespace SmartCore.Entities
         /// <param name="saveForsed">Сохранять свойства, помеченные как "принудительные"</param>
         public void SaveAll(BaseEntityObject obj, bool saveChild = false, bool saveForsed = false)
         {
-	        if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+	        if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly)
 		        return;
 
 			SaveAllInternal(obj, saveChild, saveForsed);
@@ -159,7 +159,7 @@ namespace SmartCore.Entities
 		/// <param name="saveAttachedFile"></param>
 		public void Delete(BaseEntityObject obj, bool isDeletedOnly = false, bool saveAttachedFile = true)
         {
-	        if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly || _casEnvironment.IdentityUser.UserType == UsetType.SaveOnly)
+	        if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly || _casEnvironment.IdentityUser.UserType == UserType.SaveOnly)
 		        return;
 
 			if (obj.ItemId <= 0) return;
@@ -224,7 +224,7 @@ namespace SmartCore.Entities
 
 		public void MarkAsDeleted<T>(ICommonFilter[] filters) where T : BaseEntityObject
 	    {
-		    if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly || _casEnvironment.IdentityUser.UserType == UsetType.SaveOnly)
+		    if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly || _casEnvironment.IdentityUser.UserType == UserType.SaveOnly)
 			    return;
 
 			var query = BaseQueries.GetMarkAsDeletedQuery<T>(filters);

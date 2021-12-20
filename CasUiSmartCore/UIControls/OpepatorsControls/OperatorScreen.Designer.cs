@@ -89,7 +89,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             _buttonDeleteOperator.TextMain = "Delete";
             _buttonDeleteOperator.TextSecondary = "operator";
             _buttonDeleteOperator.DisplayerRequested += buttonDeleteOperator_DisplayerRequested;
-            _buttonDeleteOperator.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly || userType == UsetType.SaveOnly);
+            _buttonDeleteOperator.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly || userType == UserType.SaveOnly);
 			// 
 			// NonRoutineJobsListScreen
 			// 

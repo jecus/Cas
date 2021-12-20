@@ -28,10 +28,12 @@ namespace CAS.Entity.Models.DTO.General
 
 		
 		[Column("UserType")]
-		public UsetType UserType { get; set; }
+		public UserType UserType { get; set; }
 
-		
-		[Column("UiType")]
+		[NotMapped]
+        public CAAUserType CAAUserType { get; set; }
+
+        [Column("UiType")]
 		public UiType UiType { get; set; }
 
 		[Column("PersonnelId")]
