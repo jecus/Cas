@@ -2,6 +2,7 @@
 using System.Data;
 using CAS.Entity.Models.DTO.Dictionaries;
 using CAS.Entity.Models.DTO.General;
+using Entity.Abstractions.DTO.General;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 

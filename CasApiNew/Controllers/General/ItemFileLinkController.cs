@@ -1,5 +1,6 @@
 ﻿using CAS.Entity.Core;
 using CAS.Entity.Models.DTO.General;
+using Entity.Abstractions.DTO.General;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

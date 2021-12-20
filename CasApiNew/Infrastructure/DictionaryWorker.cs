@@ -7,6 +7,7 @@ using CAS.Entity.Core;
 using CAS.Entity.Core.Repository;
 using CAS.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.Dictionaries;
+using Entity.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CAS.API.Infrastructure

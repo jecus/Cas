@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CAS.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
+using Entity.Abstractions;
 
 namespace CAS.API.Infrastructure
 {

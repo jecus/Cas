@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 using CAS.UI.ExcelExport;
+using CAS.UI.Interfaces;
+using CAS.UI.UICAAControls.Users;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.Users;
 using CASTerms;
 using SmartCore.Entities.General;
 
@@ -100,6 +103,12 @@ namespace CAS.UI.UICAAControls
 		#endregion
 
 
+
+        private void Users_Click(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = "Users";
+            e.RequestedEntity = new CAAUserListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+        }
 
 
 		#endregion

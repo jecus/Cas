@@ -34,7 +34,7 @@ namespace CAA.Entity.Models.DTO
 
         [NotMapped]
         public UiType UiType { get; set; }
-        [NotMapped]
+        [Column("PersonnelId")]
 		public int PersonnelId { get; set; }
 
 

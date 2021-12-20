@@ -1,4 +1,4 @@
-﻿namespace CAS.Entity.Models.DTO
+﻿namespace Entity.Abstractions
 {
 	public interface IBaseDictionary
 	{

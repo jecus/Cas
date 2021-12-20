@@ -1,5 +1,7 @@
-﻿using CAA.Entity.Models.DTO;
+﻿
+using CAA.Entity.Models.DTO;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace CAA.Entity.Core
 {
@@ -10,11 +12,22 @@ namespace CAA.Entity.Core
 			
 		}
 
-        #region dbo
+		#region dbo
 
-        public DbSet<CAAUserDTO> UserDtos { get; set; }
+		public DbSet<CAAAttachedFileDTO> AttachedFileDtos { get; set; }
+        public DbSet<CAAItemFileLinkDTO> ItemFileLinkDtos { get; set; }
+		public DbSet<CAAUserDTO> UserDtos { get; set; }
         public DbSet<CAAOperatorDTO> OperatorDtos { get; set; }
 
-        #endregion
-    }
+		#endregion
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CAAItemFileLinkDTO>()
+                .HasOne(i => i.File)
+                .WithMany(i => i.ItemFileLinkDto)
+                .HasForeignKey(i => i.FileId);
+		}
+
+	}
 }

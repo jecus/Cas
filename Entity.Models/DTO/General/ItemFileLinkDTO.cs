@@ -2,33 +2,32 @@
 using CAS.Entity.Models.DTO.Dictionaries;
 using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
+using Entity.Abstractions.DTO.General;
 using Newtonsoft.Json;
 
 namespace CAS.Entity.Models.DTO.General
 {
 	[Table("ItemsFilesLinks", Schema = "dbo")]
-	
-	public class ItemFileLinkDTO : BaseEntity
+    public class ItemFileLinkDTO : BaseEntity, IItemFileLinkDTO
 	{
-		
-		[Column("ParentId")]
-		public int? ParentId { get; set; }
+        [Column("ParentId")]
+        public int? ParentId { get; set; }
 
-		
-		[Column("ParentTypeId")]
-		public int ParentTypeId { get; set; }
 
-		
-		[Column("LinkType")]
-		public short LinkType { get; set; }
+        [Column("ParentTypeId")]
+        public int ParentTypeId { get; set; }
 
-		
-		[Column("FileId")]
-		public int? FileId { get; set; }
 
-		
-		[Child]
-		public AttachedFileDTO File { get; set; }
+        [Column("LinkType")]
+        public short LinkType { get; set; }
+
+
+        [Column("FileId")]
+        public int? FileId { get; set; }
+
+
+        [Child]
+        public AttachedFileDTO File { get; set; }
 
 
 		#region Navigation Property
