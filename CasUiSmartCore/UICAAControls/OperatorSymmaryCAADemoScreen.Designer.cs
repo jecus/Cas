@@ -364,7 +364,8 @@ namespace CAS.UI.UICAAControls
 			this.Operator.Text = "Add Operator";
 			this.Operator.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.Operator.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-            // 
+            this.Operator.DisplayerRequested += Operator_Click;
+			// 
 			// Users
 			// 
 			this.Users.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -1646,9 +1647,9 @@ namespace CAS.UI.UICAAControls
 
 		}
 
-		#endregion
+        #endregion
 
-		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelReferences;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelReferences;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelAircrafts;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelStores;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelExport;

@@ -823,6 +823,12 @@
     <Compile Include="UICAAControls\OperatorSymmaryCAADemoScreen.Designer.cs">
       <DependentUpon>OperatorSymmaryCAADemoScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\Operators\AddOperatorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Operators\AddOperatorForm.Designer.cs">
+      <DependentUpon>AddOperatorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\Users\CAAUserListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4029,6 +4035,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\OperatorSymmaryCAADemoScreen.resx">
       <DependentUpon>OperatorSymmaryCAADemoScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\Operators\AddOperatorForm.resx">
+      <DependentUpon>AddOperatorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Users\CAAUserListScreen.resx">
       <DependentUpon>CAAUserListScreen.cs</DependentUpon>

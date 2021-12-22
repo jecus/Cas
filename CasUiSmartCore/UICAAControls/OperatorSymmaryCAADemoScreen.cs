@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.Activity;
+using CAS.UI.UICAAControls.Operators;
 using CAS.UI.UICAAControls.Users;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
@@ -11,6 +12,7 @@ using CAS.UI.UIControls.PersonnelControls;
 using CAS.UI.UIControls.Reliability;
 using CAS.UI.UIControls.Users;
 using CASTerms;
+using SmartCore.CAA;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 
@@ -150,7 +152,15 @@ namespace CAS.UI.UICAAControls
             e.RequestedEntity = new SpecializationsListScreen(_currentOperator);
         }
 
-        #endregion
+		#endregion
+
+
+		private void Operator_Click(object sender, ReferenceEventArgs e)
+        {
+            var form = new AddOperatorFrom(new CaaOpearatorDto());
+            form.ShowDialog();
+            e.Cancel = true;
+		}
 
 
 		#endregion
