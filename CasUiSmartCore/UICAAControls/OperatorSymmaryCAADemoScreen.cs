@@ -157,7 +157,7 @@ namespace CAS.UI.UICAAControls
 
 		private void Operator_Click(object sender, ReferenceEventArgs e)
         {
-            var form = new AddOperatorFrom(new CaaOpearatorDto());
+            var form = new AddOperatorFrom(new AllOperators());
             form.ShowDialog();
             e.Cancel = true;
 		}

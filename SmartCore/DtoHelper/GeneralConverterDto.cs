@@ -24,7 +24,9 @@ using SmartCore.Relation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
+using SmartCore.CAA;
 using SmartCore.Entities.General.Setting;
 
 namespace SmartCore.DtoHelper
@@ -5818,5 +5820,86 @@ namespace SmartCore.DtoHelper
 				OperatorId = workStation.OperatorId
 			};
 		}
+
+
+
+
+        public static AllOperatorsDTO ConvertCAA(this AllOperators oper)
+        {
+            return new AllOperatorsDTO
+			{
+                ItemId = oper.ItemId,
+                IsDeleted = oper.IsDeleted,
+                Updated = oper.Updated,
+                CorrectorId = oper.CorrectorId,
+                FullName = oper.FullName,
+                ShortName = oper.ShortName,
+                ICAOCode = oper.ICAOCode,
+                Address = oper.Address,
+                Phone = oper.Phone,
+                Fax = oper.Fax,
+                Web = operdto.Web,
+				Email = oper.Email,
+                LogoType = oper.LogoTypeImageByteView,
+				LogoTypeWhite = oper.LogoTypeWhite,
+				LogotypeReportLarge = oper.LogotypeReportLarge,
+                LogotypeReportVeryLarge = oper.LogotypeReportVeryLarge,
+				Settings = new AllOperatorSettings()
+                {
+                    IsCommertial = oper.IsCommertial,
+					IsAEMS = oper.IsAEMS,
+                    IsAerodromOperator = oper.IsAerodromOperator,
+                    IsAMO = oper.IsAMO,
+                    IsTraningOperation = oper.IsTraningOperation,
+                    IsFuel = oper.IsFuel,
+                    IsATC = oper.IsATC,
+                    TypeOperation = oper.TypeOperation,
+                    SpecialOperation = oper.SpecialOperation,
+                    Fleet = oper.Fleet,
+                    AemcPrivilages = oper.AemcPrivilages,
+                    Ratings = oper.Ratings,
+                    TraningOrgPrivilages = oper.TraningOrgPrivilages,
+                },
+			};
+        }
+
+        public static AllOperators ConvertCAA(this AllOperatorsDTO operdto)
+        {
+            return new AllOperators()
+            {
+                ItemId = operdto.ItemId,
+                IsDeleted = operdto.IsDeleted,
+                Updated = operdto.Updated,
+                CorrectorId = operdto.CorrectorId,
+				FullName = operdto.FullName,
+                ShortName = operdto.ShortName,
+				ICAOCode = operdto.ICAOCode,
+                Address = operdto.Address,
+                Phone = operdto.Phone,
+                Fax = operdto.Fax,
+                Web = operdto.Web,
+                Email = operdto.Email,
+                LogoTypeImageByteView = operdto.LogoType,
+				LogoTypeWhite = operdto.LogoTypeWhite,
+                LogotypeReportLarge = operdto.LogotypeReportLarge,
+                LogotypeReportVeryLarge = operdto.LogotypeReportVeryLarge,
+                IsCommertial = operdto.Settings.IsCommertial,
+                IsAEMS = operdto.Settings.IsAEMS,
+                IsAerodromOperator = operdto.Settings.IsAerodromOperator,
+                IsAMO = operdto.Settings.IsAMO,
+                IsTraningOperation = operdto.Settings.IsTraningOperation,
+                IsFuel = operdto.Settings.IsFuel,
+                IsATC = operdto.Settings.IsATC,
+                TypeOperation = operdto.Settings.TypeOperation,
+                SpecialOperation = operdto.Settings.SpecialOperation,
+                Fleet = operdto.Settings.Fleet,
+                AemcPrivilages = operdto.Settings.AemcPrivilages,
+                Ratings = operdto.Settings.Ratings,
+                TraningOrgPrivilages = operdto.Settings.TraningOrgPrivilages,
+
+			};
+        }
+
+
 	}
 }

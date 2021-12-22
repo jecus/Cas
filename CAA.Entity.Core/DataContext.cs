@@ -36,6 +36,7 @@ namespace CAA.Entity.Core
 
 		#region dbo
 
+		public DbSet<AllOperatorsDTO> AllOperatorsDtos { get; set; }
 		public DbSet<CAAAttachedFileDTO> AttachedFileDtos { get; set; }
         public DbSet<CAAItemFileLinkDTO> ItemFileLinkDtos { get; set; }
 		public DbSet<CAAUserDTO> UserDtos { get; set; }

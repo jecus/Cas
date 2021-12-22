@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using CAA.Entity.Models.DTO;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Attributes;
 using SmartCore.Management;
 
 namespace SmartCore.CAA
 {
-    public class CaaOpearatorDto : BaseEntityObject
+    [CAADto(typeof(AllOperatorsDTO))]
+    public class AllOperators : BaseEntityObject
     {
         public string FullName { get; set; }
         public string ShortName { get; set; }
@@ -146,7 +149,7 @@ namespace SmartCore.CAA
 
         public Byte[] LogoTypeImageByteView
         {
-            get { return _logoTypeImageByteView; }
+            get { return _logoTypeImageByteView ?? (_logoTypeImageByteView = new byte[0]); ; }
             set
             {
                 _logoTypeImageByteView = value;

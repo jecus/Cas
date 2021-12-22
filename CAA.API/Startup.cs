@@ -76,7 +76,7 @@ namespace CAA.API
                 o.DocExpansion(DocExpansion.None);
                 o.DefaultModelsExpandDepth(-1);//Disable schemas
                 o.RoutePrefix = "swagger";
-                o.SwaggerEndpoint("v1/swagger.json", "Cas API v1");
+                o.SwaggerEndpoint("v1/swagger.json", "Caa API v1");
             });
             Initialize(app);
         }

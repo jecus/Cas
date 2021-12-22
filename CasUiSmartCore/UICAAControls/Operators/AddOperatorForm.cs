@@ -15,7 +15,7 @@ namespace CAS.UI.UICAAControls.Operators
 {
     public partial class AddOperatorFrom :  MetroForm
     {
-        private readonly CaaOpearatorDto _operatoDto;
+        private readonly AllOperators _currentOperator;
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private bool _logotypeChanged;
         private bool _logotypeWhiteChanged;
@@ -30,9 +30,9 @@ namespace CAS.UI.UICAAControls.Operators
             InitializeComponent();
         }
         
-        public AddOperatorFrom(CaaOpearatorDto operatoDto) : this()
+        public AddOperatorFrom(AllOperators currentOperator) : this()
         {
-            _operatoDto = operatoDto;
+            _currentOperator = currentOperator;
             UpdateControls();
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
@@ -41,7 +41,7 @@ namespace CAS.UI.UICAAControls.Operators
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
-            if (_operatoDto == null) return;
+            if (_currentOperator == null) return;
         }
 
         private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -51,50 +51,50 @@ namespace CAS.UI.UICAAControls.Operators
 
         private void UpdateInformation()
         {
-            textBoxFullName.Text = _operatoDto.FullName;
-            metroTextBoxShortName.Text = _operatoDto.ShortName;
-            metroTextBoxAddress.Text = _operatoDto.Address;
-            metroTextBoxIcao.Text = _operatoDto.ICAOCode;
-            metroTextBoxPhone.Text = _operatoDto.Phone;
-            metroTextBoxFax.Text = _operatoDto.Fax;
-            metroTextBoxWeb.Text = _operatoDto.Web;
-            metroTextBoxEmail.Text = _operatoDto.Email;
+            textBoxFullName.Text = _currentOperator.FullName;
+            metroTextBoxShortName.Text = _currentOperator.ShortName;
+            metroTextBoxAddress.Text = _currentOperator.Address;
+            metroTextBoxIcao.Text = _currentOperator.ICAOCode;
+            metroTextBoxPhone.Text = _currentOperator.Phone;
+            metroTextBoxFax.Text = _currentOperator.Fax;
+            metroTextBoxWeb.Text = _currentOperator.Web;
+            metroTextBoxEmail.Text = _currentOperator.Email;
 
             for (int i = 0; i < checkedListBoxTypeOfOper.Items.Count; i++)
             {
-                if (_operatoDto.TypeOperation != null && _operatoDto.TypeOperation.Contains(checkedListBoxTypeOfOper.Items[i].ToString()))
+                if (_currentOperator.TypeOperation != null && _currentOperator.TypeOperation.Contains(checkedListBoxTypeOfOper.Items[i].ToString()))
                     checkedListBoxTypeOfOper.SetItemChecked(i, true);
             }
             for (int i = 0; i < checkedListBoxFleet.Items.Count; i++)
             {
-                if (_operatoDto.Fleet != null && _operatoDto.Fleet.Contains(checkedListBoxFleet.Items[i].ToString()))
+                if (_currentOperator.Fleet != null && _currentOperator.Fleet.Contains(checkedListBoxFleet.Items[i].ToString()))
                     checkedListBoxFleet.SetItemChecked(i, true);
             }
             for (int i = 0; i < checkedListBoxAemcPrivilages.Items.Count; i++)
             {
-                if (_operatoDto.AemcPrivilages != null && _operatoDto.AemcPrivilages.Contains(checkedListBoxAemcPrivilages.Items[i].ToString()))
+                if (_currentOperator.AemcPrivilages != null && _currentOperator.AemcPrivilages.Contains(checkedListBoxAemcPrivilages.Items[i].ToString()))
                     checkedListBoxAemcPrivilages.SetItemChecked(i, true);
             }
             for (int i = 0; i < checkedListBoxTraningOrgPrivilages.Items.Count; i++)
             {
-                if (_operatoDto.TraningOrgPrivilages != null && _operatoDto.TraningOrgPrivilages.Contains(checkedListBoxTraningOrgPrivilages.Items[i].ToString()))
+                if (_currentOperator.TraningOrgPrivilages != null && _currentOperator.TraningOrgPrivilages.Contains(checkedListBoxTraningOrgPrivilages.Items[i].ToString()))
                     checkedListBoxTraningOrgPrivilages.SetItemChecked(i, true);
             }
             for (int i = 0; i < checkedListBoxRatings.Items.Count; i++)
             {
-                if (_operatoDto.Ratings != null && _operatoDto.Ratings.Contains(checkedListBoxRatings.Items[i].ToString()))
+                if (_currentOperator.Ratings != null && _currentOperator.Ratings.Contains(checkedListBoxRatings.Items[i].ToString()))
                     checkedListBoxRatings.SetItemChecked(i, true);
             }
             for (int i = 0; i < checkedListBoxSpecialOp.Items.Count; i++)
             {
-                if (_operatoDto.SpecialOperation != null && _operatoDto.SpecialOperation.Contains(checkedListBoxSpecialOp.Items[i].ToString()))
+                if (_currentOperator.SpecialOperation != null && _currentOperator.SpecialOperation.Contains(checkedListBoxSpecialOp.Items[i].ToString()))
                     checkedListBoxSpecialOp.SetItemChecked(i, true);
             }
 
-            _pictureBoxTransparentLogotype.BackgroundImage = _operatoDto.LogoTypeImage;
-            _pictureBoxWhiteBackgroundLogotype.BackgroundImage = _operatoDto.LogoTypeWhiteImage;
-            pictureBoxReportLogoLarge.BackgroundImage = _operatoDto.LogotypeReportLargeImage;
-            pictureBoxReportLogoVeryLarge.BackgroundImage = _operatoDto.LogotypeReportVeryLargeImage;
+            _pictureBoxTransparentLogotype.BackgroundImage = _currentOperator.LogoTypeImage;
+            _pictureBoxWhiteBackgroundLogotype.BackgroundImage = _currentOperator.LogoTypeWhiteImage;
+            pictureBoxReportLogoLarge.BackgroundImage = _currentOperator.LogotypeReportLargeImage;
+            pictureBoxReportLogoVeryLarge.BackgroundImage = _currentOperator.LogotypeReportVeryLargeImage;
             _logotypeChanged = false;
             _logotypeWhiteChanged = false;
             _logotypeReportLargeChanged = false;
@@ -105,18 +105,60 @@ namespace CAS.UI.UICAAControls.Operators
             UpdateRemoveLbl(pictureBoxReportLogoLarge, _linkDeleteChengeReportLogoLarge);
             UpdateRemoveLbl(pictureBoxReportLogoVeryLarge, _linkDeleteReportLogoVeryLarge);
 
-            checkBoxATC.Checked = _operatoDto.IsATC;
-            checkBoxFuel.Checked = _operatoDto.IsFuel;
-            checkBoxTraningOrg.Checked = _operatoDto.IsTraningOperation;
-            checkBoxAmo.Checked = _operatoDto.IsAMO;
-            checkBoxAemc.Checked = _operatoDto.IsAEMS;
-            checkBoxAirdromeOp.Checked = _operatoDto.IsAerodromOperator;
-            if (_operatoDto.IsCommertial)
+            checkBoxATC.Checked = _currentOperator.IsATC;
+            checkBoxFuel.Checked = _currentOperator.IsFuel;
+            checkBoxTraningOrg.Checked = _currentOperator.IsTraningOperation;
+            checkBoxAmo.Checked = _currentOperator.IsAMO;
+            checkBoxAemc.Checked = _currentOperator.IsAEMS;
+            checkBoxAirdromeOp.Checked = _currentOperator.IsAerodromOperator;
+            if (_currentOperator.IsCommertial)
                 radioButtonComertial.Checked = true;
             else radioButtonNotCommertial.Checked = true;
         }
 
-        
+
+        private void ApplyChanges()
+        {
+            _currentOperator.FullName = textBoxFullName.Text;
+            _currentOperator.ShortName = metroTextBoxShortName.Text;
+            _currentOperator.Address = metroTextBoxAddress.Text;
+            _currentOperator.ICAOCode = metroTextBoxIcao.Text;
+            _currentOperator.Phone = metroTextBoxPhone.Text;
+            _currentOperator.Fax = metroTextBoxFax.Text;
+            _currentOperator.Web = metroTextBoxWeb.Text;
+            _currentOperator.Email = metroTextBoxEmail.Text;
+
+            _currentOperator.IsATC = checkBoxATC.Checked;
+            _currentOperator.IsFuel = checkBoxFuel.Checked;
+            _currentOperator.IsTraningOperation = checkBoxTraningOrg.Checked;
+            _currentOperator.IsAMO = checkBoxAmo.Checked;
+            _currentOperator.IsAEMS = checkBoxAemc.Checked;
+            _currentOperator.IsAerodromOperator = checkBoxAirdromeOp.Checked;
+
+            foreach (var item in checkedListBoxTypeOfOper.CheckedItems)
+                _currentOperator.TypeOperation += $"{item} ";
+            foreach (var item in checkedListBoxFleet.CheckedItems)
+                _currentOperator.Fleet += $"{item} ";
+            foreach (var item in checkedListBoxAemcPrivilages.CheckedItems)
+                _currentOperator.AemcPrivilages += $"{item} ";
+            foreach (var item in checkedListBoxTraningOrgPrivilages.CheckedItems)
+                _currentOperator.TraningOrgPrivilages += $"{item} ";
+            foreach (var item in checkedListBoxRatings.CheckedItems)
+                _currentOperator.Ratings += $"{item} ";
+            foreach (var item in checkedListBoxSpecialOp.CheckedItems)
+                _currentOperator.SpecialOperation += $"{item} ";
+
+
+            if (_logotypeChanged)
+                _currentOperator.LogoTypeImage = _pictureBoxTransparentLogotype.BackgroundImage;
+            if (_logotypeWhiteChanged)
+                _currentOperator.LogoTypeWhiteImage = _pictureBoxWhiteBackgroundLogotype.BackgroundImage;
+            if (_logotypeReportLargeChanged)
+                _currentOperator.LogotypeReportLargeImage = pictureBoxReportLogoLarge.BackgroundImage;
+            if (_logotypeReportVeryLargeChanged)
+                _currentOperator.LogotypeReportVeryLargeImage = pictureBoxReportLogoVeryLarge.BackgroundImage;
+        }
+
         private void UpdateControls()
         {
             checkedListBoxTypeOfOper.Items.Clear();
@@ -315,7 +357,7 @@ namespace CAS.UI.UICAAControls.Operators
             {
                 ApplyChanges();
 
-                GlobalObjects.CaaEnvironment.NewKeeper.Save(_operatoDto, true);
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentOperator, true, isCaa:true);
                 DialogResult = DialogResult.OK;
                 Close();
             }
@@ -323,11 +365,6 @@ namespace CAS.UI.UICAAControls.Operators
             {
                 Program.Provider.Logger.Log("Error while save document", ex);
             }
-        }
-
-        private void ApplyChanges()
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
