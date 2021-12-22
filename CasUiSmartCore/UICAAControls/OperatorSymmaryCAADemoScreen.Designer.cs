@@ -218,7 +218,8 @@ namespace CAS.UI.UICAAControls
 			this._adminContainer.Size = new System.Drawing.Size(105, 42);
 			this._adminContainer.TabIndex = 1;
 			this._adminContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
-            // 
+            this._adminContainer.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UserType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin;
+			// 
 			// _settingContainer
 			// 
 			this._settingContainer.AutoSize = true;

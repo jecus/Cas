@@ -75,9 +75,9 @@
 			this.extendableRichContainer.Location = new System.Drawing.Point(4, 4);
 			this.extendableRichContainer.MainControl = null;
 			this.extendableRichContainer.Margin = new System.Windows.Forms.Padding(4);
-			this.extendableRichContainer.MaximumSize = new System.Drawing.Size(200, 34);
+			this.extendableRichContainer.MaximumSize = new System.Drawing.Size(350, 34);
 			this.extendableRichContainer.Name = "extendableRichContainer";
-			this.extendableRichContainer.Size = new System.Drawing.Size(143, 34);
+			this.extendableRichContainer.Size = new System.Drawing.Size(350, 34);
 			this.extendableRichContainer.TabIndex = 0;
 			this.extendableRichContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
 			this.extendableRichContainer.Extending += new System.EventHandler(this.ExtendableRichContainerExtending);
