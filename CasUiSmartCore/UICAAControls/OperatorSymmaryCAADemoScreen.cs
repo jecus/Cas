@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
+using CAA.Entity.Models.DTO;
 using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.Activity;
@@ -9,10 +11,9 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.CAA;
 using CAS.UI.UIControls.PersonnelControls;
-using CAS.UI.UIControls.Reliability;
-using CAS.UI.UIControls.Users;
 using CASTerms;
 using SmartCore.CAA;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 
@@ -56,8 +57,12 @@ namespace CAS.UI.UICAAControls
 			aircraftHeaderControl1.Operator = currentOperator;
 			_currentOperator = currentOperator;
 			statusControl.ShowStatus = false;
-            UpdateInformation();
-		}
+
+            _worker = new AnimatedThreadWorker();
+            _worker.DoWork += Worker_DoWork;
+            _worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+			_worker.RunWorkerAsync();
+        }
 
 		#endregion
 
@@ -73,41 +78,27 @@ namespace CAS.UI.UICAAControls
 		{
 			_operatorInfoReference.CurrentOperator = _currentOperator;
         }
-#endregion
-
-
-
-		#region public bool GetChangeStatus()
-
-		/// <summary>
-		/// Возвращает значение, показывающее были ли изменения в данном элементе управления
-		/// </summary>
-		/// <returns></returns>
-		public bool GetChangeStatus()
-		{
-			// Проверяем, изменены ли поля WestAircraft
-			return false;
-		}
-
-		#endregion
+        #endregion
 
 		#region private void HeaderControl1ReloadRised(object sender, EventArgs e)
 
 		private void HeaderControl1ReloadRised(object sender, EventArgs e)
 		{
-			if (GetChangeStatus())
-			{
-				if (MessageBox.Show("All unsaved data will be lost. Are you sure you want to continue?",
-									(string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.YesNo,
-									MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
-				{
-					return;
-				}
-			}
+            _worker.RunWorkerAsync();
+        }
 
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            var operators = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<AllOperatorsDTO, AllOperators>();
+            _operators.OperatorCollection = new CommonCollection<AllOperators>(operators);
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
 			UpdateInformation();
 		}
-		#endregion
+
+        #endregion
 
 
 

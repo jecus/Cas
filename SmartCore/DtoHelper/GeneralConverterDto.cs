@@ -5838,7 +5838,7 @@ namespace SmartCore.DtoHelper
                 Address = oper.Address,
                 Phone = oper.Phone,
                 Fax = oper.Fax,
-                Web = operdto.Web,
+                Web = oper.Web,
 				Email = oper.Email,
                 LogoType = oper.LogoTypeImageByteView,
 				LogoTypeWhite = oper.LogoTypeWhite,
