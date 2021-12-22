@@ -779,7 +779,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			if (_settings != null)
 			{
 				comboBoxServerName.Items.Clear();
-				comboBoxServerName.Items.AddRange(_settings.ConnectionStrings.Select(i => i.Key).ToArray());
+				comboBoxServerName.Items.AddRange(_settings.ConnectionStrings.Select(i => i.Key).OrderBy(i => i).ToArray());
 
 				if (_settings.LastInformation != null)
 				{

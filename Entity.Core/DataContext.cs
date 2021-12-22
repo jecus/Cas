@@ -5,6 +5,7 @@ using CAS.Entity.Models.DTO.General;
 using Entity.Abstractions.DTO.General;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace CAS.Entity.Core
 {
@@ -189,6 +190,12 @@ namespace CAS.Entity.Core
 		{
 			return GenerateKeys(1).Dequeue();
 		}
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.ConfigureWarnings(i => i.Ignore(CoreEventId.RowLimitingOperationWithoutOrderByWarning));
+        }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

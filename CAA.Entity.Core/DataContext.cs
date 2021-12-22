@@ -2,6 +2,7 @@
 using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 
 namespace CAA.Entity.Core
@@ -59,6 +60,12 @@ namespace CAA.Entity.Core
         public DbSet<CAASupplierDTO> SupplierDtos { get; set; }
 
         #endregion
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.ConfigureWarnings(i => i.Ignore(CoreEventId.RowLimitingOperationWithoutOrderByWarning));
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
