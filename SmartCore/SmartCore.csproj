@@ -404,6 +404,7 @@
     <Compile Include="CAA\Operators\Ratings.cs" />
     <Compile Include="CAA\Operators\Privileges.cs" />
     <Compile Include="CAA\Operators\Fleet.cs" />
+    <Compile Include="CAA\Operators\SpecialOperations.cs" />
     <Compile Include="CAA\Operators\TypesOfOperations.cs" />
     <Compile Include="Calculations\AirFleetForecast.cs" />
     <Compile Include="Analyst\AnalystCore.cs" />

@@ -85,6 +85,11 @@ namespace CAS.UI.UICAAControls.Operators
                 if (_operatoDto.Ratings != null && _operatoDto.Ratings.Contains(checkedListBoxRatings.Items[i].ToString()))
                     checkedListBoxRatings.SetItemChecked(i, true);
             }
+            for (int i = 0; i < checkedListBoxSpecialOp.Items.Count; i++)
+            {
+                if (_operatoDto.SpecialOperation != null && _operatoDto.SpecialOperation.Contains(checkedListBoxSpecialOp.Items[i].ToString()))
+                    checkedListBoxSpecialOp.SetItemChecked(i, true);
+            }
 
             _pictureBoxTransparentLogotype.BackgroundImage = _operatoDto.LogoTypeImage;
             _pictureBoxWhiteBackgroundLogotype.BackgroundImage = _operatoDto.LogoTypeWhiteImage;
@@ -99,6 +104,16 @@ namespace CAS.UI.UICAAControls.Operators
             UpdateRemoveLbl(_pictureBoxWhiteBackgroundLogotype, _linkDeleteWhiteBackgroundLogotype);
             UpdateRemoveLbl(pictureBoxReportLogoLarge, _linkDeleteChengeReportLogoLarge);
             UpdateRemoveLbl(pictureBoxReportLogoVeryLarge, _linkDeleteReportLogoVeryLarge);
+
+            checkBoxATC.Checked = _operatoDto.IsATC;
+            checkBoxFuel.Checked = _operatoDto.IsFuel;
+            checkBoxTraningOrg.Checked = _operatoDto.IsTraningOperation;
+            checkBoxAmo.Checked = _operatoDto.IsAMO;
+            checkBoxAemc.Checked = _operatoDto.IsAEMS;
+            checkBoxAirdromeOp.Checked = _operatoDto.IsAerodromOperator;
+            if (_operatoDto.IsCommertial)
+                radioButtonComertial.Checked = true;
+            else radioButtonNotCommertial.Checked = true;
         }
 
         
@@ -114,6 +129,13 @@ namespace CAS.UI.UICAAControls.Operators
             checkedListBoxTraningOrgPrivilages.Items.AddRange(Privileges.Items.ToArray());
             checkedListBoxRatings.Items.Clear();
             checkedListBoxRatings.Items.AddRange(Ratings.Items.ToArray());
+            checkedListBoxSpecialOp.Items.Clear();
+            checkedListBoxSpecialOp.Items.AddRange(SpecialOperations.Items.ToArray());
+
+
+            checkedListBoxAemcPrivilages.Enabled = checkBoxAemc.Checked;
+            checkedListBoxRatings.Enabled = checkBoxAmo.Checked;
+            checkedListBoxTraningOrgPrivilages.Enabled = checkBoxTraningOrg.Checked;
         }
 
         private void checkBoxAemc_CheckedChanged(object sender, System.EventArgs e)
@@ -285,6 +307,8 @@ namespace CAS.UI.UICAAControls.Operators
 
         #endregion
 
+        #region private void buttonOk_Click(object sender, EventArgs e)
+
         private void buttonOk_Click(object sender, EventArgs e)
         {
             try
@@ -301,10 +325,22 @@ namespace CAS.UI.UICAAControls.Operators
             }
         }
 
+        private void ApplyChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region private void buttonCancel_Click(object sender, EventArgs e)
+
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
+
+        #endregion
+
     }
 }
