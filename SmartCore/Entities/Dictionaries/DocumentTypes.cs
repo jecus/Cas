@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Attributes;
@@ -252,6 +253,7 @@ namespace SmartCore.Entities.Dictionaries
 
 	[Table("DocumentSubType", "Dictionaries", "ItemId")]
 	[Dto(typeof(DocumentSubTypeDTO))]
+	[CAADto(typeof(CAADocumentSubTypeDTO))]
 	[DictionaryCollection(typeof(DocumentSubTypeCollection))]
 	[Serializable]
 	public class DocumentSubType : AbstractDictionary

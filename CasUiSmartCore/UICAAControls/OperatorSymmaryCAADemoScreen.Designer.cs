@@ -57,8 +57,7 @@ namespace CAS.UI.UICAAControls
 			this._personnelReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
             this.LinkPersonnel = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkGeneral = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
-			this.LinkOccurences = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
-			this.LinkEvent = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            this.LinkEvent = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkSystem = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkComponents = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkEngines = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -537,6 +536,7 @@ namespace CAS.UI.UICAAControls
 			this.LinkNomenclatures.Text = "Nomenclatures";
 			this.LinkNomenclatures.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkNomenclatures.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkNomenclatures.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkNomenclaturesDisplayerRequested);
 
 			// 
 			// LinkAircraftStatus
@@ -737,29 +737,6 @@ namespace CAS.UI.UICAAControls
 			this.LinkEvent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkEvent.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             // 
-			// LinkOccurences
-			// 
-			this.LinkOccurences.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.LinkOccurences.Displayer = null;
-			this.LinkOccurences.DisplayerText = null;
-			this.LinkOccurences.Entity = null;
-			this.LinkOccurences.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.LinkOccurences.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.LinkOccurences.ImageBackColor = System.Drawing.Color.Transparent;
-			this.LinkOccurences.ImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.LinkOccurences.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.LinkOccurences.LinkMouseCapturedColor = System.Drawing.Color.Empty;
-			this.LinkOccurences.Location = new System.Drawing.Point(10, 0);
-			this.LinkOccurences.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.LinkOccurences.Name = "LinkOccurences";
-			this.LinkOccurences.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.LinkOccurences.Size = new System.Drawing.Size(280, 20);
-			this.LinkOccurences.Status = AvControls.Statuses.Satisfactory;
-			this.LinkOccurences.TabIndex = 6;
-			this.LinkOccurences.Text = "Occurrences and Interruptions";
-			this.LinkOccurences.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.LinkOccurences.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-            // 
 			// LinkSystem
 			// 
 			this.LinkSystem.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -945,7 +922,8 @@ namespace CAS.UI.UICAAControls
 			this.LinkSpecializations.Text = "Occupations";
 			this.LinkSpecializations.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkSpecializations.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-            // 
+            this.LinkSpecializations.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkSpecializationsDisplayerRequested);
+			// 
 			// LinkDepartments
 			// 
 			this.LinkDepartments.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -968,7 +946,8 @@ namespace CAS.UI.UICAAControls
 			this.LinkDepartments.Text = "Departments";
 			this.LinkDepartments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkDepartments.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-            // 
+            this.LinkDepartments.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkDepartmentsDisplayerRequested);
+			// 
 			// _qualityAssuranceReferenceContainer
 			// 
 			this._qualityAssuranceReferenceContainer.AutoSize = true;
@@ -1725,8 +1704,7 @@ namespace CAS.UI.UICAAControls
 
 
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkGeneral;
-		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkOccurences;
-		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEvent;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEvent;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkSystem;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkComponents;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEngines;

@@ -20,7 +20,24 @@ namespace SmartCore.Entities.General.Attributes
 		}
 	}
 
-	#endregion
+
+    [AttributeUsage(AttributeTargets.Class)]
+    public class CAADtoAttribute : Attribute
+    {
+        private readonly Type _type;
+
+        public Type Type
+        {
+            get { return _type; }
+        }
+
+        public CAADtoAttribute(Type type)
+        {
+            _type = type;
+        }
+    }
+
+    #endregion
 
     #region public class SubQueryAttribute : Attribute
     /// <summary>

@@ -101,7 +101,7 @@ namespace SmartCore.Entities.NewLoader
 			if (dto == null)
 				return null;
 
-			var methodName = GetConverterMethodName(typeof(TOut));
+			var methodName = GetConverterMethodName(typeof(TOut), typeof(T));
 			var method = GetMethod(typeof(T), methodName);
 
 			return InvokeConverter<T,TOut>(dto, method);
@@ -120,7 +120,7 @@ namespace SmartCore.Entities.NewLoader
 			if (dto == null)
 				return null;
 
-			var methodName = GetConverterMethodName(typeof(TOut));
+			var methodName = GetConverterMethodName(typeof(TOut), typeof(T));
 			var method = GetMethod(typeof(T), methodName);
 			return InvokeConverter<T, TOut>(dto, method);
 		}
@@ -144,7 +144,7 @@ namespace SmartCore.Entities.NewLoader
 			if (dtos == null)
 				return res;
 
-			var methodName = GetConverterMethodName(typeof(TOut));
+			var methodName = GetConverterMethodName(typeof(TOut), typeof(T));
 			var method = GetMethod(typeof(T), methodName);
 			res.AddRange(dtos.Select(i => InvokeConverter<T, TOut>(i, method)));
 
@@ -191,7 +191,7 @@ namespace SmartCore.Entities.NewLoader
 			if (dtos == null)
 				return res;
 
-			var methodName = GetConverterMethodName(typeof(TOut));
+			var methodName = GetConverterMethodName(typeof(TOut), typeof(T));
 			var method = GetMethod(typeof(T), methodName);
 			res.AddRange(dtos.Select(i => InvokeConverter<T, TOut>(i, method)));
 
@@ -210,9 +210,13 @@ namespace SmartCore.Entities.NewLoader
 
 		#region private string GetConverterMethodName(Type TOut)
 
-		private string GetConverterMethodName(Type TOut)
+		private string GetConverterMethodName(Type TOut, Type tIn)
 		{
 			var methodName = "Convert";
+            if (tIn.ToString().StartsWith("CAA"))
+                return methodName += "CAA";
+
+
 			if (TOut.Name.Equals("AircraftModel"))
 				methodName = "ConvertToAircraftModel";
 			else if (TOut.Name.Equals("ComponentModel"))

@@ -157,7 +157,7 @@ namespace CAS.UI.Helpers
 				["id"] = id.ToString(),
 				["loadChild"] = loadChild.ToString()
 			});
-			var res = _httpClient.GetJsonAsync<T>($"{typeof(T).Name.Replace("DTO", "").ToLower()}/getbyid?{param}");
+			var res = _httpClient.GetJsonAsync<T>($"{typeof(T).Name.Replace("DTO", "").Replace("CAA", "").ToLower()}/getbyid?{param}");
 			return res?.Data;
 		}
 
@@ -171,7 +171,7 @@ namespace CAS.UI.Helpers
 				["getDeleted"] = getDeleted.ToString(),
 				["getAll"] = getAll.ToString(),
 			});
-			var res = _httpClient.SendJsonAsync<IEnumerable<Filter>, T>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").ToLower()}/get?{param}", filters);
+			var res = _httpClient.SendJsonAsync<IEnumerable<Filter>, T>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").Replace("CAA", "").ToLower()}/get?{param}", filters);
 			return res?.Data;
 		}
 
@@ -184,7 +184,7 @@ namespace CAS.UI.Helpers
 				["loadChild"] = loadChild.ToString(),
 				["getDeleted"] = getDeleted.ToString(),
 			});
-			var res = _httpClient.SendJsonAsync<IEnumerable<Filter>, List<T>>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").ToLower()}/getlist?{param}", filters);
+			var res = _httpClient.SendJsonAsync<IEnumerable<Filter>, List<T>>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").Replace("CAA", "").ToLower()}/getlist?{param}", filters);
 			return res?.Data;
 		}
 
@@ -197,18 +197,18 @@ namespace CAS.UI.Helpers
 				["loadChild"] = loadChild.ToString(),
 				["getDeleted"] = getDeleted.ToString(),
 			});
-			var res = _httpClient.SendJsonAsync<IEnumerable<Filter>, List<T>>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").ToLower()}/getlistall?{param}", filters);
+			var res = _httpClient.SendJsonAsync<IEnumerable<Filter>, List<T>>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").Replace("CAA", "").ToLower()}/getlistall?{param}", filters);
 			return res?.Data;
 		}
 
 		public void Delete<T>(T entity) where T : BaseEntity
 		{
-			_httpClient.SendJsonAsync<T>(HttpMethod.Post, $"{ typeof(T).Name.Replace("DTO", "").ToLower()}/delete", entity);
+			_httpClient.SendJsonAsync<T>(HttpMethod.Post, $"{ typeof(T).Name.Replace("DTO", "").Replace("CAA", "").ToLower()}/delete", entity);
 		}
 
 		public int Save<T>(T value, bool saveAttachedFile = true, bool writeAudit = true) where T : BaseEntity
 		{
-			var res = _httpClient.SendJsonAsync<T, int>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").ToLower()}/save", value);
+			var res = _httpClient.SendJsonAsync<T, int>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").Replace("CAA", "").ToLower()}/save", value);
 			return res?.Data ?? -1;
 		}
 
@@ -220,7 +220,7 @@ namespace CAS.UI.Helpers
 			for (int i = 0; i < entity.Count(); i = i + batchSize.Value)
 			{
 				var bulk = entity.Skip(i).Take(batchSize.Value).Select(q => q); //Не красиво но не хочу дублироваьб метод можно пока так
-				_httpClient.SendJsonAsync<IEnumerable<T>>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkdelete", bulk);
+				_httpClient.SendJsonAsync<IEnumerable<T>>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").Replace("CAA", "").ToLower()}/bulkdelete", bulk);
 			}
 		}
 
@@ -233,7 +233,7 @@ namespace CAS.UI.Helpers
 			{
 				var bulk = entity.Skip(i).Take(batchSize.Value).Select(q => q); //Не красиво но не хочу дублироваьб метод можно пока так
 				_httpClient.SendJsonAsync<IEnumerable<T>>(HttpMethod.Post,
-					$"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkupdate", bulk);
+					$"{typeof(T).Name.Replace("DTO", "").Replace("CAA", "").ToLower()}/bulkupdate", bulk);
 			}
 
 			
@@ -250,7 +250,7 @@ namespace CAS.UI.Helpers
 				var bulk = entity.Skip(i).Take(batchSize.Value)
 					.Select(q => q); //Не красиво но не хочу дублироваьб метод можно пока так
 				var r = _httpClient.SendJsonAsync<IEnumerable<T>, Dictionary<string, int>>(HttpMethod.Post,
-					$"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkinsert", bulk);
+					$"{typeof(T).Name.Replace("DTO", "").Replace("CAA", "").ToLower()}/bulkinsert", bulk);
 
 				foreach (var inserted in r.Data)
 					res.Add(inserted.Key, inserted.Value);

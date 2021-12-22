@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
@@ -7,6 +8,7 @@ namespace SmartCore.Entities.Dictionaries
 {
 	[Table("LocationsType", "Dictionaries", "ItemId")]
 	[Dto(typeof(LocationsTypeDTO))]
+	[CAADto(typeof(CAALocationsTypeDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class LocationsType : AbstractDictionary

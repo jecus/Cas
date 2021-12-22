@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 
@@ -7,6 +8,7 @@ namespace SmartCore.Entities.Dictionaries
 {
 	[Table("Departments", "Dictionaries", "ItemId")]
 	[Dto(typeof(DepartmentDTO))]
+	[CAADto(typeof(CAADepartmentDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class Department : AbstractDictionary

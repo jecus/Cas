@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
@@ -7,6 +8,7 @@ namespace SmartCore.Entities.Dictionaries
 {
 	[Table("LicenseRemarkRights", "Dictionaries", "ItemId")]
 	[Dto(typeof(LicenseRemarkRightDTO))]
+	[CAADto(typeof(CAALicenseRemarkRightDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class LicenseRemarkRights : AbstractDictionary

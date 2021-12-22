@@ -841,6 +841,12 @@
     <Compile Include="UICAAControls\Users\CAAUserForm.Designer.cs">
       <DependentUpon>CAAUserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\Auxiliary\CAA\CAACommonListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\CAA\CAACommonListScreen.Designer.cs">
+      <DependentUpon>CAACommonListScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\MaintananceProgram\MaintenanceDirectiveBindMPDForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4031,6 +4037,10 @@
     <EmbeddedResource Include="UICAAControls\Users\CAAUserForm.resx">
       <DependentUpon>CAAUserForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Auxiliary\CAA\CAACommonListScreen.resx">
+      <DependentUpon>CAACommonListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\MaintananceProgram\MaintenanceDirectiveBindMPDForm.resx">
       <DependentUpon>MaintenanceDirectiveBindMPDForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -5635,6 +5645,10 @@
     <ProjectReference Include="..\AvControls\AvControls.csproj">
       <Project>{2212b211-134f-4d16-974a-73ab657ea5f8}</Project>
       <Name>AvControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CAA.Entity.Models\CAA.Entity.Models.csproj">
+      <Project>{3F85BD51-A949-4BA4-A629-9F1BB5D4B924}</Project>
+      <Name>CAA.Entity.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\CasNetworkObserver\CasNetworkObserver.csproj">
       <Project>{D85F5EEF-016D-49B4-AB24-17C153EF42DC}</Project>

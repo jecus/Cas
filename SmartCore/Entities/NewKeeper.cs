@@ -47,7 +47,7 @@ namespace SmartCore.Entities
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var method = GetMethod(typeof(T), "Convert");
+			var method = GetMethod(typeof(T),typeof(TOut), "Convert");
 			var res = InvokeConverter<T, TOut>(value, method);
 			var newId = _apiProvider.Save(res);
 
@@ -59,7 +59,7 @@ namespace SmartCore.Entities
 			if (value is IFileDTOContainer && saveAttachedFile)
 				SaveAttachedFileDTO(value as IFileDTOContainer);
 		}
-		public void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true)
+		public void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true, bool isCaa = false)
 		{
 			if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly)
 				return;
@@ -72,8 +72,20 @@ namespace SmartCore.Entities
 				type = AuditOperation.Changed;
 				
 			var blType = value.GetType();
-			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
-			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "SaveGeneric")?.MakeGenericMethod(blType, dto.Type);
+
+            MethodInfo method;
+            if (isCaa)
+            {
+                var dto = (CAADtoAttribute)blType.GetCustomAttributes(typeof(CAADtoAttribute), false).FirstOrDefault();
+                method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "SaveGeneric")?.MakeGenericMethod(blType, dto.Type);
+			}
+            else
+            {
+                var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
+                method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "SaveGeneric")?.MakeGenericMethod(blType, dto.Type);
+			}
+
+			
 
 			method.Invoke(this, new object[] { value, saveAttachedFile });
 
@@ -93,7 +105,7 @@ namespace SmartCore.Entities
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var method = GetMethod(typeof(T), "Convert");
+			var method = GetMethod(typeof(T), typeof(TOut), "Convert");
 
 			var res = new List<TOut>();
 			foreach (var value in values)
@@ -139,7 +151,7 @@ namespace SmartCore.Entities
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var method = GetMethod(typeof(T), "Convert");
+			var method = GetMethod(typeof(T), typeof(TOut), "Convert");
 
 			var res = new List<TOut>();
 			foreach (var value in values)
@@ -179,7 +191,7 @@ namespace SmartCore.Entities
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var method = GetMethod(typeof(T), "Convert");
+			var method = GetMethod(typeof(T), typeof(TOut), "Convert");
 
 			var res = new List<TOut>();
 			foreach (var value in values)
@@ -215,7 +227,7 @@ namespace SmartCore.Entities
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var method = GetMethod(typeof(T), "Convert");
+			var method = GetMethod(typeof(T), typeof(TOut), "Convert");
 
 			if (isDeletedOnly)
 			{
@@ -341,8 +353,12 @@ namespace SmartCore.Entities
 
 		#region private MethodInfo GetMethod(Type t, string methodName)
 
-		private MethodInfo GetMethod(Type t, string methodName)
-		{
+		private MethodInfo GetMethod(Type t, Type tOut, string methodName)
+        {
+
+            if (tOut.ToString().StartsWith("CAA"))
+                methodName += "CAA";
+
 			var method = typeof(GeneralConverterDto).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public, null, new[] { t }, null);
 			if (method == null)
 				method = typeof(DictionaryConverterDto).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public, null, new[] { t }, null);

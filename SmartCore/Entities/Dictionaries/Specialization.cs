@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Attributes;
@@ -8,6 +9,7 @@ namespace SmartCore.Entities.Dictionaries
 {
     [Table("Specializations", "Dictionaries", "ItemId")]
 	[Dto(typeof(SpecializationDTO))]
+	[CAADto(typeof(CAASpecializationDTO))]
     [DictionaryCollection(typeof(CommonDictionaryCollection<Specialization>))]
     [Condition("IsDeleted", "0")]
 	[Serializable]

@@ -97,7 +97,9 @@ namespace CAS.UI.UIControls.PersonnelControls
 
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
-			_itemsArray.AddRange(GlobalObjects.CasEnvironment.GetDictionary<Specialization>());
+			if(GlobalObjects.CasEnvironment != null)
+			    _itemsArray.AddRange(GlobalObjects.CasEnvironment.GetDictionary<Specialization>());
+			else _itemsArray.AddRange(GlobalObjects.CaaEnvironment.GetDictionary<Specialization>());
 
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
 

@@ -42,6 +42,19 @@ namespace SmartCore
         void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState);
         void UpdateUser(string password);
 
+        string GetCorrector(int id);
+        string GetCorrector(IBaseEntityObject entity);
+
+        void GetDictionaries();
+
+        IDictionaryCollection GetDictionary<T>() where T : IDictionaryItem;
+
+        IDictionaryCollection GetDictionary(Type type);
+
+        void ClearDictionaries();
+
+        void AddDictionary(Type t, IDictionaryCollection dictionary);
+
     }
 
 	public interface ICasEnvironment : IBaseEnvironment
@@ -69,18 +82,7 @@ namespace SmartCore
 		/// </summary>
 
         void Disconnect();
-		string GetCorrector(int id);
-		string GetCorrector(IBaseEntityObject entity);
 
-		
-
-		IDictionaryCollection GetDictionary<T>() where T : IDictionaryItem;
-
-		IDictionaryCollection GetDictionary(Type type);
-
-		void ClearDictionaries();
-
-		void AddDictionary(Type t, IDictionaryCollection dictionary);
 
 		void Reset();
 
@@ -93,7 +95,6 @@ namespace SmartCore
 
 
 		void FirstLoad();
-        void GetDictionaries();
 
         void SetParentsToStores();
 

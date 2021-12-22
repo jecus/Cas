@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Auxiliary;
@@ -1090,6 +1091,409 @@ namespace SmartCore.DtoHelper
 				CorrectorId = tripnameDto.CorrectorId,
 				FullName = tripnameDto.TripName
 			};
+		}
+
+
+
+        public static CAAAGWCategorieDTO ConvertCAA(this AGWCategory agwCategory)
+        {
+            return new CAAAGWCategorieDTO
+			{
+                ItemId = agwCategory.ItemId,
+                IsDeleted = agwCategory.IsDeleted,
+                Updated = agwCategory.Updated,
+                CorrectorId = agwCategory.CorrectorId,
+                FullName = agwCategory.FullName,
+                Gender = (short)agwCategory.Gender,
+                MinAge = agwCategory.MinAge,
+                MaxAge = agwCategory.MaxAge,
+                WeightSummer = agwCategory.WeightSummer,
+                WeightWinter = agwCategory.WeightWinter
+            };
+        }
+
+        public static AGWCategory ConvertCAA(this CAAAGWCategorieDTO agwCategorieDto)
+        {
+            return new AGWCategory
+            {
+                ItemId = agwCategorieDto.ItemId,
+                IsDeleted = agwCategorieDto.IsDeleted,
+                Updated = agwCategorieDto.Updated,
+                CorrectorId = agwCategorieDto.CorrectorId,
+                FullName = agwCategorieDto.FullName,
+                Gender = agwCategorieDto.Gender != null ? (Gender)agwCategorieDto.Gender : Gender.NotApplicable,
+                MinAge = agwCategorieDto.MinAge ?? default(int),
+                MaxAge = agwCategorieDto.MaxAge ?? default(int),
+                WeightSummer = agwCategorieDto.WeightSummer ?? default(int),
+                WeightWinter = agwCategorieDto.WeightWinter ?? default(int)
+            };
+        }
+
+		public static CAADepartmentDTO ConvertCAA(this Department department)
+        {
+            return new CAADepartmentDTO
+            {
+                ItemId = department.ItemId,
+                IsDeleted = department.IsDeleted,
+                Updated = department.Updated,
+                CorrectorId = department.CorrectorId,
+                Name = department.ShortName,
+                FullName = department.FullName,
+                Address = department.Address,
+                Phone = department.Phone,
+                Fax = department.Fax,
+                Email = department.Email,
+                Website = department.Website
+            };
+        }
+
+        public static Department ConvertCAA(this CAADepartmentDTO departmentDto)
+        {
+            return new Department
+            {
+                ItemId = departmentDto.ItemId,
+                IsDeleted = departmentDto.IsDeleted,
+                Updated = departmentDto.Updated,
+                CorrectorId = departmentDto.CorrectorId,
+                ShortName = departmentDto.Name,
+                FullName = departmentDto.FullName,
+                Address = departmentDto.Address,
+                Phone = departmentDto.Phone,
+                Fax = departmentDto.Fax,
+                Email = departmentDto.Email,
+                Website = departmentDto.Website
+            };
+        }
+
+        public static CAANomenclatureDTO ConvertCAA(this Nomenclatures nomenclature)
+        {
+            return new CAANomenclatureDTO
+			{
+                ItemId = nomenclature.ItemId,
+                IsDeleted = nomenclature.IsDeleted,
+                Updated = nomenclature.Updated,
+                CorrectorId = nomenclature.CorrectorId,
+                Name = nomenclature.ShortName,
+                FullName = nomenclature.FullName,
+                DepartmentId = nomenclature.Department?.ItemId ?? -1,
+                Department = nomenclature.Department?.ConvertCAA()
+            };
+        }
+
+        public static Nomenclatures ConvertCAA(this CAANomenclatureDTO nomenclatureDto)
+        {
+            var nom = new Nomenclatures
+            {
+                ItemId = nomenclatureDto.ItemId,
+                IsDeleted = nomenclatureDto.IsDeleted,
+                Updated = nomenclatureDto.Updated,
+                CorrectorId = nomenclatureDto.CorrectorId,
+                ShortName = nomenclatureDto.Name,
+                FullName = nomenclatureDto.FullName,
+            };
+
+            var department = nomenclatureDto.Department?.ConvertCAA();
+            if (department != null)
+                nom.Department = department.IsDeleted ? Department.Unknown : department;
+            else nom.Department = Department.Unknown;
+
+            return nom;
+        }
+
+        public static CAAATAChapterDTO ConvertCAA(this AtaChapter ataChapter)
+        {
+            return new CAAATAChapterDTO
+			{
+                ItemId = ataChapter.ItemId,
+                IsDeleted = ataChapter.IsDeleted,
+                Updated = ataChapter.Updated,
+                CorrectorId = ataChapter.CorrectorId,
+                FullName = ataChapter.FullName,
+                ShortName = ataChapter.ShortName
+            };
+        }
+
+        public static AtaChapter ConvertCAA(this CAAATAChapterDTO ataChapterDto)
+        {
+            return new AtaChapter
+            {
+                ItemId = ataChapterDto.ItemId,
+                IsDeleted = ataChapterDto.IsDeleted,
+                Updated = ataChapterDto.Updated,
+                CorrectorId = ataChapterDto.CorrectorId,
+                FullName = ataChapterDto.FullName,
+                ShortName = ataChapterDto.ShortName
+            };
+        }
+
+
+        public static CAADocumentSubTypeDTO ConvertCAA(this DocumentSubType documentsubtype)
+        {
+            return new CAADocumentSubTypeDTO
+			{
+                ItemId = documentsubtype.ItemId,
+                IsDeleted = documentsubtype.IsDeleted,
+                Updated = documentsubtype.Updated,
+                CorrectorId = documentsubtype.CorrectorId,
+                Name = documentsubtype.FullName,
+                DocumentTypeId = documentsubtype.DocumentTypeId,
+            };
+        }
+
+        public static DocumentSubType ConvertCAA(this CAADocumentSubTypeDTO documentsubtypeDto)
+        {
+            return new DocumentSubType
+            {
+                ItemId = documentsubtypeDto.ItemId,
+                IsDeleted = documentsubtypeDto.IsDeleted,
+                Updated = documentsubtypeDto.Updated,
+                CorrectorId = documentsubtypeDto.CorrectorId,
+                FullName = documentsubtypeDto.Name,
+                DocumentTypeId = documentsubtypeDto.DocumentTypeId
+            };
+        }
+
+        public static CAAEmployeeSubjectDTO ConvertCAA(this EmployeeSubject employeesubject)
+        {
+            return new CAAEmployeeSubjectDTO
+			{
+                ItemId = employeesubject.ItemId,
+                IsDeleted = employeesubject.IsDeleted,
+                Updated = employeesubject.Updated,
+                CorrectorId = employeesubject.CorrectorId,
+                Name = employeesubject.ShortName,
+                FullName = employeesubject.FullName,
+                LicenceTypeId = employeesubject.LicenceTypeId
+            };
+        }
+
+        public static EmployeeSubject ConvertCAA(this CAAEmployeeSubjectDTO employeesubjectDto)
+        {
+            return new EmployeeSubject
+            {
+                ItemId = employeesubjectDto.ItemId,
+                IsDeleted = employeesubjectDto.IsDeleted,
+                Updated = employeesubjectDto.Updated,
+                CorrectorId = employeesubjectDto.CorrectorId,
+                ShortName = employeesubjectDto.Name,
+                FullName = employeesubjectDto.FullName,
+                LicenceTypeId = employeesubjectDto.LicenceTypeId ?? default(int)
+            };
+        }
+
+        public static CAAGoodStandartDTO ConvertCAA(this GoodStandart standart)
+        {
+            return new CAAGoodStandartDTO
+			{
+                ItemId = standart.ItemId,
+                IsDeleted = standart.IsDeleted,
+                Updated = standart.Updated,
+                CorrectorId = standart.CorrectorId,
+                Name = standart.FullName,
+                PartNumber = standart.PartNumber,
+                Description = standart.Description,
+                Remarks = standart.Remarks,
+                DefaultProductId = standart.DefaultProductId,
+                ComponentType = standart.GoodsClass?.ItemId
+            };
+        }
+
+        public static GoodStandart ConvertCAA(this CAAGoodStandartDTO standartDto)
+        {
+            return new GoodStandart
+            {
+                ItemId = standartDto.ItemId,
+                IsDeleted = standartDto.IsDeleted,
+                Updated = standartDto.Updated,
+                CorrectorId = standartDto.CorrectorId,
+                FullName = standartDto.Name,
+                PartNumber = standartDto.PartNumber,
+                Description = standartDto.Description,
+                Remarks = standartDto.Remarks,
+                DefaultProductId = standartDto.DefaultProductId ?? default(int),
+                GoodsClass = standartDto.ComponentType.HasValue ? GoodsClass.Items.GetItemById(standartDto.ComponentType.Value) : GoodsClass.Unknown
+            };
+        }
+
+        public static CAALicenseRemarkRightDTO ConvertCAA(this LicenseRemarkRights licenseremarkright)
+        {
+            return new CAALicenseRemarkRightDTO
+			{
+                ItemId = licenseremarkright.ItemId,
+                IsDeleted = licenseremarkright.IsDeleted,
+                Updated = licenseremarkright.Updated,
+                CorrectorId = licenseremarkright.CorrectorId,
+                Name = licenseremarkright.ShortName,
+                FullName = licenseremarkright.FullName
+            };
+        }
+
+        public static LicenseRemarkRights ConvertCAA(this CAALicenseRemarkRightDTO licenseremarkrightDto)
+        {
+            return new LicenseRemarkRights
+            {
+                ItemId = licenseremarkrightDto.ItemId,
+                IsDeleted = licenseremarkrightDto.IsDeleted,
+                Updated = licenseremarkrightDto.Updated,
+                CorrectorId = licenseremarkrightDto.CorrectorId,
+                ShortName = licenseremarkrightDto.Name,
+                FullName = licenseremarkrightDto.FullName
+            };
+        }
+
+        public static CAALocationDTO ConvertCAA(this Locations location)
+        {
+            return new CAALocationDTO
+			{
+                ItemId = location.ItemId,
+                IsDeleted = location.IsDeleted,
+                Updated = location.Updated,
+                CorrectorId = location.CorrectorId,
+                Name = location.ShortName,
+                FullName = location.FullName,
+                LocationsTypeId = location.LocationsType?.ItemId ?? default(int),
+                LocationsType = location.LocationsType?.ConvertCAA()
+            };
+        }
+
+        public static Locations ConvertCAA(this CAALocationDTO locationDto)
+        {
+            return new Locations
+            {
+                ItemId = locationDto.ItemId,
+                IsDeleted = locationDto.IsDeleted,
+                Updated = locationDto.Updated,
+                CorrectorId = locationDto.CorrectorId,
+                ShortName = locationDto.Name,
+                FullName = locationDto.FullName,
+                LocationsType = locationDto.LocationsType?.ConvertCAA()
+            };
+        }
+
+        public static LocationsType ConvertCAA(this CAALocationsTypeDTO locationsTypeDto)
+        {
+            var loc = new LocationsType
+            {
+                ItemId = locationsTypeDto.ItemId,
+                IsDeleted = locationsTypeDto.IsDeleted,
+                Updated = locationsTypeDto.Updated,
+                CorrectorId = locationsTypeDto.CorrectorId,
+                FullName = locationsTypeDto.FullName,
+                ShortName = locationsTypeDto.Name,
+            };
+
+            var department = locationsTypeDto.Department?.ConvertCAA();
+            if (department != null)
+                loc.Department = department.IsDeleted ? Department.Unknown : department;
+            else loc.Department = Department.Unknown;
+
+            return loc;
+        }
+
+        public static CAALocationsTypeDTO ConvertCAA(this LocationsType locationsType)
+        {
+            return new CAALocationsTypeDTO
+			{
+                ItemId = locationsType.ItemId,
+                IsDeleted = locationsType.IsDeleted,
+                Updated = locationsType.Updated,
+                CorrectorId = locationsType.CorrectorId,
+                FullName = locationsType.FullName,
+                Name = locationsType.ShortName,
+                DepartmentId = locationsType.Department?.ItemId ?? -1
+            };
+        }
+
+        public static CAARestrictionDTO ConvertCAA(this LicenseRestriction licenserestriction)
+        {
+            return new CAARestrictionDTO
+			{
+                ItemId = licenserestriction.ItemId,
+                IsDeleted = licenserestriction.IsDeleted,
+                Updated = licenserestriction.Updated,
+                CorrectorId = licenserestriction.CorrectorId,
+                Name = licenserestriction.ShortName,
+                FullName = licenserestriction.FullName
+            };
+        }
+
+        public static LicenseRestriction ConvertCAA(this CAARestrictionDTO licenserestrictionDto)
+        {
+            return new LicenseRestriction
+            {
+                ItemId = licenserestrictionDto.ItemId,
+                IsDeleted = licenserestrictionDto.IsDeleted,
+                Updated = licenserestrictionDto.Updated,
+                CorrectorId = licenserestrictionDto.CorrectorId,
+                ShortName = licenserestrictionDto.Name,
+                FullName = licenserestrictionDto.FullName
+            };
+        }
+
+		public static CAAServiceTypeDTO ConvertCAA(this ServiceType servicetype)
+		{
+			return new CAAServiceTypeDTO
+			{
+				ItemId = servicetype.ItemId,
+				IsDeleted = servicetype.IsDeleted,
+				Updated = servicetype.Updated,
+				CorrectorId = servicetype.CorrectorId,
+				Name = servicetype.ShortName,
+				FullName = servicetype.FullName
+			};
+		}
+
+		public static ServiceType ConvertCAA(this CAAServiceTypeDTO servicetypeDto)
+		{
+			return new ServiceType
+			{
+				ItemId = servicetypeDto.ItemId,
+				IsDeleted = servicetypeDto.IsDeleted,
+				Updated = servicetypeDto.Updated,
+				CorrectorId = servicetypeDto.CorrectorId,
+				ShortName = servicetypeDto.Name,
+				FullName = servicetypeDto.FullName
+			};
+		}
+
+		public static CAASpecializationDTO ConvertCAA(this Specialization specialization)
+		{
+			return new CAASpecializationDTO
+			{
+				ItemId = specialization.ItemId,
+				IsDeleted = specialization.IsDeleted,
+				Updated = specialization.Updated,
+				CorrectorId = specialization.CorrectorId,
+				ShortName = specialization.ShortName,
+				FullName = specialization.FullName,
+				DepartmentId = specialization.Department?.ItemId ?? -1,
+				Level = specialization.Level,
+				KeyPersonel = specialization.KeyPersonel,
+				Department = specialization.Department?.ConvertCAA()
+			};
+		}
+
+		public static Specialization ConvertCAA(this CAASpecializationDTO specializationDto)
+		{
+			var spec = new Specialization
+			{
+				ItemId = specializationDto.ItemId,
+				IsDeleted = specializationDto.IsDeleted,
+				Updated = specializationDto.Updated,
+				CorrectorId = specializationDto.CorrectorId,
+				ShortName = specializationDto.ShortName,
+				FullName = specializationDto.FullName,
+				Level = specializationDto.Level,
+				KeyPersonel = specializationDto.KeyPersonel
+			};
+
+
+			var department = specializationDto.Department?.ConvertCAA();
+			if (department != null)
+				spec.Department = department.IsDeleted ? Department.Unknown : department;
+			else spec.Department = Department.Unknown;
+
+			return spec;
 		}
 	}
 }

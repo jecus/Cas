@@ -422,7 +422,9 @@ namespace CAS.UI.UIControls.Auxiliary
             {
                 try
                 {
-                    _typeItemsCollection = GlobalObjects.CasEnvironment.GetDictionary(_type);
+                    if(GlobalObjects.CasEnvironment != null)
+                        _typeItemsCollection = GlobalObjects.CasEnvironment.GetDictionary(_type);
+                    else _typeItemsCollection = GlobalObjects.CaaEnvironment.GetDictionary(_type);
                 }
                 catch (Exception)
                 {

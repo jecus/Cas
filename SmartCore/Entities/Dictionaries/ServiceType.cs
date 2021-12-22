@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 
@@ -6,6 +7,7 @@ namespace SmartCore.Entities.Dictionaries
 {
 	[Table("ServiceTypes", "Dictionaries", "ItemId")]
 	[Dto(typeof(ServiceTypeDTO))]
+	[CAADto(typeof(CAAServiceTypeDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class ServiceType: AbstractDictionary

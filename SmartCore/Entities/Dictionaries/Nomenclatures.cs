@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
@@ -8,6 +9,7 @@ namespace SmartCore.Entities.Dictionaries
 {
 	[Table("Nomenclatures", "Dictionaries", "ItemId")]
 	[Dto(typeof(NomenclatureDTO))]
+	[CAADto(typeof(CAANomenclatureDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class Nomenclatures : AbstractDictionary

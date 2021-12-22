@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
@@ -14,6 +15,7 @@ namespace SmartCore.Entities.Dictionaries
     /// </summary>
     [Table("GoodStandarts", "Dictionaries", "ItemId")]
 	[Dto(typeof(GoodStandartDTO))]
+	[CAADto(typeof(CAAGoodStandartDTO))]
     //[DictionaryCollection(typeof(CommonDictionaryCollection<GoodStandart>))]
     [Condition("IsDeleted", "0")]
     [Serializable]

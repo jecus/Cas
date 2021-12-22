@@ -1,18 +1,24 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using CAS.Entity.Models.DTO.General;
 using CAS.UI.Helpers;
 using Entity.Abstractions;
 using SmartCore.AuditMongo.Repository;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.NewLoader;
 using SmartCore.Management;
+using SmartCore.ObjectCache;
 using SmartCore.Queries;
 
 namespace SmartCore
@@ -24,6 +30,12 @@ namespace SmartCore
 
     public class CaaEnvironment : ICaaEnvironment
     {
+        public CaaEnvironment()
+        {
+            _dictionaries = new CommonDictionariesCache();
+        }
+
+
         public OperatorCollection Operators { get; set; }
         public IAuditRepository AuditRepository { get; set; }
         public ApiProvider ApiProvider { get; set; }
@@ -42,6 +54,11 @@ namespace SmartCore
         {
             return _newLoader.Execute(query, parameters);
         }
+
+        #region public CommonCollection<Store> User { get; internal set; }
+
+        public Dictionary<int, string> Users { get; set; }
+        #endregion
 
         #region public IIdentityUser IdentityUser { get; }
         /// <summary>
@@ -66,8 +83,28 @@ namespace SmartCore
 
         public void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState)
         {
-            // Загрузка всех операторов
-            loadingState.CurrentPersentage = 3;
+            if (backgroundWorker == null) return;
+
+            if (loadingState == null)
+                loadingState = new LoadingState();
+            loadingState.MaxPersentage = 10;
+
+            //Загрузка всех пользователей
+            loadingState.CurrentPersentage = 0;
+            loadingState.CurrentPersentageDescription = "Loading Users";
+            backgroundWorker.ReportProgress(1, loadingState);
+
+            var users = ApiProvider.GetAllUsersAsync();
+            Users = new Dictionary<int, string>();
+            foreach (var user in users)
+                Users.Add(user.ItemId, user.ToString());
+
+            if (backgroundWorker.CancellationPending)
+            {
+                return;
+            }
+
+            loadingState.CurrentPersentage = 2;
             loadingState.CurrentPersentageDescription = "Loading Operators";
             backgroundWorker.ReportProgress(1, loadingState);
 
@@ -77,9 +114,142 @@ namespace SmartCore
             {
                 return;
             }
+
+            //Загрузка всех словарей
+            loadingState.CurrentPersentage = 3;
+            loadingState.CurrentPersentageDescription = "Loading Dictionaries";
+            backgroundWorker.ReportProgress(1, loadingState);
+
+            GetDictionaries();
+
+            if (backgroundWorker.CancellationPending)
+            {
+                return;
+            }
         }
 
         #endregion
+
+
+        #region public CommonDictionariesCache Dictionaries
+
+        private readonly CommonDictionariesCache _dictionaries;
+
+        public IDictionaryCollection GetDictionary<T>() where T : IDictionaryItem
+        {
+            return _dictionaries.GetDictionary<T>();
+        }
+
+        public IDictionaryCollection GetDictionary(Type type)
+        {
+            return _dictionaries.GetDictionary(type);
+        }
+
+        public void ClearDictionaries()
+        {
+            _dictionaries.Clear();
+        }
+
+        public void AddDictionary(Type t, IDictionaryCollection dictionary)
+        {
+            _dictionaries.Add(t, dictionary);
+        }
+
+        #endregion
+
+        public void GetDictionaries()
+        {
+            ClearDictionaries();
+
+            var assembly = Assembly.GetAssembly(typeof(BaseEntityObject));
+            var types = assembly.GetTypes()
+                .Where(t => t.Namespace != null && t.IsClass && t.Namespace.StartsWith("SmartCore.Entities.Dictionaries"));
+
+            var staticDictionaryType = types.Where(t => t.IsSubclassOf(typeof(StaticDictionary))
+                                                            && t.GetCustomAttributes(typeof(TableAttribute), false).Length > 0).ToList();
+
+            foreach (var type in staticDictionaryType)
+            {
+                try
+                {
+                    string qr = BaseQueries.GetSelectQueryWithWhere(type, loadChild: true);
+                    DataSet ds = Execute(qr);
+
+                    //поиск в типе своиства Items
+                    PropertyInfo itemsProp = type.GetProperty("Items");
+                    //поиск у типа конструктора беза параметров
+                    ConstructorInfo ci = type.GetConstructor(new Type[0]);
+                    //создание экземпляра статического словаря 
+                    //(при этом будут созданы все его статические элементы, 
+                    // которые будут доступны через статическое своиство Items)
+                    StaticDictionary instance = (StaticDictionary)ci.Invoke(null);
+                    //Получение элементов статического своиства Items
+                    IEnumerable staticList = (IEnumerable)itemsProp.GetValue(instance, null);
+
+                    BaseQueries.SetFields(staticList, ds);
+                }
+                catch (Exception)
+                {
+                    continue;
+                    //throw ex;
+                }
+            }
+
+            var abstractDictionaryTypes = types.Where(t => t.IsSubclassOf(typeof(AbstractDictionary))
+                                                               && !t.IsAbstract)
+                                                      .ToList();
+            //коллекция дл типов, которые не удалось загрузить сразу
+            //по причине отсутствия другого словаря в коллекции словарей ядра
+            var defferedTypes = new List<Type>();
+            foreach (var type in abstractDictionaryTypes)
+            {
+                try
+                {
+                    var dca = (DictionaryCollectionAttribute)type.GetCustomAttributes(typeof(DictionaryCollectionAttribute), false).FirstOrDefault();
+                    var bl = (DtoAttribute)type.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
+
+                    var typeDict = dca == null
+                        ? new CommonDictionaryCollection<AbstractDictionary>()
+                        : dca.GetInstance();
+
+                    IEnumerable items = _newLoader.GetObjectList(bl.Type, type, true);
+                    typeDict.AddRange((IEnumerable<IDictionaryItem>)items);
+                    AddDictionary(type, typeDict);
+
+                }
+                catch (KeyNotFoundException)
+                {
+                    defferedTypes.Add(type);
+                    continue;
+                }
+                catch (Exception)
+                {
+                    continue;
+                    //throw ex;
+                }
+            }
+
+            //Повторная попытка загрузить типы данных, которые не удалось загрузить с первого раза
+            foreach (var type in defferedTypes)
+            {
+                try
+                {
+                    var dca = (DictionaryCollectionAttribute)type.GetCustomAttributes(typeof(DictionaryCollectionAttribute), false).FirstOrDefault();
+                    var bl = (DtoAttribute)type.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
+                    var typeDict = dca == null
+                        ? new CommonDictionaryCollection<AbstractDictionary>()
+                        : dca.GetInstance();
+                    IEnumerable items = _newLoader.GetObjectList(bl.Type, type, true);
+                    typeDict.AddRange((IEnumerable<IDictionaryItem>)items);
+                    AddDictionary(type, typeDict);
+                }
+                catch (Exception)
+                {
+                    continue;
+                    //throw ex;
+                }
+            }
+        }
 
         public void UpdateUser(string password)
         {
@@ -137,6 +307,22 @@ namespace SmartCore
 
             _newLoader = new NewLoader(this);
         }
+        #endregion
+
+        #region public UserDTO GetCorrector(int id)
+
+        public string GetCorrector(int id)
+        {
+            return Users.ContainsKey(id) ? Users[id] : "Unknown";
+        }
+
+        public string GetCorrector(IBaseEntityObject entity)
+        {
+            return Users.ContainsKey(entity.CorrectorId) ?
+                $"{Users[entity.CorrectorId]} ({Auxiliary.Convert.GetDateFormat(entity.Updated)} {entity.Updated.TimeOfDay.Hours}:{entity.Updated.TimeOfDay.Minutes}:{entity.Updated.TimeOfDay.Seconds})"
+                : "Unknown";
+        }
+
         #endregion
 
     }
