@@ -232,7 +232,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.linkLabelEditOperatorInfo.Size = new System.Drawing.Size(144, 17);
 			this.linkLabelEditOperatorInfo.TabIndex = 12;
 			this.linkLabelEditOperatorInfo.TabStop = true;
-			this.linkLabelEditOperatorInfo.Text = "Edit operator\'s info";
+			this.linkLabelEditOperatorInfo.Text = "Edit operator info";
 			this.linkLabelEditOperatorInfo.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkLabelEditOperatorInfoDisplayerRequested);
             // 
             // linkLabelEditPassword
