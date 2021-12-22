@@ -4,8 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.IO.Compression;
+using System.Threading.Tasks;
 using API.Abstractions.Abstractions.Helpers;
 using API.Abstractions.Abstractions.Middleware;
+using API.Abstractions.Abstractions.Workers;
 using Microsoft.AspNetCore.ResponseCompression;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -35,6 +37,7 @@ namespace CAA.API
                 options.UseMemberCasing();
             });
 
+            RegisterWorkers(services);
             RegisterDataBase(services);
             RegisterSwagger(services);
             RegisterHealthCheck(services);
@@ -75,6 +78,16 @@ namespace CAA.API
                 o.RoutePrefix = "swagger";
                 o.SwaggerEndpoint("v1/swagger.json", "Cas API v1");
             });
+            Initialize(app);
+        }
+
+
+        public void Initialize(IApplicationBuilder app)
+        {
+            var scope = app.ApplicationServices.CreateScope();
+            var workers = scope.ServiceProvider.GetServices<IWorker>();
+            foreach (var worker in workers)
+                Task.Run(() => worker.Start());
         }
 
     }

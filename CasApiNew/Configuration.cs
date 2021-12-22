@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using API.Abstractions.Abstractions.Workers;
 using CAS.API.Infrastructure;
 using CAS.Entity.Core;
 using Microsoft.EntityFrameworkCore;

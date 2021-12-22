@@ -2,6 +2,7 @@ using System.IO.Compression;
 using System.Threading.Tasks;
 using API.Abstractions.Abstractions.Helpers;
 using API.Abstractions.Abstractions.Middleware;
+using API.Abstractions.Abstractions.Workers;
 using CAS.API.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

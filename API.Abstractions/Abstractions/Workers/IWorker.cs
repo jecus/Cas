@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CAS.API.Infrastructure
+namespace API.Abstractions.Abstractions.Workers
 {
 	public interface IWorker : IDisposable
 	{

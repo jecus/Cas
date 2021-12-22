@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using API.Abstractions.Abstractions.Workers;
 using CAA.Entity.Core;
+using CAS.API.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +13,10 @@ namespace CAA.API
 {
     public partial class Startup
     {
-
+        public virtual void RegisterWorkers(IServiceCollection services)
+        {
+            services.AddWorker<DictionaryWorker>();
+        }
         public virtual void RegisterDataBase(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(builder =>
