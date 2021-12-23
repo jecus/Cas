@@ -4,10 +4,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
+using CAA.Entity.Models.DTO;
 using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
 using Entity.Abstractions.Filters;
 using Microsoft.EntityFrameworkCore;
+using Z.EntityFramework.Plus;
 
 namespace CAA.Entity.Core.Repository
 {
@@ -385,197 +387,197 @@ namespace CAA.Entity.Core.Repository
 			var whereCall = Expression.Call( whereMethodGeneric, filesPropertyExpression, lambdaForWhere);
 			var lambda = Expression.Lambda(whereCall, aircraftFlightObject);
 
-			// if (typeCollection.Contains("ItemFileLinkDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<ItemFileLinkDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			// if (typeCollection.Contains("ComponentLLPCategoryDataDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryDataDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("ComponentLLPCategoryChangeRecordDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryChangeRecordDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("TransferRecordDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<TransferRecordDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("ComponentDirectiveDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<ComponentDirectiveDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("ActualStateRecordDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<ActualStateRecordDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("MaintenanceProgramChangeRecordDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<MaintenanceProgramChangeRecordDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("AuditRecordDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<AuditRecordDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("DirectiveRecordDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<DirectiveRecordDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("CategoryRecordDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<CategoryRecordDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("AccessoryRequiredDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<AccessoryRequiredDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("KitSuppliersRelationDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<KitSuppliersRelationDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("EventConditionDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<EventConditionDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("DocumentDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<DocumentDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("DamageSectorDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<DamageSectorDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("DamageDocumentDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<DamageDocumentDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("FlightTrackRecordDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<FlightTrackRecordDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("InitialOrderRecordDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<InitialOrderRecordDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("JobCardTaskDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<JobCardTaskDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("MaintenanceDirectiveDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<MaintenanceDirectiveDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("MTOPCheckRecordDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<MTOPCheckRecordDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("ProcedureDocumentReferenceDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<ProcedureDocumentReferenceDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("RequestRecordDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<RequestRecordDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("RequestForQuotationRecordDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<RequestForQuotationRecordDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<RequestForQuotationRecordDTO>>>(lambda.Body, lambda.Parameters));
-			// }
-			//
-			// if (typeCollection.Contains("SpecialistLicenseDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("SpecialistTrainingDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<SpecialistTrainingDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("SpecialistLicenseDetailDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseDetailDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("SpecialistLicenseRemarkDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseRemarkDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("SpecialistCAADTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<SpecialistCAADTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("SpecialistLicenseRatingDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<ItemFileLinkDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("SpecialistInstrumentRatingDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<SpecialistInstrumentRatingDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			//
-			// if (typeCollection.Contains("WorkOrderRecordDTO"))
-			// {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<WorkOrderRecordDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-			// }
-			throw new Exception($"Type({typeCollection}) not Found!");
+            if (typeCollection.Contains("ItemFileLinkDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAAItemFileLinkDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+            // if (typeCollection.Contains("ComponentLLPCategoryDataDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryDataDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("ComponentLLPCategoryChangeRecordDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryChangeRecordDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("TransferRecordDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<TransferRecordDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("ComponentDirectiveDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<ComponentDirectiveDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("ActualStateRecordDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<ActualStateRecordDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("MaintenanceProgramChangeRecordDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<MaintenanceProgramChangeRecordDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("AuditRecordDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<AuditRecordDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("DirectiveRecordDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<DirectiveRecordDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            if (typeCollection.Contains("CategoryRecordDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAACategoryRecordDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+            //
+            // if (typeCollection.Contains("AccessoryRequiredDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<AccessoryRequiredDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("KitSuppliersRelationDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<KitSuppliersRelationDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("EventConditionDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<EventConditionDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            if (typeCollection.Contains("DocumentDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAADocumentDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+            //
+            // if (typeCollection.Contains("DamageSectorDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<DamageSectorDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("DamageDocumentDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<DamageDocumentDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("FlightTrackRecordDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<FlightTrackRecordDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("InitialOrderRecordDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<InitialOrderRecordDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("JobCardTaskDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<JobCardTaskDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("MaintenanceDirectiveDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<MaintenanceDirectiveDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("MTOPCheckRecordDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<MTOPCheckRecordDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("ProcedureDocumentReferenceDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<ProcedureDocumentReferenceDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("RequestRecordDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<RequestRecordDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            //
+            // if (typeCollection.Contains("RequestForQuotationRecordDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<RequestForQuotationRecordDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<RequestForQuotationRecordDTO>>>(lambda.Body, lambda.Parameters));
+            // }
+            //
+            if (typeCollection.Contains("SpecialistLicenseDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistLicenseDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+
+            if (typeCollection.Contains("SpecialistTrainingDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistTrainingDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+
+            if (typeCollection.Contains("SpecialistLicenseDetailDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistLicenseDetailDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+
+            if (typeCollection.Contains("SpecialistLicenseRemarkDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistLicenseRemarkDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+
+            if (typeCollection.Contains("SpecialistCAADTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistCAADTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+
+            if (typeCollection.Contains("SpecialistLicenseRatingDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAAItemFileLinkDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+
+            if (typeCollection.Contains("SpecialistInstrumentRatingDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistInstrumentRatingDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+            //
+            // if (typeCollection.Contains("WorkOrderRecordDTO"))
+            // {
+            // 	var l = Expression.Lambda<Func<T, IEnumerable<WorkOrderRecordDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            // }
+            throw new Exception($"Type({typeCollection}) not Found!");
 		}
 
 
@@ -624,197 +626,197 @@ namespace CAA.Entity.Core.Repository
 			var lambda = Expression.Lambda(whereCall, aircraftFlightObject);
 
 
-   //          if (typeCollection.Contains("ItemFileLinkDTO"))
-   //          {
-			// 	var l = Expression.Lambda<Func<T, IEnumerable<ItemFileLinkDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //          if (typeCollection.Contains("ComponentLLPCategoryDataDTO"))
-   //          {
-			// 	var l =  Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryDataDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(l);
-   //          }
-   //
-   //          if (typeCollection.Contains("ComponentLLPCategoryChangeRecordDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryChangeRecordDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("TransferRecordDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<TransferRecordDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("ComponentDirectiveDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<ComponentDirectiveDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("ActualStateRecordDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<ActualStateRecordDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("MaintenanceProgramChangeRecordDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<MaintenanceProgramChangeRecordDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("AuditRecordDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<AuditRecordDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("DirectiveRecordDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<DirectiveRecordDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("CategoryRecordDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<CategoryRecordDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("AccessoryRequiredDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<AccessoryRequiredDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("KitSuppliersRelationDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<KitSuppliersRelationDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("EventConditionDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<EventConditionDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("DocumentDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<DocumentDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("DamageSectorDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<DamageSectorDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("DamageDocumentDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<DamageDocumentDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("FlightTrackRecordDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<FlightTrackRecordDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("InitialOrderRecordDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<InitialOrderRecordDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("JobCardTaskDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<JobCardTaskDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("MaintenanceDirectiveDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<MaintenanceDirectiveDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("MTOPCheckRecordDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<MTOPCheckRecordDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("ProcedureDocumentReferenceDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<ProcedureDocumentReferenceDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("RequestRecordDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<RequestRecordDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("RequestForQuotationRecordDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<RequestForQuotationRecordDTO>>>(lambda.Body, lambda.Parameters);
-			// 	return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<RequestForQuotationRecordDTO>>>(lambda.Body, lambda.Parameters));
-   //          }
-   //
-   //          if (typeCollection.Contains("SpecialistLicenseDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("SpecialistTrainingDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<SpecialistTrainingDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("SpecialistLicenseDetailDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseDetailDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("SpecialistLicenseRemarkDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseRemarkDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("SpecialistCAADTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<SpecialistCAADTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("SpecialistLicenseRatingDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<ItemFileLinkDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("SpecialistInstrumentRatingDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<SpecialistInstrumentRatingDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-   //
-   //          if (typeCollection.Contains("WorkOrderRecordDTO"))
-   //          {
-   //              var l = Expression.Lambda<Func<T, IEnumerable<WorkOrderRecordDTO>>>(lambda.Body, lambda.Parameters);
-   //              return query.IncludeFilter(l);
-			// }
-			throw new Exception($"Type({typeCollection}) not Found!");
+            if (typeCollection.Contains("ItemFileLinkDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAAItemFileLinkDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+            //          if (typeCollection.Contains("ComponentLLPCategoryDataDTO"))
+            //          {
+            // 	var l =  Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryDataDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(l);
+            //          }
+            //
+            //          if (typeCollection.Contains("ComponentLLPCategoryChangeRecordDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryChangeRecordDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("TransferRecordDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<TransferRecordDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("ComponentDirectiveDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<ComponentDirectiveDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("ActualStateRecordDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<ActualStateRecordDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("MaintenanceProgramChangeRecordDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<MaintenanceProgramChangeRecordDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("AuditRecordDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<AuditRecordDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("DirectiveRecordDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<DirectiveRecordDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            if (typeCollection.Contains("CategoryRecordDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAACategoryRecordDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+            //
+            //          if (typeCollection.Contains("AccessoryRequiredDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<AccessoryRequiredDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("KitSuppliersRelationDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<KitSuppliersRelationDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("EventConditionDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<EventConditionDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            if (typeCollection.Contains("DocumentDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAADocumentDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+            //
+            //          if (typeCollection.Contains("DamageSectorDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<DamageSectorDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("DamageDocumentDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<DamageDocumentDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("FlightTrackRecordDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<FlightTrackRecordDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("InitialOrderRecordDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<InitialOrderRecordDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("JobCardTaskDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<JobCardTaskDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("MaintenanceDirectiveDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<MaintenanceDirectiveDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("MTOPCheckRecordDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<MTOPCheckRecordDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("ProcedureDocumentReferenceDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<ProcedureDocumentReferenceDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("RequestRecordDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<RequestRecordDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            //
+            //          if (typeCollection.Contains("RequestForQuotationRecordDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<RequestForQuotationRecordDTO>>>(lambda.Body, lambda.Parameters);
+            // 	return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<RequestForQuotationRecordDTO>>>(lambda.Body, lambda.Parameters));
+            //          }
+            //
+            if (typeCollection.Contains("SpecialistLicenseDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistLicenseDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+
+            if (typeCollection.Contains("SpecialistTrainingDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistTrainingDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+
+            if (typeCollection.Contains("SpecialistLicenseDetailDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistLicenseDetailDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+
+            if (typeCollection.Contains("SpecialistLicenseRemarkDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistLicenseRemarkDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+
+            if (typeCollection.Contains("SpecialistCAADTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistCAADTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+
+            if (typeCollection.Contains("SpecialistLicenseRatingDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAAItemFileLinkDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+
+            if (typeCollection.Contains("SpecialistInstrumentRatingDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistInstrumentRatingDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+            //
+            //          if (typeCollection.Contains("WorkOrderRecordDTO"))
+            //          {
+            //              var l = Expression.Lambda<Func<T, IEnumerable<WorkOrderRecordDTO>>>(lambda.Body, lambda.Parameters);
+            //              return query.IncludeFilter(l);
+            // }
+            throw new Exception($"Type({typeCollection}) not Found!");
 		}
 	}
 }
