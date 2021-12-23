@@ -197,7 +197,9 @@ namespace CAA.Entity.Core
                 .HasMany(i => i.EmployeeDocuments).WithOne(i => i.SpecialistDto).HasForeignKey(i => i.ParentID);
             modelBuilder.Entity<CAASpecialistDTO>()
                 .HasMany(i => i.CategoriesRecords).WithOne(i => i.SpecialistDto).HasForeignKey(i => i.ParentId);
-           
+            modelBuilder.Entity<CAASpecialistDTO>()
+                .HasMany(i => i.Files).WithOne(i => i.SpecialistDto).HasForeignKey(i => i.ParentId);
+
             modelBuilder.Entity<CAASpecialistTrainingDTO>()
                 .HasOne(i => i.AircraftType)
                 .WithMany(i => i.SpecialistTrainingDtos)
@@ -210,6 +212,9 @@ namespace CAA.Entity.Core
                 .HasOne(i => i.Supplier)
                 .WithMany(i => i.SpecialistTrainingDtos)
                 .HasForeignKey(i => i.SupplierId);
+            modelBuilder.Entity<CAASpecialistTrainingDTO>()
+                .HasMany(i => i.Files).WithOne(i => i.SpecialistTraining).HasForeignKey(i => i.ParentId);
+
 
             modelBuilder.Entity<CAASupplierDTO>()
                 .HasMany(i => i.SupplierDocs).WithOne(i => i.SupplieDto).HasForeignKey(i => i.ParentID);

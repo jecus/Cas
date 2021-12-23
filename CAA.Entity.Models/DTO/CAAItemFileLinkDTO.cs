@@ -2,6 +2,7 @@
 using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
 using Entity.Abstractions.DTO.General;
+using Newtonsoft.Json;
 
 namespace CAA.Entity.Models.DTO
 {
@@ -27,5 +28,11 @@ namespace CAA.Entity.Models.DTO
         [Child]
         public CAAAttachedFileDTO File { get; set; }
 
-	}
+
+        [JsonIgnore]
+        public CAASpecialistTrainingDTO SpecialistTraining { get; set; }
+        [JsonIgnore]
+        public CAASpecialistDTO SpecialistDto { get; set; }
+
+    }
 }
