@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Attributes;
@@ -11,6 +12,7 @@ namespace SmartCore.Entities.Dictionaries
 	/// </summary>
 	[Table("AGWCategories", "Dictionaries", "ItemId")]
 	[Dto(typeof(AGWCategorieDTO))]
+	[CAADto(typeof(CAAAGWCategorieDTO))]
 	[DictionaryCollection(typeof(CommonDictionaryCollection<AGWCategory>))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
