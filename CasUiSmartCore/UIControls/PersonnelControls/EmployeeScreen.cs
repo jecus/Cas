@@ -85,7 +85,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 
             _currentItem = employee;
 
-            aircraftHeaderControl1.Operator = GlobalObjects.CasEnvironment.Operators[0];
+            aircraftHeaderControl1.Operator = GlobalObjects.CasEnvironment?.Operators[0] ?? GlobalObjects.CaaEnvironment?.Operators[0];
 
 			Initialize();
         }
