@@ -17,6 +17,8 @@ namespace SmartCore.Entities.NewLoader
 		DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results);
 		DataSet Execute(string query, SqlParameter[] parameters);
 
+        void ReloadDictionary(params Type[] types);
+
 		IList<int> GetSelectColumnOnly<T>(IEnumerable<Filter> filters, string selectProperty)
 			where T : BaseEntity;
 

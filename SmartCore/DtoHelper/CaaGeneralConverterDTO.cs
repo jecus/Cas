@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
-using CAS.Entity.Models.DTO.Dictionaries;
-using CAS.Entity.Models.DTO.General;
 using SmartCore.Auxiliary;
 using SmartCore.CAA;
 using SmartCore.Calculations;
@@ -20,6 +15,40 @@ namespace SmartCore.DtoHelper
 {
     public static  class CaaGeneralConverterDTO
 	{
+        public static SpecialistMedicalRecord ConvertCAA(this CAASpecialistMedicalRecordDTO medicalRecordDto)
+        {
+            return new SpecialistMedicalRecord
+            {
+                ItemId = medicalRecordDto.ItemId,
+                IsDeleted = medicalRecordDto.IsDeleted,
+                Updated = medicalRecordDto.Updated,
+                CorrectorId = medicalRecordDto.CorrectorId,
+                Remarks = medicalRecordDto.Remarks,
+                ClassNumber = medicalRecordDto.ClassId ?? default(int),
+                SpecialistId = medicalRecordDto.SpecialistId ?? default(int),
+                RepeatLifelength = Lifelength.ConvertFromByteArray(medicalRecordDto.Repeat),
+                NotifyLifelength = Lifelength.ConvertFromByteArray(medicalRecordDto.Notify),
+                IssueDate = medicalRecordDto.IssueDate
+            };
+        }
+
+        public static CAASpecialistMedicalRecordDTO ConvertCAA(this SpecialistMedicalRecord medicalRecord)
+        {
+            return new CAASpecialistMedicalRecordDTO()
+            {
+                ItemId = medicalRecord.ItemId,
+                IsDeleted = medicalRecord.IsDeleted,
+                Updated = medicalRecord.Updated,
+                CorrectorId = medicalRecord.CorrectorId,
+                Repeat = medicalRecord.RepeatLifelength?.ConvertToByteArray(),
+                Notify = medicalRecord.NotifyLifelength?.ConvertToByteArray(),
+                Remarks = medicalRecord.Remarks,
+                SpecialistId = medicalRecord.SpecialistId,
+                ClassId = medicalRecord.ClassNumber,
+                IssueDate = medicalRecord.IssueDate
+            };
+        }
+
 		public static CAASpecialistDTO ConvertCAA(this Specialist specialist)
 		{
 			return new CAASpecialistDTO

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -9,6 +10,7 @@ namespace SmartCore.Entities.General.Personnel
 {
 	[Table("EmployeeMedicalRecors", "dbo", "ItemId")]
 	[Dto(typeof(SpecialistMedicalRecordDTO))]
+	[CAADto(typeof(CAASpecialistMedicalRecordDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class SpecialistMedicalRecord : BaseEntityObject

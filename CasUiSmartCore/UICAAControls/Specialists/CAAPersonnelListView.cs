@@ -128,7 +128,7 @@ namespace CAS.UI.UICAAControls.Specialists
 				string regNumber = SelectedItem.FirstName + " " + SelectedItem.LastName;
 				e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 				e.DisplayerText = regNumber;
-				e.RequestedEntity = new EmployeeScreen(SelectedItem);
+				e.RequestedEntity = new CAAEmployeeScreen(SelectedItem);
 			}
 		}
 		#endregion

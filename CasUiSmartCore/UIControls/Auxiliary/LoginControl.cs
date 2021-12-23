@@ -818,6 +818,10 @@ namespace CAS.UI.UIControls.Auxiliary
                 var environment = DbTypes.CaaEnvironment = new CaaEnvironment();
                 environment.AuditRepository = GlobalObjects.AuditRepository;
                 environment.ApiProvider = new ApiProvider(con.Connection);
+                
+
+                var personelService = new PersonnelCore(environment);
+                GlobalObjects.PersonnelCore = personelService;
                 GlobalObjects.CaaEnvironment = environment;
 
             }

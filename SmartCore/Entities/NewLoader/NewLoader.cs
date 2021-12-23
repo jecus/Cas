@@ -9,7 +9,9 @@ using CAS.UI.Helpers;
 using Entity.Abstractions;
 using Entity.Abstractions.Filters;
 using SmartCore.DtoHelper;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Attributes;
 using SmartCore.Management;
 using SmartCore.Queries;
 
@@ -205,7 +207,20 @@ namespace SmartCore.Entities.NewLoader
 		}
 
 
-        
+		public void ReloadDictionary(params Type[] types)
+        {
+            foreach (var type in types)
+            {
+                var dto = (CAADtoAttribute)type.GetCustomAttributes(typeof(CAADtoAttribute), false).FirstOrDefault();
+                var reloadedDict = GetObjectList(dto.Type, type, loadChild: true);
+
+                var dict = _casEnvironment.GetDictionary(type);
+                dict.Clear();
+
+                foreach (AbstractDictionary dictionary in reloadedDict)
+                    dict.Add(dictionary);
+            }
+        }
 
 
 		#region private string GetConverterMethodName(Type TOut)

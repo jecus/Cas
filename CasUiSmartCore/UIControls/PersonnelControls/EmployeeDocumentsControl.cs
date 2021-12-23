@@ -181,8 +181,14 @@ namespace CAS.UI.UIControls.PersonnelControls
 
 			try
 			{
-				GlobalObjects.DocumentCore.SaveDocumentsList(_currentItem, unsaved);
-			}
+				if(GlobalObjects.CasEnvironment != null)
+				    GlobalObjects.DocumentCore.SaveDocumentsList(_currentItem, unsaved);
+                else
+                {
+					foreach (var unsavedDocument in unsaved)
+                        GlobalObjects.CaaEnvironment.NewKeeper.Save(unsavedDocument, isCaa:true);
+				}
+            }
 			catch (Exception ex)
 			{
 				Program.Provider.Logger.Log("Error while save document", ex);

@@ -220,7 +220,7 @@ namespace CAS.UI.UIControls.PersonnelControls
             dictionaryComboBoxLocation.Type = typeof(LocationsType);
 
 			checkedListBox1.Items.Clear();
-			checkedListBox1.Items.AddRange(GlobalObjects.CasEnvironment.GetDictionary<Specialization>().ToArray());
+			checkedListBox1.Items.AddRange(GlobalObjects.CasEnvironment?.GetDictionary<Specialization>().ToArray() ?? GlobalObjects.CaaEnvironment?.GetDictionary<Specialization>().ToArray());
 
 			for (int i = 0; i < checkedListBox1.Items.Count; i++)
 			{
