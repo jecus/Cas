@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
@@ -179,6 +180,7 @@ namespace SmartCore.Entities.Dictionaries
 
     [Table("CategoryRecords", "dbo", "ItemId")]
 	[Dto(typeof(CategoryRecordDTO))]
+	[CAADto(typeof(CAACategoryRecordDTO))]
     [Condition("IsDeleted", "0")]
     [Serializable]
     public class CategoryRecord : BaseEntityObject

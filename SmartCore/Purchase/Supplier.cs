@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -14,6 +15,7 @@ namespace SmartCore.Purchase
 	/// </summary>
 	[Table("Supplier", "dbo", "ItemId")]
 	[Dto(typeof(SupplierDTO))]
+	[CAADto(typeof(CAASupplierDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class Supplier : BaseEntityObject

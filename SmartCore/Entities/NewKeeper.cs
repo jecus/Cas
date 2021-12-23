@@ -362,7 +362,8 @@ namespace SmartCore.Entities
 			var method = typeof(GeneralConverterDto).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public, null, new[] { t }, null);
 			if (method == null)
 				method = typeof(DictionaryConverterDto).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public, null, new[] { t }, null);
-
+            if (method == null)
+                method = typeof(CaaGeneralConverterDTO).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public, null, new[] { t }, null);
 			if (method == null)
 				throw new ArgumentNullException(methodName, $"В конвертере не содержится метод для {nameof(t)}");
 

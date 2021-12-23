@@ -6,6 +6,7 @@ using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.Activity;
 using CAS.UI.UICAAControls.Operators;
+using CAS.UI.UICAAControls.Specialists;
 using CAS.UI.UICAAControls.Users;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
@@ -98,11 +99,19 @@ namespace CAS.UI.UICAAControls
 			UpdateInformation();
 		}
 
+		#endregion
+
+		#region private void LinkPersonnelDisplayerRequested(object sender, ReferenceEventArgs e)
+
+        private void LinkPersonnelDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = "Personnel";
+            e.RequestedEntity = new CAAPersonnelListScreen(_currentOperator);
+        }
+
         #endregion
 
-
-
-        private void Users_Click(object sender, ReferenceEventArgs e)
+		private void Users_Click(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Users";
             e.RequestedEntity = new CAAUserListScreen(GlobalObjects.CaaEnvironment.Operators[0]);

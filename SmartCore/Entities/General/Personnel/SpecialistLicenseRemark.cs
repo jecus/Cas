@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
@@ -7,6 +8,7 @@ namespace SmartCore.Entities.General.Personnel
 {
 	[Table("SpecialistsLicenseRemark", "dbo", "ItemId")]
 	[Dto(typeof(SpecialistLicenseRemarkDTO))]
+	[CAADto(typeof(CAASpecialistLicenseRemarkDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class SpecialistLicenseRemark : BaseEntityObject

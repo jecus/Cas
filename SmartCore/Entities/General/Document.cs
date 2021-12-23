@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
@@ -21,6 +22,7 @@ namespace SmartCore.Entities.General
 	/// </summary>
 	[Table("Documents", "dbo", "ItemId")]
 	[Dto(typeof(DocumentDTO))]
+	[CAADto(typeof(CAADocumentDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class Document : BaseEntityObject, IDirective, IComparable<Document>, IEquatable<Document>, IFileContainer

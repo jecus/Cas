@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
@@ -11,6 +12,7 @@ namespace SmartCore.Entities.General
     /// </summary>
     [Table("Files","dbo","ItemId")]
     [Dto(typeof(AttachedFileDTO))]
+    [CAADto(typeof(CAAAttachedFileDTO))]
 	[Serializable]
     public class AttachedFile : BaseEntityObject, IEquatable<AttachedFile>, IEqualityComparer<AttachedFile>
     {

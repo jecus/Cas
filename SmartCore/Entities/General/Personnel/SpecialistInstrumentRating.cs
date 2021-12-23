@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
@@ -7,6 +8,7 @@ namespace SmartCore.Entities.General.Personnel
 {
 	[Table("SpecialistsInstrumentRating", "dbo", "ItemId")]
 	[Dto(typeof(SpecialistInstrumentRatingDTO))]
+	[CAADto(typeof(CAASpecialistInstrumentRatingDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class SpecialistInstrumentRating : BaseEntityObject

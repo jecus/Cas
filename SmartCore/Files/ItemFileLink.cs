@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -9,6 +10,7 @@ namespace SmartCore.Files
 {
 	[Table("ItemsFilesLinks", "dbo", "ItemId")]
 	[Dto(typeof(ItemFileLinkDTO))]
+	[CAADto(typeof(CAAItemFileLinkDTO))]
 	[Serializable]
 	public class ItemFileLink : BaseEntityObject
 	{

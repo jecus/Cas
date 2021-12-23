@@ -161,7 +161,7 @@ namespace SmartCore.Entities.NewLoader
 		{
 			var method = typeof(INewLoader).GetMethods().FirstOrDefault(i => i.Name == "GetObjectList")?.MakeGenericMethod(dtoType, blType);
 
-			if (dtoType.Name == "AccessoryDescriptionDTO")
+			if (dtoType.Name == "AccessoryDescriptionDTO" || dtoType.Name == "CAAAccessoryDescriptionDTO")
 			{
 				var filter = new List<Filter>();
 				if(blType.Name == "AircraftModel")
@@ -214,7 +214,11 @@ namespace SmartCore.Entities.NewLoader
 		{
 			var methodName = "Convert";
             if (tIn.ToString().StartsWith("CAA"))
-                return methodName += "CAA";
+            {
+                if (TOut.Name.Equals("AircraftModel"))
+                    return "ConvertToAircraftModelCAA";
+				return methodName += "CAA";
+            }
 
 
 			if (TOut.Name.Equals("AircraftModel"))
@@ -244,8 +248,10 @@ namespace SmartCore.Entities.NewLoader
 			var method = typeof(GeneralConverterDto).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public, null, new[] { t }, null);
 			if (method == null)
 				method = typeof(DictionaryConverterDto).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public, null, new[] { t }, null);
+            if (method == null)
+				method = typeof(CaaGeneralConverterDTO).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public, null, new[] { t }, null);
 
-			if (method == null)
+            if (method == null)
 				throw new ArgumentNullException(methodName, $"В конвертере не содержится метод для {nameof(t)}");
 
 			return method;

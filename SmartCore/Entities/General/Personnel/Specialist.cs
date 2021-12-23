@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
@@ -23,6 +24,7 @@ namespace SmartCore.Entities.General.Personnel
     /// </summary>
     [Table("Specialists", "dbo", "ItemId")]
     [Dto(typeof(SpecialistDTO))]
+    [CAADto(typeof(CAASpecialistDTO))]
 	[Condition("IsDeleted", "0")]
     [Serializable]
     public class Specialist : BaseEntityObject, IFileContainer, IEmployeeFilterParams, IEmployeeWorkPackageFilterParams

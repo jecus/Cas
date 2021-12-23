@@ -466,6 +466,7 @@
     <Compile Include="Discrepancies\IDiscrepanciesCore.cs" />
     <Compile Include="Documents\DocumentCore.cs" />
     <Compile Include="Documents\IDocumentCore.cs" />
+    <Compile Include="DtoHelper\CaaGeneralConverterDTO.cs" />
     <Compile Include="DtoHelper\DictionaryConverterDto.cs" />
     <Compile Include="DtoHelper\Extentionsa.cs" />
     <Compile Include="DtoHelper\GeneralConverterDto.cs" />

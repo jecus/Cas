@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
@@ -9,6 +10,7 @@ namespace SmartCore.Entities.General.Personnel
 {
 	[Table("SpecialistsCAA", "dbo", "ItemId")]
 	[Dto(typeof(SpecialistCAADTO))]
+	[CAADto(typeof(CAASpecialistCAADTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class SpecialistCAA : BaseEntityObject

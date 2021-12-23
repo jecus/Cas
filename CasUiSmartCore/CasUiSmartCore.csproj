@@ -835,6 +835,18 @@
     <Compile Include="UICAAControls\Operators\AllOperatorsDemoCollectionControl.Designer.cs">
       <DependentUpon>AllOperatorsDemoCollectionControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\Specialists\CAAPersonnelListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Specialists\CAAPersonnelListScreen.Designer.cs">
+      <DependentUpon>CAAPersonnelListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\Specialists\CAAPersonnelListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Specialists\CAAPersonnelListView.Designer.cs">
+      <DependentUpon>CAAPersonnelListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\Users\CAAUserListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4047,6 +4059,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Operators\AllOperatorsDemoCollectionControl.resx">
       <DependentUpon>AllOperatorsDemoCollectionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\Specialists\CAAPersonnelListScreen.resx">
+      <DependentUpon>CAAPersonnelListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Users\CAAUserListScreen.resx">
       <DependentUpon>CAAUserListScreen.cs</DependentUpon>
