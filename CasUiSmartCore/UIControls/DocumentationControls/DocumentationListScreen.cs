@@ -311,8 +311,18 @@ namespace CAS.UI.UIControls.DocumentationControls
 					return;
 
 				string message;
-                var attachedFile = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<AttachedFileDTO, AttachedFile>(document.FileId);
-				GlobalObjects.CasEnvironment.SaveAsFile(attachedFile, saveFileDialog.FileName, out message);
+
+                if (GlobalObjects.CasEnvironment != null)
+                {
+                    var attachedFile = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<AttachedFileDTO, AttachedFile>(document.FileId);
+                    GlobalObjects.CasEnvironment.SaveAsFile(attachedFile, saveFileDialog.FileName, out message);
+				}
+                else
+                {
+                    var attachedFile = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<AttachedFileDTO, AttachedFile>(document.FileId);
+                    GlobalObjects.CaaEnvironment.SaveAsFile(attachedFile, saveFileDialog.FileName, out message);
+				}
+					
 				if (message != "")
 				{
 					MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],

@@ -55,6 +55,10 @@ namespace SmartCore
 
         void AddDictionary(Type t, IDictionaryCollection dictionary);
 
+        void OpenFile(AttachedFile attachedFile, out string message);
+
+        void SaveAsFile(AttachedFile attachedFile, string filePath, out string message);
+
     }
 
 	public interface ICasEnvironment : IBaseEnvironment
@@ -86,9 +90,6 @@ namespace SmartCore
 
 		void Reset();
 
-        void OpenFile(AttachedFile attachedFile, out string message);
-
-		void SaveAsFile(AttachedFile attachedFile, string filePath, out string message);
 
         void SetAircraftCore(IAircraftsCore aircraftsCore);
         void SetComponentCore(IComponentCore componentCore);

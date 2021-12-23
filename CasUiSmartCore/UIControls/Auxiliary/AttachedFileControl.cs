@@ -449,7 +449,9 @@ namespace CAS.UI.UIControls.Auxiliary
                 _fileData = _file.FileData;
                 _fileSize = _file.FileData != null ? _file.FileData.Length : _file.FileSize;
 
-                GlobalObjects.CasEnvironment.OpenFile(_file, out message);
+                if(GlobalObjects.CasEnvironment != null)
+                    GlobalObjects.CasEnvironment.OpenFile(_file, out message);
+                else GlobalObjects.CaaEnvironment.OpenFile(_file, out message);
             }
             else
             {
@@ -459,7 +461,9 @@ namespace CAS.UI.UIControls.Auxiliary
                 temp.FileData = _fileData;
                 temp.FileSize = _fileSize;
 
-                GlobalObjects.CasEnvironment.OpenFile(temp, out message);
+                if (GlobalObjects.CasEnvironment != null)
+                    GlobalObjects.CasEnvironment.OpenFile(temp, out message);
+                else GlobalObjects.CaaEnvironment.OpenFile(_file, out message);
             }
             if (message != "")
             {

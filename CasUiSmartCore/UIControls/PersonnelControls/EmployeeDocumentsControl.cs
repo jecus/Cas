@@ -347,7 +347,9 @@ namespace CAS.UI.UIControls.PersonnelControls
 					return;
 
 				string message;
-				GlobalObjects.CasEnvironment.SaveAsFile(document.AttachedFile, saveFileDialog.FileName, out message);
+				if(GlobalObjects.CasEnvironment != null)
+				    GlobalObjects.CasEnvironment.SaveAsFile(document.AttachedFile, saveFileDialog.FileName, out message);
+				else GlobalObjects.CaaEnvironment.SaveAsFile(document.AttachedFile, saveFileDialog.FileName, out message);
 				if (message != "")
 				{
 					MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],

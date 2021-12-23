@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using CAS.Entity.Models.DTO.General;
 using CAS.UI.Helpers;
 using Entity.Abstractions;
@@ -255,6 +258,106 @@ namespace SmartCore
         {
             ApiProvider.UpdatePassword(IdentityUser.ItemId, password);
         }
+
+        private List<FileProcess> _openFileProcesses = new List<FileProcess>();
+
+        #region public void OpenFile(AttachedFile attachedFile, out string message)
+
+        /// <summary>
+        /// Копирует файл во временную папку. В зависимости от расширения файла открывает подходящий процесс
+        /// </summary>
+        /// <param name="attachedFile">Файл для открытия</param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public void OpenFile(AttachedFile attachedFile, out string message)
+        {
+            message = "";
+
+            if (attachedFile.FileData == null)
+            {
+                attachedFile = _newLoader.GetObjectById<AttachedFileDTO, AttachedFile>(attachedFile.ItemId, true);
+
+                if (attachedFile.FileData == null)
+                    return;
+            }
+
+            var fileNameToRemove = Path.GetTempPath() + attachedFile.FileName;
+            if (!File.Exists(fileNameToRemove))
+            {
+                try
+                {
+                    FileStream fileStreamBack = new FileStream(fileNameToRemove, FileMode.Create, FileAccess.Write);
+                    fileStreamBack.Write(attachedFile.FileData, 0, attachedFile.FileData.Length);
+                    fileStreamBack.Close();
+                }
+                catch (IOException ioException)
+                {
+                    message = ioException.Message;
+                }
+            }
+
+            if (File.Exists(fileNameToRemove))
+            {
+                Process tempProcess = new Process();
+                //определение расширения файла
+                string pattern = @"\.\w+$";
+                Match m = Regex.Match(attachedFile.FileName, pattern);
+                string fileExtension = m.Groups[0].Value;
+                //определение,чем открыть фаил, в зависимости от расширения
+                if (Regex.IsMatch(fileExtension, @"(\.[pP][dD][fF])"))
+                    tempProcess.StartInfo.FileName = fileNameToRemove;
+                if (Regex.IsMatch(fileExtension, @"(\.[pP][nN][gG])") ||
+                    Regex.IsMatch(fileExtension, @"(\.[jJ][pP][gG])"))
+                {
+                    //tempProcess.StartInfo.FileName = "mspaint.exe";
+                    tempProcess.StartInfo.FileName = fileNameToRemove;
+                    tempProcess.StartInfo.Arguments = fileNameToRemove;
+                }
+
+                tempProcess.Start();
+                FileProcess fileProcess = new FileProcess(attachedFile, fileNameToRemove, tempProcess);
+
+                lock (_openFileProcesses)
+                {
+                    _openFileProcesses.Add(fileProcess);
+                }
+            }
+            else
+            {
+                message = "File : " + fileNameToRemove + " deleted or moved in another place." +
+                            "\nPlease check file location or bing another file.";
+            }
+        }
+
+        #endregion
+
+        #region public void SaveAsFile(AttachedFile attachedFile, string filePath,out string message)
+
+        public void SaveAsFile(AttachedFile attachedFile, string filePath, out string message)
+        {
+            message = "";
+
+            if (attachedFile.FileData == null)
+            {
+                attachedFile = _newLoader.GetObjectById<AttachedFileDTO, AttachedFile>(attachedFile.ItemId, true);
+
+                if (attachedFile.FileData == null)
+                    return;
+            }
+
+            try
+            {
+                var fileStreamBack = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+                fileStreamBack.Write(attachedFile.FileData, 0, attachedFile.FileData.Length);
+                fileStreamBack.Close();
+            }
+            catch (IOException ioException)
+            {
+                message = ioException.Message;
+            }
+        }
+
+        #endregion
 
 
         #region public NewKeeper NewKeeper { get; }

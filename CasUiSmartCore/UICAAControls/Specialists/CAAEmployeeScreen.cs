@@ -175,11 +175,35 @@ namespace CAS.UI.UICAAControls.Specialists
                 if (_currentItem.ItemId > 0)
 	                _currentItem = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO,Specialist>(_currentItem.ItemId, true);
 
+                var links = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+                {
+                    new Filter("ParentId",_currentItem.ItemId),
+                    new Filter("ParentTypeId",_currentItem.SmartCoreObjectType.ItemId)
+                }, true);
+
+                var fileIds = links.Where(i => i.FileId.HasValue).Select(i => i.FileId.Value);
+                if (fileIds.Any())
+                {
+                    var files = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAAAttachedFileDTO, AttachedFile>(new Filter("ItemId", values: fileIds));
+                    foreach (var file in links)
+                    {
+                        var f = files.FirstOrDefault(i => i.ItemId == file.FileId)?.GetCopyUnsaved(false);
+                        if (f == null) continue;
+                        f.ItemId = file.FileId.Value;
+                        file.File = (AttachedFile)f;
+
+                    }
+                }
+
+                _currentItem.Files.Clear();
+                _currentItem.Files.AddRange(links);
+
+
                 if (_currentItem.EmployeeDocuments.Any())
                 {
 	                var docIds = _currentItem.EmployeeDocuments.Select(i => i.ItemId);
 	                
-	                var links = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+	                links = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAItemFileLinkDTO, ItemFileLink>(new List<Filter>()
 	                {
 		                new Filter("ParentId",docIds),
 		                new Filter("ParentTypeId",SmartCoreType.Document.ItemId)
@@ -191,7 +215,6 @@ namespace CAS.UI.UICAAControls.Specialists
 		                document.Files = new CommonCollection<ItemFileLink>(links.Where(i => i.ParentId == document.ItemId));
 	                }
                 }
-                
 
                 _currentItem.MedicalRecord = GlobalObjects.CaaEnvironment.NewLoader.GetObject<CAASpecialistMedicalRecordDTO, SpecialistMedicalRecord>(new Filter("SpecialistId", _currentItem.ItemId));
 

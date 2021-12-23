@@ -38,7 +38,49 @@ using SmartCore.Queries;
 
 namespace SmartCore
 {
-	/// <summary>
+
+    public  class FileProcess
+    {
+        private readonly AttachedFile _attachedFile;
+        private readonly Process _process;
+        private readonly string _fileNameToRemove;
+
+        #region public AttachedFile AttachedFile
+
+        public AttachedFile AttachedFile
+        {
+            get { return _attachedFile; }
+        }
+        #endregion
+
+        #region public string FileNameToRemove
+
+        public string FileNameToRemove
+        {
+            get { return _fileNameToRemove; }
+        }
+        #endregion
+
+        #region public Process Process
+
+        public Process Process
+        {
+            get { return _process; }
+        }
+        #endregion
+
+        #region public FileProcess(AttachedFile attachedFile, string fileNameToRemove, Process process)
+
+        public FileProcess(AttachedFile attachedFile, string fileNameToRemove, Process process)
+        {
+            _attachedFile = attachedFile;
+            _fileNameToRemove = fileNameToRemove;
+            _process = process;
+        }
+        #endregion
+    }
+
+    /// <summary>
     /// Окружение системы CAS. Движок CAS
     /// </summary>
     public class CasEnvironment:ICasEnvironment
@@ -55,50 +97,6 @@ namespace SmartCore
         }
         #endregion
 
-        #region class FileProcess
-
-        class FileProcess
-        {
-            private readonly AttachedFile _attachedFile;
-            private readonly Process _process;
-            private readonly string _fileNameToRemove;
-
-            #region public AttachedFile AttachedFile
-
-            public AttachedFile AttachedFile
-            {
-                get { return _attachedFile; }
-            }
-            #endregion
-
-            #region public string FileNameToRemove
-
-            public string FileNameToRemove
-            {
-                get { return _fileNameToRemove; }
-            }
-            #endregion
-
-            #region public Process Process
-
-            public Process Process
-            {
-                get { return _process; }
-            }
-            #endregion
-
-            #region public FileProcess(AttachedFile attachedFile, string fileNameToRemove, Process process)
-
-            public FileProcess(AttachedFile attachedFile, string fileNameToRemove, Process process)
-            {
-                _attachedFile = attachedFile;
-                _fileNameToRemove = fileNameToRemove;
-                _process = process;
-            }
-            #endregion
-        }
-
-        #endregion
 
         private ApiProvider _apiProvider;
 		public ApiProvider ApiProvider
