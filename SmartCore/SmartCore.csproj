@@ -401,6 +401,7 @@
     <Compile Include="AverageUtilizations\IAverageUtilizationCore.cs" />
     <Compile Include="CaaEnvironment.cs" />
     <Compile Include="CAA\AllOperators.cs" />
+    <Compile Include="CAA\Operators\IAllOperatorFilterParams.cs" />
     <Compile Include="CAA\Operators\Ratings.cs" />
     <Compile Include="CAA\Operators\Privileges.cs" />
     <Compile Include="CAA\Operators\Fleet.cs" />

@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using CAA.Entity.Models.DTO;
+using SmartCore.CAA.Operators;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Management;
@@ -9,7 +10,7 @@ using SmartCore.Management;
 namespace SmartCore.CAA
 {
     [CAADto(typeof(AllOperatorsDTO))]
-    public class AllOperators : BaseEntityObject
+    public class AllOperators : BaseEntityObject, IAllOperatorFilterParams
     {
         public string FullName { get; set; }
         public string ShortName { get; set; }

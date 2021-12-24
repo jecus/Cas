@@ -157,10 +157,19 @@ namespace CAS.UI.UICAAControls
 
 		private void Operator_Click(object sender, ReferenceEventArgs e)
         {
-            var form = new AddOperatorFrom(new AllOperators());
-            form.ShowDialog();
-            e.Cancel = true;
+			e.DisplayerText = "Operators";
+            e.RequestedEntity = new CAAOperatorlListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
 		}
+
+        private void Aircraft_Click(object sender, ReferenceEventArgs e)
+        {
+            e.Cancel = true;
+        }
+
+        private void Store_Click(object sender, ReferenceEventArgs e)
+        {
+            e.Cancel = true;
+        }
 
 
 		#endregion

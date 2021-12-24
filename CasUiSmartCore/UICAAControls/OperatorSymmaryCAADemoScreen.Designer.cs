@@ -321,7 +321,8 @@ namespace CAS.UI.UICAAControls
 			this.Aircraft.Text = "Add Aircraft";
 			this.Aircraft.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.Aircraft.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-            // 
+            this.Aircraft.DisplayerRequested += Aircraft_Click;
+			// 
 			// QuotationSupp
 			// 
 			this.Store.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -344,7 +345,8 @@ namespace CAS.UI.UICAAControls
 			this.Store.Text = "Add Store";
 			this.Store.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.Store.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-            // 
+            this.Store.DisplayerRequested += Store_Click;
+			// 
 			// mail
 			// 
 			this.Operator.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));

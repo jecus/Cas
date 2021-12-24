@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using CAA.Entity.Models.DTO;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using MetroFramework.Forms;
 using SmartCore.CAA;
 using SmartCore.CAA.Operators;
-using SmartCore.Entities.General;
 
 namespace CAS.UI.UICAAControls.Operators
 {
     public partial class AddOperatorFrom :  MetroForm
     {
-        private readonly AllOperators _currentOperator;
+        private  AllOperators _currentOperator;
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private bool _logotypeChanged;
         private bool _logotypeWhiteChanged;
@@ -36,12 +35,16 @@ namespace CAS.UI.UICAAControls.Operators
             UpdateControls();
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
+            _animatedThreadWorker.RunWorkerAsync();
         }
         #endregion
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
             if (_currentOperator == null) return;
+
+            if (_currentOperator.ItemId > 0)
+                _currentOperator = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<AllOperatorsDTO, AllOperators>(_currentOperator.ItemId);
         }
 
         private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
