@@ -169,7 +169,8 @@ namespace CAS.UI.UIControls.DocumentationControls
 				DocumentForm form = new DocumentForm(SelectedItem);
 				if (form.ShowDialog() == DialogResult.OK)
 				{
-					GlobalObjects.PerformanceCalculator.GetNextPerformance(SelectedItem);
+					if(GlobalObjects.CasEnvironment != null)
+					    GlobalObjects.PerformanceCalculator.GetNextPerformance(SelectedItem);
 					var subs = GetListViewSubItems(SelectedItem);
 					for (int i = 0; i < subs.Count; i++)
 						radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;

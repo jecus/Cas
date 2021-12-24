@@ -8,6 +8,7 @@ using CAS.UI.Helpers;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
+using Entity.Abstractions.Attributte;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.Auxiliary;
@@ -133,46 +134,92 @@ namespace CAS.UI.UIControls.DocumentationControls
 
 			_animatedThreadWorker.ReportProgress(0, "Loading");
 
-		    if (_currentDocument.ItemId <= 0 && _currentDocument.IssueDateValidTo == DateTimeExtend.GetCASMinDateTime() && _loadTemplate)
-		    {
-			    if (_parent is Operator)
-				    parentDocs = GlobalObjects.DocumentCore.GetDocuments(_parent, DocumentType.Other, true);
-			    else if (_parent is Specialist || _parent is Supplier)
-				    parentDocs = GlobalObjects.DocumentCore.GetDocumentsByParentType(_parent, DocumentType.Other);
-			    else parentDocs = GlobalObjects.DocumentCore.GetDocuments(_parent.SmartCoreObjectType, DocumentType.Other, true);
-		    }
-
-			var links = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<ItemFileLinkDTO, ItemFileLink>(new List<Filter>()
-			{
-				new Filter("ParentId",_currentDocument.ItemId),
-				new Filter("ParentTypeId",_currentDocument.SmartCoreObjectType.ItemId)
-			}, true);
-
-            var fileIds = links.Where(i => i.FileId.HasValue).Select(i => i.FileId.Value);
-            if (fileIds.Any())
+            if (GlobalObjects.CasEnvironment != null)
             {
-                var files = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AttachedFileDTO, AttachedFile>(new Filter("ItemId", values: fileIds));
-                foreach (var file in links)
+                if (_currentDocument.ItemId <= 0 && _currentDocument.IssueDateValidTo == DateTimeExtend.GetCASMinDateTime() && _loadTemplate)
                 {
-                    var f = files.FirstOrDefault(i => i.ItemId == file.FileId)?.GetCopyUnsaved(false);
-                    if (f == null) continue;
-                    f.ItemId = file.FileId.Value;
-                    file.File = (AttachedFile)f;
-
+                    if (_parent is Operator)
+                        parentDocs = GlobalObjects.DocumentCore.GetDocuments(_parent, DocumentType.Other, true);
+                    else if (_parent is Specialist || _parent is Supplier)
+                        parentDocs = GlobalObjects.DocumentCore.GetDocumentsByParentType(_parent, DocumentType.Other);
+                    else parentDocs = GlobalObjects.DocumentCore.GetDocuments(_parent.SmartCoreObjectType, DocumentType.Other, true);
                 }
+
+                var links = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<ItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+                {
+                    new Filter("ParentId",_currentDocument.ItemId),
+                    new Filter("ParentTypeId",_currentDocument.SmartCoreObjectType.ItemId)
+                }, true);
+
+                var fileIds = links.Where(i => i.FileId.HasValue).Select(i => i.FileId.Value);
+                if (fileIds.Any())
+                {
+                    var files = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AttachedFileDTO, AttachedFile>(new Filter("ItemId", values: fileIds));
+                    foreach (var file in links)
+                    {
+                        var f = files.FirstOrDefault(i => i.ItemId == file.FileId)?.GetCopyUnsaved(false);
+                        if (f == null) continue;
+                        f.ItemId = file.FileId.Value;
+                        file.File = (AttachedFile)f;
+
+                    }
+                }
+
+                _currentDocument.Files.Clear();
+                _currentDocument.Files.AddRange(links);
+
+                _animatedThreadWorker.ReportProgress(80, "Loading Suppliers");
+                _suppliers.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<SupplierDTO, Supplier>());
+
+                var q = _suppliers.Where(i => i.Name == null);
+                foreach (var supplier in q)
+                {
+                    GlobalObjects.CasEnvironment.Keeper.Delete(supplier);
+                }
+			}
+            else
+            {
+                if (_currentDocument.ItemId <= 0 && _currentDocument.IssueDateValidTo == DateTimeExtend.GetCASMinDateTime() && _loadTemplate)
+                {
+                    parentDocs = GlobalObjects
+						.CaaEnvironment
+                        .NewLoader
+                        .GetObjectListAll<DocumentDTO, SmartCore.Entities.General.Document>(new Filter("CorrectorId", FilterType.Equal, GlobalObjects.CaaEnvironment.IdentityUser.ItemId), true).ToList();
+				}
+
+                var links = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+                {
+                    new Filter("ParentId",_currentDocument.ItemId),
+                    new Filter("ParentTypeId",_currentDocument.SmartCoreObjectType.ItemId)
+                }, true);
+
+                var fileIds = links.Where(i => i.FileId.HasValue).Select(i => i.FileId.Value);
+                if (fileIds.Any())
+                {
+                    var files = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AttachedFileDTO, AttachedFile>(new Filter("ItemId", values: fileIds));
+                    foreach (var file in links)
+                    {
+                        var f = files.FirstOrDefault(i => i.ItemId == file.FileId)?.GetCopyUnsaved(false);
+                        if (f == null) continue;
+                        f.ItemId = file.FileId.Value;
+                        file.File = (AttachedFile)f;
+
+                    }
+                }
+
+                _currentDocument.Files.Clear();
+                _currentDocument.Files.AddRange(links);
+
+                _animatedThreadWorker.ReportProgress(80, "Loading Suppliers");
+                _suppliers.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<SupplierDTO, Supplier>());
+
+                var q = _suppliers.Where(i => i.Name == null);
+                foreach (var supplier in q)
+                    GlobalObjects.CaaEnvironment.NewKeeper.Delete(supplier);
             }
 
-			_currentDocument.Files.Clear();
-			_currentDocument.Files.AddRange(links);
 
-			_animatedThreadWorker.ReportProgress(80, "Loading Suppliers");
-			_suppliers.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<SupplierDTO, Supplier>());
-
-		    var q = _suppliers.Where(i => i.Name == null);
-		    foreach (var supplier in q)
-		    {
-			    GlobalObjects.CasEnvironment.Keeper.Delete(supplier);
-		    }
+		    
 
 			_animatedThreadWorker.ReportProgress(100, "Loading complete");
 	    }
@@ -214,7 +261,10 @@ namespace CAS.UI.UIControls.DocumentationControls
 			comboBoxDocumentType.SelectedItem = _currentDocument.DocType;
 
 			//обновление под.типа
-			var fromEnv = (DocumentSubTypeCollection)GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>();
+            DocumentSubTypeCollection fromEnv;
+			if (GlobalObjects.CasEnvironment != null)
+			    fromEnv = (DocumentSubTypeCollection)GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>();
+			else fromEnv = (DocumentSubTypeCollection)GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>();
 			var certificatesSubs = new DocumentSubTypeCollection();
 			certificatesSubs.AddRange(fromEnv.GetSubTypesByDocType(_currentDocument.DocType));
 
@@ -247,11 +297,6 @@ namespace CAS.UI.UIControls.DocumentationControls
 
 			#region Заполнение comboBoxNomenclature
 
-			//var nomenclatures = GlobalObjects.CasEnvironment.GetDictionary<Nomenclatures>().ToArray();
-			//comboBoxNomenclature.Items.Clear();
-			//comboBoxNomenclature.Items.AddRange(nomenclatures);
-			//comboBoxNomenclature.Items.Add(Nomenclatures.Unknown);
-			//comboBoxNomenclature.SelectedItem = _currentDocument.Nomenсlature;
 
 			#endregion
 
@@ -265,7 +310,10 @@ namespace CAS.UI.UIControls.DocumentationControls
 
 			#region Заполнение comboBoxDepartment
 
-			var departments = GlobalObjects.CasEnvironment.GetDictionary<Department>().ToArray();
+            IDictionaryItem[] departments;
+            if (GlobalObjects.CasEnvironment != null)
+			    departments = GlobalObjects.CasEnvironment.GetDictionary<Department>().ToArray();
+			else departments = GlobalObjects.CaaEnvironment.GetDictionary<Department>().ToArray();
 			comboBoxDepartment.Items.Clear();
 			comboBoxDepartment.Items.AddRange(departments);
 			comboBoxDepartment.Items.Add(Department.Unknown);
@@ -353,40 +401,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 		}
 		#endregion
 
-		#region private void CheckExist()
-		private bool CheckExist()
-        {
-            //Проверка на то, не существует ли такой подтип для данного типа документов у текущего родителя
-            List<Document> parentDocs =
-                GlobalObjects.DocumentCore.GetDocuments(_parent, 
-                    comboBoxDocumentType.SelectedItem != null 
-                        ? (DocumentType)comboBoxDocumentType.SelectedItem
-                        : DocumentType.Other);
-
-            if (parentDocs.Count == 0) return true;//данный родитель пока не имеет документов
-            if (comboBoxSubType.SelectedItem == null) return true;//подтип не задан
-
-            //Поиск документа с заданным подтипом
-            //Document exist = parentDocs.Where(d => d.DocumentSubType ==
-            //                                       ((DocumentSubType) comboBoxSubType.SelectedItem).ItemId).FirstOrDefault();
-            if (comboBoxDocumentType.SelectedItem == DocumentType.Certificate)
-            {
-                //Для сертификатов нельзя оздавать 2 и более документов одного подпита 
-                //для каждого родителя 
-                Document exist = parentDocs.FirstOrDefault(d => d.DocumentSubType == comboBoxSubType.SelectedItem
-                                                                && d.ParentId == _parent.ItemId);
-                if (exist != null)
-                {
-                    //документа с заданным типом нет - проверка проидена
-                    return exist.ItemId == _currentDocument.ItemId;
-                }
-                return true;
-            }
-            return true;
-        }
-		#endregion
-
-		#region  private void ApplyChanges()
+        #region  private void ApplyChanges()
 
 		private void ApplyChanges()
 	    {
@@ -484,42 +499,23 @@ namespace CAS.UI.UIControls.DocumentationControls
         {
             DocumentType type = (DocumentType) comboBoxDocumentType.SelectedItem;
             comboBoxSubType.Items.Clear();
-            //List<DocumentSubType> list = GlobalObjects.CasEnvironment.DocSubTypes.GetSubTypesByDocType((DocumentType)comboBoxDocumentType.SelectedItem);
-            var dstc = (DocumentSubTypeCollection) GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>();
-            List<DocumentSubType> list = dstc.GetSubTypesByDocType((DocumentType)comboBoxDocumentType.SelectedItem);
+
+            DocumentSubTypeCollection dstc;
+			if (GlobalObjects.CasEnvironment != null)
+                dstc = (DocumentSubTypeCollection) GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>();
+			else dstc = (DocumentSubTypeCollection)GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>();
+			List<DocumentSubType> list = dstc.GetSubTypesByDocType((DocumentType)comboBoxDocumentType.SelectedItem);
             
             foreach (DocumentSubType item in list)
             {
                 comboBoxSubType.Items.Add(item);
             }
-            //if(type.ItemID != DocumentType.Contract.ItemID)
-            //{
-            //    textBoxContractNumber.Enabled =
-            //    textBoxPayerName.Enabled =
-            //    textBoxProlongation.Enabled =
-            //    textBoxServiceType.Enabled =
-            //    textBoxResponsible.Enabled = false;    
-            //}
-            //else 
             if (type.ItemId == DocumentType.Equipment.ItemId)
             {
-                //textBoxContractNumber.Enabled =
-                //    textBoxPayerName.Enabled =
-                //    textBoxProlongation.Enabled =
-                //    textBoxServiceType.Enabled =
-                //    textBoxResponsible.Enabled =
-                    checkBoxIssueValidTo.Enabled =
+                checkBoxIssueValidTo.Enabled =
                     dateTimePickerIssueValidFrom.Enabled =
                     dateTimePickerIssueValidTo.Enabled = false;
             }
-            //else
-            //{
-            //    textBoxContractNumber.Enabled =
-            //    textBoxPayerName.Enabled =
-            //    textBoxProlongation.Enabled =
-            //    textBoxServiceType.Enabled =
-            //    textBoxResponsible.Enabled = true;      
-            //}
         }
         #endregion
 
@@ -535,7 +531,10 @@ namespace CAS.UI.UIControls.DocumentationControls
 	        {
 		        ApplyChanges();
 
-		        GlobalObjects.DocumentCore.SaveDocumentsList(_parent, new List<Document> {CurrentDocument});
+				if(GlobalObjects.CasEnvironment != null)
+		            GlobalObjects.DocumentCore.SaveDocumentsList(_parent, new List<Document> {CurrentDocument});
+                else GlobalObjects.CaaEnvironment.NewKeeper.Save(CurrentDocument);
+            
 			    DialogResult = DialogResult.OK;
 			    Close();
 	        }
@@ -617,13 +616,20 @@ namespace CAS.UI.UIControls.DocumentationControls
 		{
 			var department = comboBoxDepartment.SelectedItem as Department;
 
-			var nomenclatures = GlobalObjects.CasEnvironment.GetDictionary<Nomenclatures>().Cast<Nomenclatures>().Where(i => i.Department?.ItemId == department.ItemId).ToArray();
-			comboBoxNomenclature.Items.Clear();
+
+            Nomenclatures[] nomenclatures;
+            if(GlobalObjects.CasEnvironment != null)
+                nomenclatures = GlobalObjects.CasEnvironment.GetDictionary<Nomenclatures>().Cast<Nomenclatures>().Where(i => i.Department?.ItemId == department.ItemId).ToArray();
+			else nomenclatures = GlobalObjects.CaaEnvironment.GetDictionary<Nomenclatures>().Cast<Nomenclatures>().Where(i => i.Department?.ItemId == department.ItemId).ToArray();
+            comboBoxNomenclature.Items.Clear();
 			comboBoxNomenclature.Items.AddRange(nomenclatures);
 			comboBoxNomenclature.Items.Add(Nomenclatures.Unknown);
 			comboBoxNomenclature.SelectedItem = _currentDocument.Nomenсlature;
 
-			var specialization = GlobalObjects.CasEnvironment.GetDictionary<Specialization>().Cast<Specialization>().Where(i => i.Department?.ItemId == department.ItemId).ToArray();
+            Specialization[] specialization;
+            if (GlobalObjects.CasEnvironment != null)
+				specialization = GlobalObjects.CasEnvironment.GetDictionary<Specialization>().Cast<Specialization>().Where(i => i.Department?.ItemId == department.ItemId).ToArray();
+			else specialization = GlobalObjects.CaaEnvironment.GetDictionary<Specialization>().Cast<Specialization>().Where(i => i.Department?.ItemId == department.ItemId).ToArray();
 			comboBoxResponsible.Items.Clear();
 			comboBoxResponsible.Items.AddRange(specialization);
 			comboBoxResponsible.Items.Add(Specialization.Unknown);

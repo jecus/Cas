@@ -19,6 +19,8 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
@@ -269,8 +271,20 @@ namespace CAS.UI.UIControls.Auxiliary
 				//TODO:(Evgenii Babak) нужен Helper
 				if (ViewedType.Name == typeof(NonRoutineJob).Name)
 					InitialDirectiveArray.AddRange(GlobalObjects.NonRoutineJobCore.GetNonRoutineJobs().ToArray());
-				else
-					InitialDirectiveArray.AddRange(GlobalObjects.CasEnvironment?.Loader.GetObjectCollection(ViewedType, loadChild:true) ?? GlobalObjects.CaaEnvironment?.Loader.GetObjectCollection(ViewedType, loadChild: true));
+                else
+                {
+                    
+
+					if(GlobalObjects.CasEnvironment !=null)
+                        InitialDirectiveArray.AddRange(GlobalObjects.CasEnvironment?.Loader.GetObjectCollection(ViewedType, loadChild: true));
+                    else
+                    {
+                        var dto = (CAADtoAttribute)ViewedType.GetCustomAttributes(typeof(CAADtoAttribute), false).FirstOrDefault();
+                        var res = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList(dto.Type, ViewedType, loadChild: true);
+                        InitialDirectiveArray.AddRange((IEnumerable<IBaseEntityObject>)res);
+					}
+					
+				}
 			}
 
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
@@ -291,13 +305,18 @@ namespace CAS.UI.UIControls.Auxiliary
 			{
 				AnimatedThreadWorker.ReportProgress(90, "comparison with the Work Packages");
 
-				//загрузка рабочих пакетов для определения 
-				//перекрытых ими выполнений задач
-				if (_openPubWorkPackages == null)
-					_openPubWorkPackages = new CommonCollection<WorkPackage>();
-				_openPubWorkPackages.Clear();
-				_openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Opened));
-				_openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Published));
+                if (GlobalObjects.CasEnvironment != null)
+                {
+                    //загрузка рабочих пакетов для определения 
+                    //перекрытых ими выполнений задач
+                    if (_openPubWorkPackages == null)
+                        _openPubWorkPackages = new CommonCollection<WorkPackage>();
+                    _openPubWorkPackages.Clear();
+                    _openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Opened));
+                    _openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Published));
+				}
+
+				
 			}
 
 			#region Загрузка Котировочных ордеров
@@ -309,17 +328,21 @@ namespace CAS.UI.UIControls.Auxiliary
 			if (_openPubQuotations == null)
 				_openPubQuotations = new CommonCollection<RequestForQuotation>();
 
-			_openPubQuotations.Clear();
-			_openPubQuotations.AddRange(GlobalObjects.PurchaseCore.
-				GetRequestForQuotation(CurrentOperator, new[]{WorkPackageStatus.Opened, WorkPackageStatus.Published}));
+            if (GlobalObjects.CasEnvironment != null)
+            {
+                _openPubQuotations.Clear();
+                _openPubQuotations.AddRange(GlobalObjects.PurchaseCore.
+                    GetRequestForQuotation(CurrentOperator, new[] { WorkPackageStatus.Opened, WorkPackageStatus.Published }));
 
-			if (AnimatedThreadWorker.CancellationPending)
-			{
-				e.Cancel = true;
-				return;
+                
 			}
-			#endregion
 
+			#endregion
+			if (AnimatedThreadWorker.CancellationPending)
+            {
+                e.Cancel = true;
+                return;
+            }
 			AnimatedThreadWorker.ReportProgress(100, "Complete");
 			#endregion
 			
