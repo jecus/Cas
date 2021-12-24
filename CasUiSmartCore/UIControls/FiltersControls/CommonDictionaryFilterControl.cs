@@ -118,7 +118,9 @@ namespace CAS.UI.UIControls.FiltersControls
                     {
                         try
                         {
-                            _typeItemsCollection = GlobalObjects.CasEnvironment.GetDictionary(genericArgumentType);
+                            if (GlobalObjects.CaaEnvironment != null)
+                                _typeItemsCollection = GlobalObjects.CasEnvironment.GetDictionary(genericArgumentType);
+                            else _typeItemsCollection = GlobalObjects.CaaEnvironment.GetDictionary(genericArgumentType);
                         }
                         catch (Exception)
                         {
