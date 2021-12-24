@@ -5,6 +5,7 @@ using CAA.Entity.Models.DTO;
 using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.Activity;
+using CAS.UI.UICAAControls.Document;
 using CAS.UI.UICAAControls.Operators;
 using CAS.UI.UICAAControls.Specialists;
 using CAS.UI.UICAAControls.Users;
@@ -170,6 +171,16 @@ namespace CAS.UI.UICAAControls
         {
             e.Cancel = true;
         }
+
+        #region private void LabelDocumentsDisplayerRequested(object sender, ReferenceEventArgs e)
+
+        private void LabelDocumentsDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = CurrentOperator.Name + ". " + "Documents";
+            e.RequestedEntity = new CAADocumentationListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+        }
+
+        #endregion
 
 
 		#endregion

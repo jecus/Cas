@@ -126,7 +126,7 @@ namespace CAS.UI.UIControls.Auxiliary
 				throw new ArgumentNullException("viewedType");
 
 			ViewedType = viewedType;
-			aircraftHeaderControl1.Operator = GlobalObjects.CasEnvironment.Operators[0];
+			aircraftHeaderControl1.Operator = GlobalObjects.CasEnvironment?.Operators[0] ?? GlobalObjects.CaaEnvironment?.Operators[0];
 			StatusTitle = ViewedType.Name;
 			_currentForecast = new Forecast {Aircraft = CurrentAircraft};
 			_filter = new CommonFilterCollection(viewedType);
@@ -270,7 +270,7 @@ namespace CAS.UI.UIControls.Auxiliary
 				if (ViewedType.Name == typeof(NonRoutineJob).Name)
 					InitialDirectiveArray.AddRange(GlobalObjects.NonRoutineJobCore.GetNonRoutineJobs().ToArray());
 				else
-					InitialDirectiveArray.AddRange(GlobalObjects.CasEnvironment.Loader.GetObjectCollection(ViewedType, loadChild:true));
+					InitialDirectiveArray.AddRange(GlobalObjects.CasEnvironment?.Loader.GetObjectCollection(ViewedType, loadChild:true) ?? GlobalObjects.CaaEnvironment?.Loader.GetObjectCollection(ViewedType, loadChild: true));
 			}
 
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");

@@ -227,7 +227,7 @@ namespace CAS.UI.UICAAControls.Specialists
 
 	            };
 
-				var documents = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAADocumentDTO, Document>(new Filter("ParentTypeId", types), true);
+				var documents = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ParentTypeId", types), true);
 
 	            if (documents.Count > 0)
 	            {

@@ -49,8 +49,7 @@ namespace CAS.UI.UICAAControls
 			this.Operator = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.ExportATLB = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
 			this.LinkRecords = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
-			this.LinkInternalDocuments = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
-			this.LinkNomenclatures = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            this.LinkNomenclatures = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkFligthsSchedule = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkAircraftStatus = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkFligthsPlanOPS = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -432,7 +431,7 @@ namespace CAS.UI.UICAAControls
 			this._documentsReferenceContainer.Name = "_documentsReferenceContainer";
 			this._documentsReferenceContainer.ReferenceLink = this.LinkRigestry;
 			//this._documentsReferenceContainer.ReferenceLink02 = this.LinkRecords;
-			this._documentsReferenceContainer.ReferenceLink03 = this.LinkInternalDocuments;
+			this._documentsReferenceContainer.ReferenceLink03 = null;
 			this._documentsReferenceContainer.ReferenceLink04 = null;
 			this._documentsReferenceContainer.ReferenceLink05 = null;
 			this._documentsReferenceContainer.ReferenceLink06 = null;
@@ -473,7 +472,8 @@ namespace CAS.UI.UICAAControls
 			this.LinkRigestry.Text = "Registry";
 			this.LinkRigestry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkRigestry.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-            // 
+            this.LinkRigestry.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LabelDocumentsDisplayerRequested);
+			// 
 			// LinkRecords
 			// 
 			this.LinkRecords.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -496,29 +496,6 @@ namespace CAS.UI.UICAAControls
 			this.LinkRecords.Text = "Correspondence";
 			this.LinkRecords.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkRecords.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-            // 
-			// LinkInternalDocuments
-			// 
-			this.LinkInternalDocuments.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.LinkInternalDocuments.Displayer = null;
-			this.LinkInternalDocuments.DisplayerText = null;
-			this.LinkInternalDocuments.Entity = null;
-			this.LinkInternalDocuments.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.LinkInternalDocuments.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.LinkInternalDocuments.ImageBackColor = System.Drawing.Color.Transparent;
-			this.LinkInternalDocuments.ImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.LinkInternalDocuments.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.LinkInternalDocuments.LinkMouseCapturedColor = System.Drawing.Color.Empty;
-			this.LinkInternalDocuments.Location = new System.Drawing.Point(10, 0);
-			this.LinkInternalDocuments.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.LinkInternalDocuments.Name = "LinkInternalDocuments";
-			this.LinkInternalDocuments.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.LinkInternalDocuments.Size = new System.Drawing.Size(188, 20);
-			this.LinkInternalDocuments.Status = AvControls.Statuses.Satisfactory;
-			this.LinkInternalDocuments.TabIndex = 3;
-			this.LinkInternalDocuments.Text = "Internal Documents";
-			this.LinkInternalDocuments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.LinkInternalDocuments.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             // 
 			// LinkNomenclatures
 			// 
@@ -1692,8 +1669,7 @@ namespace CAS.UI.UICAAControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel Store;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel Operator;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRecords;
-		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkInternalDocuments;
-		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkNomenclatures;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkNomenclatures;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPersonnel;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkSpecializations;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkAircraftStatus;
