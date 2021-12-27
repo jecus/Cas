@@ -7,6 +7,7 @@ using SmartCore.CAA;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Files;
 using SmartCore.Purchase;
@@ -15,7 +16,171 @@ namespace SmartCore.DtoHelper
 {
     public static  class CaaGeneralConverterDTO
 	{
-        public static SpecialistMedicalRecord ConvertCAA(this CAASpecialistMedicalRecordDTO medicalRecordDto)
+
+		public static CAAAircraftDTO ConvertCAA(this Aircraft aircraft)
+		{
+			return new CAAAircraftDTO
+			{
+				ItemId = aircraft.ItemId,
+				IsDeleted = aircraft.IsDeleted,
+				Updated = aircraft.Updated,
+				CorrectorId = aircraft.CorrectorId,
+				AircraftFrameId = aircraft.AircraftFrameId,
+				OperatorID = aircraft.OperatorId,
+				APUFH = aircraft.APUFH,
+				AircraftTypeID = aircraft.AircraftTypeId,
+				ModelId = aircraft.Model?.ItemId,
+				TypeCertificateNumber = aircraft.TypeCertificateNumber,
+				ManufactureDate = aircraft.ManufactureDate,
+				RegistrationNumber = aircraft.RegistrationNumber,
+				SerialNumber = aircraft.SerialNumber,
+				VariableNumber = aircraft.VariableNumber,
+				LineNumber = aircraft.LineNumber,
+				Owner = aircraft.Owner,
+				BasicEmptyWeight = aircraft.BasicEmptyWeight,
+				BasicEmptyWeightCargoConfig = aircraft.BasicEmptyWeightCargoConfig,
+				CargoCapacityContainer = aircraft.CargoCapacityContainer,
+				Cruise = aircraft.Cruise,
+				CruiseFuelFlow = aircraft.CruiseFuelFlow,
+				FuelCapacity = aircraft.FuelCapacity,
+				MaxCruiseAltitude = aircraft.MaxCruiseAltitude,
+				MaxLandingWeight = aircraft.MaxLandingWeight,
+				MaxPayloadWeight = aircraft.MaxLandingWeight,
+				MaxTakeOffCrossWeight = aircraft.MaxTakeOffCrossWeight,
+				MaxTaxiWeight = aircraft.MaxTaxiWeight,
+				MaxZeroFuelWeight = aircraft.MaxZeroFuelWeight,
+				OperationalEmptyWeight = aircraft.OperationalEmptyWeight,
+				CockpitSeating = aircraft.CockpitSeating,
+				Galleys = aircraft.Galleys,
+				Lavatory = aircraft.Lavatory,
+				SeatingEconomy = (short?)aircraft.SeatingEconomy,
+				SeatingBusiness = (short?)aircraft.SeatingBusiness,
+				SeatingFirst = (short?)aircraft.SeatingFirst,
+				Oven = aircraft.Oven,
+				Boiler = aircraft.Boiler,
+				AirStairDoors = aircraft.AirStairsDoors,
+				Tanks = aircraft.Tanks,
+				AircraftAddress24Bit = aircraft.AircraftAddress24Bit,
+				ELTIdHexCode = aircraft.ELTIdHexCode,
+				DeliveryDate = aircraft.DeliveryDate,
+				AcceptanceDate = aircraft.AcceptanceDate,
+				Schedule = aircraft.Schedule,
+				MSG = (short)aircraft.MSG,
+				CheckNaming = aircraft.MaintenanceProgramCheckNaming,
+				NoiceCategory = aircraft.NoiceCategory,
+				FADEC = aircraft.FADEC,
+				LandingCategory = aircraft.LandingCategory,
+				EFIS = aircraft.EFIS,
+				Brakes = (short)aircraft.Brakes,
+				Winglets = aircraft.Winglets,
+				ApuUtizationPerFlightinMinutes = aircraft.ApuUtizationPerFlightinMinutes,
+			};
+		}
+
+		public static Aircraft ConvertCAA(this CAAAircraftDTO aircraftDto)
+		{
+			var value = new Aircraft
+			{
+				ItemId = aircraftDto.ItemId,
+				AircraftFrameId = aircraftDto.AircraftFrameId,
+				IsDeleted = aircraftDto.IsDeleted,
+				Updated = aircraftDto.Updated,
+				CorrectorId = aircraftDto.CorrectorId,
+				APUFH = aircraftDto.APUFH,
+				OperatorId = aircraftDto.OperatorID,
+				AircraftTypeId = aircraftDto.AircraftTypeID,
+				TypeCertificateNumber = aircraftDto.TypeCertificateNumber,
+				ManufactureDate = aircraftDto.ManufactureDate,
+				RegistrationNumber = aircraftDto.RegistrationNumber,
+				SerialNumber = aircraftDto.SerialNumber,
+				VariableNumber = aircraftDto.VariableNumber,
+				LineNumber = aircraftDto.LineNumber,
+				Owner = aircraftDto.Owner,
+				BasicEmptyWeight = aircraftDto.BasicEmptyWeight ?? default(double),
+				BasicEmptyWeightCargoConfig = aircraftDto.BasicEmptyWeightCargoConfig ?? default(double),
+				CargoCapacityContainer = aircraftDto.CargoCapacityContainer,
+				Cruise = aircraftDto.Cruise,
+				CruiseFuelFlow = aircraftDto.CruiseFuelFlow,
+				FuelCapacity = aircraftDto.FuelCapacity,
+				MaxCruiseAltitude = aircraftDto.MaxCruiseAltitude,
+				MaxLandingWeight = aircraftDto.MaxLandingWeight ?? default(double),
+				MaxPayloadWeight = aircraftDto.MaxPayloadWeight ?? default(double),
+				MaxTakeOffCrossWeight = aircraftDto.MaxTakeOffCrossWeight ?? default(double),
+				MaxTaxiWeight = aircraftDto.MaxTaxiWeight ?? default(double),
+				MaxZeroFuelWeight = aircraftDto.MaxZeroFuelWeight ?? default(double),
+				OperationalEmptyWeight = aircraftDto.OperationalEmptyWeight ?? default(double),
+				CockpitSeating = aircraftDto.CockpitSeating,
+				Galleys = aircraftDto.Galleys,
+				Lavatory = aircraftDto.Lavatory,
+				SeatingEconomy = aircraftDto.SeatingEconomy ?? default(int),
+				SeatingBusiness = aircraftDto.SeatingBusiness ?? default(int),
+				SeatingFirst = aircraftDto.SeatingFirst ?? default(int),
+				Oven = aircraftDto.Oven,
+				Boiler = aircraftDto.Boiler,
+				AirStairsDoors = aircraftDto.AirStairDoors,
+				Tanks = aircraftDto.Tanks ?? default(int),
+				AircraftAddress24Bit = aircraftDto.AircraftAddress24Bit,
+				ELTIdHexCode = aircraftDto.ELTIdHexCode,
+				DeliveryDate = aircraftDto.DeliveryDate,
+				AcceptanceDate = aircraftDto.AcceptanceDate,
+				Schedule = aircraftDto.Schedule,
+				MSG = (MSG)aircraftDto.MSG,
+				MaintenanceProgramCheckNaming = aircraftDto.CheckNaming,
+				NoiceCategory = aircraftDto.NoiceCategory,
+				FADEC = aircraftDto.FADEC,
+				LandingCategory = aircraftDto.LandingCategory,
+				EFIS = aircraftDto.EFIS,
+				Brakes = (Brakes)aircraftDto.Brakes,
+				Winglets = aircraftDto.Winglets,
+				ApuUtizationPerFlightinMinutes = aircraftDto.ApuUtizationPerFlightinMinutes,
+				Model = aircraftDto.Model?.ConvertToAircraftModelCAA()
+			};
+
+			if (aircraftDto.MaintenanceProgramChangeRecords != null)
+				value.MaintenanceProgramChangeRecords.AddRange(aircraftDto.MaintenanceProgramChangeRecords.Select(i => i.ConvertCAA()));
+
+			return value;
+		}
+
+        public static CAAMaintenanceProgramChangeRecordDTO ConvertCAA(this MaintenanceProgramChangeRecord record)
+        {
+            return new CAAMaintenanceProgramChangeRecordDTO
+            {
+                ItemId = record.ItemId,
+                IsDeleted = record.IsDeleted,
+                Updated = record.Updated,
+                CorrectorId = record.CorrectorId,
+                ParentAircraftId = record.ParentAircraftId,
+                MSG = (short?)record.MSG,
+                MaintenanceCheckRecordId = record.MaintenanceCheckRecordId,
+                CalculatedPerformanceSource = record.CalculatedPerformanceSource?.ConvertToByteArray(),
+                PerformanceNum = record.PerformanceNum,
+                RecordDate = record.RecordDate,
+                OnLifelength = record.OnLifelength?.ConvertToByteArray(),
+                Remarks = record.Remarks
+            };
+        }
+
+        public static MaintenanceProgramChangeRecord ConvertCAA(this CAAMaintenanceProgramChangeRecordDTO record)
+        {
+            return new MaintenanceProgramChangeRecord
+            {
+                ItemId = record.ItemId,
+                IsDeleted = record.IsDeleted,
+                Updated = record.Updated,
+                CorrectorId = record.CorrectorId,
+                ParentAircraftId = record.ParentAircraftId ?? default(int),
+                MSG = record.MSG.HasValue ? (MSG)record.MSG.Value : MSG.Unknown,
+                MaintenanceCheckRecordId = record.MaintenanceCheckRecordId ?? default(int),
+                CalculatedPerformanceSource = Lifelength.ConvertFromByteArray(record.CalculatedPerformanceSource),
+                PerformanceNum = record.PerformanceNum ?? default(int),
+                RecordDate = record.RecordDate ?? DateTimeExtend.GetCASMinDateTime(),
+                OnLifelength = Lifelength.ConvertFromByteArray(record.OnLifelength),
+                Remarks = record.Remarks
+            };
+        }
+
+		public static SpecialistMedicalRecord ConvertCAA(this CAASpecialistMedicalRecordDTO medicalRecordDto)
         {
             return new SpecialistMedicalRecord
             {

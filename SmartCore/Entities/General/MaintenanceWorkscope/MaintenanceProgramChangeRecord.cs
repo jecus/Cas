@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -11,6 +12,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 	/// </summary>
 	[Table("MaintenanceProgramChangeRecords", "dbo", "ItemId")]
 	[Dto(typeof(MaintenanceProgramChangeRecordDTO))]
+	[CAADto(typeof(CAAMaintenanceProgramChangeRecordDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class MaintenanceProgramChangeRecord: AbstractRecord

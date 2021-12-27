@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
+using SmartCore.CAA.Aircraft;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
@@ -18,7 +20,8 @@ namespace SmartCore.Entities.General
     [Table("Aircrafts", "dbo", "ItemId")]
     [Condition("IsDeleted", "0")]
 	[Dto(typeof(AircraftDTO))]
-	public class Aircraft : BaseEntityObject, IComparable<Aircraft>, IComponentContainer
+	[CAADto(typeof(CAAAircraftDTO))]
+	public class Aircraft : BaseEntityObject, IComparable<Aircraft>, IComponentContainer, IAircraftFilter
     {
 
         /*

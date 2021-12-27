@@ -422,11 +422,11 @@ namespace CAA.Entity.Core.Repository
             // 	return query.IncludeFilter(l);
             // }
             //
-            // if (typeCollection.Contains("MaintenanceProgramChangeRecordDTO"))
-            // {
-            // 	var l = Expression.Lambda<Func<T, IEnumerable<MaintenanceProgramChangeRecordDTO>>>(lambda.Body, lambda.Parameters);
-            // 	return query.IncludeFilter(l);
-            // }
+            if (typeCollection.Contains("MaintenanceProgramChangeRecordDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAAMaintenanceProgramChangeRecordDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
             //
             // if (typeCollection.Contains("AuditRecordDTO"))
             // {
@@ -661,11 +661,11 @@ namespace CAA.Entity.Core.Repository
             //              return query.IncludeFilter(l);
             // }
             //
-            //          if (typeCollection.Contains("MaintenanceProgramChangeRecordDTO"))
-            //          {
-            //              var l = Expression.Lambda<Func<T, IEnumerable<MaintenanceProgramChangeRecordDTO>>>(lambda.Body, lambda.Parameters);
-            //              return query.IncludeFilter(l);
-            // }
+            if (typeCollection.Contains("MaintenanceProgramChangeRecordDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CAAMaintenanceProgramChangeRecordDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
             //
             //          if (typeCollection.Contains("AuditRecordDTO"))
             //          {

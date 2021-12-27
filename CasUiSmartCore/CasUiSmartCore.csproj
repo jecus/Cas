@@ -817,6 +817,24 @@
     <Compile Include="UICAAControls\Activity\CAAActivityListView.Designer.cs">
       <DependentUpon>CAAActivityListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\Airacraft\AllAircraftsDemoCollectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Airacraft\AllAircraftsDemoCollectionControl.Designer.cs">
+      <DependentUpon>AllAircraftsDemoCollectionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\Airacraft\CAAAircraftListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Airacraft\CAAAircraftListScreen.Designer.cs">
+      <DependentUpon>CAAAircraftListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\Airacraft\CAAAircraftListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Airacraft\CAAAircraftListView.Designer.cs">
+      <DependentUpon>CAAAircraftListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\Document\CAADocumentationListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4073,6 +4091,13 @@
   <ItemGroup>
     <EmbeddedResource Include="UICAAControls\Activity\CAAActivityListScreen.resx">
       <DependentUpon>CAAActivityListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\Airacraft\AllAircraftsDemoCollectionControl.resx">
+      <DependentUpon>AllAircraftsDemoCollectionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\Airacraft\CAAAircraftListScreen.resx">
+      <DependentUpon>CAAAircraftListScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Document\CAADocumentationListScreen.resx">

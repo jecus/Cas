@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using CAS.UI.Helpers;
 using Entity.Abstractions;
@@ -28,6 +29,7 @@ namespace SmartCore
 {
     public interface ICaaEnvironment : IBaseEnvironment
     {
+        AircraftCollection Aircraft { get; set; }
 
     }
 
@@ -40,6 +42,7 @@ namespace SmartCore
 
 
         public OperatorCollection Operators { get; set; }
+        public AircraftCollection Aircraft { get; set; }
         public IAuditRepository AuditRepository { get; set; }
         public ApiProvider ApiProvider { get; set; }
 
@@ -83,6 +86,7 @@ namespace SmartCore
             }
             set { _currentUser = value; }
         }
+        #endregion
 
         public void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState)
         {
@@ -107,11 +111,22 @@ namespace SmartCore
                 return;
             }
 
-            loadingState.CurrentPersentage = 2;
+            loadingState.CurrentPersentage = 1;
             loadingState.CurrentPersentageDescription = "Loading Operators";
             backgroundWorker.ReportProgress(1, loadingState);
 
             Operators = new OperatorCollection(_newLoader.GetObjectList<OperatorDTO, Operator>().ToArray());
+
+            if (backgroundWorker.CancellationPending)
+            {
+                return;
+            }
+
+            loadingState.CurrentPersentage = 2;
+            loadingState.CurrentPersentageDescription = "Loading Aircrafts";
+            backgroundWorker.ReportProgress(1, loadingState);
+
+            Aircraft = new AircraftCollection(_newLoader.GetObjectList<CAAAircraftDTO, Aircraft>().ToArray());
 
             if (backgroundWorker.CancellationPending)
             {
@@ -131,7 +146,7 @@ namespace SmartCore
             }
         }
 
-        #endregion
+
 
 
         #region public CommonDictionariesCache Dictionaries

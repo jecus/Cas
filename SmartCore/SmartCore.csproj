@@ -400,6 +400,7 @@
     <Compile Include="AverageUtilizations\AverageUtilizationCore.cs" />
     <Compile Include="AverageUtilizations\IAverageUtilizationCore.cs" />
     <Compile Include="CaaEnvironment.cs" />
+    <Compile Include="CAA\Aircraft\IAircraftFilter.cs" />
     <Compile Include="CAA\AllOperators.cs" />
     <Compile Include="CAA\Operators\IAllOperatorFilterParams.cs" />
     <Compile Include="CAA\Operators\Ratings.cs" />

@@ -5,6 +5,7 @@ using CAA.Entity.Models.DTO;
 using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.Activity;
+using CAS.UI.UICAAControls.Airacraft;
 using CAS.UI.UICAAControls.Document;
 using CAS.UI.UICAAControls.Operators;
 using CAS.UI.UICAAControls.Specialists;
@@ -93,6 +94,8 @@ namespace CAS.UI.UICAAControls
         {
             var operators = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<AllOperatorsDTO, AllOperators>();
             _operators.OperatorCollection = new CommonCollection<AllOperators>(operators);
+            var aircaraft = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAircraftDTO, Aircraft>();
+            _aircrafts.AircraftCollection = new CommonCollection<Aircraft>(aircaraft);
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -164,7 +167,8 @@ namespace CAS.UI.UICAAControls
 
         private void Aircraft_Click(object sender, ReferenceEventArgs e)
         {
-            e.Cancel = true;
+            e.DisplayerText = "Aircrafts";
+            e.RequestedEntity = new CAAAircraftListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
         }
 
         private void Store_Click(object sender, ReferenceEventArgs e)

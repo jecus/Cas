@@ -1,4 +1,5 @@
-﻿using CAS.UI.UICAAControls.Operators;
+﻿using CAS.UI.UICAAControls.Airacraft;
+using CAS.UI.UICAAControls.Operators;
 using CAS.UI.UIControls.HangarControls;
 using CAS.UI.UIControls.ReferenceControls;
 using CASTerms;
@@ -39,6 +40,7 @@ namespace CAS.UI.UICAAControls
 			this.flowLayoutPanelExport = new System.Windows.Forms.FlowLayoutPanel();
 			this._operatorInfoReference = new CAS.UI.UIControls.OpepatorsControls.OperatorInfoReference();
             _operators = new AllOperatorsDemoCollectionControl();
+            _aircrafts = new AllAircraftsDemoCollectionControl();
             this._documentsReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
 			this.LinkRigestry = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.ExportMonthly = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
@@ -91,8 +93,7 @@ namespace CAS.UI.UICAAControls
 			this.LinkCommercialRequests = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.flowLayoutPanelAircrafts = new System.Windows.Forms.FlowLayoutPanel();
             this._certificationReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
-            this._registerReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
-			this._oversightReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
+            this._oversightReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
             this.flowLayoutPanelStores = new System.Windows.Forms.FlowLayoutPanel();
             this._adminContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
 			this._settingContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
@@ -1192,7 +1193,7 @@ namespace CAS.UI.UICAAControls
 			// 
 			this.flowLayoutPanelAircrafts.AutoScroll = true;
 			this.flowLayoutPanelAircrafts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.flowLayoutPanelAircrafts.Controls.Add(this._registerReferenceContainer);
+            this.flowLayoutPanelAircrafts.Controls.Add(this._aircrafts);
             this.flowLayoutPanelAircrafts.Controls.Add(this._operators);
             this.flowLayoutPanelAircrafts.Controls.Add(this._certificationReferenceContainer);
 			this.flowLayoutPanelAircrafts.Controls.Add(this._oversightReferenceContainer);
@@ -1234,37 +1235,7 @@ namespace CAS.UI.UICAAControls
 			this._certificationReferenceContainer.Size = new System.Drawing.Size(109, 42);
 			this._certificationReferenceContainer.TabIndex = 26;
 			this._certificationReferenceContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
-			// 
-			// _registerReferenceContainer
-			// 
-			this._registerReferenceContainer.AutoSize = true;
-			this._registerReferenceContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this._registerReferenceContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-			this._registerReferenceContainer.Caption = "Register";
-			this._registerReferenceContainer.DescriptionTextColor = System.Drawing.Color.DimGray;
-			this._registerReferenceContainer.Extended = false;
-			this._registerReferenceContainer.Location = new System.Drawing.Point(3, 174);
-			this._registerReferenceContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this._registerReferenceContainer.Name = "_registerReferenceContainer";
-            this._registerReferenceContainer.ReferenceLink02 = null;
-			this._registerReferenceContainer.ReferenceLink03 = null;
-			this._registerReferenceContainer.ReferenceLink04 = null;
-			this._registerReferenceContainer.ReferenceLink05 = null;
-			this._registerReferenceContainer.ReferenceLink06 = null;
-			this._registerReferenceContainer.ReferenceLink07 = null;
-			this._registerReferenceContainer.ReferenceLink08 = null;
-			this._registerReferenceContainer.ReferenceLink09 = null;
-			this._registerReferenceContainer.ReferenceLink10 = null;
-			this._registerReferenceContainer.ReferenceLink11 = null;
-			this._registerReferenceContainer.ReferenceLink12 = null;
-			this._registerReferenceContainer.ReferenceLink13 = null;
-			this._registerReferenceContainer.ReferenceLink14 = null;
-			this._registerReferenceContainer.ReferenceLink15 = null;
-			this._registerReferenceContainer.ReferenceLink16 = null;
-			this._registerReferenceContainer.Size = new System.Drawing.Size(109, 42);
-			this._registerReferenceContainer.TabIndex = 26;
-			this._registerReferenceContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
-			// 
+            // 
 			// _oversightReferenceContainer
 			// 
 			this._oversightReferenceContainer.AutoSize = true;
@@ -1614,6 +1585,19 @@ namespace CAS.UI.UICAAControls
             this._operators.Name = "_operators";
             this._operators.Size = new System.Drawing.Size(362, 168);
             this._operators.TabIndex = 25;
+            // 
+			// _operators
+            // 
+			this._aircrafts.AircraftCollection = null;
+            this._aircrafts.AutoSize = true;
+            this._aircrafts.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this._aircrafts.Extended = true;
+            this._aircrafts.Location = new System.Drawing.Point(3, 2);
+            this._aircrafts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this._aircrafts.MaximumSize = new System.Drawing.Size(400, 0);
+            this._aircrafts.Name = "_operators";
+            this._aircrafts.Size = new System.Drawing.Size(362, 168);
+            this._aircrafts.TabIndex = 25;
 
 			// 
 			// OperatorSymmaryDemoScreen
@@ -1650,6 +1634,7 @@ namespace CAS.UI.UICAAControls
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelStores;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelExport;
         private AllOperatorsDemoCollectionControl _operators;
+        private AllAircraftsDemoCollectionControl _aircrafts;
 		private CAS.UI.UIControls.OpepatorsControls.OperatorInfoReference _operatorInfoReference;
         private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _documentsReferenceContainer;
         private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _personnelReferenceContainer;
@@ -1658,8 +1643,7 @@ namespace CAS.UI.UICAAControls
 		private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _settingContainer;
 		private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _smsReferenceContainer;
 		private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _certificationReferenceContainer;
-		private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _registerReferenceContainer;
-		private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _oversightReferenceContainer;
+        private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _oversightReferenceContainer;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRigestry;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel ExportMonthly;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel Users;
