@@ -34,9 +34,11 @@ namespace CAA.Entity.Core
         #endregion
 
 
-		#region dbo
+        #region dbo
 
-		public DbSet<AllOperatorsDTO> AllOperatorsDtos { get; set; }
+        public DbSet<CAAAircraftDTO> AircraftDtos { get; set; }
+        public DbSet<CAAMaintenanceProgramChangeRecordDTO> MaintenanceProgramChangeRecordDtos { get; set; }
+        public DbSet<AllOperatorsDTO> AllOperatorsDtos { get; set; }
 		public DbSet<CAAAttachedFileDTO> AttachedFileDtos { get; set; }
         public DbSet<CAAItemFileLinkDTO> ItemFileLinkDtos { get; set; }
 		public DbSet<CAAUserDTO> UserDtos { get; set; }
@@ -70,6 +72,15 @@ namespace CAA.Entity.Core
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CAAAircraftDTO>()
+                .HasOne(i => i.Model)
+                .WithMany(i => i.AircraftDtos)
+                .HasForeignKey(i => i.ModelId);
+            modelBuilder.Entity<CAAAircraftDTO>()
+                .HasMany(i => i.MaintenanceProgramChangeRecords)
+                .WithOne(i => i.ParentAircraftDto)
+                .HasForeignKey(i => i.ParentAircraftId);
+
             modelBuilder.Entity<CAAItemFileLinkDTO>()
                 .HasOne(i => i.File)
                 .WithMany(i => i.ItemFileLinkDto)

@@ -154,6 +154,8 @@ namespace CAA.Entity.Models.Dictionary
 		public ICollection<CAASpecialistLicenseDTO> SpecialistLicenseDtos { get; set; }
         [JsonIgnore]
 		public ICollection<CAACategoryRecordDTO> CategoryRecordDtos { get; set; }
+        [JsonIgnore]
+        public ICollection<CAAAircraftDTO> AircraftDtos { get; set; }
 
 		#endregion
 	}
