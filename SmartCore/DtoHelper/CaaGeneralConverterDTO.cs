@@ -945,6 +945,11 @@ namespace SmartCore.DtoHelper
 					AemcPrivilages = oper.AemcPrivilages,
 					Ratings = oper.Ratings,
 					TraningOrgPrivilages = oper.TraningOrgPrivilages,
+                    IATACode = oper.IATACode,
+                    Description = oper.Description,
+                    IsAirOperator = oper.IsAirOperator,
+                    IsCAMO = oper.IsCAMO,
+                    IsCAO = oper.IsCAO,
 				},
 			};
 		}
@@ -982,6 +987,11 @@ namespace SmartCore.DtoHelper
 				AemcPrivilages = operdto.Settings.AemcPrivilages,
 				Ratings = operdto.Settings.Ratings,
 				TraningOrgPrivilages = operdto.Settings.TraningOrgPrivilages,
+                IATACode = operdto.Settings.IATACode,
+                Description = operdto.Settings.Description,
+                IsAirOperator = operdto.Settings.IsAirOperator,
+                IsCAMO = operdto.Settings.IsCAMO,
+                IsCAO = operdto.Settings.IsCAO,
 
 			};
 		}

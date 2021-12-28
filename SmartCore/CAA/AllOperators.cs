@@ -175,5 +175,12 @@ namespace SmartCore.CAA
         public string Ratings { get; set; }
         public string TraningOrgPrivilages { get; set; }
 
+
+        public string IATACode { get; set; }
+        public string Description { get; set; }
+        public bool IsAirOperator { get; set; }
+        public bool IsCAMO { get; set; }
+        public bool IsCAO { get; set; }
+
     }
 }

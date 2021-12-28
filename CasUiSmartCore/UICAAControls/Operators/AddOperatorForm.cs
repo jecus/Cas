@@ -59,10 +59,19 @@ namespace CAS.UI.UICAAControls.Operators
             metroTextBoxShortName.Text = _currentOperator.ShortName;
             metroTextBoxAddress.Text = _currentOperator.Address;
             metroTextBoxIcao.Text = _currentOperator.ICAOCode;
+            metroTextBoxIATA.Text = _currentOperator.IATACode;
             metroTextBoxPhone.Text = _currentOperator.Phone;
             metroTextBoxFax.Text = _currentOperator.Fax;
             metroTextBoxWeb.Text = _currentOperator.Web;
             metroTextBoxEmail.Text = _currentOperator.Email;
+            metroTextBoxOperatorType.Text = _currentOperator.Description;
+            metroTextBoxAmoType.Text = _currentOperator.Description;
+            metroTextBoxCAMO.Text = _currentOperator.Description;
+            metroTextBoxCAO.Text = _currentOperator.Description;
+            metroTextBoxAirdrome.Text = _currentOperator.Description;
+            metroTextBoxATCANS.Text = _currentOperator.Description;
+            metroTextBoxFuel.Text = _currentOperator.Description;
+            metroTextBoxTraining.Text = _currentOperator.Description;
 
             for (int i = 0; i < checkedListBoxTypeOfOper.Items.Count; i++)
             {
@@ -115,6 +124,11 @@ namespace CAS.UI.UICAAControls.Operators
             radioButtonAmo.Checked = _currentOperator.IsAMO;
             radioButtonAemc.Checked = _currentOperator.IsAEMS;
             radioButtonAirdromeOp.Checked = _currentOperator.IsAerodromOperator;
+            radioButtonAirOperator.Checked = _currentOperator.IsAirOperator;
+            radioButtonCAMO.Checked = _currentOperator.IsCAMO;
+            radioButtonCAO.Checked = _currentOperator.IsCAO;
+
+
             if (_currentOperator.IsCommertial)
                 radioButtonComertial.Checked = true;
             else radioButtonNotCommertial.Checked = true;

@@ -106,5 +106,20 @@ namespace CAA.Entity.Models.DTO
 
         [JsonProperty("TraningOrgPrivilages")]
         public string TraningOrgPrivilages { get; set; }
+
+        [JsonProperty("IATACode")]
+        public string IATACode { get; set; }
+
+        [JsonProperty("Description")]
+        public string Description { get; set; }
+
+        [JsonProperty("IsAirOperator")]
+        public bool IsAirOperator { get; set; }
+
+        [JsonProperty("IsCAMO")]
+        public bool IsCAMO { get; set; }
+
+        [JsonProperty("IsCAO")]
+        public bool IsCAO { get; set; }
     }
 }
