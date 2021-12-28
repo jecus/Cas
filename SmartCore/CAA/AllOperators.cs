@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Linq;
 using CAA.Entity.Models.DTO;
 using SmartCore.CAA.Operators;
 using SmartCore.Entities.General;
@@ -171,9 +173,8 @@ namespace SmartCore.CAA
         public string TypeOperation { get; set; }
         public string SpecialOperation { get; set; }
         public string Fleet { get; set; }
-        public string AemcPrivilages { get; set; }
+        public string Privilages { get; set; }
         public string Ratings { get; set; }
-        public string TraningOrgPrivilages { get; set; }
 
 
         public string IATACode { get; set; }
@@ -181,6 +182,119 @@ namespace SmartCore.CAA
         public bool IsAirOperator { get; set; }
         public bool IsCAMO { get; set; }
         public bool IsCAO { get; set; }
+
+
+        public string TypeString
+        {
+            get
+            {
+                if (IsAirOperator)
+                    return "AirOperator";
+                if (IsAMO)
+                    return "AMO";
+                if (IsCAMO)
+                    return "CAMO";
+                if (IsCAO)
+                    return "CAO";
+                if (IsAirOperator)
+                    return "AirOperator";
+                if (IsATC)
+                    return "ATC/ANS";
+                if (IsFuel)
+                    return "Fuel";
+                if (IsAEMS)
+                    return "AeMC";
+                if (IsTraningOperation)
+                    return "ATO";
+
+                return string.Empty;
+            }
+        }
+
+        public string CommertialString
+        {
+            get
+            {
+                if (IsCommertial)
+                    return "Commertial";
+                return "Not Commertial";
+            }
+        }
+        
+        public string PrivilagesString
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(Privilages))
+                {
+                    var text = Privilages.Split(' ');
+                    var res = new List<string>();
+                    foreach (var p in text)
+                        res.Add(Privileges.Items.FirstOrDefault(i => i.FullName.Equals(p))?.FullName);
+
+                    return string.Join(",", res);
+                }
+
+                return "";
+            }
+        }
+
+
+        public string TPOString
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(TypeOperation))
+                {
+                    var text = TypeOperation.Split(' ');
+                    var res = new List<string>();
+                    foreach (var p in text)
+                        res.Add(TypesOfOperations.Items.FirstOrDefault(i => i.FullName.Equals(p))?.FullName);
+
+                    return string.Join(",", res);
+                }
+
+                return "";
+            }
+        }
+
+        public string SPOString
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(SpecialOperation))
+                {
+                    var text = SpecialOperation.Split(' ');
+                    var res = new List<string>();
+                    foreach (var p in text)
+                        res.Add(SpecialOperations.Items.FirstOrDefault(i => i.FullName.Equals(p))?.FullName);
+
+                    return string.Join(",", res);
+                }
+
+                return "";
+            }
+        }
+
+        public string FleetString
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(Fleet))
+                {
+                    var text = Fleet.Split(' ');
+                    var res = new List<string>();
+                    foreach (var p in text)
+                        res.Add(Operators.Fleet.Items.FirstOrDefault(i => i.FullName.Equals(p))?.FullName);
+
+                    return string.Join(",", res);
+                }
+
+                return "";
+            }
+        }
+
+
 
     }
 }

@@ -85,12 +85,12 @@ namespace CAS.UI.UICAAControls.Operators
             }
             for (int i = 0; i < checkedListBoxAemcPrivilages.Items.Count; i++)
             {
-                if (_currentOperator.AemcPrivilages != null && _currentOperator.AemcPrivilages.Contains(checkedListBoxAemcPrivilages.Items[i].ToString()))
+                if (_currentOperator.Privilages != null && _currentOperator.Privilages.Contains(checkedListBoxAemcPrivilages.Items[i].ToString()))
                     checkedListBoxAemcPrivilages.SetItemChecked(i, true);
             }
             for (int i = 0; i < checkedListBoxTraningOrgPrivilages.Items.Count; i++)
             {
-                if (_currentOperator.TraningOrgPrivilages != null && _currentOperator.TraningOrgPrivilages.Contains(checkedListBoxTraningOrgPrivilages.Items[i].ToString()))
+                if (_currentOperator.Privilages != null && _currentOperator.Privilages.Contains(checkedListBoxTraningOrgPrivilages.Items[i].ToString()))
                     checkedListBoxTraningOrgPrivilages.SetItemChecked(i, true);
             }
             for (int i = 0; i < checkedListBoxRatings.Items.Count; i++)
@@ -141,10 +141,33 @@ namespace CAS.UI.UICAAControls.Operators
             _currentOperator.ShortName = metroTextBoxShortName.Text;
             _currentOperator.Address = metroTextBoxAddress.Text;
             _currentOperator.ICAOCode = metroTextBoxIcao.Text;
+            _currentOperator.IATACode = metroTextBoxIATA.Text;
             _currentOperator.Phone = metroTextBoxPhone.Text;
             _currentOperator.Fax = metroTextBoxFax.Text;
             _currentOperator.Web = metroTextBoxWeb.Text;
             _currentOperator.Email = metroTextBoxEmail.Text;
+
+            if(radioButtonAirOperator.Checked)
+                _currentOperator.Description = metroTextBoxOperatorType.Text;
+            else if (radioButtonAmo.Checked)
+                _currentOperator.Description = metroTextBoxAmoType.Text;
+            else if(radioButtonCAMO.Checked)
+                _currentOperator.Description = metroTextBoxCAMO.Text;
+            else if(radioButtonCAO.Checked)
+                _currentOperator.Description = metroTextBoxCAO.Text;
+            else if (radioButtonAirdromeOp.Checked)
+                _currentOperator.Description = metroTextBoxAirdrome.Text;
+            else if (radioButtonATC.Checked)
+                _currentOperator.Description = metroTextBoxATCANS.Text;
+            else if (radioButtonFuel.Checked)
+                _currentOperator.Description = metroTextBoxFuel.Text;
+            else if (radioButtonTraningOrg.Checked)
+                _currentOperator.Description = metroTextBoxTraining.Text;
+
+            _currentOperator.IsAerodromOperator = radioButtonAirdromeOp.Checked;
+            _currentOperator.IsAirOperator = radioButtonAirOperator.Checked;
+            _currentOperator.IsCAMO = radioButtonCAMO.Checked;
+            _currentOperator.IsCAO= radioButtonCAO.Checked;
 
             _currentOperator.IsATC = radioButtonATC.Checked;
             _currentOperator.IsFuel = radioButtonFuel.Checked;
@@ -157,10 +180,18 @@ namespace CAS.UI.UICAAControls.Operators
                 _currentOperator.TypeOperation += $"{item} ";
             foreach (var item in checkedListBoxFleet.CheckedItems)
                 _currentOperator.Fleet += $"{item} ";
-            foreach (var item in checkedListBoxAemcPrivilages.CheckedItems)
-                _currentOperator.AemcPrivilages += $"{item} ";
-            foreach (var item in checkedListBoxTraningOrgPrivilages.CheckedItems)
-                _currentOperator.TraningOrgPrivilages += $"{item} ";
+
+            if (radioButtonAemc.Checked)
+            {
+                foreach (var item in checkedListBoxAemcPrivilages.CheckedItems)
+                    _currentOperator.Privilages += $"{item} ";
+            }
+            else if (radioButtonTraningOrg.Checked)
+            {
+                foreach(var item in checkedListBoxTraningOrgPrivilages.CheckedItems)
+                _currentOperator.Privilages += $"{item} ";
+            }
+
             foreach (var item in checkedListBoxRatings.CheckedItems)
                 _currentOperator.Ratings += $"{item} ";
             foreach (var item in checkedListBoxSpecialOp.CheckedItems)

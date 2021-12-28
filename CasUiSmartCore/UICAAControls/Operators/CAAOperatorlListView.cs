@@ -50,13 +50,20 @@ namespace CAS.UI.UICAAControls.Operators
 		/// </summary>
 		protected override void SetHeaders()
 		{
-			AddColumn("Full Name", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Short Name", (int)(radGridView1.Width * 0.24f));
-			AddColumn("ICAOCode", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Address", (int)(radGridView1.Width * 0.4f));
-			AddColumn("Phone", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Name", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Type", (int)(radGridView1.Width * 0.24f));
+			AddColumn("ICAO", (int)(radGridView1.Width * 0.24f));
+			AddColumn("IATA", (int)(radGridView1.Width * 0.24f));
+			AddColumn("CAT/NC", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Type of Operation", (int)(radGridView1.Width * 0.4f));
+			AddColumn("SPO", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Fleet", (int)(radGridView1.Width * 0.5f));
+			AddColumn("Aircraft Type", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Privilages", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Address", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Phone", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Fax", (int)(radGridView1.Width * 0.3f));
-			AddColumn("Web", (int)(radGridView1.Width * 0.5f));
+			AddColumn("Web", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Email", (int)(radGridView1.Width * 0.3f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
@@ -71,10 +78,16 @@ namespace CAS.UI.UICAAControls.Operators
             var subItems = new List<CustomCell>()
 			{
 				CreateRow(item.FullName, item.FullName),
-				CreateRow(item.ShortName, item.ShortName),
+				CreateRow(item.TypeString, item.TypeString),
 				CreateRow(item.ICAOCode, item.ICAOCode),
+				CreateRow(item.IATACode, item.IATACode),
+				CreateRow(item.CommertialString, item.CommertialString),
+				CreateRow(item.TPOString, item.TPOString),
+				CreateRow(item.SPOString, item.SPOString),
+				CreateRow(item.FleetString, item.FleetString),
+				CreateRow(item.Description, item.Description),
+				CreateRow(item.PrivilagesString, item.PrivilagesString),
 				CreateRow(item.Address, item.Address),
-				CreateRow(item.Phone, item.Phone),
 				CreateRow(item.Fax, item.Fax),
 				CreateRow(item.Web, item.Web),
 				CreateRow(item.Email, item.Email),

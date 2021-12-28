@@ -98,14 +98,11 @@ namespace CAA.Entity.Models.DTO
         [JsonProperty("Fleet")]
         public string Fleet { get; set; }
 
-        [JsonProperty("AemcPrivilages")]
-        public string AemcPrivilages { get; set; }
-
         [JsonProperty("Ratings")]
         public string Ratings { get; set; }
 
-        [JsonProperty("TraningOrgPrivilages")]
-        public string TraningOrgPrivilages { get; set; }
+        [JsonProperty("Privilages")]
+        public string Privilages { get; set; }
 
         [JsonProperty("IATACode")]
         public string IATACode { get; set; }
