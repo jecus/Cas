@@ -137,6 +137,7 @@ namespace CAS.UI.UICAAControls.Operators
 
         private void ApplyChanges()
         {
+            _currentOperator.IsCommertial = radioButtonComertial.Checked;
             _currentOperator.FullName = textBoxFullName.Text;
             _currentOperator.ShortName = metroTextBoxShortName.Text;
             _currentOperator.Address = metroTextBoxAddress.Text;
@@ -175,6 +176,13 @@ namespace CAS.UI.UICAAControls.Operators
             _currentOperator.IsAMO = radioButtonAmo.Checked;
             _currentOperator.IsAEMS = radioButtonAemc.Checked;
             _currentOperator.IsAerodromOperator = radioButtonAirdromeOp.Checked;
+
+
+            _currentOperator.TypeOperation = "";
+            _currentOperator.Fleet = "";
+            _currentOperator.Privilages = "";
+            _currentOperator.Ratings = "";
+            _currentOperator.SpecialOperation = "";
 
             foreach (var item in checkedListBoxTypeOfOper.CheckedItems)
                 _currentOperator.TypeOperation += $"{item} ";

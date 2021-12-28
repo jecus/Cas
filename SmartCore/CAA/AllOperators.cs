@@ -196,8 +196,8 @@ namespace SmartCore.CAA
                     return "CAMO";
                 if (IsCAO)
                     return "CAO";
-                if (IsAirOperator)
-                    return "AirOperator";
+                if (IsAerodromOperator)
+                    return "AerodromOperator";
                 if (IsATC)
                     return "ATC/ANS";
                 if (IsFuel)
@@ -215,6 +215,9 @@ namespace SmartCore.CAA
         {
             get
             {
+                if (!IsAirOperator)
+                    return string.Empty;
+
                 if (IsCommertial)
                     return "Commertial";
                 return "Not Commertial";
@@ -227,10 +230,12 @@ namespace SmartCore.CAA
             {
                 if (!string.IsNullOrEmpty(Privilages))
                 {
-                    var text = Privilages.Split(' ');
                     var res = new List<string>();
-                    foreach (var p in text)
-                        res.Add(Privileges.Items.FirstOrDefault(i => i.FullName.Equals(p))?.FullName);
+                    foreach (var items in Privileges.Items)
+                    {
+                        if(Privilages.Contains(items.FullName))
+                            res.Add(items.FullName);
+                    }
 
                     return string.Join(",", res);
                 }
@@ -246,10 +251,12 @@ namespace SmartCore.CAA
             {
                 if (!string.IsNullOrEmpty(TypeOperation))
                 {
-                    var text = TypeOperation.Split(' ');
                     var res = new List<string>();
-                    foreach (var p in text)
-                        res.Add(TypesOfOperations.Items.FirstOrDefault(i => i.FullName.Equals(p))?.FullName);
+                    foreach (var items in TypesOfOperations.Items)
+                    {
+                        if (TypeOperation.Contains(items.FullName))
+                            res.Add(items.FullName);
+                    }
 
                     return string.Join(",", res);
                 }
@@ -264,10 +271,12 @@ namespace SmartCore.CAA
             {
                 if (!string.IsNullOrEmpty(SpecialOperation))
                 {
-                    var text = SpecialOperation.Split(' ');
                     var res = new List<string>();
-                    foreach (var p in text)
-                        res.Add(SpecialOperations.Items.FirstOrDefault(i => i.FullName.Equals(p))?.FullName);
+                    foreach (var items in SpecialOperations.Items)
+                    {
+                        if (SpecialOperation.Contains(items.FullName))
+                            res.Add(items.FullName);
+                    }
 
                     return string.Join(",", res);
                 }
@@ -282,11 +291,12 @@ namespace SmartCore.CAA
             {
                 if (!string.IsNullOrEmpty(Fleet))
                 {
-                    var text = Fleet.Split(' ');
                     var res = new List<string>();
-                    foreach (var p in text)
-                        res.Add(Operators.Fleet.Items.FirstOrDefault(i => i.FullName.Equals(p))?.FullName);
-
+                    foreach (var items in Operators.Fleet.Items)
+                    {
+                        if (Fleet.Contains(items.FullName))
+                            res.Add(items.FullName);
+                    }
                     return string.Join(",", res);
                 }
 
