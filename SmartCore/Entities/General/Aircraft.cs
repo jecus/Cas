@@ -34,18 +34,18 @@ namespace SmartCore.Entities.General
 		/// Эксплуатант, к которому относится ВС
 		/// </summary>
 		[TableColumnAttribute("OperatorId")]
-        public Int32 OperatorId { get; set; }
+        public int OperatorId { get; set; }
 		/// <summary>
 		/// Тип воздушного судна
 		/// </summary>
         [TableColumnAttribute("AircraftTypeId")]
-        public Int32 AircraftTypeId { get; set; }
+        public int AircraftTypeId { get; set; }
         /// <summary>
         /// Регистрационный номер ВС. Например EX 001
         /// </summary>
         [TableColumnAttribute("RegistrationNumber")]
         [FormControl(120,"Reg. Num")]
-        public String RegistrationNumber { get; set; }
+        public string RegistrationNumber { get; set; }
 
 		/// <summary>
 		/// 
@@ -59,14 +59,14 @@ namespace SmartCore.Entities.General
         [Child(false)]
         public AircraftModel Model
         {
-            get { return _model ?? (_model = AircraftModel.Unknown); }
-            set { _model = value; }
+            get => _model ?? (_model = AircraftModel.Unknown);
+            set => _model = value;
         }
 		/// <summary>
 		/// Номер сертификата
 		/// </summary>
         [TableColumnAttribute("TypeCertificateNumber")]
-        public String TypeCertificateNumber { get; set; }
+        public string TypeCertificateNumber { get; set; }
 		/// <summary>
 		/// Дата производства ВС 
 		/// сохраняется в БД, но не загружается
@@ -77,22 +77,22 @@ namespace SmartCore.Entities.General
 		/// Серийный (заводской) номер ВС
 		/// </summary>
         [TableColumnAttribute("SerialNumber")]
-        public String SerialNumber { get; set; }
+        public string SerialNumber { get; set; }
 		/// <summary>
 		/// Вариационный номер ВС
 		/// </summary>
         [TableColumnAttribute("VariableNumber")]
-        public String VariableNumber { get; set; }
+        public string VariableNumber { get; set; }
 		/// <summary>
 		/// Линейный номер ВС
 		/// </summary>
         [TableColumnAttribute("LineNumber")]
-        public String LineNumber { get; set; }
+        public string LineNumber { get; set; }
 		/// <summary>
 		/// Владелец ВС
 		/// </summary>
         [TableColumnAttribute("Owner")]
-        public String Owner { get; set; }
+        public string Owner { get; set; }
         /// <summary>
 		/// Параметр Basic Empty Weight
 		/// </summary>
@@ -112,27 +112,27 @@ namespace SmartCore.Entities.General
 		/// Параметр Cargo Capacity Container
 		/// </summary>
         [TableColumnAttribute("CargoCapacityContainer")]
-        public String CargoCapacityContainer { get; set; }
+        public string CargoCapacityContainer { get; set; }
 		/// <summary>
 		/// Параметр Cruise
 		/// </summary>
         [TableColumnAttribute("Cruise")]
-        public String Cruise { get; set; }
+        public string Cruise { get; set; }
 		/// <summary>
 		/// Параметр Cruise Fuel Flow
 		/// </summary>
         [TableColumnAttribute("CruiseFuelFlow")]
-        public String CruiseFuelFlow { get; set; }
+        public string CruiseFuelFlow { get; set; }
 		/// <summary>
 		/// Параметр Fuel Capacity
 		/// </summary>
         [TableColumnAttribute("FuelCapacity")]
-        public String FuelCapacity { get; set; }
+        public string FuelCapacity { get; set; }
 		/// <summary>
 		/// Параметр Max Cruise Altitude
 		/// </summary>
         [TableColumnAttribute("MaxCruiseAltitude")]
-        public String MaxCruiseAltitude { get; set; }
+        public string MaxCruiseAltitude { get; set; }
         /// <summary>
 		/// Параметр Max Landing Weight
 		/// </summary>
@@ -162,17 +162,17 @@ namespace SmartCore.Entities.General
 		/// Параметр Cockpit Seating
 		/// </summary>
         [TableColumnAttribute("CockpitSeating")]
-        public String CockpitSeating { get; set; }
+        public string CockpitSeating { get; set; }
 		/// <summary>
 		/// Параметр Galleys
 		/// </summary>
         [TableColumnAttribute("Galleys")]
-        public String Galleys { get; set; }
+        public string Galleys { get; set; }
 		/// <summary>
 		/// Параметр Lavatory
 		/// </summary>
         [TableColumnAttribute("Lavatory")]
-        public String Lavatory { get; set; }
+        public string Lavatory { get; set; }
         /// <summary>
 		/// Количество сидений эконом класса
 		/// </summary>
@@ -192,22 +192,22 @@ namespace SmartCore.Entities.General
         /// Кол-во котлов
         /// </summary>
         [TableColumnAttribute("Boiler")]
-        public String Boiler { get; set; }
+        public string Boiler { get; set; }
         /// <summary>
         /// Кол-во печек
         /// </summary>
         [TableColumnAttribute("Oven")]
-        public String Oven { get; set; }
+        public string Oven { get; set; }
         /// <summary>
         /// Кол-во дверей с лестницами
         /// </summary>
         [TableColumnAttribute("AirStairDoors")]
-        public String AirStairsDoors { get; set; }
+        public string AirStairsDoors { get; set; }
         /// <summary>
 		/// Топливные баки
 		/// </summary>
         [TableColumnAttribute("Tanks")]
-        public Int32 Tanks { get; set; }
+        public int Tanks { get; set; }
 		/// <summary>
 		/// День доставки воздушного судна
 		/// </summary>
@@ -232,17 +232,17 @@ namespace SmartCore.Entities.General
 										                              and IsDeleted = 0
 					 ) T
 					 where comp.IsBaseComponent = 1 and comp.BaseComponentTypeId=4 and comp.IsDeleted=0 and T.DestinationObjectID = dbo.Aircrafts.ItemId)")]
-        public Int32 AircraftFrameId { get; set; }
+        public int AircraftFrameId { get; set; }
         /// <summary>
         /// Параметр AircraftAddress24Bit
         /// </summary>
         [TableColumnAttribute("AircraftAddress24Bit")]
-        public String AircraftAddress24Bit { get; set; }
+        public string AircraftAddress24Bit { get; set; }
         /// <summary>
         /// Параметр Max Zero Fuel Weight
         /// </summary>
         [TableColumnAttribute("ELTIdHexCode")]
-        public String ELTIdHexCode { get; set; }
+        public string ELTIdHexCode { get; set; }
         /// <summary>
         /// Указывает что ВС совершает полеты(true) или находиться на карантине(false)
         /// </summary>
@@ -299,8 +299,8 @@ namespace SmartCore.Entities.General
 
 	    public List<AircraftEquipments> AircraftEquipments
 	    {
-		    get { return _aircraftEquipmets ?? (_aircraftEquipmets = new List<AircraftEquipments>()); }
-		    set
+		    get => _aircraftEquipmets ?? (_aircraftEquipmets = new List<AircraftEquipments>());
+            set
 		    {
 				if (_aircraftEquipmets != value)
 				{
@@ -420,7 +420,7 @@ namespace SmartCore.Entities.General
         [Child(RelationType.OneToMany, "ParentAircraftId", "ParentAircraft")]
         public BaseRecordCollection<MaintenanceProgramChangeRecord> MaintenanceProgramChangeRecords
         {
-            get { return _maintenanceProgramChangeRecords ?? (_maintenanceProgramChangeRecords = new BaseRecordCollection<MaintenanceProgramChangeRecord>()); }
+            get => _maintenanceProgramChangeRecords ?? (_maintenanceProgramChangeRecords = new BaseRecordCollection<MaintenanceProgramChangeRecord>());
             internal set
             {
                 if (_maintenanceProgramChangeRecords != value)
@@ -434,20 +434,15 @@ namespace SmartCore.Entities.General
         }
 
 	    private static Aircraft _unknown;
-		public static Aircraft Unknown
-	    {
-		    get
-		    {
-				return _unknown ?? (_unknown = new Aircraft
-				{
-					RegistrationNumber = "N/A",
-					ItemId = -1
-				});
-			}
-	    }
+		public static Aircraft Unknown =>
+            _unknown ?? (_unknown = new Aircraft
+            {
+                RegistrationNumber = "N/A",
+                ItemId = -1
+            });
 
 
-	    public new Aircraft GetCopyUnsaved(bool marked = true)
+        public new Aircraft GetCopyUnsaved(bool marked = true)
 	    {
 		    var aircraft = (Aircraft) MemberwiseClone();
 		    aircraft.ItemId = -1;

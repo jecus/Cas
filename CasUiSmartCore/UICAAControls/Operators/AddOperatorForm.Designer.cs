@@ -36,6 +36,7 @@
             MetroFramework.Controls.MetroLabel metroLabel5;
             MetroFramework.Controls.MetroLabel metroLabel6;
             MetroFramework.Controls.MetroLabel metroLabel7;
+            MetroFramework.Controls.MetroLabel metroLabel8;
             this.textBoxFullName = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxShortName = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxIcao = new MetroFramework.Controls.MetroTextBox();
@@ -68,21 +69,38 @@
             this.checkedListBoxSpecialOp = new System.Windows.Forms.CheckedListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.checkedListBoxFleet = new System.Windows.Forms.CheckedListBox();
-            this.checkBoxAirdromeOp = new System.Windows.Forms.CheckBox();
-            this.checkBoxAemc = new System.Windows.Forms.CheckBox();
+            this.radioButtonAirdromeOp = new MetroFramework.Controls.MetroRadioButton();
+            this.radioButtonAemc = new MetroFramework.Controls.MetroRadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.checkedListBoxAemcPrivilages = new System.Windows.Forms.CheckedListBox();
-            this.checkBoxAmo = new System.Windows.Forms.CheckBox();
+            this.radioButtonAmo = new MetroFramework.Controls.MetroRadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.checkedListBoxRatings = new System.Windows.Forms.CheckedListBox();
-            this.checkBoxATC = new System.Windows.Forms.CheckBox();
-            this.checkBoxFuel = new System.Windows.Forms.CheckBox();
-            this.checkBoxTraningOrg = new System.Windows.Forms.CheckBox();
+            this.radioButtonATC = new MetroFramework.Controls.MetroRadioButton();
+            this.radioButtonFuel = new MetroFramework.Controls.MetroRadioButton();
+            this.radioButtonTraningOrg = new MetroFramework.Controls.MetroRadioButton();
             this.label6 = new System.Windows.Forms.Label();
             this.checkedListBoxTraningOrgPrivilages = new System.Windows.Forms.CheckedListBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.radioButtonComertial = new System.Windows.Forms.RadioButton();
-            this.radioButtonNotCommertial = new System.Windows.Forms.RadioButton();
+            this.radioButtonComertial = new MetroFramework.Controls.MetroRadioButton();
+            this.radioButtonNotCommertial = new MetroFramework.Controls.MetroRadioButton();
+            this.label8 = new System.Windows.Forms.Label();
+            this.metroTextBoxOperatorType = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBoxAmoType = new MetroFramework.Controls.MetroTextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.radioButtonCAMO = new MetroFramework.Controls.MetroRadioButton();
+            this.metroTextBoxCAMO = new MetroFramework.Controls.MetroTextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.metroTextBoxCAO = new MetroFramework.Controls.MetroTextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.radioButtonCAO = new MetroFramework.Controls.MetroRadioButton();
+            this.metroTextBoxAirdrome = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBoxATCANS = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBoxFuel = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBoxTraining = new MetroFramework.Controls.MetroTextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.metroTextBoxIATA = new MetroFramework.Controls.MetroTextBox();
+            this.radioButtonAirOperator = new MetroFramework.Controls.MetroRadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
             labelDescription = new MetroFramework.Controls.MetroLabel();
             metroLabel1 = new MetroFramework.Controls.MetroLabel();
             metroLabel2 = new MetroFramework.Controls.MetroLabel();
@@ -91,10 +109,12 @@
             metroLabel5 = new MetroFramework.Controls.MetroLabel();
             metroLabel6 = new MetroFramework.Controls.MetroLabel();
             metroLabel7 = new MetroFramework.Controls.MetroLabel();
+            metroLabel8 = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReportLogoVeryLarge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReportLogoLarge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxWhiteBackgroundLogotype)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelDescription
@@ -134,7 +154,7 @@
             // 
             metroLabel3.AutoSize = true;
             metroLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel3.Location = new System.Drawing.Point(5, 173);
+            metroLabel3.Location = new System.Drawing.Point(5, 195);
             metroLabel3.Name = "metroLabel3";
             metroLabel3.Size = new System.Drawing.Size(59, 19);
             metroLabel3.TabIndex = 18;
@@ -145,7 +165,7 @@
             // 
             metroLabel4.AutoSize = true;
             metroLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel4.Location = new System.Drawing.Point(5, 227);
+            metroLabel4.Location = new System.Drawing.Point(5, 249);
             metroLabel4.Name = "metroLabel4";
             metroLabel4.Size = new System.Drawing.Size(49, 19);
             metroLabel4.TabIndex = 20;
@@ -156,7 +176,7 @@
             // 
             metroLabel5.AutoSize = true;
             metroLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel5.Location = new System.Drawing.Point(5, 254);
+            metroLabel5.Location = new System.Drawing.Point(5, 276);
             metroLabel5.Name = "metroLabel5";
             metroLabel5.Size = new System.Drawing.Size(31, 19);
             metroLabel5.TabIndex = 22;
@@ -167,7 +187,7 @@
             // 
             metroLabel6.AutoSize = true;
             metroLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel6.Location = new System.Drawing.Point(5, 281);
+            metroLabel6.Location = new System.Drawing.Point(5, 303);
             metroLabel6.Name = "metroLabel6";
             metroLabel6.Size = new System.Drawing.Size(39, 19);
             metroLabel6.TabIndex = 24;
@@ -178,12 +198,23 @@
             // 
             metroLabel7.AutoSize = true;
             metroLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel7.Location = new System.Drawing.Point(5, 308);
+            metroLabel7.Location = new System.Drawing.Point(5, 330);
             metroLabel7.Name = "metroLabel7";
             metroLabel7.Size = new System.Drawing.Size(44, 19);
             metroLabel7.TabIndex = 26;
             metroLabel7.Text = "Email:";
             metroLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // metroLabel8
+            // 
+            metroLabel8.AutoSize = true;
+            metroLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            metroLabel8.Location = new System.Drawing.Point(5, 171);
+            metroLabel8.Name = "metroLabel8";
+            metroLabel8.Size = new System.Drawing.Size(69, 19);
+            metroLabel8.TabIndex = 337;
+            metroLabel8.Text = "IATA code:";
+            metroLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // textBoxFullName
             // 
@@ -297,7 +328,7 @@
             this.metroTextBoxAddress.CustomButton.Visible = false;
             this.metroTextBoxAddress.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxAddress.Lines = new string[0];
-            this.metroTextBoxAddress.Location = new System.Drawing.Point(100, 171);
+            this.metroTextBoxAddress.Location = new System.Drawing.Point(100, 193);
             this.metroTextBoxAddress.MaxLength = 32767;
             this.metroTextBoxAddress.Multiline = true;
             this.metroTextBoxAddress.Name = "metroTextBoxAddress";
@@ -329,7 +360,7 @@
             this.metroTextBoxPhone.CustomButton.Visible = false;
             this.metroTextBoxPhone.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxPhone.Lines = new string[0];
-            this.metroTextBoxPhone.Location = new System.Drawing.Point(100, 225);
+            this.metroTextBoxPhone.Location = new System.Drawing.Point(100, 247);
             this.metroTextBoxPhone.MaxLength = 32767;
             this.metroTextBoxPhone.Multiline = true;
             this.metroTextBoxPhone.Name = "metroTextBoxPhone";
@@ -361,7 +392,7 @@
             this.metroTextBoxFax.CustomButton.Visible = false;
             this.metroTextBoxFax.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxFax.Lines = new string[0];
-            this.metroTextBoxFax.Location = new System.Drawing.Point(100, 252);
+            this.metroTextBoxFax.Location = new System.Drawing.Point(100, 274);
             this.metroTextBoxFax.MaxLength = 32767;
             this.metroTextBoxFax.Multiline = true;
             this.metroTextBoxFax.Name = "metroTextBoxFax";
@@ -393,7 +424,7 @@
             this.metroTextBoxWeb.CustomButton.Visible = false;
             this.metroTextBoxWeb.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxWeb.Lines = new string[0];
-            this.metroTextBoxWeb.Location = new System.Drawing.Point(100, 279);
+            this.metroTextBoxWeb.Location = new System.Drawing.Point(100, 301);
             this.metroTextBoxWeb.MaxLength = 32767;
             this.metroTextBoxWeb.Multiline = true;
             this.metroTextBoxWeb.Name = "metroTextBoxWeb";
@@ -425,7 +456,7 @@
             this.metroTextBoxEmail.CustomButton.Visible = false;
             this.metroTextBoxEmail.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxEmail.Lines = new string[0];
-            this.metroTextBoxEmail.Location = new System.Drawing.Point(100, 306);
+            this.metroTextBoxEmail.Location = new System.Drawing.Point(100, 328);
             this.metroTextBoxEmail.MaxLength = 32767;
             this.metroTextBoxEmail.Multiline = true;
             this.metroTextBoxEmail.Name = "metroTextBoxEmail";
@@ -445,7 +476,7 @@
             // 
             this._linkDeleteReportLogoVeryLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkDeleteReportLogoVeryLarge.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkDeleteReportLogoVeryLarge.Location = new System.Drawing.Point(402, 519);
+            this._linkDeleteReportLogoVeryLarge.Location = new System.Drawing.Point(402, 541);
             this._linkDeleteReportLogoVeryLarge.Name = "_linkDeleteReportLogoVeryLarge";
             this._linkDeleteReportLogoVeryLarge.Size = new System.Drawing.Size(85, 48);
             this._linkDeleteReportLogoVeryLarge.TabIndex = 43;
@@ -458,7 +489,7 @@
             // 
             this._linkDeleteChengeReportLogoLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkDeleteChengeReportLogoLarge.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkDeleteChengeReportLogoLarge.Location = new System.Drawing.Point(402, 461);
+            this._linkDeleteChengeReportLogoLarge.Location = new System.Drawing.Point(402, 483);
             this._linkDeleteChengeReportLogoLarge.Name = "_linkDeleteChengeReportLogoLarge";
             this._linkDeleteChengeReportLogoLarge.Size = new System.Drawing.Size(85, 48);
             this._linkDeleteChengeReportLogoLarge.TabIndex = 42;
@@ -471,7 +502,7 @@
             // 
             this._linkDeleteWhiteBackgroundLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkDeleteWhiteBackgroundLogotype.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkDeleteWhiteBackgroundLogotype.Location = new System.Drawing.Point(402, 399);
+            this._linkDeleteWhiteBackgroundLogotype.Location = new System.Drawing.Point(402, 421);
             this._linkDeleteWhiteBackgroundLogotype.Name = "_linkDeleteWhiteBackgroundLogotype";
             this._linkDeleteWhiteBackgroundLogotype.Size = new System.Drawing.Size(85, 48);
             this._linkDeleteWhiteBackgroundLogotype.TabIndex = 41;
@@ -484,7 +515,7 @@
             // 
             this._linkDeleteTransparentLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkDeleteTransparentLogotype.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkDeleteTransparentLogotype.Location = new System.Drawing.Point(402, 340);
+            this._linkDeleteTransparentLogotype.Location = new System.Drawing.Point(402, 362);
             this._linkDeleteTransparentLogotype.Name = "_linkDeleteTransparentLogotype";
             this._linkDeleteTransparentLogotype.Size = new System.Drawing.Size(85, 48);
             this._linkDeleteTransparentLogotype.TabIndex = 40;
@@ -497,7 +528,7 @@
             // 
             this.labelReportLogoVeryLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.labelReportLogoVeryLarge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.labelReportLogoVeryLarge.Location = new System.Drawing.Point(10, 519);
+            this.labelReportLogoVeryLarge.Location = new System.Drawing.Point(10, 541);
             this.labelReportLogoVeryLarge.Name = "labelReportLogoVeryLarge";
             this.labelReportLogoVeryLarge.Size = new System.Drawing.Size(184, 53);
             this.labelReportLogoVeryLarge.TabIndex = 34;
@@ -510,7 +541,7 @@
             this.pictureBoxReportLogoVeryLarge.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
             this.pictureBoxReportLogoVeryLarge.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBoxReportLogoVeryLarge.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxReportLogoVeryLarge.Location = new System.Drawing.Point(200, 519);
+            this.pictureBoxReportLogoVeryLarge.Location = new System.Drawing.Point(200, 541);
             this.pictureBoxReportLogoVeryLarge.Name = "pictureBoxReportLogoVeryLarge";
             this.pictureBoxReportLogoVeryLarge.Size = new System.Drawing.Size(48, 48);
             this.pictureBoxReportLogoVeryLarge.TabIndex = 35;
@@ -521,7 +552,7 @@
             // 
             this.linkLabelChengeReportLogoVeryLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.linkLabelChengeReportLogoVeryLarge.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.linkLabelChengeReportLogoVeryLarge.Location = new System.Drawing.Point(325, 519);
+            this.linkLabelChengeReportLogoVeryLarge.Location = new System.Drawing.Point(325, 541);
             this.linkLabelChengeReportLogoVeryLarge.Name = "linkLabelChengeReportLogoVeryLarge";
             this.linkLabelChengeReportLogoVeryLarge.Size = new System.Drawing.Size(85, 48);
             this.linkLabelChengeReportLogoVeryLarge.TabIndex = 38;
@@ -534,7 +565,7 @@
             // 
             this.labelReportLogoLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.labelReportLogoLarge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.labelReportLogoLarge.Location = new System.Drawing.Point(10, 459);
+            this.labelReportLogoLarge.Location = new System.Drawing.Point(10, 481);
             this.labelReportLogoLarge.Name = "labelReportLogoLarge";
             this.labelReportLogoLarge.Size = new System.Drawing.Size(184, 53);
             this.labelReportLogoLarge.TabIndex = 36;
@@ -547,7 +578,7 @@
             this.pictureBoxReportLogoLarge.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
             this.pictureBoxReportLogoLarge.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBoxReportLogoLarge.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxReportLogoLarge.Location = new System.Drawing.Point(200, 459);
+            this.pictureBoxReportLogoLarge.Location = new System.Drawing.Point(200, 481);
             this.pictureBoxReportLogoLarge.Name = "pictureBoxReportLogoLarge";
             this.pictureBoxReportLogoLarge.Size = new System.Drawing.Size(48, 48);
             this.pictureBoxReportLogoLarge.TabIndex = 37;
@@ -558,7 +589,7 @@
             // 
             this.linkLabelChengeReportLogoLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.linkLabelChengeReportLogoLarge.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.linkLabelChengeReportLogoLarge.Location = new System.Drawing.Point(325, 459);
+            this.linkLabelChengeReportLogoLarge.Location = new System.Drawing.Point(325, 481);
             this.linkLabelChengeReportLogoLarge.Name = "linkLabelChengeReportLogoLarge";
             this.linkLabelChengeReportLogoLarge.Size = new System.Drawing.Size(85, 48);
             this.linkLabelChengeReportLogoLarge.TabIndex = 39;
@@ -571,7 +602,7 @@
             // 
             this._labelTransparentLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._labelTransparentLogotype.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._labelTransparentLogotype.Location = new System.Drawing.Point(10, 340);
+            this._labelTransparentLogotype.Location = new System.Drawing.Point(10, 362);
             this._labelTransparentLogotype.Name = "_labelTransparentLogotype";
             this._labelTransparentLogotype.Size = new System.Drawing.Size(184, 48);
             this._labelTransparentLogotype.TabIndex = 28;
@@ -582,7 +613,7 @@
             // 
             this._labelWhiteBackgroundLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._labelWhiteBackgroundLogotype.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._labelWhiteBackgroundLogotype.Location = new System.Drawing.Point(10, 399);
+            this._labelWhiteBackgroundLogotype.Location = new System.Drawing.Point(10, 421);
             this._labelWhiteBackgroundLogotype.Name = "_labelWhiteBackgroundLogotype";
             this._labelWhiteBackgroundLogotype.Size = new System.Drawing.Size(184, 53);
             this._labelWhiteBackgroundLogotype.TabIndex = 31;
@@ -595,7 +626,7 @@
             this._pictureBoxTransparentLogotype.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
             this._pictureBoxTransparentLogotype.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this._pictureBoxTransparentLogotype.Cursor = System.Windows.Forms.Cursors.Hand;
-            this._pictureBoxTransparentLogotype.Location = new System.Drawing.Point(200, 340);
+            this._pictureBoxTransparentLogotype.Location = new System.Drawing.Point(200, 362);
             this._pictureBoxTransparentLogotype.Name = "_pictureBoxTransparentLogotype";
             this._pictureBoxTransparentLogotype.Size = new System.Drawing.Size(48, 48);
             this._pictureBoxTransparentLogotype.TabIndex = 29;
@@ -608,7 +639,7 @@
             this._pictureBoxWhiteBackgroundLogotype.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
             this._pictureBoxWhiteBackgroundLogotype.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this._pictureBoxWhiteBackgroundLogotype.Cursor = System.Windows.Forms.Cursors.Hand;
-            this._pictureBoxWhiteBackgroundLogotype.Location = new System.Drawing.Point(200, 399);
+            this._pictureBoxWhiteBackgroundLogotype.Location = new System.Drawing.Point(200, 421);
             this._pictureBoxWhiteBackgroundLogotype.Name = "_pictureBoxWhiteBackgroundLogotype";
             this._pictureBoxWhiteBackgroundLogotype.Size = new System.Drawing.Size(48, 48);
             this._pictureBoxWhiteBackgroundLogotype.TabIndex = 30;
@@ -619,7 +650,7 @@
             // 
             this._linkChangeTransparentLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkChangeTransparentLogotype.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkChangeTransparentLogotype.Location = new System.Drawing.Point(325, 340);
+            this._linkChangeTransparentLogotype.Location = new System.Drawing.Point(325, 362);
             this._linkChangeTransparentLogotype.Name = "_linkChangeTransparentLogotype";
             this._linkChangeTransparentLogotype.Size = new System.Drawing.Size(85, 48);
             this._linkChangeTransparentLogotype.TabIndex = 32;
@@ -632,7 +663,7 @@
             // 
             this._linkChangeWhiteBackgroundLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkChangeWhiteBackgroundLogotype.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkChangeWhiteBackgroundLogotype.Location = new System.Drawing.Point(325, 399);
+            this._linkChangeWhiteBackgroundLogotype.Location = new System.Drawing.Point(325, 421);
             this._linkChangeWhiteBackgroundLogotype.Name = "_linkChangeWhiteBackgroundLogotype";
             this._linkChangeWhiteBackgroundLogotype.Size = new System.Drawing.Size(85, 48);
             this._linkChangeWhiteBackgroundLogotype.TabIndex = 33;
@@ -648,7 +679,7 @@
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(824, 594);
+            this.buttonOk.Location = new System.Drawing.Point(1297, 576);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 297;
@@ -662,7 +693,7 @@
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonCancel.Location = new System.Drawing.Point(905, 594);
+            this.buttonCancel.Location = new System.Drawing.Point(1378, 576);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 33);
             this.buttonCancel.TabIndex = 296;
@@ -732,33 +763,34 @@
             this.checkedListBoxFleet.Size = new System.Drawing.Size(350, 64);
             this.checkedListBoxFleet.TabIndex = 302;
             // 
-            // checkBoxAirdromeOp
+            // radioButtonAirdromeOp
             // 
-            this.checkBoxAirdromeOp.AutoSize = true;
-            this.checkBoxAirdromeOp.Location = new System.Drawing.Point(559, 278);
-            this.checkBoxAirdromeOp.Name = "checkBoxAirdromeOp";
-            this.checkBoxAirdromeOp.Size = new System.Drawing.Size(115, 17);
-            this.checkBoxAirdromeOp.TabIndex = 307;
-            this.checkBoxAirdromeOp.Text = "Airodrome operator";
-            this.checkBoxAirdromeOp.UseVisualStyleBackColor = true;
+            this.radioButtonAirdromeOp.AutoSize = true;
+            this.radioButtonAirdromeOp.Location = new System.Drawing.Point(1004, 45);
+            this.radioButtonAirdromeOp.Name = "radioButtonAirdromeOp";
+            this.radioButtonAirdromeOp.Size = new System.Drawing.Size(128, 15);
+            this.radioButtonAirdromeOp.TabIndex = 307;
+            this.radioButtonAirdromeOp.Text = "Airodrome operator";
+            this.radioButtonAirdromeOp.UseSelectable = true;
+            this.radioButtonAirdromeOp.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
-            // checkBoxAemc
+            // radioButtonAemc
             // 
-            this.checkBoxAemc.AutoSize = true;
-            this.checkBoxAemc.Location = new System.Drawing.Point(498, 279);
-            this.checkBoxAemc.Name = "checkBoxAemc";
-            this.checkBoxAemc.Size = new System.Drawing.Size(55, 17);
-            this.checkBoxAemc.TabIndex = 308;
-            this.checkBoxAemc.Text = "AeMC";
-            this.checkBoxAemc.UseVisualStyleBackColor = true;
-            this.checkBoxAemc.CheckedChanged += new System.EventHandler(this.checkBoxAemc_CheckedChanged);
+            this.radioButtonAemc.AutoSize = true;
+            this.radioButtonAemc.Location = new System.Drawing.Point(1004, 225);
+            this.radioButtonAemc.Name = "radioButtonAemc";
+            this.radioButtonAemc.Size = new System.Drawing.Size(56, 15);
+            this.radioButtonAemc.TabIndex = 308;
+            this.radioButtonAemc.Text = "AeMC";
+            this.radioButtonAemc.UseSelectable = true;
+            this.radioButtonAemc.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.label3.Location = new System.Drawing.Point(495, 306);
+            this.label3.Location = new System.Drawing.Point(1003, 252);
             this.label3.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 14);
@@ -769,28 +801,28 @@
             // 
             this.checkedListBoxAemcPrivilages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.checkedListBoxAemcPrivilages.FormattingEnabled = true;
-            this.checkedListBoxAemcPrivilages.Location = new System.Drawing.Point(630, 306);
+            this.checkedListBoxAemcPrivilages.Location = new System.Drawing.Point(1112, 252);
             this.checkedListBoxAemcPrivilages.Name = "checkedListBoxAemcPrivilages";
-            this.checkedListBoxAemcPrivilages.Size = new System.Drawing.Size(350, 64);
+            this.checkedListBoxAemcPrivilages.Size = new System.Drawing.Size(352, 64);
             this.checkedListBoxAemcPrivilages.TabIndex = 309;
             // 
-            // checkBoxAmo
+            // radioButtonAmo
             // 
-            this.checkBoxAmo.AutoSize = true;
-            this.checkBoxAmo.Location = new System.Drawing.Point(498, 371);
-            this.checkBoxAmo.Name = "checkBoxAmo";
-            this.checkBoxAmo.Size = new System.Drawing.Size(50, 17);
-            this.checkBoxAmo.TabIndex = 311;
-            this.checkBoxAmo.Text = "AMO";
-            this.checkBoxAmo.UseVisualStyleBackColor = true;
-            this.checkBoxAmo.CheckedChanged += new System.EventHandler(this.checkBoxAmo_CheckedChanged);
+            this.radioButtonAmo.AutoSize = true;
+            this.radioButtonAmo.Location = new System.Drawing.Point(498, 327);
+            this.radioButtonAmo.Name = "radioButtonAmo";
+            this.radioButtonAmo.Size = new System.Drawing.Size(51, 15);
+            this.radioButtonAmo.TabIndex = 311;
+            this.radioButtonAmo.Text = "AMO";
+            this.radioButtonAmo.UseSelectable = true;
+            this.radioButtonAmo.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.label4.Location = new System.Drawing.Point(495, 399);
+            this.label4.Location = new System.Drawing.Point(495, 394);
             this.label4.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 14);
@@ -801,48 +833,50 @@
             // 
             this.checkedListBoxRatings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.checkedListBoxRatings.FormattingEnabled = true;
-            this.checkedListBoxRatings.Location = new System.Drawing.Point(630, 399);
+            this.checkedListBoxRatings.Location = new System.Drawing.Point(630, 394);
             this.checkedListBoxRatings.Name = "checkedListBoxRatings";
             this.checkedListBoxRatings.Size = new System.Drawing.Size(350, 64);
             this.checkedListBoxRatings.TabIndex = 312;
             // 
-            // checkBoxATC
+            // radioButtonATC
             // 
-            this.checkBoxATC.AutoSize = true;
-            this.checkBoxATC.Location = new System.Drawing.Point(680, 477);
-            this.checkBoxATC.Name = "checkBoxATC";
-            this.checkBoxATC.Size = new System.Drawing.Size(74, 17);
-            this.checkBoxATC.TabIndex = 314;
-            this.checkBoxATC.Text = "ATC/ANS";
-            this.checkBoxATC.UseVisualStyleBackColor = true;
+            this.radioButtonATC.AutoSize = true;
+            this.radioButtonATC.Location = new System.Drawing.Point(1004, 115);
+            this.radioButtonATC.Name = "radioButtonATC";
+            this.radioButtonATC.Size = new System.Drawing.Size(71, 15);
+            this.radioButtonATC.TabIndex = 314;
+            this.radioButtonATC.Text = "ATC/ANS";
+            this.radioButtonATC.UseSelectable = true;
+            this.radioButtonATC.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
-            // checkBoxFuel
+            // radioButtonFuel
             // 
-            this.checkBoxFuel.AutoSize = true;
-            this.checkBoxFuel.Location = new System.Drawing.Point(628, 477);
-            this.checkBoxFuel.Name = "checkBoxFuel";
-            this.checkBoxFuel.Size = new System.Drawing.Size(46, 17);
-            this.checkBoxFuel.TabIndex = 315;
-            this.checkBoxFuel.Text = "Fuel";
-            this.checkBoxFuel.UseVisualStyleBackColor = true;
+            this.radioButtonFuel.AutoSize = true;
+            this.radioButtonFuel.Location = new System.Drawing.Point(1005, 171);
+            this.radioButtonFuel.Name = "radioButtonFuel";
+            this.radioButtonFuel.Size = new System.Drawing.Size(45, 15);
+            this.radioButtonFuel.TabIndex = 315;
+            this.radioButtonFuel.Text = "Fuel";
+            this.radioButtonFuel.UseSelectable = true;
+            this.radioButtonFuel.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
-            // checkBoxTraningOrg
+            // radioButtonTraningOrg
             // 
-            this.checkBoxTraningOrg.AutoSize = true;
-            this.checkBoxTraningOrg.Location = new System.Drawing.Point(498, 478);
-            this.checkBoxTraningOrg.Name = "checkBoxTraningOrg";
-            this.checkBoxTraningOrg.Size = new System.Drawing.Size(126, 17);
-            this.checkBoxTraningOrg.TabIndex = 316;
-            this.checkBoxTraningOrg.Text = "Training Organization";
-            this.checkBoxTraningOrg.UseVisualStyleBackColor = true;
-            this.checkBoxTraningOrg.CheckedChanged += new System.EventHandler(this.checkBoxTraningOrg_CheckedChanged);
+            this.radioButtonTraningOrg.AutoSize = true;
+            this.radioButtonTraningOrg.Location = new System.Drawing.Point(1006, 327);
+            this.radioButtonTraningOrg.Name = "radioButtonTraningOrg";
+            this.radioButtonTraningOrg.Size = new System.Drawing.Size(136, 15);
+            this.radioButtonTraningOrg.TabIndex = 316;
+            this.radioButtonTraningOrg.Text = "Training Organization";
+            this.radioButtonTraningOrg.UseSelectable = true;
+            this.radioButtonTraningOrg.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.label6.Location = new System.Drawing.Point(495, 503);
+            this.label6.Location = new System.Drawing.Point(1007, 352);
             this.label6.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(72, 14);
@@ -853,65 +887,459 @@
             // 
             this.checkedListBoxTraningOrgPrivilages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.checkedListBoxTraningOrgPrivilages.FormattingEnabled = true;
-            this.checkedListBoxTraningOrgPrivilages.Location = new System.Drawing.Point(630, 503);
+            this.checkedListBoxTraningOrgPrivilages.Location = new System.Drawing.Point(1114, 352);
             this.checkedListBoxTraningOrgPrivilages.Name = "checkedListBoxTraningOrgPrivilages";
             this.checkedListBoxTraningOrgPrivilages.Size = new System.Drawing.Size(350, 64);
             this.checkedListBoxTraningOrgPrivilages.TabIndex = 317;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.label7.Location = new System.Drawing.Point(495, 34);
-            this.label7.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 14);
-            this.label7.TabIndex = 319;
-            this.label7.Text = "Air Operator:";
-            // 
             // radioButtonComertial
             // 
             this.radioButtonComertial.AutoSize = true;
-            this.radioButtonComertial.Location = new System.Drawing.Point(630, 34);
+            this.radioButtonComertial.Location = new System.Drawing.Point(3, 3);
             this.radioButtonComertial.Name = "radioButtonComertial";
-            this.radioButtonComertial.Size = new System.Drawing.Size(76, 17);
+            this.radioButtonComertial.Size = new System.Drawing.Size(86, 15);
             this.radioButtonComertial.TabIndex = 320;
             this.radioButtonComertial.TabStop = true;
             this.radioButtonComertial.Text = "Commertial";
-            this.radioButtonComertial.UseVisualStyleBackColor = true;
+            this.radioButtonComertial.UseSelectable = true;
             // 
             // radioButtonNotCommertial
             // 
             this.radioButtonNotCommertial.AutoSize = true;
-            this.radioButtonNotCommertial.Location = new System.Drawing.Point(712, 34);
+            this.radioButtonNotCommertial.Location = new System.Drawing.Point(95, 3);
             this.radioButtonNotCommertial.Name = "radioButtonNotCommertial";
-            this.radioButtonNotCommertial.Size = new System.Drawing.Size(96, 17);
+            this.radioButtonNotCommertial.Size = new System.Drawing.Size(109, 15);
             this.radioButtonNotCommertial.TabIndex = 321;
             this.radioButtonNotCommertial.TabStop = true;
             this.radioButtonNotCommertial.Text = "Not Commertial";
-            this.radioButtonNotCommertial.UseVisualStyleBackColor = true;
+            this.radioButtonNotCommertial.UseSelectable = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.label8.Location = new System.Drawing.Point(495, 281);
+            this.label8.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(89, 14);
+            this.label8.TabIndex = 322;
+            this.label8.Text = "Aircraft Type:";
+            // 
+            // metroTextBoxOperatorType
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBoxOperatorType.CustomButton.Image = null;
+            this.metroTextBoxOperatorType.CustomButton.Location = new System.Drawing.Point(318, 2);
+            this.metroTextBoxOperatorType.CustomButton.Name = "";
+            this.metroTextBoxOperatorType.CustomButton.Size = new System.Drawing.Size(31, 31);
+            this.metroTextBoxOperatorType.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxOperatorType.CustomButton.TabIndex = 1;
+            this.metroTextBoxOperatorType.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxOperatorType.CustomButton.UseSelectable = true;
+            this.metroTextBoxOperatorType.CustomButton.Visible = false;
+            this.metroTextBoxOperatorType.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxOperatorType.Lines = new string[0];
+            this.metroTextBoxOperatorType.Location = new System.Drawing.Point(630, 281);
+            this.metroTextBoxOperatorType.MaxLength = 32767;
+            this.metroTextBoxOperatorType.Multiline = true;
+            this.metroTextBoxOperatorType.Name = "metroTextBoxOperatorType";
+            this.metroTextBoxOperatorType.PasswordChar = '\0';
+            this.metroTextBoxOperatorType.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxOperatorType.SelectedText = "";
+            this.metroTextBoxOperatorType.SelectionLength = 0;
+            this.metroTextBoxOperatorType.SelectionStart = 0;
+            this.metroTextBoxOperatorType.ShortcutsEnabled = true;
+            this.metroTextBoxOperatorType.Size = new System.Drawing.Size(352, 36);
+            this.metroTextBoxOperatorType.TabIndex = 323;
+            this.metroTextBoxOperatorType.UseSelectable = true;
+            this.metroTextBoxOperatorType.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxOperatorType.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroTextBoxAmoType
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBoxAmoType.CustomButton.Image = null;
+            this.metroTextBoxAmoType.CustomButton.Location = new System.Drawing.Point(318, 2);
+            this.metroTextBoxAmoType.CustomButton.Name = "";
+            this.metroTextBoxAmoType.CustomButton.Size = new System.Drawing.Size(31, 31);
+            this.metroTextBoxAmoType.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxAmoType.CustomButton.TabIndex = 1;
+            this.metroTextBoxAmoType.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxAmoType.CustomButton.UseSelectable = true;
+            this.metroTextBoxAmoType.CustomButton.Visible = false;
+            this.metroTextBoxAmoType.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxAmoType.Lines = new string[0];
+            this.metroTextBoxAmoType.Location = new System.Drawing.Point(630, 352);
+            this.metroTextBoxAmoType.MaxLength = 32767;
+            this.metroTextBoxAmoType.Multiline = true;
+            this.metroTextBoxAmoType.Name = "metroTextBoxAmoType";
+            this.metroTextBoxAmoType.PasswordChar = '\0';
+            this.metroTextBoxAmoType.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxAmoType.SelectedText = "";
+            this.metroTextBoxAmoType.SelectionLength = 0;
+            this.metroTextBoxAmoType.SelectionStart = 0;
+            this.metroTextBoxAmoType.ShortcutsEnabled = true;
+            this.metroTextBoxAmoType.Size = new System.Drawing.Size(352, 36);
+            this.metroTextBoxAmoType.TabIndex = 325;
+            this.metroTextBoxAmoType.UseSelectable = true;
+            this.metroTextBoxAmoType.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxAmoType.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.label9.Location = new System.Drawing.Point(495, 352);
+            this.label9.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(89, 14);
+            this.label9.TabIndex = 324;
+            this.label9.Text = "Aircraft Type:";
+            // 
+            // radioButtonCAMO
+            // 
+            this.radioButtonCAMO.AutoSize = true;
+            this.radioButtonCAMO.Location = new System.Drawing.Point(498, 465);
+            this.radioButtonCAMO.Name = "radioButtonCAMO";
+            this.radioButtonCAMO.Size = new System.Drawing.Size(59, 15);
+            this.radioButtonCAMO.TabIndex = 326;
+            this.radioButtonCAMO.Text = "CAMO";
+            this.radioButtonCAMO.UseSelectable = true;
+            this.radioButtonCAMO.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
+            // metroTextBoxCAMO
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBoxCAMO.CustomButton.Image = null;
+            this.metroTextBoxCAMO.CustomButton.Location = new System.Drawing.Point(318, 2);
+            this.metroTextBoxCAMO.CustomButton.Name = "";
+            this.metroTextBoxCAMO.CustomButton.Size = new System.Drawing.Size(31, 31);
+            this.metroTextBoxCAMO.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxCAMO.CustomButton.TabIndex = 1;
+            this.metroTextBoxCAMO.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxCAMO.CustomButton.UseSelectable = true;
+            this.metroTextBoxCAMO.CustomButton.Visible = false;
+            this.metroTextBoxCAMO.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxCAMO.Lines = new string[0];
+            this.metroTextBoxCAMO.Location = new System.Drawing.Point(630, 488);
+            this.metroTextBoxCAMO.MaxLength = 32767;
+            this.metroTextBoxCAMO.Multiline = true;
+            this.metroTextBoxCAMO.Name = "metroTextBoxCAMO";
+            this.metroTextBoxCAMO.PasswordChar = '\0';
+            this.metroTextBoxCAMO.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxCAMO.SelectedText = "";
+            this.metroTextBoxCAMO.SelectionLength = 0;
+            this.metroTextBoxCAMO.SelectionStart = 0;
+            this.metroTextBoxCAMO.ShortcutsEnabled = true;
+            this.metroTextBoxCAMO.Size = new System.Drawing.Size(352, 36);
+            this.metroTextBoxCAMO.TabIndex = 328;
+            this.metroTextBoxCAMO.UseSelectable = true;
+            this.metroTextBoxCAMO.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxCAMO.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.label10.Location = new System.Drawing.Point(495, 489);
+            this.label10.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(89, 14);
+            this.label10.TabIndex = 327;
+            this.label10.Text = "Aircraft Type:";
+            // 
+            // metroTextBoxCAO
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBoxCAO.CustomButton.Image = null;
+            this.metroTextBoxCAO.CustomButton.Location = new System.Drawing.Point(318, 2);
+            this.metroTextBoxCAO.CustomButton.Name = "";
+            this.metroTextBoxCAO.CustomButton.Size = new System.Drawing.Size(31, 31);
+            this.metroTextBoxCAO.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxCAO.CustomButton.TabIndex = 1;
+            this.metroTextBoxCAO.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxCAO.CustomButton.UseSelectable = true;
+            this.metroTextBoxCAO.CustomButton.Visible = false;
+            this.metroTextBoxCAO.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxCAO.Lines = new string[0];
+            this.metroTextBoxCAO.Location = new System.Drawing.Point(630, 538);
+            this.metroTextBoxCAO.MaxLength = 32767;
+            this.metroTextBoxCAO.Multiline = true;
+            this.metroTextBoxCAO.Name = "metroTextBoxCAO";
+            this.metroTextBoxCAO.PasswordChar = '\0';
+            this.metroTextBoxCAO.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxCAO.SelectedText = "";
+            this.metroTextBoxCAO.SelectionLength = 0;
+            this.metroTextBoxCAO.SelectionStart = 0;
+            this.metroTextBoxCAO.ShortcutsEnabled = true;
+            this.metroTextBoxCAO.Size = new System.Drawing.Size(352, 36);
+            this.metroTextBoxCAO.TabIndex = 331;
+            this.metroTextBoxCAO.UseSelectable = true;
+            this.metroTextBoxCAO.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxCAO.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.label11.Location = new System.Drawing.Point(495, 538);
+            this.label11.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(89, 14);
+            this.label11.TabIndex = 330;
+            this.label11.Text = "Aircraft Type:";
+            // 
+            // radioButtonCAO
+            // 
+            this.radioButtonCAO.AutoSize = true;
+            this.radioButtonCAO.Location = new System.Drawing.Point(498, 510);
+            this.radioButtonCAO.Name = "radioButtonCAO";
+            this.radioButtonCAO.Size = new System.Drawing.Size(48, 15);
+            this.radioButtonCAO.TabIndex = 329;
+            this.radioButtonCAO.Text = "CAO";
+            this.radioButtonCAO.UseSelectable = true;
+            this.radioButtonCAO.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
+            // metroTextBoxAirdrome
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBoxAirdrome.CustomButton.Image = null;
+            this.metroTextBoxAirdrome.CustomButton.Location = new System.Drawing.Point(318, 2);
+            this.metroTextBoxAirdrome.CustomButton.Name = "";
+            this.metroTextBoxAirdrome.CustomButton.Size = new System.Drawing.Size(31, 31);
+            this.metroTextBoxAirdrome.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxAirdrome.CustomButton.TabIndex = 1;
+            this.metroTextBoxAirdrome.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxAirdrome.CustomButton.UseSelectable = true;
+            this.metroTextBoxAirdrome.CustomButton.Visible = false;
+            this.metroTextBoxAirdrome.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxAirdrome.Lines = new string[0];
+            this.metroTextBoxAirdrome.Location = new System.Drawing.Point(1112, 68);
+            this.metroTextBoxAirdrome.MaxLength = 32767;
+            this.metroTextBoxAirdrome.Multiline = true;
+            this.metroTextBoxAirdrome.Name = "metroTextBoxAirdrome";
+            this.metroTextBoxAirdrome.PasswordChar = '\0';
+            this.metroTextBoxAirdrome.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxAirdrome.SelectedText = "";
+            this.metroTextBoxAirdrome.SelectionLength = 0;
+            this.metroTextBoxAirdrome.SelectionStart = 0;
+            this.metroTextBoxAirdrome.ShortcutsEnabled = true;
+            this.metroTextBoxAirdrome.Size = new System.Drawing.Size(352, 36);
+            this.metroTextBoxAirdrome.TabIndex = 332;
+            this.metroTextBoxAirdrome.UseSelectable = true;
+            this.metroTextBoxAirdrome.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxAirdrome.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroTextBoxATCANS
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBoxATCANS.CustomButton.Image = null;
+            this.metroTextBoxATCANS.CustomButton.Location = new System.Drawing.Point(318, 2);
+            this.metroTextBoxATCANS.CustomButton.Name = "";
+            this.metroTextBoxATCANS.CustomButton.Size = new System.Drawing.Size(31, 31);
+            this.metroTextBoxATCANS.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxATCANS.CustomButton.TabIndex = 1;
+            this.metroTextBoxATCANS.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxATCANS.CustomButton.UseSelectable = true;
+            this.metroTextBoxATCANS.CustomButton.Visible = false;
+            this.metroTextBoxATCANS.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxATCANS.Lines = new string[0];
+            this.metroTextBoxATCANS.Location = new System.Drawing.Point(1112, 129);
+            this.metroTextBoxATCANS.MaxLength = 32767;
+            this.metroTextBoxATCANS.Multiline = true;
+            this.metroTextBoxATCANS.Name = "metroTextBoxATCANS";
+            this.metroTextBoxATCANS.PasswordChar = '\0';
+            this.metroTextBoxATCANS.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxATCANS.SelectedText = "";
+            this.metroTextBoxATCANS.SelectionLength = 0;
+            this.metroTextBoxATCANS.SelectionStart = 0;
+            this.metroTextBoxATCANS.ShortcutsEnabled = true;
+            this.metroTextBoxATCANS.Size = new System.Drawing.Size(352, 36);
+            this.metroTextBoxATCANS.TabIndex = 333;
+            this.metroTextBoxATCANS.UseSelectable = true;
+            this.metroTextBoxATCANS.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxATCANS.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroTextBoxFuel
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBoxFuel.CustomButton.Image = null;
+            this.metroTextBoxFuel.CustomButton.Location = new System.Drawing.Point(318, 2);
+            this.metroTextBoxFuel.CustomButton.Name = "";
+            this.metroTextBoxFuel.CustomButton.Size = new System.Drawing.Size(31, 31);
+            this.metroTextBoxFuel.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxFuel.CustomButton.TabIndex = 1;
+            this.metroTextBoxFuel.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxFuel.CustomButton.UseSelectable = true;
+            this.metroTextBoxFuel.CustomButton.Visible = false;
+            this.metroTextBoxFuel.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxFuel.Lines = new string[0];
+            this.metroTextBoxFuel.Location = new System.Drawing.Point(1112, 183);
+            this.metroTextBoxFuel.MaxLength = 32767;
+            this.metroTextBoxFuel.Multiline = true;
+            this.metroTextBoxFuel.Name = "metroTextBoxFuel";
+            this.metroTextBoxFuel.PasswordChar = '\0';
+            this.metroTextBoxFuel.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxFuel.SelectedText = "";
+            this.metroTextBoxFuel.SelectionLength = 0;
+            this.metroTextBoxFuel.SelectionStart = 0;
+            this.metroTextBoxFuel.ShortcutsEnabled = true;
+            this.metroTextBoxFuel.Size = new System.Drawing.Size(352, 36);
+            this.metroTextBoxFuel.TabIndex = 334;
+            this.metroTextBoxFuel.UseSelectable = true;
+            this.metroTextBoxFuel.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxFuel.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroTextBoxTraining
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBoxTraining.CustomButton.Image = null;
+            this.metroTextBoxTraining.CustomButton.Location = new System.Drawing.Point(318, 2);
+            this.metroTextBoxTraining.CustomButton.Name = "";
+            this.metroTextBoxTraining.CustomButton.Size = new System.Drawing.Size(31, 31);
+            this.metroTextBoxTraining.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxTraining.CustomButton.TabIndex = 1;
+            this.metroTextBoxTraining.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxTraining.CustomButton.UseSelectable = true;
+            this.metroTextBoxTraining.CustomButton.Visible = false;
+            this.metroTextBoxTraining.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxTraining.Lines = new string[0];
+            this.metroTextBoxTraining.Location = new System.Drawing.Point(1114, 422);
+            this.metroTextBoxTraining.MaxLength = 32767;
+            this.metroTextBoxTraining.Multiline = true;
+            this.metroTextBoxTraining.Name = "metroTextBoxTraining";
+            this.metroTextBoxTraining.PasswordChar = '\0';
+            this.metroTextBoxTraining.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxTraining.SelectedText = "";
+            this.metroTextBoxTraining.SelectionLength = 0;
+            this.metroTextBoxTraining.SelectionStart = 0;
+            this.metroTextBoxTraining.ShortcutsEnabled = true;
+            this.metroTextBoxTraining.Size = new System.Drawing.Size(352, 36);
+            this.metroTextBoxTraining.TabIndex = 336;
+            this.metroTextBoxTraining.UseSelectable = true;
+            this.metroTextBoxTraining.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxTraining.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.label12.Location = new System.Drawing.Point(1007, 422);
+            this.label12.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(89, 14);
+            this.label12.TabIndex = 335;
+            this.label12.Text = "Aircraft Type:";
+            // 
+            // metroTextBoxIATA
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBoxIATA.CustomButton.Image = null;
+            this.metroTextBoxIATA.CustomButton.Location = new System.Drawing.Point(344, 1);
+            this.metroTextBoxIATA.CustomButton.Name = "";
+            this.metroTextBoxIATA.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.metroTextBoxIATA.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxIATA.CustomButton.TabIndex = 1;
+            this.metroTextBoxIATA.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxIATA.CustomButton.UseSelectable = true;
+            this.metroTextBoxIATA.CustomButton.Visible = false;
+            this.metroTextBoxIATA.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxIATA.Lines = new string[0];
+            this.metroTextBoxIATA.Location = new System.Drawing.Point(100, 169);
+            this.metroTextBoxIATA.MaxLength = 32767;
+            this.metroTextBoxIATA.Multiline = true;
+            this.metroTextBoxIATA.Name = "metroTextBoxIATA";
+            this.metroTextBoxIATA.PasswordChar = '\0';
+            this.metroTextBoxIATA.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxIATA.SelectedText = "";
+            this.metroTextBoxIATA.SelectionLength = 0;
+            this.metroTextBoxIATA.SelectionStart = 0;
+            this.metroTextBoxIATA.ShortcutsEnabled = true;
+            this.metroTextBoxIATA.Size = new System.Drawing.Size(364, 21);
+            this.metroTextBoxIATA.TabIndex = 338;
+            this.metroTextBoxIATA.UseSelectable = true;
+            this.metroTextBoxIATA.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxIATA.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // radioButtonAirOperator
+            // 
+            this.radioButtonAirOperator.AutoSize = true;
+            this.radioButtonAirOperator.Location = new System.Drawing.Point(498, 34);
+            this.radioButtonAirOperator.Name = "radioButtonAirOperator";
+            this.radioButtonAirOperator.Size = new System.Drawing.Size(88, 15);
+            this.radioButtonAirOperator.TabIndex = 339;
+            this.radioButtonAirOperator.Text = "Air Operator";
+            this.radioButtonAirOperator.UseSelectable = true;
+            this.radioButtonAirOperator.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.radioButtonComertial);
+            this.panel1.Controls.Add(this.radioButtonNotCommertial);
+            this.panel1.Location = new System.Drawing.Point(630, 32);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(225, 28);
+            this.panel1.TabIndex = 340;
             // 
             // AddOperatorFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 650);
-            this.Controls.Add(this.radioButtonNotCommertial);
-            this.Controls.Add(this.radioButtonComertial);
-            this.Controls.Add(this.label7);
+            this.ClientSize = new System.Drawing.Size(1476, 632);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.radioButtonAirOperator);
+            this.Controls.Add(this.metroTextBoxIATA);
+            this.Controls.Add(metroLabel8);
+            this.Controls.Add(this.metroTextBoxTraining);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.metroTextBoxFuel);
+            this.Controls.Add(this.metroTextBoxATCANS);
+            this.Controls.Add(this.metroTextBoxAirdrome);
+            this.Controls.Add(this.metroTextBoxCAO);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.radioButtonCAO);
+            this.Controls.Add(this.metroTextBoxCAMO);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.radioButtonCAMO);
+            this.Controls.Add(this.metroTextBoxAmoType);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.metroTextBoxOperatorType);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.checkedListBoxTraningOrgPrivilages);
-            this.Controls.Add(this.checkBoxTraningOrg);
-            this.Controls.Add(this.checkBoxFuel);
-            this.Controls.Add(this.checkBoxATC);
+            this.Controls.Add(this.radioButtonTraningOrg);
+            this.Controls.Add(this.radioButtonFuel);
+            this.Controls.Add(this.radioButtonATC);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.checkedListBoxRatings);
-            this.Controls.Add(this.checkBoxAmo);
+            this.Controls.Add(this.radioButtonAmo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.checkedListBoxAemcPrivilages);
-            this.Controls.Add(this.checkBoxAemc);
-            this.Controls.Add(this.checkBoxAirdromeOp);
+            this.Controls.Add(this.radioButtonAemc);
+            this.Controls.Add(this.radioButtonAirdromeOp);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.checkedListBoxFleet);
             this.Controls.Add(this.label1);
@@ -960,6 +1388,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReportLogoLarge)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxWhiteBackgroundLogotype)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -999,20 +1429,37 @@
         private System.Windows.Forms.CheckedListBox checkedListBoxSpecialOp;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckedListBox checkedListBoxFleet;
-        private System.Windows.Forms.CheckBox checkBoxAirdromeOp;
-        private System.Windows.Forms.CheckBox checkBoxAemc;
+        private MetroFramework.Controls.MetroRadioButton radioButtonAirdromeOp;
+        private MetroFramework.Controls.MetroRadioButton radioButtonAemc;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckedListBox checkedListBoxAemcPrivilages;
-        private System.Windows.Forms.CheckBox checkBoxAmo;
+        private MetroFramework.Controls.MetroRadioButton radioButtonAmo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckedListBox checkedListBoxRatings;
-        private System.Windows.Forms.CheckBox checkBoxATC;
-        private System.Windows.Forms.CheckBox checkBoxFuel;
-        private System.Windows.Forms.CheckBox checkBoxTraningOrg;
+        private MetroFramework.Controls.MetroRadioButton radioButtonATC;
+        private MetroFramework.Controls.MetroRadioButton radioButtonFuel;
+        private MetroFramework.Controls.MetroRadioButton radioButtonTraningOrg;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckedListBox checkedListBoxTraningOrgPrivilages;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.RadioButton radioButtonComertial;
-        private System.Windows.Forms.RadioButton radioButtonNotCommertial;
+        private MetroFramework.Controls.MetroRadioButton radioButtonComertial;
+        private MetroFramework.Controls.MetroRadioButton radioButtonNotCommertial;
+        private System.Windows.Forms.Label label8;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxOperatorType;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxAmoType;
+        private System.Windows.Forms.Label label9;
+        private MetroFramework.Controls.MetroRadioButton radioButtonCAMO;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxCAMO;
+        private System.Windows.Forms.Label label10;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxCAO;
+        private System.Windows.Forms.Label label11;
+        private MetroFramework.Controls.MetroRadioButton radioButtonCAO;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxAirdrome;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxATCANS;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxFuel;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxTraining;
+        private System.Windows.Forms.Label label12;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxIATA;
+        private MetroFramework.Controls.MetroRadioButton radioButtonAirOperator;
+        private System.Windows.Forms.Panel panel1;
     }
 }

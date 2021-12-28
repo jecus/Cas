@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
+using CAS.UI.Helpers;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using MetroFramework.Forms;
@@ -108,12 +109,12 @@ namespace CAS.UI.UICAAControls.Operators
             UpdateRemoveLbl(pictureBoxReportLogoLarge, _linkDeleteChengeReportLogoLarge);
             UpdateRemoveLbl(pictureBoxReportLogoVeryLarge, _linkDeleteReportLogoVeryLarge);
 
-            checkBoxATC.Checked = _currentOperator.IsATC;
-            checkBoxFuel.Checked = _currentOperator.IsFuel;
-            checkBoxTraningOrg.Checked = _currentOperator.IsTraningOperation;
-            checkBoxAmo.Checked = _currentOperator.IsAMO;
-            checkBoxAemc.Checked = _currentOperator.IsAEMS;
-            checkBoxAirdromeOp.Checked = _currentOperator.IsAerodromOperator;
+            radioButtonATC.Checked = _currentOperator.IsATC;
+            radioButtonFuel.Checked = _currentOperator.IsFuel;
+            radioButtonTraningOrg.Checked = _currentOperator.IsTraningOperation;
+            radioButtonAmo.Checked = _currentOperator.IsAMO;
+            radioButtonAemc.Checked = _currentOperator.IsAEMS;
+            radioButtonAirdromeOp.Checked = _currentOperator.IsAerodromOperator;
             if (_currentOperator.IsCommertial)
                 radioButtonComertial.Checked = true;
             else radioButtonNotCommertial.Checked = true;
@@ -131,12 +132,12 @@ namespace CAS.UI.UICAAControls.Operators
             _currentOperator.Web = metroTextBoxWeb.Text;
             _currentOperator.Email = metroTextBoxEmail.Text;
 
-            _currentOperator.IsATC = checkBoxATC.Checked;
-            _currentOperator.IsFuel = checkBoxFuel.Checked;
-            _currentOperator.IsTraningOperation = checkBoxTraningOrg.Checked;
-            _currentOperator.IsAMO = checkBoxAmo.Checked;
-            _currentOperator.IsAEMS = checkBoxAemc.Checked;
-            _currentOperator.IsAerodromOperator = checkBoxAirdromeOp.Checked;
+            _currentOperator.IsATC = radioButtonATC.Checked;
+            _currentOperator.IsFuel = radioButtonFuel.Checked;
+            _currentOperator.IsTraningOperation = radioButtonTraningOrg.Checked;
+            _currentOperator.IsAMO = radioButtonAmo.Checked;
+            _currentOperator.IsAEMS = radioButtonAemc.Checked;
+            _currentOperator.IsAerodromOperator = radioButtonAirdromeOp.Checked;
 
             foreach (var item in checkedListBoxTypeOfOper.CheckedItems)
                 _currentOperator.TypeOperation += $"{item} ";
@@ -178,25 +179,11 @@ namespace CAS.UI.UICAAControls.Operators
             checkedListBoxSpecialOp.Items.AddRange(SpecialOperations.Items.ToArray());
 
 
-            checkedListBoxAemcPrivilages.Enabled = checkBoxAemc.Checked;
-            checkedListBoxRatings.Enabled = checkBoxAmo.Checked;
-            checkedListBoxTraningOrgPrivilages.Enabled = checkBoxTraningOrg.Checked;
+            checkedListBoxAemcPrivilages.Enabled = radioButtonAemc.Checked;
+            checkedListBoxRatings.Enabled = radioButtonAmo.Checked;
+            checkedListBoxTraningOrgPrivilages.Enabled = radioButtonTraningOrg.Checked;
         }
 
-        private void checkBoxAemc_CheckedChanged(object sender, System.EventArgs e)
-        {
-            checkedListBoxAemcPrivilages.Enabled = checkBoxAemc.Checked;
-        }
-
-        private void checkBoxAmo_CheckedChanged(object sender, System.EventArgs e)
-        {
-            checkedListBoxRatings.Enabled = checkBoxAmo.Checked;
-        }
-
-        private void checkBoxTraningOrg_CheckedChanged(object sender, System.EventArgs e)
-        {
-            checkedListBoxTraningOrgPrivilages.Enabled = checkBoxTraningOrg.Checked;
-        }
 
 
         #region private void LinkLogotypeLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -382,5 +369,87 @@ namespace CAS.UI.UICAAControls.Operators
 
         #endregion
 
+        private void radioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            radioButtonComertial.Enabled =
+                radioButtonNotCommertial.Enabled =
+                    checkedListBoxTypeOfOper.Enabled =
+                        checkedListBoxSpecialOp.Enabled =
+                            checkedListBoxFleet.Enabled =
+                                metroTextBoxOperatorType.Enabled =
+                        radioButtonAirOperator.Checked;
+
+            if (!radioButtonAirOperator.Checked)
+            {
+                checkedListBoxTypeOfOper.Unchecked(); 
+                checkedListBoxSpecialOp.Unchecked(); 
+                checkedListBoxFleet.Unchecked(); 
+                metroTextBoxOperatorType.Text = string.Empty;
+            }
+
+            metroTextBoxAmoType.Enabled =
+                checkedListBoxRatings.Enabled=
+            radioButtonAmo.Checked;
+
+            if (!radioButtonAmo.Checked)
+            {
+                checkedListBoxRatings.Unchecked();
+                metroTextBoxAmoType.Text = string.Empty;
+            }
+
+
+            metroTextBoxCAMO.Enabled =
+                radioButtonCAMO.Checked;
+
+            if (!radioButtonCAMO.Checked)
+                metroTextBoxCAMO.Text = string.Empty;
+
+            metroTextBoxCAO.Enabled =
+                radioButtonCAO.Checked;
+
+            if (!radioButtonCAO.Checked)
+                metroTextBoxCAO.Text = string.Empty;
+
+            metroTextBoxAirdrome.Enabled =
+                radioButtonAirdromeOp.Checked;
+
+            if (!radioButtonAirdromeOp.Checked)
+                metroTextBoxAirdrome.Text = string.Empty;
+
+            metroTextBoxATCANS.Enabled =
+                radioButtonATC.Checked;
+
+            if (!radioButtonATC.Checked)
+                metroTextBoxATCANS.Text = string.Empty;
+
+            metroTextBoxATCANS.Enabled =
+                radioButtonATC.Checked;
+
+            if (!radioButtonATC.Checked)
+                metroTextBoxATCANS.Text = string.Empty;
+
+            metroTextBoxFuel.Enabled =
+                radioButtonFuel.Checked;
+
+            if (!radioButtonFuel.Checked)
+                metroTextBoxFuel.Text = string.Empty;
+
+            checkedListBoxAemcPrivilages.Enabled =
+                radioButtonAemc.Checked;
+
+            if (!radioButtonAemc.Checked)
+                checkedListBoxAemcPrivilages.Unchecked();
+
+            checkedListBoxTraningOrgPrivilages.Enabled =
+                metroTextBoxTraining.Enabled =
+                radioButtonTraningOrg.Checked;
+
+            if (!radioButtonTraningOrg.Checked)
+            {
+                checkedListBoxTraningOrgPrivilages.Unchecked();
+                metroTextBoxTraining.Text = string.Empty;
+            }
+
+        }
     }
 }

@@ -805,6 +805,7 @@
     <Compile Include="ExcelExport\ExcelExportProvider.cs" />
     <Compile Include="Extentions.cs" />
     <Compile Include="Helpers\CmbScrollHelper.cs" />
+    <Compile Include="Helpers\UIExtensions.cs" />
     <Compile Include="UICAAControls\Activity\CAAActivityListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>

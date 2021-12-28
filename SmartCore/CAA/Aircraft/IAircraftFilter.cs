@@ -7,7 +7,6 @@ namespace SmartCore.CAA.Aircraft
         [Filter("Registration Number:", Order = 1)]
         string RegistrationNumber { get; set; }
 
-
         [Filter("Serial Number:", Order = 2)]
         string SerialNumber { get; set; }
 
