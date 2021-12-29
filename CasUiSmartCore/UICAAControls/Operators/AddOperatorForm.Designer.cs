@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UICAAControls.Operators
+﻿using System.Windows.Forms;
+
+namespace CAS.UI.UICAAControls.Operators
 {
     partial class AddOperatorFrom
     {
@@ -69,37 +71,37 @@
             this.checkedListBoxSpecialOp = new System.Windows.Forms.CheckedListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.checkedListBoxFleet = new System.Windows.Forms.CheckedListBox();
-            this.radioButtonAirdromeOp = new MetroFramework.Controls.MetroRadioButton();
-            this.radioButtonAemc = new MetroFramework.Controls.MetroRadioButton();
+            this.radioButtonAirdromeOp = new RadioButton();
+            this.radioButtonAemc = new RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.checkedListBoxAemcPrivilages = new System.Windows.Forms.CheckedListBox();
-            this.radioButtonAmo = new MetroFramework.Controls.MetroRadioButton();
+            this.radioButtonAmo = new RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.checkedListBoxRatings = new System.Windows.Forms.CheckedListBox();
-            this.radioButtonATC = new MetroFramework.Controls.MetroRadioButton();
-            this.radioButtonFuel = new MetroFramework.Controls.MetroRadioButton();
-            this.radioButtonTraningOrg = new MetroFramework.Controls.MetroRadioButton();
+            this.radioButtonATC = new RadioButton();
+            this.radioButtonFuel = new RadioButton();
+            this.radioButtonTraningOrg = new RadioButton();
             this.label6 = new System.Windows.Forms.Label();
             this.checkedListBoxTraningOrgPrivilages = new System.Windows.Forms.CheckedListBox();
-            this.radioButtonComertial = new MetroFramework.Controls.MetroRadioButton();
-            this.radioButtonNotCommertial = new MetroFramework.Controls.MetroRadioButton();
+            this.radioButtonComertial = new RadioButton();
+            this.radioButtonNotCommertial = new RadioButton();
             this.label8 = new System.Windows.Forms.Label();
             this.metroTextBoxOperatorType = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxAmoType = new MetroFramework.Controls.MetroTextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.radioButtonCAMO = new MetroFramework.Controls.MetroRadioButton();
+            this.radioButtonCAMO = new RadioButton();
             this.metroTextBoxCAMO = new MetroFramework.Controls.MetroTextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.metroTextBoxCAO = new MetroFramework.Controls.MetroTextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.radioButtonCAO = new MetroFramework.Controls.MetroRadioButton();
+            this.radioButtonCAO = new RadioButton();
             this.metroTextBoxAirdrome = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxATCANS = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxFuel = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxTraining = new MetroFramework.Controls.MetroTextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.metroTextBoxIATA = new MetroFramework.Controls.MetroTextBox();
-            this.radioButtonAirOperator = new MetroFramework.Controls.MetroRadioButton();
+            this.radioButtonAirOperator = new RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             labelDescription = new MetroFramework.Controls.MetroLabel();
             metroLabel1 = new MetroFramework.Controls.MetroLabel();
@@ -766,23 +768,23 @@
             // radioButtonAirdromeOp
             // 
             this.radioButtonAirdromeOp.AutoSize = true;
+            this.radioButtonAirdromeOp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonAirdromeOp.Location = new System.Drawing.Point(1004, 45);
             this.radioButtonAirdromeOp.Name = "radioButtonAirdromeOp";
             this.radioButtonAirdromeOp.Size = new System.Drawing.Size(128, 15);
             this.radioButtonAirdromeOp.TabIndex = 307;
             this.radioButtonAirdromeOp.Text = "Airodrome operator";
-            this.radioButtonAirdromeOp.UseSelectable = true;
             this.radioButtonAirdromeOp.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // radioButtonAemc
             // 
             this.radioButtonAemc.AutoSize = true;
+            this.radioButtonAemc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonAemc.Location = new System.Drawing.Point(1004, 225);
             this.radioButtonAemc.Name = "radioButtonAemc";
             this.radioButtonAemc.Size = new System.Drawing.Size(56, 15);
             this.radioButtonAemc.TabIndex = 308;
             this.radioButtonAemc.Text = "AeMC";
-            this.radioButtonAemc.UseSelectable = true;
             this.radioButtonAemc.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // label3
@@ -809,12 +811,12 @@
             // radioButtonAmo
             // 
             this.radioButtonAmo.AutoSize = true;
+            this.radioButtonAmo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonAmo.Location = new System.Drawing.Point(498, 327);
             this.radioButtonAmo.Name = "radioButtonAmo";
             this.radioButtonAmo.Size = new System.Drawing.Size(51, 15);
             this.radioButtonAmo.TabIndex = 311;
             this.radioButtonAmo.Text = "AMO";
-            this.radioButtonAmo.UseSelectable = true;
             this.radioButtonAmo.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // label4
@@ -841,34 +843,34 @@
             // radioButtonATC
             // 
             this.radioButtonATC.AutoSize = true;
+            this.radioButtonATC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonATC.Location = new System.Drawing.Point(1004, 115);
             this.radioButtonATC.Name = "radioButtonATC";
             this.radioButtonATC.Size = new System.Drawing.Size(71, 15);
             this.radioButtonATC.TabIndex = 314;
             this.radioButtonATC.Text = "ATC/ANS";
-            this.radioButtonATC.UseSelectable = true;
             this.radioButtonATC.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // radioButtonFuel
             // 
             this.radioButtonFuel.AutoSize = true;
+            this.radioButtonFuel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonFuel.Location = new System.Drawing.Point(1005, 171);
             this.radioButtonFuel.Name = "radioButtonFuel";
             this.radioButtonFuel.Size = new System.Drawing.Size(45, 15);
             this.radioButtonFuel.TabIndex = 315;
             this.radioButtonFuel.Text = "Fuel";
-            this.radioButtonFuel.UseSelectable = true;
             this.radioButtonFuel.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // radioButtonTraningOrg
             // 
             this.radioButtonTraningOrg.AutoSize = true;
+            this.radioButtonTraningOrg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonTraningOrg.Location = new System.Drawing.Point(1006, 327);
             this.radioButtonTraningOrg.Name = "radioButtonTraningOrg";
             this.radioButtonTraningOrg.Size = new System.Drawing.Size(136, 15);
             this.radioButtonTraningOrg.TabIndex = 316;
             this.radioButtonTraningOrg.Text = "Training Organization";
-            this.radioButtonTraningOrg.UseSelectable = true;
             this.radioButtonTraningOrg.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // label6
@@ -895,24 +897,24 @@
             // radioButtonComertial
             // 
             this.radioButtonComertial.AutoSize = true;
+            this.radioButtonComertial.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonComertial.Location = new System.Drawing.Point(3, 3);
             this.radioButtonComertial.Name = "radioButtonComertial";
             this.radioButtonComertial.Size = new System.Drawing.Size(86, 15);
             this.radioButtonComertial.TabIndex = 320;
             this.radioButtonComertial.TabStop = true;
             this.radioButtonComertial.Text = "Commertial";
-            this.radioButtonComertial.UseSelectable = true;
             // 
             // radioButtonNotCommertial
             // 
             this.radioButtonNotCommertial.AutoSize = true;
+            this.radioButtonNotCommertial.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonNotCommertial.Location = new System.Drawing.Point(95, 3);
             this.radioButtonNotCommertial.Name = "radioButtonNotCommertial";
             this.radioButtonNotCommertial.Size = new System.Drawing.Size(109, 15);
             this.radioButtonNotCommertial.TabIndex = 321;
             this.radioButtonNotCommertial.TabStop = true;
             this.radioButtonNotCommertial.Text = "Not Commertial";
-            this.radioButtonNotCommertial.UseSelectable = true;
             // 
             // label8
             // 
@@ -1005,12 +1007,13 @@
             // radioButtonCAMO
             // 
             this.radioButtonCAMO.AutoSize = true;
+            this.radioButtonCAMO.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonCAMO.Location = new System.Drawing.Point(498, 465);
             this.radioButtonCAMO.Name = "radioButtonCAMO";
             this.radioButtonCAMO.Size = new System.Drawing.Size(59, 15);
             this.radioButtonCAMO.TabIndex = 326;
             this.radioButtonCAMO.Text = "CAMO";
-            this.radioButtonCAMO.UseSelectable = true;
+
             this.radioButtonCAMO.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // metroTextBoxCAMO
@@ -1104,12 +1107,12 @@
             // radioButtonCAO
             // 
             this.radioButtonCAO.AutoSize = true;
+            this.radioButtonCAO.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonCAO.Location = new System.Drawing.Point(498, 510);
             this.radioButtonCAO.Name = "radioButtonCAO";
             this.radioButtonCAO.Size = new System.Drawing.Size(48, 15);
             this.radioButtonCAO.TabIndex = 329;
             this.radioButtonCAO.Text = "CAO";
-            this.radioButtonCAO.UseSelectable = true;
             this.radioButtonCAO.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // metroTextBoxAirdrome
@@ -1287,12 +1290,12 @@
             // radioButtonAirOperator
             // 
             this.radioButtonAirOperator.AutoSize = true;
+            this.radioButtonAirOperator.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonAirOperator.Location = new System.Drawing.Point(498, 34);
             this.radioButtonAirOperator.Name = "radioButtonAirOperator";
             this.radioButtonAirOperator.Size = new System.Drawing.Size(88, 15);
             this.radioButtonAirOperator.TabIndex = 339;
             this.radioButtonAirOperator.Text = "Air Operator";
-            this.radioButtonAirOperator.UseSelectable = true;
             this.radioButtonAirOperator.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // panel1
@@ -1429,37 +1432,37 @@
         private System.Windows.Forms.CheckedListBox checkedListBoxSpecialOp;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckedListBox checkedListBoxFleet;
-        private MetroFramework.Controls.MetroRadioButton radioButtonAirdromeOp;
-        private MetroFramework.Controls.MetroRadioButton radioButtonAemc;
+        private RadioButton radioButtonAirdromeOp;
+        private RadioButton radioButtonAemc;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckedListBox checkedListBoxAemcPrivilages;
-        private MetroFramework.Controls.MetroRadioButton radioButtonAmo;
+        private RadioButton radioButtonAmo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckedListBox checkedListBoxRatings;
-        private MetroFramework.Controls.MetroRadioButton radioButtonATC;
-        private MetroFramework.Controls.MetroRadioButton radioButtonFuel;
-        private MetroFramework.Controls.MetroRadioButton radioButtonTraningOrg;
+        private RadioButton radioButtonATC;
+        private RadioButton radioButtonFuel;
+        private RadioButton radioButtonTraningOrg;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckedListBox checkedListBoxTraningOrgPrivilages;
-        private MetroFramework.Controls.MetroRadioButton radioButtonComertial;
-        private MetroFramework.Controls.MetroRadioButton radioButtonNotCommertial;
+        private RadioButton radioButtonComertial;
+        private RadioButton radioButtonNotCommertial;
         private System.Windows.Forms.Label label8;
         private MetroFramework.Controls.MetroTextBox metroTextBoxOperatorType;
         private MetroFramework.Controls.MetroTextBox metroTextBoxAmoType;
         private System.Windows.Forms.Label label9;
-        private MetroFramework.Controls.MetroRadioButton radioButtonCAMO;
+        private RadioButton radioButtonCAMO;
         private MetroFramework.Controls.MetroTextBox metroTextBoxCAMO;
         private System.Windows.Forms.Label label10;
         private MetroFramework.Controls.MetroTextBox metroTextBoxCAO;
         private System.Windows.Forms.Label label11;
-        private MetroFramework.Controls.MetroRadioButton radioButtonCAO;
+        private RadioButton radioButtonCAO;
         private MetroFramework.Controls.MetroTextBox metroTextBoxAirdrome;
         private MetroFramework.Controls.MetroTextBox metroTextBoxATCANS;
         private MetroFramework.Controls.MetroTextBox metroTextBoxFuel;
         private MetroFramework.Controls.MetroTextBox metroTextBoxTraining;
         private System.Windows.Forms.Label label12;
         private MetroFramework.Controls.MetroTextBox metroTextBoxIATA;
-        private MetroFramework.Controls.MetroRadioButton radioButtonAirOperator;
+        private RadioButton radioButtonAirOperator;
         private System.Windows.Forms.Panel panel1;
     }
 }
