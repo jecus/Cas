@@ -30,15 +30,15 @@ namespace CAS.UI.UICAAControls.Operators
         /// </summary>
         private void InitializeComponent()
         {
-            MetroFramework.Controls.MetroLabel labelDescription;
-            MetroFramework.Controls.MetroLabel metroLabel1;
-            MetroFramework.Controls.MetroLabel metroLabel2;
-            MetroFramework.Controls.MetroLabel metroLabel3;
-            MetroFramework.Controls.MetroLabel metroLabel4;
-            MetroFramework.Controls.MetroLabel metroLabel5;
-            MetroFramework.Controls.MetroLabel metroLabel6;
-            MetroFramework.Controls.MetroLabel metroLabel7;
-            MetroFramework.Controls.MetroLabel metroLabel8;
+            System.Windows.Forms.Label labelDescription;
+            System.Windows.Forms.Label metroLabel1;
+            System.Windows.Forms.Label metroLabel2;
+            System.Windows.Forms.Label metroLabel3;
+            System.Windows.Forms.Label metroLabel4;
+            System.Windows.Forms.Label metroLabel5;
+            System.Windows.Forms.Label metroLabel6;
+            System.Windows.Forms.Label metroLabel7;
+            System.Windows.Forms.Label metroLabel8;
             this.textBoxFullName = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxShortName = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxIcao = new MetroFramework.Controls.MetroTextBox();
@@ -71,47 +71,47 @@ namespace CAS.UI.UICAAControls.Operators
             this.checkedListBoxSpecialOp = new System.Windows.Forms.CheckedListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.checkedListBoxFleet = new System.Windows.Forms.CheckedListBox();
-            this.radioButtonAirdromeOp = new RadioButton();
-            this.radioButtonAemc = new RadioButton();
+            this.radioButtonAirdromeOp = new System.Windows.Forms.RadioButton();
+            this.radioButtonAemc = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.checkedListBoxAemcPrivilages = new System.Windows.Forms.CheckedListBox();
-            this.radioButtonAmo = new RadioButton();
+            this.radioButtonAmo = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.checkedListBoxRatings = new System.Windows.Forms.CheckedListBox();
-            this.radioButtonATC = new RadioButton();
-            this.radioButtonFuel = new RadioButton();
-            this.radioButtonTraningOrg = new RadioButton();
+            this.radioButtonATC = new System.Windows.Forms.RadioButton();
+            this.radioButtonFuel = new System.Windows.Forms.RadioButton();
+            this.radioButtonTraningOrg = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
             this.checkedListBoxTraningOrgPrivilages = new System.Windows.Forms.CheckedListBox();
-            this.radioButtonComertial = new RadioButton();
-            this.radioButtonNotCommertial = new RadioButton();
+            this.radioButtonComertial = new System.Windows.Forms.RadioButton();
+            this.radioButtonNotCommertial = new System.Windows.Forms.RadioButton();
             this.label8 = new System.Windows.Forms.Label();
             this.metroTextBoxOperatorType = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxAmoType = new MetroFramework.Controls.MetroTextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.radioButtonCAMO = new RadioButton();
+            this.radioButtonCAMO = new System.Windows.Forms.RadioButton();
             this.metroTextBoxCAMO = new MetroFramework.Controls.MetroTextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.metroTextBoxCAO = new MetroFramework.Controls.MetroTextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.radioButtonCAO = new RadioButton();
+            this.radioButtonCAO = new System.Windows.Forms.RadioButton();
             this.metroTextBoxAirdrome = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxATCANS = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxFuel = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxTraining = new MetroFramework.Controls.MetroTextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.metroTextBoxIATA = new MetroFramework.Controls.MetroTextBox();
-            this.radioButtonAirOperator = new RadioButton();
+            this.radioButtonAirOperator = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            labelDescription = new MetroFramework.Controls.MetroLabel();
-            metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            metroLabel4 = new MetroFramework.Controls.MetroLabel();
-            metroLabel5 = new MetroFramework.Controls.MetroLabel();
-            metroLabel6 = new MetroFramework.Controls.MetroLabel();
-            metroLabel7 = new MetroFramework.Controls.MetroLabel();
-            metroLabel8 = new MetroFramework.Controls.MetroLabel();
+            labelDescription = new System.Windows.Forms.Label();
+            metroLabel1 = new System.Windows.Forms.Label();
+            metroLabel2 = new System.Windows.Forms.Label();
+            metroLabel3 = new System.Windows.Forms.Label();
+            metroLabel4 = new System.Windows.Forms.Label();
+            metroLabel5 = new System.Windows.Forms.Label();
+            metroLabel6 = new System.Windows.Forms.Label();
+            metroLabel7 = new System.Windows.Forms.Label();
+            metroLabel8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReportLogoVeryLarge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReportLogoLarge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).BeginInit();
@@ -122,10 +122,11 @@ namespace CAS.UI.UICAAControls.Operators
             // labelDescription
             // 
             labelDescription.AutoSize = true;
+            labelDescription.Font = new System.Drawing.Font("Verdana", 9F);
             labelDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             labelDescription.Location = new System.Drawing.Point(5, 65);
             labelDescription.Name = "labelDescription";
-            labelDescription.Size = new System.Drawing.Size(72, 19);
+            labelDescription.Size = new System.Drawing.Size(73, 14);
             labelDescription.TabIndex = 12;
             labelDescription.Text = "Full Name:";
             labelDescription.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -133,10 +134,11 @@ namespace CAS.UI.UICAAControls.Operators
             // metroLabel1
             // 
             metroLabel1.AutoSize = true;
+            metroLabel1.Font = new System.Drawing.Font("Verdana", 9F);
             metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             metroLabel1.Location = new System.Drawing.Point(5, 119);
             metroLabel1.Name = "metroLabel1";
-            metroLabel1.Size = new System.Drawing.Size(84, 19);
+            metroLabel1.Size = new System.Drawing.Size(86, 14);
             metroLabel1.TabIndex = 14;
             metroLabel1.Text = "Short Name:";
             metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -144,10 +146,11 @@ namespace CAS.UI.UICAAControls.Operators
             // metroLabel2
             // 
             metroLabel2.AutoSize = true;
+            metroLabel2.Font = new System.Drawing.Font("Verdana", 9F);
             metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             metroLabel2.Location = new System.Drawing.Point(5, 146);
             metroLabel2.Name = "metroLabel2";
-            metroLabel2.Size = new System.Drawing.Size(77, 19);
+            metroLabel2.Size = new System.Drawing.Size(78, 14);
             metroLabel2.TabIndex = 16;
             metroLabel2.Text = "ICAO code:";
             metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -155,10 +158,11 @@ namespace CAS.UI.UICAAControls.Operators
             // metroLabel3
             // 
             metroLabel3.AutoSize = true;
+            metroLabel3.Font = new System.Drawing.Font("Verdana", 9F);
             metroLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             metroLabel3.Location = new System.Drawing.Point(5, 195);
             metroLabel3.Name = "metroLabel3";
-            metroLabel3.Size = new System.Drawing.Size(59, 19);
+            metroLabel3.Size = new System.Drawing.Size(63, 14);
             metroLabel3.TabIndex = 18;
             metroLabel3.Text = "Address:";
             metroLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -166,10 +170,11 @@ namespace CAS.UI.UICAAControls.Operators
             // metroLabel4
             // 
             metroLabel4.AutoSize = true;
+            metroLabel4.Font = new System.Drawing.Font("Verdana", 9F);
             metroLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             metroLabel4.Location = new System.Drawing.Point(5, 249);
             metroLabel4.Name = "metroLabel4";
-            metroLabel4.Size = new System.Drawing.Size(49, 19);
+            metroLabel4.Size = new System.Drawing.Size(52, 14);
             metroLabel4.TabIndex = 20;
             metroLabel4.Text = "Phone:";
             metroLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -177,10 +182,11 @@ namespace CAS.UI.UICAAControls.Operators
             // metroLabel5
             // 
             metroLabel5.AutoSize = true;
+            metroLabel5.Font = new System.Drawing.Font("Verdana", 9F);
             metroLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             metroLabel5.Location = new System.Drawing.Point(5, 276);
             metroLabel5.Name = "metroLabel5";
-            metroLabel5.Size = new System.Drawing.Size(31, 19);
+            metroLabel5.Size = new System.Drawing.Size(33, 14);
             metroLabel5.TabIndex = 22;
             metroLabel5.Text = "Fax:";
             metroLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -188,10 +194,11 @@ namespace CAS.UI.UICAAControls.Operators
             // metroLabel6
             // 
             metroLabel6.AutoSize = true;
+            metroLabel6.Font = new System.Drawing.Font("Verdana", 9F);
             metroLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             metroLabel6.Location = new System.Drawing.Point(5, 303);
             metroLabel6.Name = "metroLabel6";
-            metroLabel6.Size = new System.Drawing.Size(39, 19);
+            metroLabel6.Size = new System.Drawing.Size(40, 14);
             metroLabel6.TabIndex = 24;
             metroLabel6.Text = "Web:";
             metroLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -199,10 +206,11 @@ namespace CAS.UI.UICAAControls.Operators
             // metroLabel7
             // 
             metroLabel7.AutoSize = true;
+            metroLabel7.Font = new System.Drawing.Font("Verdana", 9F);
             metroLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             metroLabel7.Location = new System.Drawing.Point(5, 330);
             metroLabel7.Name = "metroLabel7";
-            metroLabel7.Size = new System.Drawing.Size(44, 19);
+            metroLabel7.Size = new System.Drawing.Size(45, 14);
             metroLabel7.TabIndex = 26;
             metroLabel7.Text = "Email:";
             metroLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -210,10 +218,11 @@ namespace CAS.UI.UICAAControls.Operators
             // metroLabel8
             // 
             metroLabel8.AutoSize = true;
+            metroLabel8.Font = new System.Drawing.Font("Verdana", 9F);
             metroLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             metroLabel8.Location = new System.Drawing.Point(5, 171);
             metroLabel8.Name = "metroLabel8";
-            metroLabel8.Size = new System.Drawing.Size(69, 19);
+            metroLabel8.Size = new System.Drawing.Size(72, 14);
             metroLabel8.TabIndex = 337;
             metroLabel8.Text = "IATA code:";
             metroLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -768,10 +777,11 @@ namespace CAS.UI.UICAAControls.Operators
             // radioButtonAirdromeOp
             // 
             this.radioButtonAirdromeOp.AutoSize = true;
+            this.radioButtonAirdromeOp.Font = new System.Drawing.Font("Verdana", 9F);
             this.radioButtonAirdromeOp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonAirdromeOp.Location = new System.Drawing.Point(1004, 45);
             this.radioButtonAirdromeOp.Name = "radioButtonAirdromeOp";
-            this.radioButtonAirdromeOp.Size = new System.Drawing.Size(128, 15);
+            this.radioButtonAirdromeOp.Size = new System.Drawing.Size(148, 18);
             this.radioButtonAirdromeOp.TabIndex = 307;
             this.radioButtonAirdromeOp.Text = "Airodrome operator";
             this.radioButtonAirdromeOp.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
@@ -779,10 +789,11 @@ namespace CAS.UI.UICAAControls.Operators
             // radioButtonAemc
             // 
             this.radioButtonAemc.AutoSize = true;
+            this.radioButtonAemc.Font = new System.Drawing.Font("Verdana", 9F);
             this.radioButtonAemc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonAemc.Location = new System.Drawing.Point(1004, 225);
             this.radioButtonAemc.Name = "radioButtonAemc";
-            this.radioButtonAemc.Size = new System.Drawing.Size(56, 15);
+            this.radioButtonAemc.Size = new System.Drawing.Size(60, 18);
             this.radioButtonAemc.TabIndex = 308;
             this.radioButtonAemc.Text = "AeMC";
             this.radioButtonAemc.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
@@ -811,10 +822,11 @@ namespace CAS.UI.UICAAControls.Operators
             // radioButtonAmo
             // 
             this.radioButtonAmo.AutoSize = true;
+            this.radioButtonAmo.Font = new System.Drawing.Font("Verdana", 9F);
             this.radioButtonAmo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonAmo.Location = new System.Drawing.Point(498, 327);
             this.radioButtonAmo.Name = "radioButtonAmo";
-            this.radioButtonAmo.Size = new System.Drawing.Size(51, 15);
+            this.radioButtonAmo.Size = new System.Drawing.Size(53, 18);
             this.radioButtonAmo.TabIndex = 311;
             this.radioButtonAmo.Text = "AMO";
             this.radioButtonAmo.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
@@ -843,10 +855,11 @@ namespace CAS.UI.UICAAControls.Operators
             // radioButtonATC
             // 
             this.radioButtonATC.AutoSize = true;
+            this.radioButtonATC.Font = new System.Drawing.Font("Verdana", 9F);
             this.radioButtonATC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonATC.Location = new System.Drawing.Point(1004, 115);
             this.radioButtonATC.Name = "radioButtonATC";
-            this.radioButtonATC.Size = new System.Drawing.Size(71, 15);
+            this.radioButtonATC.Size = new System.Drawing.Size(78, 18);
             this.radioButtonATC.TabIndex = 314;
             this.radioButtonATC.Text = "ATC/ANS";
             this.radioButtonATC.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
@@ -854,10 +867,11 @@ namespace CAS.UI.UICAAControls.Operators
             // radioButtonFuel
             // 
             this.radioButtonFuel.AutoSize = true;
+            this.radioButtonFuel.Font = new System.Drawing.Font("Verdana", 9F);
             this.radioButtonFuel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonFuel.Location = new System.Drawing.Point(1005, 171);
             this.radioButtonFuel.Name = "radioButtonFuel";
-            this.radioButtonFuel.Size = new System.Drawing.Size(45, 15);
+            this.radioButtonFuel.Size = new System.Drawing.Size(51, 18);
             this.radioButtonFuel.TabIndex = 315;
             this.radioButtonFuel.Text = "Fuel";
             this.radioButtonFuel.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
@@ -865,10 +879,11 @@ namespace CAS.UI.UICAAControls.Operators
             // radioButtonTraningOrg
             // 
             this.radioButtonTraningOrg.AutoSize = true;
+            this.radioButtonTraningOrg.Font = new System.Drawing.Font("Verdana", 9F);
             this.radioButtonTraningOrg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonTraningOrg.Location = new System.Drawing.Point(1006, 327);
             this.radioButtonTraningOrg.Name = "radioButtonTraningOrg";
-            this.radioButtonTraningOrg.Size = new System.Drawing.Size(136, 15);
+            this.radioButtonTraningOrg.Size = new System.Drawing.Size(159, 18);
             this.radioButtonTraningOrg.TabIndex = 316;
             this.radioButtonTraningOrg.Text = "Training Organization";
             this.radioButtonTraningOrg.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
@@ -897,10 +912,11 @@ namespace CAS.UI.UICAAControls.Operators
             // radioButtonComertial
             // 
             this.radioButtonComertial.AutoSize = true;
+            this.radioButtonComertial.Font = new System.Drawing.Font("Verdana", 9F);
             this.radioButtonComertial.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonComertial.Location = new System.Drawing.Point(3, 3);
             this.radioButtonComertial.Name = "radioButtonComertial";
-            this.radioButtonComertial.Size = new System.Drawing.Size(86, 15);
+            this.radioButtonComertial.Size = new System.Drawing.Size(96, 18);
             this.radioButtonComertial.TabIndex = 320;
             this.radioButtonComertial.TabStop = true;
             this.radioButtonComertial.Text = "Commertial";
@@ -908,10 +924,11 @@ namespace CAS.UI.UICAAControls.Operators
             // radioButtonNotCommertial
             // 
             this.radioButtonNotCommertial.AutoSize = true;
+            this.radioButtonNotCommertial.Font = new System.Drawing.Font("Verdana", 9F);
             this.radioButtonNotCommertial.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.radioButtonNotCommertial.Location = new System.Drawing.Point(95, 3);
+            this.radioButtonNotCommertial.Location = new System.Drawing.Point(101, 3);
             this.radioButtonNotCommertial.Name = "radioButtonNotCommertial";
-            this.radioButtonNotCommertial.Size = new System.Drawing.Size(109, 15);
+            this.radioButtonNotCommertial.Size = new System.Drawing.Size(122, 18);
             this.radioButtonNotCommertial.TabIndex = 321;
             this.radioButtonNotCommertial.TabStop = true;
             this.radioButtonNotCommertial.Text = "Not Commertial";
@@ -1007,13 +1024,13 @@ namespace CAS.UI.UICAAControls.Operators
             // radioButtonCAMO
             // 
             this.radioButtonCAMO.AutoSize = true;
+            this.radioButtonCAMO.Font = new System.Drawing.Font("Verdana", 9F);
             this.radioButtonCAMO.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonCAMO.Location = new System.Drawing.Point(498, 465);
             this.radioButtonCAMO.Name = "radioButtonCAMO";
-            this.radioButtonCAMO.Size = new System.Drawing.Size(59, 15);
+            this.radioButtonCAMO.Size = new System.Drawing.Size(62, 18);
             this.radioButtonCAMO.TabIndex = 326;
             this.radioButtonCAMO.Text = "CAMO";
-
             this.radioButtonCAMO.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // metroTextBoxCAMO
@@ -1107,10 +1124,11 @@ namespace CAS.UI.UICAAControls.Operators
             // radioButtonCAO
             // 
             this.radioButtonCAO.AutoSize = true;
+            this.radioButtonCAO.Font = new System.Drawing.Font("Verdana", 9F);
             this.radioButtonCAO.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonCAO.Location = new System.Drawing.Point(498, 510);
             this.radioButtonCAO.Name = "radioButtonCAO";
-            this.radioButtonCAO.Size = new System.Drawing.Size(48, 15);
+            this.radioButtonCAO.Size = new System.Drawing.Size(52, 18);
             this.radioButtonCAO.TabIndex = 329;
             this.radioButtonCAO.Text = "CAO";
             this.radioButtonCAO.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
@@ -1290,10 +1308,11 @@ namespace CAS.UI.UICAAControls.Operators
             // radioButtonAirOperator
             // 
             this.radioButtonAirOperator.AutoSize = true;
+            this.radioButtonAirOperator.Font = new System.Drawing.Font("Verdana", 9F);
             this.radioButtonAirOperator.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonAirOperator.Location = new System.Drawing.Point(498, 34);
             this.radioButtonAirOperator.Name = "radioButtonAirOperator";
-            this.radioButtonAirOperator.Size = new System.Drawing.Size(88, 15);
+            this.radioButtonAirOperator.Size = new System.Drawing.Size(102, 18);
             this.radioButtonAirOperator.TabIndex = 339;
             this.radioButtonAirOperator.Text = "Air Operator";
             this.radioButtonAirOperator.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
@@ -1304,7 +1323,7 @@ namespace CAS.UI.UICAAControls.Operators
             this.panel1.Controls.Add(this.radioButtonNotCommertial);
             this.panel1.Location = new System.Drawing.Point(630, 32);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(225, 28);
+            this.panel1.Size = new System.Drawing.Size(248, 28);
             this.panel1.TabIndex = 340;
             // 
             // AddOperatorFrom
