@@ -52,6 +52,7 @@ namespace CAS.UI.UICAAControls
 			this.ExportATLB = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
 			this.LinkRecords = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkNomenclatures = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            this.LinkFindingLevels = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkFligthsSchedule = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkAircraftStatus = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkFligthsPlanOPS = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -238,7 +239,7 @@ namespace CAS.UI.UICAAControls
 			this._settingContainer.ReferenceLink05 = this.LinkDepartments;
 			this._settingContainer.ReferenceLink06 = this.LinkSpecializations;
 			this._settingContainer.ReferenceLink07 = this.LinkNomenclatures;
-            this._settingContainer.ReferenceLink08 = null;
+            this._settingContainer.ReferenceLink08 = this.LinkFindingLevels;
 			this._settingContainer.ReferenceLink09 = null;
 			this._settingContainer.ReferenceLink10 = null;
 			this._settingContainer.ReferenceLink11 = null;
@@ -517,10 +518,35 @@ namespace CAS.UI.UICAAControls
 			this.LinkNomenclatures.Size = new System.Drawing.Size(188, 20);
 			this.LinkNomenclatures.Status = AvControls.Statuses.Satisfactory;
 			this.LinkNomenclatures.TabIndex = 4;
-			this.LinkNomenclatures.Text = "Nomenclatures";
+			this.LinkNomenclatures.Text = "Nomenclature";
 			this.LinkNomenclatures.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkNomenclatures.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             this.LinkNomenclatures.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkNomenclaturesDisplayerRequested);
+			// 
+			// LinkFindingLevels
+			// 
+			this.LinkFindingLevels.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkFindingLevels.Displayer = null;
+			this.LinkFindingLevels.DisplayerText = null;
+			this.LinkFindingLevels.Entity = null;
+			this.LinkFindingLevels.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.LinkFindingLevels.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkFindingLevels.ImageBackColor = System.Drawing.Color.Transparent;
+			this.LinkFindingLevels.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.LinkFindingLevels.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkFindingLevels.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.LinkFindingLevels.Location = new System.Drawing.Point(10, 0);
+			this.LinkFindingLevels.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.LinkFindingLevels.Name = "LinkFindingLevels";
+			this.LinkFindingLevels.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.LinkFindingLevels.Size = new System.Drawing.Size(188, 20);
+			this.LinkFindingLevels.Status = AvControls.Statuses.Satisfactory;
+			this.LinkFindingLevels.TabIndex = 4;
+			this.LinkFindingLevels.Text = "Finding Level";
+			this.LinkFindingLevels.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.LinkFindingLevels.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+
+            this.LinkFindingLevels.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkFindingLevelsDisplayerRequested);
 
 			// 
 			// LinkAircraftStatus
@@ -1654,6 +1680,7 @@ namespace CAS.UI.UICAAControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel Operator;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRecords;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkNomenclatures;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkFindingLevels;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPersonnel;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkSpecializations;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkAircraftStatus;

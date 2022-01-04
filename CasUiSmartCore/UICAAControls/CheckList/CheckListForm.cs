@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using MetroFramework.Forms;
 
 namespace CAS.UI.UICAAControls.CheckList
@@ -16,6 +8,16 @@ namespace CAS.UI.UICAAControls.CheckList
         public CheckListForm()
         {
             InitializeComponent();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var control = new AuditControl();
+            //control.UpdateInformation(training, _suppliers, aircraftModels, _employeeLicenceControl);
+            //control.Deleted += Control_Deleted;
+            flowLayoutPanel1.Controls.Remove(linkLabel1);
+            flowLayoutPanel1.Controls.Add(control);
+            flowLayoutPanel1.Controls.Add(linkLabel1);
         }
     }
 }

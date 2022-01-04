@@ -4,6 +4,7 @@ using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using SmartCore.Auxiliary;
 using SmartCore.CAA;
+using SmartCore.CAA.FindingLevel;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -993,5 +994,39 @@ namespace SmartCore.DtoHelper
 
 			};
 		}
+
+        public static FindingLevelsDTO ConvertCAA(this FindingLevels levels)
+        {
+            return new FindingLevelsDTO()
+            {
+                ItemId = levels.ItemId,
+                IsDeleted = levels.IsDeleted,
+                CorrectiveAction = levels.CorrectiveAction?.ConvertToByteArray(),
+                CorrectorId = levels.CorrectorId,
+                FinalAction = levels.FinalAction?.ConvertToByteArray(),
+                LevelClass = levels.LevelClass,
+                LevelName = levels.LevelName,
+                LevelColor = levels.LevelColor,
+                Remark = levels.Remark,
+                Updated = levels.Updated
+            };
+        }
+
+        public static FindingLevels ConvertCAA(this FindingLevelsDTO levels)
+        {
+            return new FindingLevels()
+            {
+                ItemId = levels.ItemId,
+                IsDeleted = levels.IsDeleted,
+                CorrectiveAction = Lifelength.ConvertFromByteArray(levels.CorrectiveAction),
+                CorrectorId = levels.CorrectorId,
+                FinalAction = Lifelength.ConvertFromByteArray(levels.FinalAction),
+                LevelClass = levels.LevelClass,
+                LevelName = levels.LevelName,
+                LevelColor = levels.LevelColor,
+                Remark = levels.Remark,
+                Updated = levels.Updated
+            };
+        }
 	}
 }

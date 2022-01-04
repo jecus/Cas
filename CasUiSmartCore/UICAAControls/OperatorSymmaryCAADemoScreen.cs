@@ -6,6 +6,7 @@ using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.Activity;
 using CAS.UI.UICAAControls.Airacraft;
+using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UICAAControls.Document;
 using CAS.UI.UICAAControls.Operators;
 using CAS.UI.UICAAControls.Specialists;
@@ -16,6 +17,7 @@ using CAS.UI.UIControls.Auxiliary.CAA;
 using CAS.UI.UIControls.PersonnelControls;
 using CASTerms;
 using SmartCore.CAA;
+using SmartCore.CAA.FindingLevel;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -145,8 +147,13 @@ namespace CAS.UI.UICAAControls
             e.DisplayerText = "Nomenclatures";
             e.RequestedEntity = new CAACommonListScreen(typeof(Nomenclatures));
         }
+        #endregion
 
-		#endregion
+        private void LinkFindingLevelsDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = "FindingLevel";
+            e.RequestedEntity = new CAACommonListScreen(typeof(FindingLevels));
+        }
 
         #region private void LinkSpecializationsDisplayerRequested(object sender, ReferenceEventArgs e)
 
@@ -173,6 +180,8 @@ namespace CAS.UI.UICAAControls
 
         private void Store_Click(object sender, ReferenceEventArgs e)
         {
+            var f = new CheckListForm();
+            f.ShowDialog();
             e.Cancel = true;
         }
 

@@ -2,6 +2,7 @@
 using System.Reflection;
 using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
+using SmartCore.Calculations;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 
@@ -96,6 +97,8 @@ namespace SmartCore.Entities.Dictionaries
 		[Child]
 		public Department Department { get; set; }
 
+        [FormControl(150, "Test", 1, Order = 55)]
+		public Lifelength Test { get; set; }
 		#endregion
 
 		#region public static Nomenclatures Unknown

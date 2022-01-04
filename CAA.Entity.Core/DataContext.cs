@@ -30,6 +30,7 @@ namespace CAA.Entity.Core
         public DbSet<CAARestrictionDTO> RestrictionDtos { get; set; }
         public DbSet<CAAServiceTypeDTO> ServiceTypeDtos { get; set; }
         public DbSet<CAASpecializationDTO> SpecializationDtos { get; set; }
+        public DbSet<FindingLevelsDTO> FindingLevelsDtos { get; set; }
 
         #endregion
 

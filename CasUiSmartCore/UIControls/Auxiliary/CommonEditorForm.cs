@@ -152,7 +152,12 @@ namespace CAS.UI.UIControls.Auxiliary
                 PropertyInfo pairProperty = null;
                 FormControlAttribute attr =
                     (FormControlAttribute)t.GetCustomAttributes(typeof(FormControlAttribute), false).First();
-                labels.Add(new Label { Text = attr.Title, AutoSize = true });
+                labels.Add(new Label
+                {
+                    Text = attr.Title, AutoSize = true,
+                    Font = new Font("Verdana", 9F),
+                    ForeColor = Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))))
+            });
 
                 //Если значение должно быть не пустым или не NULL
                 //то шрифт леибла утснанавливается в ЖИРНЫЙ(BOLD)
@@ -1093,8 +1098,14 @@ namespace CAS.UI.UIControls.Auxiliary
 
                     Lifelength val = (Lifelength)propertyInfo.GetValue(_currentObject, null);
                     Lifelength controlVal = ((LifelengthViewer)control).Lifelength;
-                    if (!val.IsEqual(controlVal))
-                        return true;
+                    if (val != null)
+                    {
+                        if (!val.IsEqual(controlVal))
+                            return true;
+                    }
+                    else if(controlVal != null) return true;
+
+
                 }
                 if (control is TreeDictionaryComboBox)
                 {
@@ -1516,7 +1527,18 @@ namespace CAS.UI.UIControls.Auxiliary
 
                     Lifelength val = (Lifelength)propertyInfo.GetValue(_currentObject, null);
                     Lifelength controlVal = ((LifelengthViewer)control).Lifelength;
-                    if (!val.IsEqual(controlVal)) propertyInfo.SetValue(_currentObject, controlVal, null);
+                    if (val != null)
+                    {
+                        if (!val.IsEqual(controlVal))
+                            propertyInfo.SetValue(_currentObject, controlVal, null);
+                    }
+                    else if (controlVal != null)
+                    {
+                        propertyInfo.SetValue(_currentObject, controlVal, null);
+                    }
+                        
+
+                    
                 }
                 if (control is ThresholdControl)
                 {

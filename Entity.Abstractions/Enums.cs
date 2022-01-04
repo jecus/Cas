@@ -1,6 +1,23 @@
 ﻿namespace Entity.Abstractions
 {
-	public enum UserType
+    public enum LevelColor
+    {
+        Red,
+        Orange,
+        Yellow,
+        Green,
+        Blue,
+        Violet,
+        White,
+        Unknown
+    }
+    public enum LevelClass
+    {
+        Major,
+        Minor
+    }
+
+    public enum UserType
     {
         Admin,
         SuperUser,
