@@ -44,7 +44,8 @@ namespace CAA.Entity.Core
         public DbSet<CAAItemFileLinkDTO> ItemFileLinkDtos { get; set; }
 		public DbSet<CAAUserDTO> UserDtos { get; set; }
         public DbSet<CAAOperatorDTO> OperatorDtos { get; set; }
-
+        public DbSet<CheckListDTO> CheckListDtos { get; set; }
+        public DbSet<CheckListRecordDTO> CheckListRecordDtos { get; set; }
         public DbSet<CAACategoryRecordDTO> CategoryRecordDtos { get; set; }
         public DbSet<CAADocumentDTO> DocumentDtos { get; set; }
 
@@ -73,6 +74,12 @@ namespace CAA.Entity.Core
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CheckListRecordDTO>()
+                .HasOne(i => i.CheckList)
+                .WithMany(i => i.CheckListRecords)
+                .HasForeignKey(i => i.CheckListId);
+
+
             modelBuilder.Entity<CAAAircraftDTO>()
                 .HasOne(i => i.Model)
                 .WithMany(i => i.AircraftDtos)
