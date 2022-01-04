@@ -4,6 +4,7 @@ using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using SmartCore.Auxiliary;
 using SmartCore.CAA;
+using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -1026,6 +1027,113 @@ namespace SmartCore.DtoHelper
                 LevelColor = levels.LevelColor,
                 Remark = levels.Remark,
                 Updated = levels.Updated
+            };
+        }
+
+        public static CheckLists ConvertCAA(this CheckListDTO levels)
+        {
+            var res =  new CheckLists()
+            {
+                ItemId = levels.ItemId,
+                IsDeleted = levels.IsDeleted,
+                CorrectorId = levels.CorrectorId,
+                Updated = levels.Updated,
+				Source = levels.Source,
+				Settings =
+                {
+                    Requirement = levels.Settings.Requirement,
+					EditionDate = levels.Settings.EditionDate,
+					EditionNumber = levels.Settings.EditionNumber,
+					EffEditionDate = levels.Settings.EffEditionDate,
+					EffRevisonDate = levels.Settings.EffRevisonDate,
+					ItemNumber = levels.Settings.ItemNumber,
+					ItemtName = levels.Settings.ItemtName,
+					PartName = levels.Settings.PartName,
+					PartNumber = levels.Settings.PartNumber,
+					RevisonDate = levels.Settings.RevisonDate,
+					RevisonNumber = levels.Settings.RevisonNumber,
+					SectionName = levels.Settings.SectionName,
+					SectionNumber = levels.Settings.SectionNumber,
+					SubPartName = levels.Settings.SubPartName,
+					SubPartNumber = levels.Settings.SubPartNumber,
+				}
+            };
+
+            if (levels.CheckListRecords != null)
+                res.CheckListRecords.AddRange(levels.CheckListRecords.Select(i => i.ConvertCAA()));
+
+            return res;
+        }
+
+        public static CheckListDTO ConvertCAA(this CheckLists levels)
+        {
+            var res = new CheckListDTO()
+            {
+                ItemId = levels.ItemId,
+                IsDeleted = levels.IsDeleted,
+                CorrectorId = levels.CorrectorId,
+                Updated = levels.Updated,
+                Source = levels.Source,
+                Settings = new CheckListSettings()
+                {
+                    Requirement = levels.Settings.Requirement,
+                    EditionDate = levels.Settings.EditionDate,
+                    EditionNumber = levels.Settings.EditionNumber,
+                    EffEditionDate = levels.Settings.EffEditionDate,
+                    EffRevisonDate = levels.Settings.EffRevisonDate,
+                    ItemNumber = levels.Settings.ItemNumber,
+                    ItemtName = levels.Settings.ItemtName,
+                    PartName = levels.Settings.PartName,
+                    PartNumber = levels.Settings.PartNumber,
+                    RevisonDate = levels.Settings.RevisonDate,
+                    RevisonNumber = levels.Settings.RevisonNumber,
+                    SectionName = levels.Settings.SectionName,
+                    SectionNumber = levels.Settings.SectionNumber,
+                    SubPartName = levels.Settings.SubPartName,
+                    SubPartNumber = levels.Settings.SubPartNumber,
+                }
+            };
+
+            if (levels.CheckListRecords != null)
+            {
+                foreach (var rec in levels.CheckListRecords)
+                    res.CheckListRecords.Add(rec.ConvertCAA());
+            }
+                
+
+            return res;
+        }
+
+
+
+		public static CheckListRecords ConvertCAA(this CheckListRecordDTO recordDto)
+        {
+            return new CheckListRecords()
+            {
+                ItemId = recordDto.ItemId,
+                IsDeleted = recordDto.IsDeleted,
+                CorrectorId = recordDto.CorrectorId,
+                Updated = recordDto.Updated,
+				Remark = recordDto.Remark,
+				CheckListId = recordDto.CheckListId,
+				OptionNumber = recordDto.OptionNumber,
+				Option = OptionType.GetItemById(recordDto.Option)
+
+            };
+        }
+
+        public static CheckListRecordDTO ConvertCAA(this CheckListRecords recordDto)
+        {
+            return new CheckListRecordDTO()
+            {
+                ItemId = recordDto.ItemId,
+                IsDeleted = recordDto.IsDeleted,
+                CorrectorId = recordDto.CorrectorId,
+                Updated = recordDto.Updated,
+                Remark = recordDto.Remark,
+                CheckListId = recordDto.CheckListId,
+                OptionNumber = recordDto.OptionNumber,
+                Option = recordDto.Option.ItemId
             };
         }
 	}

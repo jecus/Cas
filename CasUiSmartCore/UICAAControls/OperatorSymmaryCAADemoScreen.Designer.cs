@@ -1016,6 +1016,7 @@ namespace CAS.UI.UICAAControls
 			this.LinkCheckList.Text = "Check List";
 			this.LinkCheckList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkCheckList.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkCheckList.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkCheckListsDisplayerRequested);
 			// 
 			// LinkProceduresAndProcesses
 			// 

@@ -41,10 +41,20 @@ namespace CAA.Entity.Models.DTO
 
         #endregion
 
+
+
     }
 
     public class CheckListSettings
     {
+        public CheckListSettings()
+        {
+            EditionDate = DateTime.Today;
+            EffEditionDate = DateTime.Today;
+            RevisonDate = DateTime.Today;
+            EffRevisonDate = DateTime.Today;
+        }
+
         [JsonProperty("EditionNumber")]
         public string EditionNumber { get; set; }
 
@@ -87,7 +97,7 @@ namespace CAA.Entity.Models.DTO
         [JsonProperty("ItemtName")]
         public string ItemtName { get; set; }
 
-        [JsonProperty("Source")]
-        public string Source { get; set; }
+        [JsonProperty("Requirement")]
+        public string Requirement { get; set; }
     }
 }

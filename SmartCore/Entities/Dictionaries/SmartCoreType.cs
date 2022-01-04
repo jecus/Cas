@@ -1,4 +1,5 @@
 ﻿using System;
+using SmartCore.CAA.Check;
 using SmartCore.DataAccesses.AttachedFiles;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
@@ -473,6 +474,8 @@ namespace SmartCore.Entities.Dictionaries
 		public static SmartCoreType IORQORRelation = new SmartCoreType(3075, "IORQORRelation", "IORQORRelation", typeof(IORQORRelation));
 		public static SmartCoreType RequestForQuotationRecord = new SmartCoreType(3076, "RequestForQuotationRecord", "RequestForQuotationRecord", typeof(RequestForQuotationRecord));
 		public static SmartCoreType ItemsRelation = new SmartCoreType(3077, "ItemsRelation", "ItemsRelation", typeof(ItemsRelation));
+		public static SmartCoreType CheckLists = new SmartCoreType(3078, "CheckLists", "CheckLists", typeof(CheckLists));
+		public static SmartCoreType CheckListRecords = new SmartCoreType(3079, "CheckListRecords", "CheckListRecords", typeof(CheckListRecords));
 		
 		/*
          * Методы

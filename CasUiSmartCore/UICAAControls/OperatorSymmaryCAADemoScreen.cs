@@ -17,6 +17,7 @@ using CAS.UI.UIControls.Auxiliary.CAA;
 using CAS.UI.UIControls.PersonnelControls;
 using CASTerms;
 using SmartCore.CAA;
+using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -180,8 +181,6 @@ namespace CAS.UI.UICAAControls
 
         private void Store_Click(object sender, ReferenceEventArgs e)
         {
-            var f = new CheckListForm();
-            f.ShowDialog();
             e.Cancel = true;
         }
 
@@ -198,6 +197,11 @@ namespace CAS.UI.UICAAControls
 
 		#endregion
 
-	}
+        private void LinkCheckListsDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = "CheckList";
+            e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+        }
+    }
 }
 

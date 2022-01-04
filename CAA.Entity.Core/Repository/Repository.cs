@@ -445,6 +445,11 @@ namespace CAA.Entity.Core.Repository
                 var l = Expression.Lambda<Func<T, IEnumerable<CAACategoryRecordDTO>>>(lambda.Body, lambda.Parameters);
                 return query.IncludeFilter(l);
             }
+            if (typeCollection.Contains("CheckListRecordDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CheckListRecordDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
             //
             // if (typeCollection.Contains("AccessoryRequiredDTO"))
             // {
@@ -664,6 +669,11 @@ namespace CAA.Entity.Core.Repository
             if (typeCollection.Contains("MaintenanceProgramChangeRecordDTO"))
             {
                 var l = Expression.Lambda<Func<T, IEnumerable<CAAMaintenanceProgramChangeRecordDTO>>>(lambda.Body, lambda.Parameters);
+                return query.IncludeFilter(l);
+            }
+            if (typeCollection.Contains("CheckListRecordDTO"))
+            {
+                var l = Expression.Lambda<Func<T, IEnumerable<CheckListRecordDTO>>>(lambda.Body, lambda.Parameters);
                 return query.IncludeFilter(l);
             }
             //
