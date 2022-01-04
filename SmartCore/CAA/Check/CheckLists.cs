@@ -25,11 +25,7 @@ namespace SmartCore.CAA.Check
         }
 
         public string EditionNumber => Settings.EditionNumber;
-        public DateTime EditionDate => Settings.EditionDate;
-        public DateTime EffEditionDate => Settings.EffEditionDate;
         public string RevisonNumber => Settings.RevisonNumber;
-        public DateTime RevisonDate => Settings.RevisonDate;
-        public DateTime EffRevisonDate => Settings.EffRevisonDate;
         public string SectionNumber => Settings.SectionNumber;
         public string SectionName => Settings.SectionName;
         public string PartNumber => Settings.PartNumber;
