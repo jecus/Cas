@@ -52,8 +52,9 @@ namespace CAS.UI
         {
             _loadingVariants = new Dictionary<string, ModeProvider>();
             //Инициализация загрузки "Release"
-            _loadingVariants.Add("release", new ModeProvider( new MailFileLogger(),
-                                                              delegate(Object state)
+            _loadingVariants.Add("release", new ModeProvider( //new MailFileLogger(),
+                                                              new SafeFileLogger(),
+                                                              delegate (Object state)
                                                               {
                                                                   formMain mainForm = InitProgram();
                                                                   Application.ThreadException += ApplicationThreadException;
