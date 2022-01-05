@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -8,6 +9,9 @@ using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.Check;
+using SmartCore.Entities.Collections;
+using SmartCore.Entities.General;
+using SmartCore.Files;
 
 namespace CAS.UI.UICAAControls.CheckList
 {
@@ -49,6 +53,30 @@ namespace CAS.UI.UICAAControls.CheckList
 
                 _currentCheck.CheckListRecords.Clear();
                 _currentCheck.CheckListRecords.AddRange(records);
+
+
+                var links = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+                {
+                    new Filter("ParentId",_currentCheck.ItemId),
+                    new Filter("ParentTypeId",_currentCheck.SmartCoreObjectType.ItemId)
+                }, true);
+
+                var fileIds = links.Where(i => i.FileId.HasValue).Select(i => i.FileId.Value);
+                if (fileIds.Any())
+                {
+                    var files = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAAAttachedFileDTO, AttachedFile>(new Filter("ItemId", values: fileIds));
+                    foreach (var file in links)
+                    {
+                        var f = files.FirstOrDefault(i => i.ItemId == file.FileId)?.GetCopyUnsaved(false);
+                        if (f == null) continue;
+                        f.ItemId = file.FileId.Value;
+                        file.File = (AttachedFile)f;
+
+                    }
+                }
+
+                _currentCheck.Files = new CommonCollection<ItemFileLink>(links);
+
             }
         }
 
@@ -70,6 +98,10 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxItemNumber.Text = _currentCheck.Settings.ItemNumber;
             metroTextBoxItemName.Text = _currentCheck.Settings.ItemtName;
             metroTextBoxRequirement.Text = _currentCheck.Settings.Requirement;
+
+            fileControl.UpdateInfo(_currentCheck.File, "Adobe PDF Files|*.pdf",
+                "This record does not contain a file proving the Document. Enclose PDF file to prove the Document.",
+                "Attached file proves the Document.");
 
             foreach (var rec in _currentCheck.CheckListRecords)
                 UpdateRecords(rec);
@@ -93,6 +125,12 @@ namespace CAS.UI.UICAAControls.CheckList
             _currentCheck.Settings.ItemNumber = metroTextBoxItemNumber.Text;
             _currentCheck.Settings.ItemtName = metroTextBoxItemName.Text;
             _currentCheck.Settings.Requirement =  metroTextBoxRequirement.Text;
+
+            if (fileControl.GetChangeStatus())
+            {
+                fileControl.ApplyChanges();
+                _currentCheck.File = fileControl.AttachedFile;
+            }
         }
 
 

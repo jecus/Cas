@@ -1096,7 +1096,9 @@ namespace SmartCore.DtoHelper
 
             if (levels.CheckListRecords != null)
             {
-                foreach (var rec in levels.CheckListRecords)
+                res.CheckListRecords = new List<CheckListRecordDTO>();
+
+				foreach (var rec in levels.CheckListRecords)
                     res.CheckListRecords.Add(rec.ConvertCAA());
             }
                 

@@ -38,7 +38,8 @@
 		TrainingFormFile = 34,
 		MailFormFile = 35,
 		STCFile = 36,
-		ProductFile = 37
+		ProductFile = 37,
+		CheckList = 38,
 
 
 	}

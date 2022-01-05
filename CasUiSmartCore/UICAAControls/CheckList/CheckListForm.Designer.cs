@@ -61,6 +61,7 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.fileControl = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
             metroLabel1 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -696,11 +697,30 @@
             this.linkLabel1.Text = "Add";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
+            // fileControl
+            // 
+            this.fileControl.AutoSize = true;
+            this.fileControl.BackColor = System.Drawing.Color.Transparent;
+            this.fileControl.Description1 = null;
+            this.fileControl.Description2 = null;
+            this.fileControl.Filter = "PDF file (*.pdf)|*.pdf";
+            this.fileControl.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
+            this.fileControl.IconNotEnabled = null;
+            this.fileControl.Location = new System.Drawing.Point(8, 358);
+            this.fileControl.MaximumSize = new System.Drawing.Size(350, 100);
+            this.fileControl.MinimumSize = new System.Drawing.Size(350, 50);
+            this.fileControl.Name = "fileControl";
+            this.fileControl.ShowLinkLabelBrowse = true;
+            this.fileControl.ShowLinkLabelRemove = false;
+            this.fileControl.Size = new System.Drawing.Size(350, 100);
+            this.fileControl.TabIndex = 302;
+            // 
             // CheckListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1085, 549);
+            this.Controls.Add(this.fileControl);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(label12);
             this.Controls.Add(this.buttonOk);
@@ -765,5 +785,6 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        public UIControls.Auxiliary.AttachedFileControl fileControl;
     }
 }
