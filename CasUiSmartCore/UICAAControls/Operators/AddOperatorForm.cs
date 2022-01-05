@@ -400,7 +400,7 @@ namespace CAS.UI.UICAAControls.Operators
             {
                 ApplyChanges();
 
-                GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentOperator, true, isCaa:true);
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentOperator, true);
                 DialogResult = DialogResult.OK;
                 Close();
             }

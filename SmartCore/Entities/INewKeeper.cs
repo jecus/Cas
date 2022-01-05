@@ -17,7 +17,7 @@ namespace SmartCore.Entities
 			where T : BaseEntityObject, new() where TOut : BaseEntity, new();
 		void BulkDelete<T, TOut>(List<BaseEntityObject> values, int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new();
 
-		void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true, bool isCaa = false);
+		void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true);
 
 		void Delete(BaseEntityObject value, bool isDeletedOnly = false, bool saveAttachedFile = true);
 		void SaveAttachedFile(IFileContainer container);

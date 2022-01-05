@@ -82,7 +82,7 @@ namespace CAS.UI.UICAAControls.CheckList
 				CreateRow("", ""),
                 CreateRow(item.Source, item.Source),
                 CreateRow(item.Settings.EditionNumber, item.Settings.EditionNumber),
-                CreateRow(item.Settings.RevisonNumber, item.Settings.RevisonNumber),
+                CreateRow(item.Settings.RevisionNumber, item.Settings.RevisionNumber),
                 CreateRow(author, author)
 			};
 

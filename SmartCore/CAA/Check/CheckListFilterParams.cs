@@ -10,8 +10,8 @@ namespace SmartCore.CAA.Check
         [Filter("EditionNumber", Order = 2)]
         string EditionNumber { get;  }
 
-        [Filter("RevisonNumber", Order = 5)]
-        string RevisonNumber { get;  }
+        [Filter("RevisionNumber", Order = 5)]
+        string RevisionNumber { get;  }
 
         [Filter("SectionNumber", Order = 8)]
         string SectionNumber { get;  }
@@ -34,8 +34,8 @@ namespace SmartCore.CAA.Check
         [Filter("ItemNumber", Order = 14)]
         string ItemNumber { get;  }
 
-        [Filter("ItemtName", Order = 15)]
-        string ItemtName { get;  }
+        [Filter("ItemName", Order = 15)]
+        string ItemName { get;  }
 
         [Filter("Requirement", Order = 16)]
         string Requirement { get;  }

@@ -64,8 +64,8 @@ namespace CAA.Entity.Models.DTO
         [JsonProperty("EffEditionDate")]
         public DateTime EffEditionDate { get; set; }
 
-        [JsonProperty("RevisonNumber")]
-        public string RevisonNumber { get; set; }
+        [JsonProperty("RevisionNumber")]
+        public string RevisionNumber { get; set; }
 
         [JsonProperty("RevisonnDate")]
         public DateTime RevisonDate { get; set; }

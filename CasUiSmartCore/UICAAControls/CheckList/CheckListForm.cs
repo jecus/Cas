@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.Check;
 
@@ -40,7 +42,14 @@ namespace CAS.UI.UICAAControls.CheckList
             if (_currentCheck == null) return;
 
             if (_currentCheck.ItemId > 0)
+            {
                 _currentCheck = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListDTO, CheckLists>(_currentCheck.ItemId);
+                var records =
+                    GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRecordDTO, CheckListRecords>(new Filter("CheckListId", _currentCheck.ItemId));
+
+                _currentCheck.CheckListRecords.Clear();
+                _currentCheck.CheckListRecords.AddRange(records);
+            }
         }
 
         private void UpdateInformation()
@@ -49,7 +58,7 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxEditionNumber.Text = _currentCheck.Settings.EditionNumber;
             dateTimePickerEditionDate.Value = _currentCheck.Settings.EditionDate;
             dateTimePickerEditionEff.Value = _currentCheck.Settings.EffEditionDate;
-            metroTextBoxRevision.Text = _currentCheck.Settings.RevisonNumber;
+            metroTextBoxRevision.Text = _currentCheck.Settings.RevisionNumber;
             dateTimePickerRevisionDate.Value = _currentCheck.Settings.RevisonDate;
             dateTimePickerRevisionEff.Value = _currentCheck.Settings.EffRevisonDate;
             metroTextBoxSectionNumber.Text = _currentCheck.Settings.SectionNumber;
@@ -61,6 +70,9 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxItemNumber.Text = _currentCheck.Settings.ItemNumber;
             metroTextBoxItemName.Text = _currentCheck.Settings.ItemtName;
             metroTextBoxRequirement.Text = _currentCheck.Settings.Requirement;
+
+            foreach (var rec in _currentCheck.CheckListRecords)
+                UpdateRecords(rec);
         }
 
         private void ApplyChanges()
@@ -69,7 +81,7 @@ namespace CAS.UI.UICAAControls.CheckList
             _currentCheck.Settings.EditionNumber = metroTextBoxEditionNumber.Text ;
             _currentCheck.Settings.EditionDate = dateTimePickerEditionDate.Value;
             _currentCheck.Settings.EffEditionDate = dateTimePickerEditionEff.Value;
-            _currentCheck.Settings.RevisonNumber = metroTextBoxRevision.Text;
+            _currentCheck.Settings.RevisionNumber = metroTextBoxRevision.Text;
             _currentCheck.Settings.RevisonDate = dateTimePickerRevisionDate.Value;
             _currentCheck.Settings.EffRevisonDate = dateTimePickerRevisionEff.Value;
             _currentCheck.Settings.SectionNumber = metroTextBoxSectionNumber.Text;
@@ -86,12 +98,40 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var control = new AuditControl();
-            //control.UpdateInformation(training, _suppliers, aircraftModels, _employeeLicenceControl);
-            //control.Deleted += Control_Deleted;
+            UpdateRecords(new CheckListRecords {CheckListId = _currentCheck.ItemId});
+        }
+
+        public void UpdateRecords(CheckListRecords record)
+        {
+            var control = new AuditControl(record);
+            control.Deleted += Control_Deleted;
             flowLayoutPanel1.Controls.Remove(linkLabel1);
             flowLayoutPanel1.Controls.Add(control);
             flowLayoutPanel1.Controls.Add(linkLabel1);
+        }
+
+        private void Control_Deleted(object sender, EventArgs e)
+        {
+            var control = sender as AuditControl;
+
+            var dialogResult = MessageBox.Show("Do you really want to delete record?", "Deleting confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+            if (dialogResult == DialogResult.Yes)
+            {
+                if (control.Record.ItemId > 0)
+                {
+                    try
+                    {
+                        GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.Record);
+                    }
+                    catch (Exception ex)
+                    {
+                        Program.Provider.Logger.Log("Error while removing data", ex);
+                    }
+                }
+                flowLayoutPanel1.Controls.Remove(control);
+                control.Deleted -= Control_Deleted;
+                control.Dispose();
+            }
         }
 
         private void buttonOk_Click(object sender, System.EventArgs e)
@@ -100,7 +140,17 @@ namespace CAS.UI.UICAAControls.CheckList
             {
                 ApplyChanges();
 
-                GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentCheck, true, isCaa: true);
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentCheck, true);
+
+
+                foreach (var control in flowLayoutPanel1.Controls.OfType<AuditControl>())
+                {
+                    control.ApplyChanges();
+                    control.Record.CheckListId = _currentCheck.ItemId;
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(control.Record, true);
+                }
+
+
                 DialogResult = DialogResult.OK;
                 Close();
             }

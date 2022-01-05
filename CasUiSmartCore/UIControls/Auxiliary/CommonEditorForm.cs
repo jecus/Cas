@@ -1632,7 +1632,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
                 if(GlobalObjects.CasEnvironment != null)
                     GlobalObjects.CasEnvironment.Manipulator.SaveAll(_currentObject, true);
-                else GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentObject, true, isCaa:true);
+                else GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentObject, true);
             }
             catch (Exception ex)
             {

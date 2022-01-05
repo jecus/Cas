@@ -186,7 +186,7 @@ namespace CAS.UI.UIControls.PersonnelControls
                 else
                 {
 					foreach (var unsavedDocument in unsaved)
-                        GlobalObjects.CaaEnvironment.NewKeeper.Save(unsavedDocument, isCaa:true);
+                        GlobalObjects.CaaEnvironment.NewKeeper.Save(unsavedDocument);
 				}
             }
 			catch (Exception ex)

@@ -25,7 +25,7 @@ namespace SmartCore.CAA.Check
         }
 
         public string EditionNumber => Settings.EditionNumber;
-        public string RevisonNumber => Settings.RevisonNumber;
+        public string RevisionNumber => Settings.RevisionNumber;
         public string SectionNumber => Settings.SectionNumber;
         public string SectionName => Settings.SectionName;
         public string PartNumber => Settings.PartNumber;
@@ -33,7 +33,7 @@ namespace SmartCore.CAA.Check
         public string SubPartNumber => Settings.SubPartNumber;
         public string SubPartName => Settings.SubPartName;
         public string ItemNumber => Settings.ItemNumber;
-        public string ItemtName => Settings.ItemtName;
+        public string ItemName => Settings.ItemtName;
         public string Requirement => Settings.Requirement;
     }
 }

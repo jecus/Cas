@@ -68,7 +68,7 @@ namespace CAS.UI.UICAAControls.CheckList
 	    {
 		    var control = new AuditControl();
 		    //control.UpdateInformation(training, _suppliers, aircraftModels, _employeeLicenceControl);
-			//control.Deleted += Control_Deleted;
+		    //control.Deleted += Control_Deleted;
 		    flowLayoutPanelPerformances.Controls.Remove(linkLabelAddNew);
 		    flowLayoutPanelPerformances.Controls.Add(control);
 		    flowLayoutPanelPerformances.Controls.Add(linkLabelAddNew);

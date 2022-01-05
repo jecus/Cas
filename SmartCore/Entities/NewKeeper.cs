@@ -59,7 +59,7 @@ namespace SmartCore.Entities
 			if (value is IFileDTOContainer && saveAttachedFile)
 				SaveAttachedFileDTO(value as IFileDTOContainer);
 		}
-		public void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true, bool isCaa = false)
+		public void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true)
 		{
 			if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly)
 				return;
@@ -72,22 +72,13 @@ namespace SmartCore.Entities
 				type = AuditOperation.Changed;
 				
 			var blType = value.GetType();
+            var dto = ((DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault())?.Type;
+            if (dto == null)
+                dto = ((CAADtoAttribute)blType.GetCustomAttributes(typeof(CAADtoAttribute), false).FirstOrDefault())?.Type;
 
-            MethodInfo method;
-            if (isCaa)
-            {
-                var dto = (CAADtoAttribute)blType.GetCustomAttributes(typeof(CAADtoAttribute), false).FirstOrDefault();
-                method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "SaveGeneric")?.MakeGenericMethod(blType, dto.Type);
-			}
-            else
-            {
-                var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
-                method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "SaveGeneric")?.MakeGenericMethod(blType, dto.Type);
-			}
+			MethodInfo method =  typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "SaveGeneric")?.MakeGenericMethod(blType, dto);
 
-			
-
-			method.Invoke(this, new object[] { value, saveAttachedFile });
+            method.Invoke(this, new object[] { value, saveAttachedFile });
 
 			if(writeAudit)
 				_auditRepository.WriteAsync(value, type ,_casEnvironment.IdentityUser);
@@ -133,8 +124,12 @@ namespace SmartCore.Entities
 			}
 
 			var blType = value.First().GetType();
-			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
-			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "BulkInsert")?.MakeGenericMethod(blType, dto.Type);
+
+            var dto = ((DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault())?.Type;
+            if (dto == null)
+                dto = ((CAADtoAttribute)blType.GetCustomAttributes(typeof(CAADtoAttribute), false).FirstOrDefault())?.Type;
+
+			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "BulkInsert")?.MakeGenericMethod(blType, dto);
 
 			method.Invoke(this, new object[] { value, batchSize });
 
@@ -172,8 +167,10 @@ namespace SmartCore.Entities
 			}
 
 			var blType = value.First().GetType();
-			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
-			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "BulkUpdate")?.MakeGenericMethod(blType, dto.Type);
+            var dto = ((DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault())?.Type;
+            if (dto == null)
+                dto = ((CAADtoAttribute)blType.GetCustomAttributes(typeof(CAADtoAttribute), false).FirstOrDefault())?.Type;
+			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "BulkUpdate")?.MakeGenericMethod(blType, dto);
 
 			method.Invoke(this, new object[] { value, batchSize });
 
@@ -208,8 +205,11 @@ namespace SmartCore.Entities
 				o.CorrectorId = _casEnvironment.IdentityUser.ItemId;
 
 			var blType = value.First().GetType();
-			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
-			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "BulkDelete")?.MakeGenericMethod(blType, dto.Type);
+			var dto = ((DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault())?.Type;
+			if(dto == null)
+                dto = ((CAADtoAttribute)blType.GetCustomAttributes(typeof(CAADtoAttribute), false).FirstOrDefault())?.Type;
+
+			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "BulkDelete")?.MakeGenericMethod(blType, dto);
 
 			method.Invoke(this, new object[] { value, batchSize });
 
@@ -251,8 +251,10 @@ namespace SmartCore.Entities
 			value.Updated = DateTime.Now;
 
 			var blType = value.GetType();
-			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
-			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "DeleteGeneric")?.MakeGenericMethod(blType, dto.Type);
+            var dto = ((DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault())?.Type;
+            if (dto == null)
+                dto = ((CAADtoAttribute)blType.GetCustomAttributes(typeof(CAADtoAttribute), false).FirstOrDefault())?.Type;
+			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "DeleteGeneric")?.MakeGenericMethod(blType, dto);
 
 			method.Invoke(this, new object[] { value, isDeletedOnly, saveAttachedFile });
 
