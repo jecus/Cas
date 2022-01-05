@@ -479,6 +479,9 @@ namespace SmartCore.Entities.General
 		public string IdNumber { get; set; }
 		#endregion
 
+
+        public int? Author { get; set; }
+
 		#region Implement of IMathData
 		//Своиства интерфеися IMathData, они содержат вычисления мат аппарата для объектов
 		//у всех директив, деталей чеков и т.д. можно вычислить их текущее сотояние

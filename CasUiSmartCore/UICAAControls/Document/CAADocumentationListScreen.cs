@@ -128,7 +128,7 @@ namespace CAS.UI.UICAAControls.Document
                 _initialDocumentArray.AddRange(GlobalObjects
                     .CaaEnvironment
                     .NewLoader
-                    .GetObjectListAll<DocumentDTO, SmartCore.Entities.General.Document>(new Filter("CorrectorId", FilterType.Equal, GlobalObjects.CaaEnvironment.IdentityUser.ItemId), true));
+                    .GetObjectListAll<DocumentDTO, SmartCore.Entities.General.Document>(new Filter("Author", FilterType.Equal, GlobalObjects.CaaEnvironment.IdentityUser.ItemId), true));
 			}
 			catch(Exception ex)
 			{

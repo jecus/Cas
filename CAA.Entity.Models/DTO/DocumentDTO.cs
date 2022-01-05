@@ -134,7 +134,11 @@ namespace CAA.Entity.Models.DTO
         [Column("IdNumber"), MaxLength(128)]
 		public string IdNumber { get; set; }
 
-        
+
+        [Column("Author")]
+        public int? Author { get; set; }
+
+
 		[Include]
 		public CAADocumentSubTypeDTO DocumentSubType { get; set; }
 

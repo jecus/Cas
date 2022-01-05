@@ -640,7 +640,8 @@ namespace SmartCore.DtoHelper
 				LocationId = document.Location?.ItemId ?? -1,
 				SupplierId = document.Supplier?.ItemId ?? -1,
 				ParentAircraftId = document.ParentAircraftId,
-				IdNumber = document.IdNumber
+				IdNumber = document.IdNumber,
+				Author = document.Author
 			};
 		}
 
@@ -672,6 +673,7 @@ namespace SmartCore.DtoHelper
 				ProlongationWay = document.ProlongationWayId.HasValue ? (ProlongationWay)document.ProlongationWayId.Value : ProlongationWay.Unknown,
 				Aboard = document.Aboard,
 				Privy = document.Privy,
+                Author = document.Author,
 				IssueNumber = document.IssueNumber,
 				Remarks = document.Remarks,
 				ParentAircraftId = document.ParentAircraftId ?? default(int),

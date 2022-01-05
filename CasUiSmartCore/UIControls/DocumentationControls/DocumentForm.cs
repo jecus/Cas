@@ -533,7 +533,12 @@ namespace CAS.UI.UIControls.DocumentationControls
 
 				if(GlobalObjects.CasEnvironment != null)
 		            GlobalObjects.DocumentCore.SaveDocumentsList(_parent, new List<Document> {CurrentDocument});
-                else GlobalObjects.CaaEnvironment.NewKeeper.Save(CurrentDocument);
+                else
+                {
+                    if (CurrentDocument.ItemId <= 0)
+                        CurrentDocument.Author = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(CurrentDocument);
+                }
             
 			    DialogResult = DialogResult.OK;
 			    Close();
