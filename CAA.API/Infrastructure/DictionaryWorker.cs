@@ -104,7 +104,12 @@ namespace CAS.API.Infrastructure
 					return res.Cast<IBaseDictionary>().ToList();
 				}
 
-
+                if (t == typeof(FindingLevelsDTO))
+                {
+                    var repo = new Repository<FindingLevelsDTO>(context);
+                    var res = await repo.GetObjectListAsync(loadChild: true);
+                    return res.Cast<IBaseDictionary>().ToList();
+                }
 				if (t == typeof(CAAGoodStandartDTO))
 				{
 					var repo = new Repository<CAAGoodStandartDTO>(context);
