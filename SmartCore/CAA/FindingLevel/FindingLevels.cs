@@ -37,7 +37,7 @@ namespace SmartCore.CAA.FindingLevel
         [ListViewData("Final Action", 5)]
         public Lifelength FinalAction { get; set; }
 
-        [FormControl(150, "Remark:                                                                                       ", 1, Order = 6)]
+        [FormControl(150, "Remark:", 1, Order = 6)]
         [Filter("Remark", Order = 6)]
         [ListViewData("Remark", 6)]
         public string Remark { get; set; }

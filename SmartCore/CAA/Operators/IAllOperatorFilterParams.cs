@@ -1,4 +1,5 @@
-﻿using SmartCore.Entities.General.Attributes;
+﻿using System.Collections.Generic;
+using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.CAA.Operators
 {
@@ -8,7 +9,7 @@ namespace SmartCore.CAA.Operators
         string FullName { get; }
 
         [Filter("Type:", Order = 2)]
-        string TypeString { get; }
+        Type TypeFilter { get; }
 
         [Filter("ICAOCode:", Order = 3)]
         string ICAOCode { get; }
@@ -17,22 +18,22 @@ namespace SmartCore.CAA.Operators
         string IATACode { get; }
 
         [Filter("CAT/NC:", Order = 5)]
-        string CommertialString { get; }
+        Cat CommertialFilter { get; }
 
         [Filter("Type of Operation:", Order = 6)]
-        string TPOString { get; }
+        List<TypesOfOperations> TPOFilter { get; }
 
         [Filter("SPO:", Order = 7)]
-        string SPOString { get; }
+        List<SpecialOperations> SPOFilter { get; }
 
         [Filter("Fleet:", Order = 8)]
-        string FleetString { get; }
+        List<Fleet> FleetFilter { get; }
 
         [Filter("Aircraft Type:", Order = 9)]
         string Description { get; }
 
         [Filter("Privilages:", Order = 10)]
-        string PrivilagesString { get; }
+        List<Privileges> PrivilagesFilter { get; }
 
         [Filter("Address:", Order = 11)]
         string Address { get; }
@@ -45,6 +46,9 @@ namespace SmartCore.CAA.Operators
 
         [Filter("Email:", Order = 14)]
         string Email { get; }
+
+        [Filter("Ratings:", Order = 15)]
+        string Ratings { get; }
 
     }
 }

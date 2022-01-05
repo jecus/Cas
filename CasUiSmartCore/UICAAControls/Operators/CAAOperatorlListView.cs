@@ -1,15 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
-using CAS.UI.Management.Dispatchering;
-using CAS.UI.UICAAControls.Specialists;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA;
-using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UICAAControls.Operators
 {

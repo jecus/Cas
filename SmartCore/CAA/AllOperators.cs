@@ -11,6 +11,28 @@ using SmartCore.Management;
 
 namespace SmartCore.CAA
 {
+    public enum Cat
+    {
+        Commertial,
+        NotCommertial,
+        None
+    }
+
+    public enum Type
+    {
+        AirOperator,
+        AMO,
+        CAMO,
+        CAO,
+        AerodromOperator,
+        ATCANS,
+        Fuel,
+        AeMC,
+        ATO,
+        None
+
+    }
+
     [CAADto(typeof(AllOperatorsDTO))]
     public class AllOperators : BaseEntityObject, IAllOperatorFilterParams
     {
@@ -184,123 +206,107 @@ namespace SmartCore.CAA
         public bool IsCAO { get; set; }
 
 
-        public string TypeString
+        public string TypeString => TypeFilter.ToString();
+
+        public Type TypeFilter
         {
             get
             {
                 if (IsAirOperator)
-                    return "AirOperator";
+                    return Type.AirOperator;
                 if (IsAMO)
-                    return "AMO";
+                    return Type.AMO;
                 if (IsCAMO)
-                    return "CAMO";
+                    return Type.CAMO;
                 if (IsCAO)
-                    return "CAO";
+                    return Type.CAO;
                 if (IsAerodromOperator)
-                    return "AerodromOperator";
+                    return Type.AerodromOperator;
                 if (IsATC)
-                    return "ATC/ANS";
+                    return Type.ATCANS;
                 if (IsFuel)
-                    return "Fuel";
+                    return Type.Fuel;
                 if (IsAEMS)
-                    return "AeMC";
+                    return Type.AeMC;
                 if (IsTraningOperation)
-                    return "ATO";
+                    return Type.ATO;
 
-                return string.Empty;
+                return Type.None;
             }
         }
 
-        public string CommertialString
+        public string CommertialString => CommertialFilter.ToString();
+
+
+        public Cat CommertialFilter
         {
             get
             {
                 if (!IsAirOperator)
-                    return string.Empty;
+                    return Cat.None;
 
                 if (IsCommertial)
-                    return "Commertial";
-                return "Not Commertial";
-            }
-        }
-        
-        public string PrivilagesString
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(Privilages))
-                {
-                    var res = new List<string>();
-                    foreach (var items in Privileges.Items)
-                    {
-                        if(Privilages.Contains(items.FullName))
-                            res.Add(items.FullName);
-                    }
-
-                    return string.Join(",", res);
-                }
-
-                return "";
+                    return Cat.Commertial;
+                return Cat.NotCommertial;
             }
         }
 
 
-        public string TPOString
+
+        public string PrivilagesString => string.Join(", ", PrivilagesFilter);
+
+        public List<Privileges> PrivilagesFilter
         {
             get
             {
-                if (!string.IsNullOrEmpty(TypeOperation))
-                {
-                    var res = new List<string>();
-                    foreach (var items in TypesOfOperations.Items)
-                    {
-                        if (TypeOperation.Contains(items.FullName))
-                            res.Add(items.FullName);
-                    }
+                var res = new List<Privileges>();
+                if (string.IsNullOrEmpty(Privilages)) return res;
+                res.AddRange(Privileges.Items.Where(items => Privilages.Contains(items.FullName)));
 
-                    return string.Join(",", res);
-                }
+                return res;
 
-                return "";
             }
         }
 
-        public string SPOString
+        public string TPOString => string.Join(", ", TPOFilter);
+
+        public List<TypesOfOperations> TPOFilter
         {
             get
             {
-                if (!string.IsNullOrEmpty(SpecialOperation))
-                {
-                    var res = new List<string>();
-                    foreach (var items in SpecialOperations.Items)
-                    {
-                        if (SpecialOperation.Contains(items.FullName))
-                            res.Add(items.FullName);
-                    }
+                var res = new List<TypesOfOperations>();
+                if (string.IsNullOrEmpty(TypeOperation)) return res;
+                res.AddRange(TypesOfOperations.Items.Where(items => TypeOperation.Contains(items.FullName)));
+                return res;
 
-                    return string.Join(",", res);
-                }
-
-                return "";
             }
         }
 
-        public string FleetString
+        public string SPOString => string.Join(", ", SPOFilter);
+
+        public List<SpecialOperations> SPOFilter
         {
             get
             {
-                if (!string.IsNullOrEmpty(Fleet))
-                {
-                    var res = new List<string>();
-                    foreach (var items in Operators.Fleet.Items)
-                    {
-                        if (Fleet.Contains(items.FullName))
-                            res.Add(items.FullName);
-                    }
-                    return string.Join(",", res);
-                }
+                var res = new List<SpecialOperations>();
+                if (string.IsNullOrEmpty(SpecialOperation)) return res;
+                res.AddRange(SpecialOperations.Items.Where(items => SpecialOperation.Contains(items.FullName)));
+                return res;
 
-                return "";
+            }
+        }
+
+        public string FleetString => string.Join(", ", FleetFilter);
+
+        public List<Fleet> FleetFilter
+        {
+            get
+            {
+                var res = new List<Fleet>();
+                if (string.IsNullOrEmpty(Fleet)) return res;
+                res.AddRange(Operators.Fleet.Items.Where(items => Fleet.Contains(items.FullName)));
+                return res;
+
             }
         }
 

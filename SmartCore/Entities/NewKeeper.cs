@@ -42,10 +42,10 @@ namespace SmartCore.Entities
 				return;
 
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
+				throw new ArgumentException("T", "не является наследником " + nameof(BaseEntity));
 
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
+				throw new ArgumentException("TOut", "не является наследником " + nameof(BaseEntityObject));
 
 			var method = GetMethod(typeof(T),typeof(TOut), "Convert");
 			var res = InvokeConverter<T, TOut>(value, method);
@@ -91,10 +91,10 @@ namespace SmartCore.Entities
 				return;
 
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
+				throw new ArgumentException("T", "не является наследником " + nameof(BaseEntity));
 
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
+				throw new ArgumentException("TOut", "не является наследником " + nameof(BaseEntityObject));
 
 			var method = GetMethod(typeof(T), typeof(TOut), "Convert");
 
@@ -141,10 +141,10 @@ namespace SmartCore.Entities
 				return;
 
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
+				throw new ArgumentException("T", "не является наследником " + nameof(BaseEntity));
 
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
+				throw new ArgumentException("TOut", "не является наследником " + nameof(BaseEntityObject));
 
 			var method = GetMethod(typeof(T), typeof(TOut), "Convert");
 
@@ -183,10 +183,10 @@ namespace SmartCore.Entities
 				return;
 
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
+				throw new ArgumentException("T", "не является наследником " + nameof(BaseEntity));
 
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
+				throw new ArgumentException("TOut", "не является наследником " + nameof(BaseEntityObject));
 
 			var method = GetMethod(typeof(T), typeof(TOut), "Convert");
 
@@ -222,10 +222,10 @@ namespace SmartCore.Entities
 				return;
 
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
+				throw new ArgumentException("T", "не является наследником " + nameof(BaseEntity));
 
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
+				throw new ArgumentException("TOut", "не является наследником " + nameof(BaseEntityObject));
 
 			var method = GetMethod(typeof(T), typeof(TOut), "Convert");
 
