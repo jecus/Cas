@@ -17,6 +17,8 @@ namespace CAA.Entity.Core
         #region Dictionary
 
         public DbSet<CAAAccessoryDescriptionDTO> AccessoryDescriptionDtos { get; set; }
+
+        public DbSet<CAAAircraftOtherParameterDTO> AircraftOtherParameterDtos { get; set; }
         public DbSet<CAAAGWCategorieDTO> AGWCategorieDtos { get; set; }
         public DbSet<CAAATAChapterDTO> ATAChapterDtos { get; set; }
         public DbSet<CAADepartmentDTO> DepartmentDtos { get; set; }
@@ -41,6 +43,7 @@ namespace CAA.Entity.Core
         public DbSet<CAAMaintenanceProgramChangeRecordDTO> MaintenanceProgramChangeRecordDtos { get; set; }
         public DbSet<AllOperatorsDTO> AllOperatorsDtos { get; set; }
 		public DbSet<CAAAttachedFileDTO> AttachedFileDtos { get; set; }
+        public DbSet<CAAAircraftEquipmentDTO> AircraftEquipmentDtos { get; set; }
         public DbSet<CAAItemFileLinkDTO> ItemFileLinkDtos { get; set; }
 		public DbSet<CAAUserDTO> UserDtos { get; set; }
         public DbSet<CAAOperatorDTO> OperatorDtos { get; set; }
@@ -79,6 +82,10 @@ namespace CAA.Entity.Core
                 .WithMany(i => i.CheckListRecords)
                 .HasForeignKey(i => i.CheckListId);
 
+            modelBuilder.Entity<CAAAircraftEquipmentDTO>()
+                .HasOne(i => i.AircraftOtherParameter)
+                .WithMany(i => i.AircraftEquipmentDtos)
+                .HasForeignKey(i => i.AircraftOtherParameterId);
 
             modelBuilder.Entity<CAAAircraftDTO>()
                 .HasOne(i => i.Model)

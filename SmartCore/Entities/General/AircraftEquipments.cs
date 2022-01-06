@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
@@ -8,6 +9,7 @@ namespace SmartCore.Entities.General
 {
 	[Table("AircraftEquipments", "dbo", "ItemId")]
 	[Dto(typeof(AircraftEquipmentDTO))]
+	[CAADto(typeof(CAAAircraftEquipmentDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class AircraftEquipments : BaseEntityObject

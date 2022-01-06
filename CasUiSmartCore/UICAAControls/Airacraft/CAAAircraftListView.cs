@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Forms;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
+using CAS.UI.UICAAControls.Operators;
+using CAS.UI.UIControls.AircraftsControls;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
@@ -77,16 +81,10 @@ namespace CAS.UI.UICAAControls.Airacraft
 		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-		{
-			//if (SelectedItem != null)
-			//{
-   //             var form = new AddOperatorFrom(SelectedItem);
-   //             if (form.ShowDialog() == DialogResult.OK)
-   //                 _animatedThreadWorker.RunWorkerAsync();
-   //             e.Cancel = true;
-			//}
-
-            e.Cancel = false;
+        {
+            e.DisplayerText = SelectedItem.RegistrationNumber;
+            e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			e.RequestedEntity = new CAAAircraftGeneralDataScreen(SelectedItem);
         }
 		#endregion
 

@@ -29,7 +29,10 @@ namespace CAS.UI.UIControls.Auxiliary
                 if (_aircraft!=null)
                 {
                     labelDate.Text = UsefulMethods.NormalizeDate(DateTime.Now);
-                    labelPerformance.Text = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_aircraft).ToRepeatIntervalsFormat();
+
+
+                    if(GlobalObjects.CasEnvironment != null)
+                        labelPerformance.Text = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_aircraft).ToRepeatIntervalsFormat();
                 }
             }
         }

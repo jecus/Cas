@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -20,6 +21,7 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
 
 namespace CAS.UI.UIControls.Auxiliary
@@ -782,7 +784,14 @@ namespace CAS.UI.UIControls.Auxiliary
 				}
                 else
                 {
-                    TypeItemsCollection = GlobalObjects.CasEnvironment.Loader.GetObjectCollection(_type, loadChild: true, ignoreConditions:_ignoreConditions);
+                    if(GlobalObjects.CasEnvironment != null)
+                        TypeItemsCollection = GlobalObjects.CasEnvironment.Loader.GetObjectCollection(_type, loadChild: true, ignoreConditions:_ignoreConditions);
+                    else
+                    {
+                        var dto = (CAADtoAttribute)_type.GetCustomAttributes(typeof(CAADtoAttribute), false).FirstOrDefault();
+                        var res = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList(dto.Type, _type, loadChild: true);
+                        TypeItemsCollection = new CommonCollection<BaseEntityObject>((IEnumerable<BaseEntityObject>) res);
+                    }
                 }
             }
 

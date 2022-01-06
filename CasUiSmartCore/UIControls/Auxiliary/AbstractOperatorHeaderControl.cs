@@ -298,7 +298,8 @@ namespace CAS.UI.UIControls.Auxiliary
                     b.AppendLine("V/N: " + value.VariableNumber);
                     _childButton.ShowToolTip = true;
                     _childButton.ToolTipText = b.ToString();
-                    Operator = GlobalObjects.CasEnvironment.Operators.First(o => o.ItemId == value.OperatorId);
+                    Operator = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment?.Operators.First(o => o.ItemId == value.OperatorId) :
+                               GlobalObjects.CaaEnvironment?.Operators.First(o => o.ItemId == value.OperatorId);
                 }
             }
         }

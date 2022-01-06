@@ -75,6 +75,12 @@ namespace CAS.API.Infrastructure
 					return res.Cast<IBaseDictionary>().ToList();
 				}
 
+                if (t == typeof(CAAAircraftOtherParameterDTO))
+                {
+                    var repo = new Repository<CAAAircraftOtherParameterDTO>(context);
+                    var res = await repo.GetObjectListAsync(loadChild: true);
+                    return res.Cast<IBaseDictionary>().ToList();
+                }
 
 				if (t == typeof(CAAATAChapterDTO))
 				{

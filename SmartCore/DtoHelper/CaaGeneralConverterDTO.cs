@@ -19,6 +19,63 @@ namespace SmartCore.DtoHelper
     public static  class CaaGeneralConverterDTO
 	{
 
+        public static CAAAircraftEquipmentDTO ConvertCAA(this AircraftEquipments aireq)
+        {
+            return new CAAAircraftEquipmentDTO
+            {
+                ItemId = aireq.ItemId,
+                IsDeleted = aireq.IsDeleted,
+                Updated = aireq.Updated,
+                CorrectorId = aireq.CorrectorId,
+                Description = aireq.Description,
+                AircraftId = aireq.AircraftId,
+                AircraftOtherParameterId = aireq.AircraftOtherParameter?.ItemId,
+                AircraftEquipmetType = (int)aireq.AircraftEquipmetType,
+                AircraftOtherParameter = aireq.AircraftOtherParameter?.ConvertCAA()
+            };
+        }
+
+        public static AircraftEquipments ConvertCAA(this CAAAircraftEquipmentDTO aireqdto)
+        {
+            return new AircraftEquipments
+            {
+                ItemId = aireqdto.ItemId,
+                IsDeleted = aireqdto.IsDeleted,
+                Updated = aireqdto.Updated,
+                CorrectorId = aireqdto.CorrectorId,
+                Description = aireqdto.Description,
+                AircraftId = aireqdto.AircraftId,
+                AircraftOtherParameter = aireqdto.AircraftOtherParameter?.ConvertCAA(),
+                AircraftEquipmetType = (AircraftEquipmetType)aireqdto.AircraftEquipmetType
+            };
+        }
+
+		public static CAAAircraftOtherParameterDTO ConvertCAA(this AircraftOtherParameters parameters)
+        {
+            return new CAAAircraftOtherParameterDTO
+            {
+                ItemId = parameters.ItemId,
+                IsDeleted = parameters.IsDeleted,
+                Updated = parameters.Updated,
+                CorrectorId = parameters.CorrectorId,
+                FullName = parameters.FullName,
+                Name = parameters.ShortName
+            };
+        }
+
+        public static AircraftOtherParameters ConvertCAA(this CAAAircraftOtherParameterDTO parametersDto)
+        {
+            return new AircraftOtherParameters
+            {
+                ItemId = parametersDto.ItemId,
+                IsDeleted = parametersDto.IsDeleted,
+                Updated = parametersDto.Updated,
+                CorrectorId = parametersDto.CorrectorId,
+                FullName = parametersDto.FullName,
+                ShortName = parametersDto.Name
+            };
+        }
+
 		public static CAAAircraftDTO ConvertCAA(this Aircraft aircraft)
 		{
 			return new CAAAircraftDTO
@@ -1140,5 +1197,7 @@ namespace SmartCore.DtoHelper
                 Option = recordDto.Option.ItemId
             };
         }
+
+
 	}
 }

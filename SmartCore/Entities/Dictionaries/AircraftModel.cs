@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Accessory;
@@ -12,6 +13,7 @@ namespace SmartCore.Entities.Dictionaries
     /// </summary>
     [Table("AccessoryDescriptions", "Dictionaries", "ItemId")]
 	[Dto(typeof(AccessoryDescriptionDTO))]
+	[CAADto(typeof(CAAAccessoryDescriptionDTO))]
     //[Table("Models", "Dictionaries", "ItemId")]
     //[DictionaryCollection(typeof(CommonDictionaryCollection<AircraftModel>))]
     [Condition("IsDeleted", "0")]

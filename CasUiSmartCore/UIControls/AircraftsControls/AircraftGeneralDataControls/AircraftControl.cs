@@ -220,22 +220,32 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
             textBoxSerialNumber.Text = CurrentAircraft.SerialNumber;
             textBoxRegistrationNumber.Text = CurrentAircraft.RegistrationNumber;
             textBoxOwner.Text = CurrentAircraft.Owner;
-            textBoxOperator.Text = GlobalObjects.CasEnvironment.Operators.First(o => o.ItemId == CurrentAircraft.OperatorId).Name;
+            textBoxOperator.Text = GlobalObjects.CasEnvironment!=null ?
+                GlobalObjects.CasEnvironment.Operators.First(o => o.ItemId == CurrentAircraft.OperatorId).Name :
+                GlobalObjects.CaaEnvironment.Operators.First(o => o.ItemId == CurrentAircraft.OperatorId).Name;
 			textBoxAircraftTypeCertificateNo.Text = CurrentAircraft.TypeCertificateNumber;
             textBoxVariableNumber.Text = CurrentAircraft.VariableNumber;
 	        numericUpDownAPU.Value = (decimal) CurrentAircraft.APUFH;
 			textBoxLineNumber.Text = CurrentAircraft.LineNumber;
 			lifelengthViewerToday.DateFrom = CurrentAircraft.ManufactureDate;
-			lifelengthViewerToday.Lifelength = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(CurrentAircraft);
 
-			var aircraftFrame = GlobalObjects.ComponentCore.GetBaseComponentById(CurrentAircraft.AircraftFrameId);
-			dateTimePickerStart.Value = aircraftFrame.StartDate.Year > 1950 
-                ? aircraftFrame.StartDate : DateTimeExtend.GetCASMinDateTime();
-			lifelengthViewerStart.DateFrom = CurrentAircraft.ManufactureDate;
-			if (aircraftFrame.StartLifelength != null)
+            if (GlobalObjects.CasEnvironment != null)
             {
-                lifelengthViewerStart.Lifelength = aircraftFrame.StartLifelength;
+                lifelengthViewerToday.Lifelength = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(CurrentAircraft);
+                var aircraftFrame = GlobalObjects.ComponentCore.GetBaseComponentById(CurrentAircraft.AircraftFrameId);
+                dateTimePickerStart.Value = aircraftFrame.StartDate.Year > 1950
+                    ? aircraftFrame.StartDate : DateTimeExtend.GetCASMinDateTime();
+                lifelengthViewerStart.DateFrom = CurrentAircraft.ManufactureDate;
+                if (aircraftFrame.StartLifelength != null)
+                {
+                    lifelengthViewerStart.Lifelength = aircraftFrame.StartLifelength;
+                }
             }
+
+			
+
+			
+			
 
             //CheckAircraftType();
             //CheckPermission();
