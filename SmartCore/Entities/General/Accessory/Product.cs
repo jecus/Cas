@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities.Collections;
@@ -23,6 +24,7 @@ namespace SmartCore.Entities.General.Accessory
 	/// </summary>
 	[Table("AccessoryDescriptions", "Dictionaries", "ItemId")]
 	[Dto(typeof(AccessoryDescriptionDTO))]
+	[CAADto(typeof(CAAAccessoryDescriptionDTO))]
 	[Condition("IsDeleted", "0")]
 	[Condition("ModelingObjectTypeId", "-1")]
 	[Serializable]

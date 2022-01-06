@@ -713,24 +713,52 @@ namespace CAS.UI.UIControls.Auxiliary
                 key += _filterParam2 != null ? _filterParam2.GetType().Name + _filterParam2 : "";
                 key += _filterParam3 != null ? _filterParam3.GetType().Name + _filterParam3 : "";
 
-                if (GlobalObjects.CasEnvironment.TempCollections.ContainsKey(key))
+                if (GlobalObjects.CasEnvironment != null)
                 {
-                    try
+                    if (GlobalObjects.CasEnvironment.TempCollections.ContainsKey(key))
                     {
-                        TypeItemsCollection = GlobalObjects.CasEnvironment.TempCollections[key];
-
-                        if (TypeItemsCollection != null && _doReload)
+                        try
                         {
-                            //коллекция содержится во временных коллекциях
-                            //выполнение очистки и перезагрузки коллекции
-                            TypeItemsCollection.Clear();
-                            TypeItemsCollection.AddRange(_loadObjectsDelegate(new[] { _filterParam1, _filterParam2 }));
+                            TypeItemsCollection = GlobalObjects.CasEnvironment.TempCollections[key];
+
+                            if (TypeItemsCollection != null && _doReload)
+                            {
+                                //коллекция содержится во временных коллекциях
+                                //выполнение очистки и перезагрузки коллекции
+                                TypeItemsCollection.Clear();
+                                TypeItemsCollection.AddRange(_loadObjectsDelegate(new[] { _filterParam1, _filterParam2 }));
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Program.Provider.Logger.Log("Error while load lookup combobox items. Params:" + key, ex);
+                            TypeItemsCollection = null;
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        Program.Provider.Logger.Log("Error while load lookup combobox items. Params:" + key, ex);
-                        TypeItemsCollection = null;
+                        if (GlobalObjects.CaaEnvironment.TempCollections.ContainsKey(key))
+                        {
+                            try
+                            {
+                                TypeItemsCollection = GlobalObjects.CaaEnvironment.TempCollections[key];
+
+                                if (TypeItemsCollection != null && _doReload)
+                                {
+                                    //коллекция содержится во временных коллекциях
+                                    //выполнение очистки и перезагрузки коллекции
+                                    TypeItemsCollection.Clear();
+                                    TypeItemsCollection.AddRange(_loadObjectsDelegate(new[]
+                                        {_filterParam1, _filterParam2}));
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Program.Provider.Logger.Log("Error while load lookup combobox items. Params:" + key,
+                                    ex);
+                                TypeItemsCollection = null;
+                            }
+                        }
                     }
                 }
                 else
@@ -739,8 +767,17 @@ namespace CAS.UI.UIControls.Auxiliary
                     {
                         TypeItemsCollection = _loadObjectsDelegate(new[] { _filterParam1, _filterParam2 });
 
-                        if(!GlobalObjects.CasEnvironment.TempCollections.ContainsKey(key))
-                            GlobalObjects.CasEnvironment.TempCollections.Add(key, TypeItemsCollection);
+                        if (GlobalObjects.CasEnvironment != null)
+                        {
+                            if (!GlobalObjects.CasEnvironment.TempCollections.ContainsKey(key))
+                                GlobalObjects.CasEnvironment.TempCollections.Add(key, TypeItemsCollection);
+                        }
+                        else
+                        {
+                            if (!GlobalObjects.CaaEnvironment.TempCollections.ContainsKey(key))
+                                GlobalObjects.CaaEnvironment.TempCollections.Add(key, TypeItemsCollection);
+                        }
+                            
 
                         if (backgroundWorker.CancellationPending)
                         {
@@ -779,7 +816,10 @@ namespace CAS.UI.UIControls.Auxiliary
 					Type genericType = typeof(CommonCollection<>);
 	                Type genericList = genericType.MakeGenericType(_type);
 	                TypeItemsCollection = (ICommonCollection)Activator.CreateInstance(genericList);
-	                TypeItemsCollection.AddRange(GlobalObjects.CasEnvironment.GetDictionary(_type));
+                    if (GlobalObjects.CasEnvironment != null)
+                        TypeItemsCollection.AddRange(GlobalObjects.CasEnvironment.GetDictionary(_type));
+                    else
+                        TypeItemsCollection.AddRange(GlobalObjects.CaaEnvironment.GetDictionary(_type));
 	                TypeItemsCollection.RemoveById(-1);
 				}
                 else
@@ -1206,8 +1246,10 @@ namespace CAS.UI.UIControls.Auxiliary
 
 	                if (typeName == "Product")
 	                {
-						refe.RequestedEntity = new ProductListScreen(GlobalObjects.CasEnvironment.Operators[0]);
-					}
+                        if (GlobalObjects.CasEnvironment != null)
+                            refe.RequestedEntity = new ProductListScreen(GlobalObjects.CasEnvironment.Operators[0]);
+                        else refe.RequestedEntity = new ProductListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+                    }
 	                else refe.RequestedEntity = new CommonListScreen(_type);
                     
                     refe.TypeOfReflection = ReflectionTypes.DisplayInNew;
@@ -1243,11 +1285,13 @@ namespace CAS.UI.UIControls.Auxiliary
                 key += _filterParam2 != null ? _filterParam2.GetType().Name + _filterParam2 : "";
                 key += _filterParam3 != null ? _filterParam3.GetType().Name + _filterParam3 : "";
 
-                if (GlobalObjects.CasEnvironment.TempCollections.ContainsKey(key))
+                if ((GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.TempCollections.ContainsKey(key) : GlobalObjects.CaaEnvironment.TempCollections.ContainsKey(key)))
                 {
                     try
                     {
-                        TypeItemsCollection = GlobalObjects.CasEnvironment.TempCollections[key];
+                        if (GlobalObjects.CasEnvironment != null)
+                            TypeItemsCollection = GlobalObjects.CasEnvironment.TempCollections[key];
+                        else TypeItemsCollection = GlobalObjects.CaaEnvironment.TempCollections[key];
 
                         if (TypeItemsCollection != null && _doReload)
                         {
@@ -1268,7 +1312,10 @@ namespace CAS.UI.UIControls.Auxiliary
                     try
                     {
                         TypeItemsCollection = _loadObjectsDelegate(new[] { _filterParam1, _filterParam2 });
-                        GlobalObjects.CasEnvironment.TempCollections.Add(key, TypeItemsCollection);
+                        if (GlobalObjects.CasEnvironment != null)
+                            GlobalObjects.CasEnvironment.TempCollections.Add(key, TypeItemsCollection);
+                        else
+                            GlobalObjects.CaaEnvironment.TempCollections.Add(key, TypeItemsCollection);
                     }
                     catch (Exception ex)
                     {
@@ -1297,7 +1344,14 @@ namespace CAS.UI.UIControls.Auxiliary
                 }
                 else
                 {
-                    TypeItemsCollection = GlobalObjects.CasEnvironment.Loader.GetObjectCollection(_type, loadChild: true);
+                    if(GlobalObjects.CasEnvironment != null)
+                        TypeItemsCollection = GlobalObjects.CasEnvironment.Loader.GetObjectCollection(_type, loadChild: true);
+                    else
+                    {
+                        var dto = (CAADtoAttribute)_type.GetCustomAttributes(typeof(CAADtoAttribute), false).FirstOrDefault();
+                        var res = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList(dto.Type, _type, loadChild: true);
+                        TypeItemsCollection = new CommonCollection<BaseEntityObject>((IEnumerable<BaseEntityObject>)res);
+                    }
                 }    
             }
 

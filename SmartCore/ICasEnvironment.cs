@@ -58,7 +58,7 @@ namespace SmartCore
         void OpenFile(AttachedFile attachedFile, out string message);
 
         void SaveAsFile(AttachedFile attachedFile, string filePath, out string message);
-
+        Dictionary<string, ICommonCollection> TempCollections { get; }
     }
 
 	public interface ICasEnvironment : IBaseEnvironment
@@ -73,7 +73,7 @@ namespace SmartCore
 		CommonCollection<WorkShop> WorkShops { get; }
 		CommonCollection<WorkStation> WorkStations { get; }
 		BaseComponentCollection BaseComponents { get; }
-		Dictionary<string, ICommonCollection> TempCollections { get; }
+		
 		ReasonCollection Reasons { get; }
         ILoader Loader { get; }
         Calculator Calculator { get; set; }

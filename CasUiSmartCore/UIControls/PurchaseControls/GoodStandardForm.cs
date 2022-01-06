@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.Dictionary;
+using CAS.Entity.Models.DTO.Dictionaries;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
@@ -76,7 +80,17 @@ namespace CAS.UI.UIControls.PurchaseControls
             }
             else
             {
-                var products = GlobalObjects.PurchaseCore.GetProducts(_currentKit.ItemId, true);
+                IList<Product> products;
+                if(GlobalObjects.CasEnvironment != null)
+                    products = GlobalObjects.PurchaseCore.GetProducts(_currentKit.ItemId, true);
+                else
+                {
+                    products =  GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAccessoryDescriptionDTO, Product>(new List<Filter>()
+                    {
+                        new Filter("StandartId",_currentKit.ItemId),
+                        new Filter("ModelingObjectTypeId",-1)
+                    }, true);
+                }
 
                 foreach (var product in products)
                 {
@@ -263,7 +277,9 @@ namespace CAS.UI.UIControls.PurchaseControls
         {
             try
             {
-                GlobalObjects.CasEnvironment.Manipulator.Save(_currentKit);
+                if(GlobalObjects.CasEnvironment != null)
+                    GlobalObjects.CasEnvironment.Manipulator.Save(_currentKit);
+                else GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentKit);
 
                 //foreach (KitSuppliersRelation relation in _currentKit.SupplierRelations)
                 //{

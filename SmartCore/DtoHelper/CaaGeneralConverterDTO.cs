@@ -9,6 +9,7 @@ using SmartCore.CAA.FindingLevel;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Files;
@@ -19,7 +20,81 @@ namespace SmartCore.DtoHelper
     public static  class CaaGeneralConverterDTO
 	{
 
-        public static CAAAircraftEquipmentDTO ConvertCAA(this AircraftEquipments aireq)
+		public static CAAAccessoryDescriptionDTO ConvertCAA(this Product product)
+		{
+			return new CAAAccessoryDescriptionDTO
+			{
+				ItemId = product.ItemId,
+				IsDeleted = product.IsDeleted,
+				Updated = product.Updated,
+				CorrectorId = product.CorrectorId,
+				Model = product.Name,
+				PartNumber = product.PartNumber,
+				AltPartNumber = product.AltPartNumber,
+				AtaChapterId = product.ATAChapter?.ItemId,
+				Description = product.Description,
+				StandartId = product.Standart?.ItemId,
+				Manufacturer = product.Manufacturer,
+				CostNew = product.CostNew,
+				CostOverhaul = product.CostOverhaul,
+				ModelingObjectTypeId = -1,
+				CostServiceable = product.CostServiceable,
+				Measure = product.Measure?.ItemId,
+				Remarks = product.Remarks,
+				Code = product.Code,
+				ComponentClass = (short?)product.GoodsClass?.ItemId,
+				IsDangerous = product.IsDangerous,
+				DescRus = product.DescRus,
+				HTS = product.HTS,
+				Reference = product.Reference,
+				IsEffectivity = product.IsEffectivity,
+				IsForbidden = product.IsForbidden,
+				EngineRef = product.EngineRef,
+				Limitation = product.Limitation,
+				Reason = product.Reason,
+            };
+		}
+
+		public static Product ConvertToProductCAA(this CAAAccessoryDescriptionDTO productDto)
+		{
+			var product = new Product
+			{
+				ItemId = productDto.ItemId,
+				IsDeleted = productDto.IsDeleted,
+				Updated = productDto.Updated,
+				CorrectorId = productDto.CorrectorId,
+				Name = productDto.Model,
+				PartNumber = productDto.PartNumber,
+				AltPartNumber = productDto.AltPartNumber,
+				ATAChapter = productDto.ATAChapter?.ConvertCAA(),
+				Description = productDto.Description,
+				Standart = productDto.GoodStandart?.ConvertCAA(),
+				Manufacturer = productDto.Manufacturer,
+				CostNew = productDto.CostNew ?? default(double),
+				CostOverhaul = productDto.CostOverhaul ?? default(double),
+				CostServiceable = productDto.CostServiceable ?? default(double),
+				Measure = productDto.Measure.HasValue ? Measure.Items.GetItemById(productDto.Measure.Value) : Measure.Unknown,
+				Remarks = productDto.Remarks,
+				Code = productDto.Code,
+				GoodsClass = productDto.ComponentClass.HasValue ? GoodsClass.Items.GetItemById(productDto.ComponentClass.Value) : GoodsClass.Unknown,
+				IsDangerous = productDto.IsDangerous,
+				DescRus = productDto.DescRus,
+				HTS = productDto.HTS,
+				Reference = productDto.Reference,
+				IsEffectivity = productDto.IsEffectivity,
+				IsForbidden = productDto.IsForbidden,
+				EngineRef = productDto.EngineRef,
+				Limitation = productDto.Limitation,
+				Reason = productDto.Reason,
+				ProductType = productDto.ModelingObjectTypeId == -1 ? ProductType.EquipmentandMaterial : ProductType.ComponentModel
+			};
+
+
+			return product;
+
+		}
+
+		public static CAAAircraftEquipmentDTO ConvertCAA(this AircraftEquipments aireq)
         {
             return new CAAAircraftEquipmentDTO
             {
@@ -917,7 +992,7 @@ namespace SmartCore.DtoHelper
 				PartNumber = aircraftModel.PartNumber,
 				AltPartNumber = aircraftModel.AltPartNumber,
 				AtaChapterId = aircraftModel.ATAChapter?.ItemId,
-				GoodStandart = aircraftModel.Standart?.ConvertCAA(),
+				//GoodStandart = aircraftModel.Standart?.ConvertCAA(),
 				Description = aircraftModel.Description,
 				StandartId = aircraftModel.Standart?.ItemId,
 				Manufacturer = aircraftModel.Manufacturer,

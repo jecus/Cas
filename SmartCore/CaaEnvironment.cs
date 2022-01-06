@@ -151,6 +151,18 @@ namespace SmartCore
 
         #region public CommonDictionariesCache Dictionaries
 
+        #region public Dictionary<string, ICommonCollection> TempCollections
+        private Dictionary<string, ICommonCollection> _tempCollections;
+        /// <summary>
+        /// Временные коллекции (коллекции, используемые более чем в одном контроле)
+        /// </summary>
+        public Dictionary<string, ICommonCollection> TempCollections
+        {
+            get { return _tempCollections; }
+            internal set { _tempCollections = value; }
+        }
+        #endregion
+
         private readonly CommonDictionariesCache _dictionaries;
 
         public IDictionaryCollection GetDictionary<T>() where T : IDictionaryItem

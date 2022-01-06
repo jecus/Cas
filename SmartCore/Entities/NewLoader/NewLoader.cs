@@ -232,6 +232,8 @@ namespace SmartCore.Entities.NewLoader
             {
                 if (TOut.Name.Equals("AircraftModel"))
                     return "ConvertToAircraftModelCAA";
+                if (TOut.Name.Equals("Product"))
+                    return "ConvertToProductCAA";
 				return methodName += "CAA";
             }
 
