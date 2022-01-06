@@ -106,7 +106,7 @@ namespace SmartCore.DtoHelper
                 AircraftId = aireq.AircraftId,
                 AircraftOtherParameterId = aireq.AircraftOtherParameter?.ItemId,
                 AircraftEquipmetType = (int)aireq.AircraftEquipmetType,
-                AircraftOtherParameter = aireq.AircraftOtherParameter?.ConvertCAA()
+                //AircraftOtherParameter = aireq.AircraftOtherParameter?.ConvertCAA()
             };
         }
 
