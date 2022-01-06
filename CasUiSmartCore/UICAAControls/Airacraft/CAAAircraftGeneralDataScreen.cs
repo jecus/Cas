@@ -83,8 +83,6 @@ namespace CAS.UI.UICAAControls.Airacraft
 
             }
             else CurrentAircraft = _currentAircraft;
-            //statusControl.Aircraft = CurrentAircraft;
-            //statusControl.ConditionState = ConditionState.Satisfactory;
 
             aircraftControl1.CurrentAircraft = CurrentAircraft;
             //powerPlantsControl1.UpdateControl(CurrentAircraft, BaseComponentType.Engine);

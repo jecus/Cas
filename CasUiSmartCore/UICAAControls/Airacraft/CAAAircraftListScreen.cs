@@ -68,8 +68,7 @@ namespace CAS.UI.UICAAControls.Airacraft
 				throw new ArgumentNullException("currentOperator");
 			aircraftHeaderControl1.Operator = currentOperator;
 			_currentOperator = currentOperator;
-			statusControl.ShowStatus = false;
-			labelTitle.Visible = false;
+            labelTitle.Visible = false;
 
 			_filter = new CommonFilterCollection(typeof(IAircraftFilter));
 
