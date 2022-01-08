@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls.Operators;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
@@ -262,11 +263,14 @@ namespace CAS.UI.UICAAControls.Airacraft
 		#region private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
-		{
-            var form = new AddOperatorFrom(new AllOperators());
-			if(form.ShowDialog() == DialogResult.OK)
-				AnimatedThreadWorker.RunWorkerAsync();
-			e.Cancel = true;
+        {
+            e.DisplayerText = "New Aircraft";
+            e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+            e.RequestedEntity = new CAAAircraftGeneralDataScreen(new Aircraft()
+            {
+				OperatorId = GlobalObjects.CaaEnvironment.Operators.FirstOrDefault().ItemId,
+				ManufactureDate = DateTime.Today
+            });
         }
 
 		#endregion

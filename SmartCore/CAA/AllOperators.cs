@@ -34,6 +34,7 @@ namespace SmartCore.CAA
     }
 
     [CAADto(typeof(AllOperatorsDTO))]
+    [Serializable]
     public class AllOperators : BaseEntityObject, IAllOperatorFilterParams
     {
         public string FullName { get; set; }
@@ -311,6 +312,9 @@ namespace SmartCore.CAA
         }
 
 
-
+        public override string ToString()
+        {
+            return FullName;
+        }
     }
 }

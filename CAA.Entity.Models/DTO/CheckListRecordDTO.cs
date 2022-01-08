@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
 using Newtonsoft.Json;
@@ -7,6 +8,7 @@ namespace CAA.Entity.Models.DTO
 {
     [Table("CheckListRecord", Schema = "dbo")]
     [Condition("IsDeleted", 0)]
+    [Serializable]
     public class CheckListRecordDTO : BaseEntity
     {
         [Column("Option")]

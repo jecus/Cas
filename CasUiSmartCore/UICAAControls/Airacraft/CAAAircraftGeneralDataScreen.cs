@@ -105,10 +105,11 @@ namespace CAS.UI.UICAAControls.Airacraft
         /// <returns></returns>
         private bool ValidateData(out string message)
         {
-            if (!apusControl.ValidateData(out message) ||
-                !powerPlantsControl1.ValidateData(out message) ||
-                !propellersControl1.ValidateData(out message) ||
-                !landingGearsControl1.ValidateData(out message)||
+            if (
+                //!apusControl.ValidateData(out message) ||
+                //!powerPlantsControl1.ValidateData(out message) ||
+                //!propellersControl1.ValidateData(out message) ||
+                //!landingGearsControl1.ValidateData(out message)||
 				!aircraftControl1.ValidateData(out message))
 				return false;
             return true;
@@ -126,11 +127,11 @@ namespace CAS.UI.UICAAControls.Airacraft
         {
             // Проверяем, изменены ли поля WestAircraft
             return aircraftControl1.GetChangeStatus() 
-                   || powerPlantsControl1.GetChangeStatus()
-                   || propellersControl1.GetChangeStatus()
+                   //|| powerPlantsControl1.GetChangeStatus()
+                  // || propellersControl1.GetChangeStatus()
                    || performanceDataControl1.GetChangeStatus()
-                   || landingGearsControl1.GetChangeStatus()
-				   || apusControl.GetChangeStatus()
+                   //|| landingGearsControl1.GetChangeStatus()
+				   //|| apusControl.GetChangeStatus()
                    || interiorConfigurationControl1.GetChangeStatus()
 				   || aircraftOtherControl1.GetChangeStatus()
 				   || aircraftOtherControl2.GetChangeStatus();
@@ -259,9 +260,9 @@ namespace CAS.UI.UICAAControls.Airacraft
                 MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
                            MessageBoxIcon.Information);
 
-                powerPlantsControl1.UpdateControl(CurrentAircraft, BaseComponentType.Engine);
-                propellersControl1.UpdateControl(CurrentAircraft, BaseComponentType.Propeller);
-                landingGearsControl1.UpdateControl(CurrentAircraft, BaseComponentType.LandingGear);
+                //powerPlantsControl1.UpdateControl(CurrentAircraft, BaseComponentType.Engine);
+                //propellersControl1.UpdateControl(CurrentAircraft, BaseComponentType.Propeller);
+                //landingGearsControl1.UpdateControl(CurrentAircraft, BaseComponentType.LandingGear);
 				aircraftOtherControl1.UpdateControl(CurrentAircraft, AircraftEquipmetType.TapeOfOperationApproval);
 				aircraftOtherControl2.UpdateControl(CurrentAircraft, AircraftEquipmetType.Equipmet);
 			}

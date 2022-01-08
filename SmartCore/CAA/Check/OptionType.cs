@@ -4,6 +4,7 @@ using SmartCore.Entities.Dictionaries;
 
 namespace SmartCore.CAA.Check
 {
+    [Serializable]
     public class OptionType : StaticDictionary
     {
         #region public static CommonDictionaryCollection<OptionType> _Items = new CommonDictionaryCollection<OptionType>();

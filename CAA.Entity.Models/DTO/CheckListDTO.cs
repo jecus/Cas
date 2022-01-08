@@ -45,6 +45,7 @@ namespace CAA.Entity.Models.DTO
 
     }
 
+    [Serializable]
     public class CheckListSettings
     {
         public CheckListSettings()

@@ -8,6 +8,7 @@ using SmartCore.Entities.Dictionaries;
 
 namespace SmartCore.CAA.Operators
 {
+    [Serializable]
     public class TypesOfOperations : StaticDictionary
     {
         #region public static CommonDictionaryCollection<TypesOfOperations> _Items = new CommonDictionaryCollection<TypesOfOperations>();

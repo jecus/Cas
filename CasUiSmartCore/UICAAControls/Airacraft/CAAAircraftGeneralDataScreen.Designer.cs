@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
 			this.extendableRichContainerAircraft = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
-			this.aircraftControl1 = new CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls.AircraftControl();
+			this.aircraftControl1 = new CAAAircraftControl();
 			this.extendableRichContainerPowerPlants = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
 			this.powerPlantsControl1 = new CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls.BaseComponentEditorCollectionControl();
 			this.extendableRichContainerPropellers = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
@@ -407,7 +407,7 @@
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelMain;
-        private CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls.AircraftControl aircraftControl1;
+        private CAAAircraftControl aircraftControl1;
         private CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer extendableRichContainerAircraft;
         private CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls.BaseComponentEditorCollectionControl powerPlantsControl1;
         private CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer extendableRichContainerPowerPlants;

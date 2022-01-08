@@ -4,6 +4,7 @@ using SmartCore.Entities.Dictionaries;
 
 namespace SmartCore.CAA.Operators
 {
+    [Serializable]
     public class Privileges : StaticDictionary
     {
         #region public static CommonDictionaryCollection<Privileges> _Items = new CommonDictionaryCollection<Privileges>();

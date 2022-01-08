@@ -12,6 +12,7 @@ using SmartCore.Files;
 namespace SmartCore.CAA.Check
 {
     [CAADto(typeof(CheckListDTO))]
+    [Serializable]
     public class CheckLists : BaseEntityObject, ICheckListFilterParams, IFileContainer
     {
         public string Source { get; set; }
@@ -20,7 +21,21 @@ namespace SmartCore.CAA.Check
 
         public List<CheckListRecords> CheckListRecords { get; set; }
 
-        public CommonCollection<ItemFileLink> Files { get; set; }
+        private CommonCollection<ItemFileLink> _files;
+        public CommonCollection<ItemFileLink> Files
+        {
+            get { return _files ?? (_files = new CommonCollection<ItemFileLink>()); }
+            set
+            {
+                if (_files != value)
+                {
+                    if (_files != null)
+                        _files.Clear();
+                    if (value != null)
+                        _files = value;
+                }
+            }
+        }
 
 
         #region public AttachedFile FaaFormFile { get; set; }
@@ -30,7 +45,7 @@ namespace SmartCore.CAA.Check
         {
             get
             {
-                return _file ?? (Files.GetFileByFileLinkType(FileLinkType.CheckList));
+                return _file ?? (Files?.GetFileByFileLinkType(FileLinkType.CheckList));
             }
             set
             {
@@ -48,6 +63,21 @@ namespace SmartCore.CAA.Check
             CheckListRecords = new List<CheckListRecords>();
             Settings = new CheckListSettings();
             SmartCoreObjectType = SmartCoreType.CheckLists;
+        }
+
+        public override BaseEntityObject GetCopyUnsaved(bool marked = true)
+        {
+            var clone = (CheckLists)MemberwiseClone();
+            clone.ItemId = -1;
+            clone.UnSetEvents();
+
+            if (marked)
+                clone.Source += " Copy";
+
+            clone.Files?.Clear();
+            clone.CheckListRecords?.Clear();
+
+            return clone;
         }
 
         public string EditionNumber => Settings.EditionNumber;

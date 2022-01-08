@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using AvControls;
+using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
@@ -114,7 +115,7 @@ namespace CAS.UI.UICAAControls.Operators
 
                 _controlItems.Add(tempLabel);
 
-                //tempLabel.DisplayerRequested += TempButtonDisplayerRequested;
+                tempLabel.DisplayerRequested += TempButtonDisplayerRequested;
 
 
             }
@@ -123,6 +124,11 @@ namespace CAS.UI.UICAAControls.Operators
             _controlItems.Sort((x, y) => string.Compare(x.Text, y.Text));
             flowLayoutPanelAircrafts.Controls.AddRange(_controlItems.ToArray());
             flowLayoutPanelAircrafts.Controls.Add(panelButtons);
+        }
+
+        private void TempButtonDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            e.Cancel = true;
         }
 
         #endregion

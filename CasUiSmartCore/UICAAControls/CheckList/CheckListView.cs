@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
@@ -105,6 +106,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		}
 		#endregion
 
-		#endregion
+
+        #endregion
 	}
 }

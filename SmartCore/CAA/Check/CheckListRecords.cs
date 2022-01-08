@@ -1,4 +1,5 @@
-﻿using CAA.Entity.Models.DTO;
+﻿using System;
+using CAA.Entity.Models.DTO;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
@@ -6,6 +7,7 @@ using SmartCore.Entities.General.Attributes;
 namespace SmartCore.CAA.Check
 {
     [CAADto(typeof(CheckListRecordDTO))]
+    [Serializable]
     public class CheckListRecords : BaseEntityObject
     {
         public OptionType Option { get; set; }
