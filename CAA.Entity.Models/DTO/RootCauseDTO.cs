@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Abstractions;
+using Entity.Abstractions.Attributte;
 
 namespace CAA.Entity.Models.DTO
 {
     [Table("RootCauses", Schema = "dbo")]
+    [Condition("IsDeleted", 0)]
     public class RootCauseDTO : BaseEntity
     {
         [Column("CategoryNumber"), MaxLength(250)]
