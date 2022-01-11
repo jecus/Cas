@@ -27,6 +27,12 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		#region public PersonnelListView()
 
+        public CheckListView()
+        {
+            SortDirection = SortDirection.Asc;
+			InitializeComponent();
+		}
+
         /// <summary>
         /// </summary>
         /// <param name="animatedThreadWorker"></param>

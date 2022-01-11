@@ -379,5 +379,13 @@ namespace CAS.UI.UICAAControls.CheckList
 		#endregion
 
 		#endregion
-	}
+
+        private void ButtonRevisionClick(object sender, EventArgs e)
+        {
+			var form = new CheckListRevisionForm(_initialDocumentArray.ToList());
+
+            if (form.ShowDialog(this) == DialogResult.OK)
+                AnimatedThreadWorker.RunWorkerAsync();
+        }
+    }
 }
