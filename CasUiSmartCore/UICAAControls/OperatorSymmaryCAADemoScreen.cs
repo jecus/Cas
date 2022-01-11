@@ -152,7 +152,7 @@ namespace CAS.UI.UICAAControls
 
         private void LinkFindingLevelsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "FindingLevel";
+            e.DisplayerText = "Finding Level";
             e.RequestedEntity = new CAACommonListScreen(typeof(FindingLevels));
         }
 
@@ -201,6 +201,12 @@ namespace CAS.UI.UICAAControls
         {
             e.DisplayerText = "CheckList";
             e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+        }
+
+        private void LinkRootCauseDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = "Root Cause";
+            e.RequestedEntity = new CAACommonListScreen(typeof(RootCause));
         }
     }
 }

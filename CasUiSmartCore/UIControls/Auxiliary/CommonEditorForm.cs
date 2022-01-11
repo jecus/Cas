@@ -174,7 +174,7 @@ namespace CAS.UI.UIControls.Auxiliary
                 {
                     try
                     {
-                        c = GetControl(_currentObject, pairProperty, attr.PairControlWidht, 1, attr.PairControlEnabled, attr.RichTextBox);
+                        c = GetControl(_currentObject, pairProperty, attr.PairControlWidht, attr.Height, 1, attr.PairControlEnabled, attr.RichTextBox);
                     }
                     catch (Exception ex)
                     {
@@ -190,7 +190,7 @@ namespace CAS.UI.UIControls.Auxiliary
                 try
                 {
                     int cw = pairProperty != null ? attr.Width - attr.PairControlWidht - 5 : attr.Width;
-                    c = GetControl(_currentObject, t, cw, attr.Lines, attr.Enabled, attr.RichTextBox);
+                    c = GetControl(_currentObject, t, cw, attr.Height, attr.Lines, attr.Enabled, attr.RichTextBox);
                 }
                 catch (Exception ex)
                 {
@@ -548,6 +548,7 @@ namespace CAS.UI.UIControls.Auxiliary
         private Control GetControl(BaseEntityObject obj, 
                                    PropertyInfo propertyInfo, 
                                    int controlWidth, 
+                                   int controlHeight, 
                                    int controlLines, 
                                    bool controlEnabled,
                                    bool richTextBox)
@@ -827,6 +828,13 @@ namespace CAS.UI.UIControls.Auxiliary
                                 Text = val,
                                 Width = controlWidth,
                             };
+
+                            if (controlHeight > 0)
+                            {
+                                textBox.AutoSize = false;
+                                textBox.Height = controlHeight;
+                            }
+
                             if (controlLines > 1)
                             {
                                 textBox.ScrollBars = ScrollBars.Vertical;

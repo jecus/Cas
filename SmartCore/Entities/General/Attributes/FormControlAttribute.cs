@@ -8,6 +8,7 @@ namespace SmartCore.Entities.General.Attributes
     {
         private int _order = -1;
         private int _width = 100;
+        private int _height;
         private int _lines = 1;
         private bool _richTextBox;
         private string _title = "";
@@ -155,6 +156,12 @@ namespace SmartCore.Entities.General.Attributes
         public int Width
         {
             get { return _width; }
+        }
+
+        public int Height
+        {
+            get { return _height; }
+            set { _height = value; }
         }
 
         public int Order

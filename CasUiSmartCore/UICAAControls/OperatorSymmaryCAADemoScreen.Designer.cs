@@ -53,6 +53,7 @@ namespace CAS.UI.UICAAControls
 			this.LinkRecords = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkNomenclatures = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkFindingLevels = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            this.LinkRootCause = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkFligthsSchedule = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkAircraftStatus = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkFligthsPlanOPS = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -231,7 +232,7 @@ namespace CAS.UI.UICAAControls
 			this._settingContainer.ReferenceLink06 = this.LinkSpecializations;
 			this._settingContainer.ReferenceLink07 = this.LinkNomenclatures;
             this._settingContainer.ReferenceLink08 = this.LinkFindingLevels;
-			this._settingContainer.ReferenceLink09 = null;
+			this._settingContainer.ReferenceLink09 = this.LinkRootCause;
 			this._settingContainer.ReferenceLink10 = null;
 			this._settingContainer.ReferenceLink11 = null;
 			this._settingContainer.ReferenceLink12 = null;
@@ -536,8 +537,31 @@ namespace CAS.UI.UICAAControls
 			this.LinkFindingLevels.Text = "Finding Level";
 			this.LinkFindingLevels.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkFindingLevels.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-
             this.LinkFindingLevels.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkFindingLevelsDisplayerRequested);
+			// 
+			// LinkRootCause
+			// 
+			this.LinkRootCause.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkRootCause.Displayer = null;
+			this.LinkRootCause.DisplayerText = null;
+			this.LinkRootCause.Entity = null;
+			this.LinkRootCause.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.LinkRootCause.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkRootCause.ImageBackColor = System.Drawing.Color.Transparent;
+			this.LinkRootCause.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.LinkRootCause.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkRootCause.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.LinkRootCause.Location = new System.Drawing.Point(10, 0);
+			this.LinkRootCause.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.LinkRootCause.Name = "LinkRootCause";
+			this.LinkRootCause.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.LinkRootCause.Size = new System.Drawing.Size(188, 20);
+			this.LinkRootCause.Status = AvControls.Statuses.Satisfactory;
+			this.LinkRootCause.TabIndex = 4;
+			this.LinkRootCause.Text = "Root Cause";
+			this.LinkRootCause.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.LinkRootCause.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkRootCause.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkRootCauseDisplayerRequested);
 
 			// 
 			// LinkAircraftStatus
@@ -1474,6 +1498,7 @@ namespace CAS.UI.UICAAControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRecords;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkNomenclatures;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkFindingLevels;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRootCause;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPersonnel;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkSpecializations;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkAircraftStatus;

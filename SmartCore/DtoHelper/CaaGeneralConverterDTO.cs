@@ -20,6 +20,35 @@ namespace SmartCore.DtoHelper
     public static  class CaaGeneralConverterDTO
 	{
 
+        public static RootCause ConvertCAA(this RootCauseDTO cause)
+        {
+            return new RootCause
+			{
+                ItemId = cause.ItemId,
+                IsDeleted = cause.IsDeleted,
+                Updated = cause.Updated,
+                CorrectorId = cause.CorrectorId,
+                Remark = cause.Remark,
+                CategoryName = cause.CategoryName,
+                CategoryNumber = cause.CategoryNumber,
+
+			};
+        }
+
+        public static RootCauseDTO ConvertCAA(this RootCause cause)
+        {
+            return new RootCauseDTO
+			{
+                ItemId = cause.ItemId,
+                IsDeleted = cause.IsDeleted,
+                Updated = cause.Updated,
+                CorrectorId = cause.CorrectorId,
+                Remark = cause.Remark,
+                CategoryName = cause.CategoryName,
+                CategoryNumber = cause.CategoryNumber,
+            };
+        }
+
 		public static CAAAccessoryDescriptionDTO ConvertCAA(this Product product)
 		{
 			return new CAAAccessoryDescriptionDTO
