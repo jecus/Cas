@@ -12,6 +12,7 @@ using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.Operators;
+using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -101,6 +102,28 @@ namespace CAS.UI.UICAAControls.CheckList
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(loadChild:true));
+
+            foreach (var check in _initialDocumentArray)
+            {
+                check.Remains = Lifelength.Null;
+                check.Condition = ConditionState.Satisfactory;
+
+                var days = (check.Settings.RevisonValidToDate - DateTime.Today).Days;
+                var editionDays = 0;
+				if (!check.Settings.RevisonValidTo)
+                    editionDays = (check.Settings.EffRevisonDate - DateTime.Today).Days;
+                else editionDays = (check.Settings.RevisonDate - DateTime.Today).Days;
+
+                check.Remains = new Lifelength(days - editionDays, null, null);
+
+
+				if(check.Remains.Days < 0)
+                    check.Condition = ConditionState.Overdue;
+				else if (check.Remains.Days >= 0 && check.Remains.Days <= check.Settings.RevisonValidToNotify)
+                    check.Condition = ConditionState.Notify;
+			}
+
+
             
 
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");

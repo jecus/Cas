@@ -1219,6 +1219,9 @@ namespace SmartCore.DtoHelper
 					SectionNumber = levels.Settings.SectionNumber,
 					SubPartName = levels.Settings.SubPartName,
 					SubPartNumber = levels.Settings.SubPartNumber,
+					RevisonValidTo =  levels.Settings.RevisonValidTo,
+					RevisonValidToDate =  levels.Settings.RevisonValidToDate,
+					RevisonValidToNotify =  levels.Settings.RevisonValidToNotify,
 				}
             };
 
@@ -1254,7 +1257,10 @@ namespace SmartCore.DtoHelper
                     SectionNumber = levels.Settings.SectionNumber,
                     SubPartName = levels.Settings.SubPartName,
                     SubPartNumber = levels.Settings.SubPartNumber,
-                }
+                    RevisonValidTo =  levels.Settings.RevisonValidTo,
+                    RevisonValidToDate =  levels.Settings.RevisonValidToDate,
+                    RevisonValidToNotify =  levels.Settings.RevisonValidToNotify,
+				}
             };
 
             if (levels.CheckListRecords != null)

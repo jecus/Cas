@@ -54,6 +54,7 @@ namespace CAA.Entity.Models.DTO
             EffEditionDate = DateTime.Today;
             RevisonDate = DateTime.Today;
             EffRevisonDate = DateTime.Today;
+            RevisonValidToDate = DateTime.Today;
         }
 
         [JsonProperty("EditionNumber")]
@@ -100,5 +101,14 @@ namespace CAA.Entity.Models.DTO
 
         [JsonProperty("Requirement")]
         public string Requirement { get; set; }
+
+        [JsonProperty("RevisonValidTo")]
+        public bool RevisonValidTo { get; set; }
+
+        [JsonProperty("RevisonValidToDate")]
+        public DateTime RevisonValidToDate { get; set; }
+
+        [JsonProperty("RevisonValidToNotify")]
+        public int RevisonValidToNotify { get; set; }
     }
 }

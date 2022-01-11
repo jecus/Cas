@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
+using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA.Check;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CheckList
 {
@@ -59,6 +62,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			AddColumn("Source", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Edition", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Revision", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Remain", (int)(radGridView1.Width * 0.3f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -84,6 +88,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 CreateRow(item.Source, item.Source),
                 CreateRow(item.Settings.EditionNumber, item.Settings.EditionNumber),
                 CreateRow(item.Settings.RevisionNumber, item.Settings.RevisionNumber),
+                CreateRow(item.Remains.ToString(), item.Remains),
                 CreateRow(author, author)
 			};
 
@@ -106,7 +111,31 @@ namespace CAS.UI.UICAAControls.CheckList
 		}
 		#endregion
 
+        #region protected override void SetItemColor(GridViewRowInfo listViewItem, Document item)
+
+        protected override void SetItemColor(GridViewRowInfo listViewItem, CheckLists item)
+        {
+            var itemBackColor = UsefulMethods.GetColor(item);
+            var itemForeColor = Color.Gray;
+
+            foreach (GridViewCellInfo cell in listViewItem.Cells)
+            {
+                cell.Style.DrawFill = true;
+                cell.Style.CustomizeFill = true;
+                cell.Style.BackColor = UsefulMethods.GetColor(item);
+
+                var listViewForeColor = cell.Style.ForeColor;
+
+                if (listViewForeColor != Color.MediumVioletRed)
+                    cell.Style.ForeColor = itemForeColor;
+                cell.Style.BackColor = itemBackColor;
+            }
+        }
+
 
         #endregion
+
+
+		#endregion
 	}
 }

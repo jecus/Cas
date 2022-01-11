@@ -82,6 +82,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void UpdateInformation()
         {
+
             metroTextSource.Text = _currentCheck.Source;
             metroTextBoxEditionNumber.Text = _currentCheck.Settings.EditionNumber;
             dateTimePickerEditionDate.Value = _currentCheck.Settings.EditionDate;
@@ -98,6 +99,9 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxItemNumber.Text = _currentCheck.Settings.ItemNumber;
             metroTextBoxItemName.Text = _currentCheck.Settings.ItemtName;
             metroTextBoxRequirement.Text = _currentCheck.Settings.Requirement;
+            checkBoxRevisionValidTo.Checked = _currentCheck.Settings.RevisonValidTo;
+            dateTimePickeValidTo.Value = _currentCheck.Settings.RevisonValidToDate;
+            numericUpNotify.Value = _currentCheck.Settings.RevisonValidToNotify;
 
             fileControl.UpdateInfo(_currentCheck.File, "Adobe PDF Files|*.pdf",
                 "This record does not contain a file proving the Document. Enclose PDF file to prove the Document.",
@@ -125,6 +129,10 @@ namespace CAS.UI.UICAAControls.CheckList
             _currentCheck.Settings.ItemNumber = metroTextBoxItemNumber.Text;
             _currentCheck.Settings.ItemtName = metroTextBoxItemName.Text;
             _currentCheck.Settings.Requirement =  metroTextBoxRequirement.Text;
+
+            _currentCheck.Settings.RevisonValidTo = checkBoxRevisionValidTo.Checked;
+            _currentCheck.Settings.RevisonValidToDate = dateTimePickeValidTo.Value;
+            _currentCheck.Settings.RevisonValidToNotify = (int) numericUpNotify.Value;
 
             if (fileControl.GetChangeStatus())
             {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CAA.Entity.Models.DTO;
 using SmartCore.Auxiliary.Extentions;
+using SmartCore.Calculations;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -56,6 +57,9 @@ namespace SmartCore.CAA.Check
 
         #endregion
 
+
+        public Lifelength Remains { get; set; }
+        public ConditionState Condition { get; set; }
 
         public CheckLists()
         {

@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UICAAControls.CheckList
+﻿using System.Windows.Forms;
+
+namespace CAS.UI.UICAAControls.CheckList
 {
     partial class CheckListForm
     {
@@ -30,7 +32,6 @@
         {
             System.Windows.Forms.Label metroLabel1;
             System.Windows.Forms.Label label1;
-            System.Windows.Forms.Label label2;
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label4;
             System.Windows.Forms.Label label5;
@@ -41,6 +42,8 @@
             System.Windows.Forms.Label label10;
             System.Windows.Forms.Label label11;
             System.Windows.Forms.Label label12;
+            System.Windows.Forms.Label label13;
+            System.Windows.Forms.Label label14;
             this.metroTextSource = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxEditionNumber = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxRevision = new MetroFramework.Controls.MetroTextBox();
@@ -61,10 +64,12 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.numericUpNotify = new System.Windows.Forms.NumericUpDown();
+            this.dateTimePickeValidTo = new System.Windows.Forms.DateTimePicker();
+            this.checkBoxRevisionValidTo = new System.Windows.Forms.CheckBox();
             this.fileControl = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
             metroLabel1 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
-            label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
@@ -75,7 +80,10 @@
             label10 = new System.Windows.Forms.Label();
             label11 = new System.Windows.Forms.Label();
             label12 = new System.Windows.Forms.Label();
+            label13 = new System.Windows.Forms.Label();
+            label14 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).BeginInit();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -95,31 +103,19 @@
             label1.AutoSize = true;
             label1.Font = new System.Drawing.Font("Verdana", 9F);
             label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label1.Location = new System.Drawing.Point(5, 105);
+            label1.Location = new System.Drawing.Point(5, 161);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(55, 14);
             label1.TabIndex = 18;
             label1.Text = "Edition:";
             label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Verdana", 9F);
-            label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label2.Location = new System.Drawing.Point(5, 132);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(64, 14);
-            label2.TabIndex = 20;
-            label2.Text = "Revision:";
-            label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Verdana", 9F);
             label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label3.Location = new System.Drawing.Point(5, 172);
+            label3.Location = new System.Drawing.Point(5, 288);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(53, 14);
             label3.TabIndex = 22;
@@ -131,7 +127,7 @@
             label4.AutoSize = true;
             label4.Font = new System.Drawing.Font("Verdana", 9F);
             label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label4.Location = new System.Drawing.Point(5, 219);
+            label4.Location = new System.Drawing.Point(5, 329);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(38, 14);
             label4.TabIndex = 25;
@@ -143,7 +139,7 @@
             label5.AutoSize = true;
             label5.Font = new System.Drawing.Font("Verdana", 9F);
             label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label5.Location = new System.Drawing.Point(5, 266);
+            label5.Location = new System.Drawing.Point(5, 382);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(62, 14);
             label5.TabIndex = 28;
@@ -155,7 +151,7 @@
             label6.AutoSize = true;
             label6.Font = new System.Drawing.Font("Verdana", 9F);
             label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label6.Location = new System.Drawing.Point(5, 313);
+            label6.Location = new System.Drawing.Point(5, 423);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(41, 14);
             label6.TabIndex = 31;
@@ -167,7 +163,7 @@
             label7.AutoSize = true;
             label7.Font = new System.Drawing.Font("Verdana", 9F);
             label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label7.Location = new System.Drawing.Point(283, 153);
+            label7.Location = new System.Drawing.Point(291, 269);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(43, 14);
             label7.TabIndex = 34;
@@ -179,7 +175,7 @@
             label8.AutoSize = true;
             label8.Font = new System.Drawing.Font("Verdana", 9F);
             label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label8.Location = new System.Drawing.Point(121, 87);
+            label8.Location = new System.Drawing.Point(129, 143);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(21, 14);
             label8.TabIndex = 35;
@@ -191,7 +187,7 @@
             label9.AutoSize = true;
             label9.Font = new System.Drawing.Font("Verdana", 9F);
             label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label9.Location = new System.Drawing.Point(227, 86);
+            label9.Location = new System.Drawing.Point(235, 142);
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(37, 14);
             label9.TabIndex = 40;
@@ -203,7 +199,7 @@
             label10.AutoSize = true;
             label10.Font = new System.Drawing.Font("Verdana", 9F);
             label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label10.Location = new System.Drawing.Point(361, 87);
+            label10.Location = new System.Drawing.Point(367, 143);
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(60, 14);
             label10.TabIndex = 41;
@@ -215,7 +211,7 @@
             label11.AutoSize = true;
             label11.Font = new System.Drawing.Font("Verdana", 9F);
             label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label11.Location = new System.Drawing.Point(453, 65);
+            label11.Location = new System.Drawing.Point(456, 65);
             label11.Name = "label11";
             label11.Size = new System.Drawing.Size(84, 14);
             label11.TabIndex = 42;
@@ -227,12 +223,36 @@
             label12.AutoSize = true;
             label12.Font = new System.Drawing.Font("Verdana", 9F);
             label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label12.Location = new System.Drawing.Point(453, 244);
+            label12.Location = new System.Drawing.Point(456, 400);
             label12.Name = "label12";
             label12.Size = new System.Drawing.Size(101, 14);
             label12.TabIndex = 300;
             label12.Text = "Auditor Actions";
             label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new System.Drawing.Font("Verdana", 9F);
+            label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label13.Location = new System.Drawing.Point(81, 218);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(102, 14);
+            label13.TabIndex = 307;
+            label13.Text = "Check/Valid To:";
+            label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new System.Drawing.Font("Verdana", 9F);
+            label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label14.Location = new System.Drawing.Point(81, 243);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(92, 14);
+            label14.TabIndex = 308;
+            label14.Text = "Notify (days):";
+            label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // metroTextSource
             // 
@@ -240,9 +260,9 @@
             // 
             // 
             this.metroTextSource.CustomButton.Image = null;
-            this.metroTextSource.CustomButton.Location = new System.Drawing.Point(327, 1);
+            this.metroTextSource.CustomButton.Location = new System.Drawing.Point(273, 2);
             this.metroTextSource.CustomButton.Name = "";
-            this.metroTextSource.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.metroTextSource.CustomButton.Size = new System.Drawing.Size(71, 71);
             this.metroTextSource.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTextSource.CustomButton.TabIndex = 1;
             this.metroTextSource.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -250,7 +270,7 @@
             this.metroTextSource.CustomButton.Visible = false;
             this.metroTextSource.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextSource.Lines = new string[0];
-            this.metroTextSource.Location = new System.Drawing.Point(100, 63);
+            this.metroTextSource.Location = new System.Drawing.Point(108, 63);
             this.metroTextSource.MaxLength = 32767;
             this.metroTextSource.Multiline = true;
             this.metroTextSource.Name = "metroTextSource";
@@ -260,7 +280,7 @@
             this.metroTextSource.SelectionLength = 0;
             this.metroTextSource.SelectionStart = 0;
             this.metroTextSource.ShortcutsEnabled = true;
-            this.metroTextSource.Size = new System.Drawing.Size(347, 21);
+            this.metroTextSource.Size = new System.Drawing.Size(347, 76);
             this.metroTextSource.TabIndex = 17;
             this.metroTextSource.UseSelectable = true;
             this.metroTextSource.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -282,7 +302,7 @@
             this.metroTextBoxEditionNumber.CustomButton.Visible = false;
             this.metroTextBoxEditionNumber.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxEditionNumber.Lines = new string[0];
-            this.metroTextBoxEditionNumber.Location = new System.Drawing.Point(100, 103);
+            this.metroTextBoxEditionNumber.Location = new System.Drawing.Point(108, 159);
             this.metroTextBoxEditionNumber.MaxLength = 32767;
             this.metroTextBoxEditionNumber.Multiline = true;
             this.metroTextBoxEditionNumber.Name = "metroTextBoxEditionNumber";
@@ -314,7 +334,7 @@
             this.metroTextBoxRevision.CustomButton.Visible = false;
             this.metroTextBoxRevision.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxRevision.Lines = new string[0];
-            this.metroTextBoxRevision.Location = new System.Drawing.Point(100, 130);
+            this.metroTextBoxRevision.Location = new System.Drawing.Point(108, 186);
             this.metroTextBoxRevision.MaxLength = 32767;
             this.metroTextBoxRevision.Multiline = true;
             this.metroTextBoxRevision.Name = "metroTextBoxRevision";
@@ -346,7 +366,7 @@
             this.metroTextBoxSectionNumber.CustomButton.Visible = false;
             this.metroTextBoxSectionNumber.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxSectionNumber.Lines = new string[0];
-            this.metroTextBoxSectionNumber.Location = new System.Drawing.Point(100, 170);
+            this.metroTextBoxSectionNumber.Location = new System.Drawing.Point(108, 286);
             this.metroTextBoxSectionNumber.MaxLength = 32767;
             this.metroTextBoxSectionNumber.Multiline = true;
             this.metroTextBoxSectionNumber.Name = "metroTextBoxSectionNumber";
@@ -378,7 +398,7 @@
             this.metroTextBoxSectionName.CustomButton.Visible = false;
             this.metroTextBoxSectionName.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxSectionName.Lines = new string[0];
-            this.metroTextBoxSectionName.Location = new System.Drawing.Point(173, 170);
+            this.metroTextBoxSectionName.Location = new System.Drawing.Point(181, 286);
             this.metroTextBoxSectionName.MaxLength = 32767;
             this.metroTextBoxSectionName.Multiline = true;
             this.metroTextBoxSectionName.Name = "metroTextBoxSectionName";
@@ -410,7 +430,7 @@
             this.metroTextBoxPartName.CustomButton.Visible = false;
             this.metroTextBoxPartName.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxPartName.Lines = new string[0];
-            this.metroTextBoxPartName.Location = new System.Drawing.Point(173, 217);
+            this.metroTextBoxPartName.Location = new System.Drawing.Point(181, 333);
             this.metroTextBoxPartName.MaxLength = 32767;
             this.metroTextBoxPartName.Multiline = true;
             this.metroTextBoxPartName.Name = "metroTextBoxPartName";
@@ -442,7 +462,7 @@
             this.metroTextBoxPartNumber.CustomButton.Visible = false;
             this.metroTextBoxPartNumber.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxPartNumber.Lines = new string[0];
-            this.metroTextBoxPartNumber.Location = new System.Drawing.Point(100, 217);
+            this.metroTextBoxPartNumber.Location = new System.Drawing.Point(108, 333);
             this.metroTextBoxPartNumber.MaxLength = 32767;
             this.metroTextBoxPartNumber.Multiline = true;
             this.metroTextBoxPartNumber.Name = "metroTextBoxPartNumber";
@@ -474,7 +494,7 @@
             this.metroTextBoxSubPartName.CustomButton.Visible = false;
             this.metroTextBoxSubPartName.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxSubPartName.Lines = new string[0];
-            this.metroTextBoxSubPartName.Location = new System.Drawing.Point(173, 264);
+            this.metroTextBoxSubPartName.Location = new System.Drawing.Point(181, 380);
             this.metroTextBoxSubPartName.MaxLength = 32767;
             this.metroTextBoxSubPartName.Multiline = true;
             this.metroTextBoxSubPartName.Name = "metroTextBoxSubPartName";
@@ -506,7 +526,7 @@
             this.metroTextBoxSubPartNumber.CustomButton.Visible = false;
             this.metroTextBoxSubPartNumber.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxSubPartNumber.Lines = new string[0];
-            this.metroTextBoxSubPartNumber.Location = new System.Drawing.Point(100, 264);
+            this.metroTextBoxSubPartNumber.Location = new System.Drawing.Point(108, 380);
             this.metroTextBoxSubPartNumber.MaxLength = 32767;
             this.metroTextBoxSubPartNumber.Multiline = true;
             this.metroTextBoxSubPartNumber.Name = "metroTextBoxSubPartNumber";
@@ -538,7 +558,7 @@
             this.metroTextBoxItemName.CustomButton.Visible = false;
             this.metroTextBoxItemName.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxItemName.Lines = new string[0];
-            this.metroTextBoxItemName.Location = new System.Drawing.Point(173, 311);
+            this.metroTextBoxItemName.Location = new System.Drawing.Point(181, 427);
             this.metroTextBoxItemName.MaxLength = 32767;
             this.metroTextBoxItemName.Multiline = true;
             this.metroTextBoxItemName.Name = "metroTextBoxItemName";
@@ -570,7 +590,7 @@
             this.metroTextBoxItemNumber.CustomButton.Visible = false;
             this.metroTextBoxItemNumber.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxItemNumber.Lines = new string[0];
-            this.metroTextBoxItemNumber.Location = new System.Drawing.Point(100, 311);
+            this.metroTextBoxItemNumber.Location = new System.Drawing.Point(108, 427);
             this.metroTextBoxItemNumber.MaxLength = 32767;
             this.metroTextBoxItemNumber.Multiline = true;
             this.metroTextBoxItemNumber.Name = "metroTextBoxItemNumber";
@@ -588,28 +608,28 @@
             // 
             // dateTimePickerEditionDate
             // 
-            this.dateTimePickerEditionDate.Location = new System.Drawing.Point(182, 103);
+            this.dateTimePickerEditionDate.Location = new System.Drawing.Point(190, 159);
             this.dateTimePickerEditionDate.Name = "dateTimePickerEditionDate";
             this.dateTimePickerEditionDate.Size = new System.Drawing.Size(119, 20);
             this.dateTimePickerEditionDate.TabIndex = 36;
             // 
             // dateTimePickerEditionEff
             // 
-            this.dateTimePickerEditionEff.Location = new System.Drawing.Point(328, 103);
+            this.dateTimePickerEditionEff.Location = new System.Drawing.Point(336, 159);
             this.dateTimePickerEditionEff.Name = "dateTimePickerEditionEff";
             this.dateTimePickerEditionEff.Size = new System.Drawing.Size(119, 20);
             this.dateTimePickerEditionEff.TabIndex = 37;
             // 
             // dateTimePickerRevisionDate
             // 
-            this.dateTimePickerRevisionDate.Location = new System.Drawing.Point(182, 130);
+            this.dateTimePickerRevisionDate.Location = new System.Drawing.Point(190, 186);
             this.dateTimePickerRevisionDate.Name = "dateTimePickerRevisionDate";
             this.dateTimePickerRevisionDate.Size = new System.Drawing.Size(119, 20);
             this.dateTimePickerRevisionDate.TabIndex = 38;
             // 
             // dateTimePickerRevisionEff
             // 
-            this.dateTimePickerRevisionEff.Location = new System.Drawing.Point(328, 130);
+            this.dateTimePickerRevisionEff.Location = new System.Drawing.Point(336, 186);
             this.dateTimePickerRevisionEff.Name = "dateTimePickerRevisionEff";
             this.dateTimePickerRevisionEff.Size = new System.Drawing.Size(119, 20);
             this.dateTimePickerRevisionEff.TabIndex = 39;
@@ -620,9 +640,9 @@
             // 
             // 
             this.metroTextBoxRequirement.CustomButton.Image = null;
-            this.metroTextBoxRequirement.CustomButton.Location = new System.Drawing.Point(350, 2);
+            this.metroTextBoxRequirement.CustomButton.Location = new System.Drawing.Point(188, 1);
             this.metroTextBoxRequirement.CustomButton.Name = "";
-            this.metroTextBoxRequirement.CustomButton.Size = new System.Drawing.Size(165, 165);
+            this.metroTextBoxRequirement.CustomButton.Size = new System.Drawing.Size(329, 329);
             this.metroTextBoxRequirement.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTextBoxRequirement.CustomButton.TabIndex = 1;
             this.metroTextBoxRequirement.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -640,7 +660,7 @@
             this.metroTextBoxRequirement.SelectionLength = 0;
             this.metroTextBoxRequirement.SelectionStart = 0;
             this.metroTextBoxRequirement.ShortcutsEnabled = true;
-            this.metroTextBoxRequirement.Size = new System.Drawing.Size(518, 170);
+            this.metroTextBoxRequirement.Size = new System.Drawing.Size(518, 331);
             this.metroTextBoxRequirement.TabIndex = 43;
             this.metroTextBoxRequirement.UseSelectable = true;
             this.metroTextBoxRequirement.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -653,7 +673,7 @@
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(922, 511);
+            this.buttonOk.Location = new System.Drawing.Point(922, 673);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 299;
@@ -667,7 +687,7 @@
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonCancel.Location = new System.Drawing.Point(1003, 511);
+            this.buttonCancel.Location = new System.Drawing.Point(1003, 673);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 33);
             this.buttonCancel.TabIndex = 298;
@@ -678,7 +698,7 @@
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Controls.Add(this.linkLabel1);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(560, 244);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(560, 400);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(518, 261);
             this.flowLayoutPanel1.TabIndex = 301;
@@ -697,6 +717,42 @@
             this.linkLabel1.Text = "Add";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
+            // numericUpNotify
+            // 
+            this.numericUpNotify.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.numericUpNotify.ForeColor = System.Drawing.Color.DimGray;
+            this.numericUpNotify.Location = new System.Drawing.Point(190, 241);
+            this.numericUpNotify.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpNotify.Name = "numericUpNotify";
+            this.numericUpNotify.Size = new System.Drawing.Size(119, 20);
+            this.numericUpNotify.TabIndex = 306;
+            this.numericUpNotify.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // dateTimePickeValidTo
+            // 
+            this.dateTimePickeValidTo.CalendarForeColor = System.Drawing.Color.DimGray;
+            this.dateTimePickeValidTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.dateTimePickeValidTo.Location = new System.Drawing.Point(190, 212);
+            this.dateTimePickeValidTo.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
+            this.dateTimePickeValidTo.Name = "dateTimePickeValidTo";
+            this.dateTimePickeValidTo.Size = new System.Drawing.Size(119, 20);
+            this.dateTimePickeValidTo.TabIndex = 303;
+            // 
+            // checkBoxRevisionValidTo
+            // 
+            this.checkBoxRevisionValidTo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxRevisionValidTo.Font = new System.Drawing.Font("Verdana", 9F);
+            this.checkBoxRevisionValidTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.checkBoxRevisionValidTo.Location = new System.Drawing.Point(8, 190);
+            this.checkBoxRevisionValidTo.Name = "checkBoxRevisionValidTo";
+            this.checkBoxRevisionValidTo.Size = new System.Drawing.Size(88, 16);
+            this.checkBoxRevisionValidTo.TabIndex = 309;
+            this.checkBoxRevisionValidTo.Text = "Revision:";
+            // 
             // fileControl
             // 
             this.fileControl.AutoSize = true;
@@ -706,7 +762,7 @@
             this.fileControl.Filter = "PDF file (*.pdf)|*.pdf";
             this.fileControl.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
             this.fileControl.IconNotEnabled = null;
-            this.fileControl.Location = new System.Drawing.Point(8, 358);
+            this.fileControl.Location = new System.Drawing.Point(16, 474);
             this.fileControl.MaximumSize = new System.Drawing.Size(350, 100);
             this.fileControl.MinimumSize = new System.Drawing.Size(350, 50);
             this.fileControl.Name = "fileControl";
@@ -719,7 +775,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1085, 549);
+            this.ClientSize = new System.Drawing.Size(1085, 711);
+            this.Controls.Add(this.checkBoxRevisionValidTo);
+            this.Controls.Add(label14);
+            this.Controls.Add(label13);
+            this.Controls.Add(this.numericUpNotify);
+            this.Controls.Add(this.dateTimePickeValidTo);
             this.Controls.Add(this.fileControl);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(label12);
@@ -748,7 +809,6 @@
             this.Controls.Add(this.metroTextBoxSectionNumber);
             this.Controls.Add(label3);
             this.Controls.Add(this.metroTextBoxRevision);
-            this.Controls.Add(label2);
             this.Controls.Add(this.metroTextBoxEditionNumber);
             this.Controls.Add(label1);
             this.Controls.Add(this.metroTextSource);
@@ -758,6 +818,7 @@
             this.Text = "Add Check List";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -786,5 +847,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.LinkLabel linkLabel1;
         public UIControls.Auxiliary.AttachedFileControl fileControl;
+        private System.Windows.Forms.NumericUpDown numericUpNotify;
+        private System.Windows.Forms.DateTimePicker dateTimePickeValidTo;
+        private CheckBox checkBoxRevisionValidTo;
     }
 }
