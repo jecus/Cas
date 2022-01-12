@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
@@ -15,6 +16,7 @@ namespace SmartCore.Entities.General
     /// </summary>
     [Serializable]
     [Dto(typeof(OperatorDTO))]
+    [CAADto(typeof(CAAOperatorDTO))]
 	public class Operator : BaseEntityObject, IComponentContainer
 	{
 

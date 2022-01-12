@@ -1222,6 +1222,9 @@ namespace SmartCore.DtoHelper
 					RevisonValidTo =  levels.Settings.RevisonValidTo,
 					RevisonValidToDate =  levels.Settings.RevisonValidToDate,
 					RevisonValidToNotify =  levels.Settings.RevisonValidToNotify,
+					LevelId =  levels.Settings.LevelId,
+					Described =  levels.Settings.Described,
+                    Instructions =  levels.Settings.Instructions,
 				}
             };
 
@@ -1260,6 +1263,9 @@ namespace SmartCore.DtoHelper
                     RevisonValidTo =  levels.Settings.RevisonValidTo,
                     RevisonValidToDate =  levels.Settings.RevisonValidToDate,
                     RevisonValidToNotify =  levels.Settings.RevisonValidToNotify,
+                    LevelId =  levels.Settings.LevelId,
+                    Described =  levels.Settings.Described,
+                    Instructions =  levels.Settings.Instructions,
 				}
             };
 
@@ -1305,6 +1311,50 @@ namespace SmartCore.DtoHelper
                 CheckListId = recordDto.CheckListId,
                 OptionNumber = recordDto.OptionNumber,
                 Option = recordDto.Option.ItemId
+            };
+        }
+
+
+        public static CAAOperatorDTO ConvertCAA(this Operator oper)
+        {
+            return new CAAOperatorDTO
+            {
+                ItemId = oper.ItemId,
+                IsDeleted = oper.IsDeleted,
+                Updated = oper.Updated,
+                CorrectorId = oper.CorrectorId,
+                Name = oper.Name,
+                LogoType = oper.LogoType,
+                ICAOCode = oper.ICAOCode,
+                Address = oper.Address,
+                Phone = oper.Phone,
+                Fax = oper.Fax,
+                LogoTypeWhite = oper.LogoTypeWhite,
+                Email = oper.Email,
+                LogotypeReportLarge = oper.LogotypeReportLarge,
+                LogotypeReportVeryLarge = oper.LogotypeReportVeryLarge
+            };
+        }
+
+        public static Operator ConvertCAA(this CAAOperatorDTO operdto)
+        {
+            return new Operator()
+            {
+                ItemId = operdto.ItemId,
+                IsDeleted = operdto.IsDeleted,
+                Updated = operdto.Updated,
+                CorrectorId = operdto.CorrectorId,
+                Name = operdto.Name,
+                LogoTypeImageByteView = operdto.LogoType,
+                LogoType = operdto.LogoType,
+                ICAOCode = operdto.ICAOCode,
+                Address = operdto.Address,
+                Phone = operdto.Phone,
+                Fax = operdto.Fax,
+                LogoTypeWhite = operdto.LogoTypeWhite,
+                Email = operdto.Email,
+                LogotypeReportLarge = operdto.LogotypeReportLarge,
+                LogotypeReportVeryLarge = operdto.LogotypeReportVeryLarge
             };
         }
 

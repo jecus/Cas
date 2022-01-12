@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.Operators;
@@ -11,6 +12,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using SmartCore.CAA.Check;
+using SmartCore.CAA.FindingLevel;
 using SmartCore.CAA.Operators;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
@@ -103,9 +105,16 @@ namespace CAS.UI.UICAAControls.CheckList
 
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(loadChild:true));
 
-            foreach (var check in _initialDocumentArray)
+            var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>();
+            
+
+			foreach (var check in _initialDocumentArray)
             {
-                check.Remains = Lifelength.Null;
+                check.Level = levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
+                              FindingLevels.Unknown;
+
+
+				check.Remains = Lifelength.Null;
                 check.Condition = ConditionState.Satisfactory;
 
                 var days = (check.Settings.RevisonValidToDate - DateTime.Today).Days;
@@ -382,9 +391,9 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void ButtonRevisionClick(object sender, EventArgs e)
         {
-			var form = new CheckListRevisionForm(_initialDocumentArray.ToList());
+			var form = new CheckListRevisionForm();
 
-            if (form.ShowDialog(this) == DialogResult.OK)
+            if (form.ShowDialog(this) == DialogResult.OK || form.ShowDialog(this) == DialogResult.Cancel)
                 AnimatedThreadWorker.RunWorkerAsync();
         }
     }
