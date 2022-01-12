@@ -71,11 +71,11 @@ namespace CAS.UI.UICAAControls.CheckList
             this.numericUpNotify = new System.Windows.Forms.NumericUpDown();
             this.dateTimePickeValidTo = new System.Windows.Forms.DateTimePicker();
             this.checkBoxRevisionValidTo = new System.Windows.Forms.CheckBox();
-            this.fileControl = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
             this.metroTextBoxReference = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxDescribed = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxInstructions = new MetroFramework.Controls.MetroTextBox();
             this.comboBoxLevel = new System.Windows.Forms.ComboBox();
+            this.fileControl = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
             metroLabel1 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
@@ -127,11 +127,11 @@ namespace CAS.UI.UICAAControls.CheckList
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Verdana", 9F);
             label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label3.Location = new System.Drawing.Point(5, 460);
+            label3.Location = new System.Drawing.Point(5, 520);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(53, 14);
+            label3.Size = new System.Drawing.Size(58, 14);
             label3.TabIndex = 22;
-            label3.Text = "Section";
+            label3.Text = "Section:";
             label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
@@ -139,7 +139,7 @@ namespace CAS.UI.UICAAControls.CheckList
             label4.AutoSize = true;
             label4.Font = new System.Drawing.Font("Verdana", 9F);
             label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label4.Location = new System.Drawing.Point(5, 443);
+            label4.Location = new System.Drawing.Point(5, 473);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(38, 14);
             label4.TabIndex = 25;
@@ -151,7 +151,7 @@ namespace CAS.UI.UICAAControls.CheckList
             label5.AutoSize = true;
             label5.Font = new System.Drawing.Font("Verdana", 9F);
             label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label5.Location = new System.Drawing.Point(5, 554);
+            label5.Location = new System.Drawing.Point(5, 607);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(62, 14);
             label5.TabIndex = 28;
@@ -163,7 +163,7 @@ namespace CAS.UI.UICAAControls.CheckList
             label6.AutoSize = true;
             label6.Font = new System.Drawing.Font("Verdana", 9F);
             label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label6.Location = new System.Drawing.Point(5, 537);
+            label6.Location = new System.Drawing.Point(5, 567);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(41, 14);
             label6.TabIndex = 31;
@@ -237,9 +237,9 @@ namespace CAS.UI.UICAAControls.CheckList
             label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             label12.Location = new System.Drawing.Point(456, 400);
             label12.Name = "label12";
-            label12.Size = new System.Drawing.Size(101, 14);
+            label12.Size = new System.Drawing.Size(106, 14);
             label12.TabIndex = 300;
-            label12.Text = "Auditor Actions";
+            label12.Text = "Auditor Actions:";
             label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label13
@@ -765,24 +765,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxRevisionValidTo.TabIndex = 309;
             this.checkBoxRevisionValidTo.Text = "Revision:";
             // 
-            // fileControl
-            // 
-            this.fileControl.AutoSize = true;
-            this.fileControl.BackColor = System.Drawing.Color.Transparent;
-            this.fileControl.Description1 = null;
-            this.fileControl.Description2 = null;
-            this.fileControl.Filter = "PDF file (*.pdf)|*.pdf";
-            this.fileControl.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
-            this.fileControl.IconNotEnabled = null;
-            this.fileControl.Location = new System.Drawing.Point(16, 654);
-            this.fileControl.MaximumSize = new System.Drawing.Size(350, 100);
-            this.fileControl.MinimumSize = new System.Drawing.Size(350, 50);
-            this.fileControl.Name = "fileControl";
-            this.fileControl.ShowLinkLabelBrowse = true;
-            this.fileControl.ShowLinkLabelRemove = false;
-            this.fileControl.Size = new System.Drawing.Size(350, 100);
-            this.fileControl.TabIndex = 302;
-            // 
             // metroTextBoxReference
             // 
             // 
@@ -929,11 +911,31 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             // comboBoxLevel
             // 
+            this.comboBoxLevel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxLevel.ForeColor = System.Drawing.Color.DimGray;
             this.comboBoxLevel.FormattingEnabled = true;
             this.comboBoxLevel.Location = new System.Drawing.Point(188, 401);
             this.comboBoxLevel.Name = "comboBoxLevel";
-            this.comboBoxLevel.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxLevel.Size = new System.Drawing.Size(121, 22);
             this.comboBoxLevel.TabIndex = 317;
+            // 
+            // fileControl
+            // 
+            this.fileControl.AutoSize = true;
+            this.fileControl.BackColor = System.Drawing.Color.Transparent;
+            this.fileControl.Description1 = null;
+            this.fileControl.Description2 = null;
+            this.fileControl.Filter = "PDF file (*.pdf)|*.pdf";
+            this.fileControl.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
+            this.fileControl.IconNotEnabled = null;
+            this.fileControl.Location = new System.Drawing.Point(16, 654);
+            this.fileControl.MaximumSize = new System.Drawing.Size(350, 100);
+            this.fileControl.MinimumSize = new System.Drawing.Size(350, 50);
+            this.fileControl.Name = "fileControl";
+            this.fileControl.ShowLinkLabelBrowse = true;
+            this.fileControl.ShowLinkLabelRemove = false;
+            this.fileControl.Size = new System.Drawing.Size(350, 100);
+            this.fileControl.TabIndex = 302;
             // 
             // CheckListForm
             // 

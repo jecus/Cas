@@ -63,6 +63,8 @@ namespace SmartCore.CAA.FindingLevel
 
         public override string ToString()
         {
+            if (ItemId == -1)
+                return LevelName;
             return $"{LevelName}/{LevelClass}";
         }
     }
