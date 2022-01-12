@@ -198,8 +198,10 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 		{
-			
-		}
+            var form = new CheckListForm(_directivesViewer.SelectedItem);
+            if (form.ShowDialog() == DialogResult.OK)
+                AnimatedThreadWorker.RunWorkerAsync();
+        }
 
 		#endregion
 
