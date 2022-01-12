@@ -186,7 +186,13 @@ namespace CAS.UI.UICAAControls.Specialists
 
 		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 		{
-			
+            ReferenceEventArgs refE = new ReferenceEventArgs
+            {
+                TypeOfReflection = ReflectionTypes.DisplayInNew,
+                DisplayerText = "Employee",
+                RequestedEntity = new CAAEmployeeScreen(_directivesViewer.SelectedItem)
+            };
+            InvokeDisplayerRequested(refE);
 		}
 
 		#endregion
