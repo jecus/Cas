@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CAA.Entity.Models.DTO;
 using SmartCore.Auxiliary.Extentions;
+using SmartCore.CAA.FindingLevel;
 using SmartCore.Calculations;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
@@ -95,6 +96,6 @@ namespace SmartCore.CAA.Check
         public string ItemNumber => Settings.ItemNumber;
         public string ItemName => Settings.ItemtName;
         public string Requirement => Settings.Requirement;
-        
+        public FindingLevels Level { get; set; }
     }
 }

@@ -81,7 +81,8 @@ namespace CAS.UI.UICAAControls.CheckList
 
                 _levels.Clear();
                 _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>();
-
+                _currentCheck.Level = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.Settings.LevelId) ??
+                                      FindingLevels.Unknown;
             }
         }
 

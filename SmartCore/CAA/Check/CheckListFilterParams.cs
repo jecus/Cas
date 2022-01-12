@@ -1,4 +1,5 @@
-﻿using SmartCore.Entities.General.Attributes;
+﻿using SmartCore.CAA.FindingLevel;
+using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.CAA.Check
 {
@@ -39,5 +40,8 @@ namespace SmartCore.CAA.Check
 
         [Filter("Requirement", Order = 16)]
         string Requirement { get;  }
+
+        [Filter("Level", Order = 17)]
+        FindingLevels Level { get; set; }
     }
 }
