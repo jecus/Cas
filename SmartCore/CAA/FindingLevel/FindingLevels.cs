@@ -32,11 +32,13 @@ namespace SmartCore.CAA.FindingLevel
         [FormControl(150, "Corrective Action:", 1, Order = 4)]
         [Filter("Corrective Action", Order = 4)]
         [ListViewData("Corrective Action", 4)]
+        [LifeLenghtControlType(LifeLenghtControType.DaysOnly)]
         public Lifelength CorrectiveAction { get; set; }
 
         [FormControl(150, "Final Action:", 1, Order = 5)]
         [Filter("Final Action", Order = 5)]
         [ListViewData("Final Action", 5)]
+        [LifeLenghtControlType(LifeLenghtControType.DaysOnly)]
         public Lifelength FinalAction { get; set; }
 
         [FormControl(150, "Remark:", 1, Order = 6)]

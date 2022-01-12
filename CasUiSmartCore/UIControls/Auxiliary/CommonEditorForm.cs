@@ -943,13 +943,24 @@ namespace CAS.UI.UIControls.Auxiliary
                 case "lifelength":
                     {
                         object val = propertyInfo.GetValue(obj, null);
-                        return new LifelengthViewer
+                        var ll = new LifelengthViewer
                         {
                             Enabled = controlEnabled,
-                            Lifelength = (Lifelength) val,
+                            Lifelength = (Lifelength)val,
                             MinimumSize = new Size(20, 17),
-                            Tag = propertyInfo
+                            Tag = propertyInfo,
+
                         };
+
+                        var controlType =
+                            (LifeLenghtControlTypeAttribute)propertyInfo.GetCustomAttributes(typeof(LifeLenghtControlTypeAttribute), false).FirstOrDefault();
+                        if (controlType != null)
+                        {
+                            if (controlType.ControlType == LifeLenghtControType.DaysOnly)
+                                ll.ShowCalendarOnly = true;
+                        }
+                        
+                        return ll;
                     }
                 case "timespan":
                     {

@@ -673,6 +673,7 @@
     <Compile Include="Entities\General\Attributes\ExcelImportAttribute.cs" />
     <Compile Include="Entities\General\Attributes\FilterAttributes.cs" />
     <Compile Include="Entities\General\Attributes\FormControlAttribute.cs" />
+    <Compile Include="Entities\General\Attributes\LifeLenghtControlType.cs" />
     <Compile Include="Entities\General\Attributes\ListViewDataAttribute.cs" />
     <Compile Include="Entities\General\Attributes\SavableAttribute.cs" />
     <Compile Include="Entities\General\Attributes\ValueAttributes.cs" />
