@@ -28,7 +28,6 @@ namespace SmartCore.CAA.RoutineAudits
 
         public int AuthorId { get; set; }
 
-        [FormControl(350, "Created:", 1, Order = 6, Enabled = false)]
         public DateTime Created { get; set; }
 
 

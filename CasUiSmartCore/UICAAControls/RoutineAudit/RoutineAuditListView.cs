@@ -62,7 +62,6 @@ namespace CAS.UI.UICAAControls.CheckList
 			AddColumn("Type", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.45f));
             AddColumn("Remark", (int)(radGridView1.Width * 0.45f));
-			AddColumn("Create Date", (int)(radGridView1.Width * 0.24f));
             AddColumn("Author", (int)(radGridView1.Width * 0.24f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
@@ -72,7 +71,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		protected override List<CustomCell> GetListViewSubItems(SmartCore.CAA.RoutineAudits.RoutineAudit item)
         {
-            var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
+            var author = GlobalObjects.CaaEnvironment?.GetCorrector(item.AuthorId);
             var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
 
             var subItems = new List<CustomCell>()
@@ -82,8 +81,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 CreateRow(item.Type, item.Type),
                 CreateRow(item.Description, item.Description),
                 CreateRow(item.Remark, item.Remark),
-				CreateRow(item.Created.ToString(), item.Created),
-                CreateRow(author, author),
+                CreateRow($"{author} ({SmartCore.Auxiliary.Convert.GetDateFormat(item.Created)} {item.Created.TimeOfDay.Hours}:{item.Created.TimeOfDay.Minutes}:{item.Created.TimeOfDay.Seconds})", author),
                 CreateRow(corrector, corrector)
 			};
 

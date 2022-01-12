@@ -114,17 +114,36 @@ namespace CAS.UI.UIControls.Users
 			if (Check())
 			{
 				ApplyChanges();
-				GlobalObjects.CasEnvironment.ApiProvider.AddOrUpdateUser(new UserDTO()
-				{
-					ItemId = _user.ItemId,
-					Login = _user.Login,
-					Password = _user.Password,
-					Surname = _user.Surname,
-					Name = _user.Name,
-					UserType = _user.UserType,
-					UiType = _user.UiType,
-					PersonnelId = _user.PersonnelId
-				}); 
+
+                if (GlobalObjects.CasEnvironment != null)
+                {
+                    GlobalObjects.CasEnvironment.ApiProvider.AddOrUpdateUser(new UserDTO()
+                    {
+                        ItemId = _user.ItemId,
+                        Login = _user.Login,
+                        Password = _user.Password,
+                        Surname = _user.Surname,
+                        Name = _user.Name,
+                        UserType = _user.UserType,
+                        UiType = _user.UiType,
+                        PersonnelId = _user.PersonnelId
+                    });
+				}
+                else
+                {
+                    GlobalObjects.CaaEnvironment.ApiProvider.AddOrUpdateUser(new UserDTO()
+                    {
+                        ItemId = _user.ItemId,
+                        Login = _user.Login,
+                        Password = _user.Password,
+                        Surname = _user.Surname,
+                        Name = _user.Name,
+                        UserType = _user.UserType,
+                        UiType = _user.UiType,
+                        PersonnelId = _user.PersonnelId
+                    });
+				}
+				
 				DialogResult = DialogResult.OK;
 				Close();
 			}
