@@ -12,6 +12,8 @@ namespace SmartCore.CAA.FindingLevel
     [Serializable]
     public class FindingLevels : BaseEntityObject, IBaseDictionary
     {
+        
+
         [FormControl(150, "Level Name:", 1, Order = 1)]
         [Filter("Level Name", Order = 1)]
         [ListViewData("Level Name",  1)]
@@ -42,11 +44,26 @@ namespace SmartCore.CAA.FindingLevel
         [ListViewData("Remark", 6)]
         public string Remark { get; set; }
 
+        private static FindingLevels _unknown;
+        public static FindingLevels Unknown =>
+            _unknown ?? (_unknown = new FindingLevels
+            {
+                LevelName = "Unknown",
+                LevelClass = LevelClass.Major,
+                Remark = "Unknown",
+                ItemId = -1
+            });
+
 
         public FindingLevels()
         {
             FinalAction = Lifelength.Zero;
             CorrectiveAction = Lifelength.Zero;
+        }
+
+        public override string ToString()
+        {
+            return $"{LevelName}/{LevelClass}";
         }
     }
 }

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.Check;
+using SmartCore.CAA.FindingLevel;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Files;
@@ -19,6 +21,7 @@ namespace CAS.UI.UICAAControls.CheckList
     {
         private CheckLists _currentCheck;
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
+        private IList<FindingLevels> _levels = new List<FindingLevels>();
 
         #region Constructors
         public CheckListForm()
@@ -74,8 +77,10 @@ namespace CAS.UI.UICAAControls.CheckList
 
                     }
                 }
-
                 _currentCheck.Files = new CommonCollection<ItemFileLink>(links);
+
+                _levels.Clear();
+                _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>();
 
             }
         }
@@ -102,6 +107,17 @@ namespace CAS.UI.UICAAControls.CheckList
             checkBoxRevisionValidTo.Checked = _currentCheck.Settings.RevisonValidTo;
             dateTimePickeValidTo.Value = _currentCheck.Settings.RevisonValidToDate;
             numericUpNotify.Value = _currentCheck.Settings.RevisonValidToNotify;
+
+            metroTextBoxReference.Text = _currentCheck.Settings.Reference;
+            metroTextBoxDescribed.Text = _currentCheck.Settings.Described;
+            metroTextBoxInstructions.Text = _currentCheck.Settings.Instructions;
+
+            comboBoxLevel.Items.Clear();
+            comboBoxLevel.Items.AddRange(_levels.ToArray());
+            comboBoxLevel.Items.Add(FindingLevels.Unknown);
+
+            comboBoxLevel.SelectedItem = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.Settings.LevelId) ??
+                                         FindingLevels.Unknown;
 
             fileControl.UpdateInfo(_currentCheck.File, "Adobe PDF Files|*.pdf",
                 "This record does not contain a file proving the Document. Enclose PDF file to prove the Document.",
@@ -133,6 +149,13 @@ namespace CAS.UI.UICAAControls.CheckList
             _currentCheck.Settings.RevisonValidTo = checkBoxRevisionValidTo.Checked;
             _currentCheck.Settings.RevisonValidToDate = dateTimePickeValidTo.Value;
             _currentCheck.Settings.RevisonValidToNotify = (int) numericUpNotify.Value;
+
+            _currentCheck.Settings.Reference = metroTextBoxReference.Text;
+            _currentCheck.Settings.Described = metroTextBoxDescribed.Text;
+            _currentCheck.Settings.Instructions = metroTextBoxInstructions.Text;
+
+
+            _currentCheck.Settings.LevelId = ((FindingLevels) comboBoxLevel.SelectedItem).ItemId;
 
             if (fileControl.GetChangeStatus())
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
@@ -110,5 +111,18 @@ namespace CAA.Entity.Models.DTO
 
         [JsonProperty("RevisonValidToNotify")]
         public int RevisonValidToNotify { get; set; }
+
+        [JsonProperty("Reference")]
+        public string Reference { get; set; }
+
+        [JsonProperty("Described")]
+        public string Described { get; set; }
+
+        [JsonProperty("Instructions")]
+        public string Instructions { get; set; }
+
+        [JsonProperty("LevelId", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue(-1)]
+        public int LevelId { get; set; }
     }
 }
