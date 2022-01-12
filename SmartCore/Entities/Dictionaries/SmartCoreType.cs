@@ -1,5 +1,6 @@
 ﻿using System;
 using SmartCore.CAA.Check;
+using SmartCore.CAA.RoutineAudits;
 using SmartCore.DataAccesses.AttachedFiles;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
@@ -476,6 +477,7 @@ namespace SmartCore.Entities.Dictionaries
 		public static SmartCoreType ItemsRelation = new SmartCoreType(3077, "ItemsRelation", "ItemsRelation", typeof(ItemsRelation));
 		public static SmartCoreType CheckLists = new SmartCoreType(3078, "CheckLists", "CheckLists", typeof(CheckLists));
 		public static SmartCoreType CheckListRecords = new SmartCoreType(3079, "CheckListRecords", "CheckListRecords", typeof(CheckListRecords));
+		public static SmartCoreType RoutineAudit = new SmartCoreType(3080, "RoutineAudit", "RoutineAudit", typeof(RoutineAudit));
 		
 		/*
          * Методы

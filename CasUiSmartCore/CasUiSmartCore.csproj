@@ -914,6 +914,18 @@
     <Compile Include="UICAAControls\Operators\CAAOperatorlListView.Designer.cs">
       <DependentUpon>CAAOperatorlListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\RoutineAudit\RoutineAuditListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\RoutineAudit\RoutineAuditListView.Designer.cs">
+      <DependentUpon>RoutineAuditListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\RoutineAudit\RoutineAuditListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\RoutineAudit\RoutineAuditListScreen.Designer.cs">
+      <DependentUpon>RoutineAuditListScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\Specialists\CAAPersonnelListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4178,6 +4190,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Operators\CAAOperatorlListScreen.resx">
       <DependentUpon>CAAOperatorlListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\RoutineAudit\RoutineAuditListScreen.resx">
+      <DependentUpon>RoutineAuditListScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Specialists\CAAPersonnelListScreen.resx">

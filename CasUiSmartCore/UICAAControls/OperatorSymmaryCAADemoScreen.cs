@@ -9,6 +9,7 @@ using CAS.UI.UICAAControls.Airacraft;
 using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UICAAControls.Document;
 using CAS.UI.UICAAControls.Operators;
+using CAS.UI.UICAAControls.RoutineAudit;
 using CAS.UI.UICAAControls.Specialists;
 using CAS.UI.UICAAControls.Users;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
@@ -207,6 +208,12 @@ namespace CAS.UI.UICAAControls
         {
             e.DisplayerText = "Root Cause";
             e.RequestedEntity = new CAACommonListScreen(typeof(RootCause));
+        }
+
+        private void LinkRoutineAuditDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = "Routine Audit";
+            e.RequestedEntity = new RoutineAuditListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
         }
     }
 }

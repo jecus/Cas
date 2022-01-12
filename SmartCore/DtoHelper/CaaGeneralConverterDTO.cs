@@ -6,6 +6,7 @@ using SmartCore.Auxiliary;
 using SmartCore.CAA;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
+using SmartCore.CAA.RoutineAudits;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -20,7 +21,43 @@ namespace SmartCore.DtoHelper
     public static  class CaaGeneralConverterDTO
 	{
 
-        public static RootCause ConvertCAA(this RootCauseDTO cause)
+        public static RoutineAudit ConvertCAA(this RoutineAuditDTO audit)
+        {
+            return new RoutineAudit
+			{
+                ItemId = audit.ItemId,
+                IsDeleted = audit.IsDeleted,
+                Updated = audit.Updated,
+                CorrectorId = audit.CorrectorId,
+                Remark = audit.Remark,
+                AuditNumber = audit.AuditNumber,
+                AuthorId = audit.AuthorId,
+                Type = audit.Type,
+                Title = audit.Title,
+                Description = audit.Description,
+                Created = audit.Created,
+            };
+        }
+
+        public static RoutineAuditDTO ConvertCAA(this RoutineAudit audit)
+        {
+            return new RoutineAuditDTO
+			{
+				ItemId = audit.ItemId,
+                IsDeleted = audit.IsDeleted,
+                Updated = audit.Updated,
+                CorrectorId = audit.CorrectorId,
+                Remark = audit.Remark,
+                AuditNumber = audit.AuditNumber,
+                AuthorId = audit.AuthorId,
+                Type = audit.Type,
+                Title = audit.Title,
+                Description = audit.Description,
+                Created = audit.Created,
+			};
+        }
+
+		public static RootCause ConvertCAA(this RootCauseDTO cause)
         {
             return new RootCause
 			{

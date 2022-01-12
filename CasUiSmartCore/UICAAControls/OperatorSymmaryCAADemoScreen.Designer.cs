@@ -73,6 +73,7 @@ namespace CAS.UI.UICAAControls
             this.LinkDepartments = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this._qualityAssuranceReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
 			this.LinkCheckList = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.LinkRoutineAudit = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkInitialOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkPurchaseOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -986,7 +987,7 @@ namespace CAS.UI.UICAAControls
 			this._qualityAssuranceReferenceContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._qualityAssuranceReferenceContainer.Name = "_qualityAssuranceReferenceContainer";
 			this._qualityAssuranceReferenceContainer.ReferenceLink = this.LinkCheckList;
-			this._qualityAssuranceReferenceContainer.ReferenceLink02 = null;
+			this._qualityAssuranceReferenceContainer.ReferenceLink02 = this.LinkRoutineAudit;
 			this._qualityAssuranceReferenceContainer.ReferenceLink03 = null;
 			this._qualityAssuranceReferenceContainer.ReferenceLink04 = null;
 			this._qualityAssuranceReferenceContainer.ReferenceLink05 = null;
@@ -1032,6 +1033,30 @@ namespace CAS.UI.UICAAControls
 			this.LinkCheckList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkCheckList.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             this.LinkCheckList.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkCheckListsDisplayerRequested);
+			// 
+			// LinkRoutineAudit
+			// 
+			this.LinkRoutineAudit.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkRoutineAudit.Displayer = null;
+			this.LinkRoutineAudit.DisplayerText = null;
+			this.LinkRoutineAudit.Entity = null;
+			this.LinkRoutineAudit.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.LinkRoutineAudit.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkRoutineAudit.ImageBackColor = System.Drawing.Color.Transparent;
+			this.LinkRoutineAudit.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.LinkRoutineAudit.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkRoutineAudit.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.LinkRoutineAudit.Location = new System.Drawing.Point(10, 0);
+			this.LinkRoutineAudit.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.LinkRoutineAudit.Name = "LinkCheckList";
+			this.LinkRoutineAudit.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.LinkRoutineAudit.Size = new System.Drawing.Size(188, 20);
+			this.LinkRoutineAudit.Status = AvControls.Statuses.Satisfactory;
+			this.LinkRoutineAudit.TabIndex = 16;
+			this.LinkRoutineAudit.Text = "Routine Audit";
+			this.LinkRoutineAudit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.LinkRoutineAudit.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkRoutineAudit.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkRoutineAuditDisplayerRequested);
             // 
 			// flowLayoutPanelAircrafts
 			// 
@@ -1508,6 +1533,7 @@ namespace CAS.UI.UICAAControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkSchedulePeriod;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkDepartments;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkCheckList;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRoutineAudit;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkInitialOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkDocumentPurchase;
