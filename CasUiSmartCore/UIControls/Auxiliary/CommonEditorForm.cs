@@ -953,13 +953,10 @@ namespace CAS.UI.UIControls.Auxiliary
                         };
 
                         var controlType =
-                            (LifeLenghtControlTypeAttribute)propertyInfo.GetCustomAttributes(typeof(LifeLenghtControlTypeAttribute), false).FirstOrDefault();
+                            (LifeLenghtCalendarOnlyAttribute)propertyInfo.GetCustomAttributes(typeof(LifeLenghtCalendarOnlyAttribute), false).FirstOrDefault();
                         if (controlType != null)
-                        {
-                            if (controlType.ControlType == LifeLenghtControType.DaysOnly)
-                                ll.ShowCalendarOnly = true;
-                        }
-                        
+                            ll.ShowCalendarOnly = true;
+
                         return ll;
                     }
                 case "timespan":
