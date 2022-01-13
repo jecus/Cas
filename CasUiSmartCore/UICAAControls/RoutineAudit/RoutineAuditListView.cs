@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.Interfaces;
+using CAS.UI.UICAAControls.RoutineAudit;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.NewGrid;
@@ -96,7 +97,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		{
 			if (SelectedItem != null)
 			{
-                var form = new CommonEditorForm(SelectedItem);
+                var form = new RoutineAuditForm(SelectedItem);
                 if (form.ShowDialog() == DialogResult.OK)
                     _animatedThreadWorker.RunWorkerAsync();
                 e.Cancel = true;

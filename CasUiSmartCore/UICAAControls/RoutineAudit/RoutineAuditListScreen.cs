@@ -163,7 +163,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
 		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 		{
-            var form = new CommonEditorForm(_directivesViewer.SelectedItem);
+            var form = new RoutineAuditForm(_directivesViewer.SelectedItem);
             if (form.ShowDialog() == DialogResult.OK)
                 AnimatedThreadWorker.RunWorkerAsync();
         }
@@ -262,7 +262,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-            var form = new CommonEditorForm(new SmartCore.CAA.RoutineAudits.RoutineAudit()
+            var form = new RoutineAuditForm(new SmartCore.CAA.RoutineAudits.RoutineAudit()
             {
 				Created = DateTime.Now,
 				AuthorId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId
