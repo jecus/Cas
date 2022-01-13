@@ -235,5 +235,17 @@ namespace CAS.UI.UICAAControls.CheckList
             DialogResult = DialogResult.Cancel;
             Close();
         }
+
+        private void checkBoxRevisionValidTo_CheckedChanged(object sender, EventArgs e)
+        {
+            metroTextBoxRevision.Enabled = dateTimePickerRevisionDate.Enabled =
+                dateTimePickerRevisionEff.Enabled = checkBoxRevisionValidTo.Checked;
+
+            metroTextBoxEditionNumber.Enabled =
+                dateTimePickerEditionDate.Enabled =
+                    dateTimePickerEditionEff.Enabled =
+                        !checkBoxRevisionValidTo.Checked;
+
+        }
     }
 }

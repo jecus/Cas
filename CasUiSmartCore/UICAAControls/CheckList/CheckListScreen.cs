@@ -120,7 +120,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 var days = (check.Settings.RevisonValidToDate - DateTime.Today).Days;
                 var editionDays = 0;
 				if (!check.Settings.RevisonValidTo)
-                    editionDays = (check.Settings.EffRevisonDate - DateTime.Today).Days;
+                    editionDays = (check.Settings.EditionDate - DateTime.Today).Days;
                 else editionDays = (check.Settings.RevisonDate - DateTime.Today).Days;
 
                 check.Remains = new Lifelength(days - editionDays, null, null);

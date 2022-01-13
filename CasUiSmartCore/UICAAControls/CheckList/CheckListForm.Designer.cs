@@ -812,6 +812,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxRevisionValidTo.Size = new System.Drawing.Size(88, 16);
             this.checkBoxRevisionValidTo.TabIndex = 309;
             this.checkBoxRevisionValidTo.Text = "Revision:";
+            this.checkBoxRevisionValidTo.CheckedChanged += new System.EventHandler(this.checkBoxRevisionValidTo_CheckedChanged);
             // 
             // metroTextBoxReference
             // 
