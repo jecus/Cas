@@ -127,7 +127,7 @@ namespace CAS.UI.UICAAControls.CheckList
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Verdana", 9F);
             label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label3.Location = new System.Drawing.Point(5, 520);
+            label3.Location = new System.Drawing.Point(5, 473);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(58, 14);
             label3.TabIndex = 22;
@@ -139,7 +139,7 @@ namespace CAS.UI.UICAAControls.CheckList
             label4.AutoSize = true;
             label4.Font = new System.Drawing.Font("Verdana", 9F);
             label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label4.Location = new System.Drawing.Point(5, 473);
+            label4.Location = new System.Drawing.Point(5, 520);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(38, 14);
             label4.TabIndex = 25;
@@ -151,7 +151,7 @@ namespace CAS.UI.UICAAControls.CheckList
             label5.AutoSize = true;
             label5.Font = new System.Drawing.Font("Verdana", 9F);
             label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label5.Location = new System.Drawing.Point(5, 607);
+            label5.Location = new System.Drawing.Point(5, 567);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(62, 14);
             label5.TabIndex = 28;
@@ -163,7 +163,7 @@ namespace CAS.UI.UICAAControls.CheckList
             label6.AutoSize = true;
             label6.Font = new System.Drawing.Font("Verdana", 9F);
             label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label6.Location = new System.Drawing.Point(5, 567);
+            label6.Location = new System.Drawing.Point(5, 614);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(41, 14);
             label6.TabIndex = 31;
@@ -265,6 +265,54 @@ namespace CAS.UI.UICAAControls.CheckList
             label14.TabIndex = 308;
             label14.Text = "Notify (days):";
             label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Verdana", 9F);
+            label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label2.Location = new System.Drawing.Point(5, 110);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(75, 14);
+            label2.TabIndex = 310;
+            label2.Text = "Reference:";
+            label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new System.Drawing.Font("Verdana", 9F);
+            label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label15.Location = new System.Drawing.Point(5, 139);
+            label15.Name = "label15";
+            label15.Size = new System.Drawing.Size(94, 28);
+            label15.TabIndex = 312;
+            label15.Text = "Pre-described\r\nFinding:";
+            label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new System.Drawing.Font("Verdana", 9F);
+            label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label16.Location = new System.Drawing.Point(5, 209);
+            label16.Name = "label16";
+            label16.Size = new System.Drawing.Size(87, 14);
+            label16.TabIndex = 314;
+            label16.Text = "Instructions:";
+            label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new System.Drawing.Font("Verdana", 9F);
+            label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label17.Location = new System.Drawing.Point(81, 403);
+            label17.Name = "label17";
+            label17.Size = new System.Drawing.Size(45, 14);
+            label17.TabIndex = 316;
+            label17.Text = "Level:";
+            label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // metroTextSource
             // 
@@ -797,18 +845,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxReference.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxReference.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Verdana", 9F);
-            label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label2.Location = new System.Drawing.Point(5, 110);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(75, 14);
-            label2.TabIndex = 310;
-            label2.Text = "Reference:";
-            label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // metroTextBoxDescribed
             // 
             // 
@@ -841,18 +877,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxDescribed.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxDescribed.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Font = new System.Drawing.Font("Verdana", 9F);
-            label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label15.Location = new System.Drawing.Point(5, 139);
-            label15.Name = "label15";
-            label15.Size = new System.Drawing.Size(94, 28);
-            label15.TabIndex = 312;
-            label15.Text = "Pre-described\r\nFinding:";
-            label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // metroTextBoxInstructions
             // 
             // 
@@ -884,30 +908,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxInstructions.UseSelectable = true;
             this.metroTextBoxInstructions.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxInstructions.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Font = new System.Drawing.Font("Verdana", 9F);
-            label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label16.Location = new System.Drawing.Point(5, 209);
-            label16.Name = "label16";
-            label16.Size = new System.Drawing.Size(87, 14);
-            label16.TabIndex = 314;
-            label16.Text = "Instructions:";
-            label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Font = new System.Drawing.Font("Verdana", 9F);
-            label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label17.Location = new System.Drawing.Point(81, 403);
-            label17.Name = "label17";
-            label17.Size = new System.Drawing.Size(45, 14);
-            label17.TabIndex = 316;
-            label17.Text = "Level:";
-            label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // comboBoxLevel
             // 
