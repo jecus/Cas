@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
+using CAS.UI.UICAAControls;
 using CAS.UI.UIControls.AircraftsControls;
 using CAS.UI.UIControls.OpepatorsControls;
 using CAS.UI.UIControls.StoresControls;
@@ -449,7 +450,9 @@ namespace CAS.UI.UIControls.Auxiliary
             {
                 e.DisplayerText = _currentOperator.Name;
 #if DEBUG
-                e.RequestedEntity = new OperatorSymmaryDemoScreen(_currentOperator);
+                if(GlobalObjects.CasEnvironment!=null)
+                    e.RequestedEntity = new OperatorSymmaryDemoScreen(_currentOperator);
+                else e.RequestedEntity = new OperatorSymmaryCAADemoScreen(_currentOperator);
 #else
                 e.RequestedEntity = new OperatorSymmaryDemoScreen(_currentOperator);
 #endif

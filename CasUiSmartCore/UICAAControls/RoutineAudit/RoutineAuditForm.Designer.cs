@@ -52,6 +52,66 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Verdana", 9F);
+            label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label2.Location = new System.Drawing.Point(1043, 63);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(62, 14);
+            label2.TabIndex = 339;
+            label2.Text = "Audit №:";
+            label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Verdana", 9F);
+            label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label1.Location = new System.Drawing.Point(1043, 92);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(41, 14);
+            label1.TabIndex = 341;
+            label1.Text = "Type:";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Verdana", 9F);
+            label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label3.Location = new System.Drawing.Point(1043, 121);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(38, 14);
+            label3.TabIndex = 343;
+            label3.Text = "Title:";
+            label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Verdana", 9F);
+            label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label4.Location = new System.Drawing.Point(1043, 150);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(82, 14);
+            label4.TabIndex = 345;
+            label4.Text = "Description:";
+            label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new System.Drawing.Font("Verdana", 9F);
+            label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label5.Location = new System.Drawing.Point(1043, 251);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(59, 14);
+            label5.TabIndex = 347;
+            label5.Text = "Remark:";
+            label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // ButtonDelete
             // 
             this.ButtonDelete.ActiveBackColor = System.Drawing.Color.Transparent;
@@ -202,18 +262,6 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             this.metroTextBoxAudit.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxAudit.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Verdana", 9F);
-            label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label2.Location = new System.Drawing.Point(1043, 63);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(62, 14);
-            label2.TabIndex = 339;
-            label2.Text = "Audit №:";
-            label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // metroTextBoxType
             // 
             // 
@@ -245,18 +293,6 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             this.metroTextBoxType.UseSelectable = true;
             this.metroTextBoxType.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxType.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Verdana", 9F);
-            label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label1.Location = new System.Drawing.Point(1043, 92);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(41, 14);
-            label1.TabIndex = 341;
-            label1.Text = "Type:";
-            label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // metroTextBoxTitle
             // 
@@ -290,18 +326,6 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             this.metroTextBoxTitle.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxTitle.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Verdana", 9F);
-            label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label3.Location = new System.Drawing.Point(1043, 121);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(38, 14);
-            label3.TabIndex = 343;
-            label3.Text = "Title:";
-            label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // metroTextBoxDescription
             // 
             // 
@@ -333,18 +357,6 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             this.metroTextBoxDescription.UseSelectable = true;
             this.metroTextBoxDescription.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxDescription.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new System.Drawing.Font("Verdana", 9F);
-            label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label4.Location = new System.Drawing.Point(1043, 150);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(82, 14);
-            label4.TabIndex = 345;
-            label4.Text = "Description:";
-            label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // metroTextBoxRemark
             // 
@@ -378,18 +390,6 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             this.metroTextBoxRemark.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxRemark.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new System.Drawing.Font("Verdana", 9F);
-            label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label5.Location = new System.Drawing.Point(1043, 251);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(59, 14);
-            label5.TabIndex = 347;
-            label5.Text = "Remark:";
-            label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // RoutineAuditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,6 +414,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             this.Name = "RoutineAuditForm";
             this.Resizable = false;
             this.Text = "RoutineAuditForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RoutineAuditForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

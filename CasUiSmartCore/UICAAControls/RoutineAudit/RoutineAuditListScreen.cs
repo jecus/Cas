@@ -269,7 +269,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             });
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
-			e.Cancel = true;
+            e.Cancel = true;
         }
 
 		#endregion

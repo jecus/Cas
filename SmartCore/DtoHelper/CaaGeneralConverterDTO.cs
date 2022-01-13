@@ -21,7 +21,33 @@ namespace SmartCore.DtoHelper
     public static  class CaaGeneralConverterDTO
 	{
 
-        public static RoutineAudit ConvertCAA(this RoutineAuditDTO audit)
+        public static RoutineAuditRecord ConvertCAA(this RoutineAuditRecordDTO audit)
+        {
+            return new RoutineAuditRecord
+			{
+                ItemId = audit.ItemId,
+                IsDeleted = audit.IsDeleted,
+                Updated = audit.Updated,
+                CorrectorId = audit.CorrectorId,
+                CheckListId = audit.CheckListId,
+                RoutineAuditId = audit.RoutineAuditId,
+            };
+        }
+
+        public static RoutineAuditRecordDTO ConvertCAA(this RoutineAuditRecord audit)
+        {
+            return new RoutineAuditRecordDTO
+			{
+				ItemId = audit.ItemId,
+                IsDeleted = audit.IsDeleted,
+                Updated = audit.Updated,
+                CorrectorId = audit.CorrectorId,
+                CheckListId = audit.CheckListId,
+                RoutineAuditId = audit.RoutineAuditId,
+			};
+        }
+
+		public static RoutineAudit ConvertCAA(this RoutineAuditDTO audit)
         {
             return new RoutineAudit
 			{
@@ -1382,7 +1408,7 @@ namespace SmartCore.DtoHelper
                 Updated = operdto.Updated,
                 CorrectorId = operdto.CorrectorId,
                 Name = operdto.Name,
-                LogoTypeImageByteView = operdto.LogoType,
+                LogoTypeImageByteView = operdto.LogoTypeWhite,
                 LogoType = operdto.LogoType,
                 ICAOCode = operdto.ICAOCode,
                 Address = operdto.Address,

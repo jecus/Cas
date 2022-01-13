@@ -252,14 +252,12 @@ namespace SmartCore.Entities.General
 
         #region public Byte[] LogoTypeImageByteView { get; set; }
 
-        private Byte[] _logoTypeImageByteView;
-
         public Byte[] LogoTypeImageByteView
         {
-            get {return _logoTypeImageByteView; }
+            get { return _logoType ?? (_logoType = new byte[0]); }
             set
             {
-                _logoTypeImageByteView = value;
+                _logoType = value;
                 OnPropertyChanged("LogoTypeImageByteView");
             }
         }

@@ -101,6 +101,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 if (form.ShowDialog() == DialogResult.OK)
                     _animatedThreadWorker.RunWorkerAsync();
                 e.Cancel = true;
+
 			}
 		}
 		#endregion

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using CAS.Entity.Models.DTO.General;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
@@ -62,6 +63,10 @@ namespace CAS.UI.UIControls.OpepatorsControls
         {
             if(CurrentOperator == null)return;
 
+            if (GlobalObjects.CasEnvironment != null)
+               CurrentOperator =  GlobalObjects.CasEnvironment.NewLoader.GetObjectById<OperatorDTO, Operator>(CurrentOperator.ItemId);
+            else CurrentOperator = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<OperatorDTO, Operator>(CurrentOperator.ItemId);
+
             OperatorControl.CurrentOperator = CurrentOperator;
         }
 
@@ -83,7 +88,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
                 try
                 {
-                        GlobalObjects.NewKeeper.Save(CurrentOperator);
+                    GlobalObjects.NewKeeper.Save(CurrentOperator);
                 }
                 catch (Exception ex)
                 {
@@ -161,13 +166,15 @@ namespace CAS.UI.UIControls.OpepatorsControls
             {
                 if (MessageBox.Show("All unsaved data will be lost. Are you sure you want to continue?", (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
-                    OperatorControl.UpdateInformation();
+                    UpdateInformation();
                 }
             }
             else
             {
-                OperatorControl.UpdateInformation();
+                UpdateInformation();
             }
+
+            
         }
 
         #endregion
