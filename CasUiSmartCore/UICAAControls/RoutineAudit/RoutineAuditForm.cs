@@ -189,7 +189,8 @@ namespace CAS.UI.UICAAControls.RoutineAudit
                     _addedChecks.Add(item);
 
                     var delete = _records.FirstOrDefault(i => i.CheckListId == item.ItemId);
-                    GlobalObjects.CaaEnvironment.NewKeeper.Delete(delete);
+                    if(delete != null)
+                        GlobalObjects.CaaEnvironment.NewKeeper.Delete(delete);
                 }
 
                 _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
