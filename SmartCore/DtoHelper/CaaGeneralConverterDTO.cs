@@ -1288,6 +1288,8 @@ namespace SmartCore.DtoHelper
 					LevelId =  levels.Settings.LevelId,
 					Described =  levels.Settings.Described,
                     Instructions =  levels.Settings.Instructions,
+                    MH =  levels.Settings.MH,
+                    Phase =  levels.Settings.Phase,
 				}
             };
 
@@ -1329,6 +1331,8 @@ namespace SmartCore.DtoHelper
                     LevelId =  levels.Settings.LevelId,
                     Described =  levels.Settings.Described,
                     Instructions =  levels.Settings.Instructions,
+                    MH =  levels.Settings.MH,
+                    Phase =  levels.Settings.Phase,
 				}
             };
 

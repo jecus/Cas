@@ -40,6 +40,8 @@ namespace CAS.UI.UICAAControls.CheckList
             System.Windows.Forms.Label metroLabel1;
             System.Windows.Forms.Label label2;
             System.Windows.Forms.Label label17;
+            System.Windows.Forms.Label label19;
+            System.Windows.Forms.Label label18;
             this.checkBoxRevisionValidTo = new System.Windows.Forms.CheckBox();
             this.numericUpNotify = new System.Windows.Forms.NumericUpDown();
             this.dateTimePickeValidTo = new System.Windows.Forms.DateTimePicker();
@@ -65,6 +67,10 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxCheck = new System.Windows.Forms.CheckBox();
             this.checkBoxNotify = new System.Windows.Forms.CheckBox();
             this.checkBoxLevel = new System.Windows.Forms.CheckBox();
+            this.dateTimePickerMH = new System.Windows.Forms.DateTimePicker();
+            this.comboBoxPhase = new System.Windows.Forms.ComboBox();
+            this.checkBoxPhase = new System.Windows.Forms.CheckBox();
+            this.checkBoxMH = new System.Windows.Forms.CheckBox();
             label14 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
             label10 = new System.Windows.Forms.Label();
@@ -74,6 +80,8 @@ namespace CAS.UI.UICAAControls.CheckList
             metroLabel1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label17 = new System.Windows.Forms.Label();
+            label19 = new System.Windows.Forms.Label();
+            label18 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).BeginInit();
             this.SuspendLayout();
             // 
@@ -582,11 +590,86 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxLevel.TabIndex = 344;
             this.checkBoxLevel.CheckedChanged += new System.EventHandler(this.checkBoxLevel_CheckedChanged);
             // 
+            // dateTimePickerMH
+            // 
+            this.dateTimePickerMH.CalendarForeColor = System.Drawing.Color.DimGray;
+            this.dateTimePickerMH.CustomFormat = "HH:mm";
+            this.dateTimePickerMH.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.dateTimePickerMH.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerMH.Location = new System.Drawing.Point(1248, 313);
+            this.dateTimePickerMH.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
+            this.dateTimePickerMH.Name = "dateTimePickerMH";
+            this.dateTimePickerMH.ShowUpDown = true;
+            this.dateTimePickerMH.Size = new System.Drawing.Size(119, 20);
+            this.dateTimePickerMH.TabIndex = 348;
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new System.Drawing.Font("Verdana", 9F);
+            label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label19.Location = new System.Drawing.Point(1141, 320);
+            label19.Name = "label19";
+            label19.Size = new System.Drawing.Size(31, 14);
+            label19.TabIndex = 347;
+            label19.Text = "MH:";
+            label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // comboBoxPhase
+            // 
+            this.comboBoxPhase.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxPhase.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxPhase.FormattingEnabled = true;
+            this.comboBoxPhase.Location = new System.Drawing.Point(1248, 285);
+            this.comboBoxPhase.Name = "comboBoxPhase";
+            this.comboBoxPhase.Size = new System.Drawing.Size(121, 22);
+            this.comboBoxPhase.TabIndex = 346;
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Font = new System.Drawing.Font("Verdana", 9F);
+            label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label18.Location = new System.Drawing.Point(1141, 287);
+            label18.Name = "label18";
+            label18.Size = new System.Drawing.Size(51, 14);
+            label18.TabIndex = 345;
+            label18.Text = "Phase:";
+            label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // checkBoxPhase
+            // 
+            this.checkBoxPhase.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxPhase.Font = new System.Drawing.Font("Verdana", 9F);
+            this.checkBoxPhase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.checkBoxPhase.Location = new System.Drawing.Point(1117, 287);
+            this.checkBoxPhase.Name = "checkBoxPhase";
+            this.checkBoxPhase.Size = new System.Drawing.Size(18, 16);
+            this.checkBoxPhase.TabIndex = 349;
+            this.checkBoxPhase.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // checkBoxMH
+            // 
+            this.checkBoxMH.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxMH.Font = new System.Drawing.Font("Verdana", 9F);
+            this.checkBoxMH.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.checkBoxMH.Location = new System.Drawing.Point(1117, 318);
+            this.checkBoxMH.Name = "checkBoxMH";
+            this.checkBoxMH.Size = new System.Drawing.Size(18, 16);
+            this.checkBoxMH.TabIndex = 350;
+            this.checkBoxMH.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
             // CheckListRevisionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1518, 703);
+            this.Controls.Add(this.checkBoxMH);
+            this.Controls.Add(this.checkBoxPhase);
+            this.Controls.Add(this.dateTimePickerMH);
+            this.Controls.Add(label19);
+            this.Controls.Add(this.comboBoxPhase);
+            this.Controls.Add(label18);
             this.Controls.Add(this.checkBoxLevel);
             this.Controls.Add(this.checkBoxNotify);
             this.Controls.Add(this.checkBoxCheck);
@@ -658,5 +741,9 @@ namespace CAS.UI.UICAAControls.CheckList
         private System.Windows.Forms.CheckBox checkBoxCheck;
         private System.Windows.Forms.CheckBox checkBoxNotify;
         private System.Windows.Forms.CheckBox checkBoxLevel;
+        private System.Windows.Forms.DateTimePicker dateTimePickerMH;
+        private System.Windows.Forms.ComboBox comboBoxPhase;
+        private System.Windows.Forms.CheckBox checkBoxPhase;
+        private System.Windows.Forms.CheckBox checkBoxMH;
     }
 }

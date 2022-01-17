@@ -76,6 +76,13 @@ namespace CAS.UI.UICAAControls.CheckList
             comboBoxLevel.Items.AddRange(_levels.ToArray());
             comboBoxLevel.Items.Add(FindingLevels.Unknown);
 
+
+            var phase = new List<int> { 1, 2, 3, 4, 5, 6 };
+            comboBoxPhase.Items.Clear();
+            foreach (var i in phase)
+                comboBoxPhase.Items.Add(i);
+            comboBoxPhase.SelectedItem = 1;
+
             comboBoxLevel.SelectedItem = FindingLevels.Unknown;
             _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
             _updateChecks.Clear();
@@ -109,6 +116,10 @@ namespace CAS.UI.UICAAControls.CheckList
                     checks.Settings.Reference = metroTextBoxReference.Text;
                 if(checkBoxLevel.Checked)
                     checks.Settings.LevelId = ((FindingLevels)comboBoxLevel.SelectedItem).ItemId;
+                if (checkBoxPhase.Checked)
+                    checks.Settings.Phase = (int)comboBoxPhase.SelectedItem;
+                if (checkBoxMH.Checked)
+                    checks.Settings.MH = dateTimePickerMH.Value;
             }
         }
 
@@ -132,6 +143,8 @@ namespace CAS.UI.UICAAControls.CheckList
             checkBoxRevisionValidTo.Enabled =
             dateTimePickeValidTo.Enabled =
             numericUpNotify.Enabled =
+                comboBoxPhase.Enabled =
+                    dateTimePickerMH.Enabled =
             metroTextBoxReference.Enabled =
                 comboBoxLevel.Enabled = state;
         }
@@ -150,6 +163,8 @@ namespace CAS.UI.UICAAControls.CheckList
             numericUpNotify.Value = 0;
             metroTextBoxReference.Text = "";
             comboBoxLevel.SelectedItem = FindingLevels.Unknown;
+            comboBoxPhase.SelectedItem = 1;
+            dateTimePickerMH.Value = new DateTime(2020, 1, 1, 0, 0, 0);
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
@@ -262,6 +277,16 @@ namespace CAS.UI.UICAAControls.CheckList
         private void CheckListRevisionForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            comboBoxPhase.Enabled = checkBoxLevel.Checked;
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePickerMH.Enabled = checkBoxLevel.Checked;
         }
     }
 }

@@ -124,5 +124,12 @@ namespace CAA.Entity.Models.DTO
         [JsonProperty("LevelId", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(-1)]
         public int LevelId { get; set; }
+
+        [JsonProperty("Phase", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue(1)]
+        public int Phase { get; set; }
+
+        [JsonProperty("MH")]
+        public DateTime MH { get; set; }
     }
 }

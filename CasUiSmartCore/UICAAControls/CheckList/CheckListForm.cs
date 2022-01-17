@@ -9,11 +9,13 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
+using SmartCore.Auxiliary;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Files;
+using DateTime = System.DateTime;
 
 namespace CAS.UI.UICAAControls.CheckList
 {
@@ -112,6 +114,24 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxReference.Text = _currentCheck.Settings.Reference;
             metroTextBoxDescribed.Text = _currentCheck.Settings.Described;
             metroTextBoxInstructions.Text = _currentCheck.Settings.Instructions;
+            
+            
+            
+            
+            if(DateTimeExtend.GetCASMinDateTime() <= _currentCheck.Settings.MH)
+                dateTimePickerMH.Value = _currentCheck.Settings.MH;
+            else
+            {
+                var date = new DateTime(2020,1,1,0,0,0);
+                dateTimePickerMH.Value = date;
+            }
+
+            var phase = new List<int> { 1, 2, 3, 4, 5, 6 };
+            comboBoxPhase.Items.Clear();
+            foreach (var i in phase)
+                comboBoxPhase.Items.Add(i);
+            comboBoxPhase.SelectedItem = _currentCheck.Settings.Phase;
+
 
             comboBoxLevel.Items.Clear();
             comboBoxLevel.Items.AddRange(_levels.ToArray());
@@ -157,6 +177,8 @@ namespace CAS.UI.UICAAControls.CheckList
 
 
             _currentCheck.Settings.LevelId = ((FindingLevels) comboBoxLevel.SelectedItem).ItemId;
+            _currentCheck.Settings.Phase = (int)comboBoxPhase.SelectedItem;
+            _currentCheck.Settings.MH = dateTimePickerMH.Value;
 
             if (fileControl.GetChangeStatus())
             {
