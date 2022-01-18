@@ -6,6 +6,7 @@ using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.Activity;
 using CAS.UI.UICAAControls.Airacraft;
+using CAS.UI.UICAAControls.Audit;
 using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UICAAControls.Document;
 using CAS.UI.UICAAControls.Operators;
@@ -214,6 +215,12 @@ namespace CAS.UI.UICAAControls
         {
             e.DisplayerText = "Routine Audit";
             e.RequestedEntity = new RoutineAuditListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+        }
+
+        private void LinkAuditDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = "Audit";
+            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
         }
     }
 }

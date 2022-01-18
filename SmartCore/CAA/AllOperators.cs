@@ -314,7 +314,7 @@ namespace SmartCore.CAA
 
         public override string ToString()
         {
-            return FullName;
+            return !string.IsNullOrEmpty(FullName) ? FullName : ShortName;
         }
     }
 }

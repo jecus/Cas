@@ -981,7 +981,7 @@ namespace CAS.UI.UICAAControls.CheckList
             // dateTimePickerMH
             // 
             this.dateTimePickerMH.CalendarForeColor = System.Drawing.Color.DimGray;
-            this.dateTimePickerMH.CustomFormat = "hh:mm";
+            this.dateTimePickerMH.CustomFormat = "HH:mm";
             this.dateTimePickerMH.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.dateTimePickerMH.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerMH.Location = new System.Drawing.Point(188, 457);

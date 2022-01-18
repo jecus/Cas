@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Abstractions;
+using Entity.Abstractions.Attributte;
 using Newtonsoft.Json;
 
 namespace CAA.Entity.Models.DTO
 {
     [Table("AllOperators", Schema = "dbo")]
+    [Condition("IsDeleted", 0)]
     public class AllOperatorsDTO : BaseEntity
     {
         [Column("FullName"), MaxLength(200)]

@@ -73,6 +73,7 @@ namespace CAS.UI.UICAAControls
             this.LinkDepartments = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this._qualityAssuranceReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
 			this.LinkCheckList = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.LinkAudit = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkRoutineAudit = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkInitialOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -988,7 +989,7 @@ namespace CAS.UI.UICAAControls
 			this._qualityAssuranceReferenceContainer.Name = "_qualityAssuranceReferenceContainer";
 			this._qualityAssuranceReferenceContainer.ReferenceLink = this.LinkCheckList;
 			this._qualityAssuranceReferenceContainer.ReferenceLink02 = this.LinkRoutineAudit;
-			this._qualityAssuranceReferenceContainer.ReferenceLink03 = null;
+			this._qualityAssuranceReferenceContainer.ReferenceLink03 = this.LinkAudit;
 			this._qualityAssuranceReferenceContainer.ReferenceLink04 = null;
 			this._qualityAssuranceReferenceContainer.ReferenceLink05 = null;
 			this._qualityAssuranceReferenceContainer.ReferenceLink06 = null;
@@ -1033,6 +1034,30 @@ namespace CAS.UI.UICAAControls
 			this.LinkCheckList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkCheckList.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             this.LinkCheckList.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkCheckListsDisplayerRequested);
+            // 
+			// LinkCheckList
+			// 
+			this.LinkAudit.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkAudit.Displayer = null;
+			this.LinkAudit.DisplayerText = null;
+			this.LinkAudit.Entity = null;
+			this.LinkAudit.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.LinkAudit.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkAudit.ImageBackColor = System.Drawing.Color.Transparent;
+			this.LinkAudit.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.LinkAudit.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkAudit.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.LinkAudit.Location = new System.Drawing.Point(10, 0);
+			this.LinkAudit.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.LinkAudit.Name = "LinkAudit";
+			this.LinkAudit.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.LinkAudit.Size = new System.Drawing.Size(188, 20);
+			this.LinkAudit.Status = AvControls.Statuses.Satisfactory;
+			this.LinkAudit.TabIndex = 16;
+			this.LinkAudit.Text = "Audit";
+			this.LinkAudit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.LinkAudit.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkAudit.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkAuditDisplayerRequested);
 			// 
 			// LinkRoutineAudit
 			// 
@@ -1534,6 +1559,7 @@ namespace CAS.UI.UICAAControls
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkDepartments;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkCheckList;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRoutineAudit;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkAudit;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkInitialOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkDocumentPurchase;

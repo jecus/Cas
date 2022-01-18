@@ -231,18 +231,6 @@ namespace SmartCore.Entities.General.WorkPackage
 			}
 		}
 
-		/// <summary>
-		/// Представление даты создания рабочего пакета для списка
-		/// </summary>
-		[ListViewData(0.1f, "Create Date", 6)]
-		public DateTime? ListViewCreateDate
-		{
-			get
-			{
-				if (_createDate < (DateTimeExtend.GetCASMinDateTime())) return null;
-				return _createDate;
-			}
-		}
 		#endregion
 
 		#region public DateTime OpeningDate { get; set; }
@@ -266,20 +254,7 @@ namespace SmartCore.Entities.General.WorkPackage
 				}
 			}
 		}
-
-		/// <summary>
-		/// Представление даты открытия рабочего пакета для списка
-		/// </summary>
-		[ListViewData(0.1f, "Opening date", 7)]
-		public DateTime? ListViewOpeningDate
-		{
-			get
-			{
-				if (_openingDate < (DateTimeExtend.GetCASMinDateTime())) return null;
-				return _openingDate;
-			}
-		}
-		#endregion
+        #endregion
 
 		#region public DateTime PublishingDate { get; set; }
 
@@ -300,19 +275,6 @@ namespace SmartCore.Entities.General.WorkPackage
 				{
 					_publishingDate = value < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : value;
 				}
-			}
-		}
-
-		/// <summary>
-		/// Представление даты публикации рабочего пакета для списка
-		/// </summary>
-		[ListViewData(0.1f, "Publishing date", 8)]
-		public DateTime? ListViewPublishingDate
-		{
-			get
-			{
-				if (_status != WorkPackageStatus.Opened && _publishingDate >= (DateTimeExtend.GetCASMinDateTime())) return _publishingDate;
-				return null;
 			}
 		}
 

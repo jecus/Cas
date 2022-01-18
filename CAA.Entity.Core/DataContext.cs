@@ -40,6 +40,7 @@ namespace CAA.Entity.Core
         #region dbo
 
         public DbSet<CAAAircraftDTO> AircraftDtos { get; set; }
+        public DbSet<CAAAuditDTO> CAAAuditDtos { get; set; }
         public DbSet<RootCauseDTO> RootCauseDtos { get; set; }
         public DbSet<CAAMaintenanceProgramChangeRecordDTO> MaintenanceProgramChangeRecordDtos { get; set; }
         public DbSet<AllOperatorsDTO> AllOperatorsDtos { get; set; }

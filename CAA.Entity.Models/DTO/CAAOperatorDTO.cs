@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Abstractions;
+using Entity.Abstractions.Attributte;
 
 namespace CAA.Entity.Models.DTO
 {
 	[Table("Operators", Schema = "dbo")]
-	
+    [Condition("IsDeleted", 0)]
+
 	public class CAAOperatorDTO : BaseEntity
 	{
 		

@@ -9,7 +9,7 @@ using Entity.Abstractions.Attributte;
 namespace CAA.Entity.Models.DTO
 {
 	[Table("Aircrafts", Schema = "dbo")]
-	
+    [Condition("IsDeleted", 0)]
 	public class CAAAircraftDTO : BaseEntity
 	{
 		

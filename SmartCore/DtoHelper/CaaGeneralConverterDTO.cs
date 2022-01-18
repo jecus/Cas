@@ -4,6 +4,7 @@ using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using SmartCore.Auxiliary;
 using SmartCore.CAA;
+using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.CAA.RoutineAudits;
@@ -21,7 +22,41 @@ namespace SmartCore.DtoHelper
     public static  class CaaGeneralConverterDTO
 	{
 
-        public static RoutineAuditRecord ConvertCAA(this RoutineAuditRecordDTO audit)
+        public static CAAAudit ConvertCAA(this CAAAuditDTO audit)
+        {
+            return new CAAAudit
+			{
+                ItemId = audit.ItemId,
+                IsDeleted = audit.IsDeleted,
+                Updated = audit.Updated,
+                CorrectorId = audit.CorrectorId,
+                AuditNumber =  audit.AuditNumber,
+                Description =  audit.Description,
+                OperatorId =  audit.OperatorId,
+
+                Title =  audit.Title,
+                SettingsJSON = audit.SettingsJSON,
+			};
+        }
+
+        public static CAAAuditDTO ConvertCAA(this CAAAudit audit)
+        {
+            return new CAAAuditDTO
+			{
+                ItemId = audit.ItemId,
+                IsDeleted = audit.IsDeleted,
+                Updated = audit.Updated,
+                CorrectorId = audit.CorrectorId,
+				AuditNumber =  audit.AuditNumber,
+                Description =  audit.Description,
+                OperatorId =  audit.OperatorId,
+                Title =  audit.Title,
+                SettingsJSON = audit.SettingsJSON,
+			};
+        }
+
+
+		public static RoutineAuditRecord ConvertCAA(this RoutineAuditRecordDTO audit)
         {
             return new RoutineAuditRecord
 			{

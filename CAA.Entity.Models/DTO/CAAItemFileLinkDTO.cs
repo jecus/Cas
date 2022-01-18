@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 namespace CAA.Entity.Models.DTO
 {
 	[Table("ItemsFilesLinks", Schema = "dbo")]
+    [Condition("IsDeleted", 0)]
     public class CAAItemFileLinkDTO : BaseEntity, IItemFileLinkDTO
 	{
         [Column("ParentId")]
