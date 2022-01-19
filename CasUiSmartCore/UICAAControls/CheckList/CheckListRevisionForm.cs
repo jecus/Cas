@@ -77,11 +77,11 @@ namespace CAS.UI.UICAAControls.CheckList
             comboBoxLevel.Items.Add(FindingLevels.Unknown);
 
 
-            var phase = new List<int> { 1, 2, 3, 4, 5, 6 };
+            var phase = new List<string> { "1", "2", "3", "4", "5", "6", "N/A" };
             comboBoxPhase.Items.Clear();
             foreach (var i in phase)
                 comboBoxPhase.Items.Add(i);
-            comboBoxPhase.SelectedItem = 1;
+            comboBoxPhase.SelectedItem = "N/A";
 
             comboBoxLevel.SelectedItem = FindingLevels.Unknown;
             _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
@@ -99,13 +99,11 @@ namespace CAS.UI.UICAAControls.CheckList
                 {
                     checks.Settings.EditionNumber = metroTextBoxEditionNumber.Text;
                     checks.Settings.EditionDate = dateTimePickerEditionDate.Value;
-                    checks.Settings.EffEditionDate = dateTimePickerEditionEff.Value;
                 }
-                if (checkBoxRevision.Checked)
+                if (checkBoxRevisionValidTo.Checked)
                 {
                     checks.Settings.RevisionNumber = metroTextBoxRevision.Text;
                     checks.Settings.RevisonDate = dateTimePickerRevisionDate.Value;
-                    checks.Settings.EffRevisonDate = dateTimePickerRevisionEff.Value;
                     checks.Settings.RevisonValidTo = checkBoxRevisionValidTo.Checked;
                 }
                 if(checkBoxCheck.Checked)
@@ -117,7 +115,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 if(checkBoxLevel.Checked)
                     checks.Settings.LevelId = ((FindingLevels)comboBoxLevel.SelectedItem).ItemId;
                 if (checkBoxPhase.Checked)
-                    checks.Settings.Phase = (int)comboBoxPhase.SelectedItem;
+                    checks.Settings.Phase = (string)comboBoxPhase.SelectedItem;
                 if (checkBoxMH.Checked)
                     checks.Settings.MH = dateTimePickerMH.Value;
             }
@@ -128,20 +126,16 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             checkBoxSource.Checked =
                 checkBoxEdition.Checked =
-                    checkBoxRevision.Checked =
-                        checkBoxCheck.Checked =
+                    checkBoxCheck.Checked =
                             checkBoxNotify.Checked =
                                 checkBoxReference.Checked =
                                     checkBoxLevel.Checked = 
             metroTextSource.Enabled = 
             metroTextBoxEditionNumber.Enabled =
             dateTimePickerEditionDate.Enabled =
-            dateTimePickerEditionEff.Enabled =
-            metroTextBoxRevision.Enabled = 
-            dateTimePickerRevisionDate.Enabled = 
-            dateTimePickerRevisionEff.Enabled =
-            checkBoxRevisionValidTo.Enabled =
-            dateTimePickeValidTo.Enabled =
+                metroTextBoxRevision.Enabled = 
+            dateTimePickerRevisionDate.Enabled =
+                dateTimePickeValidTo.Enabled =
             numericUpNotify.Enabled =
                 comboBoxPhase.Enabled =
                     dateTimePickerMH.Enabled =
@@ -154,16 +148,14 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextSource.Text = "";
             metroTextBoxEditionNumber.Text = "";
             dateTimePickerEditionDate.Value = DateTime.Today;
-            dateTimePickerEditionEff.Value = DateTime.Today;
             metroTextBoxRevision.Text = "";
             dateTimePickerRevisionDate.Value = DateTime.Today;
-            dateTimePickerRevisionEff.Value = DateTime.Today;
             checkBoxRevisionValidTo.Checked = false;
             dateTimePickeValidTo.Value = DateTime.Today;
             numericUpNotify.Value = 0;
             metroTextBoxReference.Text = "";
             comboBoxLevel.SelectedItem = FindingLevels.Unknown;
-            comboBoxPhase.SelectedItem = 1;
+            comboBoxPhase.SelectedItem = "N/A";
             dateTimePickerMH.Value = new DateTime(2020, 1, 1, 0, 0, 0);
         }
 
@@ -247,17 +239,9 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             metroTextBoxEditionNumber.Enabled =
                 dateTimePickerEditionDate.Enabled =
-                dateTimePickerEditionEff.Enabled = 
                     checkBoxEdition.Checked;
         }
 
-        private void checkBoxRevision_CheckedChanged(object sender, EventArgs e)
-        {
-            checkBoxRevisionValidTo.Enabled =
-                metroTextBoxRevision.Enabled =
-                    dateTimePickerRevisionDate.Enabled =
-                        dateTimePickerRevisionEff.Enabled = checkBoxRevision.Checked;
-        }
 
         private void checkBoxCheck_CheckedChanged(object sender, EventArgs e)
         {
@@ -281,12 +265,19 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            comboBoxPhase.Enabled = checkBoxLevel.Checked;
+            comboBoxPhase.Enabled = checkBoxPhase.Checked;
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            dateTimePickerMH.Enabled = checkBoxLevel.Checked;
+            dateTimePickerMH.Enabled = checkBoxMH.Checked;
+        }
+
+        private void checkBoxRevisionValidTo_CheckedChanged(object sender, EventArgs e)
+        {
+            metroTextBoxRevision.Enabled =
+                    dateTimePickerRevisionDate.Enabled
+                        = checkBoxRevisionValidTo.Checked;
         }
     }
 }

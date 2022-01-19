@@ -94,10 +94,8 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextSource.Text = _currentCheck.Source;
             metroTextBoxEditionNumber.Text = _currentCheck.Settings.EditionNumber;
             dateTimePickerEditionDate.Value = _currentCheck.Settings.EditionDate;
-            dateTimePickerEditionEff.Value = _currentCheck.Settings.EffEditionDate;
             metroTextBoxRevision.Text = _currentCheck.Settings.RevisionNumber;
             dateTimePickerRevisionDate.Value = _currentCheck.Settings.RevisonDate;
-            dateTimePickerRevisionEff.Value = _currentCheck.Settings.EffRevisonDate;
             metroTextBoxSectionNumber.Text = _currentCheck.Settings.SectionNumber;
             metroTextBoxSectionName.Text = _currentCheck.Settings.SectionName;
             metroTextBoxPartNumber.Text = _currentCheck.Settings.PartNumber;
@@ -126,7 +124,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 dateTimePickerMH.Value = date;
             }
 
-            var phase = new List<int> { 1, 2, 3, 4, 5, 6 };
+            var phase = new List<string> { "1", "2", "3", "4", "5", "6", "N/A" };
             comboBoxPhase.Items.Clear();
             foreach (var i in phase)
                 comboBoxPhase.Items.Add(i);
@@ -153,10 +151,8 @@ namespace CAS.UI.UICAAControls.CheckList
             _currentCheck.Source = metroTextSource.Text;
             _currentCheck.Settings.EditionNumber = metroTextBoxEditionNumber.Text ;
             _currentCheck.Settings.EditionDate = dateTimePickerEditionDate.Value;
-            _currentCheck.Settings.EffEditionDate = dateTimePickerEditionEff.Value;
             _currentCheck.Settings.RevisionNumber = metroTextBoxRevision.Text;
             _currentCheck.Settings.RevisonDate = dateTimePickerRevisionDate.Value;
-            _currentCheck.Settings.EffRevisonDate = dateTimePickerRevisionEff.Value;
             _currentCheck.Settings.SectionNumber = metroTextBoxSectionNumber.Text;
             _currentCheck.Settings.SectionName =  metroTextBoxSectionName.Text;
             _currentCheck.Settings.PartNumber = metroTextBoxPartNumber.Text;
@@ -177,7 +173,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
 
             _currentCheck.Settings.LevelId = ((FindingLevels) comboBoxLevel.SelectedItem).ItemId;
-            _currentCheck.Settings.Phase = (int)comboBoxPhase.SelectedItem;
+            _currentCheck.Settings.Phase = (string)comboBoxPhase.SelectedItem;
             _currentCheck.Settings.MH = dateTimePickerMH.Value;
 
             if (fileControl.GetChangeStatus())
@@ -261,12 +257,11 @@ namespace CAS.UI.UICAAControls.CheckList
         private void checkBoxRevisionValidTo_CheckedChanged(object sender, EventArgs e)
         {
             metroTextBoxRevision.Enabled = dateTimePickerRevisionDate.Enabled =
-                dateTimePickerRevisionEff.Enabled = checkBoxRevisionValidTo.Checked;
+                 checkBoxRevisionValidTo.Checked;
 
             metroTextBoxEditionNumber.Enabled =
                 dateTimePickerEditionDate.Enabled =
-                    dateTimePickerEditionEff.Enabled =
-                        !checkBoxRevisionValidTo.Checked;
+                    !checkBoxRevisionValidTo.Checked;
 
         }
     }

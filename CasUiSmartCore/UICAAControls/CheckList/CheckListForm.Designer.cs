@@ -39,7 +39,6 @@ namespace CAS.UI.UICAAControls.CheckList
             System.Windows.Forms.Label label7;
             System.Windows.Forms.Label label8;
             System.Windows.Forms.Label label9;
-            System.Windows.Forms.Label label10;
             System.Windows.Forms.Label label11;
             System.Windows.Forms.Label label12;
             System.Windows.Forms.Label label13;
@@ -62,9 +61,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxItemName = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxItemNumber = new MetroFramework.Controls.MetroTextBox();
             this.dateTimePickerEditionDate = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerEditionEff = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerRevisionDate = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerRevisionEff = new System.Windows.Forms.DateTimePicker();
             this.metroTextBoxRequirement = new MetroFramework.Controls.MetroTextBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -89,7 +86,6 @@ namespace CAS.UI.UICAAControls.CheckList
             label7 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
-            label10 = new System.Windows.Forms.Label();
             label11 = new System.Windows.Forms.Label();
             label12 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
@@ -211,18 +207,6 @@ namespace CAS.UI.UICAAControls.CheckList
             label9.TabIndex = 40;
             label9.Text = "Date";
             label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new System.Drawing.Font("Verdana", 9F);
-            label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label10.Location = new System.Drawing.Point(367, 278);
-            label10.Name = "label10";
-            label10.Size = new System.Drawing.Size(60, 14);
-            label10.TabIndex = 41;
-            label10.Text = "Eff. Date";
-            label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label11
             // 
@@ -703,26 +687,12 @@ namespace CAS.UI.UICAAControls.CheckList
             this.dateTimePickerEditionDate.Size = new System.Drawing.Size(119, 20);
             this.dateTimePickerEditionDate.TabIndex = 36;
             // 
-            // dateTimePickerEditionEff
-            // 
-            this.dateTimePickerEditionEff.Location = new System.Drawing.Point(336, 294);
-            this.dateTimePickerEditionEff.Name = "dateTimePickerEditionEff";
-            this.dateTimePickerEditionEff.Size = new System.Drawing.Size(119, 20);
-            this.dateTimePickerEditionEff.TabIndex = 37;
-            // 
             // dateTimePickerRevisionDate
             // 
             this.dateTimePickerRevisionDate.Location = new System.Drawing.Point(190, 321);
             this.dateTimePickerRevisionDate.Name = "dateTimePickerRevisionDate";
             this.dateTimePickerRevisionDate.Size = new System.Drawing.Size(119, 20);
             this.dateTimePickerRevisionDate.TabIndex = 38;
-            // 
-            // dateTimePickerRevisionEff
-            // 
-            this.dateTimePickerRevisionEff.Location = new System.Drawing.Point(336, 321);
-            this.dateTimePickerRevisionEff.Name = "dateTimePickerRevisionEff";
-            this.dateTimePickerRevisionEff.Size = new System.Drawing.Size(119, 20);
-            this.dateTimePickerRevisionEff.TabIndex = 39;
             // 
             // metroTextBoxRequirement
             // 
@@ -1020,11 +990,8 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.metroTextBoxRequirement);
             this.Controls.Add(label11);
-            this.Controls.Add(label10);
             this.Controls.Add(label9);
-            this.Controls.Add(this.dateTimePickerRevisionEff);
             this.Controls.Add(this.dateTimePickerRevisionDate);
-            this.Controls.Add(this.dateTimePickerEditionEff);
             this.Controls.Add(this.dateTimePickerEditionDate);
             this.Controls.Add(label8);
             this.Controls.Add(label7);
@@ -1070,9 +1037,7 @@ namespace CAS.UI.UICAAControls.CheckList
         private MetroFramework.Controls.MetroTextBox metroTextBoxItemName;
         private MetroFramework.Controls.MetroTextBox metroTextBoxItemNumber;
         private System.Windows.Forms.DateTimePicker dateTimePickerEditionDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerEditionEff;
         private System.Windows.Forms.DateTimePicker dateTimePickerRevisionDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerRevisionEff;
         private MetroFramework.Controls.MetroTextBox metroTextBoxRequirement;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;

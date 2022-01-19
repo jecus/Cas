@@ -1300,32 +1300,7 @@ namespace SmartCore.DtoHelper
                 CorrectorId = levels.CorrectorId,
                 Updated = levels.Updated,
 				Source = levels.Source,
-				Settings =
-                {
-                    Requirement = levels.Settings.Requirement,
-					EditionDate = levels.Settings.EditionDate,
-					EditionNumber = levels.Settings.EditionNumber,
-					EffEditionDate = levels.Settings.EffEditionDate,
-					EffRevisonDate = levels.Settings.EffRevisonDate,
-					ItemNumber = levels.Settings.ItemNumber,
-					ItemtName = levels.Settings.ItemtName,
-					PartName = levels.Settings.PartName,
-					PartNumber = levels.Settings.PartNumber,
-					RevisonDate = levels.Settings.RevisonDate,
-					RevisionNumber = levels.Settings.RevisionNumber,
-					SectionName = levels.Settings.SectionName,
-					SectionNumber = levels.Settings.SectionNumber,
-					SubPartName = levels.Settings.SubPartName,
-					SubPartNumber = levels.Settings.SubPartNumber,
-					RevisonValidTo =  levels.Settings.RevisonValidTo,
-					RevisonValidToDate =  levels.Settings.RevisonValidToDate,
-					RevisonValidToNotify =  levels.Settings.RevisonValidToNotify,
-					LevelId =  levels.Settings.LevelId,
-					Described =  levels.Settings.Described,
-                    Instructions =  levels.Settings.Instructions,
-                    MH =  levels.Settings.MH,
-                    Phase =  levels.Settings.Phase,
-				}
+				SettingsJSON =  levels.SettingsJSON
             };
 
             if (levels.CheckListRecords != null)
@@ -1343,33 +1318,8 @@ namespace SmartCore.DtoHelper
                 CorrectorId = levels.CorrectorId,
                 Updated = levels.Updated,
                 Source = levels.Source,
-                Settings = new CheckListSettings()
-                {
-                    Requirement = levels.Settings.Requirement,
-                    EditionDate = levels.Settings.EditionDate,
-                    EditionNumber = levels.Settings.EditionNumber,
-                    EffEditionDate = levels.Settings.EffEditionDate,
-                    EffRevisonDate = levels.Settings.EffRevisonDate,
-                    ItemNumber = levels.Settings.ItemNumber,
-                    ItemtName = levels.Settings.ItemtName,
-                    PartName = levels.Settings.PartName,
-                    PartNumber = levels.Settings.PartNumber,
-                    RevisonDate = levels.Settings.RevisonDate,
-                    RevisionNumber = levels.Settings.RevisionNumber,
-                    SectionName = levels.Settings.SectionName,
-                    SectionNumber = levels.Settings.SectionNumber,
-                    SubPartName = levels.Settings.SubPartName,
-                    SubPartNumber = levels.Settings.SubPartNumber,
-                    RevisonValidTo =  levels.Settings.RevisonValidTo,
-                    RevisonValidToDate =  levels.Settings.RevisonValidToDate,
-                    RevisonValidToNotify =  levels.Settings.RevisonValidToNotify,
-                    LevelId =  levels.Settings.LevelId,
-                    Described =  levels.Settings.Described,
-                    Instructions =  levels.Settings.Instructions,
-                    MH =  levels.Settings.MH,
-                    Phase =  levels.Settings.Phase,
-				}
-            };
+				SettingsJSON =  levels.SettingsJSON
+			};
 
             if (levels.CheckListRecords != null)
             {

@@ -50,7 +50,7 @@ namespace SmartCore.CAA.FindingLevel
         public static FindingLevels Unknown =>
             _unknown ?? (_unknown = new FindingLevels
             {
-                LevelName = "Unknown",
+                LevelName = "N/A",
                 LevelClass = LevelClass.Major,
                 Remark = "Unknown",
                 ItemId = -1
