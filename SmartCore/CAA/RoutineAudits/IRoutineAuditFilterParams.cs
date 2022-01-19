@@ -1,30 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SmartCore.CAA.Check;
 using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.CAA.RoutineAudits
 {
     public interface IRoutineAuditFilterParams
     {
-        [Filter("AuditNumber:", Order = 1)]
-        string AuditNumber { get; set; }
+        [Filter("Program Type:", Order =1)]
+        ProgramType Type { get; }
 
-        [Filter("Type:", Order = 2)]
-        string Type { get; set; }
-
-        [Filter("Title:", Order = 3)]
-        string Title { get; set; }
+        [Filter("Object:", Order = 2)]
+        RoutineObject RoutineObject { get; }
 
         [Filter("Description:", Order = 4)]
-        string Description { get; set; }
+        string Description { get; }
 
         [Filter("Remark:", Order = 5)]
-        string Remark { get; set; }
-
-        [Filter("Created:", Order = 6)]
-        DateTime Created { get; set; }
+        string Remark { get; }
     }
 }

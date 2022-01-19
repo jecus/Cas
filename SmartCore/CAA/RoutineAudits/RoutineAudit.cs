@@ -1,5 +1,7 @@
 ﻿using System;
 using CAA.Entity.Models.DTO;
+using Newtonsoft.Json;
+using SmartCore.CAA.Check;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
@@ -11,28 +13,68 @@ namespace SmartCore.CAA.RoutineAudits
     [Serializable]
     public class RoutineAudit : BaseEntityObject, IRoutineAuditFilterParams
     {
-        [FormControl(350, "AuditNumber:", 1, Order = 1)]
-        public string AuditNumber { get; set; }
-
-        [FormControl(350, "Type:", 1, Order = 2)]
-        public string Type { get; set; }
-
-        [FormControl(350, "Title:", 1, Order = 3)]
         public string Title { get; set; }
 
-        [FormControl(350, "Description:", 1, Order = 4, Height = 100)]
         public string Description { get; set; }
 
-        [FormControl(350, "Remark:", 1, Order = 5, Height = 100)]
         public string Remark { get; set; }
 
-        public int AuthorId { get; set; }
 
-        public DateTime Created { get; set; }
+        public string SettingsJSON
+        {
+            get
+            {
+                if (Settings == null)
+                    return null;
+
+                return JsonConvert.SerializeObject(Settings,
+                    Formatting.Indented,
+                    new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+            }
+
+            set => Settings = string.IsNullOrWhiteSpace(value) ? new RoutineAuditSettings() : JsonConvert.DeserializeObject<RoutineAuditSettings>(value);
+        }
+
+        public RoutineAuditSettings Settings { get; set; }
+
+
+        private ProgramType _type;
+        private RoutineObject _routineObject;
+
+        [JsonProperty("Type")]
+        public ProgramType Type
+        {
+            get
+            {
+                _type = ProgramType.GetItemById(Settings.TypeId) ?? ProgramType.Unknown;
+                return _type;
+            }
+            set
+            {
+                Settings.TypeId = value.ItemId;
+                _type = value;
+            }
+        }
+
+        [JsonProperty("RoutineObject")]
+        public RoutineObject RoutineObject
+        {
+            get
+            {
+                _routineObject = RoutineObject.GetItemById(Settings.RoutineObjectId) ?? RoutineObject.Unknown;
+                return _routineObject;
+            }
+            set
+            {
+                Settings.RoutineObjectId = value.ItemId;
+                _routineObject = value;
+            }
+        }
 
 
         public RoutineAudit()
         {
+            Settings = new RoutineAuditSettings();
             SmartCoreObjectType = SmartCoreType.RoutineAudit;
             ItemId = -1;
         }
@@ -49,5 +91,22 @@ namespace SmartCore.CAA.RoutineAudits
 
             return clone;
         }
+    }
+
+    [Serializable]
+    public class RoutineAuditSettings
+    {
+
+        [JsonProperty("TypeId")]
+        public int TypeId { get; set; }
+
+        [JsonProperty("RoutineObjectId")]
+        public int RoutineObjectId { get; set; }
+
+        [JsonProperty("AuthorId")]
+        public int AuthorId { get; set; }
+
+        [JsonProperty("Created")]
+        public DateTime Created { get; set; }
     }
 }

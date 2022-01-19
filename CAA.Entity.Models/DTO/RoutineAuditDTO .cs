@@ -9,12 +9,6 @@ namespace CAA.Entity.Models.DTO
     [Condition("IsDeleted", 0)]
     public class RoutineAuditDTO : BaseEntity
     {
-        [Column("AuditNumber")]
-        public string AuditNumber { get; set; }
-
-        [Column("Type")]
-        public string Type { get; set; }
-
         [Column("Title")]
         public string Title { get; set; }
 
@@ -24,10 +18,8 @@ namespace CAA.Entity.Models.DTO
         [Column("Remark")]
         public string Remark { get; set; }
 
-        [Column("AuthorId")]
-        public int AuthorId { get; set; }
+        [Column("SettingsJSON")]
+        public string SettingsJSON { get; set; }
 
-        [Column("Created")]
-        public DateTime Created { get; set; }
     }
 }

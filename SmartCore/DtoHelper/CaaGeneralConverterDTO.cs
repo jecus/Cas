@@ -91,12 +91,8 @@ namespace SmartCore.DtoHelper
                 Updated = audit.Updated,
                 CorrectorId = audit.CorrectorId,
                 Remark = audit.Remark,
-                AuditNumber = audit.AuditNumber,
-                AuthorId = audit.AuthorId,
-                Type = audit.Type,
-                Title = audit.Title,
+				SettingsJSON =  audit.SettingsJSON,
                 Description = audit.Description,
-                Created = audit.Created,
             };
         }
 
@@ -109,13 +105,9 @@ namespace SmartCore.DtoHelper
                 Updated = audit.Updated,
                 CorrectorId = audit.CorrectorId,
                 Remark = audit.Remark,
-                AuditNumber = audit.AuditNumber,
-                AuthorId = audit.AuthorId,
-                Type = audit.Type,
-                Title = audit.Title,
-                Description = audit.Description,
-                Created = audit.Created,
-			};
+				SettingsJSON =  audit.SettingsJSON,
+				Description = audit.Description,
+            };
         }
 
 		public static RootCause ConvertCAA(this RootCauseDTO cause)

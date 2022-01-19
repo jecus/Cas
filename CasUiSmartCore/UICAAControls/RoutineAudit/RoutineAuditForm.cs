@@ -95,9 +95,15 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
         private void UpdateInformation()
         {
-            metroTextBoxAudit.Text = _audit.AuditNumber;
+            comboBoxProgramType.Items.Clear();
+            comboBoxProgramType.Items.AddRange(ProgramType.Items.OrderBy(i => i.FullName).ToArray());
+            comboBoxProgramType.SelectedItem = _audit.Type;
+
+            comboBoxObject.Items.Clear();
+            comboBoxObject.Items.AddRange(RoutineObject.Items.OrderBy(i => i.FullName).ToArray());
+            comboBoxObject.SelectedItem = _audit.RoutineObject;
+
             metroTextBoxTitle.Text = _audit.Title;
-            metroTextBoxType.Text = _audit.Type;
             metroTextBoxDescription.Text = _audit.Description;
             metroTextBoxRemark.Text = _audit.Remark;
 
@@ -147,9 +153,9 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
         private void ApplyChanges()
         {
-            _audit.AuditNumber = metroTextBoxAudit.Text;
             _audit.Title = metroTextBoxTitle.Text;
-            _audit.Type = metroTextBoxType.Text;
+            _audit.Type = (ProgramType)comboBoxProgramType.SelectedItem;
+            _audit.RoutineObject = (RoutineObject)comboBoxObject.SelectedItem;
             _audit.Description = metroTextBoxDescription.Text;
             _audit.Remark = metroTextBoxRemark.Text;
         }

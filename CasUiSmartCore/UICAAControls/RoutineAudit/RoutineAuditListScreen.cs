@@ -264,8 +264,11 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 		{
             var form = new RoutineAuditForm(new SmartCore.CAA.RoutineAudits.RoutineAudit()
             {
-				Created = DateTime.Now,
-				AuthorId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId
+				Settings =  new RoutineAuditSettings()
+                {
+                    Created = DateTime.Now,
+                    AuthorId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId
+				}
             });
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();

@@ -58,9 +58,9 @@ namespace CAS.UI.UICAAControls.CheckList
 		/// </summary>
 		protected override void SetHeaders()
 		{
-			AddColumn("Audit №", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Title", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Type", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Title", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Program Type", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Object", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.45f));
             AddColumn("Remark", (int)(radGridView1.Width * 0.45f));
             AddColumn("Author", (int)(radGridView1.Width * 0.24f));
@@ -72,17 +72,17 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		protected override List<CustomCell> GetListViewSubItems(SmartCore.CAA.RoutineAudits.RoutineAudit item)
         {
-            var author = GlobalObjects.CaaEnvironment?.GetCorrector(item.AuthorId);
+            var author = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.AuthorId);
             var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
 
             var subItems = new List<CustomCell>()
 			{
-                CreateRow(item.AuditNumber, item.AuditNumber),
                 CreateRow(item.Title, item.Title),
-                CreateRow(item.Type, item.Type),
+                CreateRow(item.Type.ToString(), item.Type),
+                CreateRow(item.RoutineObject.ToString(), item.Type),
                 CreateRow(item.Description, item.Description),
                 CreateRow(item.Remark, item.Remark),
-                CreateRow($"{author} ({SmartCore.Auxiliary.Convert.GetDateFormat(item.Created)} {item.Created.TimeOfDay.Hours}:{item.Created.TimeOfDay.Minutes}:{item.Created.TimeOfDay.Seconds})", author),
+                CreateRow($"{author} ({SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.Created)} {item.Settings.Created.TimeOfDay.Hours}:{item.Settings.Created.TimeOfDay.Minutes}:{item.Settings.Created.TimeOfDay.Seconds})", author),
                 CreateRow(corrector, corrector)
 			};
 
