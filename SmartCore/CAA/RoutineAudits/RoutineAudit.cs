@@ -41,7 +41,6 @@ namespace SmartCore.CAA.RoutineAudits
         private ProgramType _type;
         private RoutineObject _routineObject;
 
-        [JsonProperty("Type")]
         public ProgramType Type
         {
             get
@@ -56,7 +55,6 @@ namespace SmartCore.CAA.RoutineAudits
             }
         }
 
-        [JsonProperty("RoutineObject")]
         public RoutineObject RoutineObject
         {
             get

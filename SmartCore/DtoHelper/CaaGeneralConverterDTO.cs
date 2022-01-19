@@ -91,6 +91,7 @@ namespace SmartCore.DtoHelper
                 Updated = audit.Updated,
                 CorrectorId = audit.CorrectorId,
                 Remark = audit.Remark,
+                Title = audit.Title,
 				SettingsJSON =  audit.SettingsJSON,
                 Description = audit.Description,
             };
@@ -103,7 +104,8 @@ namespace SmartCore.DtoHelper
 				ItemId = audit.ItemId,
                 IsDeleted = audit.IsDeleted,
                 Updated = audit.Updated,
-                CorrectorId = audit.CorrectorId,
+                Title = audit.Title,
+				CorrectorId = audit.CorrectorId,
                 Remark = audit.Remark,
 				SettingsJSON =  audit.SettingsJSON,
 				Description = audit.Description,

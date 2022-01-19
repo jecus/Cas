@@ -6,10 +6,13 @@ namespace SmartCore.CAA.RoutineAudits
 {
     public interface IRoutineAuditFilterParams
     {
-        [Filter("Program Type:", Order =1)]
+        [Filter("Title:", Order = 1)]
+        string Title { get; set; }
+
+        [Filter("Program Type:", Order = 2)]
         ProgramType Type { get; }
 
-        [Filter("Object:", Order = 2)]
+        [Filter("Object:", Order = 3)]
         RoutineObject RoutineObject { get; }
 
         [Filter("Description:", Order = 4)]
