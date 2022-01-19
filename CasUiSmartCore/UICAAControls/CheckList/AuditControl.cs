@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using SmartCore.CAA.Check;
 
@@ -49,7 +50,7 @@ namespace CAS.UI.UICAAControls.CheckList
             comboBoxOptionNumber.SelectedIndex = 0;
 
             comboBoxOptionType.Items.Clear();
-            comboBoxOptionType.Items.AddRange(OptionType.Items.ToArray());
+            comboBoxOptionType.Items.AddRange(OptionType.Items.OrderBy(i => i.ShortName).ToArray());
             comboBoxOptionType.SelectedIndex = 0;
         }
 
