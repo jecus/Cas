@@ -66,10 +66,11 @@ namespace CAS.UI.UICAAControls.CheckList
 			AddColumn("Requirement", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Auditor Action", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Source", (int)(radGridView1.Width * 0.3f));
-			AddColumn("Level", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Level", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Edition", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Revision", (int)(radGridView1.Width * 0.3f));
-			AddColumn("Remain", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Remain", (int)(radGridView1.Width * 0.1f));
+			AddColumn("Phase", (int)(radGridView1.Width * 0.1f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -97,6 +98,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 CreateRow(item.Settings.EditionNumber, item.Settings.EditionNumber),
                 CreateRow(item.Settings.RevisionNumber, item.Settings.RevisionNumber),
                 CreateRow(item.Remains.ToString(), item.Remains),
+                CreateRow(item.Settings.Phase.ToString(), item.Settings.Phase),
                 CreateRow(author, author)
 			};
 
