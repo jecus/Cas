@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
+using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UICAAControls.RoutineAudit;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
@@ -87,14 +90,12 @@ namespace CAS.UI.UICAAControls.Audit
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
-			if (SelectedItem != null)
-			{
-                var form = new AuditForm(SelectedItem);
-                if (form.ShowDialog() == DialogResult.OK)
-                    _animatedThreadWorker.RunWorkerAsync();
-                e.Cancel = true;
-
-			}
+            if (SelectedItem != null)
+            {
+                e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(),null,  SelectedItem.ItemId);
+                e.DisplayerText = $"Audit: {SelectedItem.AuditNumber}";
+                e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+            }
 		}
 		#endregion
 

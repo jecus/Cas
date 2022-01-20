@@ -89,28 +89,19 @@ namespace CAS.UI.UICAAControls.Audit
             _audit.Settings.Remark = textBoxRemarks.Text;
         }
 
+        private void Save()
+        {
+            ApplyChanges();
+            GlobalObjects.CaaEnvironment.NewKeeper.Save(_audit);
+        }
+
 
         private void buttonOk_Click(object sender, System.EventArgs e)
         {
             try
             {
-                ApplyChanges();
-
-                GlobalObjects.CaaEnvironment.NewKeeper.Save(_audit);
-
-                var ids = _records.Select(i => i.RoutineAuditId);
-                foreach (var routin in _updateChecks.Where(i => !ids.Contains(i.ItemId)))
-                {
-                    var rec = new CAAAuditRecord()
-                    {
-                        AuditId = _audit.ItemId,
-                        RoutineAuditId = routin.ItemId
-                    };
-
-                    GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
-                    _records.Add(rec);
-                }
-
+                Save();
+                MessageBox.Show("All records updated successfull!", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
                 DialogResult = DialogResult.OK;
                 Close();
             }
@@ -130,8 +121,25 @@ namespace CAS.UI.UICAAControls.Audit
         {
             if (_fromroutineAuditListView.SelectedItems.Count == 0) return;
 
+            if (string.IsNullOrEmpty(_audit.AuditNumber))
+                metroTextBoxAuditNumber.Text = $"{GlobalObjects.CaaEnvironment.IdentityUser.Name} ({SmartCore.Auxiliary.Convert.GetDateFormat(_audit.Settings.CreateDate)} {_audit.Settings.CreateDate.TimeOfDay.Hours}:{_audit.Settings.CreateDate.TimeOfDay.Minutes}:{_audit.Settings.CreateDate.TimeOfDay.Seconds})";
+
+
+            if (_audit.ItemId <= 0)
+                Save();
+
             foreach (var item in _fromroutineAuditListView.SelectedItems.ToArray())
             {
+                var rec = new CAAAuditRecord()
+                {
+                    AuditId = _audit.ItemId,
+                    RoutineAuditId = item.ItemId
+                };
+
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
+                _records.Add(rec);
+
+
                 _updateChecks.Add(item);
                 _addedChecks.Remove(item);
             }

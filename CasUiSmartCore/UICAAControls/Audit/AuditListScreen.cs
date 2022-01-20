@@ -6,15 +6,14 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls.CheckList;
-using CAS.UI.UICAAControls.RoutineAudit;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using SmartCore.CAA;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
-using SmartCore.CAA.RoutineAudits;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -37,6 +36,7 @@ namespace CAS.UI.UICAAControls.Audit
 		private AuditListView _directivesViewer;
 
 		private RadMenuItem _toolStripMenuItemOpen;
+		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 
@@ -124,13 +124,19 @@ namespace CAS.UI.UICAAControls.Audit
 		private void InitToolStripMenuItems()
 		{
 			_toolStripMenuItemOpen = new RadMenuItem();
+			_toolStripMenuItemEdit = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
-			// 
-			// toolStripMenuItemView
-			// 
-			_toolStripMenuItemOpen.Text = "Open";
-			_toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
+            // 
+            // toolStripMenuItemView
+            // 
+            _toolStripMenuItemOpen.Text = "Open";
+            _toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
+            // 
+            // toolStripMenuItemView
+            // 
+            _toolStripMenuItemEdit.Text = "Edit";
+            _toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
 			// 
 			// toolStripMenuItemHighlight
 			// 
@@ -148,7 +154,9 @@ namespace CAS.UI.UICAAControls.Audit
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
 		}
-		#endregion
+
+        
+        #endregion
 
 
 		#region private void HighlightItemClick(object sender, EventArgs e)
@@ -172,12 +180,29 @@ namespace CAS.UI.UICAAControls.Audit
 
 		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 		{
+			if (_directivesViewer.SelectedItem != null)
+            {
+                var refE = new ReferenceEventArgs();
+                var dp = new DisplayerParams()
+                {
+                    Page = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), null, _directivesViewer.SelectedItem.ItemId),
+                    TypeOfReflection = ReflectionTypes.DisplayInNew,
+                    PageCaption = $"Audit: {_directivesViewer.SelectedItem.AuditNumber}",
+                    DisplayerType = DisplayerType.Screen
+                };
+                refE.SetParameters(dp);
+                InvokeDisplayerRequested(refE);
+            }
+		}
+
+		#endregion
+
+        private void ToolStripMenuItemEditClick(object sender, EventArgs e)
+        {
             var form = new AuditForm(_directivesViewer.SelectedItem);
             if (form.ShowDialog() == DialogResult.OK)
                 AnimatedThreadWorker.RunWorkerAsync();
         }
-
-		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
 		private void ButtonDeleteClick(object sender, EventArgs e)

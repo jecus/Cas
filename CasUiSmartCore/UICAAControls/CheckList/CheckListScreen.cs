@@ -33,6 +33,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		#region Fields
 
         private readonly int? _routingId;
+        private readonly int? _auditId;
 
         private CommonCollection<CheckLists> _initialDocumentArray = new CommonCollection<CheckLists>();
 		private CommonCollection<CheckLists> _resultDocumentArray = new CommonCollection<CheckLists>();
@@ -65,13 +66,14 @@ namespace CAS.UI.UICAAControls.CheckList
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public CheckListsScreen(Operator currentOperator, int? routingId = null)
+		public CheckListsScreen(Operator currentOperator, int? routingId = null, int? auditId = null)
 			: this()
 		{
 			if (currentOperator == null)
 				throw new ArgumentNullException("currentOperator");
 			aircraftHeaderControl1.Operator = currentOperator;
             _routingId = routingId;
+            _auditId = auditId;
             statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 
@@ -115,6 +117,20 @@ namespace CAS.UI.UICAAControls.CheckList
 				if(ids.Any())
                     _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("ItemId", ids), loadChild: true));
 
+			}
+			else if (_auditId.HasValue)
+            {
+                var records = GlobalObjects.CaaEnvironment.NewLoader
+                    .GetObjectListAll<CAAAuditRecordDTO, CAAAuditRecord>(new Filter("AuditId", _auditId), loadChild: true).ToList();
+
+                var routineIds = records.Select(i => i.RoutineAuditId);
+
+                var routines = GlobalObjects.CaaEnvironment.NewLoader
+                    .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", routineIds), loadChild: true).ToList();
+
+                var ids = routines.Select(i => i.CheckListId);
+                if (ids.Any())
+                    _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("ItemId", ids), loadChild: true));
 			}
 			else _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(loadChild:true));
 

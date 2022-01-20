@@ -119,6 +119,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
                     Save();
                     MessageBox.Show("All records updated successfull!", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
                     DialogResult = DialogResult.OK;
+                    Close();
             }
             catch (Exception ex)
             {
