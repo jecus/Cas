@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
@@ -101,6 +102,9 @@ namespace CAS.UI.UICAAControls
             _operators.OperatorCollection = new CommonCollection<AllOperators>(operators);
             var aircaraft = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAircraftDTO, Aircraft>();
             _aircrafts.AircraftCollection = new CommonCollection<Aircraft>(aircaraft);
+
+            GlobalObjects.CaaEnvironment.AllOperators = new List<AllOperators>(operators);
+            GlobalObjects.CaaEnvironment.Aircraft = new AircraftCollection(aircaraft);
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)

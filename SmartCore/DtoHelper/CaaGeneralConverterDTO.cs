@@ -31,10 +31,6 @@ namespace SmartCore.DtoHelper
                 Updated = audit.Updated,
                 CorrectorId = audit.CorrectorId,
                 AuditNumber =  audit.AuditNumber,
-                Description =  audit.Description,
-                OperatorId =  audit.OperatorId,
-
-                Title =  audit.Title,
                 SettingsJSON = audit.SettingsJSON,
 			};
         }
@@ -48,12 +44,37 @@ namespace SmartCore.DtoHelper
                 Updated = audit.Updated,
                 CorrectorId = audit.CorrectorId,
 				AuditNumber =  audit.AuditNumber,
-                Description =  audit.Description,
-                OperatorId =  audit.OperatorId,
-                Title =  audit.Title,
                 SettingsJSON = audit.SettingsJSON,
 			};
         }
+
+        public static CAAAuditRecord ConvertCAA(this CAAAuditRecordDTO audit)
+        {
+            return new CAAAuditRecord
+			{
+                ItemId = audit.ItemId,
+                IsDeleted = audit.IsDeleted,
+                Updated = audit.Updated,
+                CorrectorId = audit.CorrectorId,
+                AuditId = audit.AuditId,
+				RoutineAuditId = audit.RoutineAuditId
+            };
+        }
+
+        public static CAAAuditRecordDTO ConvertCAA(this CAAAuditRecord audit)
+        {
+            return new CAAAuditRecordDTO
+			{
+                ItemId = audit.ItemId,
+                IsDeleted = audit.IsDeleted,
+                Updated = audit.Updated,
+                CorrectorId = audit.CorrectorId,
+				AuditId = audit.AuditId,
+                RoutineAuditId = audit.RoutineAuditId
+			};
+        }
+
+
 
 
 		public static RoutineAuditRecord ConvertCAA(this RoutineAuditRecordDTO audit)

@@ -481,6 +481,7 @@ namespace SmartCore.Entities.Dictionaries
 		public static SmartCoreType RoutineAudit = new SmartCoreType(3080, "RoutineAudit", "RoutineAudit", typeof(RoutineAudit));
 		public static SmartCoreType RoutineAuditRecord = new SmartCoreType(3081, "RoutineAuditRecord", "RoutineAuditRecord", typeof(RoutineAuditRecord));
 		public static SmartCoreType CAAAudit = new SmartCoreType(3082, "CAAAudit", "CAAAudit", typeof(CAAAudit));
+		public static SmartCoreType CAAAuditRecord = new SmartCoreType(3083, "CAAAuditRecord", "CAAAuditRecord", typeof(CAAAuditRecord));
 		
 		/*
          * Методы

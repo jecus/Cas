@@ -6,18 +6,18 @@ using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.CAA.RoutineAudits
 {
-    [CAADto(typeof(CAAAuditRecordDTO))]
+    [CAADto(typeof(RoutineAuditRecordDTO))]
     [Condition("IsDeleted", "0")]
     [Serializable]
-    public class CAAAuditRecord : BaseEntityObject
+    public class RoutineAuditRecord : BaseEntityObject
     {
         public int RoutineAuditId { get; set; }
 
-        public int AuditId { get; set; }
+        public int CheckListId { get; set; }
 
-        public CAAAuditRecord()
+        public RoutineAuditRecord()
         {
-            SmartCoreObjectType = SmartCoreType.CAAAuditRecord;
+            SmartCoreObjectType = SmartCoreType.RoutineAuditRecord;
             ItemId = -1;
         }
     }

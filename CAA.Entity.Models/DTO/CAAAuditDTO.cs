@@ -10,17 +10,9 @@ namespace CAA.Entity.Models.DTO
     [Condition("IsDeleted", 0)]
     public class CAAAuditDTO : BaseEntity
     {
-        [Column("OperatorId")]
-        public int OperatorId { get; set; }
 
         [Column("AuditNumber")]
         public string AuditNumber { get; set; }
-
-        [Column("Title")]
-        public string Title { get; set; }
-
-        [Column("Description")]
-        public string Description { get; set; }
 
 
         [Column("SettingsJSON")]

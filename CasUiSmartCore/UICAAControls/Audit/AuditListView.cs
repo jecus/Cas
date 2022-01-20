@@ -53,16 +53,10 @@ namespace CAS.UI.UICAAControls.Audit
 		protected override void SetHeaders()
 		{
 			AddColumn("Audit №", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Title", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Create Date", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Opening date", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Publishing date", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Closing date", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Author", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Published By", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Publishing Remark", (int)(radGridView1.Width * 0.20f));
-            AddColumn("Closed By", (int)(radGridView1.Width * 0.20f));
-            AddColumn("Closing Remark", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Operator", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Remark", (int)(radGridView1.Width * 0.30f));
+			AddColumn("CreateDate", (int)(radGridView1.Width * 0.30f));
+			AddColumn("Autor", (int)(radGridView1.Width * 0.30f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -72,27 +66,19 @@ namespace CAS.UI.UICAAControls.Audit
 		protected override List<CustomCell> GetListViewSubItems(CAAAudit item)
         {
             var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
-            var author = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.AuthorId);
-            var published = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.PublishedById);
-            var closed = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.ClosedById);
+            var author = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.AutorId);
 
             var subItems = new List<CustomCell>()
-			{
+            {
                 CreateRow(item.AuditNumber, item.AuditNumber),
-                CreateRow(item.Title, item.Title),
-                CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.CreateDate), item.Settings.CreateDate),
-                CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.OpeningDate), item.Settings.OpeningDate),
-                CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.PublishingDate), item.Settings.PublishingDate),
+                CreateRow(item.Operator.ToString(), item.Operator),
+                CreateRow(item.Settings.Remark, item.Settings.Remark),
+				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.CreateDate), item.Settings.CreateDate),
                 CreateRow(author, author),
-                CreateRow(published, published),
-				CreateRow(item.Settings.PublishedRemark, item.Settings.PublishedRemark),
-                CreateRow(closed, closed),
-                CreateRow(item.Settings.ClosedRemark, item.Settings.ClosedRemark),
+                CreateRow(corrector, corrector)
+            };
 
-				CreateRow(corrector, corrector)
-			};
-
-			return subItems;
+            return subItems;
 		}
 
 		#endregion

@@ -316,5 +316,15 @@ namespace SmartCore.CAA
         {
             return !string.IsNullOrEmpty(FullName) ? FullName : ShortName;
         }
+
+
+        private static AllOperators _unknown;
+        public static AllOperators Unknown =>
+            _unknown ?? (_unknown = new AllOperators
+            {
+                ShortName = "Unknown",
+                FullName = "Unknown",
+                ItemId = -1
+            });
     }
 }

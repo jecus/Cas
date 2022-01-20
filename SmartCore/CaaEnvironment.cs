@@ -14,6 +14,7 @@ using CAS.Entity.Models.DTO.General;
 using CAS.UI.Helpers;
 using Entity.Abstractions;
 using SmartCore.AuditMongo.Repository;
+using SmartCore.CAA;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -24,12 +25,14 @@ using SmartCore.Entities.NewLoader;
 using SmartCore.Management;
 using SmartCore.ObjectCache;
 using SmartCore.Queries;
+using Type = System.Type;
 
 namespace SmartCore
 {
     public interface ICaaEnvironment : IBaseEnvironment
     {
         AircraftCollection Aircraft { get; set; }
+        List<AllOperators> AllOperators { get; set; }
 
     }
 
@@ -43,6 +46,7 @@ namespace SmartCore
 
         public OperatorCollection Operators { get; set; }
         public AircraftCollection Aircraft { get; set; }
+        public List<AllOperators> AllOperators { get; set; }
         public IAuditRepository AuditRepository { get; set; }
         public ApiProvider ApiProvider { get; set; }
 
@@ -116,6 +120,8 @@ namespace SmartCore
             backgroundWorker.ReportProgress(1, loadingState);
 
             Operators = new OperatorCollection(_newLoader.GetObjectList<OperatorDTO, Operator>().ToArray());
+
+            AllOperators = new List<AllOperators>(_newLoader.GetObjectList<AllOperatorsDTO, AllOperators>().ToArray());
 
             if (backgroundWorker.CancellationPending)
             {

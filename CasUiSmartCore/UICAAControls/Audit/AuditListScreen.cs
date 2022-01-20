@@ -11,6 +11,7 @@ using CAS.UI.UICAAControls.RoutineAudit;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
+using SmartCore.CAA;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.RoutineAudits;
@@ -101,6 +102,12 @@ namespace CAS.UI.UICAAControls.Audit
 
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAuditDTO, CAAAudit>(loadChild:true));
 
+            foreach (var audit in _initialDocumentArray)
+            {
+                audit.Operator =  GlobalObjects.CaaEnvironment
+                    .AllOperators
+                    .FirstOrDefault(i => i.ItemId == audit.Settings.OperatorId) ?? AllOperators.Unknown;
+			}
             
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
 
@@ -264,7 +271,14 @@ namespace CAS.UI.UICAAControls.Audit
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-            var form = new AuditForm(new CAAAudit());
+            var form = new AuditForm(new CAAAudit()
+            {
+				Settings = new CAAAuditSettings()
+                {
+					CreateDate = DateTime.Now,
+					AutorId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId
+                }
+            });
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
             e.Cancel = true;
