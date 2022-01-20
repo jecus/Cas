@@ -123,12 +123,12 @@ namespace CAS.UI.UICAAControls.CheckList
                 var records = GlobalObjects.CaaEnvironment.NewLoader
                     .GetObjectListAll<CAAAuditRecordDTO, CAAAuditRecord>(new Filter("AuditId", _auditId), loadChild: true).ToList();
 
-                var routineIds = records.Select(i => i.RoutineAuditId);
+                var routineIds = records.Select(i => i.RoutineAuditId).Distinct();
 
-                var routines = GlobalObjects.CaaEnvironment.NewLoader
+				var routines = GlobalObjects.CaaEnvironment.NewLoader
                     .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", routineIds), loadChild: true).ToList();
 
-                var ids = routines.Select(i => i.CheckListId);
+                var ids = routines.Select(i => i.CheckListId).Distinct();
                 if (ids.Any())
                     _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("ItemId", ids), loadChild: true));
 			}

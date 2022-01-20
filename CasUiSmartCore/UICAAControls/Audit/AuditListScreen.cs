@@ -243,6 +243,7 @@ namespace CAS.UI.UICAAControls.Audit
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
 			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
+                _toolStripMenuItemEdit,
 				_toolStripSeparator1,
 				_toolStripMenuItemHighlight);
 
