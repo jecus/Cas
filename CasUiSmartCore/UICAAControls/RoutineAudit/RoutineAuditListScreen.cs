@@ -6,10 +6,12 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
+using CrystalDecisions.Windows.Forms;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.RoutineAudits;
 using SmartCore.Entities.Collections;
@@ -34,6 +36,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 		private RoutineAuditListView _directivesViewer;
 
 		private RadMenuItem _toolStripMenuItemOpen;
+		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 
@@ -115,13 +118,19 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 		private void InitToolStripMenuItems()
 		{
 			_toolStripMenuItemOpen = new RadMenuItem();
+			_toolStripMenuItemEdit = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
+            // 
+            // toolStripMenuItemView
+            // 
+            _toolStripMenuItemOpen.Text = "Open";
+            _toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
 			// 
 			// toolStripMenuItemView
 			// 
-			_toolStripMenuItemOpen.Text = "Open";
-			_toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
+            _toolStripMenuItemEdit.Text = "Edit";
+            _toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
 			// 
 			// toolStripMenuItemHighlight
 			// 
@@ -139,7 +148,26 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
 		}
-		#endregion
+
+        private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
+        {
+            if (_directivesViewer.SelectedItem != null)
+            {
+                var refE = new ReferenceEventArgs();
+                var dp = new DisplayerParams()
+                {
+                    Page = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _directivesViewer.SelectedItem.ItemId),
+					TypeOfReflection = ReflectionTypes.DisplayInNew,
+                    PageCaption = $"Routine Audit: {_directivesViewer.SelectedItem.Title}",
+					DisplayerType = DisplayerType.Screen
+			    };
+                refE.SetParameters(dp);
+                InvokeDisplayerRequested(refE);
+			}
+            
+		}
+
+        #endregion
 
 
 		#region private void HighlightItemClick(object sender, EventArgs e)
@@ -161,7 +189,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
 		#region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 
-		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
+		private void ToolStripMenuItemEditClick(object sender, EventArgs e)
 		{
             var form = new RoutineAuditForm(_directivesViewer.SelectedItem);
             if (form.ShowDialog() == DialogResult.OK)

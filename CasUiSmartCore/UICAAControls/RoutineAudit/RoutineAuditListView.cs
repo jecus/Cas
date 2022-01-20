@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
-using Auxiliary;
 using CAS.UI.Interfaces;
-using CAS.UI.UICAAControls.RoutineAudit;
+using CAS.UI.Management.Dispatchering;
+using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
-using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
-using SmartCore.CAA.Check;
-using SmartCore.CAA.RoutineAudits;
-using Telerik.WinControls.UI;
 
-namespace CAS.UI.UICAAControls.CheckList
+namespace CAS.UI.UICAAControls.RoutineAudit
 {
 	///<summary>
 	/// список для отображения сотрудников
@@ -96,13 +91,13 @@ namespace CAS.UI.UICAAControls.CheckList
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
 			if (SelectedItem != null)
-			{
-                var form = new RoutineAuditForm(SelectedItem);
-                if (form.ShowDialog() == DialogResult.OK)
-                    _animatedThreadWorker.RunWorkerAsync();
-                e.Cancel = true;
+            {
 
-			}
+                e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), SelectedItem.ItemId);
+                e.DisplayerText = $"Routine Audit: {SelectedItem.Title}";
+                e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+
+            }
 		}
 		#endregion
 

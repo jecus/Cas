@@ -1,4 +1,6 @@
 ﻿
+using CAS.UI.UICAAControls.RoutineAudit;
+
 namespace CAS.UI.UICAAControls.Audit
 {
     partial class AuditForm
@@ -37,10 +39,10 @@ namespace CAS.UI.UICAAControls.Audit
             this.textBoxRemarks = new MetroFramework.Controls.MetroTextBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this._fromroutineAuditListView = new CAS.UI.UICAAControls.CheckList.RoutineAuditListView();
+            this._fromroutineAuditListView = new RoutineAuditListView();
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
-            this._toroutineAuditListView = new CAS.UI.UICAAControls.CheckList.RoutineAuditListView();
+            this._toroutineAuditListView = new RoutineAuditListView();
             metroLabel2 = new MetroFramework.Controls.MetroLabel();
             metroLabel6 = new MetroFramework.Controls.MetroLabel();
             label14 = new MetroFramework.Controls.MetroLabel();
@@ -302,9 +304,9 @@ namespace CAS.UI.UICAAControls.Audit
         private MetroFramework.Controls.MetroTextBox textBoxRemarks;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
-        private CheckList.RoutineAuditListView _fromroutineAuditListView;
+        private RoutineAuditListView _fromroutineAuditListView;
         private AvControls.AvButtonT.AvButtonT ButtonDelete;
         private AvControls.AvButtonT.AvButtonT ButtonAdd;
-        private CheckList.RoutineAuditListView _toroutineAuditListView;
+        private RoutineAuditListView _toroutineAuditListView;
     }
 }

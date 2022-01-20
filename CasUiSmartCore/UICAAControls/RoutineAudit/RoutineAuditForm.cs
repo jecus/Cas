@@ -116,34 +116,9 @@ namespace CAS.UI.UICAAControls.RoutineAudit
         {
             try
             {
-
-                var dialogResult = MessageBox.Show("Do you really want update records?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    ApplyChanges();
-                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_audit);
-
-
-                    var ids = _records.Select(i => i.CheckListId);
-                    foreach (var check in _updateChecks.Where(i => !ids.Contains(i.ItemId)))
-                    {
-                        var rec = new RoutineAuditRecord()
-                        {
-                            CheckListId = check.ItemId,
-                            RoutineAuditId = _audit.ItemId
-                        };
-                        
-                        GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
-                        _records.Add(rec);
-                }
-
-
+                    Save();
                     MessageBox.Show("All records updated successfull!", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
-                    //DialogResult = DialogResult.OK;
-                    // Close();
-                    _animatedThreadWorker.RunWorkerAsync();
-                    this.Focus();
-                }
+                    DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
             {
@@ -160,6 +135,12 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             _audit.Remark = metroTextBoxRemark.Text;
         }
 
+        private void Save()
+        {
+            ApplyChanges();
+            GlobalObjects.CaaEnvironment.NewKeeper.Save(_audit);
+        }
+
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
@@ -170,10 +151,26 @@ namespace CAS.UI.UICAAControls.RoutineAudit
         {
             if (_fromcheckListView.SelectedItems.Count == 0) return;
 
+            if (string.IsNullOrEmpty(_audit.Title))
+                metroTextBoxTitle.Text = $"{GlobalObjects.CaaEnvironment.IdentityUser.Name} ({SmartCore.Auxiliary.Convert.GetDateFormat(_audit.Settings.Created)} {_audit.Settings.Created.TimeOfDay.Hours}:{_audit.Settings.Created.TimeOfDay.Minutes}:{_audit.Settings.Created.TimeOfDay.Seconds})";
+
+
+            if(_audit.ItemId <= 0)
+                Save();
+
             foreach (var item in _fromcheckListView.SelectedItems.ToArray())
             {
                 _updateChecks.Add(item);
                 _addedChecks.Remove(item);
+
+                var rec = new RoutineAuditRecord()
+                {
+                    CheckListId = item.ItemId,
+                    RoutineAuditId = _audit.ItemId
+                };
+
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
+                _records.Add(rec);
             }
 
             _fromcheckListView.SetItemsArray(_addedChecks.ToArray());

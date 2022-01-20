@@ -11,9 +11,11 @@ using CAS.UI.UICAAControls.Operators;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.CAA.Operators;
+using SmartCore.CAA.RoutineAudits;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -30,9 +32,9 @@ namespace CAS.UI.UICAAControls.CheckList
 	{
 		#region Fields
 
-		private Operator _currentOperator;
+        private readonly int? _routingId;
 
-		private CommonCollection<CheckLists> _initialDocumentArray = new CommonCollection<CheckLists>();
+        private CommonCollection<CheckLists> _initialDocumentArray = new CommonCollection<CheckLists>();
 		private CommonCollection<CheckLists> _resultDocumentArray = new CommonCollection<CheckLists>();
 		private CommonFilterCollection _filter;
 
@@ -63,14 +65,14 @@ namespace CAS.UI.UICAAControls.CheckList
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public CheckListsScreen(Operator currentOperator)
+		public CheckListsScreen(Operator currentOperator, int? routingId = null)
 			: this()
 		{
 			if (currentOperator == null)
 				throw new ArgumentNullException("currentOperator");
 			aircraftHeaderControl1.Operator = currentOperator;
-			_currentOperator = currentOperator;
-			statusControl.ShowStatus = false;
+            _routingId = routingId;
+            statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 
 			_filter = new CommonFilterCollection(typeof(ICheckListFilterParams));
@@ -103,7 +105,18 @@ namespace CAS.UI.UICAAControls.CheckList
 
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
-			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(loadChild:true));
+
+            if (_routingId.HasValue)
+            {
+                var records = GlobalObjects.CaaEnvironment.NewLoader
+                    .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", _routingId), loadChild: true).ToList();
+
+                var ids = records.Select(i => i.CheckListId);
+				if(ids.Any())
+                    _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("ItemId", ids), loadChild: true));
+
+			}
+			else _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(loadChild:true));
 
             var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>();
             

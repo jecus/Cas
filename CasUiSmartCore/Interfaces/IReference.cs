@@ -331,7 +331,7 @@ namespace CAS.UI.Interfaces
 
 		#region private DisplayerParams()
 
-		private DisplayerParams()
+        public DisplayerParams()
 		{
 
 		}
