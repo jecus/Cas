@@ -152,12 +152,33 @@ namespace CAS.UI.UICAAControls.RoutineAudit
         {
             if (_fromcheckListView.SelectedItems.Count == 0) return;
 
+            
+            if (_fromcheckListView.SelectedItems.Count > 1)
+            {
+                MessageBox.Show("You can add only one check!!", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                return;
+            }
+
             if (string.IsNullOrEmpty(_audit.Title))
                 metroTextBoxTitle.Text = $"{GlobalObjects.CaaEnvironment.IdentityUser.Name} ({SmartCore.Auxiliary.Convert.GetDateFormat(_audit.Settings.Created)} {_audit.Settings.Created.TimeOfDay.Hours}:{_audit.Settings.Created.TimeOfDay.Minutes}:{_audit.Settings.Created.TimeOfDay.Seconds})";
 
 
             if(_audit.ItemId <= 0)
                 Save();
+
+            if (_updateChecks.Any())
+            {
+                var form = MessageBox.Show("Do yoy really wand replace check?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
+                if(form == DialogResult.No)
+                    return;
+
+                foreach (var check in _updateChecks)
+                {
+                    GlobalObjects.CaaEnvironment.NewKeeper.Delete(check);
+                    _updateChecks.Remove(check);
+                    _addedChecks.Add(check);
+                }
+            }
 
             foreach (var item in _fromcheckListView.SelectedItems.ToArray())
             {

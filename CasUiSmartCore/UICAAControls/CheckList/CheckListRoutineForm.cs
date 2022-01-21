@@ -7,9 +7,11 @@ using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
+using SmartCore.CAA.RoutineAudits;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 
@@ -17,13 +19,15 @@ namespace CAS.UI.UICAAControls.CheckList
 {
     public partial class CheckListRoutineForm : MetroForm
     {
+        private readonly int _routineId;
         private List<CheckLists> _addedChecks = new List<CheckLists>();
         private List<CheckLists> _updateChecks = new List<CheckLists>();
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private IList<FindingLevels> _levels = new List<FindingLevels>();
 
-        public CheckListRoutineForm()
+        public CheckListRoutineForm(int routineId)
         {
+            _routineId = routineId;
             InitializeComponent();
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
@@ -66,108 +70,39 @@ namespace CAS.UI.UICAAControls.CheckList
                 else if (check.Remains.Days >= 0 && check.Remains.Days <= check.Settings.RevisonValidToNotify)
                     check.Condition = ConditionState.Notify;
             }
+            
+            
+            var records = GlobalObjects.CaaEnvironment.NewLoader
+                .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", _routineId), loadChild: true).ToList();
+
+            var ids = records.Select(i => i.CheckListId);
+
+            foreach (var id in ids)
+            {
+                var item = _addedChecks.FirstOrDefault(i => i.ItemId == id);
+                if(item == null)
+                    continue;
+
+                _addedChecks.Remove(item);
+                _updateChecks.Add(item);
+            }
         }
 
         private void UpdateInformation()
         {
-            SetEnableControl(false);
-
-            comboBoxLevel.Items.Clear();
-            comboBoxLevel.Items.AddRange(_levels.ToArray());
-            comboBoxLevel.Items.Add(FindingLevels.Unknown);
-
-
-            var phase = new List<string> { "1", "2", "3", "4", "5", "6", "N/A" };
-            comboBoxPhase.Items.Clear();
-            foreach (var i in phase)
-                comboBoxPhase.Items.Add(i);
-            comboBoxPhase.SelectedItem = "N/A";
-
-            comboBoxLevel.SelectedItem = FindingLevels.Unknown;
             _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
             _updateChecks.Clear();
             _tocheckListView.SetItemsArray(_updateChecks.ToArray());
         }
-
-        private void ApplyChanges()
-        {
-            foreach (var checks in _updateChecks)
-            {
-                if(checkBoxSource.Checked)
-                    checks.Source = metroTextSource.Text;
-                if(checkBoxEdition.Checked)
-                {
-                    checks.Settings.EditionNumber = metroTextBoxEditionNumber.Text;
-                    checks.Settings.EditionDate = dateTimePickerEditionDate.Value;
-                }
-                if (checkBoxRevisionValidTo.Checked)
-                {
-                    checks.Settings.RevisionNumber = metroTextBoxRevision.Text;
-                    checks.Settings.RevisonDate = dateTimePickerRevisionDate.Value;
-                    checks.Settings.RevisonValidTo = checkBoxRevisionValidTo.Checked;
-                }
-                if(checkBoxCheck.Checked)
-                    checks.Settings.RevisonValidToDate = dateTimePickeValidTo.Value;
-                if (checkBoxNotify.Checked)
-                    checks.Settings.RevisonValidToNotify = (int)numericUpNotify.Value;
-                if(checkBoxReference.Checked)
-                    checks.Settings.Reference = metroTextBoxReference.Text;
-                if(checkBoxLevel.Checked)
-                    checks.Settings.LevelId = ((FindingLevels)comboBoxLevel.SelectedItem).ItemId;
-                if (checkBoxPhase.Checked)
-                    checks.Settings.Phase = (string)comboBoxPhase.SelectedItem;
-                if (checkBoxMH.Checked)
-                    checks.Settings.MH = dateTimePickerMH.Value;
-            }
-        }
-
-
-        private void SetEnableControl(bool state)
-        {
-            checkBoxSource.Checked =
-                checkBoxEdition.Checked =
-                    checkBoxCheck.Checked =
-                            checkBoxNotify.Checked =
-                                checkBoxReference.Checked =
-                                    checkBoxLevel.Checked = 
-            metroTextSource.Enabled = 
-            metroTextBoxEditionNumber.Enabled =
-            dateTimePickerEditionDate.Enabled =
-                metroTextBoxRevision.Enabled = 
-            dateTimePickerRevisionDate.Enabled =
-                dateTimePickeValidTo.Enabled =
-            numericUpNotify.Enabled =
-                comboBoxPhase.Enabled =
-                    dateTimePickerMH.Enabled =
-            metroTextBoxReference.Enabled =
-                comboBoxLevel.Enabled = state;
-        }
-
-        private void ClearControl()
-        {
-            metroTextSource.Text = "";
-            metroTextBoxEditionNumber.Text = "";
-            dateTimePickerEditionDate.Value = DateTime.Today;
-            metroTextBoxRevision.Text = "";
-            dateTimePickerRevisionDate.Value = DateTime.Today;
-            checkBoxRevisionValidTo.Checked = false;
-            dateTimePickeValidTo.Value = DateTime.Today;
-            numericUpNotify.Value = 0;
-            metroTextBoxReference.Text = "";
-            comboBoxLevel.SelectedItem = FindingLevels.Unknown;
-            comboBoxPhase.SelectedItem = "N/A";
-            dateTimePickerMH.Value = new DateTime(2020, 1, 1, 0, 0, 0);
-        }
-
+        
+        
         private void buttonOk_Click(object sender, EventArgs e)
         {
             try
             {
-
                 var dialogResult = MessageBox.Show("Do you really want update records?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    ApplyChanges();
                     foreach (var checks in _updateChecks)
                         GlobalObjects.CaaEnvironment.NewKeeper.Save(checks);
 
@@ -181,8 +116,6 @@ namespace CAS.UI.UICAAControls.CheckList
                         _updateChecks.Remove(item);
                         _addedChecks.Add(item);
                     }
-                    SetEnableControl(false);
-                    ClearControl();
                     _animatedThreadWorker.RunWorkerAsync();
                 }
             }
@@ -205,6 +138,14 @@ namespace CAS.UI.UICAAControls.CheckList
             {
                 _updateChecks.Add(item);
                 _addedChecks.Remove(item);
+                
+                var rec = new RoutineAuditRecord()
+                {
+                    CheckListId = item.ItemId,
+                    RoutineAuditId = _routineId
+                };
+
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
             }
 
             _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
@@ -224,60 +165,10 @@ namespace CAS.UI.UICAAControls.CheckList
             _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
             _tocheckListView.SetItemsArray(_updateChecks.ToArray());
         }
-
-        private void checkBoxSource_CheckedChanged(object sender, EventArgs e)
-        {
-            metroTextSource.Enabled = checkBoxSource.Checked;
-        }
-
-        private void checkBoxReference_CheckedChanged(object sender, EventArgs e)
-        {
-            metroTextBoxReference.Enabled = checkBoxReference.Checked;
-        }
-
-        private void checkBoxEdition_CheckedChanged(object sender, EventArgs e)
-        {
-            metroTextBoxEditionNumber.Enabled =
-                dateTimePickerEditionDate.Enabled =
-                    checkBoxEdition.Checked;
-        }
-
-
-        private void checkBoxCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            dateTimePickeValidTo.Enabled = checkBoxCheck.Checked;
-        }
-
-        private void checkBoxNotify_CheckedChanged(object sender, EventArgs e)
-        {
-            numericUpNotify.Enabled = checkBoxNotify.Checked;
-        }
-
-        private void checkBoxLevel_CheckedChanged(object sender, EventArgs e)
-        {
-            comboBoxLevel.Enabled = checkBoxLevel.Checked;
-        }
-
+        
         private void CheckListRevisionForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult = DialogResult.OK;
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            comboBoxPhase.Enabled = checkBoxPhase.Checked;
-        }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            dateTimePickerMH.Enabled = checkBoxMH.Checked;
-        }
-
-        private void checkBoxRevisionValidTo_CheckedChanged(object sender, EventArgs e)
-        {
-            metroTextBoxRevision.Enabled =
-                    dateTimePickerRevisionDate.Enabled
-                        = checkBoxRevisionValidTo.Checked;
         }
     }
 }
