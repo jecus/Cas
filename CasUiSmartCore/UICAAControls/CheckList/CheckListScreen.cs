@@ -62,22 +62,26 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		#region public PersonnelListScreen(Operator currentOperator)
 
-		///<summary>
-		/// Создаёт экземпляр элемента управления, отображающего список директив
-		///</summary>
-		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public CheckListsScreen(Operator currentOperator, int? routingId = null, int? auditId = null)
-			: this()
-		{
-			if (currentOperator == null)
-				throw new ArgumentNullException("currentOperator");
-			aircraftHeaderControl1.Operator = currentOperator;
+        ///<summary>
+        /// Создаёт экземпляр элемента управления, отображающего список директив
+        ///</summary>
+        ///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
+        public CheckListsScreen(Operator currentOperator, int? routingId = null, int? auditId = null)
+            : this()
+        {
+            if (currentOperator == null)
+                throw new ArgumentNullException("currentOperator");
+            aircraftHeaderControl1.Operator = currentOperator;
             _routingId = routingId;
             _auditId = auditId;
             statusControl.ShowStatus = false;
-			labelTitle.Visible = false;
+            labelTitle.Visible = false;
 
-			_filter = new CommonFilterCollection(typeof(ICheckListFilterParams));
+            _filter = new CommonFilterCollection(typeof(ICheckListFilterParams));
+
+            if (routingId.HasValue || auditId.HasValue)
+                buttonRevison.Visible = false;
+
 
 			InitToolStripMenuItems();
 			InitListView();
@@ -93,7 +97,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			_directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
+            _directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
 		}

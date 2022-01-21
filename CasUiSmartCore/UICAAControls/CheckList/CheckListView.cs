@@ -40,8 +40,12 @@ namespace CAS.UI.UICAAControls.CheckList
 		{
             _animatedThreadWorker = animatedThreadWorker;
             InitializeComponent();
-			SortDirection = SortDirection.Asc;
-			OldColumnIndex = 6;
+			ColumnIndexes = new List<string>()
+			{
+				"Section №", "Part №","SubPart №","Item №"
+			};
+			//SortDirection = SortDirection.Asc;
+			//OldColumnIndex = 6;
 		}
 		#endregion
 
