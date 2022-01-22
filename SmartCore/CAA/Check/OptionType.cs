@@ -27,6 +27,7 @@ namespace SmartCore.CAA.Check
         public static OptionType Reviewed = new OptionType(11, "Reviewed", "Reviewed", "");
         public static OptionType OtherAction = new OptionType(12, "Other Action", "Other Action", "");
         public static OptionType Traced = new OptionType(13, "Traced", "Traced", "");
+        public static OptionType IdentifiedExamined = new OptionType(14, "Identified/Examined", "Identified/Examined", "");
         public static OptionType Unknown = new OptionType(-1, "Unknown", "Unknown", "Unknown");
 
         /*
