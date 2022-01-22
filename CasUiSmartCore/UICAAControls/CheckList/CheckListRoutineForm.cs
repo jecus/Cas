@@ -91,7 +91,6 @@ namespace CAS.UI.UICAAControls.CheckList
         private void UpdateInformation()
         {
             _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
-            _updateChecks.Clear();
             _tocheckListView.SetItemsArray(_updateChecks.ToArray());
         }
         

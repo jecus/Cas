@@ -172,7 +172,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
                 if(form == DialogResult.No)
                     return;
 
-                foreach (var check in _updateChecks)
+                foreach (var check in _updateChecks.ToArray())
                 {
                     GlobalObjects.CaaEnvironment.NewKeeper.Delete(check);
                     _updateChecks.Remove(check);

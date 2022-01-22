@@ -32,6 +32,7 @@ namespace CAS.UI.UICAAControls.CheckList
 	{
 		#region Fields
 
+        private  int? _currentRoutineId;
         private readonly int? _routingId;
         private readonly int? _auditId;
 
@@ -114,7 +115,8 @@ namespace CAS.UI.UICAAControls.CheckList
 
             if (_routingId.HasValue)
             {
-                var records = GlobalObjects.CaaEnvironment.NewLoader
+                _currentRoutineId = _routingId;
+				var records = GlobalObjects.CaaEnvironment.NewLoader
                     .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", _routingId), loadChild: true).ToList();
 
                 var ids = records.Select(i => i.CheckListId);
@@ -129,7 +131,8 @@ namespace CAS.UI.UICAAControls.CheckList
 
                 var routineIds = records.Select(i => i.RoutineAuditId).Distinct();
 
-				var routines = GlobalObjects.CaaEnvironment.NewLoader
+                _currentRoutineId = routineIds.FirstOrDefault();
+                var routines = GlobalObjects.CaaEnvironment.NewLoader
                     .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", routineIds), loadChild: true).ToList();
 
                 var ids = routines.Select(i => i.CheckListId).Distinct();
@@ -330,11 +333,20 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-            var form = new CheckListForm(new CheckLists());
-			if(form.ShowDialog() == DialogResult.OK)
-				AnimatedThreadWorker.RunWorkerAsync();
-			e.Cancel = true;
-        }
+            if (_currentRoutineId.HasValue)
+            {
+                var form = new CheckListRoutineForm(_currentRoutineId.Value);
+                if (form.ShowDialog() == DialogResult.OK)
+                    AnimatedThreadWorker.RunWorkerAsync();
+			}
+            else
+            {
+				var form = new CheckListForm(new CheckLists());
+                if (form.ShowDialog() == DialogResult.OK)
+                    AnimatedThreadWorker.RunWorkerAsync();
+            }
+            e.Cancel = true;
+		}
 
 		#endregion
 
