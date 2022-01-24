@@ -4,7 +4,7 @@ using Entity.Abstractions.Attributte;
 
 namespace CAA.Entity.Models.DTO
 {
-    [Table("AuditCheckRecor", Schema = "dbo")]
+    [Table("AuditCheckRecords", Schema = "dbo")]
     [Condition("IsDeleted", 0)]
     public  class AuditCheckRecordDTO : BaseEntity
     {
