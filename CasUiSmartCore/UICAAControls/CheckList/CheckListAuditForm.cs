@@ -44,13 +44,16 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void UpdateControls()
         {
+            radioButtonNotSatisfactory.CheckedChanged += RadioButtonSatisfactory_CheckedChange;
+            radioButtonSatisfactory.CheckedChanged += RadioButtonSatisfactory_CheckedChange;
+
             radioButtonNotSatisfactory.Enabled =
                 radioButtonSatisfactory.Enabled =
                     metroTextBoxReference.Enabled =
                         comboBoxRootCategory.Enabled =
                             metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
 
-            comboBoxRootCategory.Enabled = radioButtonSatisfactory.Checked;
+            comboBoxRootCategory.Enabled = !radioButtonSatisfactory.Checked;
         }
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
@@ -75,8 +78,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void UpdateInformation()
         {
-            radioButtonNotSatisfactory.CheckedChanged += RadioButtonSatisfactory_CheckedChange;
-            radioButtonSatisfactory.CheckedChanged += RadioButtonSatisfactory_CheckedChange;
+            
 
             labelSourceText.Text = _currentCheck.Source;
             labelEditorText.Text = _currentCheck.EditionNumber;
@@ -147,7 +149,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void RadioButtonSatisfactory_CheckedChange(object sender, EventArgs e)
         {
-            comboBoxRootCategory.Enabled = radioButtonSatisfactory.Checked;
+            comboBoxRootCategory.Enabled = !radioButtonSatisfactory.Checked;
         }
     }
 }

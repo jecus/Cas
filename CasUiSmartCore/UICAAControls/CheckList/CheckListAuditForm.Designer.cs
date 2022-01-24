@@ -37,7 +37,7 @@ namespace CAS.UI.UICAAControls.CheckList
             System.Windows.Forms.Label label8;
             System.Windows.Forms.Label label9;
             System.Windows.Forms.Label label10;
-
+            System.Windows.Forms.Label label1;
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.metroTextBoxItem = new MetroFramework.Controls.MetroTextBox();
@@ -63,6 +63,7 @@ namespace CAS.UI.UICAAControls.CheckList
             labelEditorText = new System.Windows.Forms.Label();
             labelRevisionText = new System.Windows.Forms.Label();
             labelLevelText = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -360,6 +361,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.radioButtonSatisfactory.Size = new System.Drawing.Size(99, 18);
             this.radioButtonSatisfactory.TabIndex = 344;
             this.radioButtonSatisfactory.TabStop = true;
+            this.radioButtonSatisfactory.Checked = true;
             this.radioButtonSatisfactory.Text = "Satisfactory";
             // 
             // radioButtonNotSatisfactory
@@ -509,11 +511,24 @@ namespace CAS.UI.UICAAControls.CheckList
             labelLevelText.Text = "Level";
             labelLevelText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Verdana", 9F);
+            label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label1.Location = new System.Drawing.Point(469, 48);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(81, 14);
+            label1.TabIndex = 353;
+            label1.Text = "Audit action";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // CheckListAuditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(997, 820);
+            this.Controls.Add(label1);
             this.Controls.Add(this.comboBoxRootCategory);
             this.Controls.Add(label10);
             this.Controls.Add(this.checkBoxNotApplicable);
@@ -549,11 +564,6 @@ namespace CAS.UI.UICAAControls.CheckList
 
 
         #endregion
-
-        System.Windows.Forms.Label labelSourceText;
-        System.Windows.Forms.Label labelEditorText;
-        System.Windows.Forms.Label labelRevisionText;
-        System.Windows.Forms.Label labelLevelText;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
         private MetroFramework.Controls.MetroTextBox metroTextBoxItem;
@@ -568,5 +578,9 @@ namespace CAS.UI.UICAAControls.CheckList
         private MetroFramework.Controls.MetroTextBox metroTextBoxComments;
         private CheckBox checkBoxNotApplicable;
         private ComboBox comboBoxRootCategory;
+        System.Windows.Forms.Label labelSourceText;
+        System.Windows.Forms.Label labelEditorText;
+        System.Windows.Forms.Label labelRevisionText;
+        System.Windows.Forms.Label labelLevelText;
     }
 }
