@@ -107,6 +107,7 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             this.ButtonAdd.ActiveBackColor = System.Drawing.Color.Transparent;
             this.ButtonAdd.ActiveBackgroundImage = null;
+            this.ButtonAdd.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ButtonAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ButtonAdd.FontMain = new System.Drawing.Font("Verdana", 8F);
             this.ButtonAdd.FontSecondary = new System.Drawing.Font("Verdana", 8F);
@@ -135,6 +136,7 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             this.ButtonDelete.ActiveBackColor = System.Drawing.Color.Transparent;
             this.ButtonDelete.ActiveBackgroundImage = null;
+            this.ButtonDelete.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ButtonDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ButtonDelete.FontMain = new System.Drawing.Font("Verdana", 8F);
             this.ButtonDelete.FontSecondary = new System.Drawing.Font("Verdana", 8F);

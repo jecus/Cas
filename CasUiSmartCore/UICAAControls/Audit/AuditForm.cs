@@ -121,12 +121,34 @@ namespace CAS.UI.UICAAControls.Audit
         {
             if (_fromroutineAuditListView.SelectedItems.Count == 0) return;
 
+
+            if (_fromroutineAuditListView.SelectedItems.Count > 1)
+            {
+                MessageBox.Show("You can add only one Routine audit!!", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                return;
+            }
+
+
             if (string.IsNullOrEmpty(_audit.AuditNumber))
                 metroTextBoxAuditNumber.Text = $"{GlobalObjects.CaaEnvironment.IdentityUser.Name} ({SmartCore.Auxiliary.Convert.GetDateFormat(_audit.Settings.CreateDate)} {_audit.Settings.CreateDate.TimeOfDay.Hours}:{_audit.Settings.CreateDate.TimeOfDay.Minutes}:{_audit.Settings.CreateDate.TimeOfDay.Seconds})";
 
-
             if (_audit.ItemId <= 0)
                 Save();
+
+
+            if (_updateChecks.Any())
+            {
+                var form = MessageBox.Show("Do yoy really wand replace Routine audit?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
+                if (form == DialogResult.No)
+                    return;
+
+                foreach (var check in _updateChecks.ToArray())
+                {
+                    GlobalObjects.CaaEnvironment.NewKeeper.Delete(check);
+                    _updateChecks.Remove(check);
+                    _addedChecks.Add(check);
+                }
+            }
 
             foreach (var item in _fromroutineAuditListView.SelectedItems.ToArray())
             {
