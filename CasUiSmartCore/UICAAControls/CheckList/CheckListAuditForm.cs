@@ -23,6 +23,7 @@ namespace CAS.UI.UICAAControls.CheckList
         private IList<FindingLevels> _levels = new List<FindingLevels>();
         private AuditCheck _currentAuditCheck;
         private List<AuditCheckRecord> _currentAuditCheckRecords = new List<AuditCheckRecord>();
+        private IList<RootCause> _rootCase = new List<RootCause>();
 
         #region Constructors
         public CheckListAuditForm()
@@ -49,9 +50,10 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void UpdateControls()
         {
-            comboBoxRootCategory.Items.Clear();
-            comboBoxRootCategory.Items.AddRange(AuditRootCategory.Items.ToArray());
-            comboBoxRootCategory.SelectedItem = AuditRootCategory.Unknown;
+
+            checkedListBoxRoot.Items.Clear();
+            checkedListBoxRoot.Items.AddRange(_rootCase.ToArray());
+
 
             radioButtonNotSatisfactory.CheckedChanged += RadioButtonSatisfactory_CheckedChange;
             radioButtonSatisfactory.CheckedChanged += RadioButtonSatisfactory_CheckedChange;
@@ -59,65 +61,71 @@ namespace CAS.UI.UICAAControls.CheckList
             radioButtonNotSatisfactory.Enabled =
                 radioButtonSatisfactory.Enabled =
                     metroTextBoxReference.Enabled =
-                        comboBoxRootCategory.Enabled =
+                        checkedListBoxRoot.Enabled =
                             metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
 
-            comboBoxRootCategory.Enabled = !radioButtonSatisfactory.Checked;
+            checkedListBoxRoot.Enabled = !radioButtonSatisfactory.Checked;
         }
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
             if (_currentCheck == null) return;
 
-            if (_currentCheck.ItemId > 0)
+
+            _rootCase = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<RootCauseDTO, RootCause>();
+
+            _currentCheck =
+                GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListDTO, CheckLists>(_currentCheck.ItemId);
+            _currentAuditCheck =
+                GlobalObjects.CaaEnvironment.NewLoader.GetObject<AuditCheckDTO, AuditCheck>(new Filter("AuditId",
+                    _auditId));
+            if (_currentAuditCheck == null)
             {
-                _currentCheck = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListDTO, CheckLists>(_currentCheck.ItemId);
-                _currentAuditCheck = GlobalObjects.CaaEnvironment.NewLoader.GetObject<AuditCheckDTO, AuditCheck>(new Filter("AuditId", _auditId));
-                if (_currentAuditCheck == null)
+                _currentAuditCheck = new AuditCheck()
                 {
-                    _currentAuditCheck = new AuditCheck()
-                    {
-                        CheckListId = _currentCheck.ItemId,
-                        AuditId = _auditId
-                    };
-                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
-                }
-
-                if(_currentAuditCheck.ItemId > 0)
-                 _currentAuditCheckRecords = new List<AuditCheckRecord>(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AuditCheckRecordDTO, AuditCheckRecord>(new Filter("AuditRecordId", _currentAuditCheck.ItemId)));
-                else _currentAuditCheckRecords = new List<AuditCheckRecord>();
-
-
-                var records =
-                    GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRecordDTO, CheckListRecords>(new Filter("CheckListId", _currentCheck.ItemId));
-
-
-                foreach (var rec in records)
-                {
-                    var find = _currentAuditCheckRecords.FirstOrDefault(i => i.CheckListRecordId == rec.ItemId);
-                    if (find == null)
-                    {
-                        var newRecord = new AuditCheckRecord()
-                        {
-                            CheckListRecordId = rec.ItemId,
-                            AuditRecordId = _currentAuditCheck.ItemId,
-                            CheckListRecord = rec
-                        };
-                        GlobalObjects.CaaEnvironment.NewKeeper.Save(newRecord);
-
-                        _currentAuditCheckRecords.Add(newRecord);
-                    }
-                    else find.CheckListRecord = rec;
-                }
-
-                _currentCheck.CheckListRecords.Clear();
-                _currentCheck.CheckListRecords.AddRange(records);
-
-                _levels.Clear();
-                _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>();
-                _currentCheck.Level = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.Settings.LevelId) ??
-                                      FindingLevels.Unknown;
+                    CheckListId = _currentCheck.ItemId,
+                    AuditId = _auditId
+                };
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
             }
+
+            if (_currentAuditCheck.ItemId > 0)
+                _currentAuditCheckRecords = new List<AuditCheckRecord>(
+                    GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AuditCheckRecordDTO, AuditCheckRecord>(
+                        new Filter("AuditRecordId", _currentAuditCheck.ItemId)));
+            else _currentAuditCheckRecords = new List<AuditCheckRecord>();
+
+
+            var records =
+                GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRecordDTO, CheckListRecords>(
+                    new Filter("CheckListId", _currentCheck.ItemId));
+
+
+            foreach (var rec in records)
+            {
+                var find = _currentAuditCheckRecords.FirstOrDefault(i => i.CheckListRecordId == rec.ItemId);
+                if (find == null)
+                {
+                    var newRecord = new AuditCheckRecord()
+                    {
+                        CheckListRecordId = rec.ItemId,
+                        AuditRecordId = _currentAuditCheck.ItemId,
+                        CheckListRecord = rec
+                    };
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(newRecord);
+
+                    _currentAuditCheckRecords.Add(newRecord);
+                }
+                else find.CheckListRecord = rec;
+            }
+
+            _currentCheck.CheckListRecords.Clear();
+            _currentCheck.CheckListRecords.AddRange(records);
+
+            _levels.Clear();
+            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>();
+            _currentCheck.Level = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.Settings.LevelId) ??
+                                  FindingLevels.Unknown;
         }
 
         private void UpdateInformation()
@@ -137,6 +145,12 @@ namespace CAS.UI.UICAAControls.CheckList
             radioButtonSatisfactory.Checked = _currentAuditCheck.Settings.IsSatisfactory;
             metroTextBoxReference.Text = _currentAuditCheck.Settings.SubReference;
             metroTextBoxComments.Text = _currentAuditCheck.Settings.Comments;
+
+            for (int i = 0; i < checkedListBoxRoot.Items.Count; i++)
+            {
+                if (!string.IsNullOrEmpty(_currentAuditCheck.Settings.RootCause) &&_currentAuditCheck.Settings.RootCause.Contains(checkedListBoxRoot.Items[i].ToString()))
+                    checkedListBoxRoot.SetItemChecked(i, true);
+            }
 
             foreach (var group in _currentCheck.CheckListRecords.GroupBy(i => i.OptionNumber))
             {
@@ -161,6 +175,9 @@ namespace CAS.UI.UICAAControls.CheckList
             _currentAuditCheck.Settings.IsSatisfactory = radioButtonSatisfactory.Checked;
             _currentAuditCheck.Settings.SubReference = metroTextBoxReference.Text;
             _currentAuditCheck.Settings.Comments = metroTextBoxComments.Text;
+
+            foreach (var item in checkedListBoxRoot.CheckedItems)
+                _currentAuditCheck.Settings.RootCause += $"{item} ";
         }
 
 
@@ -203,17 +220,17 @@ namespace CAS.UI.UICAAControls.CheckList
             radioButtonNotSatisfactory.Enabled =
                 radioButtonSatisfactory.Enabled =
                     metroTextBoxReference.Enabled =
-                        comboBoxRootCategory.Enabled = 
+                        checkedListBoxRoot.Enabled = 
                 metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
 
-            comboBoxRootCategory.Enabled = !radioButtonSatisfactory.Checked;
+            checkedListBoxRoot.Enabled = !radioButtonSatisfactory.Checked;
         }
 
 
 
         private void RadioButtonSatisfactory_CheckedChange(object sender, EventArgs e)
         {
-            comboBoxRootCategory.Enabled = !radioButtonSatisfactory.Checked;
+            checkedListBoxRoot.Enabled = !radioButtonSatisfactory.Checked;
         }
     }
 }

@@ -55,5 +55,8 @@ namespace SmartCore.CAA.Audit
 
         [JsonProperty("Comments")]
         public string Comments { get; set; }
+
+        [JsonProperty("RootCause")]
+        public string RootCause { get; set; }
     }
 }

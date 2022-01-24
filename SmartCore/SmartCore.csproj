@@ -404,7 +404,6 @@
     <Compile Include="CAA\AllOperators.cs" />
     <Compile Include="CAA\Audit\AuditCheck.cs" />
     <Compile Include="CAA\Audit\AuditCheckRecord.cs" />
-    <Compile Include="CAA\Audit\AuditRootCategory.cs" />
     <Compile Include="CAA\Audit\CAAAudit.cs" />
     <Compile Include="CAA\Audit\AuditType.cs" />
     <Compile Include="CAA\Audit\IAuditFilterParams.cs" />

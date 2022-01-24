@@ -24,5 +24,11 @@ namespace SmartCore.CAA.FindingLevel
         [Filter("Remark", Order = 3)]
         [ListViewData("Remark", 3)]
         public string Remark { get; set; }
+
+
+        public override string ToString()
+        {
+            return $"{CategoryNumber} {CategoryName}";
+        }
     }
 }
