@@ -49,6 +49,9 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void UpdateControls()
         {
+            comboBoxRootCategory.Items.Clear();
+            comboBoxRootCategory.Items.AddRange(AuditRootCategory.Items.ToArray());
+
             radioButtonNotSatisfactory.CheckedChanged += RadioButtonSatisfactory_CheckedChange;
             radioButtonSatisfactory.CheckedChanged += RadioButtonSatisfactory_CheckedChange;
 
@@ -80,7 +83,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 }
 
                 if(_currentAuditCheck.ItemId > 0)
-                 _currentAuditCheckRecords = new List<AuditCheckRecord>(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AuditCheckRecordDTO, AuditCheckRecord>(new Filter("AuditId", _currentAuditCheck.ItemId)));
+                 _currentAuditCheckRecords = new List<AuditCheckRecord>(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AuditCheckRecordDTO, AuditCheckRecord>(new Filter("AuditRecordId", _currentAuditCheck.ItemId)));
                 else _currentAuditCheckRecords = new List<AuditCheckRecord>();
 
 
@@ -103,6 +106,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
                         _currentAuditCheckRecords.Add(newRecord);
                     }
+                    else find.CheckListRecord = rec;
                 }
 
                 _currentCheck.CheckListRecords.Clear();
@@ -117,8 +121,6 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void UpdateInformation()
         {
-            
-
             labelSourceText.Text = _currentCheck.Source;
             labelEditorText.Text = _currentCheck.EditionNumber;
             labelRevisionText.Text = _currentCheck.RevisionNumber;
@@ -130,6 +132,11 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxItem.Text = $"{_currentCheck.ItemNumber} {_currentCheck.ItemName}";
             metroTextBoxRequirement.Text = _currentCheck.Requirement;
 
+            checkBoxNotApplicable.Checked = _currentAuditCheck.Settings.IsApplicable ;
+            radioButtonSatisfactory.Checked = _currentAuditCheck.Settings.IsSatisfactory;
+            metroTextBoxReference.Text = _currentAuditCheck.Settings.SubReference;
+            metroTextBoxComments.Text = _currentAuditCheck.Settings.Comments;
+
             foreach (var group in _currentCheck.CheckListRecords.GroupBy(i => i.OptionNumber))
             {
                 flowLayoutPanel1.Controls.Add(new Label()
@@ -140,7 +147,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 });
                 foreach (var record in group)
                 {
-                    var control = new AuditCheckControl(record);
+                    var control = new AuditCheckControl(_currentAuditCheckRecords.FirstOrDefault(i => i.CheckListRecordId == record.ItemId));
                     flowLayoutPanel1.Controls.Add(control);
                 }
             }
@@ -149,7 +156,10 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void ApplyChanges()
         {
-
+            _currentAuditCheck.Settings.IsApplicable = checkBoxNotApplicable.Checked;
+            _currentAuditCheck.Settings.IsSatisfactory = radioButtonSatisfactory.Checked;
+            _currentAuditCheck.Settings.SubReference = metroTextBoxReference.Text;
+            _currentAuditCheck.Settings.Comments = metroTextBoxComments.Text;
         }
 
 
@@ -157,6 +167,18 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             try
             {
+
+                ApplyChanges();
+
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
+
+
+                foreach (var control in flowLayoutPanel1.Controls.OfType<AuditCheckControl>())
+                {
+                    control.ApplyChanges();
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(control.AuditCheckRecord, true);
+                }
+
 
                 DialogResult = DialogResult.OK;
                 Close();
@@ -182,6 +204,8 @@ namespace CAS.UI.UICAAControls.CheckList
                     metroTextBoxReference.Enabled =
                         comboBoxRootCategory.Enabled = 
                 metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
+
+            comboBoxRootCategory.Enabled = !radioButtonSatisfactory.Checked;
         }
 
 

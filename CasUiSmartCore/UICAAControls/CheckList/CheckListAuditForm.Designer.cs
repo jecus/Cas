@@ -59,11 +59,11 @@ namespace CAS.UI.UICAAControls.CheckList
             label8 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
             label10 = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
             labelSourceText = new System.Windows.Forms.Label();
             labelEditorText = new System.Windows.Forms.Label();
             labelRevisionText = new System.Windows.Forms.Label();
             labelLevelText = new System.Windows.Forms.Label();
-            label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -150,6 +150,18 @@ namespace CAS.UI.UICAAControls.CheckList
             label10.Text = "Root cause Category";
             label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Verdana", 9F);
+            label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label1.Location = new System.Drawing.Point(469, 48);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(81, 14);
+            label1.TabIndex = 353;
+            label1.Text = "Audit action";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -157,7 +169,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(834, 782);
+            this.buttonOk.Location = new System.Drawing.Point(834, 764);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 299;
@@ -171,7 +183,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonCancel.Location = new System.Drawing.Point(915, 782);
+            this.buttonCancel.Location = new System.Drawing.Point(915, 764);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 33);
             this.buttonCancel.TabIndex = 298;
@@ -332,7 +344,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxRequirement.Multiline = true;
             this.metroTextBoxRequirement.Name = "metroTextBoxRequirement";
             this.metroTextBoxRequirement.PasswordChar = '\0';
-            this.metroTextBoxRequirement.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxRequirement.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.metroTextBoxRequirement.SelectedText = "";
             this.metroTextBoxRequirement.SelectionLength = 0;
             this.metroTextBoxRequirement.SelectionStart = 0;
@@ -348,12 +360,13 @@ namespace CAS.UI.UICAAControls.CheckList
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(472, 65);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(518, 711);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(518, 689);
             this.flowLayoutPanel1.TabIndex = 343;
             // 
             // radioButtonSatisfactory
             // 
             this.radioButtonSatisfactory.AutoSize = true;
+            this.radioButtonSatisfactory.Checked = true;
             this.radioButtonSatisfactory.Font = new System.Drawing.Font("Verdana", 9F);
             this.radioButtonSatisfactory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radioButtonSatisfactory.Location = new System.Drawing.Point(8, 472);
@@ -361,7 +374,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.radioButtonSatisfactory.Size = new System.Drawing.Size(99, 18);
             this.radioButtonSatisfactory.TabIndex = 344;
             this.radioButtonSatisfactory.TabStop = true;
-            this.radioButtonSatisfactory.Checked = true;
             this.radioButtonSatisfactory.Text = "Satisfactory";
             // 
             // radioButtonNotSatisfactory
@@ -397,7 +409,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxReference.Multiline = true;
             this.metroTextBoxReference.Name = "metroTextBoxReference";
             this.metroTextBoxReference.PasswordChar = '\0';
-            this.metroTextBoxReference.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxReference.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.metroTextBoxReference.SelectedText = "";
             this.metroTextBoxReference.SelectionLength = 0;
             this.metroTextBoxReference.SelectionStart = 0;
@@ -429,7 +441,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxComments.Multiline = true;
             this.metroTextBoxComments.Name = "metroTextBoxComments";
             this.metroTextBoxComments.PasswordChar = '\0';
-            this.metroTextBoxComments.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxComments.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.metroTextBoxComments.SelectedText = "";
             this.metroTextBoxComments.SelectionLength = 0;
             this.metroTextBoxComments.SelectionStart = 0;
@@ -452,16 +464,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxNotApplicable.Text = "Not applicable";
             this.checkBoxNotApplicable.UseVisualStyleBackColor = true;
             this.checkBoxNotApplicable.CheckedChanged += new System.EventHandler(this.checkBoxNotApplicable_CheckedChanged);
-            // 
-            // comboBoxRootCategory
-            // 
-            this.comboBoxRootCategory.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.comboBoxRootCategory.ForeColor = System.Drawing.Color.DimGray;
-            this.comboBoxRootCategory.FormattingEnabled = true;
-            this.comboBoxRootCategory.Location = new System.Drawing.Point(8, 732);
-            this.comboBoxRootCategory.Name = "comboBoxRootCategory";
-            this.comboBoxRootCategory.Size = new System.Drawing.Size(458, 22);
-            this.comboBoxRootCategory.TabIndex = 352;
             // 
             // labelSourceText
             // 
@@ -511,23 +513,21 @@ namespace CAS.UI.UICAAControls.CheckList
             labelLevelText.Text = "Level";
             labelLevelText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label1
+            // comboBoxRootCategory
             // 
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Verdana", 9F);
-            label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label1.Location = new System.Drawing.Point(469, 48);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(81, 14);
-            label1.TabIndex = 353;
-            label1.Text = "Audit action";
-            label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.comboBoxRootCategory.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxRootCategory.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxRootCategory.FormattingEnabled = true;
+            this.comboBoxRootCategory.Location = new System.Drawing.Point(8, 732);
+            this.comboBoxRootCategory.Name = "comboBoxRootCategory";
+            this.comboBoxRootCategory.Size = new System.Drawing.Size(458, 22);
+            this.comboBoxRootCategory.TabIndex = 352;
             // 
             // CheckListAuditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(997, 820);
+            this.ClientSize = new System.Drawing.Size(997, 802);
             this.Controls.Add(label1);
             this.Controls.Add(this.comboBoxRootCategory);
             this.Controls.Add(label10);

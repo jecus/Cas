@@ -44,6 +44,16 @@ namespace SmartCore.CAA.Audit
     [Serializable]
     public class AuditCheckSettings
     {
+        [JsonProperty("IsApplicable")]
+        public bool IsApplicable { get; set; }
 
+        [JsonProperty("IsSatisfactory")]
+        public bool IsSatisfactory { get; set; }
+
+        [JsonProperty("SubReference")]
+        public string SubReference { get; set; }
+
+        [JsonProperty("Comments")]
+        public string Comments { get; set; }
     }
 }

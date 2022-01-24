@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using SmartCore.CAA.Check;
+﻿using System.Windows.Forms;
+using SmartCore.CAA.Audit;
 
 namespace CAS.UI.UICAAControls.CheckList
 {
     public partial class AuditCheckControl : UserControl
     {
-        public readonly CheckListRecords Record;
+        public  AuditCheckRecord AuditCheckRecord;
 
         #region Constructors
         public AuditCheckControl()
@@ -16,9 +13,9 @@ namespace CAS.UI.UICAAControls.CheckList
             InitializeComponent();
         }
 
-        public AuditCheckControl(CheckListRecords records) : this()
+        public AuditCheckControl(AuditCheckRecord auditCheckRecord) : this()
         {
-            Record = records;
+            AuditCheckRecord = auditCheckRecord;
             UpdateInformation();
         }
 
@@ -27,14 +24,15 @@ namespace CAS.UI.UICAAControls.CheckList
 
         public void ApplyChanges()
         {
-
+            AuditCheckRecord.IsChecked = checkBox1.Checked;
         }
 
 
         private void UpdateInformation()
         {
-            metroTextBoxRemark.Text = Record.Remark;
-            labelType.Text = Record.Option.ToString();
+            metroTextBoxRemark.Text = AuditCheckRecord.CheckListRecord.Remark;
+            labelType.Text = AuditCheckRecord.CheckListRecord.Option.ToString();
+            checkBox1.Checked = AuditCheckRecord.IsChecked;
         }
     }
 }
