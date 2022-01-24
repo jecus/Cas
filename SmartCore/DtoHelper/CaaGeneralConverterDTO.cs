@@ -21,8 +21,63 @@ namespace SmartCore.DtoHelper
 {
     public static  class CaaGeneralConverterDTO
 	{
+        public static AuditCheck ConvertCAA(this AuditCheckDTO audit)
+        {
+            return new AuditCheck
+			{
+                ItemId = audit.ItemId,
+                IsDeleted = audit.IsDeleted,
+                Updated = audit.Updated,
+                CorrectorId = audit.CorrectorId,
+                AuditId =  audit.AuditId,
+                CheckListId =  audit.CheckListId,
+                SettingsJSON = audit.SettingsJSON,
+            };
+        }
 
-        public static CAAAudit ConvertCAA(this CAAAuditDTO audit)
+        public static AuditCheckDTO ConvertCAA(this AuditCheck audit)
+        {
+            return new AuditCheckDTO
+			{
+                ItemId = audit.ItemId,
+                IsDeleted = audit.IsDeleted,
+                Updated = audit.Updated,
+                CorrectorId = audit.CorrectorId,
+                AuditId =  audit.AuditId,
+				CheckListId =  audit.CheckListId,
+				SettingsJSON = audit.SettingsJSON,
+            };
+        }
+
+
+        public static AuditCheckRecord ConvertCAA(this AuditCheckRecordDTO audit)
+        {
+            return new AuditCheckRecord
+			{
+                ItemId = audit.ItemId,
+                IsDeleted = audit.IsDeleted,
+                Updated = audit.Updated,
+                CorrectorId = audit.CorrectorId,
+                CheckListRecordId =  audit.CheckListRecordId,
+                IsChecked =  audit.IsChecked,
+            };
+        }
+
+        public static AuditCheckRecordDTO ConvertCAA(this AuditCheckRecord audit)
+        {
+            return new AuditCheckRecordDTO
+			{
+                ItemId = audit.ItemId,
+                IsDeleted = audit.IsDeleted,
+                Updated = audit.Updated,
+                CorrectorId = audit.CorrectorId,
+				CheckListRecordId =  audit.CheckListRecordId,
+                IsChecked =  audit.IsChecked,
+			};
+        }
+
+
+		public static CAAAudit ConvertCAA(this CAAAuditDTO audit)
         {
             return new CAAAudit
 			{

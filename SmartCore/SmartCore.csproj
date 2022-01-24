@@ -402,6 +402,8 @@
     <Compile Include="CaaEnvironment.cs" />
     <Compile Include="CAA\Aircraft\IAircraftFilter.cs" />
     <Compile Include="CAA\AllOperators.cs" />
+    <Compile Include="CAA\Audit\AuditCheck.cs" />
+    <Compile Include="CAA\Audit\AuditCheckRecord.cs" />
     <Compile Include="CAA\Audit\CAAAudit.cs" />
     <Compile Include="CAA\Audit\AuditType.cs" />
     <Compile Include="CAA\Audit\IAuditFilterParams.cs" />
