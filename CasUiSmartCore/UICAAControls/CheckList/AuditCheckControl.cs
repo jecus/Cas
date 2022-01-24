@@ -34,7 +34,6 @@ namespace CAS.UI.UICAAControls.CheckList
         private void UpdateInformation()
         {
             metroTextBoxRemark.Text = Record.Remark;
-            labelOption.Text =$"Option: {Record.OptionNumber}" ;
             labelType.Text = Record.Option.ToString();
         }
     }

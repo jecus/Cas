@@ -16,6 +16,8 @@ namespace CAA.Entity.Core
 
         #region Dictionary
 
+        public DbSet<AuditCheckDTO> AuditCheckDtos { get; set; }
+        public DbSet<AuditCheckRecordDTO> AuditCheckRecordDtos { get; set; }
         public DbSet<CAAAccessoryDescriptionDTO> AccessoryDescriptionDtos { get; set; }
 
         public DbSet<CAAAircraftOtherParameterDTO> AircraftOtherParameterDtos { get; set; }

@@ -34,13 +34,10 @@ namespace CAS.UI.UICAAControls.CheckList
             System.Windows.Forms.Label label2;
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label4;
-            System.Windows.Forms.Label label6;
-            System.Windows.Forms.Label label5;
-            System.Windows.Forms.Label label1;
-            System.Windows.Forms.Label label7;
             System.Windows.Forms.Label label8;
             System.Windows.Forms.Label label9;
             System.Windows.Forms.Label label10;
+
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.metroTextBoxItem = new MetroFramework.Controls.MetroTextBox();
@@ -59,17 +56,13 @@ namespace CAS.UI.UICAAControls.CheckList
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
-            label6 = new System.Windows.Forms.Label();
-            label5 = new System.Windows.Forms.Label();
-            label1 = new System.Windows.Forms.Label();
-            label7 = new System.Windows.Forms.Label();
+            label8 = new System.Windows.Forms.Label();
+            label9 = new System.Windows.Forms.Label();
+            label10 = new System.Windows.Forms.Label();
             labelSourceText = new System.Windows.Forms.Label();
             labelEditorText = new System.Windows.Forms.Label();
             labelRevisionText = new System.Windows.Forms.Label();
             labelLevelText = new System.Windows.Forms.Label();
-            label8 = new System.Windows.Forms.Label();
-            label9 = new System.Windows.Forms.Label();
-            label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -119,102 +112,6 @@ namespace CAS.UI.UICAAControls.CheckList
             label4.TabIndex = 331;
             label4.Text = "Level:";
             label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new System.Drawing.Font("Verdana", 9F);
-            label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label6.Location = new System.Drawing.Point(5, 203);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(41, 14);
-            label6.TabIndex = 339;
-            label6.Text = "Item:";
-            label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new System.Drawing.Font("Verdana", 9F);
-            label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label5.Location = new System.Drawing.Point(5, 176);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(62, 14);
-            label5.TabIndex = 337;
-            label5.Text = "Subpart:";
-            label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Verdana", 9F);
-            label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label1.Location = new System.Drawing.Point(5, 145);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(38, 14);
-            label1.TabIndex = 335;
-            label1.Text = "Part:";
-            label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new System.Drawing.Font("Verdana", 9F);
-            label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label7.Location = new System.Drawing.Point(5, 117);
-            label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(58, 14);
-            label7.TabIndex = 333;
-            label7.Text = "Section:";
-            label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelSourceText
-            // 
-            labelSourceText.AutoSize = true;
-            labelSourceText.Font = new System.Drawing.Font("Verdana", 9F);
-            labelSourceText.ForeColor = System.Drawing.Color.Black;
-            labelSourceText.Location = new System.Drawing.Point(63, 65);
-            labelSourceText.Name = "labelSourceText";
-            labelSourceText.Size = new System.Drawing.Size(50, 14);
-            labelSourceText.TabIndex = 323;
-            labelSourceText.Text = "Source";
-            labelSourceText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelEditorText
-            // 
-            labelEditorText.AutoSize = true;
-            labelEditorText.Font = new System.Drawing.Font("Verdana", 9F);
-            labelEditorText.ForeColor = System.Drawing.Color.Black;
-            labelEditorText.Location = new System.Drawing.Point(63, 90);
-            labelEditorText.Name = "labelEditorText";
-            labelEditorText.Size = new System.Drawing.Size(44, 14);
-            labelEditorText.TabIndex = 325;
-            labelEditorText.Text = "Editor";
-            labelEditorText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelRevisionText
-            // 
-            labelRevisionText.AutoSize = true;
-            labelRevisionText.Font = new System.Drawing.Font("Verdana", 9F);
-            labelRevisionText.ForeColor = System.Drawing.Color.Black;
-            labelRevisionText.Location = new System.Drawing.Point(185, 90);
-            labelRevisionText.Name = "labelRevisionText";
-            labelRevisionText.Size = new System.Drawing.Size(59, 14);
-            labelRevisionText.TabIndex = 327;
-            labelRevisionText.Text = "Revision";
-            labelRevisionText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelLevelText
-            // 
-            labelLevelText.AutoSize = true;
-            labelLevelText.Font = new System.Drawing.Font("Verdana", 9F);
-            labelLevelText.ForeColor = System.Drawing.Color.Black;
-            labelLevelText.Location = new System.Drawing.Point(315, 90);
-            labelLevelText.Name = "labelLevelText";
-            labelLevelText.Size = new System.Drawing.Size(40, 14);
-            labelLevelText.TabIndex = 332;
-            labelLevelText.Text = "Level";
-            labelLevelText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label8
             // 
@@ -286,7 +183,7 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             // 
             this.metroTextBoxItem.CustomButton.Image = null;
-            this.metroTextBoxItem.CustomButton.Location = new System.Drawing.Point(378, 1);
+            this.metroTextBoxItem.CustomButton.Location = new System.Drawing.Point(436, 1);
             this.metroTextBoxItem.CustomButton.Name = "";
             this.metroTextBoxItem.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.metroTextBoxItem.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -297,7 +194,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxItem.Enabled = false;
             this.metroTextBoxItem.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxItem.Lines = new string[0];
-            this.metroTextBoxItem.Location = new System.Drawing.Point(66, 203);
+            this.metroTextBoxItem.Location = new System.Drawing.Point(8, 203);
             this.metroTextBoxItem.MaxLength = 32767;
             this.metroTextBoxItem.Multiline = true;
             this.metroTextBoxItem.Name = "metroTextBoxItem";
@@ -307,7 +204,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxItem.SelectionLength = 0;
             this.metroTextBoxItem.SelectionStart = 0;
             this.metroTextBoxItem.ShortcutsEnabled = true;
-            this.metroTextBoxItem.Size = new System.Drawing.Size(400, 23);
+            this.metroTextBoxItem.Size = new System.Drawing.Size(458, 23);
             this.metroTextBoxItem.TabIndex = 340;
             this.metroTextBoxItem.UseSelectable = true;
             this.metroTextBoxItem.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -319,7 +216,7 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             // 
             this.metroTextBoxSubPart.CustomButton.Image = null;
-            this.metroTextBoxSubPart.CustomButton.Location = new System.Drawing.Point(378, 1);
+            this.metroTextBoxSubPart.CustomButton.Location = new System.Drawing.Point(436, 1);
             this.metroTextBoxSubPart.CustomButton.Name = "";
             this.metroTextBoxSubPart.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.metroTextBoxSubPart.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -330,7 +227,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxSubPart.Enabled = false;
             this.metroTextBoxSubPart.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxSubPart.Lines = new string[0];
-            this.metroTextBoxSubPart.Location = new System.Drawing.Point(66, 172);
+            this.metroTextBoxSubPart.Location = new System.Drawing.Point(8, 172);
             this.metroTextBoxSubPart.MaxLength = 32767;
             this.metroTextBoxSubPart.Multiline = true;
             this.metroTextBoxSubPart.Name = "metroTextBoxSubPart";
@@ -340,7 +237,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxSubPart.SelectionLength = 0;
             this.metroTextBoxSubPart.SelectionStart = 0;
             this.metroTextBoxSubPart.ShortcutsEnabled = true;
-            this.metroTextBoxSubPart.Size = new System.Drawing.Size(400, 23);
+            this.metroTextBoxSubPart.Size = new System.Drawing.Size(458, 23);
             this.metroTextBoxSubPart.TabIndex = 338;
             this.metroTextBoxSubPart.UseSelectable = true;
             this.metroTextBoxSubPart.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -352,7 +249,7 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             // 
             this.metroTextBoxPart.CustomButton.Image = null;
-            this.metroTextBoxPart.CustomButton.Location = new System.Drawing.Point(378, 1);
+            this.metroTextBoxPart.CustomButton.Location = new System.Drawing.Point(436, 1);
             this.metroTextBoxPart.CustomButton.Name = "";
             this.metroTextBoxPart.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.metroTextBoxPart.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -363,7 +260,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxPart.Enabled = false;
             this.metroTextBoxPart.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxPart.Lines = new string[0];
-            this.metroTextBoxPart.Location = new System.Drawing.Point(66, 143);
+            this.metroTextBoxPart.Location = new System.Drawing.Point(8, 143);
             this.metroTextBoxPart.MaxLength = 32767;
             this.metroTextBoxPart.Multiline = true;
             this.metroTextBoxPart.Name = "metroTextBoxPart";
@@ -373,7 +270,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxPart.SelectionLength = 0;
             this.metroTextBoxPart.SelectionStart = 0;
             this.metroTextBoxPart.ShortcutsEnabled = true;
-            this.metroTextBoxPart.Size = new System.Drawing.Size(400, 23);
+            this.metroTextBoxPart.Size = new System.Drawing.Size(458, 23);
             this.metroTextBoxPart.TabIndex = 336;
             this.metroTextBoxPart.UseSelectable = true;
             this.metroTextBoxPart.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -385,7 +282,7 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             // 
             this.metroTextBoxSection.CustomButton.Image = null;
-            this.metroTextBoxSection.CustomButton.Location = new System.Drawing.Point(378, 1);
+            this.metroTextBoxSection.CustomButton.Location = new System.Drawing.Point(436, 1);
             this.metroTextBoxSection.CustomButton.Name = "";
             this.metroTextBoxSection.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.metroTextBoxSection.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -396,7 +293,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxSection.Enabled = false;
             this.metroTextBoxSection.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxSection.Lines = new string[0];
-            this.metroTextBoxSection.Location = new System.Drawing.Point(66, 114);
+            this.metroTextBoxSection.Location = new System.Drawing.Point(8, 114);
             this.metroTextBoxSection.MaxLength = 32767;
             this.metroTextBoxSection.Multiline = true;
             this.metroTextBoxSection.Name = "metroTextBoxSection";
@@ -406,7 +303,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxSection.SelectionLength = 0;
             this.metroTextBoxSection.SelectionStart = 0;
             this.metroTextBoxSection.ShortcutsEnabled = true;
-            this.metroTextBoxSection.Size = new System.Drawing.Size(400, 23);
+            this.metroTextBoxSection.Size = new System.Drawing.Size(458, 23);
             this.metroTextBoxSection.TabIndex = 334;
             this.metroTextBoxSection.UseSelectable = true;
             this.metroTextBoxSection.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -564,6 +461,54 @@ namespace CAS.UI.UICAAControls.CheckList
             this.comboBoxRootCategory.Size = new System.Drawing.Size(458, 22);
             this.comboBoxRootCategory.TabIndex = 352;
             // 
+            // labelSourceText
+            // 
+            labelSourceText.AutoSize = true;
+            labelSourceText.Font = new System.Drawing.Font("Verdana", 9F);
+            labelSourceText.ForeColor = System.Drawing.Color.Black;
+            labelSourceText.Location = new System.Drawing.Point(63, 65);
+            labelSourceText.Name = "labelSourceText";
+            labelSourceText.Size = new System.Drawing.Size(50, 14);
+            labelSourceText.TabIndex = 323;
+            labelSourceText.Text = "Source";
+            labelSourceText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelEditorText
+            // 
+            labelEditorText.AutoSize = true;
+            labelEditorText.Font = new System.Drawing.Font("Verdana", 9F);
+            labelEditorText.ForeColor = System.Drawing.Color.Black;
+            labelEditorText.Location = new System.Drawing.Point(63, 90);
+            labelEditorText.Name = "labelEditorText";
+            labelEditorText.Size = new System.Drawing.Size(44, 14);
+            labelEditorText.TabIndex = 325;
+            labelEditorText.Text = "Editor";
+            labelEditorText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelRevisionText
+            // 
+            labelRevisionText.AutoSize = true;
+            labelRevisionText.Font = new System.Drawing.Font("Verdana", 9F);
+            labelRevisionText.ForeColor = System.Drawing.Color.Black;
+            labelRevisionText.Location = new System.Drawing.Point(185, 90);
+            labelRevisionText.Name = "labelRevisionText";
+            labelRevisionText.Size = new System.Drawing.Size(59, 14);
+            labelRevisionText.TabIndex = 327;
+            labelRevisionText.Text = "Revision";
+            labelRevisionText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelLevelText
+            // 
+            labelLevelText.AutoSize = true;
+            labelLevelText.Font = new System.Drawing.Font("Verdana", 9F);
+            labelLevelText.ForeColor = System.Drawing.Color.Black;
+            labelLevelText.Location = new System.Drawing.Point(315, 90);
+            labelLevelText.Name = "labelLevelText";
+            labelLevelText.Size = new System.Drawing.Size(40, 14);
+            labelLevelText.TabIndex = 332;
+            labelLevelText.Text = "Level";
+            labelLevelText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // CheckListAuditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -581,13 +526,9 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.metroTextBoxRequirement);
             this.Controls.Add(this.metroTextBoxItem);
-            this.Controls.Add(label6);
             this.Controls.Add(this.metroTextBoxSubPart);
-            this.Controls.Add(label5);
             this.Controls.Add(this.metroTextBoxPart);
-            this.Controls.Add(label1);
             this.Controls.Add(this.metroTextBoxSection);
-            this.Controls.Add(label7);
             this.Controls.Add(labelLevelText);
             this.Controls.Add(label4);
             this.Controls.Add(labelRevisionText);
@@ -609,6 +550,10 @@ namespace CAS.UI.UICAAControls.CheckList
 
         #endregion
 
+        System.Windows.Forms.Label labelSourceText;
+        System.Windows.Forms.Label labelEditorText;
+        System.Windows.Forms.Label labelRevisionText;
+        System.Windows.Forms.Label labelLevelText;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
         private MetroFramework.Controls.MetroTextBox metroTextBoxItem;
@@ -623,9 +568,5 @@ namespace CAS.UI.UICAAControls.CheckList
         private MetroFramework.Controls.MetroTextBox metroTextBoxComments;
         private CheckBox checkBoxNotApplicable;
         private ComboBox comboBoxRootCategory;
-        System.Windows.Forms.Label labelSourceText;
-        System.Windows.Forms.Label labelEditorText;
-        System.Windows.Forms.Label labelRevisionText;
-        System.Windows.Forms.Label labelLevelText;
     }
 }

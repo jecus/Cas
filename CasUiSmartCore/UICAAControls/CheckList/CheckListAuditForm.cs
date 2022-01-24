@@ -38,7 +38,19 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            UpdateControls();
             UpdateInformation();
+        }
+
+        private void UpdateControls()
+        {
+            radioButtonNotSatisfactory.Enabled =
+                radioButtonSatisfactory.Enabled =
+                    metroTextBoxReference.Enabled =
+                        comboBoxRootCategory.Enabled =
+                            metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
+
+            comboBoxRootCategory.Enabled = radioButtonSatisfactory.Checked;
         }
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
@@ -77,10 +89,19 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxItem.Text = $"{_currentCheck.ItemNumber} {_currentCheck.ItemName}";
             metroTextBoxRequirement.Text = _currentCheck.Requirement;
 
-            foreach (var record in _currentCheck.CheckListRecords)
+            foreach (var group in _currentCheck.CheckListRecords.GroupBy(i => i.OptionNumber))
             {
-                var control = new AuditCheckControl(record);
-                flowLayoutPanel1.Controls.Add(control);
+                flowLayoutPanel1.Controls.Add(new Label()
+                {
+                    Text = $"Option: {group.Key}",
+                    Font = new System.Drawing.Font("Verdana", 9F),
+                    ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))))
+                });
+                foreach (var record in group)
+                {
+                    var control = new AuditCheckControl(record);
+                    flowLayoutPanel1.Controls.Add(control);
+                }
             }
 
         }
@@ -111,13 +132,15 @@ namespace CAS.UI.UICAAControls.CheckList
             Close();
         }
 
+        
+
         private void checkBoxNotApplicable_CheckedChanged(object sender, EventArgs e)
         {
             radioButtonNotSatisfactory.Enabled =
                 radioButtonSatisfactory.Enabled =
                     metroTextBoxReference.Enabled =
                         comboBoxRootCategory.Enabled = 
-                metroTextBoxComments.Enabled = checkBoxNotApplicable.Checked;
+                metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
         }
 
 

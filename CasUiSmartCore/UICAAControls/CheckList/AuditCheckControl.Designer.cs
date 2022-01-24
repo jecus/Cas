@@ -30,7 +30,6 @@
         {
             this.metroTextBoxRemark = new MetroFramework.Controls.MetroTextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            labelOption = new System.Windows.Forms.Label();
             labelType = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -51,7 +50,7 @@
             this.metroTextBoxRemark.Enabled = false;
             this.metroTextBoxRemark.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxRemark.Lines = new string[0];
-            this.metroTextBoxRemark.Location = new System.Drawing.Point(138, 34);
+            this.metroTextBoxRemark.Location = new System.Drawing.Point(138, 3);
             this.metroTextBoxRemark.MaxLength = 32767;
             this.metroTextBoxRemark.Multiline = true;
             this.metroTextBoxRemark.Name = "metroTextBoxRemark";
@@ -70,29 +69,17 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(5, 35);
+            this.checkBox1.Location = new System.Drawing.Point(5, 4);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(15, 14);
             this.checkBox1.TabIndex = 27;
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // labelOption
-            // 
-            labelOption.AutoSize = true;
-            labelOption.Font = new System.Drawing.Font("Verdana", 9F);
-            labelOption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            labelOption.Location = new System.Drawing.Point(26, 9);
-            labelOption.Name = "labelOption";
-            labelOption.Size = new System.Drawing.Size(54, 14);
-            labelOption.TabIndex = 19;
-            labelOption.Text = "Option:";
-            labelOption.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // labelType
             // 
             labelType.Font = new System.Drawing.Font("Verdana", 9F);
             labelType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            labelType.Location = new System.Drawing.Point(26, 34);
+            labelType.Location = new System.Drawing.Point(26, 3);
             labelType.Name = "labelType";
             labelType.Size = new System.Drawing.Size(106, 58);
             labelType.TabIndex = 26;
@@ -105,19 +92,16 @@
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(labelType);
             this.Controls.Add(this.metroTextBoxRemark);
-            this.Controls.Add(labelOption);
             this.Name = "AuditCheckControl";
-            this.Size = new System.Drawing.Size(473, 95);
+            this.Size = new System.Drawing.Size(473, 64);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
+        System.Windows.Forms.Label labelType;
         private MetroFramework.Controls.MetroTextBox metroTextBoxRemark;
         private System.Windows.Forms.CheckBox checkBox1;
-        System.Windows.Forms.Label labelOption;
-        System.Windows.Forms.Label labelType;
     }
 }
