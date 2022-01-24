@@ -97,6 +97,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            _directivesViewer.AuditId = _auditId;
             _directivesViewer.IsAuditCheck = _auditId.HasValue &&
                                              (_routineAudit?.Type == ProgramType.CAAKG ||
                                               _routineAudit?.Type == ProgramType.IOSA);
@@ -239,7 +240,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		{
             if (_auditId.HasValue && (_routineAudit?.Type == ProgramType.CAAKG || _routineAudit?.Type == ProgramType.IOSA))
             {
-                var form = new CheckListAuditForm(_directivesViewer.SelectedItem);
+                var form = new CheckListAuditForm(_directivesViewer.SelectedItem, _auditId.Value);
                 if (form.ShowDialog() == DialogResult.OK)
                     AnimatedThreadWorker.RunWorkerAsync();
             }

@@ -9,6 +9,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
+using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
 
@@ -17,8 +18,11 @@ namespace CAS.UI.UICAAControls.CheckList
     public partial class CheckListAuditForm : MetroForm
     {
         private CheckLists _currentCheck;
+        private readonly int _auditId;
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private IList<FindingLevels> _levels = new List<FindingLevels>();
+        private AuditCheck _currentAuditCheck;
+        private List<AuditCheckRecord> _currentAuditCheckRecords = new List<AuditCheckRecord>();
 
         #region Constructors
         public CheckListAuditForm()
@@ -26,9 +30,10 @@ namespace CAS.UI.UICAAControls.CheckList
             InitializeComponent();
         }
 
-        public CheckListAuditForm(CheckLists currentCheck) : this()
+        public CheckListAuditForm(CheckLists currentCheck, int auditId) : this()
         {
             _currentCheck = currentCheck;
+            _auditId = auditId;
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
             _animatedThreadWorker.RunWorkerAsync();
@@ -63,8 +68,42 @@ namespace CAS.UI.UICAAControls.CheckList
             if (_currentCheck.ItemId > 0)
             {
                 _currentCheck = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListDTO, CheckLists>(_currentCheck.ItemId);
+                _currentAuditCheck = GlobalObjects.CaaEnvironment.NewLoader.GetObject<AuditCheckDTO, AuditCheck>(new Filter("AuditId", _auditId));
+                if (_currentAuditCheck == null)
+                {
+                    _currentAuditCheck = new AuditCheck()
+                    {
+                        CheckListId = _currentCheck.ItemId,
+                        AuditId = _auditId
+                    };
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
+                }
+
+                if(_currentAuditCheck.ItemId > 0)
+                 _currentAuditCheckRecords = new List<AuditCheckRecord>(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AuditCheckRecordDTO, AuditCheckRecord>(new Filter("AuditId", _currentAuditCheck.ItemId)));
+                else _currentAuditCheckRecords = new List<AuditCheckRecord>();
+
+
                 var records =
                     GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRecordDTO, CheckListRecords>(new Filter("CheckListId", _currentCheck.ItemId));
+
+
+                foreach (var rec in records)
+                {
+                    var find = _currentAuditCheckRecords.FirstOrDefault(i => i.CheckListRecordId == rec.ItemId);
+                    if (find == null)
+                    {
+                        var newRecord = new AuditCheckRecord()
+                        {
+                            CheckListRecordId = rec.ItemId,
+                            AuditRecordId = _currentAuditCheck.ItemId,
+                            CheckListRecord = rec
+                        };
+                        GlobalObjects.CaaEnvironment.NewKeeper.Save(newRecord);
+
+                        _currentAuditCheckRecords.Add(newRecord);
+                    }
+                }
 
                 _currentCheck.CheckListRecords.Clear();
                 _currentCheck.CheckListRecords.AddRange(records);

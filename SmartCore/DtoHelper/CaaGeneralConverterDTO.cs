@@ -59,6 +59,7 @@ namespace SmartCore.DtoHelper
                 Updated = audit.Updated,
                 CorrectorId = audit.CorrectorId,
                 CheckListRecordId =  audit.CheckListRecordId,
+				AuditRecordId = audit.AuditRecordId,
                 IsChecked =  audit.IsChecked,
             };
         }
@@ -72,7 +73,9 @@ namespace SmartCore.DtoHelper
                 Updated = audit.Updated,
                 CorrectorId = audit.CorrectorId,
 				CheckListRecordId =  audit.CheckListRecordId,
-                IsChecked =  audit.IsChecked,
+                AuditRecordId = audit.AuditRecordId,
+
+				IsChecked =  audit.IsChecked,
 			};
         }
 

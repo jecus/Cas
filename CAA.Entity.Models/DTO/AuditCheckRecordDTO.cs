@@ -8,6 +8,9 @@ namespace CAA.Entity.Models.DTO
     [Condition("IsDeleted", 0)]
     public  class AuditCheckRecordDTO : BaseEntity
     {
+        [Column("AuditRecordId")]
+        public int AuditRecordId { get; set; }
+
         [Column("CheckListRecordId")]
         public int CheckListRecordId { get; set; }
 

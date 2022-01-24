@@ -50,6 +50,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		}
 
         public bool IsAuditCheck { get; set; }
+        public int? AuditId { get; set; }
 
         #endregion
 
@@ -123,7 +124,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			{
 				if (IsAuditCheck)
 				{
-					var form = new CheckListAuditForm(SelectedItem);
+					var form = new CheckListAuditForm(SelectedItem, AuditId.Value);
 					if (form.ShowDialog() == DialogResult.OK)
                         _animatedThreadWorker.RunWorkerAsync();
 				}
