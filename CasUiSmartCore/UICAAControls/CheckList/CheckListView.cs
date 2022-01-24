@@ -8,6 +8,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA.Check;
+using SmartCore.CAA.RoutineAudits;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CheckList
@@ -47,7 +48,10 @@ namespace CAS.UI.UICAAControls.CheckList
 			//SortDirection = SortDirection.Asc;
 			//OldColumnIndex = 6;
 		}
-		#endregion
+
+        public bool IsAuditCheck { get; set; }
+
+        #endregion
 
 		#endregion
 
@@ -117,9 +121,21 @@ namespace CAS.UI.UICAAControls.CheckList
 		{
 			if (SelectedItem != null)
 			{
-                var form = new CheckListForm(SelectedItem);
-                if (form.ShowDialog() == DialogResult.OK)
-                    _animatedThreadWorker.RunWorkerAsync();
+				if (IsAuditCheck)
+				{
+					var form = new CheckListAuditForm(SelectedItem);
+					if (form.ShowDialog() == DialogResult.OK)
+                        _animatedThreadWorker.RunWorkerAsync();
+				}
+				else
+				{
+                    var form = new CheckListForm(SelectedItem);
+                    if (form.ShowDialog() == DialogResult.OK)
+                        _animatedThreadWorker.RunWorkerAsync();
+				}
+
+
+				
                 e.Cancel = true;
 			}
 		}

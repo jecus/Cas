@@ -1,33 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using CAA.Entity.Models.Dictionary;
+﻿using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
-using CAS.UI.UICAAControls.Operators;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
-using SmartCore.CAA.Operators;
 using SmartCore.CAA.RoutineAudits;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CheckList
 {
-	///<summary>
-	///</summary>
-	[ToolboxItem(false)]
+    ///<summary>
+    ///</summary>
+    [ToolboxItem(false)]
 	public partial class CheckListsScreen : ScreenControl
 	{
 		#region Fields
@@ -45,8 +43,9 @@ namespace CAS.UI.UICAAControls.CheckList
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator1;
+        private SmartCore.CAA.RoutineAudits.RoutineAudit _routineAudit;
 
-		#endregion
+        #endregion
 
 
 		#region Constructors
@@ -97,8 +96,12 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-		{
-            _directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
+        {
+            _directivesViewer.IsAuditCheck = _auditId.HasValue &&
+                                             (_routineAudit?.Type == ProgramType.CAAKG ||
+                                              _routineAudit?.Type == ProgramType.IOSA);
+
+			_directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
 		}
@@ -129,11 +132,11 @@ namespace CAS.UI.UICAAControls.CheckList
                 var records = GlobalObjects.CaaEnvironment.NewLoader
                     .GetObjectListAll<CAAAuditRecordDTO, CAAAuditRecord>(new Filter("AuditId", _auditId), loadChild: true).ToList();
 
-                var routineIds = records.Select(i => i.RoutineAuditId).Distinct();
+                _currentRoutineId = records.Select(i => i.RoutineAuditId).FirstOrDefault();
+                _routineAudit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(_currentRoutineId.Value);
 
-                _currentRoutineId = routineIds.FirstOrDefault();
-                var routines = GlobalObjects.CaaEnvironment.NewLoader
-                    .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", routineIds), loadChild: true).ToList();
+				var routines = GlobalObjects.CaaEnvironment.NewLoader
+                    .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", _currentRoutineId), loadChild: true).ToList();
 
                 var ids = routines.Select(i => i.CheckListId).Distinct();
                 if (ids.Any())
@@ -234,9 +237,18 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 		{
-            var form = new CheckListForm(_directivesViewer.SelectedItem);
-            if (form.ShowDialog() == DialogResult.OK)
-                AnimatedThreadWorker.RunWorkerAsync();
+            if (_auditId.HasValue && (_routineAudit?.Type == ProgramType.CAAKG || _routineAudit?.Type == ProgramType.IOSA))
+            {
+                var form = new CheckListAuditForm(_directivesViewer.SelectedItem);
+                if (form.ShowDialog() == DialogResult.OK)
+                    AnimatedThreadWorker.RunWorkerAsync();
+            }
+            else
+            {
+				var form = new CheckListForm(_directivesViewer.SelectedItem);
+                if (form.ShowDialog() == DialogResult.OK)
+                    AnimatedThreadWorker.RunWorkerAsync();
+			}
         }
 
 		#endregion

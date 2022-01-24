@@ -1014,7 +1014,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Controls.Add(metroLabel1);
             this.Name = "CheckListForm";
             this.Resizable = false;
-            this.Text = "Add Check List";
+            this.Text = "Check List";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).EndInit();
