@@ -51,6 +51,7 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             comboBoxRootCategory.Items.Clear();
             comboBoxRootCategory.Items.AddRange(AuditRootCategory.Items.ToArray());
+            comboBoxRootCategory.SelectedItem = AuditRootCategory.Unknown;
 
             radioButtonNotSatisfactory.CheckedChanged += RadioButtonSatisfactory_CheckedChange;
             radioButtonSatisfactory.CheckedChanged += RadioButtonSatisfactory_CheckedChange;
