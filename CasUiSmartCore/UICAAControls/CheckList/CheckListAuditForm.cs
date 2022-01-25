@@ -230,6 +230,9 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void RadioButtonSatisfactory_CheckedChange(object sender, EventArgs e)
         {
+            if(radioButtonSatisfactory.Checked)
+                checkedListBoxRoot.SelectionMode = SelectionMode.None;
+            else checkedListBoxRoot.SelectionMode = SelectionMode.One;
             checkedListBoxRoot.Enabled = !radioButtonSatisfactory.Checked;
         }
     }
