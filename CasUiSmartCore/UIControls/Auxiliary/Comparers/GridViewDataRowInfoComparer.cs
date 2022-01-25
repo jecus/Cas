@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
@@ -174,12 +175,25 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
             var xx = x.Tag as CheckLists;
             var yy = y.Tag as CheckLists;
 
-			var a = $"{xx.SectionNumber} {xx.PartNumber} {xx.SubPartNumber} {xx.ItemNumber}";
-            var b = $"{yy.SectionNumber} {yy.PartNumber} {yy.SubPartNumber} {yy.ItemNumber}";
 
-			var xParts = a.Split(new char[] { '.' });
-            var yParts = b.Split(new char[] { '.' });
-            var partsLength = Math.Max(xParts.Length, yParts.Length);
+			var a = Regex.Replace($"{xx.SectionNumber}|{xx.PartNumber}|{xx.SubPartNumber}|{xx.ItemNumber}", @"\s+", " "); ;
+            var b = Regex.Replace($"{yy.SectionNumber}|{yy.PartNumber}|{yy.SubPartNumber}|{yy.ItemNumber}", @"\s+", " "); ;
+
+			var xParts = a.Split('|')
+                .SelectMany(i => i.Split(' '))
+                .SelectMany(i => i.Split('.'))
+                .ToArray();
+            var yParts = b.Split('|')
+                .SelectMany(i => i.Split(' '))
+				.SelectMany(i => i.Split('.'))
+                .ToArray();
+
+			xParts[xParts.Length - 1] = Regex.Replace(xParts[xParts.Length - 1], "[^0-9.]", "");
+            yParts[yParts.Length - 1] = Regex.Replace(yParts[yParts.Length - 1], "[^0-9.]", "");
+
+
+
+			var partsLength = Math.Max(xParts.Length, yParts.Length);
             if (partsLength > 0)
             {
                 for (var i = 0; i < partsLength; i++)

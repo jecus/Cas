@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using Auxiliary;
@@ -7,6 +8,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA.Check;
+using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CheckList
@@ -54,6 +56,14 @@ namespace CAS.UI.UICAAControls.CheckList
 		#endregion
 
 		#region Methods
+
+        protected override void GroupingItems()
+        {
+            var descriptor = new GroupDescriptor();
+			foreach (var colName in new List<string>{ "Section №" , "Section Name" , "Part №" , "Part Name", "SubPart №","SubPart Name" })
+                descriptor.GroupNames.Add(colName, ListSortDirection.Ascending);
+            this.radGridView1.GroupDescriptors.Add(descriptor);
+		}
 
         #region protected override void SetHeaders()
 			/// <summary>

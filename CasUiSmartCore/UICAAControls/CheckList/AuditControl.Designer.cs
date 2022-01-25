@@ -69,7 +69,7 @@
             this.metroTextBoxRemark.Multiline = true;
             this.metroTextBoxRemark.Name = "metroTextBoxRemark";
             this.metroTextBoxRemark.PasswordChar = '\0';
-            this.metroTextBoxRemark.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxRemark.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.metroTextBoxRemark.SelectedText = "";
             this.metroTextBoxRemark.SelectionLength = 0;
             this.metroTextBoxRemark.SelectionStart = 0;

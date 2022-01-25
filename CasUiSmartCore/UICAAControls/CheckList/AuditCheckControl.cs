@@ -28,6 +28,12 @@ namespace CAS.UI.UICAAControls.CheckList
         }
 
 
+        public void EnableCheckBox(bool flag)
+        {
+            checkBox1.Enabled = flag;
+        }
+
+
         private void UpdateInformation()
         {
             metroTextBoxRemark.Text = AuditCheckRecord.CheckListRecord.Remark;

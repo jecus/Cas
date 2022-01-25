@@ -65,6 +65,9 @@ namespace CAS.UI.UICAAControls.CheckList
                             metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
 
             checkedListBoxRoot.Enabled = !radioButtonSatisfactory.Checked;
+
+            foreach (var control in flowLayoutPanel1.Controls.OfType<AuditCheckControl>())
+                control.EnableCheckBox(!checkBoxNotApplicable.Checked);
         }
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
@@ -224,6 +227,9 @@ namespace CAS.UI.UICAAControls.CheckList
                 metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
 
             checkedListBoxRoot.Enabled = !radioButtonSatisfactory.Checked;
+
+            foreach (var control in flowLayoutPanel1.Controls.OfType<AuditCheckControl>())
+                control.EnableCheckBox(!checkBoxNotApplicable.Checked);
         }
 
 

@@ -30,6 +30,7 @@ namespace CAS.UI.UICAAControls.CheckList
         /// </summary>
         private void InitializeComponent()
         {
+
             this.metroTextBoxRemark = new MetroFramework.Controls.MetroTextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             labelType = new System.Windows.Forms.Label();
@@ -49,8 +50,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxRemark.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTextBoxRemark.CustomButton.UseSelectable = true;
             this.metroTextBoxRemark.CustomButton.Visible = false;
-            this.metroTextBoxRemark.ReadOnly = true;
-            this.metroTextBoxRemark.ScrollBars = ScrollBars.Vertical;
             this.metroTextBoxRemark.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxRemark.Lines = new string[0];
             this.metroTextBoxRemark.Location = new System.Drawing.Point(138, 3);
@@ -58,7 +57,8 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxRemark.Multiline = true;
             this.metroTextBoxRemark.Name = "metroTextBoxRemark";
             this.metroTextBoxRemark.PasswordChar = '\0';
-            this.metroTextBoxRemark.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxRemark.ReadOnly = true;
+            this.metroTextBoxRemark.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.metroTextBoxRemark.SelectedText = "";
             this.metroTextBoxRemark.SelectionLength = 0;
             this.metroTextBoxRemark.SelectionStart = 0;
