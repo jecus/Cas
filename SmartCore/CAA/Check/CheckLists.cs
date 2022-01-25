@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
 using SmartCore.Auxiliary.Extentions;
@@ -21,11 +22,12 @@ namespace SmartCore.CAA.Check
     {
         public string Source { get; set; }
 
-        
+
 
         public List<CheckListRecords> CheckListRecords { get; set; }
 
         private CommonCollection<ItemFileLink> _files;
+
         public CommonCollection<ItemFileLink> Files
         {
             get { return _files ?? (_files = new CommonCollection<ItemFileLink>()); }
@@ -43,14 +45,12 @@ namespace SmartCore.CAA.Check
 
 
         #region public AttachedFile FaaFormFile { get; set; }
-        [NonSerialized]
-        private AttachedFile _file;
+
+        [NonSerialized] private AttachedFile _file;
+
         public AttachedFile File
         {
-            get
-            {
-                return _file ?? (Files?.GetFileByFileLinkType(FileLinkType.CheckList));
-            }
+            get { return _file ?? (Files?.GetFileByFileLinkType(FileLinkType.CheckList)); }
             set
             {
                 _file = value;
@@ -75,10 +75,12 @@ namespace SmartCore.CAA.Check
 
                 return JsonConvert.SerializeObject(Settings,
                     Formatting.Indented,
-                    new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+                    new JsonSerializerSettings {DefaultValueHandling = DefaultValueHandling.Ignore});
             }
 
-            set => Settings = string.IsNullOrWhiteSpace(value) ? new CheckListSettings() : JsonConvert.DeserializeObject<CheckListSettings>(value);
+            set => Settings = string.IsNullOrWhiteSpace(value)
+                ? new CheckListSettings()
+                : JsonConvert.DeserializeObject<CheckListSettings>(value);
         }
 
         public CheckListSettings Settings { get; set; }
@@ -95,7 +97,7 @@ namespace SmartCore.CAA.Check
 
         public override BaseEntityObject GetCopyUnsaved(bool marked = true)
         {
-            var clone = (CheckLists)MemberwiseClone();
+            var clone = (CheckLists) MemberwiseClone();
             clone.ItemId = -1;
             clone.UnSetEvents();
 
@@ -123,8 +125,7 @@ namespace SmartCore.CAA.Check
     }
 
 
-
-    [Serializable]
+[Serializable]
     public class CheckListSettings
     {
         public CheckListSettings()

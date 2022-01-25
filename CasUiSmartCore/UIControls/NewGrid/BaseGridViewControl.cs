@@ -624,8 +624,7 @@ namespace CAS.UI.UIControls.NewGrid
 					SortingItems(temp);
 
 				radGridView1.Rows.AddRange(temp.ToArray());
-
-			}
+            }
 			catch (Exception ex)
 			{
 				Program.Provider.Logger.Log(ex);
@@ -752,13 +751,10 @@ namespace CAS.UI.UIControls.NewGrid
 		{
             if (ColumnIndexes!=null && ColumnIndexes.Any())
             {
-                foreach (var colName in ColumnIndexes)
-                {
-                    radGridView1.Columns[colName].SortOrder = RadSortOrder.Ascending;
-                }
+                temp.Sort(new CodeComparer(Convert.ToInt32(SortDirection)));
+
             }
-            else
-                temp.Sort(new GridViewDataRowInfoComparer(OldColumnIndex, Convert.ToInt32(SortDirection)));
+			else  temp.Sort(new GridViewDataRowInfoComparer(OldColumnIndex, Convert.ToInt32(SortDirection)));
 		}
 
 
@@ -770,21 +766,14 @@ namespace CAS.UI.UIControls.NewGrid
 
 		private void RadGridView1_CustomSorting(object sender, Telerik.WinControls.UI.GridViewCustomSortingEventArgs e)
 		{
-
-            if (ColumnIndexes!=null && ColumnIndexes.Any())
+			if (ColumnIndexes!=null && ColumnIndexes.Any())
             {
-                foreach (var colName in ColumnIndexes)
-                {
-                    radGridView1.Columns[colName].SortOrder = RadSortOrder.Ascending;
-                }
+                e.SortResult = new CodeComparer(Convert.ToInt32(SortDirection)).Compare(e.Row1, e.Row2);
+
             }
             else
-            {
-                e.SortResult = new GridViewDataRowInfoComparer(OldColumnIndex, Convert.ToInt32(SortDirection)).Compare(e.Row1, e.Row2);
-			}
-
-			
-		}
+				e.SortResult = new GridViewDataRowInfoComparer(OldColumnIndex, Convert.ToInt32(SortDirection)).Compare(e.Row1, e.Row2);
+        }
 
 		#endregion
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
+using SmartCore.CAA.Check;
 using SmartCore.Entities.Dictionaries;
 using Telerik.WinControls.UI;
 
@@ -158,6 +159,57 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
 
 		#endregion
 	}
+
+    public class CodeComparer : IComparer<GridViewRowInfo>
+    {
+        public CodeComparer(int sortMultiplier)
+        {
+			SortMultiplier = sortMultiplier;
+		}
+
+        public int SortMultiplier { get; set; }
+
+        public virtual int Compare(GridViewRowInfo x, GridViewRowInfo y)
+        {
+            var xx = x.Tag as CheckLists;
+            var yy = y.Tag as CheckLists;
+
+			var a = $"{xx.SectionNumber} {xx.PartNumber} {xx.SubPartNumber} {xx.ItemNumber}";
+            var b = $"{yy.SectionNumber} {yy.PartNumber} {yy.SubPartNumber} {yy.ItemNumber}";
+
+			var xParts = a.Split(new char[] { '.' });
+            var yParts = b.Split(new char[] { '.' });
+            var partsLength = Math.Max(xParts.Length, yParts.Length);
+            if (partsLength > 0)
+            {
+                for (var i = 0; i < partsLength; i++)
+                {
+                    if (xParts.Length <= i) return -1;// 4.2 < 4.2.x
+                    if (yParts.Length <= i) return 1;
+
+                    var xPart = xParts[i];
+                    var yPart = yParts[i];
+
+                    if (string.IsNullOrEmpty(xPart)) xPart = "0";// 5..2->5.0.2
+                    if (string.IsNullOrEmpty(yPart)) yPart = "0";
+
+                    if (!int.TryParse(xPart, out var xInt) || !int.TryParse(yPart, out var yInt))
+                    {
+                        // 3.a.45 compare part as string
+                        var abcCompare = xPart.CompareTo(yPart);
+                        if (abcCompare != 0)
+                            return SortMultiplier * abcCompare;
+                        continue;
+                    }
+
+                    if (xInt != yInt) return xInt < yInt ? -1 : 1;
+                }
+                return 0;
+            }
+            // compare as string
+            return SortMultiplier * xx.CompareTo(yy);
+        }
+    }
 
 
 	public class GridViewDataRowInfoComparer : IComparer<GridViewRowInfo>

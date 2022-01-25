@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Auxiliary;
@@ -8,7 +7,6 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA.Check;
-using SmartCore.CAA.RoutineAudits;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CheckList
@@ -30,8 +28,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
         public CheckListView()
         {
-            SortDirection = SortDirection.Asc;
-			InitializeComponent();
+            InitializeComponent();
 		}
 
         /// <summary>
@@ -41,27 +38,27 @@ namespace CAS.UI.UICAAControls.CheckList
 		{
             _animatedThreadWorker = animatedThreadWorker;
             InitializeComponent();
-			ColumnIndexes = new List<string>()
-			{
-				"Section №", "Part №","SubPart №","Item №"
-			};
-			//SortDirection = SortDirection.Asc;
-			//OldColumnIndex = 6;
-		}
+            ColumnIndexes = new List<string>()
+            {
+                "Section №", "Part №","SubPart №","Item №"
+            };
+            SortDirection = SortDirection.Desc;
+            EnableCustomSorting = true;
+        }
 
         public bool IsAuditCheck { get; set; }
         public int? AuditId { get; set; }
 
-        #endregion
+		#endregion
 
 		#endregion
 
 		#region Methods
 
-		#region protected override void SetHeaders()
-		/// <summary>
-		/// Устанавливает заголовки
-		/// </summary>
+        #region protected override void SetHeaders()
+			/// <summary>
+			/// Устанавливает заголовки
+			/// </summary>
 		protected override void SetHeaders()
 		{
 			AddColumn("Section №", (int)(radGridView1.Width * 0.20f));

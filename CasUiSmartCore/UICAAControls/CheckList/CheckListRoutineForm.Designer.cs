@@ -67,7 +67,6 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             // _fromcheckListView
             // 
-            this._fromcheckListView.ColumnIndexes = null;
             this._fromcheckListView.ConfigurePaste = null;
             this._fromcheckListView.Displayer = null;
             this._fromcheckListView.DisplayerText = null;
@@ -86,7 +85,6 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             // _tocheckListView
             // 
-            this._tocheckListView.ColumnIndexes = null;
             this._tocheckListView.ConfigurePaste = null;
             this._tocheckListView.Displayer = null;
             this._tocheckListView.DisplayerText = null;
