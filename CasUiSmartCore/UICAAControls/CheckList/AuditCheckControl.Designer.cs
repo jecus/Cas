@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UICAAControls.CheckList
+﻿using System.Windows.Forms;
+
+namespace CAS.UI.UICAAControls.CheckList
 {
     partial class AuditCheckControl
     {
@@ -47,7 +49,8 @@
             this.metroTextBoxRemark.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTextBoxRemark.CustomButton.UseSelectable = true;
             this.metroTextBoxRemark.CustomButton.Visible = false;
-            this.metroTextBoxRemark.Enabled = false;
+            this.metroTextBoxRemark.ReadOnly = true;
+            this.metroTextBoxRemark.ScrollBars = ScrollBars.Vertical;
             this.metroTextBoxRemark.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxRemark.Lines = new string[0];
             this.metroTextBoxRemark.Location = new System.Drawing.Point(138, 3);

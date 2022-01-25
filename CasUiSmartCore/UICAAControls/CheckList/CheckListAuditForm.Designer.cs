@@ -336,7 +336,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxRequirement.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTextBoxRequirement.CustomButton.UseSelectable = true;
             this.metroTextBoxRequirement.CustomButton.Visible = false;
-            this.metroTextBoxRequirement.Enabled = false;
             this.metroTextBoxRequirement.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxRequirement.Lines = new string[0];
             this.metroTextBoxRequirement.Location = new System.Drawing.Point(8, 232);
@@ -344,6 +343,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxRequirement.Multiline = true;
             this.metroTextBoxRequirement.Name = "metroTextBoxRequirement";
             this.metroTextBoxRequirement.PasswordChar = '\0';
+            this.metroTextBoxRequirement.ReadOnly = true;
             this.metroTextBoxRequirement.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.metroTextBoxRequirement.SelectedText = "";
             this.metroTextBoxRequirement.SelectionLength = 0;
@@ -465,6 +465,15 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxNotApplicable.UseVisualStyleBackColor = true;
             this.checkBoxNotApplicable.CheckedChanged += new System.EventHandler(this.checkBoxNotApplicable_CheckedChanged);
             // 
+            // checkedListBoxRoot
+            // 
+            this.checkedListBoxRoot.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.checkedListBoxRoot.FormattingEnabled = true;
+            this.checkedListBoxRoot.Location = new System.Drawing.Point(8, 733);
+            this.checkedListBoxRoot.Name = "checkedListBoxRoot";
+            this.checkedListBoxRoot.Size = new System.Drawing.Size(458, 94);
+            this.checkedListBoxRoot.TabIndex = 354;
+            // 
             // labelSourceText
             // 
             labelSourceText.AutoSize = true;
@@ -513,15 +522,6 @@ namespace CAS.UI.UICAAControls.CheckList
             labelLevelText.Text = "Level";
             labelLevelText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // checkedListBoxRoot
-            // 
-            this.checkedListBoxRoot.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.checkedListBoxRoot.FormattingEnabled = true;
-            this.checkedListBoxRoot.Location = new System.Drawing.Point(8, 733);
-            this.checkedListBoxRoot.Name = "checkedListBoxRoot";
-            this.checkedListBoxRoot.Size = new System.Drawing.Size(458, 94);
-            this.checkedListBoxRoot.TabIndex = 354;
-            // 
             // CheckListAuditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -563,6 +563,11 @@ namespace CAS.UI.UICAAControls.CheckList
 
 
         #endregion
+
+        System.Windows.Forms.Label labelSourceText;
+        System.Windows.Forms.Label labelEditorText;
+        System.Windows.Forms.Label labelRevisionText;
+        System.Windows.Forms.Label labelLevelText;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
         private MetroFramework.Controls.MetroTextBox metroTextBoxItem;
@@ -577,9 +582,5 @@ namespace CAS.UI.UICAAControls.CheckList
         private MetroFramework.Controls.MetroTextBox metroTextBoxComments;
         private CheckBox checkBoxNotApplicable;
         private CheckedListBox checkedListBoxRoot;
-        System.Windows.Forms.Label labelSourceText;
-        System.Windows.Forms.Label labelEditorText;
-        System.Windows.Forms.Label labelRevisionText;
-        System.Windows.Forms.Label labelLevelText;
     }
 }
