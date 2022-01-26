@@ -326,7 +326,7 @@ namespace CAS.UI.UIControls.NewGrid
 			radGridView1.MasterTemplate.ShowHeaderCellButtons = true;
 			radGridView1.MasterTemplate.ShowFilteringRow = false;
 
-			this.radGridView1.AllowSearchRow = true;
+            this.radGridView1.AllowSearchRow = true;
 			EnableCustomSorting = true;
 		}
 
@@ -437,19 +437,19 @@ namespace CAS.UI.UIControls.NewGrid
 
 			try
 			{
-				if (!CheckHeders())
+				if (!CheckHeaders())
 				{
 					radGridView1.Columns.Clear();
 					radGridView1.Columns.AddRange(ColumnHeaderList.ToArray());
 				}
 
-				this.radGridView1.GroupDescriptors.Clear();
+				
 				AddItems(itemsArray);
 				UpdateItemColor();
 				SetTotalText();
 				GroupingItems();
 
-				radGridView1.MasterTemplate.ExpandAllGroups();
+                radGridView1.MasterTemplate.ExpandAllGroups();
 
 				radGridView1.RowFormatting += RadGridView1_RowFormatting;
 				radGridView1.CellFormatting += RadGridView1_CellFormatting;
@@ -462,7 +462,7 @@ namespace CAS.UI.UIControls.NewGrid
 			}
 		}
 
-		private bool CheckHeders()
+		private bool CheckHeaders()
 		{
 			for (int i = 0; i < ColumnHeaderList.Count; i++)
 			{
@@ -751,7 +751,7 @@ namespace CAS.UI.UIControls.NewGrid
 		{
             if (ColumnIndexes!=null && ColumnIndexes.Any())
             {
-                temp.Sort(new CodeComparer(Convert.ToInt32(SortDirection)));
+                temp.Sort(new CheckListsComparer(Convert.ToInt32(SortDirection)));
 
             }
 			else  temp.Sort(new GridViewDataRowInfoComparer(OldColumnIndex, Convert.ToInt32(SortDirection)));
@@ -768,8 +768,7 @@ namespace CAS.UI.UIControls.NewGrid
 		{
 			if (ColumnIndexes!=null && ColumnIndexes.Any())
             {
-                e.SortResult = new CodeComparer(Convert.ToInt32(SortDirection)).Compare(e.Row1, e.Row2);
-
+                e.SortResult = new CheckListsComparer(Convert.ToInt32(SortDirection)).Compare(e.Row1, e.Row2);
             }
             else
 				e.SortResult = new GridViewDataRowInfoComparer(OldColumnIndex, Convert.ToInt32(SortDirection)).Compare(e.Row1, e.Row2);
@@ -777,10 +776,12 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
+
 		#region protected virtual void GroupingItems()
 
 		protected virtual void GroupingItems()
 		{
+            this.radGridView1.GroupDescriptors.Clear();
 			Grouping();
 		}
 
@@ -1161,7 +1162,8 @@ namespace CAS.UI.UIControls.NewGrid
 		}
 
 		#endregion
-	}
+
+    }
 
 
 	public class CustomCell

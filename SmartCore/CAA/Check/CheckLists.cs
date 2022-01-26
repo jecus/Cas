@@ -122,6 +122,22 @@ namespace SmartCore.CAA.Check
         public string ItemName => Settings.ItemtName;
         public string Requirement => Settings.Requirement;
         public FindingLevels Level { get; set; }
+
+        public long Group
+        {
+            get
+            {
+                var g = Regex.Replace($"{SectionNumber} {PartNumber} {SubPartNumber}", @"\s+", " ");
+                var n = Regex.Replace(g, "[^0-9.]", "").Replace(".", "");
+                long.TryParse(n, out var res);
+                return res;
+            }
+        }
+
+        public override int CompareTo(object y)
+        {
+            return Group > ((CheckLists) y).Group ? 1 : -1;
+        }
     }
 
 

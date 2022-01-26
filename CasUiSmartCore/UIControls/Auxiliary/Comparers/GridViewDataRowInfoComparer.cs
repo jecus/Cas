@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
 using SmartCore.CAA.Check;
 using SmartCore.Entities.Dictionaries;
+using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.Auxiliary.Comparers
@@ -161,9 +163,93 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
 		#endregion
 	}
 
-    public class CodeComparer : IComparer<GridViewRowInfo>
+
+    public class GroupComparer : IComparer<Group<GridViewRowInfo>>
     {
-        public CodeComparer(int sortMultiplier)
+        public int Compare(Group<GridViewRowInfo> x, Group<GridViewRowInfo> y)
+        {
+            var xx = x.GetItems().FirstOrDefault()?.Tag;
+            var yy = y.GetItems().FirstOrDefault()?.Tag;
+
+			if (xx != null && yy != null)
+            {
+                var xxx = xx as CheckLists;
+                var yyy = yy as CheckLists;
+
+                var result = (xxx.Group > yyy.Group) ? 1 : -1;
+                DataGroup xGroup = x as DataGroup;
+                if (xGroup != null && ((DataGroup)x).GroupDescriptor.GroupNames.First().Direction == ListSortDirection.Descending)
+                {
+                    result *= -1;
+                }
+                return result;
+            }
+
+            return 1;
+            //return ((object[])x.Key)[0].ToString().CompareTo(((object[])y.Key)[0].ToString());
+        }
+    }
+
+	public class CheckListsGroupComparer : IComparer<Group<GridViewRowInfo>>
+	{
+        
+
+        public int SortMultiplier { get; set; }
+
+        public virtual int Compare(Group<GridViewRowInfo> x, Group<GridViewRowInfo> y)
+        {
+            var xx = $"{((object[])x.Key)[0]}|{((object[])x.Key)[2]}|{((object[])x.Key)[4]}";
+            var yy = $"{((object[])y.Key)[0]}|{((object[])y.Key)[2]}|{((object[])y.Key)[4]}";
+
+			var a = Regex.Replace(xx, @"\s+", " "); ;
+            var b = Regex.Replace(yy, @"\s+", " "); ;
+
+            var xParts = a.Split('|')
+                .SelectMany(i => i.Split(' '))
+                .SelectMany(i => i.Split('.'))
+                .ToArray();
+            var yParts = b.Split('|')
+                .SelectMany(i => i.Split(' '))
+                .SelectMany(i => i.Split('.'))
+                .ToArray();
+
+            var partsLength = Math.Max(xParts.Length, yParts.Length);
+            if (partsLength > 0)
+            {
+                for (var i = 0; i < partsLength; i++)
+                {
+                    if (xParts.Length <= i) return -1;// 4.2 < 4.2.x
+                    if (yParts.Length <= i) return 1;
+
+                    var xPart = xParts[i];
+                    var yPart = yParts[i];
+
+                    if (string.IsNullOrEmpty(xPart)) xPart = "0";// 5..2->5.0.2
+                    if (string.IsNullOrEmpty(yPart)) yPart = "0";
+
+                    if (!int.TryParse(xPart, out var xInt) || !int.TryParse(yPart, out var yInt))
+                    {
+                        // 3.a.45 compare part as string
+                        var abcCompare = xPart.CompareTo(yPart);
+                        if (abcCompare != 0)
+                            return SortMultiplier * abcCompare;
+                        continue;
+                    }
+
+                    if (xInt != yInt) return xInt < yInt ? -1 : 1;
+                }
+                return 0;
+            }
+            // compare as string
+            return SortMultiplier * xx.CompareTo(yy);
+		}
+	}
+
+
+
+	public class CheckListsComparer : IComparer<GridViewRowInfo>
+    {
+        public CheckListsComparer(int sortMultiplier)
         {
 			SortMultiplier = sortMultiplier;
 		}
