@@ -40,6 +40,10 @@ namespace CAS.UI.UICAAControls.Audit
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 
+        private RadMenuSeparatorItem _toolStripSeparator2;
+		private RadMenuItem _toolStripMenuItemPublish;
+        private RadMenuItem _toolStripMenuItemClose;
+
 		#endregion
 
 
@@ -126,7 +130,10 @@ namespace CAS.UI.UICAAControls.Audit
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuItemEdit = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
+            _toolStripMenuItemClose = new RadMenuItem();
+            _toolStripMenuItemPublish = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
+			_toolStripSeparator2 = new RadMenuSeparatorItem();
             // 
             // toolStripMenuItemView
             // 
@@ -141,7 +148,19 @@ namespace CAS.UI.UICAAControls.Audit
 			// toolStripMenuItemHighlight
 			// 
 			_toolStripMenuItemHighlight.Text = "Highlight";
-			
+
+
+            // 
+            // toolStripMenuItemView
+            // 
+            _toolStripMenuItemPublish.Text = "Publish";
+            _toolStripMenuItemPublish.Click += ToolStripMenuItemPublishClick;
+            // 
+            // toolStripMenuItemClose
+            // 
+            _toolStripMenuItemClose.Text = "Close";
+            _toolStripMenuItemClose.Click += ToolStripMenuItemCloseClick;
+
 			_toolStripMenuItemHighlight.Items.Clear();
 
 			foreach (Highlight highlight in Highlight.HighlightList)
@@ -155,7 +174,75 @@ namespace CAS.UI.UICAAControls.Audit
 			}
 		}
 
-        
+
+		#endregion
+
+
+		#region private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
+
+		private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
+		{
+            foreach (var item in _directivesViewer.SelectedItems)
+            {
+                if (item.Settings.Status == RoutineStatus.Closed)
+                {
+					MessageBox.Show($@"This audit {item.AuditNumber} is already closed!", (string)new GlobalTermsProvider()["SystemName"],
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+                        MessageBoxDefaultButton.Button2);
+					continue;
+                }
+
+                item.Settings.Status = RoutineStatus.Closed;
+                item.Settings.ClosingDate = DateTime.Now;
+                item.Settings.ClosedId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(item);
+                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+                AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+
+                AnimatedThreadWorker.RunWorkerAsync();
+			}
+
+        }
+
+		#endregion
+
+
+		#region private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
+		/// <summary>
+		/// Публикует рабочий пакет
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
+        {
+            foreach (var item in _directivesViewer.SelectedItems)
+            {
+                var audit = item;
+                if (audit.Settings.Status != RoutineStatus.Closed)
+                {
+                    audit.Settings.Status = RoutineStatus.Published;
+                    item.Settings.PublishingDate = DateTime.Now;
+                    item.Settings.PublishedId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
+					GlobalObjects.CaaEnvironment.NewKeeper.Save(audit);
+                }
+                else
+                {
+                    MessageBox.Show($@"This audit {item.AuditNumber} is already closed!", (string) new GlobalTermsProvider()["SystemName"],
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+                        MessageBoxDefaultButton.Button2);
+					continue;
+
+                }
+            }
+
+            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+            AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+
+            AnimatedThreadWorker.RunWorkerAsync();
+        }
+
         #endregion
 
 
@@ -244,6 +331,9 @@ namespace CAS.UI.UICAAControls.Audit
 
 			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
                 _toolStripMenuItemEdit,
+				_toolStripSeparator2,
+				_toolStripMenuItemPublish,
+				_toolStripMenuItemClose,
 				_toolStripSeparator1,
 				_toolStripMenuItemHighlight);
 
