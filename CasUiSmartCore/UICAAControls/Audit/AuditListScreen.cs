@@ -199,7 +199,7 @@ namespace CAS.UI.UICAAControls.Audit
 
         private void ToolStripMenuItemEditClick(object sender, EventArgs e)
         {
-            var form = new AuditForm(_directivesViewer.SelectedItem);
+            var form = new EditAuditForm(_directivesViewer.SelectedItem.ItemId);
             if (form.ShowDialog() == DialogResult.OK)
                 AnimatedThreadWorker.RunWorkerAsync();
         }
@@ -302,7 +302,7 @@ namespace CAS.UI.UICAAControls.Audit
 				Settings = new CAAAuditSettings()
                 {
 					CreateDate = DateTime.Now,
-					AutorId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId
+					AuthorId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId
                 }
             });
 			if(form.ShowDialog() == DialogResult.OK)
@@ -396,7 +396,7 @@ namespace CAS.UI.UICAAControls.Audit
 
 		#endregion
 
-		#endregion
+        #endregion
 
-    }
+	}
 }

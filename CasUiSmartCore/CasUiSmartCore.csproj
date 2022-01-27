@@ -848,6 +848,12 @@
     <Compile Include="UICAAControls\Airacraft\CAAAircraftListView.Designer.cs">
       <DependentUpon>CAAAircraftListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\Audit\EditAuditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Audit\EditAuditForm.Designer.cs">
+      <DependentUpon>EditAuditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\Audit\AuditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4203,6 +4209,9 @@
     <EmbeddedResource Include="UICAAControls\Airacraft\CAAAircraftListScreen.resx">
       <DependentUpon>CAAAircraftListScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\Audit\EditAuditForm.resx">
+      <DependentUpon>EditAuditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Audit\AuditForm.resx">
       <DependentUpon>AuditForm.cs</DependentUpon>

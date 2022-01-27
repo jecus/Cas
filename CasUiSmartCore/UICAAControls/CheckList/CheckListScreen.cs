@@ -19,6 +19,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.UI.UICAAControls.Audit;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CheckList
@@ -102,14 +103,22 @@ namespace CAS.UI.UICAAControls.CheckList
                                              (_routineAudit?.Type == ProgramType.CAAKG ||
                                               _routineAudit?.Type == ProgramType.IOSA);
 
+            if (_auditId.HasValue)
+            {
+                this.headerControl.ShowEditButton = true;
+                this.headerControl.EditButtonClick +=HeaderControl_EditButtonClick; ;
+
+            }
+
 			_directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
 		}
-		#endregion
 
-		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+        #endregion
+
+        #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+        protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		{
 			_initialDocumentArray.Clear();
 			_resultDocumentArray.Clear();
@@ -215,6 +224,13 @@ namespace CAS.UI.UICAAControls.CheckList
 			}
 		}
 		#endregion
+
+        private void HeaderControl_EditButtonClick(object sender, EventArgs e)
+        {
+			var form = new EditAuditForm(_directivesViewer.SelectedItem.ItemId);
+            if (form.ShowDialog() == DialogResult.OK)
+                AnimatedThreadWorker.RunWorkerAsync();
+		}
 
 
 		#region private void HighlightItemClick(object sender, EventArgs e)

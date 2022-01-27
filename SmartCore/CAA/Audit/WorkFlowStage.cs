@@ -14,6 +14,16 @@ namespace SmartCore.CAA.Audit
         private static CommonDictionaryCollection<WorkFlowStage> _Items = new CommonDictionaryCollection<WorkFlowStage>();
         #endregion
 
+        public static WorkFlowStage Open = new WorkFlowStage(1, "Open", "Open", "Open");
+        public static WorkFlowStage Evaluation = new WorkFlowStage(2, "Evaluation", "Evaluation", "Evaluation");
+        public static WorkFlowStage CAR = new WorkFlowStage(3, "CAR - Corrective Action Report", "CAR - Corrective Action Report", "CAR - Corrective Action Report");
+        public static WorkFlowStage CAP = new WorkFlowStage(4, "Corrective Action Plan (CAP) ", "Corrective Action Plan (CAP) ", "Corrective Action Plan (CAP) ");
+        public static WorkFlowStage Review = new WorkFlowStage(5, "Review", "Review", "Review");
+        public static WorkFlowStage VOI = new WorkFlowStage(6, "VOI/Acceptance", "VOI/Acceptance", "VOI/Acceptance");
+        public static WorkFlowStage FAT = new WorkFlowStage(7, "Final Action Taken (FAT)", "Final Action Taken (FAT)", "Final Action Taken (FAT)");
+        public static WorkFlowStage Audite = new WorkFlowStage(8, "Audite corrections", "Audite corrections", "Audite corrections");
+        public static WorkFlowStage UnknAuditorown = new WorkFlowStage(9, "Auditor corrections", "Auditor corrections", "Auditor corrections");
+        public static WorkFlowStage Closed = new WorkFlowStage(10, "Closed ", "Closed ", "Closed");
         public static WorkFlowStage Unknown = new WorkFlowStage(-1, "Unknown", "Unknown", "Unknown");
 
         /*

@@ -53,7 +53,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 		/// </summary>
 		protected override void SetHeaders()
 		{
-            AddColumn("Title", (int)(radGridView1.Width * 0.20f));
+            AddColumn("Code", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Program Type", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Object", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.45f));

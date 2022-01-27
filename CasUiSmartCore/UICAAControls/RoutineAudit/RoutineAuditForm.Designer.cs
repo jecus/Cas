@@ -88,6 +88,30 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             label5.Text = "Remark:";
             label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Verdana", 9F);
+            label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label3.Location = new System.Drawing.Point(1043, 123);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(53, 14);
+            label3.TabIndex = 343;
+            label3.Text = "Object:";
+            label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Verdana", 9F);
+            label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label2.Location = new System.Drawing.Point(1044, 69);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(45, 14);
+            label2.TabIndex = 351;
+            label2.Text = "Code:";
+            label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // ButtonDelete
             // 
             this.ButtonDelete.ActiveBackColor = System.Drawing.Color.Transparent;
@@ -146,12 +170,15 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             // 
             // _tocheckListView
             // 
+            this._tocheckListView.AuditId = null;
+            this._tocheckListView.ColumnIndexes = null;
             this._tocheckListView.ConfigurePaste = null;
             this._tocheckListView.Displayer = null;
             this._tocheckListView.DisplayerText = null;
             this._tocheckListView.EnableCustomSorting = true;
             this._tocheckListView.Entity = null;
             this._tocheckListView.IgnoreEnterPress = false;
+            this._tocheckListView.IsAuditCheck = false;
             this._tocheckListView.Location = new System.Drawing.Point(8, 391);
             this._tocheckListView.MenuOpeningAction = null;
             this._tocheckListView.Name = "_tocheckListView";
@@ -164,12 +191,15 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             // 
             // _fromcheckListView
             // 
+            this._fromcheckListView.AuditId = null;
+            this._fromcheckListView.ColumnIndexes = null;
             this._fromcheckListView.ConfigurePaste = null;
             this._fromcheckListView.Displayer = null;
             this._fromcheckListView.DisplayerText = null;
             this._fromcheckListView.EnableCustomSorting = true;
             this._fromcheckListView.Entity = null;
             this._fromcheckListView.IgnoreEnterPress = false;
+            this._fromcheckListView.IsAuditCheck = false;
             this._fromcheckListView.Location = new System.Drawing.Point(8, 63);
             this._fromcheckListView.MenuOpeningAction = null;
             this._fromcheckListView.Name = "_fromcheckListView";
@@ -270,18 +300,6 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             this.metroTextBoxRemark.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxRemark.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Verdana", 9F);
-            label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label3.Location = new System.Drawing.Point(1043, 123);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(53, 14);
-            label3.TabIndex = 343;
-            label3.Text = "Object:";
-            label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // comboBoxProgramType
             // 
             this.comboBoxProgramType.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -333,18 +351,6 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             this.metroTextBoxTitle.UseSelectable = true;
             this.metroTextBoxTitle.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxTitle.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Verdana", 9F);
-            label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label2.Location = new System.Drawing.Point(1044, 69);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(38, 14);
-            label2.TabIndex = 351;
-            label2.Text = "Title:";
-            label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // RoutineAuditForm
             // 

@@ -9,10 +9,10 @@ using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.CAA.Audit
 {
-    public enum CAARoutineStatus
+    public enum RoutineStatus
     {
         Open,
-        Workflow,
+        Published,
         Closed
     }
 
@@ -45,7 +45,14 @@ namespace SmartCore.CAA.Audit
 
         public CAAAudit()
         {
-            Settings = new CAAAuditSettings();
+            Settings = new CAAAuditSettings()
+            {
+                Status = RoutineStatus.Open,
+                WorkflowStageId = -1,
+                PublishingDate =  DateTimeExtend.GetCASMinDateTime(),
+                ClosingDate = DateTimeExtend.GetCASMinDateTime(),
+                CreateDate = DateTime.Today
+            };
             SmartCoreObjectType = SmartCoreType.CAAAudit;
             ItemId = -1;
         }
@@ -60,29 +67,79 @@ namespace SmartCore.CAA.Audit
 
         }
 
-        //public CAARoutineStatus Status { get; set; }
+        [JsonProperty("Status")]
+        public RoutineStatus Status { get; set; }
 
-        //private WorkFlowStage _workflowStage;
-        //public WorkFlowStage WorkflowStage
-        //{
-        //    get => _workflowStage ?? WorkFlowStage.Unknown;
-        //    set => _workflowStage = value;
-        //}
-
-        //private WorkFlowStatus _workflowStatus;
-        //public WorkFlowStatus WorkflowStatus
-        //{
-        //    get => _workflowStatus ?? WorkFlowStatus.Unknown;
-        //    set => _workflowStatus = value;
-        //}
+        [JsonProperty("WorkflowStageId")]
+        public int WorkflowStageId { get; set; }
 
 
-        //private AuditType _auditType;
-        //public AuditType AuditType
-        //{
-        //    get => _auditType ?? AuditType.Unknown;
-        //    set => _auditType = value;
-        //}
+        #region public DateTime CreateDate { get; set; }
+
+        private DateTime _createDate;
+        /// <summary>
+        /// Дата открытия Рабочего Пакета 
+        /// </summary>
+        [JsonProperty("CreateDate")]
+        public DateTime CreateDate
+        {
+            get { return _createDate; }
+            set
+            {
+                var min = DateTimeExtend.GetCASMinDateTime();
+                if (_createDate < min || _createDate != value)
+                {
+                    _createDate = value < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : value;
+                }
+            }
+        }
+
+        #endregion
+
+        #region public DateTime PublishingDate { get; set; }
+
+        private DateTime _publishingDate;
+        /// <summary>
+        /// Дата публикации рабочего пакета 
+        /// </summary>
+        [JsonProperty("PublishingDate")]
+        public DateTime PublishingDate
+        {
+            get { return _publishingDate < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _publishingDate; }
+            set
+            {
+                var min = DateTimeExtend.GetCASMinDateTime();
+                if (_publishingDate < min || _publishingDate != value)
+                {
+                    _publishingDate = value < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : value;
+                }
+            }
+        }
+
+        #endregion
+
+        #region public DateTime ClosingDate { get; set; }
+
+        private DateTime _closingDate;
+        /// <summary>
+        /// Дата закрытия рабочего пакета
+        /// </summary>
+        [JsonProperty("ClosingDate")]
+        public DateTime ClosingDate
+        {
+            get { return _closingDate < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _closingDate; }
+            set
+            {
+                var min = DateTimeExtend.GetCASMinDateTime();
+                if (_closingDate < min || _closingDate != value)
+                {
+                    _closingDate = value < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : value;
+                }
+            }
+        }
+
+        #endregion
+
 
         [JsonProperty("OperatorId")]
         public int OperatorId { get; set; }
@@ -90,11 +147,14 @@ namespace SmartCore.CAA.Audit
         [JsonProperty("Remark")]
         public string Remark { get; set; }
 
-        [JsonProperty("AutorId")]
-        public int AutorId { get; set; }
-
-        [JsonProperty("CreateDate")]
-        public DateTime CreateDate { get; set; }
+        [JsonProperty("AuthorId")]
+        public int AuthorId { get; set; }
+        [JsonProperty("PublishedId")]
+        public int PublishedId { get; set; }
+        [JsonProperty("ClosedId")]
+        public int ClosedId { get; set; }
+        [JsonProperty("KMH")]
+        public decimal KMH { get; set; }
 
 
     }
