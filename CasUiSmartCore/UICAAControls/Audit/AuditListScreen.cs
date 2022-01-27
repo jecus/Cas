@@ -336,12 +336,12 @@ group by a.RoutineAuditId");
 			if (confirmResult == DialogResult.Yes)
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
-				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList());
 
                 foreach (var audit in _directivesViewer.SelectedItems)
                 {
                     GlobalObjects.CaaEnvironment.NewLoader.Execute(
-                        $"delete from dbo.RoutineAuditRecords where RoutineAuditId = {audit.ItemId}");
+                        $"update dbo.AuditRecords set IsDeleted = 1 where AuditId = {audit.ItemId}");
                 }
                 
 

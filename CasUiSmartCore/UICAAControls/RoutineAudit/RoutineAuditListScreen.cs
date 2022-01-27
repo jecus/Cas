@@ -215,7 +215,12 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 			if (confirmResult == DialogResult.Yes)
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
-				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList());
+                foreach (var audit in _directivesViewer.SelectedItems)
+                {
+                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
+                        $"update dbo.RoutineAuditRecords set IsDeleted = 1 where RoutineAuditId = {audit.ItemId}");
+                }
 				_directivesViewer.radGridView1.EndUpdate();
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
