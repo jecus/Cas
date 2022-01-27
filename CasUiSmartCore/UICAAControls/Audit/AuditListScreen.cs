@@ -121,7 +121,7 @@ cross apply
 	where AuditId = ar.AuditId and IsDeleted = 0
 ) a
 where ar.IsDeleted = 0
-group by a.RoutineAuditId";
+group by a.RoutineAuditId");
 
             var dt = ds.Tables[0];
 
