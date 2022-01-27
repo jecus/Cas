@@ -134,10 +134,6 @@ namespace SmartCore.CAA.Check
             }
         }
 
-        public override int CompareTo(object y)
-        {
-            return Group > ((CheckLists) y).Group ? 1 : -1;
-        }
     }
 
 

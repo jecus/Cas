@@ -22,6 +22,14 @@ namespace SmartCore.CAA.Audit
     public class CAAAudit : BaseEntityObject , IAuditFilterParams
     {
         public double MH { get; set; }
+        public string KMLW
+        {
+            get
+            {
+                var res = ((double) Settings.KMH) * MH;
+                return res.ToString();
+            }
+        }
 
         public string AuditNumber { get; set; }
 

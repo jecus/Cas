@@ -66,8 +66,11 @@ namespace CAS.UI.UICAAControls.Audit
             AddColumn("PublishedDate", (int)(radGridView1.Width * 0.30f));
             AddColumn("ClosingDate", (int)(radGridView1.Width * 0.30f));
             AddColumn("MH", (int)(radGridView1.Width * 0.30f));
-			AddColumn("Stage", (int)(radGridView1.Width * 0.30f));
+			
 			AddColumn("K for MH", (int)(radGridView1.Width * 0.30f));
+			AddColumn("K * MH", (int)(radGridView1.Width * 0.30f));
+
+            AddColumn("Stage", (int)(radGridView1.Width * 0.30f));
 			AddColumn("Remark", (int)(radGridView1.Width * 0.30f));
             AddColumn("Author", (int)(radGridView1.Width * 0.30f));
             AddColumn("Published By", (int)(radGridView1.Width * 0.30f));
@@ -105,15 +108,17 @@ namespace CAS.UI.UICAAControls.Audit
                 CreateRow(item.Operator.ToString(), item.Operator),
 				CreateRow(item.AuditNumber, item.AuditNumber),
 				CreateRow(item.Settings.Status.ToString(), item.Settings.Status),
+
 				CreateRow(Convert.GetDateFormat(item.Settings.CreateDate), item.Settings.CreateDate),
 				CreateRow(publishedDate, item.Settings.PublishingDate),
 				CreateRow(closedDate, item.Settings.ClosingDate),
+
 				CreateRow(item.MH.ToString(), item.MH),
+                CreateRow(item.Settings.KMH.ToString(), item.Settings.KMH),
+                CreateRow(item.KMLW, item.KMLW),
 
-				CreateRow(stage.ToString(), stage),
-				CreateRow(item.Settings.KMH.ToString(), item.Settings.KMH),
 				CreateRow(item.Settings.Remark, item.Settings.Remark),
-
+                CreateRow(stage.ToString(), stage),
                 CreateRow(author, author),
                 CreateRow(published, published),
                 CreateRow(closed, closed),
