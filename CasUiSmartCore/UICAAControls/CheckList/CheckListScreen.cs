@@ -287,7 +287,12 @@ namespace CAS.UI.UICAAControls.CheckList
 			if (confirmResult == DialogResult.Yes)
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
-				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
+				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList());
+                foreach (var audit in _directivesViewer.SelectedItems)
+                {
+                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
+                        $"update dbo.CheckListRecord set IsDeleted = 1 where CheckListId = {audit.ItemId}");
+                }
 				_directivesViewer.radGridView1.EndUpdate();
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
