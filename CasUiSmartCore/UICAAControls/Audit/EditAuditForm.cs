@@ -8,6 +8,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
+using SmartCore.Auxiliary;
 using SmartCore.CAA;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.RoutineAudits;
@@ -82,13 +83,20 @@ namespace CAS.UI.UICAAControls.Audit
             var status = (RoutineStatus)comboBoxStatus.SelectedItem;
             if (status == RoutineStatus.Published)
             {
-                _audit.Settings.PublishingDate = DateTime.Now;
-                _audit.Settings.PublishedId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
+                if (_audit.Settings.PublishingDate <= DateTimeExtend.GetCASMinDateTime())
+                {
+                    _audit.Settings.PublishingDate = DateTime.Now;
+                    _audit.Settings.PublishedId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
+                }
             }
             else if (status == RoutineStatus.Closed)
             {
-                _audit.Settings.ClosingDate = DateTime.Now;
-                _audit.Settings.ClosedId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
+                if(_audit.Settings.ClosingDate <= DateTimeExtend.GetCASMinDateTime())
+                {
+                    _audit.Settings.ClosingDate = DateTime.Now;
+                    _audit.Settings.ClosedId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
+                }
+                
             }
 
         }
