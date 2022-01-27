@@ -42,8 +42,6 @@ namespace CAS.UI.UICAAControls.Audit
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
-            if (_audit == null) return;
-
             _operators = GlobalObjects.CaaEnvironment.AllOperators;
             _audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_auditId);
         }

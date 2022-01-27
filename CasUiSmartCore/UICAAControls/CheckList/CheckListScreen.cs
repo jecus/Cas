@@ -227,7 +227,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void HeaderControl_EditButtonClick(object sender, EventArgs e)
         {
-			var form = new EditAuditForm(_directivesViewer.SelectedItem.ItemId);
+			var form = new EditAuditForm(_auditId.Value);
             if (form.ShowDialog() == DialogResult.OK)
                 AnimatedThreadWorker.RunWorkerAsync();
 		}
