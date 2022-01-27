@@ -63,10 +63,10 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxCheck = new System.Windows.Forms.CheckBox();
             this.checkBoxNotify = new System.Windows.Forms.CheckBox();
             this.checkBoxLevel = new System.Windows.Forms.CheckBox();
-            this.dateTimePickerMH = new System.Windows.Forms.DateTimePicker();
             this.comboBoxPhase = new System.Windows.Forms.ComboBox();
             this.checkBoxPhase = new System.Windows.Forms.CheckBox();
             this.checkBoxMH = new System.Windows.Forms.CheckBox();
+            this.metroTextBoxMH = new MetroFramework.Controls.MetroTextBox();
             label14 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
@@ -343,12 +343,15 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             // _fromcheckListView
             // 
+            this._fromcheckListView.AuditId = null;
+            this._fromcheckListView.ColumnIndexes = null;
             this._fromcheckListView.ConfigurePaste = null;
             this._fromcheckListView.Displayer = null;
             this._fromcheckListView.DisplayerText = null;
             this._fromcheckListView.EnableCustomSorting = true;
             this._fromcheckListView.Entity = null;
             this._fromcheckListView.IgnoreEnterPress = false;
+            this._fromcheckListView.IsAuditCheck = false;
             this._fromcheckListView.Location = new System.Drawing.Point(5, 53);
             this._fromcheckListView.MenuOpeningAction = null;
             this._fromcheckListView.Name = "_fromcheckListView";
@@ -361,12 +364,15 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             // _tocheckListView
             // 
+            this._tocheckListView.AuditId = null;
+            this._tocheckListView.ColumnIndexes = null;
             this._tocheckListView.ConfigurePaste = null;
             this._tocheckListView.Displayer = null;
             this._tocheckListView.DisplayerText = null;
             this._tocheckListView.EnableCustomSorting = true;
             this._tocheckListView.Entity = null;
             this._tocheckListView.IgnoreEnterPress = false;
+            this._tocheckListView.IsAuditCheck = false;
             this._tocheckListView.Location = new System.Drawing.Point(5, 381);
             this._tocheckListView.MenuOpeningAction = null;
             this._tocheckListView.Name = "_tocheckListView";
@@ -573,19 +579,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxLevel.TabIndex = 344;
             this.checkBoxLevel.CheckedChanged += new System.EventHandler(this.checkBoxLevel_CheckedChanged);
             // 
-            // dateTimePickerMH
-            // 
-            this.dateTimePickerMH.CalendarForeColor = System.Drawing.Color.DimGray;
-            this.dateTimePickerMH.CustomFormat = "HH:mm";
-            this.dateTimePickerMH.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.dateTimePickerMH.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerMH.Location = new System.Drawing.Point(1248, 313);
-            this.dateTimePickerMH.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
-            this.dateTimePickerMH.Name = "dateTimePickerMH";
-            this.dateTimePickerMH.ShowUpDown = true;
-            this.dateTimePickerMH.Size = new System.Drawing.Size(119, 20);
-            this.dateTimePickerMH.TabIndex = 348;
-            // 
             // comboBoxPhase
             // 
             this.comboBoxPhase.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -618,14 +611,46 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxMH.TabIndex = 350;
             this.checkBoxMH.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
+            // metroTextBoxMH
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBoxMH.CustomButton.Image = null;
+            this.metroTextBoxMH.CustomButton.Location = new System.Drawing.Point(101, 1);
+            this.metroTextBoxMH.CustomButton.Name = "";
+            this.metroTextBoxMH.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.metroTextBoxMH.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxMH.CustomButton.TabIndex = 1;
+            this.metroTextBoxMH.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxMH.CustomButton.UseSelectable = true;
+            this.metroTextBoxMH.CustomButton.Visible = false;
+            this.metroTextBoxMH.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxMH.Lines = new string[0];
+            this.metroTextBoxMH.Location = new System.Drawing.Point(1248, 313);
+            this.metroTextBoxMH.MaxLength = 32767;
+            this.metroTextBoxMH.Multiline = true;
+            this.metroTextBoxMH.Name = "metroTextBoxMH";
+            this.metroTextBoxMH.PasswordChar = '\0';
+            this.metroTextBoxMH.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxMH.SelectedText = "";
+            this.metroTextBoxMH.SelectionLength = 0;
+            this.metroTextBoxMH.SelectionStart = 0;
+            this.metroTextBoxMH.ShortcutsEnabled = true;
+            this.metroTextBoxMH.Size = new System.Drawing.Size(121, 21);
+            this.metroTextBoxMH.TabIndex = 351;
+            this.metroTextBoxMH.UseSelectable = true;
+            this.metroTextBoxMH.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxMH.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
             // CheckListRevisionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1518, 703);
+            this.Controls.Add(this.metroTextBoxMH);
             this.Controls.Add(this.checkBoxMH);
             this.Controls.Add(this.checkBoxPhase);
-            this.Controls.Add(this.dateTimePickerMH);
             this.Controls.Add(label19);
             this.Controls.Add(this.comboBoxPhase);
             this.Controls.Add(label18);
@@ -693,9 +718,9 @@ namespace CAS.UI.UICAAControls.CheckList
         private System.Windows.Forms.CheckBox checkBoxCheck;
         private System.Windows.Forms.CheckBox checkBoxNotify;
         private System.Windows.Forms.CheckBox checkBoxLevel;
-        private System.Windows.Forms.DateTimePicker dateTimePickerMH;
         private System.Windows.Forms.ComboBox comboBoxPhase;
         private System.Windows.Forms.CheckBox checkBoxPhase;
         private System.Windows.Forms.CheckBox checkBoxMH;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxMH;
     }
 }

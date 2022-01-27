@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.Dictionary;
@@ -112,17 +113,10 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxReference.Text = _currentCheck.Settings.Reference;
             metroTextBoxDescribed.Text = _currentCheck.Settings.Described;
             metroTextBoxInstructions.Text = _currentCheck.Settings.Instructions;
-            
-            
-            
-            
-            if(DateTimeExtend.GetCASMinDateTime() <= _currentCheck.Settings.MH)
-                dateTimePickerMH.Value = _currentCheck.Settings.MH;
-            else
-            {
-                var date = new DateTime(2020,1,1,0,0,0);
-                dateTimePickerMH.Value = date;
-            }
+
+
+            if (Math.Abs(_currentCheck.Settings.MH) > 0.000001)
+                metroTextBoxMH.Text = _currentCheck.Settings.MH.ToString();
 
             var phase = new List<string> { "1", "2", "3", "4", "5", "6", "N/A" };
             comboBoxPhase.Items.Clear();
@@ -146,7 +140,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 UpdateRecords(rec);
         }
 
-        private void ApplyChanges()
+        private bool ApplyChanges()
         {
             _currentCheck.Source = metroTextSource.Text;
             _currentCheck.Settings.EditionNumber = metroTextBoxEditionNumber.Text ;
@@ -174,14 +168,45 @@ namespace CAS.UI.UICAAControls.CheckList
 
             _currentCheck.Settings.LevelId = ((FindingLevels) comboBoxLevel.SelectedItem).ItemId;
             _currentCheck.Settings.Phase = (string)comboBoxPhase.SelectedItem;
-            _currentCheck.Settings.MH = dateTimePickerMH.Value;
+
+
+            double manHours;
+            if (!CheckManHours(out manHours))
+                return false;
+            _currentCheck.Settings.MH = manHours;
 
             if (fileControl.GetChangeStatus())
             {
                 fileControl.ApplyChanges();
                 _currentCheck.File = fileControl.AttachedFile;
             }
+
+            return true;
         }
+
+        #region public bool CheckManHours(out double manHours)
+
+        /// <summary>
+        /// Проверяет значение ManHours
+        /// </summary>
+        /// <param name="manHours">Значение ManHours</param>
+        /// <returns>Возвращает true если значение можно преобразовать в тип double, иначе возвращает false</returns>
+        public bool CheckManHours(out double manHours)
+        {
+            if (metroTextBoxMH.Text == "")
+            {
+                manHours = 0;
+                return true;
+            }
+            if (double.TryParse(metroTextBoxMH.Text, NumberStyles.Float, new NumberFormatInfo(), out manHours) == false)
+            {
+                MessageBox.Show("Man Hours. Invalid value", (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            return true;
+        }
+
+        #endregion
 
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -226,21 +251,25 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             try
             {
-                ApplyChanges();
-
-                GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentCheck, true);
-
-
-                foreach (var control in flowLayoutPanel1.Controls.OfType<AuditControl>())
+                if(ApplyChanges())
                 {
-                    control.ApplyChanges();
-                    control.Record.CheckListId = _currentCheck.ItemId;
-                    GlobalObjects.CaaEnvironment.NewKeeper.Save(control.Record, true);
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentCheck, true);
+
+
+                    foreach (var control in flowLayoutPanel1.Controls.OfType<AuditControl>())
+                    {
+                        control.ApplyChanges();
+                        control.Record.CheckListId = _currentCheck.ItemId;
+                        GlobalObjects.CaaEnvironment.NewKeeper.Save(control.Record, true);
+                    }
+
+
+                    DialogResult = DialogResult.OK;
+                    Close();
                 }
 
-
-                DialogResult = DialogResult.OK;
-                Close();
+                
+                this.Focus();
             }
             catch (Exception ex)
             {

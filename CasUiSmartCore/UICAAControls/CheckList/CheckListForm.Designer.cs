@@ -76,7 +76,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.comboBoxLevel = new System.Windows.Forms.ComboBox();
             this.fileControl = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
             this.comboBoxPhase = new System.Windows.Forms.ComboBox();
-            this.dateTimePickerMH = new System.Windows.Forms.DateTimePicker();
+            this.metroTextBoxMH = new MetroFramework.Controls.MetroTextBox();
             metroLabel1 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
@@ -729,7 +729,6 @@ namespace CAS.UI.UICAAControls.CheckList
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -948,25 +947,44 @@ namespace CAS.UI.UICAAControls.CheckList
             this.comboBoxPhase.Size = new System.Drawing.Size(121, 22);
             this.comboBoxPhase.TabIndex = 319;
             // 
-            // dateTimePickerMH
+            // metroTextBoxMH
             // 
-            this.dateTimePickerMH.CalendarForeColor = System.Drawing.Color.DimGray;
-            this.dateTimePickerMH.CustomFormat = "HH:mm";
-            this.dateTimePickerMH.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.dateTimePickerMH.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerMH.Location = new System.Drawing.Point(188, 457);
-            this.dateTimePickerMH.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
-            this.dateTimePickerMH.Name = "dateTimePickerMH";
-            this.dateTimePickerMH.ShowUpDown = true;
-            this.dateTimePickerMH.Size = new System.Drawing.Size(119, 20);
-            this.dateTimePickerMH.TabIndex = 322;
+            // 
+            // 
+            // 
+            this.metroTextBoxMH.CustomButton.Image = null;
+            this.metroTextBoxMH.CustomButton.Location = new System.Drawing.Point(101, 1);
+            this.metroTextBoxMH.CustomButton.Name = "";
+            this.metroTextBoxMH.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.metroTextBoxMH.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxMH.CustomButton.TabIndex = 1;
+            this.metroTextBoxMH.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxMH.CustomButton.UseSelectable = true;
+            this.metroTextBoxMH.CustomButton.Visible = false;
+            this.metroTextBoxMH.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxMH.Lines = new string[0];
+            this.metroTextBoxMH.Location = new System.Drawing.Point(188, 457);
+            this.metroTextBoxMH.MaxLength = 32767;
+            this.metroTextBoxMH.Multiline = true;
+            this.metroTextBoxMH.Name = "metroTextBoxMH";
+            this.metroTextBoxMH.PasswordChar = '\0';
+            this.metroTextBoxMH.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxMH.SelectedText = "";
+            this.metroTextBoxMH.SelectionLength = 0;
+            this.metroTextBoxMH.SelectionStart = 0;
+            this.metroTextBoxMH.ShortcutsEnabled = true;
+            this.metroTextBoxMH.Size = new System.Drawing.Size(121, 21);
+            this.metroTextBoxMH.TabIndex = 322;
+            this.metroTextBoxMH.UseSelectable = true;
+            this.metroTextBoxMH.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxMH.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // CheckListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1085, 820);
-            this.Controls.Add(this.dateTimePickerMH);
+            this.Controls.Add(this.metroTextBoxMH);
             this.Controls.Add(label19);
             this.Controls.Add(this.comboBoxPhase);
             this.Controls.Add(label18);
@@ -1052,6 +1070,6 @@ namespace CAS.UI.UICAAControls.CheckList
         private MetroFramework.Controls.MetroTextBox metroTextBoxInstructions;
         private ComboBox comboBoxLevel;
         private ComboBox comboBoxPhase;
-        private DateTimePicker dateTimePickerMH;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxMH;
     }
 }

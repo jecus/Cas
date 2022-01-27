@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.Dictionary;
@@ -89,7 +90,7 @@ namespace CAS.UI.UICAAControls.CheckList
             _tocheckListView.SetItemsArray(_updateChecks.ToArray());
         }
 
-        private void ApplyChanges()
+        private bool ApplyChanges()
         {
             foreach (var checks in _updateChecks)
             {
@@ -117,9 +118,40 @@ namespace CAS.UI.UICAAControls.CheckList
                 if (checkBoxPhase.Checked)
                     checks.Settings.Phase = (string)comboBoxPhase.SelectedItem;
                 if (checkBoxMH.Checked)
-                    checks.Settings.MH = dateTimePickerMH.Value;
+                {
+                    double manHours;
+                    if (!CheckManHours(out manHours))
+                        return false;
+                    checks.Settings.MH = manHours;
+                }
             }
+
+            return true;
         }
+
+        #region public bool CheckManHours(out double manHours)
+
+        /// <summary>
+        /// Проверяет значение ManHours
+        /// </summary>
+        /// <param name="manHours">Значение ManHours</param>
+        /// <returns>Возвращает true если значение можно преобразовать в тип double, иначе возвращает false</returns>
+        public bool CheckManHours(out double manHours)
+        {
+            if (metroTextBoxMH.Text == "")
+            {
+                manHours = 0;
+                return true;
+            }
+            if (double.TryParse(metroTextBoxMH.Text, NumberStyles.Float, new NumberFormatInfo(), out manHours) == false)
+            {
+                MessageBox.Show("Man Hours. Invalid value", (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            return true;
+        }
+
+        #endregion
 
 
         private void SetEnableControl(bool state)
@@ -138,7 +170,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 dateTimePickeValidTo.Enabled =
             numericUpNotify.Enabled =
                 comboBoxPhase.Enabled =
-                    dateTimePickerMH.Enabled =
+                    metroTextBoxMH.Enabled =
             metroTextBoxReference.Enabled =
                 comboBoxLevel.Enabled = state;
         }
@@ -156,7 +188,7 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxReference.Text = "";
             comboBoxLevel.SelectedItem = FindingLevels.Unknown;
             comboBoxPhase.SelectedItem = "N/A";
-            dateTimePickerMH.Value = new DateTime(2020, 1, 1, 0, 0, 0);
+            metroTextBoxMH.Text = "0.0";
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
@@ -167,23 +199,26 @@ namespace CAS.UI.UICAAControls.CheckList
                 var dialogResult = MessageBox.Show("Do you really want update records?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    ApplyChanges();
-                    foreach (var checks in _updateChecks)
-                        GlobalObjects.CaaEnvironment.NewKeeper.Save(checks);
-
-
-                    MessageBox.Show("All records updated successfull!", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
-                    //DialogResult = DialogResult.OK;
-                    //Close();
-
-                    foreach (var item in _tocheckListView.SelectedItems.ToArray())
+                    if (ApplyChanges())
                     {
-                        _updateChecks.Remove(item);
-                        _addedChecks.Add(item);
+                        foreach (var checks in _updateChecks)
+                            GlobalObjects.CaaEnvironment.NewKeeper.Save(checks);
+
+
+                        MessageBox.Show("All records updated successfull!", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
+                        //DialogResult = DialogResult.OK;
+                        //Close();
+
+                        foreach (var item in _tocheckListView.SelectedItems.ToArray())
+                        {
+                            _updateChecks.Remove(item);
+                            _addedChecks.Add(item);
+                        }
+                        SetEnableControl(false);
+                        ClearControl();
+                        _animatedThreadWorker.RunWorkerAsync();
                     }
-                    SetEnableControl(false);
-                    ClearControl();
-                    _animatedThreadWorker.RunWorkerAsync();
+                    
                 }
             }
             catch (Exception ex)
@@ -270,7 +305,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            dateTimePickerMH.Enabled = checkBoxMH.Checked;
+            metroTextBoxMH.Enabled = checkBoxMH.Checked;
         }
 
         private void checkBoxRevisionValidTo_CheckedChanged(object sender, EventArgs e)

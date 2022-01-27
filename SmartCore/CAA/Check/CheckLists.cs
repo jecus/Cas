@@ -150,6 +150,7 @@ namespace SmartCore.CAA.Check
             RevisonDate = DateTime.Today;
             RevisonValidToDate = DateTime.Today;
             Phase = "N/A";
+            MH = 0.0;
         }
 
         [JsonProperty("EditionNumber")]
@@ -217,7 +218,7 @@ namespace SmartCore.CAA.Check
         [DefaultValue("N/A")]
         public string Phase { get; set; }
 
-        [JsonProperty("MH")]
-        public DateTime MH { get; set; }
+        [JsonProperty("ManHours")]
+        public double MH { get; set; }
     }
 }
