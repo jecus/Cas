@@ -65,6 +65,7 @@ namespace CAS.UI.UICAAControls.Audit
 			AddColumn("CreateDate", (int)(radGridView1.Width * 0.30f));
             AddColumn("PublishedDate", (int)(radGridView1.Width * 0.30f));
             AddColumn("ClosingDate", (int)(radGridView1.Width * 0.30f));
+            AddColumn("MH", (int)(radGridView1.Width * 0.30f));
 			AddColumn("Stage", (int)(radGridView1.Width * 0.30f));
 			AddColumn("K for MH", (int)(radGridView1.Width * 0.30f));
 			AddColumn("Remark", (int)(radGridView1.Width * 0.30f));
@@ -107,6 +108,7 @@ namespace CAS.UI.UICAAControls.Audit
 				CreateRow(Convert.GetDateFormat(item.Settings.CreateDate), item.Settings.CreateDate),
 				CreateRow(publishedDate, item.Settings.PublishingDate),
 				CreateRow(closedDate, item.Settings.ClosingDate),
+				CreateRow(item.MH.ToString(), item.MH),
 
 				CreateRow(stage.ToString(), stage),
 				CreateRow(item.Settings.KMH.ToString(), item.Settings.KMH),

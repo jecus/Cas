@@ -21,6 +21,8 @@ namespace SmartCore.CAA.Audit
     [Serializable]
     public class CAAAudit : BaseEntityObject , IAuditFilterParams
     {
+        public double MH { get; set; }
+
         public string AuditNumber { get; set; }
 
         public string SettingsJSON

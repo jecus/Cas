@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -106,7 +107,34 @@ namespace CAS.UI.UICAAControls.Audit
 
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAuditDTO, CAAAudit>(loadChild:true));
 
-            foreach (var audit in _initialDocumentArray)
+
+            var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute(@"select a.RoutineAuditId, Sum(a.MH) from dbo.AuditRecords ar
+cross apply
+(
+	select ra.RoutineAuditId, rar.MH from dbo.RoutineAuditRecords ra
+	cross apply
+	(
+		select cast(JSON_VALUE(SettingsJSON, '$.ManHours') as float) as MH 
+		from dbo.CheckList 
+		where ItemId = ra.CheckListId and IsDeleted = 0
+	) rar
+	where AuditId = ar.AuditId and IsDeleted = 0
+) a
+where ar.IsDeleted = 0
+group by a.RoutineAuditId";
+
+            var dt = ds.Tables[0];
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                var id = (int)dr[0];
+                var find = _initialDocumentArray.FirstOrDefault(i => i.ItemId == id);
+
+                if (find != null && !string.IsNullOrEmpty(dr[1].ToString()))
+                    find.MH = Convert.ToDouble(dr[1].ToString());
+            }
+
+			foreach (var audit in _initialDocumentArray)
             {
                 audit.Operator =  GlobalObjects.CaaEnvironment
                     .AllOperators
@@ -309,6 +337,14 @@ namespace CAS.UI.UICAAControls.Audit
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
 				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
+
+                foreach (var audit in _directivesViewer.SelectedItems)
+                {
+                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
+                        $"delete from dbo.RoutineAuditRecords where RoutineAuditId = {audit.ItemId}");
+                }
+                
+
 				_directivesViewer.radGridView1.EndUpdate();
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
