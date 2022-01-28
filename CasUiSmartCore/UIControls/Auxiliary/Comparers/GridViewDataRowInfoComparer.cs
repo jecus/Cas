@@ -176,16 +176,39 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
                 var xxx = xx as CheckLists;
                 var yyy = yy as CheckLists;
 
-                var result = (xxx.Group > yyy.Group) ? 1 : -1;
-                DataGroup xGroup = x as DataGroup;
-                if (xGroup != null && ((DataGroup)x).GroupDescriptor.GroupNames.First().Direction == ListSortDirection.Descending)
+                var xParts = xxx.Group;
+                var yParts = yyy.Group;
+
+                var partsLength = Math.Max(xParts.Length, yParts.Length);
+                if (partsLength > 0)
                 {
-                    result *= -1;
+                    for (var i = 0; i < partsLength; i++)
+                    {
+                        if (xParts.Length <= i) return -1;// 4.2 < 4.2.x
+                        if (yParts.Length <= i) return 1;
+
+                        var xPart = xParts[i];
+                        var yPart = yParts[i];
+
+                        if (string.IsNullOrEmpty(xPart)) xPart = "0";// 5..2->5.0.2
+                        if (string.IsNullOrEmpty(yPart)) yPart = "0";
+
+                        if (!int.TryParse(xPart, out var xInt) || !int.TryParse(yPart, out var yInt))
+                        {
+                            // 3.a.45 compare part as string
+                            var abcCompare = xPart.CompareTo(yPart);
+                            if (abcCompare != 0)
+                                return -1 * abcCompare;
+                            continue;
+                        }
+
+                        if (xInt != yInt) return xInt < yInt ? -1 : 1;
+                    }
+                    return 0;
                 }
-                return result;
             }
 
-            return 1;
+            return -1;
             //return ((object[])x.Key)[0].ToString().CompareTo(((object[])y.Key)[0].ToString());
         }
     }

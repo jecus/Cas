@@ -123,14 +123,13 @@ namespace SmartCore.CAA.Check
         public string Requirement => Settings.Requirement;
         public FindingLevels Level { get; set; }
 
-        public long Group
+        public string[] Group
         {
             get
             {
                 var g = Regex.Replace($"{SectionNumber} {PartNumber} {SubPartNumber}", @"\s+", " ");
-                var n = Regex.Replace(g, "[^0-9.]", "").Replace(".", "");
-                long.TryParse(n, out var res);
-                return res;
+                var n = Regex.Replace(g, "[^0-9.]", "").Split('.');
+                return n;
             }
         }
 
