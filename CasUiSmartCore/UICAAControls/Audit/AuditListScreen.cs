@@ -108,20 +108,21 @@ namespace CAS.UI.UICAAControls.Audit
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAuditDTO, CAAAudit>(loadChild:true));
 
 
-            var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute(@"select a.RoutineAuditId, Sum(a.MH) from dbo.AuditRecords ar
+            var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute(@"select a.AuditId, Sum(a.MH) from dbo.AuditRecords ar
 cross apply
 (
-	select ra.RoutineAuditId, rar.MH from dbo.RoutineAuditRecords ra
+	select ar.AuditId, rar.MH from dbo.RoutineAuditRecords ra
 	cross apply
 	(
 		select cast(JSON_VALUE(SettingsJSON, '$.ManHours') as float) as MH 
 		from dbo.CheckList 
-		where ItemId = ra.CheckListId and IsDeleted = 0
+		where ra.CheckListId = ItemId and IsDeleted = 0
 	) rar
-	where AuditId = ar.AuditId and IsDeleted = 0
+	where ar.RoutineAuditId = ra.RoutineAuditId and ra.IsDeleted = 0
 ) a
-where ar.IsDeleted = 0
-group by a.RoutineAuditId");
+where ar.IsDeleted = 0 
+group by a.AuditId
+");
 
             var dt = ds.Tables[0];
 

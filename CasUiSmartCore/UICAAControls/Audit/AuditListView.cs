@@ -82,13 +82,7 @@ namespace CAS.UI.UICAAControls.Audit
 
         protected override void GroupingItems()
         {
-            this.radGridView1.GroupDescriptors.Clear();
-            var descriptor = new GroupDescriptor();
-            foreach (var colName in new List<string> { "Status" })
-                descriptor.GroupNames.Add(colName, ListSortDirection.Ascending);
-            this.radGridView1.GroupDescriptors.Add(descriptor);
-
-
+            Grouping("Status");
         }
 
 		#region protected override List<CustomCell> GetListViewSubItems(Specialization item)

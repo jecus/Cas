@@ -39,7 +39,7 @@ namespace SmartCore.CAA.Audit
                 if (Settings.Status == RoutineStatus.Closed)
                 {
                     var diff = Settings.ClosingDate.Subtract(Settings.PublishingDate);
-                    return diff.TotalDays > 0 ?  $"{diff.TotalDays}d {diff.Minutes}m" : $"{diff.Minutes}m";
+                    return (int)diff.TotalDays > 0 ?  $"{(int)diff.TotalDays}d {(int)diff.Minutes}m" : $"{(int)diff.TotalMinutes}m";
                 }
                 return "";
             }
