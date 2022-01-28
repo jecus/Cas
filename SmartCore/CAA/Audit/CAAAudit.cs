@@ -31,6 +31,20 @@ namespace SmartCore.CAA.Audit
             }
         }
 
+
+        public string WorkTime
+        {
+            get
+            {
+                if (Settings.Status == RoutineStatus.Closed)
+                {
+                    var diff = Settings.ClosingDate.Subtract(Settings.PublishingDate);
+                    return diff.TotalDays > 0 ?  $"{diff.TotalDays}d {diff.Minutes}m" : $"{diff.Minutes}m";
+                }
+                return "";
+            }
+        }
+
         public string AuditNumber { get; set; }
 
         public string SettingsJSON

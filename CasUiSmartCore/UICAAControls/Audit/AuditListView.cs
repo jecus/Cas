@@ -70,6 +70,7 @@ namespace CAS.UI.UICAAControls.Audit
 			AddColumn("K for MH", (int)(radGridView1.Width * 0.30f));
 			AddColumn("K * MH", (int)(radGridView1.Width * 0.30f));
 
+            AddColumn("WorkTime", (int)(radGridView1.Width * 0.30f));
             AddColumn("Stage", (int)(radGridView1.Width * 0.30f));
 			AddColumn("Remark", (int)(radGridView1.Width * 0.30f));
             AddColumn("Author", (int)(radGridView1.Width * 0.30f));
@@ -117,8 +118,10 @@ namespace CAS.UI.UICAAControls.Audit
                 CreateRow(item.Settings.KMH.ToString(), item.Settings.KMH),
                 CreateRow(item.KMLW, item.KMLW),
 
-				CreateRow(item.Settings.Remark, item.Settings.Remark),
+				
+                CreateRow(item.WorkTime, item.WorkTime),
                 CreateRow(stage.ToString(), stage),
+                CreateRow(item.Settings.Remark, item.Settings.Remark),
                 CreateRow(author, author),
                 CreateRow(published, published),
                 CreateRow(closed, closed),
