@@ -302,9 +302,10 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
                         continue;
                     }
 
-                    if (xInt != yInt) return xInt < yInt ? -1 : 1;
+                    if (xInt != yInt) return SortMultiplier *(xInt < yInt ? -1 : 1);
                 }
-                return 0;
+                return SortMultiplier * -1;
+                //return  0;
             }
             // compare as string
             return SortMultiplier * xx.CompareTo(yy);

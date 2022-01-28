@@ -67,12 +67,6 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             // _fromcheckListView
             // 
-            this._fromcheckListView.ConfigurePaste = null;
-            this._fromcheckListView.Displayer = null;
-            this._fromcheckListView.DisplayerText = null;
-            this._fromcheckListView.EnableCustomSorting = true;
-            this._fromcheckListView.Entity = null;
-            this._fromcheckListView.IgnoreEnterPress = false;
             this._fromcheckListView.Location = new System.Drawing.Point(5, 53);
             this._fromcheckListView.MenuOpeningAction = null;
             this._fromcheckListView.Name = "_fromcheckListView";
@@ -80,17 +74,10 @@ namespace CAS.UI.UICAAControls.CheckList
             this._fromcheckListView.PasteComplete = null;
             this._fromcheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._fromcheckListView.Size = new System.Drawing.Size(1510, 290);
-            this._fromcheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Asc;
             this._fromcheckListView.TabIndex = 329;
             // 
             // _tocheckListView
             // 
-            this._tocheckListView.ConfigurePaste = null;
-            this._tocheckListView.Displayer = null;
-            this._tocheckListView.DisplayerText = null;
-            this._tocheckListView.EnableCustomSorting = true;
-            this._tocheckListView.Entity = null;
-            this._tocheckListView.IgnoreEnterPress = false;
             this._tocheckListView.Location = new System.Drawing.Point(5, 381);
             this._tocheckListView.MenuOpeningAction = null;
             this._tocheckListView.Name = "_tocheckListView";
@@ -98,7 +85,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this._tocheckListView.PasteComplete = null;
             this._tocheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._tocheckListView.Size = new System.Drawing.Size(1510, 290);
-            this._tocheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Asc;
             this._tocheckListView.TabIndex = 330;
             // 
             // ButtonAdd

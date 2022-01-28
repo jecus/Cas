@@ -33,6 +33,15 @@ namespace CAS.UI.UICAAControls.CheckList
         public CheckListView()
         {
             InitializeComponent();
+
+            ColumnIndexes = new List<string>()
+            {
+                "Section №", "Part №","SubPart №","Item №"
+            };
+            SortDirection = SortDirection.Desc;
+            EnableCustomSorting = true;
+
+            this.radGridView1.MasterTemplate.GroupComparer = new GroupComparer();
 		}
 
         /// <summary>
