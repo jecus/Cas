@@ -253,6 +253,20 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
 
+
+            var condition = "";
+            if (item.AuditCheck != null)
+            {
+                if (item.AuditCheck.Settings.IsApplicable)
+                    condition = "Not Applicable";
+                else
+                {
+                    if (item.AuditCheck.Settings.IsSatisfactory)
+                        condition = "Satisfactory";
+                    else condition = "Not Satisfactory";
+                }
+            }
+
             var subItems = new List<CustomCell>()
             {
                 CreateRow(item.Settings.SectionNumber, item.Settings.SectionNumber),
@@ -266,7 +280,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 CreateRow(item.Settings.Requirement, item.Settings.Requirement),
 
                 CreateRow(item.Level.ToString(), item.Level),
-                CreateRow("", ""),
+                CreateRow(condition, condition),
                 CreateRow("", ""),
                 CreateRow("", ""),
                 CreateRow("", ""),

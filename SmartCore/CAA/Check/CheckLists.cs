@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
 using SmartCore.Auxiliary.Extentions;
+using SmartCore.CAA.Audit;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.Calculations;
 using SmartCore.Entities;
@@ -133,6 +134,7 @@ namespace SmartCore.CAA.Check
             }
         }
 
+        public AuditCheck AuditCheck { get; set; }
     }
 
 

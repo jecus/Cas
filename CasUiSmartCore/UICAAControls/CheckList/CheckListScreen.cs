@@ -20,6 +20,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UICAAControls.Audit;
+using SmartCore.CAA.Audit;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CheckList
@@ -142,7 +143,8 @@ namespace CAS.UI.UICAAControls.CheckList
                     .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", _routingId), loadChild: true).ToList();
 
                 var ids = records.Select(i => i.CheckListId);
-				if(ids.Any())
+
+                if (ids.Any())
                     _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("ItemId", ids), loadChild: true));
 
 			}
@@ -159,7 +161,14 @@ namespace CAS.UI.UICAAControls.CheckList
 
                 var ids = routines.Select(i => i.CheckListId).Distinct();
                 if (ids.Any())
-                    _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("ItemId", ids), loadChild: true));
+                {
+                    var auditChecks = GlobalObjects.CaaEnvironment.NewLoader
+                        .GetObjectListAll<AuditCheckDTO, AuditCheck>(new Filter("CheckListId", ids), loadChild: true).ToList();
+
+					_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("ItemId", ids), loadChild: true));
+                    foreach (var check in _initialDocumentArray)
+                        check.AuditCheck = auditChecks.FirstOrDefault(i => i.CheckListId == check.ItemId);
+				}
 			}
 			else _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(loadChild:true));
 
@@ -301,7 +310,10 @@ namespace CAS.UI.UICAAControls.CheckList
                 {
                     GlobalObjects.CaaEnvironment.NewLoader.Execute(
                         $"update dbo.CheckListRecord set IsDeleted = 1 where CheckListId = {audit.ItemId}");
-                }
+
+                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
+                        $"update [dbo].[AuditChecks] set IsDeleted = 1 where CheckListId = {audit.ItemId}");
+				}
 				_directivesViewer.radGridView1.EndUpdate();
 				AnimatedThreadWorker.RunWorkerAsync();
 			}

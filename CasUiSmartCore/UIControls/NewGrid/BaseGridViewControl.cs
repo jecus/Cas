@@ -793,7 +793,7 @@ namespace CAS.UI.UIControls.NewGrid
 		{
 			if (string.IsNullOrEmpty(colName))
 				return;
-
+            this.radGridView1.GroupDescriptors.Clear();
 			var radSortOrder = SortDirection == 0 ? ListSortDirection.Ascending : ListSortDirection.Descending;
 
 			var descriptor = new GroupDescriptor();

@@ -11,6 +11,7 @@ using MetroFramework.Forms;
 using SmartCore.CAA;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.RoutineAudits;
+using SmartCore.Entities.General;
 
 namespace CAS.UI.UICAAControls.Audit
 {
@@ -144,10 +145,15 @@ namespace CAS.UI.UICAAControls.Audit
 
                 foreach (var check in _updateChecks.ToArray())
                 {
+                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
+                        $"update [dbo].[AuditChecks] set IsDeleted = 1 where AuditId = {_audit.ItemId}");
+                    
                     GlobalObjects.CaaEnvironment.NewKeeper.Delete(check);
                     _updateChecks.Remove(check);
                     _addedChecks.Add(check);
                 }
+
+                
             }
 
             foreach (var item in _fromroutineAuditListView.SelectedItems.ToArray())
@@ -161,6 +167,20 @@ namespace CAS.UI.UICAAControls.Audit
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
                 _records.Add(rec);
 
+
+                var records = GlobalObjects.CaaEnvironment.NewLoader
+                    .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", item.ItemId), loadChild: true).ToList();
+
+                var ac = new List<BaseEntityObject>();
+                foreach (var auditRecord in records)
+                {
+                    ac.Add(new AuditCheck()
+                    {
+                        CheckListId = auditRecord.CheckListId,
+                        AuditId = _audit.ItemId
+                    });
+                }
+                GlobalObjects.CaaEnvironment.NewKeeper.BulkInsert(ac);
 
                 _updateChecks.Add(item);
                 _addedChecks.Remove(item);

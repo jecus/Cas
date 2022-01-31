@@ -80,8 +80,11 @@ namespace CAS.UI.UICAAControls.CheckList
             _currentCheck =
                 GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListDTO, CheckLists>(_currentCheck.ItemId);
             _currentAuditCheck =
-                GlobalObjects.CaaEnvironment.NewLoader.GetObject<AuditCheckDTO, AuditCheck>(new Filter("AuditId",
-                    _auditId));
+                GlobalObjects.CaaEnvironment.NewLoader.GetObject<AuditCheckDTO, AuditCheck>(new List<Filter>()
+                {
+                    new Filter("AuditId", _auditId),
+                    new Filter("CheckListId", _currentCheck.ItemId),
+                });
             if (_currentAuditCheck == null)
             {
                 _currentAuditCheck = new AuditCheck()

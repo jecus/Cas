@@ -343,7 +343,10 @@ group by a.AuditId
                 {
                     GlobalObjects.CaaEnvironment.NewLoader.Execute(
                         $"update dbo.AuditRecords set IsDeleted = 1 where AuditId = {audit.ItemId}");
-                }
+
+                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
+                        $"update [dbo].[AuditChecks] set IsDeleted = 1 where AuditId = {audit.ItemId}");
+				}
                 
 
 				_directivesViewer.radGridView1.EndUpdate();
