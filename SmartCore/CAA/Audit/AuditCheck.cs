@@ -35,7 +35,10 @@ namespace SmartCore.CAA.Audit
 
         public AuditCheck()
         {
-            Settings = new AuditCheckSettings();
+            Settings = new AuditCheckSettings()
+            {
+                IsSatisfactory = false
+            };
             SmartCoreObjectType = SmartCoreType.AuditCheck;
             ItemId = -1;
         }

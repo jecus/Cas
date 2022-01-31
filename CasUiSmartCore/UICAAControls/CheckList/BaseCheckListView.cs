@@ -255,8 +255,11 @@ namespace CAS.UI.UICAAControls.CheckList
 
 
             var condition = "";
+            var root = "";
             if (item.AuditCheck != null)
             {
+                root = item.AuditCheck.Settings.RootCause;
+
                 if (item.AuditCheck.Settings.IsApplicable)
                     condition = "Not Applicable";
                 else
@@ -281,7 +284,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
                 CreateRow(item.Level.ToString(), item.Level),
                 CreateRow(condition, condition),
-                CreateRow("", ""),
+                CreateRow(root, root),
                 CreateRow("", ""),
                 CreateRow("", ""),
 

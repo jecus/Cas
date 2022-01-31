@@ -148,7 +148,9 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxRequirement.Text = _currentCheck.Requirement;
 
             checkBoxNotApplicable.Checked = _currentAuditCheck.Settings.IsApplicable ;
+
             radioButtonSatisfactory.Checked = _currentAuditCheck.Settings.IsSatisfactory;
+            radioButtonNotSatisfactory.Checked = !radioButtonSatisfactory.Checked;
             metroTextBoxReference.Text = _currentAuditCheck.Settings.SubReference;
             metroTextBoxComments.Text = _currentAuditCheck.Settings.Comments;
 
@@ -183,7 +185,7 @@ namespace CAS.UI.UICAAControls.CheckList
             _currentAuditCheck.Settings.Comments = metroTextBoxComments.Text;
 
             foreach (var item in checkedListBoxRoot.CheckedItems)
-                _currentAuditCheck.Settings.RootCause += $"{item} ";
+                _currentAuditCheck.Settings.RootCause += $"{item}, ";
         }
 
 
