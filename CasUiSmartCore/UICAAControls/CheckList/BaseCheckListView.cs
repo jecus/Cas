@@ -238,6 +238,10 @@ namespace CAS.UI.UICAAControls.CheckList
             AddColumn("Requirement", (int)(radGridView1.Width * 0.3f));
 
             AddColumn("Level", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Condition", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Root Cause", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Workflow Stage", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Workflow Status", (int)(radGridView1.Width * 0.2f));
 
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
         }
@@ -262,6 +266,10 @@ namespace CAS.UI.UICAAControls.CheckList
                 CreateRow(item.Settings.Requirement, item.Settings.Requirement),
 
                 CreateRow(item.Level.ToString(), item.Level),
+                CreateRow("", ""),
+                CreateRow("", ""),
+                CreateRow("", ""),
+                CreateRow("", ""),
 
                 CreateRow(author, author)
             };

@@ -80,10 +80,6 @@ namespace CAS.UI.UICAAControls.CheckList
 
             _filter = new CommonFilterCollection(typeof(ICheckListFilterParams));
 
-            if (routingId.HasValue || auditId.HasValue)
-                buttonRevison.Visible = false;
-
-
 			InitToolStripMenuItems();
 			InitListView();
 			UpdateInformation();
@@ -98,7 +94,20 @@ namespace CAS.UI.UICAAControls.CheckList
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            _directivesViewer.AuditId = _auditId;
+            if (_auditId.HasValue)
+            {
+                buttonCAR.Visible = true;
+                pictureBox4.Visible = true;
+            }
+
+            if (_routingId.HasValue || _auditId.HasValue)
+            {
+                pictureBox3.Visible = false;
+				buttonRevison.Visible = false;
+            }
+
+
+			_directivesViewer.AuditId = _auditId;
             _directivesViewer.IsAuditCheck = _auditId.HasValue &&
                                              (_routineAudit?.Type == ProgramType.CAAKG ||
                                               _routineAudit?.Type == ProgramType.IOSA);
@@ -479,6 +488,11 @@ namespace CAS.UI.UICAAControls.CheckList
 
             if (form.ShowDialog(this) == DialogResult.OK || form.ShowDialog(this) == DialogResult.Cancel)
                 AnimatedThreadWorker.RunWorkerAsync();
+        }
+
+        private void ButtonCARClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

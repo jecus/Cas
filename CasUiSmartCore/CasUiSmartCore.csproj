@@ -5762,6 +5762,7 @@
     <None Include="Resources\AirplaneStartLogo.gif" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\CARR.png" />
     <Content Include="Resources\ГербTop.png" />
     <Content Include="Resources\ФСО.png" />
     <None Include="Resources\AddIconLargeGray.png" />
