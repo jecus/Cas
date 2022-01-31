@@ -908,11 +908,11 @@
     <Compile Include="UICAAControls\CheckList\CheckListScreen.Designer.cs">
       <DependentUpon>CheckListScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CheckList\CheckListView.cs">
+    <Compile Include="UICAAControls\CheckList\BaseCheckListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UICAAControls\CheckList\CheckListView.Designer.cs">
-      <DependentUpon>CheckListView.cs</DependentUpon>
+    <Compile Include="UICAAControls\CheckList\BaseCheckListView.Designer.cs">
+      <DependentUpon>BaseCheckListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UICAAControls\CheckList\CheckListForm.cs">
       <SubType>Form</SubType>

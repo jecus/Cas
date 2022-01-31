@@ -39,7 +39,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		private CommonCollection<CheckLists> _resultDocumentArray = new CommonCollection<CheckLists>();
 		private CommonFilterCollection _filter;
 
-		private CheckListView _directivesViewer;
+		private BaseCheckListView _directivesViewer;
 
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemHighlight;
@@ -303,8 +303,11 @@ namespace CAS.UI.UICAAControls.CheckList
 		#region private void InitListView()
 
 		private void InitListView()
-		{
-			_directivesViewer = new CheckListView(AnimatedThreadWorker);
+        {
+            if (_auditId.HasValue)
+                _directivesViewer = new LiteCheckListView(AnimatedThreadWorker);
+            else _directivesViewer = new CheckListView(AnimatedThreadWorker);
+
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;

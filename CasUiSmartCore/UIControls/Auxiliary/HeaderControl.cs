@@ -467,7 +467,8 @@ namespace CAS.UI.UIControls.Auxiliary
             set
             {
                 richReferenceButtonEdit.Visible = value;
-                //pictureBox2.Visible = value;
+               // pictureBox2.Visible = value;
+                //pictureBoxH.Visible = true;
             }
         }
 
@@ -521,7 +522,6 @@ namespace CAS.UI.UIControls.Auxiliary
             set
             {
                 buttonHelp.Visible = value;
-                pictureBoxH.Visible = value;
             }
         }
 

@@ -144,7 +144,7 @@ namespace CAS.UI.UIControls.Auxiliary
             this.pictureBoxH.Size = new System.Drawing.Size(10, 62);
             this.pictureBoxH.TabIndex = 24;
             this.pictureBoxH.TabStop = false;
-            this.pictureBoxH.Visible = true;
+            this.pictureBoxH.Visible = false;
             // 
             // buttonHelp
             // 
