@@ -46,6 +46,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator1;
         private SmartCore.CAA.RoutineAudits.RoutineAudit _routineAudit;
+        private CAAAudit _audit;
 
         #endregion
 
@@ -99,6 +100,9 @@ namespace CAS.UI.UICAAControls.CheckList
             {
                 buttonCAR.Visible = true;
                 pictureBox4.Visible = true;
+                labelTitle.Text = $"Workflow Stage : {WorkFlowStage.GetItemById(_audit.Settings.WorkflowStageId)}";
+                labelTitle.Visible = true;
+
             }
 
             if (_routingId.HasValue || _auditId.HasValue)
@@ -150,7 +154,9 @@ namespace CAS.UI.UICAAControls.CheckList
 			}
 			else if (_auditId.HasValue)
             {
-                var records = GlobalObjects.CaaEnvironment.NewLoader
+
+                _audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_auditId.Value);
+				var records = GlobalObjects.CaaEnvironment.NewLoader
                     .GetObjectListAll<CAAAuditRecordDTO, CAAAuditRecord>(new Filter("AuditId", _auditId), loadChild: true).ToList();
 
                 _currentRoutineId = records.Select(i => i.RoutineAuditId).FirstOrDefault();
