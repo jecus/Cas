@@ -51,6 +51,9 @@ namespace CAS.UI.UICAAControls.CheckList
         private void UpdateControls()
         {
 
+            comboBoxWorkFlowStatus.Items.Clear();
+            comboBoxWorkFlowStatus.Items.AddRange(WorkFlowStatus.Items.ToArray());
+
             checkedListBoxRoot.Items.Clear();
             checkedListBoxRoot.Items.AddRange(_rootCase.ToArray());
 
@@ -154,6 +157,8 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxReference.Text = _currentAuditCheck.Settings.SubReference;
             metroTextBoxComments.Text = _currentAuditCheck.Settings.Comments;
 
+            comboBoxWorkFlowStatus.SelectedItem = WorkFlowStatus.GetItemById(_currentAuditCheck.Settings.WorkflowStatusId);
+
             for (int i = 0; i < checkedListBoxRoot.Items.Count; i++)
             {
                 if (!string.IsNullOrEmpty(_currentAuditCheck.Settings.RootCause) &&_currentAuditCheck.Settings.RootCause.Contains(checkedListBoxRoot.Items[i].ToString()))
@@ -183,6 +188,7 @@ namespace CAS.UI.UICAAControls.CheckList
             _currentAuditCheck.Settings.IsSatisfactory = radioButtonSatisfactory.Checked;
             _currentAuditCheck.Settings.SubReference = metroTextBoxReference.Text;
             _currentAuditCheck.Settings.Comments = metroTextBoxComments.Text;
+            _currentAuditCheck.Settings.WorkflowStatusId = ((WorkFlowStatus)comboBoxWorkFlowStatus.SelectedItem).ItemId;
 
             foreach (var item in checkedListBoxRoot.CheckedItems)
                 _currentAuditCheck.Settings.RootCause += $"{item}, ";

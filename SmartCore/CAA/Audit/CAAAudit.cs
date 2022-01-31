@@ -88,7 +88,7 @@ namespace SmartCore.CAA.Audit
     {
         public CAAAuditSettings()
         {
-
+            WorkflowStageId = -1;
         }
 
         [JsonProperty("Status")]

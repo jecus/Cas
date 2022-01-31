@@ -67,6 +67,7 @@ namespace CAS.UI.UICAAControls.Audit
             comboBoxWorkFlow.Items.AddRange(WorkFlowStage.Items.ToArray());
             comboBoxWorkFlow.SelectedItem = WorkFlowStage.GetItemById(_audit.Settings.WorkflowStageId);
 
+
             comboBoxOperator.Items.Clear();
             comboBoxOperator.Items.AddRange(_operators.ToArray());
             comboBoxOperator.SelectedItem = _operators.FirstOrDefault(i => i.ItemId == _audit.Settings.OperatorId) ?? _operators.FirstOrDefault();

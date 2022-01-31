@@ -37,7 +37,8 @@ namespace SmartCore.CAA.Audit
         {
             Settings = new AuditCheckSettings()
             {
-                IsSatisfactory = false
+                IsSatisfactory = false,
+                WorkflowStatusId = -1
             };
             SmartCoreObjectType = SmartCoreType.AuditCheck;
             ItemId = -1;
@@ -61,5 +62,8 @@ namespace SmartCore.CAA.Audit
 
         [JsonProperty("RootCause")]
         public string RootCause { get; set; }
+
+        [JsonProperty("WorkflowStatusId")]
+        public int WorkflowStatusId { get; set; }
     }
 }

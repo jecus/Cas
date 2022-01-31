@@ -38,6 +38,8 @@ namespace CAS.UI.UICAAControls.CheckList
             System.Windows.Forms.Label label9;
             System.Windows.Forms.Label label10;
             System.Windows.Forms.Label label1;
+
+            System.Windows.Forms.Label label5;
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.metroTextBoxItem = new MetroFramework.Controls.MetroTextBox();
@@ -52,6 +54,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxComments = new MetroFramework.Controls.MetroTextBox();
             this.checkBoxNotApplicable = new System.Windows.Forms.CheckBox();
             this.checkedListBoxRoot = new System.Windows.Forms.CheckedListBox();
+            this.comboBoxWorkFlowStatus = new System.Windows.Forms.ComboBox();
             metroLabel1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
@@ -64,6 +67,7 @@ namespace CAS.UI.UICAAControls.CheckList
             labelEditorText = new System.Windows.Forms.Label();
             labelRevisionText = new System.Windows.Forms.Label();
             labelLevelText = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -143,7 +147,7 @@ namespace CAS.UI.UICAAControls.CheckList
             label10.AutoSize = true;
             label10.Font = new System.Drawing.Font("Verdana", 9F);
             label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label10.Location = new System.Drawing.Point(5, 715);
+            label10.Location = new System.Drawing.Point(996, 65);
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(139, 14);
             label10.TabIndex = 351;
@@ -169,7 +173,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(834, 801);
+            this.buttonOk.Location = new System.Drawing.Point(1187, 801);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 299;
@@ -183,7 +187,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonCancel.Location = new System.Drawing.Point(915, 801);
+            this.buttonCancel.Location = new System.Drawing.Point(1268, 801);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 33);
             this.buttonCancel.TabIndex = 298;
@@ -469,9 +473,9 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             this.checkedListBoxRoot.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.checkedListBoxRoot.FormattingEnabled = true;
-            this.checkedListBoxRoot.Location = new System.Drawing.Point(8, 733);
+            this.checkedListBoxRoot.Location = new System.Drawing.Point(999, 83);
             this.checkedListBoxRoot.Name = "checkedListBoxRoot";
-            this.checkedListBoxRoot.Size = new System.Drawing.Size(458, 94);
+            this.checkedListBoxRoot.Size = new System.Drawing.Size(342, 94);
             this.checkedListBoxRoot.TabIndex = 354;
             // 
             // labelSourceText
@@ -522,11 +526,35 @@ namespace CAS.UI.UICAAControls.CheckList
             labelLevelText.Text = "Level";
             labelLevelText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // comboBoxWorkFlowStatus
+            // 
+            this.comboBoxWorkFlowStatus.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxWorkFlowStatus.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxWorkFlowStatus.FormattingEnabled = true;
+            this.comboBoxWorkFlowStatus.Location = new System.Drawing.Point(999, 207);
+            this.comboBoxWorkFlowStatus.Name = "comboBoxWorkFlowStatus";
+            this.comboBoxWorkFlowStatus.Size = new System.Drawing.Size(342, 22);
+            this.comboBoxWorkFlowStatus.TabIndex = 360;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new System.Drawing.Font("Verdana", 9F);
+            label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label5.Location = new System.Drawing.Point(996, 190);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(110, 14);
+            label5.TabIndex = 361;
+            label5.Text = "Workflow Status";
+            label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // CheckListAuditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(997, 839);
+            this.ClientSize = new System.Drawing.Size(1350, 839);
+            this.Controls.Add(label5);
+            this.Controls.Add(this.comboBoxWorkFlowStatus);
             this.Controls.Add(this.checkedListBoxRoot);
             this.Controls.Add(label1);
             this.Controls.Add(label10);
@@ -582,5 +610,6 @@ namespace CAS.UI.UICAAControls.CheckList
         private MetroFramework.Controls.MetroTextBox metroTextBoxComments;
         private CheckBox checkBoxNotApplicable;
         private CheckedListBox checkedListBoxRoot;
+        private ComboBox comboBoxWorkFlowStatus;
     }
 }

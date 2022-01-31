@@ -9,6 +9,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
+using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
@@ -235,11 +236,12 @@ namespace CAS.UI.UICAAControls.CheckList
             AddColumn("SubPart Name", (int)(radGridView1.Width * 0.24f));
             AddColumn("Item №", (int)(radGridView1.Width * 0.3f));
 
-            AddColumn("Requirement", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Requirement", (int)(radGridView1.Width * 0.35f));
 
             AddColumn("Level", (int)(radGridView1.Width * 0.2f));
             AddColumn("Condition", (int)(radGridView1.Width * 0.2f));
-            AddColumn("Root Cause", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Root Cause", (int)(radGridView1.Width * 0.35f));
+            AddColumn("Workflow Status", (int)(radGridView1.Width * 0.2f));
 
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
         }
@@ -254,9 +256,11 @@ namespace CAS.UI.UICAAControls.CheckList
 
             var condition = "";
             var root = "";
+            var status = WorkFlowStatus.Unknown;
             if (item.AuditCheck != null)
             {
                 root = item.AuditCheck.Settings.RootCause;
+                status = WorkFlowStatus.GetItemById(item.AuditCheck.Settings.WorkflowStatusId);
 
                 if (item.AuditCheck.Settings.IsApplicable)
                     condition = "Not Applicable";
@@ -283,6 +287,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 CreateRow(item.Level.ToString(), item.Level),
                 CreateRow(condition, condition),
                 CreateRow(root, root),
+                CreateRow(status.ToString(), status),
 
                 CreateRow(author, author)
             };

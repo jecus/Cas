@@ -14,6 +14,12 @@ namespace SmartCore.CAA.Audit
         private static CommonDictionaryCollection<WorkFlowStatus> _Items = new CommonDictionaryCollection<WorkFlowStatus>();
         #endregion
 
+       
+        public static WorkFlowStatus Review = new WorkFlowStatus(1, "Review", "Review", "Review");
+        public static WorkFlowStatus VOI = new WorkFlowStatus(2, "VOI/Acceptance", "VOI/Acceptance", "VOI/Acceptance");
+        public static WorkFlowStatus FAT = new WorkFlowStatus(3, "Final Action Taken (FAT)", "Final Action Taken (FAT)", "Final Action Taken (FAT)");
+        public static WorkFlowStatus Audite = new WorkFlowStatus(4, "Audite corrections", "Audite corrections", "Audite corrections");
+        public static WorkFlowStatus UnknAuditorown = new WorkFlowStatus(5, "Auditor corrections", "Auditor corrections", "Auditor corrections");
         public static WorkFlowStatus Unknown = new WorkFlowStatus(-1, "Unknown", "Unknown", "Unknown");
 
         /*

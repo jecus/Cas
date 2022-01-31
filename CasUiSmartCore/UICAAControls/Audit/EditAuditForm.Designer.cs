@@ -179,6 +179,17 @@ namespace CAS.UI.UICAAControls.Audit
             labelValidFrom.Text = "Create Date:";
             labelValidFrom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // metroLabel4
+            // 
+            metroLabel4.AutoSize = true;
+            metroLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            metroLabel4.Location = new System.Drawing.Point(23, 143);
+            metroLabel4.Name = "metroLabel4";
+            metroLabel4.Size = new System.Drawing.Size(104, 19);
+            metroLabel4.TabIndex = 357;
+            metroLabel4.Text = "Workflow Stage:";
+            metroLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // metroTextBoxAuditNumber
             // 
             // 
@@ -402,17 +413,6 @@ namespace CAS.UI.UICAAControls.Audit
             this.comboBoxWorkFlow.Name = "comboBoxWorkFlow";
             this.comboBoxWorkFlow.Size = new System.Drawing.Size(250, 22);
             this.comboBoxWorkFlow.TabIndex = 358;
-            // 
-            // metroLabel4
-            // 
-            metroLabel4.AutoSize = true;
-            metroLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel4.Location = new System.Drawing.Point(23, 143);
-            metroLabel4.Name = "metroLabel4";
-            metroLabel4.Size = new System.Drawing.Size(104, 19);
-            metroLabel4.TabIndex = 357;
-            metroLabel4.Text = "Workflow Stage:";
-            metroLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // EditAuditForm
             // 
