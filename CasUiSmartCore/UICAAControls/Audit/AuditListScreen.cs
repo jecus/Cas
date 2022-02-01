@@ -320,6 +320,8 @@ group by a.AuditId
                 AnimatedThreadWorker.RunWorkerAsync();
         }
 
+
+
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
@@ -332,12 +334,12 @@ group by a.AuditId
 				MessageBox.Show(_directivesViewer.SelectedItems.Count == 1
 						? "Do you really want to delete " + typeName + " " + _directivesViewer.SelectedItems[0] + "?"
 						: "Do you really want to delete selected " + typeName + "s?", "Confirm delete operation",
-					MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+					MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
 			if (confirmResult == DialogResult.Yes)
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
-				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList());
+				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
 
                 foreach (var audit in _directivesViewer.SelectedItems)
                 {

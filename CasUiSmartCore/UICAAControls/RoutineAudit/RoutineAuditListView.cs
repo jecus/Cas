@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
@@ -7,6 +8,8 @@ using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
+using SmartCore.CAA.Check;
+using SmartCore.Entities.General;
 
 namespace CAS.UI.UICAAControls.RoutineAudit
 {
@@ -62,6 +65,33 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
+
+        public override void ButtonDeleteClick(object sender, EventArgs e)
+        {
+            if (this.SelectedItems == null ||
+                this.SelectedItems.Count == 0) return;
+
+            string typeName = nameof(SmartCore.CAA.RoutineAudits.RoutineAudit);
+
+            DialogResult confirmResult =
+                MessageBox.Show(this.SelectedItems.Count == 1
+                        ? "Do you really want to delete " + typeName + " " + this.SelectedItems[0] + "?"
+                        : "Do you really want to delete selected " + typeName + "s?", "Confirm delete operation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                this.radGridView1.BeginUpdate();
+                GlobalObjects.NewKeeper.Delete(this.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
+                foreach (var audit in this.SelectedItems)
+                {
+                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
+                        $"update dbo.RoutineAuditRecords set IsDeleted = 1 where RoutineAuditId = {audit.ItemId}");
+                }
+                this.radGridView1.EndUpdate();
+                _animatedThreadWorker.RunWorkerAsync();
+            }
+		}
 
 		#region protected override List<CustomCell> GetListViewSubItems(Specialization item)
 

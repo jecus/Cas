@@ -311,7 +311,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			if (confirmResult == DialogResult.Yes)
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
-				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList());
+				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
                 foreach (var audit in _directivesViewer.SelectedItems)
                 {
                     GlobalObjects.CaaEnvironment.NewLoader.Execute(

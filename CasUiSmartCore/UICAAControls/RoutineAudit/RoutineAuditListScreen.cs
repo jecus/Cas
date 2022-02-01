@@ -204,18 +204,18 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 			if (_directivesViewer.SelectedItems == null ||
 				_directivesViewer.SelectedItems.Count == 0) return;
 
-			string typeName = nameof(CheckLists);
+			string typeName = nameof(SmartCore.CAA.RoutineAudits.RoutineAudit);
 
 			DialogResult confirmResult =
 				MessageBox.Show(_directivesViewer.SelectedItems.Count == 1
 						? "Do you really want to delete " + typeName + " " + _directivesViewer.SelectedItems[0] + "?"
 						: "Do you really want to delete selected " + typeName + "s?", "Confirm delete operation",
-					MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+					MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
 			if (confirmResult == DialogResult.Yes)
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
-				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList());
+				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
                 foreach (var audit in _directivesViewer.SelectedItems)
                 {
                     GlobalObjects.CaaEnvironment.NewLoader.Execute(
