@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.Interfaces;
@@ -11,6 +12,7 @@ using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
+using SmartCore.Entities.General;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
 
@@ -192,8 +194,39 @@ namespace CAS.UI.UICAAControls.CheckList
         #endregion
 
 
-		#endregion
-	}
+        #endregion
+
+        public override void ButtonDeleteClick(object sender, EventArgs e)
+        {
+            if (this.SelectedItems == null ||
+                this.SelectedItems.Count == 0) return;
+
+            string typeName = nameof(CheckLists);
+
+            DialogResult confirmResult =
+                MessageBox.Show(this.SelectedItems.Count == 1
+                        ? "Do you really want to delete " + typeName + " " + this.SelectedItems[0] + "?"
+                        : "Do you really want to delete selected " + typeName + "s?", "Confirm delete operation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                this.radGridView1.BeginUpdate();
+                GlobalObjects.NewKeeper.Delete(this.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
+                foreach (var audit in this.SelectedItems)
+                {
+                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
+                        $"update dbo.CheckListRecord set IsDeleted = 1 where CheckListId = {audit.ItemId}");
+
+                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
+                        $"update [dbo].[AuditChecks] set IsDeleted = 1 where CheckListId = {audit.ItemId}");
+                }
+                this.radGridView1.EndUpdate();
+                _animatedThreadWorker.RunWorkerAsync();
+            }
+        }
+
+    }
 
 
     public class CheckListView : BaseCheckListView

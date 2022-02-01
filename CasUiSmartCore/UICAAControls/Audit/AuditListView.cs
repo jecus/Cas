@@ -143,7 +143,7 @@ namespace CAS.UI.UICAAControls.Audit
                 MessageBox.Show(this.SelectedItems.Count == 1
                         ? "Do you really want to delete " + typeName + " " + this.SelectedItems[0] + "?"
                         : "Do you really want to delete selected " + typeName + "s?", "Confirm delete operation",
-                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
             if (confirmResult == DialogResult.Yes)
             {

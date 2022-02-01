@@ -325,38 +325,7 @@ group by a.AuditId
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
-			if (_directivesViewer.SelectedItems == null ||
-				_directivesViewer.SelectedItems.Count == 0) return;
-
-			string typeName = nameof(CheckLists);
-
-			DialogResult confirmResult =
-				MessageBox.Show(_directivesViewer.SelectedItems.Count == 1
-						? "Do you really want to delete " + typeName + " " + _directivesViewer.SelectedItems[0] + "?"
-						: "Do you really want to delete selected " + typeName + "s?", "Confirm delete operation",
-					MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-
-			if (confirmResult == DialogResult.Yes)
-			{
-				_directivesViewer.radGridView1.BeginUpdate();
-				GlobalObjects.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
-
-                foreach (var audit in _directivesViewer.SelectedItems)
-                {
-                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
-                        $"update dbo.AuditCheckRecords set IsDeleted = 1 where AuditRecordId in (select ItemId from dbo.AuditChecks where AuditId = {audit.ItemId})");
-
-					GlobalObjects.CaaEnvironment.NewLoader.Execute(
-                        $"update dbo.AuditRecords set IsDeleted = 1 where AuditId = {audit.ItemId}");
-
-                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
-                        $"update [dbo].[AuditChecks] set IsDeleted = 1 where AuditId = {audit.ItemId}");
-				}
-                
-
-				_directivesViewer.radGridView1.EndUpdate();
-				AnimatedThreadWorker.RunWorkerAsync();
-			}
+            _directivesViewer.ButtonDeleteClick(sender, e);
 		}
 
 		#endregion
