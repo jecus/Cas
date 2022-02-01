@@ -37,7 +37,6 @@ namespace SmartCore.CAA.Audit
         {
             Settings = new AuditCheckSettings()
             {
-                IsSatisfactory = false,
                 WorkflowStatusId = -1
             };
             SmartCoreObjectType = SmartCoreType.AuditCheck;
@@ -48,11 +47,11 @@ namespace SmartCore.CAA.Audit
     [Serializable]
     public class AuditCheckSettings
     {
-        [JsonProperty("IsApplicable")]
-        public bool IsApplicable { get; set; }
+        [JsonProperty("IsApplicable", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsApplicable { get; set; }
 
-        [JsonProperty("IsSatisfactory")]
-        public bool IsSatisfactory { get; set; }
+        [JsonProperty("IsSatisfactory", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsSatisfactory { get; set; }
 
         [JsonProperty("SubReference")]
         public string SubReference { get; set; }

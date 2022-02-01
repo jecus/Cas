@@ -510,7 +510,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void ButtonCARClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

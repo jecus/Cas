@@ -342,6 +342,9 @@ group by a.AuditId
                 foreach (var audit in _directivesViewer.SelectedItems)
                 {
                     GlobalObjects.CaaEnvironment.NewLoader.Execute(
+                        $"update dbo.AuditCheckRecords set IsDeleted = 1 where AuditRecordId in (select ItemId from dbo.AuditChecks where AuditId = {audit.ItemId})");
+
+					GlobalObjects.CaaEnvironment.NewLoader.Execute(
                         $"update dbo.AuditRecords set IsDeleted = 1 where AuditId = {audit.ItemId}");
 
                     GlobalObjects.CaaEnvironment.NewLoader.Execute(

@@ -150,10 +150,14 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxItem.Text = $"{_currentCheck.ItemNumber} {_currentCheck.ItemName}";
             metroTextBoxRequirement.Text = _currentCheck.Requirement;
 
-            checkBoxNotApplicable.Checked = _currentAuditCheck.Settings.IsApplicable ;
+            if(_currentAuditCheck.Settings.IsApplicable.HasValue)
+                checkBoxNotApplicable.Checked = _currentAuditCheck.Settings.IsApplicable.Value ;
+            if (_currentAuditCheck.Settings.IsSatisfactory.HasValue)
+            {
+                radioButtonSatisfactory.Checked = _currentAuditCheck.Settings.IsSatisfactory.Value;
+                radioButtonNotSatisfactory.Checked = !radioButtonSatisfactory.Checked;
+            }
 
-            radioButtonSatisfactory.Checked = _currentAuditCheck.Settings.IsSatisfactory;
-            radioButtonNotSatisfactory.Checked = !radioButtonSatisfactory.Checked;
             metroTextBoxReference.Text = _currentAuditCheck.Settings.SubReference;
             metroTextBoxComments.Text = _currentAuditCheck.Settings.Comments;
 

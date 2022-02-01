@@ -254,7 +254,7 @@ namespace CAS.UI.UICAAControls.CheckList
             var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
 
 
-            var condition = "";
+            var condition = "Unknown";
             var root = "";
             var status = WorkFlowStatus.Unknown;
             if (item.AuditCheck != null)
@@ -262,13 +262,16 @@ namespace CAS.UI.UICAAControls.CheckList
                 root = item.AuditCheck.Settings.RootCause;
                 status = WorkFlowStatus.GetItemById(item.AuditCheck.Settings.WorkflowStatusId);
 
-                if (item.AuditCheck.Settings.IsApplicable)
+                if (item.AuditCheck.Settings.IsApplicable.HasValue &&item.AuditCheck.Settings.IsApplicable.Value)
                     condition = "Not Applicable";
                 else
                 {
-                    if (item.AuditCheck.Settings.IsSatisfactory)
-                        condition = "Satisfactory";
-                    else condition = "Not Satisfactory";
+                    if (item.AuditCheck.Settings.IsSatisfactory.HasValue)
+                    {
+                        if (item.AuditCheck.Settings.IsSatisfactory.Value)
+                            condition = "Satisfactory";
+                        else condition = "Not Satisfactory";
+                    }
                 }
             }
 
