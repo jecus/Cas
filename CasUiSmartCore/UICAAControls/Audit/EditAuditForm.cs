@@ -86,6 +86,7 @@ namespace CAS.UI.UICAAControls.Audit
             {
                 if (_audit.Settings.PublishingDate <= DateTimeExtend.GetCASMinDateTime())
                 {
+                    _audit.Settings.WorkflowStageId = WorkFlowStage.Open.ItemId;
                     _audit.Settings.PublishingDate = DateTime.Now;
                     _audit.Settings.PublishedId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
                 }
@@ -134,6 +135,11 @@ namespace CAS.UI.UICAAControls.Audit
         private void AuditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void comboBoxStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

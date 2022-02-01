@@ -266,6 +266,7 @@ namespace CAS.UI.UICAAControls.Audit
             this.comboBoxStatus.Name = "comboBoxStatus";
             this.comboBoxStatus.Size = new System.Drawing.Size(250, 22);
             this.comboBoxStatus.TabIndex = 342;
+            this.comboBoxStatus.SelectedIndexChanged += new System.EventHandler(this.comboBoxStatus_SelectedIndexChanged);
             // 
             // numericUpDown1
             // 

@@ -98,8 +98,12 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             if (_auditId.HasValue)
             {
-                buttonCAR.Visible = true;
-                pictureBox4.Visible = true;
+                if (_audit.Settings.Status == RoutineStatus.Published)
+                {
+                    buttonCAR.Visible = true;
+                    pictureBox4.Visible = true;
+				}
+                
                 labelTitle.Text = $"Workflow Stage : {WorkFlowStage.GetItemById(_audit.Settings.WorkflowStageId)}";
                 labelTitle.Visible = true;
 
