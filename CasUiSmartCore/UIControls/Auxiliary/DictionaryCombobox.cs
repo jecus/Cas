@@ -571,7 +571,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
 			    if (departmentItemId > 0)
 			    {
-				    foreach (var dic in _typeItemsCollection.GetValidEntries().OfType<Locations>().Where(i => i.LocationsType.Department.ItemId == departmentItemId).OrderBy(i => i.ToString()))
+				    foreach (var dic in _typeItemsCollection.GetValidEntries().OfType<Locations>().Where(i => i.LocationsType?.Department?.ItemId == departmentItemId).OrderBy(i => i.ToString()))
 					    comboBoxReason.Items.Add(dic);
 				}
 			    else
