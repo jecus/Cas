@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -6,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.Events;
@@ -24,6 +26,7 @@ using SmartCore.AuditMongo;
 using SmartCore.AuditMongo.Repository;
 using SmartCore.Audits;
 using SmartCore.AverageUtilizations;
+using SmartCore.CAA;
 using SmartCore.Calculations;
 using SmartCore.Calculations.MTOP;
 using SmartCore.Calculations.PerformanceCalculator;
@@ -823,6 +826,8 @@ namespace CAS.UI.UIControls.Auxiliary
                 var personelService = new PersonnelCore(environment);
                 GlobalObjects.PersonnelCore = personelService;
                 GlobalObjects.CaaEnvironment = environment;
+
+                environment.AllOperators = new List<AllOperators>(environment.NewLoader.GetObjectList<AllOperatorsDTO, AllOperators>());
 
             }
             else

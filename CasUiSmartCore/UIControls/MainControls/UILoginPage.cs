@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
@@ -74,8 +75,19 @@ namespace CAS.UI.UIControls.MainControls
 
 
             var isCAA = (bool)sender;
-            if(isCAA)
-                s = new OperatorSymmaryCAADemoScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            if (isCAA)
+            {
+                if(GlobalObjects.CaaEnvironment.IdentityUser.OperatorId <= 0)
+                    s = new OperatorSymmaryCAADemoScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+                else
+                {
+                    var op = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(i =>
+                        i.ItemId == GlobalObjects.CaaEnvironment.IdentityUser.OperatorId);
+                    if(op != null)
+                        s = new CurrentOperatorSymmaryCAADemoScreen(op);
+                    else throw new Exception("Operator not found!");
+                }
+            }
             else s = new OperatorSymmaryDemoScreen(GlobalObjects.CasEnvironment.Operators[0]);
 
 #if RELEASE

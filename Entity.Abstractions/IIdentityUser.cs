@@ -10,5 +10,6 @@
         CAAUserType CAAUserType { get; set; }
         UiType UiType { get; set; }
         int PersonnelId { get; set; }
+        int OperatorId { get; set; }
     }
 }

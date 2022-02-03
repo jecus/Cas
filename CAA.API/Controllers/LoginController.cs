@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace CAS.API.Controllers
+namespace CAA.API.Controllers
 {
 	[ApiController]
 	[Route("user")]
@@ -26,6 +26,19 @@ namespace CAS.API.Controllers
 		public async Task<ActionResult<CAAUserDTO>> GetUser(string login, string password)
 		{
             var res = await _context.UserDtos.FirstOrDefaultAsync(i => !i.IsDeleted && i.Login.Equals(login) && i.Password.Equals(password));
+
+            if (res != null)
+            {
+                var spec = await _context.SpecialistDtos.AsNoTracking()
+                    .FirstOrDefaultAsync(i => i.ItemId == res.PersonnelId);
+
+                var op = await _context.AllOperatorsDtos.AsNoTracking()
+                    .FirstOrDefaultAsync(i => i.ItemId == spec.OperatorId);
+
+                res.OperatorId = op?.ItemId ?? -1;
+            }
+
+
             return Ok(res);
 		}
 
@@ -74,6 +87,7 @@ namespace CAS.API.Controllers
                 updateUser.Password = caaUser.Password;
                 updateUser.Name = caaUser.Name;
                 updateUser.Surname = caaUser.Surname;
+
             }
             else
             {

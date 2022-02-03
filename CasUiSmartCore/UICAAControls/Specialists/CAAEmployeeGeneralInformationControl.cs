@@ -10,6 +10,7 @@ using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CASTerms;
+using SmartCore.CAA;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Personnel;
 
@@ -233,8 +234,8 @@ namespace CAS.UI.UICAAControls.Specialists
             }
             else
             {
-                comboBoxOperator.Items.Add(Specialist.Unknown);
-                comboBoxOperator.SelectedItem = Specialist.Unknown;
+                comboBoxOperator.Items.Add(AllOperators.Unknown);
+                comboBoxOperator.SelectedItem = AllOperators.Unknown;
                 radioButtonOperator.Checked = false;
                 comboBoxOperator.Enabled = false;
             }
@@ -341,7 +342,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			//dateTimePickerDateOfBirth.ValueChanged -= DateTimePickerEffDateValueChanged;
 
             _currentItem.IsCAA = radioButtonCAA.Checked;
-            _currentItem.OperatorId = ((Specialist) comboBoxOperator.SelectedItem).ItemId;
+            _currentItem.OperatorId = ((AllOperators) comboBoxOperator.SelectedItem).ItemId;
 			_currentItem.FirstName = textBoxFirstName.Text;
 	        _currentItem.ShortName = textBoxShortName.Text;
             _currentItem.LastName = textBoxLastName.Text;
@@ -490,8 +491,8 @@ namespace CAS.UI.UICAAControls.Specialists
             }
             else
             {
-                comboBoxOperator.Items.Add(Specialist.Unknown);
-                comboBoxOperator.SelectedItem = Specialist.Unknown;
+                comboBoxOperator.Items.Add(AllOperators.Unknown);
+                comboBoxOperator.SelectedItem = AllOperators.Unknown;
                 comboBoxOperator.Enabled = false;
             }
         }

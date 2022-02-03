@@ -920,6 +920,18 @@
     <Compile Include="UICAAControls\CheckList\CheckListForm.Designer.cs">
       <DependentUpon>CheckListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CurrentOperator\CurrentOperatorSymmaryCAADemoScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CurrentOperator\CurrentOperatorSymmaryCAADemoScreen.Designer.cs">
+      <DependentUpon>CurrentOperatorSymmaryCAADemoScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\CurrentOperator\CAAOperatorInfoReference.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CurrentOperator\CAAOperatorInfoReference.Designer.cs">
+      <DependentUpon>CAAOperatorInfoReference.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\Document\CAADocumentationListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4247,6 +4259,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\CheckListForm.resx">
       <DependentUpon>CheckListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CurrentOperator\CurrentOperatorSymmaryCAADemoScreen.resx">
+      <DependentUpon>CurrentOperatorSymmaryCAADemoScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CurrentOperator\CAAOperatorInfoReference.resx">
+      <DependentUpon>CAAOperatorInfoReference.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Document\CAADocumentationListScreen.resx">
       <DependentUpon>CAADocumentationListScreen.cs</DependentUpon>

@@ -39,7 +39,9 @@ namespace CAS.Entity.Models.DTO.General
 		[Column("PersonnelId")]
 		public int PersonnelId { get; set; }
 
-		public override string ToString()
+        public int OperatorId { get; set; }
+
+        public override string ToString()
 		{
 			return Name.Equals(Surname) ? Name : $"{Surname} {Name}";
 		}
