@@ -128,7 +128,14 @@ namespace CAS.UI.UICAAControls.Operators
 
         private void TempButtonDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.Cancel = true;
+            var op = ((ReferenceStatusImageLinkLabel)sender).Tag as AllOperators;
+
+            if (op == null)
+                e.Cancel = true;
+
+            e.TypeOfReflection = ReflectionTypes.DisplayInCurrent;
+            e.DisplayerText = "";
+            e.RequestedEntity = new CurrentOperatorSymmaryCAADemoScreen(op);
         }
 
         #endregion

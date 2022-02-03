@@ -229,13 +229,15 @@ namespace CAS.UI.UICAAControls.Specialists
             {
                 comboBoxOperator.Items.AddRange(GlobalObjects.CaaEnvironment.AllOperators.ToArray());
                 comboBoxOperator.SelectedItem = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(i => i.ItemId == _currentItem.OperatorId);
-                radioButtonCAA.Checked = true;
+                radioButtonCAA.Checked = false;
+                radioButtonOperator.Checked = true;
                 comboBoxOperator.Enabled = true;
             }
             else
             {
                 comboBoxOperator.Items.Add(AllOperators.Unknown);
                 comboBoxOperator.SelectedItem = AllOperators.Unknown;
+                radioButtonCAA.Checked = true;
                 radioButtonOperator.Checked = false;
                 comboBoxOperator.Enabled = false;
             }
