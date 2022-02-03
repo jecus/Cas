@@ -9,6 +9,7 @@ using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.CAA.RoutineAudits;
 using SmartCore.Calculations;
+using SmartCore.Entities;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
@@ -1444,24 +1445,40 @@ namespace SmartCore.DtoHelper
         }
 
 
-        public static CAAOperatorDTO ConvertCAA(this Operator oper)
+        public static CAAUser ConvertCAA(this CAAUserDTO oper)
         {
-            return new CAAOperatorDTO
-            {
+            return new CAAUser
+			{
+                ItemId = oper.ItemId,
+                IsDeleted = oper.IsDeleted,
+                Updated = oper.Updated,
+                CorrectorId = oper.CorrectorId,
+				Name = oper.Name,
+                Login = oper.Login,
+                Password = oper.Password,
+                UserType = oper.CAAUserType,
+                Surname = oper.Surname,
+                PersonnelId = oper.PersonnelId,
+                UiType = oper.UiType,
+			};
+        }
+
+
+		public static CAAUserDTO ConvertCAA(this CAAUser oper)
+        {
+            return new CAAUserDTO
+			{
                 ItemId = oper.ItemId,
                 IsDeleted = oper.IsDeleted,
                 Updated = oper.Updated,
                 CorrectorId = oper.CorrectorId,
                 Name = oper.Name,
-                LogoType = oper.LogoType,
-                ICAOCode = oper.ICAOCode,
-                Address = oper.Address,
-                Phone = oper.Phone,
-                Fax = oper.Fax,
-                LogoTypeWhite = oper.LogoTypeWhite,
-                Email = oper.Email,
-                LogotypeReportLarge = oper.LogotypeReportLarge,
-                LogotypeReportVeryLarge = oper.LogotypeReportVeryLarge
+                Login = oper.Login,
+				Password = oper.Password,
+				CAAUserType = oper.UserType,
+                Surname = oper.Surname,
+                UiType = oper.UiType,
+				PersonnelId = oper.PersonnelId
             };
         }
 

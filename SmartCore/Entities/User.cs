@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models.DTO;
 using Entity.Abstractions;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -66,6 +67,7 @@ namespace SmartCore.Entities
 
 
     [Serializable]
+    [CAADto(typeof(CAAUserDTO))]
     public class CAAUser : BaseEntityObject
     {
         [Filter("Name:")]

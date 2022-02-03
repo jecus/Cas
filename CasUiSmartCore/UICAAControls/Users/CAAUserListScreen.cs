@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
@@ -92,7 +93,7 @@ namespace CAS.UI.UICAAControls.Users
 				var userDto = GlobalObjects.CaaEnvironment.ApiProvider.GetAllUsersAsync();
 				_initial.AddRange(userDto.Select(i => new CAAUser(i)));
 
-				_specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistDTO, Specialist>());
+				_specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASpecialistDTO, Specialist>());
 				foreach (var user in _initial)
 				{
 					user.Personnel = _specialists.FirstOrDefault(i => i.ItemId == user.PersonnelId) ??

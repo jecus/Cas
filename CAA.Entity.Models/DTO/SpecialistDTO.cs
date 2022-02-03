@@ -132,6 +132,7 @@ namespace CAA.Entity.Models.DTO
         [Column("IsCAA")]
 		public bool IsCAA { get; set; }
 
+
         [Column("OperatorId")]
 		public int OperatorId { get; set; }
 

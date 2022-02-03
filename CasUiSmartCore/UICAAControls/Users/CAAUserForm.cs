@@ -10,7 +10,7 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
 
-namespace CAS.UI.UIControls.Users
+namespace CAS.UI.UICAAControls.Users
 {
 	public partial class CAAUserForm : MetroForm
     {
@@ -42,20 +42,44 @@ namespace CAS.UI.UIControls.Users
 
 		private void UpdateInformation()
 		{
+            this.metroComboBoxPersonnel.SelectedIndexChanged -= new System.EventHandler(this.metroComboBoxPersonnel_SelectedIndexChanged);
+
 			textBoxSurname.Text = _user.Surname;
 			textBoxName.Text = _user.Name;
 			textBoxLogin.Text = _user.Login;
 			textBoxPassword.Text = _user.Password;
 
-			metroComboBox1.DataSource = Enum.GetValues(typeof(CAAUserType));
-			metroComboBox1.SelectedItem = _user.UserType;
 
-			metroComboBoxUiType.DataSource = Enum.GetValues(typeof(UiType));
-			metroComboBoxUiType.SelectedItem = _user.UiType;
+
+
+			if (_user.Personnel.IsCAA)
+            {
+                metroComboBox1.Items.Clear();
+                foreach (var val in Enum.GetValues(typeof(CAAUserType)).OfType<CAAUserType>().Where(i => (int)i < 10).ToList())
+                    metroComboBox1.Items.Add(val);
+            }
+            else
+            {
+                metroComboBox1.Items.Clear();
+                foreach (var val in Enum.GetValues(typeof(CAAUserType)).OfType<CAAUserType>().Where(i => (int)i >= 10).ToList())
+                    metroComboBox1.Items.Add(val);
+            }
+
+            metroComboBox1.SelectedItem = _user.UserType;
+
+			foreach (var val in Enum.GetValues(typeof(UiType)).OfType<UiType>().ToArray())
+            {
+				metroComboBoxUiType.Items.Add(val);
+                metroComboBoxUiType.SelectedItem = _user.UiType;
+			}
+
+			
 
 			metroComboBoxPersonnel.Items.AddRange(_specialists.OrderBy(i => i.LastName).ToArray());
 			metroComboBoxPersonnel.Items.Add(Specialist.Unknown);
 			metroComboBoxPersonnel.SelectedItem = _user.Personnel;
+
+            this.metroComboBoxPersonnel.SelectedIndexChanged += new System.EventHandler(this.metroComboBoxPersonnel_SelectedIndexChanged);
 		}
 
 		#endregion
@@ -140,6 +164,30 @@ namespace CAS.UI.UIControls.Users
 			Close();
 		}
 
-		#endregion
-	}
+        #endregion
+
+        private void metroComboBoxPersonnel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (metroComboBoxPersonnel.SelectedItem != null)
+            {
+                var spec = metroComboBoxPersonnel.SelectedItem as Specialist;
+                if (spec.IsCAA)
+                {
+                    metroComboBox1.Items.Clear();
+                    foreach (var val in Enum.GetValues(typeof(CAAUserType)).OfType<CAAUserType>().Where(i => (int)i < 10).ToList())
+                        metroComboBox1.Items.Add(val);
+                }
+                else
+                {
+                    metroComboBox1.Items.Clear();
+                    foreach (var val in Enum.GetValues(typeof(CAAUserType)).OfType<CAAUserType>().Where(i => (int)i >= 10).ToList())
+                        metroComboBox1.Items.Add(val);
+				}
+
+                metroComboBox1.SelectedIndex = 0;
+
+
+            }
+        }
+    }
 }

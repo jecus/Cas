@@ -481,18 +481,17 @@ namespace CAS.UI.UICAAControls.Specialists
         private void radioButtonCAA_CheckedChanged(object sender, EventArgs e)
         {
             comboBoxOperator.Items.Clear();
-            if (!_currentItem.IsCAA)
+            
+            if (!radioButtonCAA.Checked)
             {
                 comboBoxOperator.Items.AddRange(GlobalObjects.CaaEnvironment.AllOperators.ToArray());
-                comboBoxOperator.SelectedItem = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(i => i.ItemId == _currentItem.OperatorId);
-                radioButtonCAA.Checked = true;
+                comboBoxOperator.SelectedItem = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault();
                 comboBoxOperator.Enabled = true;
             }
             else
             {
                 comboBoxOperator.Items.Add(Specialist.Unknown);
                 comboBoxOperator.SelectedItem = Specialist.Unknown;
-                radioButtonOperator.Checked = false;
                 comboBoxOperator.Enabled = false;
             }
         }
