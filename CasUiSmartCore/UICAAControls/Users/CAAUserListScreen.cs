@@ -135,7 +135,7 @@ namespace CAS.UI.UICAAControls.Users
 		#region private void ButtonAddNonRoutineJobClick(object sender, EventArgs e)
 		private void ButtonAddNonRoutineJobClick(object sender, EventArgs e)
 		{
-			var form = new UserForm(new User(), _specialists);
+			var form = new CAAUserForm(new CAAUser(){PersonnelId = -1, Personnel = Specialist.Unknown}, _specialists);
 
 			if (form.ShowDialog() == DialogResult.OK)
 			{

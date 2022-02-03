@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.Entity.Models.DTO.General;
@@ -65,7 +66,11 @@ namespace CAS.UI.UICAAControls.Users
                     metroComboBox1.Items.Add(val);
             }
 
-            metroComboBox1.SelectedItem = _user.UserType;
+            if (_user.ItemId <= 0)
+                metroComboBox1.SelectedIndex = 0;
+
+
+			metroComboBox1.SelectedItem = _user.UserType;
 
 			foreach (var val in Enum.GetValues(typeof(UiType)).OfType<UiType>().ToArray())
             {
@@ -117,7 +122,29 @@ namespace CAS.UI.UICAAControls.Users
 				return false;
 			}
 
-			return true;
+            if (_user.ItemId <= 0)
+            {
+                var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute(
+                    $"select top 1 ItemId from [dbo].[Users] where PersonnelId = {((BaseEntityObject) metroComboBoxPersonnel.SelectedItem).ItemId} and IsDeleted = 0");
+
+
+                var dt = ds.Tables[0];
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    var id = (int?) dr[0];
+                    var res =  !(id.HasValue && id.Value > 0);
+
+					if(!res)
+                    MessageBox.Show("For this specialist already create login and passwaord!", "Information", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    return res;
+
+                }
+            }
+
+            return true;
 		}
 
 		#endregion
