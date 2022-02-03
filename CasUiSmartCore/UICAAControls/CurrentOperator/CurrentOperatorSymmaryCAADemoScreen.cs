@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using CAA.Entity.Models.DTO;
 using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
@@ -98,7 +99,7 @@ namespace CAS.UI.UICAAControls
         {
             var operators = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<AllOperatorsDTO, AllOperators>();
             var aircaraft = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAircraftDTO, Aircraft>();
-            _aircrafts.AircraftCollection = new CommonCollection<Aircraft>(aircaraft);
+            _aircrafts.AircraftCollection = new CommonCollection<Aircraft>(aircaraft.Where(i => i.OperatorId == _currentOperator.ItemId));
 
             GlobalObjects.CaaEnvironment.AllOperators = new List<AllOperators>(operators);
             GlobalObjects.CaaEnvironment.Aircraft = new AircraftCollection(aircaraft);
@@ -120,18 +121,6 @@ namespace CAS.UI.UICAAControls
         }
 
         #endregion
-
-		private void Users_Click(object sender, ReferenceEventArgs e)
-        {
-            e.DisplayerText = "Users";
-            e.RequestedEntity = new CAAUserListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
-        }
-
-        private void Activity_DisplayerRequested(object sender, ReferenceEventArgs e)
-        {
-            e.DisplayerText = "Activity";
-            e.RequestedEntity = new CAAActivityListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
-        }
 
 
         #region private void LinkDepartmentsDisplayerRequested(object sender, ReferenceEventArgs e)

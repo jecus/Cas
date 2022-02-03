@@ -46,8 +46,7 @@ namespace CAS.UI.UICAAControls
 			this.ExportMonthly = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
             this.Aircraft = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.Store = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
-			this.Operator = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
-			this.ExportATLB = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
+            this.ExportATLB = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
 			this.LinkRecords = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkNomenclatures = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkFindingLevels = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -186,8 +185,7 @@ namespace CAS.UI.UICAAControls
 			this._settingContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._settingContainer.Name = "_settingContainer";
 			this._settingContainer.ReferenceLink = this.Aircraft;
-			this._settingContainer.ReferenceLink02 = this.Operator;
-			this._settingContainer.ReferenceLink03 = this.Store;
+            this._settingContainer.ReferenceLink03 = this.Store;
 			this._settingContainer.ReferenceLink04 = null;
 			this._settingContainer.ReferenceLink05 = this.LinkDepartments;
 			this._settingContainer.ReferenceLink06 = this.LinkSpecializations;
@@ -276,30 +274,6 @@ namespace CAS.UI.UICAAControls
 			this.Store.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.Store.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             this.Store.DisplayerRequested += Store_Click;
-			// 
-			// mail
-			// 
-			this.Operator.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.Operator.Displayer = null;
-			this.Operator.DisplayerText = null;
-			this.Operator.Entity = null;
-			this.Operator.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.Operator.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.Operator.ImageBackColor = System.Drawing.Color.Transparent;
-			this.Operator.ImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.Operator.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.Operator.LinkMouseCapturedColor = System.Drawing.Color.Empty;
-			this.Operator.Location = new System.Drawing.Point(10, 0);
-			this.Operator.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.Operator.Name = "Operator";
-			this.Operator.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.Operator.Size = new System.Drawing.Size(188, 20);
-			this.Operator.Status = AvControls.Statuses.Satisfactory;
-			this.Operator.TabIndex = 2;
-			this.Operator.Text = "Add Operator";
-			this.Operator.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.Operator.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-            this.Operator.DisplayerRequested += Operator_Click;
             // 
 			// ExportMonthly
 			// 
@@ -1437,8 +1411,7 @@ namespace CAS.UI.UICAAControls
         private Management.Dispatchering.ReferenceStatusImageLinkLabel ExportATLB;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel Aircraft;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel Store;
-		private Management.Dispatchering.ReferenceStatusImageLinkLabel Operator;
-		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRecords;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRecords;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkNomenclatures;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkFindingLevels;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRootCause;
