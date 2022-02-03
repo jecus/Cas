@@ -129,7 +129,13 @@ namespace CAA.Entity.Models.DTO
 		[Column("Combination")]
 		public string Combination { get; set; }
 
-		
+        [Column("IsCAA")]
+		public bool IsCAA { get; set; }
+
+        [Column("OperatorId")]
+		public int OperatorId { get; set; }
+
+
 		[Include]
 		public CAAAGWCategorieDTO AGWCategory { get; set; }
 
@@ -169,6 +175,5 @@ namespace CAA.Entity.Models.DTO
 		[Child(FilterType.Equal, "ParentTypeId", 1310)]
 		public ICollection<CAAItemFileLinkDTO> Files { get; set; }
 
-
-	}
+    }
 }

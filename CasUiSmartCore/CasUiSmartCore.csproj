@@ -992,6 +992,12 @@
     <Compile Include="UICAAControls\Specialists\CAAEmployeeScreen.Designer.cs">
       <DependentUpon>CAAEmployeeScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\Specialists\CAAEmployeeGeneralInformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Specialists\CAAEmployeeGeneralInformationControl.Designer.cs">
+      <DependentUpon>CAAEmployeeGeneralInformationControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\Users\CAAUserListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4272,6 +4278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Specialists\CAAEmployeeScreen.resx">
       <DependentUpon>CAAEmployeeScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\Specialists\CAAEmployeeGeneralInformationControl.resx">
+      <DependentUpon>CAAEmployeeGeneralInformationControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Users\CAAUserListScreen.resx">
       <DependentUpon>CAAUserListScreen.cs</DependentUpon>

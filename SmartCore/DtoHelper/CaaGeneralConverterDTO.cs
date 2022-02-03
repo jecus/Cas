@@ -569,7 +569,7 @@ namespace SmartCore.DtoHelper
 				PhoneMobile = specialist.PhoneMobile,
 				Phone = specialist.Phone,
 				Email = specialist.Email,
-				Skype = specialist.Skype,
+                Skype = specialist.Skype,
 				Information = specialist.Information,
 				Education = (short)(specialist.Education?.ItemId ?? -1),
 				Location = (short)(specialist.Facility?.ItemId ?? -1),
@@ -585,6 +585,8 @@ namespace SmartCore.DtoHelper
 				GradeIssueDate = specialist.GradeIssueDate,
 				Additional = specialist.Additional,
 				Combination = specialist.Combination,
+                IsCAA = specialist.IsCAA,
+                OperatorId = specialist.OperatorId,
 				Licenses = specialist.Licenses?.Select(i => i.ConvertCAA()) as ICollection<CAASpecialistLicenseDTO>,
 				SpecialistTrainings = specialist.SpecialistTrainings?.Select(i => i.ConvertCAA()) as ICollection<CAASpecialistTrainingDTO>,
 				LicenseDetails = specialist.LicenseDetails?.Select(i => i.ConvertCAA()) as ICollection<CAASpecialistLicenseDetailDTO>,
@@ -599,7 +601,7 @@ namespace SmartCore.DtoHelper
 		{
 			var value = new Specialist
 			{
-				ItemId = specialist.ItemId,
+                ItemId = specialist.ItemId,
 				IsDeleted = specialist.IsDeleted,
 				Updated = specialist.Updated,
 				CorrectorId = specialist.CorrectorId,
@@ -631,7 +633,9 @@ namespace SmartCore.DtoHelper
 				Combination = specialist.Combination ?? "",
 				AGWCategory = specialist.AGWCategory?.ConvertCAA(),
 				Facility = specialist.Facility?.ConvertCAA(),
-				Specialization = specialist.Specialization?.ConvertCAA()
+				Specialization = specialist.Specialization?.ConvertCAA(),
+				IsCAA = specialist.IsCAA,
+				OperatorId = specialist.OperatorId
 			};
 
 			if (specialist.Licenses != null)

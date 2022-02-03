@@ -308,6 +308,9 @@ namespace SmartCore.Entities.General.Personnel
 
 		#endregion
 
+		public bool IsCAA { get; set; }
+		public int OperatorId { get; set; }
+
 		public SpecialistMedicalRecord MedicalRecord { get; set; }
 
 		#region public CommonCollection<SpecialistLicense> Licenses

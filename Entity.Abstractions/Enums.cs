@@ -27,10 +27,10 @@
 
     public enum CAAUserType
     {
-        CAAAdmin,
-        CAA,
-        OperatorAdmin,
-        Operator
+        CAAAdmin = 0,
+        CAA = 1,
+        OperatorAdmin = 10,
+        Operator = 11
     }
 
     public enum UiType

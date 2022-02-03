@@ -41,7 +41,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.extendableRichContainer2 = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
 			this.employeeSummary = new CAS.UI.UIControls.PersonnelControls.EmployeeSummary();
 			this.extendableRichContainerGeneral = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
-			this._directiveGeneralInformation = new CAS.UI.UIControls.PersonnelControls.EmployeeGeneralInformationControl();
+			this._directiveGeneralInformation = new CAAEmployeeGeneralInformationControl();
 			this.extendableRichContainerDocuments = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
 			this.DocumentsControl = new CAS.UI.UIControls.PersonnelControls.EmployeeDocumentsControl();
 			this.extendableRichContainerLicense = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
@@ -528,7 +528,7 @@ namespace CAS.UI.UICAAControls.Specialists
         //private ReferenceControls.ExtendableRichContainer extendableRichContainerSummary;
         //private MaintenanceDirectiveSummary _directiveSummary;
         private UIControls.ReferenceControls.ExtendableRichContainer extendableRichContainerGeneral;
-        public EmployeeGeneralInformationControl _directiveGeneralInformation;
+        public CAAEmployeeGeneralInformationControl _directiveGeneralInformation;
         private UIControls.ReferenceControls.ExtendableRichContainer extendableRichContainerDocuments;
         public EmployeeDocumentsControl DocumentsControl;
 		private UIControls.ReferenceControls.ExtendableRichContainer extendableRichContainerLicense;
