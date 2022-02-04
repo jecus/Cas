@@ -1178,7 +1178,6 @@ namespace SmartCore.DtoHelper
                 FullName = nomenclature.FullName,
 				OperatorId = nomenclature.OperatorId,
                 DepartmentId = nomenclature.Department?.ItemId ?? -1,
-                Department = nomenclature.Department?.ConvertCAA()
             };
         }
 
