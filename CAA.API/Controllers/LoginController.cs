@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CAA.Entity.Core;
@@ -92,7 +93,7 @@ namespace CAA.API.Controllers
                 updateUser.UiType = caaUser.UiType;
                 updateUser.PersonnelId = caaUser.PersonnelId;
                 updateUser.CorrectorId = caaUser.CorrectorId;
-                updateUser.Updated = caaUser.Updated;
+                updateUser.Updated = DateTime.Now;
             }
             else
             {
@@ -102,6 +103,12 @@ namespace CAA.API.Controllers
                     Password = caaUser.Password,
                     Name = caaUser.Name,
                     Surname = caaUser.Surname,
+                    OperatorId = caaUser.OperatorId,
+                    CAAUserType = caaUser.CAAUserType,
+                    UiType = caaUser.UiType,
+                    PersonnelId = caaUser.PersonnelId,
+                    CorrectorId = caaUser.CorrectorId,
+                    Updated = DateTime.Now
                 };
 
                 _context.UserDtos.Add(newUser);

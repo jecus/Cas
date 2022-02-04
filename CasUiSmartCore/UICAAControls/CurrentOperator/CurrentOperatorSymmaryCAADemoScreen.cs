@@ -62,7 +62,16 @@ namespace CAS.UI.UICAAControls
 		{
 			if (currentOperator == null)
 				throw new ArgumentNullException("currentOperator");
-			aircraftHeaderControl1.Operator = GlobalObjects.CaaEnvironment.Operators[0];
+			aircraftHeaderControl1.Operator = new Operator()
+            {
+                Address = currentOperator.Address,
+                Email = currentOperator.Email,
+                LogoTypeImage = currentOperator.LogoTypeImage,
+                LogoTypeWhiteImage = currentOperator.LogoTypeWhiteImage,
+                LogotypeReportLargeImage = currentOperator.LogotypeReportLargeImage,
+                LogotypeReportVeryLargeImage = currentOperator.LogotypeReportVeryLargeImage,
+                Name = currentOperator.FullName
+            };
 			_currentOperator = currentOperator;
 			statusControl.ShowStatus = false;
 
@@ -181,7 +190,7 @@ namespace CAS.UI.UICAAControls
         private void LabelDocumentsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = CurrentOperator.Name + ". " + "Documents";
-            e.RequestedEntity = new CAADocumentationListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            e.RequestedEntity = new CAADocumentationListScreen(GlobalObjects.CaaEnvironment.Operators[0], _currentOperator.ItemId);
         }
 
         #endregion

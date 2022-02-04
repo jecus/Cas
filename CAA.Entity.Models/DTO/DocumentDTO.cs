@@ -138,6 +138,9 @@ namespace CAA.Entity.Models.DTO
         [Column("Author")]
         public int? Author { get; set; }
 
+        [Column("OperatorId")]
+		public int OperatorId { get; set; }
+
 
 		[Include]
 		public CAADocumentSubTypeDTO DocumentSubType { get; set; }
@@ -178,6 +181,6 @@ namespace CAA.Entity.Models.DTO
 		[JsonIgnore]
 		public ICollection<CAAProcedureDocumentReferenceDTO> ProcedureDocumentReferenceDtos { get; set; }
 
-		#endregion
+        #endregion
 	}
 }

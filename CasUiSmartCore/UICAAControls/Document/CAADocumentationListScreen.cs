@@ -26,14 +26,13 @@ namespace CAS.UI.UICAAControls.Document
 	[ToolboxItem(false)]
 	public partial class CAADocumentationListScreen : ScreenControl
 	{
-		private readonly List<Filter> _filters;
-
-		#region Fields
+        #region Fields
 
 		private ICommonCollection<SmartCore.Entities.General.Document> _initialDocumentArray = new CommonCollection<SmartCore.Entities.General.Document>();
 		private ICommonCollection<SmartCore.Entities.General.Document> _resultDocumentArray = new CommonCollection<SmartCore.Entities.General.Document>();
 		private readonly BaseEntityObject _parent;
-		private readonly DocumentType _docType;
+        private readonly int _operatorId;
+        private readonly DocumentType _docType;
 		private DocumentationListView _directivesViewer;
 
 		private RadMenuItem _toolStripMenuItemShowTaskCard;
@@ -73,13 +72,14 @@ namespace CAS.UI.UICAAControls.Document
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>
-		public CAADocumentationListScreen(Operator currentOperator)
+		public CAADocumentationListScreen(Operator currentOperator, int operatorId)
 			: this()
 		{
 			if (currentOperator == null)
 				throw new ArgumentNullException("currentOperator");
 			_parent = currentOperator;
-			aircraftHeaderControl1.Operator = currentOperator;
+            _operatorId = operatorId;
+            aircraftHeaderControl1.Operator = currentOperator;
 			StatusTitle = "Operator Documentation";
 			labelTitle.Visible = false;
 
@@ -91,11 +91,6 @@ namespace CAS.UI.UICAAControls.Document
 			UpdateInformation();
 		}
 
-		public CAADocumentationListScreen(Operator currentOperator, List<Filter> filters)
-			: this(currentOperator)
-		{
-			_filters = filters;
-		}
 
 		#endregion
 
@@ -125,10 +120,11 @@ namespace CAS.UI.UICAAControls.Document
 			try
 			{
 				GlobalObjects.CaaEnvironment.NewLoader.ReloadDictionary(typeof(DocumentSubType), typeof(ServiceType), typeof(Nomenclatures), typeof(Department), typeof(Specialization));
+                
                 _initialDocumentArray.AddRange(GlobalObjects
                     .CaaEnvironment
                     .NewLoader
-                    .GetObjectListAll<DocumentDTO, SmartCore.Entities.General.Document>(new Filter("Author", FilterType.Equal, GlobalObjects.CaaEnvironment.IdentityUser.ItemId), true));
+                    .GetObjectListAll<DocumentDTO, SmartCore.Entities.General.Document>(new Filter("OperatorId", FilterType.Equal, _operatorId), true));
 			}
 			catch(Exception ex)
 			{
@@ -302,7 +298,7 @@ namespace CAS.UI.UICAAControls.Document
 		#region private void ButtonAddNonRoutineJobClick(object sender, EventArgs e)
 		private void ButtonAddNonRoutineJobClick(object sender, EventArgs e)
 		{
-			var form = new DocumentForm(new SmartCore.Entities.General.Document(), _parent);
+			var form = new DocumentForm(new SmartCore.Entities.General.Document(), _parent, _operatorId);
 
 			if (form.ShowDialog() == DialogResult.OK)
 			{

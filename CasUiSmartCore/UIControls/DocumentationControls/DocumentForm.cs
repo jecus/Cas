@@ -31,6 +31,8 @@ namespace CAS.UI.UIControls.DocumentationControls
     ///</summary>
     public partial class DocumentForm : MetroForm
     {
+        private readonly int? _operatorId;
+
         #region Fields
 
         private Document _currentDocument;
@@ -108,6 +110,12 @@ namespace CAS.UI.UIControls.DocumentationControls
 			_animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
         }
 		#endregion
+
+		//caa
+        public DocumentForm(Document doc, BaseEntityObject parent, int? operatorId) : this(doc, parent)
+        {
+            _operatorId = operatorId;
+        }
 
 		#endregion
 
@@ -437,6 +445,9 @@ namespace CAS.UI.UIControls.DocumentationControls
 			_currentDocument.Privy = checkBoxPrivy.Checked;
             _currentDocument.IdNumber = textBoxIdNumber.Text;
 
+
+            if (_operatorId.HasValue &&  _currentDocument.OperatorId != 0)
+                _currentDocument.OperatorId = _operatorId.Value;
 
             if (_parent is Aircraft)
 			    _currentDocument.ParentAircraftId = _parent.ItemId;

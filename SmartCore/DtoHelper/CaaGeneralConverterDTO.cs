@@ -978,7 +978,8 @@ namespace SmartCore.DtoHelper
 				SupplierId = document.Supplier?.ItemId ?? -1,
 				ParentAircraftId = document.ParentAircraftId,
 				IdNumber = document.IdNumber,
-				Author = document.Author
+				Author = document.Author,
+				OperatorId = document.OperatorId
 			};
 		}
 
@@ -1013,6 +1014,7 @@ namespace SmartCore.DtoHelper
                 Author = document.Author,
 				IssueNumber = document.IssueNumber,
 				Remarks = document.Remarks,
+                OperatorId = document.OperatorId,
 				ParentAircraftId = document.ParentAircraftId ?? default(int),
 				IdNumber = document.IdNumber,
 				Supplier = document.Supplier?.ConvertCAA(),

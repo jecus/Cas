@@ -481,6 +481,7 @@ namespace SmartCore.Entities.General
 
 
         public int? Author { get; set; }
+        public int OperatorId { get; set; }
 
 		#region Implement of IMathData
 		//Своиства интерфеися IMathData, они содержат вычисления мат аппарата для объектов

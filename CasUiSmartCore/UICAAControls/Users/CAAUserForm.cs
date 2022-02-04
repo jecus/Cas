@@ -181,7 +181,7 @@ and  Login = '{textBoxLogin.Text}' and ItemId != {_user.ItemId} ");
 			if (Check())
 			{
 				ApplyChanges();
-				GlobalObjects.CaaEnvironment.ApiProvider.AddOrUpdateUser(new UserDTO()
+				GlobalObjects.CaaEnvironment.ApiProvider.AddOrUpdateUser(new UserDTO
 				{
 					ItemId = _user.ItemId,
 					Login = _user.Login,
@@ -193,7 +193,6 @@ and  Login = '{textBoxLogin.Text}' and ItemId != {_user.ItemId} ");
 					PersonnelId = _user.PersonnelId,
 					OperatorId =  ((Specialist)metroComboBoxPersonnel.SelectedItem).OperatorId,
 					CorrectorId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId,
-					Updated = DateTime.Now
                 }); 
 				DialogResult = DialogResult.OK;
 				Close();

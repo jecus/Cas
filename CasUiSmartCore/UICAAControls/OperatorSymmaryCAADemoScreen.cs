@@ -195,7 +195,7 @@ namespace CAS.UI.UICAAControls
         private void LabelDocumentsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = CurrentOperator.Name + ". " + "Documents";
-            e.RequestedEntity = new CAADocumentationListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            e.RequestedEntity = new CAADocumentationListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
         }
 
         #endregion
