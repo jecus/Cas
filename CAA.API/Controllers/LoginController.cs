@@ -27,19 +27,6 @@ namespace CAA.API.Controllers
 		public async Task<ActionResult<CAAUserDTO>> GetUser(string login, string password)
 		{
             var res = await _context.UserDtos.FirstOrDefaultAsync(i => !i.IsDeleted && i.Login.Equals(login) && i.Password.Equals(password));
-
-            if (res != null)
-            {
-                var spec = await _context.SpecialistDtos.AsNoTracking()
-                    .FirstOrDefaultAsync(i => i.ItemId == res.PersonnelId);
-
-                var op = await _context.AllOperatorsDtos.AsNoTracking()
-                    .FirstOrDefaultAsync(i => i.ItemId == spec.OperatorId);
-
-                res.OperatorId = op?.ItemId ?? -1;
-            }
-
-
             return Ok(res);
 		}
 
@@ -50,7 +37,14 @@ namespace CAA.API.Controllers
             return Ok(res);
 		}
 
-		[HttpGet("{userId}")]
+        [HttpGet("getall/{operatorId}")]
+        public async Task<ActionResult<List<CAAUserDTO>>> GetAllList(int operatorId)
+        {
+            var res = await _context.UserDtos.Where(i => !i.IsDeleted && i.OperatorId == operatorId).ToListAsync();
+            return Ok(res);
+        }
+
+        [HttpGet("{userId}")]
 		public async Task<ActionResult<CAAUserDTO>> GetById(int userId)
 		{
 			var res = await _context.UserDtos.Where(i => !i.IsDeleted).FirstOrDefaultAsync(i => !i.IsDeleted && i.ItemId == userId);

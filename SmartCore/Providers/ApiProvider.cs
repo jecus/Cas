@@ -71,6 +71,12 @@ namespace CAS.UI.Helpers
 			return res?.Data;
 		}
 
+        public List<UserDTO> GetAllUsersAsync(int operatorId)
+        {
+            var res = _httpClient.GetJsonAsync<List<UserDTO>>($"user/getall/{operatorId}");
+            return res?.Data;
+        }
+
 		public UserDTO GetByIdAsync(int userId)
 		{
 			var res = _httpClient.GetJsonAsync<UserDTO>($"user/{userId}");

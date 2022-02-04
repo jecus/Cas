@@ -37,8 +37,8 @@ namespace CAA.Entity.Models.DTO
         [Column("PersonnelId")]
 		public int PersonnelId { get; set; }
 
-		[NotMapped]
-        public int OperatorId { get; set; }
+        [Column("OperatorId")]
+		public int OperatorId { get; set; }
 
 
         public override string ToString()

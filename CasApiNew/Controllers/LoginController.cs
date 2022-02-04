@@ -36,7 +36,7 @@ namespace CAS.API.Controllers
             return Ok(res);
 		}
 
-		[HttpGet("{userId}")]
+        [HttpGet("{userId}")]
 		public async Task<ActionResult<UserDTO>> GetById(int userId)
 		{
 			var res = await _context.UserDtos.Where(i => !i.IsDeleted).FirstOrDefaultAsync(i => !i.IsDeleted && i.ItemId == userId);

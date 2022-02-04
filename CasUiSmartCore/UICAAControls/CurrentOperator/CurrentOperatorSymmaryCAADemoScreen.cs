@@ -199,7 +199,7 @@ namespace CAS.UI.UICAAControls
         private void Users_Click(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Users";
-            e.RequestedEntity = new CAAUserListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            e.RequestedEntity = new CAAUserListScreen(GlobalObjects.CaaEnvironment.Operators[0], _currentOperator.ItemId);
         }
 
         private void Activity_DisplayerRequested(object sender, ReferenceEventArgs e)

@@ -10,6 +10,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.Users;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
@@ -23,7 +24,9 @@ namespace CAS.UI.UICAAControls.Users
 	[ToolboxItem(false)]
 	public partial class CAAUserListScreen : ScreenControl
 	{
-		#region Fields
+        private readonly int _operatorId;
+
+        #region Fields
 
 		private CommonCollection<CAAUser> _initial = new CommonCollection<CAAUser>();
 		private CommonCollection<Specialist> _specialists = new CommonCollection<Specialist>();
@@ -49,13 +52,14 @@ namespace CAS.UI.UICAAControls.Users
 
 		#region public CAAUserListScreen(Operator currentOperator) : this()
 
-		public CAAUserListScreen(Operator currentOperator)
+		public CAAUserListScreen(Operator currentOperator, int operatorId)
 			: this()
 		{
 			if (currentOperator == null)
 				throw new ArgumentNullException("currentOperator");
+            _operatorId = operatorId;
 
-			_filter = new CommonFilterCollection(typeof(User));
+            _filter = new CommonFilterCollection(typeof(User));
 			aircraftHeaderControl1.Operator = currentOperator;
 			StatusTitle = "Users";
 			
@@ -90,10 +94,22 @@ namespace CAS.UI.UICAAControls.Users
 
 			try
 			{
-				var userDto = GlobalObjects.CaaEnvironment.ApiProvider.GetAllUsersAsync();
-				_initial.AddRange(userDto.Select(i => new CAAUser(i)));
+                if (_operatorId > 0)
+                {
+                    var userDto = GlobalObjects.CaaEnvironment.ApiProvider.GetAllUsersAsync(_operatorId);
+                    _initial.AddRange(userDto.Select(i => new CAAUser(i)));
 
-				_specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASpecialistDTO, Specialist>());
+                    _specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASpecialistDTO, Specialist>(new Filter("OperatorId", _operatorId)));
+				}
+                else
+                {
+                    var userDto = GlobalObjects.CaaEnvironment.ApiProvider.GetAllUsersAsync();
+                    _initial.AddRange(userDto.Select(i => new CAAUser(i)));
+
+					_specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASpecialistDTO, Specialist>());
+				}
+
+				
 				foreach (var user in _initial)
 				{
 					user.Personnel = _specialists.FirstOrDefault(i => i.ItemId == user.PersonnelId) ??
