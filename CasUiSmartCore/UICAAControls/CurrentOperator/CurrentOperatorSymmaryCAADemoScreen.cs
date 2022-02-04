@@ -205,7 +205,7 @@ namespace CAS.UI.UICAAControls
         private void Activity_DisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Activity";
-            e.RequestedEntity = new CAAActivityListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            e.RequestedEntity = new CAAActivityListScreen(GlobalObjects.CaaEnvironment.Operators[0], _currentOperator.ItemId);
         }
 
 

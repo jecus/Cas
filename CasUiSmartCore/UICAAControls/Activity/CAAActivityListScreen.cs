@@ -14,6 +14,7 @@ using CASTerms;
 using Entity.Abstractions.Filters;
 using MongoDB.Driver;
 using SmartCore.Activity;
+using SmartCore.AuditMongo;
 using SmartCore.AuditMongo.Repository;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
@@ -33,7 +34,9 @@ namespace CAS.UI.UICAAControls.Activity
 	[ToolboxItem(false)]
 	public partial class CAAActivityListScreen : ScreenControl
 	{
-		#region Fields
+        private readonly int _operatorId;
+
+        #region Fields
 
 		private CommonCollection<ActivityDTO> _initial = new CommonCollection<ActivityDTO>();
 		private CommonCollection<ActivityDTO> _result = new CommonCollection<ActivityDTO>();
@@ -59,13 +62,14 @@ namespace CAS.UI.UICAAControls.Activity
 
 		#region public ActivityListScreen(Operator currentOperator) : this()
 
-		public CAAActivityListScreen(Operator currentOperator)
+		public CAAActivityListScreen(Operator currentOperator, int operatorId)
 			: this()
 		{
 			if (currentOperator == null)
 				throw new ArgumentNullException("currentOperator");
+            _operatorId = operatorId;
 
-			_filter = new CommonFilterCollection(typeof(ActivityDTO));
+            _filter = new CommonFilterCollection(typeof(ActivityDTO));
 			aircraftHeaderControl1.Operator = currentOperator;
 			StatusTitle = "Activity";
 
@@ -88,7 +92,7 @@ namespace CAS.UI.UICAAControls.Activity
 		private void UpdateInformation()
 		{
 			var date = DateTime.Now;
-			dateTimePickerDateFrom.Value = new DateTime(date.Year, date.Month, date.Day, 0, 0, 1).AddDays(-7);
+			dateTimePickerDateFrom.Value = new DateTime(date.Year, date.Month, date.Day, 0, 0, 1).AddDays(-3);
 			dateTimePickerDateTo.Value = new DateTime(date.Year, date.Month, date.Day, 23, 59, 59);
 		}
 
@@ -114,10 +118,22 @@ namespace CAS.UI.UICAAControls.Activity
 
 			try
 			{
-				var activity = GlobalObjects.AuditContext.AuditCollection
-					.FindSync(i => i.Date >= dateTimePickerDateFrom.Value && i.Date <= dateTimePickerDateTo.Value)
-					.ToList();
+                List<AuditEntity> activity = new List<AuditEntity>();
+                if (_operatorId > 0)
+                {
+                    activity = GlobalObjects.AuditContext.AuditCollection
+                        .FindSync(i => i.Date >= dateTimePickerDateFrom.Value && i.Date <= dateTimePickerDateTo.Value && i.OperatorId == _operatorId)
+                        .ToList();
+				}
+                else
+                {
+                    activity = GlobalObjects.AuditContext.AuditCollection
+                        .FindSync(i => i.Date >= dateTimePickerDateFrom.Value && i.Date <= dateTimePickerDateTo.Value)
+                        .ToList();
+				}
 
+
+                
 				var users =  GlobalObjects.CaaEnvironment.ApiProvider.GetAllUsersAsync();
 
 				foreach (var bsonElement in activity)

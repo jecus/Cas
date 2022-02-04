@@ -43,7 +43,8 @@ namespace SmartCore.AuditMongo.Repository
 					ObjectId = (int) target?.ItemId,
 					ObjectTypeId = (int) target?.SmartCoreObjectType.ItemId,
 					UserId = user.ItemId,
-					AdditionalParameters = parameters
+					AdditionalParameters = parameters,
+                    OperatorId = user.OperatorId
 				});
 			}
 			catch (Exception ex)
@@ -66,6 +67,7 @@ namespace SmartCore.AuditMongo.Repository
 					ObjectId = -1,
 					ObjectTypeId = -1,
 					UserId = user.ItemId,
+                    OperatorId = user.OperatorId,
 					AdditionalParameters = new Dictionary<string, object>()
 					{
 						["ReportName"] = reportName

@@ -21,6 +21,7 @@ namespace SmartCore.AuditMongo
 		public int ObjectTypeId { get; set; }
 
 		public int ObjectId { get; set; }
+		public int? OperatorId { get; set; }
 
 		public Dictionary<string, object> AdditionalParameters { get; set; }
 	}
