@@ -19,6 +19,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.CAA;
 using CAS.UI.UIControls.PersonnelControls;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using SmartCore.CAA;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.Entities.Collections;
@@ -137,7 +138,10 @@ namespace CAS.UI.UICAAControls
         private void LinkDepartmentsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Departments";
-            e.RequestedEntity = new CAACommonListScreen(typeof(Department));
+            e.RequestedEntity = new CAACommonListScreen(typeof(Department), new List<Filter>()
+            {
+                new Filter("OperatorId",_currentOperator.ItemId )
+            }) { OperatorId = _currentOperator.ItemId };
         }
 
 		#endregion
@@ -167,12 +171,6 @@ namespace CAS.UI.UICAAControls
 
 		#endregion
 
-
-		private void Operator_Click(object sender, ReferenceEventArgs e)
-        {
-			e.DisplayerText = "Operators";
-            e.RequestedEntity = new CAAOperatorlListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
-		}
 
         private void Aircraft_Click(object sender, ReferenceEventArgs e)
         {

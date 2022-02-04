@@ -37,7 +37,7 @@ namespace SmartCore.Entities.NewLoader
 		IList<TOut> GetObjectList<T, TOut>(Filter filter, bool loadChild = false,
 			bool getDeleted = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new();
 
-		IList GetObjectList(Type dtoType, Type blType, bool loadChild = false, bool getDeleted = false);
+		IList GetObjectList(Type dtoType, Type blType, bool loadChild = false, bool getDeleted = false, List<Filter> filter = null);
 
 		IList<TOut> GetObjectListAll<T, TOut>(IEnumerable<Filter> filters = null, bool loadChild = false,
 			bool getDeleted = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new();

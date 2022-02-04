@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using CAA.Entity.Models;
 using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Entities.General.Attributes;
@@ -11,7 +12,7 @@ namespace SmartCore.Entities.Dictionaries
 	[CAADto(typeof(CAADepartmentDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
-	public class Department : AbstractDictionary
+	public class Department : AbstractDictionary, IOperatable
 	{
 		private static Type _thisType;
 		private static Department _unknown;
@@ -175,7 +176,12 @@ namespace SmartCore.Entities.Dictionaries
 			}
 		}
 
+
+
 		#endregion
+
+
+        public int OperatorId { get; set; }
 
 
 	}

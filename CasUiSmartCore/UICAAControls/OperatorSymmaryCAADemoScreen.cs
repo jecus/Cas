@@ -19,6 +19,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.CAA;
 using CAS.UI.UIControls.PersonnelControls;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using SmartCore.CAA;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
@@ -141,8 +142,10 @@ namespace CAS.UI.UICAAControls
 
         private void LinkDepartmentsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "Departments";
-            e.RequestedEntity = new CAACommonListScreen(typeof(Department));
+            e.RequestedEntity = new CAACommonListScreen(typeof(Department), new List<Filter>()
+            {
+                new Filter("OperatorId",-1 )
+            });
         }
 
 		#endregion

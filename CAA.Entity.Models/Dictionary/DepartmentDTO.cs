@@ -11,7 +11,7 @@ namespace CAA.Entity.Models.Dictionary
 	[Table("Departments", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class CAADepartmentDTO : BaseEntity, IBaseDictionary
+	public class CAADepartmentDTO : BaseEntity, IBaseDictionary, IOperatable
 	{
 		
 		[Column("Name"), MaxLength(50)]
@@ -34,6 +34,9 @@ namespace CAA.Entity.Models.Dictionary
 
 		[Column("Website"), MaxLength(256)]
 		public string Website { get; set; }
+
+        [Column("OperatorId")]
+		public int OperatorId { get; set; }
 
 
 

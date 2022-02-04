@@ -12,7 +12,7 @@ namespace CAA.Entity.Models.DTO
 	[Table("Documents", Schema = "dbo")]
 	
 	[Condition("IsDeleted", 0)]
-	public class CAADocumentDTO : BaseEntity
+	public class CAADocumentDTO : BaseEntity, IOperatable
 	{
 	    
 		[Column("ParentID")]

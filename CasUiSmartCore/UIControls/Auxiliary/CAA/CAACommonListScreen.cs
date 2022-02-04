@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using CAA.Entity.Models;
 using CAS.Entity.Models.DTO.Dictionaries;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.FiltersControls;
@@ -12,6 +13,7 @@ using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.PersonnelControls;
 using CAS.UI.UIControls.PurchaseControls;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -32,7 +34,8 @@ namespace CAS.UI.UIControls.Auxiliary.CAA
 		#region Fields
 
 		protected Type ViewedType;
-		protected CommonGridViewControl DirectivesViewer;
+        private readonly List<Filter> _filters;
+        protected CommonGridViewControl DirectivesViewer;
 
 		protected ICommonCollection InitialDirectiveArray;
 		protected ICommonCollection ResultDirectiveArray;
@@ -52,6 +55,7 @@ namespace CAS.UI.UIControls.Auxiliary.CAA
 
 		#region Properties
 
+        public int OperatorId { get; set; } = -1;
 		public bool ShowOpenOperationContextMenu
 		{
 			get { return _showOpenOperationContextMenu; }
@@ -92,14 +96,15 @@ namespace CAS.UI.UIControls.Auxiliary.CAA
 		///</summary>
 		///<param name="viewedType">Тип, объекты которого будут отображаться в списке</param>
 		///<param name="beginGroup"></param>
-		public CAACommonListScreen(Type viewedType, PropertyInfo beginGroup = null)
+		public CAACommonListScreen(Type viewedType, List<Filter> filters = null, PropertyInfo beginGroup = null)
 			: this()
 		{
 			if (viewedType == null)
 				throw new ArgumentNullException("viewedType");
 
 			ViewedType = viewedType;
-			aircraftHeaderControl1.Operator = GlobalObjects.CaaEnvironment.Operators[0];
+            _filters = filters;
+            aircraftHeaderControl1.Operator = GlobalObjects.CaaEnvironment.Operators[0];
 			StatusTitle = ViewedType.Name;
 
 			_filter = new CommonFilterCollection(viewedType);
@@ -183,7 +188,7 @@ namespace CAS.UI.UIControls.Auxiliary.CAA
 			else
             {
                 var dto = (CAADtoAttribute)ViewedType.GetCustomAttributes(typeof(CAADtoAttribute), false).FirstOrDefault();
-				var res = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList(dto.Type, ViewedType, loadChild: true);
+				var res = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList(dto.Type, ViewedType, loadChild: true, filter: _filters);
 				InitialDirectiveArray.AddRange((IEnumerable<IBaseEntityObject>)res);
             }
 
@@ -517,6 +522,10 @@ namespace CAS.UI.UIControls.Auxiliary.CAA
 				{
 					ConstructorInfo ci = ViewedType.GetConstructor(new Type[0]);
 					BaseEntityObject item = (BaseEntityObject)ci.Invoke(null);
+
+                    if (item is IOperatable oper)
+                        oper.OperatorId = OperatorId;
+
 					form = new CommonEditorForm(item);
 				}
 

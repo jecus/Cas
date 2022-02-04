@@ -11,7 +11,7 @@ namespace CAA.Entity.Models.DTO
 	[Table("Specialists", Schema = "dbo")]
 	
 	[Condition("IsDeleted", 0)]
-	public class CAASpecialistDTO : BaseEntity, ICAAFileDtoContainer
+	public class CAASpecialistDTO : BaseEntity, ICAAFileDtoContainer, IOperatable
 	{
 		
 		[Column("FirstName"), MaxLength(256)]

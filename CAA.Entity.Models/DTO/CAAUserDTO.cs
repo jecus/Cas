@@ -8,7 +8,7 @@ namespace CAA.Entity.Models.DTO
     [Table("Users", Schema = "dbo")]
 	
 	[Condition("IsDeleted", 0)]
-	public class CAAUserDTO : BaseEntity, IIdentityUser
+	public class CAAUserDTO : BaseEntity, IIdentityUser, IOperatable
 	{
 		
 		[Column("Name"), MaxLength(100)]

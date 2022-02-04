@@ -159,13 +159,13 @@ namespace SmartCore.Entities.NewLoader
 			return GetObjectList<T, TOut>(new[] {filter}, loadChild, getDeleted);
 		}
 
-		public IList GetObjectList(Type dtoType, Type blType, bool loadChild = false, bool getDeleted = false)
+		public IList GetObjectList(Type dtoType, Type blType, bool loadChild = false, bool getDeleted = false, List<Filter> filter = null)
 		{
 			var method = typeof(INewLoader).GetMethods().FirstOrDefault(i => i.Name == "GetObjectList")?.MakeGenericMethod(dtoType, blType);
 
 			if (dtoType.Name == "AccessoryDescriptionDTO" || dtoType.Name == "CAAAccessoryDescriptionDTO")
 			{
-				var filter = new List<Filter>();
+				filter = new List<Filter>();
 				if(blType.Name == "AircraftModel")
 					filter.Add(new Filter("ModelingObjectTypeId", 7));
 				else if (blType.Name == "ComponentModel")
@@ -176,7 +176,7 @@ namespace SmartCore.Entities.NewLoader
 				return (IList)method.Invoke(this, new object[] { filter, loadChild, getDeleted });
 			}
 
-			return (IList)method.Invoke(this, new object[] { null, loadChild, getDeleted });
+			return (IList)method.Invoke(this, new object[] { filter, loadChild, getDeleted });
 		}
 
 		public IList<TOut> GetObjectListAll<T, TOut>(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new()

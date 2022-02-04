@@ -1142,8 +1142,9 @@ namespace SmartCore.DtoHelper
                 Phone = department.Phone,
                 Fax = department.Fax,
                 Email = department.Email,
-                Website = department.Website
-            };
+                Website = department.Website,
+                OperatorId = department.OperatorId
+			};
         }
 
         public static Department ConvertCAA(this CAADepartmentDTO departmentDto)
@@ -1160,8 +1161,9 @@ namespace SmartCore.DtoHelper
                 Phone = departmentDto.Phone,
                 Fax = departmentDto.Fax,
                 Email = departmentDto.Email,
-                Website = departmentDto.Website
-            };
+                Website = departmentDto.Website,
+                OperatorId = departmentDto.OperatorId
+			};
         }
 
         public static CAANomenclatureDTO ConvertCAA(this Nomenclatures nomenclature)
