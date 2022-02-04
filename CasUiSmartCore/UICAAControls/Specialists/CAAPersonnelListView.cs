@@ -5,6 +5,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.PersonnelControls;
 using CASTerms;
+using SmartCore.CAA;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Personnel;
 
@@ -33,11 +34,18 @@ namespace CAS.UI.UICAAControls.Specialists
 
         public int OperatorId { get; set; }
 
-        #endregion
+		#endregion
 
 		#endregion
 
 		#region Methods
+
+        #region protected override SetGroupsToItems()
+        protected override void GroupingItems()
+        {
+            Grouping("Operator");
+        }
+        #endregion
 
 		#region protected override void SetHeaders()
 		/// <summary>
@@ -51,6 +59,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			AddColumn("Occupation", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Combination", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Department", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Operator", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Privileges", (int)(radGridView1.Width * 0.5f));
 			AddColumn("Date of Birth", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Education", (int)(radGridView1.Width * 0.34f));
@@ -93,6 +102,12 @@ namespace CAS.UI.UICAAControls.Specialists
 			var phone = string.IsNullOrEmpty(item.Additional) ? item.Phone : $"{item.Phone} | Add.: {item.Additional}";
 
 
+            var op = (GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(
+                i => i.ItemId == item?.OperatorId) ?? AllOperators.Unknown).ToString();
+
+            if (item.IsCAA)
+                op = "CAA";
+
 			var subItems = new List<CustomCell>()
 			{
 				CreateRow(item.Status.ToString(), item.Status),
@@ -101,6 +116,7 @@ namespace CAS.UI.UICAAControls.Specialists
 				CreateRow(item.Specialization.ToString(), item.Specialization),
 				CreateRow(item.Combination, item.Combination),
 				CreateRow(department.ToString(), department),
+				CreateRow(op.ToString(), op),
 				CreateRow(ratingString, ratingString),
 				CreateRow(item.DateOfBirth.ToString("dd-MMMM-yyyy"), item.DateOfBirth),
 				CreateRow(item.Education.ToString(), item.Education),

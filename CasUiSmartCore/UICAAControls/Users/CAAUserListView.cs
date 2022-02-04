@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.Users;
+using CASTerms;
+using SmartCore.CAA;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Personnel;
@@ -41,12 +44,18 @@ namespace CAS.UI.UICAAControls.Users
 		protected override List<CustomCell> GetListViewSubItems(CAAUser item)
 		{
 			var userName = $"{item.Surname} {item.Name}";
+			var op = (GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(
+                i => i.ItemId == item.Personnel?.OperatorId) ?? AllOperators.Unknown).ToString();
+
+            if (item.Personnel.IsCAA)
+                op = "CAA";
 			var subItems = new List<CustomCell>()
 			{
 				CreateRow(userName,userName),
 				CreateRow(item.Login,item.Login),
 				CreateRow(item.Password,item.Password),
 				CreateRow(item.Personnel.ToString(),item.Personnel),
+				CreateRow(op,op),
 				CreateRow(item.UserType.ToString(),item.UserType),
 				CreateRow(item.UiType.ToString(),item.UiType),
 			};
@@ -66,6 +75,7 @@ namespace CAS.UI.UICAAControls.Users
 			AddColumn("Login", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Password", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Personnel", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Operator", (int)(radGridView1.Width * 0.20f));
 			AddColumn("User Type", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Ui Type", (int)(radGridView1.Width * 0.20f));
 		}
