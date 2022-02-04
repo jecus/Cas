@@ -1472,8 +1472,7 @@ namespace SmartCore.DtoHelper
 				Level = specialization.Level,
 				OperatorId = specialization.OperatorId,
 				KeyPersonel = specialization.KeyPersonel,
-				Department = specialization.Department?.ConvertCAA()
-			};
+            };
 		}
 
 		public static Specialization ConvertCAA(this CAASpecializationDTO specializationDto)
@@ -1488,8 +1487,8 @@ namespace SmartCore.DtoHelper
                 OperatorId = specializationDto.OperatorId,
 				FullName = specializationDto.FullName,
 				Level = specializationDto.Level,
-				KeyPersonel = specializationDto.KeyPersonel
-			};
+				KeyPersonel = specializationDto.KeyPersonel,
+            };
 
 
 			var department = specializationDto.Department?.ConvertCAA();

@@ -24,6 +24,8 @@ namespace CAS.UI.UIControls.PersonnelControls
         {
             InitializeComponent();
         }
+
+
         #endregion
 
         #endregion

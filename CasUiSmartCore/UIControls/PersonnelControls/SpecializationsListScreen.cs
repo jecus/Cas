@@ -218,7 +218,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 		{
 			_directivesViewer = new SpecializationListView();
 			_directivesViewer.TabIndex = 2;
-			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
+            _directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 			Controls.Add(_directivesViewer);
@@ -275,7 +275,10 @@ namespace CAS.UI.UIControls.PersonnelControls
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-			CommonEditorForm form = new CommonEditorForm(new Specialization());
+			CommonEditorForm form = new CommonEditorForm(new Specialization()
+            {
+				OperatorId = _operatorId
+            });
 
 			if (form.ShowDialog() == DialogResult.OK) 
 				AnimatedThreadWorker.RunWorkerAsync();
