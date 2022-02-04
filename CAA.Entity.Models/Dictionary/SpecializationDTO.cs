@@ -11,7 +11,7 @@ namespace CAA.Entity.Models.Dictionary
 	[Table("Specializations", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class CAASpecializationDTO : BaseEntity, IBaseDictionary
+	public class CAASpecializationDTO : BaseEntity, IBaseDictionary, IOperatable
 	{
 		
 		[Column("FullName"), MaxLength(128)]
@@ -47,5 +47,8 @@ namespace CAA.Entity.Models.Dictionary
 		public ICollection<CAASpecialistDTO> SpecialistDtos { get; set; }
 
 		#endregion
-	}
+
+        [Column("OperatorId")]
+		public int OperatorId { get; set; }
+    }
 }

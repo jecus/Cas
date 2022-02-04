@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using CAA.Entity.Models;
 using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Entities.Collections;
@@ -13,8 +14,8 @@ namespace SmartCore.Entities.Dictionaries
     [DictionaryCollection(typeof(CommonDictionaryCollection<Specialization>))]
     [Condition("IsDeleted", "0")]
 	[Serializable]
-    public class Specialization : AbstractDictionary
-    {
+    public class Specialization : AbstractDictionary, IOperatable
+	{
 		private static Type _thisType;
 
 
@@ -153,5 +154,7 @@ namespace SmartCore.Entities.Dictionaries
 			return _thisType ?? (_thisType = typeof(Specialization));
 		}
 		#endregion
-	}
+
+        public int OperatorId { get; set; }
+    }
 }

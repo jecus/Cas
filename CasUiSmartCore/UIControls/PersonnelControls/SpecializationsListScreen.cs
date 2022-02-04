@@ -3,9 +3,11 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.Dictionary;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -21,8 +23,9 @@ namespace CAS.UI.UIControls.PersonnelControls
 		#region Fields
 
 		private Operator _currentOperator;
+        private readonly int _operatorId;
 
-		private CommonDictionaryCollection<Specialization> _itemsArray = new CommonDictionaryCollection<Specialization>();
+        private CommonDictionaryCollection<Specialization> _itemsArray = new CommonDictionaryCollection<Specialization>();
 
 		private SpecializationListView _directivesViewer;
 
@@ -61,13 +64,20 @@ namespace CAS.UI.UIControls.PersonnelControls
 				throw new ArgumentNullException("currentOperator");
 			aircraftHeaderControl1.Operator = currentOperator;
 			_currentOperator = currentOperator;
-			statusControl.ShowStatus = false;
+            statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 			buttonApplyFilter.Visible = false;
 
 			InitToolStripMenuItems();
 			InitListView();
 			UpdateInformation();
+		}
+
+
+        public SpecializationsListScreen(Operator currentOperator, int operatorId) 
+            : this(currentOperator)
+        {
+			_operatorId = operatorId;
 		}
 
 		#endregion
@@ -99,7 +109,18 @@ namespace CAS.UI.UIControls.PersonnelControls
 
 			if(GlobalObjects.CasEnvironment != null)
 			    _itemsArray.AddRange(GlobalObjects.CasEnvironment.GetDictionary<Specialization>());
-			else _itemsArray.AddRange(GlobalObjects.CaaEnvironment.GetDictionary<Specialization>());
+            else
+            {
+                //_itemsArray.AddRange(GlobalObjects.CaaEnvironment.GetDictionary<Specialization>());
+                var res = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecializationDTO, Specialization>(
+                    new Filter("OperatorId", _operatorId));
+
+                foreach (var specialization in res)
+                {
+                    _itemsArray.Add(specialization);
+                }
+
+            }
 
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
 

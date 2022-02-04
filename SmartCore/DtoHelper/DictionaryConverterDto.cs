@@ -1470,6 +1470,7 @@ namespace SmartCore.DtoHelper
 				FullName = specialization.FullName,
 				DepartmentId = specialization.Department?.ItemId ?? -1,
 				Level = specialization.Level,
+				OperatorId = specialization.OperatorId,
 				KeyPersonel = specialization.KeyPersonel,
 				Department = specialization.Department?.ConvertCAA()
 			};
@@ -1484,6 +1485,7 @@ namespace SmartCore.DtoHelper
 				Updated = specializationDto.Updated,
 				CorrectorId = specializationDto.CorrectorId,
 				ShortName = specializationDto.ShortName,
+                OperatorId = specializationDto.OperatorId,
 				FullName = specializationDto.FullName,
 				Level = specializationDto.Level,
 				KeyPersonel = specializationDto.KeyPersonel

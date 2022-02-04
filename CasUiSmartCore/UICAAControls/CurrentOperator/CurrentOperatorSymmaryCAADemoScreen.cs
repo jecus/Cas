@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using CAA.Entity.Models.DTO;
 using CAS.UI.ExcelExport;
+using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.Activity;
 using CAS.UI.UICAAControls.Airacraft;
@@ -127,7 +128,7 @@ namespace CAS.UI.UICAAControls
         private void LinkPersonnelDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Personnel";
-            e.RequestedEntity = new CAAPersonnelListScreen(GlobalObjects.CaaEnvironment.Operators[0], _currentOperator.ItemId);
+            e.RequestedEntity = new CAAPersonnelListScreen(_getOperator(), _currentOperator.ItemId);
         }
 
         #endregion
@@ -184,7 +185,7 @@ namespace CAS.UI.UICAAControls
         private void LinkSpecializationsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Specializations";
-            e.RequestedEntity = new SpecializationsListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            e.RequestedEntity = new SpecializationsListScreen(_getOperator(), _currentOperator.ItemId);
         }
 
 		#endregion
@@ -193,7 +194,7 @@ namespace CAS.UI.UICAAControls
         private void Aircraft_Click(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Aircrafts";
-            e.RequestedEntity = new CAAAircraftListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            e.RequestedEntity = new CAAAircraftListScreen(_getOperator());
         }
 
         private void Store_Click(object sender, ReferenceEventArgs e)
@@ -206,7 +207,7 @@ namespace CAS.UI.UICAAControls
         private void LabelDocumentsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = CurrentOperator.Name + ". " + "Documents";
-            e.RequestedEntity = new CAADocumentationListScreen(GlobalObjects.CaaEnvironment.Operators[0], _currentOperator.ItemId);
+            e.RequestedEntity = new CAADocumentationListScreen(_getOperator(), _currentOperator.ItemId);
         }
 
         #endregion
@@ -215,13 +216,13 @@ namespace CAS.UI.UICAAControls
         private void Users_Click(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Users";
-            e.RequestedEntity = new CAAUserListScreen(GlobalObjects.CaaEnvironment.Operators[0], _currentOperator.ItemId);
+            e.RequestedEntity = new CAAUserListScreen(_getOperator(), _currentOperator.ItemId);
         }
 
         private void Activity_DisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Activity";
-            e.RequestedEntity = new CAAActivityListScreen(GlobalObjects.CaaEnvironment.Operators[0], _currentOperator.ItemId);
+            e.RequestedEntity = new CAAActivityListScreen(_getOperator(), _currentOperator.ItemId);
         }
 
 
@@ -230,20 +231,26 @@ namespace CAS.UI.UICAAControls
         private void LinkCheckListsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "CheckList";
-            e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            e.RequestedEntity = new CheckListsScreen(_getOperator());
         }
 
 
         private void LinkRoutineAuditDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Routine Audit";
-            e.RequestedEntity = new RoutineAuditListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            e.RequestedEntity = new RoutineAuditListScreen(_getOperator());
         }
 
         private void LinkAuditDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Audit";
-            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            e.RequestedEntity = new AuditListScreen(_getOperator());
+        }
+
+
+        private Operator _getOperator()
+        {
+            return GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(i => i.ItemId == _currentOperator.ItemId).ToOperator();
         }
     }
 }

@@ -185,7 +185,7 @@ namespace CAS.UI.UICAAControls
         private void LinkSpecializationsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Specializations";
-            e.RequestedEntity = new SpecializationsListScreen(_currentOperator);
+            e.RequestedEntity = new SpecializationsListScreen(_currentOperator, -1);
         }
 
 		#endregion
