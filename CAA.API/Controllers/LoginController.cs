@@ -87,7 +87,12 @@ namespace CAA.API.Controllers
                 updateUser.Password = caaUser.Password;
                 updateUser.Name = caaUser.Name;
                 updateUser.Surname = caaUser.Surname;
-
+                updateUser.OperatorId = caaUser.OperatorId;
+                updateUser.CAAUserType = caaUser.CAAUserType;
+                updateUser.UiType = caaUser.UiType;
+                updateUser.PersonnelId = caaUser.PersonnelId;
+                updateUser.CorrectorId = caaUser.CorrectorId;
+                updateUser.Updated = caaUser.Updated;
             }
             else
             {

@@ -6,6 +6,7 @@ using CAS.Entity.Models.DTO.General;
 using CASTerms;
 using Entity.Abstractions;
 using MetroFramework.Forms;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Logical;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
@@ -49,9 +50,6 @@ namespace CAS.UI.UICAAControls.Users
 			textBoxName.Text = _user.Name;
 			textBoxLogin.Text = _user.Login;
 			textBoxPassword.Text = _user.Password;
-
-
-
 
 			if (_user.Personnel.IsCAA)
             {
@@ -136,15 +134,33 @@ namespace CAS.UI.UICAAControls.Users
                     var res =  !(id.HasValue && id.Value > 0);
 
 					if(!res)
-                    MessageBox.Show("For this specialist already create login and passwaord!", "Information", MessageBoxButtons.OK,
+                    MessageBox.Show("For this specialist already create login and password!", "Information", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
 
                     return res;
-
                 }
             }
 
-            return true;
+            var checkUser = GlobalObjects.CaaEnvironment.NewLoader.Execute($@"select * from [dbo].[Users] 
+where Password = '{textBoxPassword.Text}'
+and  Login = '{textBoxLogin.Text}' and ItemId != {_user.ItemId} ");
+
+            var dt2 = checkUser.Tables[0];
+            foreach (DataRow dr in dt2.Rows)
+            {
+                var id = (int?)dr[0];
+                var res = !(id.HasValue && id.Value > 0);
+
+                if (!res)
+                    MessageBox.Show("For this combination login and password already exist!", "Information", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                return res;
+			}
+
+
+
+				return true;
 		}
 
 		#endregion
@@ -174,8 +190,11 @@ namespace CAS.UI.UICAAControls.Users
 					Name = _user.Name,
                     CAAUserType = _user.UserType,
 					UiType = _user.UiType,
-					PersonnelId = _user.PersonnelId
-				}); 
+					PersonnelId = _user.PersonnelId,
+					OperatorId =  ((Specialist)metroComboBoxPersonnel.SelectedItem).OperatorId,
+					CorrectorId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId,
+					Updated = DateTime.Now
+                }); 
 				DialogResult = DialogResult.OK;
 				Close();
 			}

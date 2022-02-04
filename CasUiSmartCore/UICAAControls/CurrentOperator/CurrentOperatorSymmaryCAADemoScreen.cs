@@ -187,7 +187,20 @@ namespace CAS.UI.UICAAControls
         #endregion
 
 
-		#endregion
+        private void Users_Click(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = "Users";
+            e.RequestedEntity = new CAAUserListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+        }
+
+        private void Activity_DisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = "Activity";
+            e.RequestedEntity = new CAAActivityListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+        }
+
+
+        #endregion
 
         private void LinkCheckListsDisplayerRequested(object sender, ReferenceEventArgs e)
         {

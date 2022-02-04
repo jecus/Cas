@@ -44,7 +44,9 @@ namespace CAS.UI.UICAAControls
             this._documentsReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
 			this.LinkRigestry = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.ExportMonthly = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
-            this.Aircraft = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.Users = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.Activity = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.Aircraft = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.Store = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.ExportATLB = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
 			this.LinkRecords = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -88,7 +90,8 @@ namespace CAS.UI.UICAAControls
             this._certificationReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
             this._oversightReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
             this.flowLayoutPanelStores = new System.Windows.Forms.FlowLayoutPanel();
-            this._settingContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
+            this._adminContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
+			this._settingContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
 			this.headerControl.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.flowLayoutPanelReferences.SuspendLayout();
@@ -143,8 +146,13 @@ namespace CAS.UI.UICAAControls
 			// 
 			this.flowLayoutPanelExport.AutoScroll = true;
 			this.flowLayoutPanelExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.flowLayoutPanelExport.Controls.Add(this._settingContainer);
-            this.flowLayoutPanelExport.Dock = System.Windows.Forms.DockStyle.Left;
+#if DEMO
+			this.flowLayoutPanelExport.Controls.Add(this._adminContainer);
+#else
+            this.flowLayoutPanelExport.Controls.Add(this._adminContainer);
+			this.flowLayoutPanelExport.Controls.Add(this._settingContainer);
+#endif
+			this.flowLayoutPanelExport.Dock = System.Windows.Forms.DockStyle.Left;
 			this.flowLayoutPanelExport.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
 			this.flowLayoutPanelExport.Location = new System.Drawing.Point(0, 0);
 			this.flowLayoutPanelExport.MinimumSize = new System.Drawing.Size(400, 10);
@@ -172,7 +180,41 @@ namespace CAS.UI.UICAAControls
 			this._operatorInfoReference.Size = new System.Drawing.Size(342, 220);
 			this._operatorInfoReference.TabIndex = 0;
 			this._operatorInfoReference.UpperLeftIcon = ((System.Drawing.Image)(resources.GetObject("_operatorInfoReference.UpperLeftIcon")));
-            // 
+
+			// 
+			// _adminContainer
+			// 
+			this._adminContainer.AutoSize = true;
+			this._adminContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this._adminContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this._adminContainer.Caption = "Admin";
+			this._adminContainer.DescriptionTextColor = System.Drawing.Color.DimGray;
+			this._adminContainer.Extended = true;
+			this._adminContainer.Location = new System.Drawing.Point(3, 232);
+			this._adminContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this._adminContainer.Name = "_adminContainer";
+			this._adminContainer.ReferenceLink = this.Activity;
+			this._adminContainer.ReferenceLink02 = this.Users;
+			this._adminContainer.ReferenceLink03 = null;
+			this._adminContainer.ReferenceLink04 = null;
+			this._adminContainer.ReferenceLink05 = null;
+			this._adminContainer.ReferenceLink06 = null;
+			this._adminContainer.ReferenceLink07 = null;
+			this._adminContainer.ReferenceLink08 = null;
+			this._adminContainer.ReferenceLink09 = null;
+			this._adminContainer.ReferenceLink10 = null;
+			this._adminContainer.ReferenceLink11 = null;
+			this._adminContainer.ReferenceLink12 = null;
+			this._adminContainer.ReferenceLink13 = null;
+			this._adminContainer.ReferenceLink14 = null;
+			this._adminContainer.ReferenceLink15 = null;
+			this._adminContainer.ReferenceLink16 = null;
+			this._adminContainer.Size = new System.Drawing.Size(105, 42);
+			this._adminContainer.TabIndex = 1;
+			this._adminContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
+            this._adminContainer.Visible = GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin ||
+                                           GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.OperatorAdmin;
+			// 
 			// _settingContainer
 			// 
 			this._settingContainer.AutoSize = true;
@@ -202,7 +244,8 @@ namespace CAS.UI.UICAAControls
 			this._settingContainer.Size = new System.Drawing.Size(105, 42);
 			this._settingContainer.TabIndex = 1;
 			this._settingContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
-            this._settingContainer.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UserType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin;
+            this._settingContainer.Visible =GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin ||
+                                            GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.OperatorAdmin;
 			// 
 			// ExportMonthly
 			// 
@@ -227,6 +270,30 @@ namespace CAS.UI.UICAAControls
 			this.ExportMonthly.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.ExportMonthly.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             // 
+			// Activity
+			// 
+			this.Activity.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.Activity.Displayer = null;
+			this.Activity.DisplayerText = null;
+			this.Activity.Entity = null;
+			this.Activity.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.Activity.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.Activity.ImageBackColor = System.Drawing.Color.Transparent;
+			this.Activity.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.Activity.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.Activity.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.Activity.Location = new System.Drawing.Point(10, 0);
+			this.Activity.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.Activity.Name = "Activity";
+			this.Activity.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.Activity.Size = new System.Drawing.Size(188, 20);
+			this.Activity.Status = AvControls.Statuses.Satisfactory;
+			this.Activity.TabIndex = 2;
+			this.Activity.Text = "Activity";
+			this.Activity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.Activity.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.Activity.DisplayerRequested += Activity_DisplayerRequested;
+			// 
 			// Purchase
 			// 
 			this.Aircraft.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -275,6 +342,30 @@ namespace CAS.UI.UICAAControls
 			this.Store.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             this.Store.DisplayerRequested += Store_Click;
             // 
+			// Users
+			// 
+			this.Users.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.Users.Displayer = null;
+			this.Users.DisplayerText = null;
+			this.Users.Entity = null;
+			this.Users.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.Users.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.Users.ImageBackColor = System.Drawing.Color.Transparent;
+			this.Users.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.Users.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.Users.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.Users.Location = new System.Drawing.Point(10, 0);
+			this.Users.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.Users.Name = "Users";
+			this.Users.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.Users.Size = new System.Drawing.Size(188, 20);
+			this.Users.Status = AvControls.Statuses.Satisfactory;
+			this.Users.TabIndex = 2;
+			this.Users.Text = "Users";
+			this.Users.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.Users.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.Users.DisplayerRequested += Users_Click;
+			// 
 			// ExportMonthly
 			// 
 			this.ExportATLB.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -1403,13 +1494,16 @@ namespace CAS.UI.UICAAControls
         private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _documentsReferenceContainer;
         private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _personnelReferenceContainer;
         private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _qualityAssuranceReferenceContainer;
-        private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _settingContainer;
+        private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _adminContainer;
+		private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _settingContainer;
         private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _certificationReferenceContainer;
         private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _oversightReferenceContainer;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRigestry;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel ExportMonthly;
-        private Management.Dispatchering.ReferenceStatusImageLinkLabel ExportATLB;
-        private Management.Dispatchering.ReferenceStatusImageLinkLabel Aircraft;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel Users;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel ExportATLB;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel Activity;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel Aircraft;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel Store;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRecords;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkNomenclatures;
