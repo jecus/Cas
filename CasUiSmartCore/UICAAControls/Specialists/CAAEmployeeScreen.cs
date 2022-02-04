@@ -27,6 +27,7 @@ namespace CAS.UI.UICAAControls.Specialists
 
         private bool _needReload;
         private Specialist _currentItem;
+        private readonly int _opearatorId;
         private ContextMenuStrip _buttonPrintMenuStrip;
         private ToolStripMenuItem _itemPrintReportRecords;
         private ToolStripMenuItem _itemPrintReportHistory;
@@ -46,40 +47,21 @@ namespace CAS.UI.UICAAControls.Specialists
         }
         #endregion
 
-        #region public EmployeeScreen(Aircraft aircraft) : this ()
-
-        ///<summary>
-        /// Создает страницу для отображения информации об одной директиве
-        ///</summary>
-        /// <param name="operator">Директива</param>
-        public CAAEmployeeScreen(Operator @operator)
-            : this()
-        {
-            if (@operator == null)
-                throw new ArgumentNullException("operator", "Argument cannot be null");
-
-            aircraftHeaderControl1.Operator = @operator;
-
-            _currentItem = new Specialist();
-
-            Initialize();
-        }
-
-        #endregion
-
         #region public EmployeeScreen(Specialist employee) : this ()
 
-        ///<summary>
-        /// Создает страницу для отображения информации об одной директиве
-        ///</summary>
-        /// <param name="employee">Директива</param>
-        public CAAEmployeeScreen(Specialist employee)
+        /// <summary>
+        ///  Создает страницу для отображения информации об одной директиве
+        /// </summary>
+        ///  <param name="employee">Директива</param>
+        /// <param name="opearatorId"></param>
+        public CAAEmployeeScreen(Specialist employee, int opearatorId)
             : this()
         {
             if (employee == null)
                 throw new ArgumentNullException("employee", "Argument cannot be null");
 
             _currentItem = employee;
+            _opearatorId = opearatorId;
 
             aircraftHeaderControl1.Operator = GlobalObjects.CaaEnvironment?.Operators[0];
 
@@ -143,6 +125,7 @@ namespace CAS.UI.UICAAControls.Specialists
 
 	        employeeSummary.CurrentItem = _currentItem;
             //обновление главной информацию по директиве
+            _directiveGeneralInformation.OperatorId = _opearatorId;
             _directiveGeneralInformation.CurrentItem = _currentItem;
 			//обновление информации подзадач директивы
 			DocumentsControl.Reload += DocumentsControl_Reload;

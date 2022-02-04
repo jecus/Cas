@@ -30,7 +30,10 @@ namespace CAS.UI.UICAAControls.Specialists
 			SortDirection = SortDirection.Asc;
 			OldColumnIndex = 6;
 		}
-		#endregion
+
+        public int OperatorId { get; set; }
+
+        #endregion
 
 		#endregion
 
@@ -128,7 +131,7 @@ namespace CAS.UI.UICAAControls.Specialists
 				string regNumber = SelectedItem.FirstName + " " + SelectedItem.LastName;
 				e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 				e.DisplayerText = regNumber;
-				e.RequestedEntity = new CAAEmployeeScreen(SelectedItem);
+				e.RequestedEntity = new CAAEmployeeScreen(SelectedItem, OperatorId);
 			}
 		}
 		#endregion

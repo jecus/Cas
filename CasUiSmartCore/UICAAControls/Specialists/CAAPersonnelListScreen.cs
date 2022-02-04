@@ -120,9 +120,6 @@ namespace CAS.UI.UICAAControls.Specialists
                         loadChild: true));
 			}
 
-			
-			
-
 			var aircraftModels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, AircraftModel>(new Filter("ModelingObjectTypeId", 7));
 
 			foreach (var specialist in _initialDocumentArray)
@@ -206,7 +203,7 @@ namespace CAS.UI.UICAAControls.Specialists
             {
                 TypeOfReflection = ReflectionTypes.DisplayInNew,
                 DisplayerText = "Employee",
-                RequestedEntity = new CAAEmployeeScreen(_directivesViewer.SelectedItem)
+                RequestedEntity = new CAAEmployeeScreen(_directivesViewer.SelectedItem, _operatorId)
             };
             InvokeDisplayerRequested(refE);
 		}
@@ -244,6 +241,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		{
 			_directivesViewer = new CAAPersonnelListView();
 			_directivesViewer.TabIndex = 2;
+			_directivesViewer.OperatorId = _operatorId;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
@@ -308,7 +306,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			e.DisplayerText = "New Employee";
 			var newSpec = new Specialist {Status = SpecialistStatus.Unknown, Position = SpecialistPosition.Unknown, Education = Education.UNK, Citizenship = Citizenship.UNK};
-			e.RequestedEntity = new CAAEmployeeScreen(newSpec);
+			e.RequestedEntity = new CAAEmployeeScreen(newSpec, _operatorId);
 		}
 
 		#endregion

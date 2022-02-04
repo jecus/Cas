@@ -27,7 +27,7 @@ namespace CAS.UI.UICAAControls.Specialists
         private const string TransparentFilter = "PNG (*.png)|*.png";
 
         private Specialist _currentItem;
-
+        public int OperatorId { get; set; }
         #endregion
 
         #region Constructors
@@ -224,23 +224,40 @@ namespace CAS.UI.UICAAControls.Specialists
             dictionaryComboBoxOccupation.Type = typeof(Specialization);
             dictionaryComboBoxLocation.Type = typeof(LocationsType);
 
-            comboBoxOperator.Items.Clear();
-            if (!_currentItem.IsCAA)
+
+            if (OperatorId > 0)
             {
                 comboBoxOperator.Items.AddRange(GlobalObjects.CaaEnvironment.AllOperators.ToArray());
-                comboBoxOperator.SelectedItem = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(i => i.ItemId == _currentItem.OperatorId);
+                comboBoxOperator.SelectedItem = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(i => i.ItemId == OperatorId);
                 radioButtonCAA.Checked = false;
                 radioButtonOperator.Checked = true;
-                comboBoxOperator.Enabled = true;
+
+                radioButtonOperator.Enabled = false;
+                radioButtonCAA.Enabled = false;
+                radioButtonOperator.Enabled = false;
             }
             else
             {
-                comboBoxOperator.Items.Add(AllOperators.Unknown);
-                comboBoxOperator.SelectedItem = AllOperators.Unknown;
-                radioButtonCAA.Checked = true;
-                radioButtonOperator.Checked = false;
-                comboBoxOperator.Enabled = false;
+                comboBoxOperator.Items.Clear();
+                if (!_currentItem.IsCAA)
+                {
+                    comboBoxOperator.Items.AddRange(GlobalObjects.CaaEnvironment.AllOperators.ToArray());
+                    comboBoxOperator.SelectedItem = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(i => i.ItemId == _currentItem.OperatorId);
+                    radioButtonCAA.Checked = false;
+                    radioButtonOperator.Checked = true;
+                    comboBoxOperator.Enabled = true;
+                }
+                else
+                {
+                    comboBoxOperator.Items.Add(AllOperators.Unknown);
+                    comboBoxOperator.SelectedItem = AllOperators.Unknown;
+                    radioButtonCAA.Checked = true;
+                    radioButtonOperator.Checked = false;
+                    comboBoxOperator.Enabled = false;
+                }
             }
+
+            
 
 
 
