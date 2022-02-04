@@ -119,7 +119,7 @@ namespace CAS.UI.UICAAControls
         private void LinkPersonnelDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Personnel";
-            e.RequestedEntity = new CAAPersonnelListScreen(_currentOperator);
+            e.RequestedEntity = new CAAPersonnelListScreen(_currentOperator, -1);
         }
 
         #endregion

@@ -31,8 +31,9 @@ namespace CAS.UI.UICAAControls.Specialists
 		#region Fields
 
 		private Operator _currentOperator;
+        private readonly int _operatorId;
 
-		private CommonCollection<Specialist> _initialDocumentArray = new CommonCollection<Specialist>();
+        private CommonCollection<Specialist> _initialDocumentArray = new CommonCollection<Specialist>();
 		private CommonCollection<Specialist> _resultDocumentArray = new CommonCollection<Specialist>();
 		private CommonFilterCollection _filter;
 
@@ -66,14 +67,15 @@ namespace CAS.UI.UICAAControls.Specialists
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public CAAPersonnelListScreen(Operator currentOperator)
+		public CAAPersonnelListScreen(Operator currentOperator, int operatorId)
 			: this()
 		{
 			if (currentOperator == null)
 				throw new ArgumentNullException("currentOperator");
 			aircraftHeaderControl1.Operator = currentOperator;
 			_currentOperator = currentOperator;
-			statusControl.ShowStatus = false;
+            _operatorId = operatorId;
+            statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 
 			_filter = new CommonFilterCollection(typeof(IEmployeeFilterParams));
@@ -106,7 +108,21 @@ namespace CAS.UI.UICAAControls.Specialists
 
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
-			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecialistDTO, Specialist>(loadChild:true));
+            if (_operatorId == -1)
+            {
+                _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+                    .GetObjectListAll<CAASpecialistDTO, Specialist>(loadChild: true));
+			}
+            else
+            {
+                _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+                    .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", _operatorId),
+                        loadChild: true));
+			}
+
+			
+			
+
 			var aircraftModels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, AircraftModel>(new Filter("ModelingObjectTypeId", 7));
 
 			foreach (var specialist in _initialDocumentArray)

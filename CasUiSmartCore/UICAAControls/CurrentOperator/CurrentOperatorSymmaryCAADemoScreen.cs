@@ -126,7 +126,7 @@ namespace CAS.UI.UICAAControls
         private void LinkPersonnelDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Personnel";
-            e.RequestedEntity = new CAAPersonnelListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            e.RequestedEntity = new CAAPersonnelListScreen(GlobalObjects.CaaEnvironment.Operators[0], _currentOperator.ItemId);
         }
 
         #endregion
