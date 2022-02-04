@@ -899,7 +899,8 @@ namespace CAS.UI.UICAAControls
 			this.LinkPersonnel.Status = AvControls.Statuses.Satisfactory;
 			this.LinkPersonnel.TabIndex = 8;
 			this.LinkPersonnel.Text = "Personnel";
-			this.LinkPersonnel.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UserType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin;
+			this.LinkPersonnel.Visible = GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin ||
+                                         GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.OperatorAdmin;
 			this.LinkPersonnel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkPersonnel.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             this.LinkPersonnel.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkPersonnelDisplayerRequested);
