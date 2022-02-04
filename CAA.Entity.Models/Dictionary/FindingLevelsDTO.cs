@@ -8,7 +8,7 @@ namespace CAA.Entity.Models.Dictionary
     [Table("FindingLevels", Schema = "Dictionaries")]
 
     [Condition("IsDeleted", 0)]
-    public class FindingLevelsDTO : BaseEntity, IBaseDictionary
+    public class FindingLevelsDTO : BaseEntity, IBaseDictionary, IOperatable
     {
         [Column("LevelName")]
         public string LevelName { get; set; }
@@ -27,5 +27,8 @@ namespace CAA.Entity.Models.Dictionary
 
         [Column("Remark")]
         public string Remark { get; set; }
+
+        [Column("OperatorId")]
+        public int OperatorId { get; set; }
     }
 }

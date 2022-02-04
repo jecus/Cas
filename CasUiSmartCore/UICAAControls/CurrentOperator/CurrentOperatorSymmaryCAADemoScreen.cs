@@ -151,14 +151,32 @@ namespace CAS.UI.UICAAControls
         private void LinkNomenclaturesDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Nomenclatures";
-            e.RequestedEntity = new CAACommonListScreen(typeof(Nomenclatures));
+            e.RequestedEntity = new CAACommonListScreen(typeof(Nomenclatures), new List<Filter>()
+                {
+                    new Filter("OperatorId",_currentOperator.ItemId )
+                })
+                { OperatorId = _currentOperator.ItemId };
         }
         #endregion
 
         private void LinkFindingLevelsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Finding Level";
-            e.RequestedEntity = new CAACommonListScreen(typeof(FindingLevels));
+            e.RequestedEntity = new CAACommonListScreen(typeof(FindingLevels), new List<Filter>()
+                {
+                    new Filter("OperatorId",_currentOperator.ItemId )
+                })
+                { OperatorId = _currentOperator.ItemId };
+        }
+
+        private void LinkRootCauseDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = "Root Cause";
+            e.RequestedEntity = new CAACommonListScreen(typeof(RootCause), new List<Filter>()
+                {
+                    new Filter("OperatorId",_currentOperator.ItemId )
+                })
+                { OperatorId = _currentOperator.ItemId };
         }
 
         #region private void LinkSpecializationsDisplayerRequested(object sender, ReferenceEventArgs e)
@@ -215,11 +233,6 @@ namespace CAS.UI.UICAAControls
             e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators[0]);
         }
 
-        private void LinkRootCauseDisplayerRequested(object sender, ReferenceEventArgs e)
-        {
-            e.DisplayerText = "Root Cause";
-            e.RequestedEntity = new CAACommonListScreen(typeof(RootCause));
-        }
 
         private void LinkRoutineAuditDisplayerRequested(object sender, ReferenceEventArgs e)
         {

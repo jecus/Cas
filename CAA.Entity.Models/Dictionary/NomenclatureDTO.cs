@@ -11,7 +11,7 @@ namespace CAA.Entity.Models.Dictionary
 	[Table("Nomenclatures", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class CAANomenclatureDTO : BaseEntity, IBaseDictionary
+	public class CAANomenclatureDTO : BaseEntity, IBaseDictionary, IOperatable
 	{
 		
 		[Column("DepartmentId")]
@@ -25,7 +25,10 @@ namespace CAA.Entity.Models.Dictionary
 	    [Column("FullName"), MaxLength(256)]
 		public string FullName { get; set; }
 
-	    
+        [Column("OperatorId")]
+		public int OperatorId { get; set; }
+
+
 		[Child]
 	    public CAADepartmentDTO Department { get; set; }
 

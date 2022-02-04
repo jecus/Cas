@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using CAA.Entity.Models;
 using CAA.Entity.Models.Dictionary;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Calculations;
@@ -13,7 +14,7 @@ namespace SmartCore.Entities.Dictionaries
 	[CAADto(typeof(CAANomenclatureDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
-	public class Nomenclatures : AbstractDictionary
+	public class Nomenclatures : AbstractDictionary, IOperatable
 	{
 		private static Type _thisType;
 		private static Nomenclatures _unknown;
@@ -178,6 +179,8 @@ namespace SmartCore.Entities.Dictionaries
             SmartCoreObjectType = SmartCoreType.Nomenclatures;
         }
 
-        #endregion
+		#endregion
+
+        public int OperatorId { get; set; }
 	}
 }

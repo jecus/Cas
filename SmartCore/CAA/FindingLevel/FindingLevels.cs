@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models;
 using CAA.Entity.Models.Dictionary;
 using Entity.Abstractions;
 using SmartCore.Calculations;
@@ -10,7 +11,7 @@ namespace SmartCore.CAA.FindingLevel
     [CAADto(typeof(FindingLevelsDTO))]
     [Condition("IsDeleted", "0")]
     [Serializable]
-    public class FindingLevels : BaseEntityObject, IBaseDictionary
+    public class FindingLevels : BaseEntityObject, IBaseDictionary, IOperatable
     {
         
 
@@ -69,5 +70,7 @@ namespace SmartCore.CAA.FindingLevel
                 return LevelName;
             return $"{LevelName}/{LevelClass}";
         }
+
+        public int OperatorId { get; set; }
     }
 }

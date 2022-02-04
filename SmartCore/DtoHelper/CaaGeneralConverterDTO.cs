@@ -201,7 +201,8 @@ namespace SmartCore.DtoHelper
                 Updated = cause.Updated,
                 CorrectorId = cause.CorrectorId,
                 Remark = cause.Remark,
-                CategoryName = cause.CategoryName,
+                OperatorId = cause.OperatorId,
+				CategoryName = cause.CategoryName,
                 CategoryNumber = cause.CategoryNumber,
 
 			};
@@ -216,7 +217,8 @@ namespace SmartCore.DtoHelper
                 Updated = cause.Updated,
                 CorrectorId = cause.CorrectorId,
                 Remark = cause.Remark,
-                CategoryName = cause.CategoryName,
+                OperatorId = cause.OperatorId,
+				CategoryName = cause.CategoryName,
                 CategoryNumber = cause.CategoryNumber,
             };
         }
@@ -1348,7 +1350,8 @@ namespace SmartCore.DtoHelper
                 FinalAction = levels.FinalAction?.ConvertToByteArray(),
                 LevelClass = levels.LevelClass,
                 LevelName = levels.LevelName,
-                LevelColor = levels.LevelColor,
+				OperatorId = levels.OperatorId,
+				LevelColor = levels.LevelColor,
                 Remark = levels.Remark,
                 Updated = levels.Updated
             };
@@ -1360,7 +1363,8 @@ namespace SmartCore.DtoHelper
             {
                 ItemId = levels.ItemId,
                 IsDeleted = levels.IsDeleted,
-                CorrectiveAction = Lifelength.ConvertFromByteArray(levels.CorrectiveAction),
+                OperatorId = levels.OperatorId,
+				CorrectiveAction = Lifelength.ConvertFromByteArray(levels.CorrectiveAction),
                 CorrectorId = levels.CorrectorId,
                 FinalAction = Lifelength.ConvertFromByteArray(levels.FinalAction),
                 LevelClass = levels.LevelClass,

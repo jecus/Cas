@@ -7,7 +7,7 @@ namespace CAA.Entity.Models.DTO
 {
     [Table("RootCauses", Schema = "dbo")]
     [Condition("IsDeleted", 0)]
-    public class RootCauseDTO : BaseEntity
+    public class RootCauseDTO : BaseEntity, IOperatable
     {
         [Column("CategoryNumber"), MaxLength(250)]
         public string CategoryNumber { get; set; }
@@ -15,5 +15,7 @@ namespace CAA.Entity.Models.DTO
         public string CategoryName { get; set; }
         [Column("Remark")]
         public string Remark { get; set; }
+        [Column("OperatorId")]
+        public int OperatorId { get; set; }
     }
 }

@@ -863,7 +863,7 @@ namespace SmartCore.DtoHelper
 				CorrectorId = nomenclature.CorrectorId,
 				Name = nomenclature.ShortName,
 				FullName = nomenclature.FullName,
-				DepartmentId = nomenclature.Department?.ItemId ?? -1,
+                DepartmentId = nomenclature.Department?.ItemId ?? -1,
 				Department = nomenclature.Department?.Convert()
 			};
 		}
@@ -1176,6 +1176,7 @@ namespace SmartCore.DtoHelper
                 CorrectorId = nomenclature.CorrectorId,
                 Name = nomenclature.ShortName,
                 FullName = nomenclature.FullName,
+				OperatorId = nomenclature.OperatorId,
                 DepartmentId = nomenclature.Department?.ItemId ?? -1,
                 Department = nomenclature.Department?.ConvertCAA()
             };
@@ -1190,7 +1191,8 @@ namespace SmartCore.DtoHelper
                 Updated = nomenclatureDto.Updated,
                 CorrectorId = nomenclatureDto.CorrectorId,
                 ShortName = nomenclatureDto.Name,
-                FullName = nomenclatureDto.FullName,
+                OperatorId = nomenclatureDto.OperatorId,
+				FullName = nomenclatureDto.FullName,
             };
 
             var department = nomenclatureDto.Department?.ConvertCAA();

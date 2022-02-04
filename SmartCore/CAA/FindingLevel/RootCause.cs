@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
@@ -8,7 +9,7 @@ namespace SmartCore.CAA.FindingLevel
     [CAADto(typeof(RootCauseDTO))]
     [Condition("IsDeleted", "0")]
     [Serializable]
-    public class RootCause : BaseEntityObject
+    public class RootCause : BaseEntityObject, IOperatable
     {
         [FormControl(150, "Category №", 1, Order = 1)]
         [Filter("Category №", Order = 1)]
@@ -30,5 +31,7 @@ namespace SmartCore.CAA.FindingLevel
         {
             return $"{CategoryNumber} {CategoryName}";
         }
+
+        public int OperatorId { get; set; }
     }
 }
