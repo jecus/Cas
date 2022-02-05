@@ -224,8 +224,19 @@ and  Login = '{textBoxLogin.Text}' and ItemId != {_user.ItemId} ");
                 else
                 {
                     metroComboBox1.Items.Clear();
-                    foreach (var val in Enum.GetValues(typeof(CAAUserType)).OfType<CAAUserType>().Where(i => (int)i >= 10).ToList())
-                        metroComboBox1.Items.Add(val);
+
+                    if (GlobalObjects.CaaEnvironment.IdentityUser.OperatorId > 0)
+                    {
+                        foreach (var val in Enum.GetValues(typeof(CAAUserType)).OfType<CAAUserType>().Where(i => (int)i > 10).ToList())
+                            metroComboBox1.Items.Add(val);
+					}
+                    else
+                    {
+                        foreach (var val in Enum.GetValues(typeof(CAAUserType)).OfType<CAAUserType>().Where(i => (int)i >= 10).ToList())
+                            metroComboBox1.Items.Add(val);
+					}
+
+                    
 				}
 
                 metroComboBox1.SelectedIndex = 0;
