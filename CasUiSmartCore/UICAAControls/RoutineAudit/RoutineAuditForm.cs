@@ -48,10 +48,10 @@ namespace CAS.UI.UICAAControls.RoutineAudit
         {
             _updateChecks.Clear();
             _addedChecks.Clear();
-            _addedChecks = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(loadChild: true).ToList();
+            _addedChecks = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("OperatorId", _audit.OperatorId),loadChild: true).ToList();
 
             _levels.Clear();
-            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>();
+            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _audit.OperatorId));
 
             foreach (var check in _addedChecks)
             {
