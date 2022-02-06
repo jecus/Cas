@@ -8,6 +8,7 @@ using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
@@ -19,13 +20,15 @@ namespace CAS.UI.UICAAControls.CheckList
 {
     public partial class CheckListRevisionForm : MetroForm
     {
+        private readonly int _operatorId;
         private CommonCollection<CheckLists> _addedChecks = new CommonCollection<CheckLists>();
         private CommonCollection<CheckLists> _updateChecks = new CommonCollection<CheckLists>();
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private IList<FindingLevels> _levels = new List<FindingLevels>();
 
-        public CheckListRevisionForm()
+        public CheckListRevisionForm(int operatorId)
         {
+            _operatorId = operatorId;
             InitializeComponent();
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
@@ -41,10 +44,10 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             _addedChecks.Clear();
             _addedChecks.AddRange(
-                GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(loadChild: true)
+                GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("OperatorId", _operatorId), loadChild: true)
                     .ToList());
             _levels.Clear();
-            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>();
+            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
 
             foreach (var check in _addedChecks)
             {

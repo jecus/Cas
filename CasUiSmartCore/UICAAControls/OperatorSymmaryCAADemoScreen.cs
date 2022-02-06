@@ -224,7 +224,7 @@ namespace CAS.UI.UICAAControls
         private void LinkCheckListsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "CheckList";
-            e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
         }
 
 

@@ -30,7 +30,9 @@ namespace CAS.UI.UICAAControls.CheckList
     [ToolboxItem(false)]
 	public partial class CheckListsScreen : ScreenControl
 	{
-		#region Fields
+        private readonly int _operatorId;
+
+        #region Fields
 
         private  int? _currentRoutineId;
         private readonly int? _routingId;
@@ -86,6 +88,24 @@ namespace CAS.UI.UICAAControls.CheckList
 			InitListView();
 			UpdateInformation();
 		}
+
+
+        public CheckListsScreen(Operator currentOperator, int operatorId)
+            : this()
+        {
+            if (currentOperator == null)
+                throw new ArgumentNullException("currentOperator");
+            _operatorId = operatorId;
+            aircraftHeaderControl1.Operator = currentOperator;
+            statusControl.ShowStatus = false;
+            labelTitle.Visible = false;
+
+            _filter = new CommonFilterCollection(typeof(ICheckListFilterParams));
+
+            InitToolStripMenuItems();
+            InitListView();
+            UpdateInformation();
+        }
 
 		#endregion
 
@@ -180,9 +200,13 @@ namespace CAS.UI.UICAAControls.CheckList
                         check.AuditCheck = auditChecks.FirstOrDefault(i => i.CheckListId == check.ItemId);
 				}
 			}
-			else _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(loadChild:true));
+            else
+            {
+                _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+                    .GetObjectListAll<CheckListDTO, CheckLists>(new Filter("OperatorId", _operatorId), loadChild:true));
+            }
 
-            var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>();
+            var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
             
 
 			foreach (var check in _initialDocumentArray)
@@ -384,7 +408,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			}
             else
             {
-				var form = new CheckListForm(new CheckLists());
+				var form = new CheckListForm(new CheckLists(){OperatorId = _operatorId });
                 if (form.ShowDialog() == DialogResult.OK)
                     AnimatedThreadWorker.RunWorkerAsync();
             }
@@ -481,7 +505,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void ButtonRevisionClick(object sender, EventArgs e)
         {
-			var form = new CheckListRevisionForm();
+			var form = new CheckListRevisionForm(_operatorId);
 
             if (form.ShowDialog(this) == DialogResult.OK || form.ShowDialog(this) == DialogResult.Cancel)
                 AnimatedThreadWorker.RunWorkerAsync();

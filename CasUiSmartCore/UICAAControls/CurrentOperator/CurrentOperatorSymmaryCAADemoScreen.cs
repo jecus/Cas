@@ -231,7 +231,7 @@ namespace CAS.UI.UICAAControls
         private void LinkCheckListsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "CheckList";
-            e.RequestedEntity = new CheckListsScreen(_getOperator());
+            e.RequestedEntity = new CheckListsScreen(_getOperator(), _currentOperator.ItemId);
         }
 
 

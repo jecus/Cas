@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
-using Newtonsoft.Json;
 
 namespace CAA.Entity.Models.DTO
 {
     [Table("CheckList", Schema = "dbo")]
     [Condition("IsDeleted", 0)]
-    public class CheckListDTO : BaseEntity
+    public class CheckListDTO : BaseEntity,IOperatable
     {
         [Column("Source")]
         public string Source { get; set; }
@@ -27,8 +24,8 @@ namespace CAA.Entity.Models.DTO
 
         #endregion
 
-
-
+        [Column("OperatorId")]
+        public int OperatorId { get; set; }
     }
 
 }

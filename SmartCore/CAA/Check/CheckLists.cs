@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
 using SmartCore.Auxiliary.Extentions;
@@ -19,7 +20,7 @@ namespace SmartCore.CAA.Check
 {
     [CAADto(typeof(CheckListDTO))]
     [Serializable]
-    public class CheckLists : BaseEntityObject, ICheckListFilterParams, IFileContainer
+    public class CheckLists : BaseEntityObject, ICheckListFilterParams, IFileContainer, IOperatable
     {
         public string Source { get; set; }
 
@@ -135,6 +136,7 @@ namespace SmartCore.CAA.Check
         }
 
         public AuditCheck AuditCheck { get; set; }
+        public int OperatorId { get; set; }
     }
 
 
