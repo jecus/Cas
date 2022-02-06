@@ -7,7 +7,7 @@ namespace CAA.Entity.Models.DTO
 {
     [Table("RoutineAudits", Schema = "dbo")]
     [Condition("IsDeleted", 0)]
-    public class RoutineAuditDTO : BaseEntity
+    public class RoutineAuditDTO : BaseEntity, IOperatable
     {
         [Column("Title")]
         public string Title { get; set; }
@@ -21,5 +21,7 @@ namespace CAA.Entity.Models.DTO
         [Column("SettingsJSON")]
         public string SettingsJSON { get; set; }
 
+        [Column("OperatorId")]
+        public int OperatorId { get; set; }
     }
 }

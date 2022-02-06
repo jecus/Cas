@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
 using SmartCore.CAA.Check;
@@ -11,7 +12,7 @@ namespace SmartCore.CAA.RoutineAudits
     [CAADto(typeof(RoutineAuditDTO))]
     [Condition("IsDeleted", "0")]
     [Serializable]
-    public class RoutineAudit : BaseEntityObject, IRoutineAuditFilterParams
+    public class RoutineAudit : BaseEntityObject, IRoutineAuditFilterParams, IOperatable
     {
         public string Title { get; set; }
 
@@ -89,6 +90,8 @@ namespace SmartCore.CAA.RoutineAudits
 
             return clone;
         }
+
+        public int OperatorId { get; set; }
     }
 
     [Serializable]

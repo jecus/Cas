@@ -12,6 +12,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using CrystalDecisions.Windows.Forms;
+using Entity.Abstractions.Filters;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.RoutineAudits;
 using SmartCore.Entities.Collections;
@@ -27,7 +28,9 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 	[ToolboxItem(false)]
 	public partial class RoutineAuditListScreen : ScreenControl
 	{
-		#region Fields
+        private readonly int _operatorId;
+
+        #region Fields
 
 		private CommonCollection<SmartCore.CAA.RoutineAudits.RoutineAudit> _initialDocumentArray = new CommonCollection<SmartCore.CAA.RoutineAudits.RoutineAudit>();
 		private CommonCollection<SmartCore.CAA.RoutineAudits.RoutineAudit> _resultDocumentArray = new CommonCollection<SmartCore.CAA.RoutineAudits.RoutineAudit>();
@@ -61,12 +64,13 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public RoutineAuditListScreen(Operator currentOperator)
+		public RoutineAuditListScreen(Operator currentOperator, int operatorId)
 			: this()
 		{
 			if (currentOperator == null)
 				throw new ArgumentNullException("currentOperator");
-			aircraftHeaderControl1.Operator = currentOperator;
+            _operatorId = operatorId;
+            aircraftHeaderControl1.Operator = currentOperator;
             statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 
@@ -100,7 +104,8 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
-			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(loadChild:true));
+			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+                .GetObjectListAll<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(new Filter("OperatorId", _operatorId),loadChild:true));
 
             
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
@@ -276,6 +281,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 		{
             var form = new RoutineAuditForm(new SmartCore.CAA.RoutineAudits.RoutineAudit()
             {
+                OperatorId = _operatorId,
 				Settings =  new RoutineAuditSettings()
                 {
                     Created = DateTime.Now,

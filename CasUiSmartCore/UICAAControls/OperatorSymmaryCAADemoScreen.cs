@@ -231,7 +231,7 @@ namespace CAS.UI.UICAAControls
         private void LinkRoutineAuditDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Routine Audit";
-            e.RequestedEntity = new RoutineAuditListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            e.RequestedEntity = new RoutineAuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
         }
 
         private void LinkAuditDisplayerRequested(object sender, ReferenceEventArgs e)
