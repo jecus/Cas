@@ -236,8 +236,20 @@ namespace CAS.UI.UICAAControls
 
         private void LinkAuditDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "Audit";
-            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            e.DisplayerText = "Audit CAA";
+            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+        }
+
+        private void LinkAuditOpDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = "Audit Operator";
+            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], AuditType.Operator);
+        }
+
+        private void LinkAuditAllDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = "Audit All";
+            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], AuditType.All);
         }
     }
 }

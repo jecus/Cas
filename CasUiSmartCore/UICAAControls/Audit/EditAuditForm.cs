@@ -70,13 +70,14 @@ namespace CAS.UI.UICAAControls.Audit
 
             comboBoxOperator.Items.Clear();
             comboBoxOperator.Items.AddRange(_operators.ToArray());
-            comboBoxOperator.SelectedItem = _operators.FirstOrDefault(i => i.ItemId == _audit.Settings.OperatorId) ?? _operators.FirstOrDefault();
+            comboBoxOperator.Items.Add(AllOperators.Unknown);
+            comboBoxOperator.SelectedItem = _operators.FirstOrDefault(i => i.ItemId == _audit.OperatorId) ?? _operators.FirstOrDefault();
             metroTextBoxAuditNumber.Text = _audit.AuditNumber;
         }
 
         private void ApplyChanges()
         {
-            _audit.Settings.OperatorId = ((AllOperators) comboBoxOperator.SelectedItem).ItemId;
+            _audit.OperatorId = ((AllOperators) comboBoxOperator.SelectedItem).ItemId;
             _audit.AuditNumber =  metroTextBoxAuditNumber.Text;
             _audit.Settings.WorkflowStageId = (comboBoxWorkFlow.SelectedItem as WorkFlowStage).ItemId;
             _audit.Settings.KMH = numericUpDown1.Value;

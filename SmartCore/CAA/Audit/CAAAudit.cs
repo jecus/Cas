@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
 using SmartCore.Auxiliary;
@@ -19,7 +20,7 @@ namespace SmartCore.CAA.Audit
     [CAADto(typeof(CAAAuditDTO))]
     [Condition("IsDeleted", "0")]
     [Serializable]
-    public class CAAAudit : BaseEntityObject , IAuditFilterParams
+    public class CAAAudit : BaseEntityObject , IAuditFilterParams, IOperatable
     {
         public double MH { get; set; }
         public string KMLW
@@ -80,6 +81,8 @@ namespace SmartCore.CAA.Audit
             SmartCoreObjectType = SmartCoreType.CAAAudit;
             ItemId = -1;
         }
+
+        public int OperatorId { get; set; }
     }
 
 
@@ -164,9 +167,6 @@ namespace SmartCore.CAA.Audit
 
         #endregion
 
-
-        [JsonProperty("OperatorId")]
-        public int OperatorId { get; set; }
 
         [JsonProperty("Remark")]
         public string Remark { get; set; }

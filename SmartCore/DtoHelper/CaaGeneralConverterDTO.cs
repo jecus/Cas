@@ -90,6 +90,7 @@ namespace SmartCore.DtoHelper
                 Updated = audit.Updated,
                 CorrectorId = audit.CorrectorId,
                 AuditNumber =  audit.AuditNumber,
+				OperatorId = audit.OperatorId,
                 SettingsJSON = audit.SettingsJSON,
 			};
         }
@@ -103,7 +104,8 @@ namespace SmartCore.DtoHelper
                 Updated = audit.Updated,
                 CorrectorId = audit.CorrectorId,
 				AuditNumber =  audit.AuditNumber,
-                SettingsJSON = audit.SettingsJSON,
+                OperatorId = audit.OperatorId,
+				SettingsJSON = audit.SettingsJSON,
 			};
         }
 

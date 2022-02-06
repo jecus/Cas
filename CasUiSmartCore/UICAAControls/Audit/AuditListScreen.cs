@@ -12,6 +12,7 @@ using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using SmartCore.CAA;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
@@ -20,15 +21,26 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
+using FilterType = Entity.Abstractions.Attributte.FilterType;
 
 namespace CAS.UI.UICAAControls.Audit
 {
+
+    public enum AuditType
+    {
+		CAA,
+		Operator,
+		All
+    }
 	///<summary>
 	///</summary>
 	[ToolboxItem(false)]
 	public partial class AuditListScreen : ScreenControl
 	{
-		#region Fields
+        private readonly AuditType _type;
+        private readonly int? _operatorId;
+
+        #region Fields
 
 		private CommonCollection<CAAAudit> _initialDocumentArray = new CommonCollection<CAAAudit>();
 		private CommonCollection<CAAAudit> _resultDocumentArray = new CommonCollection<CAAAudit>();
@@ -66,12 +78,13 @@ namespace CAS.UI.UICAAControls.Audit
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public AuditListScreen(Operator currentOperator)
+		public AuditListScreen(Operator currentOperator, int? operatorId)
 			: this()
 		{
 			if (currentOperator == null)
 				throw new ArgumentNullException("currentOperator");
-			aircraftHeaderControl1.Operator = currentOperator;
+            _operatorId = operatorId;
+            aircraftHeaderControl1.Operator = currentOperator;
             statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 
@@ -81,6 +94,26 @@ namespace CAS.UI.UICAAControls.Audit
 			InitListView();
 			UpdateInformation();
 		}
+
+        public AuditListScreen(Operator currentOperator, AuditType type)
+            : this()
+        {
+            if (currentOperator == null)
+                throw new ArgumentNullException("currentOperator");
+            _type = type;
+            aircraftHeaderControl1.Operator = currentOperator;
+            statusControl.ShowStatus = false;
+            labelTitle.Visible = false;
+
+            _filter = new CommonFilterCollection(typeof(IAuditFilterParams));
+
+
+            buttonAddNew.Visible = type == AuditType.CAA;
+
+            InitToolStripMenuItems();
+            InitListView();
+            UpdateInformation();
+        }
 
 		#endregion
 
@@ -104,11 +137,36 @@ namespace CAS.UI.UICAAControls.Audit
 			_resultDocumentArray.Clear();
 
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
+            DataSet ds = null;
 
-			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAuditDTO, CAAAudit>(loadChild:true));
+            if (_operatorId.HasValue)
+            {
+                _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAuditDTO, CAAAudit>(new Filter("OperatorId", _operatorId), loadChild: true));
 
 
-            var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute(@"select a.AuditId, Sum(a.MH) from dbo.AuditRecords ar
+                ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@"select a.AuditId, Sum(a.MH) from dbo.AuditRecords ar
+cross apply
+(
+	select ar.AuditId, rar.MH from dbo.RoutineAuditRecords ra
+	cross apply
+	(
+		select cast(JSON_VALUE(SettingsJSON, '$.ManHours') as float) as MH 
+		from dbo.CheckList 
+		where ra.CheckListId = ItemId and IsDeleted = 0 and OperatorId = {_operatorId}
+	) rar
+	where ar.RoutineAuditId = ra.RoutineAuditId and ra.IsDeleted = 0
+) a
+where ar.IsDeleted = 0 
+group by a.AuditId
+");
+			}
+            else
+            {
+                if (_type == AuditType.All)
+                {
+                    _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAuditDTO, CAAAudit>( loadChild: true));
+
+                    ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@"select a.AuditId, Sum(a.MH) from dbo.AuditRecords ar
 cross apply
 (
 	select ar.AuditId, rar.MH from dbo.RoutineAuditRecords ra
@@ -123,6 +181,31 @@ cross apply
 where ar.IsDeleted = 0 
 group by a.AuditId
 ");
+				}
+				else if (_type == AuditType.Operator)
+                {
+                    _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAuditDTO, CAAAudit>(new Filter("OperatorId", FilterType.Grather, 0), loadChild: true));
+
+                    ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@"select a.AuditId, Sum(a.MH) from dbo.AuditRecords ar
+cross apply
+(
+	select ar.AuditId, rar.MH from dbo.RoutineAuditRecords ra
+	cross apply
+	(
+		select cast(JSON_VALUE(SettingsJSON, '$.ManHours') as float) as MH 
+		from dbo.CheckList 
+		where ra.CheckListId = ItemId and IsDeleted = 0 and OperatorId > 0
+	) rar
+	where ar.RoutineAuditId = ra.RoutineAuditId and ra.IsDeleted = 0
+) a
+where ar.IsDeleted = 0 
+group by a.AuditId
+");
+				}
+            }
+
+
+			
 
             var dt = ds.Tables[0];
 
@@ -139,7 +222,7 @@ group by a.AuditId
             {
                 audit.Operator =  GlobalObjects.CaaEnvironment
                     .AllOperators
-                    .FirstOrDefault(i => i.ItemId == audit.Settings.OperatorId) ?? AllOperators.Unknown;
+                    .FirstOrDefault(i => i.ItemId == audit.OperatorId) ?? AllOperators.Unknown;
 			}
             
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
@@ -404,6 +487,7 @@ group by a.AuditId
 		{
             var form = new AuditForm(new CAAAudit()
             {
+				OperatorId = _operatorId.Value,
 				Settings = new CAAAuditSettings()
                 {
 					CreateDate = DateTime.Now,

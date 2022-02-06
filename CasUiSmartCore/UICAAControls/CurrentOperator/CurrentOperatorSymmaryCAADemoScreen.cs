@@ -243,8 +243,8 @@ namespace CAS.UI.UICAAControls
 
         private void LinkAuditDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "Audit";
-            e.RequestedEntity = new AuditListScreen(_getOperator());
+            e.DisplayerText = "Audit Operator";
+            e.RequestedEntity = new AuditListScreen(_getOperator(), _currentOperator.ItemId);
         }
 
 

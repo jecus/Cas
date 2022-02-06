@@ -51,7 +51,7 @@ namespace CAS.UI.UICAAControls.Audit
 
             _updateChecks.Clear();
             _addedChecks.Clear();
-            _addedChecks = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(loadChild: true).ToList();
+            _addedChecks = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(new Filter("OperatorId", _audit.OperatorId),loadChild: true).ToList();
 
             if (_audit.ItemId > 0)
             {
@@ -77,15 +77,16 @@ namespace CAS.UI.UICAAControls.Audit
 
             comboBoxOperator.Items.Clear();
             comboBoxOperator.Items.AddRange(_operators.ToArray());
-            
-            comboBoxOperator.SelectedItem = _operators.FirstOrDefault(i => i.ItemId == _audit.Settings.OperatorId) ?? _operators.FirstOrDefault();
+            comboBoxOperator.Items.Add(AllOperators.Unknown);
+
+            comboBoxOperator.SelectedItem = _operators.FirstOrDefault(i => i.ItemId == _audit.OperatorId) ?? _operators.FirstOrDefault();
             metroTextBoxAuditNumber.Text = _audit.AuditNumber;
             textBoxRemarks.Text = _audit.Settings.Remark;
         }
 
         private void ApplyChanges()
         {
-            _audit.Settings.OperatorId = ((AllOperators) comboBoxOperator.SelectedItem).ItemId;
+            _audit.OperatorId = ((AllOperators) comboBoxOperator.SelectedItem).ItemId;
             _audit.AuditNumber =  metroTextBoxAuditNumber.Text;
             _audit.Settings.Remark = textBoxRemarks.Text;
         }

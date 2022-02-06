@@ -1031,7 +1031,7 @@ namespace CAS.UI.UICAAControls
 			this.LinkAudit.Size = new System.Drawing.Size(188, 20);
 			this.LinkAudit.Status = AvControls.Statuses.Satisfactory;
 			this.LinkAudit.TabIndex = 16;
-			this.LinkAudit.Text = "Audit";
+			this.LinkAudit.Text = "Audit Operator";
 			this.LinkAudit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkAudit.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             this.LinkAudit.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkAuditDisplayerRequested);

@@ -322,8 +322,8 @@ namespace SmartCore.CAA
         public static AllOperators Unknown =>
             _unknown ?? (_unknown = new AllOperators
             {
-                ShortName = "Unknown",
-                FullName = "Unknown",
+                ShortName = "CAA",
+                FullName = "CAA",
                 ItemId = -1
             });
     }
