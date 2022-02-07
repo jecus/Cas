@@ -20,14 +20,16 @@ namespace CAS.UI.UICAAControls.CheckList
     public partial class CheckListRoutineForm : MetroForm
     {
         private readonly int _routineId;
+        private readonly int _operatorId;
         private List<CheckLists> _addedChecks = new List<CheckLists>();
         private List<CheckLists> _updateChecks = new List<CheckLists>();
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private IList<FindingLevels> _levels = new List<FindingLevels>();
 
-        public CheckListRoutineForm(int routineId)
+        public CheckListRoutineForm(int routineId, int operatorId)
         {
             _routineId = routineId;
+            _operatorId = operatorId;
             InitializeComponent();
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
@@ -43,9 +45,10 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             _addedChecks.Clear();
             _addedChecks =
-                GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(loadChild: true).ToList();
+                GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("OperatorId", _operatorId), loadChild: true).ToList();
             _levels.Clear();
             _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>();
+
 
             foreach (var check in _addedChecks)
             {

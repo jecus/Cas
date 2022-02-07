@@ -16,6 +16,7 @@ using SmartCore.Filters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -207,7 +208,23 @@ namespace CAS.UI.UICAAControls.CheckList
             }
 
             var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
-            
+
+            var ds = GlobalObjects.CaaEnvironment.Execute($@"
+select c.ItemId,Max(EffDate) as Date  from dbo.CheckListRevision r
+cross apply
+(
+	select top 1 ItemId, OperatorId from dbo.CheckList where r.CheckListId = ItemId and  OperatorId = {_operatorId}
+) c
+where r.IsDeleted = 0
+group by c.ItemId");
+
+            var revisions = ds.Tables[0].AsEnumerable()
+				.Select(dataRow => new 
+                {
+                    Id = dataRow.Field<int>("ItemId"),
+                    Date = dataRow.Field<DateTime>("Date"),
+                }).ToList();
+
 
 			foreach (var check in _initialDocumentArray)
             {
@@ -222,7 +239,12 @@ namespace CAS.UI.UICAAControls.CheckList
                 var editionDays = 0;
 				if (!check.Settings.RevisonValidTo)
                     editionDays = (check.Settings.EditionDate - DateTime.Today).Days;
-                //else editionDays = (check.Settings.RevisonDate - DateTime.Today).Days;
+                else
+                {
+                    var revision = revisions.FirstOrDefault(i => i.Id == check.ItemId);
+					if(revision != null)
+                        editionDays = (revision.Date - DateTime.Today).Days;
+                }
 
                 check.Remains = new Lifelength(days - editionDays, null, null);
 
@@ -402,7 +424,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		{
             if (_currentRoutineId.HasValue)
             {
-                var form = new CheckListRoutineForm(_currentRoutineId.Value);
+                var form = new CheckListRoutineForm(_currentRoutineId.Value, _operatorId);
                 if (form.ShowDialog() == DialogResult.OK)
                     AnimatedThreadWorker.RunWorkerAsync();
 			}
