@@ -52,6 +52,7 @@ namespace CAS.UI.UICAAControls.CheckList
             _levels.Clear();
             _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
 
+            
             foreach (var check in _addedChecks)
             {
                 check.Level = _levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
@@ -65,7 +66,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 var editionDays = 0;
                 if (!check.Settings.RevisonValidTo)
                     editionDays = (check.Settings.EditionDate - DateTime.Today).Days;
-                else editionDays = (check.Settings.RevisonDate - DateTime.Today).Days;
+                //else editionDays = (check.Settings.RevisonDate - DateTime.Today).Days;
 
                 check.Remains = new Lifelength(days - editionDays, null, null);
 
@@ -111,9 +112,13 @@ namespace CAS.UI.UICAAControls.CheckList
                 }
                 if (checkBoxRevisionValidTo.Checked)
                 {
-                    checks.Settings.RevisionNumber = metroTextBoxRevision.Text;
-                    checks.Settings.RevisonDate = dateTimePickerRevisionDate.Value.Date;
                     checks.Settings.RevisonValidTo = checkBoxRevisionValidTo.Checked;
+                    _revisions.Add(new CheckListRevision()
+                    {
+                        CheckListId = checks.ItemId,
+                        EffDate = dateTimePickerRevisionDate.Value.Date,
+                        Number = metroTextBoxRevision.Text,
+                    });
                 }
                 if(checkBoxCheck.Checked)
                     checks.Settings.RevisonValidToDate = dateTimePickeValidTo.Value.Date;
@@ -131,28 +136,6 @@ namespace CAS.UI.UICAAControls.CheckList
                     if (!CheckManHours(out manHours))
                         return false;
                     checks.Settings.MH = manHours;
-                }
-
-                if (checkBoxEditionEff.Checked)
-                {
-                    _revisions.Add(new CheckListRevision()
-                    {
-                        CheckListId = checks.ItemId,
-                        EffDate = dateTimePickerEditionEff.Value.Date,
-                        Number = "",
-                        Type = RevisionType.Edition
-                    });
-                }
-                
-                if (checkBoxRevisionEff.Checked)
-                {
-                    _revisions.Add(new CheckListRevision()
-                    {
-                        CheckListId = checks.ItemId,
-                        EffDate = dateTimePickerRevisionEff.Value.Date,
-                        Number = "",
-                        Type = RevisionType.Revision
-                    });
                 }
 
             }
@@ -192,12 +175,8 @@ namespace CAS.UI.UICAAControls.CheckList
                     checkBoxCheck.Checked =
                             checkBoxNotify.Checked =
                                 checkBoxReference.Checked =
-                                    checkBoxLevel.Checked = 
-                                        checkBoxEditionEff.Checked  = 
-                                            checkBoxRevisionEff.Checked  = 
-                                                dateTimePickerEditionEff.Enabled = 
-                                                    dateTimePickerRevisionEff.Enabled = 
-            metroTextSource.Enabled = 
+                                    checkBoxLevel.Checked =
+                                        metroTextSource.Enabled = 
             metroTextBoxEditionNumber.Enabled =
             dateTimePickerEditionDate.Enabled =
                 metroTextBoxRevision.Enabled = 
@@ -215,8 +194,6 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextSource.Text = "";
             metroTextBoxEditionNumber.Text = "";
             dateTimePickerEditionDate.Value = DateTime.Today;
-            dateTimePickerEditionEff.Value = DateTime.Today;
-            dateTimePickerRevisionEff.Value = DateTime.Today;
             metroTextBoxRevision.Text = "";
             dateTimePickerRevisionDate.Value = DateTime.Today;
             checkBoxRevisionValidTo.Checked = false;
@@ -352,16 +329,6 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxRevision.Enabled =
                     dateTimePickerRevisionDate.Enabled
                         = checkBoxRevisionValidTo.Checked;
-        }
-
-        private void checkBoxEditionEff_CheckedChanged(object sender, EventArgs e)
-        {
-            dateTimePickerEditionEff.Enabled = checkBoxEditionEff.Checked;
-        }
-
-        private void checkBoxRevisionEff_CheckedChanged(object sender, EventArgs e)
-        {
-            dateTimePickerRevisionEff.Enabled = checkBoxRevisionEff.Checked;
         }
     }
 }

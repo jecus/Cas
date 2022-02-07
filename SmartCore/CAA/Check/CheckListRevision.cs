@@ -14,8 +14,6 @@ namespace SmartCore.CAA.Check
 
         public string Number { get; set; }
 
-        public RevisionType Type { get; set; }
-
         public DateTime EffDate { get; set; }
 
         public string SettingsJSON

@@ -1434,7 +1434,6 @@ namespace SmartCore.DtoHelper
                 Updated = levels.Updated,
                 EffDate = levels.EffDate,
                 CheckListId = levels.CheckListId,
-                Type = levels.Type,
                 Number = levels.Number,
                 SettingsJSON = levels.SettingsJSON,
             };
@@ -1453,7 +1452,6 @@ namespace SmartCore.DtoHelper
                 Updated = levels.Updated,
                 EffDate = levels.EffDate,
                 CheckListId = levels.CheckListId,
-                Type = levels.Type,
                 Number = levels.Number,
                 SettingsJSON = levels.SettingsJSON,
 			};

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Text.RegularExpressions;
 using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
@@ -115,7 +116,7 @@ namespace SmartCore.CAA.Check
         }
 
         public string EditionNumber => Settings.EditionNumber;
-        public string RevisionNumber => Settings.RevisionNumber;
+        public string RevisionNumber => Revisions?.OrderBy(i => i.EffDate)?.LastOrDefault()?.Number ?? "";
         public string SectionNumber => Settings.SectionNumber;
         public string SectionName => Settings.SectionName;
         public string PartNumber => Settings.PartNumber;
@@ -149,7 +150,6 @@ namespace SmartCore.CAA.Check
         public CheckListSettings()
         {
             EditionDate = DateTime.Today;
-            RevisonDate = DateTime.Today;
             RevisonValidToDate = DateTime.Today;
             Phase = "N/A";
             MH = 0.0;
@@ -161,11 +161,6 @@ namespace SmartCore.CAA.Check
         [JsonProperty("EditionDate")]
         public DateTime EditionDate { get; set; }
 
-        [JsonProperty("RevisionNumber")]
-        public string RevisionNumber { get; set; }
-
-        [JsonProperty("RevisonnDate")]
-        public DateTime RevisonDate { get; set; }
 
         [JsonProperty("SectionNumber")]
         public string SectionNumber { get; set; }

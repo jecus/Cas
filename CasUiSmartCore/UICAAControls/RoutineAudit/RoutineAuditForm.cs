@@ -66,7 +66,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
                 var editionDays = 0;
                 if (!check.Settings.RevisonValidTo)
                     editionDays = (check.Settings.EditionDate - DateTime.Today).Days;
-                else editionDays = (check.Settings.RevisonDate - DateTime.Today).Days;
+                //else editionDays = (check.Settings.RevisonDate - DateTime.Today).Days;
 
                 check.Remains = new Lifelength(days - editionDays, null, null);
 
