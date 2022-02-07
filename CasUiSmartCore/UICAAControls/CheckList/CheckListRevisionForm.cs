@@ -109,11 +109,11 @@ namespace CAS.UI.UICAAControls.CheckList
                 if (checkBoxRevisionValidTo.Checked)
                 {
                     checks.Settings.RevisionNumber = metroTextBoxRevision.Text;
-                    checks.Settings.RevisonDate = dateTimePickerRevisionDate.Value;
+                    checks.Settings.RevisonDate = dateTimePickerRevisionDate.Value.Date;
                     checks.Settings.RevisonValidTo = checkBoxRevisionValidTo.Checked;
                 }
                 if(checkBoxCheck.Checked)
-                    checks.Settings.RevisonValidToDate = dateTimePickeValidTo.Value;
+                    checks.Settings.RevisonValidToDate = dateTimePickeValidTo.Value.Date;
                 if (checkBoxNotify.Checked)
                     checks.Settings.RevisonValidToNotify = (int)numericUpNotify.Value;
                 if(checkBoxReference.Checked)
@@ -167,6 +167,10 @@ namespace CAS.UI.UICAAControls.CheckList
                             checkBoxNotify.Checked =
                                 checkBoxReference.Checked =
                                     checkBoxLevel.Checked = 
+                                        checkBoxEditionEff.Checked  = 
+                                            checkBoxRevisionEff.Checked  = 
+                                                dateTimePickerEditionEff.Enabled = 
+                                                    dateTimePickerRevisionEff.Enabled = 
             metroTextSource.Enabled = 
             metroTextBoxEditionNumber.Enabled =
             dateTimePickerEditionDate.Enabled =
@@ -185,6 +189,8 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextSource.Text = "";
             metroTextBoxEditionNumber.Text = "";
             dateTimePickerEditionDate.Value = DateTime.Today;
+            dateTimePickerEditionEff.Value = DateTime.Today;
+            dateTimePickerRevisionEff.Value = DateTime.Today;
             metroTextBoxRevision.Text = "";
             dateTimePickerRevisionDate.Value = DateTime.Today;
             checkBoxRevisionValidTo.Checked = false;
@@ -318,6 +324,16 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxRevision.Enabled =
                     dateTimePickerRevisionDate.Enabled
                         = checkBoxRevisionValidTo.Checked;
+        }
+
+        private void checkBoxEditionEff_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePickerEditionEff.Enabled = checkBoxEditionEff.Checked;
+        }
+
+        private void checkBoxRevisionEff_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePickerRevisionEff.Enabled = checkBoxRevisionEff.Checked;
         }
     }
 }

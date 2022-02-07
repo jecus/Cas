@@ -29,7 +29,7 @@ namespace CAS.UI.UICAAControls.CheckList
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void  InitializeComponent()
+        private void InitializeComponent()
         {
             System.Windows.Forms.Label label14;
             System.Windows.Forms.Label label13;
@@ -41,6 +41,9 @@ namespace CAS.UI.UICAAControls.CheckList
             System.Windows.Forms.Label label17;
             System.Windows.Forms.Label label19;
             System.Windows.Forms.Label label18;
+            System.Windows.Forms.Label label3;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckListRevisionForm));
+            System.Windows.Forms.Label label4;
             this.checkBoxRevisionValidTo = new System.Windows.Forms.CheckBox();
             this.numericUpNotify = new System.Windows.Forms.NumericUpDown();
             this.dateTimePickeValidTo = new System.Windows.Forms.DateTimePicker();
@@ -67,6 +70,10 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxPhase = new System.Windows.Forms.CheckBox();
             this.checkBoxMH = new System.Windows.Forms.CheckBox();
             this.metroTextBoxMH = new MetroFramework.Controls.MetroTextBox();
+            this.dateTimePickerRevisionEff = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerEditionEff = new System.Windows.Forms.DateTimePicker();
+            this.checkBoxRevisionEff = new System.Windows.Forms.CheckBox();
+            this.checkBoxEditionEff = new System.Windows.Forms.CheckBox();
             label14 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
@@ -77,6 +84,8 @@ namespace CAS.UI.UICAAControls.CheckList
             label17 = new System.Windows.Forms.Label();
             label19 = new System.Windows.Forms.Label();
             label18 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).BeginInit();
             this.SuspendLayout();
             // 
@@ -200,6 +209,13 @@ namespace CAS.UI.UICAAControls.CheckList
             label18.Text = "Phase:";
             label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // label3
+            // 
+            label3.Location = new System.Drawing.Point(0, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(100, 23);
+            label3.TabIndex = 0;
+            // 
             // checkBoxRevisionValidTo
             // 
             this.checkBoxRevisionValidTo.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -217,11 +233,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.numericUpNotify.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.numericUpNotify.ForeColor = System.Drawing.Color.DimGray;
             this.numericUpNotify.Location = new System.Drawing.Point(1250, 231);
-            this.numericUpNotify.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+            this.numericUpNotify.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             this.numericUpNotify.Name = "numericUpNotify";
             this.numericUpNotify.Size = new System.Drawing.Size(119, 20);
             this.numericUpNotify.TabIndex = 323;
@@ -343,22 +355,44 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             // _fromcheckListView
             // 
+            this._fromcheckListView.AuditId = null;
+            this._fromcheckListView.ColumnIndexes = ((System.Collections.Generic.List<string>)(resources.GetObject("_fromcheckListView.ColumnIndexes")));
+            this._fromcheckListView.ConfigurePaste = null;
+            this._fromcheckListView.Displayer = null;
+            this._fromcheckListView.DisplayerText = null;
+            this._fromcheckListView.EnableCustomSorting = true;
+            this._fromcheckListView.Entity = null;
+            this._fromcheckListView.IgnoreEnterPress = false;
+            this._fromcheckListView.IsAuditCheck = false;
             this._fromcheckListView.Location = new System.Drawing.Point(5, 53);
             this._fromcheckListView.MenuOpeningAction = null;
             this._fromcheckListView.Name = "_fromcheckListView";
+            this._fromcheckListView.OldColumnIndex = 0;
             this._fromcheckListView.PasteComplete = null;
             this._fromcheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._fromcheckListView.Size = new System.Drawing.Size(1029, 290);
+            this._fromcheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
             this._fromcheckListView.TabIndex = 329;
             // 
             // _tocheckListView
             // 
+            this._tocheckListView.AuditId = null;
+            this._tocheckListView.ColumnIndexes = ((System.Collections.Generic.List<string>)(resources.GetObject("_tocheckListView.ColumnIndexes")));
+            this._tocheckListView.ConfigurePaste = null;
+            this._tocheckListView.Displayer = null;
+            this._tocheckListView.DisplayerText = null;
+            this._tocheckListView.EnableCustomSorting = true;
+            this._tocheckListView.Entity = null;
+            this._tocheckListView.IgnoreEnterPress = false;
+            this._tocheckListView.IsAuditCheck = false;
             this._tocheckListView.Location = new System.Drawing.Point(5, 381);
             this._tocheckListView.MenuOpeningAction = null;
             this._tocheckListView.Name = "_tocheckListView";
+            this._tocheckListView.OldColumnIndex = 0;
             this._tocheckListView.PasteComplete = null;
             this._tocheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._tocheckListView.Size = new System.Drawing.Size(1029, 290);
+            this._tocheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
             this._tocheckListView.TabIndex = 330;
             // 
             // ButtonAdd
@@ -621,11 +655,64 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxMH.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxMH.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
+            // dateTimePickerRevisionEff
+            // 
+            this.dateTimePickerRevisionEff.Location = new System.Drawing.Point(1396, 176);
+            this.dateTimePickerRevisionEff.Name = "dateTimePickerRevisionEff";
+            this.dateTimePickerRevisionEff.Size = new System.Drawing.Size(119, 20);
+            this.dateTimePickerRevisionEff.TabIndex = 353;
+            // 
+            // dateTimePickerEditionEff
+            // 
+            this.dateTimePickerEditionEff.Location = new System.Drawing.Point(1396, 149);
+            this.dateTimePickerEditionEff.Name = "dateTimePickerEditionEff";
+            this.dateTimePickerEditionEff.Size = new System.Drawing.Size(119, 20);
+            this.dateTimePickerEditionEff.TabIndex = 352;
+            // 
+            // checkBoxRevisionEff
+            // 
+            this.checkBoxRevisionEff.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxRevisionEff.Font = new System.Drawing.Font("Verdana", 9F);
+            this.checkBoxRevisionEff.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.checkBoxRevisionEff.Location = new System.Drawing.Point(1375, 177);
+            this.checkBoxRevisionEff.Name = "checkBoxRevisionEff";
+            this.checkBoxRevisionEff.Size = new System.Drawing.Size(18, 16);
+            this.checkBoxRevisionEff.TabIndex = 356;
+            this.checkBoxRevisionEff.CheckedChanged += new System.EventHandler(this.checkBoxRevisionEff_CheckedChanged);
+            // 
+            // checkBoxEditionEff
+            // 
+            this.checkBoxEditionEff.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxEditionEff.Font = new System.Drawing.Font("Verdana", 9F);
+            this.checkBoxEditionEff.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.checkBoxEditionEff.Location = new System.Drawing.Point(1375, 153);
+            this.checkBoxEditionEff.Name = "checkBoxEditionEff";
+            this.checkBoxEditionEff.Size = new System.Drawing.Size(18, 16);
+            this.checkBoxEditionEff.TabIndex = 355;
+            this.checkBoxEditionEff.CheckedChanged += new System.EventHandler(this.checkBoxEditionEff_CheckedChanged);
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Verdana", 9F);
+            label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label4.Location = new System.Drawing.Point(1429, 132);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(37, 14);
+            label4.TabIndex = 357;
+            label4.Text = "Date";
+            label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // CheckListRevisionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1518, 703);
+            this.Controls.Add(label4);
+            this.Controls.Add(this.checkBoxRevisionEff);
+            this.Controls.Add(this.checkBoxEditionEff);
+            this.Controls.Add(this.dateTimePickerRevisionEff);
+            this.Controls.Add(this.dateTimePickerEditionEff);
             this.Controls.Add(this.metroTextBoxMH);
             this.Controls.Add(this.checkBoxMH);
             this.Controls.Add(this.checkBoxPhase);
@@ -669,8 +756,20 @@ namespace CAS.UI.UICAAControls.CheckList
             ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.CheckBox checkBoxRevisionEff;
+
+        private System.Windows.Forms.DateTimePicker dateTimePickerEditionEff;
+
+        private System.Windows.Forms.DateTimePicker dateTimePickerRevisionEff;
+
+        private System.Windows.Forms.CheckBox checkBoxEditionEff;
+
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
 
         #endregion
 
