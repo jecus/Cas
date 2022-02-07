@@ -16,6 +16,8 @@ namespace SmartCore.CAA.Check
 
         public DateTime EffDate { get; set; }
 
+        public RevisionType Type { get; set; }
+
         public string SettingsJSON
         {
             get
@@ -34,6 +36,8 @@ namespace SmartCore.CAA.Check
         }
 
         public CheckListRevisionSettings Settings { get; set; }
+
+        
 
         public CheckListRevision()
         {

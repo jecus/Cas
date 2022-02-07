@@ -29,7 +29,6 @@ namespace CAS.UI.UICAAControls.CheckList
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Label label1;
             this.dateTimePickerRevisionDate = new System.Windows.Forms.DateTimePicker();
             this.metroTextBoxRevision = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxRemark = new MetroFramework.Controls.MetroTextBox();
@@ -151,7 +150,7 @@ namespace CAS.UI.UICAAControls.CheckList
         }
 
         #endregion
-
+        System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePickerRevisionDate;
         private MetroFramework.Controls.MetroTextBox metroTextBoxRevision;
         private MetroFramework.Controls.MetroTextBox metroTextBoxRemark;

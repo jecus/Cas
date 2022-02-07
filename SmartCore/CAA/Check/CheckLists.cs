@@ -28,7 +28,18 @@ namespace SmartCore.CAA.Check
 
 
         public List<CheckListRecords> CheckListRecords { get; set; }
-        public List<CheckListRevision> Revisions { get; set; }
+        public List<CheckListRevision> AllRevisions { get; set; }
+
+        public List<CheckListRevision> Revisions => 
+            AllRevisions?.Where(i => i.Type == RevisionType.Revision)
+            .OrderBy(i => i.EffDate)
+                .ToList() ?? new List<CheckListRevision>();
+
+        public List<CheckListRevision> Editions =>
+            AllRevisions?.Where(i => i.Type == RevisionType.Edition)
+                .OrderBy(i => i.EffDate)
+                .ToList() ?? new List<CheckListRevision>();
+
 
         private CommonCollection<ItemFileLink> _files;
 
@@ -95,7 +106,7 @@ namespace SmartCore.CAA.Check
         {
             ItemId = -1;
             CheckListRecords = new List<CheckListRecords>();
-            Revisions = new List<CheckListRevision>();
+            AllRevisions = new List<CheckListRevision>();
             Settings = new CheckListSettings();
             SmartCoreObjectType = SmartCoreType.CheckLists;
         }
@@ -116,7 +127,7 @@ namespace SmartCore.CAA.Check
         }
 
         public string EditionNumber => Settings.EditionNumber;
-        public string RevisionNumber => Revisions?.OrderBy(i => i.EffDate)?.LastOrDefault()?.Number ?? "";
+        public string RevisionNumber => AllRevisions?.OrderBy(i => i.EffDate)?.LastOrDefault()?.Number ?? "";
         public string SectionNumber => Settings.SectionNumber;
         public string SectionName => Settings.SectionName;
         public string PartNumber => Settings.PartNumber;

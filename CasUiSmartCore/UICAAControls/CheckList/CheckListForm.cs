@@ -63,8 +63,8 @@ namespace CAS.UI.UICAAControls.CheckList
                 var revisions =
                     GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new Filter("CheckListId", _currentCheck.ItemId));
 
-                _currentCheck.Revisions.Clear();
-                _currentCheck.Revisions.AddRange(revisions);
+                _currentCheck.AllRevisions.Clear();
+                _currentCheck.AllRevisions.AddRange(revisions);
 
 
                 var links = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAItemFileLinkDTO, ItemFileLink>(new List<Filter>()
@@ -98,10 +98,10 @@ namespace CAS.UI.UICAAControls.CheckList
         private void UpdateInformation()
         {
             metroTextSource.Text = _currentCheck.Source;
-            metroTextBoxEditionNumber.Text = _currentCheck.Settings.EditionNumber;
-            dateTimePickerEditionDate.Value = _currentCheck.Settings.EditionDate;
-            metroTextBoxRevision.Text = _currentCheck.Revisions?.OrderBy(i => i.EffDate).LastOrDefault()?.Number ?? "";
-            metroTextBoxRevisionDate.Text = _currentCheck.Revisions?.OrderBy(i => i.EffDate).LastOrDefault()?.EffDate.ToString("dd MMMM yyyy", new CultureInfo("ru-RU")) ?? ""; 
+            metroTextBoxEditionNumber.Text = _currentCheck.Editions?.LastOrDefault()?.Number ?? "";
+            metroTextBoxEditionDate.Text = _currentCheck.Editions?.LastOrDefault()?.EffDate.ToString("dd MMMM yyyy", new CultureInfo("ru-RU")) ?? "";
+            metroTextBoxRevision.Text = _currentCheck.Revisions?.LastOrDefault()?.Number ?? "";
+            metroTextBoxRevisionDate.Text = _currentCheck.Revisions?.LastOrDefault()?.EffDate.ToString("dd MMMM yyyy", new CultureInfo("ru-RU")) ?? ""; 
             metroTextBoxSectionNumber.Text = _currentCheck.Settings.SectionNumber;
             metroTextBoxSectionName.Text = _currentCheck.Settings.SectionName;
             metroTextBoxPartNumber.Text = _currentCheck.Settings.PartNumber;
@@ -111,7 +111,6 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxItemNumber.Text = _currentCheck.Settings.ItemNumber;
             metroTextBoxItemName.Text = _currentCheck.Settings.ItemtName;
             metroTextBoxRequirement.Text = _currentCheck.Settings.Requirement;
-            checkBoxRevisionValidTo.Checked = _currentCheck.Settings.RevisonValidTo;
             dateTimePickeValidTo.Value = _currentCheck.Settings.RevisonValidToDate;
             numericUpNotify.Value = _currentCheck.Settings.RevisonValidToNotify;
 
@@ -142,13 +141,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 "Attached file proves the Document.");
 
 
-            linkLabel2.Enabled = checkBoxRevisionValidTo.Checked;
-
-            foreach (var control in flowLayoutPanel2.Controls.OfType<RevisionControl>())
-                control.Enabled = checkBoxRevisionValidTo.Checked;
-
-
-            foreach (var rec in _currentCheck.Revisions)
+            foreach (var rec in _currentCheck.AllRevisions)
                 UpdateRevision(rec);
 
             foreach (var rec in _currentCheck.CheckListRecords)
@@ -158,10 +151,15 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private bool ApplyChanges()
         {
+
+            //_currentCheck.Settings.EditionNumber = metroTextBoxEditionNumber.Text;
+            //_currentCheck.Settings.EditionDate = dateTimePickerEditionDate.Value;
+            //_currentCheck.Settings.SectionNumber = metroTextBoxSectionNumber.Text;
+            //_currentCheck.Settings.RevisonValidTo = checkBoxRevisionValidTo.Checked;
+            //_currentCheck.Settings.RevisonValidToDate = dateTimePickeValidTo.Value;
+
+
             _currentCheck.Source = metroTextSource.Text;
-            _currentCheck.Settings.EditionNumber = metroTextBoxEditionNumber.Text ;
-            _currentCheck.Settings.EditionDate = dateTimePickerEditionDate.Value;
-            _currentCheck.Settings.SectionNumber = metroTextBoxSectionNumber.Text;
             _currentCheck.Settings.SectionName =  metroTextBoxSectionName.Text;
             _currentCheck.Settings.PartNumber = metroTextBoxPartNumber.Text;
             _currentCheck.Settings.PartName = metroTextBoxPartName.Text;
@@ -171,8 +169,7 @@ namespace CAS.UI.UICAAControls.CheckList
             _currentCheck.Settings.ItemtName = metroTextBoxItemName.Text;
             _currentCheck.Settings.Requirement =  metroTextBoxRequirement.Text;
 
-            _currentCheck.Settings.RevisonValidTo = checkBoxRevisionValidTo.Checked;
-            _currentCheck.Settings.RevisonValidToDate = dateTimePickeValidTo.Value;
+
             _currentCheck.Settings.RevisonValidToNotify = (int) numericUpNotify.Value;
 
             _currentCheck.Settings.Reference = metroTextBoxReference.Text;
@@ -305,37 +302,6 @@ namespace CAS.UI.UICAAControls.CheckList
             Close();
         }
 
-        private void checkBoxRevisionValidTo_CheckedChanged(object sender, EventArgs e)
-        {
-
-            linkLabel2.Enabled = checkBoxRevisionValidTo.Checked;
-
-            foreach (var control in flowLayoutPanel2.Controls.OfType<RevisionControl>())
-                control.EnableControls(checkBoxRevisionValidTo.Checked);
-
-
-                metroTextBoxEditionNumber.Enabled =
-                dateTimePickerEditionDate.Enabled =
-                    !checkBoxRevisionValidTo.Checked;
-
-        }
-
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var last = _currentCheck.Revisions?.OrderBy(i => i.EffDate)?.LastOrDefault()?.Number ?? "";
-            if (int.TryParse(last, out var q))
-            {
-
-            }
-
-            var n = new CheckListRevision()
-            {
-                Number = (++q).ToString()
-            };
-
-            _currentCheck.Revisions.Add(n);
-            UpdateRevision(n);
-        }
 
         private void ControlRevision_Deleted(object sender, EventArgs e)
         {
@@ -348,7 +314,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 {
                     try
                     {
-                        _currentCheck.Revisions.Remove(control.Revision);
+                        _currentCheck.AllRevisions.Remove(control.Revision);
                         GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.Revision);
                     }
                     catch (Exception ex)
@@ -367,9 +333,7 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             var control = new RevisionControl(rec);
             control.Deleted += ControlRevision_Deleted;
-            flowLayoutPanel2.Controls.Remove(linkLabel2);
             flowLayoutPanel2.Controls.Add(control);
-            flowLayoutPanel2.Controls.Add(linkLabel2);
         }
     }
 }

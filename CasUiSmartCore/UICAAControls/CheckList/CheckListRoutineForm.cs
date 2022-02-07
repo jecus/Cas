@@ -47,7 +47,7 @@ namespace CAS.UI.UICAAControls.CheckList
             _addedChecks =
                 GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("OperatorId", _operatorId), loadChild: true).ToList();
             _levels.Clear();
-            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>();
+            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
 
 
             foreach (var check in _addedChecks)

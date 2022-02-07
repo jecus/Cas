@@ -362,22 +362,7 @@ namespace CASReports.Builders
 					 "--",
 					 apu.Model.ToString());
 #else
-				Lifelength period = GlobalObjects.CasEnvironment.Calculator.GetLifelength(apu, _from, _to);
-				Lifelength total = GlobalObjects.CasEnvironment.Calculator.GetLifelength(apu, _to);
-				Lifelength onCCheck = _lastC?heckRecord != null
-					? GlobalObjects.CasEnvironment.Calculator.GetLifelength(apu, _lastC?heckRecord.RecordDate)
-					: Lifelength.Null;
-				Lifelength sinceLast = onCCheck != null ? total - onCCheck : Lifelength.Null;
-				dataset.BaseDetailsTable.AddBaseDetailsTableRow
-					("APU",
-					 apu.SerialNumber,
-					 total.TotalMinutes != null ? total.ToHoursMinutesFormat("") : "",
-					 "--",
-					 sinceLast.TotalMinutes != null ? sinceLast.ToHoursMinutesFormat("") : "",
-					 "--",
-					 period.TotalMinutes != null ? period.ToHoursMinutesFormat("") : "",
-					 "--",
-					 apu.Model.ToString());
+				
 #endif
 			}
 		}

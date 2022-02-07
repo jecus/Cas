@@ -1,7 +1,4 @@
-﻿
-using CAS.UI.UICAAControls.RoutineAudit;
-
-namespace CAS.UI.UICAAControls.Audit
+﻿namespace CAS.UI.UICAAControls.Audit
 {
     partial class AuditForm
     {
@@ -39,10 +36,10 @@ namespace CAS.UI.UICAAControls.Audit
             this.textBoxRemarks = new MetroFramework.Controls.MetroTextBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this._fromroutineAuditListView = new RoutineAuditListView();
+            this._fromroutineAuditListView = new  CAS.UI.UICAAControls.RoutineAudit.RoutineAuditListView();
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
-            this._toroutineAuditListView = new RoutineAuditListView();
+            this._toroutineAuditListView = new CAS.UI.UICAAControls.RoutineAudit.RoutineAuditListView();
             metroLabel2 = new MetroFramework.Controls.MetroLabel();
             metroLabel6 = new MetroFramework.Controls.MetroLabel();
             label14 = new MetroFramework.Controls.MetroLabel();
@@ -182,20 +179,10 @@ namespace CAS.UI.UICAAControls.Audit
             // 
             // _fromroutineAuditListView
             // 
-            this._fromroutineAuditListView.ConfigurePaste = null;
-            this._fromroutineAuditListView.Displayer = null;
-            this._fromroutineAuditListView.DisplayerText = null;
-            this._fromroutineAuditListView.EnableCustomSorting = true;
-            this._fromroutineAuditListView.Entity = null;
-            this._fromroutineAuditListView.IgnoreEnterPress = false;
             this._fromroutineAuditListView.Location = new System.Drawing.Point(23, 60);
-            this._fromroutineAuditListView.MenuOpeningAction = null;
-            this._fromroutineAuditListView.Name = "_fromroutineAuditListView";
-            this._fromroutineAuditListView.OldColumnIndex = 0;
-            this._fromroutineAuditListView.PasteComplete = null;
+            this._fromroutineAuditListView.Name = "fromroutineAuditListView";
             this._fromroutineAuditListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._fromroutineAuditListView.Size = new System.Drawing.Size(1091, 295);
-            this._fromroutineAuditListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Asc;
             this._fromroutineAuditListView.TabIndex = 341;
             // 
             // ButtonDelete
@@ -256,20 +243,10 @@ namespace CAS.UI.UICAAControls.Audit
             // 
             // _toroutineAuditListView
             // 
-            this._toroutineAuditListView.ConfigurePaste = null;
-            this._toroutineAuditListView.Displayer = null;
-            this._toroutineAuditListView.DisplayerText = null;
-            this._toroutineAuditListView.EnableCustomSorting = true;
-            this._toroutineAuditListView.Entity = null;
-            this._toroutineAuditListView.IgnoreEnterPress = false;
             this._toroutineAuditListView.Location = new System.Drawing.Point(23, 394);
-            this._toroutineAuditListView.MenuOpeningAction = null;
-            this._toroutineAuditListView.Name = "_toroutineAuditListView";
-            this._toroutineAuditListView.OldColumnIndex = 0;
-            this._toroutineAuditListView.PasteComplete = null;
+            this._toroutineAuditListView.Name = "toroutineAuditListView";
             this._toroutineAuditListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._toroutineAuditListView.Size = new System.Drawing.Size(1091, 295);
-            this._toroutineAuditListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Asc;
             this._toroutineAuditListView.TabIndex = 344;
             // 
             // AuditForm
@@ -304,9 +281,9 @@ namespace CAS.UI.UICAAControls.Audit
         private MetroFramework.Controls.MetroTextBox textBoxRemarks;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
-        private RoutineAuditListView _fromroutineAuditListView;
+        private CAS.UI.UICAAControls.RoutineAudit.RoutineAuditListView _fromroutineAuditListView;
         private AvControls.AvButtonT.AvButtonT ButtonDelete;
         private AvControls.AvButtonT.AvButtonT ButtonAdd;
-        private RoutineAuditListView _toroutineAuditListView;
+        private CAS.UI.UICAAControls.RoutineAudit.RoutineAuditListView _toroutineAuditListView;
     }
 }

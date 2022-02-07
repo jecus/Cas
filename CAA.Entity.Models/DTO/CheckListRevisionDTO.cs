@@ -5,6 +5,11 @@ using Entity.Abstractions.Attributte;
 
 namespace CAA.Entity.Models.DTO
 {
+    public enum RevisionType
+    {
+        Edition = 0,
+        Revision = 1
+    }
 
     [Table("CheckListRevision", Schema = "dbo")]
     [Condition("IsDeleted", 0)]
@@ -15,6 +20,9 @@ namespace CAA.Entity.Models.DTO
         
         [Column("Number")]
         public string Number { get; set; }
+
+        [Column("Type")]
+        public RevisionType Type { get; set; }
 
         [Column("EffDate")]
         public DateTime EffDate{ get; set; }

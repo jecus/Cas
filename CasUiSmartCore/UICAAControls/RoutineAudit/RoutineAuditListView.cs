@@ -30,18 +30,16 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
         public RoutineAuditListView()
         {
-            SortDirection = SortDirection.Asc;
-			InitializeComponent();
+            InitializeComponent();
 		}
 
         /// <summary>
         /// </summary>
         /// <param name="animatedThreadWorker"></param>
-        public RoutineAuditListView(AnimatedThreadWorker animatedThreadWorker)
+        public RoutineAuditListView(AnimatedThreadWorker animatedThreadWorker) : this()
 		{
             _animatedThreadWorker = animatedThreadWorker;
-            InitializeComponent();
-			SortDirection = SortDirection.Asc;
+            SortDirection = SortDirection.Asc;
 			OldColumnIndex = 1;
 		}
 		#endregion

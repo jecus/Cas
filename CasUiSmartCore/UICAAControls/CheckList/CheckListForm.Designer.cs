@@ -61,7 +61,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxSubPartNumber = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxItemName = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxItemNumber = new MetroFramework.Controls.MetroTextBox();
-            this.dateTimePickerEditionDate = new System.Windows.Forms.DateTimePicker();
             this.metroTextBoxRequirement = new MetroFramework.Controls.MetroTextBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -69,7 +68,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.numericUpNotify = new System.Windows.Forms.NumericUpDown();
             this.dateTimePickeValidTo = new System.Windows.Forms.DateTimePicker();
-            this.checkBoxRevisionValidTo = new System.Windows.Forms.CheckBox();
             this.metroTextBoxReference = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxDescribed = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxInstructions = new MetroFramework.Controls.MetroTextBox();
@@ -78,8 +76,8 @@ namespace CAS.UI.UICAAControls.CheckList
             this.comboBoxPhase = new System.Windows.Forms.ComboBox();
             this.metroTextBoxMH = new MetroFramework.Controls.MetroTextBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.metroTextBoxRevisionDate = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBoxEditionDate = new MetroFramework.Controls.MetroTextBox();
             metroLabel1 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
@@ -102,7 +100,6 @@ namespace CAS.UI.UICAAControls.CheckList
             label10 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).BeginInit();
-            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -698,13 +695,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxItemNumber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxItemNumber.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // dateTimePickerEditionDate
-            // 
-            this.dateTimePickerEditionDate.Location = new System.Drawing.Point(190, 294);
-            this.dateTimePickerEditionDate.Name = "dateTimePickerEditionDate";
-            this.dateTimePickerEditionDate.Size = new System.Drawing.Size(119, 20);
-            this.dateTimePickerEditionDate.TabIndex = 36;
-            // 
             // metroTextBoxRequirement
             // 
             // 
@@ -811,18 +801,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.dateTimePickeValidTo.Name = "dateTimePickeValidTo";
             this.dateTimePickeValidTo.Size = new System.Drawing.Size(119, 20);
             this.dateTimePickeValidTo.TabIndex = 303;
-            // 
-            // checkBoxRevisionValidTo
-            // 
-            this.checkBoxRevisionValidTo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxRevisionValidTo.Font = new System.Drawing.Font("Verdana", 9F);
-            this.checkBoxRevisionValidTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.checkBoxRevisionValidTo.Location = new System.Drawing.Point(1084, 63);
-            this.checkBoxRevisionValidTo.Name = "checkBoxRevisionValidTo";
-            this.checkBoxRevisionValidTo.Size = new System.Drawing.Size(88, 16);
-            this.checkBoxRevisionValidTo.TabIndex = 309;
-            this.checkBoxRevisionValidTo.Text = "Revision:";
-            this.checkBoxRevisionValidTo.CheckedChanged += new System.EventHandler(this.checkBoxRevisionValidTo_CheckedChanged);
             // 
             // metroTextBoxReference
             // 
@@ -993,25 +971,10 @@ namespace CAS.UI.UICAAControls.CheckList
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.AutoScroll = true;
-            this.flowLayoutPanel2.Controls.Add(this.linkLabel2);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(1084, 84);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(1084, 65);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(270, 692);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(270, 711);
             this.flowLayoutPanel2.TabIndex = 302;
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.linkLabel2.Location = new System.Drawing.Point(3, 0);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.linkLabel2.Size = new System.Drawing.Size(36, 17);
-            this.linkLabel2.TabIndex = 0;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Add";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // metroTextBoxRevisionDate
             // 
@@ -1046,11 +1009,45 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxRevisionDate.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxRevisionDate.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
+            // metroTextBoxEditionDate
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBoxEditionDate.CustomButton.Image = null;
+            this.metroTextBoxEditionDate.CustomButton.Location = new System.Drawing.Point(101, 1);
+            this.metroTextBoxEditionDate.CustomButton.Name = "";
+            this.metroTextBoxEditionDate.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.metroTextBoxEditionDate.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxEditionDate.CustomButton.TabIndex = 1;
+            this.metroTextBoxEditionDate.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxEditionDate.CustomButton.UseSelectable = true;
+            this.metroTextBoxEditionDate.CustomButton.Visible = false;
+            this.metroTextBoxEditionDate.Enabled = false;
+            this.metroTextBoxEditionDate.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxEditionDate.Lines = new string[0];
+            this.metroTextBoxEditionDate.Location = new System.Drawing.Point(188, 294);
+            this.metroTextBoxEditionDate.MaxLength = 32767;
+            this.metroTextBoxEditionDate.Multiline = true;
+            this.metroTextBoxEditionDate.Name = "metroTextBoxEditionDate";
+            this.metroTextBoxEditionDate.PasswordChar = '\0';
+            this.metroTextBoxEditionDate.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxEditionDate.SelectedText = "";
+            this.metroTextBoxEditionDate.SelectionLength = 0;
+            this.metroTextBoxEditionDate.SelectionStart = 0;
+            this.metroTextBoxEditionDate.ShortcutsEnabled = true;
+            this.metroTextBoxEditionDate.Size = new System.Drawing.Size(121, 21);
+            this.metroTextBoxEditionDate.TabIndex = 325;
+            this.metroTextBoxEditionDate.UseSelectable = true;
+            this.metroTextBoxEditionDate.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxEditionDate.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
             // CheckListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1359, 820);
+            this.Controls.Add(this.metroTextBoxEditionDate);
             this.Controls.Add(this.metroTextBoxRevisionDate);
             this.Controls.Add(label10);
             this.Controls.Add(this.metroTextBoxMH);
@@ -1066,7 +1063,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Controls.Add(label15);
             this.Controls.Add(this.metroTextBoxReference);
             this.Controls.Add(label2);
-            this.Controls.Add(this.checkBoxRevisionValidTo);
             this.Controls.Add(label14);
             this.Controls.Add(label13);
             this.Controls.Add(this.numericUpNotify);
@@ -1079,7 +1075,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Controls.Add(this.metroTextBoxRequirement);
             this.Controls.Add(label11);
             this.Controls.Add(label9);
-            this.Controls.Add(this.dateTimePickerEditionDate);
             this.Controls.Add(label8);
             this.Controls.Add(label7);
             this.Controls.Add(this.metroTextBoxItemName);
@@ -1105,8 +1100,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).EndInit();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1125,7 +1118,6 @@ namespace CAS.UI.UICAAControls.CheckList
         private MetroFramework.Controls.MetroTextBox metroTextBoxSubPartNumber;
         private MetroFramework.Controls.MetroTextBox metroTextBoxItemName;
         private MetroFramework.Controls.MetroTextBox metroTextBoxItemNumber;
-        private System.Windows.Forms.DateTimePicker dateTimePickerEditionDate;
         private MetroFramework.Controls.MetroTextBox metroTextBoxRequirement;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
@@ -1134,7 +1126,6 @@ namespace CAS.UI.UICAAControls.CheckList
         public UIControls.Auxiliary.AttachedFileControl fileControl;
         private System.Windows.Forms.NumericUpDown numericUpNotify;
         private System.Windows.Forms.DateTimePicker dateTimePickeValidTo;
-        private CheckBox checkBoxRevisionValidTo;
         private MetroFramework.Controls.MetroTextBox metroTextBoxReference;
         private MetroFramework.Controls.MetroTextBox metroTextBoxDescribed;
         private MetroFramework.Controls.MetroTextBox metroTextBoxInstructions;
@@ -1142,7 +1133,7 @@ namespace CAS.UI.UICAAControls.CheckList
         private ComboBox comboBoxPhase;
         private MetroFramework.Controls.MetroTextBox metroTextBoxMH;
         private FlowLayoutPanel flowLayoutPanel2;
-        private LinkLabel linkLabel2;
         private MetroFramework.Controls.MetroTextBox metroTextBoxRevisionDate;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxEditionDate;
     }
 }

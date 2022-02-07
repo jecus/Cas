@@ -16,7 +16,9 @@ namespace CAS.UI.UICAAControls.CheckList
         public RevisionControl(CheckListRevision revision) : this()
         {
             Revision = revision;
+            EnableControls(false);
             UpdateInformation();
+
         }
 
         public void EnableControls(bool state)
@@ -28,6 +30,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void UpdateInformation()
         {
+            label1.Text = Revision.Type.ToString();
             metroTextBoxRemark.Text = Revision.Settings.Remark;
             metroTextBoxRevision.Text = Revision.Number;
             dateTimePickerRevisionDate.Value = Revision.EffDate;
