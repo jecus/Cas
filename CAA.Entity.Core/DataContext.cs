@@ -43,6 +43,7 @@ namespace CAA.Entity.Core
 
         public DbSet<CAAAircraftDTO> AircraftDtos { get; set; }
         public DbSet<CAAAuditDTO> CAAAuditDtos { get; set; }
+        public DbSet<CheckListRevisionDTO> CheckListRevisionDtos { get; set; }
         public DbSet<CAAAuditRecordDTO> AuditRecordDtos { get; set; }
         public DbSet<RootCauseDTO> RootCauseDtos { get; set; }
         public DbSet<CAAMaintenanceProgramChangeRecordDTO> MaintenanceProgramChangeRecordDtos { get; set; }
