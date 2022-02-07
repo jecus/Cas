@@ -921,6 +921,12 @@
     <Compile Include="UICAAControls\CheckList\CheckListForm.Designer.cs">
       <DependentUpon>CheckListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CheckList\RevisionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CheckList\RevisionControl.Designer.cs">
+      <DependentUpon>RevisionControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CurrentOperator\CurrentOperatorSymmaryCAADemoScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4260,6 +4266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\CheckListForm.resx">
       <DependentUpon>CheckListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CheckList\RevisionControl.resx">
+      <DependentUpon>RevisionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CurrentOperator\CurrentOperatorSymmaryCAADemoScreen.resx">
       <DependentUpon>CurrentOperatorSymmaryCAADemoScreen.cs</DependentUpon>

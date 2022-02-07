@@ -27,6 +27,7 @@ namespace SmartCore.CAA.Check
 
 
         public List<CheckListRecords> CheckListRecords { get; set; }
+        public List<CheckListRevision> Revisions { get; set; }
 
         private CommonCollection<ItemFileLink> _files;
 
@@ -93,6 +94,7 @@ namespace SmartCore.CAA.Check
         {
             ItemId = -1;
             CheckListRecords = new List<CheckListRecords>();
+            Revisions = new List<CheckListRevision>();
             Settings = new CheckListSettings();
             SmartCoreObjectType = SmartCoreType.CheckLists;
         }
@@ -137,6 +139,7 @@ namespace SmartCore.CAA.Check
 
         public AuditCheck AuditCheck { get; set; }
         public int OperatorId { get; set; }
+        
     }
 
 

@@ -10,13 +10,12 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
-using SmartCore.Auxiliary;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Files;
-using DateTime = System.DateTime;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CheckList
 {
@@ -61,6 +60,13 @@ namespace CAS.UI.UICAAControls.CheckList
                 _currentCheck.CheckListRecords.AddRange(records);
 
 
+                var revisions =
+                    GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new Filter("CheckListId", _currentCheck.ItemId));
+
+                _currentCheck.Revisions.Clear();
+                _currentCheck.Revisions.AddRange(revisions);
+
+
                 var links = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAItemFileLinkDTO, ItemFileLink>(new List<Filter>()
                 {
                     new Filter("ParentId",_currentCheck.ItemId),
@@ -91,12 +97,11 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void UpdateInformation()
         {
-
             metroTextSource.Text = _currentCheck.Source;
             metroTextBoxEditionNumber.Text = _currentCheck.Settings.EditionNumber;
             dateTimePickerEditionDate.Value = _currentCheck.Settings.EditionDate;
-            metroTextBoxRevision.Text = _currentCheck.Settings.RevisionNumber;
-            dateTimePickerRevisionDate.Value = _currentCheck.Settings.RevisonDate;
+            metroTextBoxRevision.Text = _currentCheck.Revisions?.OrderBy(i => i.EffDate).LastOrDefault()?.Number ?? "";
+            metroTextBoxRevisionDate.Text = _currentCheck.Revisions?.OrderBy(i => i.EffDate).LastOrDefault()?.EffDate.ToString("dd MMMM yyyy", new CultureInfo("ru-RU")) ?? ""; 
             metroTextBoxSectionNumber.Text = _currentCheck.Settings.SectionNumber;
             metroTextBoxSectionName.Text = _currentCheck.Settings.SectionName;
             metroTextBoxPartNumber.Text = _currentCheck.Settings.PartNumber;
@@ -136,17 +141,26 @@ namespace CAS.UI.UICAAControls.CheckList
                 "This record does not contain a file proving the Document. Enclose PDF file to prove the Document.",
                 "Attached file proves the Document.");
 
+
+            linkLabel2.Enabled = checkBoxRevisionValidTo.Checked;
+
+            foreach (var control in flowLayoutPanel2.Controls.OfType<RevisionControl>())
+                control.Enabled = checkBoxRevisionValidTo.Checked;
+
+
+            foreach (var rec in _currentCheck.Revisions)
+                UpdateRevision(rec);
+
             foreach (var rec in _currentCheck.CheckListRecords)
                 UpdateRecords(rec);
         }
+
 
         private bool ApplyChanges()
         {
             _currentCheck.Source = metroTextSource.Text;
             _currentCheck.Settings.EditionNumber = metroTextBoxEditionNumber.Text ;
             _currentCheck.Settings.EditionDate = dateTimePickerEditionDate.Value;
-            _currentCheck.Settings.RevisionNumber = metroTextBoxRevision.Text;
-            _currentCheck.Settings.RevisonDate = dateTimePickerRevisionDate.Value;
             _currentCheck.Settings.SectionNumber = metroTextBoxSectionNumber.Text;
             _currentCheck.Settings.SectionName =  metroTextBoxSectionName.Text;
             _currentCheck.Settings.PartNumber = metroTextBoxPartNumber.Text;
@@ -264,6 +278,14 @@ namespace CAS.UI.UICAAControls.CheckList
                     }
 
 
+                    foreach (var control in flowLayoutPanel2.Controls.OfType<RevisionControl>())
+                    {
+                        control.ApplyChanges();
+                        control.Revision.CheckListId = _currentCheck.ItemId;
+                        GlobalObjects.CaaEnvironment.NewKeeper.Save(control.Revision, true);
+                    }
+
+
                     DialogResult = DialogResult.OK;
                     Close();
                 }
@@ -285,13 +307,69 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void checkBoxRevisionValidTo_CheckedChanged(object sender, EventArgs e)
         {
-            metroTextBoxRevision.Enabled = dateTimePickerRevisionDate.Enabled =
-                 checkBoxRevisionValidTo.Checked;
 
-            metroTextBoxEditionNumber.Enabled =
+            linkLabel2.Enabled = checkBoxRevisionValidTo.Checked;
+
+            foreach (var control in flowLayoutPanel2.Controls.OfType<RevisionControl>())
+                control.EnableControls(checkBoxRevisionValidTo.Checked);
+
+
+                metroTextBoxEditionNumber.Enabled =
                 dateTimePickerEditionDate.Enabled =
                     !checkBoxRevisionValidTo.Checked;
 
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var last = _currentCheck.Revisions?.OrderBy(i => i.EffDate)?.LastOrDefault()?.Number ?? "";
+            if (int.TryParse(last, out var q))
+            {
+
+            }
+
+            var n = new CheckListRevision()
+            {
+                Number = (++q).ToString()
+            };
+
+            _currentCheck.Revisions.Add(n);
+            UpdateRevision(n);
+        }
+
+        private void ControlRevision_Deleted(object sender, EventArgs e)
+        {
+            var control = sender as RevisionControl;
+
+            var dialogResult = MessageBox.Show("Do you really want to delete revision?", "Deleting confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+            if (dialogResult == DialogResult.Yes)
+            {
+                if (control.Revision.ItemId > 0)
+                {
+                    try
+                    {
+                        _currentCheck.Revisions.Remove(control.Revision);
+                        GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.Revision);
+                    }
+                    catch (Exception ex)
+                    {
+                        Program.Provider.Logger.Log("Error while removing data", ex);
+                    }
+                }
+                flowLayoutPanel2.Controls.Remove(control);
+                control.Deleted -= Control_Deleted;
+                control.Dispose();
+            }
+        }
+
+
+        private void UpdateRevision(CheckListRevision rec)
+        {
+            var control = new RevisionControl(rec);
+            control.Deleted += ControlRevision_Deleted;
+            flowLayoutPanel2.Controls.Remove(linkLabel2);
+            flowLayoutPanel2.Controls.Add(control);
+            flowLayoutPanel2.Controls.Add(linkLabel2);
         }
     }
 }

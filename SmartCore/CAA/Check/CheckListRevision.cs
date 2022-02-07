@@ -39,6 +39,7 @@ namespace SmartCore.CAA.Check
 
         public CheckListRevision()
         {
+            EffDate = DateTime.Today;
             Settings = new CheckListRevisionSettings();
         }
 
@@ -47,6 +48,7 @@ namespace SmartCore.CAA.Check
 
     public class CheckListRevisionSettings
     {
-        
+        [JsonProperty("Remark")]
+        public string Remark { get; set; }
     }
 }

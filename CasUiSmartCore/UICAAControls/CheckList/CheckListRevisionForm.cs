@@ -15,12 +15,14 @@ using SmartCore.CAA.FindingLevel;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 
 namespace CAS.UI.UICAAControls.CheckList
 {
     public partial class CheckListRevisionForm : MetroForm
     {
         private readonly int _operatorId;
+        private List<BaseEntityObject> _revisions = new List<BaseEntityObject>();
         private CommonCollection<CheckLists> _addedChecks = new CommonCollection<CheckLists>();
         private CommonCollection<CheckLists> _updateChecks = new CommonCollection<CheckLists>();
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
@@ -42,6 +44,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
+            _revisions.Clear();
             _addedChecks.Clear();
             _addedChecks.AddRange(
                 GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("OperatorId", _operatorId), loadChild: true)
@@ -129,6 +132,29 @@ namespace CAS.UI.UICAAControls.CheckList
                         return false;
                     checks.Settings.MH = manHours;
                 }
+
+                if (checkBoxEditionEff.Checked)
+                {
+                    _revisions.Add(new CheckListRevision()
+                    {
+                        CheckListId = checks.ItemId,
+                        EffDate = dateTimePickerEditionEff.Value.Date,
+                        Number = "",
+                        Type = RevisionType.Edition
+                    });
+                }
+                
+                if (checkBoxRevisionEff.Checked)
+                {
+                    _revisions.Add(new CheckListRevision()
+                    {
+                        CheckListId = checks.ItemId,
+                        EffDate = dateTimePickerRevisionEff.Value.Date,
+                        Number = "",
+                        Type = RevisionType.Revision
+                    });
+                }
+
             }
 
             return true;
@@ -214,6 +240,8 @@ namespace CAS.UI.UICAAControls.CheckList
                     {
                         foreach (var checks in _updateChecks)
                             GlobalObjects.CaaEnvironment.NewKeeper.Save(checks);
+
+                        GlobalObjects.CaaEnvironment.NewKeeper.BulkInsert(_revisions);
 
 
                         MessageBox.Show("All records updated successfull!", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
