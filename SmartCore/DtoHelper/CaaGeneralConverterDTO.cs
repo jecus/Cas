@@ -1424,6 +1424,46 @@ namespace SmartCore.DtoHelper
         }
 
 
+        public static CheckListRevision ConvertCAA(this CheckListRevisionDTO levels)
+        {
+            var res = new CheckListRevision()
+            {
+                ItemId = levels.ItemId,
+                IsDeleted = levels.IsDeleted,
+                CorrectorId = levels.CorrectorId,
+                Updated = levels.Updated,
+                EffDate = levels.EffDate,
+                CheckListId = levels.CheckListId,
+                Type = levels.Type,
+                Number = levels.Number,
+                SettingsJSON = levels.SettingsJSON,
+            };
+
+
+            return res;
+        }
+
+        public static CheckListRevisionDTO ConvertCAA(this CheckListRevision levels)
+        {
+            var res = new CheckListRevisionDTO()
+            {
+				ItemId = levels.ItemId,
+                IsDeleted = levels.IsDeleted,
+                CorrectorId = levels.CorrectorId,
+                Updated = levels.Updated,
+                EffDate = levels.EffDate,
+                CheckListId = levels.CheckListId,
+                Type = levels.Type,
+                Number = levels.Number,
+                SettingsJSON = levels.SettingsJSON,
+			};
+
+            return res;
+        }
+
+
+
+
 
 		public static CheckListRecords ConvertCAA(this CheckListRecordDTO recordDto)
         {

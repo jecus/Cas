@@ -412,6 +412,7 @@
     <Compile Include="CAA\Audit\WorkFlowStage.cs" />
     <Compile Include="CAA\Check\CheckListFilterParams.cs" />
     <Compile Include="CAA\Check\CheckListRecords.cs" />
+    <Compile Include="CAA\Check\CheckListRevision.cs" />
     <Compile Include="CAA\Check\CheckLists.cs" />
     <Compile Include="CAA\Check\OptionType.cs" />
     <Compile Include="CAA\FindingLevel\FindingLevels.cs" />
