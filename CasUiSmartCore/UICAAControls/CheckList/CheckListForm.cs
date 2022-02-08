@@ -99,9 +99,11 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             metroTextSource.Text = _currentCheck.Source;
             metroTextBoxEditionNumber.Text = _currentCheck.Editions?.LastOrDefault()?.Number ?? "";
-            metroTextBoxEditionDate.Text = _currentCheck.Editions?.LastOrDefault()?.EffDate.ToString("dd MMMM yyyy", new CultureInfo("ru-RU")) ?? "";
+            metroTextBoxEditionDate.Text = _currentCheck.Editions?.LastOrDefault()?.Date.ToString("dd MMMM yyyy", new CultureInfo("ru-RU")) ?? "";
+            metroTextBox1.Text = _currentCheck.Editions?.LastOrDefault()?.EffDate.ToString("dd MMMM yyyy", new CultureInfo("ru-RU")) ?? "";
             metroTextBoxRevision.Text = _currentCheck.Revisions?.LastOrDefault()?.Number ?? "";
-            metroTextBoxRevisionDate.Text = _currentCheck.Revisions?.LastOrDefault()?.EffDate.ToString("dd MMMM yyyy", new CultureInfo("ru-RU")) ?? ""; 
+            metroTextBoxRevisionDate.Text = _currentCheck.Revisions?.LastOrDefault()?.Date.ToString("dd MMMM yyyy", new CultureInfo("ru-RU")) ?? ""; 
+            metroTextBox2.Text = _currentCheck.Revisions?.LastOrDefault()?.EffDate.ToString("dd MMMM yyyy", new CultureInfo("ru-RU")) ?? ""; 
             metroTextBoxSectionNumber.Text = _currentCheck.Settings.SectionNumber;
             metroTextBoxSectionName.Text = _currentCheck.Settings.SectionName;
             metroTextBoxPartNumber.Text = _currentCheck.Settings.PartNumber;
@@ -272,14 +274,6 @@ namespace CAS.UI.UICAAControls.CheckList
                         control.ApplyChanges();
                         control.Record.CheckListId = _currentCheck.ItemId;
                         GlobalObjects.CaaEnvironment.NewKeeper.Save(control.Record, true);
-                    }
-
-
-                    foreach (var control in flowLayoutPanel2.Controls.OfType<RevisionControl>())
-                    {
-                        control.ApplyChanges();
-                        control.Revision.CheckListId = _currentCheck.ItemId;
-                        GlobalObjects.CaaEnvironment.NewKeeper.Save(control.Revision, true);
                     }
 
 

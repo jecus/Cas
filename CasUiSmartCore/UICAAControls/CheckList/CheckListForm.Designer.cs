@@ -50,6 +50,7 @@ namespace CAS.UI.UICAAControls.CheckList
             System.Windows.Forms.Label label18;
             System.Windows.Forms.Label label19;
             System.Windows.Forms.Label label10;
+            System.Windows.Forms.Label label20;
             this.metroTextSource = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxEditionNumber = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxRevision = new MetroFramework.Controls.MetroTextBox();
@@ -78,6 +79,8 @@ namespace CAS.UI.UICAAControls.CheckList
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.metroTextBoxRevisionDate = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxEditionDate = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBox2 = new MetroFramework.Controls.MetroTextBox();
             metroLabel1 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
@@ -98,6 +101,7 @@ namespace CAS.UI.UICAAControls.CheckList
             label18 = new System.Windows.Forms.Label();
             label19 = new System.Windows.Forms.Label();
             label10 = new System.Windows.Forms.Label();
+            label20 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).BeginInit();
             this.SuspendLayout();
@@ -783,11 +787,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.numericUpNotify.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.numericUpNotify.ForeColor = System.Drawing.Color.DimGray;
             this.numericUpNotify.Location = new System.Drawing.Point(190, 376);
-            this.numericUpNotify.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+            this.numericUpNotify.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             this.numericUpNotify.Name = "numericUpNotify";
             this.numericUpNotify.Size = new System.Drawing.Size(119, 20);
             this.numericUpNotify.TabIndex = 306;
@@ -1043,11 +1043,92 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxEditionDate.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxEditionDate.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
+            // metroTextBox1
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBox1.CustomButton.Image = null;
+            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(101, 1);
+            this.metroTextBox1.CustomButton.Name = "";
+            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBox1.CustomButton.TabIndex = 1;
+            this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBox1.CustomButton.UseSelectable = true;
+            this.metroTextBox1.CustomButton.Visible = false;
+            this.metroTextBox1.Enabled = false;
+            this.metroTextBox1.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBox1.Lines = new string[0];
+            this.metroTextBox1.Location = new System.Drawing.Point(315, 294);
+            this.metroTextBox1.MaxLength = 32767;
+            this.metroTextBox1.Multiline = true;
+            this.metroTextBox1.Name = "metroTextBox1";
+            this.metroTextBox1.PasswordChar = '\0';
+            this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBox1.SelectedText = "";
+            this.metroTextBox1.SelectionLength = 0;
+            this.metroTextBox1.SelectionStart = 0;
+            this.metroTextBox1.ShortcutsEnabled = true;
+            this.metroTextBox1.Size = new System.Drawing.Size(121, 21);
+            this.metroTextBox1.TabIndex = 328;
+            this.metroTextBox1.UseSelectable = true;
+            this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroTextBox2
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBox2.CustomButton.Image = null;
+            this.metroTextBox2.CustomButton.Location = new System.Drawing.Point(101, 1);
+            this.metroTextBox2.CustomButton.Name = "";
+            this.metroTextBox2.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.metroTextBox2.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBox2.CustomButton.TabIndex = 1;
+            this.metroTextBox2.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBox2.CustomButton.UseSelectable = true;
+            this.metroTextBox2.CustomButton.Visible = false;
+            this.metroTextBox2.Enabled = false;
+            this.metroTextBox2.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBox2.Lines = new string[0];
+            this.metroTextBox2.Location = new System.Drawing.Point(315, 320);
+            this.metroTextBox2.MaxLength = 32767;
+            this.metroTextBox2.Multiline = true;
+            this.metroTextBox2.Name = "metroTextBox2";
+            this.metroTextBox2.PasswordChar = '\0';
+            this.metroTextBox2.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBox2.SelectedText = "";
+            this.metroTextBox2.SelectionLength = 0;
+            this.metroTextBox2.SelectionStart = 0;
+            this.metroTextBox2.ShortcutsEnabled = true;
+            this.metroTextBox2.Size = new System.Drawing.Size(121, 21);
+            this.metroTextBox2.TabIndex = 327;
+            this.metroTextBox2.UseSelectable = true;
+            this.metroTextBox2.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBox2.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Font = new System.Drawing.Font("Verdana", 9F);
+            label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label20.Location = new System.Drawing.Point(349, 277);
+            label20.Name = "label20";
+            label20.Size = new System.Drawing.Size(57, 14);
+            label20.TabIndex = 326;
+            label20.Text = "Eff Date";
+            label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // CheckListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1359, 820);
+            this.Controls.Add(this.metroTextBox1);
+            this.Controls.Add(this.metroTextBox2);
+            this.Controls.Add(label20);
             this.Controls.Add(this.metroTextBoxEditionDate);
             this.Controls.Add(this.metroTextBoxRevisionDate);
             this.Controls.Add(label10);
@@ -1103,8 +1184,10 @@ namespace CAS.UI.UICAAControls.CheckList
             ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private MetroFramework.Controls.MetroTextBox metroTextBox1;
+        private MetroFramework.Controls.MetroTextBox metroTextBox2;
 
         #endregion
 

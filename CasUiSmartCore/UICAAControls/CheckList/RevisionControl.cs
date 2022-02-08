@@ -34,16 +34,9 @@ namespace CAS.UI.UICAAControls.CheckList
             label1.Text = Revision.Type.ToString();
             metroTextBoxRemark.Text = Revision.Settings.Remark;
             metroTextBoxRevision.Text = Revision.Number;
-            dateTimePickerRevisionDate.Value = Revision.EffDate;
+            dateTimePickerRevisionDate.Value = Revision.Date;
+            dateTimePickerEffDate.Value = Revision.EffDate;
         }
-
-        public void ApplyChanges()
-        {
-            Revision.Settings.Remark = metroTextBoxRemark.Text;
-            Revision.Number = metroTextBoxRevision.Text;
-            Revision.EffDate = dateTimePickerRevisionDate.Value;
-        }
-
 
         public event EventHandler<EventArgs> Deleted;
 

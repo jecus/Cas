@@ -178,7 +178,8 @@ order by c.ItemId");
                     _revisions.Add(new CheckListRevision()
                     {
                         CheckListId = checks.ItemId,
-                        EffDate = dateTimePickerEditionDate.Value.Date,
+                        Date = dateTimePickerEditionDate.Value.Date,
+                        EffDate = dateTimePickerEditionEff.Value.Date,
                         Number = metroTextBoxEditionNumber.Text,
                         Type = RevisionType.Edition
                     });
@@ -188,7 +189,8 @@ order by c.ItemId");
                     _revisions.Add(new CheckListRevision()
                     {
                         CheckListId = checks.ItemId,
-                        EffDate = dateTimePickerRevisionDate.Value.Date,
+                        Date = dateTimePickerRevisionDate.Value.Date,
+                        EffDate = RevisionEff.Value.Date,
                         Number = metroTextBoxRevision.Text,
                         Type = RevisionType.Revision
                     });
@@ -257,6 +259,8 @@ order by c.ItemId");
                 dateTimePickeValidTo.Enabled =
             numericUpNotify.Enabled =
                 comboBoxPhase.Enabled =
+                    dateTimePickerEditionEff.Enabled =
+                        RevisionEff.Enabled =
                     metroTextBoxMH.Enabled =
             metroTextBoxReference.Enabled =
                 comboBoxLevel.Enabled = state;
@@ -271,6 +275,8 @@ order by c.ItemId");
             dateTimePickerRevisionDate.Value = DateTime.Today;
             checkBoxRevisionValidTo.Checked = false;
             dateTimePickeValidTo.Value = DateTime.Today;
+            dateTimePickerEditionEff.Value = DateTime.Today;
+            RevisionEff.Value = DateTime.Today;
             numericUpNotify.Value = 0;
             metroTextBoxReference.Text = "";
             comboBoxLevel.SelectedItem = FindingLevels.Unknown;
@@ -356,6 +362,7 @@ order by c.ItemId");
         {
             metroTextBoxEditionNumber.Enabled =
                 dateTimePickerEditionDate.Enabled =
+                    dateTimePickerEditionEff.Enabled =
                     checkBoxEdition.Checked;
         }
 
@@ -393,7 +400,8 @@ order by c.ItemId");
         private void checkBoxRevisionValidTo_CheckedChanged(object sender, EventArgs e)
         {
             metroTextBoxRevision.Enabled =
-                    dateTimePickerRevisionDate.Enabled
+                    dateTimePickerRevisionDate.Enabled=
+                        RevisionEff.Enabled 
                         = checkBoxRevisionValidTo.Checked;
         }
 

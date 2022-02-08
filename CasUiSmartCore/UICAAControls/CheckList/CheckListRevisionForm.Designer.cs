@@ -44,6 +44,7 @@ namespace CAS.UI.UICAAControls.CheckList
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label4;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckListRevisionForm));
+            System.Windows.Forms.Label label5;
             this.checkBoxRevisionValidTo = new System.Windows.Forms.CheckBox();
             this.numericUpNotify = new System.Windows.Forms.NumericUpDown();
             this.dateTimePickeValidTo = new System.Windows.Forms.DateTimePicker();
@@ -71,6 +72,8 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxMH = new System.Windows.Forms.CheckBox();
             this.metroTextBoxMH = new MetroFramework.Controls.MetroTextBox();
             this.avButtonT2 = new AvControls.AvButtonT.AvButtonT();
+            this.RevisionEff = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerEditionEff = new System.Windows.Forms.DateTimePicker();
             label14 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
@@ -83,6 +86,7 @@ namespace CAS.UI.UICAAControls.CheckList
             label18 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).BeginInit();
             this.SuspendLayout();
             // 
@@ -687,11 +691,42 @@ namespace CAS.UI.UICAAControls.CheckList
             this.avButtonT2.ToolTipText = "";
             this.avButtonT2.Click += new System.EventHandler(this.avButtonT2_Click);
             // 
+            // RevisionEff
+            // 
+            this.RevisionEff.Enabled = false;
+            this.RevisionEff.Location = new System.Drawing.Point(1375, 177);
+            this.RevisionEff.Name = "RevisionEff";
+            this.RevisionEff.Size = new System.Drawing.Size(119, 20);
+            this.RevisionEff.TabIndex = 356;
+            // 
+            // dateTimePickerEditionEff
+            // 
+            this.dateTimePickerEditionEff.Enabled = false;
+            this.dateTimePickerEditionEff.Location = new System.Drawing.Point(1375, 150);
+            this.dateTimePickerEditionEff.Name = "dateTimePickerEditionEff";
+            this.dateTimePickerEditionEff.Size = new System.Drawing.Size(119, 20);
+            this.dateTimePickerEditionEff.TabIndex = 355;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new System.Drawing.Font("Verdana", 9F);
+            label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label5.Location = new System.Drawing.Point(1412, 132);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(57, 14);
+            label5.TabIndex = 357;
+            label5.Text = "Eff Date";
+            label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // CheckListRevisionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1518, 803);
+            this.Controls.Add(label5);
+            this.Controls.Add(this.RevisionEff);
+            this.Controls.Add(this.dateTimePickerEditionEff);
             this.Controls.Add(this.avButtonT2);
             this.Controls.Add(label4);
             this.Controls.Add(this.metroTextBoxMH);
@@ -739,12 +774,11 @@ namespace CAS.UI.UICAAControls.CheckList
             this.PerformLayout();
         }
 
-        private AvControls.AvButtonT.AvButtonT avButtonT2;
+        private System.Windows.Forms.DateTimePicker RevisionEff;
 
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.DateTimePicker dateTimePickerEditionEff;
+
+        private AvControls.AvButtonT.AvButtonT avButtonT2;
 
         #endregion
         private System.Windows.Forms.Label label14;
