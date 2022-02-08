@@ -874,6 +874,12 @@
     <Compile Include="UICAAControls\Audit\AuditListView.Designer.cs">
       <DependentUpon>AuditListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CAAGridViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CAAGridViewControl.Designer.cs">
+      <DependentUpon>CAAGridViewControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CheckList\AuditCheckControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -885,6 +891,12 @@
     </Compile>
     <Compile Include="UICAAControls\CheckList\AuditControl.Designer.cs">
       <DependentUpon>AuditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\CheckList\CheckListLiteView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CheckList\CheckListLiteView.Designer.cs">
+      <DependentUpon>CheckListLiteView.cs</DependentUpon>
     </Compile>
     <Compile Include="UICAAControls\CheckList\CheckListAuditForm.cs">
       <SubType>Form</SubType>
@@ -910,11 +922,11 @@
     <Compile Include="UICAAControls\CheckList\CheckListScreen.Designer.cs">
       <DependentUpon>CheckListScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CheckList\BaseCheckListView.cs">
+    <Compile Include="UICAAControls\CheckList\CheckListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UICAAControls\CheckList\BaseCheckListView.Designer.cs">
-      <DependentUpon>BaseCheckListView.cs</DependentUpon>
+    <Compile Include="UICAAControls\CheckList\CheckListView.Designer.cs">
+      <DependentUpon>CheckListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UICAAControls\CheckList\CheckListForm.cs">
       <SubType>Form</SubType>
@@ -945,6 +957,12 @@
     </Compile>
     <Compile Include="UICAAControls\Document\CAADocumentationListScreen.Designer.cs">
       <DependentUpon>CAADocumentationListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="UICAAControls\OperatorSymmaryCAADemoScreen.cs">
       <SubType>UserControl</SubType>
@@ -4245,6 +4263,9 @@
     <EmbeddedResource Include="UICAAControls\Audit\AuditListScreen.resx">
       <DependentUpon>AuditListScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CAAGridViewControl.resx">
+      <DependentUpon>CAAGridViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\AuditCheckControl.resx">
       <DependentUpon>AuditCheckControl.cs</DependentUpon>

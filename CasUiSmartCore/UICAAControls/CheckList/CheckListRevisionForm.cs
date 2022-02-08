@@ -107,17 +107,22 @@ namespace CAS.UI.UICAAControls.CheckList
                     checks.Source = metroTextSource.Text;
                 if(checkBoxEdition.Checked)
                 {
-                    checks.Settings.EditionNumber = metroTextBoxEditionNumber.Text;
-                    checks.Settings.EditionDate = dateTimePickerEditionDate.Value;
+                    _revisions.Add(new CheckListRevision()
+                    {
+                        CheckListId = checks.ItemId,
+                        EffDate = dateTimePickerEditionDate.Value.Date,
+                        Number = metroTextBoxEditionNumber.Text,
+                        Type = RevisionType.Edition
+                    });
                 }
                 if (checkBoxRevisionValidTo.Checked)
                 {
-                    checks.Settings.RevisonValidTo = checkBoxRevisionValidTo.Checked;
                     _revisions.Add(new CheckListRevision()
                     {
                         CheckListId = checks.ItemId,
                         EffDate = dateTimePickerRevisionDate.Value.Date,
                         Number = metroTextBoxRevision.Text,
+                        Type = RevisionType.Revision
                     });
                 }
                 if(checkBoxCheck.Checked)

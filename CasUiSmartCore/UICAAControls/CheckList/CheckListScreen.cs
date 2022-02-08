@@ -21,6 +21,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UICAAControls.Audit;
+using CAS.UI.UIControls.NewGrid;
 using SmartCore.CAA.Audit;
 using Telerik.WinControls.UI;
 
@@ -43,7 +44,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		private CommonCollection<CheckLists> _resultDocumentArray = new CommonCollection<CheckLists>();
 		private CommonFilterCollection _filter;
 
-		private BaseCheckListView _directivesViewer;
+		private BaseGridViewControl<CheckLists> _directivesViewer;
 
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemHighlight;
@@ -136,13 +137,25 @@ namespace CAS.UI.UICAAControls.CheckList
 				buttonRevison.Visible = false;
             }
 
+            if (_directivesViewer is CheckListLiteView lite)
+            {
+                lite.AuditId = _auditId;
+                lite.IsAuditCheck = _auditId.HasValue &&
+                                    (_routineAudit?.Type == ProgramType.CAAKG ||
+                                     _routineAudit?.Type == ProgramType.IOSA);
+			}
+			else if(_directivesViewer is CheckListView view)
 
-			_directivesViewer.AuditId = _auditId;
-            _directivesViewer.IsAuditCheck = _auditId.HasValue &&
-                                             (_routineAudit?.Type == ProgramType.CAAKG ||
-                                              _routineAudit?.Type == ProgramType.IOSA);
+            {
+                view.AuditId = _auditId;
+                view.IsAuditCheck = _auditId.HasValue &&
+                                    (_routineAudit?.Type == ProgramType.CAAKG ||
+                                     _routineAudit?.Type == ProgramType.IOSA);
+            }
 
-            if (_auditId.HasValue)
+
+
+			if (_auditId.HasValue)
             {
                 this.headerControl.ShowEditButton = true;
                 this.headerControl.EditButtonClick +=HeaderControl_EditButtonClick; ;
@@ -357,7 +370,7 @@ group by c.ItemId");
 		private void InitListView()
         {
             if (_auditId.HasValue)
-                _directivesViewer = new LiteCheckListView(AnimatedThreadWorker);
+                _directivesViewer = new CheckListLiteView(AnimatedThreadWorker);
             else _directivesViewer = new CheckListView(AnimatedThreadWorker);
 
 			_directivesViewer.TabIndex = 2;

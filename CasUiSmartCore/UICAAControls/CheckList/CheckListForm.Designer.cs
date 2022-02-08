@@ -388,6 +388,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxEditionNumber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTextBoxEditionNumber.CustomButton.UseSelectable = true;
             this.metroTextBoxEditionNumber.CustomButton.Visible = false;
+            this.metroTextBoxEditionNumber.Enabled = false;
             this.metroTextBoxEditionNumber.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxEditionNumber.Lines = new string[0];
             this.metroTextBoxEditionNumber.Location = new System.Drawing.Point(108, 294);
