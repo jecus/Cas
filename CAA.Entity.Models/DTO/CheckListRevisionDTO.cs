@@ -24,6 +24,9 @@ namespace CAA.Entity.Models.DTO
         [Column("Type")]
         public RevisionType Type { get; set; }
 
+        [Column("Date")]
+        public DateTime Date { get; set; }
+
         [Column("EffDate")]
         public DateTime EffDate{ get; set; }
         

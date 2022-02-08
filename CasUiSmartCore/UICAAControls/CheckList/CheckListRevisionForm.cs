@@ -45,6 +45,8 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
+            var ids = _updateChecks.Select(i => i.ItemId);
+            _updateChecks.Clear();
             _revisions.Clear();
             _addedChecks.Clear();
             _addedChecks.AddRange(
@@ -129,6 +131,20 @@ order by c.ItemId");
                 check.Remains = Lifelength.Null;
                 check.Condition = ConditionState.Satisfactory;
             }
+
+            if (ids.Any())
+            {
+                var checks = _addedChecks.ToArray();
+                foreach (var check in checks)
+                {
+                    if (ids.Contains(check.ItemId))
+                    {
+                        _updateChecks.Add(check);
+                        _addedChecks.Remove(check);
+                    }
+                }
+            }
+            
         }
 
         private void UpdateInformation()
@@ -148,7 +164,6 @@ order by c.ItemId");
 
             comboBoxLevel.SelectedItem = FindingLevels.Unknown;
             _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
-            _updateChecks.Clear();
             _tocheckListView.SetItemsArray(_updateChecks.ToArray());
         }
 
@@ -280,14 +295,7 @@ order by c.ItemId");
 
 
                         MessageBox.Show("All records updated successfull!", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
-                        //DialogResult = DialogResult.OK;
-                        //Close();
-
-                        foreach (var item in _tocheckListView.SelectedItems.ToArray())
-                        {
-                            _updateChecks.Remove(item);
-                            _addedChecks.Add(item);
-                        }
+                        
                         SetEnableControl(false);
                         ClearControl();
                         _animatedThreadWorker.RunWorkerAsync();
@@ -387,6 +395,12 @@ order by c.ItemId");
             metroTextBoxRevision.Enabled =
                     dateTimePickerRevisionDate.Enabled
                         = checkBoxRevisionValidTo.Checked;
+        }
+
+        private void avButtonT2_Click(object sender, EventArgs e)
+        {
+            var form = new CheckListRevEditForm();
+            form.ShowDialog();
         }
     }
 }

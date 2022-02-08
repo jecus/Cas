@@ -31,7 +31,6 @@ namespace CAS.UI.UICAAControls.CheckList
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckListRevisionForm));
             System.Windows.Forms.Label label14;
             System.Windows.Forms.Label label13;
             System.Windows.Forms.Label label9;
@@ -44,6 +43,7 @@ namespace CAS.UI.UICAAControls.CheckList
             System.Windows.Forms.Label label18;
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label4;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckListRevisionForm));
             this.checkBoxRevisionValidTo = new System.Windows.Forms.CheckBox();
             this.numericUpNotify = new System.Windows.Forms.NumericUpDown();
             this.dateTimePickeValidTo = new System.Windows.Forms.DateTimePicker();
@@ -70,6 +70,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxPhase = new System.Windows.Forms.CheckBox();
             this.checkBoxMH = new System.Windows.Forms.CheckBox();
             this.metroTextBoxMH = new MetroFramework.Controls.MetroTextBox();
+            this.avButtonT2 = new AvControls.AvButtonT.AvButtonT();
             label14 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
@@ -84,6 +85,145 @@ namespace CAS.UI.UICAAControls.CheckList
             label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).BeginInit();
             this.SuspendLayout();
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new System.Drawing.Font("Verdana", 9F);
+            label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label14.Location = new System.Drawing.Point(1141, 233);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(92, 14);
+            label14.TabIndex = 325;
+            label14.Text = "Notify (days):";
+            label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new System.Drawing.Font("Verdana", 9F);
+            label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label13.Location = new System.Drawing.Point(1141, 208);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(102, 14);
+            label13.TabIndex = 324;
+            label13.Text = "Check/Valid To:";
+            label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new System.Drawing.Font("Verdana", 9F);
+            label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label9.Location = new System.Drawing.Point(1295, 132);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(37, 14);
+            label9.TabIndex = 320;
+            label9.Text = "Date";
+            label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new System.Drawing.Font("Verdana", 9F);
+            label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label8.Location = new System.Drawing.Point(1189, 133);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(21, 14);
+            label8.TabIndex = 315;
+            label8.Text = "№";
+            label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Verdana", 9F);
+            label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label1.Location = new System.Drawing.Point(1065, 151);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(55, 14);
+            label1.TabIndex = 312;
+            label1.Text = "Edition:";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // metroLabel1
+            // 
+            metroLabel1.AutoSize = true;
+            metroLabel1.Font = new System.Drawing.Font("Verdana", 9F);
+            metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            metroLabel1.Location = new System.Drawing.Point(1065, 65);
+            metroLabel1.Name = "metroLabel1";
+            metroLabel1.Size = new System.Drawing.Size(55, 14);
+            metroLabel1.TabIndex = 310;
+            metroLabel1.Text = "Source:";
+            metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Verdana", 9F);
+            label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label2.Location = new System.Drawing.Point(1065, 100);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(75, 14);
+            label2.TabIndex = 333;
+            label2.Text = "Reference:";
+            label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new System.Drawing.Font("Verdana", 9F);
+            label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label17.Location = new System.Drawing.Point(1141, 259);
+            label17.Name = "label17";
+            label17.Size = new System.Drawing.Size(45, 14);
+            label17.TabIndex = 336;
+            label17.Text = "Level:";
+            label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new System.Drawing.Font("Verdana", 9F);
+            label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label19.Location = new System.Drawing.Point(1141, 320);
+            label19.Name = "label19";
+            label19.Size = new System.Drawing.Size(31, 14);
+            label19.TabIndex = 347;
+            label19.Text = "MH:";
+            label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Font = new System.Drawing.Font("Verdana", 9F);
+            label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label18.Location = new System.Drawing.Point(1141, 287);
+            label18.Name = "label18";
+            label18.Size = new System.Drawing.Size(51, 14);
+            label18.TabIndex = 345;
+            label18.Text = "Phase:";
+            label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label3
+            // 
+            label3.Location = new System.Drawing.Point(0, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(100, 23);
+            label3.TabIndex = 0;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Verdana", 9F);
+            label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label4.Location = new System.Drawing.Point(1065, 180);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(64, 14);
+            label4.TabIndex = 352;
+            label4.Text = "Revision:";
+            label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // checkBoxRevisionValidTo
             // 
@@ -201,7 +341,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(1359, 659);
+            this.buttonOk.Location = new System.Drawing.Point(1359, 759);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 328;
@@ -214,7 +354,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonCancel.Location = new System.Drawing.Point(1440, 659);
+            this.buttonCancel.Location = new System.Drawing.Point(1440, 759);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 33);
             this.buttonCancel.TabIndex = 327;
@@ -236,7 +376,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this._fromcheckListView.OldColumnIndex = 0;
             this._fromcheckListView.PasteComplete = null;
             this._fromcheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-            this._fromcheckListView.Size = new System.Drawing.Size(1029, 290);
+            this._fromcheckListView.Size = new System.Drawing.Size(1029, 306);
             this._fromcheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
             this._fromcheckListView.TabIndex = 329;
             // 
@@ -249,13 +389,13 @@ namespace CAS.UI.UICAAControls.CheckList
             this._tocheckListView.EnableCustomSorting = true;
             this._tocheckListView.Entity = null;
             this._tocheckListView.IgnoreEnterPress = false;
-            this._tocheckListView.Location = new System.Drawing.Point(5, 381);
+            this._tocheckListView.Location = new System.Drawing.Point(5, 406);
             this._tocheckListView.MenuOpeningAction = null;
             this._tocheckListView.Name = "_tocheckListView";
             this._tocheckListView.OldColumnIndex = 0;
             this._tocheckListView.PasteComplete = null;
             this._tocheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-            this._tocheckListView.Size = new System.Drawing.Size(1029, 290);
+            this._tocheckListView.Size = new System.Drawing.Size(1029, 346);
             this._tocheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
             this._tocheckListView.TabIndex = 330;
             // 
@@ -271,7 +411,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.ButtonAdd.Icon = global::CAS.UI.Properties.Resources.AddIconSmall;
             this.ButtonAdd.IconLayout = System.Windows.Forms.ImageLayout.Center;
             this.ButtonAdd.IconNotEnabled = null;
-            this.ButtonAdd.Location = new System.Drawing.Point(918, 341);
+            this.ButtonAdd.Location = new System.Drawing.Point(918, 366);
             this.ButtonAdd.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonAdd.Name = "ButtonAdd";
             this.ButtonAdd.NormalBackgroundImage = null;
@@ -299,7 +439,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.ButtonDelete.Icon = global::CAS.UI.Properties.Resources.DeleteIconSmall;
             this.ButtonDelete.IconLayout = System.Windows.Forms.ImageLayout.Center;
             this.ButtonDelete.IconNotEnabled = null;
-            this.ButtonDelete.Location = new System.Drawing.Point(912, 678);
+            this.ButtonDelete.Location = new System.Drawing.Point(912, 770);
             this.ButtonDelete.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonDelete.Name = "ButtonDelete";
             this.ButtonDelete.NormalBackgroundImage = null;
@@ -519,150 +659,40 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxMH.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxMH.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // label14
+            // avButtonT2
             // 
-            label14.AutoSize = true;
-            label14.Font = new System.Drawing.Font("Verdana", 9F);
-            label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label14.Location = new System.Drawing.Point(1141, 233);
-            label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(92, 14);
-            label14.TabIndex = 325;
-            label14.Text = "Notify (days):";
-            label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Font = new System.Drawing.Font("Verdana", 9F);
-            label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label13.Location = new System.Drawing.Point(1141, 208);
-            label13.Name = "label13";
-            label13.Size = new System.Drawing.Size(102, 14);
-            label13.TabIndex = 324;
-            label13.Text = "Check/Valid To:";
-            label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new System.Drawing.Font("Verdana", 9F);
-            label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label9.Location = new System.Drawing.Point(1295, 132);
-            label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(37, 14);
-            label9.TabIndex = 320;
-            label9.Text = "Date";
-            label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new System.Drawing.Font("Verdana", 9F);
-            label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label8.Location = new System.Drawing.Point(1189, 133);
-            label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(21, 14);
-            label8.TabIndex = 315;
-            label8.Text = "№";
-            label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Verdana", 9F);
-            label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label1.Location = new System.Drawing.Point(1065, 151);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(55, 14);
-            label1.TabIndex = 312;
-            label1.Text = "Edition:";
-            label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // metroLabel1
-            // 
-            metroLabel1.AutoSize = true;
-            metroLabel1.Font = new System.Drawing.Font("Verdana", 9F);
-            metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel1.Location = new System.Drawing.Point(1065, 65);
-            metroLabel1.Name = "metroLabel1";
-            metroLabel1.Size = new System.Drawing.Size(55, 14);
-            metroLabel1.TabIndex = 310;
-            metroLabel1.Text = "Source:";
-            metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Verdana", 9F);
-            label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label2.Location = new System.Drawing.Point(1065, 100);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(75, 14);
-            label2.TabIndex = 333;
-            label2.Text = "Reference:";
-            label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Font = new System.Drawing.Font("Verdana", 9F);
-            label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label17.Location = new System.Drawing.Point(1141, 259);
-            label17.Name = "label17";
-            label17.Size = new System.Drawing.Size(45, 14);
-            label17.TabIndex = 336;
-            label17.Text = "Level:";
-            label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.Font = new System.Drawing.Font("Verdana", 9F);
-            label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label19.Location = new System.Drawing.Point(1141, 320);
-            label19.Name = "label19";
-            label19.Size = new System.Drawing.Size(31, 14);
-            label19.TabIndex = 347;
-            label19.Text = "MH:";
-            label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Font = new System.Drawing.Font("Verdana", 9F);
-            label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label18.Location = new System.Drawing.Point(1141, 287);
-            label18.Name = "label18";
-            label18.Size = new System.Drawing.Size(51, 14);
-            label18.TabIndex = 345;
-            label18.Text = "Phase:";
-            label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            label3.Location = new System.Drawing.Point(0, 0);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(100, 23);
-            label3.TabIndex = 0;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new System.Drawing.Font("Verdana", 9F);
-            label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label4.Location = new System.Drawing.Point(1065, 180);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(64, 14);
-            label4.TabIndex = 352;
-            label4.Text = "Revision:";
-            label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.avButtonT2.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.avButtonT2.ActiveBackgroundImage = null;
+            this.avButtonT2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.avButtonT2.FontMain = new System.Drawing.Font("Verdana", 8F);
+            this.avButtonT2.FontSecondary = new System.Drawing.Font("Verdana", 8F);
+            this.avButtonT2.ForeColorMain = System.Drawing.SystemColors.ControlText;
+            this.avButtonT2.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
+            this.avButtonT2.Icon = global::CAS.UI.Properties.Resources.AddIconSmall;
+            this.avButtonT2.IconLayout = System.Windows.Forms.ImageLayout.Center;
+            this.avButtonT2.IconNotEnabled = null;
+            this.avButtonT2.Location = new System.Drawing.Point(5, 759);
+            this.avButtonT2.Margin = new System.Windows.Forms.Padding(4);
+            this.avButtonT2.Name = "avButtonT2";
+            this.avButtonT2.NormalBackgroundImage = null;
+            this.avButtonT2.PaddingMain = new System.Windows.Forms.Padding(0);
+            this.avButtonT2.PaddingSecondary = new System.Windows.Forms.Padding(0);
+            this.avButtonT2.ShowToolTip = false;
+            this.avButtonT2.Size = new System.Drawing.Size(116, 33);
+            this.avButtonT2.TabIndex = 354;
+            this.avButtonT2.TextAlignMain = System.Drawing.ContentAlignment.MiddleLeft;
+            this.avButtonT2.TextAlignSecondary = System.Drawing.ContentAlignment.MiddleLeft;
+            this.avButtonT2.TextMain = "Add New";
+            this.avButtonT2.TextSecondary = "";
+            this.avButtonT2.ToolTipText = "";
+            this.avButtonT2.Click += new System.EventHandler(this.avButtonT2_Click);
             // 
             // CheckListRevisionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1518, 703);
+            this.ClientSize = new System.Drawing.Size(1518, 803);
+            this.Controls.Add(this.avButtonT2);
             this.Controls.Add(label4);
             this.Controls.Add(this.metroTextBoxMH);
             this.Controls.Add(this.checkBoxMH);
@@ -709,6 +739,8 @@ namespace CAS.UI.UICAAControls.CheckList
             this.PerformLayout();
         }
 
+        private AvControls.AvButtonT.AvButtonT avButtonT2;
+
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.CheckBox checkBox1;
@@ -736,8 +768,8 @@ namespace CAS.UI.UICAAControls.CheckList
         private MetroFramework.Controls.MetroTextBox metroTextBoxEditionNumber;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
-        private CheckListRevisionView _fromcheckListView;
-        private CheckListRevisionView _tocheckListView;
+        private CAS.UI.UICAAControls.CheckList.CheckListRevisionView _fromcheckListView;
+        private CAS.UI.UICAAControls.CheckList.CheckListRevisionView _tocheckListView;
         private AvControls.AvButtonT.AvButtonT ButtonAdd;
         private AvControls.AvButtonT.AvButtonT ButtonDelete;
         private MetroFramework.Controls.MetroTextBox metroTextBoxReference;

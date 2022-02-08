@@ -61,13 +61,6 @@ namespace CAS.UI.UICAAControls.CheckList
             if (!CheckManHours(out manHours))
                 return false;
             _currentCheck.Settings.MH = manHours;
-
-            if (fileControl.GetChangeStatus())
-            {
-                fileControl.ApplyChanges();
-                _currentCheck.File = fileControl.AttachedFile;
-            }
-
             return true;
         }
 

@@ -36,8 +36,8 @@ namespace SmartCore.CAA.Check
         }
 
         public CheckListRevisionSettings Settings { get; set; }
+        public DateTime Date { get; set; }
 
-        
 
         public CheckListRevision()
         {
