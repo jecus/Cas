@@ -45,7 +45,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
-            var ids = _updateChecks.Select(i => i.ItemId);
+            var ids = _updateChecks.Select(i => i.ItemId).ToArray();
             _updateChecks.Clear();
             _revisions.Clear();
             _addedChecks.Clear();
