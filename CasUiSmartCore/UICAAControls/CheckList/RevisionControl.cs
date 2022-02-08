@@ -13,8 +13,9 @@ namespace CAS.UI.UICAAControls.CheckList
             InitializeComponent();
         }
 
-        public RevisionControl(CheckListRevision revision) : this()
+        public RevisionControl(CheckListRevision revision) 
         {
+            InitializeComponent();
             Revision = revision;
             EnableControls(false);
             UpdateInformation();

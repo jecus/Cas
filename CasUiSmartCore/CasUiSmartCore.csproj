@@ -928,6 +928,12 @@
     <Compile Include="UICAAControls\CheckList\CheckListForm.Designer.cs">
       <DependentUpon>CheckListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CheckList\CheckListRevisionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CheckList\CheckListRevisionView.Designer.cs">
+      <DependentUpon>CheckListRevisionView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CheckList\RevisionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

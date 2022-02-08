@@ -126,8 +126,11 @@ namespace SmartCore.CAA.Check
             return clone;
         }
 
-        public string EditionNumber => Settings.EditionNumber;
-        public string RevisionNumber => AllRevisions?.OrderBy(i => i.EffDate)?.LastOrDefault()?.Number ?? "";
+        public string NextEditionNumber  { get; set; }
+        public string NextRevisionNumber  { get; set; }
+        public string EditionNumber  { get; set; }
+        public string RevisionNumber  { get; set; }
+        
         public string SectionNumber => Settings.SectionNumber;
         public string SectionName => Settings.SectionName;
         public string PartNumber => Settings.PartNumber;
@@ -160,19 +163,11 @@ namespace SmartCore.CAA.Check
     {
         public CheckListSettings()
         {
-            EditionDate = DateTime.Today;
-            RevisonValidToDate = DateTime.Today;
             Phase = "N/A";
             MH = 0.0;
         }
 
-        [JsonProperty("EditionNumber")]
-        public string EditionNumber { get; set; }
-
-        [JsonProperty("EditionDate")]
-        public DateTime EditionDate { get; set; }
-
-
+        
         [JsonProperty("SectionNumber")]
         public string SectionNumber { get; set; }
 
@@ -200,14 +195,11 @@ namespace SmartCore.CAA.Check
         [JsonProperty("Requirement")]
         public string Requirement { get; set; }
 
-        [JsonProperty("RevisonValidTo")]
-        public bool RevisonValidTo { get; set; }
-
-        [JsonProperty("RevisonValidToDate")]
-        public DateTime RevisonValidToDate { get; set; }
-
         [JsonProperty("RevisonValidToNotify")]
         public int RevisonValidToNotify { get; set; }
+        
+        [JsonProperty("RevisonValidToDate")]
+        public DateTime RevisonValidToDate { get; set; }
 
         [JsonProperty("Reference")]
         public string Reference { get; set; }

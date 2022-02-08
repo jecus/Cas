@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -52,29 +53,81 @@ namespace CAS.UI.UICAAControls.CheckList
             _levels.Clear();
             _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
 
+            var dsEdition = GlobalObjects.CaaEnvironment.Execute($@"
+select c.ItemId as CheckId, edition.EditionNumber ,edition.EditionDate from dbo.CheckList c
+cross apply
+(
+	select top 2 Number as EditionNumber, EffDate as EditionDate  from dbo.CheckListRevision 
+	where CheckListId = c.ItemId and IsDeleted = 0 and Type = 0
+	order by EffDate desc
+)edition
+where c.IsDeleted = 0 and c.OperatorId = {_operatorId}
+order by c.ItemId");
+            
+            var dsRevision = GlobalObjects.CaaEnvironment.Execute($@"
+select c.ItemId as CheckId,revision.RevisionNumber, revision.RevisionDate from dbo.CheckList c
+cross apply
+(
+	select top 2 Number as RevisionNumber, EffDate as RevisionDate  from dbo.CheckListRevision 
+	where CheckListId = c.ItemId and IsDeleted = 0 and Type = 1
+	order by EffDate desc
+)revision
+where c.IsDeleted = 0 and c.OperatorId = {_operatorId}
+order by c.ItemId");
+            
+            
+            var revisions = dsRevision.Tables[0].AsEnumerable()
+                .Select(dataRow => new 
+                {
+                    Id = dataRow.Field<int>("CheckId"),
+                    RevisionNumber = dataRow.Field<string>("RevisionNumber"),
+                    RevisionDate = dataRow.Field<DateTime?>("RevisionDate"),
+                }).ToList();
+            
+            var editions = dsEdition.Tables[0].AsEnumerable()
+                .Select(dataRow => new 
+                {
+                    Id = dataRow.Field<int>("CheckId"),
+                    EditionNumber = dataRow.Field<string>("EditionNumber"),
+                    EditionDate = dataRow.Field<DateTime?>("EditionDate"),
+                }).ToList();
+            
+            
             
             foreach (var check in _addedChecks)
             {
+                var revision = revisions.Where(i => i.Id == check.ItemId).ToList();
+                var edition = editions.Where(i => i.Id == check.ItemId).ToList();
+
+                if (revision.Any())
+                {
+                    if(revision.Count == 1)
+                        check.RevisionNumber = revision.LastOrDefault()?.RevisionNumber;
+                    else
+                    {
+                        check.NextRevisionNumber = revision.FirstOrDefault()?.RevisionNumber;
+                        check.RevisionNumber = revision.LastOrDefault()?.RevisionNumber;
+                    }
+                }
+                
+                if (edition.Any())
+                {
+                    if (edition.Count == 1)
+                        check.EditionNumber = edition.LastOrDefault()?.EditionNumber;  
+                    else
+                    {
+                        check.NextEditionNumber = edition.FirstOrDefault()?.EditionNumber;
+                        check.EditionNumber = edition.LastOrDefault()?.EditionNumber;  
+                    }
+                }
+                
+                
                 check.Level = _levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
                               FindingLevels.Unknown;
 
 
                 check.Remains = Lifelength.Null;
                 check.Condition = ConditionState.Satisfactory;
-
-                var days = (check.Settings.RevisonValidToDate - DateTime.Today).Days;
-                var editionDays = 0;
-                if (!check.Settings.RevisonValidTo)
-                    editionDays = (check.Settings.EditionDate - DateTime.Today).Days;
-                //else editionDays = (check.Settings.RevisonDate - DateTime.Today).Days;
-
-                check.Remains = new Lifelength(days - editionDays, null, null);
-
-
-                if (check.Remains.Days < 0)
-                    check.Condition = ConditionState.Overdue;
-                else if (check.Remains.Days >= 0 && check.Remains.Days <= check.Settings.RevisonValidToNotify)
-                    check.Condition = ConditionState.Notify;
             }
         }
 

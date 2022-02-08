@@ -54,24 +54,8 @@ namespace CAS.UI.UICAAControls.CheckList
             {
                 check.Level = _levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
                               FindingLevels.Unknown;
-
-
                 check.Remains = Lifelength.Null;
                 check.Condition = ConditionState.Satisfactory;
-
-                var days = (check.Settings.RevisonValidToDate - DateTime.Today).Days;
-                var editionDays = 0;
-                if (!check.Settings.RevisonValidTo)
-                    editionDays = (check.Settings.EditionDate - DateTime.Today).Days;
-                //else editionDays = (check.Settings.RevisonDate - DateTime.Today).Days;
-
-                check.Remains = new Lifelength(days - editionDays, null, null);
-
-
-                if (check.Remains.Days < 0)
-                    check.Condition = ConditionState.Overdue;
-                else if (check.Remains.Days >= 0 && check.Remains.Days <= check.Settings.RevisonValidToNotify)
-                    check.Condition = ConditionState.Notify;
             }
             
             

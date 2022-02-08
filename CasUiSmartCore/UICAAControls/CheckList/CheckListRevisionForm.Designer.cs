@@ -32,7 +32,18 @@ namespace CAS.UI.UICAAControls.CheckList
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckListRevisionForm));
-
+            System.Windows.Forms.Label label14;
+            System.Windows.Forms.Label label13;
+            System.Windows.Forms.Label label9;
+            System.Windows.Forms.Label label8;
+            System.Windows.Forms.Label label1;
+            System.Windows.Forms.Label metroLabel1;
+            System.Windows.Forms.Label label2;
+            System.Windows.Forms.Label label17;
+            System.Windows.Forms.Label label19;
+            System.Windows.Forms.Label label18;
+            System.Windows.Forms.Label label3;
+            System.Windows.Forms.Label label4;
             this.checkBoxRevisionValidTo = new System.Windows.Forms.CheckBox();
             this.numericUpNotify = new System.Windows.Forms.NumericUpDown();
             this.dateTimePickeValidTo = new System.Windows.Forms.DateTimePicker();
@@ -42,8 +53,8 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxEditionNumber = new MetroFramework.Controls.MetroTextBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this._fromcheckListView = new CAS.UI.UICAAControls.CheckList.CheckListView();
-            this._tocheckListView = new CAS.UI.UICAAControls.CheckList.CheckListView();
+            this._fromcheckListView = new CAS.UI.UICAAControls.CheckList.CheckListRevisionView();
+            this._tocheckListView = new CAS.UI.UICAAControls.CheckList.CheckListRevisionView();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
             this.metroTextBoxReference = new MetroFramework.Controls.MetroTextBox();
@@ -70,135 +81,9 @@ namespace CAS.UI.UICAAControls.CheckList
             label19 = new System.Windows.Forms.Label();
             label18 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Font = new System.Drawing.Font("Verdana", 9F);
-            label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label14.Location = new System.Drawing.Point(1141, 233);
-            label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(92, 14);
-            label14.TabIndex = 325;
-            label14.Text = "Notify (days):";
-            label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Font = new System.Drawing.Font("Verdana", 9F);
-            label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label13.Location = new System.Drawing.Point(1141, 208);
-            label13.Name = "label13";
-            label13.Size = new System.Drawing.Size(102, 14);
-            label13.TabIndex = 324;
-            label13.Text = "Check/Valid To:";
-            label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new System.Drawing.Font("Verdana", 9F);
-            label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label9.Location = new System.Drawing.Point(1295, 132);
-            label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(37, 14);
-            label9.TabIndex = 320;
-            label9.Text = "Date";
-            label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new System.Drawing.Font("Verdana", 9F);
-            label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label8.Location = new System.Drawing.Point(1189, 133);
-            label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(21, 14);
-            label8.TabIndex = 315;
-            label8.Text = "№";
-            label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Verdana", 9F);
-            label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label1.Location = new System.Drawing.Point(1065, 151);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(55, 14);
-            label1.TabIndex = 312;
-            label1.Text = "Edition:";
-            label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // metroLabel1
-            // 
-            metroLabel1.AutoSize = true;
-            metroLabel1.Font = new System.Drawing.Font("Verdana", 9F);
-            metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel1.Location = new System.Drawing.Point(1065, 65);
-            metroLabel1.Name = "metroLabel1";
-            metroLabel1.Size = new System.Drawing.Size(55, 14);
-            metroLabel1.TabIndex = 310;
-            metroLabel1.Text = "Source:";
-            metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Verdana", 9F);
-            label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label2.Location = new System.Drawing.Point(1065, 100);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(75, 14);
-            label2.TabIndex = 333;
-            label2.Text = "Reference:";
-            label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Font = new System.Drawing.Font("Verdana", 9F);
-            label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label17.Location = new System.Drawing.Point(1141, 259);
-            label17.Name = "label17";
-            label17.Size = new System.Drawing.Size(45, 14);
-            label17.TabIndex = 336;
-            label17.Text = "Level:";
-            label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.Font = new System.Drawing.Font("Verdana", 9F);
-            label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label19.Location = new System.Drawing.Point(1141, 320);
-            label19.Name = "label19";
-            label19.Size = new System.Drawing.Size(31, 14);
-            label19.TabIndex = 347;
-            label19.Text = "MH:";
-            label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Font = new System.Drawing.Font("Verdana", 9F);
-            label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label18.Location = new System.Drawing.Point(1141, 287);
-            label18.Name = "label18";
-            label18.Size = new System.Drawing.Size(51, 14);
-            label18.TabIndex = 345;
-            label18.Text = "Phase:";
-            label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            label3.Location = new System.Drawing.Point(0, 0);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(100, 23);
-            label3.TabIndex = 0;
             // 
             // checkBoxRevisionValidTo
             // 
@@ -207,9 +92,8 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxRevisionValidTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.checkBoxRevisionValidTo.Location = new System.Drawing.Point(1041, 180);
             this.checkBoxRevisionValidTo.Name = "checkBoxRevisionValidTo";
-            this.checkBoxRevisionValidTo.Size = new System.Drawing.Size(88, 16);
+            this.checkBoxRevisionValidTo.Size = new System.Drawing.Size(18, 16);
             this.checkBoxRevisionValidTo.TabIndex = 326;
-            this.checkBoxRevisionValidTo.Text = "Revision:";
             this.checkBoxRevisionValidTo.CheckedChanged += new System.EventHandler(this.checkBoxRevisionValidTo_CheckedChanged);
             // 
             // numericUpNotify
@@ -339,8 +223,18 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             // _fromcheckListView
             // 
+            this._fromcheckListView.ColumnIndexes = ((System.Collections.Generic.List<string>)(resources.GetObject("_fromcheckListView.ColumnIndexes")));
+            this._fromcheckListView.ConfigurePaste = null;
+            this._fromcheckListView.Displayer = null;
+            this._fromcheckListView.DisplayerText = null;
+            this._fromcheckListView.EnableCustomSorting = true;
+            this._fromcheckListView.Entity = null;
+            this._fromcheckListView.IgnoreEnterPress = false;
             this._fromcheckListView.Location = new System.Drawing.Point(5, 53);
+            this._fromcheckListView.MenuOpeningAction = null;
             this._fromcheckListView.Name = "_fromcheckListView";
+            this._fromcheckListView.OldColumnIndex = 0;
+            this._fromcheckListView.PasteComplete = null;
             this._fromcheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._fromcheckListView.Size = new System.Drawing.Size(1029, 290);
             this._fromcheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
@@ -348,7 +242,18 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             // _tocheckListView
             // 
+            this._tocheckListView.ColumnIndexes = ((System.Collections.Generic.List<string>)(resources.GetObject("_tocheckListView.ColumnIndexes")));
+            this._tocheckListView.ConfigurePaste = null;
+            this._tocheckListView.Displayer = null;
+            this._tocheckListView.DisplayerText = null;
+            this._tocheckListView.EnableCustomSorting = true;
+            this._tocheckListView.Entity = null;
+            this._tocheckListView.IgnoreEnterPress = false;
             this._tocheckListView.Location = new System.Drawing.Point(5, 381);
+            this._tocheckListView.MenuOpeningAction = null;
+            this._tocheckListView.Name = "_tocheckListView";
+            this._tocheckListView.OldColumnIndex = 0;
+            this._tocheckListView.PasteComplete = null;
             this._tocheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._tocheckListView.Size = new System.Drawing.Size(1029, 290);
             this._tocheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
@@ -614,20 +519,157 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxMH.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxMH.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new System.Drawing.Font("Verdana", 9F);
+            label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label14.Location = new System.Drawing.Point(1141, 233);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(92, 14);
+            label14.TabIndex = 325;
+            label14.Text = "Notify (days):";
+            label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new System.Drawing.Font("Verdana", 9F);
+            label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label13.Location = new System.Drawing.Point(1141, 208);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(102, 14);
+            label13.TabIndex = 324;
+            label13.Text = "Check/Valid To:";
+            label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new System.Drawing.Font("Verdana", 9F);
+            label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label9.Location = new System.Drawing.Point(1295, 132);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(37, 14);
+            label9.TabIndex = 320;
+            label9.Text = "Date";
+            label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new System.Drawing.Font("Verdana", 9F);
+            label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label8.Location = new System.Drawing.Point(1189, 133);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(21, 14);
+            label8.TabIndex = 315;
+            label8.Text = "№";
+            label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Verdana", 9F);
+            label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label1.Location = new System.Drawing.Point(1065, 151);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(55, 14);
+            label1.TabIndex = 312;
+            label1.Text = "Edition:";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // metroLabel1
+            // 
+            metroLabel1.AutoSize = true;
+            metroLabel1.Font = new System.Drawing.Font("Verdana", 9F);
+            metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            metroLabel1.Location = new System.Drawing.Point(1065, 65);
+            metroLabel1.Name = "metroLabel1";
+            metroLabel1.Size = new System.Drawing.Size(55, 14);
+            metroLabel1.TabIndex = 310;
+            metroLabel1.Text = "Source:";
+            metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Verdana", 9F);
+            label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label2.Location = new System.Drawing.Point(1065, 100);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(75, 14);
+            label2.TabIndex = 333;
+            label2.Text = "Reference:";
+            label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new System.Drawing.Font("Verdana", 9F);
+            label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label17.Location = new System.Drawing.Point(1141, 259);
+            label17.Name = "label17";
+            label17.Size = new System.Drawing.Size(45, 14);
+            label17.TabIndex = 336;
+            label17.Text = "Level:";
+            label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new System.Drawing.Font("Verdana", 9F);
+            label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label19.Location = new System.Drawing.Point(1141, 320);
+            label19.Name = "label19";
+            label19.Size = new System.Drawing.Size(31, 14);
+            label19.TabIndex = 347;
+            label19.Text = "MH:";
+            label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Font = new System.Drawing.Font("Verdana", 9F);
+            label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label18.Location = new System.Drawing.Point(1141, 287);
+            label18.Name = "label18";
+            label18.Size = new System.Drawing.Size(51, 14);
+            label18.TabIndex = 345;
+            label18.Text = "Phase:";
+            label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label3
+            // 
+            label3.Location = new System.Drawing.Point(0, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(100, 23);
+            label3.TabIndex = 0;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Verdana", 9F);
+            label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label4.Location = new System.Drawing.Point(1065, 180);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(64, 14);
+            label4.TabIndex = 352;
+            label4.Text = "Revision:";
+            label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // CheckListRevisionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1518, 703);
+            this.Controls.Add(label4);
             this.Controls.Add(this.metroTextBoxMH);
             this.Controls.Add(this.checkBoxMH);
             this.Controls.Add(this.checkBoxPhase);
             this.Controls.Add(label19);
             this.Controls.Add(this.comboBoxPhase);
             this.Controls.Add(label18);
-            this.Controls.Add(_fromcheckListView);
-            this.Controls.Add(_tocheckListView);
-
             this.Controls.Add(this.checkBoxLevel);
             this.Controls.Add(this.checkBoxNotify);
             this.Controls.Add(this.checkBoxCheck);
@@ -665,7 +707,6 @@ namespace CAS.UI.UICAAControls.CheckList
             ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
@@ -686,7 +727,6 @@ namespace CAS.UI.UICAAControls.CheckList
         System.Windows.Forms.Label label18;
         System.Windows.Forms.Label label3;
 
-        System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox checkBoxRevisionValidTo;
         private System.Windows.Forms.NumericUpDown numericUpNotify;
         private System.Windows.Forms.DateTimePicker dateTimePickeValidTo;
@@ -696,8 +736,8 @@ namespace CAS.UI.UICAAControls.CheckList
         private MetroFramework.Controls.MetroTextBox metroTextBoxEditionNumber;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
-        private CheckListView _fromcheckListView;
-        private CheckListView _tocheckListView;
+        private CheckListRevisionView _fromcheckListView;
+        private CheckListRevisionView _tocheckListView;
         private AvControls.AvButtonT.AvButtonT ButtonAdd;
         private AvControls.AvButtonT.AvButtonT ButtonDelete;
         private MetroFramework.Controls.MetroTextBox metroTextBoxReference;

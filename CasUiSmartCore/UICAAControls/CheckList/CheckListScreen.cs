@@ -223,19 +223,30 @@ namespace CAS.UI.UICAAControls.CheckList
             var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
 
             var ds = GlobalObjects.CaaEnvironment.Execute($@"
-select c.ItemId,Max(EffDate) as Date  from dbo.CheckListRevision r
+select c.ItemId as CheckId, edition.EditionNumber ,edition.EditionDate, revision.RevisionNumber, revision.RevisionDate from dbo.CheckList c
 cross apply
 (
-	select top 1 ItemId, OperatorId from dbo.CheckList where r.CheckListId = ItemId and  OperatorId = {_operatorId}
-) c
-where r.IsDeleted = 0
-group by c.ItemId");
+	select top 1 Number as EditionNumber, EffDate as EditionDate  from dbo.CheckListRevision 
+	where CheckListId = c.ItemId and IsDeleted = 0 and Type = 0
+	order by EffDate desc
+)edition
+outer apply
+(
+	select top 1 Number as RevisionNumber, EffDate as RevisionDate  from dbo.CheckListRevision 
+	where CheckListId = c.ItemId and IsDeleted = 0 and Type = 1
+	order by EffDate desc
+)revision
+where c.IsDeleted = 0 and c.OperatorId = {_operatorId}
+order by c.ItemId");
 
             var revisions = ds.Tables[0].AsEnumerable()
 				.Select(dataRow => new 
                 {
-                    Id = dataRow.Field<int>("ItemId"),
-                    Date = dataRow.Field<DateTime>("Date"),
+                    Id = dataRow.Field<int>("CheckId"),
+                    EditionNumber = dataRow.Field<string>("EditionNumber"),
+                    EditionDate = dataRow.Field<DateTime?>("EditionDate"),
+                    RevisionNumber = dataRow.Field<string>("RevisionNumber"),
+                    RevisionDate = dataRow.Field<DateTime?>("RevisionDate"),
                 }).ToList();
 
 
@@ -247,25 +258,33 @@ group by c.ItemId");
 
 				check.Remains = Lifelength.Null;
                 check.Condition = ConditionState.Satisfactory;
-
-                var days = (check.Settings.RevisonValidToDate - DateTime.Today).Days;
-                var editionDays = 0;
-				if (!check.Settings.RevisonValidTo)
-                    editionDays = (check.Settings.EditionDate - DateTime.Today).Days;
-                else
+                
+                
+                var revision = revisions.FirstOrDefault(i => i.Id == check.ItemId);
+                if (revision != null)
                 {
-                    var revision = revisions.FirstOrDefault(i => i.Id == check.ItemId);
-					if(revision != null)
-                        editionDays = (revision.Date - DateTime.Today).Days;
+	                check.EditionNumber = revision.EditionNumber;
+	                check.RevisionNumber = revision.RevisionNumber;
                 }
-
-                check.Remains = new Lifelength(days - editionDays, null, null);
-
-
-				if(check.Remains.Days < 0)
-                    check.Condition = ConditionState.Overdue;
-				else if (check.Remains.Days >= 0 && check.Remains.Days <= check.Settings.RevisonValidToNotify)
-                    check.Condition = ConditionState.Notify;
+                
+    //             var days = (check.Settings.RevisonValidToDate - DateTime.Today).Days;
+    //             var editionDays = 0;
+				// if (!check.Settings.RevisonValidTo)
+    //                 editionDays = (check.Settings.EditionDate - DateTime.Today).Days;
+    //             else
+    //             {
+    //                 var revision = revisions.FirstOrDefault(i => i.Id == check.ItemId);
+				// 	if(revision != null)
+    //                     editionDays = (revision.Date - DateTime.Today).Days;
+    //             }
+    //
+    //             check.Remains = new Lifelength(days - editionDays, null, null);
+    //
+    //
+				// if(check.Remains.Days < 0)
+    //                 check.Condition = ConditionState.Overdue;
+				// else if (check.Remains.Days >= 0 && check.Remains.Days <= check.Settings.RevisonValidToNotify)
+    //                 check.Condition = ConditionState.Notify;
 			}
 
 
