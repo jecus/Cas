@@ -230,11 +230,11 @@ cross apply
 	select top 1 r.Number from dbo.CheckListRevisionRecord  rec
 	cross apply
 	(
-		select Number, Type, OperatorId from dbo.CheckListRevision 
+		select Number,EffDate, Type, OperatorId from dbo.CheckListRevision 
 		where ItemId = rec.ParentId
 	)r
 	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 0 and r.OperatorId = {_operatorId}
-	order by EffDate desc
+	order by r.EffDate desc
 ) res");
 
             var dsRevision = GlobalObjects.CaaEnvironment.Execute($@"
@@ -244,11 +244,11 @@ cross apply
 	select top 1 r.Number from dbo.CheckListRevisionRecord  rec
 	cross apply
 	(
-		select Number, Type, OperatorId from dbo.CheckListRevision 
+		select Number,EffDate, Type, OperatorId from dbo.CheckListRevision 
 		where ItemId = rec.ParentId
 	)r
 	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 1 and r.OperatorId = {_operatorId}
-	order by EffDate desc
+	order by r.EffDate desc
 ) res");
 
             var editions = dsEdition.Tables[0].AsEnumerable()

@@ -14,6 +14,12 @@ namespace SmartCore.CAA.Check
 
         [Filter("Type", Order = 2)]
         RevisionType Type { get; set; }
+
+        [Filter("Date", Order = 3)]
+         DateTime Date { get; set; }
+
+        [Filter("EffDate", Order = 4)]
+         DateTime EffDate { get; set; }
     }
 
     [CAADto(typeof(CheckListRevisionDTO))]
@@ -25,6 +31,10 @@ namespace SmartCore.CAA.Check
         public string Number { get; set; }
 
         public RevisionType Type { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public DateTime EffDate { get; set; }
 
         public string SettingsJSON
         {
@@ -48,6 +58,8 @@ namespace SmartCore.CAA.Check
 
         public CheckListRevision()
         {
+            Date = DateTime.Today;
+            EffDate = DateTime.Today;
             Settings = new CheckListRevisionSettings();
         }
 

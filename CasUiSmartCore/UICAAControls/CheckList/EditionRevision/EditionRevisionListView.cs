@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
+using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA.Check;
-using Telerik.WinControls.Data;
+using SmartCore.Entities.General;
 
 namespace CAS.UI.UICAAControls.CheckList
 {
@@ -12,8 +15,16 @@ namespace CAS.UI.UICAAControls.CheckList
 	///</summary>
 	public partial class EditionRevisionListView : BaseGridViewControl<CheckListRevision>
 	{
+        private readonly AnimatedThreadWorker _animatedThreadWorker;
+
         public EditionRevisionListView()
         {
+            InitializeComponent();
+        }
+         
+        public EditionRevisionListView(AnimatedThreadWorker animatedThreadWorker)
+        {
+            _animatedThreadWorker = animatedThreadWorker;
             InitializeComponent();
         }
 
@@ -28,6 +39,8 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             AddColumn("№", (int)(radGridView1.Width * 0.20f));
             AddColumn("Type", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Date", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Eff Date", (int)(radGridView1.Width * 0.24f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.24f));
         }
         #endregion
@@ -42,6 +55,8 @@ namespace CAS.UI.UICAAControls.CheckList
 
             subItems.Add(CreateRow(item.Number, item.Number));
             subItems.Add(CreateRow(item.Type.ToString(), item.Type));
+            subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Date), item.Date));
+            subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.EffDate), item.EffDate));
             subItems.Add(CreateRow(author, author));
 
             return subItems;
@@ -49,8 +64,39 @@ namespace CAS.UI.UICAAControls.CheckList
 
         #endregion
 
-        
+        public override void ButtonDeleteClick(object sender, EventArgs e)
+        {
+            if (this.SelectedItems == null ||
+                this.SelectedItems.Count == 0) return;
+
+            string typeName = nameof(CheckLists);
+
+            DialogResult confirmResult =
+                MessageBox.Show(this.SelectedItems.Count == 1
+                        ? "Do you really want to delete " + typeName + " " + this.SelectedItems[0] + "?"
+                        : "Do you really want to delete selected " + typeName + "s?", "Confirm delete operation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                this.radGridView1.BeginUpdate();
+                GlobalObjects.NewKeeper.Delete(this.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
+
+                foreach (var check in this.SelectedItems)
+                {
+                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
+                        $"update dbo.CheckListRevisionRecord set IsDeleted = 1 where ParentId = {check.ItemId})");
+
+                }
+
+
+                this.radGridView1.EndUpdate();
+                _animatedThreadWorker.RunWorkerAsync();
+            }
+        }
+
+
         #endregion
-        
+
     }
 }

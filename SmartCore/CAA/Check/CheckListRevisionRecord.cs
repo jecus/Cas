@@ -11,9 +11,6 @@ namespace SmartCore.CAA.Check
     {
         public int CheckListId { get; set; }
 
-        public DateTime Date { get; set; }
-
-        public DateTime EffDate { get; set; }
 
         public string SettingsJSON { get; set; }
         public int ParentId { get; set; }
@@ -22,8 +19,7 @@ namespace SmartCore.CAA.Check
 
         public CheckListRevisionRecord()
         {
-            Date = DateTime.Today;
-            EffDate = DateTime.Today;
+            
         }
     }
 }

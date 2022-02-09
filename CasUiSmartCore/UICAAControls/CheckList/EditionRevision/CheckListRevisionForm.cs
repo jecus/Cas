@@ -60,23 +60,23 @@ namespace CAS.UI.UICAAControls.CheckList
 select c.ItemId as CheckId, res.Number, res.EffDate from dbo.CheckList c
 cross apply
 (
-	select top 2 r.Number, rec.EffDate from dbo.CheckListRevisionRecord  rec
+	select top 2 r.Number, r.EffDate from dbo.CheckListRevisionRecord  rec
 	cross apply
 	(
-		select Number, Type, OperatorId from dbo.CheckListRevision 
+		select Number,EffDate, Type, OperatorId from dbo.CheckListRevision 
 		where ItemId = rec.ParentId
 	)r
-	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 0 and r.OperatorId = -1
-	order by EffDate desc
+	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 0 and r.OperatorId = {_operatorId}
+	order by r.EffDate desc
 ) res");
 
             var dsRevision = GlobalObjects.CaaEnvironment.Execute($@"select c.ItemId as CheckId, res.Number, res.EffDate from dbo.CheckList c
 cross apply
 (
-	select top 2 r.Number, rec.EffDate from dbo.CheckListRevisionRecord  rec
+	select top 2 r.Number, r.EffDate from dbo.CheckListRevisionRecord  rec
 	cross apply
 	(
-		select ItemId, Number, Type, OperatorId from dbo.CheckListRevision 
+		select ItemId,EffDate, Number, Type, OperatorId from dbo.CheckListRevision 
 		where ItemId = rec.ParentId
 	)r
 	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 1 and r.OperatorId = {_operatorId} and (r.ItemId > (select top 1 q.ItemId  from dbo.CheckListRevisionRecord r1
@@ -86,7 +86,7 @@ cross apply
 																																			)q
 																																			where q.Type = 0 and r1.CheckListId = c.ItemId and IsDeleted = 0 
 																																			order by ItemId desc))
-	order by EffDate desc
+	order by r.EffDate desc
 ) res
 ");
 
@@ -178,14 +178,14 @@ cross apply
                     {
                         Number = metroTextBoxEditionNumber.Text,
                         Type = RevisionType.Edition,
-                        OperatorId = _operatorId
+                        OperatorId = _operatorId,
+                        Date = dateTimePickerEditionDate.Value.Date,
+                        EffDate = dateTimePickerEditionEff.Value.Date,
                     };
 
                     _revisions.Add(new CheckListRevisionRecord()
                     {
                         CheckListId = checks.ItemId,
-                        Date = dateTimePickerEditionDate.Value.Date,
-                        EffDate = dateTimePickerEditionEff.Value.Date,
                     });
                 }
                 if (checkBoxRevisionValidTo.Checked)
@@ -194,14 +194,13 @@ cross apply
                     {
                         Number = metroTextBoxRevision.Text,
                         Type = RevisionType.Revision,
-                        OperatorId = _operatorId
+                        OperatorId = _operatorId,
+                        Date = dateTimePickerRevisionDate.Value.Date,
+                        EffDate = RevisionEff.Value.Date,
                     };
                     _revisions.Add(new CheckListRevisionRecord()
                     {
                         CheckListId = checks.ItemId,
-                        Date = dateTimePickerRevisionDate.Value.Date,
-                        EffDate = RevisionEff.Value.Date,
-                        
                     });
                 }
                 if(checkBoxCheck.Checked)

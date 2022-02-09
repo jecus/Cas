@@ -1433,7 +1433,9 @@ namespace SmartCore.DtoHelper
                 CorrectorId = levels.CorrectorId,
                 Updated = levels.Updated,
                 OperatorId = levels.OperatorId,
-                Number = levels.Number,
+                EffDate = levels.EffDate,
+                Date = levels.Date,
+				Number = levels.Number,
                 Type = levels.Type,
                 SettingsJSON = levels.SettingsJSON,
             };
@@ -1450,6 +1452,8 @@ namespace SmartCore.DtoHelper
 				IsDeleted = levels.IsDeleted,
 				CorrectorId = levels.CorrectorId,
 				Updated = levels.Updated,
+                EffDate = levels.EffDate,
+                Date = levels.Date,
 				OperatorId = levels.OperatorId,
 				Number = levels.Number,
 				Type = levels.Type,
@@ -1467,10 +1471,10 @@ namespace SmartCore.DtoHelper
                 IsDeleted = levels.IsDeleted,
                 CorrectorId = levels.CorrectorId,
                 Updated = levels.Updated,
-                EffDate = levels.EffDate,
-                CheckListId = levels.CheckListId,
+                
+				CheckListId = levels.CheckListId,
                 ParentId = levels.ParentId,
-                Date = levels.Date,
+                
                 SettingsJSON = levels.SettingsJSON,
             };
 
@@ -1486,9 +1490,8 @@ namespace SmartCore.DtoHelper
                 IsDeleted = levels.IsDeleted,
                 CorrectorId = levels.CorrectorId,
                 Updated = levels.Updated,
-                EffDate = levels.EffDate,
                 ParentId = levels.ParentId,
-				Date = levels.Date,
+				
                 CheckListId = levels.CheckListId,
                 SettingsJSON = levels.SettingsJSON,
             };
