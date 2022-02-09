@@ -1432,11 +1432,9 @@ namespace SmartCore.DtoHelper
                 IsDeleted = levels.IsDeleted,
                 CorrectorId = levels.CorrectorId,
                 Updated = levels.Updated,
-                EffDate = levels.EffDate,
-                CheckListId = levels.CheckListId,
+                OperatorId = levels.OperatorId,
                 Number = levels.Number,
                 Type = levels.Type,
-                Date = levels.Date,
                 SettingsJSON = levels.SettingsJSON,
             };
 
@@ -1449,16 +1447,51 @@ namespace SmartCore.DtoHelper
             var res = new CheckListRevisionDTO()
             {
 				ItemId = levels.ItemId,
+				IsDeleted = levels.IsDeleted,
+				CorrectorId = levels.CorrectorId,
+				Updated = levels.Updated,
+				OperatorId = levels.OperatorId,
+				Number = levels.Number,
+				Type = levels.Type,
+				SettingsJSON = levels.SettingsJSON,
+			};
+
+            return res;
+        }
+
+        public static CheckListRevisionRecord ConvertCAA(this CheckListRevisionRecordDTO levels)
+        {
+            var res = new CheckListRevisionRecord()
+            {
+                ItemId = levels.ItemId,
                 IsDeleted = levels.IsDeleted,
                 CorrectorId = levels.CorrectorId,
                 Updated = levels.Updated,
                 EffDate = levels.EffDate,
-                Type = levels.Type,
+                CheckListId = levels.CheckListId,
+                ParentId = levels.ParentId,
                 Date = levels.Date,
-				CheckListId = levels.CheckListId,
-                Number = levels.Number,
                 SettingsJSON = levels.SettingsJSON,
-			};
+            };
+
+
+            return res;
+        }
+
+        public static CheckListRevisionRecordDTO ConvertCAA(this CheckListRevisionRecord levels)
+        {
+            var res = new CheckListRevisionRecordDTO()
+            {
+                ItemId = levels.ItemId,
+                IsDeleted = levels.IsDeleted,
+                CorrectorId = levels.CorrectorId,
+                Updated = levels.Updated,
+                EffDate = levels.EffDate,
+                ParentId = levels.ParentId,
+				Date = levels.Date,
+                CheckListId = levels.CheckListId,
+                SettingsJSON = levels.SettingsJSON,
+            };
 
             return res;
         }

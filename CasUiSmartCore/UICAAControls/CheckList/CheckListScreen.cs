@@ -20,6 +20,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls.Audit;
 using CAS.UI.UIControls.NewGrid;
 using SmartCore.CAA.Audit;
@@ -222,31 +223,46 @@ namespace CAS.UI.UICAAControls.CheckList
 
             var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
 
-            var ds = GlobalObjects.CaaEnvironment.Execute($@"
-select c.ItemId as CheckId, edition.EditionNumber ,edition.EditionDate, revision.RevisionNumber, revision.RevisionDate from dbo.CheckList c
+            var dsEdition = GlobalObjects.CaaEnvironment.Execute($@"
+select c.ItemId as CheckId, res.Number from dbo.CheckList c
 cross apply
 (
-	select top 1 Number as EditionNumber, EffDate as EditionDate  from dbo.CheckListRevision 
-	where CheckListId = c.ItemId and IsDeleted = 0 and Type = 0
+	select top 1 r.Number from dbo.CheckListRevisionRecord  rec
+	cross apply
+	(
+		select Number, Type, OperatorId from dbo.CheckListRevision 
+		where ItemId = rec.ParentId
+	)r
+	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 0 and r.OperatorId = {_operatorId}
 	order by EffDate desc
-)edition
-outer apply
-(
-	select top 1 Number as RevisionNumber, EffDate as RevisionDate  from dbo.CheckListRevision 
-	where CheckListId = c.ItemId and IsDeleted = 0 and Type = 1
-	order by EffDate desc
-)revision
-where c.IsDeleted = 0 and c.OperatorId = {_operatorId}
-order by c.ItemId");
+) res");
 
-            var revisions = ds.Tables[0].AsEnumerable()
-				.Select(dataRow => new 
+            var dsRevision = GlobalObjects.CaaEnvironment.Execute($@"
+select c.ItemId as CheckId, res.Number from dbo.CheckList c
+cross apply
+(
+	select top 1 r.Number from dbo.CheckListRevisionRecord  rec
+	cross apply
+	(
+		select Number, Type, OperatorId from dbo.CheckListRevision 
+		where ItemId = rec.ParentId
+	)r
+	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 1 and r.OperatorId = {_operatorId}
+	order by EffDate desc
+) res");
+
+            var editions = dsEdition.Tables[0].AsEnumerable()
+                .Select(dataRow => new
                 {
                     Id = dataRow.Field<int>("CheckId"),
-                    EditionNumber = dataRow.Field<string>("EditionNumber"),
-                    EditionDate = dataRow.Field<DateTime?>("EditionDate"),
-                    RevisionNumber = dataRow.Field<string>("RevisionNumber"),
-                    RevisionDate = dataRow.Field<DateTime?>("RevisionDate"),
+                    Number = dataRow.Field<string>("Number"),
+                }).ToList();
+
+            var revisions = dsRevision.Tables[0].AsEnumerable()
+                .Select(dataRow => new
+                {
+                    Id = dataRow.Field<int>("CheckId"),
+                    Number = dataRow.Field<string>("Number"),
                 }).ToList();
 
 
@@ -258,33 +274,36 @@ order by c.ItemId");
 
 				check.Remains = Lifelength.Null;
                 check.Condition = ConditionState.Satisfactory;
-                
-                
+
+
                 var revision = revisions.FirstOrDefault(i => i.Id == check.ItemId);
                 if (revision != null)
-                {
-	                check.EditionNumber = revision.EditionNumber;
-	                check.RevisionNumber = revision.RevisionNumber;
-                }
-                
-    //             var days = (check.Settings.RevisonValidToDate - DateTime.Today).Days;
-    //             var editionDays = 0;
+                    check.RevisionNumber = revision.Number;
+
+                var edition = editions.FirstOrDefault(i => i.Id == check.ItemId);
+                if (edition != null)
+                    check.EditionNumber = edition.Number;
+
+
+
+				//             var days = (check.Settings.RevisonValidToDate - DateTime.Today).Days;
+				//             var editionDays = 0;
 				// if (!check.Settings.RevisonValidTo)
-    //                 editionDays = (check.Settings.EditionDate - DateTime.Today).Days;
-    //             else
-    //             {
-    //                 var revision = revisions.FirstOrDefault(i => i.Id == check.ItemId);
+				//                 editionDays = (check.Settings.EditionDate - DateTime.Today).Days;
+				//             else
+				//             {
+				//                 var revision = revisions.FirstOrDefault(i => i.Id == check.ItemId);
 				// 	if(revision != null)
-    //                     editionDays = (revision.Date - DateTime.Today).Days;
-    //             }
-    //
-    //             check.Remains = new Lifelength(days - editionDays, null, null);
-    //
-    //
+				//                     editionDays = (revision.Date - DateTime.Today).Days;
+				//             }
+				//
+				//             check.Remains = new Lifelength(days - editionDays, null, null);
+				//
+				//
 				// if(check.Remains.Days < 0)
-    //                 check.Condition = ConditionState.Overdue;
+				//                 check.Condition = ConditionState.Overdue;
 				// else if (check.Remains.Days >= 0 && check.Remains.Days <= check.Settings.RevisonValidToNotify)
-    //                 check.Condition = ConditionState.Notify;
+				//                 check.Condition = ConditionState.Notify;
 			}
 
 
@@ -565,9 +584,23 @@ order by c.ItemId");
                 AnimatedThreadWorker.RunWorkerAsync();
         }
 
+        private void ButtonRevisionsClick(object sender, EventArgs e)
+        {
+	        var refE = new ReferenceEventArgs();
+	        var dp = new DisplayerParams()
+	        {
+		        Page = new EditionRevisionListScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _operatorId),
+		        TypeOfReflection = ReflectionTypes.DisplayInNew,
+		        PageCaption = $"Edition/Revision",
+		        DisplayerType = DisplayerType.Screen
+	        };
+	        refE.SetParameters(dp);
+	        InvokeDisplayerRequested(refE);
+        }
+
         private void ButtonCARClick(object sender, EventArgs e)
         {
-            
+	        
         }
     }
 }

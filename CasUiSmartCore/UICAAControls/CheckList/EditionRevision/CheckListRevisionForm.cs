@@ -23,7 +23,8 @@ namespace CAS.UI.UICAAControls.CheckList
     public partial class CheckListRevisionForm : MetroForm
     {
         private readonly int _operatorId;
-        private List<BaseEntityObject> _revisions = new List<BaseEntityObject>();
+        private List<CheckListRevisionRecord> _revisions = new List<CheckListRevisionRecord>();
+        private CheckListRevision revisionedition = new CheckListRevision();
         private CommonCollection<CheckLists> _addedChecks = new CommonCollection<CheckLists>();
         private CommonCollection<CheckLists> _updateChecks = new CommonCollection<CheckLists>();
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
@@ -45,7 +46,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
-            var ids = _updateChecks.Select(i => i.ItemId).ToArray();
+            revisionedition = new CheckListRevision();
             _updateChecks.Clear();
             _revisions.Clear();
             _addedChecks.Clear();
@@ -56,46 +57,58 @@ namespace CAS.UI.UICAAControls.CheckList
             _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
 
             var dsEdition = GlobalObjects.CaaEnvironment.Execute($@"
-select c.ItemId as CheckId, edition.EditionNumber ,edition.EditionDate from dbo.CheckList c
+select c.ItemId as CheckId, res.Number, res.EffDate from dbo.CheckList c
 cross apply
 (
-	select top 2 Number as EditionNumber, EffDate as EditionDate  from dbo.CheckListRevision 
-	where CheckListId = c.ItemId and IsDeleted = 0 and Type = 0
+	select top 2 r.Number, rec.EffDate from dbo.CheckListRevisionRecord  rec
+	cross apply
+	(
+		select Number, Type, OperatorId from dbo.CheckListRevision 
+		where ItemId = rec.ParentId
+	)r
+	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 0 and r.OperatorId = -1
 	order by EffDate desc
-)edition
-where c.IsDeleted = 0 and c.OperatorId = {_operatorId}
-order by c.ItemId");
-            
-            var dsRevision = GlobalObjects.CaaEnvironment.Execute($@"
-select c.ItemId as CheckId,revision.RevisionNumber, revision.RevisionDate,revision.RevisionEffDate from dbo.CheckList c
+) res");
+
+            var dsRevision = GlobalObjects.CaaEnvironment.Execute($@"select c.ItemId as CheckId, res.Number, res.EffDate from dbo.CheckList c
 cross apply
 (
-	select top 2 Number as RevisionNumber, Date as RevisionDate, EffDate as RevisionEffDate  from dbo.CheckListRevision 
-	where CheckListId = c.ItemId and IsDeleted = 0 and Type = 1 and (ItemId > (select top 1 ItemId  from dbo.CheckListRevision where Type = 0 and CheckListId = c.ItemId and IsDeleted = 0 order by ItemId desc))
+	select top 2 r.Number, rec.EffDate from dbo.CheckListRevisionRecord  rec
+	cross apply
+	(
+		select ItemId, Number, Type, OperatorId from dbo.CheckListRevision 
+		where ItemId = rec.ParentId
+	)r
+	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 1 and r.OperatorId = {_operatorId} and (r.ItemId > (select top 1 q.ItemId  from dbo.CheckListRevisionRecord r1
+																																			cross apply
+																																			(
+																																				select top 1 ItemId, Type from dbo.CheckListRevision where ItemId = r1.ParentId
+																																			)q
+																																			where q.Type = 0 and r1.CheckListId = c.ItemId and IsDeleted = 0 
+																																			order by ItemId desc))
 	order by EffDate desc
-)revision
-where c.IsDeleted = 0 and c.OperatorId = {_operatorId}
-order by c.ItemId");
-            
-            
+) res
+");
+
+
             var revisions = dsRevision.Tables[0].AsEnumerable()
-                .Select(dataRow => new 
+                .Select(dataRow => new
                 {
                     Id = dataRow.Field<int>("CheckId"),
-                    RevisionNumber = dataRow.Field<string>("RevisionNumber"),
-                    RevisionDate = dataRow.Field<DateTime?>("RevisionDate"),
+                    Number = dataRow.Field<string>("Number"),
+                    EffDate = dataRow.Field<DateTime?>("EffDate"),
                 }).ToList();
-            
+
             var editions = dsEdition.Tables[0].AsEnumerable()
-                .Select(dataRow => new 
+                .Select(dataRow => new
                 {
                     Id = dataRow.Field<int>("CheckId"),
-                    EditionNumber = dataRow.Field<string>("EditionNumber"),
-                    EditionDate = dataRow.Field<DateTime?>("EditionDate"),
+                    Number = dataRow.Field<string>("Number"),
+                    EffDate = dataRow.Field<DateTime?>("EffDate"),
                 }).ToList();
-            
-            
-            
+
+
+
             foreach (var check in _addedChecks)
             {
                 var revision = revisions.Where(i => i.Id == check.ItemId).ToList();
@@ -103,27 +116,27 @@ order by c.ItemId");
 
                 if (revision.Any())
                 {
-                    if(revision.Count == 1)
-                        check.RevisionNumber = revision.LastOrDefault()?.RevisionNumber;
+                    if (revision.Count == 1)
+                        check.RevisionNumber = revision.LastOrDefault()?.Number;
                     else
                     {
-                        check.NextRevisionNumber = revision.FirstOrDefault()?.RevisionNumber;
-                        check.RevisionNumber = revision.LastOrDefault()?.RevisionNumber;
+                        check.NextRevisionNumber = revision.FirstOrDefault()?.Number;
+                        check.RevisionNumber = revision.LastOrDefault()?.Number;
                     }
                 }
-                
+
                 if (edition.Any())
                 {
                     if (edition.Count == 1)
-                        check.EditionNumber = edition.LastOrDefault()?.EditionNumber;  
+                        check.EditionNumber = edition.LastOrDefault()?.Number;
                     else
                     {
-                        check.NextEditionNumber = edition.FirstOrDefault()?.EditionNumber;
-                        check.EditionNumber = edition.LastOrDefault()?.EditionNumber;  
+                        check.NextEditionNumber = edition.FirstOrDefault()?.Number;
+                        check.EditionNumber = edition.LastOrDefault()?.Number;
                     }
                 }
-                
-                
+
+
                 check.Level = _levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
                               FindingLevels.Unknown;
 
@@ -131,20 +144,6 @@ order by c.ItemId");
                 check.Remains = Lifelength.Null;
                 check.Condition = ConditionState.Satisfactory;
             }
-
-            if (ids.Any())
-            {
-                var checks = _addedChecks.ToArray();
-                foreach (var check in checks)
-                {
-                    if (ids.Contains(check.ItemId))
-                    {
-                        _updateChecks.Add(check);
-                        _addedChecks.Remove(check);
-                    }
-                }
-            }
-            
         }
 
         private void UpdateInformation()
@@ -175,24 +174,34 @@ order by c.ItemId");
                     checks.Source = metroTextSource.Text;
                 if(checkBoxEdition.Checked)
                 {
-                    _revisions.Add(new CheckListRevision()
+                    revisionedition = new CheckListRevision()
+                    {
+                        Number = metroTextBoxEditionNumber.Text,
+                        Type = RevisionType.Edition,
+                        OperatorId = _operatorId
+                    };
+
+                    _revisions.Add(new CheckListRevisionRecord()
                     {
                         CheckListId = checks.ItemId,
                         Date = dateTimePickerEditionDate.Value.Date,
                         EffDate = dateTimePickerEditionEff.Value.Date,
-                        Number = metroTextBoxEditionNumber.Text,
-                        Type = RevisionType.Edition
                     });
                 }
                 if (checkBoxRevisionValidTo.Checked)
                 {
-                    _revisions.Add(new CheckListRevision()
+                    revisionedition = new CheckListRevision()
+                    {
+                        Number = metroTextBoxRevision.Text,
+                        Type = RevisionType.Revision,
+                        OperatorId = _operatorId
+                    };
+                    _revisions.Add(new CheckListRevisionRecord()
                     {
                         CheckListId = checks.ItemId,
                         Date = dateTimePickerRevisionDate.Value.Date,
                         EffDate = RevisionEff.Value.Date,
-                        Number = metroTextBoxRevision.Text,
-                        Type = RevisionType.Revision
+                        
                     });
                 }
                 if(checkBoxCheck.Checked)
@@ -297,7 +306,11 @@ order by c.ItemId");
                         foreach (var checks in _updateChecks)
                             GlobalObjects.CaaEnvironment.NewKeeper.Save(checks);
 
-                        GlobalObjects.CaaEnvironment.NewKeeper.BulkInsert(_revisions);
+                        GlobalObjects.CaaEnvironment.NewKeeper.Save(revisionedition);
+                        foreach (var r in _revisions)
+                            r.ParentId = revisionedition.ItemId;
+
+                        GlobalObjects.CaaEnvironment.NewKeeper.BulkInsert(_revisions.Cast<BaseEntityObject>().ToList());
 
 
                         MessageBox.Show("All records updated successfull!", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
@@ -403,12 +416,6 @@ order by c.ItemId");
                     dateTimePickerRevisionDate.Enabled=
                         RevisionEff.Enabled 
                         = checkBoxRevisionValidTo.Checked;
-        }
-
-        private void avButtonT2_Click(object sender, EventArgs e)
-        {
-            var form = new CheckListRevEditForm();
-            form.ShowDialog();
         }
     }
 }

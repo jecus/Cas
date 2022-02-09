@@ -6,17 +6,17 @@ namespace CAS.UI.UICAAControls.CheckList
 {
     public partial class RevisionControl : UserControl
     {
-        public readonly CheckListRevision Revision;
+        public readonly CheckListRevisionRecord Record;
 
         public RevisionControl()
         {
             InitializeComponent();
         }
 
-        public RevisionControl(CheckListRevision revision) 
+        public RevisionControl(CheckListRevisionRecord record) 
         {
             InitializeComponent();
-            Revision = revision;
+            Record = record;
             EnableControls(false);
             UpdateInformation();
 
@@ -26,16 +26,17 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             metroTextBoxRemark.Enabled =
                 metroTextBoxRevision.Enabled =
+                dateTimePickerEffDate.Enabled =
                     dateTimePickerRevisionDate.Enabled = state;
         }
 
         private void UpdateInformation()
         {
-            label1.Text = Revision.Type.ToString();
-            metroTextBoxRemark.Text = Revision.Settings.Remark;
-            metroTextBoxRevision.Text = Revision.Number;
-            dateTimePickerRevisionDate.Value = Revision.Date;
-            dateTimePickerEffDate.Value = Revision.EffDate;
+            label1.Text = Record.Parent?.Type.ToString();
+            metroTextBoxRemark.Text = Record.Parent?.Settings.Remark;
+            metroTextBoxRevision.Text = Record.Parent?.Number;
+            dateTimePickerRevisionDate.Value = Record.Date;
+            dateTimePickerEffDate.Value = Record.EffDate;
         }
 
         public event EventHandler<EventArgs> Deleted;

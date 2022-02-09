@@ -12,4 +12,12 @@ namespace CAA.API.Controllers.General
 		{
 		}
 	}
+	
+	[Route("checklistrevisionrecord")]
+	public class CheckListRevisionRecordController : BaseController<CheckListRevisionRecordDTO>
+	{
+		public CheckListRevisionRecordController(DataContext context, ILogger<BaseController<CheckListRevisionRecordDTO>> logger) : base(context, logger)
+		{
+		}
+	}
 }

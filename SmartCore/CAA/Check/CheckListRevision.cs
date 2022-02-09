@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
 using SmartCore.Entities.General;
@@ -8,13 +9,11 @@ namespace SmartCore.CAA.Check
 {
     [CAADto(typeof(CheckListRevisionDTO))]
     [Serializable]
-    public class CheckListRevision : BaseEntityObject
+    public class CheckListRevision : BaseEntityObject, IOperatable
     {
         public int CheckListId { get; set; }
 
         public string Number { get; set; }
-
-        public DateTime EffDate { get; set; }
 
         public RevisionType Type { get; set; }
 
@@ -36,12 +35,10 @@ namespace SmartCore.CAA.Check
         }
 
         public CheckListRevisionSettings Settings { get; set; }
-        public DateTime Date { get; set; }
-
+        public int OperatorId { get; set; }
 
         public CheckListRevision()
         {
-            EffDate = DateTime.Today;
             Settings = new CheckListRevisionSettings();
         }
 

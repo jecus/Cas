@@ -59,13 +59,21 @@ namespace CAS.UI.UICAAControls.CheckList
                 _currentCheck.CheckListRecords.Clear();
                 _currentCheck.CheckListRecords.AddRange(records);
 
-
-                var revisions =
-                    GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new Filter("CheckListId", _currentCheck.ItemId));
-
                 _currentCheck.AllRevisions.Clear();
-                _currentCheck.AllRevisions.AddRange(revisions);
+                var revisionRec =
+                    GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionRecordDTO, CheckListRevisionRecord>(new Filter("CheckListId", _currentCheck.ItemId));
+                if (revisionRec.Any())
+                {
+                    var ids = revisionRec.Select(i => i.ParentId);
+                    var revisions = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new Filter("ItemId", ids));
 
+                    foreach (var rec in revisionRec)
+                    {
+                        rec.Parent = revisions.FirstOrDefault(i => i.ItemId == rec.ParentId);
+                    }
+
+                    _currentCheck.AllRevisions.AddRange(revisionRec);
+                }
 
                 var links = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAItemFileLinkDTO, ItemFileLink>(new List<Filter>()
                 {
@@ -298,12 +306,12 @@ namespace CAS.UI.UICAAControls.CheckList
             var dialogResult = MessageBox.Show("Do you really want to delete revision?", "Deleting confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
             if (dialogResult == DialogResult.Yes)
             {
-                if (control.Revision.ItemId > 0)
+                if (control.Record.ItemId > 0)
                 {
                     try
                     {
-                        _currentCheck.AllRevisions.Remove(control.Revision);
-                        GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.Revision);
+                        _currentCheck.AllRevisions.Remove(control.Record);
+                        GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.Record);
                     }
                     catch (Exception ex)
                     {
@@ -317,7 +325,7 @@ namespace CAS.UI.UICAAControls.CheckList
         }
 
 
-        private void UpdateRevision(CheckListRevision rec)
+        private void UpdateRevision(CheckListRevisionRecord rec)
         {
             var control = new RevisionControl(rec);
             control.Deleted += ControlRevision_Deleted;
