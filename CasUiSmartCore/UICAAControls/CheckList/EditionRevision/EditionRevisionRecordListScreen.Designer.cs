@@ -3,7 +3,7 @@ using Entity.Abstractions;
 
 namespace CAS.UI.UICAAControls.CheckList
 {
-    partial class EditionRevisionListScreen
+    partial class EditionRevisionRecordListScreen
 	{
         /// <summary> 
         /// Требуется переменная конструктора.

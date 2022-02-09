@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using Auxiliary;
-using CAS.UI.Interfaces;
-using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA.Check;
-using SmartCore.Entities.General;
 using Telerik.WinControls.Data;
-using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CheckList
 {

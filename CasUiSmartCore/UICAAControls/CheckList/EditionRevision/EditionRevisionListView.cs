@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
@@ -86,15 +88,26 @@ namespace CAS.UI.UICAAControls.CheckList
                 {
                     GlobalObjects.CaaEnvironment.NewLoader.Execute(
                         $"update dbo.CheckListRevisionRecord set IsDeleted = 1 where ParentId = {check.ItemId})");
-
                 }
-
-
+                
                 this.radGridView1.EndUpdate();
                 _animatedThreadWorker.RunWorkerAsync();
             }
         }
 
+        
+        #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+
+        protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+        {
+            if (SelectedItem != null)
+            {
+                e.DisplayerText = $"{SelectedItem.Type} : {SelectedItem.Number}";
+                e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+                e.RequestedEntity = new EditionRevisionRecordListScreen(GlobalObjects.CaaEnvironment.Operators[0], SelectedItem.ItemId);
+            }
+        }
+        #endregion
 
         #endregion
 

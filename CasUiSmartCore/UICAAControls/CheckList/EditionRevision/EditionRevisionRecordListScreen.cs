@@ -14,6 +14,10 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.Dictionary;
+using SmartCore.CAA.FindingLevel;
+using SmartCore.Calculations;
+using SmartCore.Entities.Dictionaries;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CheckList
@@ -21,28 +25,28 @@ namespace CAS.UI.UICAAControls.CheckList
     ///<summary>
     ///</summary>
     [ToolboxItem(false)]
-	public partial class EditionRevisionListScreen : ScreenControl
+	public partial class EditionRevisionRecordListScreen : ScreenControl
 	{
-        private readonly int _operatorId;
-        private CommonCollection<CheckListRevision> _initialDocumentArray = new CommonCollection<CheckListRevision>();
-		private CommonCollection<CheckListRevision> _resultDocumentArray = new CommonCollection<CheckListRevision>();
+		private readonly int _parentId;
+		private CommonCollection<CheckLists> _initialDocumentArray = new CommonCollection<CheckLists>();
+		private CommonCollection<CheckLists> _resultDocumentArray = new CommonCollection<CheckLists>();
 		private CommonFilterCollection _filter;
 
-		private EditionRevisionListView _directivesViewer;
+		private CheckListView _directivesViewer;
         private RadMenuItem _toolStripMenuItemOpen;
 
 		
-		public EditionRevisionListScreen()
+		public EditionRevisionRecordListScreen()
 		{
 			InitializeComponent();
 		}
 		
-        public EditionRevisionListScreen(Operator currentOperator, int operatorId)
+        public EditionRevisionRecordListScreen(Operator currentOperator, int parentId)
             : this()
         {
             if (currentOperator == null)
                 throw new ArgumentNullException("currentOperator");
-            _operatorId = operatorId;
+            _parentId = parentId;
             aircraftHeaderControl1.Operator = currentOperator;
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
@@ -73,7 +77,28 @@ namespace CAS.UI.UICAAControls.CheckList
             _resultDocumentArray.Clear();
 
             AnimatedThreadWorker.ReportProgress(0, "load");
-			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new Filter("OperatorId", _operatorId)));
+
+
+            var records = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionRecordDTO, CheckListRevisionRecord>(new Filter("ParentId", _parentId));
+
+            if (records.Any())
+            {
+	            var ids = records.Select(i => i.CheckListId);
+	            _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListDTO, CheckLists>(new Filter("ItemId", ids)));
+            }
+
+            var lvlids = _initialDocumentArray.Select(i => i.Settings.LevelId);
+            var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("ItemId", lvlids));
+
+            foreach (var check in _initialDocumentArray)
+            {
+	            check.Level = levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
+	                          FindingLevels.Unknown;
+
+
+	            check.Remains = Lifelength.Null;
+	            check.Condition = ConditionState.Satisfactory;
+            }
 
             AnimatedThreadWorker.ReportProgress(70, "filter directives");
 
@@ -118,7 +143,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private void InitListView()
         {
-            _directivesViewer = new EditionRevisionListView();
+            _directivesViewer = new CheckListView();
 
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
@@ -202,7 +227,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		///</summary>
 		///<param name="initialCollection"></param>
 		///<param name="resultCollection"></param>
-		private void FilterItems(IEnumerable<CheckListRevision> initialCollection, ICommonCollection<CheckListRevision> resultCollection)
+		private void FilterItems(IEnumerable<CheckLists> initialCollection, ICommonCollection<CheckLists> resultCollection)
 		{
 			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
