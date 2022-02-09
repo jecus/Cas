@@ -7,9 +7,18 @@ using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.CAA.Check
 {
+    public interface ICheckListRevisionFilterParams
+    {
+        [Filter("Number", Order = 1)]
+        string Number { get; set; }
+
+        [Filter("Type", Order = 2)]
+        RevisionType Type { get; set; }
+    }
+
     [CAADto(typeof(CheckListRevisionDTO))]
     [Serializable]
-    public class CheckListRevision : BaseEntityObject, IOperatable
+    public class CheckListRevision : BaseEntityObject, IOperatable, ICheckListRevisionFilterParams
     {
         public int CheckListId { get; set; }
 

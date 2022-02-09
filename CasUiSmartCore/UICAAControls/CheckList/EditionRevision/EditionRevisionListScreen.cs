@@ -1,54 +1,35 @@
-﻿using CAA.Entity.Models.Dictionary;
-using CAA.Entity.Models.DTO;
+﻿using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA.Check;
-using SmartCore.CAA.FindingLevel;
-using SmartCore.CAA.RoutineAudits;
-using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using CAS.UI.UICAAControls.Audit;
-using CAS.UI.UIControls.NewGrid;
-using SmartCore.CAA.Audit;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CheckList
 {
-	public class EditionRevision : BaseEntityObject
-	{
-		public string Number { get; set; }
-		public RevisionType Type { get; set; }
-		public int Count { get; set; }
-		
-	}
-	
-	
     ///<summary>
     ///</summary>
     [ToolboxItem(false)]
 	public partial class EditionRevisionListScreen : ScreenControl
 	{
         private readonly int _operatorId;
-        private CommonCollection<EditionRevision> _initialDocumentArray = new CommonCollection<EditionRevision>();
-		private CommonCollection<EditionRevision> _resultDocumentArray = new CommonCollection<EditionRevision>();
+        private CommonCollection<CheckListRevision> _initialDocumentArray = new CommonCollection<CheckListRevision>();
+		private CommonCollection<CheckListRevision> _resultDocumentArray = new CommonCollection<CheckListRevision>();
 		private CommonFilterCollection _filter;
 
-		private BaseGridViewControl<CheckLists> _directivesViewer;
-
-		private RadMenuItem _toolStripMenuItemOpen;
+		private EditionRevisionListView _directivesViewer;
+        private RadMenuItem _toolStripMenuItemOpen;
 
 		
 		public EditionRevisionListScreen()
@@ -66,7 +47,7 @@ namespace CAS.UI.UICAAControls.CheckList
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
 
-            _filter = new CommonFilterCollection(typeof(ICheckListFilterParams));
+            _filter = new CommonFilterCollection(typeof(ICheckListRevisionFilterParams));
 
 			InitToolStripMenuItems();
 			InitListView();
@@ -78,7 +59,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-	       // _directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
+	        _directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
 		}
@@ -88,18 +69,17 @@ namespace CAS.UI.UICAAControls.CheckList
         #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		{
-			
-			var data =  GlobalObjects.CaaEnvironment.NewLoader
-				.GetObjectListAll<CheckListRevisionDTO, CheckListRevision>(new Filter("OperatorId", _operatorId), loadChild:true);
+			_initialDocumentArray.Clear();
+            _resultDocumentArray.Clear();
 
+            AnimatedThreadWorker.ReportProgress(0, "load");
+			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new Filter("OperatorId", _operatorId)));
 
-			var res = data.GroupBy(i => new { i.Type, i.Number })
-				.Select(i => new EditionRevision
-				{
-					Number = i.Key.Number,
-					Type = i.Key.Type,
-					Count = i.Count()
-				});
+            AnimatedThreadWorker.ReportProgress(70, "filter directives");
+
+            FilterItems(_initialDocumentArray, _resultDocumentArray);
+
+            AnimatedThreadWorker.ReportProgress(100, "Complete");
 
 		}
 		#endregion
@@ -138,7 +118,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private void InitListView()
         {
-	        //_directivesViewer = 
+            _directivesViewer = new EditionRevisionListView();
 
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
@@ -229,7 +209,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		///</summary>
 		///<param name="initialCollection"></param>
 		///<param name="resultCollection"></param>
-		private void FilterItems(IEnumerable<CheckLists> initialCollection, ICommonCollection<CheckLists> resultCollection)
+		private void FilterItems(IEnumerable<CheckListRevision> initialCollection, ICommonCollection<CheckListRevision> resultCollection)
 		{
 			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
@@ -275,7 +255,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			#region Фильтрация директив
 			AnimatedThreadWorker.ReportProgress(50, "filter directives");
 
-			//FilterItems(_initialDocumentArray, _resultDocumentArray);
+			FilterItems(_initialDocumentArray, _resultDocumentArray);
 
 			if (AnimatedThreadWorker.CancellationPending)
 			{
@@ -290,11 +270,5 @@ namespace CAS.UI.UICAAControls.CheckList
 		#endregion
 
 		#endregion
-		
-
-        private void ButtonCARClick(object sender, EventArgs e)
-        {
-            
-        }
     }
 }
