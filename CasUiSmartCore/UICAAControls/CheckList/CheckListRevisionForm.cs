@@ -67,11 +67,11 @@ where c.IsDeleted = 0 and c.OperatorId = {_operatorId}
 order by c.ItemId");
             
             var dsRevision = GlobalObjects.CaaEnvironment.Execute($@"
-select c.ItemId as CheckId,revision.RevisionNumber, revision.RevisionDate from dbo.CheckList c
+select c.ItemId as CheckId,revision.RevisionNumber, revision.RevisionDate,revision.RevisionEffDate from dbo.CheckList c
 cross apply
 (
-	select top 2 Number as RevisionNumber, EffDate as RevisionDate  from dbo.CheckListRevision 
-	where CheckListId = c.ItemId and IsDeleted = 0 and Type = 1
+	select top 2 Number as RevisionNumber, Date as RevisionDate, EffDate as RevisionEffDate  from dbo.CheckListRevision 
+	where CheckListId = c.ItemId and IsDeleted = 0 and Type = 1 and (ItemId > (select top 1 ItemId  from dbo.CheckListRevision where Type = 0 and CheckListId = c.ItemId and IsDeleted = 0 order by ItemId desc))
 	order by EffDate desc
 )revision
 where c.IsDeleted = 0 and c.OperatorId = {_operatorId}
