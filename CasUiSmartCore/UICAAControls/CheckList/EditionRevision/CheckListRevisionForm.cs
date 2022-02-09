@@ -162,7 +162,12 @@ cross apply
             comboBoxPhase.SelectedItem = "N/A";
 
             comboBoxLevel.SelectedItem = FindingLevels.Unknown;
+
+            radioButtonRevision.Checked = true;
+            
+            _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
             _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
+            _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
             _tocheckListView.SetItemsArray(_updateChecks.ToArray());
         }
 
@@ -271,6 +276,9 @@ cross apply
                         RevisionEff.Enabled =
                     metroTextBoxMH.Enabled =
             metroTextBoxReference.Enabled =
+                checkBoxRevisionValidTo.Checked = 
+                    checkBoxPhase.Checked = 
+                        checkBoxMH.Checked =
                 comboBoxLevel.Enabled = state;
         }
 
@@ -281,7 +289,6 @@ cross apply
             dateTimePickerEditionDate.Value = DateTime.Today;
             metroTextBoxRevision.Text = "";
             dateTimePickerRevisionDate.Value = DateTime.Today;
-            checkBoxRevisionValidTo.Checked = false;
             dateTimePickeValidTo.Value = DateTime.Today;
             dateTimePickerEditionEff.Value = DateTime.Today;
             RevisionEff.Value = DateTime.Today;
@@ -334,30 +341,57 @@ cross apply
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            if (_fromcheckListView.SelectedItems.Count == 0) return;
-
-            foreach (var item in _fromcheckListView.SelectedItems.ToArray())
+            if (_fromcheckRevisionListView.SelectedItems.Count > 0)
             {
-                _updateChecks.Add(item);
-                _addedChecks.Remove(item);
+                foreach (var item in _fromcheckRevisionListView.SelectedItems.ToArray())
+                {
+                    _updateChecks.Add(item);
+                    _addedChecks.Remove(item);
+                }
+                
+                _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
+                _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
             }
-
-            _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
-            _tocheckListView.SetItemsArray(_updateChecks.ToArray());
+            else if (_fromcheckListView.SelectedItems.Count > 0)
+            {
+                foreach (var item in _fromcheckListView.SelectedItems.ToArray())
+                {
+                    _updateChecks.Add(item);
+                    _addedChecks.Remove(item);
+                }
+                
+                _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
+                _tocheckListView.SetItemsArray(_updateChecks.ToArray());
+            }
+            
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
-            if (_tocheckListView.SelectedItems.Count == 0) return;
-
-            foreach (var item in _tocheckListView.SelectedItems.ToArray())
+            if (_tocheckRevisionListView.SelectedItems.Count > 0)
             {
-                _updateChecks.Remove(item);
-                _addedChecks.Add(item);
+                foreach (var item in _tocheckRevisionListView.SelectedItems.ToArray())
+                {
+                    _updateChecks.Remove(item);
+                    _addedChecks.Add(item);
+                }
+
+                _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
+                _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
+            }
+            else if (_tocheckListView.SelectedItems.Count > 0)
+            {
+                foreach (var item in _tocheckListView.SelectedItems.ToArray())
+                {
+                    _updateChecks.Remove(item);
+                    _addedChecks.Add(item);
+                }
+
+                _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
+                _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
             }
 
-            _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
-            _tocheckListView.SetItemsArray(_updateChecks.ToArray());
+            
         }
 
         private void checkBoxSource_CheckedChanged(object sender, EventArgs e)
@@ -415,6 +449,68 @@ cross apply
                     dateTimePickerRevisionDate.Enabled=
                         RevisionEff.Enabled 
                         = checkBoxRevisionValidTo.Checked;
+        }
+
+        private void radioButtonOther_CheckedChanged(object sender, EventArgs e)
+        {            
+            ClearControl();
+            SetEnableControl(false);
+            ClearTable();
+            
+            checkBoxSource.Enabled =
+                checkBoxCheck.Enabled =
+                        checkBoxNotify.Enabled =
+                            checkBoxReference.Enabled =
+                                checkBoxLevel.Enabled =
+                                    checkBoxPhase.Enabled = 
+                                            checkBoxMH.Enabled =
+                                     radioButtonOther.Checked;
+
+            checkBoxEdition.Enabled =
+                checkBoxRevisionValidTo.Enabled = 
+                    !radioButtonOther.Checked;
+
+            _fromcheckRevisionListView.Visible = !radioButtonOther.Checked;
+            _tocheckRevisionListView.Visible = !radioButtonOther.Checked;
+            _fromcheckListView.Visible = radioButtonOther.Checked;
+            _tocheckListView.Visible = radioButtonOther.Checked;
+                
+            
+
+        }
+
+        private void ClearTable()
+        {
+            _updateChecks.Clear();
+            _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
+            _tocheckListView.SetItemsArray(_updateChecks.ToArray());
+        }
+
+        private void radioButtonRevision_CheckedChanged(object sender, EventArgs e)
+        {
+            ClearTable();
+            ClearControl();
+            SetEnableControl(false);
+            
+            checkBoxEdition.Enabled =
+                checkBoxRevisionValidTo.Enabled =
+                    radioButtonRevision.Checked;
+            
+            checkBoxSource.Enabled =
+                checkBoxCheck.Enabled =
+                    checkBoxNotify.Enabled =
+                        checkBoxReference.Enabled =
+                            checkBoxLevel.Enabled =
+                                checkBoxPhase.Enabled = 
+                                    checkBoxMH.Enabled =
+                                !radioButtonRevision.Checked;
+            
+            _fromcheckRevisionListView.Visible = radioButtonRevision.Checked;
+            _tocheckRevisionListView.Visible = radioButtonRevision.Checked;
+            _fromcheckListView.Visible = !radioButtonRevision.Checked;
+            _tocheckListView.Visible = !radioButtonRevision.Checked;
+
+            
         }
     }
 }

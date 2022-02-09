@@ -54,8 +54,10 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxEditionNumber = new MetroFramework.Controls.MetroTextBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this._fromcheckListView = new CAS.UI.UICAAControls.CheckList.CheckListRevisionView();
-            this._tocheckListView = new CAS.UI.UICAAControls.CheckList.CheckListRevisionView();
+            this._fromcheckRevisionListView = new CAS.UI.UICAAControls.CheckList.CheckListRevisionView();
+            this._fromcheckListView = new CAS.UI.UICAAControls.CheckList.CheckListView();
+            this._tocheckRevisionListView = new CAS.UI.UICAAControls.CheckList.CheckListRevisionView();
+            this._tocheckListView = new CAS.UI.UICAAControls.CheckList.CheckListView();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
             this.metroTextBoxReference = new MetroFramework.Controls.MetroTextBox();
@@ -73,6 +75,8 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxMH = new MetroFramework.Controls.MetroTextBox();
             this.RevisionEff = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerEditionEff = new System.Windows.Forms.DateTimePicker();
+            this.radioButtonOther = new System.Windows.Forms.RadioButton();
+            this.radioButtonRevision = new System.Windows.Forms.RadioButton();
             label14 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
@@ -378,6 +382,26 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             // _fromcheckListView
             // 
+            this._fromcheckRevisionListView.ColumnIndexes = ((System.Collections.Generic.List<string>)(resources.GetObject("_fromcheckListView.ColumnIndexes")));
+            this._fromcheckRevisionListView.ConfigurePaste = null;
+            this._fromcheckRevisionListView.Displayer = null;
+            this._fromcheckRevisionListView.DisplayerText = null;
+            this._fromcheckRevisionListView.EnableCustomSorting = true;
+            this._fromcheckRevisionListView.Entity = null;
+            this._fromcheckRevisionListView.IgnoreEnterPress = false;
+            this._fromcheckRevisionListView.Location = new System.Drawing.Point(5, 53);
+            this._fromcheckRevisionListView.MenuOpeningAction = null;
+            this._fromcheckRevisionListView.Name = "_fromcheckRevisionListView";
+            this._fromcheckRevisionListView.OldColumnIndex = 0;
+            this._fromcheckRevisionListView.PasteComplete = null;
+            this._fromcheckRevisionListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this._fromcheckRevisionListView.Size = new System.Drawing.Size(1029, 306);
+            this._fromcheckRevisionListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
+            this._fromcheckRevisionListView.TabIndex = 329;
+            this._fromcheckRevisionListView.Visible = false;
+            // 
+            // _fromcheckListView
+            // 
             this._fromcheckListView.ColumnIndexes = ((System.Collections.Generic.List<string>)(resources.GetObject("_fromcheckListView.ColumnIndexes")));
             this._fromcheckListView.ConfigurePaste = null;
             this._fromcheckListView.Displayer = null;
@@ -394,6 +418,27 @@ namespace CAS.UI.UICAAControls.CheckList
             this._fromcheckListView.Size = new System.Drawing.Size(1029, 306);
             this._fromcheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
             this._fromcheckListView.TabIndex = 329;
+            this._fromcheckListView.Visible = false;
+            // 
+            // _tocheckListView
+            // 
+            this._tocheckRevisionListView.ColumnIndexes = ((System.Collections.Generic.List<string>)(resources.GetObject("_tocheckListView.ColumnIndexes")));
+            this._tocheckRevisionListView.ConfigurePaste = null;
+            this._tocheckRevisionListView.Displayer = null;
+            this._tocheckRevisionListView.DisplayerText = null;
+            this._tocheckRevisionListView.EnableCustomSorting = true;
+            this._tocheckRevisionListView.Entity = null;
+            this._tocheckRevisionListView.IgnoreEnterPress = false;
+            this._tocheckRevisionListView.Location = new System.Drawing.Point(5, 406);
+            this._tocheckRevisionListView.MenuOpeningAction = null;
+            this._tocheckRevisionListView.Name = "_tocheckRevisionListView";
+            this._tocheckRevisionListView.OldColumnIndex = 0;
+            this._tocheckRevisionListView.PasteComplete = null;
+            this._tocheckRevisionListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this._tocheckRevisionListView.Size = new System.Drawing.Size(1029, 346);
+            this._tocheckRevisionListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
+            this._tocheckRevisionListView.Visible = false;
+            this._tocheckRevisionListView.TabIndex = 330;            
             // 
             // _tocheckListView
             // 
@@ -413,6 +458,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this._tocheckListView.Size = new System.Drawing.Size(1029, 346);
             this._tocheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
             this._tocheckListView.TabIndex = 330;
+            this._tocheckListView.Visible = false;
             // 
             // ButtonAdd
             // 
@@ -690,11 +736,39 @@ namespace CAS.UI.UICAAControls.CheckList
             this.dateTimePickerEditionEff.Size = new System.Drawing.Size(119, 20);
             this.dateTimePickerEditionEff.TabIndex = 355;
             // 
+            // radioButtonOther
+            // 
+            this.radioButtonOther.AutoSize = true;
+            this.radioButtonOther.Font = new System.Drawing.Font("Verdana", 9F);
+            this.radioButtonOther.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.radioButtonOther.Location = new System.Drawing.Point(1043, 29);
+            this.radioButtonOther.Name = "radioButtonOther";
+            this.radioButtonOther.Size = new System.Drawing.Size(61, 18);
+            this.radioButtonOther.TabIndex = 358;
+            this.radioButtonOther.TabStop = true;
+            this.radioButtonOther.Text = "Other";
+            this.radioButtonOther.CheckedChanged += new System.EventHandler(this.radioButtonOther_CheckedChanged);
+            // 
+            // radioButtonRevision
+            // 
+            this.radioButtonRevision.AutoSize = true;
+            this.radioButtonRevision.Font = new System.Drawing.Font("Verdana", 9F);
+            this.radioButtonRevision.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.radioButtonRevision.Location = new System.Drawing.Point(1108, 29);
+            this.radioButtonRevision.Name = "radioButtonRevision";
+            this.radioButtonRevision.Size = new System.Drawing.Size(125, 18);
+            this.radioButtonRevision.TabIndex = 359;
+            this.radioButtonRevision.TabStop = true;
+            this.radioButtonRevision.Text = "Edition/Revision";
+            this.radioButtonRevision.CheckedChanged += new System.EventHandler(this.radioButtonRevision_CheckedChanged);
+            // 
             // CheckListRevisionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1518, 803);
+            this.Controls.Add(this.radioButtonOther);
+            this.Controls.Add(this.radioButtonRevision);
             this.Controls.Add(label5);
             this.Controls.Add(this.RevisionEff);
             this.Controls.Add(this.dateTimePickerEditionEff);
@@ -718,7 +792,9 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Controls.Add(label2);
             this.Controls.Add(this.ButtonDelete);
             this.Controls.Add(this.ButtonAdd);
+            this.Controls.Add(this._tocheckRevisionListView);
             this.Controls.Add(this._tocheckListView);
+            this.Controls.Add(this._fromcheckRevisionListView);
             this.Controls.Add(this._fromcheckListView);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.buttonCancel);
@@ -743,6 +819,9 @@ namespace CAS.UI.UICAAControls.CheckList
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.RadioButton radioButtonOther;
+        private System.Windows.Forms.RadioButton radioButtonRevision;
 
         private System.Windows.Forms.DateTimePicker RevisionEff;
 
@@ -770,8 +849,10 @@ namespace CAS.UI.UICAAControls.CheckList
         private MetroFramework.Controls.MetroTextBox metroTextBoxEditionNumber;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
-        private CAS.UI.UICAAControls.CheckList.CheckListRevisionView _fromcheckListView;
-        private CAS.UI.UICAAControls.CheckList.CheckListRevisionView _tocheckListView;
+        private CAS.UI.UICAAControls.CheckList.CheckListRevisionView _fromcheckRevisionListView;
+        private CAS.UI.UICAAControls.CheckList.CheckListRevisionView _tocheckRevisionListView;
+        private CAS.UI.UICAAControls.CheckList.CheckListView _fromcheckListView;
+        private CAS.UI.UICAAControls.CheckList.CheckListView _tocheckListView;
         private AvControls.AvButtonT.AvButtonT ButtonAdd;
         private AvControls.AvButtonT.AvButtonT ButtonDelete;
         private MetroFramework.Controls.MetroTextBox metroTextBoxReference;

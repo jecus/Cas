@@ -37,10 +37,13 @@ namespace CAS.UI.UICAAControls.CheckList
             this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.pictureBox3 = new System.Windows.Forms.PictureBox();
+			this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
 			this.pictureBox4 = new System.Windows.Forms.PictureBox();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
 			this.flowLayoutPanel1.SuspendLayout();
@@ -143,6 +146,16 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.pictureBox2.TabIndex = 15;
 			this.pictureBox2.TabStop = false;
 			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+			this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.pictureBox1.Location = new System.Drawing.Point(55, 3);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(5, 50);
+			this.pictureBox1.TabIndex = 15;
+			this.pictureBox1.TabStop = false; 
+			// 
 			// pictureBox3
 			// 
 			this.pictureBox3.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
@@ -179,6 +192,8 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.flowLayoutPanel1.AutoSize = true;
 			this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.flowLayoutPanel1.Controls.Add(this.buttonDeleteSelected);
+			this.flowLayoutPanel1.Controls.Add(this.pictureBox1);
+			this.flowLayoutPanel1.Controls.Add(this.buttonAddNew);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox2);
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox3);
@@ -192,6 +207,30 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.flowLayoutPanel1.TabIndex = 3;
 			this.flowLayoutPanel1.WrapContents = false;
 			// 
+			// buttonAddNew
+			// 
+			this.buttonAddNew.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+			this.buttonAddNew.ActiveBackgroundImage = null;
+			this.buttonAddNew.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonAddNew.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonAddNew.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonAddNew.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+			this.buttonAddNew.ForeColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+			this.buttonAddNew.Icon = global::CAS.UI.Properties.Resources.AddIcon;
+			this.buttonAddNew.IconLayout = System.Windows.Forms.ImageLayout.Center;
+			this.buttonAddNew.IconNotEnabled = global::CAS.UI.Properties.Resources.AddIcon_gray;
+			this.buttonAddNew.Location = new System.Drawing.Point(66, 0);
+			this.buttonAddNew.Name = "buttonAddDocument";
+			this.buttonAddNew.NormalBackgroundImage = null;
+			this.buttonAddNew.ShowToolTip = true;
+			this.buttonAddNew.Size = new System.Drawing.Size(52, 57);
+			this.buttonAddNew.TabIndex = 0;
+			this.buttonAddNew.TextMain = "";
+			this.buttonAddNew.TextSecondary = "";
+			this.buttonAddNew.ToolTipText = "Add new";
+			this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
+			this.buttonAddNew.Enabled = !(userType == UserType.ReadOnly);
+			// 
 			// RequestForQuotationListScreen
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,6 +238,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Name = "RequestForQuotationListScreen";
             this.ShowAircraftStatusPanel = false;
             this.Size = new System.Drawing.Size(917, 590);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -214,6 +254,8 @@ namespace CAS.UI.UICAAControls.CheckList
         private AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
         private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
         private System.Windows.Forms.Label labelDateAsOf;
+        private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddNew;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
 		private System.Windows.Forms.PictureBox pictureBox3;
 		private System.Windows.Forms.PictureBox pictureBox4;

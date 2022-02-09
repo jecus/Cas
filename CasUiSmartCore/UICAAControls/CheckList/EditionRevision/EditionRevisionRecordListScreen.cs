@@ -288,5 +288,11 @@ namespace CAS.UI.UICAAControls.CheckList
 		#endregion
 
 		#endregion
-    }
+
+		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			var form = new CheckListRevEditForm();
+			form.ShowDialog();
+		}
+	}
 }
