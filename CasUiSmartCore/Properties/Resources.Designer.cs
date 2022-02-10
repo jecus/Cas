@@ -993,6 +993,16 @@ namespace CAS.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap PEL {
+            get {
+                object obj = ResourceManager.GetObject("PEL", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap PerformDirective {
             get {
                 object obj = ResourceManager.GetObject("PerformDirective", resourceCulture);

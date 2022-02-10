@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.DTO;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
+using CASTerms;
+using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.PEL;
 using SmartCore.Entities.Collections;
+using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UICAAControls.Audit.PEL
 {
@@ -33,7 +39,27 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
-           
+            var specialists = new CommonCollection<Specialist>();
+            if (_operatorId == -1)
+            {
+                specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+                    .GetObjectListAll<CAASpecialistDTO, Specialist>(loadChild: true));
+            }
+            else
+            {
+                specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+                    .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", _operatorId),
+                        loadChild: true));
+            }
+            
+            _addedChecks.AddRange(specialists.Select(i => new PelSpecialist()
+            {
+                ItemId = i.ItemId,
+                FirstName = i.FirstName,
+                LastName = i.LastName,
+                Specialization = i.Specialization
+            }));
+            
         }
 
         private void UpdateInformation()

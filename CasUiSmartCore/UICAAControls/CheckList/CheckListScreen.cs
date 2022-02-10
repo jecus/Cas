@@ -22,6 +22,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls.Audit;
+using CAS.UI.UICAAControls.Audit.PEL;
 using CAS.UI.UIControls.NewGrid;
 using SmartCore.CAA.Audit;
 using Telerik.WinControls.UI;
@@ -130,8 +131,10 @@ namespace CAS.UI.UICAAControls.CheckList
 	                buttonCAR.Visible = true;
                     pictureBox5.Visible = true;
 				}
-                
-                labelTitle.Text = $"Workflow Stage : {WorkFlowStage.GetItemById(_audit.Settings.WorkflowStageId)}";
+
+	            buttonPel.Visible = true;
+
+	            labelTitle.Text = $"Workflow Stage : {WorkFlowStage.GetItemById(_audit.Settings.WorkflowStageId)}";
                 labelTitle.Visible = true;
 
             }
@@ -600,5 +603,11 @@ cross apply
         {
 	        
         }
-    }
+
+        private void ButtonPelClick(object sender, EventArgs e)
+        {
+	        var form = new AuditTeamForm(_operatorId);
+	        form.ShowDialog();
+        }
+	}
 }

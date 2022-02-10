@@ -38,6 +38,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.buttonRevison = new AvControls.AvButtonT.AvButtonT();
             this.buttonRevisions = new AvControls.AvButtonT.AvButtonT();
             this.buttonCAR = new AvControls.AvButtonT.AvButtonT();
+            this.buttonPel = new AvControls.AvButtonT.AvButtonT();
             this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -195,6 +196,33 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.buttonCAR.Visible = false;
 			this.buttonCAR.Click += ButtonCARClick;
 			// 
+			// buttonPel
+			// 
+			this.buttonPel.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+			this.buttonPel.ActiveBackgroundImage = null;
+			this.buttonPel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonPel.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonPel.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
+			this.buttonPel.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+			this.buttonPel.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
+			this.buttonPel.Icon = global::CAS.UI.Properties.Resources.PEL;
+			this.buttonPel.IconLayout = System.Windows.Forms.ImageLayout.Center;
+			this.buttonPel.IconNotEnabled = null;
+			this.buttonPel.Location = new System.Drawing.Point(0, 0);
+			this.buttonPel.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
+			this.buttonPel.Name = "buttonPel";
+			this.buttonPel.NormalBackgroundImage = null;
+			this.buttonPel.PaddingMain = new System.Windows.Forms.Padding(0);
+			this.buttonPel.PaddingSecondary = new System.Windows.Forms.Padding(0);
+			this.buttonPel.ShowToolTip = true;
+			this.buttonPel.Size = new System.Drawing.Size(52, 57);
+			this.buttonPel.TabIndex = 18;
+			this.buttonPel.TextMain = "";
+			this.buttonPel.TextSecondary = "";
+			this.buttonPel.ToolTipText = "PEL";
+			this.buttonPel.Visible = false;
+			this.buttonPel.Click += ButtonPelClick;
+			// 
 			// buttonAddNew
 			// 
 			this.buttonAddNew.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
@@ -293,7 +321,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.pictureBox5.Size = new System.Drawing.Size(5, 50);
 			this.pictureBox5.TabIndex = 15;
 			this.pictureBox5.TabStop = false;
-			this.pictureBox5.Visible = true;
+			this.pictureBox5.Visible = false;
 			// 
 			// labelDateAsOf
 			// 
@@ -320,6 +348,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.flowLayoutPanel1.Controls.Add(this.buttonCAR);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox5);
 			this.flowLayoutPanel1.Controls.Add(this.buttonRevisions);
+			this.flowLayoutPanel1.Controls.Add(this.buttonPel);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(1291, 0);
@@ -340,6 +369,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
 			this.flowLayoutPanel1.ResumeLayout(false);
 			this.ResumeLayout(false);
@@ -355,6 +385,7 @@ namespace CAS.UI.UICAAControls.CheckList
         private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
         private AvControls.AvButtonT.AvButtonT buttonRevison;
         private AvControls.AvButtonT.AvButtonT buttonCAR;
+        private AvControls.AvButtonT.AvButtonT buttonPel;
         private AvControls.AvButtonT.AvButtonT buttonRevisions;
         private System.Windows.Forms.Label labelDateAsOf;
 		private System.Windows.Forms.PictureBox pictureBox1;

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
+using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Auxiliary;
@@ -20,18 +21,18 @@ namespace SmartCore.Entities.General.Personnel
 {
 
     /// <summary>
-    /// Класс описывает Специалиста
+    /// РљР»Р°СЃСЃ РѕРїРёСЃС‹РІР°РµС‚ РЎРїРµС†РёР°Р»РёСЃС‚Р°
     /// </summary>
     [Table("Specialists", "dbo", "ItemId")]
     [Dto(typeof(SpecialistDTO))]
     [CAADto(typeof(CAASpecialistDTO))]
 	[Condition("IsDeleted", "0")]
     [Serializable]
-    public class Specialist : BaseEntityObject, IFileContainer, IEmployeeFilterParams, IEmployeeWorkPackageFilterParams
+    public class Specialist : BaseEntityObject, IFileContainer, IEmployeeFilterParams, IEmployeeWorkPackageFilterParams, IOperatable
 	{
 		private static Type _thisType;
 		/*
-		*  Свойства
+		*  РЎРІРѕР№СЃС‚РІР°
 		*/
 
 		#region public String IDNo { get; set; }
@@ -136,7 +137,7 @@ namespace SmartCore.Entities.General.Personnel
 		private FamilyStatus _familyStatus;
 
 		/// <summary>
-		/// Семейное положение
+		/// РЎРµРјРµР№РЅРѕРµ РїРѕР»РѕР¶РµРЅРёРµ
 		/// </summary>
 		[TableColumnAttribute("FamilyStatus")]
 		[FormControl(120, "Family Status")]
@@ -512,7 +513,7 @@ namespace SmartCore.Entities.General.Personnel
 		#endregion
 
 		/*
-         * Паспортные данные
+         * РџР°СЃРїРѕСЂС‚РЅС‹Рµ РґР°РЅРЅС‹Рµ
          */
 
 		#region public AttachedFile PassportCopyFile { get; set; }
@@ -607,12 +608,12 @@ namespace SmartCore.Entities.General.Personnel
 		#endregion
 
 		/*
-		*  Методы 
+		*  РњРµС‚РѕРґС‹ 
 		*/
 
 		#region public Specialist()
 		/// <summary>
-		/// Создает Специалиста без дополнительной информации
+		/// РЎРѕР·РґР°РµС‚ РЎРїРµС†РёР°Р»РёСЃС‚Р° Р±РµР· РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё
 		/// </summary>
 		public Specialist()
         {
@@ -629,7 +630,7 @@ namespace SmartCore.Entities.General.Personnel
       
         #region public override string ToString()
         /// <summary>
-        /// Перегружаем для отладки
+        /// РџРµСЂРµРіСЂСѓР¶Р°РµРј РґР»СЏ РѕС‚Р»Р°РґРєРё
         /// </summary>
         /// <returns></returns>
         public override string ToString()

@@ -1,4 +1,5 @@
-﻿using CAS.UI.UIControls.NewGrid;
+﻿using System.Collections.Generic;
+using CAS.UI.UIControls.NewGrid;
 using SmartCore.CAA.PEL;
 
 namespace CAS.UI.UICAAControls.Audit.PEL
@@ -21,7 +22,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 		{
 			InitializeComponent();
 			SortDirection = SortDirection.Asc;
-			OldColumnIndex = 6;
+			OldColumnIndex = 0;
 		}
 
         public int OperatorId { get; set; }
@@ -46,6 +47,21 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 			AddColumn("Responsibilities", (int)(radGridView1.Width * 0.24f));
 		}
 		#endregion
+		
+		
+		protected override List<CustomCell> GetListViewSubItems(PelSpecialist item)
+		{
+			var subItems = new List<CustomCell>()
+			{
+				CreateRow(item.FirstName, item.FirstName),
+				CreateRow(item.LastName, item.LastName),
+				CreateRow(item.Specialization.ToString(), item.Specialization),
+				CreateRow(item.Role.ToString(), item.Role),
+				CreateRow(item.PELResponsibilities.ToString(), item.PELResponsibilities),
+			};
+
+			return subItems;
+		}
 		
 
 		#endregion
