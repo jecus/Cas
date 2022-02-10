@@ -55,7 +55,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(1288, 796);
+            this.buttonOk.Location = new System.Drawing.Point(1348, 799);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 328;
@@ -169,13 +169,13 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.metroLabel1.Text = "Responsibilities:";
             this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // comboBoxResponsibilities 
+            // comboBoxResponsibilities
             // 
             this.comboBoxResponsibilities.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.comboBoxResponsibilities.ForeColor = System.Drawing.Color.DimGray;
             this.comboBoxResponsibilities.FormattingEnabled = true;
             this.comboBoxResponsibilities.Location = new System.Drawing.Point(1050, 379);
-            this.comboBoxResponsibilities.Name = "comboBoxResponsibilities ";
+            this.comboBoxResponsibilities.Name = "comboBoxResponsibilities";
             this.comboBoxResponsibilities.Size = new System.Drawing.Size(250, 22);
             this.comboBoxResponsibilities.TabIndex = 335;
             // 
