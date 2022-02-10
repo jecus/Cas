@@ -74,7 +74,7 @@ namespace CAS.UI.UICAAControls.CheckList
         /// Создаёт экземпляр элемента управления, отображающего список директив
         ///</summary>
         ///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-        public CheckListsScreen(Operator currentOperator, int? routingId = null, int? auditId = null)
+        public CheckListsScreen(Operator currentOperator,int operatorId, int? routingId = null, int? auditId = null)
             : this()
         {
             if (currentOperator == null)
@@ -82,6 +82,7 @@ namespace CAS.UI.UICAAControls.CheckList
             aircraftHeaderControl1.Operator = currentOperator;
             _routingId = routingId;
             _auditId = auditId;
+            _operatorId = operatorId;
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
 
@@ -121,10 +122,13 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             if (_auditId.HasValue)
             {
-                if (_audit.Settings.Status == RoutineStatus.Published)
+	            this.headerControl.ShowEditButton = true;
+	            this.headerControl.EditButtonClick += HeaderControl_EditButtonClick;
+	            
+	            if (_audit.Settings.Status == RoutineStatus.Published)
                 {
-                    buttonCAR.Visible = true;
-                    pictureBox4.Visible = true;
+	                buttonCAR.Visible = true;
+                    pictureBox5.Visible = true;
 				}
                 
                 labelTitle.Text = $"Workflow Stage : {WorkFlowStage.GetItemById(_audit.Settings.WorkflowStageId)}";
@@ -134,7 +138,9 @@ namespace CAS.UI.UICAAControls.CheckList
 
             if (_routingId.HasValue || _auditId.HasValue)
             {
-                pictureBox3.Visible = false;
+	            buttonRevisions.Visible = false;
+	            pictureBox5.Visible = false;
+                pictureBox4.Visible = false;
 				buttonRevison.Visible = false;
             }
 
@@ -154,15 +160,7 @@ namespace CAS.UI.UICAAControls.CheckList
                                      _routineAudit?.Type == ProgramType.IOSA);
             }
 
-
-
-			if (_auditId.HasValue)
-            {
-                this.headerControl.ShowEditButton = true;
-                this.headerControl.EditButtonClick +=HeaderControl_EditButtonClick; ;
-
-            }
-
+            
 			_directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
@@ -195,7 +193,7 @@ namespace CAS.UI.UICAAControls.CheckList
             {
 
                 _audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_auditId.Value);
-				var records = GlobalObjects.CaaEnvironment.NewLoader
+                var records = GlobalObjects.CaaEnvironment.NewLoader
                     .GetObjectListAll<CAAAuditRecordDTO, CAAAuditRecord>(new Filter("AuditId", _auditId), loadChild: true).ToList();
 
                 _currentRoutineId = records.Select(i => i.RoutineAuditId).FirstOrDefault();

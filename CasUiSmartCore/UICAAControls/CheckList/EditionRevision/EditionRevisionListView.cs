@@ -30,7 +30,9 @@ namespace CAS.UI.UICAAControls.CheckList
             InitializeComponent();
         }
 
-		#region Methods
+        public int OperatorId { get; set; }
+
+        #region Methods
 
 
         #region protected override void SetHeaders()
@@ -104,7 +106,7 @@ namespace CAS.UI.UICAAControls.CheckList
             {
                 e.DisplayerText = $"{SelectedItem.Type} : {SelectedItem.Number}";
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-                e.RequestedEntity = new EditionRevisionRecordListScreen(GlobalObjects.CaaEnvironment.Operators[0], SelectedItem.ItemId);
+                e.RequestedEntity = new EditionRevisionRecordListScreen(GlobalObjects.CaaEnvironment.Operators[0], SelectedItem.ItemId, OperatorId);
             }
         }
         #endregion

@@ -28,6 +28,7 @@ namespace CAS.UI.UICAAControls.CheckList
 	public partial class EditionRevisionRecordListScreen : ScreenControl
 	{
 		private readonly int _parentId;
+		private readonly int _operatorId;
 		private CommonCollection<CheckLists> _initialDocumentArray = new CommonCollection<CheckLists>();
 		private CommonCollection<CheckLists> _resultDocumentArray = new CommonCollection<CheckLists>();
 		private CommonFilterCollection _filter;
@@ -41,24 +42,30 @@ namespace CAS.UI.UICAAControls.CheckList
 			InitializeComponent();
 		}
 		
-        public EditionRevisionRecordListScreen(Operator currentOperator, int parentId)
+        public EditionRevisionRecordListScreen(Operator currentOperator, int parentId, int operatorId)
             : this()
         {
             if (currentOperator == null)
                 throw new ArgumentNullException("currentOperator");
             _parentId = parentId;
+            _operatorId = operatorId;
             aircraftHeaderControl1.Operator = currentOperator;
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
 
             _filter = new CommonFilterCollection(typeof(ICheckListRevisionFilterParams));
+            
+            this.headerControl.ShowEditButton = true;
+            this.headerControl.EditButtonClick += HeaderControl_EditButtonClick;
 
 			InitToolStripMenuItems();
 			InitListView();
 			UpdateInformation();
 		}
-        
-		#region Methods
+
+
+
+        #region Methods
 
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -288,6 +295,14 @@ namespace CAS.UI.UICAAControls.CheckList
 		#endregion
 
 		#endregion
+		
+		
+		private void HeaderControl_EditButtonClick(object sender, EventArgs e)
+		{
+			var form = new CheckListEditionRevisionEditForm(_parentId,_operatorId);
+			if(form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
+		}
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{

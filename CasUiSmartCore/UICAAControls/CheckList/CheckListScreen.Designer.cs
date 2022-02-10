@@ -151,7 +151,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.buttonRevisions.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
 			this.buttonRevisions.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
 			this.buttonRevisions.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
-			this.buttonRevisions.Icon = global::CAS.UI.Properties.Resources.PerformDirective;
+			this.buttonRevisions.Icon = global::CAS.UI.Properties.Resources.REV;
 			this.buttonRevisions.IconLayout = System.Windows.Forms.ImageLayout.Center;
 			this.buttonRevisions.IconNotEnabled = null;
 			this.buttonRevisions.Location = new System.Drawing.Point(0, 0);

@@ -383,80 +383,40 @@ namespace CAS.UI.UICAAControls.CheckList
             // _fromcheckListView
             // 
             this._fromcheckRevisionListView.ColumnIndexes = ((System.Collections.Generic.List<string>)(resources.GetObject("_fromcheckListView.ColumnIndexes")));
-            this._fromcheckRevisionListView.ConfigurePaste = null;
-            this._fromcheckRevisionListView.Displayer = null;
-            this._fromcheckRevisionListView.DisplayerText = null;
-            this._fromcheckRevisionListView.EnableCustomSorting = true;
-            this._fromcheckRevisionListView.Entity = null;
-            this._fromcheckRevisionListView.IgnoreEnterPress = false;
             this._fromcheckRevisionListView.Location = new System.Drawing.Point(5, 53);
-            this._fromcheckRevisionListView.MenuOpeningAction = null;
             this._fromcheckRevisionListView.Name = "_fromcheckRevisionListView";
-            this._fromcheckRevisionListView.OldColumnIndex = 0;
-            this._fromcheckRevisionListView.PasteComplete = null;
             this._fromcheckRevisionListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._fromcheckRevisionListView.Size = new System.Drawing.Size(1029, 306);
-            this._fromcheckRevisionListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
             this._fromcheckRevisionListView.TabIndex = 329;
             this._fromcheckRevisionListView.Visible = false;
             // 
             // _fromcheckListView
             // 
             this._fromcheckListView.ColumnIndexes = ((System.Collections.Generic.List<string>)(resources.GetObject("_fromcheckListView.ColumnIndexes")));
-            this._fromcheckListView.ConfigurePaste = null;
-            this._fromcheckListView.Displayer = null;
-            this._fromcheckListView.DisplayerText = null;
-            this._fromcheckListView.EnableCustomSorting = true;
-            this._fromcheckListView.Entity = null;
-            this._fromcheckListView.IgnoreEnterPress = false;
             this._fromcheckListView.Location = new System.Drawing.Point(5, 53);
-            this._fromcheckListView.MenuOpeningAction = null;
             this._fromcheckListView.Name = "_fromcheckListView";
-            this._fromcheckListView.OldColumnIndex = 0;
-            this._fromcheckListView.PasteComplete = null;
             this._fromcheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._fromcheckListView.Size = new System.Drawing.Size(1029, 306);
-            this._fromcheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
             this._fromcheckListView.TabIndex = 329;
             this._fromcheckListView.Visible = false;
             // 
             // _tocheckListView
             // 
             this._tocheckRevisionListView.ColumnIndexes = ((System.Collections.Generic.List<string>)(resources.GetObject("_tocheckListView.ColumnIndexes")));
-            this._tocheckRevisionListView.ConfigurePaste = null;
-            this._tocheckRevisionListView.Displayer = null;
-            this._tocheckRevisionListView.DisplayerText = null;
-            this._tocheckRevisionListView.EnableCustomSorting = true;
-            this._tocheckRevisionListView.Entity = null;
-            this._tocheckRevisionListView.IgnoreEnterPress = false;
             this._tocheckRevisionListView.Location = new System.Drawing.Point(5, 406);
-            this._tocheckRevisionListView.MenuOpeningAction = null;
             this._tocheckRevisionListView.Name = "_tocheckRevisionListView";
-            this._tocheckRevisionListView.OldColumnIndex = 0;
-            this._tocheckRevisionListView.PasteComplete = null;
             this._tocheckRevisionListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._tocheckRevisionListView.Size = new System.Drawing.Size(1029, 346);
-            this._tocheckRevisionListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
             this._tocheckRevisionListView.Visible = false;
             this._tocheckRevisionListView.TabIndex = 330;            
             // 
             // _tocheckListView
             // 
             this._tocheckListView.ColumnIndexes = ((System.Collections.Generic.List<string>)(resources.GetObject("_tocheckListView.ColumnIndexes")));
-            this._tocheckListView.ConfigurePaste = null;
-            this._tocheckListView.Displayer = null;
-            this._tocheckListView.DisplayerText = null;
-            this._tocheckListView.EnableCustomSorting = true;
-            this._tocheckListView.Entity = null;
-            this._tocheckListView.IgnoreEnterPress = false;
             this._tocheckListView.Location = new System.Drawing.Point(5, 406);
-            this._tocheckListView.MenuOpeningAction = null;
             this._tocheckListView.Name = "_tocheckListView";
-            this._tocheckListView.OldColumnIndex = 0;
-            this._tocheckListView.PasteComplete = null;
             this._tocheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._tocheckListView.Size = new System.Drawing.Size(1029, 346);
-            this._tocheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
             this._tocheckListView.TabIndex = 330;
             this._tocheckListView.Visible = false;
             // 

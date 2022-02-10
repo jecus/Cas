@@ -1123,6 +1123,16 @@ namespace CAS.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap REV {
+            get {
+                object obj = ResourceManager.GetObject("REV", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap runner {
             get {
                 object obj = ResourceManager.GetObject("runner", resourceCulture);

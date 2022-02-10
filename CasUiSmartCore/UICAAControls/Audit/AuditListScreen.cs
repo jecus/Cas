@@ -385,7 +385,7 @@ group by a.AuditId
                 var refE = new ReferenceEventArgs();
                 var dp = new DisplayerParams()
                 {
-                    Page = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), null, _directivesViewer.SelectedItem.ItemId),
+                    Page = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _operatorId ?? -1, null, _directivesViewer.SelectedItem.ItemId),
                     TypeOfReflection = ReflectionTypes.DisplayInNew,
                     PageCaption = $"Audit: {_directivesViewer.SelectedItem.AuditNumber}",
                     DisplayerType = DisplayerType.Screen
@@ -420,6 +420,7 @@ group by a.AuditId
 		{
 			_directivesViewer = new AuditListView(AnimatedThreadWorker);
 			_directivesViewer.TabIndex = 2;
+			_directivesViewer.OperatorId = _operatorId ?? -1;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;

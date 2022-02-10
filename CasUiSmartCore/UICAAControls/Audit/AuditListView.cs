@@ -51,7 +51,10 @@ namespace CAS.UI.UICAAControls.Audit
 			SortDirection = SortDirection.Asc;
 			OldColumnIndex = 1;
 		}
-		#endregion
+
+        public int OperatorId { get; set; }
+
+        #endregion
 
 		#endregion
 
@@ -174,7 +177,7 @@ namespace CAS.UI.UICAAControls.Audit
 		{
             if (SelectedItem != null)
             {
-                e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(),null,  SelectedItem.ItemId);
+                e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), OperatorId ,null,  SelectedItem.ItemId);
                 e.DisplayerText = $"Audit: {SelectedItem.AuditNumber}";
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
             }
