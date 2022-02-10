@@ -9,6 +9,7 @@ using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.PEL;
+using SmartCore.CAA.RoutineAudits;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Personnel;
 
@@ -64,6 +65,14 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 
         private void UpdateInformation()
         {
+            comboBoxRoles.Items.Clear();
+            comboBoxRoles.Items.AddRange(PELRole.Items.ToArray());
+            comboBoxRoles.SelectedItem = PELRole.Unknown;
+            
+            comboBoxResponsibilities.Items.Clear();
+            comboBoxResponsibilities.Items.AddRange(PELResponsibilities.Items.ToArray());
+            comboBoxResponsibilities.SelectedItem = PELResponsibilities.Unknown;
+            
             _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
             _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
         }
@@ -90,6 +99,9 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             {
                 foreach (var item in _fromcheckRevisionListView.SelectedItems.ToArray())
                 {
+                    item.Role = comboBoxRoles.SelectedItem as PELRole;
+                    item.PELResponsibilities = comboBoxResponsibilities.SelectedItem as PELResponsibilities;
+                    
                     _updateChecks.Add(item);
                     _addedChecks.Remove(item);
                 }
@@ -104,6 +116,9 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             {
                 foreach (var item in _tocheckRevisionListView.SelectedItems.ToArray())
                 {
+                    item.Role = PELRole.Unknown;
+                    item.PELResponsibilities = PELResponsibilities.Unknown;
+                    
                     _updateChecks.Remove(item);
                     _addedChecks.Add(item);
                 }

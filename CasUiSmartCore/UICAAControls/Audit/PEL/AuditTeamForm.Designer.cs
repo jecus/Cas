@@ -36,6 +36,10 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this._tocheckRevisionListView = new CAS.UI.UICAAControls.Audit.PEL.PelPersonnelListView();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
+            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.comboBoxRoles = new System.Windows.Forms.ComboBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.comboBoxResponsibilities = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -76,21 +80,20 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             // 
             this._fromcheckRevisionListView.Location = new System.Drawing.Point(5, 53);
             this._fromcheckRevisionListView.Name = "_fromcheckRevisionListView";
+            this._fromcheckRevisionListView.PasteComplete = null;
             this._fromcheckRevisionListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-            this._fromcheckRevisionListView.Size = new System.Drawing.Size(1419, 306);
+            this._fromcheckRevisionListView.Size = new System.Drawing.Size(1419, 317);
+            this._fromcheckRevisionListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Asc;
             this._fromcheckRevisionListView.TabIndex = 329;
-            this._fromcheckRevisionListView.Visible = true;
             // 
             // _tocheckRevisionListView
             // 
-
-            this._tocheckRevisionListView.Location = new System.Drawing.Point(5, 406);
+            this._tocheckRevisionListView.Location = new System.Drawing.Point(5, 417);
             this._tocheckRevisionListView.Name = "_tocheckRevisionListView";
-            this._tocheckRevisionListView.OldColumnIndex = 0;
             this._tocheckRevisionListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._tocheckRevisionListView.Size = new System.Drawing.Size(1419, 346);
+            this._tocheckRevisionListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Asc;
             this._tocheckRevisionListView.TabIndex = 330;
-            this._tocheckRevisionListView.Visible = true;
             // 
             // ButtonAdd
             // 
@@ -104,7 +107,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.ButtonAdd.Icon = global::CAS.UI.Properties.Resources.AddIconSmall;
             this.ButtonAdd.IconLayout = System.Windows.Forms.ImageLayout.Center;
             this.ButtonAdd.IconNotEnabled = null;
-            this.ButtonAdd.Location = new System.Drawing.Point(1308, 366);
+            this.ButtonAdd.Location = new System.Drawing.Point(1307, 377);
             this.ButtonAdd.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonAdd.Name = "ButtonAdd";
             this.ButtonAdd.NormalBackgroundImage = null;
@@ -148,23 +151,75 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.ButtonDelete.ToolTipText = "";
             this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
-            // CheckListEditionRevisionEditForm
+            // metroLabel6
+            // 
+            this.metroLabel6.AutoSize = true;
+            this.metroLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.metroLabel6.Location = new System.Drawing.Point(640, 385);
+            this.metroLabel6.Name = "metroLabel6";
+            this.metroLabel6.Size = new System.Drawing.Size(43, 19);
+            this.metroLabel6.TabIndex = 334;
+            this.metroLabel6.Text = "Roles:";
+            this.metroLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // comboBoxRoles
+            // 
+            this.comboBoxRoles.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxRoles.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxRoles.FormattingEnabled = true;
+            this.comboBoxRoles.Location = new System.Drawing.Point(689, 382);
+            this.comboBoxRoles.Name = "comboBoxRoles";
+            this.comboBoxRoles.Size = new System.Drawing.Size(250, 22);
+            this.comboBoxRoles.TabIndex = 333;
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.metroLabel1.Location = new System.Drawing.Point(945, 382);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(99, 19);
+            this.metroLabel1.TabIndex = 336;
+            this.metroLabel1.Text = "Responsibilities:";
+            this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // comboBoxResponsibilities 
+            // 
+            this.comboBoxResponsibilities.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxResponsibilities.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxResponsibilities.FormattingEnabled = true;
+            this.comboBoxResponsibilities.Location = new System.Drawing.Point(1050, 379);
+            this.comboBoxResponsibilities.Name = "comboBoxResponsibilities ";
+            this.comboBoxResponsibilities.Size = new System.Drawing.Size(250, 22);
+            this.comboBoxResponsibilities.TabIndex = 335;
+            // 
+            // AuditTeamForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1447, 840);
+            this.Controls.Add(this.metroLabel1);
+            this.Controls.Add(this.comboBoxResponsibilities);
+            this.Controls.Add(this.metroLabel6);
+            this.Controls.Add(this.comboBoxRoles);
             this.Controls.Add(this.ButtonDelete);
             this.Controls.Add(this.ButtonAdd);
             this.Controls.Add(this._tocheckRevisionListView);
             this.Controls.Add(this._fromcheckRevisionListView);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.buttonCancel);
-            this.Name = "CheckListEditionRevisionEditForm";
+            this.Name = "AuditTeamForm";
             this.Resizable = false;
             this.Text = "CheckList Revision Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CheckListRevisionForm_FormClosing);
             this.ResumeLayout(false);
+            this.PerformLayout();
         }
+
+        private MetroFramework.Controls.MetroLabel metroLabel6;
+        private System.Windows.Forms.ComboBox comboBoxRoles;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private System.Windows.Forms.ComboBox comboBoxResponsibilities;
 
         #endregion
 
