@@ -642,6 +642,9 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CAS, Version=1.0.8076.25627, Culture=neutral, PublicKeyToken=null">
+      <HintPath>bin\x86\AQUILINEDEBUG\CAS.exe</HintPath>
+    </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
@@ -873,6 +876,18 @@
     </Compile>
     <Compile Include="UICAAControls\Audit\AuditListView.Designer.cs">
       <DependentUpon>AuditListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\Audit\PEL\AuditTeamForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Audit\PEL\AuditTeamForm.Designer.cs">
+      <DependentUpon>AuditTeamForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\Audit\PEL\PelPersonnelListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Audit\PEL\PelPersonnelListView.Designer.cs">
+      <DependentUpon>PelPersonnelListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UICAAControls\CheckList\AuditCheckControl.cs">
       <SubType>UserControl</SubType>
@@ -4287,6 +4302,9 @@
     <EmbeddedResource Include="UICAAControls\Audit\AuditListScreen.resx">
       <DependentUpon>AuditListScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\Audit\PEL\AuditTeamForm.resx">
+      <DependentUpon>AuditTeamForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\AuditCheckControl.resx">
       <DependentUpon>AuditCheckControl.cs</DependentUpon>
