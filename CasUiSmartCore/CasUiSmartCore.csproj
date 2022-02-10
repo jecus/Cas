@@ -5892,6 +5892,7 @@
     <None Include="Resources\CARR.png" />
     <None Include="Resources\REV.png" />
     <None Include="Resources\PEL.png" />
+    <None Include="Resources\AddUser.png" />
     <Content Include="Resources\ГербTop.png" />
     <Content Include="Resources\ФСО.png" />
     <None Include="Resources\AddIconLargeGray.png" />

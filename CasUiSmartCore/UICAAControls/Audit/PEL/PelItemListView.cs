@@ -94,7 +94,6 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 				CreateRow(item.Settings.ItemtName, item.Settings.ItemtName),
 				CreateRow(item.Settings.Requirement, item.Settings.Requirement),
 				CreateRow(item.Source, item.Source),
-				CreateRow(item.Level.ToString(), item.Level),
 				CreateRow("",""),
 
 				CreateRow(author, author)

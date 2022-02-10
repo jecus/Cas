@@ -197,7 +197,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1447, 840);
+            this.ClientSize = new System.Drawing.Size(1440, 840);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.comboBoxResponsibilities);
             this.Controls.Add(this.metroLabel6);

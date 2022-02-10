@@ -606,7 +606,7 @@ cross apply
 
         private void ButtonPelClick(object sender, EventArgs e)
         {
-	        var form = new AuditTeamForm(_operatorId);
+	        var form = new PelItemForm(_audit.OperatorId);
 	        form.ShowDialog();
         }
 	}

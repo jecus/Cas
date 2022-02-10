@@ -18,7 +18,9 @@ namespace CAS.UI.UICAAControls.Audit.PEL
     public partial class AuditTeamForm : MetroForm
     {
         private readonly int _operatorId;
-        
+
+        public PelSpecialist[] PelSpecialists => _updateChecks.OrderBy(i => i.FirstName).ThenBy(i => i.LastName).ToArray();
+
         private CommonCollection<PelSpecialist> _addedChecks = new CommonCollection<PelSpecialist>();
         private CommonCollection<PelSpecialist> _updateChecks = new CommonCollection<PelSpecialist>();
         

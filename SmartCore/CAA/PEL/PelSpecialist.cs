@@ -30,9 +30,24 @@ namespace SmartCore.CAA.PEL
             get { return _responsibilities ?? PELResponsibilities.Unknown; }
             set { _responsibilities = value; }
         }
+
         
-        
-        
-        
+        private static PelSpecialist _unknown;
+
+        public static PelSpecialist Unknown
+        {
+            get
+            {
+                return _unknown ?? (_unknown = new PelSpecialist
+                {
+                    FirstName = "Unknown",
+                });
+            }
+        }
+
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName} / {Role} / {PELResponsibilities}";
+        }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
@@ -9,10 +7,7 @@ using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.Check;
-using SmartCore.CAA.PEL;
-using SmartCore.CAA.RoutineAudits;
 using SmartCore.Entities.Collections;
-using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UICAAControls.Audit.PEL
 {
@@ -41,15 +36,13 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
-
+            _addedChecks.Clear();
+            _addedChecks.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+                .GetObjectListAll<CheckListDTO, CheckLists>(new Filter("OperatorId", _operatorId), true));
         }
 
         private void UpdateInformation()
         {
-            comboBoxPersonel.Items.Clear();
-            comboBoxPersonel.Items.AddRange(PELRole.Items.ToArray());
-            comboBoxPersonel.SelectedItem = PELRole.Unknown;
-            
             _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
             _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
         }
@@ -101,6 +94,19 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         private void CheckListRevisionForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void AvButtonT1OnClick(object sender, EventArgs e)
+        {
+            var form = new AuditTeamForm(_operatorId);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                this.Focus();
+                
+                comboBoxPersonel.Items.Clear();
+                comboBoxPersonel.Items.AddRange(form.PelSpecialists);
+                comboBoxPersonel.SelectedIndex = 0;
+            }
         }
     }
 }
