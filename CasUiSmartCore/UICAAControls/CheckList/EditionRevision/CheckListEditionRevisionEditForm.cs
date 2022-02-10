@@ -209,7 +209,7 @@ cross apply
                 {
                     _updateChecks.Remove(item);
                     _addedChecks.Add(item);
-                    GlobalObjects.CaaEnvironment.Execute($@"delete from dbo.CheckListRevisionRecord where ParentId = {_parentId} and CheckListid = {item.ItemId}");
+                    GlobalObjects.CaaEnvironment.Execute($@"delete from dbo.CheckListRevisionRecord where ParentId = {_parentId} and CheckListId = {item.ItemId}");
                 }
 
                 _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
