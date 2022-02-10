@@ -7,6 +7,7 @@ using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.Check;
+using SmartCore.CAA.PEL;
 using SmartCore.Entities.Collections;
 
 namespace CAS.UI.UICAAControls.Audit.PEL
@@ -96,16 +97,19 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             DialogResult = DialogResult.OK;
         }
 
+
+        private PelSpecialist[] items;
         private void AvButtonT1OnClick(object sender, EventArgs e)
         {
-            var form = new AuditTeamForm(_operatorId);
+            var form = new AuditTeamForm(_operatorId, items);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 this.Focus();
-                
+                items = form.PelSpecialists;
                 comboBoxPersonel.Items.Clear();
                 comboBoxPersonel.Items.AddRange(form.PelSpecialists);
-                comboBoxPersonel.SelectedIndex = 0;
+                if(comboBoxPersonel.Items.Count > 0)
+                    comboBoxPersonel.SelectedIndex = 0;
             }
         }
     }

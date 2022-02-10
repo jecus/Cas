@@ -26,10 +26,14 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
 
-        public AuditTeamForm(int operatorId)
+        public AuditTeamForm(int operatorId, PelSpecialist[] pelSpecialists)
         {
             _operatorId = operatorId;
             InitializeComponent();
+            
+           if(pelSpecialists != null)
+               _updateChecks.AddRange(pelSpecialists);
+           
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
             _animatedThreadWorker.RunWorkerAsync();
@@ -43,18 +47,17 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
             var specialists = new CommonCollection<Specialist>();
-            if (_operatorId == -1)
-            {
-                specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-                    .GetObjectListAll<CAASpecialistDTO, Specialist>(loadChild: true));
-            }
-            else
+            
+            specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+                .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", -1),
+                    loadChild: true));
+            if (_operatorId >  -1)
             {
                 specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
                     .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", _operatorId),
                         loadChild: true));
             }
-            
+
             _addedChecks.AddRange(specialists.Select(i => new PelSpecialist()
             {
                 ItemId = i.ItemId,
@@ -62,6 +65,12 @@ namespace CAS.UI.UICAAControls.Audit.PEL
                 LastName = i.LastName,
                 Specialization = i.Specialization
             }));
+
+
+            foreach (var pelSpecialist in _updateChecks)
+            {
+                _addedChecks.Remove(pelSpecialist);
+            }
             
         }
 
