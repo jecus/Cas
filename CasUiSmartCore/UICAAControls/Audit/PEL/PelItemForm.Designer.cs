@@ -34,12 +34,10 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             System.Windows.Forms.Label label3;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PelItemForm));
             this.buttonOk = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
             this._fromcheckRevisionListView = new CAS.UI.UICAAControls.Audit.PEL.PelItemListView();
             this._tocheckRevisionListView = new CAS.UI.UICAAControls.Audit.PEL.PelItemListView();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
-            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.comboBoxPersonel = new System.Windows.Forms.ComboBox();
             this.avButtonT1 = new AvControls.AvButtonT.AvButtonT();
             label3 = new System.Windows.Forms.Label();
@@ -58,25 +56,12 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(1425, 796);
+            this.buttonOk.Location = new System.Drawing.Point(1405, 796);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 328;
             this.buttonOk.Text = "OK";
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonCancel.Location = new System.Drawing.Point(1506, 796);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 33);
-            this.buttonCancel.TabIndex = 327;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // _fromcheckRevisionListView
             // 
@@ -215,7 +200,6 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.Controls.Add(this._tocheckRevisionListView);
             this.Controls.Add(this._fromcheckRevisionListView);
             this.Controls.Add(this.buttonOk);
-            this.Controls.Add(this.buttonCancel);
             this.Name = "PelItemForm";
             this.Resizable = false;
             this.Text = "CheckList Revision Form";
@@ -235,7 +219,6 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         System.Windows.Forms.Label label3;
 
         private System.Windows.Forms.Button buttonOk;
-        private System.Windows.Forms.Button buttonCancel;
         private CAS.UI.UICAAControls.Audit.PEL.PelItemListView _fromcheckRevisionListView;
         private CAS.UI.UICAAControls.Audit.PEL.PelItemListView _tocheckRevisionListView;
         private AvControls.AvButtonT.AvButtonT ButtonAdd;
