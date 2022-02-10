@@ -23,8 +23,8 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 
         public PelItemForm(int operatorId)
         {
-            _operatorId = operatorId;
             InitializeComponent();
+            _operatorId = operatorId;
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
             _animatedThreadWorker.RunWorkerAsync();
@@ -38,8 +38,8 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
             _addedChecks.Clear();
-            _addedChecks.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-                .GetObjectListAll<CheckListDTO, CheckLists>(new Filter("OperatorId", _operatorId), true));
+            // _addedChecks.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+            //     .GetObjectListAll<CheckListDTO, CheckLists>(new Filter("OperatorId", _operatorId), true));
         }
 
         private void UpdateInformation()

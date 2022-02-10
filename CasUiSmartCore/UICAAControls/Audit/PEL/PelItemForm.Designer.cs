@@ -34,6 +34,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             System.Windows.Forms.Label label3;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PelItemForm));
             this.buttonOk = new System.Windows.Forms.Button();
+            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this._fromcheckRevisionListView = new CAS.UI.UICAAControls.Audit.PEL.PelItemListView();
             this._tocheckRevisionListView = new CAS.UI.UICAAControls.Audit.PEL.PelItemListView();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
