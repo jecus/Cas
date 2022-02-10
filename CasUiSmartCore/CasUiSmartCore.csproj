@@ -883,6 +883,18 @@
     <Compile Include="UICAAControls\Audit\PEL\AuditTeamForm.Designer.cs">
       <DependentUpon>AuditTeamForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\Audit\PEL\PelItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Audit\PEL\PelItemForm.Designer.cs">
+      <DependentUpon>PelItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\Audit\PEL\PelItemListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Audit\PEL\PelItemListView.Designer.cs">
+      <DependentUpon>PelItemListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\Audit\PEL\PelPersonnelListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4305,6 +4317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Audit\PEL\AuditTeamForm.resx">
       <DependentUpon>AuditTeamForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\Audit\PEL\PelItemForm.resx">
+      <DependentUpon>PelItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\AuditCheckControl.resx">
       <DependentUpon>AuditCheckControl.cs</DependentUpon>
