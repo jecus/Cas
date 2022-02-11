@@ -22,8 +22,8 @@
 
         #region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
@@ -32,7 +32,6 @@
             this.metroTextBoxRemark = new MetroFramework.Controls.MetroTextBox();
             this.comboBoxOptionNumber = new System.Windows.Forms.ComboBox();
             this.comboBoxOptionType = new System.Windows.Forms.ComboBox();
-            this.linkLabelAddNew = new System.Windows.Forms.LinkLabel();
             label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -100,25 +99,10 @@
             this.comboBoxOptionType.Size = new System.Drawing.Size(198, 22);
             this.comboBoxOptionType.TabIndex = 27;
             // 
-            // linkLabelAddNew
-            // 
-            this.linkLabelAddNew.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.linkLabelAddNew.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.linkLabelAddNew.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.linkLabelAddNew.Location = new System.Drawing.Point(411, 4);
-            this.linkLabelAddNew.Name = "linkLabelAddNew";
-            this.linkLabelAddNew.Size = new System.Drawing.Size(70, 23);
-            this.linkLabelAddNew.TabIndex = 28;
-            this.linkLabelAddNew.TabStop = true;
-            this.linkLabelAddNew.Text = "Remove";
-            this.linkLabelAddNew.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.linkLabelAddNew.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelAddNew_LinkClicked);
-            // 
             // AuditControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.linkLabelAddNew);
             this.Controls.Add(this.comboBoxOptionType);
             this.Controls.Add(this.comboBoxOptionNumber);
             this.Controls.Add(this.metroTextBoxRemark);
@@ -127,7 +111,6 @@
             this.Size = new System.Drawing.Size(484, 93);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -135,6 +118,5 @@
         private MetroFramework.Controls.MetroTextBox metroTextBoxRemark;
         private System.Windows.Forms.ComboBox comboBoxOptionNumber;
         private System.Windows.Forms.ComboBox comboBoxOptionType;
-        private System.Windows.Forms.LinkLabel linkLabelAddNew;
     }
 }

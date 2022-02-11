@@ -53,13 +53,5 @@ namespace CAS.UI.UICAAControls.CheckList
             comboBoxOptionType.Items.AddRange(OptionType.Items.OrderBy(i => i.ShortName).ToArray());
             comboBoxOptionType.SelectedIndex = 0;
         }
-
-        public event EventHandler<EventArgs> Deleted;
-
-        private void linkLabelAddNew_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if(Deleted != null)
-                Deleted.Invoke(this, EventArgs.Empty);
-        }
     }
 }
