@@ -42,7 +42,10 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             SortDirection = SortDirection.Asc;
 			OldColumnIndex = 1;
 		}
-		#endregion
+
+        public int OperatorId { get; set; }
+
+        #endregion
 
 		#endregion
 
@@ -121,7 +124,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 			if (SelectedItem != null)
             {
 
-                e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), SelectedItem.ItemId);
+                e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(),OperatorId, SelectedItem.ItemId);
                 e.DisplayerText = $"Routine Audit: {SelectedItem.Title}";
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 
