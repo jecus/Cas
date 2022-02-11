@@ -48,6 +48,10 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 		protected override void GroupingItems()
 		{
 			this.radGridView1.GroupDescriptors.Clear();
+			var descriptorGroup = new GroupDescriptor();
+			descriptorGroup.GroupNames.Add("Personnel",  ListSortDirection.Ascending);
+			this.radGridView1.GroupDescriptors.Add(descriptorGroup);
+			
 			var descriptor = new GroupDescriptor();
 			foreach (var colName in new List<string>{ "Section №" , "Section Name" , "Part №" , "Part Name", "SubPart №","SubPart Name" })
 				descriptor.GroupNames.Add(colName,  ListSortDirection.Ascending);

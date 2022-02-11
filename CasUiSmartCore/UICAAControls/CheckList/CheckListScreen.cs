@@ -613,8 +613,16 @@ cross apply
 
         private void ButtonPelClick(object sender, EventArgs e)
         {
-	        var form = new PelItemForm(_audit.ItemId, _audit.OperatorId, _initialDocumentArray);
-	        form.ShowDialog();
+	        var refE = new ReferenceEventArgs();
+	        var dp = new DisplayerParams()
+	        {
+		        Page = new PELListScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _operatorId, _auditId.Value, _initialDocumentArray),
+		        TypeOfReflection = ReflectionTypes.DisplayInNew,
+		        PageCaption = $"PEL {_audit.AuditNumber}",
+		        DisplayerType = DisplayerType.Screen
+	        };
+	        refE.SetParameters(dp);
+	        InvokeDisplayerRequested(refE);
         }
 	}
 }
