@@ -323,7 +323,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.pictureBox5.Size = new System.Drawing.Size(5, 50);
 			this.pictureBox5.TabIndex = 15;
 			this.pictureBox5.TabStop = false;
-			this.pictureBox5.Visible = false;
+			this.pictureBox5.Visible = true;
 			// 
 			// pictureBox6
 			// 
