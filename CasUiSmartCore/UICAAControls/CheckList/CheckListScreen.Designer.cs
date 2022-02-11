@@ -46,12 +46,14 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.pictureBox3 = new System.Windows.Forms.PictureBox();
 			this.pictureBox4 = new System.Windows.Forms.PictureBox();
 			this.pictureBox5 = new System.Windows.Forms.PictureBox();
+			this.pictureBox6 = new System.Windows.Forms.PictureBox();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
             // 
@@ -323,6 +325,17 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.pictureBox5.TabStop = false;
 			this.pictureBox5.Visible = false;
 			// 
+			// pictureBox6
+			// 
+			this.pictureBox6.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+			this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.pictureBox6.Location = new System.Drawing.Point(55, 3);
+			this.pictureBox6.Name = "pictureBox3";
+			this.pictureBox6.Size = new System.Drawing.Size(5, 50);
+			this.pictureBox6.TabIndex = 15;
+			this.pictureBox6.TabStop = false;
+			this.pictureBox6.Visible = true;
+			// 
 			// labelDateAsOf
 			// 
 			this.labelDateAsOf.AutoSize = true;
@@ -348,6 +361,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.flowLayoutPanel1.Controls.Add(this.buttonCAR);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox5);
 			this.flowLayoutPanel1.Controls.Add(this.buttonRevisions);
+			this.flowLayoutPanel1.Controls.Add(this.pictureBox6);
 			this.flowLayoutPanel1.Controls.Add(this.buttonPel);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -371,6 +385,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
 			this.flowLayoutPanel1.ResumeLayout(false);
 			this.ResumeLayout(false);
             this.PerformLayout();
@@ -393,6 +408,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		private System.Windows.Forms.PictureBox pictureBox3;
 		private System.Windows.Forms.PictureBox pictureBox4;
 		private System.Windows.Forms.PictureBox pictureBox5;
+		private System.Windows.Forms.PictureBox pictureBox6;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 	}
 }

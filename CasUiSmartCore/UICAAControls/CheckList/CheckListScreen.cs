@@ -121,6 +121,15 @@ namespace CAS.UI.UICAAControls.CheckList
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+	        if (_routingId.HasValue || _auditId.HasValue)
+	        {
+		        pictureBox3.Visible = false;
+		        buttonRevisions.Visible = false;
+		        
+		        pictureBox5.Visible = false;
+		        buttonRevison.Visible = false;
+	        }
+	        
             if (_auditId.HasValue)
             {
 	            this.headerControl.ShowEditButton = true;
@@ -128,25 +137,23 @@ namespace CAS.UI.UICAAControls.CheckList
 	            
 	            if (_audit.Settings.Status == RoutineStatus.Published)
                 {
+	                pictureBox4.Visible = true;
 	                buttonCAR.Visible = true;
-                    pictureBox5.Visible = true;
-				}
-
+                }
+	            else
+	            {
+		            pictureBox4.Visible = false;
+		            buttonCAR.Visible = false;
+	            }
+	            
+	            pictureBox6.Visible = true;
 	            buttonPel.Visible = true;
-
+	            
+	            
 	            labelTitle.Text = $"Workflow Stage : {WorkFlowStage.GetItemById(_audit.Settings.WorkflowStageId)}";
                 labelTitle.Visible = true;
-
             }
-
-            if (_routingId.HasValue || _auditId.HasValue)
-            {
-	            buttonRevisions.Visible = false;
-	            pictureBox5.Visible = false;
-                pictureBox4.Visible = false;
-				buttonRevison.Visible = false;
-            }
-
+            
             if (_directivesViewer is CheckListLiteView lite)
             {
                 lite.AuditId = _auditId;
