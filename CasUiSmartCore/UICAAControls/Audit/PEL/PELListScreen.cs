@@ -54,7 +54,7 @@ namespace CAS.UI.UICAAControls.CheckList
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
 
-            _filter = new CommonFilterCollection(typeof(ICheckListRevisionFilterParams));
+            _filter = new CommonFilterCollection(typeof(IAuditPelRecordFilterParams));
 
 			InitToolStripMenuItems();
 			InitListView();

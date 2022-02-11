@@ -9,10 +9,15 @@ using SmartCore.Entities.General.Personnel;
 
 namespace SmartCore.CAA.PEL
 {
+    public interface IAuditPelRecordFilterParams
+    {
+        
+    }
+    
     [CAADto(typeof(AuditPelRecordDTO))]
     [Condition("IsDeleted", "0")]
     [Serializable]
-    public class AuditPelRecord : BaseEntityObject
+    public class AuditPelRecord : BaseEntityObject, IAuditPelRecordFilterParams
     {
         public int AuditRecordId { get; set; }
         
