@@ -232,35 +232,11 @@ namespace CAS.UI.UICAAControls.CheckList
         public void UpdateRecords(CheckListRecords record)
         {
             var control = new AuditControl(record);
-            control.Deleted += Control_Deleted;
             flowLayoutPanel1.Controls.Remove(linkLabel1);
             flowLayoutPanel1.Controls.Add(control);
             flowLayoutPanel1.Controls.Add(linkLabel1);
         }
-
-        private void Control_Deleted(object sender, EventArgs e)
-        {
-            var control = sender as AuditControl;
-
-            var dialogResult = MessageBox.Show("Do you really want to delete record?", "Deleting confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
-            if (dialogResult == DialogResult.Yes)
-            {
-                if (control.Record.ItemId > 0)
-                {
-                    try
-                    {
-                        GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.Record);
-                    }
-                    catch (Exception ex)
-                    {
-                        Program.Provider.Logger.Log("Error while removing data", ex);
-                    }
-                }
-                flowLayoutPanel1.Controls.Remove(control);
-                control.Deleted -= Control_Deleted;
-                control.Dispose();
-            }
-        }
+        
 
         private void buttonOk_Click(object sender, System.EventArgs e)
         {
@@ -319,7 +295,6 @@ namespace CAS.UI.UICAAControls.CheckList
                     }
                 }
                 flowLayoutPanel2.Controls.Remove(control);
-                control.Deleted -= Control_Deleted;
                 control.Dispose();
             }
         }
@@ -328,7 +303,6 @@ namespace CAS.UI.UICAAControls.CheckList
         private void UpdateRevision(CheckListRevisionRecord rec)
         {
             var control = new RevisionControl(rec);
-            control.Deleted += ControlRevision_Deleted;
             flowLayoutPanel2.Controls.Add(control);
         }
     }

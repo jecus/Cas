@@ -38,14 +38,5 @@ namespace CAS.UI.UICAAControls.CheckList
             dateTimePickerRevisionDate.Value = Record.Parent.Date;
             dateTimePickerEffDate.Value = Record.Parent.EffDate;
         }
-
-        public event EventHandler<EventArgs> Deleted;
-
-
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if (Deleted != null)
-                Deleted.Invoke(this, EventArgs.Empty);
-        }
     }
 }

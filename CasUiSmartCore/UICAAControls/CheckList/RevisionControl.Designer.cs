@@ -23,24 +23,44 @@ namespace CAS.UI.UICAAControls.CheckList
 
         #region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            
-            System.Windows.Forms.Label label2;
-            System.Windows.Forms.Label label3;
             this.dateTimePickerRevisionDate = new System.Windows.Forms.DateTimePicker();
             this.metroTextBoxRevision = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxRemark = new MetroFramework.Controls.MetroTextBox();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.dateTimePickerEffDate = new System.Windows.Forms.DateTimePicker();
-            label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Verdana", 9F);
+            label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label2.Location = new System.Drawing.Point(42, 30);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(37, 14);
+            label2.TabIndex = 45;
+            label2.Text = "Date";
+            label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Verdana", 9F);
+            label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label3.Location = new System.Drawing.Point(171, 30);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(57, 14);
+            label3.TabIndex = 46;
+            label3.Text = "Eff Date";
+            label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // dateTimePickerRevisionDate
             // 
@@ -113,19 +133,12 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxRemark.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxRemark.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // linkLabel2
+            // dateTimePickerEffDate
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.linkLabel2.Location = new System.Drawing.Point(198, 131);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.linkLabel2.Size = new System.Drawing.Size(64, 17);
-            this.linkLabel2.TabIndex = 43;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Remove";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            this.dateTimePickerEffDate.Location = new System.Drawing.Point(134, 46);
+            this.dateTimePickerEffDate.Name = "dateTimePickerEffDate";
+            this.dateTimePickerEffDate.Size = new System.Drawing.Size(119, 20);
+            this.dateTimePickerEffDate.TabIndex = 44;
             // 
             // label1
             // 
@@ -139,37 +152,6 @@ namespace CAS.UI.UICAAControls.CheckList
             label1.Text = "Edition:";
             label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // dateTimePickerEffDate
-            // 
-            this.dateTimePickerEffDate.Location = new System.Drawing.Point(134, 46);
-            this.dateTimePickerEffDate.Name = "dateTimePickerEffDate";
-            this.dateTimePickerEffDate.Size = new System.Drawing.Size(119, 20);
-            this.dateTimePickerEffDate.TabIndex = 44;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Verdana", 9F);
-            label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label2.Location = new System.Drawing.Point(42, 30);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(37, 14);
-            label2.TabIndex = 45;
-            label2.Text = "Date";
-            label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Verdana", 9F);
-            label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label3.Location = new System.Drawing.Point(171, 30);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(57, 14);
-            label3.TabIndex = 46;
-            label3.Text = "Eff Date";
-            label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // RevisionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -177,24 +159,23 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Controls.Add(label3);
             this.Controls.Add(label2);
             this.Controls.Add(this.dateTimePickerEffDate);
-            this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.metroTextBoxRemark);
             this.Controls.Add(this.dateTimePickerRevisionDate);
             this.Controls.Add(this.metroTextBoxRevision);
             this.Controls.Add(label1);
             this.Name = "RevisionControl";
-            this.Size = new System.Drawing.Size(262, 148);
+            this.Size = new System.Drawing.Size(262, 132);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
-        System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePickerRevisionDate;
         private MetroFramework.Controls.MetroTextBox metroTextBoxRevision;
         private MetroFramework.Controls.MetroTextBox metroTextBoxRemark;
-        private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.DateTimePicker dateTimePickerEffDate;
     }
 }
