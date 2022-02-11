@@ -37,21 +37,18 @@ namespace CAS.UI.UICAAControls.CheckList
             this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
             this.buttonRevison = new AvControls.AvButtonT.AvButtonT();
             this.buttonRevisions = new AvControls.AvButtonT.AvButtonT();
-            this.buttonCAR = new AvControls.AvButtonT.AvButtonT();
             this.buttonPel = new AvControls.AvButtonT.AvButtonT();
             this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.pictureBox3 = new System.Windows.Forms.PictureBox();
-			this.pictureBox4 = new System.Windows.Forms.PictureBox();
 			this.pictureBox5 = new System.Windows.Forms.PictureBox();
 			this.pictureBox6 = new System.Windows.Forms.PictureBox();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
 			this.flowLayoutPanel1.SuspendLayout();
@@ -171,33 +168,6 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.buttonRevisions.ToolTipText = "Edition/Revison";
 			this.buttonRevisions.Click += ButtonRevisionsClick;
 			// 
-			// buttonCAR
-			// 
-			this.buttonCAR.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-			this.buttonCAR.ActiveBackgroundImage = null;
-			this.buttonCAR.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonCAR.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonCAR.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
-			this.buttonCAR.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonCAR.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
-			this.buttonCAR.Icon = global::CAS.UI.Properties.Resources.CARR;
-			this.buttonCAR.IconLayout = System.Windows.Forms.ImageLayout.Center;
-			this.buttonCAR.IconNotEnabled = null;
-			this.buttonCAR.Location = new System.Drawing.Point(0, 0);
-			this.buttonCAR.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
-			this.buttonCAR.Name = "buttonCAR";
-			this.buttonCAR.NormalBackgroundImage = null;
-			this.buttonCAR.PaddingMain = new System.Windows.Forms.Padding(0);
-			this.buttonCAR.PaddingSecondary = new System.Windows.Forms.Padding(0);
-			this.buttonCAR.ShowToolTip = true;
-			this.buttonCAR.Size = new System.Drawing.Size(52, 57);
-			this.buttonCAR.TabIndex = 18;
-			this.buttonCAR.TextMain = "";
-			this.buttonCAR.TextSecondary = "";
-			this.buttonCAR.ToolTipText = "Revison";
-			this.buttonCAR.Visible = false;
-			this.buttonCAR.Click += ButtonCARClick;
-			// 
 			// buttonPel
 			// 
 			this.buttonPel.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
@@ -303,17 +273,6 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.pictureBox3.TabIndex = 15;
 			this.pictureBox3.TabStop = false;
 			// 
-			// pictureBox4
-			// 
-			this.pictureBox4.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
-			this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.pictureBox4.Location = new System.Drawing.Point(55, 3);
-			this.pictureBox4.Name = "pictureBox3";
-			this.pictureBox4.Size = new System.Drawing.Size(5, 50);
-			this.pictureBox4.TabIndex = 15;
-			this.pictureBox4.TabStop = false;
-			this.pictureBox4.Visible = false;
-			// 
 			// pictureBox5
 			// 
 			this.pictureBox5.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
@@ -357,8 +316,6 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox3);
 			this.flowLayoutPanel1.Controls.Add(this.buttonRevison);
-            this.flowLayoutPanel1.Controls.Add(this.pictureBox4);
-			this.flowLayoutPanel1.Controls.Add(this.buttonCAR);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox5);
 			this.flowLayoutPanel1.Controls.Add(this.buttonRevisions);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox6);
@@ -382,8 +339,6 @@ namespace CAS.UI.UICAAControls.CheckList
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
 			this.flowLayoutPanel1.ResumeLayout(false);
@@ -399,14 +354,12 @@ namespace CAS.UI.UICAAControls.CheckList
         private AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
         private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
         private AvControls.AvButtonT.AvButtonT buttonRevison;
-        private AvControls.AvButtonT.AvButtonT buttonCAR;
         private AvControls.AvButtonT.AvButtonT buttonPel;
         private AvControls.AvButtonT.AvButtonT buttonRevisions;
         private System.Windows.Forms.Label labelDateAsOf;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.PictureBox pictureBox2;
 		private System.Windows.Forms.PictureBox pictureBox3;
-		private System.Windows.Forms.PictureBox pictureBox4;
 		private System.Windows.Forms.PictureBox pictureBox5;
 		private System.Windows.Forms.PictureBox pictureBox6;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;

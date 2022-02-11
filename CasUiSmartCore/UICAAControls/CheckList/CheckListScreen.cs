@@ -134,20 +134,8 @@ namespace CAS.UI.UICAAControls.CheckList
 	            this.headerControl.ShowEditButton = true;
 	            this.headerControl.EditButtonClick += HeaderControl_EditButtonClick;
 	            
-	            if (_audit.Settings.Status == RoutineStatus.Published)
-                {
-	                pictureBox4.Visible = true;
-	                buttonCAR.Visible = true;
-                }
-	            else
-	            {
-		            pictureBox4.Visible = false;
-		            buttonCAR.Visible = false;
-	            }
-	            
 	            pictureBox6.Visible = true;
 	            buttonPel.Visible = true;
-	            
 	            
 	            labelTitle.Text = $"Workflow Stage : {WorkFlowStage.GetItemById(_audit.Settings.WorkflowStageId)}";
                 labelTitle.Visible = true;
