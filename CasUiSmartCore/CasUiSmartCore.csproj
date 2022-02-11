@@ -877,6 +877,12 @@
     <Compile Include="UICAAControls\Audit\AuditListView.Designer.cs">
       <DependentUpon>AuditListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\Audit\PEL\AuditPelRecordListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Audit\PEL\AuditPelRecordListView.Designer.cs">
+      <DependentUpon>AuditPelRecordListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\Audit\PEL\AuditTeamForm.cs">
       <SubType>Form</SubType>
     </Compile>

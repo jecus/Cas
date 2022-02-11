@@ -613,7 +613,7 @@ cross apply
 
         private void ButtonPelClick(object sender, EventArgs e)
         {
-	        var form = new PelItemForm(_audit.OperatorId);
+	        var form = new PelItemForm(_audit.ItemId, _audit.OperatorId, _initialDocumentArray);
 	        form.ShowDialog();
         }
 	}

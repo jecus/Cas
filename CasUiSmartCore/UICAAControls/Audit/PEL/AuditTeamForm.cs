@@ -8,6 +8,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
+using SmartCore.CAA;
 using SmartCore.CAA.PEL;
 using SmartCore.CAA.RoutineAudits;
 using SmartCore.Entities.Collections;
@@ -18,6 +19,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
     public partial class AuditTeamForm : MetroForm
     {
         private readonly int _operatorId;
+        private readonly CommonCollection<Specialist> _specialists;
 
         public PelSpecialist[] PelSpecialists => _updateChecks.OrderBy(i => i.FirstName).ThenBy(i => i.LastName).ToArray();
 
@@ -26,13 +28,13 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
 
-        public AuditTeamForm(int operatorId, PelSpecialist[] pelSpecialists)
+        public AuditTeamForm(int operatorId, CommonCollection<Specialist> specialists)
         {
             _operatorId = operatorId;
+            _specialists = specialists;
             InitializeComponent();
             
-           if(pelSpecialists != null)
-               _updateChecks.AddRange(pelSpecialists);
+
            
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
@@ -46,24 +48,23 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
-            var specialists = new CommonCollection<Specialist>();
-            
-            specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-                .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", -1),
-                    loadChild: true));
-            if (_operatorId >  -1)
-            {
-                specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-                    .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", _operatorId),
-                        loadChild: true));
-            }
+            // specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+            //     .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", -1),
+            //         loadChild: true));
+            // if (_operatorId >  -1)
+            // {
+            //     specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+            //         .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", _operatorId),
+            //             loadChild: true));
+            // }
 
-            _addedChecks.AddRange(specialists.Select(i => new PelSpecialist()
+            _addedChecks.AddRange(_specialists.Select(i => new PelSpecialist()
             {
                 ItemId = i.ItemId,
                 FirstName = i.FirstName,
                 LastName = i.LastName,
-                Specialization = i.Specialization
+                Specialization = i.Specialization,
+                Operator = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(o => o.ItemId == i.OperatorId) ?? AllOperators.Unknown
             }));
 
 
@@ -98,11 +99,6 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             {
                 Program.Provider.Logger.Log("Error while save checkList", ex);
             }
-        }
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
         }
         private void ButtonAdd_Click(object sender, EventArgs e)
         {

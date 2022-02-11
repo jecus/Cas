@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
 using SmartCore.CAA.Check;
+using SmartCore.CAA.PEL;
 using SmartCore.Entities.Dictionaries;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
@@ -281,9 +282,21 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
 
         public virtual int Compare(GridViewRowInfo x, GridViewRowInfo y)
         {
-            var xx = x.Tag as CheckLists;
-            var yy = y.Tag as CheckLists;
+	        CheckLists xx = null;
+	        CheckLists yy = null;
+	        if (x.Tag is CheckLists)
+		        xx = x.Tag as CheckLists;
+	        if (y.Tag is CheckLists)
+		        yy = y.Tag as CheckLists;
+	        
+	        
+	        if (x.Tag is AuditPelRecord)
+		        xx = (x.Tag as AuditPelRecord).CheckList;
+	        if (y.Tag is AuditPelRecord)
+		        yy = (y.Tag as AuditPelRecord).CheckList;
 
+	        if (xx == null || y is null)
+		        return 0;
 
 			var a = Regex.Replace($"{xx.SectionNumber}|{xx.PartNumber}|{xx.SubPartNumber}|{xx.ItemNumber}", @"\s+", " "); ;
             var b = Regex.Replace($"{yy.SectionNumber}|{yy.PartNumber}|{yy.SubPartNumber}|{yy.ItemNumber}", @"\s+", " "); ;

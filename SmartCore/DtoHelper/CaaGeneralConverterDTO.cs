@@ -7,6 +7,7 @@ using SmartCore.CAA;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
+using SmartCore.CAA.PEL;
 using SmartCore.CAA.RoutineAudits;
 using SmartCore.Calculations;
 using SmartCore.Entities;
@@ -1532,6 +1533,40 @@ namespace SmartCore.DtoHelper
                 OptionNumber = recordDto.OptionNumber,
                 Option = recordDto.Option.ItemId
             };
+        }
+        
+        
+        
+        public static AuditPelRecord ConvertCAA(this AuditPelRecordDTO recordDto)
+        {
+	        return new AuditPelRecord()
+	        {
+		        ItemId = recordDto.ItemId,
+		        IsDeleted = recordDto.IsDeleted,
+		        CorrectorId = recordDto.CorrectorId,
+		        Updated = recordDto.Updated,
+		        CheckListId = recordDto.CheckListId,
+		        SpecialistId = recordDto.SpecialistId,
+		        AuditRecordId = recordDto.AuditRecordId,
+		        SettingsJSON = recordDto.SettingsJSON,
+
+	        };
+        }
+
+        public static AuditPelRecordDTO ConvertCAA(this AuditPelRecord recordDto)
+        {
+	        return new AuditPelRecordDTO()
+	        {
+		        ItemId = recordDto.ItemId,
+		        IsDeleted = recordDto.IsDeleted,
+		        CorrectorId = recordDto.CorrectorId,
+		        Updated = recordDto.Updated,
+		        CheckListId = recordDto.CheckListId,
+		        SpecialistId = recordDto.SpecialistId,
+		        AuditRecordId = recordDto.AuditRecordId,
+		        SettingsJSON = recordDto.SettingsJSON,
+
+	        };
         }
 
 

@@ -9,6 +9,7 @@ using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
+using SmartCore.CAA;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Atlbs;
@@ -16,6 +17,7 @@ using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Files;
 using SmartCore.Management;
+using Type = System.Type;
 
 namespace SmartCore.Entities.General.Personnel
 {
@@ -655,6 +657,8 @@ namespace SmartCore.Entities.General.Personnel
 				});
 			}
 		}
+
+		public AllOperators Operator { get; set; }
 
 		#endregion
 

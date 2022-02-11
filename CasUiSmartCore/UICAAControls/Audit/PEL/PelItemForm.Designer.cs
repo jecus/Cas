@@ -36,7 +36,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.buttonOk = new System.Windows.Forms.Button();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this._fromcheckRevisionListView = new CAS.UI.UICAAControls.Audit.PEL.PelItemListView();
-            this._tocheckRevisionListView = new CAS.UI.UICAAControls.Audit.PEL.PelItemListView();
+            this._tocheckRevisionListView = new CAS.UI.UICAAControls.Audit.PEL.AuditPelRecordListView();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
             this.comboBoxPersonel = new System.Windows.Forms.ComboBox();
@@ -57,7 +57,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(1405, 796);
+            this.buttonOk.Location = new System.Drawing.Point(1385, 776);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 328;
@@ -68,10 +68,8 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             // 
             this._fromcheckRevisionListView.Location = new System.Drawing.Point(5, 53);
             this._fromcheckRevisionListView.Name = "_fromcheckRevisionListView";
-            this._fromcheckRevisionListView.PasteComplete = null;
             this._fromcheckRevisionListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._fromcheckRevisionListView.Size = new System.Drawing.Size(1419, 317);
-            this._fromcheckRevisionListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Asc;
             this._fromcheckRevisionListView.TabIndex = 329;
             // 
             // _tocheckRevisionListView
@@ -80,7 +78,6 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this._tocheckRevisionListView.Name = "_tocheckRevisionListView";
             this._tocheckRevisionListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._tocheckRevisionListView.Size = new System.Drawing.Size(1419, 346);
-            this._tocheckRevisionListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Asc;
             this._tocheckRevisionListView.TabIndex = 330;
             // 
             // ButtonAdd
@@ -95,7 +92,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.ButtonAdd.Icon = global::CAS.UI.Properties.Resources.AddIconSmall;
             this.ButtonAdd.IconLayout = System.Windows.Forms.ImageLayout.Center;
             this.ButtonAdd.IconNotEnabled = null;
-            this.ButtonAdd.Location = new System.Drawing.Point(1307, 377);
+            this.ButtonAdd.Location = new System.Drawing.Point(1207, 357);
             this.ButtonAdd.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonAdd.Name = "ButtonAdd";
             this.ButtonAdd.NormalBackgroundImage = null;
@@ -221,7 +218,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 
         private System.Windows.Forms.Button buttonOk;
         private CAS.UI.UICAAControls.Audit.PEL.PelItemListView _fromcheckRevisionListView;
-        private CAS.UI.UICAAControls.Audit.PEL.PelItemListView _tocheckRevisionListView;
+        private CAS.UI.UICAAControls.Audit.PEL.AuditPelRecordListView _tocheckRevisionListView;
         private AvControls.AvButtonT.AvButtonT ButtonAdd;
         private AvControls.AvButtonT.AvButtonT ButtonDelete;
     }

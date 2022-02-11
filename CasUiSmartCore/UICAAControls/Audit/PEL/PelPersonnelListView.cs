@@ -32,7 +32,11 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 		#endregion
 
 		#region Methods
-		
+
+		protected override void GroupingItems()
+		{
+			Grouping("Operator");
+		}
 
 		#region protected override void SetHeaders()
 		/// <summary>
@@ -45,6 +49,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 			AddColumn("Occupation", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Roles", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Responsibilities", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Operator", (int)(radGridView1.Width * 0.24f));
 		}
 		#endregion
 		
@@ -58,6 +63,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 				CreateRow(item.Specialization.ToString(), item.Specialization),
 				CreateRow(item.Role.ToString(), item.Role),
 				CreateRow(item.PELResponsibilities.ToString(), item.PELResponsibilities),
+				CreateRow(item.Operator.ToString(), item.Operator),
 			};
 
 			return subItems;

@@ -45,6 +45,8 @@ namespace SmartCore.CAA.PEL
             }
         }
 
+        public AllOperators Operator { get; set; }
+
         public override string ToString()
         {
             return $"{FirstName} {LastName} / {Role} / {PELResponsibilities}";
