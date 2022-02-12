@@ -11,6 +11,9 @@ namespace CAA.Entity.Models.DTO
     {
         [Column("Source")]
         public string Source { get; set; }
+        
+        [Column("Source")]
+        public int  EditionId{ get; set; }
 
         [Column("SettingsJSON")]
         public string SettingsJSON { get; set; }

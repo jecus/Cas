@@ -1389,6 +1389,7 @@ namespace SmartCore.DtoHelper
                 CorrectorId = levels.CorrectorId,
                 Updated = levels.Updated,
 				Source = levels.Source,
+				EditionId = levels.EditionId,
 				OperatorId = levels.OperatorId,
 				SettingsJSON =  levels.SettingsJSON
             };
@@ -1408,6 +1409,7 @@ namespace SmartCore.DtoHelper
                 CorrectorId = levels.CorrectorId,
                 Updated = levels.Updated,
                 Source = levels.Source,
+                EditionId = levels.EditionId,
                 OperatorId = levels.OperatorId,
 				SettingsJSON =  levels.SettingsJSON
 			};
