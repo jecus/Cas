@@ -14,6 +14,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.UI.Management.Dispatchering;
+using CAS.UI.UICAAControls.CheckList.EditionRevision;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CheckList
@@ -30,6 +32,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private EditionRevisionListView _directivesViewer;
         private RadMenuItem _toolStripMenuItemOpen;
+        private RadMenuItem _toolStripMenuItemEdit;
 
 		
 		public EditionRevisionListScreen()
@@ -89,20 +92,43 @@ namespace CAS.UI.UICAAControls.CheckList
 		private void InitToolStripMenuItems()
 		{
 			_toolStripMenuItemOpen = new RadMenuItem();
+			_toolStripMenuItemEdit = new RadMenuItem();
 			// 
 			// toolStripMenuItemView
 			// 
 			_toolStripMenuItemOpen.Text = "Open";
 			_toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
+			// 
+			// _toolStripMenuItemEdit
+			// 
+			_toolStripMenuItemEdit.Text = "Edit";
+			_toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
 		}
+
+		private void ToolStripMenuItemEditClick(object sender, EventArgs e)
+		{
+			var form = new EditionForm(_directivesViewer.SelectedItem);
+			if(form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
+		}
+
 		#endregion
 		
 		#region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 
 		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 		{
-            
-        }
+			var refE = new ReferenceEventArgs();
+			var dp = new DisplayerParams()
+			{
+				Page = new EditionRevisionRecordListScreen(GlobalObjects.CaaEnvironment.Operators[0], _directivesViewer.SelectedItem.ItemId, _operatorId),
+				TypeOfReflection = ReflectionTypes.DisplayInNew,
+				PageCaption = $"{_directivesViewer.SelectedItem.Type} : {_directivesViewer.SelectedItem.Number}",
+				DisplayerType = DisplayerType.Screen
+			};
+			refE.SetParameters(dp);
+			InvokeDisplayerRequested(refE);
+		}
 
 		#endregion
 
@@ -128,8 +154,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
-			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen);
-			_directivesViewer.DisableContectMenu();
+			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,_toolStripMenuItemEdit);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
@@ -263,5 +288,12 @@ namespace CAS.UI.UICAAControls.CheckList
 		#endregion
 
 		#endregion
-    }
+
+		private void ButtonAddClick(object sender, EventArgs e)
+		{
+			var form = new EditionForm(new CheckListRevision{OperatorId = _operatorId, Type = RevisionType.Edition});
+			if(form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
+		}
+	}
 }

@@ -273,32 +273,7 @@ namespace CAS.UI.UICAAControls.CheckList
             DialogResult = DialogResult.Cancel;
             Close();
         }
-
-
-        private void ControlRevision_Deleted(object sender, EventArgs e)
-        {
-            var control = sender as RevisionControl;
-
-            var dialogResult = MessageBox.Show("Do you really want to delete revision?", "Deleting confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
-            if (dialogResult == DialogResult.Yes)
-            {
-                if (control.Record.ItemId > 0)
-                {
-                    try
-                    {
-                        _currentCheck.AllRevisions.Remove(control.Record);
-                        GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.Record);
-                    }
-                    catch (Exception ex)
-                    {
-                        Program.Provider.Logger.Log("Error while removing data", ex);
-                    }
-                }
-                flowLayoutPanel2.Controls.Remove(control);
-                control.Dispose();
-            }
-        }
-
+        
 
         private void UpdateRevision(CheckListRevisionRecord rec)
         {

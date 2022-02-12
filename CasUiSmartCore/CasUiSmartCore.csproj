@@ -973,6 +973,12 @@
     <Compile Include="UICAAControls\CheckList\EditionRevision\CheckListRevisionForm.Designer.cs">
       <DependentUpon>CheckListRevisionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CheckList\EditionRevision\EditionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CheckList\EditionRevision\EditionForm.Designer.cs">
+      <DependentUpon>EditionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CheckList\EditionRevision\EditionRevisionListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4349,6 +4355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\EditionRevision\CheckListRevisionForm.resx">
       <DependentUpon>CheckListRevisionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CheckList\EditionRevision\EditionForm.resx">
+      <DependentUpon>EditionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\EditionRevision\EditionRevisionListScreen.resx">
       <DependentUpon>EditionRevisionListScreen.cs</DependentUpon>

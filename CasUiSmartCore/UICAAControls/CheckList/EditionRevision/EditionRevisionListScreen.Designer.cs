@@ -35,6 +35,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.labelDateAsOf = new System.Windows.Forms.Label();
             this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
             this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
+            this.buttonAdd = new AvControls.AvButtonT.AvButtonT();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -106,7 +107,58 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.buttonApplyFilter.TextMain = "";
 			this.buttonApplyFilter.TextSecondary = "";
 			this.buttonApplyFilter.ToolTipText = "Apply filter";
+			this.buttonApplyFilter.Click += ButtonApplyFilterClick;// 
+			// buttonApplyFilter
+			// 
+			this.buttonApplyFilter.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+			this.buttonApplyFilter.ActiveBackgroundImage = null;
+			this.buttonApplyFilter.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonApplyFilter.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonApplyFilter.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
+			this.buttonApplyFilter.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+			this.buttonApplyFilter.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
+			this.buttonApplyFilter.Icon = global::CAS.UI.Properties.Resources.ApplyFilterIcon;
+			this.buttonApplyFilter.IconLayout = System.Windows.Forms.ImageLayout.Center;
+			this.buttonApplyFilter.IconNotEnabled = null;
+			this.buttonApplyFilter.Location = new System.Drawing.Point(0, 0);
+			this.buttonApplyFilter.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
+			this.buttonApplyFilter.Name = "buttonApplyFilter";
+			this.buttonApplyFilter.NormalBackgroundImage = null;
+			this.buttonApplyFilter.PaddingMain = new System.Windows.Forms.Padding(0);
+			this.buttonApplyFilter.PaddingSecondary = new System.Windows.Forms.Padding(0);
+			this.buttonApplyFilter.ShowToolTip = true;
+			this.buttonApplyFilter.Size = new System.Drawing.Size(52, 57);
+			this.buttonApplyFilter.TabIndex = 18;
+			this.buttonApplyFilter.TextMain = "";
+			this.buttonApplyFilter.TextSecondary = "";
+			this.buttonApplyFilter.ToolTipText = "Apply filter";
 			this.buttonApplyFilter.Click += ButtonApplyFilterClick;
+			// 
+			// buttonAdd
+			// 
+			this.buttonAdd.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+			this.buttonAdd.ActiveBackgroundImage = null;
+			this.buttonAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonAdd.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonAdd.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
+			this.buttonAdd.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+			this.buttonAdd.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
+			this.buttonAdd.Icon = global::CAS.UI.Properties.Resources.AddIcon;
+			this.buttonAdd.IconLayout = System.Windows.Forms.ImageLayout.Center;
+			this.buttonAdd.IconNotEnabled = null;
+			this.buttonAdd.Location = new System.Drawing.Point(0, 0);
+			this.buttonAdd.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
+			this.buttonAdd.Name = "buttonApplyFilter";
+			this.buttonAdd.NormalBackgroundImage = null;
+			this.buttonAdd.PaddingMain = new System.Windows.Forms.Padding(0);
+			this.buttonAdd.PaddingSecondary = new System.Windows.Forms.Padding(0);
+			this.buttonAdd.ShowToolTip = true;
+			this.buttonAdd.Size = new System.Drawing.Size(52, 57);
+			this.buttonAdd.TabIndex = 18;
+			this.buttonAdd.TextMain = "";
+			this.buttonAdd.TextSecondary = "";
+			this.buttonAdd.ToolTipText = "Apply filter";
+			this.buttonAdd.Click += ButtonAddClick;
 
 			// 
 			// buttonDeleteSelected
@@ -182,6 +234,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox2);
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox3);
+			this.flowLayoutPanel1.Controls.Add(this.buttonAdd);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox4);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -213,6 +266,7 @@ namespace CAS.UI.UICAAControls.CheckList
         private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
         private AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
         private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
+        private AvControls.AvButtonT.AvButtonT buttonAdd;
         private System.Windows.Forms.Label labelDateAsOf;
         private System.Windows.Forms.PictureBox pictureBox2;
 		private System.Windows.Forms.PictureBox pictureBox3;
