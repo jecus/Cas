@@ -55,9 +55,6 @@ namespace CAS.UI.UICAAControls.CheckList
 
             _filter = new CommonFilterCollection(typeof(ICheckListRevisionFilterParams));
             
-            this.headerControl.ShowEditButton = true;
-            this.headerControl.EditButtonClick += HeaderControl_EditButtonClick;
-
 			InitToolStripMenuItems();
 			InitListView();
 			UpdateInformation();
@@ -297,12 +294,6 @@ namespace CAS.UI.UICAAControls.CheckList
 		#endregion
 		
 		
-		private void HeaderControl_EditButtonClick(object sender, EventArgs e)
-		{
-			var form = new CheckListEditionRevisionEditForm(_parentId,_operatorId);
-			if(form.ShowDialog() == DialogResult.OK)
-				AnimatedThreadWorker.RunWorkerAsync();
-		}
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
