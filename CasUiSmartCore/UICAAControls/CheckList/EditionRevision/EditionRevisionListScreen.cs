@@ -291,7 +291,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private void ButtonAddClick(object sender, EventArgs e)
 		{
-			var form = new EditionForm(new CheckListRevision{OperatorId = _operatorId, Type = RevisionType.Edition});
+			var form = new EditionForm(new CheckListRevision{OperatorId = _operatorId, Type = RevisionType.Edition, Status = EditionRevisionStatus.Close});
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
 		}

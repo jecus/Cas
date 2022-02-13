@@ -177,7 +177,7 @@ cross apply
                 {
                     revisionedition = new CheckListRevision()
                     {
-                        Number = metroTextBoxEditionNumber.Text,
+                        //Number = metroTextBoxEditionNumber.Text,
                         Type = RevisionType.Edition,
                         OperatorId = _operatorId,
                         Date = dateTimePickerEditionDate.Value.Date,
@@ -193,7 +193,7 @@ cross apply
                 {
                     revisionedition = new CheckListRevision()
                     {
-                        Number = metroTextBoxRevision.Text,
+                        //Number = metroTextBoxRevision.Text,
                         Type = RevisionType.Revision,
                         OperatorId = _operatorId,
                         Date = dateTimePickerRevisionDate.Value.Date,

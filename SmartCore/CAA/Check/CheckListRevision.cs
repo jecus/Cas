@@ -10,7 +10,7 @@ namespace SmartCore.CAA.Check
     public interface ICheckListRevisionFilterParams
     {
         [Filter("Number", Order = 1)]
-        string Number { get; set; }
+        int Number { get; set; }
 
         [Filter("Type", Order = 2)]
         RevisionType Type { get; set; }
@@ -28,7 +28,8 @@ namespace SmartCore.CAA.Check
     {
         public int CheckListId { get; set; }
 
-        public string Number { get; set; }
+        public int Number { get; set; }
+        public EditionRevisionStatus Status { get; set; }
 
         public RevisionType Type { get; set; }
 
@@ -60,6 +61,7 @@ namespace SmartCore.CAA.Check
         {
             Date = DateTime.Today;
             EffDate = DateTime.Today;
+            Status = EditionRevisionStatus.Close;
             Settings = new CheckListRevisionSettings();
         }
 

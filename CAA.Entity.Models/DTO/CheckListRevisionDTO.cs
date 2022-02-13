@@ -10,16 +10,25 @@ namespace CAA.Entity.Models.DTO
         Edition = 0,
         Revision = 1
     }
+    
+    public enum EditionRevisionStatus
+    {
+        Open = 0,
+        Close = 1
+    }
 
     [Table("CheckListRevision", Schema = "dbo")]
     [Condition("IsDeleted", 0)]
     public class CheckListRevisionDTO: BaseEntity,IOperatable
     {
         [Column("Number")]
-        public string Number { get; set; }
+        public int Number { get; set; }
 
         [Column("Type")]
         public RevisionType Type { get; set; }
+        
+        [Column("Status")]
+        public EditionRevisionStatus Status { get; set; }
 
         [Column("OperatorId")]
         public int OperatorId{ get; set; }

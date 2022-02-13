@@ -45,6 +45,7 @@ namespace CAS.UI.UICAAControls.CheckList
             AddColumn("Type", (int)(radGridView1.Width * 0.24f));
             AddColumn("Date", (int)(radGridView1.Width * 0.24f));
             AddColumn("Eff Date", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Status", (int)(radGridView1.Width * 0.24f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.24f));
         }
         #endregion
@@ -57,10 +58,11 @@ namespace CAS.UI.UICAAControls.CheckList
 
             var subItems = new List<CustomCell>();
 
-            subItems.Add(CreateRow(item.Number, item.Number));
+            subItems.Add(CreateRow(item.Number.ToString(), item.Number));
             subItems.Add(CreateRow(item.Type.ToString(), item.Type));
             subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Date), item.Date));
             subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.EffDate), item.EffDate));
+            subItems.Add(CreateRow(item.Status.ToString(), item.Status));
             subItems.Add(CreateRow(author, author));
 
             return subItems;

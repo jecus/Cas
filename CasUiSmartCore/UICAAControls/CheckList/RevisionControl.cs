@@ -34,7 +34,7 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             label1.Text = Record.Parent?.Type.ToString();
             metroTextBoxRemark.Text = Record.Parent?.Settings.Remark;
-            metroTextBoxRevision.Text = Record.Parent?.Number;
+            metroTextBoxRevision.Text = Record.Parent?.Number.ToString();
             dateTimePickerRevisionDate.Value = Record.Parent.Date;
             dateTimePickerEffDate.Value = Record.Parent.EffDate;
         }
