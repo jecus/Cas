@@ -215,6 +215,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.buttonAddNew.TabIndex = 0;
 			this.buttonAddNew.TextMain = "";
 			this.buttonAddNew.TextSecondary = "";
+			this.buttonAddNew.Visible = false;
 			this.buttonAddNew.ToolTipText = "Add new";
 			this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
 			this.buttonAddNew.Enabled = !(userType == UserType.ReadOnly);
@@ -252,6 +253,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.pictureBox1.Size = new System.Drawing.Size(5, 50);
 			this.pictureBox1.TabIndex = 15;
 			this.pictureBox1.TabStop = false;
+			this.pictureBox1.Visible = false;
 			// 
 			// pictureBox2
 			// 

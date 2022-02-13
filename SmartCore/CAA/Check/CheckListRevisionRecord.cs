@@ -10,13 +10,9 @@ namespace SmartCore.CAA.Check
     public class CheckListRevisionRecord : BaseEntityObject
     {
         public int CheckListId { get; set; }
-
-
         public string SettingsJSON { get; set; }
         public int ParentId { get; set; }
-        public CheckListRevision Parent { get; set; }
-
-
+        
         public CheckListRevisionRecord()
         {
             

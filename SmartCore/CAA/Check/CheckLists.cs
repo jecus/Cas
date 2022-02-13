@@ -29,7 +29,7 @@ namespace SmartCore.CAA.Check
 
 
         public List<CheckListRecords> CheckListRecords { get; set; }
-        public List<CheckListRevisionRecord> AllRevisions { get; set; }
+        public List<EditionRevisionView> AllRevisions { get; set; }
 
         private CommonCollection<ItemFileLink> _files;
 
@@ -96,7 +96,7 @@ namespace SmartCore.CAA.Check
         {
             ItemId = -1;
             CheckListRecords = new List<CheckListRecords>();
-            AllRevisions = new List<CheckListRevisionRecord>();
+            AllRevisions = new List<EditionRevisionView>();
             Settings = new CheckListSettings();
             SmartCoreObjectType = SmartCoreType.CheckLists;
         }
@@ -147,13 +147,14 @@ namespace SmartCore.CAA.Check
     }
 
 
-[Serializable]
+    [Serializable]
     public class CheckListSettings
     {
         public CheckListSettings()
         {
             Phase = "N/A";
             MH = 0.0;
+            RevisonValidToDate = DateTime.Today;
         }
 
         
@@ -209,5 +210,18 @@ namespace SmartCore.CAA.Check
 
         [JsonProperty("ManHours")]
         public double MH { get; set; }
+    }
+
+    [Serializable]
+    public class EditionRevisionView
+    {
+        public int Number { get; set; }
+
+        public RevisionType Type { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public DateTime EffDate { get; set; }
+        public string Remark { get; set; }
     }
 }

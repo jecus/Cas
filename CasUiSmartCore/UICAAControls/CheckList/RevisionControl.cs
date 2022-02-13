@@ -6,14 +6,14 @@ namespace CAS.UI.UICAAControls.CheckList
 {
     public partial class RevisionControl : UserControl
     {
-        public readonly CheckListRevisionRecord Record;
+        public readonly EditionRevisionView Record;
 
         public RevisionControl()
         {
             InitializeComponent();
         }
 
-        public RevisionControl(CheckListRevisionRecord record) 
+        public RevisionControl(EditionRevisionView record) 
         {
             InitializeComponent();
             Record = record;
@@ -32,11 +32,11 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void UpdateInformation()
         {
-            label1.Text = Record.Parent?.Type.ToString();
-            metroTextBoxRemark.Text = Record.Parent?.Settings.Remark;
-            metroTextBoxRevision.Text = Record.Parent?.Number.ToString();
-            dateTimePickerRevisionDate.Value = Record.Parent.Date;
-            dateTimePickerEffDate.Value = Record.Parent.EffDate;
+            label1.Text = Record.Type.ToString();
+            metroTextBoxRemark.Text = Record.Remark;
+            metroTextBoxRevision.Text = Record.Number.ToString();
+            dateTimePickerRevisionDate.Value = Record.Date;
+            dateTimePickerEffDate.Value = Record.EffDate;
         }
     }
 }

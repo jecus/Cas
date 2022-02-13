@@ -60,8 +60,19 @@ namespace CAS.UI.UICAAControls.CheckList
                 _currentCheck.CheckListRecords.AddRange(records);
 
                 _currentCheck.AllRevisions.Clear();
-                var revisionRec =
-                    GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionRecordDTO, CheckListRevisionRecord>(new Filter("CheckListId", _currentCheck.ItemId));
+                
+                var edition =
+                    GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListRevisionDTO, CheckListRevision>(_currentCheck.EditionId);
+                _currentCheck.AllRevisions.Add(new EditionRevisionView()
+                {
+                    Date = edition.Date,
+                    Number = edition.Number,
+                    Remark = edition.Settings.Remark,
+                    Type = edition.Type,
+                    EffDate = edition.EffDate
+                });
+                
+                var revisionRec = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionRecordDTO, CheckListRevisionRecord>(new Filter("CheckListId", _currentCheck.ItemId));
                 if (revisionRec.Any())
                 {
                     var ids = revisionRec.Select(i => i.ParentId);
@@ -69,10 +80,19 @@ namespace CAS.UI.UICAAControls.CheckList
 
                     foreach (var rec in revisionRec)
                     {
-                        rec.Parent = revisions.FirstOrDefault(i => i.ItemId == rec.ParentId);
+                        var revision = revisions.FirstOrDefault(i => i.ItemId == rec.ParentId);
+                        if(revision == null)
+                            continue;
+                        
+                        _currentCheck.AllRevisions.Add(new EditionRevisionView()
+                        {
+                            Date = revision.Date,
+                            Number = revision.Number,
+                            Remark = revision.Settings.Remark,
+                            Type = revision.Type,
+                            EffDate = revision.EffDate
+                        });
                     }
-
-                    _currentCheck.AllRevisions.AddRange(revisionRec);
                 }
 
                 var links = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAItemFileLinkDTO, ItemFileLink>(new List<Filter>()
@@ -275,7 +295,7 @@ namespace CAS.UI.UICAAControls.CheckList
         }
         
 
-        private void UpdateRevision(CheckListRevisionRecord rec)
+        private void UpdateRevision(EditionRevisionView rec)
         {
             var control = new RevisionControl(rec);
             flowLayoutPanel2.Controls.Add(control);

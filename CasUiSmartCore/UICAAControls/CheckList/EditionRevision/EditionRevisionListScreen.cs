@@ -121,7 +121,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			var refE = new ReferenceEventArgs();
 			var dp = new DisplayerParams()
 			{
-				Page = new EditionRevisionRecordListScreen(GlobalObjects.CaaEnvironment.Operators[0], _directivesViewer.SelectedItem.ItemId, _operatorId),
+				Page = new EditionRevisionRecordListScreen(GlobalObjects.CaaEnvironment.Operators[0], _directivesViewer.SelectedItem, _operatorId),
 				TypeOfReflection = ReflectionTypes.DisplayInNew,
 				PageCaption = $"{_directivesViewer.SelectedItem.Type} : {_directivesViewer.SelectedItem.Number}",
 				DisplayerType = DisplayerType.Screen

@@ -119,7 +119,14 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
+		{
+
+			if (_routingId.HasValue)
+			{
+				pictureBox1.Visible = true;
+				buttonAddNew.Visible = true;
+			}
+	        
 	        if (_routingId.HasValue || _auditId.HasValue)
 	        {
 		        pictureBox3.Visible = false;
@@ -449,12 +456,6 @@ cross apply
                 if (form.ShowDialog() == DialogResult.OK)
                     AnimatedThreadWorker.RunWorkerAsync();
 			}
-            else
-            {
-				var form = new CheckListForm(new CheckLists(){OperatorId = _operatorId });
-                if (form.ShowDialog() == DialogResult.OK)
-                    AnimatedThreadWorker.RunWorkerAsync();
-            }
             e.Cancel = true;
 		}
 
@@ -567,12 +568,7 @@ cross apply
 	        refE.SetParameters(dp);
 	        InvokeDisplayerRequested(refE);
         }
-
-        private void ButtonCARClick(object sender, EventArgs e)
-        {
-	        
-        }
-
+        
         private void ButtonPelClick(object sender, EventArgs e)
         {
 	        var refE = new ReferenceEventArgs();
