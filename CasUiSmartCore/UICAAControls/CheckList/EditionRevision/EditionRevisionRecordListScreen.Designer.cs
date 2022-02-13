@@ -35,6 +35,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.labelDateAsOf = new System.Windows.Forms.Label();
             this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
             this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
+            this.buttonRevison = new AvControls.AvButtonT.AvButtonT();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -175,7 +176,6 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.pictureBox4.Size = new System.Drawing.Size(5, 50);
 			this.pictureBox4.TabIndex = 15;
 			this.pictureBox4.TabStop = false;
-			this.pictureBox4.Visible = false;
 			// 
 			// labelDateAsOf
 			// 
@@ -197,6 +197,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox2);
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox3);
+			this.flowLayoutPanel1.Controls.Add(this.buttonRevison);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox4);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -231,6 +232,32 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
 			this.buttonAddNew.Enabled = !(userType == UserType.ReadOnly);
 			// 
+			// buttonApplyFilter
+			// 
+			this.buttonRevison.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+			this.buttonRevison.ActiveBackgroundImage = null;
+			this.buttonRevison.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonRevison.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonRevison.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
+			this.buttonRevison.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+			this.buttonRevison.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
+			this.buttonRevison.Icon = global::CAS.UI.Properties.Resources.Check_List_Service_Maintenance;
+			this.buttonRevison.IconLayout = System.Windows.Forms.ImageLayout.Center;
+			this.buttonRevison.IconNotEnabled = null;
+			this.buttonRevison.Location = new System.Drawing.Point(0, 0);
+			this.buttonRevison.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
+			this.buttonRevison.Name = "buttonRevison";
+			this.buttonRevison.NormalBackgroundImage = null;
+			this.buttonRevison.PaddingMain = new System.Windows.Forms.Padding(0);
+			this.buttonRevison.PaddingSecondary = new System.Windows.Forms.Padding(0);
+			this.buttonRevison.ShowToolTip = true;
+			this.buttonRevison.Size = new System.Drawing.Size(52, 57);
+			this.buttonRevison.TabIndex = 18;
+			this.buttonRevison.TextMain = "";
+			this.buttonRevison.TextSecondary = "";
+			this.buttonRevison.ToolTipText = "Revison";
+			this.buttonRevison.Click += ButtonRevisionClick; 
+			// 
 			// RequestForQuotationListScreen
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -253,6 +280,7 @@ namespace CAS.UI.UICAAControls.CheckList
         private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
         private AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
         private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
+        private AvControls.AvButtonT.AvButtonT buttonRevison;
         private System.Windows.Forms.Label labelDateAsOf;
         private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddNew;
         private System.Windows.Forms.PictureBox pictureBox1;

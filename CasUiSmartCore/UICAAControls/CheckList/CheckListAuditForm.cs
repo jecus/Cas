@@ -140,7 +140,7 @@ namespace CAS.UI.UICAAControls.CheckList
         private void UpdateInformation()
         {
             labelSourceText.Text = _currentCheck.Source;
-            labelEditorText.Text = _currentCheck.EditionNumber;
+            labelEditorText.Text = _currentCheck.EditionNumber.ToString();
             labelRevisionText.Text = _currentCheck.RevisionNumber;
             labelLevelText.Text = _currentCheck.Level.ToString();
 

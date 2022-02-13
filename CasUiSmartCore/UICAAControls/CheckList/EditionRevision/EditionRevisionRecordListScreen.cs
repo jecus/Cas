@@ -300,7 +300,13 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		#endregion
 		
-		
+		private void ButtonRevisionClick(object sender, EventArgs e)
+		{
+			var form = new CheckListRevisionForm(_operatorId);
+
+			if (form.ShowDialog(this) == DialogResult.OK || form.ShowDialog(this) == DialogResult.Cancel)
+				AnimatedThreadWorker.RunWorkerAsync();
+		}
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{

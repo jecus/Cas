@@ -5,13 +5,13 @@ using Entity.Abstractions.Attributte;
 
 namespace CAA.Entity.Models.DTO
 {
-    public enum RevisionType
+    public enum RevisionType : byte
     {
         Edition = 0,
         Revision = 1
     }
     
-    public enum EditionRevisionStatus
+    public enum EditionRevisionStatus : byte
     {
         Open = 0,
         Close = 1
@@ -25,10 +25,10 @@ namespace CAA.Entity.Models.DTO
         public int Number { get; set; }
 
         [Column("Type")]
-        public RevisionType Type { get; set; }
+        public byte Type { get; set; }
         
         [Column("Status")]
-        public EditionRevisionStatus Status { get; set; }
+        public byte Status { get; set; }
 
         [Column("OperatorId")]
         public int OperatorId{ get; set; }

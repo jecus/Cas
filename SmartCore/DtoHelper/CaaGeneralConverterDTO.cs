@@ -1439,8 +1439,8 @@ namespace SmartCore.DtoHelper
                 EffDate = levels.EffDate,
                 Date = levels.Date,
 				Number = levels.Number,
-				Status = levels.Status,
-                Type = levels.Type,
+				Status = (EditionRevisionStatus)levels.Status,
+                Type = (RevisionType)levels.Type,
                 SettingsJSON = levels.SettingsJSON,
             };
 
@@ -1458,10 +1458,10 @@ namespace SmartCore.DtoHelper
 				Updated = levels.Updated,
                 EffDate = levels.EffDate,
                 Date = levels.Date,
-                Status = levels.Status,
+                Status = (byte)levels.Status,
 				OperatorId = levels.OperatorId,
 				Number = levels.Number,
-				Type = levels.Type,
+				Type = (byte)levels.Type,
 				SettingsJSON = levels.SettingsJSON,
 			};
 

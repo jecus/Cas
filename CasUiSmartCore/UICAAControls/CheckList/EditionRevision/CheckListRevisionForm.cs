@@ -111,30 +111,30 @@ cross apply
 
             foreach (var check in _addedChecks)
             {
-                var revision = revisions.Where(i => i.Id == check.ItemId).ToList();
-                var edition = editions.Where(i => i.Id == check.ItemId).ToList();
-
-                if (revision.Any())
-                {
-                    if (revision.Count == 1)
-                        check.RevisionNumber = revision.LastOrDefault()?.Number;
-                    else
-                    {
-                        check.NextRevisionNumber = revision.FirstOrDefault()?.Number;
-                        check.RevisionNumber = revision.LastOrDefault()?.Number;
-                    }
-                }
-
-                if (edition.Any())
-                {
-                    if (edition.Count == 1)
-                        check.EditionNumber = edition.LastOrDefault()?.Number;
-                    else
-                    {
-                        check.NextEditionNumber = edition.FirstOrDefault()?.Number;
-                        check.EditionNumber = edition.LastOrDefault()?.Number;
-                    }
-                }
+                // var revision = revisions.Where(i => i.Id == check.ItemId).ToList();
+                // var edition = editions.Where(i => i.Id == check.ItemId).ToList();
+                //
+                // if (revision.Any())
+                // {
+                //     if (revision.Count == 1)
+                //         check.RevisionNumber = revision.LastOrDefault()?.Number;
+                //     else
+                //     {
+                //         check.NextRevisionNumber = revision.FirstOrDefault()?.Number;
+                //         check.RevisionNumber = revision.LastOrDefault()?.Number;
+                //     }
+                // }
+                //
+                // if (edition.Any())
+                // {
+                //     if (edition.Count == 1)
+                //         check.EditionNumber = edition.LastOrDefault()?.Number;
+                //     else
+                //     {
+                //         check.NextEditionNumber = edition.FirstOrDefault()?.Number;
+                //         check.EditionNumber = edition.LastOrDefault()?.Number;
+                //     }
+                // }
 
 
                 check.Level = _levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??

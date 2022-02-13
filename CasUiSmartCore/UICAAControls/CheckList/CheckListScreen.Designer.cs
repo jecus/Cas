@@ -35,7 +35,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.labelDateAsOf = new System.Windows.Forms.Label();
             this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
             this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
-            this.buttonRevison = new AvControls.AvButtonT.AvButtonT();
+            
             this.buttonRevisions = new AvControls.AvButtonT.AvButtonT();
             this.buttonPel = new AvControls.AvButtonT.AvButtonT();
             this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
@@ -43,13 +43,11 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.pictureBox3 = new System.Windows.Forms.PictureBox();
-			this.pictureBox5 = new System.Windows.Forms.PictureBox();
 			this.pictureBox6 = new System.Windows.Forms.PictureBox();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
@@ -115,32 +113,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.buttonApplyFilter.TextSecondary = "";
 			this.buttonApplyFilter.ToolTipText = "Apply filter";
 			this.buttonApplyFilter.Click += ButtonApplyFilterClick;
-            // 
-			// buttonApplyFilter
-			// 
-			this.buttonRevison.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-			this.buttonRevison.ActiveBackgroundImage = null;
-			this.buttonRevison.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonRevison.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonRevison.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
-			this.buttonRevison.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonRevison.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
-			this.buttonRevison.Icon = global::CAS.UI.Properties.Resources.Check_List_Service_Maintenance;
-			this.buttonRevison.IconLayout = System.Windows.Forms.ImageLayout.Center;
-			this.buttonRevison.IconNotEnabled = null;
-			this.buttonRevison.Location = new System.Drawing.Point(0, 0);
-			this.buttonRevison.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
-			this.buttonRevison.Name = "buttonRevison";
-			this.buttonRevison.NormalBackgroundImage = null;
-			this.buttonRevison.PaddingMain = new System.Windows.Forms.Padding(0);
-			this.buttonRevison.PaddingSecondary = new System.Windows.Forms.Padding(0);
-			this.buttonRevison.ShowToolTip = true;
-			this.buttonRevison.Size = new System.Drawing.Size(52, 57);
-			this.buttonRevison.TabIndex = 18;
-			this.buttonRevison.TextMain = "";
-			this.buttonRevison.TextSecondary = "";
-			this.buttonRevison.ToolTipText = "Revison";
-			this.buttonRevison.Click += ButtonRevisionClick; 
+            
 			// 
 			// buttonRevisions
 			// 
@@ -275,17 +248,6 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.pictureBox3.TabIndex = 15;
 			this.pictureBox3.TabStop = false;
 			// 
-			// pictureBox5
-			// 
-			this.pictureBox5.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
-			this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.pictureBox5.Location = new System.Drawing.Point(55, 3);
-			this.pictureBox5.Name = "pictureBox3";
-			this.pictureBox5.Size = new System.Drawing.Size(5, 50);
-			this.pictureBox5.TabIndex = 15;
-			this.pictureBox5.TabStop = false;
-			this.pictureBox5.Visible = true;
-			// 
 			// pictureBox6
 			// 
 			this.pictureBox6.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
@@ -317,8 +279,6 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox2);
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox3);
-			this.flowLayoutPanel1.Controls.Add(this.buttonRevison);
-			this.flowLayoutPanel1.Controls.Add(this.pictureBox5);
 			this.flowLayoutPanel1.Controls.Add(this.buttonRevisions);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox6);
 			this.flowLayoutPanel1.Controls.Add(this.buttonPel);
@@ -341,7 +301,6 @@ namespace CAS.UI.UICAAControls.CheckList
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
 			this.flowLayoutPanel1.ResumeLayout(false);
 			this.ResumeLayout(false);
@@ -355,14 +314,13 @@ namespace CAS.UI.UICAAControls.CheckList
         private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddNew;
         private AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
         private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
-        private AvControls.AvButtonT.AvButtonT buttonRevison;
+
         private AvControls.AvButtonT.AvButtonT buttonPel;
         private AvControls.AvButtonT.AvButtonT buttonRevisions;
         private System.Windows.Forms.Label labelDateAsOf;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.PictureBox pictureBox2;
 		private System.Windows.Forms.PictureBox pictureBox3;
-		private System.Windows.Forms.PictureBox pictureBox5;
 		private System.Windows.Forms.PictureBox pictureBox6;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 	}

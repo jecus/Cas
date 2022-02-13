@@ -131,9 +131,6 @@ namespace CAS.UI.UICAAControls.CheckList
 	        {
 		        pictureBox3.Visible = false;
 		        buttonRevisions.Visible = false;
-		        
-		        pictureBox5.Visible = false;
-		        buttonRevison.Visible = false;
 	        }
 	        
             if (_auditId.HasValue)
@@ -219,34 +216,41 @@ namespace CAS.UI.UICAAControls.CheckList
 			}
             else
             {
-                _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-                    .GetObjectListAll<CheckListDTO, CheckLists>(new Filter("OperatorId", _operatorId), loadChild:true));
+	            var editions = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new Filter("Status", (int)EditionRevisionStatus.Open));
+	            if (editions.Any())
+	            {
+		            var edition = editions.FirstOrDefault();
+		            _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("EditionId", edition.ItemId), loadChild:true));
+		            
+		            foreach (var check in _initialDocumentArray)
+			            check.EditionNumber = edition.Number;
+	            }
             }
 
             var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
             
 
-            var dsRevision = GlobalObjects.CaaEnvironment.Execute($@"
-select c.ItemId as CheckId, res.Number from dbo.CheckList c
-cross apply
-(
-	select top 1 r.Number from dbo.CheckListRevisionRecord  rec
-	cross apply
-	(
-		select Number,EffDate, Type, OperatorId from dbo.CheckListRevision 
-		where ItemId = rec.ParentId
-	)r
-	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 1 and r.OperatorId = {_operatorId}
-	order by r.EffDate desc
-) res");
-            
-
-            var revisions = dsRevision.Tables[0].AsEnumerable()
-                .Select(dataRow => new
-                {
-                    Id = dataRow.Field<int>("CheckId"),
-                    Number = dataRow.Field<int>("Number"),
-                }).ToList();
+//             var dsRevision = GlobalObjects.CaaEnvironment.Execute($@"
+// select c.ItemId as CheckId, res.Number from dbo.CheckList c
+// cross apply
+// (
+// 	select top 1 r.Number from dbo.CheckListRevisionRecord  rec
+// 	cross apply
+// 	(
+// 		select Number,EffDate, Type, OperatorId from dbo.CheckListRevision 
+// 		where ItemId = rec.ParentId
+// 	)r
+// 	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 1 and r.OperatorId = {_operatorId}
+// 	order by r.EffDate desc
+// ) res");
+//             
+//
+//             var revisions = dsRevision.Tables[0].AsEnumerable()
+//                 .Select(dataRow => new
+//                 {
+//                     Id = dataRow.Field<int>("CheckId"),
+//                     Number = dataRow.Field<int>("Number"),
+//                 }).ToList();
 
 
 			foreach (var check in _initialDocumentArray)
@@ -546,15 +550,7 @@ cross apply
 		#endregion
 
 		#endregion
-
-        private void ButtonRevisionClick(object sender, EventArgs e)
-        {
-			var form = new CheckListRevisionForm(_operatorId);
-
-            if (form.ShowDialog(this) == DialogResult.OK || form.ShowDialog(this) == DialogResult.Cancel)
-                AnimatedThreadWorker.RunWorkerAsync();
-        }
-
+		
         private void ButtonRevisionsClick(object sender, EventArgs e)
         {
 	        var refE = new ReferenceEventArgs();

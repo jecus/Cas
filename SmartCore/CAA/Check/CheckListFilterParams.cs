@@ -9,7 +9,7 @@ namespace SmartCore.CAA.Check
         string Source { get; set; }
 
         [Filter("EditionNumber", Order = 2)]
-        string EditionNumber { get;  }
+        int EditionNumber { get;  }
 
         [Filter("RevisionNumber", Order = 5)]
         string RevisionNumber { get;  }
