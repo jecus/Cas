@@ -22,7 +22,8 @@ namespace CAS.UI.UICAAControls.CheckList
         public EditionRevisionListView()
         {
             InitializeComponent();
-            SortDirection = SortDirection.Desc;
+            OldColumnIndex = 3;
+            SortDirection = SortDirection.Asc;
         }
          
         public EditionRevisionListView(AnimatedThreadWorker animatedThreadWorker)
@@ -31,7 +32,8 @@ namespace CAS.UI.UICAAControls.CheckList
             
             InitializeComponent();
             _animatedThreadWorker = animatedThreadWorker;
-            SortDirection = SortDirection.Desc;
+            OldColumnIndex = 3;
+            SortDirection = SortDirection.Asc;
         }
 
         public int OperatorId { get; set; }
@@ -40,6 +42,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
         protected override void GroupingItems()
         {
+            SortDirection = SortDirection.Desc;
             Grouping("Status");
         }
 

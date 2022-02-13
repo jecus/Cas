@@ -168,7 +168,7 @@ cross apply
                         Status = _parent.Status,
                         Settings = new CheckListRevisionSettings()
                         {
-                            EditionId = _parent.Type == RevisionType.Edition  ? _parent.ItemId : _parent.Settings.EditionId;
+                            EditionId = _parent.Type == RevisionType.Edition  ? _parent.ItemId : _parent.Settings.EditionId
                         }
                     };
                     _revisions.Add(new CheckListRevisionRecord()
@@ -389,5 +389,16 @@ cross apply
                         = checkBoxRevisionValidTo.Checked;
         }
 
+        private void dateTimePickerRevisionDate_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateTimePickerRevisionDate.Value < _parent.Date)
+                dateTimePickerRevisionDate.Value = _parent.Date;
+        }
+
+        private void RevisionEff_ValueChanged(object sender, EventArgs e)
+        {
+            if (RevisionEff.Value < dateTimePickerRevisionDate.Value)
+                RevisionEff.Value = dateTimePickerRevisionDate.Value;
+        }
     }
 }

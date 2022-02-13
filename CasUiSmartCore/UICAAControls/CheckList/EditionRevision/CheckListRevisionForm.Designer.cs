@@ -43,6 +43,7 @@ namespace CAS.UI.UICAAControls.CheckList
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label4;
             System.Windows.Forms.Label label5;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckListRevisionForm));
             this.checkBoxRevisionValidTo = new System.Windows.Forms.CheckBox();
             this.numericUpNotify = new System.Windows.Forms.NumericUpDown();
             this.dateTimePickeValidTo = new System.Windows.Forms.DateTimePicker();
@@ -259,6 +260,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.dateTimePickerRevisionDate.Name = "dateTimePickerRevisionDate";
             this.dateTimePickerRevisionDate.Size = new System.Drawing.Size(119, 20);
             this.dateTimePickerRevisionDate.TabIndex = 318;
+            this.dateTimePickerRevisionDate.ValueChanged += new System.EventHandler(this.dateTimePickerRevisionDate_ValueChanged);
             // 
             // metroTextBoxRevision
             // 
@@ -320,21 +322,45 @@ namespace CAS.UI.UICAAControls.CheckList
             // 
             // _fromcheckListView
             // 
+            this._fromcheckListView.AuditId = null;
+            this._fromcheckListView.ColumnIndexes = ((System.Collections.Generic.List<string>)(resources.GetObject("_fromcheckListView.ColumnIndexes")));
+            this._fromcheckListView.ConfigurePaste = null;
+            this._fromcheckListView.Displayer = null;
+            this._fromcheckListView.DisplayerText = null;
+            this._fromcheckListView.EnableCustomSorting = true;
+            this._fromcheckListView.Entity = null;
+            this._fromcheckListView.IgnoreEnterPress = false;
+            this._fromcheckListView.IsAuditCheck = false;
             this._fromcheckListView.Location = new System.Drawing.Point(5, 53);
+            this._fromcheckListView.MenuOpeningAction = null;
             this._fromcheckListView.Name = "_fromcheckListView";
+            this._fromcheckListView.OldColumnIndex = 0;
+            this._fromcheckListView.PasteComplete = null;
             this._fromcheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._fromcheckListView.Size = new System.Drawing.Size(1029, 306);
+            this._fromcheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
             this._fromcheckListView.TabIndex = 329;
-            this._fromcheckListView.Visible = true;
             // 
             // _tocheckListView
             // 
+            this._tocheckListView.AuditId = null;
+            this._tocheckListView.ColumnIndexes = ((System.Collections.Generic.List<string>)(resources.GetObject("_tocheckListView.ColumnIndexes")));
+            this._tocheckListView.ConfigurePaste = null;
+            this._tocheckListView.Displayer = null;
+            this._tocheckListView.DisplayerText = null;
+            this._tocheckListView.EnableCustomSorting = true;
+            this._tocheckListView.Entity = null;
+            this._tocheckListView.IgnoreEnterPress = false;
+            this._tocheckListView.IsAuditCheck = false;
             this._tocheckListView.Location = new System.Drawing.Point(5, 406);
+            this._tocheckListView.MenuOpeningAction = null;
             this._tocheckListView.Name = "_tocheckListView";
+            this._tocheckListView.OldColumnIndex = 0;
+            this._tocheckListView.PasteComplete = null;
             this._tocheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._tocheckListView.Size = new System.Drawing.Size(1029, 346);
+            this._tocheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
             this._tocheckListView.TabIndex = 330;
-            this._tocheckListView.Visible = true;
             // 
             // ButtonAdd
             // 
@@ -592,6 +618,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.RevisionEff.Name = "RevisionEff";
             this.RevisionEff.Size = new System.Drawing.Size(119, 20);
             this.RevisionEff.TabIndex = 356;
+            this.RevisionEff.ValueChanged += new System.EventHandler(this.RevisionEff_ValueChanged);
             // 
             // CheckListRevisionForm
             // 
