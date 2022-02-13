@@ -70,6 +70,9 @@ namespace SmartCore.CAA.Check
 
     public class CheckListRevisionSettings
     {
+        [JsonProperty("EditionId")]
+        public int EditionId { get; set; }
+        
         [JsonProperty("Remark")]
         public string Remark { get; set; }
     }

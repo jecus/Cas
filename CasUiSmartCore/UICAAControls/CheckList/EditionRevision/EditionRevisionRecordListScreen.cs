@@ -86,6 +86,20 @@ namespace CAS.UI.UICAAControls.CheckList
             if (_parent.Type == RevisionType.Edition)
             {
 	            _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListDTO, CheckLists>(new Filter("EditionId", _parent.ItemId)));
+	            foreach (var check in _initialDocumentArray)
+		            check.EditionNumber = _parent.Number;
+            }
+            else
+            {
+	            var records = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionRecordDTO, CheckListRevisionRecord>(new Filter("ParentId", _parent.ItemId));
+	            if (records.Any())
+	            {
+		            var ids = records.Select(i => i.CheckListId);
+		            _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListDTO, CheckLists>(new Filter("ItemId", ids)));
+		            var edition = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListRevisionDTO, CheckListRevision>(_parent.Settings.EditionId);
+		            foreach (var check in _initialDocumentArray)
+			            check.EditionNumber = edition.Number;
+	            }
             }
             
             var lvlids = _initialDocumentArray.Select(i => i.Settings.LevelId);
@@ -93,6 +107,7 @@ namespace CAS.UI.UICAAControls.CheckList
             
             foreach (var check in _initialDocumentArray)
             {
+	            
              check.Level = levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
                            FindingLevels.Unknown;
             
@@ -302,7 +317,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		
 		private void ButtonRevisionClick(object sender, EventArgs e)
 		{
-			var form = new CheckListRevisionForm(_operatorId);
+			var form = new CheckListRevisionForm(_operatorId, _parent);
 
 			if (form.ShowDialog(this) == DialogResult.OK || form.ShowDialog(this) == DialogResult.Cancel)
 				AnimatedThreadWorker.RunWorkerAsync();

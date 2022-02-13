@@ -23,6 +23,7 @@ namespace CAS.UI.UICAAControls.CheckList
     public partial class CheckListRevisionForm : MetroForm
     {
         private readonly int _operatorId;
+        private readonly CheckListRevision _edition;
         private List<CheckListRevisionRecord> _revisions = new List<CheckListRevisionRecord>();
         private CheckListRevision revisionedition = new CheckListRevision();
         private CommonCollection<CheckLists> _addedChecks = new CommonCollection<CheckLists>();
@@ -30,9 +31,10 @@ namespace CAS.UI.UICAAControls.CheckList
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private IList<FindingLevels> _levels = new List<FindingLevels>();
 
-        public CheckListRevisionForm(int operatorId)
+        public CheckListRevisionForm(int operatorId, CheckListRevision edition)
         {
             _operatorId = operatorId;
+            _edition = edition;
             InitializeComponent();
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
@@ -51,25 +53,11 @@ namespace CAS.UI.UICAAControls.CheckList
             _revisions.Clear();
             _addedChecks.Clear();
             _addedChecks.AddRange(
-                GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("OperatorId", _operatorId), loadChild: true)
+                GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("EditionId", _edition.ItemId), loadChild: true)
                     .ToList());
             _levels.Clear();
             _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
-
-            var dsEdition = GlobalObjects.CaaEnvironment.Execute($@"
-select c.ItemId as CheckId, res.Number, res.EffDate from dbo.CheckList c
-cross apply
-(
-	select top 2 r.Number, r.EffDate from dbo.CheckListRevisionRecord  rec
-	cross apply
-	(
-		select Number,EffDate, Type, OperatorId from dbo.CheckListRevision 
-		where ItemId = rec.ParentId
-	)r
-	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 0 and r.OperatorId = {_operatorId}
-	order by r.EffDate desc
-) res");
-
+            
             var dsRevision = GlobalObjects.CaaEnvironment.Execute($@"select c.ItemId as CheckId, res.Number, res.EffDate from dbo.CheckList c
 cross apply
 (
@@ -98,20 +86,11 @@ cross apply
                     Number = dataRow.Field<string>("Number"),
                     EffDate = dataRow.Field<DateTime?>("EffDate"),
                 }).ToList();
-
-            var editions = dsEdition.Tables[0].AsEnumerable()
-                .Select(dataRow => new
-                {
-                    Id = dataRow.Field<int>("CheckId"),
-                    Number = dataRow.Field<string>("Number"),
-                    EffDate = dataRow.Field<DateTime?>("EffDate"),
-                }).ToList();
-
-
-
+            
+            
             foreach (var check in _addedChecks)
             {
-                // var revision = revisions.Where(i => i.Id == check.ItemId).ToList();
+                check.EditionNumber = _edition.Number;
                 // var edition = editions.Where(i => i.Id == check.ItemId).ToList();
                 //
                 // if (revision.Any())
@@ -173,15 +152,24 @@ cross apply
             {
                 if(checkBoxSource.Checked)
                     checks.Source = metroTextSource.Text;
+                
+                if (!CheckNumber(out var  number))
+                    return false;
+                
                 if (checkBoxRevisionValidTo.Checked)
                 {
                     revisionedition = new CheckListRevision()
                     {
-                        //Number = metroTextBoxRevision.Text,
+                        Number = number,
                         Type = RevisionType.Revision,
                         OperatorId = _operatorId,
                         Date = dateTimePickerRevisionDate.Value.Date,
                         EffDate = RevisionEff.Value.Date,
+                        Status = _edition.Status,
+                        Settings = new CheckListRevisionSettings()
+                        {
+                            EditionId = _edition.ItemId
+                        }
                     };
                     _revisions.Add(new CheckListRevisionRecord()
                     {
@@ -235,6 +223,16 @@ cross apply
 
         #endregion
 
+        
+        public bool CheckNumber(out int number)
+        {
+            if (int.TryParse(metroTextBoxRevision.Text, NumberStyles.Number, new NumberFormatInfo(),  out number) == false)
+            {
+                MessageBox.Show("Number of edition. Invalid value", (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            return true;
+        }
 
         private void SetEnableControl(bool state)
         {
@@ -306,6 +304,7 @@ cross apply
                 Program.Provider.Logger.Log("Error while save checkList", ex);
             }
         }
+        
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;

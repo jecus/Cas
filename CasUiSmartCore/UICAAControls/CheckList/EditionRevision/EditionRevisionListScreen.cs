@@ -78,7 +78,7 @@ namespace CAS.UI.UICAAControls.CheckList
             AnimatedThreadWorker.ReportProgress(0, "load");
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new Filter("OperatorId", _operatorId)));
 
-            AnimatedThreadWorker.ReportProgress(70, "filter directives");
+			AnimatedThreadWorker.ReportProgress(70, "filter directives");
 
             FilterItems(_initialDocumentArray, _resultDocumentArray);
 
