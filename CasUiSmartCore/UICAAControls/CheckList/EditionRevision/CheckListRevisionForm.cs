@@ -173,22 +173,6 @@ cross apply
             {
                 if(checkBoxSource.Checked)
                     checks.Source = metroTextSource.Text;
-                if(checkBoxEdition.Checked)
-                {
-                    revisionedition = new CheckListRevision()
-                    {
-                        //Number = metroTextBoxEditionNumber.Text,
-                        Type = RevisionType.Edition,
-                        OperatorId = _operatorId,
-                        Date = dateTimePickerEditionDate.Value.Date,
-                        EffDate = dateTimePickerEditionEff.Value.Date,
-                    };
-
-                    _revisions.Add(new CheckListRevisionRecord()
-                    {
-                        CheckListId = checks.ItemId,
-                    });
-                }
                 if (checkBoxRevisionValidTo.Checked)
                 {
                     revisionedition = new CheckListRevision()
@@ -255,21 +239,17 @@ cross apply
         private void SetEnableControl(bool state)
         {
             checkBoxSource.Checked =
-                checkBoxEdition.Checked =
-                    checkBoxCheck.Checked =
+                checkBoxCheck.Checked =
                             checkBoxNotify.Checked =
                                 checkBoxReference.Checked =
                                     checkBoxLevel.Checked =
-                                        metroTextSource.Enabled = 
-            metroTextBoxEditionNumber.Enabled =
-            dateTimePickerEditionDate.Enabled =
-                metroTextBoxRevision.Enabled = 
+                                        metroTextSource.Enabled =
+                                            metroTextBoxRevision.Enabled = 
             dateTimePickerRevisionDate.Enabled =
                 dateTimePickeValidTo.Enabled =
             numericUpNotify.Enabled =
                 comboBoxPhase.Enabled =
-                    dateTimePickerEditionEff.Enabled =
-                        RevisionEff.Enabled =
+                    RevisionEff.Enabled =
                     metroTextBoxMH.Enabled =
             metroTextBoxReference.Enabled =
                 checkBoxRevisionValidTo.Checked = 
@@ -281,12 +261,9 @@ cross apply
         private void ClearControl()
         {
             metroTextSource.Text = "";
-            metroTextBoxEditionNumber.Text = "";
-            dateTimePickerEditionDate.Value = DateTime.Today;
             metroTextBoxRevision.Text = "";
             dateTimePickerRevisionDate.Value = DateTime.Today;
             dateTimePickeValidTo.Value = DateTime.Today;
-            dateTimePickerEditionEff.Value = DateTime.Today;
             RevisionEff.Value = DateTime.Today;
             numericUpNotify.Value = 0;
             metroTextBoxReference.Text = "";
@@ -374,16 +351,7 @@ cross apply
         {
             metroTextBoxReference.Enabled = checkBoxReference.Checked;
         }
-
-        private void checkBoxEdition_CheckedChanged(object sender, EventArgs e)
-        {
-            metroTextBoxEditionNumber.Enabled =
-                dateTimePickerEditionDate.Enabled =
-                    dateTimePickerEditionEff.Enabled =
-                    checkBoxEdition.Checked;
-        }
-
-
+        
         private void checkBoxCheck_CheckedChanged(object sender, EventArgs e)
         {
             dateTimePickeValidTo.Enabled = checkBoxCheck.Checked;

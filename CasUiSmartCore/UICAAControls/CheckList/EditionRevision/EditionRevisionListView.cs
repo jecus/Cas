@@ -22,18 +22,26 @@ namespace CAS.UI.UICAAControls.CheckList
         public EditionRevisionListView()
         {
             InitializeComponent();
+            SortDirection = SortDirection.Desc;
         }
          
         public EditionRevisionListView(AnimatedThreadWorker animatedThreadWorker)
         {
-            _animatedThreadWorker = animatedThreadWorker;
+            
+            
             InitializeComponent();
+            _animatedThreadWorker = animatedThreadWorker;
+            SortDirection = SortDirection.Desc;
         }
 
         public int OperatorId { get; set; }
 
         #region Methods
 
+        protected override void GroupingItems()
+        {
+            Grouping("Status");
+        }
 
         #region protected override void SetHeaders()
         /// <summary>
