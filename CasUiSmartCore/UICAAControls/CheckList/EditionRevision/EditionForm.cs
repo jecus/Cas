@@ -90,5 +90,16 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
         {
             DialogResult = DialogResult.OK;
         }
+
+        private void dateTimePickerEditionDate_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerEditionEff.Value = dateTimePickerEditionDate.Value;
+        }
+
+        private void dateTimePickerEditionEff_ValueChanged(object sender, EventArgs e)
+        {
+            if(dateTimePickerEditionDate.Value > dateTimePickerEditionEff.Value)
+                dateTimePickerEditionEff.Value = dateTimePickerEditionDate.Value;
+        }
     }
 }

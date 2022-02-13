@@ -23,7 +23,7 @@ namespace CAS.UI.UICAAControls.CheckList
     public partial class CheckListRevisionForm : MetroForm
     {
         private readonly int _operatorId;
-        private readonly CheckListRevision _edition;
+        private readonly CheckListRevision _parent;
         private List<CheckListRevisionRecord> _revisions = new List<CheckListRevisionRecord>();
         private CheckListRevision revisionedition = new CheckListRevision();
         private CommonCollection<CheckLists> _addedChecks = new CommonCollection<CheckLists>();
@@ -31,10 +31,10 @@ namespace CAS.UI.UICAAControls.CheckList
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private IList<FindingLevels> _levels = new List<FindingLevels>();
 
-        public CheckListRevisionForm(int operatorId, CheckListRevision edition)
+        public CheckListRevisionForm(int operatorId, CheckListRevision parent)
         {
             _operatorId = operatorId;
-            _edition = edition;
+            _parent = parent;
             InitializeComponent();
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
@@ -53,7 +53,7 @@ namespace CAS.UI.UICAAControls.CheckList
             _revisions.Clear();
             _addedChecks.Clear();
             _addedChecks.AddRange(
-                GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("EditionId", _edition.ItemId), loadChild: true)
+                GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("EditionId", _parent.ItemId), loadChild: true)
                     .ToList());
             _levels.Clear();
             _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
@@ -90,7 +90,7 @@ cross apply
             
             foreach (var check in _addedChecks)
             {
-                check.EditionNumber = _edition.Number;
+                check.EditionNumber = _parent.Number;
                 // var edition = editions.Where(i => i.Id == check.ItemId).ToList();
                 //
                 // if (revision.Any())
@@ -165,10 +165,10 @@ cross apply
                         OperatorId = _operatorId,
                         Date = dateTimePickerRevisionDate.Value.Date,
                         EffDate = RevisionEff.Value.Date,
-                        Status = _edition.Status,
+                        Status = _parent.Status,
                         Settings = new CheckListRevisionSettings()
                         {
-                            EditionId = _edition.ItemId
+                            EditionId = _parent.Type == RevisionType.Edition  ? _parent.ItemId : _parent.Settings.EditionId;
                         }
                     };
                     _revisions.Add(new CheckListRevisionRecord()

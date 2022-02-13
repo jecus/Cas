@@ -106,6 +106,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
             this.dateTimePickerEditionDate.Name = "dateTimePickerEditionDate";
             this.dateTimePickerEditionDate.Size = new System.Drawing.Size(119, 20);
             this.dateTimePickerEditionDate.TabIndex = 316;
+            this.dateTimePickerEditionDate.ValueChanged += new System.EventHandler(this.dateTimePickerEditionDate_ValueChanged);
             // 
             // metroTextBoxEditionNumber
             // 
@@ -154,11 +155,11 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
             // 
             // dateTimePickerEditionEff
             // 
-            this.dateTimePickerEditionEff.Enabled = true;
             this.dateTimePickerEditionEff.Location = new System.Drawing.Point(315, 79);
             this.dateTimePickerEditionEff.Name = "dateTimePickerEditionEff";
             this.dateTimePickerEditionEff.Size = new System.Drawing.Size(119, 20);
             this.dateTimePickerEditionEff.TabIndex = 355;
+            this.dateTimePickerEditionEff.ValueChanged += new System.EventHandler(this.dateTimePickerEditionEff_ValueChanged);
             // 
             // EditionForm
             // 
