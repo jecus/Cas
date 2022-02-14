@@ -40,7 +40,6 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemEdit;
-		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 
 		#endregion
@@ -124,7 +123,6 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 		{
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuItemEdit = new RadMenuItem();
-			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
             // 
             // toolStripMenuItemView
@@ -136,22 +134,6 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 			// 
             _toolStripMenuItemEdit.Text = "Edit";
             _toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
-			// 
-			// toolStripMenuItemHighlight
-			// 
-			_toolStripMenuItemHighlight.Text = "Highlight";
-			
-			_toolStripMenuItemHighlight.Items.Clear();
-
-			foreach (Highlight highlight in Highlight.HighlightList)
-			{
-				if (highlight == Highlight.Blue || highlight == Highlight.Yellow || highlight == Highlight.Red)
-					continue;
-				RadMenuItem item = new RadMenuItem(highlight.FullName);
-				item.Click += HighlightItemClick;
-				item.Tag = highlight;
-				_toolStripMenuItemHighlight.Items.Add(item);
-			}
 		}
 
         private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
@@ -226,9 +208,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
 			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
-				_toolStripMenuItemEdit,
-				_toolStripSeparator1,
-				_toolStripMenuItemHighlight);
+				_toolStripMenuItemEdit);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
@@ -239,6 +219,9 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 					_toolStripMenuItemOpen.Enabled = true;
 				}
 			};
+			
+			_directivesViewer.DisableDeleteContext();
+			_directivesViewer.DisableCopyPaste();
 
 
 			panel1.Controls.Add(_directivesViewer);

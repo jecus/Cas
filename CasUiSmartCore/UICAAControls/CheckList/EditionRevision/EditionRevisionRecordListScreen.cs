@@ -211,7 +211,7 @@ namespace CAS.UI.UICAAControls.CheckList
 				}
 			};
 
-
+			_directivesViewer.DisableCopyPaste();
 			panel1.Controls.Add(_directivesViewer);
 		}
 

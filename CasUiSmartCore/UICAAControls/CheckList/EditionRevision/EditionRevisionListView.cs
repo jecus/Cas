@@ -36,7 +36,8 @@ namespace CAS.UI.UICAAControls.CheckList
             _animatedThreadWorker = animatedThreadWorker;
             SortDirection = SortDirection.Asc;
             EnableCustomSorting = true;
-            
+            OldColumnIndex = 3;
+
         }
 
         public int OperatorId { get; set; }

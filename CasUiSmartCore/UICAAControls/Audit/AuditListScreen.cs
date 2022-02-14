@@ -50,7 +50,6 @@ namespace CAS.UI.UICAAControls.Audit
 
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemEdit;
-		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 
         private RadMenuSeparatorItem _toolStripSeparator2;
@@ -241,8 +240,7 @@ group by a.AuditId
 		{
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuItemEdit = new RadMenuItem();
-			_toolStripMenuItemHighlight = new RadMenuItem();
-            _toolStripMenuItemClose = new RadMenuItem();
+			_toolStripMenuItemClose = new RadMenuItem();
             _toolStripMenuItemPublish = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripSeparator2 = new RadMenuSeparatorItem();
@@ -256,10 +254,6 @@ group by a.AuditId
             // 
             _toolStripMenuItemEdit.Text = "Edit";
             _toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
-			// 
-			// toolStripMenuItemHighlight
-			// 
-			_toolStripMenuItemHighlight.Text = "Highlight";
 
 
             // 
@@ -272,18 +266,6 @@ group by a.AuditId
             // 
             _toolStripMenuItemClose.Text = "Close";
             _toolStripMenuItemClose.Click += ToolStripMenuItemCloseClick;
-
-			_toolStripMenuItemHighlight.Items.Clear();
-
-			foreach (Highlight highlight in Highlight.HighlightList)
-			{
-				if (highlight == Highlight.Blue || highlight == Highlight.Yellow || highlight == Highlight.Red)
-					continue;
-				RadMenuItem item = new RadMenuItem(highlight.FullName);
-				item.Click += HighlightItemClick;
-				item.Tag = highlight;
-				_toolStripMenuItemHighlight.Items.Add(item);
-			}
 		}
 
 
@@ -432,9 +414,7 @@ group by a.AuditId
                 _toolStripMenuItemEdit,
 				_toolStripSeparator2,
 				_toolStripMenuItemPublish,
-				_toolStripMenuItemClose,
-				_toolStripSeparator1,
-				_toolStripMenuItemHighlight);
+				_toolStripMenuItemClose);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
@@ -445,6 +425,9 @@ group by a.AuditId
 					_toolStripMenuItemOpen.Enabled = true;
 				}
 			};
+			
+			_directivesViewer.DisableDeleteContext();
+			_directivesViewer.DisableCopyPaste();
 
 
 			panel1.Controls.Add(_directivesViewer);
