@@ -67,6 +67,12 @@ namespace CAS.UI.UICAAControls.CheckList
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+	        if (_parent.Type == RevisionType.Revision)
+	        {
+		        buttonRevison.Visible = false;
+		        pictureBox4.Visible = false;
+	        }
+	        
 	        _directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
@@ -160,7 +166,28 @@ namespace CAS.UI.UICAAControls.CheckList
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
-            _directivesViewer.ButtonDeleteClick(sender, e);
+			if (_parent.Type == RevisionType.Revision)
+			{
+				if (_directivesViewer.SelectedItems == null ||
+				    _directivesViewer.SelectedItems.Count == 0) return;
+				
+				string typeName = nameof(CheckLists);
+				
+				DialogResult confirmResult =
+					MessageBox.Show(_directivesViewer.SelectedItems.Count == 1
+							? "Do you really want to delete " + typeName + " " + _directivesViewer.SelectedItems[0] + "?"
+							: "Do you really want to delete selected " + typeName + "s?", "Confirm delete operation",
+						MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+				
+				
+				if (confirmResult == DialogResult.Yes)
+				{
+					GlobalObjects.CaaEnvironment.NewLoader.Execute(
+						$"delete from  dbo.CheckListRevisionRecord where ParentId = {_parent.ItemId} and CheckListId in ({string.Join(",", _directivesViewer.SelectedItems.Select(i => i.ItemId))})");
+					AnimatedThreadWorker.RunWorkerAsync();
+				}
+			}
+            else _directivesViewer.ButtonDeleteClick(sender, e);
 		}
 
 		#endregion
@@ -325,9 +352,19 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-			var form = new CheckListForm(new CheckLists(){OperatorId = _operatorId, EditionId = _parent.ItemId});
-			if (form.ShowDialog() == DialogResult.OK)
-				AnimatedThreadWorker.RunWorkerAsync();
+			if (_parent.Type == RevisionType.Revision)
+			{
+				var form = new CheckListRevEditForm();
+				if (form.ShowDialog() == DialogResult.OK)
+					AnimatedThreadWorker.RunWorkerAsync();
+			}
+			else
+			{
+				var form = new CheckListForm(new CheckLists(){OperatorId = _operatorId, EditionId = _parent.ItemId});
+				if (form.ShowDialog() == DialogResult.OK)
+					AnimatedThreadWorker.RunWorkerAsync();
+			}
+			
 		}
 	}
 }

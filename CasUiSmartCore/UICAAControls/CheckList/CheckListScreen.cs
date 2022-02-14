@@ -122,7 +122,6 @@ namespace CAS.UI.UICAAControls.CheckList
 
 			if (_routingId.HasValue)
 			{
-				pictureBox1.Visible = true;
 				buttonAddNew.Visible = true;
 			}
 	        
@@ -378,15 +377,7 @@ namespace CAS.UI.UICAAControls.CheckList
         }
 
 		#endregion
-
-		#region private void ButtonDeleteClick(object sender, EventArgs e)
-		private void ButtonDeleteClick(object sender, EventArgs e)
-		{
-            _directivesViewer.ButtonDeleteClick(sender, e);
-		}
-
-		#endregion
-
+		
 		#region private void InitListView()
 
 		private void InitListView()
