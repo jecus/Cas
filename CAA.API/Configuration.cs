@@ -19,6 +19,7 @@ namespace CAA.API
         {
             services.AddScheduler();
             services.AddScheduledByCronWorker<EditionWorker<EditionJob>, EditionJob>(Configuration["Setup:ScheduleEditionWorker"]);
+            services.AddScheduledByCronWorker<RevisionWorker<RevisionJob>, RevisionJob>(Configuration["Setup:ScheduleRevisionWorker"]);
             
             services.AddWorker<DictionaryWorker>();
         }

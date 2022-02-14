@@ -52,18 +52,4 @@ namespace SmartCore.CAA.Check
         public RevisionCheckType RevisionCheckType { get; set; }
     }
     
-    [Serializable]
-    public enum RevisionCheckType : byte
-    {
-        None = 0,
-        New = 1,
-        Del = 2,
-        Mod =3
-       
-    }
-    
-            
-    
-    
-    
 }
