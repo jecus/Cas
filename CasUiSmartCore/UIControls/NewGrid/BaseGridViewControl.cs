@@ -776,6 +776,17 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
+		public void DisableDeleteContext()
+		{
+			_customMenu.Items.Remove(_toolStripMenuItemDelete);
+		}
+		
+		public void DisableCopyPaste()
+		{
+			_customMenu.Items.Remove(_toolStripMenuItemCopy);
+			_customMenu.Items.Remove(_toolStripMenuItemPaste);
+			_customMenu.Items.Remove(_toolStripMenuItemCopyWithoutMark);
+		}
 
 		#region protected virtual void GroupingItems()
 
