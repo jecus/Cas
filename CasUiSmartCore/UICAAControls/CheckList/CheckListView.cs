@@ -67,8 +67,9 @@ namespace CAS.UI.UICAAControls.CheckList
 
         public bool IsAuditCheck { get; set; }
         public int? AuditId { get; set; }
+        public bool IsRevision { get; set; }
 
-		#endregion
+        #endregion
 
 		#endregion
 
@@ -158,9 +159,21 @@ namespace CAS.UI.UICAAControls.CheckList
 				}
 				else
 				{
-                    var form = new CheckListForm(SelectedItem,_enable);
-                    if (form.ShowDialog() == DialogResult.OK)
-                        _animatedThreadWorker.RunWorkerAsync();
+                    if (IsRevision)
+                    {
+                        var form = new CheckListRevEditForm();
+                        if (form.ShowDialog() == DialogResult.OK)
+                            _animatedThreadWorker.RunWorkerAsync();
+                    }
+                    else
+                    {
+                        var form = new CheckListForm(SelectedItem,_enable);
+                        if (form.ShowDialog() == DialogResult.OK)
+                            _animatedThreadWorker.RunWorkerAsync();
+                    }
+                    
+                    
+                   
 				}
 
 
