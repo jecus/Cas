@@ -662,6 +662,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Controls.Add(metroLabel1);
             this.Name = "CheckListRevisionForm";
             this.Resizable = false;
+            this.MaximizeBox = false;
             this.Text = "CheckList Revision Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CheckListRevisionForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).EndInit();

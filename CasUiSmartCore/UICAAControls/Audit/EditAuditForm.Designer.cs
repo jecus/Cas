@@ -446,6 +446,7 @@ namespace CAS.UI.UICAAControls.Audit
             this.Controls.Add(metroLabel2);
             this.Name = "EditAuditForm";
             this.Resizable = false;
+            this.MaximizeBox = false;
             this.Text = "Edit AuditForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AuditForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();

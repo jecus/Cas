@@ -348,6 +348,7 @@
             this.Controls.Add(labelNewPassword);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MaximizeBox = false;
             this.Name = "CAAUserForm";
             this.Resizable = false;
             this.Text = "User Form";

@@ -893,6 +893,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Controls.Add(metroLabel1);
             this.Name = "CheckListForm";
             this.Resizable = false;
+            this.MaximizeBox = false;
             this.Text = "Check List";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();

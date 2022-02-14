@@ -582,6 +582,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(metroLabel1);
             this.Name = "CheckListAuditForm";
+            this.MaximizeBox = false;
             this.Resizable = false;
             this.Text = "Check List";
             this.ResumeLayout(false);

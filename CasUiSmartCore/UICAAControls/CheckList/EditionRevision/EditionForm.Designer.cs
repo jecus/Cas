@@ -175,6 +175,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
             this.Controls.Add(this.metroTextBoxEditionNumber);
             this.Controls.Add(label1);
             this.Name = "EditionForm";
+            this.MaximizeBox = false;
             this.Resizable = false;
             this.Text = "Edition Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CheckListRevisionForm_FormClosing);

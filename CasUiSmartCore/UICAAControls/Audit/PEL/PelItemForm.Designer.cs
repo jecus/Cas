@@ -198,6 +198,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.Controls.Add(this._tocheckRevisionListView);
             this.Controls.Add(this._fromcheckRevisionListView);
             this.Controls.Add(this.buttonOk);
+            this.MaximizeBox = false;
             this.Name = "PelItemForm";
             this.Resizable = false;
             this.Text = "CheckList Revision Form";

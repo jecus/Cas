@@ -354,6 +354,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             this.Controls.Add(this._tocheckListView);
             this.Controls.Add(this._fromcheckListView);
             this.Name = "RoutineAuditForm";
+            this.MaximizeBox = false;
             this.Resizable = false;
             this.Text = "RoutineAuditForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RoutineAuditForm_FormClosing);

@@ -268,6 +268,7 @@
             this.Controls.Add(metroLabel2);
             this.Name = "AuditForm";
             this.Resizable = false;
+            this.MaximizeBox = false;
             this.Text = "AuditForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AuditForm_FormClosing);
             this.ResumeLayout(false);

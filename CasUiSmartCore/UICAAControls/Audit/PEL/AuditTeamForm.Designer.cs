@@ -195,6 +195,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.Controls.Add(this.buttonOk);
             this.Name = "AuditTeamForm";
             this.Resizable = false;
+            this.MaximizeBox = false;
             this.Text = "CheckList Revision Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CheckListRevisionForm_FormClosing);
             this.ResumeLayout(false);

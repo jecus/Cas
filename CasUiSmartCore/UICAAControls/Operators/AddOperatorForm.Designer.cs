@@ -1404,6 +1404,7 @@ namespace CAS.UI.UICAAControls.Operators
             this.Controls.Add(labelDescription);
             this.Name = "AddOperatorFrom";
             this.Resizable = false;
+            this.MaximizeBox = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Add Operator";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReportLogoVeryLarge)).EndInit();
