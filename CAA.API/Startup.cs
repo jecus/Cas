@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using WorkerExtensions.Infrastructure;
 
 namespace CAA.API
 {
@@ -79,6 +80,7 @@ namespace CAA.API
                 o.SwaggerEndpoint("v1/swagger.json", "Caa API v1");
             });
             Initialize(app);
+            app.StartScheduler();
         }
 
 
