@@ -68,9 +68,7 @@ namespace SmartCore.CAA.Check
 
         public Lifelength Remains { get; set; }
         public ConditionState Condition { get; set; }
-
-
-
+        
         public string SettingsJSON
         {
             get
@@ -89,18 +87,7 @@ namespace SmartCore.CAA.Check
         }
 
         public CheckListSettings Settings { get; set; }
-
-
-
-        public CheckLists()
-        {
-            ItemId = -1;
-            CheckListRecords = new List<CheckListRecords>();
-            AllRevisions = new List<EditionRevisionView>();
-            Settings = new CheckListSettings();
-            SmartCoreObjectType = SmartCoreType.CheckLists;
-        }
-
+        
         public override BaseEntityObject GetCopyUnsaved(bool marked = true)
         {
             var clone = (CheckLists) MemberwiseClone();
@@ -144,6 +131,15 @@ namespace SmartCore.CAA.Check
 
         public AuditCheck AuditCheck { get; set; }
         public int OperatorId { get; set; }
+        
+        public CheckLists()
+        {
+            ItemId = -1;
+            CheckListRecords = new List<CheckListRecords>();
+            AllRevisions = new List<EditionRevisionView>();
+            Settings = new CheckListSettings();
+            SmartCoreObjectType = SmartCoreType.CheckLists;
+        }
     }
 
 
@@ -211,6 +207,8 @@ namespace SmartCore.CAA.Check
         [JsonProperty("ManHours")]
         public double MH { get; set; }
     }
+
+    
 
     [Serializable]
     public class EditionRevisionView

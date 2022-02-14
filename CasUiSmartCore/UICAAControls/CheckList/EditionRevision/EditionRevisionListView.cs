@@ -105,7 +105,7 @@ namespace CAS.UI.UICAAControls.CheckList
                     if (check.Type == RevisionType.Revision)
                     {
                         GlobalObjects.CaaEnvironment.NewLoader.Execute(
-                            $"update dbo.CheckListRevisionRecord set IsDeleted = 1 where ParentId = {check.ItemId})");
+                            $"update dbo.CheckListRevisionRecord set IsDeleted = 1 where ParentId = {check.ItemId}");
                     }
                     else
                     {

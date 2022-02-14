@@ -309,7 +309,11 @@ namespace CAS.UI.UICAAControls.CheckList
                         GlobalObjects.CaaEnvironment.NewKeeper.Save(new CheckListRevisionRecord()
                         {
                             CheckListId = _currentCheck.ItemId,
-                            ParentId = _revisionId
+                            ParentId = _revisionId,
+                            Settings = new CheckListRevisionRecordSettings()
+                            {
+                                RevisionCheckType = RevisionCheckType.New
+                            }
                         });
                     }
 

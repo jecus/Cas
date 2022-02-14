@@ -172,15 +172,15 @@ namespace CAS.UI.UICAAControls.CheckList
 				
 				DialogResult confirmResult =
 					MessageBox.Show(_directivesViewer.SelectedItems.Count == 1
-							? "Do you really want to delete " + typeName + " " + _directivesViewer.SelectedItems[0] + "?"
-							: "Do you really want to delete selected " + typeName + "s?", "Confirm delete operation",
+							? "Do you really want to mark as delete " + typeName + " " + _directivesViewer.SelectedItems[0] + "?"
+							: "Do you really want to mark as delete selected " + typeName + "s?", "Confirm delete operation",
 						MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 				
 				
 				if (confirmResult == DialogResult.Yes)
 				{
 					GlobalObjects.CaaEnvironment.NewLoader.Execute(
-						$"delete from  dbo.CheckListRevisionRecord where ParentId = {_parent.ItemId} and CheckListId in ({string.Join(",", _directivesViewer.SelectedItems.Select(i => i.ItemId))})");
+						$"update  dbo.CheckListRevisionRecord set SettingsJSON = JSON_MODIFY(SettingsJSON, '$.RevisionCheckType', 2) where ParentId = {_parent.ItemId} and CheckListId in ({string.Join(",", _directivesViewer.SelectedItems.Select(i => i.ItemId))})");
 					AnimatedThreadWorker.RunWorkerAsync();
 				}
 			}
