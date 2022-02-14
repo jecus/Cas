@@ -92,7 +92,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxAudit = new System.Windows.Forms.CheckBox();
             this.checkBoxReq = new System.Windows.Forms.CheckBox();
             this.radioButtonMOD = new System.Windows.Forms.RadioButton();
-            this.radioButtonNew = new System.Windows.Forms.RadioButton();
             this.radioButtonDel = new System.Windows.Forms.RadioButton();
             metroLabel1 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
@@ -1212,17 +1211,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.radioButtonMOD.TabIndex = 342;
             this.radioButtonMOD.Text = "MOD";
             // 
-            // radioButtonNew
-            // 
-            this.radioButtonNew.AutoSize = true;
-            this.radioButtonNew.Font = new System.Drawing.Font("Verdana", 9F);
-            this.radioButtonNew.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.radioButtonNew.Location = new System.Drawing.Point(197, 39);
-            this.radioButtonNew.Name = "radioButtonNew";
-            this.radioButtonNew.Size = new System.Drawing.Size(55, 18);
-            this.radioButtonNew.TabIndex = 343;
-            this.radioButtonNew.Text = "NEW";
-            // 
             // radioButtonDel
             // 
             this.radioButtonDel.AutoSize = true;
@@ -1240,7 +1228,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1155, 820);
             this.Controls.Add(this.radioButtonDel);
-            this.Controls.Add(this.radioButtonNew);
             this.Controls.Add(this.radioButtonMOD);
             this.Controls.Add(this.checkBoxReq);
             this.Controls.Add(this.checkBoxAudit);
@@ -1357,7 +1344,6 @@ namespace CAS.UI.UICAAControls.CheckList
         private CheckBox checkBoxAudit;
         private CheckBox checkBoxReq;
         private RadioButton radioButtonMOD;
-        private RadioButton radioButtonNew;
         private RadioButton radioButtonDel;
     }
 }

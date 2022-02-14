@@ -21,6 +21,7 @@ namespace CAS.UI.UICAAControls.CheckList
 {
     public partial class CheckListForm : MetroForm
     {
+        private readonly int _revisionId;
         private CheckLists _currentCheck;
         private readonly bool _enable;
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
@@ -41,6 +42,11 @@ namespace CAS.UI.UICAAControls.CheckList
             _animatedThreadWorker.RunWorkerAsync();
 
             EnabledControls(enable);
+        }
+        
+        public CheckListForm(CheckLists currentCheck, int revisionId) : this(currentCheck, true)
+        {
+            _revisionId = revisionId;
         }
 
         private void EnabledControls(bool enable)
@@ -90,14 +96,18 @@ namespace CAS.UI.UICAAControls.CheckList
                 
                 var edition =
                     GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListRevisionDTO, CheckListRevision>(_currentCheck.EditionId);
-                _currentCheck.AllRevisions.Add(new EditionRevisionView()
+                if (edition != null)
                 {
-                    Date = edition.Date,
-                    Number = edition.Number,
-                    Remark = edition.Settings.Remark,
-                    Type = edition.Type,
-                    EffDate = edition.EffDate
-                });
+                    _currentCheck.AllRevisions.Add(new EditionRevisionView()
+                    {
+                        Date = edition.Date,
+                        Number = edition.Number,
+                        Remark = edition.Settings.Remark,
+                        Type = edition.Type,
+                        EffDate = edition.EffDate
+                    });
+                }
+                
                 
                 var revisionRec = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionRecordDTO, CheckListRevisionRecord>(new Filter("CheckListId", _currentCheck.ItemId));
                 if (revisionRec.Any())
@@ -198,8 +208,7 @@ namespace CAS.UI.UICAAControls.CheckList
             foreach (var rec in _currentCheck.CheckListRecords)
                 UpdateRecords(rec);
         }
-
-
+        
         private bool ApplyChanges()
         {
 
@@ -294,6 +303,15 @@ namespace CAS.UI.UICAAControls.CheckList
                 if(ApplyChanges())
                 {
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentCheck, true);
+
+                    if (_currentCheck.EditionId == -1)
+                    {
+                        GlobalObjects.CaaEnvironment.NewKeeper.Save(new CheckListRevisionRecord()
+                        {
+                            CheckListId = _currentCheck.ItemId,
+                            ParentId = _revisionId
+                        });
+                    }
 
 
                     foreach (var control in flowLayoutPanel1.Controls.OfType<AuditControl>())

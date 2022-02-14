@@ -27,14 +27,11 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             InitializeComponent();
         }
-
-
+        
         #endregion
 
         private bool ApplyChanges()
         {
-
-
             _currentCheck.Source = metroTextSource.Text;
             _currentCheck.Settings.SectionName =  metroTextBoxSectionName.Text;
             _currentCheck.Settings.PartNumber = metroTextBoxPartNumber.Text;
@@ -152,8 +149,7 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             metroTextSource.Enabled = checkBoxSource.Checked;
         }
-
-
+        
         private void checkBoxFindings_CheckedChanged(object sender, EventArgs e)
         {
             metroTextBoxDescribed.Enabled = checkBoxFindings.Checked;

@@ -354,7 +354,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		{
 			if (_parent.Type == RevisionType.Revision)
 			{
-				var form = new CheckListRevEditForm();
+				var form = new CheckListForm(new CheckLists{OperatorId = _operatorId, EditionId = -1}, _parent.ItemId);
 				if (form.ShowDialog() == DialogResult.OK)
 					AnimatedThreadWorker.RunWorkerAsync();
 			}
