@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
@@ -101,8 +102,17 @@ namespace CAS.UI.UICAAControls.CheckList
 
                 foreach (var check in this.SelectedItems)
                 {
-                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
-                        $"update dbo.CheckListRevisionRecord set IsDeleted = 1 where ParentId = {check.ItemId})");
+                    if (check.Type == RevisionType.Revision)
+                    {
+                        GlobalObjects.CaaEnvironment.NewLoader.Execute(
+                            $"update dbo.CheckListRevisionRecord set IsDeleted = 1 where ParentId = {check.ItemId})");
+                    }
+                    else
+                    {
+                        GlobalObjects.CaaEnvironment.NewLoader.Execute(
+                            $"update dbo.CheckList set IsDeleted = 1 where ItemId = {check.CheckListId})");
+                    }
+                    
                 }
                 
                 this.radGridView1.EndUpdate();
