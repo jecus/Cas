@@ -119,7 +119,7 @@ namespace SmartCore.CAA.Check
         public string NextEditionNumber  { get; set; }
         public string NextRevisionNumber  { get; set; }
         public int EditionNumber  { get; set; }
-        public string RevisionNumber  { get; set; }
+        public int RevisionNumber  { get; set; }
         
         public string SectionNumber => Settings.SectionNumber;
         public string SectionName => Settings.SectionName;

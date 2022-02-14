@@ -67,12 +67,6 @@ namespace CAS.UI.UICAAControls.CheckList
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-	        if (_parent.Type == RevisionType.Revision)
-	        {
-		        buttonRevison.Visible = false;
-		        pictureBox4.Visible = false;
-	        }
-	        
 	        _directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
@@ -104,7 +98,10 @@ namespace CAS.UI.UICAAControls.CheckList
 		            _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListDTO, CheckLists>(new Filter("ItemId", ids)));
 		            var edition = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListRevisionDTO, CheckListRevision>(_parent.Settings.EditionId);
 		            foreach (var check in _initialDocumentArray)
+		            {
 			            check.EditionNumber = edition.Number;
+			            check.RevisionNumber = _parent.Number;
+		            }
 	            }
             }
             
@@ -345,10 +342,20 @@ namespace CAS.UI.UICAAControls.CheckList
 		
 		private void ButtonRevisionClick(object sender, EventArgs e)
 		{
-			var form = new CheckListRevisionForm(_operatorId, _parent);
-
-			if (form.ShowDialog(this) == DialogResult.OK || form.ShowDialog(this) == DialogResult.Cancel)
-				AnimatedThreadWorker.RunWorkerAsync();
+			if (_parent.Type == RevisionType.Revision)
+			{
+				var form = new CheckListRevisionEditForm(_operatorId, _parent, _initialDocumentArray);
+				if (form.ShowDialog(this) == DialogResult.OK || form.ShowDialog(this) == DialogResult.Cancel)
+					AnimatedThreadWorker.RunWorkerAsync();
+			}
+			else
+			{
+				var form = new CheckListRevisionForm(_operatorId, _parent);
+				if (form.ShowDialog(this) == DialogResult.OK || form.ShowDialog(this) == DialogResult.Cancel)
+					AnimatedThreadWorker.RunWorkerAsync();
+			}
+			
+			
 		}
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)

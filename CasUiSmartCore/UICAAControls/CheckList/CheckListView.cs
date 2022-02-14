@@ -133,7 +133,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 CreateRow(item.Source, item.Source),
                 CreateRow(item.Level.ToString(), item.Level),
                 CreateRow(item.EditionNumber.ToString(), item.NextEditionNumber),
-                CreateRow(item.RevisionNumber, item.NextRevisionNumber),
+                CreateRow(item.RevisionNumber.ToString(), item.NextRevisionNumber),
                 CreateRow(item.Remains.ToString(), item.Remains),
                 CreateRow(item.Settings.Phase, item.Settings.Phase),
                 CreateRow(author, author)
