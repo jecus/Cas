@@ -22,6 +22,7 @@ namespace CAS.UI.UICAAControls.CheckList
     public partial class CheckListForm : MetroForm
     {
         private CheckLists _currentCheck;
+        private readonly bool _enable;
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private IList<FindingLevels> _levels = new List<FindingLevels>();
 
@@ -31,12 +32,38 @@ namespace CAS.UI.UICAAControls.CheckList
             InitializeComponent();
         }
 
-        public CheckListForm(CheckLists currentCheck) : this()
+        public CheckListForm(CheckLists currentCheck, bool enable = true) : this()
         {
             _currentCheck = currentCheck;
+            _enable = enable;
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
             _animatedThreadWorker.RunWorkerAsync();
+
+            EnabledControls(enable);
+        }
+
+        private void EnabledControls(bool enable)
+        {
+            metroTextSource.Enabled =
+                metroTextBoxSectionNumber.Enabled =
+                    metroTextBoxSectionName.Enabled =
+                        metroTextBoxPartNumber.Enabled =
+                            metroTextBoxPartName.Enabled =
+                                metroTextBoxSubPartNumber.Enabled =
+                                    metroTextBoxSubPartName.Enabled =
+                                        metroTextBoxItemNumber.Enabled =
+                                            metroTextBoxItemName.Enabled =
+                                                metroTextBoxRequirement.Enabled =
+                                                    dateTimePickeValidTo.Enabled =
+                                                        numericUpNotify.Enabled =
+                                                            metroTextBoxReference.Enabled =
+                                                                metroTextBoxDescribed.Enabled =
+                                                                    metroTextBoxInstructions.Enabled =
+                                                                        comboBoxPhase.Enabled =
+                                                                        buttonOk.Enabled =
+                                                                            linkLabel1.Enabled =
+                                                                            comboBoxLevel.Enabled = enable;
         }
 
         #endregion
@@ -252,6 +279,8 @@ namespace CAS.UI.UICAAControls.CheckList
         public void UpdateRecords(CheckListRecords record)
         {
             var control = new AuditControl(record);
+            if(!_enable)
+                control.DisableControls();
             flowLayoutPanel1.Controls.Remove(linkLabel1);
             flowLayoutPanel1.Controls.Add(control);
             flowLayoutPanel1.Controls.Add(linkLabel1);

@@ -27,6 +27,14 @@ namespace CAS.UI.UICAAControls.CheckList
 
         #endregion
 
+        public void DisableControls()
+        {
+            linkLabelAddNew.Enabled = 
+            comboBoxOptionType.Enabled = 
+            comboBoxOptionNumber.Enabled = 
+            metroTextBoxRemark.Enabled = false;
+        }
+
         public void ApplyChanges()
         {
             Record.Remark = metroTextBoxRemark.Text;

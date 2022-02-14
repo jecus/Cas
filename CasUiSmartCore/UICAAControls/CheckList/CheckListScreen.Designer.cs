@@ -39,13 +39,10 @@ namespace CAS.UI.UICAAControls.CheckList
             this.buttonRevisions = new AvControls.AvButtonT.AvButtonT();
             this.buttonPel = new AvControls.AvButtonT.AvButtonT();
             this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
-            this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
-			this.pictureBox1 = new System.Windows.Forms.PictureBox();
-			this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.pictureBox3 = new System.Windows.Forms.PictureBox();
 			this.pictureBox6 = new System.Windows.Forms.PictureBox();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -193,41 +190,6 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
 			this.buttonAddNew.Enabled = !(userType == UserType.ReadOnly);
 			// 
-			// buttonDeleteSelected
-			// 
-			this.buttonDeleteSelected.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-			this.buttonDeleteSelected.ActiveBackgroundImage = null;
-			this.buttonDeleteSelected.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonDeleteSelected.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonDeleteSelected.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonDeleteSelected.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonDeleteSelected.ForeColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonDeleteSelected.Icon = global::CAS.UI.Properties.Resources.DeleteIcon;
-			this.buttonDeleteSelected.IconLayout = System.Windows.Forms.ImageLayout.Center;
-			this.buttonDeleteSelected.IconNotEnabled = global::CAS.UI.Properties.Resources.DeleteIcon_gray;
-			this.buttonDeleteSelected.Location = new System.Drawing.Point(135, 0);
-			this.buttonDeleteSelected.Name = "buttonDeleteSelected";
-			this.buttonDeleteSelected.NormalBackgroundImage = null;
-			this.buttonDeleteSelected.ShowToolTip = true;
-			this.buttonDeleteSelected.Size = new System.Drawing.Size(52, 57);
-			this.buttonDeleteSelected.TabIndex = 20;
-			this.buttonDeleteSelected.TextMain = "";
-			this.buttonDeleteSelected.TextSecondary = "";
-			this.buttonDeleteSelected.ToolTipText = "Delete selected";
-			this.buttonDeleteSelected.Click += ButtonDeleteClick;
-			this.buttonDeleteSelected.Enabled = !(userType == UserType.ReadOnly || userType == UserType.SaveOnly);
-			// 
-			// pictureBox1
-			// 
-			this.pictureBox1.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
-			this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.pictureBox1.Location = new System.Drawing.Point(124, 3);
-			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(5, 50);
-			this.pictureBox1.TabIndex = 15;
-			this.pictureBox1.TabStop = false;
-			this.pictureBox1.Visible = false;
-			// 
 			// pictureBox2
 			// 
 			this.pictureBox2.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
@@ -273,8 +235,6 @@ namespace CAS.UI.UICAAControls.CheckList
 			// 
 			this.flowLayoutPanel1.AutoSize = true;
 			this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.flowLayoutPanel1.Controls.Add(this.buttonDeleteSelected);
-			this.flowLayoutPanel1.Controls.Add(this.pictureBox1);
 			this.flowLayoutPanel1.Controls.Add(this.buttonAddNew);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox2);
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
@@ -298,8 +258,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Name = "RequestForQuotationListScreen";
             this.ShowAircraftStatusPanel = false;
             this.Size = new System.Drawing.Size(917, 590);
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
 			this.flowLayoutPanel1.ResumeLayout(false);
@@ -312,14 +271,12 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
         private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddNew;
-        private AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
         private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
 
         private AvControls.AvButtonT.AvButtonT buttonPel;
         private AvControls.AvButtonT.AvButtonT buttonRevisions;
         private System.Windows.Forms.Label labelDateAsOf;
-		private System.Windows.Forms.PictureBox pictureBox1;
-		private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox2;
 		private System.Windows.Forms.PictureBox pictureBox3;
 		private System.Windows.Forms.PictureBox pictureBox6;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;

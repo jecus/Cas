@@ -23,6 +23,7 @@ namespace CAS.UI.UICAAControls.CheckList
 	public partial class CheckListView : BaseGridViewControl<CheckLists>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
+        private readonly bool _enable;
 
         #region Fields
 
@@ -49,9 +50,10 @@ namespace CAS.UI.UICAAControls.CheckList
         /// <summary>
         /// </summary>
         /// <param name="animatedThreadWorker"></param>
-        public CheckListView(AnimatedThreadWorker animatedThreadWorker)
+        public CheckListView(AnimatedThreadWorker animatedThreadWorker, bool enable = true)
 		{
             _animatedThreadWorker = animatedThreadWorker;
+            _enable = enable;
             InitializeComponent();
             ColumnIndexes = new List<string>()
             {
@@ -156,7 +158,7 @@ namespace CAS.UI.UICAAControls.CheckList
 				}
 				else
 				{
-                    var form = new CheckListForm(SelectedItem);
+                    var form = new CheckListForm(SelectedItem,_enable);
                     if (form.ShowDialog() == DialogResult.OK)
                         _animatedThreadWorker.RunWorkerAsync();
 				}

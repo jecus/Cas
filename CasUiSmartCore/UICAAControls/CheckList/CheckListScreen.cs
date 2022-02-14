@@ -16,7 +16,6 @@ using SmartCore.Filters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -372,7 +371,7 @@ namespace CAS.UI.UICAAControls.CheckList
             }
             else
             {
-				var form = new CheckListForm(_directivesViewer.SelectedItem);
+				var form = new CheckListForm(_directivesViewer.SelectedItem, false);
                 if (form.ShowDialog() == DialogResult.OK)
                     AnimatedThreadWorker.RunWorkerAsync();
 			}
@@ -394,7 +393,7 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             if (_auditId.HasValue)
                 _directivesViewer = new CheckListLiteView(AnimatedThreadWorker);
-            else _directivesViewer = new CheckListView(AnimatedThreadWorker);
+            else _directivesViewer = new CheckListView(AnimatedThreadWorker, false);
 
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);

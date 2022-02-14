@@ -287,12 +287,10 @@ namespace CAS.UI.UICAAControls.CheckList
                             foreach (var r in _revisions)
                                 r.ParentId = id;
                         }
-
-
+                        
                        if(_revisions.Any())
                            GlobalObjects.CaaEnvironment.NewKeeper.BulkInsert(_revisions.Cast<BaseEntityObject>().ToList());
-
-
+                       
                         MessageBox.Show("All records updated successfull!", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
                         
                         SetEnableControl(false);
