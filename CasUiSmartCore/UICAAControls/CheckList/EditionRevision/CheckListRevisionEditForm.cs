@@ -89,12 +89,6 @@ namespace CAS.UI.UICAAControls.CheckList
             }
         }
         
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
-        }
-
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
              if (_fromcheckListView.SelectedItems.Count > 0)

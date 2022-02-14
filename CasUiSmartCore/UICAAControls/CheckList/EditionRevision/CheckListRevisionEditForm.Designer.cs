@@ -34,7 +34,6 @@ namespace CAS.UI.UICAAControls.CheckList
             System.Windows.Forms.Label label3;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckListRevisionEditForm));
             this.buttonOk = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
             this._fromcheckListView = new CAS.UI.UICAAControls.CheckList.CheckListView();
             this._tocheckListView = new CAS.UI.UICAAControls.CheckList.CheckListView();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
@@ -55,25 +54,12 @@ namespace CAS.UI.UICAAControls.CheckList
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(1359, 759);
+            this.buttonOk.Location = new System.Drawing.Point(1440, 758);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 328;
             this.buttonOk.Text = "OK";
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonCancel.Location = new System.Drawing.Point(1440, 759);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 33);
-            this.buttonCancel.TabIndex = 327;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // _fromcheckListView
             // 
@@ -159,7 +145,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.ButtonDelete.Icon = global::CAS.UI.Properties.Resources.DeleteIconSmall;
             this.ButtonDelete.IconLayout = System.Windows.Forms.ImageLayout.Center;
             this.ButtonDelete.IconNotEnabled = null;
-            this.ButtonDelete.Location = new System.Drawing.Point(1230, 757);
+            this.ButtonDelete.Location = new System.Drawing.Point(1311, 757);
             this.ButtonDelete.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonDelete.Name = "ButtonDelete";
             this.ButtonDelete.NormalBackgroundImage = null;
@@ -185,7 +171,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Controls.Add(this._tocheckListView);
             this.Controls.Add(this._fromcheckListView);
             this.Controls.Add(this.buttonOk);
-            this.Controls.Add(this.buttonCancel);
             this.Name = "CheckListRevisionEditForm";
             this.Resizable = false;
             this.Text = "CheckList Revision Form";
@@ -198,7 +183,6 @@ namespace CAS.UI.UICAAControls.CheckList
         System.Windows.Forms.Label label3;
 
         private System.Windows.Forms.Button buttonOk;
-        private System.Windows.Forms.Button buttonCancel;
         private CAS.UI.UICAAControls.CheckList.CheckListView _fromcheckListView;
         private CAS.UI.UICAAControls.CheckList.CheckListView _tocheckListView;
         private AvControls.AvButtonT.AvButtonT ButtonAdd;
