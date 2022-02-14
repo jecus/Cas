@@ -236,4 +236,72 @@ namespace CAS.UI.UICAAControls.CheckList
         }
 
     }
+
+    public class CheckListRevisionView : CheckListView
+    {
+        public CheckListRevisionView() : base()
+        {
+            
+        }
+        
+            #region protected override void SetHeaders()
+        /// <summary>
+        /// Устанавливает заголовки
+        /// </summary>
+        protected override void SetHeaders()
+        {
+            AddColumn("Status", (int)(radGridView1.Width * 0.1f));
+            AddColumn("Section №", (int)(radGridView1.Width * 0.20f));
+            AddColumn("Section Name", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Part №", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Part Name", (int)(radGridView1.Width * 0.24f));
+            AddColumn("SubPart №", (int)(radGridView1.Width * 0.24f));
+            AddColumn("SubPart Name", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Item №", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Item Name", (int)(radGridView1.Width * 0.5f));
+            AddColumn("Requirement", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Auditor Action", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Source", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Level", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Edition", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Revision", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Remain", (int)(radGridView1.Width * 0.1f));
+            AddColumn("Phase", (int)(radGridView1.Width * 0.1f));
+            AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+        }
+        #endregion
+
+        #region protected override List<CustomCell> GetListViewSubItems(Specialization item)
+
+        protected override List<CustomCell> GetListViewSubItems(CheckLists item)
+        {
+            var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
+
+            var subItems = new List<CustomCell>()
+            {
+                CreateRow(item.RevisionStatus.ToString(), item.RevisionStatus),
+                CreateRow(item.Settings.SectionNumber, item.Settings.SectionNumber),
+                CreateRow(item.Settings.SectionName, item.Settings.SectionName),
+                CreateRow(item.Settings.PartNumber, item.Settings.PartNumber),
+                CreateRow(item.Settings.PartName, item.Settings.PartName),
+                CreateRow(item.Settings.SubPartNumber, item.Settings.SubPartNumber),
+                CreateRow(item.Settings.SubPartName, item.Settings.SubPartName),
+                CreateRow(item.Settings.ItemNumber, item.Settings.ItemNumber),
+                CreateRow(item.Settings.ItemtName, item.Settings.ItemtName),
+                CreateRow(item.Settings.Requirement, item.Settings.Requirement),
+                CreateRow("", ""),
+                CreateRow(item.Source, item.Source),
+                CreateRow(item.Level.ToString(), item.Level),
+                CreateRow(item.EditionNumber.ToString(), item.NextEditionNumber),
+                CreateRow(item.RevisionNumber.ToString(), item.NextRevisionNumber),
+                CreateRow(item.Remains.ToString(), item.Remains),
+                CreateRow(item.Settings.Phase, item.Settings.Phase),
+                CreateRow(author, author)
+            };
+
+            return subItems;
+        }
+
+        #endregion
+    }
 }

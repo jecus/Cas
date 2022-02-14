@@ -108,6 +108,8 @@ namespace SmartCore.CAA.Check
         public int EditionNumber  { get; set; }
         public int RevisionNumber  { get; set; }
         
+        public RevisionCheckType RevisionStatus { get; set; }
+        
         public string SectionNumber => Settings.SectionNumber;
         public string SectionName => Settings.SectionName;
         public string PartNumber => Settings.PartNumber;
@@ -131,6 +133,8 @@ namespace SmartCore.CAA.Check
 
         public AuditCheck AuditCheck { get; set; }
         public int OperatorId { get; set; }
+        
+        
         
         public CheckLists()
         {

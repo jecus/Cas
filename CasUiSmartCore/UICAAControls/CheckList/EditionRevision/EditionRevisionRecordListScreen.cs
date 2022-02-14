@@ -99,6 +99,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		            var edition = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListRevisionDTO, CheckListRevision>(_parent.Settings.EditionId);
 		            foreach (var check in _initialDocumentArray)
 		            {
+			            check.RevisionStatus = records.FirstOrDefault(i => i.CheckListId == check.ItemId)?.Settings?.RevisionCheckType ?? RevisionCheckType.None;
 			            check.EditionNumber = edition.Number;
 			            check.RevisionNumber = _parent.Number;
 		            }
@@ -118,16 +119,6 @@ namespace CAS.UI.UICAAControls.CheckList
              check.Remains = Lifelength.Null;
              check.Condition = ConditionState.Satisfactory;
             }
-            
-
-            // var records = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionRecordDTO, CheckListRevisionRecord>(new Filter("ParentId", _parentId));
-            //
-            // if (records.Any())
-            // {
-	           //  var ids = records.Select(i => i.CheckListId);
-	           //  _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListDTO, CheckLists>(new Filter("ItemId", ids)));
-            // }
-            //
 
             AnimatedThreadWorker.ReportProgress(70, "filter directives");
 
@@ -192,8 +183,11 @@ namespace CAS.UI.UICAAControls.CheckList
 		#region private void InitListView()
 
 		private void InitListView()
-        {
-            _directivesViewer = new CheckListView();
+		{
+			if (_parent.Type == RevisionType.Edition)
+				_directivesViewer = new CheckListView();
+			else _directivesViewer = new CheckListRevisionView();
+			
             _directivesViewer.IsRevision = _parent.Type == RevisionType.Revision;
 
 			_directivesViewer.TabIndex = 2;
