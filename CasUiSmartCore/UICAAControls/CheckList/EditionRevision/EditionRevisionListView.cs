@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
@@ -10,6 +11,7 @@ using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA.Check;
 using SmartCore.Entities.General;
+using Telerik.WinControls.Data;
 
 namespace CAS.UI.UICAAControls.CheckList
 {
@@ -23,18 +25,18 @@ namespace CAS.UI.UICAAControls.CheckList
         public EditionRevisionListView()
         {
             InitializeComponent();
-            OldColumnIndex = 3;
             SortDirection = SortDirection.Asc;
+            EnableCustomSorting = true;
         }
          
         public EditionRevisionListView(AnimatedThreadWorker animatedThreadWorker)
         {
             
-            
             InitializeComponent();
             _animatedThreadWorker = animatedThreadWorker;
-            OldColumnIndex = 3;
             SortDirection = SortDirection.Asc;
+            EnableCustomSorting = true;
+            
         }
 
         public int OperatorId { get; set; }
@@ -43,8 +45,11 @@ namespace CAS.UI.UICAAControls.CheckList
 
         protected override void GroupingItems()
         {
-            SortDirection = SortDirection.Desc;
-            Grouping("Status");
+            this.radGridView1.GroupDescriptors.Clear();
+            var descriptor = new GroupDescriptor();
+            foreach (var colName in new List<string>{ "Status" })
+                descriptor.GroupNames.Add(colName,  ListSortDirection.Ascending);
+            this.radGridView1.GroupDescriptors.Add(descriptor);
         }
 
         #region protected override void SetHeaders()
@@ -70,11 +75,19 @@ namespace CAS.UI.UICAAControls.CheckList
 
             var subItems = new List<CustomCell>();
 
+            var status = "";
+            if (item.Status == EditionRevisionStatus.Open)
+                status = "1.Open";
+            else if (item.Status == EditionRevisionStatus.Temporary)
+                status = "2.Temporary";
+            else if (item.Status == EditionRevisionStatus.Close)
+                status = "3.Close";
+
             subItems.Add(CreateRow(item.Number.ToString(), item.Number));
             subItems.Add(CreateRow(item.Type.ToString(), item.Type));
             subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Date), item.Date));
             subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.EffDate), item.EffDate));
-            subItems.Add(CreateRow(item.Status.ToString(), item.Status));
+            subItems.Add(CreateRow(status, status));
             subItems.Add(CreateRow(author, author));
 
             return subItems;
