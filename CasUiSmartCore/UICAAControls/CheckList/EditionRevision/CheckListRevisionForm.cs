@@ -258,7 +258,7 @@ namespace CAS.UI.UICAAControls.CheckList
                             GlobalObjects.CaaEnvironment.NewKeeper.Save(checks);
 
 
-                        var revision = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new Filter[]
+                        var revision = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new[]
                         {
                             new Filter("Number",revisionedition.Number),
                             new Filter("EditionId", _parent.ItemId)
@@ -271,15 +271,26 @@ namespace CAS.UI.UICAAControls.CheckList
                         }
                         else
                         {
+                            
+                            
                             var id = revision.FirstOrDefault().ItemId;
+                            var records = GlobalObjects.CaaEnvironment.NewLoader
+                                .GetObjectList<CheckListRevisionRecordDTO, CheckListRevisionRecord>(new Filter("ParentId", id));
+
+                            foreach (var r in records)
+                            {
+                                var find = _revisions.FirstOrDefault(i => i.CheckListId == r.CheckListId);
+                                if (find != null)
+                                    _revisions.Remove(find);
+                            }
+                            
                             foreach (var r in _revisions)
                                 r.ParentId = id;
                         }
-                        
-                        
-                        
 
-                        GlobalObjects.CaaEnvironment.NewKeeper.BulkInsert(_revisions.Cast<BaseEntityObject>().ToList());
+
+                       if(_revisions.Any())
+                           GlobalObjects.CaaEnvironment.NewKeeper.BulkInsert(_revisions.Cast<BaseEntityObject>().ToList());
 
 
                         MessageBox.Show("All records updated successfull!", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);

@@ -216,7 +216,11 @@ namespace CAS.UI.UICAAControls.CheckList
 			}
             else
             {
-	            var editions = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new Filter("Status", (int)EditionRevisionStatus.Open));
+	            var editions = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new List<Filter>()
+	            {
+		            new Filter("Status", (byte)EditionRevisionStatus.Open),
+		            new Filter("Type", (byte)RevisionType.Edition),
+	            });
 	            if (editions.Any())
 	            {
 		            var edition = editions.FirstOrDefault();
