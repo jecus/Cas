@@ -58,64 +58,39 @@ namespace CAS.UI.UICAAControls.CheckList
             _levels.Clear();
             _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
             
-            var dsRevision = GlobalObjects.CaaEnvironment.Execute($@"select c.ItemId as CheckId, res.Number, res.EffDate from dbo.CheckList c
-cross apply
-(
-	select top 2 r.Number, r.EffDate from dbo.CheckListRevisionRecord  rec
-	cross apply
-	(
-		select ItemId,EffDate, Number, Type, OperatorId from dbo.CheckListRevision 
-		where ItemId = rec.ParentId
-	)r
-	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 1 and r.OperatorId = {_operatorId} and (r.ItemId > (select top 1 q.ItemId  from dbo.CheckListRevisionRecord r1
-																																			cross apply
-																																			(
-																																				select top 1 ItemId, Type from dbo.CheckListRevision where ItemId = r1.ParentId
-																																			)q
-																																			where q.Type = 0 and r1.CheckListId = c.ItemId and IsDeleted = 0 
-																																			order by ItemId desc))
-	order by r.EffDate desc
-) res
-");
-
-
-            var revisions = dsRevision.Tables[0].AsEnumerable()
-                .Select(dataRow => new
-                {
-                    Id = dataRow.Field<int>("CheckId"),
-                    Number = dataRow.Field<string>("Number"),
-                    EffDate = dataRow.Field<DateTime?>("EffDate"),
-                }).ToList();
+//             var dsRevision = GlobalObjects.CaaEnvironment.Execute($@"select c.ItemId as CheckId, res.Number, res.EffDate from dbo.CheckList c
+// cross apply
+// (
+// 	select top 2 r.Number, r.EffDate from dbo.CheckListRevisionRecord  rec
+// 	cross apply
+// 	(
+// 		select ItemId,EffDate, Number, Type, OperatorId from dbo.CheckListRevision 
+// 		where ItemId = rec.ParentId
+// 	)r
+// 	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 1 and r.OperatorId = {_operatorId} and (r.ItemId > (select top 1 q.ItemId  from dbo.CheckListRevisionRecord r1
+// 																																			cross apply
+// 																																			(
+// 																																				select top 1 ItemId, Type from dbo.CheckListRevision where ItemId = r1.ParentId
+// 																																			)q
+// 																																			where q.Type = 0 and r1.CheckListId = c.ItemId and IsDeleted = 0 
+// 																																			order by ItemId desc))
+// 	order by r.EffDate desc
+// ) res
+// ");
+//
+//
+//             var revisions = dsRevision.Tables[0].AsEnumerable()
+//                 .Select(dataRow => new
+//                 {
+//                     Id = dataRow.Field<int>("CheckId"),
+//                     Number = dataRow.Field<string>("Number"),
+//                     EffDate = dataRow.Field<DateTime?>("EffDate"),
+//                 }).ToList();
             
             
             foreach (var check in _addedChecks)
             {
                 check.EditionNumber = _parent.Number;
-                // var edition = editions.Where(i => i.Id == check.ItemId).ToList();
-                //
-                // if (revision.Any())
-                // {
-                //     if (revision.Count == 1)
-                //         check.RevisionNumber = revision.LastOrDefault()?.Number;
-                //     else
-                //     {
-                //         check.NextRevisionNumber = revision.FirstOrDefault()?.Number;
-                //         check.RevisionNumber = revision.LastOrDefault()?.Number;
-                //     }
-                // }
-                //
-                // if (edition.Any())
-                // {
-                //     if (edition.Count == 1)
-                //         check.EditionNumber = edition.LastOrDefault()?.Number;
-                //     else
-                //     {
-                //         check.NextEditionNumber = edition.FirstOrDefault()?.Number;
-                //         check.EditionNumber = edition.LastOrDefault()?.Number;
-                //     }
-                // }
-
-
                 check.Level = _levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
                               FindingLevels.Unknown;
 
@@ -274,7 +249,6 @@ cross apply
         {
             try
             {
-
                 var dialogResult = MessageBox.Show("Do you really want update records?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
                 if (dialogResult == DialogResult.Yes)
                 {
@@ -283,9 +257,27 @@ cross apply
                         foreach (var checks in _updateChecks)
                             GlobalObjects.CaaEnvironment.NewKeeper.Save(checks);
 
-                        GlobalObjects.CaaEnvironment.NewKeeper.Save(revisionedition);
-                        foreach (var r in _revisions)
-                            r.ParentId = revisionedition.ItemId;
+
+                        var revision = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new Filter[]
+                        {
+                            new Filter("Number",revisionedition.Number),
+                            new Filter("EditionId", _parent.ItemId)
+                        });
+                        if (!revision.Any())
+                        {
+                            GlobalObjects.CaaEnvironment.NewKeeper.Save(revisionedition);
+                            foreach (var r in _revisions)
+                                r.ParentId = revisionedition.ItemId;
+                        }
+                        else
+                        {
+                            var id = revision.FirstOrDefault().ItemId;
+                            foreach (var r in _revisions)
+                                r.ParentId = id;
+                        }
+                        
+                        
+                        
 
                         GlobalObjects.CaaEnvironment.NewKeeper.BulkInsert(_revisions.Cast<BaseEntityObject>().ToList());
 
