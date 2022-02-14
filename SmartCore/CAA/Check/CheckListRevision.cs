@@ -62,7 +62,7 @@ namespace SmartCore.CAA.Check
         {
             Date = DateTime.Today;
             EffDate = DateTime.Today;
-            Status = EditionRevisionStatus.Close;
+            Status = EditionRevisionStatus.Temporary;
             Settings = new CheckListRevisionSettings();
         }
 

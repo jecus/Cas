@@ -30,7 +30,7 @@ namespace CAA.API.Infrastructure.Jobs
 
                 var nextEdition = await context.CheckListRevisionDtos
                     .FirstOrDefaultAsync(i => !i.IsDeleted 
-                                              && i.Status == (byte)EditionRevisionStatus.Close 
+                                              && i.Status == (byte)EditionRevisionStatus.Temporary 
                                               && i.Type ==  (byte)RevisionType.Edition
                                               && i.EffDate.Date == DateTime.Today.Date);
 

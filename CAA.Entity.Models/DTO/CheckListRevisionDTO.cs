@@ -8,13 +8,14 @@ namespace CAA.Entity.Models.DTO
     public enum RevisionType : byte
     {
         Edition = 0,
-        Revision = 1
+        Revision = 1,
     }
     
     public enum EditionRevisionStatus : byte
     {
         Open = 0,
-        Close = 1
+        Close = 1,        
+        Temporary = 2
     }
 
     [Table("CheckListRevision", Schema = "dbo")]
