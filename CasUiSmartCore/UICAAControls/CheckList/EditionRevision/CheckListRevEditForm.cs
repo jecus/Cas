@@ -141,7 +141,6 @@ namespace CAS.UI.UICAAControls.CheckList
                 comboBoxPhase.SelectedItem = (string)_record.Settings.ModData["Phase"];
             }
             
-            
             if (_record.Settings.ModData.ContainsKey("Requirement"))
             {
                 checkBoxPhase.Checked = true;
@@ -183,7 +182,7 @@ namespace CAS.UI.UICAAControls.CheckList
             if (_record.Settings.ModData.ContainsKey("MH"))
             {
                 checkBoxMh.Checked = true;
-                comboBoxPhase.SelectedItem = (int)_record.Settings.ModData["MH"];
+                metroTextBoxMH.Text = (string)_record.Settings.ModData["MH"];
             }
             
             foreach (var rec in _currentCheck.CheckListRecords)

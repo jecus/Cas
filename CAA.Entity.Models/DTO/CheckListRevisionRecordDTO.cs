@@ -38,6 +38,9 @@ namespace CAA.Entity.Models.DTO
         [JsonProperty("RevisionCheckType", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(RevisionCheckType.None)]
         public RevisionCheckType RevisionCheckType { get; set; }
+        
+        [JsonProperty("ModData", NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, object> ModData { get; set; }
     }
     
     [Serializable]

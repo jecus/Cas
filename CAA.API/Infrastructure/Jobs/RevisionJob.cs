@@ -56,7 +56,63 @@ namespace CAA.API.Infrastructure.Jobs
                             check.IsDeleted = true;
                         else if (rec.Settings.RevisionCheckType == RevisionCheckType.Mod)
                         {
+                             if (rec.Settings.ModData.ContainsKey("Source"))
+                                 check.Source = (string)rec.Settings.ModData["Source"];
+
+                             if (rec.Settings.ModData.ContainsKey("Reference"))
+                                 check.Settings.Reference = (string)rec.Settings.ModData["Reference"];
+
+                             if (rec.Settings.ModData.ContainsKey("Findings"))
+                                 check.Settings.Described = (string)rec.Settings.ModData["Findings"];
+
+                             if (rec.Settings.ModData.ContainsKey("Instructions"))
+                                 check.Settings.Instructions = (string)rec.Settings.ModData["Instructions"];
+
+                             if (rec.Settings.ModData.ContainsKey("Check/ValidTo"))
+                                 check.Settings.RevisonValidToDate = (DateTime)rec.Settings.ModData["Check/ValidTo"];
+
+                             if (rec.Settings.ModData.ContainsKey("Notify"))
+                                 check.Settings.RevisonValidToNotify = (int)rec.Settings.ModData["Notify"];
+
+                             if (rec.Settings.ModData.ContainsKey("Level"))
+                                 check.Settings.LevelId = (int)rec.Settings.ModData["Level"];
+
+                             if (rec.Settings.ModData.ContainsKey("Phase"))
+                                 check.Settings.Phase = (string)rec.Settings.ModData["Phase"];
+                             
+                             if (rec.Settings.ModData.ContainsKey("Requirement"))
+                                 check.Settings.Requirement = (string)rec.Settings.ModData["Requirement"];
+
+                             if (rec.Settings.ModData.ContainsKey("Section"))
+                            {
+                                var data = ((string)rec.Settings.ModData["Section"]).Split(new[]{"||"}, StringSplitOptions.None);
+                                check.Settings.SectionNumber = data.FirstOrDefault();
+                                check.Settings.SectionName = data.LastOrDefault();
+                            }
                             
+                            if (rec.Settings.ModData.ContainsKey("Part"))
+                            {
+                                var data = ((string)rec.Settings.ModData["Part"]).Split(new[]{"||"}, StringSplitOptions.None);
+                                check.Settings.PartNumber = data.FirstOrDefault();
+                                check.Settings.PartName = data.LastOrDefault();
+                            }
+                            
+                            if (rec.Settings.ModData.ContainsKey("Subpart"))
+                            {
+                                var data = ((string)rec.Settings.ModData["Subpart"]).Split(new[]{"||"}, StringSplitOptions.None);
+                                check.Settings.SubPartNumber = data.FirstOrDefault();
+                                check.Settings.SubPartName = data.LastOrDefault();
+                            }
+                            
+                            if (rec.Settings.ModData.ContainsKey("Item"))
+                            {
+                                var data = ((string)rec.Settings.ModData["Item"]).Split(new[]{"||"}, StringSplitOptions.None);
+                                check.Settings.ItemNumber = data.FirstOrDefault();
+                                check.Settings.ItemtName = data.LastOrDefault();
+                            }
+                            
+                            if (rec.Settings.ModData.ContainsKey("MH"))
+                                check.Settings.MH = (int)rec.Settings.ModData["MH"];
                         }
                     }
 

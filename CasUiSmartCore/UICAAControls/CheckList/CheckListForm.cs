@@ -128,7 +128,7 @@ namespace CAS.UI.UICAAControls.CheckList
                         {
                             Date = revision.Date,
                             Number = revision.Number,
-                            Remark = revision.Settings.Remark,
+                            Remark = string.Join(",", rec.Settings.ModData.Select(i => i.Key)),
                             Type = revision.Type,
                             EffDate = revision.EffDate
                         });
