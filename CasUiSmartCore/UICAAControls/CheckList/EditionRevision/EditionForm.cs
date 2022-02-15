@@ -3,6 +3,7 @@ using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.DTO;
 using CASTerms;
 using MetroFramework.Forms;
 using SmartCore.CAA.Check;
@@ -16,6 +17,9 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
         public EditionForm(CheckListRevision edition)
         {
             _edition = edition;
+            if(_edition.Type == RevisionType.Edition)
+                this.Text = "Edition Form";
+            else this.Text = "Revision Form";
             InitializeComponent();
             UpdateInformation();
         }
