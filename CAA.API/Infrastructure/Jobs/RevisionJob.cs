@@ -51,7 +51,7 @@ namespace CAA.API.Infrastructure.Jobs
                             continue;
 
                         if (rec.Settings.RevisionCheckType == RevisionCheckType.New)
-                            check.EditionId = rec.ParentId;//вот тут хз
+                            check.EditionId = rec.ParentId;
                         else if (rec.Settings.RevisionCheckType == RevisionCheckType.Del)
                             check.IsDeleted = true;
                         else if (rec.Settings.RevisionCheckType == RevisionCheckType.Mod)
