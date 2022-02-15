@@ -185,10 +185,11 @@ namespace CAS.UI.UICAAControls.CheckList
 		private void InitListView()
 		{
 			if (_parent.Type == RevisionType.Edition)
-				_directivesViewer = new CheckListView();
-			else _directivesViewer = new CheckListRevisionView();
+				_directivesViewer = new CheckListView(AnimatedThreadWorker);
+			else _directivesViewer = new CheckListRevisionView(AnimatedThreadWorker);
 			
             _directivesViewer.IsRevision = _parent.Type == RevisionType.Revision;
+            _directivesViewer.RevisionId = _parent.Type == RevisionType.Revision ? _parent.ItemId : -1;
 
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);

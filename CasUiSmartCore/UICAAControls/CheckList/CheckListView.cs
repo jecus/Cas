@@ -68,6 +68,7 @@ namespace CAS.UI.UICAAControls.CheckList
         public bool IsAuditCheck { get; set; }
         public int? AuditId { get; set; }
         public bool IsRevision { get; set; }
+        public int RevisionId { get; set; }
 
         #endregion
 
@@ -161,7 +162,7 @@ namespace CAS.UI.UICAAControls.CheckList
 				{
                     if (IsRevision)
                     {
-                        var form = new CheckListRevEditForm(SelectedItem);
+                        var form = new CheckListRevEditForm(SelectedItem,RevisionId);
                         if (form.ShowDialog() == DialogResult.OK)
                             _animatedThreadWorker.RunWorkerAsync();
                     }
@@ -239,7 +240,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
     public class CheckListRevisionView : CheckListView
     {
-        public CheckListRevisionView() : base()
+        public CheckListRevisionView(AnimatedThreadWorker worker) : base(worker)
         {
             
         }

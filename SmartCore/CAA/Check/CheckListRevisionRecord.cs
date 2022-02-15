@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
@@ -44,12 +45,15 @@ namespace SmartCore.CAA.Check
     {
         public CheckListRevisionRecordSettings()
         {
-            
+            ModData = new Dictionary<string, object>();
         }
         
         [JsonProperty("RevisionCheckType", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(RevisionCheckType.None)]
         public RevisionCheckType RevisionCheckType { get; set; }
+        
+        [JsonProperty("ModData", NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, object> ModData { get; set; }
     }
     
 }

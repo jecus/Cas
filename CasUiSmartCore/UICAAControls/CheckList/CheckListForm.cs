@@ -214,12 +214,13 @@ namespace CAS.UI.UICAAControls.CheckList
 
             //_currentCheck.Settings.EditionNumber = metroTextBoxEditionNumber.Text;
             //_currentCheck.Settings.EditionDate = dateTimePickerEditionDate.Value;
-            //_currentCheck.Settings.SectionNumber = metroTextBoxSectionNumber.Text;
+            //
             //_currentCheck.Settings.RevisonValidTo = checkBoxRevisionValidTo.Checked;
             //_currentCheck.Settings.RevisonValidToDate = dateTimePickeValidTo.Value;
 
 
             _currentCheck.Source = metroTextSource.Text;
+            _currentCheck.Settings.SectionNumber = metroTextBoxSectionNumber.Text;
             _currentCheck.Settings.SectionName =  metroTextBoxSectionName.Text;
             _currentCheck.Settings.PartNumber = metroTextBoxPartNumber.Text;
             _currentCheck.Settings.PartName = metroTextBoxPartName.Text;
