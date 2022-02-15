@@ -80,13 +80,13 @@ namespace CASTerms
             hash.Add("ReportFooterPrepared", @"Produced by CAS ");
             hash.Add("ReportFooterLink", @"Visit www.avalonkg.com/cas for more information.");
             hash.Add("JobCardFooterPrepared", @"This job card was prepared by Continuing Airworthiness System.");
-            hash.Add("Copyright", " 2006-2021 Avalon Worldgroup Inc. All rights reserved");
-            hash.Add("CopyrightMultiline", " 2006-2021\r\nAvalon  Worldgroup Inc.\r\nAll rights reserved");
+            hash.Add("Copyright", " 2006-2022 Avalon Worldgroup Inc. All rights reserved");
+            hash.Add("CopyrightMultiline", " 2006-2022\r\nAvalon  Worldgroup Inc.\r\nAll rights reserved");
             hash.Add("CompanyName", "Avalon Worldgroup Inc.");
             hash.Add("CompanyNameIO", "Avalon Worldgroup Inc");
             //hash.Add("RussianLanguage", "");
             //hash.Add("EnglishLanguage", "English");
-            hash.Add("ProductVersion", "3.2");
+            hash.Add("ProductVersion", "3.3");
             hash.Add("ProductBuild", "1");//<<$SvnVersion$>>
             hash.Add("DateFormat","dd.MM.yyyy");
             hash.Add("DateFormatShort","dd.MM.yy");
@@ -103,7 +103,7 @@ namespace CASTerms
         #region public  string GetLoginSettingsPath()
 
         /// <summary>
-        /// Возаращает папку для сохранения настроек подключения
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         /// </summary>
         /// <returns></returns>
         public string GetLoginSettingsPath()
