@@ -161,7 +161,7 @@ namespace CAS.UI.UICAAControls.CheckList
 				{
                     if (IsRevision)
                     {
-                        var form = new CheckListRevEditForm();
+                        var form = new CheckListRevEditForm(SelectedItem);
                         if (form.ShowDialog() == DialogResult.OK)
                             _animatedThreadWorker.RunWorkerAsync();
                     }

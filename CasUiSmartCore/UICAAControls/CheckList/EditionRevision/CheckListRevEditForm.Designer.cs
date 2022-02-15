@@ -91,8 +91,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxItem = new System.Windows.Forms.CheckBox();
             this.checkBoxAudit = new System.Windows.Forms.CheckBox();
             this.checkBoxReq = new System.Windows.Forms.CheckBox();
-            this.radioButtonMOD = new System.Windows.Forms.RadioButton();
-            this.radioButtonDel = new System.Windows.Forms.RadioButton();
             metroLabel1 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
@@ -1200,35 +1198,11 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxReq.UseVisualStyleBackColor = true;
             this.checkBoxReq.CheckedChanged += new System.EventHandler(this.checkBoxReq_CheckedChanged);
             // 
-            // radioButtonMOD
-            // 
-            this.radioButtonMOD.AutoSize = true;
-            this.radioButtonMOD.Font = new System.Drawing.Font("Verdana", 9F);
-            this.radioButtonMOD.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.radioButtonMOD.Location = new System.Drawing.Point(137, 39);
-            this.radioButtonMOD.Name = "radioButtonMOD";
-            this.radioButtonMOD.Size = new System.Drawing.Size(54, 18);
-            this.radioButtonMOD.TabIndex = 342;
-            this.radioButtonMOD.Text = "MOD";
-            // 
-            // radioButtonDel
-            // 
-            this.radioButtonDel.AutoSize = true;
-            this.radioButtonDel.Font = new System.Drawing.Font("Verdana", 9F);
-            this.radioButtonDel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.radioButtonDel.Location = new System.Drawing.Point(257, 39);
-            this.radioButtonDel.Name = "radioButtonDel";
-            this.radioButtonDel.Size = new System.Drawing.Size(49, 18);
-            this.radioButtonDel.TabIndex = 344;
-            this.radioButtonDel.Text = "DEL";
-            // 
             // CheckListRevEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1155, 820);
-            this.Controls.Add(this.radioButtonDel);
-            this.Controls.Add(this.radioButtonMOD);
             this.Controls.Add(this.checkBoxReq);
             this.Controls.Add(this.checkBoxAudit);
             this.Controls.Add(this.checkBoxItem);
@@ -1344,7 +1318,5 @@ namespace CAS.UI.UICAAControls.CheckList
         private CheckBox checkBoxItem;
         private CheckBox checkBoxAudit;
         private CheckBox checkBoxReq;
-        private RadioButton radioButtonMOD;
-        private RadioButton radioButtonDel;
     }
 }

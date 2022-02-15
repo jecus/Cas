@@ -82,7 +82,7 @@ namespace CAS.UI.UICAAControls.CheckList
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
             _levels.Clear();
-            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>();
+            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _currentCheck.OperatorId));
             
             if (_currentCheck == null) return;
 

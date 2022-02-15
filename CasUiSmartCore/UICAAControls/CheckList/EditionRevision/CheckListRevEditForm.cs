@@ -23,12 +23,60 @@ namespace CAS.UI.UICAAControls.CheckList
         private IList<FindingLevels> _levels = new List<FindingLevels>();
 
         #region Constructors
-        public CheckListRevEditForm()
+        public CheckListRevEditForm(CheckLists check)
         {
+            
             InitializeComponent();
+            _currentCheck = check;
+            UpdateInformation();
+
         }
         
         #endregion
+        
+         private void UpdateInformation()
+        {
+            _levels.Clear();
+            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _currentCheck.OperatorId));
+            
+            metroTextSource.Text = _currentCheck.Source;
+            metroTextBoxSectionNumber.Text = _currentCheck.Settings.SectionNumber;
+            metroTextBoxSectionName.Text = _currentCheck.Settings.SectionName;
+            metroTextBoxPartNumber.Text = _currentCheck.Settings.PartNumber;
+            metroTextBoxPartName.Text = _currentCheck.Settings.PartName;
+            metroTextBoxSubPartNumber.Text = _currentCheck.Settings.SubPartNumber;
+            metroTextBoxSubPartName.Text = _currentCheck.Settings.SubPartName;
+            metroTextBoxItemNumber.Text = _currentCheck.Settings.ItemNumber;
+            metroTextBoxItemName.Text = _currentCheck.Settings.ItemtName;
+            metroTextBoxRequirement.Text = _currentCheck.Settings.Requirement;
+            dateTimePickeValidTo.Value = _currentCheck.Settings.RevisonValidToDate;
+            numericUpNotify.Value = _currentCheck.Settings.RevisonValidToNotify;
+
+            metroTextBoxReference.Text = _currentCheck.Settings.Reference;
+            metroTextBoxDescribed.Text = _currentCheck.Settings.Described;
+            metroTextBoxInstructions.Text = _currentCheck.Settings.Instructions;
+
+
+            if (Math.Abs(_currentCheck.Settings.MH) > 0.000001)
+                metroTextBoxMH.Text = _currentCheck.Settings.MH.ToString();
+
+            var phase = new List<string> { "1", "2", "3", "4", "5", "6", "N/A" };
+            comboBoxPhase.Items.Clear();
+            foreach (var i in phase)
+                comboBoxPhase.Items.Add(i);
+            comboBoxPhase.SelectedItem = _currentCheck.Settings.Phase;
+
+
+            comboBoxLevel.Items.Clear();
+            comboBoxLevel.Items.AddRange(_levels.ToArray());
+            comboBoxLevel.Items.Add(FindingLevels.Unknown);
+
+            comboBoxLevel.SelectedItem = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.Settings.LevelId) ??
+                                         FindingLevels.Unknown;
+            
+            foreach (var rec in _currentCheck.CheckListRecords)
+                UpdateRecords(rec);
+        }
 
         private bool ApplyChanges()
         {
