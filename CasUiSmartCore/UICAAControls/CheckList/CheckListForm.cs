@@ -81,6 +81,9 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
+            _levels.Clear();
+            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>();
+            
             if (_currentCheck == null) return;
 
             if (_currentCheck.ItemId > 0)
@@ -152,9 +155,6 @@ namespace CAS.UI.UICAAControls.CheckList
                     }
                 }
                 _currentCheck.Files = new CommonCollection<ItemFileLink>(links);
-
-                _levels.Clear();
-                _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>();
                 _currentCheck.Level = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.Settings.LevelId) ??
                                       FindingLevels.Unknown;
             }
