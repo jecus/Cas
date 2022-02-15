@@ -35,6 +35,7 @@ namespace CAA.Entity.Models.DTO
                 : JsonConvert.DeserializeObject<CheckListDTOSettings>(value);
         }
 
+        [NotMapped]
         public CheckListDTOSettings Settings { get; set; }
 
 
