@@ -11,7 +11,7 @@ namespace SmartCore.CAA.Check
     public class CheckListRecords : BaseEntityObject
     {
         public OptionType Option { get; set; }
-        public int OptionNumber { get; set; }
+        public Option OptionNumber { get; set; }
         public string Remark { get; set; }
         public int CheckListId { get; set; }
         public CheckLists CheckList { get; set; }

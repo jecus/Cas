@@ -415,6 +415,7 @@
     <Compile Include="CAA\Check\CheckListRevision.cs" />
     <Compile Include="CAA\Check\CheckListRevisionRecord.cs" />
     <Compile Include="CAA\Check\CheckLists.cs" />
+    <Compile Include="CAA\Check\Option.cs" />
     <Compile Include="CAA\Check\OptionType.cs" />
     <Compile Include="CAA\FindingLevel\FindingLevels.cs" />
     <Compile Include="CAA\FindingLevel\RootCause.cs" />

@@ -38,7 +38,7 @@ namespace CAS.UI.UICAAControls.CheckList
         public void ApplyChanges()
         {
             Record.Remark = metroTextBoxRemark.Text;
-            Record.OptionNumber = (int)comboBoxOptionNumber.SelectedItem;
+            Record.OptionNumber = (Option)comboBoxOptionNumber.SelectedItem;
             Record.Option = (OptionType)comboBoxOptionType.SelectedItem;
         }
 
@@ -47,14 +47,13 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             metroTextBoxRemark.Text = Record.Remark;
             comboBoxOptionNumber.SelectedItem = Record.OptionNumber;
-            comboBoxOptionType.SelectedItem = Record.Option;
+            comboBoxOptionType.SelectedItem = Record.OptionNumber;
         }
 
         private void UpdateControls()
         {
-            var numbers = new List<object> {1, 2, 3};
             comboBoxOptionNumber.Items.Clear();
-            comboBoxOptionNumber.Items.AddRange(numbers.ToArray());
+            comboBoxOptionNumber.Items.AddRange(Option.Items.OrderBy(i => i.ItemId).ToArray());
             comboBoxOptionNumber.SelectedIndex = 0;
 
             comboBoxOptionType.Items.Clear();

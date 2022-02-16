@@ -283,7 +283,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            UpdateRecords(new CheckListRecords {CheckListId = _currentCheck.ItemId, OptionNumber = 1, Option =  OptionType.Unknown});
+            UpdateRecords(new CheckListRecords {CheckListId = _currentCheck.ItemId, OptionNumber = Option.One, Option =  OptionType.Unknown});
         }
 
         public void UpdateRecords(CheckListRecords record)

@@ -1520,7 +1520,7 @@ namespace SmartCore.DtoHelper
                 Updated = recordDto.Updated,
 				Remark = recordDto.Remark,
 				CheckListId = recordDto.CheckListId,
-				OptionNumber = recordDto.OptionNumber,
+				OptionNumber = Option.GetItemById(recordDto.OptionNumber),
 				Option = OptionType.GetItemById(recordDto.Option)
 
             };
@@ -1536,7 +1536,7 @@ namespace SmartCore.DtoHelper
                 Updated = recordDto.Updated,
                 Remark = recordDto.Remark,
                 CheckListId = recordDto.CheckListId,
-                OptionNumber = recordDto.OptionNumber,
+                OptionNumber = recordDto.OptionNumber.ItemId,
                 Option = recordDto.Option.ItemId
             };
         }
