@@ -20,7 +20,7 @@ namespace SmartCore.Entities.General
         /// <summary>
         /// Тип объекта - директива, деталь, чек и т.д.
         /// </summary>
-        public SmartCoreType SmartCoreObjectType { get; protected set; }
+        public SmartCoreType SmartCoreObjectType { get;  set; }
         #endregion
 
         #region public Boolean IsDeleted { get; set; }

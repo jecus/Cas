@@ -6,9 +6,12 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
+using CAA.Entity.Models.Model;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.CAA.RoutineAudits;
@@ -114,6 +117,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 comboBoxProgramType.SelectedItem = ProgramType.GetItemById(_currentCheck.Settings.ProgramTypeId) ?? ProgramType.Unknown;
             }
             
+            
             if (_record.Settings.ModData.ContainsKey("Check/ValidTo"))
             {
                 checkBoxCheck.Checked = true;
@@ -180,6 +184,31 @@ namespace CAS.UI.UICAAControls.CheckList
             {
                 checkBoxMh.Checked = true;
                 metroTextBoxMH.Text = (string)_record.Settings.ModData["MH"];
+            }
+            
+            if (_record.Settings.ModData.ContainsKey("Audit"))
+            {
+                checkBoxAudit.Checked = true;
+
+                var revAudit = JsonConvert.DeserializeObject<RevisionAudit>((string)_record.Settings.ModData["Audit"]);
+                if (revAudit != null)
+                {
+                    if (revAudit.AuditId != null)
+                    {
+                        _currentCheck.CheckListRecords.RemoveAll(i => !revAudit.AuditId.Contains(i.ItemId));
+                    }
+
+                    if (revAudit.NewAudit!= null)
+                    {
+                        _currentCheck.CheckListRecords.AddRange(revAudit.NewAudit.Select(i => new CheckListRecords()
+                        {
+                            OptionNumber = Option.GetItemById(i.OptionNumber),
+                            Remark = i.Remark,
+                            Option = OptionType.GetItemById(i.OpttionId),
+                            CheckListId = i.CheckListId
+                        }));
+                    }
+                }
             }
             
             foreach (var rec in _currentCheck.CheckListRecords)
@@ -349,6 +378,36 @@ namespace CAS.UI.UICAAControls.CheckList
                     _record.Settings.ModData.Remove("MH");
             }
             
+            if (checkBoxAudit.Checked)
+            {
+                var auditRecords = new List<CheckListRecords>();
+                foreach (var control in flowLayoutPanel1.Controls.OfType<AuditControl>())
+                {
+                    control.ApplyChanges();
+                    auditRecords.Add(control.Record);
+                }
+                
+                var rec = new RevisionAudit()
+                {
+                    AuditId = auditRecords.Where(i=>i.ItemId > -1).Select(i => i.ItemId),
+                    NewAudit = auditRecords.Where(i=>i.ItemId <= 0).Select(i => new RevisionNewAudit
+                    {
+                        OpttionId = i.Option.ItemId,
+                        CheckListId = i.CheckListId,
+                        OptionNumber = i.OptionNumber.ItemId,
+                        Remark = i.Remark
+                    }).ToArray(),
+                };
+                
+                if (!_record.Settings.ModData.ContainsKey("Audit"))
+                    _record.Settings.ModData.Add("Audit", JsonConvert.SerializeObject(rec));
+                else _record.Settings.ModData["Audit"] = JsonConvert.SerializeObject(rec);
+            }
+            else
+            {
+                if (_record.Settings.ModData.ContainsKey("Audit"))
+                    _record.Settings.ModData.Remove("Audit");
+            }
             
             return true;
         }
@@ -386,6 +445,7 @@ namespace CAS.UI.UICAAControls.CheckList
         public void UpdateRecords(CheckListRecords record)
         {
             var control = new AuditControl(record);
+            control.DisableControls(checkBoxAudit.Checked);
             control.Deleted += Control_Deleted;
             flowLayoutPanel1.Controls.Remove(linkLabel1);
             flowLayoutPanel1.Controls.Add(control);
@@ -395,25 +455,9 @@ namespace CAS.UI.UICAAControls.CheckList
         private void Control_Deleted(object sender, EventArgs e)
         {
             var control = sender as AuditControl;
-
-            var dialogResult = MessageBox.Show("Do you really want to delete record?", "Deleting confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
-            if (dialogResult == DialogResult.Yes)
-            {
-                if (control.Record.ItemId > 0)
-                {
-                    try
-                    {
-                        GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.Record);
-                    }
-                    catch (Exception ex)
-                    {
-                        Program.Provider.Logger.Log("Error while removing data", ex);
-                    }
-                }
-                flowLayoutPanel1.Controls.Remove(control);
-                control.Deleted -= Control_Deleted;
-                control.Dispose();
-            }
+            flowLayoutPanel1.Controls.Remove(control);
+            control.Deleted -= Control_Deleted;
+            control.Dispose();
         }
 
         private void buttonOk_Click(object sender, System.EventArgs e)
@@ -511,7 +555,8 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void checkBoxAudit_CheckedChanged(object sender, EventArgs e)
         {
-
+            foreach (var control in flowLayoutPanel1.Controls.OfType<AuditControl>())
+                control.DisableControls(checkBoxAudit.Checked);
         }
 
     }

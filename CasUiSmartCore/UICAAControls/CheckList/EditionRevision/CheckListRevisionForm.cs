@@ -156,8 +156,9 @@ namespace CAS.UI.UICAAControls.CheckList
                         CheckListId = checks.ItemId,
                     });
                 }
-                if(checkBoxProgramType.Checked)
-                    checks.Settings.ProgramTypeId = ((ProgramType)comboBoxProgramType.SelectedItem).ItemId)
+
+                if (checkBoxProgramType.Checked)
+                    checks.Settings.ProgramTypeId = ((ProgramType)comboBoxProgramType.SelectedItem).ItemId;
                 if(checkBoxCheck.Checked)
                     checks.Settings.RevisonValidToDate = dateTimePickeValidTo.Value.Date;
                 if (checkBoxNotify.Checked)
