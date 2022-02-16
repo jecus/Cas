@@ -13,6 +13,7 @@ using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
+using SmartCore.CAA.RoutineAudits;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -104,6 +105,10 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             SetEnableControl(false);
 
+            comboBoxProgramType.Items.Clear();
+            comboBoxProgramType.Items.AddRange(ProgramType.Items.OrderBy(i => i.FullName).ToArray());
+            comboBoxProgramType.SelectedItem = ProgramType.Unknown;
+            
             comboBoxLevel.Items.Clear();
             comboBoxLevel.Items.AddRange(_levels.ToArray());
             comboBoxLevel.Items.Add(FindingLevels.Unknown);
@@ -151,6 +156,8 @@ namespace CAS.UI.UICAAControls.CheckList
                         CheckListId = checks.ItemId,
                     });
                 }
+                if(checkBoxProgramType.Checked)
+                    checks.Settings.ProgramTypeId = ((ProgramType)comboBoxProgramType.SelectedItem).ItemId)
                 if(checkBoxCheck.Checked)
                     checks.Settings.RevisonValidToDate = dateTimePickeValidTo.Value.Date;
                 if (checkBoxNotify.Checked)
@@ -400,6 +407,11 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             if (RevisionEff.Value < dateTimePickerRevisionDate.Value)
                 RevisionEff.Value = dateTimePickerRevisionDate.Value;
+        }
+
+        private void checkBoxProgramType_CheckedChanged(object sender, EventArgs e)
+        {
+            comboBoxProgramType.Enabled = checkBoxProgramType.Checked;
         }
     }
 }
