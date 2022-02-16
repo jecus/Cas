@@ -193,13 +193,7 @@ namespace SmartCore.CAA.Check
 
         [JsonProperty("Reference")]
         public string Reference { get; set; }
-
-        [JsonProperty("Described")]
-        public string Described { get; set; }
-
-        [JsonProperty("Instructions")]
-        public string Instructions { get; set; }
-
+        
         [JsonProperty("LevelId", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(-1)]
         public int LevelId { get; set; }
@@ -210,6 +204,10 @@ namespace SmartCore.CAA.Check
 
         [JsonProperty("ManHours")]
         public double MH { get; set; }
+
+        [JsonProperty("ProgramTypeId", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue(-1)]
+        public int ProgramTypeId { get; set; }
     }
 
     

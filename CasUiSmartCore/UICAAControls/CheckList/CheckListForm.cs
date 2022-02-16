@@ -12,6 +12,7 @@ using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
+using SmartCore.CAA.RoutineAudits;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Files;
@@ -64,9 +65,8 @@ namespace CAS.UI.UICAAControls.CheckList
                                                     dateTimePickeValidTo.Enabled =
                                                         numericUpNotify.Enabled =
                                                             metroTextBoxReference.Enabled =
-                                                                metroTextBoxDescribed.Enabled =
-                                                                    metroTextBoxInstructions.Enabled =
-                                                                        comboBoxPhase.Enabled =
+                                                                comboBoxProgramType.Enabled =
+                                                                    comboBoxPhase.Enabled =
                                                                         buttonOk.Enabled =
                                                                             linkLabel1.Enabled =
                                                                             comboBoxLevel.Enabled = enable;
@@ -176,9 +176,10 @@ namespace CAS.UI.UICAAControls.CheckList
             numericUpNotify.Value = _currentCheck.Settings.RevisonValidToNotify;
 
             metroTextBoxReference.Text = _currentCheck.Settings.Reference;
-            metroTextBoxDescribed.Text = _currentCheck.Settings.Described;
-            metroTextBoxInstructions.Text = _currentCheck.Settings.Instructions;
-
+            
+            comboBoxProgramType.Items.Clear();
+            comboBoxProgramType.Items.AddRange(ProgramType.Items.OrderBy(i => i.FullName).ToArray());
+            comboBoxProgramType.SelectedItem = ProgramType.GetItemById(_currentCheck.Settings.ProgramTypeId) ?? ProgramType.Unknown;
 
             if (Math.Abs(_currentCheck.Settings.MH) > 0.000001)
                 metroTextBoxMH.Text = _currentCheck.Settings.MH.ToString();
@@ -234,10 +235,8 @@ namespace CAS.UI.UICAAControls.CheckList
             _currentCheck.Settings.RevisonValidToNotify = (int) numericUpNotify.Value;
 
             _currentCheck.Settings.Reference = metroTextBoxReference.Text;
-            _currentCheck.Settings.Described = metroTextBoxDescribed.Text;
-            _currentCheck.Settings.Instructions = metroTextBoxInstructions.Text;
-
-
+            _currentCheck.Settings.ProgramTypeId = ((ProgramType)comboBoxProgramType.SelectedItem).ItemId;
+            
             _currentCheck.Settings.LevelId = ((FindingLevels) comboBoxLevel.SelectedItem).ItemId;
             _currentCheck.Settings.Phase = (string)comboBoxPhase.SelectedItem;
 

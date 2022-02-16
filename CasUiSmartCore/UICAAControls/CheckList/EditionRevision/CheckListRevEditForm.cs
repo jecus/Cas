@@ -11,6 +11,7 @@ using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
+using SmartCore.CAA.RoutineAudits;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Files;
@@ -59,6 +60,9 @@ namespace CAS.UI.UICAAControls.CheckList
             _currentCheck.CheckListRecords.Clear();
             _currentCheck.CheckListRecords.AddRange(records);
             
+            comboBoxProgramType.Items.Clear();
+            comboBoxProgramType.Items.AddRange(ProgramType.Items.OrderBy(i => i.FullName).ToArray());
+            comboBoxProgramType.SelectedItem = ProgramType.GetItemById(_currentCheck.Settings.ProgramTypeId) ?? ProgramType.Unknown;
             
             
             metroTextSource.Text = _currentCheck.Source;
@@ -75,8 +79,7 @@ namespace CAS.UI.UICAAControls.CheckList
             numericUpNotify.Value = _currentCheck.Settings.RevisonValidToNotify;
 
             metroTextBoxReference.Text = _currentCheck.Settings.Reference;
-            metroTextBoxDescribed.Text = _currentCheck.Settings.Described;
-            metroTextBoxInstructions.Text = _currentCheck.Settings.Instructions;
+
 
 
             if (Math.Abs(_currentCheck.Settings.MH) > 0.000001)
@@ -105,16 +108,10 @@ namespace CAS.UI.UICAAControls.CheckList
                 metroTextBoxReference.Text = (string)_record.Settings.ModData["Reference"];
             }
             
-            if (_record.Settings.ModData.ContainsKey("Findings"))
+            if (_record.Settings.ModData.ContainsKey("Program Type"))
             {
-                checkBoxFindings.Checked = true;
-                metroTextBoxDescribed.Text = (string)_record.Settings.ModData["Findings"];
-            }
-            
-            if (_record.Settings.ModData.ContainsKey("Instructions"))
-            {
-                checkBoxInstructions.Checked = true;
-                metroTextBoxInstructions.Text = (string)_record.Settings.ModData["Instructions"];
+                checkBoxProgramType.Checked = true;
+                comboBoxProgramType.SelectedItem = ProgramType.GetItemById(_currentCheck.Settings.ProgramTypeId) ?? ProgramType.Unknown;
             }
             
             if (_record.Settings.ModData.ContainsKey("Check/ValidTo"))
@@ -216,28 +213,16 @@ namespace CAS.UI.UICAAControls.CheckList
                     _record.Settings.ModData.Remove("Reference");
             }
             
-            if (checkBoxFindings.Checked)
+            if (checkBoxProgramType.Checked)
             {
-                if (!_record.Settings.ModData.ContainsKey("Findings"))
-                    _record.Settings.ModData.Add("Findings", metroTextBoxDescribed.Text);
-                else _record.Settings.ModData["Findings"] = metroTextBoxDescribed.Text;
+                if (!_record.Settings.ModData.ContainsKey("Program Type"))
+                    _record.Settings.ModData.Add("Program Type", ((ProgramType)comboBoxProgramType.SelectedItem).ItemId);
+                else _record.Settings.ModData["Program Type"] = ((ProgramType)comboBoxProgramType.SelectedItem).ItemId;
             }
             else
             {
-                if (_record.Settings.ModData.ContainsKey("Findings"))
-                    _record.Settings.ModData.Remove("Findings");
-            }
-            
-            if (checkBoxInstructions.Checked)
-            {
-                if (!_record.Settings.ModData.ContainsKey("Instructions"))
-                    _record.Settings.ModData.Add("Instructions", metroTextBoxInstructions.Text);
-                else _record.Settings.ModData["Instructions"] = metroTextBoxInstructions.Text;
-            }
-            else
-            {
-                if (_record.Settings.ModData.ContainsKey("Instructions"))
-                    _record.Settings.ModData.Remove("Instructions");
+                if (_record.Settings.ModData.ContainsKey("Program Type"))
+                    _record.Settings.ModData.Remove("Program Type");
             }
             
             if (checkBoxCheck.Checked)
@@ -462,17 +447,12 @@ namespace CAS.UI.UICAAControls.CheckList
         
         private void checkBoxFindings_CheckedChanged(object sender, EventArgs e)
         {
-            metroTextBoxDescribed.Enabled = checkBoxFindings.Checked;
+            comboBoxProgramType.Enabled = checkBoxProgramType.Checked;
         }
 
         private void checkBoxRef_CheckedChanged(object sender, EventArgs e)
         {
             metroTextBoxReference.Enabled = checkBoxRef.Checked;
-        }
-
-        private void checkBoxInstructions_CheckedChanged(object sender, EventArgs e)
-        {
-            metroTextBoxInstructions.Enabled = checkBoxInstructions.Checked;
         }
 
         private void checkBoxCheck_CheckedChanged(object sender, EventArgs e)

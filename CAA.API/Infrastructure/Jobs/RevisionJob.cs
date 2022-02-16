@@ -62,12 +62,9 @@ namespace CAA.API.Infrastructure.Jobs
                              if (rec.Settings.ModData.ContainsKey("Reference"))
                                  check.Settings.Reference = (string)rec.Settings.ModData["Reference"];
 
-                             if (rec.Settings.ModData.ContainsKey("Findings"))
-                                 check.Settings.Described = (string)rec.Settings.ModData["Findings"];
-
-                             if (rec.Settings.ModData.ContainsKey("Instructions"))
-                                 check.Settings.Instructions = (string)rec.Settings.ModData["Instructions"];
-
+                             if (rec.Settings.ModData.ContainsKey("Program Type"))
+                                 check.Settings.ProgramTypeId = (int)rec.Settings.ModData["Program Type"];
+                             
                              if (rec.Settings.ModData.ContainsKey("Check/ValidTo"))
                                  check.Settings.RevisonValidToDate = (DateTime)rec.Settings.ModData["Check/ValidTo"];
 

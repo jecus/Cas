@@ -20,6 +20,8 @@ namespace SmartCore.CAA.RoutineAudits
         public static ProgramType SANAKG = new ProgramType(4, "SANA KG", "SANA KG", "");
         public static ProgramType CAAKG = new ProgramType(5, "CAA KG", "CAA KG", "");
         public static ProgramType ISAGO = new ProgramType(6, "ISAGO", "ISAGO", "");
+        public static ProgramType SACA = new ProgramType(7, "SACA", "SACA", "");
+        public static ProgramType ICAO = new ProgramType(8, "ICAO", "ICAO", "");
         public static ProgramType Unknown = new ProgramType(-1, "Unknown", "Unknown", "Unknown");
 
         /*
