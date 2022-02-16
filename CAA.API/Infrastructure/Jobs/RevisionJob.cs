@@ -32,7 +32,7 @@ namespace CAA.API.Infrastructure.Jobs
                 
                 var currentRevision = await context.CheckListRevisionDtos
                     .FirstOrDefaultAsync(i => !i.IsDeleted 
-                                              && i.Status == (byte)EditionRevisionStatus.Temporary 
+                                              && i.Status == (byte)EditionRevisionStatus.Open 
                                               && i.Type ==  (byte)RevisionType.Revision
                                               && i.EffDate.Date <= DateTime.Today.Date);
 
