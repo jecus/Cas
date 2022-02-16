@@ -130,7 +130,7 @@ namespace CAA.API.Infrastructure.Jobs
                                             if(find)
                                                 continue;
 
-                                            context.CheckListRevisionRecordDtos.Remove(r);
+                                            r.IsDeleted = true;
                                         }
                                     }
 
