@@ -3,10 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using CAA.Entity.Core;
 using CAA.Entity.Models.DTO;
+using CAA.Entity.Models.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Quartz;
 
 namespace CAA.API.Infrastructure.Jobs
@@ -110,6 +112,40 @@ namespace CAA.API.Infrastructure.Jobs
                             
                             if (rec.Settings.ModData.ContainsKey("MH"))
                                 check.Settings.MH = (int)rec.Settings.ModData["MH"];
+
+                            if (rec.Settings.ModData.ContainsKey("Audit"))
+                            {
+                                var revAudit = JsonConvert.DeserializeObject<RevisionAudit>((string)rec.Settings.ModData["Audit"]);
+                                if (revAudit != null)
+                                {
+                                    if (revAudit.AuditId != null)
+                                    {
+                                        var checkRecords = await context.CheckListRecordDtos
+                                            .Where(i => i.CheckListId == check.ItemId)
+                                            .ToListAsync();
+
+                                        foreach (var r in checkRecords)
+                                        {
+                                            var find = revAudit.AuditId.Any(i => i == r.ItemId);
+                                            if(find)
+                                                continue;
+
+                                            context.CheckListRevisionRecordDtos.Remove(r);
+                                        }
+                                    }
+
+                                    if (revAudit.NewAudit!= null)
+                                    {
+                                        context.CheckListRecordDtos.AddRange(revAudit.NewAudit.Select(i => new CheckListRecordDTO()
+                                        {
+                                            OptionNumber = i.OptionNumber,
+                                            Remark = i.Remark,
+                                            Option = i.OpttionId,
+                                            CheckListId = i.CheckListId
+                                        }));
+                                    }
+                                }
+                            }
                         }
                     }
 
