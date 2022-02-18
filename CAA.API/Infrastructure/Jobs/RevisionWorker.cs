@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Quartz;
@@ -11,14 +12,14 @@ namespace CAA.API.Infrastructure.Jobs
     public class RevisionWorker<TJob> : BaseWorker<TJob> where TJob: class, IJob
     {
         private readonly ILogger<TJob> _logger;
-        private readonly IOptionsMonitor<ScheduleConfiguration> _opt;
+        private readonly IConfiguration _conf;
 
         public RevisionWorker(IScheduler scheduler,
             ILogger<TJob> logger,
-            IOptionsMonitor<ScheduleConfiguration> opt) : base(scheduler, logger)
+            IConfiguration conf) : base(scheduler, logger)
         {
             _logger = logger;
-            _opt = opt;
+            _conf = conf;
         }
 
         protected async override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -26,13 +27,13 @@ namespace CAA.API.Infrastructure.Jobs
             _logger.LogDebug( "Starting new RevisionWorker job...");
             try
             {
-                await ScheduleWorker<RevisionWorker<TJob>>(_opt.CurrentValue.CronExpression, stoppingToken, nameof(RevisionWorker<TJob>));
+                await ScheduleWorker<RevisionWorker<TJob>>(_conf["Setup:ScheduleRevisionWorker"], stoppingToken, nameof(RevisionWorker<TJob>));
 
                 _logger.LogDebug("RevisionWorker is done!");
             }
             catch (Exception ex)
             {
-                _logger.LogDebug("RevisionWorker hasn't been created. Exception caught: " + ex.Message);
+                _logger.LogError("RevisionWorker hasn't been created. Exception caught: " + ex.Message);
             }
         }
     }

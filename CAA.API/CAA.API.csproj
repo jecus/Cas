@@ -31,6 +31,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Reference Include="PanelRider.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+	    <HintPath>DLL\PanelRider.Abstractions.dll</HintPath>
+	  </Reference>
 	  <Reference Include="WorkerExtensions, Version=5.0.3.0, Culture=neutral, PublicKeyToken=null">
 	    <HintPath>DLL\WorkerExtensions.dll</HintPath>
 	  </Reference>
