@@ -106,7 +106,7 @@ namespace CAS.UI.UICAAControls.CheckList
 	            }
             }
             
-            var lvlids = _initialDocumentArray.Select(i => i.Settings.LevelId);
+            var lvlids = _initialDocumentArray.Select(i => i.Settings.LevelId).Distinct();
             var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("ItemId", lvlids));
             
             foreach (var check in _initialDocumentArray)
