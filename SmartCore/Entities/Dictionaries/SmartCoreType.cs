@@ -2,6 +2,7 @@
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.RoutineAudits;
+using SmartCore.CAA.StandartManual;
 using SmartCore.DataAccesses.AttachedFiles;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
@@ -484,6 +485,7 @@ namespace SmartCore.Entities.Dictionaries
 		public static SmartCoreType CAAAuditRecord = new SmartCoreType(3083, "CAAAuditRecord", "CAAAuditRecord", typeof(CAAAuditRecord));
 		public static SmartCoreType AuditCheck = new SmartCoreType(3084, "AuditCheck", "AuditCheck", typeof(AuditCheck));
 		public static SmartCoreType AuditCheckRecord = new SmartCoreType(3085, "AuditCheckRecord", "AuditCheckRecord", typeof(AuditCheckRecord));
+		public static SmartCoreType StandartManual = new SmartCoreType(3086, "StandartManual", "StandartManual", typeof(StandartManual));
 		
 		/*
          * Методы

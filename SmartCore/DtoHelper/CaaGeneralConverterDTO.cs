@@ -9,6 +9,7 @@ using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.CAA.PEL;
 using SmartCore.CAA.RoutineAudits;
+using SmartCore.CAA.StandartManual;
 using SmartCore.Calculations;
 using SmartCore.Entities;
 using SmartCore.Entities.Dictionaries;
@@ -1427,6 +1428,41 @@ namespace SmartCore.DtoHelper
 
             return res;
         }
+        
+        
+        
+        public static StandartManual ConvertCAA(this StandartManualDTO levels)
+        {
+	        var res =  new StandartManual()
+	        {
+		        ItemId = levels.ItemId,
+		        IsDeleted = levels.IsDeleted,
+		        CorrectorId = levels.CorrectorId,
+		        Updated = levels.Updated,
+		        Source = levels.Source,
+		        OperatorId = levels.OperatorId,
+		        SettingsJSON =  levels.SettingsJSON
+	        };
+	        
+	        return res;
+        }
+
+        public static StandartManualDTO ConvertCAA(this StandartManual levels)
+        {
+	        var res = new StandartManualDTO()
+	        {
+		        ItemId = levels.ItemId,
+		        IsDeleted = levels.IsDeleted,
+		        CorrectorId = levels.CorrectorId,
+		        Updated = levels.Updated,
+		        Source = levels.Source,
+		        OperatorId = levels.OperatorId,
+		        SettingsJSON =  levels.SettingsJSON
+	        };
+	        return res;
+        }
+        
+        
 
 
         public static CheckListRevision ConvertCAA(this CheckListRevisionDTO levels)

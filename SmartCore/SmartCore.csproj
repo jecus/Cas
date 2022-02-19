@@ -434,6 +434,7 @@
     <Compile Include="CAA\RoutineAudits\ProgramType.cs" />
     <Compile Include="CAA\RoutineAudits\RoutineAudit.cs" />
     <Compile Include="CAA\RoutineAudits\RoutineAuditRecord.cs" />
+    <Compile Include="CAA\StandartManual\StandartManual.cs" />
     <Compile Include="Calculations\AirFleetForecast.cs" />
     <Compile Include="Analyst\AnalystCore.cs" />
     <Compile Include="Analyst\AnalystHelper.cs" />
