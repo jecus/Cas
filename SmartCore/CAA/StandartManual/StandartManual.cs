@@ -1,27 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text.RegularExpressions;
 using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
-using SmartCore.Auxiliary.Extentions;
-using SmartCore.CAA.Audit;
-using SmartCore.CAA.Check;
-using SmartCore.CAA.FindingLevel;
-using SmartCore.Calculations;
-using SmartCore.Entities;
-using SmartCore.Entities.Collections;
+using SmartCore.CAA.RoutineAudits;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Files;
 
 namespace SmartCore.CAA.StandartManual
 {
+    
+    public interface IStandartManualFilterParams
+    {
+        [Filter("Source:", Order = 1)]
+        string Source { get; }
+        
+        [Filter("ProgramType:", Order = 2)]
+        ProgramType ProgramType { get; }
+        
+        [Filter("Description:", Order = 3)]
+        string Description { get; }
+        
+        [Filter("Remark:", Order = 4)]
+        string Remark { get; }
+        
+        [Filter("CheckValid:", Order = 5)]
+        DateTime ValidTo { get; }
+        
+        [Filter("Notify:", Order = 6)]
+        int Notify { get; }
+        
+    }
+    
     [CAADto(typeof(CheckListDTO))]
     [Serializable]
-    public class StandartManual : BaseEntityObject, IOperatable
+    public class StandartManual : BaseEntityObject, IOperatable,IStandartManualFilterParams
     {
         public string Source { get; set; }
         
@@ -45,6 +58,12 @@ namespace SmartCore.CAA.StandartManual
         }
 
         public StandartManualSettings Settings { get; set; }
+        
+        public ProgramType ProgramType => ProgramType.GetItemById(Settings.ProgramTypeId);
+        public string Description => Settings.Description;
+        public string Remark => Settings.Remark;
+        public DateTime ValidTo => Settings.ValidTo;
+        public int Notify => Settings.Notify;
 
         public override BaseEntityObject GetCopyUnsaved(bool marked = true)
         {

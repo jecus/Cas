@@ -255,7 +255,8 @@ namespace CAS.UI.UICAAControls
 
         private void LinkStandartManualDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Standart Manual";
+	        e.RequestedEntity = new StandartManualListScreen(GlobalObjects.CaaEnvironment.Operators[0], _currentOperator.ItemId);
         }
 	}
 }
