@@ -140,34 +140,33 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             _toolStripMenuItemEdit.Text = "Edit";
             _toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
 		}
-
+		
+        #endregion
+        
+        
         private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
         {
-   //          if (_directivesViewer.SelectedItem != null)
-   //          {
-   //              var refE = new ReferenceEventArgs();
-   //              var dp = new DisplayerParams()
-   //              {
-   //                  Page = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _directivesViewer.SelectedItem.ItemId),
-			// 		TypeOfReflection = ReflectionTypes.DisplayInNew,
-   //                  PageCaption = $"Routine Audit: {_directivesViewer.SelectedItem.Title}",
-			// 		DisplayerType = DisplayerType.Screen
-			//     };
-   //              refE.SetParameters(dp);
-   //              InvokeDisplayerRequested(refE);
-			// }
+	        //          if (_directivesViewer.SelectedItem != null)
+	        //          {
+	        //              var refE = new ReferenceEventArgs();
+	        //              var dp = new DisplayerParams()
+	        //              {
+	        //                  Page = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _directivesViewer.SelectedItem.ItemId),
+	        // 		TypeOfReflection = ReflectionTypes.DisplayInNew,
+	        //                  PageCaption = $"Routine Audit: {_directivesViewer.SelectedItem.Title}",
+	        // 		DisplayerType = DisplayerType.Screen
+	        //     };
+	        //              refE.SetParameters(dp);
+	        //              InvokeDisplayerRequested(refE);
+	        // }
             
-		}
-
-        #endregion
+        }
         
 		#region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 
 		private void ToolStripMenuItemEditClick(object sender, EventArgs e)
 		{
-            // var form = new RoutineAuditForm(_directivesViewer.SelectedItem);
-            // if (form.ShowDialog() == DialogResult.OK)
-            //     AnimatedThreadWorker.RunWorkerAsync();
+
         }
 
 		#endregion
@@ -250,8 +249,10 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-			e.Cancel = true;
-        }
+			var form = new StandartManualForm(new SmartCore.CAA.StandartManual.StandartManual{OperatorId = _operatorId});
+			if(form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
+		}
 
 		#endregion
 

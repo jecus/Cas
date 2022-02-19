@@ -89,7 +89,13 @@ namespace SmartCore.CAA.StandartManual
 
     [Serializable]
     public class StandartManualSettings
-    { 
+    {
+        public StandartManualSettings()
+        {
+            ProgramTypeId = -1;
+            ValidTo = DateTime.Today;
+        }
+        
         [JsonProperty("ProgramTypeId")]
        public int ProgramTypeId { get; set; }
        
