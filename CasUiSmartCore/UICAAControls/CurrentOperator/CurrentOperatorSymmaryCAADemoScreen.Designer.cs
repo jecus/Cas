@@ -58,6 +58,7 @@ namespace CAS.UI.UICAAControls
 			this.LinkFligthsPlanOPS = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkUnFligthsSchedule = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkSchedulePeriod = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.LinkStandartManual = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this._personnelReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
             this.LinkPersonnel = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkGeneral = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -87,6 +88,7 @@ namespace CAS.UI.UICAAControls
             this.LinkCommercialWorkOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkCommercialRequests = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.flowLayoutPanelAircrafts = new System.Windows.Forms.FlowLayoutPanel();
+			this._settingQuality = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
             this._certificationReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
             this._oversightReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
             this.flowLayoutPanelStores = new System.Windows.Forms.FlowLayoutPanel();
@@ -151,6 +153,7 @@ namespace CAS.UI.UICAAControls
 #else
             this.flowLayoutPanelExport.Controls.Add(this._adminContainer);
 			this.flowLayoutPanelExport.Controls.Add(this._settingContainer);
+			this.flowLayoutPanelExport.Controls.Add(this._settingQuality);
 #endif
 			this.flowLayoutPanelExport.Dock = System.Windows.Forms.DockStyle.Left;
 			this.flowLayoutPanelExport.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -214,26 +217,27 @@ namespace CAS.UI.UICAAControls
 			this._adminContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
             this._adminContainer.Visible = GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin ||
                                            GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.OperatorAdmin;
-			// 
+            // 
 			// _settingContainer
 			// 
 			this._settingContainer.AutoSize = true;
 			this._settingContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this._settingContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-			this._settingContainer.Caption = "Setting";
+			this._settingContainer.Caption = "Setting (General)";
 			this._settingContainer.DescriptionTextColor = System.Drawing.Color.DimGray;
 			this._settingContainer.Extended = true;
 			this._settingContainer.Location = new System.Drawing.Point(3, 232);
 			this._settingContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._settingContainer.Name = "_settingContainer";
 			this._settingContainer.ReferenceLink = this.Aircraft;
-            this._settingContainer.ReferenceLink03 = this.Store;
+			this._settingContainer.ReferenceLink02 = null;
+			this._settingContainer.ReferenceLink03 = null;
 			this._settingContainer.ReferenceLink04 = null;
 			this._settingContainer.ReferenceLink05 = this.LinkDepartments;
 			this._settingContainer.ReferenceLink06 = this.LinkSpecializations;
 			this._settingContainer.ReferenceLink07 = this.LinkNomenclatures;
-            this._settingContainer.ReferenceLink08 = this.LinkFindingLevels;
-			this._settingContainer.ReferenceLink09 = this.LinkRootCause;
+            this._settingContainer.ReferenceLink08 = null;
+			this._settingContainer.ReferenceLink09 = null;
 			this._settingContainer.ReferenceLink10 = null;
 			this._settingContainer.ReferenceLink11 = null;
 			this._settingContainer.ReferenceLink12 = null;
@@ -244,8 +248,65 @@ namespace CAS.UI.UICAAControls
 			this._settingContainer.Size = new System.Drawing.Size(105, 42);
 			this._settingContainer.TabIndex = 1;
 			this._settingContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
-            this._settingContainer.Visible =GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin ||
-                                            GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.OperatorAdmin;
+            this._settingContainer.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UserType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin;// 
+			// _settingQuality
+			// 
+			this._settingQuality.AutoSize = true;
+			this._settingQuality.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this._settingQuality.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this._settingQuality.Caption = "Setting (Quality)";
+			this._settingQuality.DescriptionTextColor = System.Drawing.Color.DimGray;
+			this._settingQuality.Extended = true;
+			this._settingQuality.Location = new System.Drawing.Point(3, 232);
+			this._settingQuality.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this._settingQuality.Name = "_settingQuality";
+			this._settingQuality.ReferenceLink = this.LinkStandartManual;
+			this._settingQuality.ReferenceLink02 = this.LinkFindingLevels;
+			this._settingQuality.ReferenceLink03 = this.LinkRootCause;
+			this._settingQuality.ReferenceLink04 = this.LinkRoutineAudit;
+			this._settingQuality.ReferenceLink05 = null;
+			this._settingQuality.ReferenceLink06 = null;
+			this._settingQuality.ReferenceLink07 = null;
+            this._settingQuality.ReferenceLink08 = null;
+			this._settingQuality.ReferenceLink09 = null;
+			this._settingQuality.ReferenceLink10 = null;
+			this._settingQuality.ReferenceLink11 = null;
+			this._settingQuality.ReferenceLink12 = null;
+			this._settingQuality.ReferenceLink13 = null;
+			this._settingQuality.ReferenceLink14 = null;
+			this._settingQuality.ReferenceLink15 = null;
+			this._settingQuality.ReferenceLink16 = null;
+			this._settingQuality.Size = new System.Drawing.Size(105, 42);
+			this._settingQuality.TabIndex = 1;
+			this._settingQuality.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
+			this._settingQuality.Visible =GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin ||
+			                              GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.OperatorAdmin;
+            
+			// 
+			// LinkStandartManual
+			// 
+			this.LinkStandartManual.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkStandartManual.Displayer = null;
+			this.LinkStandartManual.DisplayerText = null;
+			this.LinkStandartManual.Entity = null;
+			this.LinkStandartManual.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.LinkStandartManual.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkStandartManual.ImageBackColor = System.Drawing.Color.Transparent;
+			this.LinkStandartManual.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.LinkStandartManual.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkStandartManual.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.LinkStandartManual.Location = new System.Drawing.Point(10, 0);
+			this.LinkStandartManual.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.LinkStandartManual.Name = "LinkStandartManual";
+			this.LinkStandartManual.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.LinkStandartManual.Size = new System.Drawing.Size(188, 20);
+			this.LinkStandartManual.Status = AvControls.Statuses.Satisfactory;
+			this.LinkStandartManual.TabIndex = 16;
+			this.LinkStandartManual.Text = "Standart Manual";
+			this.LinkStandartManual.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.LinkStandartManual.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.LinkStandartManual.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkStandartManualDisplayerRequested);
+			
 			// 
 			// ExportMonthly
 			// 
@@ -965,7 +1026,7 @@ namespace CAS.UI.UICAAControls
 			this._qualityAssuranceReferenceContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._qualityAssuranceReferenceContainer.Name = "_qualityAssuranceReferenceContainer";
 			this._qualityAssuranceReferenceContainer.ReferenceLink = this.LinkCheckList;
-			this._qualityAssuranceReferenceContainer.ReferenceLink02 = this.LinkRoutineAudit;
+			this._qualityAssuranceReferenceContainer.ReferenceLink02 = null;
 			this._qualityAssuranceReferenceContainer.ReferenceLink03 = this.LinkAudit;
 			this._qualityAssuranceReferenceContainer.ReferenceLink04 = null;
 			this._qualityAssuranceReferenceContainer.ReferenceLink05 = null;
@@ -1497,6 +1558,7 @@ namespace CAS.UI.UICAAControls
         private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _qualityAssuranceReferenceContainer;
         private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _adminContainer;
 		private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _settingContainer;
+		private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _settingQuality;
         private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _certificationReferenceContainer;
         private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _oversightReferenceContainer;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRigestry;
@@ -1533,7 +1595,7 @@ namespace CAS.UI.UICAAControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkSupplierComponents;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkCommercialWorkOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkCommercialRequests;
-
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkStandartManual;
 
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkGeneral;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEvent;

@@ -203,11 +203,6 @@ namespace CAS.UI.UICAAControls
             e.RequestedEntity = new CAAAircraftListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
         }
 
-        private void Store_Click(object sender, ReferenceEventArgs e)
-        {
-            e.Cancel = true;
-        }
-
         #region private void LabelDocumentsDisplayerRequested(object sender, ReferenceEventArgs e)
 
         private void LabelDocumentsDisplayerRequested(object sender, ReferenceEventArgs e)
@@ -251,6 +246,11 @@ namespace CAS.UI.UICAAControls
             e.DisplayerText = "Audit All";
             e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], AuditType.All);
         }
-    }
+
+        private void LinkStandartManualDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
+	}
 }
 

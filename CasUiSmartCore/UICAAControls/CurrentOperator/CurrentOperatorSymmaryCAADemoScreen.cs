@@ -252,6 +252,11 @@ namespace CAS.UI.UICAAControls
         {
             return GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(i => i.ItemId == _currentOperator.ItemId).ToOperator();
         }
-    }
+
+        private void LinkStandartManualDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
+	}
 }
 
