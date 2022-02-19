@@ -2,6 +2,7 @@
 using CAA.Entity.Models;
 using CAA.Entity.Models.Dictionary;
 using Entity.Abstractions;
+using SmartCore.CAA.RoutineAudits;
 using SmartCore.Calculations;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
@@ -13,11 +14,9 @@ namespace SmartCore.CAA.FindingLevel
     [Serializable]
     public class FindingLevels : BaseEntityObject, IBaseDictionary, IOperatable
     {
-        
-
-        [FormControl(150, "Level Name:", 1, Order = 1)]
-        [Filter("Level Name", Order = 1)]
-        [ListViewData("Level Name",  1)]
+        [FormControl(150, "Level/Category:", 1, Order = 1)]
+        [Filter("Level/Category", Order = 1)]
+        [ListViewData("Level/Category",  1)]
         public string LevelName { get; set; }
 
         [FormControl(150, "Class:", 1, Order = 2)]
@@ -41,12 +40,18 @@ namespace SmartCore.CAA.FindingLevel
         [ListViewData("Final Action", 5)]
         [LifeLenghtCalendarOnly]
         public Lifelength FinalAction { get; set; }
-
-        [FormControl(150, "Remark:", 1, Order = 6)]
-        [Filter("Remark", Order = 6)]
-        [ListViewData("Remark", 6)]
+        
+        [FormControl(150, "ProgramType:", 1, Order = 6)]
+        [Filter("ProgramType", Order = 6)]
+        [ListViewData("ProgramType", 6)]
+        public ProgramType ProgramType { get; set; }
+        
+        [FormControl(150, "Remark:", 1, Order = 7)]
+        [Filter("Remark", Order = 7)]
+        [ListViewData("Remark", 7)]
         public string Remark { get; set; }
-
+        
+        
         private static FindingLevels _unknown;
         public static FindingLevels Unknown =>
             _unknown ?? (_unknown = new FindingLevels
