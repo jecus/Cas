@@ -1099,6 +1099,12 @@
     <Compile Include="UICAAControls\Specialists\CAAEmployeeGeneralInformationControl.Designer.cs">
       <DependentUpon>CAAEmployeeGeneralInformationControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\StandartManual\StandartManualForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\StandartManual\StandartManualForm.Designer.cs">
+      <DependentUpon>StandartManualForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\StandartManual\StandartManualListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4430,6 +4436,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Specialists\CAAEmployeeGeneralInformationControl.resx">
       <DependentUpon>CAAEmployeeGeneralInformationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\StandartManual\StandartManualForm.resx">
+      <DependentUpon>StandartManualForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\StandartManual\StandartManualListScreen.resx">
       <DependentUpon>StandartManualListScreen.cs</DependentUpon>
