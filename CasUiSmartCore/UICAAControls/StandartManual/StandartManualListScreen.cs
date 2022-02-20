@@ -166,7 +166,12 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
 		private void ToolStripMenuItemEditClick(object sender, EventArgs e)
 		{
-
+			if(_directivesViewer.SelectedItem == null)
+				return;
+			
+			var form = new StandartManualForm(_directivesViewer.SelectedItem,_initialDocumentArray.Select(i => i.ProgramType));
+			if(form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
         }
 
 		#endregion
@@ -249,7 +254,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-			var form = new StandartManualForm(new SmartCore.CAA.StandartManual.StandartManual{OperatorId = _operatorId});
+			var form = new StandartManualForm(new SmartCore.CAA.StandartManual.StandartManual{OperatorId = _operatorId}, _initialDocumentArray.Select(i => i.ProgramType));
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
 		}

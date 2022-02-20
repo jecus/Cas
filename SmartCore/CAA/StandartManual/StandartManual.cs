@@ -32,7 +32,7 @@ namespace SmartCore.CAA.StandartManual
         
     }
     
-    [CAADto(typeof(CheckListDTO))]
+    [CAADto(typeof(StandartManualDTO))]
     [Serializable]
     public class StandartManual : BaseEntityObject, IOperatable,IStandartManualFilterParams
     {

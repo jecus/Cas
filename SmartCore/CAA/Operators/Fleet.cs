@@ -21,7 +21,7 @@ namespace SmartCore.CAA.Operators
         public static Fleet Sailpnane = new Fleet(5, "Sailpnane", "Sailpnane", "");
         public static Fleet Other = new Fleet(6, "Other", "Other", "");
         public static Fleet Unknown = new Fleet(-1, "Unknown", "Unknown", "Unknown");
-
+        
         /*
          * Методы
          */
