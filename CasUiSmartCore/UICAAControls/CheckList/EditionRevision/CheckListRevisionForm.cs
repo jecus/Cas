@@ -25,6 +25,7 @@ namespace CAS.UI.UICAAControls.CheckList
     {
         private readonly int _operatorId;
         private readonly CheckListRevision _parent;
+        private readonly SmartCore.CAA.StandartManual.StandartManual _manual;
         private List<CheckListRevisionRecord> _revisions = new List<CheckListRevisionRecord>();
         private CheckListRevision revisionedition = new CheckListRevision();
         private CommonCollection<CheckLists> _addedChecks = new CommonCollection<CheckLists>();
@@ -32,10 +33,11 @@ namespace CAS.UI.UICAAControls.CheckList
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private IList<FindingLevels> _levels = new List<FindingLevels>();
 
-        public CheckListRevisionForm(int operatorId, CheckListRevision parent)
+        public CheckListRevisionForm(int operatorId, CheckListRevision parent, SmartCore.CAA.StandartManual.StandartManual manual)
         {
             _operatorId = operatorId;
             _parent = parent;
+            _manual = manual;
             InitializeComponent();
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
@@ -59,36 +61,6 @@ namespace CAS.UI.UICAAControls.CheckList
             _levels.Clear();
             _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
             
-//             var dsRevision = GlobalObjects.CaaEnvironment.Execute($@"select c.ItemId as CheckId, res.Number, res.EffDate from dbo.CheckList c
-// cross apply
-// (
-// 	select top 2 r.Number, r.EffDate from dbo.CheckListRevisionRecord  rec
-// 	cross apply
-// 	(
-// 		select ItemId,EffDate, Number, Type, OperatorId from dbo.CheckListRevision 
-// 		where ItemId = rec.ParentId
-// 	)r
-// 	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 1 and r.OperatorId = {_operatorId} and (r.ItemId > (select top 1 q.ItemId  from dbo.CheckListRevisionRecord r1
-// 																																			cross apply
-// 																																			(
-// 																																				select top 1 ItemId, Type from dbo.CheckListRevision where ItemId = r1.ParentId
-// 																																			)q
-// 																																			where q.Type = 0 and r1.CheckListId = c.ItemId and IsDeleted = 0 
-// 																																			order by ItemId desc))
-// 	order by r.EffDate desc
-// ) res
-// ");
-//
-//
-//             var revisions = dsRevision.Tables[0].AsEnumerable()
-//                 .Select(dataRow => new
-//                 {
-//                     Id = dataRow.Field<int>("CheckId"),
-//                     Number = dataRow.Field<string>("Number"),
-//                     EffDate = dataRow.Field<DateTime?>("EffDate"),
-//                 }).ToList();
-            
-            
             foreach (var check in _addedChecks)
             {
                 check.EditionNumber = _parent.Number;
@@ -104,16 +76,11 @@ namespace CAS.UI.UICAAControls.CheckList
         private void UpdateInformation()
         {
             SetEnableControl(false);
-
-            comboBoxProgramType.Items.Clear();
-            comboBoxProgramType.Items.AddRange(ProgramType.Items.OrderBy(i => i.FullName).ToArray());
-            comboBoxProgramType.SelectedItem = ProgramType.Unknown;
             
             comboBoxLevel.Items.Clear();
             comboBoxLevel.Items.AddRange(_levels.ToArray());
             comboBoxLevel.Items.Add(FindingLevels.Unknown);
-
-
+            
             var phase = new List<string> { "1", "2", "3", "4", "5", "6", "N/A" };
             comboBoxPhase.Items.Clear();
             foreach (var i in phase)
@@ -146,6 +113,7 @@ namespace CAS.UI.UICAAControls.CheckList
                         Date = dateTimePickerRevisionDate.Value.Date,
                         EffDate = RevisionEff.Value.Date,
                         Status = _parent.Status,
+                        ManualId = _manual.ItemId,
                         Settings = new CheckListRevisionSettings()
                         {
                             EditionId = _parent.Type == RevisionType.Edition  ? _parent.ItemId : _parent.Settings.EditionId
@@ -156,9 +124,7 @@ namespace CAS.UI.UICAAControls.CheckList
                         CheckListId = checks.ItemId,
                     });
                 }
-
-                if (checkBoxProgramType.Checked)
-                    checks.Settings.ProgramTypeId = ((ProgramType)comboBoxProgramType.SelectedItem).ItemId;
+                
                 if(checkBoxCheck.Checked)
                     checks.Settings.RevisonValidToDate = dateTimePickeValidTo.Value.Date;
                 if (checkBoxNotify.Checked)
@@ -409,10 +375,6 @@ namespace CAS.UI.UICAAControls.CheckList
             if (RevisionEff.Value < dateTimePickerRevisionDate.Value)
                 RevisionEff.Value = dateTimePickerRevisionDate.Value;
         }
-
-        private void checkBoxProgramType_CheckedChanged(object sender, EventArgs e)
-        {
-            comboBoxProgramType.Enabled = checkBoxProgramType.Checked;
-        }
+        
     }
 }

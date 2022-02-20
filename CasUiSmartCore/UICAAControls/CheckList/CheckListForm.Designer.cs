@@ -713,7 +713,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.fileControl.MaximumSize = new System.Drawing.Size(350, 100);
             this.fileControl.MinimumSize = new System.Drawing.Size(350, 50);
             this.fileControl.Name = "fileControl";
-            this.fileControl.ShowLinkLabelBrowse = false;
+            this.fileControl.ShowLinkLabelBrowse = true;
             this.fileControl.ShowLinkLabelRemove = false;
             this.fileControl.Size = new System.Drawing.Size(350, 100);
             this.fileControl.TabIndex = 302;
