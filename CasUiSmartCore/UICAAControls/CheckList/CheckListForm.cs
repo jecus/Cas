@@ -62,9 +62,7 @@ namespace CAS.UI.UICAAControls.CheckList
                                         metroTextBoxItemNumber.Enabled =
                                             metroTextBoxItemName.Enabled =
                                                 metroTextBoxRequirement.Enabled =
-                                                    dateTimePickeValidTo.Enabled =
-                                                        numericUpNotify.Enabled =
-                                                            metroTextBoxReference.Enabled =
+                                                    metroTextBoxReference.Enabled =
                                                                 comboBoxPhase.Enabled =
                                                                         buttonOk.Enabled =
                                                                             linkLabel1.Enabled =
@@ -171,9 +169,7 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxItemNumber.Text = _currentCheck.Settings.ItemNumber;
             metroTextBoxItemName.Text = _currentCheck.Settings.ItemtName;
             metroTextBoxRequirement.Text = _currentCheck.Settings.Requirement;
-            dateTimePickeValidTo.Value = _currentCheck.Settings.RevisonValidToDate;
-            numericUpNotify.Value = _currentCheck.Settings.RevisonValidToNotify;
-
+            
             metroTextBoxReference.Text = _currentCheck.Settings.Reference;
             metroTextBoxProgramType.Text = (ProgramType.GetItemById(_currentCheck.Settings.ProgramTypeId) ?? ProgramType.Unknown).ToString();
 
@@ -218,9 +214,7 @@ namespace CAS.UI.UICAAControls.CheckList
             _currentCheck.Settings.ItemNumber = metroTextBoxItemNumber.Text;
             _currentCheck.Settings.ItemtName = metroTextBoxItemName.Text;
             _currentCheck.Settings.Requirement =  metroTextBoxRequirement.Text;
-
-
-            _currentCheck.Settings.RevisonValidToNotify = (int) numericUpNotify.Value;
+            
             _currentCheck.Settings.Reference = metroTextBoxReference.Text;
             _currentCheck.Settings.LevelId = ((FindingLevels) comboBoxLevel.SelectedItem).ItemId;
             _currentCheck.Settings.Phase = (string)comboBoxPhase.SelectedItem;

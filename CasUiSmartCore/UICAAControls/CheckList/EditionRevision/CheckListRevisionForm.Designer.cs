@@ -31,8 +31,6 @@ namespace CAS.UI.UICAAControls.CheckList
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Label label14;
-            System.Windows.Forms.Label label13;
             System.Windows.Forms.Label label9;
             System.Windows.Forms.Label label8;
             System.Windows.Forms.Label metroLabel1;
@@ -45,8 +43,6 @@ namespace CAS.UI.UICAAControls.CheckList
             System.Windows.Forms.Label label5;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckListRevisionForm));
             this.checkBoxRevisionValidTo = new System.Windows.Forms.CheckBox();
-            this.numericUpNotify = new System.Windows.Forms.NumericUpDown();
-            this.dateTimePickeValidTo = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerRevisionDate = new System.Windows.Forms.DateTimePicker();
             this.metroTextBoxRevision = new MetroFramework.Controls.MetroTextBox();
             this.buttonOk = new System.Windows.Forms.Button();
@@ -60,16 +56,12 @@ namespace CAS.UI.UICAAControls.CheckList
             this.comboBoxLevel = new System.Windows.Forms.ComboBox();
             this.checkBoxSource = new System.Windows.Forms.CheckBox();
             this.checkBoxReference = new System.Windows.Forms.CheckBox();
-            this.checkBoxCheck = new System.Windows.Forms.CheckBox();
-            this.checkBoxNotify = new System.Windows.Forms.CheckBox();
             this.checkBoxLevel = new System.Windows.Forms.CheckBox();
             this.comboBoxPhase = new System.Windows.Forms.ComboBox();
             this.checkBoxPhase = new System.Windows.Forms.CheckBox();
             this.checkBoxMH = new System.Windows.Forms.CheckBox();
             this.metroTextBoxMH = new MetroFramework.Controls.MetroTextBox();
             this.RevisionEff = new System.Windows.Forms.DateTimePicker();
-            label14 = new System.Windows.Forms.Label();
-            label13 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
             metroLabel1 = new System.Windows.Forms.Label();
@@ -80,32 +72,7 @@ namespace CAS.UI.UICAAControls.CheckList
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Font = new System.Drawing.Font("Verdana", 9F);
-            label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label14.Location = new System.Drawing.Point(1142, 198);
-            label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(92, 14);
-            label14.TabIndex = 325;
-            label14.Text = "Notify (days):";
-            label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Font = new System.Drawing.Font("Verdana", 9F);
-            label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label13.Location = new System.Drawing.Point(1142, 173);
-            label13.Name = "label13";
-            label13.Size = new System.Drawing.Size(102, 14);
-            label13.TabIndex = 324;
-            label13.Text = "Check/Valid To:";
-            label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label9
             // 
@@ -160,7 +127,7 @@ namespace CAS.UI.UICAAControls.CheckList
             label17.AutoSize = true;
             label17.Font = new System.Drawing.Font("Verdana", 9F);
             label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label17.Location = new System.Drawing.Point(1142, 224);
+            label17.Location = new System.Drawing.Point(1062, 170);
             label17.Name = "label17";
             label17.Size = new System.Drawing.Size(45, 14);
             label17.TabIndex = 336;
@@ -172,7 +139,7 @@ namespace CAS.UI.UICAAControls.CheckList
             label19.AutoSize = true;
             label19.Font = new System.Drawing.Font("Verdana", 9F);
             label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label19.Location = new System.Drawing.Point(1142, 285);
+            label19.Location = new System.Drawing.Point(1062, 231);
             label19.Name = "label19";
             label19.Size = new System.Drawing.Size(31, 14);
             label19.TabIndex = 347;
@@ -184,7 +151,7 @@ namespace CAS.UI.UICAAControls.CheckList
             label18.AutoSize = true;
             label18.Font = new System.Drawing.Font("Verdana", 9F);
             label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label18.Location = new System.Drawing.Point(1142, 252);
+            label18.Location = new System.Drawing.Point(1062, 198);
             label18.Name = "label18";
             label18.Size = new System.Drawing.Size(51, 14);
             label18.TabIndex = 345;
@@ -232,27 +199,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxRevisionValidTo.Size = new System.Drawing.Size(18, 16);
             this.checkBoxRevisionValidTo.TabIndex = 326;
             this.checkBoxRevisionValidTo.CheckedChanged += new System.EventHandler(this.checkBoxRevisionValidTo_CheckedChanged);
-            // 
-            // numericUpNotify
-            // 
-            this.numericUpNotify.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.numericUpNotify.ForeColor = System.Drawing.Color.DimGray;
-            this.numericUpNotify.Location = new System.Drawing.Point(1251, 196);
-            this.numericUpNotify.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
-            this.numericUpNotify.Name = "numericUpNotify";
-            this.numericUpNotify.Size = new System.Drawing.Size(119, 20);
-            this.numericUpNotify.TabIndex = 323;
-            this.numericUpNotify.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // dateTimePickeValidTo
-            // 
-            this.dateTimePickeValidTo.CalendarForeColor = System.Drawing.Color.DimGray;
-            this.dateTimePickeValidTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.dateTimePickeValidTo.Location = new System.Drawing.Point(1251, 167);
-            this.dateTimePickeValidTo.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
-            this.dateTimePickeValidTo.Name = "dateTimePickeValidTo";
-            this.dateTimePickeValidTo.Size = new System.Drawing.Size(119, 20);
-            this.dateTimePickeValidTo.TabIndex = 322;
             // 
             // dateTimePickerRevisionDate
             // 
@@ -491,7 +437,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.comboBoxLevel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.comboBoxLevel.ForeColor = System.Drawing.Color.DimGray;
             this.comboBoxLevel.FormattingEnabled = true;
-            this.comboBoxLevel.Location = new System.Drawing.Point(1249, 222);
+            this.comboBoxLevel.Location = new System.Drawing.Point(1169, 168);
             this.comboBoxLevel.Name = "comboBoxLevel";
             this.comboBoxLevel.Size = new System.Drawing.Size(121, 22);
             this.comboBoxLevel.TabIndex = 337;
@@ -518,34 +464,12 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxReference.TabIndex = 339;
             this.checkBoxReference.CheckedChanged += new System.EventHandler(this.checkBoxReference_CheckedChanged);
             // 
-            // checkBoxCheck
-            // 
-            this.checkBoxCheck.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxCheck.Font = new System.Drawing.Font("Verdana", 9F);
-            this.checkBoxCheck.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.checkBoxCheck.Location = new System.Drawing.Point(1118, 173);
-            this.checkBoxCheck.Name = "checkBoxCheck";
-            this.checkBoxCheck.Size = new System.Drawing.Size(18, 16);
-            this.checkBoxCheck.TabIndex = 342;
-            this.checkBoxCheck.CheckedChanged += new System.EventHandler(this.checkBoxCheck_CheckedChanged);
-            // 
-            // checkBoxNotify
-            // 
-            this.checkBoxNotify.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxNotify.Font = new System.Drawing.Font("Verdana", 9F);
-            this.checkBoxNotify.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.checkBoxNotify.Location = new System.Drawing.Point(1118, 197);
-            this.checkBoxNotify.Name = "checkBoxNotify";
-            this.checkBoxNotify.Size = new System.Drawing.Size(18, 16);
-            this.checkBoxNotify.TabIndex = 343;
-            this.checkBoxNotify.CheckedChanged += new System.EventHandler(this.checkBoxNotify_CheckedChanged);
-            // 
             // checkBoxLevel
             // 
             this.checkBoxLevel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkBoxLevel.Font = new System.Drawing.Font("Verdana", 9F);
             this.checkBoxLevel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.checkBoxLevel.Location = new System.Drawing.Point(1118, 219);
+            this.checkBoxLevel.Location = new System.Drawing.Point(1038, 165);
             this.checkBoxLevel.Name = "checkBoxLevel";
             this.checkBoxLevel.Size = new System.Drawing.Size(18, 16);
             this.checkBoxLevel.TabIndex = 344;
@@ -556,7 +480,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.comboBoxPhase.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.comboBoxPhase.ForeColor = System.Drawing.Color.DimGray;
             this.comboBoxPhase.FormattingEnabled = true;
-            this.comboBoxPhase.Location = new System.Drawing.Point(1249, 250);
+            this.comboBoxPhase.Location = new System.Drawing.Point(1169, 196);
             this.comboBoxPhase.Name = "comboBoxPhase";
             this.comboBoxPhase.Size = new System.Drawing.Size(121, 22);
             this.comboBoxPhase.TabIndex = 346;
@@ -566,7 +490,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxPhase.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkBoxPhase.Font = new System.Drawing.Font("Verdana", 9F);
             this.checkBoxPhase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.checkBoxPhase.Location = new System.Drawing.Point(1118, 252);
+            this.checkBoxPhase.Location = new System.Drawing.Point(1038, 198);
             this.checkBoxPhase.Name = "checkBoxPhase";
             this.checkBoxPhase.Size = new System.Drawing.Size(18, 16);
             this.checkBoxPhase.TabIndex = 349;
@@ -577,7 +501,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.checkBoxMH.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkBoxMH.Font = new System.Drawing.Font("Verdana", 9F);
             this.checkBoxMH.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.checkBoxMH.Location = new System.Drawing.Point(1118, 283);
+            this.checkBoxMH.Location = new System.Drawing.Point(1038, 229);
             this.checkBoxMH.Name = "checkBoxMH";
             this.checkBoxMH.Size = new System.Drawing.Size(18, 16);
             this.checkBoxMH.TabIndex = 350;
@@ -599,7 +523,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.metroTextBoxMH.CustomButton.Visible = false;
             this.metroTextBoxMH.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxMH.Lines = new string[0];
-            this.metroTextBoxMH.Location = new System.Drawing.Point(1249, 278);
+            this.metroTextBoxMH.Location = new System.Drawing.Point(1169, 224);
             this.metroTextBoxMH.MaxLength = 32767;
             this.metroTextBoxMH.Multiline = true;
             this.metroTextBoxMH.Name = "metroTextBoxMH";
@@ -639,8 +563,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Controls.Add(this.comboBoxPhase);
             this.Controls.Add(label18);
             this.Controls.Add(this.checkBoxLevel);
-            this.Controls.Add(this.checkBoxNotify);
-            this.Controls.Add(this.checkBoxCheck);
             this.Controls.Add(this.checkBoxReference);
             this.Controls.Add(this.checkBoxSource);
             this.Controls.Add(this.comboBoxLevel);
@@ -655,10 +577,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.checkBoxRevisionValidTo);
-            this.Controls.Add(label14);
-            this.Controls.Add(label13);
-            this.Controls.Add(this.numericUpNotify);
-            this.Controls.Add(this.dateTimePickeValidTo);
             this.Controls.Add(label9);
             this.Controls.Add(this.dateTimePickerRevisionDate);
             this.Controls.Add(label8);
@@ -669,7 +587,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Resizable = false;
             this.Text = "CheckList Revision Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CheckListRevisionForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpNotify)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -683,8 +600,6 @@ namespace CAS.UI.UICAAControls.CheckList
         System.Windows.Forms.Label label3;
 
         private System.Windows.Forms.CheckBox checkBoxRevisionValidTo;
-        private System.Windows.Forms.NumericUpDown numericUpNotify;
-        private System.Windows.Forms.DateTimePicker dateTimePickeValidTo;
         private System.Windows.Forms.DateTimePicker dateTimePickerRevisionDate;
         private MetroFramework.Controls.MetroTextBox metroTextBoxRevision;
         private System.Windows.Forms.Button buttonOk;
@@ -698,8 +613,6 @@ namespace CAS.UI.UICAAControls.CheckList
         private System.Windows.Forms.ComboBox comboBoxLevel;
         private System.Windows.Forms.CheckBox checkBoxSource;
         private System.Windows.Forms.CheckBox checkBoxReference;
-        private System.Windows.Forms.CheckBox checkBoxCheck;
-        private System.Windows.Forms.CheckBox checkBoxNotify;
         private System.Windows.Forms.CheckBox checkBoxLevel;
         private System.Windows.Forms.ComboBox comboBoxPhase;
         private System.Windows.Forms.CheckBox checkBoxPhase;

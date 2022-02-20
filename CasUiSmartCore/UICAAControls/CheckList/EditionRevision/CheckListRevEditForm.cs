@@ -78,8 +78,6 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxItemNumber.Text = _currentCheck.Settings.ItemNumber;
             metroTextBoxItemName.Text = _currentCheck.Settings.ItemtName;
             metroTextBoxRequirement.Text = _currentCheck.Settings.Requirement;
-            dateTimePickeValidTo.Value = _currentCheck.Settings.RevisonValidToDate;
-            numericUpNotify.Value = _currentCheck.Settings.RevisonValidToNotify;
 
             metroTextBoxReference.Text = _currentCheck.Settings.Reference;
 
@@ -117,18 +115,6 @@ namespace CAS.UI.UICAAControls.CheckList
                 comboBoxProgramType.SelectedItem = ProgramType.GetItemById(_currentCheck.Settings.ProgramTypeId) ?? ProgramType.Unknown;
             }
             
-            
-            if (_record.Settings.ModData.ContainsKey("Check/ValidTo"))
-            {
-                checkBoxCheck.Checked = true;
-                dateTimePickeValidTo.Value = (DateTime)_record.Settings.ModData["Check/ValidTo"];
-            }
-            
-            if (_record.Settings.ModData.ContainsKey("Notify"))
-            {
-                checkBoxNotify.Checked = true;
-                numericUpNotify.Value = (int)_record.Settings.ModData["Notify"];
-            }
             
             if (_record.Settings.ModData.ContainsKey("Level"))
             {
@@ -252,30 +238,6 @@ namespace CAS.UI.UICAAControls.CheckList
             {
                 if (_record.Settings.ModData.ContainsKey("Program Type"))
                     _record.Settings.ModData.Remove("Program Type");
-            }
-            
-            if (checkBoxCheck.Checked)
-            {
-                if (!_record.Settings.ModData.ContainsKey("Check/ValidTo"))
-                    _record.Settings.ModData.Add("Check/ValidTo", dateTimePickeValidTo.Value);
-                else _record.Settings.ModData["Check/ValidTo"] = dateTimePickeValidTo.Value;
-            }
-            else
-            {
-                if (_record.Settings.ModData.ContainsKey("Check/ValidTo"))
-                    _record.Settings.ModData.Remove("Check/ValidTo");
-            }
-            
-            if (checkBoxNotify.Checked)
-            {
-                if (!_record.Settings.ModData.ContainsKey("Notify"))
-                    _record.Settings.ModData.Add("Notify", (int)numericUpNotify.Value);
-                else _record.Settings.ModData["Notify"] =(int)numericUpNotify.Value;
-            }
-            else
-            {
-                if (_record.Settings.ModData.ContainsKey("Notify"))
-                    _record.Settings.ModData.Remove("Notify");
             }
             
             if (checkBoxLevel.Checked)
@@ -498,17 +460,7 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             metroTextBoxReference.Enabled = checkBoxRef.Checked;
         }
-
-        private void checkBoxCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            dateTimePickeValidTo.Enabled = checkBoxCheck.Checked;
-        }
-
-        private void checkBoxNotify_CheckedChanged(object sender, EventArgs e)
-        {
-            numericUpNotify.Enabled = checkBoxNotify.Checked;
-        }
-
+        
         private void checkBoxLevel_CheckedChanged(object sender, EventArgs e)
         {
             comboBoxLevel.Enabled = checkBoxLevel.Enabled;

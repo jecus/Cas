@@ -62,7 +62,6 @@ namespace CAA.Entity.Models.DTO
         {
             Phase = "N/A";
             MH = 0.0;
-            RevisonValidToDate = DateTime.Today;
         }
 
         
@@ -92,12 +91,6 @@ namespace CAA.Entity.Models.DTO
 
         [JsonProperty("Requirement")]
         public string Requirement { get; set; }
-
-        [JsonProperty("RevisonValidToNotify")]
-        public int RevisonValidToNotify { get; set; }
-        
-        [JsonProperty("RevisonValidToDate")]
-        public DateTime RevisonValidToDate { get; set; }
 
         [JsonProperty("Reference")]
         public string Reference { get; set; }

@@ -67,12 +67,6 @@ namespace CAA.API.Infrastructure.Jobs
                              if (rec.Settings.ModData.ContainsKey("Program Type"))
                                  check.Settings.ProgramTypeId = (int)rec.Settings.ModData["Program Type"];
                              
-                             if (rec.Settings.ModData.ContainsKey("Check/ValidTo"))
-                                 check.Settings.RevisonValidToDate = (DateTime)rec.Settings.ModData["Check/ValidTo"];
-
-                             if (rec.Settings.ModData.ContainsKey("Notify"))
-                                 check.Settings.RevisonValidToNotify = (int)rec.Settings.ModData["Notify"];
-
                              if (rec.Settings.ModData.ContainsKey("Level"))
                                  check.Settings.LevelId = (int)rec.Settings.ModData["Level"];
 

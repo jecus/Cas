@@ -125,10 +125,6 @@ namespace CAS.UI.UICAAControls.CheckList
                     });
                 }
                 
-                if(checkBoxCheck.Checked)
-                    checks.Settings.RevisonValidToDate = dateTimePickeValidTo.Value.Date;
-                if (checkBoxNotify.Checked)
-                    checks.Settings.RevisonValidToNotify = (int)numericUpNotify.Value;
                 if(checkBoxReference.Checked)
                     checks.Settings.Reference = metroTextBoxReference.Text;
                 if(checkBoxLevel.Checked)
@@ -186,15 +182,11 @@ namespace CAS.UI.UICAAControls.CheckList
         private void SetEnableControl(bool state)
         {
             checkBoxSource.Checked =
-                checkBoxCheck.Checked =
-                            checkBoxNotify.Checked =
-                                checkBoxReference.Checked =
+                checkBoxReference.Checked =
                                     checkBoxLevel.Checked =
                                         metroTextSource.Enabled =
                                             metroTextBoxRevision.Enabled = 
             dateTimePickerRevisionDate.Enabled =
-                dateTimePickeValidTo.Enabled =
-            numericUpNotify.Enabled =
                 comboBoxPhase.Enabled =
                     RevisionEff.Enabled =
                     metroTextBoxMH.Enabled =
@@ -210,9 +202,7 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextSource.Text = "";
             metroTextBoxRevision.Text = "";
             dateTimePickerRevisionDate.Value = DateTime.Today;
-            dateTimePickeValidTo.Value = DateTime.Today;
             RevisionEff.Value = DateTime.Today;
-            numericUpNotify.Value = 0;
             metroTextBoxReference.Text = "";
             comboBoxLevel.SelectedItem = FindingLevels.Unknown;
             comboBoxPhase.SelectedItem = "N/A";
@@ -326,16 +316,6 @@ namespace CAS.UI.UICAAControls.CheckList
             metroTextBoxReference.Enabled = checkBoxReference.Checked;
         }
         
-        private void checkBoxCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            dateTimePickeValidTo.Enabled = checkBoxCheck.Checked;
-        }
-
-        private void checkBoxNotify_CheckedChanged(object sender, EventArgs e)
-        {
-            numericUpNotify.Enabled = checkBoxNotify.Checked;
-        }
-
         private void checkBoxLevel_CheckedChanged(object sender, EventArgs e)
         {
             comboBoxLevel.Enabled = checkBoxLevel.Checked;
