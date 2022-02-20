@@ -160,7 +160,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 		        var refE = new ReferenceEventArgs();
 		        var dp = new DisplayerParams()
 		        {
-			        Page = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _directivesViewer.SelectedItem.ItemId, _directivesViewer.SelectedItem.ItemId),
+			        Page = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _directivesViewer.SelectedItem.ItemId, _directivesViewer.SelectedItem),
 			        TypeOfReflection = ReflectionTypes.DisplayInNew,
 			        PageCaption = $"Check List: {_directivesViewer.SelectedItem.ProgramType}",
 			        DisplayerType = DisplayerType.Screen

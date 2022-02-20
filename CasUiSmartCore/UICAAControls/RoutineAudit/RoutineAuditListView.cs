@@ -124,7 +124,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 			if (SelectedItem != null)
             {
 
-                e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(),OperatorId, SelectedItem.ItemId);
+                e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(),OperatorId, routingId:SelectedItem.ItemId);
                 e.DisplayerText = $"Routine Audit: {SelectedItem.Title}";
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 

@@ -26,6 +26,7 @@ namespace CAS.UI.UICAAControls.CheckList
 	public partial class EditionRevisionListScreen : ScreenControl
 	{
         private readonly int _operatorId;
+        private readonly SmartCore.CAA.StandartManual.StandartManual _manual;
         private CommonCollection<CheckListRevision> _initialDocumentArray = new CommonCollection<CheckListRevision>();
 		private CommonCollection<CheckListRevision> _resultDocumentArray = new CommonCollection<CheckListRevision>();
 		private CommonFilterCollection _filter;
@@ -40,12 +41,13 @@ namespace CAS.UI.UICAAControls.CheckList
 			InitializeComponent();
 		}
 		
-        public EditionRevisionListScreen(Operator currentOperator, int operatorId)
+        public EditionRevisionListScreen(Operator currentOperator, int operatorId, SmartCore.CAA.StandartManual.StandartManual manual)
             : this()
         {
             if (currentOperator == null)
                 throw new ArgumentNullException("currentOperator");
             _operatorId = operatorId;
+            _manual = manual;
             aircraftHeaderControl1.Operator = currentOperator;
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
@@ -76,7 +78,11 @@ namespace CAS.UI.UICAAControls.CheckList
             _resultDocumentArray.Clear();
 
             AnimatedThreadWorker.ReportProgress(0, "load");
-			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new Filter("OperatorId", _operatorId)));
+			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new []
+			{
+				new Filter("OperatorId", _operatorId),
+				new Filter("ManualId", _manual.ItemId)
+			}));
 
 			AnimatedThreadWorker.ReportProgress(70, "filter directives");
 
@@ -121,9 +127,9 @@ namespace CAS.UI.UICAAControls.CheckList
 			var refE = new ReferenceEventArgs();
 			var dp = new DisplayerParams()
 			{
-				Page = new EditionRevisionRecordListScreen(GlobalObjects.CaaEnvironment.Operators[0], _directivesViewer.SelectedItem, _operatorId),
+				Page = new EditionRevisionRecordListScreen(GlobalObjects.CaaEnvironment.Operators[0], _directivesViewer.SelectedItem, _operatorId, _manual),
 				TypeOfReflection = ReflectionTypes.DisplayInNew,
-				PageCaption = $"{_directivesViewer.SelectedItem.Type} : {_directivesViewer.SelectedItem.Number}",
+				PageCaption = $"{_directivesViewer.SelectedItem.Type} : {_directivesViewer.SelectedItem.Number} {_manual.ProgramType}",
 				DisplayerType = DisplayerType.Screen
 			};
 			refE.SetParameters(dp);
@@ -144,7 +150,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private void InitListView()
         {
-            _directivesViewer = new EditionRevisionListView(AnimatedThreadWorker);
+            _directivesViewer = new EditionRevisionListView(AnimatedThreadWorker, _manual);
             _directivesViewer.OperatorId = _operatorId;
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
@@ -292,7 +298,13 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private void ButtonAddClick(object sender, EventArgs e)
 		{
-			var form = new EditionForm(new CheckListRevision{OperatorId = _operatorId, Type = RevisionType.Edition, Status = EditionRevisionStatus.Temporary});
+			var form = new EditionForm(new CheckListRevision
+			{
+				OperatorId = _operatorId,
+				Type = RevisionType.Edition,
+				Status = EditionRevisionStatus.Temporary,
+				ManualId = _manual.ItemId
+			});
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
 		}

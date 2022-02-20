@@ -28,6 +28,7 @@ namespace CAS.UI.UICAAControls.CheckList
 	public partial class EditionRevisionRecordListScreen : ScreenControl
 	{
 		private readonly int _operatorId;
+		private readonly SmartCore.CAA.StandartManual.StandartManual _manual;
 		private CommonCollection<CheckLists> _initialDocumentArray = new CommonCollection<CheckLists>();
 		private CommonCollection<CheckLists> _resultDocumentArray = new CommonCollection<CheckLists>();
 		private CommonFilterCollection _filter;
@@ -42,13 +43,14 @@ namespace CAS.UI.UICAAControls.CheckList
 			InitializeComponent();
 		}
 		
-        public EditionRevisionRecordListScreen(Operator currentOperator, CheckListRevision parent, int operatorId)
+        public EditionRevisionRecordListScreen(Operator currentOperator, CheckListRevision parent, int operatorId, SmartCore.CAA.StandartManual.StandartManual manual)
             : this()
         {
             if (currentOperator == null)
                 throw new ArgumentNullException("currentOperator");
             _parent = parent;
             _operatorId = operatorId;
+            _manual = manual;
             aircraftHeaderControl1.Operator = currentOperator;
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
@@ -85,13 +87,20 @@ namespace CAS.UI.UICAAControls.CheckList
 
             if (_parent.Type == RevisionType.Edition)
             {
-	            _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListDTO, CheckLists>(new Filter("EditionId", _parent.ItemId)));
+	            _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListDTO, CheckLists>(new []
+	            {
+		            new Filter("EditionId", _parent.ItemId), 
+		            new Filter("ManualId", _manual.ItemId), 
+	            }));
 	            foreach (var check in _initialDocumentArray)
 		            check.EditionNumber = _parent.Number;
             }
             else
             {
-	            var records = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionRecordDTO, CheckListRevisionRecord>(new Filter("ParentId", _parent.ItemId));
+	            var records = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionRecordDTO, CheckListRevisionRecord>(new []
+	            {
+		            new Filter("ParentId", _parent.ItemId),
+	            });
 	            if (records.Any())
 	            {
 		            var ids = records.Select(i => i.CheckListId);
@@ -355,15 +364,27 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
+			var check = new CheckLists
+			{
+				OperatorId = _operatorId,
+				ManualId = _manual.ItemId,
+				Settings = new CheckListSettings()
+				{
+					ProgramTypeId = _manual.ProgramType.ItemId
+				}
+			};
+			
 			if (_parent.Type == RevisionType.Revision)
 			{
-				var form = new CheckListForm(new CheckLists{OperatorId = _operatorId, EditionId = -1}, _parent.ItemId);
+				check.EditionId = -1;
+				var form = new CheckListForm(check, _parent.ItemId);
 				if (form.ShowDialog() == DialogResult.OK)
 					AnimatedThreadWorker.RunWorkerAsync();
 			}
 			else
 			{
-				var form = new CheckListForm(new CheckLists(){OperatorId = _operatorId, EditionId = _parent.ItemId});
+				check.EditionId = _parent.ItemId;
+				var form = new CheckListForm(check);
 				if (form.ShowDialog() == DialogResult.OK)
 					AnimatedThreadWorker.RunWorkerAsync();
 			}

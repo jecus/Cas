@@ -21,6 +21,7 @@ namespace CAS.UI.UICAAControls.CheckList
 	public partial class EditionRevisionListView : BaseGridViewControl<CheckListRevision>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
+        private readonly SmartCore.CAA.StandartManual.StandartManual _manual;
 
         public EditionRevisionListView()
         {
@@ -29,11 +30,12 @@ namespace CAS.UI.UICAAControls.CheckList
             EnableCustomSorting = true;
         }
          
-        public EditionRevisionListView(AnimatedThreadWorker animatedThreadWorker)
+        public EditionRevisionListView(AnimatedThreadWorker animatedThreadWorker, SmartCore.CAA.StandartManual.StandartManual manual)
         {
             
             InitializeComponent();
             _animatedThreadWorker = animatedThreadWorker;
+            _manual = manual;
             SortDirection = SortDirection.Asc;
             EnableCustomSorting = true;
             OldColumnIndex = 3;
@@ -141,9 +143,9 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             if (SelectedItem != null)
             {
-                e.DisplayerText = $"{SelectedItem.Type} : {SelectedItem.Number}";
+                e.DisplayerText = $"{SelectedItem.Type} : {SelectedItem.Number} {_manual.ProgramType}";
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-                e.RequestedEntity = new EditionRevisionRecordListScreen(GlobalObjects.CaaEnvironment.Operators[0], SelectedItem, OperatorId);
+                e.RequestedEntity = new EditionRevisionRecordListScreen(GlobalObjects.CaaEnvironment.Operators[0], SelectedItem, OperatorId,_manual);
             }
         }
         #endregion

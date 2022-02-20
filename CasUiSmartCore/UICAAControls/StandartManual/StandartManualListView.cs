@@ -105,7 +105,7 @@ namespace CAS.UI.UICAAControls.StandartManual
 		{
 			if (SelectedItem != null)
             {
-	            e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(),OperatorId, SelectedItem.ItemId);
+	            e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(),OperatorId, SelectedItem);
                 e.DisplayerText = $"Check List: {SelectedItem.ProgramType}";
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
             }

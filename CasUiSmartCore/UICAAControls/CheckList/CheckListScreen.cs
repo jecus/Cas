@@ -33,7 +33,7 @@ namespace CAS.UI.UICAAControls.CheckList
 	public partial class CheckListsScreen : ScreenControl
 	{
         private readonly int _operatorId;
-        private readonly int _manualId;
+        private readonly SmartCore.CAA.StandartManual.StandartManual _manual;
 
         #region Fields
 
@@ -56,8 +56,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
 
 		#region Constructors
-
-		#region public CAAPersonnelListScreen()
+		
 		///<summary>
 		/// Конструктор по умолчанию
 		///</summary>
@@ -65,9 +64,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		{
 			InitializeComponent();
 		}
-		#endregion
 
-		#region public PersonnelListScreen(Operator currentOperator)
 
         ///<summary>
         /// Создаёт экземпляр элемента управления, отображающего список директив
@@ -93,13 +90,13 @@ namespace CAS.UI.UICAAControls.CheckList
 		}
 
 
-        public CheckListsScreen(Operator currentOperator, int operatorId, int manualId)
+        public CheckListsScreen(Operator currentOperator, int operatorId, SmartCore.CAA.StandartManual.StandartManual manual)
             : this()
         {
             if (currentOperator == null)
                 throw new ArgumentNullException("currentOperator");
             _operatorId = operatorId;
-            _manualId = manualId;
+            _manual = manual;
             aircraftHeaderControl1.Operator = currentOperator;
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
@@ -111,9 +108,7 @@ namespace CAS.UI.UICAAControls.CheckList
             UpdateInformation();
         }
 
-		#endregion
-
-		#endregion
+        #endregion
 
 		#region Methods
 
@@ -175,8 +170,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			_resultDocumentArray.Clear();
 
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
-
-
+			
             if (_routingId.HasValue)
             {
                 _currentRoutineId = _routingId;
@@ -219,7 +213,7 @@ namespace CAS.UI.UICAAControls.CheckList
 	            {
 		            new Filter("Status", (byte)EditionRevisionStatus.Open),
 		            new Filter("Type", (byte)RevisionType.Edition),
-		            new Filter("ManualId", _manualId),
+		            new Filter("ManualId", _manual.ItemId),
 	            });
 	            if (editions.Any())
 	            {
@@ -536,9 +530,9 @@ namespace CAS.UI.UICAAControls.CheckList
 	        var refE = new ReferenceEventArgs();
 	        var dp = new DisplayerParams()
 	        {
-		        Page = new EditionRevisionListScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _operatorId),
+		        Page = new EditionRevisionListScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _operatorId, _manual),
 		        TypeOfReflection = ReflectionTypes.DisplayInNew,
-		        PageCaption = $"Edition/Revision",
+		        PageCaption = $"Edition/Revision : {_manual.ProgramType}",
 		        DisplayerType = DisplayerType.Screen
 	        };
 	        refE.SetParameters(dp);
