@@ -19,6 +19,9 @@ namespace CAA.Entity.Models.DTO
         
         [Column("OperatorId")]
         public int OperatorId { get; set; }
+        
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public int ProgramTypeId { get; set; }
     }
     
 }

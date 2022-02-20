@@ -39,6 +39,8 @@ namespace SmartCore.CAA.StandartManual
         public string Source { get; set; }
         
         public int OperatorId { get; set; }
+        
+        public int ProgramTypeId { get; set; }
 
         public string SettingsJSON
         {

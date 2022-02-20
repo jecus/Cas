@@ -45,15 +45,39 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             _addedChecks.Clear();
             
+            var routine = GlobalObjects.CaaEnvironment.NewLoader
+                .GetObjectById<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(_routineId);
+            
+            if(routine == null)
+                return;
+
+            var manuals = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(new []
+            {
+                new Filter("OperatorId", _operatorId),
+                new Filter("ProgramTypeId", routine.Settings.TypeId),
+            });
+            
+            if(!manuals.Any())
+                return;
+
+            var manual = manuals.FirstOrDefault();
+            
+            
             var editions = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new List<Filter>()
             {
                 new Filter("Status", (byte)EditionRevisionStatus.Open),
                 new Filter("Type", (byte)RevisionType.Edition),
+                new Filter("OperatorId", _operatorId),
+                new Filter("ManualId", manual.ItemId),
             });
             if (editions.Any())
             {
                 var edition = editions.FirstOrDefault();
-                _addedChecks.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("EditionId", edition.ItemId), loadChild:true));
+                _addedChecks.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new []
+                {
+                    new Filter("EditionId", edition.ItemId),
+                    new Filter("ManualId", manual.ItemId)
+                } ,loadChild:true));
 		            
                 foreach (var check in _addedChecks)
                     check.EditionNumber = edition.Number;
