@@ -177,7 +177,7 @@ namespace CAS.UI.UICAAControls.Audit
 		{
             if (SelectedItem != null)
             {
-                e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), OperatorId ,null,  SelectedItem.ItemId);
+                e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), OperatorId ,CheckListType.Audit,  SelectedItem.ItemId);
                 e.DisplayerText = $"Audit: {SelectedItem.AuditNumber}";
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
             }

@@ -27,19 +27,26 @@ using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CheckList
 {
+	public enum CheckListType
+	{
+		CheckList,
+		Routine,
+		Audit
+	}
+	
     ///<summary>
     ///</summary>
     [ToolboxItem(false)]
 	public partial class CheckListsScreen : ScreenControl
 	{
         private readonly int _operatorId;
+        private readonly CheckListType _type;
+        private readonly int _parentId;
         private readonly SmartCore.CAA.StandartManual.StandartManual _manual;
 
         #region Fields
 
         private  int? _currentRoutineId;
-        private readonly int? _routingId;
-        private readonly int? _auditId;
 
         private CommonCollection<CheckLists> _initialDocumentArray = new CommonCollection<CheckLists>();
 		private CommonCollection<CheckLists> _resultDocumentArray = new CommonCollection<CheckLists>();
@@ -48,8 +55,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		private BaseGridViewControl<CheckLists> _directivesViewer;
 
 		private RadMenuItem _toolStripMenuItemOpen;
-		private RadMenuSeparatorItem _toolStripSeparator1;
-        private SmartCore.CAA.RoutineAudits.RoutineAudit _routineAudit;
+		private SmartCore.CAA.RoutineAudits.RoutineAudit _routineAudit;
         private CAAAudit _audit;
 
         #endregion
@@ -70,15 +76,16 @@ namespace CAS.UI.UICAAControls.CheckList
         /// Создаёт экземпляр элемента управления, отображающего список директив
         ///</summary>
         ///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-        public CheckListsScreen(Operator currentOperator,int operatorId, int? routingId = null, int? auditId = null)
+        public CheckListsScreen(Operator currentOperator,int operatorId, CheckListType type, int parentId)
             : this()
         {
             if (currentOperator == null)
                 throw new ArgumentNullException("currentOperator");
             aircraftHeaderControl1.Operator = currentOperator;
-            _routingId = routingId;
-            _auditId = auditId;
+
             _operatorId = operatorId;
+            _type = type;
+            _parentId = parentId;
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
 
@@ -95,6 +102,7 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             if (currentOperator == null)
                 throw new ArgumentNullException("currentOperator");
+            _type = CheckListType.CheckList;
             _operatorId = operatorId;
             _manual = manual;
             aircraftHeaderControl1.Operator = currentOperator;
@@ -116,18 +124,18 @@ namespace CAS.UI.UICAAControls.CheckList
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 
-			if (_routingId.HasValue)
+			if (_type == CheckListType.Routine)
 			{
 				buttonAddNew.Visible = true;
 			}
 	        
-	        if (_routingId.HasValue || _auditId.HasValue)
+	        if (_type == CheckListType.Routine || _type == CheckListType.Audit)
 	        {
 		        pictureBox3.Visible = false;
 		        buttonRevisions.Visible = false;
 	        }
 	        
-            if (_auditId.HasValue)
+            if (_type == CheckListType.Audit)
             {
 	            this.headerControl.ShowEditButton = true;
 	            this.headerControl.EditButtonClick += HeaderControl_EditButtonClick;
@@ -141,16 +149,15 @@ namespace CAS.UI.UICAAControls.CheckList
             
             if (_directivesViewer is CheckListLiteView lite)
             {
-                lite.AuditId = _auditId;
-                lite.IsAuditCheck = _auditId.HasValue &&
+                lite.AuditId = _parentId;
+                lite.IsAuditCheck = _type == CheckListType.Audit &&
                                     (_routineAudit?.Type == ProgramType.CAAKG ||
                                      _routineAudit?.Type == ProgramType.IOSA);
 			}
 			else if(_directivesViewer is CheckListView view)
-
             {
-                view.AuditId = _auditId;
-                view.IsAuditCheck = _auditId.HasValue &&
+                view.AuditId = _parentId;
+                view.IsAuditCheck = _type == CheckListType.Audit &&
                                     (_routineAudit?.Type == ProgramType.CAAKG ||
                                      _routineAudit?.Type == ProgramType.IOSA);
             }
@@ -171,11 +178,11 @@ namespace CAS.UI.UICAAControls.CheckList
 
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 			
-            if (_routingId.HasValue)
+            if (_type == CheckListType.Routine)
             {
-                _currentRoutineId = _routingId;
+                _currentRoutineId = _parentId;
 				var records = GlobalObjects.CaaEnvironment.NewLoader
-                    .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", _routingId), loadChild: true).ToList();
+                    .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", _parentId), loadChild: true).ToList();
 
                 var ids = records.Select(i => i.CheckListId);
 
@@ -183,12 +190,12 @@ namespace CAS.UI.UICAAControls.CheckList
                     _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("ItemId", ids), loadChild: true));
 
 			}
-			else if (_auditId.HasValue)
+			else if (_type == CheckListType.Audit)
             {
 
-                _audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_auditId.Value);
+                _audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_parentId);
                 var records = GlobalObjects.CaaEnvironment.NewLoader
-                    .GetObjectListAll<CAAAuditRecordDTO, CAAAuditRecord>(new Filter("AuditId", _auditId), loadChild: true).ToList();
+                    .GetObjectListAll<CAAAuditRecordDTO, CAAAuditRecord>(new Filter("AuditId", _parentId), loadChild: true).ToList();
 
                 _currentRoutineId = records.Select(i => i.RoutineAuditId).FirstOrDefault();
                 _routineAudit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(_currentRoutineId.Value);
@@ -303,7 +310,6 @@ namespace CAS.UI.UICAAControls.CheckList
 		private void InitToolStripMenuItems()
 		{
 			_toolStripMenuItemOpen = new RadMenuItem();
-			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			// 
 			// toolStripMenuItemView
 			// 
@@ -314,7 +320,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void HeaderControl_EditButtonClick(object sender, EventArgs e)
         {
-			var form = new EditAuditForm(_auditId.Value);
+			var form = new EditAuditForm(_parentId);
             if (form.ShowDialog() == DialogResult.OK)
                 AnimatedThreadWorker.RunWorkerAsync();
 		}
@@ -341,9 +347,9 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 		{
-            if (_auditId.HasValue && (_routineAudit?.Type == ProgramType.CAAKG || _routineAudit?.Type == ProgramType.IOSA))
+            if (_type == CheckListType.Audit && (_routineAudit?.Type == ProgramType.CAAKG || _routineAudit?.Type == ProgramType.IOSA))
             {
-                var form = new CheckListAuditForm(_directivesViewer.SelectedItem, _auditId.Value);
+                var form = new CheckListAuditForm(_directivesViewer.SelectedItem, _parentId);
                 if (form.ShowDialog() == DialogResult.OK)
                     AnimatedThreadWorker.RunWorkerAsync();
             }
@@ -361,7 +367,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private void InitListView()
         {
-            if (_auditId.HasValue)
+            if (_type == CheckListType.Audit)
                 _directivesViewer = new CheckListLiteView(AnimatedThreadWorker);
             else _directivesViewer = new CheckListView(AnimatedThreadWorker, false);
 
@@ -544,7 +550,7 @@ namespace CAS.UI.UICAAControls.CheckList
 	        var refE = new ReferenceEventArgs();
 	        var dp = new DisplayerParams()
 	        {
-		        Page = new PELListScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _operatorId, _auditId.Value, _initialDocumentArray),
+		        Page = new PELListScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _operatorId, _parentId, _initialDocumentArray),
 		        TypeOfReflection = ReflectionTypes.DisplayInNew,
 		        PageCaption = $"PEL {_audit.AuditNumber}",
 		        DisplayerType = DisplayerType.Screen

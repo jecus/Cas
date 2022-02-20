@@ -143,7 +143,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
                 var refE = new ReferenceEventArgs();
                 var dp = new DisplayerParams()
                 {
-                    Page = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _directivesViewer.SelectedItem.ItemId),
+                    Page = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(),_operatorId, CheckListType.Routine, _directivesViewer.SelectedItem.ItemId),
 					TypeOfReflection = ReflectionTypes.DisplayInNew,
                     PageCaption = $"Routine Audit: {_directivesViewer.SelectedItem.Title}",
 					DisplayerType = DisplayerType.Screen

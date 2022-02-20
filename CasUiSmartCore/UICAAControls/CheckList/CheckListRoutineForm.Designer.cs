@@ -159,7 +159,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.Name = "CheckListRoutineForm";
             this.MaximizeBox = false;
             this.Resizable = false;
-            this.Text = "CheckList Revision Form";
+            this.Text = "Add CheckList Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CheckListRevisionForm_FormClosing);
             this.ResumeLayout(false);
 
