@@ -171,10 +171,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             // _tocheckListView
             // 
             this._tocheckListView.Location = new System.Drawing.Point(8, 391);
-            this._tocheckListView.MenuOpeningAction = null;
             this._tocheckListView.Name = "_tocheckListView";
-            this._tocheckListView.OldColumnIndex = 0;
-            this._tocheckListView.PasteComplete = null;
             this._tocheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._tocheckListView.Size = new System.Drawing.Size(1029, 290);
             this._tocheckListView.TabIndex = 334;
@@ -182,10 +179,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             // _fromcheckListView
             // 
             this._fromcheckListView.Location = new System.Drawing.Point(8, 63);
-            this._fromcheckListView.MenuOpeningAction = null;
             this._fromcheckListView.Name = "_fromcheckListView";
-            this._fromcheckListView.OldColumnIndex = 0;
-            this._fromcheckListView.PasteComplete = null;
             this._fromcheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._fromcheckListView.Size = new System.Drawing.Size(1029, 290);
             this._fromcheckListView.TabIndex = 333;
