@@ -218,8 +218,8 @@ namespace CAS.UI.UICAAControls
 
         private void LinkCheckListsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "CheckList";
-            e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+	        e.DisplayerText = "Standart Manual";
+	        e.RequestedEntity = new StandartManualListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1, false);
         }
 
 
@@ -251,7 +251,6 @@ namespace CAS.UI.UICAAControls
         {
 	        e.DisplayerText = "Standart Manual";
 	        e.RequestedEntity = new StandartManualListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
-	        
         }
 	}
 }

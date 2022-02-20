@@ -33,6 +33,7 @@ namespace CAS.UI.UICAAControls.CheckList
 	public partial class CheckListsScreen : ScreenControl
 	{
         private readonly int _operatorId;
+        private readonly int _manualId;
 
         #region Fields
 
@@ -92,12 +93,13 @@ namespace CAS.UI.UICAAControls.CheckList
 		}
 
 
-        public CheckListsScreen(Operator currentOperator, int operatorId)
+        public CheckListsScreen(Operator currentOperator, int operatorId, int manualId)
             : this()
         {
             if (currentOperator == null)
                 throw new ArgumentNullException("currentOperator");
             _operatorId = operatorId;
+            _manualId = manualId;
             aircraftHeaderControl1.Operator = currentOperator;
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
@@ -217,6 +219,7 @@ namespace CAS.UI.UICAAControls.CheckList
 	            {
 		            new Filter("Status", (byte)EditionRevisionStatus.Open),
 		            new Filter("Type", (byte)RevisionType.Edition),
+		            new Filter("ManualId", _manualId),
 	            });
 	            if (editions.Any())
 	            {

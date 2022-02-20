@@ -6,6 +6,8 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
+using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UICAAControls.StandartManual;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
@@ -60,7 +62,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public StandartManualListScreen(Operator currentOperator, int operatorId)
+		public StandartManualListScreen(Operator currentOperator, int operatorId, bool isEditable = true)
 			: this()
 		{
 			if (currentOperator == null)
@@ -75,6 +77,13 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 			InitToolStripMenuItems();
 			InitListView();
 			UpdateInformation();
+
+			if (!isEditable)
+			{
+				_toolStripMenuItemEdit.Enabled = false;
+				pictureBox1.Visible = pictureBox2.Visible = buttonAddNew.Visible = buttonApplyFilter.Visible = buttonDeleteSelected.Visible = isEditable;
+			}
+
 		}
 
 		#endregion
@@ -142,27 +151,26 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 		}
 		
         #endregion
-        
-        
+
+
         private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
         {
-	        //          if (_directivesViewer.SelectedItem != null)
-	        //          {
-	        //              var refE = new ReferenceEventArgs();
-	        //              var dp = new DisplayerParams()
-	        //              {
-	        //                  Page = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _directivesViewer.SelectedItem.ItemId),
-	        // 		TypeOfReflection = ReflectionTypes.DisplayInNew,
-	        //                  PageCaption = $"Routine Audit: {_directivesViewer.SelectedItem.Title}",
-	        // 		DisplayerType = DisplayerType.Screen
-	        //     };
-	        //              refE.SetParameters(dp);
-	        //              InvokeDisplayerRequested(refE);
-	        // }
-            
+	        if (_directivesViewer.SelectedItem != null)
+	        {
+		        var refE = new ReferenceEventArgs();
+		        var dp = new DisplayerParams()
+		        {
+			        Page = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _directivesViewer.SelectedItem.ItemId, _directivesViewer.SelectedItem.ItemId),
+			        TypeOfReflection = ReflectionTypes.DisplayInNew,
+			        PageCaption = $"Check List: {_directivesViewer.SelectedItem.ProgramType}",
+			        DisplayerType = DisplayerType.Screen
+		        };
+		        refE.SetParameters(dp);
+		        InvokeDisplayerRequested(refE);
+	        }
         }
-        
-		#region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
+
+        #region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 
 		private void ToolStripMenuItemEditClick(object sender, EventArgs e)
 		{

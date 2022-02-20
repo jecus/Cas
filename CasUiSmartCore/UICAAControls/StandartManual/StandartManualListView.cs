@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
+using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
@@ -101,14 +103,12 @@ namespace CAS.UI.UICAAControls.StandartManual
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
-			// if (SelectedItem != null)
-   //          {
-   //
-   //              e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(),OperatorId, SelectedItem.ItemId);
-   //              e.DisplayerText = $"Routine Audit: {SelectedItem.Title}";
-   //              e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-   //
-   //          }
+			if (SelectedItem != null)
+            {
+	            e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(),OperatorId, SelectedItem.ItemId);
+                e.DisplayerText = $"Check List: {SelectedItem.ProgramType}";
+                e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+            }
 		}
 		#endregion
 

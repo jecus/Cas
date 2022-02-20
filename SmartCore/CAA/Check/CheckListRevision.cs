@@ -36,6 +36,9 @@ namespace SmartCore.CAA.Check
         public DateTime Date { get; set; }
 
         public DateTime EffDate { get; set; }
+        
+        public int EditionId { get; set; }
+        public int ManualId { get; set; }
 
         public string SettingsJSON
         {
@@ -56,7 +59,6 @@ namespace SmartCore.CAA.Check
 
         public CheckListRevisionSettings Settings { get; set; }
         public int OperatorId { get; set; }
-        public int EditionId { get; set; }
 
         public CheckListRevision()
         {

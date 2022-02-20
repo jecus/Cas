@@ -1393,6 +1393,7 @@ namespace SmartCore.DtoHelper
                 Updated = levels.Updated,
 				Source = levels.Source,
 				EditionId = levels.EditionId,
+				ManualId  = levels.ManualId,
 				OperatorId = levels.OperatorId,
 				SettingsJSON =  levels.SettingsJSON
             };
@@ -1413,6 +1414,7 @@ namespace SmartCore.DtoHelper
                 Updated = levels.Updated,
                 Source = levels.Source,
                 EditionId = levels.EditionId,
+                ManualId  = levels.ManualId,
                 OperatorId = levels.OperatorId,
 				SettingsJSON =  levels.SettingsJSON
 			};
@@ -1477,6 +1479,7 @@ namespace SmartCore.DtoHelper
                 EffDate = levels.EffDate,
                 Date = levels.Date,
                 EditionId = levels.EditionId,
+                ManualId = levels.ManualId,
 				Number = levels.Number,
 				Status = (EditionRevisionStatus)levels.Status,
                 Type = (RevisionType)levels.Type,
@@ -1498,6 +1501,7 @@ namespace SmartCore.DtoHelper
                 EffDate = levels.EffDate,
                 Date = levels.Date,
                 EditionId = levels.EditionId,
+                ManualId = levels.ManualId,
                 Status = (byte)levels.Status,
 				OperatorId = levels.OperatorId,
 				Number = levels.Number,

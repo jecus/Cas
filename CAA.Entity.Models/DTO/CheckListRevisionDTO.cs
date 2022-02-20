@@ -45,5 +45,8 @@ namespace CAA.Entity.Models.DTO
         
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public int EditionId { get; set; }
+        
+        [Column("ManualId")]
+        public int  ManualId{ get; set; }
     }
 }

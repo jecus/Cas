@@ -26,6 +26,9 @@ namespace SmartCore.CAA.Check
         public string Source { get; set; }
 
         public int EditionId { get; set; }
+        
+        public int OperatorId { get; set; }
+        public int ManualId { get; set; }
 
 
         public List<CheckListRecords> CheckListRecords { get; set; }
@@ -132,10 +135,8 @@ namespace SmartCore.CAA.Check
         }
 
         public AuditCheck AuditCheck { get; set; }
-        public int OperatorId { get; set; }
-        
-        
-        
+
+
         public CheckLists()
         {
             ItemId = -1;
