@@ -67,7 +67,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.comboBoxPhase = new System.Windows.Forms.ComboBox();
             this.metroTextBoxMH = new MetroFramework.Controls.MetroTextBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.comboBoxProgramType = new System.Windows.Forms.ComboBox();
+            this.metroTextBoxProgramType = new MetroFramework.Controls.MetroTextBox();
             metroLabel1 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
@@ -713,7 +713,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.fileControl.MaximumSize = new System.Drawing.Size(350, 100);
             this.fileControl.MinimumSize = new System.Drawing.Size(350, 50);
             this.fileControl.Name = "fileControl";
-            this.fileControl.ShowLinkLabelBrowse = true;
+            this.fileControl.ShowLinkLabelBrowse = false;
             this.fileControl.ShowLinkLabelRemove = false;
             this.fileControl.Size = new System.Drawing.Size(350, 100);
             this.fileControl.TabIndex = 302;
@@ -768,22 +768,45 @@ namespace CAS.UI.UICAAControls.CheckList
             this.flowLayoutPanel2.Size = new System.Drawing.Size(270, 711);
             this.flowLayoutPanel2.TabIndex = 302;
             // 
-            // comboBoxProgramType
+            // metroTextBoxProgramType
             // 
-            this.comboBoxProgramType.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.comboBoxProgramType.ForeColor = System.Drawing.Color.DimGray;
-            this.comboBoxProgramType.FormattingEnabled = true;
-            this.comboBoxProgramType.Location = new System.Drawing.Point(108, 137);
-            this.comboBoxProgramType.Name = "comboBoxProgramType";
-            this.comboBoxProgramType.Size = new System.Drawing.Size(347, 22);
-            this.comboBoxProgramType.TabIndex = 324;
+            // 
+            // 
+            // 
+            this.metroTextBoxProgramType.CustomButton.Image = null;
+            this.metroTextBoxProgramType.CustomButton.Location = new System.Drawing.Point(325, 1);
+            this.metroTextBoxProgramType.CustomButton.Name = "";
+            this.metroTextBoxProgramType.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.metroTextBoxProgramType.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxProgramType.CustomButton.TabIndex = 1;
+            this.metroTextBoxProgramType.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxProgramType.CustomButton.UseSelectable = true;
+            this.metroTextBoxProgramType.CustomButton.Visible = false;
+            this.metroTextBoxProgramType.Enabled = false;
+            this.metroTextBoxProgramType.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxProgramType.Lines = new string[0];
+            this.metroTextBoxProgramType.Location = new System.Drawing.Point(108, 137);
+            this.metroTextBoxProgramType.MaxLength = 32767;
+            this.metroTextBoxProgramType.Multiline = true;
+            this.metroTextBoxProgramType.Name = "metroTextBoxProgramType";
+            this.metroTextBoxProgramType.PasswordChar = '\0';
+            this.metroTextBoxProgramType.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxProgramType.SelectedText = "";
+            this.metroTextBoxProgramType.SelectionLength = 0;
+            this.metroTextBoxProgramType.SelectionStart = 0;
+            this.metroTextBoxProgramType.ShortcutsEnabled = true;
+            this.metroTextBoxProgramType.Size = new System.Drawing.Size(347, 23);
+            this.metroTextBoxProgramType.TabIndex = 324;
+            this.metroTextBoxProgramType.UseSelectable = true;
+            this.metroTextBoxProgramType.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxProgramType.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // CheckListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1359, 820);
-            this.Controls.Add(this.comboBoxProgramType);
+            this.Controls.Add(this.metroTextBoxProgramType);
             this.Controls.Add(label1);
             this.Controls.Add(this.metroTextBoxMH);
             this.Controls.Add(this.flowLayoutPanel2);
@@ -831,7 +854,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.ComboBox comboBoxProgramType;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxProgramType;
 
         #endregion
 
