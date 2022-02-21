@@ -58,7 +58,7 @@ namespace CAA.API.Infrastructure.Jobs
                             check.IsDeleted = true;
                         else if (rec.Settings.RevisionCheckType == RevisionCheckType.Mod)
                         {
-                            var settings = JsonConvert.DeserializeObject<CheckListDTOSettings>(check.SettingsJSON);
+                            var settings = JsonConvert.DeserializeObject<CheckListSettings>(check.SettingsJSON);
                             
                             
                              if (rec.Settings.ModData.ContainsKey("Source"))

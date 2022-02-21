@@ -38,15 +38,54 @@ namespace CAA.Entity.Models.DTO
     }
     
     
-    [Serializable]
-    public class CheckListDTOSettings
+     [Serializable]
+    public class CheckListSettingsSAFA
     {
-        public CheckListDTOSettings()
+        
+        [JsonProperty("Item")]
+        public string Item { get; set; }
+        
+        [JsonProperty("ItemNumber")]
+        public string ItemNumber { get; set; }
+        
+        [JsonProperty("Title")]
+        public string Title { get; set; }
+        
+        [JsonProperty("Standard")]
+        public string Standard { get; set; }
+        
+        [JsonProperty("StandardRef")]
+        public string StandardRef { get; set; }
+        
+        [JsonProperty("PdfCode")]
+        public string PdfCode { get; set; }
+        
+        [JsonProperty("StandardText")]
+        public string StandardText { get; set; }
+        
+        [JsonProperty("PreDescribedFinding")]
+        public string PreDescribedFinding { get; set; }
+        
+        [JsonProperty("Instruction")]
+        public string Instruction { get; set; }
+        
+        [JsonProperty("ManHours")]
+        public double MH { get; set; }
+
+        [JsonProperty("ProgramTypeId", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue(-1)]
+        public int ProgramTypeId { get; set; }
+    }
+    
+
+    [Serializable]
+    public class CheckListSettings
+    {
+        public CheckListSettings()
         {
             Phase = "N/A";
             MH = 0.0;
         }
-
         
         [JsonProperty("SectionNumber")]
         public string SectionNumber { get; set; }
@@ -74,10 +113,10 @@ namespace CAA.Entity.Models.DTO
 
         [JsonProperty("Requirement")]
         public string Requirement { get; set; }
-
+        
         [JsonProperty("Reference")]
         public string Reference { get; set; }
-
+        
         [JsonProperty("LevelId", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(-1)]
         public int LevelId { get; set; }
@@ -88,7 +127,7 @@ namespace CAA.Entity.Models.DTO
 
         [JsonProperty("ManHours")]
         public double MH { get; set; }
-        
+
         [JsonProperty("ProgramTypeId", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(-1)]
         public int ProgramTypeId { get; set; }
