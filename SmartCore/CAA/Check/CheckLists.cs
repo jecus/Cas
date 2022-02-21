@@ -100,7 +100,7 @@ namespace SmartCore.CAA.Check
 
             set
             {
-                if (CheckUIType == CheckUIType.Safa)
+                if (CheckUIType == CheckUIType.Iosa) 
                 {
                     Settings = string.IsNullOrWhiteSpace(value)
                         ? new CheckListSettings()

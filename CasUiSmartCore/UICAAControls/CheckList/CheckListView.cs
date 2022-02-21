@@ -317,16 +317,13 @@ namespace CAS.UI.UICAAControls.CheckList
     
     public class CheckListSAFAView : CheckListView
     {
-        public CheckListSAFAView()
+        public CheckListSAFAView() : base()
         {
-            InitializeComponent();
+            
         }
         
-        public CheckListSAFAView(AnimatedThreadWorker worker, bool enable = true)
+        public CheckListSAFAView(AnimatedThreadWorker worker, bool enable = true) :  base(worker, enable)
         {
-            InitializeComponent();
-            _animatedThreadWorker = worker;
-            _enable = enable;
         }
         
         #region protected override void SetHeaders()
@@ -378,15 +375,11 @@ namespace CAS.UI.UICAAControls.CheckList
     public class CheckListRevisionSAFAView : CheckListView
     {
         
-        public CheckListRevisionSAFAView()
+        public CheckListRevisionSAFAView()  :  base()
         {
-            InitializeComponent();
         }
-        public CheckListRevisionSAFAView(AnimatedThreadWorker worker, bool enable = true)
+        public CheckListRevisionSAFAView(AnimatedThreadWorker worker, bool enable = true)  :  base(worker, enable)
         {
-            InitializeComponent();
-            _animatedThreadWorker = worker;
-            _enable = enable;
         }
         
         #region protected override void SetHeaders()
