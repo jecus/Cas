@@ -20,14 +20,6 @@ using SmartCore.Files;
 
 namespace SmartCore.CAA.Check
 {
-    public enum CheckUIType
-    {
-        Iosa,
-        Safa,
-        None
-    }
-    
-    
     [CAADto(typeof(CheckListDTO))]
     [Serializable]
     public class CheckLists : BaseEntityObject, ICheckListFilterParams,ICheckListSafaFilterParams, IFileContainer, IOperatable

@@ -58,91 +58,137 @@ namespace CAA.API.Infrastructure.Jobs
                             check.IsDeleted = true;
                         else if (rec.Settings.RevisionCheckType == RevisionCheckType.Mod)
                         {
-                            var settings = JsonConvert.DeserializeObject<CheckListSettings>(check.SettingsJSON);
-                            
-                            
-                             if (rec.Settings.ModData.ContainsKey("Source"))
-                                 check.Source = (string)rec.Settings.ModData["Source"];
 
-                             if (rec.Settings.ModData.ContainsKey("Reference"))
-                                 settings.Reference = (string)rec.Settings.ModData["Reference"];
-                             
-                             
-                             if (rec.Settings.ModData.ContainsKey("Level"))
-                                 settings.LevelId = (int)rec.Settings.ModData["Level"];
+                            if (check.CheckUIType == CheckUIType.Iosa)
+                            {
+                                var settings = JsonConvert.DeserializeObject<CheckListSettings>(check.SettingsJSON);
 
-                             if (rec.Settings.ModData.ContainsKey("Phase"))
-                                 settings.Phase = (string)rec.Settings.ModData["Phase"];
-                             
-                             if (rec.Settings.ModData.ContainsKey("Requirement"))
-                                 settings.Requirement = (string)rec.Settings.ModData["Requirement"];
 
-                             if (rec.Settings.ModData.ContainsKey("Section"))
-                            {
-                                var data = ((string)rec.Settings.ModData["Section"]).Split(new[]{"||"}, StringSplitOptions.None);
-                                settings.SectionNumber = data.FirstOrDefault();
-                                settings.SectionName = data.LastOrDefault();
-                            }
-                            
-                            if (rec.Settings.ModData.ContainsKey("Part"))
-                            {
-                                var data = ((string)rec.Settings.ModData["Part"]).Split(new[]{"||"}, StringSplitOptions.None);
-                                settings.PartNumber = data.FirstOrDefault();
-                                settings.PartName = data.LastOrDefault();
-                            }
-                            
-                            if (rec.Settings.ModData.ContainsKey("Subpart"))
-                            {
-                                var data = ((string)rec.Settings.ModData["Subpart"]).Split(new[]{"||"}, StringSplitOptions.None);
-                                settings.SubPartNumber = data.FirstOrDefault();
-                                settings.SubPartName = data.LastOrDefault();
-                            }
-                            
-                            if (rec.Settings.ModData.ContainsKey("Item"))
-                            {
-                                var data = ((string)rec.Settings.ModData["Item"]).Split(new[]{"||"}, StringSplitOptions.None);
-                                settings.ItemNumber = data.FirstOrDefault();
-                                settings.ItemtName = data.LastOrDefault();
-                            }
-                            
-                            if (rec.Settings.ModData.ContainsKey("MH"))
-                                settings.MH = (int)rec.Settings.ModData["MH"];
+                                if (rec.Settings.ModData.ContainsKey("Source"))
+                                    check.Source = (string)rec.Settings.ModData["Source"];
 
-                            if (rec.Settings.ModData.ContainsKey("Audit"))
-                            {
-                                var revAudit = JsonConvert.DeserializeObject<RevisionAudit>((string)rec.Settings.ModData["Audit"]);
-                                if (revAudit != null)
+                                if (rec.Settings.ModData.ContainsKey("Reference"))
+                                    settings.Reference = (string)rec.Settings.ModData["Reference"];
+
+
+                                if (rec.Settings.ModData.ContainsKey("Level"))
+                                    settings.LevelId = (int)rec.Settings.ModData["Level"];
+
+                                if (rec.Settings.ModData.ContainsKey("Phase"))
+                                    settings.Phase = (string)rec.Settings.ModData["Phase"];
+
+                                if (rec.Settings.ModData.ContainsKey("Requirement"))
+                                    settings.Requirement = (string)rec.Settings.ModData["Requirement"];
+
+                                if (rec.Settings.ModData.ContainsKey("Section"))
                                 {
-                                    if (revAudit.AuditId != null)
+                                    var data = ((string)rec.Settings.ModData["Section"]).Split(new[] { "||" }, StringSplitOptions.None);
+                                    settings.SectionNumber = data.FirstOrDefault();
+                                    settings.SectionName = data.LastOrDefault();
+                                }
+
+                                if (rec.Settings.ModData.ContainsKey("Part"))
+                                {
+                                    var data = ((string)rec.Settings.ModData["Part"]).Split(new[] { "||" }, StringSplitOptions.None);
+                                    settings.PartNumber = data.FirstOrDefault();
+                                    settings.PartName = data.LastOrDefault();
+                                }
+
+                                if (rec.Settings.ModData.ContainsKey("Subpart"))
+                                {
+                                    var data = ((string)rec.Settings.ModData["Subpart"]).Split(new[] { "||" }, StringSplitOptions.None);
+                                    settings.SubPartNumber = data.FirstOrDefault();
+                                    settings.SubPartName = data.LastOrDefault();
+                                }
+
+                                if (rec.Settings.ModData.ContainsKey("Item"))
+                                {
+                                    var data = ((string)rec.Settings.ModData["Item"]).Split(new[] { "||" }, StringSplitOptions.None);
+                                    settings.ItemNumber = data.FirstOrDefault();
+                                    settings.ItemtName = data.LastOrDefault();
+                                }
+
+                                if (rec.Settings.ModData.ContainsKey("MH"))
+                                    settings.MH = (int)rec.Settings.ModData["MH"];
+
+                                if (rec.Settings.ModData.ContainsKey("Audit"))
+                                {
+                                    var revAudit = JsonConvert.DeserializeObject<RevisionAudit>((string)rec.Settings.ModData["Audit"]);
+                                    if (revAudit != null)
                                     {
-                                        var checkRecords = await context.CheckListRecordDtos
-                                            .Where(i => i.CheckListId == check.ItemId)
-                                            .ToListAsync();
-
-                                        foreach (var r in checkRecords)
+                                        if (revAudit.AuditId != null)
                                         {
-                                            var find = revAudit.AuditId.Any(i => i == r.ItemId);
-                                            if(find)
-                                                continue;
+                                            var checkRecords = await context.CheckListRecordDtos
+                                                .Where(i => i.CheckListId == check.ItemId)
+                                                .ToListAsync();
 
-                                            r.IsDeleted = true;
+                                            foreach (var r in checkRecords)
+                                            {
+                                                var find = revAudit.AuditId.Any(i => i == r.ItemId);
+                                                if (find)
+                                                    continue;
+
+                                                r.IsDeleted = true;
+                                            }
+                                        }
+
+                                        if (revAudit.NewAudit != null)
+                                        {
+                                            context.CheckListRecordDtos.AddRange(revAudit.NewAudit.Select(i => new CheckListRecordDTO()
+                                            {
+                                                OptionNumber = i.OptionNumber,
+                                                Remark = i.Remark,
+                                                Option = i.OpttionId,
+                                                CheckListId = i.CheckListId
+                                            }));
                                         }
                                     }
-
-                                    if (revAudit.NewAudit!= null)
-                                    {
-                                        context.CheckListRecordDtos.AddRange(revAudit.NewAudit.Select(i => new CheckListRecordDTO()
-                                        {
-                                            OptionNumber = i.OptionNumber,
-                                            Remark = i.Remark,
-                                            Option = i.OpttionId,
-                                            CheckListId = i.CheckListId
-                                        }));
-                                    }
                                 }
+
+                                check.SettingsJSON = JsonConvert.SerializeObject(settings);
+                            }
+                            else if (check.CheckUIType == CheckUIType.Iosa)
+                            {
+                                var settings = JsonConvert.DeserializeObject<CheckListSettingsSAFA>(check.SettingsJSON);
+                                
+                                if (rec.Settings.ModData.ContainsKey("Source"))
+                                    check.Source = (string)rec.Settings.ModData["Source"];
+
+                                if (rec.Settings.ModData.ContainsKey("Inspection Item"))
+                                {
+                                    var data = ((string)rec.Settings.ModData["Inspection Item"]).Split(new[]{"||"}, StringSplitOptions.None);
+                                    settings.Item = data.FirstOrDefault();
+                                    settings.ItemNumber = data.LastOrDefault();
+                                }
+                                
+                                if (rec.Settings.ModData.ContainsKey("Inspection Title"))
+                                    settings.Title = (string)rec.Settings.ModData["Inspection Title"];
+                                
+                                if (rec.Settings.ModData.ContainsKey("Standard"))
+                                    settings.Standard = (string)rec.Settings.ModData["Standard"];
+                                
+                                if (rec.Settings.ModData.ContainsKey("Standard Ref"))
+                                    settings.StandardRef = (string)rec.Settings.ModData["Standard Ref"];
+                                
+                                if (rec.Settings.ModData.ContainsKey("PDF Code"))
+                                    settings.PdfCode = (string)rec.Settings.ModData["PDF Code"];
+                                
+                                if (rec.Settings.ModData.ContainsKey("Standard Text"))
+                                    settings.StandardText = (string)rec.Settings.ModData["Standard Text"];
+                                
+                                if (rec.Settings.ModData.ContainsKey("Finding"))
+                                    settings.PreDescribedFinding = (string)rec.Settings.ModData["Finding"];
+                                
+                                if (rec.Settings.ModData.ContainsKey("Instruction"))
+                                    settings.Instruction = (string)rec.Settings.ModData["Instruction"];
+                                
+                                if (rec.Settings.ModData.ContainsKey("MH"))
+                                    settings.MH = (int)rec.Settings.ModData["MH"];
+                                
+                                check.SettingsJSON = JsonConvert.SerializeObject(settings);
                             }
 
-                            check.SettingsJSON = JsonConvert.SerializeObject(settings);
+
                         }
                     }
 

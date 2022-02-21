@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -35,6 +36,28 @@ namespace CAA.Entity.Models.DTO
         
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public int ProgramTypeId { get; set; }
+        
+        
+        [NotMapped]
+        public CheckUIType CheckUIType
+        {
+            get
+            {
+                if (((IList)new[] { 1, 6, 5 }).Contains(ProgramTypeId))
+                    return CheckUIType.Iosa;
+                else if (((IList)new[] { 3, 7, 4 }).Contains(ProgramTypeId))
+                    return CheckUIType.Safa;
+
+                return CheckUIType.None;
+            }
+        }
+    }
+    
+    public enum CheckUIType
+    {
+        Iosa,
+        Safa,
+        None
     }
     
     
