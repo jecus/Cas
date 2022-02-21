@@ -84,7 +84,7 @@ namespace SmartCore.CAA.Check
         {
             get
             {
-                if (!IsSafa)
+                if (CheckUIType == CheckUIType.Iosa)
                 {
                     return JsonConvert.SerializeObject(Settings,
                         Formatting.Indented,
@@ -100,7 +100,7 @@ namespace SmartCore.CAA.Check
 
             set
             {
-                if (!IsSafa)
+                if (CheckUIType == CheckUIType.Safa)
                 {
                     Settings = string.IsNullOrWhiteSpace(value)
                         ? new CheckListSettings()
@@ -170,10 +170,6 @@ namespace SmartCore.CAA.Check
                 return CheckUIType.None;
             }
         }
-
-
-        public bool IsSafa => new[] { ProgramType.SAFA, ProgramType.SACA, ProgramType.SANAKG, }.Contains(ProgramType);
-        
         
         public override BaseEntityObject GetCopyUnsaved(bool marked = true)
         {
