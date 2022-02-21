@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa;
+using CAS.UI.UICAAControls.CheckList.EditionRevision.Safa;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
@@ -162,9 +163,19 @@ namespace CAS.UI.UICAAControls.CheckList
 				{
                     if (IsRevision)
                     {
-                        var form = new CheckListRevEditForm(SelectedItem,RevisionId);
-                        if (form.ShowDialog() == DialogResult.OK)
-                            _animatedThreadWorker.RunWorkerAsync();
+                        if (SelectedItem.CheckUIType == CheckUIType.Iosa)
+                        {
+                            var form = new CheckListRevEditForm(SelectedItem,RevisionId);
+                            if (form.ShowDialog() == DialogResult.OK)
+                                _animatedThreadWorker.RunWorkerAsync();
+                        }
+                        else if (SelectedItem.CheckUIType == CheckUIType.Safa)
+                        {
+                            var form = new CheckListSAFARevEditForm(SelectedItem,RevisionId);
+                            if (form.ShowDialog() == DialogResult.OK)
+                                _animatedThreadWorker.RunWorkerAsync();
+                        }
+                        
                     }
                     else
                     {

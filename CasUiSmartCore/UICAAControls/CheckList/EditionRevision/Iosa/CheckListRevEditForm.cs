@@ -58,11 +58,6 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             _currentCheck.CheckListRecords.Clear();
             _currentCheck.CheckListRecords.AddRange(records);
             
-            comboBoxProgramType.Items.Clear();
-            comboBoxProgramType.Items.AddRange(ProgramType.Items.OrderBy(i => i.FullName).ToArray());
-            comboBoxProgramType.SelectedItem = ProgramType.GetItemById(_currentCheck.Settings.ProgramTypeId) ?? ProgramType.Unknown;
-            
-            
             metroTextSource.Text = _currentCheck.Source;
             metroTextBoxSectionNumber.Text = _currentCheck.Settings.SectionNumber;
             metroTextBoxSectionName.Text = _currentCheck.Settings.SectionName;
@@ -103,13 +98,6 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
                 checkBoxRef.Checked = true;
                 metroTextBoxReference.Text = (string)_record.Settings.ModData["Reference"];
             }
-            
-            if (_record.Settings.ModData.ContainsKey("Program Type"))
-            {
-                checkBoxProgramType.Checked = true;
-                comboBoxProgramType.SelectedItem = ProgramType.GetItemById(_currentCheck.Settings.ProgramTypeId) ?? ProgramType.Unknown;
-            }
-            
             
             if (_record.Settings.ModData.ContainsKey("Level"))
             {
@@ -221,18 +209,6 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             {
                 if (_record.Settings.ModData.ContainsKey("Reference"))
                     _record.Settings.ModData.Remove("Reference");
-            }
-            
-            if (checkBoxProgramType.Checked)
-            {
-                if (!_record.Settings.ModData.ContainsKey("Program Type"))
-                    _record.Settings.ModData.Add("Program Type", ((ProgramType)comboBoxProgramType.SelectedItem).ItemId);
-                else _record.Settings.ModData["Program Type"] = ((ProgramType)comboBoxProgramType.SelectedItem).ItemId;
-            }
-            else
-            {
-                if (_record.Settings.ModData.ContainsKey("Program Type"))
-                    _record.Settings.ModData.Remove("Program Type");
             }
             
             if (checkBoxLevel.Checked)
@@ -446,11 +422,6 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             metroTextSource.Enabled = checkBoxSource.Checked;
         }
         
-        private void checkBoxFindings_CheckedChanged(object sender, EventArgs e)
-        {
-            comboBoxProgramType.Enabled = checkBoxProgramType.Checked;
-        }
-
         private void checkBoxRef_CheckedChanged(object sender, EventArgs e)
         {
             metroTextBoxReference.Enabled = checkBoxRef.Checked;

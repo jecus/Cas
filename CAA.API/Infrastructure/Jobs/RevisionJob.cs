@@ -66,9 +66,7 @@ namespace CAA.API.Infrastructure.Jobs
 
                              if (rec.Settings.ModData.ContainsKey("Reference"))
                                  settings.Reference = (string)rec.Settings.ModData["Reference"];
-
-                             if (rec.Settings.ModData.ContainsKey("Program Type"))
-                                 settings.ProgramTypeId = (int)rec.Settings.ModData["Program Type"];
+                             
                              
                              if (rec.Settings.ModData.ContainsKey("Level"))
                                  settings.LevelId = (int)rec.Settings.ModData["Level"];
