@@ -21,7 +21,7 @@ namespace SmartCore.CAA.Check
         [Filter("EffDate", Order = 4)]
          DateTime EffDate { get; set; }
     }
-
+    
     [CAADto(typeof(CheckListRevisionDTO))]
     [Serializable]
     public class CheckListRevision : BaseEntityObject, IOperatable, ICheckListRevisionFilterParams

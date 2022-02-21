@@ -42,7 +42,7 @@ namespace CAS.UI.UICAAControls.CheckList
         private readonly int _operatorId;
         private readonly CheckListType _type;
         private readonly int _parentId;
-        private readonly SmartCore.CAA.StandartManual.StandartManual _manual;
+        private SmartCore.CAA.StandartManual.StandartManual _manual;
 
         #region Fields
 
@@ -88,12 +88,8 @@ namespace CAS.UI.UICAAControls.CheckList
             _parentId = parentId;
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
-
-            _filter = new CommonFilterCollection(typeof(ICheckListFilterParams));
-
-			InitToolStripMenuItems();
-			InitListView();
-			UpdateInformation();
+            
+            UpdateInformation();
 		}
 
 
@@ -108,11 +104,7 @@ namespace CAS.UI.UICAAControls.CheckList
             aircraftHeaderControl1.Operator = currentOperator;
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
-
-            _filter = new CommonFilterCollection(typeof(ICheckListFilterParams));
-
-            InitToolStripMenuItems();
-            InitListView();
+            
             UpdateInformation();
         }
 
@@ -123,7 +115,6 @@ namespace CAS.UI.UICAAControls.CheckList
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-
 			if (_type == CheckListType.Routine)
 			{
 				buttonAddNew.Visible = true;
@@ -163,6 +154,18 @@ namespace CAS.UI.UICAAControls.CheckList
             }
 
             
+            if (_manual.CheckUIType == CheckUIType.Iosa)
+	            _filter = new CommonFilterCollection(typeof(ICheckListFilterParams));
+            else if (_manual.CheckUIType == CheckUIType.Safa)
+	            _filter = new CommonFilterCollection(typeof(ICheckListSafaFilterParams));
+
+
+            if (_directivesViewer == null)
+            {
+	            InitToolStripMenuItems();
+	            InitListView();
+            }
+            
 			_directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
@@ -180,9 +183,19 @@ namespace CAS.UI.UICAAControls.CheckList
 			
             if (_type == CheckListType.Routine)
             {
-                _currentRoutineId = _parentId;
+	            _currentRoutineId = _parentId;
 				var records = GlobalObjects.CaaEnvironment.NewLoader
                     .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", _parentId), loadChild: true).ToList();
+				
+				var routine = GlobalObjects.CaaEnvironment.NewLoader
+					.GetObjectById<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(_parentId);
+				var manuals = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(new []
+				{
+					new Filter("OperatorId", _operatorId),
+					new Filter("ProgramTypeId", routine.Settings.TypeId),
+				});
+
+				_manual = manuals.FirstOrDefault();
 
                 var ids = records.Select(i => i.CheckListId);
 
@@ -199,7 +212,14 @@ namespace CAS.UI.UICAAControls.CheckList
 
                 _currentRoutineId = records.Select(i => i.RoutineAuditId).FirstOrDefault();
                 _routineAudit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(_currentRoutineId.Value);
+                var manuals = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(new []
+                {
+	                new Filter("OperatorId", _operatorId),
+	                new Filter("ProgramTypeId", _routineAudit.Settings.TypeId),
+                });
 
+                _manual = manuals.FirstOrDefault();
+                
 				var routines = GlobalObjects.CaaEnvironment.NewLoader
                     .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", _currentRoutineId), loadChild: true).ToList();
 
@@ -232,69 +252,23 @@ namespace CAS.UI.UICAAControls.CheckList
 	            }
             }
 
-            var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
-            
 
-//             var dsRevision = GlobalObjects.CaaEnvironment.Execute($@"
-// select c.ItemId as CheckId, res.Number from dbo.CheckList c
-// cross apply
-// (
-// 	select top 1 r.Number from dbo.CheckListRevisionRecord  rec
-// 	cross apply
-// 	(
-// 		select Number,EffDate, Type, OperatorId from dbo.CheckListRevision 
-// 		where ItemId = rec.ParentId
-// 	)r
-// 	where c.IsDeleted = 0 and rec.CheckListId = c.ItemId and rec.IsDeleted = 0 and r.Type = 1 and r.OperatorId = {_operatorId}
-// 	order by r.EffDate desc
-// ) res");
-//             
-//
-//             var revisions = dsRevision.Tables[0].AsEnumerable()
-//                 .Select(dataRow => new
-//                 {
-//                     Id = dataRow.Field<int>("CheckId"),
-//                     Number = dataRow.Field<int>("Number"),
-//                 }).ToList();
-
-
-			foreach (var check in _initialDocumentArray)
+            if (_manual.CheckUIType == CheckUIType.Iosa)
             {
-                check.Level = levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
-                              FindingLevels.Unknown;
-
-
-				check.Remains = Lifelength.Null;
-                check.Condition = ConditionState.Satisfactory;
-
-
-                // var revision = revisions.FirstOrDefault(i => i.Id == check.ItemId);
-                // if (revision != null)
-                //     check.RevisionNumber = revision.Number;
-                
-				//             var days = (check.Settings.RevisonValidToDate - DateTime.Today).Days;
-				//             var editionDays = 0;
-				// if (!check.Settings.RevisonValidTo)
-				//                 editionDays = (check.Settings.EditionDate - DateTime.Today).Days;
-				//             else
-				//             {
-				//                 var revision = revisions.FirstOrDefault(i => i.Id == check.ItemId);
-				// 	if(revision != null)
-				//                     editionDays = (revision.Date - DateTime.Today).Days;
-				//             }
-				//
-				//             check.Remains = new Lifelength(days - editionDays, null, null);
-				//
-				//
-				// if(check.Remains.Days < 0)
-				//                 check.Condition = ConditionState.Overdue;
-				// else if (check.Remains.Days >= 0 && check.Remains.Days <= check.Settings.RevisonValidToNotify)
-				//                 check.Condition = ConditionState.Notify;
-			}
-
-
+	            var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
             
+	            foreach (var check in _initialDocumentArray)
+	            {
+		            check.Level = levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
+		                          FindingLevels.Unknown;
 
+
+		            check.Remains = Lifelength.Null;
+		            check.Condition = ConditionState.Satisfactory;
+	            }
+            }
+           
+            
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
 
 			AnimatedThreadWorker.ReportProgress(70, "filter directives");
@@ -355,7 +329,7 @@ namespace CAS.UI.UICAAControls.CheckList
             }
             else
             {
-				var form = new CheckListForm(_directivesViewer.SelectedItem, false);
+				var form = new CheckListForm.CheckListForm(_directivesViewer.SelectedItem, false);
                 if (form.ShowDialog() == DialogResult.OK)
                     AnimatedThreadWorker.RunWorkerAsync();
 			}
@@ -367,9 +341,22 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private void InitListView()
         {
-            if (_type == CheckListType.Audit)
-                _directivesViewer = new CheckListLiteView(AnimatedThreadWorker);
-            else _directivesViewer = new CheckListView(AnimatedThreadWorker, false);
+	        if (_type == CheckListType.Audit)
+	        {
+		        if (_manual.CheckUIType == CheckUIType.Iosa)
+			        _directivesViewer = new CheckListLiteView(AnimatedThreadWorker);
+		        else  if (_manual.CheckUIType == CheckUIType.Safa)
+			        _directivesViewer = new CheckListSAFAView(AnimatedThreadWorker, false);
+		        else return;
+	        }
+            else
+            {
+	            if (_manual.CheckUIType == CheckUIType.Iosa)
+		            _directivesViewer = new CheckListView(AnimatedThreadWorker, false);
+	            else  if (_manual.CheckUIType == CheckUIType.Safa)
+		            _directivesViewer = new CheckListSAFAView(AnimatedThreadWorker, false);
+	            else return;
+            }
 
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);

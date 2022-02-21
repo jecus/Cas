@@ -14,32 +14,22 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 	///</summary>
 	public partial class PelItemListView : BaseGridViewControl<CheckLists>
 	{
-		#region Fields
-
-		#endregion
-
 		#region Constructors
 
-		#region public PersonnelListView()
-		///<summary>
-		///</summary>
+		
 		public PelItemListView()
 		{
 			InitializeComponent();
-			ColumnIndexes = new List<string>()
-			{
-				"Section №", "Part №","SubPart №","Item №"
-			};
-			SortDirection = SortDirection.Desc;
-			EnableCustomSorting = true;
-
-			this.radGridView1.MasterTemplate.GroupComparer = new GroupComparer();
+			// ColumnIndexes = new List<string>()
+			// {
+			// 	"Section №", "Part №","SubPart №","Item №"
+			// };
+			// SortDirection = SortDirection.Desc;
+			// EnableCustomSorting = true;
+			//
+			// this.radGridView1.MasterTemplate.GroupComparer = new GroupComparer();
 		}
-
-        public int OperatorId { get; set; }
-
-		#endregion
-
+		
 		#endregion
 
 		#region Methods
@@ -77,7 +67,6 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 		}
 		#endregion
 		
-		
 		protected override List<CustomCell> GetListViewSubItems(CheckLists item)
 		{
 			var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
@@ -102,7 +91,75 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 			return subItems;
 		}
 		
+		#endregion
+	}
+	
+	public  class PelItemSafaListView : PelItemListView
+	{
+		#region Constructors
+
+		#region public PersonnelListView()
+		///<summary>
+		///</summary>
+		public PelItemSafaListView() : base()
+		{
+			
+		}
+		
+		#endregion
+
+		#endregion
+
+		#region Methods
+		
+		protected override void GroupingItems()
+		{
+			
+		}
+		
+
+		#region protected override void SetHeaders()
+		/// <summary>
+		/// Устанавливает заголовки
+		/// </summary>
+		protected override void SetHeaders()
+		{
+			AddColumn("Source", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Inspection Item", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Inspection Title", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Standard", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Standard Ref", (int)(radGridView1.Width * 0.24f));
+			AddColumn("PDF Code", (int)(radGridView1.Width * 0.24f));
+
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+		}
+		#endregion
+		
+		
+		protected override List<CustomCell> GetListViewSubItems(CheckLists item)
+		{
+			var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
+
+			var subItems = new List<CustomCell>()
+			{
+				CreateRow(item.Source, item.Source),
+				CreateRow(item.SettingsSafa.Item, item.SettingsSafa.Item),
+				CreateRow(item.SettingsSafa.Title, item.SettingsSafa.Title),
+				CreateRow(item.SettingsSafa.Standard, item.SettingsSafa.Standard),
+				CreateRow(item.SettingsSafa.StandardRef, item.SettingsSafa.StandardRef),
+				CreateRow(item.SettingsSafa.PdfCode, item.SettingsSafa.PdfCode),
+
+				CreateRow(author, author)
+			};
+
+			return subItems;
+		}
+		
 
 		#endregion
 	}
+	
+	
+	
+	
 }

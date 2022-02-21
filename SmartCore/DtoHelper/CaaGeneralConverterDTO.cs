@@ -1394,6 +1394,7 @@ namespace SmartCore.DtoHelper
 				Source = levels.Source,
 				EditionId = levels.EditionId,
 				ManualId  = levels.ManualId,
+				ProgramType  = ProgramType.GetItemById(levels.ProgramTypeId),
 				OperatorId = levels.OperatorId,
 				SettingsJSON =  levels.SettingsJSON
             };
@@ -1414,6 +1415,7 @@ namespace SmartCore.DtoHelper
                 Updated = levels.Updated,
                 Source = levels.Source,
                 EditionId = levels.EditionId,
+                ProgramTypeId  = levels.ProgramType?.ItemId ?? -1,
                 ManualId  = levels.ManualId,
                 OperatorId = levels.OperatorId,
 				SettingsJSON =  levels.SettingsJSON

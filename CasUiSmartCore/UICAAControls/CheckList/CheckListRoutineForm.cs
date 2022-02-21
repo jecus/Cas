@@ -25,6 +25,7 @@ namespace CAS.UI.UICAAControls.CheckList
         private List<CheckLists> _updateChecks = new List<CheckLists>();
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private IList<FindingLevels> _levels = new List<FindingLevels>();
+        private SmartCore.CAA.StandartManual.StandartManual _manual;
 
         public CheckListRoutineForm(int routineId, int operatorId)
         {
@@ -38,6 +39,29 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (_manual.CheckUIType == CheckUIType.Safa)
+            {
+                _fromcheckListView = new CheckListSAFAView();
+                _tocheckListView = new CheckListSAFAView();
+            }
+            else if (_manual.CheckUIType == CheckUIType.Iosa)
+            {
+                _fromcheckListView = new CheckListView();
+                _tocheckListView = new CheckListView();
+            }
+            
+            _fromcheckListView.Location = new System.Drawing.Point(5, 53);
+            _fromcheckListView.Name = "_fromcheckListView";
+            _fromcheckListView.OldColumnIndex = 0;
+            _fromcheckListView.Size = new System.Drawing.Size(1510, 290);
+            _tocheckListView.Location = new System.Drawing.Point(5, 381);
+            _tocheckListView.Name = "_tocheckListView";
+            _tocheckListView.OldColumnIndex = 0;
+            _tocheckListView.Size = new System.Drawing.Size(1510, 290);
+            
+            Controls.Add(_tocheckListView);
+            Controls.Add(_fromcheckListView);
+            
             UpdateInformation();
         }
 
@@ -60,7 +84,7 @@ namespace CAS.UI.UICAAControls.CheckList
             if(!manuals.Any())
                 return;
 
-            var manual = manuals.FirstOrDefault();
+            _manual = manuals.FirstOrDefault();
             
             
             var editions = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new List<Filter>()
@@ -68,7 +92,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 new Filter("Status", (byte)EditionRevisionStatus.Open),
                 new Filter("Type", (byte)RevisionType.Edition),
                 new Filter("OperatorId", _operatorId),
-                new Filter("ManualId", manual.ItemId),
+                new Filter("ManualId", _manual.ItemId),
             });
             if (editions.Any())
             {
@@ -76,24 +100,29 @@ namespace CAS.UI.UICAAControls.CheckList
                 _addedChecks.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new []
                 {
                     new Filter("EditionId", edition.ItemId),
-                    new Filter("ManualId", manual.ItemId)
+                    new Filter("ManualId", _manual.ItemId)
                 } ,loadChild:true));
 		            
                 foreach (var check in _addedChecks)
                     check.EditionNumber = edition.Number;
             }
+
             
-            _levels.Clear();
-            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
-
-
-            foreach (var check in _addedChecks)
+            if (_manual.CheckUIType == CheckUIType.Iosa)
             {
-                check.Level = _levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
-                              FindingLevels.Unknown;
-                check.Remains = Lifelength.Null;
-                check.Condition = ConditionState.Satisfactory;
+                _levels.Clear();
+                _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
+
+
+                foreach (var check in _addedChecks)
+                {
+                    check.Level = _levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
+                                  FindingLevels.Unknown;
+                    check.Remains = Lifelength.Null;
+                    check.Condition = ConditionState.Satisfactory;
+                }
             }
+            
             
             
             var records = GlobalObjects.CaaEnvironment.NewLoader
@@ -131,15 +160,15 @@ namespace CAS.UI.UICAAControls.CheckList
 
 
                     MessageBox.Show("All records updated successfull!", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
-                    //DialogResult = DialogResult.OK;
-                    //Close();
+                    DialogResult = DialogResult.OK;
+                    Close();
 
-                    foreach (var item in _tocheckListView.SelectedItems.ToArray())
-                    {
-                        _updateChecks.Remove(item);
-                        _addedChecks.Add(item);
-                    }
-                    _animatedThreadWorker.RunWorkerAsync();
+                    // foreach (var item in _tocheckListView.SelectedItems.ToArray())
+                    // {
+                    //     _updateChecks.Remove(item);
+                    //     _addedChecks.Add(item);
+                    // }
+                    // _animatedThreadWorker.RunWorkerAsync();
                 }
             }
             catch (Exception ex)
@@ -184,7 +213,10 @@ namespace CAS.UI.UICAAControls.CheckList
                 _updateChecks.Remove(item);
                 _addedChecks.Add(item);
             }
-
+            
+            GlobalObjects.CaaEnvironment.NewLoader.Execute(
+                $"delete from  dbo.[RoutineAuditRecords] where RoutineAuditId = {_routineId} and CheckListId in ({string.Join(",",_tocheckListView.SelectedItems.Select(i => i.ItemId))})");
+            
             _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
             _tocheckListView.SetItemsArray(_updateChecks.ToArray());
         }

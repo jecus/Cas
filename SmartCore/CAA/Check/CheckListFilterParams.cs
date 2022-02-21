@@ -44,4 +44,13 @@ namespace SmartCore.CAA.Check
         [Filter("Level", Order = 17)]
         FindingLevels Level { get; set; }
     }
+    
+    
+    public interface ICheckListSafaFilterParams
+    {
+        [Filter("Source", Order = 1)]
+        string Source { get; set; }
+
+       
+    }
 }

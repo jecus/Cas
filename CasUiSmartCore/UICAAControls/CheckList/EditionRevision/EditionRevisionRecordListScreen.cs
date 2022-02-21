@@ -16,6 +16,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.Dictionary;
 using SmartCore.CAA.FindingLevel;
+using SmartCore.CAA.RoutineAudits;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using Telerik.WinControls.UI;
@@ -55,7 +56,10 @@ namespace CAS.UI.UICAAControls.CheckList
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
 
-            _filter = new CommonFilterCollection(typeof(ICheckListRevisionFilterParams));
+            if (_manual.CheckUIType == CheckUIType.Iosa)
+				_filter = new CommonFilterCollection(typeof(ICheckListFilterParams));
+            else if (_manual.CheckUIType == CheckUIType.Safa)
+	            _filter = new CommonFilterCollection(typeof(ICheckListSafaFilterParams));
             
 			InitToolStripMenuItems();
 			InitListView();
@@ -115,8 +119,13 @@ namespace CAS.UI.UICAAControls.CheckList
 	            }
             }
             
-            var lvlids = _initialDocumentArray.Select(i => i.Settings.LevelId).Distinct();
-            var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("ItemId", lvlids));
+            var lvlids = _initialDocumentArray.Select(i => i.Settings?.LevelId).Distinct();
+            var levels = new List<FindingLevels>();
+            if (lvlids.Any())
+            {
+	            levels.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("ItemId", lvlids)));
+            }
+            
             
             foreach (var check in _initialDocumentArray)
             {
@@ -194,8 +203,20 @@ namespace CAS.UI.UICAAControls.CheckList
 		private void InitListView()
 		{
 			if (_parent.Type == RevisionType.Edition)
-				_directivesViewer = new CheckListView(AnimatedThreadWorker);
-			else _directivesViewer = new CheckListRevisionView(AnimatedThreadWorker);
+			{
+				if (_manual.CheckUIType == CheckUIType.Iosa)
+					_directivesViewer = new CheckListView(AnimatedThreadWorker);
+				else  if (_manual.CheckUIType == CheckUIType.Safa)
+					_directivesViewer = new CheckListSAFAView(AnimatedThreadWorker);
+				
+			}
+			else
+			{
+				if (_manual.CheckUIType == CheckUIType.Iosa)
+					_directivesViewer = new CheckListRevisionView(AnimatedThreadWorker);
+				else  if (_manual.CheckUIType == CheckUIType.Safa)
+					_directivesViewer = new CheckListRevisionSAFAView(AnimatedThreadWorker);
+			}
 			
             _directivesViewer.IsRevision = _parent.Type == RevisionType.Revision;
             _directivesViewer.RevisionId = _parent.Type == RevisionType.Revision ? _parent.ItemId : -1;
@@ -275,7 +296,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		}
 
 		#endregion
-
+ 
 		#region private void FilterItems(IEnumerable<Specialist> initialCollection, ICommonCollection<Specialist> resultCollection)
 
 		///<summary>
@@ -368,25 +389,58 @@ namespace CAS.UI.UICAAControls.CheckList
 			{
 				OperatorId = _operatorId,
 				ManualId = _manual.ItemId,
-				Settings = new CheckListSettings()
+				ProgramType = ProgramType.GetItemById(_manual.ProgramTypeId)
+			};
+
+			if (check.CheckUIType == CheckUIType.Iosa)
+			{
+				check.Settings = new CheckListSettings()
 				{
 					ProgramTypeId = _manual.ProgramType.ItemId
+				};
+				
+				if (_parent.Type == RevisionType.Revision)
+				{
+					check.EditionId = -1;
+					var form = new CheckListForm.CheckListForm(check, _parent.ItemId);
+					if (form.ShowDialog() == DialogResult.OK)
+						AnimatedThreadWorker.RunWorkerAsync();
 				}
-			};
-			
-			if (_parent.Type == RevisionType.Revision)
+				else
+				{
+					check.EditionId = _parent.ItemId;
+					var form = new CheckListForm.CheckListForm(check);
+					if (form.ShowDialog() == DialogResult.OK)
+						AnimatedThreadWorker.RunWorkerAsync();
+				}
+			}
+			else if (check.CheckUIType == CheckUIType.Safa)
 			{
-				check.EditionId = -1;
-				var form = new CheckListForm(check, _parent.ItemId);
-				if (form.ShowDialog() == DialogResult.OK)
-					AnimatedThreadWorker.RunWorkerAsync();
+				check.SettingsSafa = new CheckListSettingsSAFA()
+				{
+					ProgramTypeId = _manual.ProgramType.ItemId
+				};
+				
+				if (_parent.Type == RevisionType.Revision)
+				{
+					check.EditionId = -1;
+					var form = new CheckListForm.CheckListSAFAForm(check, _parent.ItemId);
+					if (form.ShowDialog() == DialogResult.OK)
+						AnimatedThreadWorker.RunWorkerAsync();
+				}
+				else
+				{
+					check.EditionId = _parent.ItemId;
+					var form = new CheckListForm.CheckListSAFAForm(check);
+					if (form.ShowDialog() == DialogResult.OK)
+						AnimatedThreadWorker.RunWorkerAsync();
+				}
 			}
 			else
 			{
-				check.EditionId = _parent.ItemId;
-				var form = new CheckListForm(check);
-				if (form.ShowDialog() == DialogResult.OK)
-					AnimatedThreadWorker.RunWorkerAsync();
+				MessageBox.Show($"For ProgramType:{_manual.ProgramType} form not found!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				e.Cancel = true;
+
 			}
 			
 		}

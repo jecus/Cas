@@ -19,26 +19,23 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 		#endregion
 
 		#region Constructors
-
-		#region public PersonnelListView()
+		
 		///<summary>
 		///</summary>
 		public AuditPelRecordListView()
 		{
 			InitializeComponent();
-			ColumnIndexes = new List<string>()
-			{
-				"Section №", "Part №","SubPart №","Item №"
-			};
-			SortDirection = SortDirection.Desc;
-			EnableCustomSorting = true;
-
-			this.radGridView1.MasterTemplate.GroupComparer = new GroupComparer();
+			// ColumnIndexes = new List<string>()
+			// {
+			// 	"Section №", "Part №","SubPart №","Item №"
+			// };
+			// SortDirection = SortDirection.Desc;
+			// EnableCustomSorting = true;
+			//
+			// this.radGridView1.MasterTemplate.GroupComparer = new GroupComparer();
 		}
+		
 
-        public int OperatorId { get; set; }
-
-		#endregion
 
 		#endregion
 
@@ -99,6 +96,65 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 				CreateRow(item.CheckList.Settings.Requirement, item.CheckList.Settings.Requirement),
 				CreateRow(item.CheckList.Source, item.CheckList.Source),
 				CreateRow($"{item.Specialist.FirstName} {item.Specialist.LastName}", item.Specialist),
+
+				CreateRow(author, author)
+			};
+
+			return subItems;
+		}
+		
+
+		#endregion
+	}
+	
+	public partial  class AuditPelRecordSafaListView : AuditPelRecordListView
+	{
+
+		#region Constructors
+
+		#region public PersonnelListView()
+		///<summary>
+		///</summary>
+		public AuditPelRecordSafaListView() :base()
+		{
+		}
+		
+		#endregion
+
+		#endregion
+
+		#region Methods
+
+		#region protected override void SetHeaders()
+		/// <summary>
+		/// Устанавливает заголовки
+		/// </summary>
+		protected override void SetHeaders()
+		{
+			AddColumn("Source", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Inspection Item", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Inspection Title", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Standard", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Standard Ref", (int)(radGridView1.Width * 0.24f));
+			AddColumn("PDF Code", (int)(radGridView1.Width * 0.24f));
+
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+		}
+		#endregion
+		
+		
+		protected override List<CustomCell> GetListViewSubItems(AuditPelRecord item)
+		{
+			var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
+
+			var subItems = new List<CustomCell>()
+			{
+				CreateRow(item.CheckList.Source, item.CheckList.Source),
+				CreateRow(item.CheckList.SettingsSafa.Item, item.CheckList.SettingsSafa.Item),
+				CreateRow(item.CheckList.SettingsSafa.Title, item.CheckList.SettingsSafa.Title),
+				CreateRow(item.CheckList.SettingsSafa.Standard, item.CheckList.SettingsSafa.Standard),
+				CreateRow(item.CheckList.SettingsSafa.StandardRef, item.CheckList.SettingsSafa.StandardRef),
+				CreateRow(item.CheckList.SettingsSafa.PdfCode, item.CheckList.SettingsSafa.PdfCode),
 
 				CreateRow(author, author)
 			};

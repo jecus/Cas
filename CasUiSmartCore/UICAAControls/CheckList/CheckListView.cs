@@ -22,8 +22,8 @@ namespace CAS.UI.UICAAControls.CheckList
 	///</summary>
 	public partial class CheckListView : BaseGridViewControl<CheckLists>
 	{
-        private readonly AnimatedThreadWorker _animatedThreadWorker;
-        private readonly bool _enable;
+        protected AnimatedThreadWorker _animatedThreadWorker;
+        protected  bool _enable;
 
         #region Fields
 
@@ -31,7 +31,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		#region Constructors
 
-		#region public PersonnelListView()
+
 
         public CheckListView()
         {
@@ -69,8 +69,7 @@ namespace CAS.UI.UICAAControls.CheckList
         public int? AuditId { get; set; }
         public bool IsRevision { get; set; }
         public int RevisionId { get; set; }
-
-        #endregion
+        
 
 		#endregion
 
@@ -168,9 +167,19 @@ namespace CAS.UI.UICAAControls.CheckList
                     }
                     else
                     {
-                        var form = new CheckListForm(SelectedItem,_enable);
-                        if (form.ShowDialog() == DialogResult.OK)
-                            _animatedThreadWorker.RunWorkerAsync();
+                        if (SelectedItem.CheckUIType == CheckUIType.Iosa)
+                        {
+                            var form = new CheckListForm.CheckListForm(SelectedItem,_enable);
+                            if (form.ShowDialog() == DialogResult.OK)
+                                _animatedThreadWorker.RunWorkerAsync();
+                        }
+                        else if (SelectedItem.CheckUIType == CheckUIType.Safa)
+                        {
+                            var form = new CheckListForm.CheckListSAFAForm(SelectedItem, _enable);
+                            if (form.ShowDialog() == DialogResult.OK)
+                                _animatedThreadWorker.RunWorkerAsync();
+                        }
+                        else e.Cancel = true;
                     }
                 }
                 
@@ -245,7 +254,7 @@ namespace CAS.UI.UICAAControls.CheckList
             
         }
         
-            #region protected override void SetHeaders()
+        #region protected override void SetHeaders()
         /// <summary>
         /// Устанавливает заголовки
         /// </summary>
@@ -304,5 +313,127 @@ namespace CAS.UI.UICAAControls.CheckList
         }
 
         #endregion
+    }
+    
+    public class CheckListSAFAView : CheckListView
+    {
+        public CheckListSAFAView()
+        {
+            InitializeComponent();
+        }
+        
+        public CheckListSAFAView(AnimatedThreadWorker worker, bool enable = true)
+        {
+            InitializeComponent();
+            _animatedThreadWorker = worker;
+            _enable = enable;
+        }
+        
+        #region protected override void SetHeaders()
+        /// <summary>
+        /// Устанавливает заголовки
+        /// </summary>
+        protected override void SetHeaders()
+        {
+            AddColumn("Source", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Inspection Item", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Inspection Title", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Standard", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Standard Ref", (int)(radGridView1.Width * 0.24f));
+            AddColumn("PDF Code", (int)(radGridView1.Width * 0.24f));
+
+            AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+        }
+        #endregion
+
+        #region protected override List<CustomCell> GetListViewSubItems(Specialization item)
+
+        protected override List<CustomCell> GetListViewSubItems(CheckLists item)
+        {
+            var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
+
+            var subItems = new List<CustomCell>()
+            {
+                CreateRow(item.Source, item.Source),
+                CreateRow(item.SettingsSafa.Item, item.SettingsSafa.Item),
+                CreateRow(item.SettingsSafa.Title, item.SettingsSafa.Title),
+                CreateRow(item.SettingsSafa.Standard, item.SettingsSafa.Standard),
+                CreateRow(item.SettingsSafa.StandardRef, item.SettingsSafa.StandardRef),
+                CreateRow(item.SettingsSafa.PdfCode, item.SettingsSafa.PdfCode),
+
+                CreateRow(author, author)
+            };
+
+            return subItems;
+        }
+
+        protected override void GroupingItems()
+        {
+            
+        }
+
+        #endregion
+    }
+    
+    public class CheckListRevisionSAFAView : CheckListView
+    {
+        
+        public CheckListRevisionSAFAView()
+        {
+            InitializeComponent();
+        }
+        public CheckListRevisionSAFAView(AnimatedThreadWorker worker, bool enable = true)
+        {
+            InitializeComponent();
+            _animatedThreadWorker = worker;
+            _enable = enable;
+        }
+        
+        #region protected override void SetHeaders()
+        /// <summary>
+        /// Устанавливает заголовки
+        /// </summary>
+        protected override void SetHeaders()
+        {
+            AddColumn("Status", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Source", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Inspection Item", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Inspection Title", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Standard", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Standard Ref", (int)(radGridView1.Width * 0.24f));
+            AddColumn("PDF Code", (int)(radGridView1.Width * 0.24f));
+
+            AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+        }
+        #endregion
+
+        #region protected override List<CustomCell> GetListViewSubItems(Specialization item)
+
+        protected override List<CustomCell> GetListViewSubItems(CheckLists item)
+        {
+            var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
+
+            var subItems = new List<CustomCell>()
+            {
+                CreateRow(item.RevisionStatus.ToString(), item.RevisionStatus),
+                CreateRow(item.Source, item.Source),
+                CreateRow(item.SettingsSafa.Item, item.SettingsSafa.Item),
+                CreateRow(item.SettingsSafa.Title, item.SettingsSafa.Title),
+                CreateRow(item.SettingsSafa.Standard, item.SettingsSafa.Standard),
+                CreateRow(item.SettingsSafa.StandardRef, item.SettingsSafa.StandardRef),
+                CreateRow(item.SettingsSafa.PdfCode, item.SettingsSafa.PdfCode),
+
+                CreateRow(author, author)
+            };
+
+            return subItems;
+        }
+
+        #endregion
+        
+        protected override void GroupingItems()
+        {
+            
+        }
     }
 }

@@ -16,9 +16,8 @@ using SmartCore.CAA.RoutineAudits;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Files;
-using Telerik.WinControls.UI;
 
-namespace CAS.UI.UICAAControls.CheckList
+namespace CAS.UI.UICAAControls.CheckList.CheckListForm
 {
     public partial class CheckListForm : MetroForm
     {
@@ -58,6 +57,7 @@ namespace CAS.UI.UICAAControls.CheckList
                         metroTextBoxPartNumber.Enabled =
                             metroTextBoxPartName.Enabled =
                                 metroTextBoxSubPartNumber.Enabled =
+                                    metroTextBoxMH.Enabled =
                                     metroTextBoxSubPartName.Enabled =
                                         metroTextBoxItemNumber.Enabled =
                                             metroTextBoxItemName.Enabled =

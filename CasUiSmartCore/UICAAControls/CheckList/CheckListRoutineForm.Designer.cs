@@ -33,8 +33,6 @@ namespace CAS.UI.UICAAControls.CheckList
         {
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this._fromcheckListView = new CAS.UI.UICAAControls.CheckList.CheckListView();
-            this._tocheckListView = new CAS.UI.UICAAControls.CheckList.CheckListView();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
             this.SuspendLayout();
@@ -64,28 +62,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.buttonCancel.TabIndex = 327;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            // 
-            // _fromcheckListView
-            // 
-            this._fromcheckListView.Location = new System.Drawing.Point(5, 53);
-            this._fromcheckListView.MenuOpeningAction = null;
-            this._fromcheckListView.Name = "_fromcheckListView";
-            this._fromcheckListView.OldColumnIndex = 0;
-            this._fromcheckListView.PasteComplete = null;
-            this._fromcheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-            this._fromcheckListView.Size = new System.Drawing.Size(1510, 290);
-            this._fromcheckListView.TabIndex = 329;
-            // 
-            // _tocheckListView
-            // 
-            this._tocheckListView.Location = new System.Drawing.Point(5, 381);
-            this._tocheckListView.MenuOpeningAction = null;
-            this._tocheckListView.Name = "_tocheckListView";
-            this._tocheckListView.OldColumnIndex = 0;
-            this._tocheckListView.PasteComplete = null;
-            this._tocheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-            this._tocheckListView.Size = new System.Drawing.Size(1510, 290);
-            this._tocheckListView.TabIndex = 330;
             // 
             // ButtonAdd
             // 
@@ -152,8 +128,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.ClientSize = new System.Drawing.Size(1518, 743);
             this.Controls.Add(this.ButtonDelete);
             this.Controls.Add(this.ButtonAdd);
-            this.Controls.Add(this._tocheckListView);
-            this.Controls.Add(this._fromcheckListView);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.buttonCancel);
             this.Name = "CheckListRoutineForm";

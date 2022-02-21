@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
+using Microsoft.Office.Interop.Excel;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.PEL;
 using SmartCore.Entities.Dictionaries;
@@ -298,6 +299,9 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
 	        if (xx == null || y is null)
 		        return 0;
 
+	        if(xx.Settings == null || yy.Settings == null)
+		        return 0;
+	        
 			var a = Regex.Replace($"{xx.SectionNumber}|{xx.PartNumber}|{xx.SubPartNumber}|{xx.ItemNumber}", @"\s+", " "); ;
             var b = Regex.Replace($"{yy.SectionNumber}|{yy.PartNumber}|{yy.SubPartNumber}|{yy.ItemNumber}", @"\s+", " "); ;
 

@@ -178,7 +178,7 @@ namespace CAS.UI.UICAAControls.CheckList
 				}
 				else
 				{
-                    var form = new CheckListForm(SelectedItem);
+                    var form = new CheckListForm.CheckListForm(SelectedItem);
                     if (form.ShowDialog() == DialogResult.OK)
                         _animatedThreadWorker.RunWorkerAsync();
 				}

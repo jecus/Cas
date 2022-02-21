@@ -21,28 +21,8 @@ namespace CAA.Entity.Models.DTO
         [Column("ManualId")]
         public int  ManualId{ get; set; }
 
-        public string SettingsJSON
-        {
-            get
-            {
-                if (Settings == null)
-                    return null;
-
-                return JsonConvert.SerializeObject(Settings,
-                    Formatting.Indented,
-                    new JsonSerializerSettings {DefaultValueHandling = DefaultValueHandling.Ignore});
-            }
-
-            set => Settings = string.IsNullOrWhiteSpace(value)
-                ? new CheckListDTOSettings()
-                : JsonConvert.DeserializeObject<CheckListDTOSettings>(value);
-        }
-
-        [NotMapped]
-        public CheckListDTOSettings Settings { get; set; }
-
-
-
+        public string SettingsJSON { get; set; }
+        
         #region Navigation Property
 
         [Child]
@@ -52,6 +32,9 @@ namespace CAA.Entity.Models.DTO
 
         [Column("OperatorId")]
         public int OperatorId { get; set; }
+        
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public int ProgramTypeId { get; set; }
     }
     
     

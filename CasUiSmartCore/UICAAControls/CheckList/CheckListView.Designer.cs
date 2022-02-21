@@ -26,7 +26,7 @@
         /// Обязательный метод для поддержки конструктора - не изменяйте 
         /// содержимое данного метода при помощи редактора кода.
         /// </summary>
-        private void InitializeComponent()
+        public void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

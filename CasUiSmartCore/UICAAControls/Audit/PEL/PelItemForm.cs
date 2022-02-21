@@ -33,6 +33,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             _auditId = auditId;
             _operatorId = operatorId;
             _addedChecks.AddRange(initialDocumentArray.ToArray());
+            
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
             _animatedThreadWorker.RunWorkerAsync();
@@ -40,6 +41,33 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 
         private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+             if (_addedChecks.Any(i => i.CheckUIType == CheckUIType.Iosa))
+            {
+                _tocheckRevisionListView = new AuditPelRecordListView();
+                _fromcheckRevisionListView = new PelItemListView();
+            }
+            else if (_addedChecks.Any(i => i.CheckUIType == CheckUIType.Safa))
+            {
+                _tocheckRevisionListView = new AuditPelRecordSafaListView();
+                _fromcheckRevisionListView = new PelItemSafaListView();
+            }
+            
+            // 
+            // _fromcheckRevisionListView
+            // 
+            _fromcheckRevisionListView.Location = new System.Drawing.Point(5, 53);
+            _fromcheckRevisionListView.Name = "_fromcheckRevisionListView";
+            _fromcheckRevisionListView.Size = new System.Drawing.Size(1419, 317);
+            // 
+            // _tocheckRevisionListView
+            // 
+            _tocheckRevisionListView.Location = new System.Drawing.Point(5, 417);
+            _tocheckRevisionListView.Name = "_tocheckRevisionListView";
+            _tocheckRevisionListView.Size = new System.Drawing.Size(1419, 346);
+            
+            Controls.Add(_tocheckRevisionListView);
+            Controls.Add(_fromcheckRevisionListView);
+            
             UpdateInformation();
         }
 
@@ -87,11 +115,13 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         {
             comboBoxPersonel.Items.Clear();
             comboBoxPersonel.Items.AddRange(pelSpec.ToArray());
-            
-            
+
+
             _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
+
             _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
         }
+
         private void buttonOk_Click(object sender, EventArgs e)
         {
             try
@@ -173,7 +203,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             var form = new AuditTeamForm(_operatorId,listSpec);
             if (form.ShowDialog() == DialogResult.OK)
             {
-                this.Focus();
+                Focus();
                 comboBoxPersonel.Items.Clear();
                 comboBoxPersonel.Items.AddRange(pelSpec.ToArray());
                 comboBoxPersonel.Items.AddRange(form.PelSpecialists);

@@ -15,6 +15,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UICAAControls.Audit.PEL;
+using CAS.UI.UIControls.NewGrid;
 using SmartCore.CAA.PEL;
 using SmartCore.Entities.General.Personnel;
 using Telerik.WinControls.UI;
@@ -66,9 +67,13 @@ namespace CAS.UI.UICAAControls.CheckList
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-	        _directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
-			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
-			_directivesViewer.Focus();
+	        if (_resultDocumentArray.Any())
+	        {
+		        _directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
+		        headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
+		        _directivesViewer.Focus();
+	        }
+	        
 		}
 
         #endregion
@@ -144,8 +149,11 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private void InitListView()
         {
-            _directivesViewer = new AuditPelRecordListView();
-            _directivesViewer.OperatorId = _operatorId;
+	        if(_checks.Any(i => i.CheckUIType == CheckUIType.Iosa))
+		        _directivesViewer = new AuditPelRecordListView();
+	        else if (_checks.Any(i => i.CheckUIType == CheckUIType.Safa))
+		        _directivesViewer = new AuditPelRecordSafaListView();
+	        
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;

@@ -32,11 +32,8 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         private void InitializeComponent()
         {
             System.Windows.Forms.Label label3;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PelItemForm));
             this.buttonOk = new System.Windows.Forms.Button();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
-            this._fromcheckRevisionListView = new CAS.UI.UICAAControls.Audit.PEL.PelItemListView();
-            this._tocheckRevisionListView = new CAS.UI.UICAAControls.Audit.PEL.AuditPelRecordListView();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
             this.comboBoxPersonel = new System.Windows.Forms.ComboBox();
@@ -64,21 +61,16 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.buttonOk.Text = "OK";
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
-            // _fromcheckRevisionListView
+            // metroLabel6
             // 
-            this._fromcheckRevisionListView.Location = new System.Drawing.Point(5, 53);
-            this._fromcheckRevisionListView.Name = "_fromcheckRevisionListView";
-            this._fromcheckRevisionListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-            this._fromcheckRevisionListView.Size = new System.Drawing.Size(1419, 317);
-            this._fromcheckRevisionListView.TabIndex = 329;
-            // 
-            // _tocheckRevisionListView
-            // 
-            this._tocheckRevisionListView.Location = new System.Drawing.Point(5, 417);
-            this._tocheckRevisionListView.Name = "_tocheckRevisionListView";
-            this._tocheckRevisionListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-            this._tocheckRevisionListView.Size = new System.Drawing.Size(1419, 346);
-            this._tocheckRevisionListView.TabIndex = 330;
+            this.metroLabel6.AutoSize = true;
+            this.metroLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.metroLabel6.Location = new System.Drawing.Point(9, 388);
+            this.metroLabel6.Name = "metroLabel6";
+            this.metroLabel6.Size = new System.Drawing.Size(61, 19);
+            this.metroLabel6.TabIndex = 334;
+            this.metroLabel6.Text = "Personel:";
+            this.metroLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ButtonAdd
             // 
@@ -92,7 +84,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.ButtonAdd.Icon = global::CAS.UI.Properties.Resources.AddIconSmall;
             this.ButtonAdd.IconLayout = System.Windows.Forms.ImageLayout.Center;
             this.ButtonAdd.IconNotEnabled = null;
-            this.ButtonAdd.Location = new System.Drawing.Point(1207, 357);
+            this.ButtonAdd.Location = new System.Drawing.Point(1308, 374);
             this.ButtonAdd.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonAdd.Name = "ButtonAdd";
             this.ButtonAdd.NormalBackgroundImage = null;
@@ -136,17 +128,6 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.ButtonDelete.ToolTipText = "";
             this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
-            // metroLabel6
-            // 
-            this.metroLabel6.AutoSize = true;
-            this.metroLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.metroLabel6.Location = new System.Drawing.Point(9, 388);
-            this.metroLabel6.Name = "metroLabel6";
-            this.metroLabel6.Size = new System.Drawing.Size(61, 19);
-            this.metroLabel6.TabIndex = 334;
-            this.metroLabel6.Text = "Personel:";
-            this.metroLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // comboBoxPersonel
             // 
             this.comboBoxPersonel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -166,7 +147,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.avButtonT1.FontSecondary = new System.Drawing.Font("Verdana", 8F);
             this.avButtonT1.ForeColorMain = System.Drawing.SystemColors.ControlText;
             this.avButtonT1.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
-            this.avButtonT1.Icon = global::CAS.UI.Properties.Resources.AddUser;;
+            this.avButtonT1.Icon = global::CAS.UI.Properties.Resources.AddUser;
             this.avButtonT1.IconLayout = System.Windows.Forms.ImageLayout.Center;
             this.avButtonT1.IconNotEnabled = null;
             this.avButtonT1.Location = new System.Drawing.Point(694, 377);
@@ -183,7 +164,6 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.avButtonT1.TextMain = "Add Personel";
             this.avButtonT1.TextSecondary = "";
             this.avButtonT1.ToolTipText = "";
-            this.avButtonT1.Click += AvButtonT1OnClick;
             // 
             // PelItemForm
             // 
@@ -195,8 +175,6 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.Controls.Add(this.comboBoxPersonel);
             this.Controls.Add(this.ButtonDelete);
             this.Controls.Add(this.ButtonAdd);
-            this.Controls.Add(this._tocheckRevisionListView);
-            this.Controls.Add(this._fromcheckRevisionListView);
             this.Controls.Add(this.buttonOk);
             this.MaximizeBox = false;
             this.Name = "PelItemForm";

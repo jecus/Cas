@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
+using SmartCore.CAA.Check;
 using SmartCore.CAA.RoutineAudits;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -62,6 +64,20 @@ namespace SmartCore.CAA.StandartManual
         public StandartManualSettings Settings { get; set; }
         
         public ProgramType ProgramType => ProgramType.GetItemById(Settings.ProgramTypeId);
+        public CheckUIType CheckUIType
+        {
+            get
+            {
+                if (new[] { ProgramType.IOSA, ProgramType.ISAGO, ProgramType.CAAKG, }.Contains(ProgramType))
+                    return CheckUIType.Iosa;
+                else if (new[] { ProgramType.SAFA, ProgramType.SACA, ProgramType.SANAKG, }.Contains(ProgramType))
+                    return CheckUIType.Safa;
+
+                return CheckUIType.None;
+            }
+        }
+        
+        
         public string Description => Settings.Description;
         public string Remark => Settings.Remark;
         public DateTime ValidTo => Settings.ValidTo;

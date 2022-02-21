@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.FindingLevel;
+using SmartCore.CAA.RoutineAudits;
 using SmartCore.Calculations;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
@@ -19,23 +20,30 @@ using SmartCore.Files;
 
 namespace SmartCore.CAA.Check
 {
+    public enum CheckUIType
+    {
+        Iosa,
+        Safa,
+        None
+    }
+    
+    
     [CAADto(typeof(CheckListDTO))]
     [Serializable]
-    public class CheckLists : BaseEntityObject, ICheckListFilterParams, IFileContainer, IOperatable
+    public class CheckLists : BaseEntityObject, ICheckListFilterParams,ICheckListSafaFilterParams, IFileContainer, IOperatable
     {
         public string Source { get; set; }
-
         public int EditionId { get; set; }
-        
         public int OperatorId { get; set; }
         public int ManualId { get; set; }
 
 
         public List<CheckListRecords> CheckListRecords { get; set; }
         public List<EditionRevisionView> AllRevisions { get; set; }
+        
+        #region File
 
         private CommonCollection<ItemFileLink> _files;
-
         public CommonCollection<ItemFileLink> Files
         {
             get { return _files ?? (_files = new CommonCollection<ItemFileLink>()); }
@@ -50,8 +58,7 @@ namespace SmartCore.CAA.Check
                 }
             }
         }
-
-
+        
         #region public AttachedFile FaaFormFile { get; set; }
 
         [NonSerialized] private AttachedFile _file;
@@ -68,7 +75,8 @@ namespace SmartCore.CAA.Check
 
         #endregion
 
-
+        #endregion
+        
         public Lifelength Remains { get; set; }
         public ConditionState Condition { get; set; }
         
@@ -76,20 +84,96 @@ namespace SmartCore.CAA.Check
         {
             get
             {
-                if (Settings == null)
-                    return null;
-
-                return JsonConvert.SerializeObject(Settings,
-                    Formatting.Indented,
-                    new JsonSerializerSettings {DefaultValueHandling = DefaultValueHandling.Ignore});
+                if (!IsSafa)
+                {
+                    return JsonConvert.SerializeObject(Settings,
+                        Formatting.Indented,
+                        new JsonSerializerSettings {DefaultValueHandling = DefaultValueHandling.Ignore});
+                }
+                else
+                {
+                    return JsonConvert.SerializeObject(SettingsSafa,
+                        Formatting.Indented,
+                        new JsonSerializerSettings {DefaultValueHandling = DefaultValueHandling.Ignore});
+                }
             }
 
-            set => Settings = string.IsNullOrWhiteSpace(value)
-                ? new CheckListSettings()
-                : JsonConvert.DeserializeObject<CheckListSettings>(value);
+            set
+            {
+                if (!IsSafa)
+                {
+                    Settings = string.IsNullOrWhiteSpace(value)
+                        ? new CheckListSettings()
+                        : JsonConvert.DeserializeObject<CheckListSettings>(value);
+                }
+                else
+                {
+                    SettingsSafa = string.IsNullOrWhiteSpace(value)
+                        ? new CheckListSettingsSAFA()
+                        : JsonConvert.DeserializeObject<CheckListSettingsSAFA>(value);
+                }
+            }
         }
 
         public CheckListSettings Settings { get; set; }
+        public CheckListSettingsSAFA SettingsSafa { get; set; }
+        
+        
+        public string NextEditionNumber  { get; set; }
+        public string NextRevisionNumber  { get; set; }
+        public int EditionNumber  { get; set; }
+        public int RevisionNumber  { get; set; }
+        
+        public RevisionCheckType RevisionStatus { get; set; }
+
+        #region ICheckListFilterParams
+        
+        public string SectionNumber => Settings.SectionNumber;
+        public string SectionName => Settings.SectionName;
+        public string PartNumber => Settings.PartNumber;
+        public string PartName => Settings.PartName;
+        public string SubPartNumber => Settings.SubPartNumber;
+        public string SubPartName => Settings.SubPartName;
+        public string ItemNumber => Settings.ItemNumber;
+        public string ItemName => Settings.ItemtName;
+        public string Requirement => Settings.Requirement;
+        public FindingLevels Level { get; set; }
+
+        #endregion
+        
+        public string[] Group
+        {
+            get
+            {
+                var g = Regex.Replace($"{SectionNumber} {PartNumber} {SubPartNumber}", @"\s+", " ");
+                var n = Regex.Replace(g, "[^0-9.]", "").Split('.');
+                return n;
+            }
+        }
+
+        public AuditCheck AuditCheck { get; set; }
+        
+
+
+        
+        public ProgramType ProgramType { get; set; }
+
+        public CheckUIType CheckUIType
+        {
+            get
+            {
+                if (new[] { ProgramType.IOSA, ProgramType.ISAGO, ProgramType.CAAKG, }.Contains(ProgramType))
+                    return CheckUIType.Iosa;
+                else if (new[] { ProgramType.SAFA, ProgramType.SACA, ProgramType.SANAKG, }.Contains(ProgramType))
+                    return CheckUIType.Safa;
+
+                return CheckUIType.None;
+            }
+        }
+
+
+        public bool IsSafa => new[] { ProgramType.SAFA, ProgramType.SACA, ProgramType.SANAKG, }.Contains(ProgramType);
+        
         
         public override BaseEntityObject GetCopyUnsaved(bool marked = true)
         {
@@ -105,48 +189,55 @@ namespace SmartCore.CAA.Check
 
             return clone;
         }
-
-        public string NextEditionNumber  { get; set; }
-        public string NextRevisionNumber  { get; set; }
-        public int EditionNumber  { get; set; }
-        public int RevisionNumber  { get; set; }
         
-        public RevisionCheckType RevisionStatus { get; set; }
-        
-        public string SectionNumber => Settings.SectionNumber;
-        public string SectionName => Settings.SectionName;
-        public string PartNumber => Settings.PartNumber;
-        public string PartName => Settings.PartName;
-        public string SubPartNumber => Settings.SubPartNumber;
-        public string SubPartName => Settings.SubPartName;
-        public string ItemNumber => Settings.ItemNumber;
-        public string ItemName => Settings.ItemtName;
-        public string Requirement => Settings.Requirement;
-        public FindingLevels Level { get; set; }
-
-        public string[] Group
-        {
-            get
-            {
-                var g = Regex.Replace($"{SectionNumber} {PartNumber} {SubPartNumber}", @"\s+", " ");
-                var n = Regex.Replace(g, "[^0-9.]", "").Split('.');
-                return n;
-            }
-        }
-
-        public AuditCheck AuditCheck { get; set; }
-
-
         public CheckLists()
         {
             ItemId = -1;
             CheckListRecords = new List<CheckListRecords>();
             AllRevisions = new List<EditionRevisionView>();
-            Settings = new CheckListSettings();
             SmartCoreObjectType = SmartCoreType.CheckLists;
         }
     }
 
+    [Serializable]
+    public class CheckListSettingsSAFA
+    {
+        
+        [JsonProperty("Item")]
+        public string Item { get; set; }
+        
+        [JsonProperty("ItemNumber")]
+        public string ItemNumber { get; set; }
+        
+        [JsonProperty("Title")]
+        public string Title { get; set; }
+        
+        [JsonProperty("Standard")]
+        public string Standard { get; set; }
+        
+        [JsonProperty("StandardRef")]
+        public string StandardRef { get; set; }
+        
+        [JsonProperty("PdfCode")]
+        public string PdfCode { get; set; }
+        
+        [JsonProperty("StandardText")]
+        public string StandardText { get; set; }
+        
+        [JsonProperty("PreDescribedFinding")]
+        public string PreDescribedFinding { get; set; }
+        
+        [JsonProperty("Instruction")]
+        public string Instruction { get; set; }
+        
+        [JsonProperty("ManHours")]
+        public double MH { get; set; }
+
+        [JsonProperty("ProgramTypeId", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue(-1)]
+        public int ProgramTypeId { get; set; }
+    }
+    
 
     [Serializable]
     public class CheckListSettings

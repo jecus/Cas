@@ -71,7 +71,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
                 var dialogResult = MessageBox.Show("Do you really want savae edition?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    var ds = GlobalObjects.CaaEnvironment.Execute($"select top 1 EffDate from [dbo].[CheckListRevision] where EffDate >= '{dateTimePickerEditionEff.Value:yyyy-MM-dd}' and ItemId != {_edition.ItemId} and IsDeleted = 0 and Type = {(int)_edition.Type} order by EffDate desc");
+                    var ds = GlobalObjects.CaaEnvironment.Execute($"select top 1 EffDate from [dbo].[CheckListRevision] where EffDate >= '{dateTimePickerEditionEff.Value:yyyy-MM-dd}' and ItemId != {_edition.ItemId} and IsDeleted = 0 and Type = {(int)_edition.Type} and ManualId = {_edition.ManualId} order by EffDate desc");
                     var data = ds.Tables[0].AsEnumerable().Select(dataRow => new
                     {
                         EffDate = dataRow.Field<DateTime?>("EffDate")

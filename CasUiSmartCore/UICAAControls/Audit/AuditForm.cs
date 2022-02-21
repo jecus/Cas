@@ -181,7 +181,9 @@ namespace CAS.UI.UICAAControls.Audit
                         AuditId = _audit.ItemId
                     });
                 }
-                GlobalObjects.CaaEnvironment.NewKeeper.BulkInsert(ac);
+                
+                if(ac.Any())
+                    GlobalObjects.CaaEnvironment.NewKeeper.BulkInsert(ac);
 
                 _updateChecks.Add(item);
                 _addedChecks.Remove(item);
