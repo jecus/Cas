@@ -25,8 +25,7 @@ using SmartCore.Purchase;
 using SmartCore.Queries;
 using Telerik.WinControls.UI;
 
-
-namespace CAS.UI.UIControls.PurchaseControls
+namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
 	///<summary>
 	///</summary>

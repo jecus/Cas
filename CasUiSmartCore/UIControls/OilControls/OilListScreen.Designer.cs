@@ -1,7 +1,7 @@
 ﻿using CASTerms;
 using Entity.Abstractions;
 
-namespace CAS.UI.UIControls.MonthlyUtilizationsControls
+namespace CAS.UI.UIControls.OilControls
 {
     partial class OilListScreen
 	{

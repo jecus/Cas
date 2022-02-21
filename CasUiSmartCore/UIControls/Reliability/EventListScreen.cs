@@ -18,7 +18,7 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
 
-namespace CAS.UI.UIControls.Discrepancies
+namespace CAS.UI.UIControls.Reliability
 {
 	///<summary>
 	///</summary>
@@ -121,7 +121,7 @@ namespace CAS.UI.UIControls.Discrepancies
 
 			AnimatedThreadWorker.ReportProgress(0, "load Work Packages");
 
-			var discrip = GlobalObjects.DiscrepanciesCore.GetDiscrepancies(from: dateTimePickerDateFrom.Value, to: dateTimePickerDateTo.Value).ToArray();
+			var discrip = GlobalObjects.DiscrepanciesCore.GetDiscrepancies(@from: dateTimePickerDateFrom.Value, to: dateTimePickerDateTo.Value).ToArray();
 			_initialDirectiveArray.AddRange(discrip);
 
 			foreach (var discrepancy in _initialDirectiveArray)

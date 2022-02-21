@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -11,15 +10,11 @@ using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.CAA.RoutineAudits;
-using SmartCore.Entities.Collections;
-using SmartCore.Entities.General;
-using SmartCore.Files;
 
-namespace CAS.UI.UICAAControls.CheckList
+namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
 {
     public partial class CheckListRevEditForm : MetroForm
     {

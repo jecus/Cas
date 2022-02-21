@@ -13,6 +13,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using CAS.UI.UIControls.PurchaseControls.Purchase;
+using CAS.UI.UIControls.PurchaseControls.Quatation;
 using CASReports.Builders;
 using CASReports.ReportTemplates;
 using CASTerms;

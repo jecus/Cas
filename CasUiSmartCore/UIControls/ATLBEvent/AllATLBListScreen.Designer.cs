@@ -1,6 +1,6 @@
 ﻿using CASTerms;
 
-namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
+namespace CAS.UI.UIControls.ATLBEvent
 {
     partial class AllATLBListScreen
 	{

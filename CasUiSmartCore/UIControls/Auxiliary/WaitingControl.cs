@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace CAS.UI.UIControls
+namespace CAS.UI.UIControls.Auxiliary
 {
     ///<summary>
     ///</summary>
@@ -18,7 +18,7 @@ namespace CAS.UI.UIControls
         }
 
         /// <summary>
-        /// Показывает задержку между сменой изображений
+        /// РџРѕРєР°Р·С‹РІР°РµС‚ Р·Р°РґРµСЂР¶РєСѓ РјРµР¶РґСѓ СЃРјРµРЅРѕР№ РёР·РѕР±СЂР°Р¶РµРЅРёР№
         /// </summary>
         public int Delay
         {
@@ -33,7 +33,7 @@ namespace CAS.UI.UIControls
         }
 
         /// <summary>
-        /// Перезапустить отображение
+        /// РџРµСЂРµР·Р°РїСѓСЃС‚РёС‚СЊ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ
         /// </summary>
         public void Start()
         {
@@ -42,7 +42,7 @@ namespace CAS.UI.UIControls
         }
 
         /// <summary>
-        /// Приостановить
+        /// РџСЂРёРѕСЃС‚Р°РЅРѕРІРёС‚СЊ
         /// </summary>
         public void Pause()
         {
@@ -50,7 +50,7 @@ namespace CAS.UI.UIControls
         }
 
         /// <summary>
-        /// Продолжить
+        /// РџСЂРѕРґРѕР»Р¶РёС‚СЊ
         /// </summary>
         public void Continue()
         {
@@ -58,7 +58,7 @@ namespace CAS.UI.UIControls
         }
 
         /// <summary>
-        /// Остановить
+        /// РћСЃС‚Р°РЅРѕРІРёС‚СЊ
         /// </summary>
         public void Stop()
         {

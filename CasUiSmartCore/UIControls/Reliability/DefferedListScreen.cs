@@ -9,8 +9,8 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Importing;
+using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.FiltersControls;
-using CAS.UI.UIControls.Reliability;
 using CASReports.Builders;
 using CASTerms;
 using SmartCore.Calculations;
@@ -27,7 +27,7 @@ using TempUIExtentions;
 using Point = System.Drawing.Point;
 using RadMenuItem = Telerik.WinControls.UI.RadMenuItem;
 
-namespace CAS.UI.UIControls.DirectivesControls
+namespace CAS.UI.UIControls.Reliability
 {
 	///<summary>
 	///</summary>

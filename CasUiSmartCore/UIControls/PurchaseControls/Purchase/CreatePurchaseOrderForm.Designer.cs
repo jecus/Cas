@@ -77,7 +77,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.purchaseRecordListView1 = new CAS.UI.UIControls.PurchaseControls.Purchase.PurchaseRecordListView();
-			this.quatationSupplierPriceListView1 = new CAS.UI.UIControls.PurchaseControls.Quatation.QuatationSupplierPriceListView();
+			this.quatationSupplierPriceListView1 = new QuatationSupplierPriceListView();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -836,7 +836,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private MetroTextBox textBoxPublishedBy;
 		private MetroTextBox metroTextBoxNumber;
 		private MetroLabel metroLabelNumber;
-		private Quatation.QuatationSupplierPriceListView quatationSupplierPriceListView1;
+		private QuatationSupplierPriceListView quatationSupplierPriceListView1;
 		private System.Windows.Forms.NumericUpDown numericUpDown1;
 		private MetroLabel metroLabel1;
 		private Purchase.PurchaseRecordListView purchaseRecordListView1;

@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
-using CAS.UI.UIControls.PurchaseControls.Initial;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Purchase;
 
-namespace CAS.UI.UIControls.PurchaseControls
+namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
 	public class SupplierPriceCustom : BaseEntityObject
 	{

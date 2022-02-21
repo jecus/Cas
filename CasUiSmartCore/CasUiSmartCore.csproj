@@ -967,23 +967,11 @@
     <Compile Include="UICAAControls\CheckList\CheckListView.Designer.cs">
       <DependentUpon>CheckListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CheckList\EditionRevision\CheckListRevEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UICAAControls\CheckList\EditionRevision\CheckListRevEditForm.Designer.cs">
-      <DependentUpon>CheckListRevEditForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="UICAAControls\CheckList\EditionRevision\CheckListRevisionEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UICAAControls\CheckList\EditionRevision\CheckListRevisionEditForm.Designer.cs">
       <DependentUpon>CheckListRevisionEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UICAAControls\CheckList\EditionRevision\CheckListRevisionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UICAAControls\CheckList\EditionRevision\CheckListRevisionForm.Designer.cs">
-      <DependentUpon>CheckListRevisionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UICAAControls\CheckList\EditionRevision\EditionForm.cs">
       <SubType>Form</SubType>
@@ -1008,6 +996,18 @@
     </Compile>
     <Compile Include="UICAAControls\CheckList\EditionRevision\EditionRevisionRecordListScreen.Designer.cs">
       <DependentUpon>EditionRevisionRecordListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\CheckList\EditionRevision\Iosa\CheckListRevEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CheckList\EditionRevision\Iosa\CheckListRevEditForm.Designer.cs">
+      <DependentUpon>CheckListRevEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\CheckList\EditionRevision\Iosa\CheckListRevisionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CheckList\EditionRevision\Iosa\CheckListRevisionForm.Designer.cs">
+      <DependentUpon>CheckListRevisionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UICAAControls\CheckList\RevisionControl.cs">
       <SubType>UserControl</SubType>
@@ -4383,14 +4383,8 @@
       <DependentUpon>CheckListScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UICAAControls\CheckList\EditionRevision\CheckListRevEditForm.resx">
-      <DependentUpon>CheckListRevEditForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\EditionRevision\CheckListRevisionEditForm.resx">
       <DependentUpon>CheckListRevisionEditForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UICAAControls\CheckList\EditionRevision\CheckListRevisionForm.resx">
-      <DependentUpon>CheckListRevisionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\EditionRevision\EditionForm.resx">
       <DependentUpon>EditionForm.cs</DependentUpon>
@@ -4402,6 +4396,12 @@
     <EmbeddedResource Include="UICAAControls\CheckList\EditionRevision\EditionRevisionRecordListScreen.resx">
       <DependentUpon>EditionRevisionRecordListScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CheckList\EditionRevision\Iosa\CheckListRevEditForm.resx">
+      <DependentUpon>CheckListRevEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CheckList\EditionRevision\Iosa\CheckListRevisionForm.resx">
+      <DependentUpon>CheckListRevisionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\RevisionControl.resx">
       <DependentUpon>RevisionControl.cs</DependentUpon>

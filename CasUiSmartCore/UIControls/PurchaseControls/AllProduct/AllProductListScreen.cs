@@ -10,6 +10,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.PurchaseControls.Initial;
+using CAS.UI.UIControls.PurchaseControls.Quatation;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using SmartCore.Entities.Collections;
@@ -21,7 +22,7 @@ using SmartCore.Filters;
 using SmartCore.Purchase;
 using Telerik.WinControls.UI;
 
-namespace CAS.UI.UIControls.PurchaseControls
+namespace CAS.UI.UIControls.PurchaseControls.AllProduct
 {
 	public partial class AllProductListScreen : ScreenControl
 	{

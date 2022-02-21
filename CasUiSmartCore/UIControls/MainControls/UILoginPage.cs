@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls;
+using CAS.UI.UICAAControls.CurrentOperator;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.OpepatorsControls;
 using CASTerms;
@@ -11,7 +12,7 @@ using CASTerms;
 namespace CAS.UI.UIControls.MainControls
 {
     /// <summary>
-    /// Элемент управления, необходимый для входа в систему
+    /// Р­Р»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ, РЅРµРѕР±С…РѕРґРёРјС‹Р№ РґР»СЏ РІС…РѕРґР° РІ СЃРёСЃС‚РµРјСѓ
     /// </summary>
     internal partial class UILoginPage : UserControl 
     {
@@ -19,7 +20,7 @@ namespace CAS.UI.UIControls.MainControls
         #region Constructor
 
         /// <summary>
-        /// Создает элемент управления для входа в систему
+        /// РЎРѕР·РґР°РµС‚ СЌР»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ РґР»СЏ РІС…РѕРґР° РІ СЃРёСЃС‚РµРјСѓ
         /// </summary>
         public UILoginPage()
         {
@@ -51,7 +52,7 @@ namespace CAS.UI.UIControls.MainControls
         #region public ReferenceUILoginControl LoginControl
 
         /// <summary>
-        /// Возвращает контрол подключения к серверу
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕРЅС‚СЂРѕР» РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє СЃРµСЂРІРµСЂСѓ
         /// </summary>
         public ReferenceUILoginControl LoginControl
         {

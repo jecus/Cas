@@ -9,7 +9,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 
-namespace CAS.UI.UIControls.DetailsControls
+namespace CAS.UI.UIControls.ComponentControls
 {
     ///<summary>
     ///</summary>

@@ -10,7 +10,6 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
-using CAS.UI.UIControls.PurchaseControls.Initial;
 using CAS.UI.UIControls.PurchaseControls.Purchase;
 using CASReports.Builders;
 using CASTerms;
@@ -24,8 +23,7 @@ using SmartCore.Purchase;
 using SmartCore.Queries;
 using Telerik.WinControls.UI;
 
-
-namespace CAS.UI.UIControls.PurchaseControls
+namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
 	///<summary>
 	///</summary>

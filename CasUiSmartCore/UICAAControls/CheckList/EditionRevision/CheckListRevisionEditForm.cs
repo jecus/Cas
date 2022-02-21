@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.Dictionary;
@@ -16,9 +14,8 @@ using SmartCore.CAA.FindingLevel;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 
-namespace CAS.UI.UICAAControls.CheckList
+namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 {
     public partial class CheckListRevisionEditForm : MetroForm
     {

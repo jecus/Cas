@@ -1,5 +1,4 @@
 ﻿using System;
-using CAS.UI.UIControls.DetailsControls;
 
 namespace CAS.UI.UIControls.ComponentControls
 {

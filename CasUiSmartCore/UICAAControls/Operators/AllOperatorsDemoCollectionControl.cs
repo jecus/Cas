@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using AvControls;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
+using CAS.UI.UICAAControls.CurrentOperator;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using SmartCore.CAA;

@@ -5,18 +5,18 @@ using System.Windows.Forms;
 using CASTerms;
 using SmartCore.Entities.General.Accessory;
 
-namespace CAS.UI.UIControls.DetailsControls
+namespace CAS.UI.UIControls.ComponentControls
 {
 
     /// <summary>
-    /// Строит список контролов для отображения информации по маслу
+    /// РЎС‚СЂРѕРёС‚ СЃРїРёСЃРѕРє РєРѕРЅС‚СЂРѕР»РѕРІ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РёРЅС„РѕСЂРјР°С†РёРё РїРѕ РјР°СЃР»Сѓ
     /// </summary>
     public partial class PowerUnitWorkInRegimeListControl : Interfaces.EditObjectControl
     {
 
         #region public BaseDetail BaseDetail
         /// <summary>
-        /// Полет, с которым связан контрол
+        /// РџРѕР»РµС‚, СЃ РєРѕС‚РѕСЂС‹Рј СЃРІСЏР·Р°РЅ РєРѕРЅС‚СЂРѕР»
         /// </summary>
         public BaseComponent BaseComponent
         {
@@ -30,12 +30,12 @@ namespace CAS.UI.UIControls.DetailsControls
         #endregion
 
         /*
-         * Конструктор
+         * РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
          */
 
         #region public PowerUnitWorkInRegimeListControl()
         /// <summary>
-        /// Строит список контролов для отображения информации по маслу
+        /// РЎС‚СЂРѕРёС‚ СЃРїРёСЃРѕРє РєРѕРЅС‚СЂРѕР»РѕРІ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РёРЅС„РѕСЂРјР°С†РёРё РїРѕ РјР°СЃР»Сѓ
         /// </summary>
         public PowerUnitWorkInRegimeListControl()
         {
@@ -44,19 +44,19 @@ namespace CAS.UI.UIControls.DetailsControls
         #endregion
 
         /*
-         * Перегружаемые методы
+         * РџРµСЂРµРіСЂСѓР¶Р°РµРјС‹Рµ РјРµС‚РѕРґС‹
          */
 
         #region public override void ApplyChanges()
         /// <summary>
-        /// Применить к объекту сделанные изменения на контроле. 
-        /// Если не все данные удовлетворяют формату ввода (например при вводе чисел), свойства объекта не изменяются, возвращается false
-        /// Вызов base.ApplyChanges() обязателен
+        /// РџСЂРёРјРµРЅРёС‚СЊ Рє РѕР±СЉРµРєС‚Сѓ СЃРґРµР»Р°РЅРЅС‹Рµ РёР·РјРµРЅРµРЅРёСЏ РЅР° РєРѕРЅС‚СЂРѕР»Рµ. 
+        /// Р•СЃР»Рё РЅРµ РІСЃРµ РґР°РЅРЅС‹Рµ СѓРґРѕРІР»РµС‚РІРѕСЂСЏСЋС‚ С„РѕСЂРјР°С‚Сѓ РІРІРѕРґР° (РЅР°РїСЂРёРјРµСЂ РїСЂРё РІРІРѕРґРµ С‡РёСЃРµР»), СЃРІРѕР№СЃС‚РІР° РѕР±СЉРµРєС‚Р° РЅРµ РёР·РјРµРЅСЏСЋС‚СЃСЏ, РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ false
+        /// Р’С‹Р·РѕРІ base.ApplyChanges() РѕР±СЏР·Р°С‚РµР»РµРЅ
         /// </summary>
         /// <returns></returns>
         public override void ApplyChanges()
         {
-            // Применяем сделанные изменения объектам
+            // РџСЂРёРјРµРЅСЏРµРј СЃРґРµР»Р°РЅРЅС‹Рµ РёР·РјРµРЅРµРЅРёСЏ РѕР±СЉРµРєС‚Р°Рј
             for (int i = 0; i < flowLayoutPanelMain.Controls.Count; i++)
             {
                 PowerUnitWorkInRegimeParamsControl c = flowLayoutPanelMain.Controls[i] as PowerUnitWorkInRegimeParamsControl;
@@ -68,11 +68,11 @@ namespace CAS.UI.UIControls.DetailsControls
 
 
             /*
-             * Все изменения сохранены в коллекции 
+             * Р’СЃРµ РёР·РјРµРЅРµРЅРёСЏ СЃРѕС…СЂР°РЅРµРЅС‹ РІ РєРѕР»Р»РµРєС†РёРё 
              * 
-             * Здесь необходимо сохранить внесенные данные 
-             * Коллекция является StringConvertibleCollection и не имеет отдельной таблицы в базе данных, 
-             * а хранится в качестве поля таблицы AircraftFlights
+             * Р—РґРµСЃСЊ РЅРµРѕР±С…РѕРґРёРјРѕ СЃРѕС…СЂР°РЅРёС‚СЊ РІРЅРµСЃРµРЅРЅС‹Рµ РґР°РЅРЅС‹Рµ 
+             * РљРѕР»Р»РµРєС†РёСЏ СЏРІР»СЏРµС‚СЃСЏ StringConvertibleCollection Рё РЅРµ РёРјРµРµС‚ РѕС‚РґРµР»СЊРЅРѕР№ С‚Р°Р±Р»РёС†С‹ РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С…, 
+             * Р° С…СЂР°РЅРёС‚СЃСЏ РІ РєР°С‡РµСЃС‚РІРµ РїРѕР»СЏ С‚Р°Р±Р»РёС†С‹ AircraftFlights
              */
             if (BaseComponent != null)
             {
@@ -93,14 +93,14 @@ namespace CAS.UI.UIControls.DetailsControls
 
         #region public override bool CheckData()
         /// <summary>
-        /// Проверяет введенные данные.
-        /// Если какое-либо поле не подходит по формату, следует сразу кидать MessageBox, ставить курсор в необходимое поле и возвращать false в качестве результата метода
+        /// РџСЂРѕРІРµСЂСЏРµС‚ РІРІРµРґРµРЅРЅС‹Рµ РґР°РЅРЅС‹Рµ.
+        /// Р•СЃР»Рё РєР°РєРѕРµ-Р»РёР±Рѕ РїРѕР»Рµ РЅРµ РїРѕРґС…РѕРґРёС‚ РїРѕ С„РѕСЂРјР°С‚Сѓ, СЃР»РµРґСѓРµС‚ СЃСЂР°Р·Сѓ РєРёРґР°С‚СЊ MessageBox, СЃС‚Р°РІРёС‚СЊ РєСѓСЂСЃРѕСЂ РІ РЅРµРѕР±С…РѕРґРёРјРѕРµ РїРѕР»Рµ Рё РІРѕР·РІСЂР°С‰Р°С‚СЊ false РІ РєР°С‡РµСЃС‚РІРµ СЂРµР·СѓР»СЊС‚Р°С‚Р° РјРµС‚РѕРґР°
         /// </summary>
         /// <returns></returns>
         public override bool CheckData()
         {
 
-            // Проверяем введенные данные
+            // РџСЂРѕРІРµСЂСЏРµРј РІРІРµРґРµРЅРЅС‹Рµ РґР°РЅРЅС‹Рµ
             for (int i = 0; i < flowLayoutPanelMain.Controls.Count; i++)
             {
                 PowerUnitWorkInRegimeParamsControl c = flowLayoutPanelMain.Controls[i] as PowerUnitWorkInRegimeParamsControl;
@@ -114,14 +114,14 @@ namespace CAS.UI.UIControls.DetailsControls
                 }
             }
 
-            // Все данные введены корректно
+            // Р’СЃРµ РґР°РЅРЅС‹Рµ РІРІРµРґРµРЅС‹ РєРѕСЂСЂРµРєС‚РЅРѕ
             return true;
         }
         #endregion
 
         #region public override void FillControls()
         /// <summary>
-        /// Обновляет значения полей
+        /// РћР±РЅРѕРІР»СЏРµС‚ Р·РЅР°С‡РµРЅРёСЏ РїРѕР»РµР№
         /// </summary>
         public override void FillControls()
         {
@@ -131,7 +131,7 @@ namespace CAS.UI.UIControls.DetailsControls
 
         #region public override bool GetChangeStatus()
         /// <summary>
-        /// Возвращает значение, показывающее были ли изменения в данном элементе управления
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ Р±С‹Р»Рё Р»Рё РёР·РјРµРЅРµРЅРёСЏ РІ РґР°РЅРЅРѕРј СЌР»РµРјРµРЅС‚Рµ СѓРїСЂР°РІР»РµРЅРёСЏ
         /// </summary>
         public override bool GetChangeStatus()
         {
@@ -158,11 +158,11 @@ namespace CAS.UI.UIControls.DetailsControls
         #endregion
 
         /*
-         * Реализация
+         * Р РµР°Р»РёР·Р°С†РёСЏ
          */
         #region public void UpdateInformation()
         /// <summary>
-        /// Обновляет информацию контрола
+        /// РћР±РЅРѕРІР»СЏРµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ РєРѕРЅС‚СЂРѕР»Р°
         /// </summary>
         public void UpdateInformation()
         {
@@ -172,7 +172,7 @@ namespace CAS.UI.UIControls.DetailsControls
 
         #region private void BuildControls()
         /// <summary>
-        /// Строит нужные контролы
+        /// РЎС‚СЂРѕРёС‚ РЅСѓР¶РЅС‹Рµ РєРѕРЅС‚СЂРѕР»С‹
         /// </summary>
         private void BuildControls()
         {
@@ -182,7 +182,7 @@ namespace CAS.UI.UIControls.DetailsControls
                 dateTimePickerAccelerationAir.Value = DateTime.Today.AddSeconds(BaseComponent.AccelerationAir);
             }
             
-            // Освобождаем старые контролы
+            // РћСЃРІРѕР±РѕР¶РґР°РµРј СЃС‚Р°СЂС‹Рµ РєРѕРЅС‚СЂРѕР»С‹
             foreach (Control control in flowLayoutPanelMain.Controls)
             {
                 if (control is PowerUnitWorkInRegimeParamsControl)
@@ -198,7 +198,7 @@ namespace CAS.UI.UIControls.DetailsControls
             {
                 for (int i = 0; i < BaseComponent.ComponentWorkParams.Count; i++)
                 {
-                    // Добавляем контрол для ввода данных по запускам
+                    // Р”РѕР±Р°РІР»СЏРµРј РєРѕРЅС‚СЂРѕР» РґР»СЏ РІРІРѕРґР° РґР°РЅРЅС‹С… РїРѕ Р·Р°РїСѓСЃРєР°Рј
                     PowerUnitWorkInRegimeParamsControl c = 
                         new PowerUnitWorkInRegimeParamsControl(BaseComponent.ComponentWorkParams[i]);
                     c.Extended = false;
@@ -217,7 +217,7 @@ namespace CAS.UI.UIControls.DetailsControls
 
         #region private bool ConditionExists(DetailWorkInRegimeParams con)
         /// <summary>
-        /// Существует ли информация по уровню масла для заданного агрегата
+        /// РЎСѓС‰РµСЃС‚РІСѓРµС‚ Р»Рё РёРЅС„РѕСЂРјР°С†РёСЏ РїРѕ СѓСЂРѕРІРЅСЋ РјР°СЃР»Р° РґР»СЏ Р·Р°РґР°РЅРЅРѕРіРѕ Р°РіСЂРµРіР°С‚Р°
         /// </summary>
         /// <param name="con"></param>
         /// <returns></returns>
@@ -280,8 +280,8 @@ namespace CAS.UI.UIControls.DetailsControls
 
             if(cond.ItemId > 0 && MessageBox.Show("Do you really want to delete detail params?", "Deleting confirmation", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
-                //если информация о состоянии сохранена в БД 
-                //и получен положительный ответ на ее удаление
+                //РµСЃР»Рё РёРЅС„РѕСЂРјР°С†РёСЏ Рѕ СЃРѕСЃС‚РѕСЏРЅРёРё СЃРѕС…СЂР°РЅРµРЅР° РІ Р‘Р” 
+                //Рё РїРѕР»СѓС‡РµРЅ РїРѕР»РѕР¶РёС‚РµР»СЊРЅС‹Р№ РѕС‚РІРµС‚ РЅР° РµРµ СѓРґР°Р»РµРЅРёРµ
                 try
                 {
                     GlobalObjects.CasEnvironment.Manipulator.Delete(cond);

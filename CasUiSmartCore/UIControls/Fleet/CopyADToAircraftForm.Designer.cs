@@ -1,4 +1,4 @@
-﻿namespace CAS.UI.UIControls.Users
+﻿namespace CAS.UI.UIControls.Fleet
 {
 	partial class CopyADToAircraftForm
 	{

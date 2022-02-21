@@ -1,4 +1,4 @@
-﻿namespace CAS.UI.UIControls.Discrepancies
+﻿namespace CAS.UI.UIControls.Reliability
 {
     partial class OccurrencesListView
 	{

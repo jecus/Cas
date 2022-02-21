@@ -1,4 +1,4 @@
-﻿namespace CAS.UI.UIControls.PurchaseControls
+﻿namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
     partial class PurchaseStatusListView
     {

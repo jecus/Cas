@@ -6,13 +6,14 @@ using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
+using CAS.UI.UIControls.AircraftTechnicalLogBookControls;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
 
-namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
+namespace CAS.UI.UIControls.ATLBEvent
 {
 	///<summary>
 	///</summary>

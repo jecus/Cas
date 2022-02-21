@@ -13,6 +13,7 @@ using CAS.UI.UICAAControls.Document;
 using CAS.UI.UICAAControls.Operators;
 using CAS.UI.UICAAControls.RoutineAudit;
 using CAS.UI.UICAAControls.Specialists;
+using CAS.UI.UICAAControls.StandartManual;
 using CAS.UI.UICAAControls.Users;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;

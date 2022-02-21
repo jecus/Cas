@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
@@ -7,7 +6,7 @@ using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 
-namespace CAS.UI.UIControls.PurchaseControls
+namespace CAS.UI.UIControls.PurchaseControls.AllProduct
 {
 	public partial class AllProductListView : BaseGridViewControl<Product>
 	{

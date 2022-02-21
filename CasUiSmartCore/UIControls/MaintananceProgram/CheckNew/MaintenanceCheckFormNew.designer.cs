@@ -41,7 +41,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.editButton = new AvControls.AvButtonT.AvButtonT();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.buttonApply = new System.Windows.Forms.Button();
-			this.listViewTasksForSelect = new CAS.UI.UIControls.MaintananceProgram.MaintenanceDirectiveLightListView();
+			this.listViewTasksForSelect = new MaintenanceDirectiveLightListView();
 			this.SuspendLayout();
 			// 
 			// buttonClose

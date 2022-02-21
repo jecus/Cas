@@ -1,6 +1,4 @@
-﻿using CAS.UI.UIControls.DetailsControls;
-
-namespace CAS.UI.UIControls.ComponentControls
+﻿namespace CAS.UI.UIControls.ComponentControls
 {
     partial class ComponentScreenNew
     {
@@ -40,7 +38,7 @@ namespace CAS.UI.UIControls.ComponentControls
             this.extendableRichContainerGeneral = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
             this._generalInformation = new ComponentGeneralInformationControl();
             this.extendableRichContainerWorkParams = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
-            this._detailWorkParamsControl = new CAS.UI.UIControls.DetailsControls.PowerUnitWorkInRegimeListControl();
+            this._detailWorkParamsControl = new PowerUnitWorkInRegimeListControl();
             this.extendableRichContainerPerformance = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
             this._performanceControl = new ComponentCompliancePerformanceListControl();
             this._complianceControl = new ComponentComplianceControl();

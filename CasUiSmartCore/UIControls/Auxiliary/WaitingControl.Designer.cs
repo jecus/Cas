@@ -1,4 +1,4 @@
-namespace CAS.UI.UIControls
+namespace CAS.UI.UIControls.Auxiliary
 {
     internal partial class WaitingControl
     {

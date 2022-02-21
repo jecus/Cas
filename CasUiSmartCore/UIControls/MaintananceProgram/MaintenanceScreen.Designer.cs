@@ -1,5 +1,4 @@
 ﻿using CAS.UI.UIControls.AircraftsControls;
-using CAS.UI.UIControls.DetailsControls;
 
 namespace CAS.UI.UIControls.MaintananceProgram
 {

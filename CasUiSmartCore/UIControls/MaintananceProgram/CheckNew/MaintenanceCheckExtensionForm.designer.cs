@@ -36,7 +36,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.checkBoxSelectAll = new MetroFramework.Controls.MetroCheckBox();
 			this.checkedListBoxItems = new System.Windows.Forms.CheckedListBox();
 			this.buttonApply = new System.Windows.Forms.Button();
-			this.listViewTasksForSelect = new CAS.UI.UIControls.MaintananceProgram.MaintenanceDirectiveLightListView();
+			this.listViewTasksForSelect = new MaintenanceDirectiveLightListView();
 			this.numericUpDownExtension = new System.Windows.Forms.NumericUpDown();
 			this.labelExtension = new MetroFramework.Controls.MetroLabel();
 			this.buttonReset = new System.Windows.Forms.Button();

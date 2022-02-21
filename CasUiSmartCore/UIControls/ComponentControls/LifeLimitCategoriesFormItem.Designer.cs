@@ -1,6 +1,6 @@
 ﻿using CAS.UI.Helpers;
 
-namespace CAS.UI.UIControls.DetailsControls
+namespace CAS.UI.UIControls.ComponentControls
 {
     partial class LifeLimitCategoriesFormItem
     {

@@ -1,4 +1,4 @@
-﻿namespace CAS.UI.UIControls.PurchaseControls
+﻿namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
     partial class InitialOrderListView
     {

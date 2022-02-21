@@ -8,7 +8,7 @@ using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.General.Atlbs;
 
-namespace CAS.UI.UIControls.Discrepancies
+namespace CAS.UI.UIControls.Reliability
 {
 	///<summary>
 	/// список для отображения ордеров запроса

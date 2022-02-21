@@ -8,6 +8,8 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.ComponentControls;
 using CAS.UI.UIControls.PersonnelControls;
 using CAS.UI.UIControls.PurchaseControls;
+using CAS.UI.UIControls.PurchaseControls.Purchase;
+using CAS.UI.UIControls.PurchaseControls.Quatation;
 using CAS.UI.UIControls.ScheduleControls;
 using CAS.UI.UIControls.SupplierControls;
 using CASTerms;

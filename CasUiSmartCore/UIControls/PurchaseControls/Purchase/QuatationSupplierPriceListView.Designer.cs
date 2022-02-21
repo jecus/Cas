@@ -1,4 +1,4 @@
-﻿namespace CAS.UI.UIControls.PurchaseControls.Quatation
+﻿namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
 	partial class QuatationSupplierPriceListView
 	{

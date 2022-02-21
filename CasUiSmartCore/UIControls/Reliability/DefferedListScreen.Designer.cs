@@ -1,6 +1,7 @@
 ﻿using CASTerms;
 using Entity.Abstractions;
-namespace CAS.UI.UIControls.DirectivesControls
+
+namespace CAS.UI.UIControls.Reliability
 {
 	partial class DefferedListScreen
 	{

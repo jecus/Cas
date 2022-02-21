@@ -1,26 +1,23 @@
-﻿using CAA.Entity.Models.DTO;
-using CAS.UI.Interfaces;
-using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.FiltersControls;
-using CASTerms;
-using Entity.Abstractions.Filters;
-using SmartCore.CAA.Check;
-using SmartCore.Entities.Collections;
-using SmartCore.Entities.General;
-using SmartCore.Filters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using CAS.UI.UICAAControls.Audit.PEL;
-using CAS.UI.UIControls.NewGrid;
+using CAA.Entity.Models.DTO;
+using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.FiltersControls;
+using CASTerms;
+using Entity.Abstractions.Filters;
+using SmartCore.CAA.Check;
 using SmartCore.CAA.PEL;
+using SmartCore.Entities.Collections;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
+using SmartCore.Filters;
 using Telerik.WinControls.UI;
 
-namespace CAS.UI.UICAAControls.CheckList
+namespace CAS.UI.UICAAControls.Audit.PEL
 {
     ///<summary>
     ///</summary>

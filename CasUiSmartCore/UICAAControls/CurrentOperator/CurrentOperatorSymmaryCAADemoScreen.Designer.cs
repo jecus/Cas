@@ -1,12 +1,8 @@
 ﻿using CAS.UI.UICAAControls.Airacraft;
-using CAS.UI.UICAAControls.CurrentOperator;
-using CAS.UI.UICAAControls.Operators;
-using CAS.UI.UIControls.HangarControls;
-using CAS.UI.UIControls.ReferenceControls;
 using CASTerms;
 using Entity.Abstractions;
 
-namespace CAS.UI.UICAAControls
+namespace CAS.UI.UICAAControls.CurrentOperator
 {
 	partial class CurrentOperatorSymmaryCAADemoScreen
 	{

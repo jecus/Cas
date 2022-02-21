@@ -1,7 +1,7 @@
 ﻿using CASTerms;
 using Entity.Abstractions;
 
-namespace CAS.UI.UIControls.PurchaseControls
+namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
 	partial class PurchaseStatusListScreen
 	{

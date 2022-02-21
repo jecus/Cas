@@ -7,7 +7,7 @@ using MetroFramework.Forms;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Directives;
 
-namespace CAS.UI.UIControls.Users
+namespace CAS.UI.UIControls.Fleet
 {
 	public partial class CopyADToAircraftForm : MetroForm
 	{

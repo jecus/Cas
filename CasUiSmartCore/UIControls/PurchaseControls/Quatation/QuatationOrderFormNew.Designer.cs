@@ -1,10 +1,6 @@
-﻿using  MetroFramework.Controls;
-using CASTerms;
+﻿using CAS.UI.UIControls.NewGrid;
 
-using CAS.UI.Helpers;
-using CAS.UI.UIControls.NewGrid;
-
-namespace CAS.UI.UIControls.PurchaseControls.Initial
+namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
 	partial class QuatationOrderFormNew
 	{

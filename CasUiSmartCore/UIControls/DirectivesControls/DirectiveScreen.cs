@@ -6,6 +6,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Events;
+using CAS.UI.UIControls.Fleet;
 using CAS.UI.UIControls.Users;
 using CASReports.Builders;
 using CASTerms;

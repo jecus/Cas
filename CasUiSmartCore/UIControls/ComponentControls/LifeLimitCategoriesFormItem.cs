@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
 
-namespace CAS.UI.UIControls.DetailsControls
+namespace CAS.UI.UIControls.ComponentControls
 {
     ///<summary>
     ///</summary>

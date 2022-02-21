@@ -5,7 +5,7 @@ using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Purchase;
 
-namespace CAS.UI.UIControls.PurchaseControls.Quatation
+namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
 	public partial class QuatationSupplierPriceListView : BaseGridViewControl<SupplierPrice>
 	{

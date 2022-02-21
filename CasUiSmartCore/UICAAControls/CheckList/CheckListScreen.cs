@@ -21,6 +21,8 @@ using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls.Audit;
+using CAS.UI.UICAAControls.Audit.PEL;
+using CAS.UI.UICAAControls.CheckList.EditionRevision;
 using CAS.UI.UIControls.NewGrid;
 using SmartCore.CAA.Audit;
 using Telerik.WinControls.UI;

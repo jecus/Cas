@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using CAS.UI.UIControls.DetailsControls;
 using CASTerms;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;

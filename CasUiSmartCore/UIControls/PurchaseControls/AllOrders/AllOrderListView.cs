@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using CAS.UI.UIControls.PurchaseControls.Purchase;
+using CAS.UI.UIControls.PurchaseControls.Quatation;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Interfaces;

@@ -9,7 +9,7 @@ using SmartCore.Calculations;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using Telerik.WinControls.UI;
 
-namespace CAS.UI.UIControls.MaintananceProgram
+namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 {
 	///<summary>
 	/// список для отображения ордеров запроса

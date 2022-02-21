@@ -8,20 +8,17 @@ using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls.CheckList;
-using CAS.UI.UICAAControls.StandartManual;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
-using SmartCore.CAA.RoutineAudits;
 using SmartCore.CAA.StandartManual;
 using SmartCore.Entities.Collections;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
 
-namespace CAS.UI.UICAAControls.RoutineAudit
+namespace CAS.UI.UICAAControls.StandartManual
 {
 	///<summary>
 	///</summary>

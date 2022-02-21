@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 
-namespace CAS.UI.UIControls.DetailsControls
+namespace CAS.UI.UIControls.ComponentControls
 {
     partial class PowerUnitWorkInRegimeListControl
     {

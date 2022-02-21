@@ -19,8 +19,7 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 
-
-namespace CAS.UI.UIControls.PurchaseControls
+namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
 	///<summary>
 	///</summary>

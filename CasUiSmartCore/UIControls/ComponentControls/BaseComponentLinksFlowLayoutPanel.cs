@@ -9,6 +9,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.ForecastControls;
 using CAS.UI.UIControls.MonthlyUtilizationsControls;
+using CAS.UI.UIControls.OilControls;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
@@ -21,7 +22,7 @@ namespace CAS.UI.UIControls.ComponentControls
 {
 
 	/// <summary>
-	/// Элемент управления для отображения ссылок на отчеты базового агрегата
+	/// Р­Р»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СЃСЃС‹Р»РѕРє РЅР° РѕС‚С‡РµС‚С‹ Р±Р°Р·РѕРІРѕРіРѕ Р°РіСЂРµРіР°С‚Р°
 	/// </summary>
 	public class BaseComponentLinksFlowLayoutPanel : FlowLayoutPanel
 	{
@@ -46,7 +47,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
 		#region public Statuses LinkADStatus
 		///<summary>
-		/// Возвращает или задает статус ссылки на директивы летной годности
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ СЃС‚Р°С‚СѓСЃ СЃСЃС‹Р»РєРё РЅР° РґРёСЂРµРєС‚РёРІС‹ Р»РµС‚РЅРѕР№ РіРѕРґРЅРѕСЃС‚Рё
 		///</summary>
 		public Statuses LinkADStatus
 		{
@@ -62,7 +63,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
 		#region public Statuses LinkEOStatus
 		///<summary>
-		/// Возвращает или задает статус ссылки на инженерные ордера
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ СЃС‚Р°С‚СѓСЃ СЃСЃС‹Р»РєРё РЅР° РёРЅР¶РµРЅРµСЂРЅС‹Рµ РѕСЂРґРµСЂР°
 		///</summary>
 		public Statuses LinkEOStatus
 		{
@@ -78,7 +79,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
 		#region public Statuses LinkSBStatus
 		///<summary>
-		/// Возвращает или задает статус ссылки на сервисные бюллетени
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ СЃС‚Р°С‚СѓСЃ СЃСЃС‹Р»РєРё РЅР° СЃРµСЂРІРёСЃРЅС‹Рµ Р±СЋР»Р»РµС‚РµРЅРё
 		///</summary>
 		public Statuses LinkSBStatus
 		{
@@ -94,7 +95,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
 		#region public Statuses LinkComponentStatus
 		///<summary>
-		/// Возвращает или задает статус ссылки на компоненты
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ СЃС‚Р°С‚СѓСЃ СЃСЃС‹Р»РєРё РЅР° РєРѕРјРїРѕРЅРµРЅС‚С‹
 		///</summary>
 		public Statuses LinkComponentStatus
 		{
@@ -110,7 +111,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
 		#region public Statuses LinkLLPDiscSheetStatus
 		///<summary>
-		/// Возвращает или задает статус ссылки на вращающиеся компоненты силовой установки
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ СЃС‚Р°С‚СѓСЃ СЃСЃС‹Р»РєРё РЅР° РІСЂР°С‰Р°СЋС‰РёРµСЃСЏ РєРѕРјРїРѕРЅРµРЅС‚С‹ СЃРёР»РѕРІРѕР№ СѓСЃС‚Р°РЅРѕРІРєРё
 		///</summary>
 		public Statuses LinkLLPDiscSheetStatus
 		{
@@ -129,7 +130,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region Constructor
 
 		/// <summary>
-		/// Создает элемент управления для отображения ссылок на отчеты базового агрегата
+		/// РЎРѕР·РґР°РµС‚ СЌР»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СЃСЃС‹Р»РѕРє РЅР° РѕС‚С‡РµС‚С‹ Р±Р°Р·РѕРІРѕРіРѕ Р°РіСЂРµРіР°С‚Р°
 		/// </summary>
 		public BaseComponentLinksFlowLayoutPanel(BaseComponent baseComponent, bool isForecast = false)
 		{
@@ -225,7 +226,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region public void UpdateInformation()
 
 		/// <summary>
-		/// Обновляет информацию
+		/// РћР±РЅРѕРІР»СЏРµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ
 		/// </summary>
 		public void UpdateInformation()
 		{
@@ -374,7 +375,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region public void OnAdStatusLinkDisplayRequested(ReferenceEventArgs e)
 
 		/// <summary>
-		/// Метод, обрабатывающий событие нажатия ссылки AD Status 
+		/// РњРµС‚РѕРґ, РѕР±СЂР°Р±Р°С‚С‹РІР°СЋС‰РёР№ СЃРѕР±С‹С‚РёРµ РЅР°Р¶Р°С‚РёСЏ СЃСЃС‹Р»РєРё AD Status 
 		/// </summary>
 		/// <param name="e"></param>
 		public void OnAdStatusLinkDisplayRequested(ReferenceEventArgs e)
@@ -399,13 +400,13 @@ namespace CAS.UI.UIControls.ComponentControls
 
 		#region public void OnDiscrepanciesLinkDisplayRequested(ReferenceEventArgs e)
 		/// <summary>
-		/// Метод, обрабатывающий событие нажатия ссылки Discrepancies
+		/// РњРµС‚РѕРґ, РѕР±СЂР°Р±Р°С‚С‹РІР°СЋС‰РёР№ СЃРѕР±С‹С‚РёРµ РЅР°Р¶Р°С‚РёСЏ СЃСЃС‹Р»РєРё Discrepancies
 		/// </summary>
 		/// <param name="e"></param>
 		public void OnDiscrepanciesLinkDisplayRequested(ReferenceEventArgs e)
 		{
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-			var parentAircraft = GlobalObjects.AircraftsCore.GetAircraftById(_baseComponent.ParentAircraftId);//TODO:(Evgenii Babak) пересмотреть использование ParentAircrafId здесь
+			var parentAircraft = GlobalObjects.AircraftsCore.GetAircraftById(_baseComponent.ParentAircraftId);//TODO:(Evgenii Babak) РїРµСЂРµСЃРјРѕС‚СЂРµС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ ParentAircrafId Р·РґРµСЃСЊ
 			var parentStore = GlobalObjects.StoreCore.GetStoreById(_baseComponent.ParentStoreId);
 			if (_baseComponent.BaseComponentType==BaseComponentType.Frame)
 				e.DisplayerText = $"{_baseComponent.GetParentAircraftRegNumber()}. Aircraft Frame SN {_baseComponent.SerialNumber}. Forecast";
@@ -443,7 +444,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region public void OnEnginereengOrdersLinkDisplayRequested(ReferenceEventArgs e)
 
 		/// <summary>
-		/// Метод, обрабатывающий событие нажатия ссылки Engineering Orders
+		/// РњРµС‚РѕРґ, РѕР±СЂР°Р±Р°С‚С‹РІР°СЋС‰РёР№ СЃРѕР±С‹С‚РёРµ РЅР°Р¶Р°С‚РёСЏ СЃСЃС‹Р»РєРё Engineering Orders
 		/// </summary>
 		/// <param name="e"></param>
 		public void OnEngineeringOrdersLinkDisplayRequested(ReferenceEventArgs e)
@@ -470,7 +471,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region public void OnComponentStatusLinkDisplayRequested(ReferenceEventArgs e)
 
 		/// <summary>
-		/// Метод, обрабатывающий событие нажатия ссылки LLP Disk Sheet Status
+		/// РњРµС‚РѕРґ, РѕР±СЂР°Р±Р°С‚С‹РІР°СЋС‰РёР№ СЃРѕР±С‹С‚РёРµ РЅР°Р¶Р°С‚РёСЏ СЃСЃС‹Р»РєРё LLP Disk Sheet Status
 		/// </summary>
 		/// <param name="e"></param>
 		private void OnComponentStatusLinkDisplayRequested(ReferenceEventArgs e)
@@ -485,7 +486,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region public void OnLLPDiskSheetStatusLinkDisplayRequested(ReferenceEventArgs e)
 
 		/// <summary>
-		/// Метод, обрабатывающий событие нажатия ссылки LLP Disk Sheet Status
+		/// РњРµС‚РѕРґ, РѕР±СЂР°Р±Р°С‚С‹РІР°СЋС‰РёР№ СЃРѕР±С‹С‚РёРµ РЅР°Р¶Р°С‚РёСЏ СЃСЃС‹Р»РєРё LLP Disk Sheet Status
 		/// </summary>
 		/// <param name="e"></param>
 		public void OnLLPDiskSheetStatusLinkDisplayRequested(ReferenceEventArgs e)
@@ -500,7 +501,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region public void OnSBStatusLinkDisplayRequested(ReferenceEventArgs e)
 
 		/// <summary>
-		/// Метод, обрабатывающий событие нажатия ссылки SB Status
+		/// РњРµС‚РѕРґ, РѕР±СЂР°Р±Р°С‚С‹РІР°СЋС‰РёР№ СЃРѕР±С‹С‚РёРµ РЅР°Р¶Р°С‚РёСЏ СЃСЃС‹Р»РєРё SB Status
 		/// </summary>
 		/// <param name="e"></param>
 		public void OnSBStatusLinkDisplayRequested(ReferenceEventArgs e)
@@ -526,7 +527,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region public void SetEnabled(bool enabled)
 
 		/// <summary>
-		/// Задает свойство Enabled ссылкам
+		/// Р—Р°РґР°РµС‚ СЃРІРѕР№СЃС‚РІРѕ Enabled СЃСЃС‹Р»РєР°Рј
 		/// </summary>
 		/// <param name="enabled"></param>
 		public void SetEnabled(bool enabled)

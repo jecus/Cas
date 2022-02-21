@@ -1,5 +1,12 @@
-﻿using CAA.Entity.Models.DTO;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
@@ -8,17 +15,9 @@ using SmartCore.CAA.Check;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using CAS.UI.Management.Dispatchering;
-using CAS.UI.UICAAControls.CheckList.EditionRevision;
 using Telerik.WinControls.UI;
 
-namespace CAS.UI.UICAAControls.CheckList
+namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 {
     ///<summary>
     ///</summary>

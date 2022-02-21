@@ -9,11 +9,10 @@ using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.Activity;
 using CAS.UI.UICAAControls.Airacraft;
 using CAS.UI.UICAAControls.Audit;
-using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UICAAControls.Document;
-using CAS.UI.UICAAControls.Operators;
 using CAS.UI.UICAAControls.RoutineAudit;
 using CAS.UI.UICAAControls.Specialists;
+using CAS.UI.UICAAControls.StandartManual;
 using CAS.UI.UICAAControls.Users;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
@@ -27,7 +26,7 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 
-namespace CAS.UI.UICAAControls
+namespace CAS.UI.UICAAControls.CurrentOperator
 {
 	///<summary>
 	///</summary>

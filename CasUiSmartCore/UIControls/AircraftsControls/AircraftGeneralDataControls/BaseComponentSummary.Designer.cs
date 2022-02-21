@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-using CAS.UI.UIControls.DetailsControls;
 
 namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 {

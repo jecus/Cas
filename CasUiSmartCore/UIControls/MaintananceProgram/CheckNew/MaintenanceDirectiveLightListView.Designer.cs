@@ -1,4 +1,4 @@
-﻿namespace CAS.UI.UIControls.MaintananceProgram
+﻿namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 {
     partial class MaintenanceDirectiveLightListView
     {

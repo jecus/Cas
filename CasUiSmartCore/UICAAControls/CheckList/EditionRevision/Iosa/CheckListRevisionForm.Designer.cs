@@ -1,7 +1,5 @@
 ﻿
-using CAS.UI.UIControls.NewGrid;
-
-namespace CAS.UI.UICAAControls.CheckList
+namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
 {
     partial class CheckListRevisionForm
     {

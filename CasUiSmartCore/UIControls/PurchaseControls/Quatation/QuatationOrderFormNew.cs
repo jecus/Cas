@@ -7,7 +7,6 @@ using CAS.Entity.Models.DTO.Dictionaries;
 using CAS.Entity.Models.DTO.General;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.DocumentationControls;
-using CAS.UI.UIControls.PurchaseControls.Quatation;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
@@ -19,7 +18,7 @@ using SmartCore.Entities.General.Setting;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 
-namespace CAS.UI.UIControls.PurchaseControls.Initial
+namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
 	public partial class QuatationOrderFormNew : MetroForm
 	{

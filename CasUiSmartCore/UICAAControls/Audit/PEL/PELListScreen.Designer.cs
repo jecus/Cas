@@ -1,7 +1,7 @@
 ﻿using CASTerms;
 using Entity.Abstractions;
 
-namespace CAS.UI.UICAAControls.CheckList
+namespace CAS.UI.UICAAControls.Audit.PEL
 {
     partial class PELListScreen
 	{

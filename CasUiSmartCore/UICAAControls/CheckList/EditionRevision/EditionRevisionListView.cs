@@ -13,7 +13,7 @@ using SmartCore.CAA.Check;
 using SmartCore.Entities.General;
 using Telerik.WinControls.Data;
 
-namespace CAS.UI.UICAAControls.CheckList
+namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 {
 	///<summary>
 	/// список для отображения сотрудников

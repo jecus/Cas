@@ -11,7 +11,6 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AircraftTechnicalLogBookControls;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
-using CAS.UI.UIControls.OilControls;
 using CAS.UI.UIControls.OilControls.Model;
 using CASReports.Builders;
 using CASTerms;
@@ -29,8 +28,7 @@ using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
 
-
-namespace CAS.UI.UIControls.MonthlyUtilizationsControls
+namespace CAS.UI.UIControls.OilControls
 {
 	///<summary>
 	///</summary>
