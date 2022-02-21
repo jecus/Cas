@@ -42,6 +42,33 @@ namespace CAS.UI.UICAAControls.CheckList
 
         private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (_addedChecks.Any(i => i.CheckUIType == CheckUIType.Iosa))
+            {
+                _fromcheckListView = new CheckListView();
+                _tocheckListView = new CheckListView();
+            }
+            else if (_addedChecks.Any(i => i.CheckUIType == CheckUIType.Safa))
+            {
+                _fromcheckListView = new CheckListSAFAView();
+                _tocheckListView = new CheckListSAFAView();
+            }
+            
+            // 
+            // _fromcheckListView
+            // 
+            this._fromcheckListView.Location = new System.Drawing.Point(5, 53);
+            this._fromcheckListView.Name = "_fromcheckListView";
+            this._fromcheckListView.Size = new System.Drawing.Size(1510, 306);
+            // 
+            // _tocheckListView
+            // 
+            this._tocheckListView.Location = new System.Drawing.Point(5, 406);
+            this._tocheckListView.Name = "_tocheckListView";
+            this._tocheckListView.Size = new System.Drawing.Size(1510, 346);
+
+            this.Controls.Add(this._tocheckListView);
+            this.Controls.Add(this._fromcheckListView);
+            
             UpdateInformation();
         }
 

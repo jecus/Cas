@@ -34,8 +34,6 @@ namespace CAS.UI.UICAAControls.CheckList
             System.Windows.Forms.Label label3;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckListRevisionEditForm));
             this.buttonOk = new System.Windows.Forms.Button();
-            this._fromcheckListView = new CAS.UI.UICAAControls.CheckList.CheckListView();
-            this._tocheckListView = new CAS.UI.UICAAControls.CheckList.CheckListView();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
             label3 = new System.Windows.Forms.Label();
@@ -60,50 +58,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.buttonOk.TabIndex = 328;
             this.buttonOk.Text = "OK";
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
-            // 
-            // _fromcheckListView
-            // 
-            this._fromcheckListView.AuditId = null;
-            this._fromcheckListView.ColumnIndexes = ((System.Collections.Generic.List<string>)(resources.GetObject("_fromcheckListView.ColumnIndexes")));
-            this._fromcheckListView.ConfigurePaste = null;
-            this._fromcheckListView.Displayer = null;
-            this._fromcheckListView.DisplayerText = null;
-            this._fromcheckListView.EnableCustomSorting = true;
-            this._fromcheckListView.Entity = null;
-            this._fromcheckListView.IgnoreEnterPress = false;
-            this._fromcheckListView.IsAuditCheck = false;
-            this._fromcheckListView.IsRevision = false;
-            this._fromcheckListView.Location = new System.Drawing.Point(5, 53);
-            this._fromcheckListView.MenuOpeningAction = null;
-            this._fromcheckListView.Name = "_fromcheckListView";
-            this._fromcheckListView.OldColumnIndex = 0;
-            this._fromcheckListView.PasteComplete = null;
-            this._fromcheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-            this._fromcheckListView.Size = new System.Drawing.Size(1510, 306);
-            this._fromcheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
-            this._fromcheckListView.TabIndex = 329;
-            // 
-            // _tocheckListView
-            // 
-            this._tocheckListView.AuditId = null;
-            this._tocheckListView.ColumnIndexes = ((System.Collections.Generic.List<string>)(resources.GetObject("_tocheckListView.ColumnIndexes")));
-            this._tocheckListView.ConfigurePaste = null;
-            this._tocheckListView.Displayer = null;
-            this._tocheckListView.DisplayerText = null;
-            this._tocheckListView.EnableCustomSorting = true;
-            this._tocheckListView.Entity = null;
-            this._tocheckListView.IgnoreEnterPress = false;
-            this._tocheckListView.IsAuditCheck = false;
-            this._tocheckListView.IsRevision = false;
-            this._tocheckListView.Location = new System.Drawing.Point(5, 406);
-            this._tocheckListView.MenuOpeningAction = null;
-            this._tocheckListView.Name = "_tocheckListView";
-            this._tocheckListView.OldColumnIndex = 0;
-            this._tocheckListView.PasteComplete = null;
-            this._tocheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-            this._tocheckListView.Size = new System.Drawing.Size(1510, 346);
-            this._tocheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
-            this._tocheckListView.TabIndex = 330;
             // 
             // ButtonAdd
             // 
@@ -168,8 +122,7 @@ namespace CAS.UI.UICAAControls.CheckList
             this.ClientSize = new System.Drawing.Size(1518, 803);
             this.Controls.Add(this.ButtonDelete);
             this.Controls.Add(this.ButtonAdd);
-            this.Controls.Add(this._tocheckListView);
-            this.Controls.Add(this._fromcheckListView);
+            
             this.Controls.Add(this.buttonOk);
             this.Name = "CheckListRevisionEditForm";
             this.Resizable = false;

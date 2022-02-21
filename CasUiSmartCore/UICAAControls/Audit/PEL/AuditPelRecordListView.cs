@@ -124,6 +124,13 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 		#endregion
 
 		#region Methods
+		
+		protected override void GroupingItems()
+		{
+
+
+            
+		}
 
 		#region protected override void SetHeaders()
 		/// <summary>
