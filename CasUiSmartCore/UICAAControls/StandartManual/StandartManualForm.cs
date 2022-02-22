@@ -11,17 +11,15 @@ namespace CAS.UI.UICAAControls.StandartManual
     public partial class StandartManualForm : MetroForm
     {
         private readonly SmartCore.CAA.StandartManual.StandartManual _standartManual;
-        private readonly IEnumerable<ProgramType> _existTypes;
 
         public StandartManualForm()
         {
             InitializeComponent();
         }
         
-        public StandartManualForm(SmartCore.CAA.StandartManual.StandartManual standartManual, IEnumerable<ProgramType> existTypes)
+        public StandartManualForm(SmartCore.CAA.StandartManual.StandartManual standartManual)
         {
             _standartManual = standartManual;
-            _existTypes = existTypes;
             InitializeComponent();
             UpdateInformation();
         }
@@ -29,7 +27,7 @@ namespace CAS.UI.UICAAControls.StandartManual
         private void UpdateInformation()
         {
             comboBoxProgramType.Items.Clear();
-            comboBoxProgramType.Items.AddRange(ProgramType.Items.Except(_existTypes).ToArray());
+            comboBoxProgramType.Items.AddRange(ProgramType.Items.ToArray());
             if (_standartManual.ItemId > 0)
                 comboBoxProgramType.Items.Add(_standartManual.ProgramType);
             

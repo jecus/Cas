@@ -174,7 +174,7 @@ namespace CAS.UI.UICAAControls.StandartManual
 			if(_directivesViewer.SelectedItem == null)
 				return;
 			
-			var form = new StandartManualForm(_directivesViewer.SelectedItem,_initialDocumentArray.Select(i => i.ProgramType));
+			var form = new StandartManualForm(_directivesViewer.SelectedItem);
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
         }
@@ -259,7 +259,7 @@ namespace CAS.UI.UICAAControls.StandartManual
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-			var form = new StandartManualForm(new SmartCore.CAA.StandartManual.StandartManual{OperatorId = _operatorId}, _initialDocumentArray.Select(i => i.ProgramType));
+			var form = new StandartManualForm(new SmartCore.CAA.StandartManual.StandartManual{OperatorId = _operatorId});
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
 		}
