@@ -30,13 +30,15 @@ namespace CAA.API.Infrastructure.Jobs
             {
                 var context = _provider.GetService<DataContext>();
                 
-                var currentRevision = await context.CheckListRevisionDtos
-                    .FirstOrDefaultAsync(i => !i.IsDeleted 
+                var currentRevisions = await context.CheckListRevisionDtos
+                    .Where(i => !i.IsDeleted 
                                               && i.Status == (byte)EditionRevisionStatus.Open 
                                               && i.Type ==  (byte)RevisionType.Revision
-                                              && i.EffDate.Date <= DateTime.Today.Date);
+                                              && i.EffDate.Date <= DateTime.Today.Date).ToListAsync();
 
-                if (currentRevision != null)
+                foreach (var currentRevision in currentRevisions)
+                {
+                    if (currentRevision != null)
                 {
                     currentRevision.Status = (byte)EditionRevisionStatus.Close;
                     var records = await context.CheckListRevisionRecordDtos
@@ -197,6 +199,9 @@ namespace CAA.API.Infrastructure.Jobs
 
                     await context.SaveChangesAsync();
                 }
+                }
+
+                
                 
                 
             }

@@ -28,40 +28,40 @@ namespace CAA.API.Infrastructure.Jobs
             {
                 var context = _provider.GetService<DataContext>();
 
-                var nextEdition = await context.CheckListRevisionDtos
-                    .FirstOrDefaultAsync(i => !i.IsDeleted 
+                var nextEditions = await context.CheckListRevisionDtos
+                    .Where(i => !i.IsDeleted 
                                               && i.Status == (byte)EditionRevisionStatus.Temporary 
                                               && i.Type ==  (byte)RevisionType.Edition
-                                              && i.EffDate.Date <= DateTime.Today.Date);
+                                              && i.EffDate.Date <= DateTime.Today.Date).ToListAsync();
 
-                if (nextEdition != null)
+                foreach (var nextEdition in nextEditions)
                 {
+                    if (nextEdition != null)
+                    {
+                        var currentEdition = await context.CheckListRevisionDtos
+                            .OrderBy(i => i.EffDate)
+                            .FirstOrDefaultAsync(i => !i.IsDeleted && i.Status == (byte)EditionRevisionStatus.Open && i.Type ==  (byte)RevisionType.Edition);
                     
-                    var currentEdition = await context.CheckListRevisionDtos
-                        .OrderBy(i => i.EffDate)
-                        .FirstOrDefaultAsync(i => !i.IsDeleted && i.Status == (byte)EditionRevisionStatus.Open && i.Type ==  (byte)RevisionType.Edition);
-                    
-                    currentEdition.Status = (byte)EditionRevisionStatus.Close;
+                        currentEdition.Status = (byte)EditionRevisionStatus.Close;
 
-                    var currentRevisions = await context.CheckListRevisionDtos
-                        .Where(i => !i.IsDeleted && i.Type ==  (byte)RevisionType.Revision && i.EditionId == currentEdition.ItemId)
-                        .ToListAsync();
+                        var currentRevisions = await context.CheckListRevisionDtos
+                            .Where(i => !i.IsDeleted && i.Type ==  (byte)RevisionType.Revision && i.EditionId == currentEdition.ItemId)
+                            .ToListAsync();
                     
-                    foreach (var revision in currentRevisions)
-                        revision.Status = (byte)EditionRevisionStatus.Close;
+                        foreach (var revision in currentRevisions)
+                            revision.Status = (byte)EditionRevisionStatus.Close;
                     
-                    nextEdition.Status = (byte)EditionRevisionStatus.Open;
-                    var nextRevisions = await context.CheckListRevisionDtos
-                        .Where(i => !i.IsDeleted && i.Type ==  (byte)RevisionType.Revision && i.EditionId == currentEdition.ItemId)
-                        .ToListAsync();
+                        nextEdition.Status = (byte)EditionRevisionStatus.Open;
+                        var nextRevisions = await context.CheckListRevisionDtos
+                            .Where(i => !i.IsDeleted && i.Type ==  (byte)RevisionType.Revision && i.EditionId == currentEdition.ItemId)
+                            .ToListAsync();
                     
-                    foreach (var revision in nextRevisions)
-                        revision.Status = (byte)EditionRevisionStatus.Open;
+                        foreach (var revision in nextRevisions)
+                            revision.Status = (byte)EditionRevisionStatus.Open;
                     
-                    await context.SaveChangesAsync();
+                        await context.SaveChangesAsync();
+                    }
                 }
-
-
             }
             catch (Exception e)
             {
