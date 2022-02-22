@@ -13,7 +13,7 @@ using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
 
-namespace CAS.UI.UICAAControls.CheckList
+namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 {
     public partial class CheckListAuditForm : MetroForm
     {

@@ -925,6 +925,12 @@
     <Compile Include="UICAAControls\CheckList\AuditControl.Designer.cs">
       <DependentUpon>AuditControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CheckList\CheckListAudit\CheckListAuditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CheckList\CheckListAudit\CheckListAuditForm.Designer.cs">
+      <DependentUpon>CheckListAuditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CheckList\CheckListForm\CheckListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -943,16 +949,10 @@
     <Compile Include="UICAAControls\CheckList\CheckListLiteView.Designer.cs">
       <DependentUpon>CheckListLiteView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CheckList\CheckListAuditForm.cs">
+    <Compile Include="UICAAControls\CheckList\CheckListRoutine\CheckListRoutineForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UICAAControls\CheckList\CheckListAuditForm.Designer.cs">
-      <DependentUpon>CheckListAuditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UICAAControls\CheckList\CheckListRoutineForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UICAAControls\CheckList\CheckListRoutineForm.Designer.cs">
+    <Compile Include="UICAAControls\CheckList\CheckListRoutine\CheckListRoutineForm.Designer.cs">
       <DependentUpon>CheckListRoutineForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UICAAControls\CheckList\CheckListScreen.cs">
@@ -4373,7 +4373,7 @@
     <EmbeddedResource Include="UICAAControls\CheckList\AuditControl.resx">
       <DependentUpon>AuditControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UICAAControls\CheckList\CheckListAuditForm.resx">
+    <EmbeddedResource Include="UICAAControls\CheckList\CheckListAudit\CheckListAuditForm.resx">
       <DependentUpon>CheckListAuditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\CheckListForm\CheckListForm.resx">
@@ -4382,7 +4382,7 @@
     <EmbeddedResource Include="UICAAControls\CheckList\CheckListForm\CheckListSAFAForm.resx">
       <DependentUpon>CheckListSAFAForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UICAAControls\CheckList\CheckListRoutineForm.resx">
+    <EmbeddedResource Include="UICAAControls\CheckList\CheckListRoutine\CheckListRoutineForm.resx">
       <DependentUpon>CheckListRoutineForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\CheckListScreen.resx">

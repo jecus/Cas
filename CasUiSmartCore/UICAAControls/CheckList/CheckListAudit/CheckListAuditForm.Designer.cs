@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace CAS.UI.UICAAControls.CheckList
+namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 {
     partial class CheckListAuditForm
     {
