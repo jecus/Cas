@@ -17,9 +17,9 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 
-namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
+namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Safa
 {
-    public partial class CheckListRevisionForm : MetroForm
+    public partial class CheckListSafaRevisionForm : MetroForm
     {
         private readonly int _operatorId;
         private readonly CheckListRevision _parent;
@@ -31,7 +31,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private IList<FindingLevels> _levels = new List<FindingLevels>();
 
-        public CheckListRevisionForm(int operatorId, CheckListRevision parent, SmartCore.CAA.StandartManual.StandartManual manual)
+        public CheckListSafaRevisionForm(int operatorId, CheckListRevision parent, SmartCore.CAA.StandartManual.StandartManual manual)
         {
             _operatorId = operatorId;
             _parent = parent;
@@ -67,8 +67,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             foreach (var check in _addedChecks)
             {
                 check.EditionNumber = _parent.Number;
-
-                check.Level = _levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
+                check.Level = _levels.FirstOrDefault(i => i.ItemId == check.SettingsSafa.LevelId) ??
                               FindingLevels.Unknown;
                 check.Remains = Lifelength.Null;
                 check.Condition = ConditionState.Satisfactory;
@@ -82,13 +81,6 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             comboBoxLevel.Items.Clear();
             comboBoxLevel.Items.AddRange(_levels.ToArray());
             comboBoxLevel.Items.Add(FindingLevels.Unknown);
-            
-            var phase = new List<string> { "1", "2", "3", "4", "5", "6", "N/A" };
-            comboBoxPhase.Items.Clear();
-            foreach (var i in phase)
-                comboBoxPhase.Items.Add(i);
-            comboBoxPhase.SelectedItem = "N/A";
-
             comboBoxLevel.SelectedItem = FindingLevels.Unknown;
             
             _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
@@ -126,19 +118,14 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
                         CheckListId = checks.ItemId,
                     });
                 }
-                
-                if(checkBoxReference.Checked)
-                    checks.Settings.Reference = metroTextBoxReference.Text;
                 if(checkBoxLevel.Checked)
-                    checks.Settings.LevelId = ((FindingLevels)comboBoxLevel.SelectedItem).ItemId;
-                if (checkBoxPhase.Checked)
-                    checks.Settings.Phase = (string)comboBoxPhase.SelectedItem;
+                    checks.SettingsSafa.LevelId = ((FindingLevels)comboBoxLevel.SelectedItem).ItemId;
                 if (checkBoxMH.Checked)
                 {
                     double manHours;
                     if (!CheckManHours(out manHours))
                         return false;
-                    checks.Settings.MH = manHours;
+                    checks.SettingsSafa.MH = manHours;
                 }
 
             }
@@ -184,18 +171,14 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
         private void SetEnableControl(bool state)
         {
             checkBoxSource.Checked =
-                checkBoxReference.Checked =
-                                    checkBoxLevel.Checked =
+                checkBoxLevel.Checked =
                                         metroTextSource.Enabled =
                                             metroTextBoxRevision.Enabled = 
             dateTimePickerRevisionDate.Enabled =
-                comboBoxPhase.Enabled =
-                    RevisionEff.Enabled =
+                RevisionEff.Enabled =
                     metroTextBoxMH.Enabled =
-            metroTextBoxReference.Enabled =
-                checkBoxRevisionValidTo.Checked = 
-                    checkBoxPhase.Checked = 
-                        checkBoxMH.Checked =
+                        checkBoxRevisionValidTo.Checked =
+                            checkBoxMH.Checked =
                 comboBoxLevel.Enabled = state;
         }
 
@@ -205,9 +188,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             metroTextBoxRevision.Text = "";
             dateTimePickerRevisionDate.Value = DateTime.Today;
             RevisionEff.Value = DateTime.Today;
-            metroTextBoxReference.Text = "";
             comboBoxLevel.SelectedItem = FindingLevels.Unknown;
-            comboBoxPhase.SelectedItem = "N/A";
             metroTextBoxMH.Text = "0.0";
         }
 
@@ -312,11 +293,6 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
         {
             metroTextSource.Enabled = checkBoxSource.Checked;
         }
-
-        private void checkBoxReference_CheckedChanged(object sender, EventArgs e)
-        {
-            metroTextBoxReference.Enabled = checkBoxReference.Checked;
-        }
         
         private void checkBoxLevel_CheckedChanged(object sender, EventArgs e)
         {
@@ -327,12 +303,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
         {
             DialogResult = DialogResult.OK;
         }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            comboBoxPhase.Enabled = checkBoxPhase.Checked;
-        }
-
+        
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             metroTextBoxMH.Enabled = checkBoxMH.Checked;

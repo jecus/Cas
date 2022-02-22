@@ -1009,6 +1009,12 @@
     <Compile Include="UICAAControls\CheckList\EditionRevision\Iosa\CheckListRevisionForm.Designer.cs">
       <DependentUpon>CheckListRevisionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CheckList\EditionRevision\Safa\CheckListSafaRevisionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CheckList\EditionRevision\Safa\CheckListSafaRevisionForm.Designer.cs">
+      <DependentUpon>CheckListSafaRevisionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CheckList\EditionRevision\Safa\CheckListSAFARevEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4408,6 +4414,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\EditionRevision\Iosa\CheckListRevisionForm.resx">
       <DependentUpon>CheckListRevisionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CheckList\EditionRevision\Safa\CheckListSafaRevisionForm.resx">
+      <DependentUpon>CheckListSafaRevisionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\EditionRevision\Safa\CheckListSAFARevEditForm.resx">
       <DependentUpon>CheckListSAFARevEditForm.cs</DependentUpon>

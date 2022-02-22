@@ -8,6 +8,7 @@ using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa;
+using CAS.UI.UICAAControls.CheckList.EditionRevision.Safa;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
@@ -381,9 +382,18 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 			}
 			else
 			{
-				var form = new CheckListRevisionForm(_operatorId, _parent, _manual);
-				if (form.ShowDialog(this) == DialogResult.OK || form.ShowDialog(this) == DialogResult.Cancel)
-					AnimatedThreadWorker.RunWorkerAsync();
+				if (_manual.CheckUIType == CheckUIType.Iosa)
+				{
+					var form = new CheckListRevisionForm(_operatorId, _parent, _manual);
+					if (form.ShowDialog(this) == DialogResult.OK || form.ShowDialog(this) == DialogResult.Cancel)
+						AnimatedThreadWorker.RunWorkerAsync();
+				}
+				else if (_manual.CheckUIType == CheckUIType.Safa)
+				{
+					var form = new CheckListSafaRevisionForm(_operatorId, _parent, _manual);
+					if (form.ShowDialog(this) == DialogResult.OK || form.ShowDialog(this) == DialogResult.Cancel)
+						AnimatedThreadWorker.RunWorkerAsync();
+				}
 			}
 			
 			
