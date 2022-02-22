@@ -180,6 +180,7 @@ namespace SmartCore.CAA.Check
         
         public CheckLists()
         {
+            Level = FindingLevels.Unknown;
             ItemId = -1;
             CheckListRecords = new List<CheckListRecords>();
             AllRevisions = new List<EditionRevisionView>();
