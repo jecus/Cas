@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using CASTerms;
 using Entity.Abstractions.Filters;
@@ -27,7 +28,6 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Safa
 
         public CheckListSAFARevEditForm(CheckLists check, int revisionId)
         {
-            
             InitializeComponent();
             _currentCheck = check;
             _revisionId = revisionId;
@@ -38,12 +38,24 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Safa
         
         private void UpdateInformation()
         {
-            
             _record = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionRecordDTO, CheckListRevisionRecord>(new List<Filter>()
             {
                 new Filter("CheckListId", _currentCheck.ItemId),
                 new Filter("ParentId", _revisionId),
             }).FirstOrDefault();
+            
+            var manual = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(_currentCheck.ManualId);
+            _levels.Clear();
+            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new []
+            {
+                new Filter("OperatorId", _currentCheck.OperatorId),
+                new Filter("ProgramTypeId", manual.ProgramTypeId),
+            });
+            
+            comboBoxCategory.Items.Clear();
+            comboBoxCategory.Items.AddRange(_levels.ToArray());
+            comboBoxCategory.Items.Add(FindingLevels.Unknown);
+            comboBoxCategory.SelectedItem = _currentCheck.Level;
             
             metroTextSource.Text = _currentCheck.Source;
             metroTextBoxItem.Text = _currentCheck.SettingsSafa.Item;
@@ -121,6 +133,12 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Safa
             {
                 checkBoxInstruction.Checked = true;
                 metroTextBoxInstruction.Text = (string)_record.Settings.ModData["Instruction"];
+            }
+            
+            if (_record.Settings.ModData.ContainsKey("Category"))
+            {
+                checkBoxCategory.Checked = true;
+                comboBoxCategory.SelectedItem = _levels.FirstOrDefault(i => i.ItemId == (int)_record.Settings.ModData["Category"]);
             }
         }
         
@@ -232,6 +250,18 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Safa
             {
                 if (_record.Settings.ModData.ContainsKey("Instruction"))
                     _record.Settings.ModData.Remove("Instruction");
+            }
+            
+            if (checkBoxCategory.Checked)
+            {
+                if (!_record.Settings.ModData.ContainsKey("Category"))
+                    _record.Settings.ModData.Add("Category", ((FindingLevels)comboBoxCategory.SelectedItem).ItemId);
+                else _record.Settings.ModData["Category"] = ((FindingLevels)comboBoxCategory.SelectedItem).ItemId;
+            }
+            else
+            {
+                if (_record.Settings.ModData.ContainsKey("Category"))
+                    _record.Settings.ModData.Remove("Category");
             }
             
             

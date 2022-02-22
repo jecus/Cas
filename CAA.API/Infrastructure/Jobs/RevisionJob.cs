@@ -185,6 +185,9 @@ namespace CAA.API.Infrastructure.Jobs
                                 if (rec.Settings.ModData.ContainsKey("MH"))
                                     settings.MH = (int)rec.Settings.ModData["MH"];
                                 
+                                if (rec.Settings.ModData.ContainsKey("Category"))
+                                    settings.LevelId = (int)rec.Settings.ModData["Category"];
+                                
                                 check.SettingsJSON = JsonConvert.SerializeObject(settings);
                             }
 
