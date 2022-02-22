@@ -352,7 +352,7 @@ namespace CAS.UI.UICAAControls.CheckList
             AddColumn("Standard", (int)(radGridView1.Width * 0.24f));
             AddColumn("Standard Ref", (int)(radGridView1.Width * 0.24f));
             AddColumn("PDF Code", (int)(radGridView1.Width * 0.24f));
-
+            AddColumn("Category", (int)(radGridView1.Width * 0.24f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
         }
         #endregion
@@ -371,6 +371,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 CreateRow(item.SettingsSafa.Standard, item.SettingsSafa.Standard),
                 CreateRow(item.SettingsSafa.StandardRef, item.SettingsSafa.StandardRef),
                 CreateRow(item.SettingsSafa.PdfCode, item.SettingsSafa.PdfCode),
+                CreateRow(item.Level.ToString(), item.Level),
 
                 CreateRow(author, author)
             };
@@ -409,6 +410,7 @@ namespace CAS.UI.UICAAControls.CheckList
             AddColumn("Standard", (int)(radGridView1.Width * 0.24f));
             AddColumn("Standard Ref", (int)(radGridView1.Width * 0.24f));
             AddColumn("PDF Code", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Category", (int)(radGridView1.Width * 0.24f));
 
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
         }
@@ -429,7 +431,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 CreateRow(item.SettingsSafa.Standard, item.SettingsSafa.Standard),
                 CreateRow(item.SettingsSafa.StandardRef, item.SettingsSafa.StandardRef),
                 CreateRow(item.SettingsSafa.PdfCode, item.SettingsSafa.PdfCode),
-
+                CreateRow(item.Level.ToString(), item.Level),
                 CreateRow(author, author)
             };
 
