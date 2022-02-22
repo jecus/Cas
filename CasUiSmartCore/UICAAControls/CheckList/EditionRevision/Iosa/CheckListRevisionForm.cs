@@ -56,8 +56,8 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             _addedChecks.AddRange(
                 GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("EditionId", _parent.ItemId), loadChild: true)
                     .ToList());
-            _levels.Clear();
             
+            _levels.Clear();
             _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new []
             {
                 new Filter("OperatorId", _operatorId),
@@ -67,8 +67,18 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             foreach (var check in _addedChecks)
             {
                 check.EditionNumber = _parent.Number;
-                check.Level = _levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
-                              FindingLevels.Unknown;
+
+                if (check.CheckUIType == CheckUIType.Iosa)
+                {
+                    check.Level = _levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
+                                  FindingLevels.Unknown;
+                }
+                else if (check.CheckUIType == CheckUIType.Safa)
+                {
+                    check.Level = _levels.FirstOrDefault(i => i.ItemId == check.SettingsSafa.LevelId) ??
+                                  FindingLevels.Unknown;
+                }
+                
 
 
                 check.Remains = Lifelength.Null;

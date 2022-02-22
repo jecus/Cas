@@ -120,21 +120,26 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 	            }
             }
             
-            var lvlids = _initialDocumentArray.Select(i => i.Settings?.LevelId).Distinct();
-            var levels = new List<FindingLevels>();
-            if (lvlids.Any())
+            var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new []
             {
-	            levels.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("ItemId", lvlids)));
-            }
+	            new Filter("OperatorId", _operatorId),
+	            new Filter("ProgramTypeId", _manual.ProgramTypeId),
+            });
             
             
             foreach (var check in _initialDocumentArray)
             {
+	            if (check.CheckUIType == CheckUIType.Iosa)
+	            {
+		            check.Level = levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
+		                          FindingLevels.Unknown;
+	            }
+	            else
+	            {
+		            check.Level = levels.FirstOrDefault(i => i.ItemId == check.SettingsSafa.LevelId) ??
+		                          FindingLevels.Unknown;
+	            }
 	            
-             check.Level = levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
-                           FindingLevels.Unknown;
-            
-            
              check.Remains = Lifelength.Null;
              check.Condition = ConditionState.Satisfactory;
             }
@@ -370,7 +375,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 		{
 			if (_parent.Type == RevisionType.Revision)
 			{
-				var form = new CheckListRevisionEditForm(_operatorId, _parent, _initialDocumentArray);
+				var form = new CheckListRevisionEditForm(_operatorId, _parent, _initialDocumentArray, _manual);
 				if (form.ShowDialog(this) == DialogResult.OK || form.ShowDialog(this) == DialogResult.Cancel)
 					AnimatedThreadWorker.RunWorkerAsync();
 			}

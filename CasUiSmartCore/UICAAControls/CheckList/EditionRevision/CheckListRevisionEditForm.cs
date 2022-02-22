@@ -21,15 +21,17 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
     {
         private readonly int _operatorId;
         private readonly CheckListRevision _parent;
+        private readonly SmartCore.CAA.StandartManual.StandartManual _manual;
         private CommonCollection<CheckLists> _addedChecks = new CommonCollection<CheckLists>();
         private CommonCollection<CheckLists> _updateChecks = new CommonCollection<CheckLists>();
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private IList<FindingLevels> _levels = new List<FindingLevels>();
 
-        public CheckListRevisionEditForm(int operatorId, CheckListRevision parent, CommonCollection<CheckLists> added)
+        public CheckListRevisionEditForm(int operatorId, CheckListRevision parent, CommonCollection<CheckLists> added, SmartCore.CAA.StandartManual.StandartManual manual)
         {
             _operatorId = operatorId;
             _parent = parent;
+            _manual = manual;
             _updateChecks.AddRange(added.ToList());
             InitializeComponent();
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
@@ -76,17 +78,28 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
             _addedChecks.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("EditionId", _parent.EditionId), loadChild: true)
                     .ToList());
             _levels.Clear();
-            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
+            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new []
+            {
+                new Filter("OperatorId", _operatorId),
+                new Filter("ProgramTypeId", _manual.ProgramTypeId),
+            });
 
             foreach (var check in _addedChecks)
             {
                 check.EditionNumber = _parent.Number;
                 check.RevisionNumber = _parent.Number;
+
+                if (check.CheckUIType == CheckUIType.Iosa)
+                {
+                    check.Level = _levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
+                                  FindingLevels.Unknown;
+                }
+                else if (check.CheckUIType == CheckUIType.Safa)
+                {
+                    check.Level = _levels.FirstOrDefault(i => i.ItemId == check.SettingsSafa.LevelId) ??
+                                  FindingLevels.Unknown;
+                }
                 
-                check.Level = _levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
-                              FindingLevels.Unknown;
-
-
                 check.Remains = Lifelength.Null;
                 check.Condition = ConditionState.Satisfactory;
             }
