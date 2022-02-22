@@ -255,19 +255,26 @@ namespace CAS.UI.UICAAControls.CheckList
             }
 
 
-            if (_manual.CheckUIType == CheckUIType.Iosa)
+            var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new []
             {
-	            var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
+	            new Filter("OperatorId", _operatorId),
+	            new Filter("ProgramTypeId", _manual.ProgramTypeId),
+            });
             
-	            foreach (var check in _initialDocumentArray)
+            foreach (var check in _initialDocumentArray)
+            {
+	            if (check.CheckUIType == CheckUIType.Iosa)
 	            {
 		            check.Level = levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
 		                          FindingLevels.Unknown;
-
-
-		            check.Remains = Lifelength.Null;
-		            check.Condition = ConditionState.Satisfactory;
 	            }
+	            else if (check.CheckUIType == CheckUIType.Safa)
+	            {
+		            check.Level = levels.FirstOrDefault(i => i.ItemId == check.SettingsSafa.LevelId) ??
+		                          FindingLevels.Unknown;
+	            }
+	            check.Remains = Lifelength.Null;
+	            check.Condition = ConditionState.Satisfactory;
             }
            
             

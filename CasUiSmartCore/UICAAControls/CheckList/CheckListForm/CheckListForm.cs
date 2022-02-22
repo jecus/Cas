@@ -152,8 +152,18 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListForm
                     }
                 }
                 _currentCheck.Files = new CommonCollection<ItemFileLink>(links);
-                _currentCheck.Level = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.Settings.LevelId) ??
-                                      FindingLevels.Unknown;
+
+                if (_currentCheck.CheckUIType == CheckUIType.Iosa)
+                {
+                    _currentCheck.Level = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.Settings.LevelId) ??
+                                          FindingLevels.Unknown;
+                }
+                else if (_currentCheck.CheckUIType == CheckUIType.Safa)
+                {
+                    _currentCheck.Level = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.SettingsSafa.LevelId) ??
+                                          FindingLevels.Unknown;
+                }
+                
             }
         }
 

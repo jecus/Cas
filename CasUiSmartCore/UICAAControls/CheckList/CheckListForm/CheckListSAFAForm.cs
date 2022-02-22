@@ -154,6 +154,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListForm
 
         private void UpdateInformation()
         {
+            // comboBoxCategory.Items.Clear();
+            // comboBoxCategory.Items.AddRange();
+            // comboBoxCategory.SelectedItem = 
+            
+            
             metroTextSource.Text = _currentCheck.Source;
             metroTextBoxItem.Text = _currentCheck.SettingsSafa.Item;
             metroTextBoxItemNumber.Text = _currentCheck.SettingsSafa.ItemNumber;

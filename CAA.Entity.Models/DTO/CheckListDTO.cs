@@ -65,6 +65,9 @@ namespace CAA.Entity.Models.DTO
     public class CheckListSettingsSAFA
     {
         
+        [JsonProperty("LevelId")]
+        public int LevelId { get; set; }
+        
         [JsonProperty("Item")]
         public string Item { get; set; }
         

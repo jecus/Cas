@@ -57,7 +57,12 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
                 GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("EditionId", _parent.ItemId), loadChild: true)
                     .ToList());
             _levels.Clear();
-            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
+            
+            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new []
+            {
+                new Filter("OperatorId", _operatorId),
+                new Filter("ProgramTypeId", _manual.ProgramTypeId),
+            });
             
             foreach (var check in _addedChecks)
             {

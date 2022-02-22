@@ -108,22 +108,30 @@ namespace CAS.UI.UICAAControls.CheckList
             }
 
             
-            if (_manual.CheckUIType == CheckUIType.Iosa)
+            _levels.Clear();
+            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new []
             {
-                _levels.Clear();
-                _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _operatorId));
+                new Filter("OperatorId", _operatorId),
+                new Filter("ProgramTypeId", _manual.ProgramTypeId),
+            });
 
 
-                foreach (var check in _addedChecks)
+            foreach (var check in _addedChecks)
+            {
+                if (check.CheckUIType == CheckUIType.Iosa)
                 {
                     check.Level = _levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
                                   FindingLevels.Unknown;
-                    check.Remains = Lifelength.Null;
-                    check.Condition = ConditionState.Satisfactory;
                 }
+                else if (check.CheckUIType == CheckUIType.Safa)
+                {
+                    check.Level = _levels.FirstOrDefault(i => i.ItemId == check.SettingsSafa.LevelId) ??
+                                  FindingLevels.Unknown;
+                }
+                
+                check.Remains = Lifelength.Null;
+                check.Condition = ConditionState.Satisfactory;
             }
-            
-            
             
             var records = GlobalObjects.CaaEnvironment.NewLoader
                 .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", _routineId), loadChild: true).ToList();

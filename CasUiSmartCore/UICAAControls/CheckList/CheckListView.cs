@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
+using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa;
 using CAS.UI.UICAAControls.CheckList.EditionRevision.Safa;

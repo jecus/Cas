@@ -130,10 +130,8 @@ namespace CAS.UI.UICAAControls.CheckList
 
             _currentCheck.CheckListRecords.Clear();
             _currentCheck.CheckListRecords.AddRange(records);
-
-            _levels.Clear();
-            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>();
-            _currentCheck.Level = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.Settings.LevelId) ??
+            
+            _currentCheck.Level = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<FindingLevelsDTO, FindingLevels>(_currentCheck.Settings.LevelId) ??
                                   FindingLevels.Unknown;
         }
 
