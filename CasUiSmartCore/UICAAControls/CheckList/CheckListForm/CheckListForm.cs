@@ -22,6 +22,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListForm
     public partial class CheckListForm : MetroForm
     {
         private readonly int _revisionId;
+        private  SmartCore.CAA.StandartManual.StandartManual _manual;
         private CheckLists _currentCheck;
         private readonly bool _enable;
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
@@ -44,7 +45,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListForm
             EnabledControls(enable);
         }
         
-        public CheckListForm(CheckLists currentCheck, int revisionId) : this(currentCheck, true)
+        public CheckListForm(CheckLists currentCheck, int revisionId) : this(currentCheck)
         {
             _revisionId = revisionId;
         }
@@ -78,8 +79,14 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListForm
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
+            _manual = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(_currentCheck.ManualId);
+            
             _levels.Clear();
-            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _currentCheck.OperatorId));
+            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new []
+            {
+                new Filter("OperatorId", _currentCheck.OperatorId),
+                new Filter("ProgramTypeId", _manual.ProgramTypeId),
+            });
             
             if (_currentCheck == null) return;
 
@@ -152,18 +159,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListForm
                     }
                 }
                 _currentCheck.Files = new CommonCollection<ItemFileLink>(links);
-
-                if (_currentCheck.CheckUIType == CheckUIType.Iosa)
-                {
-                    _currentCheck.Level = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.Settings.LevelId) ??
-                                          FindingLevels.Unknown;
-                }
-                else if (_currentCheck.CheckUIType == CheckUIType.Safa)
-                {
-                    _currentCheck.Level = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.SettingsSafa.LevelId) ??
-                                          FindingLevels.Unknown;
-                }
-                
+                _currentCheck.Level = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.Settings.LevelId) ??
+                                      FindingLevels.Unknown;
             }
         }
 
@@ -196,9 +193,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListForm
             comboBoxLevel.Items.Clear();
             comboBoxLevel.Items.AddRange(_levels.ToArray());
             comboBoxLevel.Items.Add(FindingLevels.Unknown);
-
-            comboBoxLevel.SelectedItem = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.Settings.LevelId) ??
-                                         FindingLevels.Unknown;
+            comboBoxLevel.SelectedItem = _currentCheck.Level;
 
             fileControl.UpdateInfo(_currentCheck.File, "Adobe PDF Files|*.pdf",
                 "This record does not contain a file proving the Document. Enclose PDF file to prove the Document.",

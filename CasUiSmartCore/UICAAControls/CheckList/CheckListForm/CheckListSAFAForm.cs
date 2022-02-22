@@ -22,6 +22,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListForm
     public partial class CheckListSAFAForm : MetroForm
     {
         private readonly int _revisionId;
+        private SmartCore.CAA.StandartManual.StandartManual _manual;
         private CheckLists _currentCheck;
         private readonly bool _enable;
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
@@ -81,8 +82,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListForm
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
+            _manual = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(_currentCheck.ManualId);
             _levels.Clear();
-            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new Filter("OperatorId", _currentCheck.OperatorId));
+            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new []
+            {
+                new Filter("OperatorId", _currentCheck.OperatorId),
+                new Filter("ProgramTypeId", _manual.ProgramTypeId),
+            });
             
             if (_currentCheck == null) return;
 
@@ -149,14 +155,18 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListForm
                     }
                 }
                 _currentCheck.Files = new CommonCollection<ItemFileLink>(links);
+                
+                _currentCheck.Level = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.SettingsSafa.LevelId) ??
+                                      FindingLevels.Unknown;
             }
         }
 
         private void UpdateInformation()
         {
-            // comboBoxCategory.Items.Clear();
-            // comboBoxCategory.Items.AddRange();
-            // comboBoxCategory.SelectedItem = 
+            comboBoxCategory.Items.Clear();
+            comboBoxCategory.Items.AddRange(_levels.ToArray());
+            comboBoxCategory.Items.Add(FindingLevels.Unknown);
+            comboBoxCategory.SelectedItem = _currentCheck.Level;
             
             
             metroTextSource.Text = _currentCheck.Source;
@@ -196,6 +206,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListForm
             _currentCheck.SettingsSafa.StandardText = metroTextBoxStandardText.Text;
             _currentCheck.SettingsSafa.PreDescribedFinding = metroTextBoxFindings.Text;
             _currentCheck.SettingsSafa.Instruction = metroTextBoxInstruction.Text;
+            _currentCheck.SettingsSafa.LevelId = ((FindingLevels) comboBoxCategory.SelectedItem).ItemId;
             
             double manHours;
             if (!CheckManHours(out manHours))

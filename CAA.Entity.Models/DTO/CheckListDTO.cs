@@ -64,6 +64,11 @@ namespace CAA.Entity.Models.DTO
      [Serializable]
     public class CheckListSettingsSAFA
     {
+        public CheckListSettingsSAFA()
+        {
+            MH = 0.0;
+            LevelId = -1;
+        }
         
         [JsonProperty("LevelId")]
         public int LevelId { get; set; }
@@ -111,6 +116,7 @@ namespace CAA.Entity.Models.DTO
         {
             Phase = "N/A";
             MH = 0.0;
+            LevelId = -1;
         }
         
         [JsonProperty("SectionNumber")]
