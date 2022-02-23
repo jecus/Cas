@@ -57,11 +57,60 @@ namespace CAA.Entity.Models.DTO
     {
         Iosa,
         Safa,
+        Icao,
         None
     }
     
     
-     [Serializable]
+    [Serializable]
+    public class CheckListICAOSettings
+    {
+        public CheckListICAOSettings()
+        {
+            MH = 0.0;
+            LevelId = -1;
+        }
+        
+        [JsonProperty("Reference")]
+        public string Reference { get; set; }
+        
+        [JsonProperty("AnnexRef")]
+        public string AnnexRef { get; set; }
+        
+        [JsonProperty("PartNumber")]
+        public string PartNumber { get; set; }
+
+        [JsonProperty("PartName")]
+        public string PartName { get; set; }
+        
+        [JsonProperty("ChapterNumber")]
+        public string ChapterNumber { get; set; }
+
+        [JsonProperty("ChapterName")]
+        public string ChapterName { get; set; }
+
+        [JsonProperty("ItemNumber")]
+        public string ItemNumber { get; set; }
+
+        [JsonProperty("ItemtName")]
+        public string ItemtName { get; set; }
+
+        [JsonProperty("Requirement")]
+        public string Standard { get; set; }
+        
+        [JsonProperty("LevelId", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue(-1)]
+        public int LevelId { get; set; }
+        
+        [JsonProperty("ManHours")]
+        public double MH { get; set; }
+
+        [JsonProperty("ProgramTypeId", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue(-1)]
+        public int ProgramTypeId { get; set; }
+    }
+    
+    [Serializable]
     public class CheckListSettingsSAFA
     {
         public CheckListSettingsSAFA()

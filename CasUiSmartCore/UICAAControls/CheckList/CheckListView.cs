@@ -179,7 +179,7 @@ namespace CAS.UI.UICAAControls.CheckList
                         }
                         
                     }
-                    else
+                    else 
                     {
                         if (SelectedItem.CheckUIType == CheckUIType.Iosa)
                         {
@@ -190,6 +190,12 @@ namespace CAS.UI.UICAAControls.CheckList
                         else if (SelectedItem.CheckUIType == CheckUIType.Safa)
                         {
                             var form = new CheckListForm.CheckListSAFAForm(SelectedItem, _enable);
+                            if (form.ShowDialog() == DialogResult.OK)
+                                _animatedThreadWorker.RunWorkerAsync();
+                        }
+                        else if (SelectedItem.CheckUIType == CheckUIType.Icao)
+                        {
+                            var form = new CheckListForm.CheckListICAOForm(SelectedItem, _enable);
                             if (form.ShowDialog() == DialogResult.OK)
                                 _animatedThreadWorker.RunWorkerAsync();
                         }
@@ -329,6 +335,8 @@ namespace CAS.UI.UICAAControls.CheckList
         #endregion
     }
     
+    
+    
     public class CheckListSAFAView : CheckListView
     {
         public CheckListSAFAView() : base()
@@ -353,6 +361,8 @@ namespace CAS.UI.UICAAControls.CheckList
             AddColumn("Standard Ref", (int)(radGridView1.Width * 0.24f));
             AddColumn("PDF Code", (int)(radGridView1.Width * 0.24f));
             AddColumn("Category", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Edition", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Revision", (int)(radGridView1.Width * 0.3f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
         }
         #endregion
@@ -372,6 +382,8 @@ namespace CAS.UI.UICAAControls.CheckList
                 CreateRow(item.SettingsSafa.StandardRef, item.SettingsSafa.StandardRef),
                 CreateRow(item.SettingsSafa.PdfCode, item.SettingsSafa.PdfCode),
                 CreateRow(item.Level.ToString(), item.Level),
+                CreateRow(item.EditionNumber.ToString(), item.EditionNumber),
+                CreateRow(item.RevisionNumber.ToString(), item.RevisionNumber),
 
                 CreateRow(author, author)
             };
@@ -411,7 +423,8 @@ namespace CAS.UI.UICAAControls.CheckList
             AddColumn("Standard Ref", (int)(radGridView1.Width * 0.24f));
             AddColumn("PDF Code", (int)(radGridView1.Width * 0.24f));
             AddColumn("Category", (int)(radGridView1.Width * 0.24f));
-
+            AddColumn("Edition", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Revision", (int)(radGridView1.Width * 0.3f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
         }
         #endregion
@@ -432,6 +445,8 @@ namespace CAS.UI.UICAAControls.CheckList
                 CreateRow(item.SettingsSafa.StandardRef, item.SettingsSafa.StandardRef),
                 CreateRow(item.SettingsSafa.PdfCode, item.SettingsSafa.PdfCode),
                 CreateRow(item.Level.ToString(), item.Level),
+                CreateRow(item.EditionNumber.ToString(), item.EditionNumber),
+                CreateRow(item.RevisionNumber.ToString(), item.RevisionNumber),
                 CreateRow(author, author)
             };
 
@@ -445,4 +460,145 @@ namespace CAS.UI.UICAAControls.CheckList
             
         }
     }
+    
+    
+    
+    public class CheckListICAOView : CheckListView
+    {
+        public CheckListICAOView() : base()
+        {
+            
+        }
+        
+        public CheckListICAOView(AnimatedThreadWorker worker, bool enable = true) :  base(worker, enable)
+        {
+        }
+        
+        #region protected override void SetHeaders()
+        /// <summary>
+        /// Устанавливает заголовки
+        /// </summary>
+        protected override void SetHeaders()
+        {
+            AddColumn("Source", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Annex Ref", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Part №", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Part Name", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Chapter №", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Chapter Name", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Item №", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Item Name", (int)(radGridView1.Width * 0.5f));
+            AddColumn("Standard or Recommended Practice", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Level", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Edition", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Revision", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+        }
+        #endregion
+
+        #region protected override List<CustomCell> GetListViewSubItems(Specialization item)
+
+        protected override List<CustomCell> GetListViewSubItems(CheckLists item)
+        {
+            var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
+
+            var subItems = new List<CustomCell>()
+            {
+                CreateRow(item.Source, item.Source),
+                CreateRow(item.SettingsIosa.AnnexRef, item.SettingsIosa.AnnexRef),
+                CreateRow(item.SettingsIosa.PartNumber, item.SettingsIosa.PartNumber),
+                CreateRow(item.SettingsIosa.PartName, item.SettingsIosa.PartName),
+                CreateRow(item.SettingsIosa.ChapterNumber, item.SettingsIosa.ChapterName),
+                CreateRow(item.SettingsIosa.ChapterName, item.SettingsIosa.ChapterName),
+                CreateRow(item.SettingsIosa.ItemNumber, item.SettingsIosa.ItemNumber),
+                CreateRow(item.SettingsIosa.ItemtName, item.SettingsIosa.ItemtName),
+                CreateRow(item.SettingsIosa.Standard, item.SettingsIosa.Standard),
+                CreateRow(item.Level.ToString(), item.Level),
+                CreateRow(item.EditionNumber.ToString(), item.EditionNumber),
+                CreateRow(item.RevisionNumber.ToString(), item.RevisionNumber),
+                CreateRow(author, author),
+            };
+
+            return subItems;
+        }
+
+        protected override void GroupingItems()
+        {
+            
+        }
+
+        #endregion
+    }
+    
+    public class CheckListRevisionICAOView : CheckListView
+    {
+        
+        public CheckListRevisionICAOView()  :  base()
+        {
+        }
+        public CheckListRevisionICAOView(AnimatedThreadWorker worker, bool enable = true)  :  base(worker, enable)
+        {
+        }
+        
+        #region protected override void SetHeaders()
+        /// <summary>
+        /// Устанавливает заголовки
+        /// </summary>
+        protected override void SetHeaders()
+        {
+            AddColumn("Status", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Source", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Annex Ref", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Part №", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Part Name", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Chapter №", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Chapter Name", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Item №", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Item Name", (int)(radGridView1.Width * 0.5f));
+            AddColumn("Standard or Recommended Practice", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Level", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Edition", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Revision", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+        }
+        #endregion
+
+        #region protected override List<CustomCell> GetListViewSubItems(Specialization item)
+
+        protected override List<CustomCell> GetListViewSubItems(CheckLists item)
+        {
+            var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
+
+            var subItems = new List<CustomCell>()
+            {
+                CreateRow(item.RevisionStatus.ToString(), item.RevisionStatus),
+                CreateRow(item.Source, item.Source),
+                CreateRow(item.SettingsIosa.AnnexRef, item.SettingsIosa.AnnexRef),
+                CreateRow(item.SettingsIosa.PartNumber, item.SettingsIosa.PartNumber),
+                CreateRow(item.SettingsIosa.PartName, item.SettingsIosa.PartName),
+                CreateRow(item.SettingsIosa.ChapterNumber, item.SettingsIosa.ChapterName),
+                CreateRow(item.SettingsIosa.ChapterName, item.SettingsIosa.ChapterName),
+                CreateRow(item.SettingsIosa.ItemNumber, item.SettingsIosa.ItemNumber),
+                CreateRow(item.SettingsIosa.ItemtName, item.SettingsIosa.ItemtName),
+                CreateRow(item.SettingsIosa.Standard, item.SettingsIosa.Standard),
+                CreateRow(item.Level.ToString(), item.Level),
+                CreateRow(item.EditionNumber.ToString(), item.EditionNumber),
+                CreateRow(item.RevisionNumber.ToString(), item.RevisionNumber),
+                CreateRow(author, author),
+                
+            };
+
+            return subItems;
+        }
+        
+        #endregion
+        
+        protected override void GroupingItems()
+        {
+            
+        }
+    }
+    
+    
+    
 }

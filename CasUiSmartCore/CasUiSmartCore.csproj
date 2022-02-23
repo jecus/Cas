@@ -937,6 +937,12 @@
     <Compile Include="UICAAControls\CheckList\CheckListForm\CheckListForm.Designer.cs">
       <DependentUpon>CheckListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CheckList\CheckListForm\CheckListICAOForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CheckList\CheckListForm\CheckListICAOForm.Designer.cs">
+      <DependentUpon>CheckListICAOForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CheckList\CheckListForm\CheckListSAFAForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4384,6 +4390,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\CheckListForm\CheckListForm.resx">
       <DependentUpon>CheckListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CheckList\CheckListForm\CheckListICAOForm.resx">
+      <DependentUpon>CheckListICAOForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\CheckListForm\CheckListSAFAForm.resx">
       <DependentUpon>CheckListSAFAForm.cs</DependentUpon>

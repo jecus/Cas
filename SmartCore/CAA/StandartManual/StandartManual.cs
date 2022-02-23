@@ -70,8 +70,10 @@ namespace SmartCore.CAA.StandartManual
             {
                 if (new[] { ProgramType.IOSA, ProgramType.ISAGO, ProgramType.CAAKG, }.Contains(ProgramType))
                     return CheckUIType.Iosa;
-                else if (new[] { ProgramType.SAFA, ProgramType.SACA, ProgramType.SANAKG, }.Contains(ProgramType))
+                if (new[] { ProgramType.SAFA, ProgramType.SACA, ProgramType.SANAKG, }.Contains(ProgramType))
                     return CheckUIType.Safa;
+                if (new[] { ProgramType.ICAO }.Contains(ProgramType))
+                    return CheckUIType.Icao;
 
                 return CheckUIType.None;
             }

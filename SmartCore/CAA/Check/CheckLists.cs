@@ -82,9 +82,15 @@ namespace SmartCore.CAA.Check
                         Formatting.Indented,
                         new JsonSerializerSettings {DefaultValueHandling = DefaultValueHandling.Ignore});
                 }
-                else
+                if (CheckUIType == CheckUIType.Safa)
                 {
                     return JsonConvert.SerializeObject(SettingsSafa,
+                        Formatting.Indented,
+                        new JsonSerializerSettings {DefaultValueHandling = DefaultValueHandling.Ignore});
+                }
+                else
+                {
+                    return JsonConvert.SerializeObject(SettingsIosa,
                         Formatting.Indented,
                         new JsonSerializerSettings {DefaultValueHandling = DefaultValueHandling.Ignore});
                 }
@@ -98,17 +104,24 @@ namespace SmartCore.CAA.Check
                         ? new CheckListSettings()
                         : JsonConvert.DeserializeObject<CheckListSettings>(value);
                 }
-                else
+                if (CheckUIType == CheckUIType.Safa)
                 {
                     SettingsSafa = string.IsNullOrWhiteSpace(value)
                         ? new CheckListSettingsSAFA()
                         : JsonConvert.DeserializeObject<CheckListSettingsSAFA>(value);
+                }
+                else
+                {
+                    SettingsIosa = string.IsNullOrWhiteSpace(value)
+                        ? new CheckListICAOSettings()
+                        : JsonConvert.DeserializeObject<CheckListICAOSettings>(value);
                 }
             }
         }
 
         public CheckListSettings Settings { get; set; }
         public CheckListSettingsSAFA SettingsSafa { get; set; }
+        public CheckListICAOSettings SettingsIosa { get; set; }
         
         
         public string NextEditionNumber  { get; set; }
@@ -145,9 +158,6 @@ namespace SmartCore.CAA.Check
 
         public AuditCheck AuditCheck { get; set; }
         
-
-
-        
         public ProgramType ProgramType { get; set; }
 
         public CheckUIType CheckUIType
@@ -156,8 +166,10 @@ namespace SmartCore.CAA.Check
             {
                 if (new[] { ProgramType.IOSA, ProgramType.ISAGO, ProgramType.CAAKG, }.Contains(ProgramType))
                     return CheckUIType.Iosa;
-                else if (new[] { ProgramType.SAFA, ProgramType.SACA, ProgramType.SANAKG, }.Contains(ProgramType))
+                if (new[] { ProgramType.SAFA, ProgramType.SACA, ProgramType.SANAKG, }.Contains(ProgramType))
                     return CheckUIType.Safa;
+                if (new[] { ProgramType.ICAO }.Contains(ProgramType))
+                    return CheckUIType.Icao;
 
                 return CheckUIType.None;
             }

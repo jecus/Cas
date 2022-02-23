@@ -215,6 +215,9 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 					_directivesViewer = new CheckListView(AnimatedThreadWorker);
 				else  if (_manual.CheckUIType == CheckUIType.Safa)
 					_directivesViewer = new CheckListSAFAView(AnimatedThreadWorker);
+				else  if (_manual.CheckUIType == CheckUIType.Icao)
+					_directivesViewer = new CheckListICAOView(AnimatedThreadWorker);
+				else return;
 				
 			}
 			else
@@ -223,6 +226,9 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 					_directivesViewer = new CheckListRevisionView(AnimatedThreadWorker);
 				else  if (_manual.CheckUIType == CheckUIType.Safa)
 					_directivesViewer = new CheckListRevisionSAFAView(AnimatedThreadWorker);
+				else  if (_manual.CheckUIType == CheckUIType.Icao)
+					_directivesViewer = new CheckListRevisionICAOView(AnimatedThreadWorker);
+				else return;
 			}
 			
             _directivesViewer.IsRevision = _parent.Type == RevisionType.Revision;
@@ -448,6 +454,28 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 				{
 					check.EditionId = _parent.ItemId;
 					var form = new CheckListForm.CheckListSAFAForm(check);
+					if (form.ShowDialog() == DialogResult.OK)
+						AnimatedThreadWorker.RunWorkerAsync();
+				}
+			}
+			else if (check.CheckUIType == CheckUIType.Icao)
+			{
+				check.SettingsIosa = new CheckListICAOSettings()
+				{
+					ProgramTypeId = _manual.ProgramType.ItemId
+				};
+				
+				if (_parent.Type == RevisionType.Revision)
+				{
+					check.EditionId = -1;
+					var form = new CheckListForm.CheckListICAOForm(check, _parent.ItemId);
+					if (form.ShowDialog() == DialogResult.OK)
+						AnimatedThreadWorker.RunWorkerAsync();
+				}
+				else
+				{
+					check.EditionId = _parent.ItemId;
+					var form = new CheckListForm.CheckListICAOForm(check);
 					if (form.ShowDialog() == DialogResult.OK)
 						AnimatedThreadWorker.RunWorkerAsync();
 				}

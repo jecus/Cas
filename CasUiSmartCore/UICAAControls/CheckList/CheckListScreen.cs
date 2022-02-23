@@ -357,6 +357,8 @@ namespace CAS.UI.UICAAControls.CheckList
 			        _directivesViewer = new CheckListLiteView(AnimatedThreadWorker);
 		        else  if (_manual.CheckUIType == CheckUIType.Safa)
 			        _directivesViewer = new CheckListSAFAView(AnimatedThreadWorker, false);
+		        else  if (_manual.CheckUIType == CheckUIType.Icao)
+			        _directivesViewer = new CheckListICAOView(AnimatedThreadWorker, false);
 		        else return;
 	        }
             else
@@ -365,6 +367,8 @@ namespace CAS.UI.UICAAControls.CheckList
 		            _directivesViewer = new CheckListView(AnimatedThreadWorker, false);
 	            else  if (_manual.CheckUIType == CheckUIType.Safa)
 		            _directivesViewer = new CheckListSAFAView(AnimatedThreadWorker, false);
+	            else  if (_manual.CheckUIType == CheckUIType.Icao)
+		            _directivesViewer = new CheckListICAOView(AnimatedThreadWorker, false);
 	            else return;
             }
 

@@ -39,6 +39,11 @@ namespace CAS.UI.UICAAControls.StandartManual
 
 		#region Methods
 
+		protected override void GroupingItems()
+		{
+			Grouping("Program Type");
+		}
+
 		#region protected override void SetHeaders()
 		/// <summary>
 		/// Устанавливает заголовки
