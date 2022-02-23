@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
+using CAS.UI.UICAAControls.CheckList.EditionRevision.Icao;
 using CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa;
 using CAS.UI.UICAAControls.CheckList.EditionRevision.Safa;
 using CAS.UI.UIControls.Auxiliary;
@@ -400,9 +401,13 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 					if (form.ShowDialog(this) == DialogResult.OK || form.ShowDialog(this) == DialogResult.Cancel)
 						AnimatedThreadWorker.RunWorkerAsync();
 				}
+				else if (_manual.CheckUIType == CheckUIType.Icao)
+				{
+					var form = new CheckListIcaoRevisionForm(_operatorId, _parent, _manual);
+					if (form.ShowDialog(this) == DialogResult.OK || form.ShowDialog(this) == DialogResult.Cancel)
+						AnimatedThreadWorker.RunWorkerAsync();
+				}
 			}
-			
-			
 		}
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
