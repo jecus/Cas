@@ -8,6 +8,7 @@ using Auxiliary;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.CheckList.CheckListAudit;
+using CAS.UI.UICAAControls.CheckList.EditionRevision.Icao;
 using CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa;
 using CAS.UI.UICAAControls.CheckList.EditionRevision.Safa;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
@@ -174,6 +175,12 @@ namespace CAS.UI.UICAAControls.CheckList
                         else if (SelectedItem.CheckUIType == CheckUIType.Safa)
                         {
                             var form = new CheckListSAFARevEditForm(SelectedItem,RevisionId);
+                            if (form.ShowDialog() == DialogResult.OK)
+                                _animatedThreadWorker.RunWorkerAsync();
+                        }
+                        else if (SelectedItem.CheckUIType == CheckUIType.Icao)
+                        {
+                            var form = new CheckListRevICAOEditForm(SelectedItem,RevisionId);
                             if (form.ShowDialog() == DialogResult.OK)
                                 _animatedThreadWorker.RunWorkerAsync();
                         }

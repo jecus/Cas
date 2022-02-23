@@ -5,18 +5,15 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
-using CAA.Entity.Models.Model;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
-using Newtonsoft.Json;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
-using SmartCore.CAA.RoutineAudits;
 
-namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
+namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
 {
-    public partial class CheckListRevEditForm : MetroForm
+    public partial class CheckListRevICAOEditForm : MetroForm
     {
         private CheckLists _currentCheck;
         private readonly int _revisionId;
@@ -24,7 +21,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
         private CheckListRevisionRecord _record;
 
         #region Constructors
-        public CheckListRevEditForm(CheckLists check, int revisionId)
+        public CheckListRevICAOEditForm(CheckLists check, int revisionId)
         {
             
             InitializeComponent();
@@ -45,17 +42,12 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
              }).FirstOrDefault();
             
              var manual = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(_currentCheck.ManualId);
-             _levels.Clear();
-             _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new []
-             {
-                 new Filter("OperatorId", _currentCheck.OperatorId),
-                 new Filter("ProgramTypeId", manual.ProgramTypeId),
-             });
-
-            var phase = new List<string> { "1", "2", "3", "4", "5", "6", "N/A" };
-            comboBoxPhase.Items.Clear();
-            foreach (var i in phase)
-                comboBoxPhase.Items.Add(i);
+            _levels.Clear();
+            _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new []
+            {
+                new Filter("OperatorId", _currentCheck.OperatorId),
+                new Filter("ProgramTypeId", manual.ProgramTypeId),
+            });
             
             var records =
                 GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRecordDTO, CheckListRecords>(new Filter("CheckListId", _currentCheck.ItemId));
@@ -64,31 +56,28 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             _currentCheck.CheckListRecords.AddRange(records);
             
             metroTextSource.Text = _currentCheck.Source;
-            metroTextBoxSectionNumber.Text = _currentCheck.Settings.SectionNumber;
-            metroTextBoxSectionName.Text = _currentCheck.Settings.SectionName;
-            metroTextBoxPartNumber.Text = _currentCheck.Settings.PartNumber;
-            metroTextBoxPartName.Text = _currentCheck.Settings.PartName;
-            metroTextBoxSubPartNumber.Text = _currentCheck.Settings.SubPartNumber;
-            metroTextBoxSubPartName.Text = _currentCheck.Settings.SubPartName;
-            metroTextBoxItemNumber.Text = _currentCheck.Settings.ItemNumber;
-            metroTextBoxItemName.Text = _currentCheck.Settings.ItemtName;
-            metroTextBoxRequirement.Text = _currentCheck.Settings.Requirement;
+            metroTextBoxAnnexRef.Text = _currentCheck.SettingsIcao.AnnexRef;
+            metroTextBoxPartNumber.Text = _currentCheck.SettingsIcao.PartNumber;
+            metroTextBoxPartName.Text = _currentCheck.SettingsIcao.PartName;
+            metroTextBoxChapterNumber.Text = _currentCheck.SettingsIcao.ChapterNumber;
+            metroTextBoxChapterName.Text = _currentCheck.SettingsIcao.ChapterName;
+            metroTextBoxItemNumber.Text = _currentCheck.SettingsIcao.ItemNumber;
+            metroTextBoxItemName.Text = _currentCheck.SettingsIcao.ItemtName;
+            metroTextBoxStandard.Text = _currentCheck.SettingsIcao.Standard;
 
-            metroTextBoxReference.Text = _currentCheck.Settings.Reference;
-
+            metroTextBoxReference.Text = _currentCheck.SettingsIcao.Reference;
 
 
-            if (Math.Abs(_currentCheck.Settings.MH) > 0.000001)
-                metroTextBoxMH.Text = _currentCheck.Settings.MH.ToString();
+
+            if (Math.Abs(_currentCheck.SettingsIcao.MH) > 0.000001)
+                metroTextBoxMH.Text = _currentCheck.SettingsIcao.MH.ToString();
             
-            comboBoxPhase.SelectedItem = _currentCheck.Settings.Phase;
-
 
             comboBoxLevel.Items.Clear();
             comboBoxLevel.Items.AddRange(_levels.ToArray());
             comboBoxLevel.Items.Add(FindingLevels.Unknown);
 
-            comboBoxLevel.SelectedItem = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.Settings.LevelId) ??
+            comboBoxLevel.SelectedItem = _levels.FirstOrDefault(i => i.ItemId == _currentCheck.SettingsIcao.LevelId) ??
                                          FindingLevels.Unknown;
             
 
@@ -110,24 +99,16 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
                 comboBoxLevel.SelectedItem = _levels.FirstOrDefault(i => i.ItemId == (int)_record.Settings.ModData["Level"]);
             }
             
-            if (_record.Settings.ModData.ContainsKey("Phase"))
-            {
-                checkBoxPhase.Checked = true;
-                comboBoxPhase.SelectedItem = (string)_record.Settings.ModData["Phase"];
-            }
-            
-            if (_record.Settings.ModData.ContainsKey("Requirement"))
+            if (_record.Settings.ModData.ContainsKey("Standard"))
             {
                 checkBoxReq.Checked = true;
-                metroTextBoxRequirement.Text = (string)_record.Settings.ModData["Requirement"];
+                metroTextBoxStandard.Text = (string)_record.Settings.ModData["Standard"];
             }
             
-            if (_record.Settings.ModData.ContainsKey("Section"))
+            if (_record.Settings.ModData.ContainsKey("AnnexRef"))
             {
-                checkBoxSection.Checked = true;
-                var data = ((string)_record.Settings.ModData["Section"]).Split(new[]{"||"}, StringSplitOptions.None);
-                metroTextBoxSectionNumber.Text = data.FirstOrDefault();
-                metroTextBoxSectionName.Text = data.LastOrDefault();
+                checkBoxAnnexRef.Checked = true;
+                metroTextBoxAnnexRef.Text = (string)_record.Settings.ModData["AnnexRef"];
             }
             
             if (_record.Settings.ModData.ContainsKey("Part"))
@@ -138,12 +119,12 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
                 metroTextBoxPartName.Text = data.LastOrDefault();
             }
             
-            if (_record.Settings.ModData.ContainsKey("Subpart"))
+            if (_record.Settings.ModData.ContainsKey("Chapter"))
             {
                 checkBoxSubpart.Checked = true;
-                var data = ((string)_record.Settings.ModData["Subpart"]).Split(new[]{"||"}, StringSplitOptions.None);
-                metroTextBoxSubPartNumber.Text = data.FirstOrDefault();
-                metroTextBoxSubPartName.Text = data.LastOrDefault();
+                var data = ((string)_record.Settings.ModData["Chapter"]).Split(new[]{"||"}, StringSplitOptions.None);
+                metroTextBoxChapterNumber.Text = data.FirstOrDefault();
+                metroTextBoxChapterName.Text = data.LastOrDefault();
             }
             
             if (_record.Settings.ModData.ContainsKey("Item"))
@@ -160,34 +141,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
                 metroTextBoxMH.Text = _record.Settings.ModData["MH"].ToString();
             }
             
-            if (_record.Settings.ModData.ContainsKey("Audit"))
-            {
-                checkBoxAudit.Checked = true;
-
-                var revAudit = JsonConvert.DeserializeObject<RevisionAudit>((string)_record.Settings.ModData["Audit"]);
-                if (revAudit != null)
-                {
-                    if (revAudit.AuditId != null)
-                    {
-                        _currentCheck.CheckListRecords.RemoveAll(i => !revAudit.AuditId.Contains(i.ItemId));
-                    }
-
-                    if (revAudit.NewAudit!= null)
-                    {
-                        _currentCheck.CheckListRecords.AddRange(revAudit.NewAudit.Select(i => new CheckListRecords()
-                        {
-                            OptionNumber = Option.GetItemById(i.OptionNumber),
-                            Remark = i.Remark,
-                            Option = OptionType.GetItemById(i.OpttionId),
-                            CheckListId = i.CheckListId
-                        }));
-                    }
-                }
-            }
-            
-            foreach (var rec in _currentCheck.CheckListRecords)
-                UpdateRecords(rec);
-        }
+         }
 
         private bool ApplyChanges()
         {
@@ -228,40 +182,29 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
                     _record.Settings.ModData.Remove("Level");
             }
             
-            if (checkBoxPhase.Checked)
-            {
-                if (!_record.Settings.ModData.ContainsKey("Phase"))
-                    _record.Settings.ModData.Add("Phase", (string)comboBoxPhase.SelectedItem);
-                else _record.Settings.ModData["Phase"] = (string)comboBoxPhase.SelectedItem;
-            }
-            else
-            {
-                if (_record.Settings.ModData.ContainsKey("Phase"))
-                    _record.Settings.ModData.Remove("Phase");
-            }
             
             if (checkBoxReq.Checked)
             {
-                if (!_record.Settings.ModData.ContainsKey("Requirement"))
-                    _record.Settings.ModData.Add("Requirement", metroTextBoxRequirement.Text);
-                else _record.Settings.ModData["Requirement"] = metroTextBoxRequirement.Text;
+                if (!_record.Settings.ModData.ContainsKey("Standard"))
+                    _record.Settings.ModData.Add("Standard", metroTextBoxStandard.Text);
+                else _record.Settings.ModData["Standard"] = metroTextBoxStandard.Text;
             }
             else
             {
-                if (_record.Settings.ModData.ContainsKey("Requirement"))
-                    _record.Settings.ModData.Remove("Requirement");
+                if (_record.Settings.ModData.ContainsKey("Standard"))
+                    _record.Settings.ModData.Remove("Standard");
             }
             
-            if (checkBoxSection.Checked)
+            if (checkBoxAnnexRef.Checked)
             {
-                if (!_record.Settings.ModData.ContainsKey("Section"))
-                    _record.Settings.ModData.Add("Section", $"{metroTextBoxSectionNumber.Text}||{metroTextBoxSectionName.Text}");
-                else _record.Settings.ModData["Section"] = $"{metroTextBoxSectionNumber.Text}||{metroTextBoxSectionName.Text}";
+                if (!_record.Settings.ModData.ContainsKey("AnnexRef"))
+                    _record.Settings.ModData.Add("AnnexRef", $"{metroTextBoxAnnexRef.Text}");
+                else _record.Settings.ModData["AnnexRef"] = $"{metroTextBoxAnnexRef.Text}";
             }
             else
             {
-                if (_record.Settings.ModData.ContainsKey("Section"))
-                    _record.Settings.ModData.Remove("Section");
+                if (_record.Settings.ModData.ContainsKey("AnnexRef"))
+                    _record.Settings.ModData.Remove("AnnexRef");
             }
             
             if (checkBoxPart.Checked)
@@ -278,14 +221,14 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             
             if (checkBoxSubpart.Checked)
             {
-                if (!_record.Settings.ModData.ContainsKey("Subpart"))
-                    _record.Settings.ModData.Add("Subpart", $"{metroTextBoxSubPartNumber.Text}||{metroTextBoxSubPartName.Text}");
-                else _record.Settings.ModData["Subpart"] = $"{metroTextBoxSubPartNumber.Text}||{metroTextBoxSubPartName.Text}";
+                if (!_record.Settings.ModData.ContainsKey("Chapter"))
+                    _record.Settings.ModData.Add("Chapter", $"{metroTextBoxChapterNumber.Text}||{metroTextBoxChapterName.Text}");
+                else _record.Settings.ModData["Chapter"] = $"{metroTextBoxChapterNumber.Text}||{metroTextBoxChapterName.Text}";
             }
             else
             {
-                if (_record.Settings.ModData.ContainsKey("Subpart"))
-                    _record.Settings.ModData.Remove("Subpart");
+                if (_record.Settings.ModData.ContainsKey("Chapter"))
+                    _record.Settings.ModData.Remove("Chapter");
             }
             
             if (checkBoxItem.Checked)
@@ -316,37 +259,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
                     _record.Settings.ModData.Remove("MH");
             }
             
-            if (checkBoxAudit.Checked)
-            {
-                var auditRecords = new List<CheckListRecords>();
-                foreach (var control in flowLayoutPanel1.Controls.OfType<AuditControl>())
-                {
-                    control.ApplyChanges();
-                    auditRecords.Add(control.Record);
-                }
-                
-                var rec = new RevisionAudit()
-                {
-                    AuditId = auditRecords.Where(i=>i.ItemId > -1).Select(i => i.ItemId),
-                    NewAudit = auditRecords.Where(i=>i.ItemId <= 0).Select(i => new RevisionNewAudit
-                    {
-                        OpttionId = i.Option.ItemId,
-                        CheckListId = i.CheckListId,
-                        OptionNumber = i.OptionNumber.ItemId,
-                        Remark = i.Remark
-                    }).ToArray(),
-                };
-                
-                if (!_record.Settings.ModData.ContainsKey("Audit"))
-                    _record.Settings.ModData.Add("Audit", JsonConvert.SerializeObject(rec));
-                else _record.Settings.ModData["Audit"] = JsonConvert.SerializeObject(rec);
-            }
-            else
-            {
-                if (_record.Settings.ModData.ContainsKey("Audit"))
-                    _record.Settings.ModData.Remove("Audit");
-            }
-            
+           
             return true;
         }
 
@@ -373,31 +286,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
         }
 
         #endregion
-
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            UpdateRecords(new CheckListRecords {CheckListId = _currentCheck.ItemId, OptionNumber = Option.One, Option =  OptionType.Unknown});
-        }
-
-        public void UpdateRecords(CheckListRecords record)
-        {
-            var control = new AuditControl(record);
-            control.DisableControls(checkBoxAudit.Checked);
-            control.Deleted += Control_Deleted;
-            flowLayoutPanel1.Controls.Remove(linkLabel1);
-            flowLayoutPanel1.Controls.Add(control);
-            flowLayoutPanel1.Controls.Add(linkLabel1);
-        }
-
-        private void Control_Deleted(object sender, EventArgs e)
-        {
-            var control = sender as AuditControl;
-            flowLayoutPanel1.Controls.Remove(control);
-            control.Deleted -= Control_Deleted;
-            control.Dispose();
-        }
-
+        
         private void buttonOk_Click(object sender, System.EventArgs e)
         {
             try
@@ -436,12 +325,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
         {
             comboBoxLevel.Enabled = checkBoxLevel.Enabled;
         }
-
-        private void checkBoxPhase_CheckedChanged(object sender, EventArgs e)
-        {
-            comboBoxPhase.Enabled = checkBoxPhase.Checked;
-        }
-
+        
         private void checkBoxMh_CheckedChanged(object sender, EventArgs e)
         {
             metroTextBoxMH.Enabled = checkBoxMh.Checked;
@@ -449,8 +333,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
 
         private void checkBoxSection_CheckedChanged(object sender, EventArgs e)
         {
-            metroTextBoxSectionNumber.Enabled =
-                metroTextBoxSectionName.Enabled = checkBoxSection.Checked;
+            metroTextBoxAnnexRef.Enabled = checkBoxAnnexRef.Checked;
         }
 
         private void checkBoxPart_CheckedChanged(object sender, EventArgs e)
@@ -461,8 +344,8 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
 
         private void checkBoxSubpart_CheckedChanged(object sender, EventArgs e)
         {
-            metroTextBoxSubPartNumber.Enabled =
-                metroTextBoxSubPartName.Enabled = checkBoxSubpart.Checked;
+            metroTextBoxChapterNumber.Enabled =
+                metroTextBoxChapterName.Enabled = checkBoxSubpart.Checked;
         }
 
         private void checkBoxItem_CheckedChanged(object sender, EventArgs e)
@@ -473,14 +356,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
 
         private void checkBoxReq_CheckedChanged(object sender, EventArgs e)
         {
-            metroTextBoxRequirement.Enabled = checkBoxReq.Checked;
+            metroTextBoxStandard.Enabled = checkBoxReq.Checked;
         }
-
-        private void checkBoxAudit_CheckedChanged(object sender, EventArgs e)
-        {
-            foreach (var control in flowLayoutPanel1.Controls.OfType<AuditControl>())
-                control.DisableControls(checkBoxAudit.Checked);
-        }
-
     }
 }

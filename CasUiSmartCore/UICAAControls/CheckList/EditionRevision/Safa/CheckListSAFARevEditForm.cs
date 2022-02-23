@@ -82,7 +82,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Safa
             if (_record.Settings.ModData.ContainsKey("MH"))
             {
                 checkBoxMH.Checked = true;
-                metroTextBoxMH.Text = (string)_record.Settings.ModData["MH"];
+                metroTextBoxMH.Text = _record.Settings.ModData["MH"].ToString();
             }
             
             if (_record.Settings.ModData.ContainsKey("Inspection Item"))
@@ -159,8 +159,8 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Safa
             if (checkBoxInspection.Checked)
             {
                 if (!_record.Settings.ModData.ContainsKey("Inspection Item"))
-                    _record.Settings.ModData.Add("Inspection Item", $"{metroTextBoxItem.Text} || {metroTextBoxItemNumber.Text}");
-                else _record.Settings.ModData["Inspection Item"] = $"{metroTextBoxItem.Text} || {metroTextBoxItemNumber.Text}";
+                    _record.Settings.ModData.Add("Inspection Item", $"{metroTextBoxItem.Text}||{metroTextBoxItemNumber.Text}");
+                else _record.Settings.ModData["Inspection Item"] = $"{metroTextBoxItem.Text}||{metroTextBoxItemNumber.Text}";
             }
             else
             {
