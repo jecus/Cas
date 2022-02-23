@@ -50,7 +50,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
         {
             this.radGridView1.GroupDescriptors.Clear();
             var descriptor = new GroupDescriptor();
-            foreach (var colName in new List<string>{ "Status" })
+            foreach (var colName in new List<string>{ "Current Status" })
                 descriptor.GroupNames.Add(colName,  ListSortDirection.Ascending);
             this.radGridView1.GroupDescriptors.Add(descriptor);
         }
@@ -65,6 +65,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
             AddColumn("Type", (int)(radGridView1.Width * 0.24f));
             AddColumn("Date", (int)(radGridView1.Width * 0.24f));
             AddColumn("Eff Date", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Current Status", (int)(radGridView1.Width * 0.24f));
             AddColumn("Status", (int)(radGridView1.Width * 0.24f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.24f));
         }
@@ -79,11 +80,11 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
             var subItems = new List<CustomCell>();
 
             var status = "";
-            if (item.Status == EditionRevisionStatus.Open)
+            if (item.CurrentStatus == EditionRevisionStatus.Open)
                 status = "1.Open";
-            else if (item.Status == EditionRevisionStatus.Temporary)
+            else if (item.CurrentStatus == EditionRevisionStatus.Temporary)
                 status = "2.Temporary";
-            else if (item.Status == EditionRevisionStatus.Close)
+            else if (item.CurrentStatus == EditionRevisionStatus.Close)
                 status = "3.Close";
 
             subItems.Add(CreateRow(item.Number.ToString(), item.Number));
@@ -91,6 +92,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
             subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Date), item.Date));
             subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.EffDate), item.EffDate));
             subItems.Add(CreateRow(status, status));
+            subItems.Add(CreateRow(item.Status.ToString(), item.Status.ToString()));
             subItems.Add(CreateRow(author, author));
 
             return subItems;

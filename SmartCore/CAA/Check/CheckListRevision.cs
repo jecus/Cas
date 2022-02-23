@@ -59,6 +59,7 @@ namespace SmartCore.CAA.Check
 
         public CheckListRevisionSettings Settings { get; set; }
         public int OperatorId { get; set; }
+        public EditionRevisionStatus CurrentStatus { get; set; }
 
         public CheckListRevision()
         {

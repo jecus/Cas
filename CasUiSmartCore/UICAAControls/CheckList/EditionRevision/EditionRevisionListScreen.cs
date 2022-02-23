@@ -83,6 +83,12 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 				new Filter("ManualId", _manual.ItemId)
 			}));
 
+			foreach (var revision in _initialDocumentArray.Where(i => i.Type == RevisionType.Revision))
+				revision.CurrentStatus = _initialDocumentArray.FirstOrDefault(i => i.ItemId == revision.EditionId).Status;
+			
+			foreach (var edition in _initialDocumentArray.Where(i => i.Type == RevisionType.Edition))
+				edition.CurrentStatus = edition.Status;
+
 			AnimatedThreadWorker.ReportProgress(70, "filter directives");
 
             FilterItems(_initialDocumentArray, _resultDocumentArray);
