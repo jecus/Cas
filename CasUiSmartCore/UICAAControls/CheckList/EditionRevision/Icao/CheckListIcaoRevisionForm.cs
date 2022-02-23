@@ -67,7 +67,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
             foreach (var check in _addedChecks)
             {
                 check.EditionNumber = _parent.Number;
-                check.Level = _levels.FirstOrDefault(i => i.ItemId == check.SettingsIosa.LevelId) ??
+                check.Level = _levels.FirstOrDefault(i => i.ItemId == check.SettingsIcao.LevelId) ??
                               FindingLevels.Unknown;
                 check.Remains = Lifelength.Null;
                 check.Condition = ConditionState.Satisfactory;
@@ -119,13 +119,13 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
                     });
                 }
                 if(checkBoxLevel.Checked)
-                    checks.SettingsIosa.LevelId = ((FindingLevels)comboBoxLevel.SelectedItem).ItemId;
+                    checks.SettingsIcao.LevelId = ((FindingLevels)comboBoxLevel.SelectedItem).ItemId;
                 if (checkBoxMH.Checked)
                 {
                     double manHours;
                     if (!CheckManHours(out manHours))
                         return false;
-                    checks.SettingsIosa.MH = manHours;
+                    checks.SettingsIcao.MH = manHours;
                 }
 
             }

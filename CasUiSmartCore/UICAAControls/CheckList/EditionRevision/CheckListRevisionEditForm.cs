@@ -51,6 +51,11 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
                 _fromcheckListView = new CheckListSAFAView();
                 _tocheckListView = new CheckListSAFAView();
             }
+            else if (_addedChecks.Any(i => i.CheckUIType == CheckUIType.Icao))
+            {
+                _fromcheckListView = new CheckListICAOView();
+                _tocheckListView = new CheckListICAOView();
+            }
             
             // 
             // _fromcheckListView
@@ -67,6 +72,8 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 
             this.Controls.Add(this._tocheckListView);
             this.Controls.Add(this._fromcheckListView);
+            
+            
             
             UpdateInformation();
         }
@@ -99,16 +106,20 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
                     check.Level = _levels.FirstOrDefault(i => i.ItemId == check.SettingsSafa.LevelId) ??
                                   FindingLevels.Unknown;
                 }
+                else if (check.CheckUIType == CheckUIType.Icao)
+                {
+                    check.Level = _levels.FirstOrDefault(i => i.ItemId == check.SettingsIcao.LevelId) ??
+                                  FindingLevels.Unknown;
+                }
                 
                 check.Remains = Lifelength.Null;
                 check.Condition = ConditionState.Satisfactory;
             }
-            
-            _addedChecks = new CommonCollection<CheckLists>(_addedChecks.Except(_updateChecks));
         }
 
         private void UpdateInformation()
         {
+            _addedChecks = new CommonCollection<CheckLists>(_addedChecks.Except(_updateChecks));
             _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
             _tocheckListView.SetItemsArray(_updateChecks.ToArray());
         }

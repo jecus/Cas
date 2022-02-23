@@ -90,7 +90,7 @@ namespace SmartCore.CAA.Check
                 }
                 else
                 {
-                    return JsonConvert.SerializeObject(SettingsIosa,
+                    return JsonConvert.SerializeObject(SettingsIcao,
                         Formatting.Indented,
                         new JsonSerializerSettings {DefaultValueHandling = DefaultValueHandling.Ignore});
                 }
@@ -112,7 +112,7 @@ namespace SmartCore.CAA.Check
                 }
                 else
                 {
-                    SettingsIosa = string.IsNullOrWhiteSpace(value)
+                    SettingsIcao = string.IsNullOrWhiteSpace(value)
                         ? new CheckListICAOSettings()
                         : JsonConvert.DeserializeObject<CheckListICAOSettings>(value);
                 }
@@ -121,7 +121,7 @@ namespace SmartCore.CAA.Check
 
         public CheckListSettings Settings { get; set; }
         public CheckListSettingsSAFA SettingsSafa { get; set; }
-        public CheckListICAOSettings SettingsIosa { get; set; }
+        public CheckListICAOSettings SettingsIcao { get; set; }
         
         
         public string NextEditionNumber  { get; set; }

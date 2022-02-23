@@ -465,7 +465,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 			}
 			else if (check.CheckUIType == CheckUIType.Icao)
 			{
-				check.SettingsIosa = new CheckListICAOSettings()
+				check.SettingsIcao = new CheckListICAOSettings()
 				{
 					ProgramTypeId = _manual.ProgramType.ItemId
 				};

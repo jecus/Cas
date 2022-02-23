@@ -164,20 +164,20 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListForm
         private void UpdateInformation()
         {
             metroTextSource.Text = _currentCheck.Source;
-            metroTextBoxAnnexRef.Text = _currentCheck.SettingsIosa.AnnexRef;
-            metroTextBoxPartNumber.Text = _currentCheck.SettingsIosa.PartNumber;
-            metroTextBoxPartName.Text = _currentCheck.SettingsIosa.PartName;
-            metroTextBoxChapterNumber.Text = _currentCheck.SettingsIosa.ChapterNumber;
-            metroTextBoxChapterName.Text = _currentCheck.SettingsIosa.ChapterName;
-            metroTextBoxItemNumber.Text = _currentCheck.SettingsIosa.ItemNumber;
-            metroTextBoxItemName.Text = _currentCheck.SettingsIosa.ItemtName;
-            metroTextBoxRequirement.Text = _currentCheck.SettingsIosa.Standard;
+            metroTextBoxAnnexRef.Text = _currentCheck.SettingsIcao.AnnexRef;
+            metroTextBoxPartNumber.Text = _currentCheck.SettingsIcao.PartNumber;
+            metroTextBoxPartName.Text = _currentCheck.SettingsIcao.PartName;
+            metroTextBoxChapterNumber.Text = _currentCheck.SettingsIcao.ChapterNumber;
+            metroTextBoxChapterName.Text = _currentCheck.SettingsIcao.ChapterName;
+            metroTextBoxItemNumber.Text = _currentCheck.SettingsIcao.ItemNumber;
+            metroTextBoxItemName.Text = _currentCheck.SettingsIcao.ItemtName;
+            metroTextBoxRequirement.Text = _currentCheck.SettingsIcao.Standard;
             
-            metroTextBoxReference.Text = _currentCheck.SettingsIosa.Reference;
-            metroTextBoxProgramType.Text = (ProgramType.GetItemById(_currentCheck.SettingsIosa.ProgramTypeId) ?? ProgramType.Unknown).ToString();
+            metroTextBoxReference.Text = _currentCheck.SettingsIcao.Reference;
+            metroTextBoxProgramType.Text = (ProgramType.GetItemById(_currentCheck.SettingsIcao.ProgramTypeId) ?? ProgramType.Unknown).ToString();
 
-            if (Math.Abs(_currentCheck.SettingsIosa.MH) > 0.000001)
-                metroTextBoxMH.Text = _currentCheck.SettingsIosa.MH.ToString();
+            if (Math.Abs(_currentCheck.SettingsIcao.MH) > 0.000001)
+                metroTextBoxMH.Text = _currentCheck.SettingsIcao.MH.ToString();
             
             comboBoxLevel.Items.Clear();
             comboBoxLevel.Items.AddRange(_levels.ToArray());
@@ -196,23 +196,23 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListForm
         private bool ApplyChanges()
         {
             _currentCheck.Source = metroTextSource.Text;
-            _currentCheck.SettingsIosa.AnnexRef = metroTextBoxAnnexRef.Text;
-            _currentCheck.SettingsIosa.PartNumber = metroTextBoxPartNumber.Text;
-            _currentCheck.SettingsIosa.PartName = metroTextBoxPartName.Text;
-            _currentCheck.SettingsIosa.ChapterNumber = metroTextBoxChapterNumber.Text;
-            _currentCheck.SettingsIosa.ChapterName =  metroTextBoxChapterName.Text;
-            _currentCheck.SettingsIosa.ItemNumber = metroTextBoxItemNumber.Text;
-            _currentCheck.SettingsIosa.ItemtName = metroTextBoxItemName.Text;
-            _currentCheck.SettingsIosa.Standard =  metroTextBoxRequirement.Text;
+            _currentCheck.SettingsIcao.AnnexRef = metroTextBoxAnnexRef.Text;
+            _currentCheck.SettingsIcao.PartNumber = metroTextBoxPartNumber.Text;
+            _currentCheck.SettingsIcao.PartName = metroTextBoxPartName.Text;
+            _currentCheck.SettingsIcao.ChapterNumber = metroTextBoxChapterNumber.Text;
+            _currentCheck.SettingsIcao.ChapterName =  metroTextBoxChapterName.Text;
+            _currentCheck.SettingsIcao.ItemNumber = metroTextBoxItemNumber.Text;
+            _currentCheck.SettingsIcao.ItemtName = metroTextBoxItemName.Text;
+            _currentCheck.SettingsIcao.Standard =  metroTextBoxRequirement.Text;
             
-            _currentCheck.SettingsIosa.Reference = metroTextBoxReference.Text;
-            _currentCheck.SettingsIosa.LevelId = ((FindingLevels) comboBoxLevel.SelectedItem).ItemId;
+            _currentCheck.SettingsIcao.Reference = metroTextBoxReference.Text;
+            _currentCheck.SettingsIcao.LevelId = ((FindingLevels) comboBoxLevel.SelectedItem).ItemId;
 
 
             double manHours;
             if (!CheckManHours(out manHours))
                 return false;
-            _currentCheck.SettingsIosa.MH = manHours;
+            _currentCheck.SettingsIcao.MH = manHours;
 
             if (fileControl.GetChangeStatus())
             {
