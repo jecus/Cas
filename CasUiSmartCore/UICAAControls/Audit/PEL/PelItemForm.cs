@@ -51,6 +51,11 @@ namespace CAS.UI.UICAAControls.Audit.PEL
                 _tocheckRevisionListView = new AuditPelRecordSafaListView();
                 _fromcheckRevisionListView = new PelItemSafaListView();
             }
+             else if (_addedChecks.Any(i => i.CheckUIType == CheckUIType.Safa))
+             {
+                 _tocheckRevisionListView = new AuditPelRecordICAOListView();
+                 _fromcheckRevisionListView = new PelItemICAOListView();
+             }
             
             // 
             // _fromcheckRevisionListView

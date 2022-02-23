@@ -161,6 +161,8 @@ namespace CAS.UI.UICAAControls.CheckList
 	            _filter = new CommonFilterCollection(typeof(ICheckListFilterParams));
             else if (_manual.CheckUIType == CheckUIType.Safa)
 	            _filter = new CommonFilterCollection(typeof(ICheckListSafaFilterParams));
+            else if (_manual.CheckUIType == CheckUIType.Icao)
+	            _filter = new CommonFilterCollection(typeof(ICheckListIcaoFilterParams));
 
 
             if (_directivesViewer == null)
@@ -272,6 +274,11 @@ namespace CAS.UI.UICAAControls.CheckList
 	            else if (check.CheckUIType == CheckUIType.Safa)
 	            {
 		            check.Level = levels.FirstOrDefault(i => i.ItemId == check.SettingsSafa.LevelId) ??
+		                          FindingLevels.Unknown;
+	            }
+	            else if (check.CheckUIType == CheckUIType.Icao)
+	            {
+		            check.Level = levels.FirstOrDefault(i => i.ItemId == check.SettingsIcao.LevelId) ??
 		                          FindingLevels.Unknown;
 	            }
 	            check.Remains = Lifelength.Null;

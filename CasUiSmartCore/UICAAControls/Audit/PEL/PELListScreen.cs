@@ -150,8 +150,9 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 		        _directivesViewer = new AuditPelRecordListView();
 	        else if (_checks.Any(i => i.CheckUIType == CheckUIType.Safa))
 		        _directivesViewer = new AuditPelRecordSafaListView();
-	        
-			_directivesViewer.TabIndex = 2;
+	        else if (_checks.Any(i => i.CheckUIType == CheckUIType.Icao))
+		        _directivesViewer = new AuditPelRecordICAOListView();
+	        _directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;

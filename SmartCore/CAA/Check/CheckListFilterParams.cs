@@ -53,4 +53,12 @@ namespace SmartCore.CAA.Check
 
        
     }
+    
+    public interface ICheckListIcaoFilterParams
+    {
+        [Filter("Source", Order = 1)]
+        string Source { get; set; }
+
+       
+    }
 }

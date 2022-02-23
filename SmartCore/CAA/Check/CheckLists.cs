@@ -22,7 +22,7 @@ namespace SmartCore.CAA.Check
 {
     [CAADto(typeof(CheckListDTO))]
     [Serializable]
-    public class CheckLists : BaseEntityObject, ICheckListFilterParams,ICheckListSafaFilterParams, IFileContainer, IOperatable
+    public class CheckLists : BaseEntityObject, ICheckListFilterParams,ICheckListSafaFilterParams,ICheckListIcaoFilterParams, IFileContainer, IOperatable
     {
         public string Source { get; set; }
         public int EditionId { get; set; }

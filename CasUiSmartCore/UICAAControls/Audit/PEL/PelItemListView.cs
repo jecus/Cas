@@ -160,6 +160,78 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 	}
 	
 	
+	public  class PelItemICAOListView : PelItemListView
+	{
+		#region Constructors
+
+		#region public PersonnelListView()
+		///<summary>
+		///</summary>
+		public PelItemICAOListView() : base()
+		{
+			
+		}
+		
+		#endregion
+
+		#endregion
+
+		#region Methods
+		
+		protected override void GroupingItems()
+		{
+			
+		}
+		
+
+		#region protected override void SetHeaders()
+		/// <summary>
+		/// Устанавливает заголовки
+		/// </summary>
+		protected override void SetHeaders()
+		{
+			AddColumn("Source", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Annex Ref", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Part №", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Part Name", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Chapter №", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Chapter Name", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Item №", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Item Name", (int)(radGridView1.Width * 0.5f));
+			AddColumn("Standard or Recommended Practice", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Level", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+		}
+		#endregion
+		
+		
+		protected override List<CustomCell> GetListViewSubItems(CheckLists item)
+		{
+			var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
+
+			var subItems = new List<CustomCell>()
+			{
+				CreateRow(item.Source, item.Source),
+				CreateRow(item.SettingsIcao.AnnexRef, item.SettingsIcao.AnnexRef),
+				CreateRow(item.SettingsIcao.PartNumber, item.SettingsIcao.PartNumber),
+				CreateRow(item.SettingsIcao.PartName, item.SettingsIcao.PartName),
+				CreateRow(item.SettingsIcao.ChapterNumber, item.SettingsIcao.ChapterName),
+				CreateRow(item.SettingsIcao.ChapterName, item.SettingsIcao.ChapterName),
+				CreateRow(item.SettingsIcao.ItemNumber, item.SettingsIcao.ItemNumber),
+				CreateRow(item.SettingsIcao.ItemtName, item.SettingsIcao.ItemtName),
+				CreateRow(item.SettingsIcao.Standard, item.SettingsIcao.Standard),
+				CreateRow(item.Level.ToString(), item.Level),
+				CreateRow(author, author),
+			};
+
+			return subItems;
+		}
+		
+
+		#endregion
+	}
+	
+	
 	
 	
 }

@@ -44,6 +44,11 @@ namespace CAS.UI.UICAAControls.CheckList
                 _fromcheckListView = new CheckListSAFAView();
                 _tocheckListView = new CheckListSAFAView();
             }
+            else if (_manual.CheckUIType == CheckUIType.Icao)
+            {
+                _fromcheckListView = new CheckListICAOView();
+                _tocheckListView = new CheckListICAOView();
+            }
             else if (_manual.CheckUIType == CheckUIType.Iosa)
             {
                 _fromcheckListView = new CheckListView();
@@ -126,6 +131,11 @@ namespace CAS.UI.UICAAControls.CheckList
                 else if (check.CheckUIType == CheckUIType.Safa)
                 {
                     check.Level = _levels.FirstOrDefault(i => i.ItemId == check.SettingsSafa.LevelId) ??
+                                  FindingLevels.Unknown;
+                }
+                else if (check.CheckUIType == CheckUIType.Icao)
+                {
+                    check.Level = _levels.FirstOrDefault(i => i.ItemId == check.SettingsIcao.LevelId) ??
                                   FindingLevels.Unknown;
                 }
                 
