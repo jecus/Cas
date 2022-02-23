@@ -192,6 +192,54 @@ namespace CAA.API.Infrastructure.Jobs
                                 
                                 check.SettingsJSON = JsonConvert.SerializeObject(settings);
                             }
+                            else if (check.CheckUIType == CheckUIType.Icao)
+                            {
+                                var settings = JsonConvert.DeserializeObject<CheckListICAOSettings>(check.SettingsJSON);
+
+
+                                if (rec.Settings.ModData.ContainsKey("Source"))
+                                    check.Source = (string)rec.Settings.ModData["Source"];
+
+                                if (rec.Settings.ModData.ContainsKey("Reference"))
+                                    settings.Reference = (string)rec.Settings.ModData["Reference"];
+
+
+                                if (rec.Settings.ModData.ContainsKey("Level"))
+                                    settings.LevelId = (int)rec.Settings.ModData["Level"];
+                                
+
+                                if (rec.Settings.ModData.ContainsKey("Standard"))
+                                    settings.Standard = (string)rec.Settings.ModData["Standard"];
+
+                                if (rec.Settings.ModData.ContainsKey("AnnexRef"))
+                                    settings.AnnexRef = (string)rec.Settings.ModData["AnnexRef"];
+
+                                if (rec.Settings.ModData.ContainsKey("Part"))
+                                {
+                                    var data = ((string)rec.Settings.ModData["Part"]).Split(new[] { "||" }, StringSplitOptions.None);
+                                    settings.PartNumber = data.FirstOrDefault();
+                                    settings.PartName = data.LastOrDefault();
+                                }
+
+                                if (rec.Settings.ModData.ContainsKey("Chapter"))
+                                {
+                                    var data = ((string)rec.Settings.ModData["Chapter"]).Split(new[] { "||" }, StringSplitOptions.None);
+                                    settings.ChapterNumber = data.FirstOrDefault();
+                                    settings.ChapterName = data.LastOrDefault();
+                                }
+
+                                if (rec.Settings.ModData.ContainsKey("Item"))
+                                {
+                                    var data = ((string)rec.Settings.ModData["Item"]).Split(new[] { "||" }, StringSplitOptions.None);
+                                    settings.ItemNumber = data.FirstOrDefault();
+                                    settings.ItemtName = data.LastOrDefault();
+                                }
+
+                                if (rec.Settings.ModData.ContainsKey("MH"))
+                                    settings.MH = (int)rec.Settings.ModData["MH"];
+                                
+                                check.SettingsJSON = JsonConvert.SerializeObject(settings);
+                            }
 
 
                         }

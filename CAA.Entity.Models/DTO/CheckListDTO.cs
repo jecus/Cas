@@ -45,8 +45,10 @@ namespace CAA.Entity.Models.DTO
             {
                 if (((IList)new[] { 1, 6, 5 }).Contains(ProgramTypeId))
                     return CheckUIType.Iosa;
-                else if (((IList)new[] { 3, 7, 4 }).Contains(ProgramTypeId))
+                if (((IList)new[] { 3, 7, 4 }).Contains(ProgramTypeId))
                     return CheckUIType.Safa;
+                if (((IList)new[] { 8 }).Contains(ProgramTypeId))
+                    return CheckUIType.Icao;
 
                 return CheckUIType.None;
             }
