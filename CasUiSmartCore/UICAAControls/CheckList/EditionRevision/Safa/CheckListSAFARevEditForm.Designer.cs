@@ -396,7 +396,7 @@
             this.metroTextBoxStandardText.Multiline = true;
             this.metroTextBoxStandardText.Name = "metroTextBoxStandardText";
             this.metroTextBoxStandardText.PasswordChar = '\0';
-            this.metroTextBoxStandardText.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxStandardText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.metroTextBoxStandardText.SelectedText = "";
             this.metroTextBoxStandardText.SelectionLength = 0;
             this.metroTextBoxStandardText.SelectionStart = 0;
@@ -500,7 +500,7 @@
             this.metroTextBoxFindings.Multiline = true;
             this.metroTextBoxFindings.Name = "metroTextBoxFindings";
             this.metroTextBoxFindings.PasswordChar = '\0';
-            this.metroTextBoxFindings.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxFindings.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.metroTextBoxFindings.SelectedText = "";
             this.metroTextBoxFindings.SelectionLength = 0;
             this.metroTextBoxFindings.SelectionStart = 0;
@@ -533,7 +533,7 @@
             this.metroTextBoxInstruction.Multiline = true;
             this.metroTextBoxInstruction.Name = "metroTextBoxInstruction";
             this.metroTextBoxInstruction.PasswordChar = '\0';
-            this.metroTextBoxInstruction.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxInstruction.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.metroTextBoxInstruction.SelectedText = "";
             this.metroTextBoxInstruction.SelectionLength = 0;
             this.metroTextBoxInstruction.SelectionStart = 0;

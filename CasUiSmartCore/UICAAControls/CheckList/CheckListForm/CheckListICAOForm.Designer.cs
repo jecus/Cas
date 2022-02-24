@@ -451,9 +451,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListForm
             // 
             // 
             this.metroTextBoxRequirement.CustomButton.Image = null;
-            this.metroTextBoxRequirement.CustomButton.Location = new System.Drawing.Point(286, 1);
+            this.metroTextBoxRequirement.CustomButton.Location = new System.Drawing.Point(252, 2);
             this.metroTextBoxRequirement.CustomButton.Name = "";
-            this.metroTextBoxRequirement.CustomButton.Size = new System.Drawing.Size(329, 329);
+            this.metroTextBoxRequirement.CustomButton.Size = new System.Drawing.Size(361, 361);
             this.metroTextBoxRequirement.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTextBoxRequirement.CustomButton.TabIndex = 1;
             this.metroTextBoxRequirement.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -466,12 +466,12 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListForm
             this.metroTextBoxRequirement.Multiline = true;
             this.metroTextBoxRequirement.Name = "metroTextBoxRequirement";
             this.metroTextBoxRequirement.PasswordChar = '\0';
-            this.metroTextBoxRequirement.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxRequirement.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.metroTextBoxRequirement.SelectedText = "";
             this.metroTextBoxRequirement.SelectionLength = 0;
             this.metroTextBoxRequirement.SelectionStart = 0;
             this.metroTextBoxRequirement.ShortcutsEnabled = true;
-            this.metroTextBoxRequirement.Size = new System.Drawing.Size(616, 331);
+            this.metroTextBoxRequirement.Size = new System.Drawing.Size(616, 366);
             this.metroTextBoxRequirement.TabIndex = 43;
             this.metroTextBoxRequirement.UseSelectable = true;
             this.metroTextBoxRequirement.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));

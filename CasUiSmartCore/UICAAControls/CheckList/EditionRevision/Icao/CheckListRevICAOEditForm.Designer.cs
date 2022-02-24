@@ -467,7 +467,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
             this.metroTextBoxStandard.Multiline = true;
             this.metroTextBoxStandard.Name = "metroTextBoxStandard";
             this.metroTextBoxStandard.PasswordChar = '\0';
-            this.metroTextBoxStandard.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxStandard.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.metroTextBoxStandard.SelectedText = "";
             this.metroTextBoxStandard.SelectionLength = 0;
             this.metroTextBoxStandard.SelectionStart = 0;

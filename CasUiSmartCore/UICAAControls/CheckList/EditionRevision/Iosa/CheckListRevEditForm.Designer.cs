@@ -549,7 +549,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             this.metroTextBoxRequirement.Multiline = true;
             this.metroTextBoxRequirement.Name = "metroTextBoxRequirement";
             this.metroTextBoxRequirement.PasswordChar = '\0';
-            this.metroTextBoxRequirement.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxRequirement.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.metroTextBoxRequirement.SelectedText = "";
             this.metroTextBoxRequirement.SelectionLength = 0;
             this.metroTextBoxRequirement.SelectionStart = 0;
