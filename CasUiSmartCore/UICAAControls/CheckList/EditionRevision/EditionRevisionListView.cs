@@ -80,12 +80,12 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
             var subItems = new List<CustomCell>();
 
             var status = "";
-            if (item.CurrentStatus == EditionRevisionStatus.Open)
-                status = "1.Open";
+            if (item.CurrentStatus == EditionRevisionStatus.Current)
+                status = "1.Current";
             else if (item.CurrentStatus == EditionRevisionStatus.Temporary)
                 status = "2.Temporary";
-            else if (item.CurrentStatus == EditionRevisionStatus.Close)
-                status = "3.Close";
+            else if (item.CurrentStatus == EditionRevisionStatus.Previous)
+                status = "3.Previous";
 
             subItems.Add(CreateRow(item.Number.ToString(), item.Number));
             subItems.Add(CreateRow(item.Type.ToString(), item.Type));

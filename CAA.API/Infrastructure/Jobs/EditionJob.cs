@@ -40,24 +40,24 @@ namespace CAA.API.Infrastructure.Jobs
                     {
                         var currentEdition = await context.CheckListRevisionDtos
                             .OrderBy(i => i.EffDate)
-                            .FirstOrDefaultAsync(i => !i.IsDeleted && i.Status == (byte)EditionRevisionStatus.Open && i.Type ==  (byte)RevisionType.Edition);
+                            .FirstOrDefaultAsync(i => !i.IsDeleted && i.Status == (byte)EditionRevisionStatus.Current && i.Type ==  (byte)RevisionType.Edition);
                     
-                        currentEdition.Status = (byte)EditionRevisionStatus.Close;
+                        currentEdition.Status = (byte)EditionRevisionStatus.Previous;
 
                         var currentRevisions = await context.CheckListRevisionDtos
                             .Where(i => !i.IsDeleted && i.Type ==  (byte)RevisionType.Revision && i.EditionId == currentEdition.ItemId)
                             .ToListAsync();
                     
                         foreach (var revision in currentRevisions)
-                            revision.Status = (byte)EditionRevisionStatus.Close;
+                            revision.Status = (byte)EditionRevisionStatus.Previous;
                     
-                        nextEdition.Status = (byte)EditionRevisionStatus.Open;
+                        nextEdition.Status = (byte)EditionRevisionStatus.Current;
                         var nextRevisions = await context.CheckListRevisionDtos
                             .Where(i => !i.IsDeleted && i.Type ==  (byte)RevisionType.Revision && i.EditionId == currentEdition.ItemId)
                             .ToListAsync();
                     
                         foreach (var revision in nextRevisions)
-                            revision.Status = (byte)EditionRevisionStatus.Open;
+                            revision.Status = (byte)EditionRevisionStatus.Current;
                     
                         await context.SaveChangesAsync();
                     }

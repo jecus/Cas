@@ -26,7 +26,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
             metroTextBoxEditionNumber.Enabled =
                 dateTimePickerEditionDate.Enabled =
                     dateTimePickerEditionEff.Enabled =
-                        edition.Status == EditionRevisionStatus.Temporary || edition.Status == EditionRevisionStatus.Open;
+                        edition.Status == EditionRevisionStatus.Temporary || edition.Status == EditionRevisionStatus.Current;
             
             
             UpdateInformation();

@@ -13,8 +13,8 @@ namespace CAA.Entity.Models.DTO
     
     public enum EditionRevisionStatus : byte
     {
-        Open = 0,
-        Close = 1,        
+        Current = 0,
+        Previous = 1,        
         Temporary = 2
     }
 

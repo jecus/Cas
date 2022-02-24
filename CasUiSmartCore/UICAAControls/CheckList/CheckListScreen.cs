@@ -243,7 +243,7 @@ namespace CAS.UI.UICAAControls.CheckList
             {
 	            var editions = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new List<Filter>()
 	            {
-		            new Filter("Status", (byte)EditionRevisionStatus.Open),
+		            new Filter("Status", (byte)EditionRevisionStatus.Current),
 		            new Filter("Type", (byte)RevisionType.Edition),
 		            new Filter("ManualId", _manual.ItemId),
 	            });

@@ -106,7 +106,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
                         OperatorId = _operatorId,
                         Date = dateTimePickerRevisionDate.Value.Date,
                         EffDate = RevisionEff.Value.Date,
-                        Status = _parent.Status,
+                        Status = EditionRevisionStatus.Temporary,
                         ManualId = _manual.ItemId,
                         Settings = new CheckListRevisionSettings()
                         {
