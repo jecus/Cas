@@ -220,7 +220,7 @@ namespace CAS.UI.UICAAControls
         private void LinkCheckListsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Standart Manual";
-	        e.RequestedEntity = new StandartManualListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1, false);
+	        e.RequestedEntity = new StandartManualListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
         }
 
 

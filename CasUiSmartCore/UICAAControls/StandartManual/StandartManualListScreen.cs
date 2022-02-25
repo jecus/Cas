@@ -11,6 +11,7 @@ using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
+using Entity.Abstractions;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA.StandartManual;
 using SmartCore.Calculations;
@@ -61,7 +62,7 @@ namespace CAS.UI.UICAAControls.StandartManual
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public StandartManualListScreen(Operator currentOperator, int operatorId, bool isEditable = true)
+		public StandartManualListScreen(Operator currentOperator, int operatorId)
 			: this()
 		{
 			if (currentOperator == null)
@@ -77,12 +78,12 @@ namespace CAS.UI.UICAAControls.StandartManual
 			InitListView();
 			UpdateInformation();
 
-			if (!isEditable)
+			if (GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAA ||
+			    GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.Operator)
 			{
 				_toolStripMenuItemEdit.Enabled = false;
-				pictureBox1.Visible = pictureBox2.Visible = buttonAddNew.Visible = buttonApplyFilter.Visible = buttonDeleteSelected.Visible = isEditable;
+				pictureBox1.Visible = buttonAddNew.Visible  = buttonDeleteSelected.Visible = false;
 			}
-
 		}
 
 		#endregion

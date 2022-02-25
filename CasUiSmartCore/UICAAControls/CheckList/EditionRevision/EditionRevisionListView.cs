@@ -66,7 +66,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
             AddColumn("Date", (int)(radGridView1.Width * 0.24f));
             AddColumn("Eff Date", (int)(radGridView1.Width * 0.24f));
             AddColumn("Edition Status", (int)(radGridView1.Width * 0.24f));
-            AddColumn("Status", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Revision Status", (int)(radGridView1.Width * 0.24f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.24f));
         }
         #endregion

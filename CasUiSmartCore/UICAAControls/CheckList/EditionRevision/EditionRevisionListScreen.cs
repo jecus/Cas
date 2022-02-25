@@ -10,6 +10,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
+using Entity.Abstractions;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA.Check;
 using SmartCore.Entities.Collections;
@@ -57,6 +58,13 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 			InitToolStripMenuItems();
 			InitListView();
 			UpdateInformation();
+			
+			if (GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAA ||
+			    GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.Operator)
+			{
+				_toolStripMenuItemEdit.Enabled = false;
+				pictureBox2.Visible = buttonAdd.Visible  = buttonDeleteSelected.Visible = false;
+			}
 		}
         
 		#region Methods
