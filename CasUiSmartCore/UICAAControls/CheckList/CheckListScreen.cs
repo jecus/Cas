@@ -141,22 +141,6 @@ namespace CAS.UI.UICAAControls.CheckList
                 labelTitle.Visible = true;
             }
             
-            if (_directivesViewer is CheckListLiteView lite)
-            {
-                lite.AuditId = _parentId;
-                lite.IsAuditCheck = _type == CheckListType.Audit &&
-                                    (_routineAudit?.Type == ProgramType.CAAKG ||
-                                     _routineAudit?.Type == ProgramType.IOSA);
-			}
-			else if(_directivesViewer is CheckListView view)
-            {
-                view.AuditId = _parentId;
-                view.IsAuditCheck = _type == CheckListType.Audit &&
-                                    (_routineAudit?.Type == ProgramType.CAAKG ||
-                                     _routineAudit?.Type == ProgramType.IOSA);
-            }
-
-            
             if (_manual.CheckUIType == CheckUIType.Iosa)
 	            _filter = new CommonFilterCollection(typeof(ICheckListFilterParams));
             else if (_manual.CheckUIType == CheckUIType.Safa)
@@ -169,6 +153,21 @@ namespace CAS.UI.UICAAControls.CheckList
             {
 	            InitToolStripMenuItems();
 	            InitListView();
+            }
+            
+            if (_directivesViewer is CheckListLiteView lite)
+            {
+	            lite.AuditId = _parentId;
+	            lite.IsAuditCheck = _type == CheckListType.Audit &&
+	                                (_routineAudit?.Type == ProgramType.CAAKG ||
+	                                 _routineAudit?.Type == ProgramType.IOSA);
+            }
+            else if(_directivesViewer is CheckListView view)
+            {
+	            view.AuditId = _parentId;
+	            view.IsAuditCheck = _type == CheckListType.Audit &&
+	                                (_routineAudit?.Type == ProgramType.CAAKG ||
+	                                 _routineAudit?.Type == ProgramType.IOSA);
             }
             
 			_directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
