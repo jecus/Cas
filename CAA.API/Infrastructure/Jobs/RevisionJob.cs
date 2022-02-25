@@ -32,15 +32,22 @@ namespace CAA.API.Infrastructure.Jobs
                 
                 var currentRevisions = await context.CheckListRevisionDtos
                     .Where(i => !i.IsDeleted 
-                                              && i.Status == (byte)EditionRevisionStatus.Temporary 
+                                              && i.Status == (byte)EditionRevisionStatus.Temporary || i.Status == (byte)EditionRevisionStatus.Current
                                               && i.Type ==  (byte)RevisionType.Revision
                                               && i.EffDate.Date <= DateTime.Today.Date).ToListAsync();
 
-                foreach (var currentRevision in currentRevisions)
+                foreach (var currentRevision in currentRevisions.Where(i => i.Status == (byte)EditionRevisionStatus.Current))
+                {
+                    currentRevision.Status = (byte)EditionRevisionStatus.Previous;
+                    await context.SaveChangesAsync();
+                }
+                
+                
+                foreach (var currentRevision in currentRevisions.Where(i => i.Status == (byte)EditionRevisionStatus.Temporary))
                 {
                     if (currentRevision != null)
                 {
-                    currentRevision.Status = (byte)EditionRevisionStatus.Previous;
+                    currentRevision.Status = (byte)EditionRevisionStatus.Current;
                     var records = await context.CheckListRevisionRecordDtos
                         .Where(i => !i.IsDeleted && i.ParentId == currentRevision.ItemId)
                         .ToListAsync();
