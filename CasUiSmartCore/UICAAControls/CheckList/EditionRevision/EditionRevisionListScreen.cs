@@ -33,6 +33,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 		private EditionRevisionListView _directivesViewer;
         private RadMenuItem _toolStripMenuItemOpen;
         private RadMenuItem _toolStripMenuItemEdit;
+        private RadMenuItem _toolStripMenuItemCreateRevision;
 
 		
 		public EditionRevisionListScreen()
@@ -104,6 +105,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 		{
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuItemEdit = new RadMenuItem();
+			_toolStripMenuItemCreateRevision = new RadMenuItem();
 			// 
 			// toolStripMenuItemView
 			// 
@@ -114,6 +116,28 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 			// 
 			_toolStripMenuItemEdit.Text = "Edit";
 			_toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
+			// 
+			// _toolStripMenuItemCreateRevision
+			// 
+			_toolStripMenuItemCreateRevision.Text = "Create Revision";
+			_toolStripMenuItemCreateRevision.Click += ToolStripMenuItemCreateRevisionClick;
+		}
+
+		private void ToolStripMenuItemCreateRevisionClick(object sender, EventArgs e)
+		{
+			var form = new EditionForm(new CheckListRevision
+			{
+				OperatorId = _operatorId,
+				Type = RevisionType.Revision,
+				Status = EditionRevisionStatus.Temporary,
+				ManualId = _manual.ItemId,
+				Settings = new CheckListRevisionSettings()
+				{
+					EditionId = _directivesViewer.SelectedItem.EditionId
+				}
+			});
+			if(form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
 		}
 
 		private void ToolStripMenuItemEditClick(object sender, EventArgs e)
@@ -165,15 +189,30 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
-			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,_toolStripMenuItemEdit);
+			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,_toolStripMenuItemEdit, _toolStripMenuItemCreateRevision);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
 				if (_directivesViewer.SelectedItems.Count <= 0)
 					return;
-				if (_directivesViewer.SelectedItems.Count == 1)
+				if (_directivesViewer.SelectedItems.Count > 1)
+				{
+					_toolStripMenuItemOpen.Enabled = false;
+					_toolStripMenuItemEdit.Enabled = false;
+					_toolStripMenuItemCreateRevision.Enabled = false;
+				}
+				else if (_directivesViewer.SelectedItems.Count == 1)
 				{
 					_toolStripMenuItemOpen.Enabled = true;
+					if(_directivesViewer.SelectedItem.Status == EditionRevisionStatus.Previous)
+						_toolStripMenuItemEdit.Enabled = false;
+					else _toolStripMenuItemEdit.Enabled = true;
+					
+					if(_directivesViewer.SelectedItem.Type == RevisionType.Edition && 
+					   (_directivesViewer.SelectedItem.Status == EditionRevisionStatus.Temporary ||
+					   _directivesViewer.SelectedItem.Status == EditionRevisionStatus.Current))
+						_toolStripMenuItemCreateRevision.Enabled = true;
+					else _toolStripMenuItemCreateRevision.Enabled = false;
 				}
 			};
 
