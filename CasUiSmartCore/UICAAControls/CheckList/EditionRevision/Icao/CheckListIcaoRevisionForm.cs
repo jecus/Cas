@@ -8,6 +8,7 @@ using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
+using Entity.Abstractions.Attributte;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.Check;
@@ -25,11 +26,11 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
         private readonly CheckListRevision _parent;
         private readonly SmartCore.CAA.StandartManual.StandartManual _manual;
         private List<CheckListRevisionRecord> _revisions = new List<CheckListRevisionRecord>();
-        private CheckListRevision revisionedition = new CheckListRevision();
         private CommonCollection<CheckLists> _addedChecks = new CommonCollection<CheckLists>();
         private CommonCollection<CheckLists> _updateChecks = new CommonCollection<CheckLists>();
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private IList<FindingLevels> _levels = new List<FindingLevels>();
+        private IList<CheckListRevision> _currentRevisions = new List<CheckListRevision>();
 
         public CheckListIcaoRevisionForm(int operatorId, CheckListRevision parent, SmartCore.CAA.StandartManual.StandartManual manual)
         {
@@ -49,7 +50,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
-            revisionedition = new CheckListRevision();
+            _currentRevisions.Clear();
             _updateChecks.Clear();
             _revisions.Clear();
             _addedChecks.Clear();
@@ -62,6 +63,14 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
             {
                 new Filter("OperatorId", _operatorId),
                 new Filter("ProgramTypeId", _manual.ProgramTypeId),
+            });
+            
+            _currentRevisions = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new[]
+            {
+                new Filter("OperatorId", _operatorId),
+                new Filter("ManualId", _manual.ItemId),
+                new Filter("EditionId", _parent.ItemId),
+                new Filter("Status",FilterType.In, new []{0,2})
             });
             
             foreach (var check in _addedChecks)
@@ -83,6 +92,11 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
             comboBoxLevel.Items.Add(FindingLevels.Unknown);
             comboBoxLevel.SelectedItem = FindingLevels.Unknown;
             
+            comboBoxRevision.Items.Clear();
+            comboBoxRevision.Items.AddRange(_currentRevisions.ToArray());
+            if(_currentRevisions.Any())
+                comboBoxRevision.SelectedIndex = 0;
+            
             _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
             _tocheckListView.SetItemsArray(_updateChecks.ToArray());
         }
@@ -94,30 +108,18 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
                 if(checkBoxSource.Checked)
                     checks.Source = metroTextSource.Text;
                 
-                if (!CheckNumber(out var  number))
-                    return false;
-                
                 if (checkBoxRevisionValidTo.Checked)
                 {
-                    revisionedition = new CheckListRevision()
+                    if (comboBoxRevision.SelectedItem != null)
                     {
-                        Number = number,
-                        Type = RevisionType.Revision,
-                        OperatorId = _operatorId,
-                        Date = dateTimePickerRevisionDate.Value.Date,
-                        EffDate = RevisionEff.Value.Date,
-                        Status = EditionRevisionStatus.Temporary,
-                        ManualId = _manual.ItemId,
-                        Settings = new CheckListRevisionSettings()
+                        _revisions.Add(new CheckListRevisionRecord()
                         {
-                            EditionId = _parent.Type == RevisionType.Edition  ? _parent.ItemId : _parent.Settings.EditionId
-                        }
-                    };
-                    _revisions.Add(new CheckListRevisionRecord()
-                    {
-                        CheckListId = checks.ItemId,
-                    });
+                            CheckListId = checks.ItemId,
+                            ParentId = (comboBoxRevision.SelectedItem as CheckListRevision).ItemId
+                        });
+                    }
                 }
+                
                 if(checkBoxLevel.Checked)
                     checks.SettingsIcao.LevelId = ((FindingLevels)comboBoxLevel.SelectedItem).ItemId;
                 if (checkBoxMH.Checked)
@@ -127,7 +129,6 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
                         return false;
                     checks.SettingsIcao.MH = manHours;
                 }
-
             }
 
             return true;
@@ -158,24 +159,12 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
         #endregion
 
         
-        public bool CheckNumber(out int number)
-        {
-            if (int.TryParse(metroTextBoxRevision.Text, NumberStyles.Number, new NumberFormatInfo(),  out number) == false)
-            {
-                MessageBox.Show("Number of edition. Invalid value", (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
-            }
-            return true;
-        }
-
         private void SetEnableControl(bool state)
         {
             checkBoxSource.Checked =
                 checkBoxLevel.Checked =
                                         metroTextSource.Enabled =
-                                            metroTextBoxRevision.Enabled = 
-            dateTimePickerRevisionDate.Enabled =
-                RevisionEff.Enabled =
+                                            comboBoxRevision.Enabled =
                     metroTextBoxMH.Enabled =
                         checkBoxRevisionValidTo.Checked =
                             checkBoxMH.Checked =
@@ -185,9 +174,8 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
         private void ClearControl()
         {
             metroTextSource.Text = "";
-            metroTextBoxRevision.Text = "";
-            dateTimePickerRevisionDate.Value = DateTime.Today;
-            RevisionEff.Value = DateTime.Today;
+            if(_currentRevisions.Any())
+                comboBoxRevision.SelectedIndex = 0;
             comboBoxLevel.SelectedItem = FindingLevels.Unknown;
             metroTextBoxMH.Text = "0.0";
         }
@@ -203,41 +191,10 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
                     {
                         foreach (var checks in _updateChecks)
                             GlobalObjects.CaaEnvironment.NewKeeper.Save(checks);
-
-
-                        var revision = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new[]
-                        {
-                            new Filter("Number",revisionedition.Number),
-                            new Filter("EditionId", _parent.ItemId)
-                        });
-                        if (!revision.Any())
-                        {
-                            GlobalObjects.CaaEnvironment.NewKeeper.Save(revisionedition);
-                            foreach (var r in _revisions)
-                                r.ParentId = revisionedition.ItemId;
-                        }
-                        else
-                        {
-                            
-                            
-                            var id = revision.FirstOrDefault().ItemId;
-                            var records = GlobalObjects.CaaEnvironment.NewLoader
-                                .GetObjectList<CheckListRevisionRecordDTO, CheckListRevisionRecord>(new Filter("ParentId", id));
-
-                            foreach (var r in records)
-                            {
-                                var find = _revisions.FirstOrDefault(i => i.CheckListId == r.CheckListId);
-                                if (find != null)
-                                    _revisions.Remove(find);
-                            }
-                            
-                            foreach (var r in _revisions)
-                                r.ParentId = id;
-                        }
                         
-                       if(_revisions.Any())
-                           GlobalObjects.CaaEnvironment.NewKeeper.BulkInsert(_revisions.Cast<BaseEntityObject>().ToList());
-                       
+                        if (_revisions.Any())
+                            GlobalObjects.CaaEnvironment.NewKeeper.BulkInsert(_revisions.Cast<BaseEntityObject>().ToList());
+                        
                         MessageBox.Show("All records updated successfull!", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
                         
                         SetEnableControl(false);
@@ -311,23 +268,10 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
 
         private void checkBoxRevisionValidTo_CheckedChanged(object sender, EventArgs e)
         {
-            metroTextBoxRevision.Enabled =
-                    dateTimePickerRevisionDate.Enabled=
-                        RevisionEff.Enabled 
+            comboBoxRevision.Enabled 
                         = checkBoxRevisionValidTo.Checked;
         }
-
-        private void dateTimePickerRevisionDate_ValueChanged(object sender, EventArgs e)
-        {
-            if (dateTimePickerRevisionDate.Value < _parent.Date)
-                dateTimePickerRevisionDate.Value = _parent.Date;
-        }
-
-        private void RevisionEff_ValueChanged(object sender, EventArgs e)
-        {
-            if (RevisionEff.Value < dateTimePickerRevisionDate.Value)
-                RevisionEff.Value = dateTimePickerRevisionDate.Value;
-        }
+        
         
     }
 }

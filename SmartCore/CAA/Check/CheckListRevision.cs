@@ -69,6 +69,10 @@ namespace SmartCore.CAA.Check
             Settings = new CheckListRevisionSettings();
         }
 
+        public override string ToString()
+        {
+            return Number.ToString();
+        }
     }
 
 

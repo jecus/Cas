@@ -31,18 +31,13 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Label label9;
-            System.Windows.Forms.Label label8;
             System.Windows.Forms.Label metroLabel1;
             System.Windows.Forms.Label label17;
             System.Windows.Forms.Label label19;
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label4;
-            System.Windows.Forms.Label label5;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckListSafaRevisionForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckListIcaoRevisionForm));
             this.checkBoxRevisionValidTo = new System.Windows.Forms.CheckBox();
-            this.dateTimePickerRevisionDate = new System.Windows.Forms.DateTimePicker();
-            this.metroTextBoxRevision = new MetroFramework.Controls.MetroTextBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this._fromcheckListView = new CAS.UI.UICAAControls.CheckList.CheckListICAOView();
@@ -55,40 +50,13 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
             this.checkBoxLevel = new System.Windows.Forms.CheckBox();
             this.checkBoxMH = new System.Windows.Forms.CheckBox();
             this.metroTextBoxMH = new MetroFramework.Controls.MetroTextBox();
-            this.RevisionEff = new System.Windows.Forms.DateTimePicker();
-            label9 = new System.Windows.Forms.Label();
-            label8 = new System.Windows.Forms.Label();
+            this.comboBoxRevision = new System.Windows.Forms.ComboBox();
             metroLabel1 = new System.Windows.Forms.Label();
             label17 = new System.Windows.Forms.Label();
             label19 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
-            label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new System.Drawing.Font("Verdana", 9F);
-            label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label9.Location = new System.Drawing.Point(1294, 93);
-            label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(37, 14);
-            label9.TabIndex = 320;
-            label9.Text = "Date";
-            label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new System.Drawing.Font("Verdana", 9F);
-            label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label8.Location = new System.Drawing.Point(1188, 94);
-            label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(21, 14);
-            label8.TabIndex = 315;
-            label8.Text = "№";
-            label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // metroLabel1
             // 
@@ -145,18 +113,6 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
             label4.Text = "Revision:";
             label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new System.Drawing.Font("Verdana", 9F);
-            label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label5.Location = new System.Drawing.Point(1411, 93);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(57, 14);
-            label5.TabIndex = 357;
-            label5.Text = "Eff Date";
-            label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // checkBoxRevisionValidTo
             // 
             this.checkBoxRevisionValidTo.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -167,46 +123,6 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
             this.checkBoxRevisionValidTo.Size = new System.Drawing.Size(18, 16);
             this.checkBoxRevisionValidTo.TabIndex = 326;
             this.checkBoxRevisionValidTo.CheckedChanged += new System.EventHandler(this.checkBoxRevisionValidTo_CheckedChanged);
-            // 
-            // dateTimePickerRevisionDate
-            // 
-            this.dateTimePickerRevisionDate.Location = new System.Drawing.Point(1252, 110);
-            this.dateTimePickerRevisionDate.Name = "dateTimePickerRevisionDate";
-            this.dateTimePickerRevisionDate.Size = new System.Drawing.Size(119, 20);
-            this.dateTimePickerRevisionDate.TabIndex = 318;
-            this.dateTimePickerRevisionDate.ValueChanged += new System.EventHandler(this.dateTimePickerRevisionDate_ValueChanged);
-            // 
-            // metroTextBoxRevision
-            // 
-            // 
-            // 
-            // 
-            this.metroTextBoxRevision.CustomButton.Image = null;
-            this.metroTextBoxRevision.CustomButton.Location = new System.Drawing.Point(47, 1);
-            this.metroTextBoxRevision.CustomButton.Name = "";
-            this.metroTextBoxRevision.CustomButton.Size = new System.Drawing.Size(19, 19);
-            this.metroTextBoxRevision.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTextBoxRevision.CustomButton.TabIndex = 1;
-            this.metroTextBoxRevision.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTextBoxRevision.CustomButton.UseSelectable = true;
-            this.metroTextBoxRevision.CustomButton.Visible = false;
-            this.metroTextBoxRevision.ForeColor = System.Drawing.Color.DimGray;
-            this.metroTextBoxRevision.Lines = new string[0];
-            this.metroTextBoxRevision.Location = new System.Drawing.Point(1170, 110);
-            this.metroTextBoxRevision.MaxLength = 32767;
-            this.metroTextBoxRevision.Multiline = true;
-            this.metroTextBoxRevision.Name = "metroTextBoxRevision";
-            this.metroTextBoxRevision.PasswordChar = '\0';
-            this.metroTextBoxRevision.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.metroTextBoxRevision.SelectedText = "";
-            this.metroTextBoxRevision.SelectionLength = 0;
-            this.metroTextBoxRevision.SelectionStart = 0;
-            this.metroTextBoxRevision.ShortcutsEnabled = true;
-            this.metroTextBoxRevision.Size = new System.Drawing.Size(67, 21);
-            this.metroTextBoxRevision.TabIndex = 314;
-            this.metroTextBoxRevision.UseSelectable = true;
-            this.metroTextBoxRevision.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.metroTextBoxRevision.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // buttonOk
             // 
@@ -443,22 +359,22 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
             this.metroTextBoxMH.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxMH.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // RevisionEff
+            // comboBoxRevision
             // 
-            this.RevisionEff.Enabled = false;
-            this.RevisionEff.Location = new System.Drawing.Point(1377, 111);
-            this.RevisionEff.Name = "RevisionEff";
-            this.RevisionEff.Size = new System.Drawing.Size(119, 20);
-            this.RevisionEff.TabIndex = 356;
-            this.RevisionEff.ValueChanged += new System.EventHandler(this.RevisionEff_ValueChanged);
+            this.comboBoxRevision.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxRevision.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxRevision.FormattingEnabled = true;
+            this.comboBoxRevision.Location = new System.Drawing.Point(1168, 106);
+            this.comboBoxRevision.Name = "comboBoxRevision";
+            this.comboBoxRevision.Size = new System.Drawing.Size(121, 22);
+            this.comboBoxRevision.TabIndex = 353;
             // 
-            // CheckListSafaRevisionForm
+            // CheckListIcaoRevisionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1518, 803);
-            this.Controls.Add(label5);
-            this.Controls.Add(this.RevisionEff);
+            this.Controls.Add(this.comboBoxRevision);
             this.Controls.Add(label4);
             this.Controls.Add(this.metroTextBoxMH);
             this.Controls.Add(this.checkBoxMH);
@@ -475,13 +391,9 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.checkBoxRevisionValidTo);
-            this.Controls.Add(label9);
-            this.Controls.Add(this.dateTimePickerRevisionDate);
-            this.Controls.Add(label8);
-            this.Controls.Add(this.metroTextBoxRevision);
             this.Controls.Add(metroLabel1);
             this.MaximizeBox = false;
-            this.Name = "CheckListSafaRevisionForm";
+            this.Name = "CheckListIcaoRevisionForm";
             this.Resizable = false;
             this.Text = "CheckList Revision Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CheckListRevisionForm_FormClosing);
@@ -489,7 +401,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.DateTimePicker RevisionEff;
+        private System.Windows.Forms.ComboBox comboBoxRevision;
 
         #endregion
 
@@ -497,8 +409,6 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
         System.Windows.Forms.Label label3;
 
         private System.Windows.Forms.CheckBox checkBoxRevisionValidTo;
-        private System.Windows.Forms.DateTimePicker dateTimePickerRevisionDate;
-        private MetroFramework.Controls.MetroTextBox metroTextBoxRevision;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
         private CAS.UI.UICAAControls.CheckList.CheckListICAOView _fromcheckListView;
