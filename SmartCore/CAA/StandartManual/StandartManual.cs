@@ -5,6 +5,7 @@ using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.RoutineAudits;
+using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
@@ -84,6 +85,8 @@ namespace SmartCore.CAA.StandartManual
         public string Remark => Settings.Remark;
         public DateTime ValidTo => Settings.ValidTo;
         public int Notify => Settings.Notify;
+        public Lifelength Remains { get; set; }
+        public ConditionState Condition { get; set; }
 
         public override BaseEntityObject GetCopyUnsaved(bool marked = true)
         {

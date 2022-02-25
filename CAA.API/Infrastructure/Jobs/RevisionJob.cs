@@ -5,7 +5,6 @@ using CAA.Entity.Core;
 using CAA.Entity.Models.DTO;
 using CAA.Entity.Models.Model;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;

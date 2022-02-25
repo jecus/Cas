@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
+using SmartCore.CAA.Check;
 using SmartCore.Entities.General;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.StandartManual
 {
@@ -55,7 +59,7 @@ namespace CAS.UI.UICAAControls.StandartManual
 			AddColumn("Description", (int)(radGridView1.Width * 0.45f));
             AddColumn("Remark", (int)(radGridView1.Width * 0.45f));
             AddColumn("Check/Valid", (int)(radGridView1.Width * 0.45f));
-            AddColumn("Notify(days)", (int)(radGridView1.Width * 0.45f));
+            AddColumn("Remain", (int)(radGridView1.Width * 0.45f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -95,12 +99,36 @@ namespace CAS.UI.UICAAControls.StandartManual
                 CreateRow(item.Settings.Description, item.Settings.Description),
                 CreateRow(item.Settings.Remark, item.Settings.Remark),
                 CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.ValidTo), item.Settings.ValidTo),
-                CreateRow(item.Settings.Notify.ToString(), item.Settings.Notify),
+                CreateRow(item.Remains.ToString(), item.Remains),
                 CreateRow(corrector, corrector)
 			};
 
 			return subItems;
 		}
+
+		#endregion
+		
+		#region protected override void SetItemColor(GridViewRowInfo listViewItem, Document item)
+
+		protected override void SetItemColor(GridViewRowInfo listViewItem, SmartCore.CAA.StandartManual.StandartManual item)
+		{
+			var itemBackColor = UsefulMethods.GetColor(item);
+			var itemForeColor = Color.Gray;
+
+			foreach (GridViewCellInfo cell in listViewItem.Cells)
+			{
+				cell.Style.DrawFill = true;
+				cell.Style.CustomizeFill = true;
+				cell.Style.BackColor = UsefulMethods.GetColor(item);
+
+				var listViewForeColor = cell.Style.ForeColor;
+
+				if (listViewForeColor != Color.MediumVioletRed)
+					cell.Style.ForeColor = itemForeColor;
+				cell.Style.BackColor = itemBackColor;
+			}
+		}
+
 
 		#endregion
 

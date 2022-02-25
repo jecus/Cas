@@ -13,7 +13,9 @@ using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA.StandartManual;
+using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
@@ -116,6 +118,19 @@ namespace CAS.UI.UICAAControls.StandartManual
 			{
 				_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
 					.GetObjectListAll<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(new Filter("OperatorId", _operatorId)));
+			}
+
+
+			foreach (var manual in _initialDocumentArray)
+			{
+				var days = (manual.Settings.ValidTo - DateTime.Today).Days;
+				manual.Remains = new Lifelength(days, null, null);
+				
+				if(manual.Remains.Days < 0)
+					manual.Condition = ConditionState.Overdue;
+				else if (manual.Remains.Days >= 0 && manual.Remains.Days <= manual.Settings.Notify)
+					manual.Condition = ConditionState.Notify;
+				else manual.Condition = ConditionState.Satisfactory;
 			}
 			
 			

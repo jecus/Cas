@@ -50,7 +50,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
         {
             this.radGridView1.GroupDescriptors.Clear();
             var descriptor = new GroupDescriptor();
-            foreach (var colName in new List<string>{ "Current Status" })
+            foreach (var colName in new List<string>{ "Edition Status" })
                 descriptor.GroupNames.Add(colName,  ListSortDirection.Ascending);
             this.radGridView1.GroupDescriptors.Add(descriptor);
         }
@@ -65,7 +65,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
             AddColumn("Type", (int)(radGridView1.Width * 0.24f));
             AddColumn("Date", (int)(radGridView1.Width * 0.24f));
             AddColumn("Eff Date", (int)(radGridView1.Width * 0.24f));
-            AddColumn("Current Status", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Edition Status", (int)(radGridView1.Width * 0.24f));
             AddColumn("Status", (int)(radGridView1.Width * 0.24f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.24f));
         }
