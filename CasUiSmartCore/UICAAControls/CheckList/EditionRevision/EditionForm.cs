@@ -18,8 +18,8 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
         {
             _edition = edition;
             if(_edition.Type == RevisionType.Edition)
-                Text = "Edition Form";
-            else Text = "Revision Form";
+                Text = "Revision Form";
+            else Text = "Edition Form";
             InitializeComponent();
 
 
