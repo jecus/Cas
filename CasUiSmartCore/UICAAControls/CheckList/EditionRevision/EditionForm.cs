@@ -17,11 +17,12 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
         public EditionForm(CheckListRevision edition)
         {
             InitializeComponent();
-
-            if(_edition.Type == RevisionType.Edition)
-                Text = "Revision Form";
-            else Text = "Edition Form";
+            
             _edition = edition;
+            if(_edition.Type == RevisionType.Edition)
+                Text = "Edition Form";
+            else Text = "Revision Form";
+            
             
             metroTextBoxEditionNumber.Enabled =
                 dateTimePickerEditionDate.Enabled =

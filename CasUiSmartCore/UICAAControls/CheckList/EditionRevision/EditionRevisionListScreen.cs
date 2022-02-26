@@ -141,7 +141,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 				ManualId = _manual.ItemId,
 				Settings = new CheckListRevisionSettings()
 				{
-					EditionId = _directivesViewer.SelectedItem.EditionId
+					EditionId = _directivesViewer.SelectedItem.ItemId
 				}
 			});
 			if(form.ShowDialog() == DialogResult.OK)
