@@ -176,36 +176,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
         }
 
 		#endregion
-
-		#region private void ButtonDeleteClick(object sender, EventArgs e)
-		private void ButtonDeleteClick(object sender, EventArgs e)
-		{
-			if (_parent.Type == RevisionType.Revision)
-			{
-				if (_directivesViewer.SelectedItems == null ||
-				    _directivesViewer.SelectedItems.Count == 0) return;
-				
-				string typeName = nameof(CheckLists);
-				
-				DialogResult confirmResult =
-					MessageBox.Show(_directivesViewer.SelectedItems.Count == 1
-							? "Do you really want to mark as delete " + typeName + " " + _directivesViewer.SelectedItems[0] + "?"
-							: "Do you really want to mark as delete selected " + typeName + "s?", "Confirm delete operation",
-						MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-				
-				
-				if (confirmResult == DialogResult.Yes)
-				{
-					GlobalObjects.CaaEnvironment.NewLoader.Execute(
-						$"update  dbo.CheckListRevisionRecord set SettingsJSON = JSON_MODIFY(SettingsJSON, '$.RevisionCheckType', 2) where ParentId = {_parent.ItemId} and CheckListId in ({string.Join(",", _directivesViewer.SelectedItems.Select(i => i.ItemId))})");
-					AnimatedThreadWorker.RunWorkerAsync();
-				}
-			}
-            else _directivesViewer.ButtonDeleteClick(sender, e);
-		}
-
-		#endregion
-
+		
 		#region private void InitListView()
 
 		private void InitListView()
@@ -292,7 +263,6 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 		}
 		#endregion
 		
-
 		#region private void ButtonApplyFilterClick(object sender, EventArgs e)
 
 		private void ButtonApplyFilterClick(object sender, EventArgs e)

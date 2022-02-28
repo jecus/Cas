@@ -187,6 +187,19 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             
             foreach (var rec in _currentCheck.CheckListRecords)
                 UpdateRecords(rec);
+            
+            
+            if (_record.Settings.RevisionCheckType == RevisionCheckType.Del)
+            {
+                radioButtonDel.Checked = true;
+                CheckedCheckBox(false);
+                DisableCheckBox(false);
+            }
+            else
+            {
+                radioButtonMod.Checked = true;
+                DisableCheckBox(true);
+            }
         }
 
         private bool ApplyChanges()
@@ -403,7 +416,15 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             try
             {
                 ApplyChanges();
-                _record.Settings.RevisionCheckType = RevisionCheckType.Mod;
+
+                if (radioButtonDel.Checked)
+                {
+                    _record.Settings.RevisionCheckType = RevisionCheckType.Del;
+                    _record.Settings.ModData.Clear();
+                }
+                else _record.Settings.RevisionCheckType = RevisionCheckType.Mod;
+                
+                
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(_record);
                 
                 DialogResult = DialogResult.OK;
@@ -482,5 +503,44 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
                 control.DisableControls(checkBoxAudit.Checked);
         }
 
+        private void radioButtonMod_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonDel.Checked)
+            {
+                CheckedCheckBox(false);
+                DisableCheckBox(false);
+            }
+            else DisableCheckBox(true);
+        }
+
+        private void CheckedCheckBox(bool flag = false)
+        {
+            checkBoxSource.Checked =
+                checkBoxRef.Checked =
+                    checkBoxLevel.Checked =
+                        checkBoxPhase.Checked =
+                            checkBoxMh.Checked =
+                                checkBoxSection.Checked =
+                                    checkBoxPart.Checked =
+                                        checkBoxSubpart.Checked =
+                                            checkBoxItem.Checked =
+                                                checkBoxReq.Checked =
+                                                    checkBoxAudit.Checked = flag;
+        }
+        
+        private void DisableCheckBox(bool flag = true)
+        {
+            checkBoxSource.Enabled =
+                checkBoxRef.Enabled =
+                    checkBoxLevel.Enabled =
+                        checkBoxPhase.Enabled =
+                            checkBoxMh.Enabled =
+                                checkBoxSection.Enabled =
+                                    checkBoxPart.Enabled =
+                                        checkBoxSubpart.Enabled =
+                                            checkBoxItem.Enabled =
+                                                checkBoxReq.Enabled =
+                                                    checkBoxAudit.Enabled = flag;
+        }
     }
 }

@@ -71,6 +71,9 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             this.checkBoxItem = new System.Windows.Forms.CheckBox();
             this.checkBoxAudit = new System.Windows.Forms.CheckBox();
             this.checkBoxReq = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.radioButtonMod = new System.Windows.Forms.RadioButton();
+            this.radioButtonDel = new System.Windows.Forms.RadioButton();
             metroLabel1 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
@@ -84,6 +87,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             label18 = new System.Windows.Forms.Label();
             label19 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -808,11 +812,47 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             this.checkBoxReq.UseVisualStyleBackColor = true;
             this.checkBoxReq.CheckedChanged += new System.EventHandler(this.checkBoxReq_CheckedChanged);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.radioButtonMod);
+            this.panel1.Controls.Add(this.radioButtonDel);
+            this.panel1.Location = new System.Drawing.Point(137, 29);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(111, 28);
+            this.panel1.TabIndex = 342;
+            // 
+            // radioButtonMod
+            // 
+            this.radioButtonMod.AutoSize = true;
+            this.radioButtonMod.Font = new System.Drawing.Font("Verdana", 9F);
+            this.radioButtonMod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.radioButtonMod.Location = new System.Drawing.Point(3, 3);
+            this.radioButtonMod.Name = "radioButtonMod";
+            this.radioButtonMod.Size = new System.Drawing.Size(51, 18);
+            this.radioButtonMod.TabIndex = 320;
+            this.radioButtonMod.TabStop = true;
+            this.radioButtonMod.Text = "Mod";
+            this.radioButtonMod.CheckedChanged += new System.EventHandler(this.radioButtonMod_CheckedChanged);
+            // 
+            // radioButtonDel
+            // 
+            this.radioButtonDel.AutoSize = true;
+            this.radioButtonDel.Font = new System.Drawing.Font("Verdana", 9F);
+            this.radioButtonDel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.radioButtonDel.Location = new System.Drawing.Point(60, 3);
+            this.radioButtonDel.Name = "radioButtonDel";
+            this.radioButtonDel.Size = new System.Drawing.Size(45, 18);
+            this.radioButtonDel.TabIndex = 321;
+            this.radioButtonDel.TabStop = true;
+            this.radioButtonDel.Text = "Del";
+            this.radioButtonDel.CheckedChanged += new System.EventHandler(this.radioButtonMod_CheckedChanged);
+            // 
             // CheckListRevEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1155, 820);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.checkBoxReq);
             this.Controls.Add(this.checkBoxAudit);
             this.Controls.Add(this.checkBoxItem);
@@ -859,9 +899,15 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
             this.Text = "Check List";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton radioButtonMod;
+        private System.Windows.Forms.RadioButton radioButtonDel;
 
         #endregion
 
