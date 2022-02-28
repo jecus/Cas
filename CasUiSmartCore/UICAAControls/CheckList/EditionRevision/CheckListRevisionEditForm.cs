@@ -166,7 +166,10 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
                 foreach (var item in _tocheckListView.SelectedItems.ToArray())
                 {
                     _updateChecks.Remove(item);
-                    _addedChecks.Add(item);
+                    if(item.RevisionStatus == RevisionCheckType.New)
+                        GlobalObjects.CaaEnvironment.NewKeeper.Delete(item, true);
+                    else _addedChecks.Add(item);
+                    
                 }
                 
                 GlobalObjects.CaaEnvironment.NewLoader.Execute(
