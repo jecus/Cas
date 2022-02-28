@@ -37,3 +37,4 @@ packages/
 /CasWcfService/tools
 /CasAPI/tools/Cake
 /.idea/.idea.CAS
+.vscode
