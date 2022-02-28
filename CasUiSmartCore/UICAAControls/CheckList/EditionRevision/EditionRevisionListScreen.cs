@@ -350,6 +350,13 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 
 		private void ButtonAddClick(object sender, EventArgs e)
 		{
+			if (_initialDocumentArray.Any(i => i.Type == RevisionType.Edition && i.Status == EditionRevisionStatus.Temporary))
+			{
+				MessageBox.Show("Edition in status Temporary already exist!","", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				return;
+			}
+			
+			
 			var form = new EditionForm(new CheckListRevision
 			{
 				OperatorId = _operatorId,
