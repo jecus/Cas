@@ -352,7 +352,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 		{
 			if (_initialDocumentArray.Any(i => i.Type == RevisionType.Edition && i.Status == EditionRevisionStatus.Temporary))
 			{
-				MessageBox.Show("Edition in status Temporary already exist!","", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				MessageBox.Show("Edition in status Temporary already exist!","Exclamation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				return;
 			}
 			
