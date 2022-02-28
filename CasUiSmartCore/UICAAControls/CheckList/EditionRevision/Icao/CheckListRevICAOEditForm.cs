@@ -398,8 +398,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
                                     checkBoxPart.Checked =
                                         checkBoxSubpart.Checked =
                                             checkBoxItem.Checked =
-                                                checkBoxReq.Checked =
-                                                    radioButtonMod.Checked = flag;
+                                                checkBoxReq.Checked = flag;
         }
         
         private void DisableCheckBox(bool flag = true)
@@ -412,8 +411,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
                                 checkBoxPart.Enabled =
                                     checkBoxSubpart.Enabled =
                                         checkBoxItem.Enabled =
-                                            checkBoxReq.Enabled =
-                                                radioButtonMod.Checked = flag;
+                                            checkBoxReq.Enabled = flag;
         }
     }
 }

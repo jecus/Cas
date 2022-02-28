@@ -140,6 +140,18 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Safa
                 checkBoxCategory.Checked = true;
                 comboBoxCategory.SelectedItem = _levels.FirstOrDefault(i => i.ItemId == (int)_record.Settings.ModData["Category"]);
             }
+            
+            if (_record.Settings.RevisionCheckType == RevisionCheckType.Del)
+            {
+                radioButtonDel.Checked = true;
+                CheckedCheckBox(false);
+                DisableCheckBox(false);
+            }
+            else
+            {
+                radioButtonMod.Checked = true;
+                DisableCheckBox(true);
+            }
         }
         
         private bool ApplyChanges()
@@ -313,7 +325,14 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Safa
             try
             {
                 ApplyChanges();
-                _record.Settings.RevisionCheckType = RevisionCheckType.Mod;
+                
+                if (radioButtonDel.Checked)
+                {
+                    _record.Settings.RevisionCheckType = RevisionCheckType.Del;
+                    _record.Settings.ModData.Clear();
+                }
+                else _record.Settings.RevisionCheckType = RevisionCheckType.Mod;
+                
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(_record);
                 
                 DialogResult = DialogResult.OK;
@@ -385,6 +404,48 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Safa
         private void checkBoxInstruction_CheckedChanged(object sender, EventArgs e)
         {
             metroTextBoxInstruction.Enabled = checkBoxInstruction.Checked;
+        }
+
+        private void radioButtonMod_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonDel.Checked)
+            {
+                CheckedCheckBox(false);
+                DisableCheckBox(false);
+            }
+            else DisableCheckBox(true);
+        }
+        
+        private void CheckedCheckBox(bool flag = false)
+        {
+            checkBoxSource.Checked =
+                checkBoxCategory.Checked =
+                    checkBoxMH.Checked =
+                        checkBoxMH.Checked =
+                            checkBoxInspection.Checked =
+                                checkBoxTitle.Checked =
+                                    checkBoxStandard.Checked =
+                                        checkBoxRef.Checked =
+                                            checkBoxPdf.Checked =
+                                                checkBoxStandardText.Checked =
+                                                    checkBoxFinding.Checked =
+                                                        checkBoxInstruction.Checked = flag;
+        }
+        
+        private void DisableCheckBox(bool flag = true)
+        {
+            checkBoxSource.Enabled =
+                checkBoxCategory.Enabled =
+                    checkBoxMH.Enabled =
+                        checkBoxMH.Enabled =
+                            checkBoxInspection.Enabled =
+                                checkBoxTitle.Enabled =
+                                    checkBoxStandard.Enabled =
+                                        checkBoxRef.Enabled =
+                                            checkBoxPdf.Enabled =
+                                                checkBoxStandardText.Enabled =
+                                                    checkBoxFinding.Enabled =
+                                                        checkBoxInstruction.Enabled = flag;
         }
     }
 }
