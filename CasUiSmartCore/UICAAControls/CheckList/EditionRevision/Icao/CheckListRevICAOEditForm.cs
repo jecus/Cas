@@ -141,6 +141,18 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
                 metroTextBoxMH.Text = _record.Settings.ModData["MH"].ToString();
             }
             
+            if (_record.Settings.RevisionCheckType == RevisionCheckType.Del)
+            {
+                radioButtonDel.Checked = true;
+                CheckedCheckBox(false);
+                DisableCheckBox(false);
+            }
+            else
+            {
+                radioButtonMod.Checked = true;
+                DisableCheckBox(true);
+            }
+            
          }
 
         private bool ApplyChanges()
@@ -292,7 +304,14 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
             try
             {
                 ApplyChanges();
-                _record.Settings.RevisionCheckType = RevisionCheckType.Mod;
+                
+                if (radioButtonDel.Checked)
+                {
+                    _record.Settings.RevisionCheckType = RevisionCheckType.Del;
+                    _record.Settings.ModData.Clear();
+                }
+                else _record.Settings.RevisionCheckType = RevisionCheckType.Mod;
+                
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(_record);
                 
                 DialogResult = DialogResult.OK;
@@ -357,6 +376,44 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
         private void checkBoxReq_CheckedChanged(object sender, EventArgs e)
         {
             metroTextBoxStandard.Enabled = checkBoxReq.Checked;
+        }
+
+        private void radioButtonMod_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonDel.Checked)
+            {
+                CheckedCheckBox(false);
+                DisableCheckBox(false);
+            }
+            else DisableCheckBox(true);
+        }
+        
+        private void CheckedCheckBox(bool flag = false)
+        {
+            checkBoxSource.Checked =
+                checkBoxRef.Checked =
+                    checkBoxLevel.Checked =
+                        checkBoxMh.Checked =
+                            checkBoxAnnexRef.Checked =
+                                    checkBoxPart.Checked =
+                                        checkBoxSubpart.Checked =
+                                            checkBoxItem.Checked =
+                                                checkBoxReq.Checked =
+                                                    radioButtonMod.Checked = flag;
+        }
+        
+        private void DisableCheckBox(bool flag = true)
+        {
+            checkBoxSource.Enabled =
+                checkBoxRef.Enabled =
+                    checkBoxLevel.Enabled =
+                        checkBoxMh.Enabled =
+                            checkBoxAnnexRef.Enabled =
+                                checkBoxPart.Enabled =
+                                    checkBoxSubpart.Enabled =
+                                        checkBoxItem.Enabled =
+                                            checkBoxReq.Enabled =
+                                                radioButtonMod.Checked = flag;
         }
     }
 }
