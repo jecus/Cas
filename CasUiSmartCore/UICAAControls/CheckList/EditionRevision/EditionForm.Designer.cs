@@ -31,7 +31,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
         {
             System.Windows.Forms.Label label9;
             System.Windows.Forms.Label label8;
-            System.Windows.Forms.Label label1;
+            
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label5;
             this.dateTimePickerEditionDate = new System.Windows.Forms.DateTimePicker();
@@ -188,7 +188,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
         #endregion
 
         System.Windows.Forms.Label label3;
-
+        System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePickerEditionDate;
         private MetroFramework.Controls.MetroTextBox metroTextBoxEditionNumber;
         private System.Windows.Forms.Button buttonOk;

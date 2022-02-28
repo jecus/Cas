@@ -22,11 +22,11 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
             if (_edition.Type == RevisionType.Edition)
             {
                 Text = "Edition Form";
-                label3.Text = "Edition";
+                label1.Text = "Edition";
             }
             else
             {
-                label3.Text = "Revision";
+                label1.Text = "Revision";
                 Text = "Revision Form";
             }
             
