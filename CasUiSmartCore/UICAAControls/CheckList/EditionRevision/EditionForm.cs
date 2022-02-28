@@ -19,9 +19,16 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
             InitializeComponent();
             
             _edition = edition;
-            if(_edition.Type == RevisionType.Edition)
+            if (_edition.Type == RevisionType.Edition)
+            {
                 Text = "Edition Form";
-            else Text = "Revision Form";
+                label3.Text = "Edition";
+            }
+            else
+            {
+                label3.Text = "Revision";
+                Text = "Revision Form";
+            }
             
             
             metroTextBoxEditionNumber.Enabled =
