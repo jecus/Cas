@@ -171,6 +171,9 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
                 
                 GlobalObjects.CaaEnvironment.NewLoader.Execute(
                     $"delete from  dbo.CheckListRevisionRecord where ParentId = {_parent.EditionId} and CheckListId in ({string.Join(",",_tocheckListView.SelectedItems.Select(i => i.ItemId))})");
+                
+                _fromcheckListView.SetItemsArray(_addedChecks.ToArray());
+                _tocheckListView.SetItemsArray(_updateChecks.ToArray());
             }
         }
 

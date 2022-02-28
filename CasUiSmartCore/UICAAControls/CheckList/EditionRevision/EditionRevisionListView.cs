@@ -105,6 +105,15 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
             if (this.SelectedItems == null ||
                 this.SelectedItems.Count == 0) return;
 
+            if (!SelectedItems.All(i => i.Status == EditionRevisionStatus.Temporary))
+            {
+                MessageBox.Show(@"You can delete only object in Status Temporary","Information",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            
+
+
             string typeName = nameof(CheckLists);
 
             DialogResult confirmResult =
