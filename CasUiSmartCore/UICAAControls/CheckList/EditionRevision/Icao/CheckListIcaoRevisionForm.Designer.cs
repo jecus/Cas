@@ -168,7 +168,6 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
             this._fromcheckListView.OldColumnIndex = 0;
             this._fromcheckListView.PasteComplete = null;
             this._fromcheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-            this._fromcheckListView.RevisionId = 0;
             this._fromcheckListView.Size = new System.Drawing.Size(1029, 306);
             this._fromcheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
             this._fromcheckListView.TabIndex = 329;
@@ -191,7 +190,6 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
             this._tocheckListView.OldColumnIndex = 0;
             this._tocheckListView.PasteComplete = null;
             this._tocheckListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-            this._tocheckListView.RevisionId = 0;
             this._tocheckListView.Size = new System.Drawing.Size(1029, 346);
             this._tocheckListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Desc;
             this._tocheckListView.TabIndex = 330;

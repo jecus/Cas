@@ -16,18 +16,24 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
     public partial class CheckListRevICAOEditForm : MetroForm
     {
         private CheckLists _currentCheck;
-        private readonly int _revisionId;
+        private readonly CheckListRevision _revision;
         private IList<FindingLevels> _levels = new List<FindingLevels>();
         private CheckListRevisionRecord _record;
 
         #region Constructors
-        public CheckListRevICAOEditForm(CheckLists check, int revisionId)
+        public CheckListRevICAOEditForm(CheckLists check, CheckListRevision revision)
         {
             
             InitializeComponent();
             _currentCheck = check;
-            _revisionId = revisionId;
+            _revision = revision;
             UpdateInformation();
+            
+            if (_revision.Status == EditionRevisionStatus.Current || _revision.Status == EditionRevisionStatus.Previous)
+            {
+                foreach (var c in this.Controls.OfType<Control>())
+                    c.Enabled = false;
+            }
 
         }
         
@@ -38,7 +44,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
              _record = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionRecordDTO, CheckListRevisionRecord>(new List<Filter>()
              {
                  new Filter("CheckListId", _currentCheck.ItemId),
-                 new Filter("ParentId", _revisionId),
+                 new Filter("ParentId", _revision.ItemId),
              }).FirstOrDefault();
             
              var manual = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(_currentCheck.ManualId);

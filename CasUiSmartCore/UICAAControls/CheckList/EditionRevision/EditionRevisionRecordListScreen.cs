@@ -204,7 +204,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 			}
 			
             _directivesViewer.IsRevision = _parent.Type == RevisionType.Revision;
-            _directivesViewer.RevisionId = _parent.Type == RevisionType.Revision ? _parent.ItemId : -1;
+            _directivesViewer.Revision = _parent.Type == RevisionType.Revision ? _parent : null;
 
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);

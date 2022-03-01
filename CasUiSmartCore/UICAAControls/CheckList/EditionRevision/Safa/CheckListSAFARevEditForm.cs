@@ -15,8 +15,8 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Safa
 {
     public partial class CheckListSAFARevEditForm : MetroForm
     {
-        private readonly int _revisionId;
         private CheckLists _currentCheck;
+        private readonly CheckListRevision _revision;
         private IList<FindingLevels> _levels = new List<FindingLevels>();
         private CheckListRevisionRecord _record;
 
@@ -26,12 +26,18 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Safa
             InitializeComponent();
         }
 
-        public CheckListSAFARevEditForm(CheckLists check, int revisionId)
+        public CheckListSAFARevEditForm(CheckLists check, CheckListRevision revision)
         {
             InitializeComponent();
             _currentCheck = check;
-            _revisionId = revisionId;
+            _revision = revision;
             UpdateInformation();
+            
+            if (_revision.Status == EditionRevisionStatus.Current || _revision.Status == EditionRevisionStatus.Previous)
+            {
+                foreach (var c in this.Controls.OfType<Control>())
+                    c.Enabled = false;
+            }
 
         }
         #endregion
@@ -41,7 +47,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Safa
             _record = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionRecordDTO, CheckListRevisionRecord>(new List<Filter>()
             {
                 new Filter("CheckListId", _currentCheck.ItemId),
-                new Filter("ParentId", _revisionId),
+                new Filter("ParentId", _revision.ItemId),
             }).FirstOrDefault();
             
             var manual = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(_currentCheck.ManualId);
