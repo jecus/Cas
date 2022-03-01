@@ -58,7 +58,6 @@ namespace SmartCore.CAA.Check
     {
         [Filter("Source", Order = 1)]
         string Source { get; set; }
-
-       
     }
+    
 }

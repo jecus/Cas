@@ -38,8 +38,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 		private CommonFilterCollection _filter;
 
 		private CheckListView _directivesViewer;
-        private RadMenuItem _toolStripMenuItemOpen;
-        private readonly CheckListRevision _parent;
+		private readonly CheckListRevision _parent;
 
 
         public EditionRevisionRecordListScreen()
@@ -63,9 +62,18 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 				_filter = new CommonFilterCollection(typeof(ICheckListFilterParams));
             else if (_manual.CheckUIType == CheckUIType.Safa)
 	            _filter = new CommonFilterCollection(typeof(ICheckListSafaFilterParams));
-            
-			InitToolStripMenuItems();
-			InitListView();
+            else if (_manual.CheckUIType == CheckUIType.Icao)
+	            _filter = new CommonFilterCollection(typeof(ICheckListIcaoFilterParams));
+
+
+            if (parent.Status == EditionRevisionStatus.Previous || (parent.Status == EditionRevisionStatus.Current && parent.Type == RevisionType.Revision))
+            {
+	            buttonRevison.Visible =
+		            pictureBox2.Visible =
+		            buttonAddNew.Visible =
+	            pictureBox4.Visible = false;
+            }
+            InitListView();
 			UpdateInformation();
 		}
 
@@ -169,28 +177,6 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 		}
 		#endregion
 
-		#region private void InitToolStripMenuItems()
-
-		private void InitToolStripMenuItems()
-		{
-			_toolStripMenuItemOpen = new RadMenuItem();
-			// 
-			// toolStripMenuItemView
-			// 
-			_toolStripMenuItemOpen.Text = "Open";
-			_toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
-		}
-		#endregion
-		
-		#region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
-
-		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
-		{
-            
-        }
-
-		#endregion
-		
 		#region private void InitListView()
 
 		private void InitListView()
@@ -227,8 +213,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 			Controls.Add(_directivesViewer);
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
-
-			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen);
+			
 			_directivesViewer.DisableContectMenu();
 
 			_directivesViewer.MenuOpeningAction = () =>
@@ -237,7 +222,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 					return;
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
-					_toolStripMenuItemOpen.Enabled = true;
+					
 				}
 			};
 
