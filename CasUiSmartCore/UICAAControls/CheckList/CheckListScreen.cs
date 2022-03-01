@@ -207,11 +207,28 @@ namespace CAS.UI.UICAAControls.CheckList
                 if (ids.Any())
                     _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("ItemId", ids), loadChild: true));
 
+                
+                var revisions = new List<CheckListRevision>();
+                var revedIds = _initialDocumentArray.Where(i => i.RevisionId.HasValue).Select(i => i.RevisionId.Value).Distinct().ToList();
+                revedIds.AddRange(_initialDocumentArray.Select(i =>i.EditionId).Distinct());
+                if (revedIds.Any())
+                {
+	                revisions.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new List<Filter>()
+	                {
+		                new Filter("ItemId", values: revedIds),
+	                }));
+                }
+		            
+                foreach (var check in _initialDocumentArray)
+                {
+	                check.RevisionNumber = revisions.FirstOrDefault(i => i.ItemId == check.RevisionId)?.Number.ToString() ?? "";
+	                check.EditionNumber = revisions.FirstOrDefault(i => i.ItemId == check.RevisionId)?.Number.ToString() ?? "";
+                }
+                
 			}
 			else if (_type == CheckListType.Audit)
             {
-
-                _audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_parentId);
+	            _audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_parentId);
                 var records = GlobalObjects.CaaEnvironment.NewLoader
                     .GetObjectListAll<CAAAuditRecordDTO, CAAAuditRecord>(new Filter("AuditId", _parentId), loadChild: true).ToList();
 
@@ -235,8 +252,25 @@ namespace CAS.UI.UICAAControls.CheckList
                         .GetObjectListAll<AuditCheckDTO, AuditCheck>(new Filter("CheckListId", ids), loadChild: true).ToList();
 
 					_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("ItemId", ids), loadChild: true));
+					
+                    var revisions = new List<CheckListRevision>();
+                    var revedIds = _initialDocumentArray.Where(i => i.RevisionId.HasValue).Select(i => i.RevisionId.Value).Distinct().ToList();
+                    revedIds.AddRange(_initialDocumentArray.Select(i =>i.EditionId).Distinct());
+                    if (revedIds.Any())
+                    {
+	                    revisions.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new List<Filter>()
+	                    {
+		                    new Filter("ItemId", values: revedIds),
+	                    }));
+                    }
+		            
                     foreach (var check in _initialDocumentArray)
-                        check.AuditCheck = auditChecks.FirstOrDefault(i => i.CheckListId == check.ItemId);
+                    {
+	                    check.AuditCheck = auditChecks.FirstOrDefault(i => i.CheckListId == check.ItemId);
+	                    check.RevisionNumber = revisions.FirstOrDefault(i => i.ItemId == check.RevisionId)?.Number.ToString() ?? "";
+	                    check.EditionNumber = revisions.FirstOrDefault(i => i.ItemId == check.RevisionId)?.Number.ToString() ?? "";
+                    }
+                    
 				}
 			}
             else
