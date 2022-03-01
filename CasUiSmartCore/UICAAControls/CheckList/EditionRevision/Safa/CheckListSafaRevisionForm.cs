@@ -75,7 +75,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Safa
             
             foreach (var check in _addedChecks)
             {
-                check.EditionNumber = _parent.Number;
+                check.EditionNumber = _parent.Number.ToString();
                 check.Level = _levels.FirstOrDefault(i => i.ItemId == check.SettingsSafa.LevelId) ??
                               FindingLevels.Unknown;
                 check.Remains = Lifelength.Null;

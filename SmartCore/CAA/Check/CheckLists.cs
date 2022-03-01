@@ -28,6 +28,7 @@ namespace SmartCore.CAA.Check
         public int EditionId { get; set; }
         public int OperatorId { get; set; }
         public int ManualId { get; set; }
+        public int? RevisionId { get; set; }
 
 
         public List<CheckListRecords> CheckListRecords { get; set; }
@@ -123,11 +124,8 @@ namespace SmartCore.CAA.Check
         public CheckListSettingsSAFA SettingsSafa { get; set; }
         public CheckListICAOSettings SettingsIcao { get; set; }
         
-        
-        public string NextEditionNumber  { get; set; }
-        public string NextRevisionNumber  { get; set; }
-        public int EditionNumber  { get; set; }
-        public int RevisionNumber  { get; set; }
+        public string EditionNumber  { get; set; }
+        public string RevisionNumber  { get; set; }
         
         public RevisionCheckType RevisionStatus { get; set; }
 
@@ -174,7 +172,7 @@ namespace SmartCore.CAA.Check
                 return CheckUIType.None;
             }
         }
-        
+
         public override BaseEntityObject GetCopyUnsaved(bool marked = true)
         {
             var clone = (CheckLists) MemberwiseClone();

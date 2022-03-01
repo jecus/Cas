@@ -93,8 +93,8 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 
             foreach (var check in _addedChecks)
             {
-                check.EditionNumber = _parent.Number;
-                check.RevisionNumber = _parent.Number;
+                check.EditionNumber = _parent.Number.ToString();
+                check.RevisionNumber = _parent.Number.ToString();
 
                 if (check.CheckUIType == CheckUIType.Iosa)
                 {

@@ -27,6 +27,7 @@ using CAS.UI.UICAAControls.CheckList.EditionRevision;
 using CAS.UI.UIControls.NewGrid;
 using SmartCore.CAA.Audit;
 using Telerik.WinControls.UI;
+using FilterType = Entity.Abstractions.Attributte.FilterType;
 
 namespace CAS.UI.UICAAControls.CheckList
 {
@@ -246,13 +247,29 @@ namespace CAS.UI.UICAAControls.CheckList
 		            new Filter("Type", (byte)RevisionType.Edition),
 		            new Filter("ManualId", _manual.ItemId),
 	            });
+	            
 	            if (editions.Any())
 	            {
 		            var edition = editions.FirstOrDefault();
 		            _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("EditionId", edition.ItemId), loadChild:true));
+
+		            var revisions = new List<CheckListRevision>();
+		            var revIds = _initialDocumentArray.Where(i => i.RevisionId.HasValue).Select(i => i.RevisionId.Value).Distinct();
+		            if (revIds.Any())
+		            {
+			            revisions.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new List<Filter>()
+			            {
+				            new Filter("ItemId", values: revIds),
+			            }));
+		            }
 		            
+
+
 		            foreach (var check in _initialDocumentArray)
-			            check.EditionNumber = edition.Number;
+		            {
+			            check.RevisionNumber = revisions.FirstOrDefault(i => i.ItemId == check.RevisionId)?.Number.ToString() ?? "";
+			            check.EditionNumber = edition.Number.ToString();
+		            }
 	            }
             }
 

@@ -100,7 +100,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 		            new Filter("ManualId", _manual.ItemId), 
 	            }));
 	            foreach (var check in _initialDocumentArray)
-		            check.EditionNumber = _parent.Number;
+		            check.EditionNumber = _parent.Number.ToString();
             }
             else
             {
@@ -116,8 +116,8 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 		            foreach (var check in _initialDocumentArray)
 		            {
 			            check.RevisionStatus = records.FirstOrDefault(i => i.CheckListId == check.ItemId)?.Settings?.RevisionCheckType ?? RevisionCheckType.None;
-			            check.EditionNumber = edition.Number;
-			            check.RevisionNumber = _parent.Number;
+			            check.EditionNumber = edition.Number.ToString();
+			            check.RevisionNumber = _parent.Number.ToString();
 		            }
 	            }
             }

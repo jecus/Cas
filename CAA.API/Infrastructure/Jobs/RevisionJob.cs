@@ -60,6 +60,8 @@ namespace CAA.API.Infrastructure.Jobs
                         if(check == null)
                             continue;
 
+                        check.RevisionId = currentRevision.ItemId;
+                        
                         if (rec.Settings.RevisionCheckType == RevisionCheckType.New)
                             check.EditionId = rec.ParentId;
                         else if (rec.Settings.RevisionCheckType == RevisionCheckType.Del)
@@ -246,8 +248,6 @@ namespace CAA.API.Infrastructure.Jobs
                                 
                                 check.SettingsJSON = JsonConvert.SerializeObject(settings);
                             }
-
-
                         }
                     }
 

@@ -109,7 +109,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 } ,loadChild:true));
 		            
                 foreach (var check in _addedChecks)
-                    check.EditionNumber = edition.Number;
+                    check.EditionNumber = edition.Number.ToString();
             }
 
             
