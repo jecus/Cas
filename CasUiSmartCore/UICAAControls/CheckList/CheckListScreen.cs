@@ -263,8 +263,6 @@ namespace CAS.UI.UICAAControls.CheckList
 			            }));
 		            }
 		            
-
-
 		            foreach (var check in _initialDocumentArray)
 		            {
 			            check.RevisionNumber = revisions.FirstOrDefault(i => i.ItemId == check.RevisionId)?.Number.ToString() ?? "";

@@ -99,8 +99,22 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 		            new Filter("EditionId", _parent.ItemId), 
 		            new Filter("ManualId", _manual.ItemId), 
 	            }));
+	            
+	            var revisions = new List<CheckListRevision>();
+	            var revIds = _initialDocumentArray.Where(i => i.RevisionId.HasValue).Select(i => i.RevisionId.Value).Distinct();
+	            if (revIds.Any())
+	            {
+		            revisions.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new List<Filter>()
+		            {
+			            new Filter("ItemId", values: revIds),
+		            }));
+	            }
+	            
 	            foreach (var check in _initialDocumentArray)
+	            {
+		            check.RevisionNumber = revisions.FirstOrDefault(i => i.ItemId == check.RevisionId)?.Number.ToString() ?? "";
 		            check.EditionNumber = _parent.Number.ToString();
+	            }
             }
             else
             {

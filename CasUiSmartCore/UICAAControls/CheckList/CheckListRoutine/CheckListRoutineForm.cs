@@ -107,11 +107,24 @@ namespace CAS.UI.UICAAControls.CheckList
                     new Filter("EditionId", edition.ItemId),
                     new Filter("ManualId", _manual.ItemId)
                 } ,loadChild:true));
-		            
-                foreach (var check in _addedChecks)
-                    check.EditionNumber = edition.Number.ToString();
-            }
+                
+                var revisions = new List<CheckListRevision>();
+                var revIds = _addedChecks.Where(i => i.RevisionId.HasValue).Select(i => i.RevisionId.Value).Distinct();
+                if (revIds.Any())
+                {
+                    revisions.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new List<Filter>()
+                    {
+                        new Filter("ItemId", values: revIds),
+                    }));
+                }
 
+                foreach (var check in _addedChecks)
+                {
+                    check.EditionNumber = edition.Number.ToString();
+                    check.RevisionNumber = revisions.FirstOrDefault(i => i.ItemId == check.RevisionId)?.Number.ToString() ?? "";
+                }
+            }
+            
             
             _levels.Clear();
             _levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new []
