@@ -34,6 +34,9 @@ namespace CAA.Entity.Models.DTO
         [Column("OperatorId")]
         public int OperatorId { get; set; }
         
+        [Column("RevisionId")]
+        public int? RevisionId { get; set; }
+        
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public int ProgramTypeId { get; set; }
         
@@ -53,6 +56,7 @@ namespace CAA.Entity.Models.DTO
                 return CheckUIType.None;
             }
         }
+        
     }
     
     public enum CheckUIType
