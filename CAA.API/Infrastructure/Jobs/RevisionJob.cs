@@ -31,7 +31,7 @@ namespace CAA.API.Infrastructure.Jobs
                 
                 var currentRevisions = await context.CheckListRevisionDtos
                     .Where(i => !i.IsDeleted 
-                                              && i.Status == (byte)EditionRevisionStatus.Temporary || i.Status == (byte)EditionRevisionStatus.Current
+                                              && (i.Status == (byte)EditionRevisionStatus.Temporary || i.Status == (byte)EditionRevisionStatus.Current)
                                               && i.Type ==  (byte)RevisionType.Revision
                                               && i.EffDate.Date <= DateTime.Today.Date).ToListAsync();
 
