@@ -260,7 +260,8 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         
         private void LinkAuditManagmentDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Audit Management";
+	        e.RequestedEntity = new AuditListScreen(_getOperator(), _currentOperator.ItemId, true);
         }
 	}
 }

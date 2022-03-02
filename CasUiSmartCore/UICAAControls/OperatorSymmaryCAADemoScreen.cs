@@ -256,7 +256,8 @@ namespace CAS.UI.UICAAControls
 
         private void LinkAuditManagmentDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Audit Management";
+	        e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1, true);
         }
 	}
 }

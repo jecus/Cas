@@ -77,7 +77,7 @@ namespace CAS.UI.UICAAControls.Audit
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public AuditListScreen(Operator currentOperator, int? operatorId)
+		public AuditListScreen(Operator currentOperator, int? operatorId, bool editable = false)
 			: this()
 		{
 			if (currentOperator == null)
@@ -89,10 +89,18 @@ namespace CAS.UI.UICAAControls.Audit
 
 			_filter = new CommonFilterCollection(typeof(IAuditFilterParams));
 
+			
+			buttonAddNew.Visible =
+				buttonDeleteSelected.Visible =
+					pictureBox1.Visible =
+						editable;
+			
 			InitToolStripMenuItems();
 			InitListView();
 			UpdateInformation();
 		}
+
+		
 
         public AuditListScreen(Operator currentOperator, AuditType type)
             : this()
@@ -105,10 +113,10 @@ namespace CAS.UI.UICAAControls.Audit
             labelTitle.Visible = false;
 
             _filter = new CommonFilterCollection(typeof(IAuditFilterParams));
-
-
-            buttonAddNew.Visible = type == AuditType.CAA;
-
+            
+            buttonAddNew.Visible =
+	            pictureBox1.Visible = type == AuditType.CAA;
+            
             InitToolStripMenuItems();
             InitListView();
             UpdateInformation();
