@@ -44,7 +44,7 @@ namespace CAA.API.Infrastructure.Jobs
                                     && i.EffDate.Date <= DateTime.Today.Date).ToListAsync();
 
 
-                    if (!currentRevisions.Any())
+                    if (!currentRevisions.Any(i => i.Status == (byte)EditionRevisionStatus.Temporary))
                     {
                         var now = DateTime.Now;
                         var tomorrow = now.AddDays(1);
@@ -270,6 +270,14 @@ namespace CAA.API.Infrastructure.Jobs
 
                             await context.SaveChangesAsync();
                         }
+                    }
+                    
+                    if (!currentRevisions.Any(i => i.Status == (byte)EditionRevisionStatus.Temporary))
+                    {
+                        var now = DateTime.Now;
+                        var tomorrow = now.AddDays(1);
+                        var durationUntilMidnight = tomorrow.Date - now;
+                        Thread.Sleep(durationUntilMidnight);
                     }
                 }
                 catch (Exception e)
