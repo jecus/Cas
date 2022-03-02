@@ -257,6 +257,11 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 	        e.DisplayerText = "Standart Manual";
 	        e.RequestedEntity = new StandartManualListScreen(GlobalObjects.CaaEnvironment.Operators[0], _currentOperator.ItemId);
         }
+        
+        private void LinkAuditManagmentDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
 	}
 }
 

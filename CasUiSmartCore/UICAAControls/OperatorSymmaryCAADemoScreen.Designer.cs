@@ -74,6 +74,7 @@ namespace CAS.UI.UICAAControls
 			this.LinkCheckList = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkAuditCAA = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkAuditOp = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.LinkAuditManagment = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkAuditAll = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkRoutineAudit = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkStandartManual = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -262,10 +263,10 @@ namespace CAS.UI.UICAAControls
 			this._settingQuality.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._settingQuality.Name = "_settingQuality";
 			this._settingQuality.ReferenceLink = this.LinkStandartManual;
-			this._settingQuality.ReferenceLink02 = this.LinkFindingLevels;
-			this._settingQuality.ReferenceLink03 = this.LinkRootCause;
-			this._settingQuality.ReferenceLink04 = this.LinkRoutineAudit;
-			this._settingQuality.ReferenceLink05 = null;
+			this._settingQuality.ReferenceLink02 = this.LinkRoutineAudit;
+			this._settingQuality.ReferenceLink03 = this.LinkAuditManagment;
+			this._settingQuality.ReferenceLink04 = this.LinkFindingLevels;
+			this._settingQuality.ReferenceLink05 = this.LinkRootCause;
 			this._settingQuality.ReferenceLink06 = null;
 			this._settingQuality.ReferenceLink07 = null;
             this._settingQuality.ReferenceLink08 = null;
@@ -1094,6 +1095,30 @@ namespace CAS.UI.UICAAControls
             this.LinkAuditOp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.LinkAuditOp.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             this.LinkAuditOp.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkAuditOpDisplayerRequested);
+			// 
+			// LinkAuditManagment
+            // 
+			this.LinkAuditManagment.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkAuditManagment.Displayer = null;
+            this.LinkAuditManagment.DisplayerText = null;
+            this.LinkAuditManagment.Entity = null;
+            this.LinkAuditManagment.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LinkAuditManagment.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkAuditManagment.ImageBackColor = System.Drawing.Color.Transparent;
+            this.LinkAuditManagment.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.LinkAuditManagment.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkAuditManagment.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+            this.LinkAuditManagment.Location = new System.Drawing.Point(10, 0);
+            this.LinkAuditManagment.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.LinkAuditManagment.Name = "LinkAuditOp";
+            this.LinkAuditManagment.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this.LinkAuditManagment.Size = new System.Drawing.Size(188, 20);
+            this.LinkAuditManagment.Status = AvControls.Statuses.Satisfactory;
+            this.LinkAuditManagment.TabIndex = 16;
+            this.LinkAuditManagment.Text = "Audit Managment";
+            this.LinkAuditManagment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LinkAuditManagment.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkAuditManagment.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkAuditManagmentDisplayerRequested);
             // 
             // LinkAuditOp
             // 
@@ -1647,6 +1672,7 @@ namespace CAS.UI.UICAAControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkAuditCAA;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkAuditOp;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkAuditAll;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkAuditManagment;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkInitialOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkDocumentPurchase;
