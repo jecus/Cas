@@ -107,10 +107,9 @@ namespace CAS.UI.UICAAControls.CheckList
             AddColumn("Requirement", (int)(radGridView1.Width * 0.3f));
             AddColumn("Auditor Action", (int)(radGridView1.Width * 0.3f));
             AddColumn("Source", (int)(radGridView1.Width * 0.3f));
-            AddColumn("Level", (int)(radGridView1.Width * 0.2f));
-            AddColumn("Edition", (int)(radGridView1.Width * 0.3f));
-            AddColumn("Revision", (int)(radGridView1.Width * 0.3f));
-            AddColumn("Remain", (int)(radGridView1.Width * 0.1f));
+            AddColumn("Level", (int)(radGridView1.Width * 0.1f));
+            AddColumn("Edition", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Revision", (int)(radGridView1.Width * 0.2f));
             AddColumn("Phase", (int)(radGridView1.Width * 0.1f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
         }
@@ -138,7 +137,6 @@ namespace CAS.UI.UICAAControls.CheckList
                 CreateRow(item.Level.ToString(), item.Level),
                 CreateRow(item.EditionNumber.ToString(), item.EditionNumber),
                 CreateRow(item.RevisionNumber.ToString(), item.RevisionNumber),
-                CreateRow(item.Remains.ToString(), item.Remains),
                 CreateRow(item.Settings.Phase, item.Settings.Phase),
                 CreateRow(author, author)
             };
@@ -273,7 +271,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
     }
 
-    public class CheckListRevisionView : CheckListView
+    public class CheckListRevisionView : CheckListView 
     {
         public CheckListRevisionView(AnimatedThreadWorker worker) : base(worker)
         {
@@ -299,10 +297,9 @@ namespace CAS.UI.UICAAControls.CheckList
             AddColumn("Auditor Action", (int)(radGridView1.Width * 0.3f));
             AddColumn("Source", (int)(radGridView1.Width * 0.3f));
             AddColumn("Level", (int)(radGridView1.Width * 0.2f));
-            AddColumn("Edition", (int)(radGridView1.Width * 0.3f));
-            AddColumn("Revision", (int)(radGridView1.Width * 0.3f));
-            AddColumn("Remain", (int)(radGridView1.Width * 0.1f));
-            AddColumn("Phase", (int)(radGridView1.Width * 0.1f));
+            AddColumn("Edition", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Revision", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Changes", (int)(radGridView1.Width * 0.39f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
         }
         #endregion
@@ -330,8 +327,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 CreateRow(item.Level.ToString(), item.Level),
                 CreateRow(item.EditionNumber.ToString(), item.EditionNumber),
                 CreateRow(item.RevisionNumber.ToString(), item.RevisionNumber),
-                CreateRow(item.Remains.ToString(), item.Remains),
-                CreateRow(item.Settings.Phase, item.Settings.Phase),
+                CreateRow(item.Changes, item.Changes),
                 CreateRow(author, author)
             };
 
@@ -429,8 +425,9 @@ namespace CAS.UI.UICAAControls.CheckList
             AddColumn("Standard Ref", (int)(radGridView1.Width * 0.24f));
             AddColumn("PDF Code", (int)(radGridView1.Width * 0.24f));
             AddColumn("Category", (int)(radGridView1.Width * 0.24f));
-            AddColumn("Edition", (int)(radGridView1.Width * 0.3f));
-            AddColumn("Revision", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Edition", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Revision", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Changes", (int)(radGridView1.Width * 0.4f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
         }
         #endregion
@@ -453,6 +450,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 CreateRow(item.Level.ToString(), item.Level),
                 CreateRow(item.EditionNumber.ToString(), item.EditionNumber),
                 CreateRow(item.RevisionNumber.ToString(), item.RevisionNumber),
+                CreateRow(item.Changes, item.Changes),
                 CreateRow(author, author)
             };
 
@@ -563,8 +561,9 @@ namespace CAS.UI.UICAAControls.CheckList
             AddColumn("Item Name", (int)(radGridView1.Width * 0.5f));
             AddColumn("Standard or Recommended Practice", (int)(radGridView1.Width * 0.3f));
             AddColumn("Level", (int)(radGridView1.Width * 0.2f));
-            AddColumn("Edition", (int)(radGridView1.Width * 0.3f));
-            AddColumn("Revision", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Edition", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Revision", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Changes", (int)(radGridView1.Width * 0.4));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
         }
         #endregion
@@ -590,6 +589,7 @@ namespace CAS.UI.UICAAControls.CheckList
                 CreateRow(item.Level.ToString(), item.Level),
                 CreateRow(item.EditionNumber.ToString(), item.EditionNumber),
                 CreateRow(item.RevisionNumber.ToString(), item.RevisionNumber),
+                CreateRow(item.Changes, item.Changes),
                 CreateRow(author, author),
                 
             };

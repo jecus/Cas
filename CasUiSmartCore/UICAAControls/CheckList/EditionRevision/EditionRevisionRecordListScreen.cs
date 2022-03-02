@@ -137,6 +137,10 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 		            var edition = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListRevisionDTO, CheckListRevision>(_parent.Settings.EditionId);
 		            foreach (var check in _initialDocumentArray)
 		            {
+			            var rec = records.FirstOrDefault(i => i.CheckListId == check.ItemId);
+			            if (rec != null)
+				            check.Changes = string.Join(", ", rec.Settings.ModData.Select(i => i.Key));
+
 			            check.RevisionStatus = records.FirstOrDefault(i => i.CheckListId == check.ItemId)?.Settings?.RevisionCheckType ?? RevisionCheckType.None;
 			            check.EditionNumber = edition.Number.ToString();
 			            check.RevisionNumber = _parent.Number.ToString();

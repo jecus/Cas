@@ -61,12 +61,12 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
         /// </summary>
         protected override void SetHeaders()
         {
-            AddColumn("№", (int)(radGridView1.Width * 0.20f));
-            AddColumn("Type", (int)(radGridView1.Width * 0.24f));
-            AddColumn("Date", (int)(radGridView1.Width * 0.24f));
-            AddColumn("Eff Date", (int)(radGridView1.Width * 0.24f));
-            AddColumn("Edition Status", (int)(radGridView1.Width * 0.24f));
-            AddColumn("Revision Status", (int)(radGridView1.Width * 0.24f));
+            AddColumn("№", (int)(radGridView1.Width * 0.18f));
+            AddColumn("Type", (int)(radGridView1.Width * 0.18f));
+            AddColumn("Date", (int)(radGridView1.Width * 0.18f));
+            AddColumn("Eff Date", (int)(radGridView1.Width * 0.18f));
+            AddColumn("Edition Status", (int)(radGridView1.Width * 0.18f));
+            AddColumn("Revision Status", (int)(radGridView1.Width * 0.18f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.24f));
         }
         #endregion
@@ -79,20 +79,25 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 
             var subItems = new List<CustomCell>();
 
-            var status = "";
-            if (item.CurrentStatus == EditionRevisionStatus.Current)
-                status = "1.Current";
-            else if (item.CurrentStatus == EditionRevisionStatus.Temporary)
-                status = "2.Temporary";
-            else if (item.CurrentStatus == EditionRevisionStatus.Previous)
-                status = "3.Previous";
+            var editionStatus = "";
+            
+                if (item.CurrentStatus == EditionRevisionStatus.Current)
+                    editionStatus = "Current Edition";
+                else if (item.CurrentStatus == EditionRevisionStatus.Temporary)
+                    editionStatus = "Temporary Edition";
+                else if (item.CurrentStatus == EditionRevisionStatus.Previous)
+                    editionStatus = "Previous Edition";
+
+                var status = "";
+                if (item.Type == RevisionType.Revision)
+                    status = item.Status.ToString();
 
             subItems.Add(CreateRow(item.Number.ToString(), item.Number));
             subItems.Add(CreateRow(item.Type.ToString(), item.Type));
             subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Date), item.Date));
             subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.EffDate), item.EffDate));
+            subItems.Add(CreateRow(editionStatus, editionStatus));
             subItems.Add(CreateRow(status, status));
-            subItems.Add(CreateRow(item.Status.ToString(), item.Status.ToString()));
             subItems.Add(CreateRow(author, author));
 
             return subItems;

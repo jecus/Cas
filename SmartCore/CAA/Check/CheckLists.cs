@@ -153,6 +153,8 @@ namespace SmartCore.CAA.Check
                 return n;
             }
         }
+        
+        public string Changes { get; set; }
 
         public AuditCheck AuditCheck { get; set; }
         
@@ -172,6 +174,7 @@ namespace SmartCore.CAA.Check
                 return CheckUIType.None;
             }
         }
+        
 
         public override BaseEntityObject GetCopyUnsaved(bool marked = true)
         {
