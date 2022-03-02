@@ -119,7 +119,7 @@ namespace CAA.API.Infrastructure.Jobs
                                 }
 
                                 if (rec.Settings.ModData.ContainsKey("MH"))
-                                    settings.MH = (int)rec.Settings.ModData["MH"];
+                                    settings.MH = (double)rec.Settings.ModData["MH"];
 
                                 if (rec.Settings.ModData.ContainsKey("Audit"))
                                 {
@@ -193,7 +193,7 @@ namespace CAA.API.Infrastructure.Jobs
                                     settings.Instruction = (string)rec.Settings.ModData["Instruction"];
                                 
                                 if (rec.Settings.ModData.ContainsKey("MH"))
-                                    settings.MH = (int)rec.Settings.ModData["MH"];
+                                    settings.MH = (double)rec.Settings.ModData["MH"];
                                 
                                 if (rec.Settings.ModData.ContainsKey("Category"))
                                     settings.LevelId = (int)rec.Settings.ModData["Category"];
@@ -244,7 +244,7 @@ namespace CAA.API.Infrastructure.Jobs
                                 }
 
                                 if (rec.Settings.ModData.ContainsKey("MH"))
-                                    settings.MH = (int)rec.Settings.ModData["MH"];
+                                    settings.MH = (double)rec.Settings.ModData["MH"];
                                 
                                 check.SettingsJSON = JsonConvert.SerializeObject(settings);
                             }
