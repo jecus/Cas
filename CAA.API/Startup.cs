@@ -80,7 +80,6 @@ namespace CAA.API
                 o.SwaggerEndpoint("v1/swagger.json", "Caa API v1");
             });
             Initialize(app);
-            app.StartScheduler();
         }
 
 

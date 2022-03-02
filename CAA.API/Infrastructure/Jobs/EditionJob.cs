@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using API.Abstractions.Abstractions.Workers;
 using CAA.Entity.Core;
 using CAA.Entity.Models.DTO;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Quartz;
 
 namespace CAA.API.Infrastructure.Jobs
 {
-    public class EditionJob: IJob
+    public class EditionJob: IWorker
     {
         private readonly ILogger<EditionJob> _logger;
         private readonly IServiceProvider _provider;
@@ -22,7 +22,12 @@ namespace CAA.API.Infrastructure.Jobs
             _provider = provider;
         }
         
-        public async Task Execute(IJobExecutionContext c)
+        public void Dispose()
+        {
+			
+        }
+        
+        public async Task Start()
         {
             try
             {
@@ -33,6 +38,14 @@ namespace CAA.API.Infrastructure.Jobs
                                               && i.Status == (byte)EditionRevisionStatus.Temporary 
                                               && i.Type ==  (byte)RevisionType.Edition
                                               && i.EffDate.Date <= DateTime.Today.Date).ToListAsync();
+
+                if (!nextEditions.Any())
+                {
+                    var now = DateTime.Now;
+                    var tomorrow = now.AddDays(1);
+                    var durationUntilMidnight = tomorrow.Date - now;
+                    Thread.Sleep(durationUntilMidnight);
+                }
 
                 foreach (var nextEdition in nextEditions)
                 {

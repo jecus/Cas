@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using API.Abstractions.Abstractions.Workers;
 using CAS.Entity.Core;
 using CAS.Entity.Core.Repository;
@@ -24,7 +25,7 @@ namespace CAS.API.Infrastructure
 			
 		}
 
-		public async void Start()
+		public async Task Start()
 		{
 			while (true)
 			{

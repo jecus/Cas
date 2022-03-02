@@ -29,7 +29,7 @@ namespace CAS.API.Infrastructure
 			
 		}
 
-		public async void Start()
+		public async Task Start()
 		{
 			while (true)
 			{

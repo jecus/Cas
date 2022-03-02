@@ -2,9 +2,9 @@
 using System.IO;
 using System.Linq;
 using API.Abstractions.Abstractions.Workers;
+using CAA.API.Infrastructure;
 using CAA.API.Infrastructure.Jobs;
 using CAA.Entity.Core;
-using CAS.API.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,11 +17,9 @@ namespace CAA.API
     {
         public virtual void RegisterWorkers(IServiceCollection services)
         {
-            services.AddScheduler();
-            services.AddScheduledByCronWorker<EditionWorker<EditionJob>, EditionJob>(Configuration["Setup:ScheduleEditionWorker"]);
-            services.AddScheduledByCronWorker<RevisionWorker<RevisionJob>, RevisionJob>(Configuration["Setup:ScheduleRevisionWorker"]);
-            
             services.AddWorker<DictionaryWorker>();
+            services.AddWorker<EditionJob>();
+            services.AddWorker<RevisionJob>();
         }
         public virtual void RegisterDataBase(IServiceCollection services)
         {

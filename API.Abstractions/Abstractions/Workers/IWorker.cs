@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace API.Abstractions.Abstractions.Workers
 {
 	public interface IWorker : IDisposable
 	{
-		void Start();
+		Task Start();
 	}
 }

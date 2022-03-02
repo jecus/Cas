@@ -4,15 +4,13 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using API.Abstractions.Abstractions.Workers;
-using CAA.API.Infrastructure;
 using CAA.Entity.Core;
 using CAA.Entity.Core.Repository;
 using CAA.Entity.Models.Dictionary;
-using CAS.Entity.Models.DTO.Dictionaries;
 using Entity.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CAS.API.Infrastructure
+namespace CAA.API.Infrastructure
 {
 	public class DictionaryWorker : IWorker
 	{
@@ -30,7 +28,7 @@ namespace CAS.API.Infrastructure
 			
 		}
 
-		public async void Start()
+		public async Task Start()
 		{
 			while (true)
 			{
