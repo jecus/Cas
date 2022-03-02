@@ -133,7 +133,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision
 	            if (records.Any())
 	            {
 		            var ids = records.Select(i => i.CheckListId);
-		            _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListDTO, CheckLists>(new Filter("ItemId", ids)));
+		            _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListDTO, CheckLists>(new Filter("ItemId", ids), getDeleted:true));
 		            var edition = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListRevisionDTO, CheckListRevision>(_parent.Settings.EditionId);
 		            foreach (var check in _initialDocumentArray)
 		            {

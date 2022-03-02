@@ -80,7 +80,7 @@ namespace CAA.API.Infrastructure.Jobs
                                 check.RevisionId = currentRevision.ItemId;
 
                                 if (rec.Settings.RevisionCheckType == RevisionCheckType.New)
-                                    check.EditionId = rec.ParentId;
+                                    check.EditionId = currentRevision.EditionId;
                                 else if (rec.Settings.RevisionCheckType == RevisionCheckType.Del)
                                     check.IsDeleted = true;
                                 else if (rec.Settings.RevisionCheckType == RevisionCheckType.Mod)
