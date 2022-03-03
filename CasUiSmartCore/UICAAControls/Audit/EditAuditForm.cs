@@ -59,6 +59,9 @@ namespace CAS.UI.UICAAControls.Audit
             dateTimePickerPublishingDate.Value = _audit.Settings.PublishingDate;
             numericUpDown1.Value = _audit.Settings.KMH;
 
+            dateTimePickerFrom.Value = _audit.Settings.From;
+            dateTimePickerTo.Value = _audit.Settings.To;
+
             textBoxAuthor.Text = GlobalObjects.CaaEnvironment?.GetCorrector(_audit.Settings.AuthorId);
             textBoxPublishedBy.Text = GlobalObjects.CaaEnvironment?.GetCorrector(_audit.Settings.PublishedId);
             textBoxClosedBy.Text = GlobalObjects.CaaEnvironment?.GetCorrector(_audit.Settings.ClosedId);
@@ -81,6 +84,9 @@ namespace CAS.UI.UICAAControls.Audit
             _audit.AuditNumber =  metroTextBoxAuditNumber.Text;
             _audit.Settings.WorkflowStageId = (comboBoxWorkFlow.SelectedItem as WorkFlowStage).ItemId;
             _audit.Settings.KMH = numericUpDown1.Value;
+            
+            _audit.Settings.From =  dateTimePickerFrom.Value;
+            _audit.Settings.To = dateTimePickerTo.Value;
 
             var status = (RoutineStatus)comboBoxStatus.SelectedItem;
             if (status == RoutineStatus.Published)
