@@ -231,6 +231,12 @@ namespace SmartCore.CAA.Audit
         
         [JsonProperty("ExtationString")]
         public string ExtationString { get; set; }
+        
+        [JsonProperty("DocumenttId")]
+        public int DocumenttId { get; set; }
+
+        [JsonIgnore]
+        public Document Document { get; set; }
     }
 
 }

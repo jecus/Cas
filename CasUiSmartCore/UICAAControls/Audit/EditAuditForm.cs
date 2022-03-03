@@ -12,7 +12,6 @@ using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.CAA;
 using SmartCore.CAA.Audit;
-using SmartCore.CAA.RoutineAudits;
 
 namespace CAS.UI.UICAAControls.Audit
 {
@@ -46,6 +45,16 @@ namespace CAS.UI.UICAAControls.Audit
         {
             _operators = GlobalObjects.CaaEnvironment.AllOperators;
             _audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_auditId);
+
+            var ids = _audit.Settings.Extations.Select(i => i.DocumenttId).Distinct();
+            if (ids.Any())
+            {
+                var documents = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ItemId", ids));
+                foreach (var extation in _audit.Settings.Extations)
+                    extation.Document = documents.FirstOrDefault(i => i.ItemId == extation.DocumenttId);
+                
+            }
+            
         }
 
 
@@ -163,13 +172,14 @@ namespace CAS.UI.UICAAControls.Audit
         
         public void UpdateRecords(Extation record)
         {
-            var control = new ExtationControl(record);
+            var control = new ExtationControl(record, _audit);
             control.Deleted += Control_Deleted;
             flowLayoutPanel1.Controls.Remove(linkLabel1);
             flowLayoutPanel1.Controls.Add(control);
             flowLayoutPanel1.Controls.Add(linkLabel1);
         }
         
+
         private void Control_Deleted(object sender, EventArgs e)
         {
             var control = sender as ExtationControl;

@@ -112,9 +112,14 @@ namespace CAS.UI.UIControls.DocumentationControls
 		#endregion
 
 		//caa
-        public DocumentForm(Document doc, BaseEntityObject parent, int? operatorId) : this(doc, parent)
+        public DocumentForm(Document doc, BaseEntityObject parent, int? operatorId) : this()
         {
             _operatorId = operatorId;
+            _currentDocument = doc;
+            _parent = parent;
+
+            _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
+            _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
         }
 
 		#endregion
@@ -192,7 +197,7 @@ namespace CAS.UI.UIControls.DocumentationControls
                     parentDocs = GlobalObjects
 						.CaaEnvironment
                         .NewLoader
-                        .GetObjectListAll<DocumentDTO, SmartCore.Entities.General.Document>(new Filter("CorrectorId", FilterType.Equal, GlobalObjects.CaaEnvironment.IdentityUser.ItemId), true).ToList();
+                        .GetObjectListAll<DocumentDTO, Document>(new Filter("CorrectorId", FilterType.Equal, GlobalObjects.CaaEnvironment.IdentityUser.ItemId), true).ToList();
 				}
 
                 var links = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ItemFileLinkDTO, ItemFileLink>(new List<Filter>()
