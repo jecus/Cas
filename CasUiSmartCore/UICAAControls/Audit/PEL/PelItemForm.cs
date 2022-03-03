@@ -165,6 +165,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
                         }
                     };
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
+                    rec.CheckList = item;
                     _updateChecks.Add(rec);
                     _addedChecks.Remove(item);
                 }
