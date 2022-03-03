@@ -71,7 +71,16 @@ namespace CAA.API.Infrastructure.Jobs
                     
                         foreach (var revision in nextRevisions)
                             revision.Status = (byte)EditionRevisionStatus.Current;
-                    
+                        
+                        
+                        var revisions = await context.CheckListRevisionDtos
+                            .Where(i => !i.IsDeleted
+                                        && i.Type ==  (byte)RevisionType.Revision).ToListAsync();
+
+                        foreach (var revision in revisions)
+                            revision.Status = (byte)EditionRevisionStatus.Previous;
+
+
                         await context.SaveChangesAsync();
                     }
                 }

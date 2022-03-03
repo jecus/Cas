@@ -47,7 +47,7 @@ namespace CAA.API.Infrastructure.Jobs
                     if (!currentRevisions.Any(i => i.Status == (byte)EditionRevisionStatus.Temporary))
                     {
                         var now = DateTime.Now;
-                        var tomorrow = now.AddDays(1);
+                        var tomorrow = now.AddDays(1).AddMinutes(5);
                         var durationUntilMidnight = tomorrow.Date - now;
                         Thread.Sleep(durationUntilMidnight);
                     }
@@ -275,7 +275,7 @@ namespace CAA.API.Infrastructure.Jobs
                     if (!currentRevisions.Any(i => i.Status == (byte)EditionRevisionStatus.Temporary))
                     {
                         var now = DateTime.Now;
-                        var tomorrow = now.AddDays(1);
+                        var tomorrow = now.AddDays(1).AddMinutes(5);;
                         var durationUntilMidnight = tomorrow.Date - now;
                         Thread.Sleep(durationUntilMidnight);
                     }
