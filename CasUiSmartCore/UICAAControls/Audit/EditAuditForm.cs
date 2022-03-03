@@ -75,7 +75,7 @@ namespace CAS.UI.UICAAControls.Audit
             comboBoxOperator.Items.Clear();
             comboBoxOperator.Items.AddRange(_operators.ToArray());
             comboBoxOperator.Items.Add(AllOperators.Unknown);
-            comboBoxOperator.SelectedItem = _operators.FirstOrDefault(i => i.ItemId == _audit.OperatorId) ?? _operators.FirstOrDefault();
+            comboBoxOperator.SelectedItem = _operators.FirstOrDefault(i => i.ItemId == _audit.OperatorId) ?? AllOperators.Unknown;
             metroTextBoxAuditNumber.Text = _audit.AuditNumber;
             
             
