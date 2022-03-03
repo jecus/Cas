@@ -82,6 +82,8 @@ namespace CAS.UI.UICAAControls.Audit
             comboBoxOperator.SelectedItem = _operators.FirstOrDefault(i => i.ItemId == _audit.OperatorId) ?? _operators.FirstOrDefault();
             metroTextBoxAuditNumber.Text = _audit.AuditNumber;
             textBoxRemarks.Text = _audit.Settings.Remark;
+            dateTimePickerFrom.Value = _audit.Settings.From;
+            dateTimePickerTo.Value = _audit.Settings.To;
         }
 
         private void ApplyChanges()
@@ -89,6 +91,8 @@ namespace CAS.UI.UICAAControls.Audit
             _audit.OperatorId = ((AllOperators) comboBoxOperator.SelectedItem).ItemId;
             _audit.AuditNumber =  metroTextBoxAuditNumber.Text;
             _audit.Settings.Remark = textBoxRemarks.Text;
+            _audit.Settings.From = dateTimePickerFrom.Value;
+            _audit.Settings.To = dateTimePickerTo.Value;
         }
 
         private void Save()

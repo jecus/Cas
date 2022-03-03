@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
@@ -92,6 +93,8 @@ namespace SmartCore.CAA.Audit
         public CAAAuditSettings()
         {
             WorkflowStageId = -1;
+            From = DateTime.Today;
+            To = DateTime.Today;
         }
 
         [JsonProperty("Status")]
@@ -180,6 +183,39 @@ namespace SmartCore.CAA.Audit
         [JsonProperty("KMH")]
         public decimal KMH { get; set; }
 
+        [JsonIgnore]
+        private DateTime _from;
+        /// <summary>
+        /// Дата публикации рабочего пакета 
+        /// </summary>
+        [JsonProperty("From")]
+        public DateTime From
+        {
+            get => _from < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _from;
+            set
+            {
+                var min = DateTimeExtend.GetCASMinDateTime();
+                if (_from < min || _from != value)
+                    _from = value < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : value;
+            }
+        }
+        
+        [JsonIgnore]
+        private DateTime _to;
+        /// <summary>
+        /// Дата публикации рабочего пакета 
+        /// </summary>
+        [JsonProperty("To")]
+        public DateTime To
+        {
+            get => _to < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _to;
+            set
+            {
+                var min = DateTimeExtend.GetCASMinDateTime();
+                if (_to < min || _to != value)
+                    _to = value < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : value;
+            }
+        }
 
     }
 

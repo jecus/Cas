@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            MetroFramework.Controls.MetroLabel metroLabel2;
-            MetroFramework.Controls.MetroLabel metroLabel6;
-            MetroFramework.Controls.MetroLabel label14;
+            MetroFramework.Controls.MetroLabel labelValidFrom;
+            MetroFramework.Controls.MetroLabel metroLabel1;
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.label14 = new MetroFramework.Controls.MetroLabel();
             this.metroTextBoxAuditNumber = new MetroFramework.Controls.MetroTextBox();
             this.comboBoxOperator = new System.Windows.Forms.ComboBox();
             this.textBoxRemarks = new MetroFramework.Controls.MetroTextBox();
@@ -40,43 +42,44 @@
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
             this._toroutineAuditListView = new CAS.UI.UICAAControls.RoutineAudit.RoutineAuditListView();
-            metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            metroLabel6 = new MetroFramework.Controls.MetroLabel();
-            label14 = new MetroFramework.Controls.MetroLabel();
+            this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
+            labelValidFrom = new MetroFramework.Controls.MetroLabel();
+            metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // metroLabel2
             // 
-            metroLabel2.AutoSize = true;
-            metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel2.Location = new System.Drawing.Point(1120, 64);
-            metroLabel2.Name = "metroLabel2";
-            metroLabel2.Size = new System.Drawing.Size(65, 19);
-            metroLabel2.TabIndex = 82;
-            metroLabel2.Text = "Audit No:";
-            metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.metroLabel2.Location = new System.Drawing.Point(1120, 64);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(65, 19);
+            this.metroLabel2.TabIndex = 82;
+            this.metroLabel2.Text = "Audit No:";
+            this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // metroLabel6
             // 
-            metroLabel6.AutoSize = true;
-            metroLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel6.Location = new System.Drawing.Point(1120, 90);
-            metroLabel6.Name = "metroLabel6";
-            metroLabel6.Size = new System.Drawing.Size(123, 19);
-            metroLabel6.TabIndex = 263;
-            metroLabel6.Text = "Operator/Provider:";
-            metroLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.metroLabel6.AutoSize = true;
+            this.metroLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.metroLabel6.Location = new System.Drawing.Point(1120, 90);
+            this.metroLabel6.Name = "metroLabel6";
+            this.metroLabel6.Size = new System.Drawing.Size(123, 19);
+            this.metroLabel6.TabIndex = 263;
+            this.metroLabel6.Text = "Operator/Provider:";
+            this.metroLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label14
             // 
-            label14.AutoSize = true;
-            label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label14.Location = new System.Drawing.Point(1121, 119);
-            label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(57, 19);
-            label14.TabIndex = 268;
-            label14.Text = "Remark:";
-            label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label14.AutoSize = true;
+            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.label14.Location = new System.Drawing.Point(1121, 119);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(57, 19);
+            this.label14.TabIndex = 268;
+            this.label14.Text = "Remark:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // metroTextBoxAuditNumber
             // 
@@ -248,6 +251,47 @@
             this._toroutineAuditListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._toroutineAuditListView.Size = new System.Drawing.Size(1091, 295);
             this._toroutineAuditListView.TabIndex = 344;
+            // labelValidFrom
+            // 
+            labelValidFrom.AutoSize = true;
+            labelValidFrom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            labelValidFrom.Location = new System.Drawing.Point(1121, 171);
+            labelValidFrom.Name = "labelValidFrom";
+            labelValidFrom.Size = new System.Drawing.Size(44, 19);
+            labelValidFrom.TabIndex = 346;
+            labelValidFrom.Text = "From:";
+            labelValidFrom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dateTimePickerFrom
+            // 
+            this.dateTimePickerFrom.CalendarForeColor = System.Drawing.Color.DimGray;
+            this.dateTimePickerFrom.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.dateTimePickerFrom.Location = new System.Drawing.Point(1247, 168);
+            this.dateTimePickerFrom.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
+            this.dateTimePickerFrom.Name = "dateTimePickerFrom";
+            this.dateTimePickerFrom.Size = new System.Drawing.Size(250, 22);
+            this.dateTimePickerFrom.TabIndex = 345;
+            // 
+            // metroLabel1
+            // 
+            metroLabel1.AutoSize = true;
+            metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            metroLabel1.Location = new System.Drawing.Point(1121, 199);
+            metroLabel1.Name = "metroLabel1";
+            metroLabel1.Size = new System.Drawing.Size(25, 19);
+            metroLabel1.TabIndex = 348;
+            metroLabel1.Text = "To:";
+            metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dateTimePickerTo
+            // 
+            this.dateTimePickerTo.CalendarForeColor = System.Drawing.Color.DimGray;
+            this.dateTimePickerTo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.dateTimePickerTo.Location = new System.Drawing.Point(1247, 196);
+            this.dateTimePickerTo.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
+            this.dateTimePickerTo.Name = "dateTimePickerTo";
+            this.dateTimePickerTo.Size = new System.Drawing.Size(250, 22);
+            this.dateTimePickerTo.TabIndex = 347;
             // 
             // AuditForm
             // 
@@ -255,20 +299,24 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1501, 730);
             this.Controls.Add(this._toroutineAuditListView);
+            this.Controls.Add(metroLabel1);
+            this.Controls.Add(this.dateTimePickerTo);
+            this.Controls.Add(labelValidFrom);
+            this.Controls.Add(this.dateTimePickerFrom);
             this.Controls.Add(this.ButtonDelete);
             this.Controls.Add(this.ButtonAdd);
             this.Controls.Add(this._fromroutineAuditListView);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.textBoxRemarks);
-            this.Controls.Add(label14);
-            this.Controls.Add(metroLabel6);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.metroLabel6);
             this.Controls.Add(this.comboBoxOperator);
             this.Controls.Add(this.metroTextBoxAuditNumber);
-            this.Controls.Add(metroLabel2);
+            this.Controls.Add(this.metroLabel2);
+            this.MaximizeBox = false;
             this.Name = "AuditForm";
             this.Resizable = false;
-            this.MaximizeBox = false;
             this.Text = "AuditForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AuditForm_FormClosing);
             this.ResumeLayout(false);
@@ -286,5 +334,10 @@
         private AvControls.AvButtonT.AvButtonT ButtonDelete;
         private AvControls.AvButtonT.AvButtonT ButtonAdd;
         private CAS.UI.UICAAControls.RoutineAudit.RoutineAuditListView _toroutineAuditListView;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroLabel metroLabel6;
+        private MetroFramework.Controls.MetroLabel label14;
+        private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
+        private System.Windows.Forms.DateTimePicker dateTimePickerTo;
     }
 }
