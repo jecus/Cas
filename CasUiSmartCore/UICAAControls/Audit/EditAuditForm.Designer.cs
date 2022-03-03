@@ -435,7 +435,6 @@ namespace CAS.UI.UICAAControls.Audit
             // dateTimePickerTo
             // 
             this.dateTimePickerTo.CalendarForeColor = System.Drawing.Color.DimGray;
-            this.dateTimePickerTo.Enabled = false;
             this.dateTimePickerTo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.dateTimePickerTo.Location = new System.Drawing.Point(148, 385);
             this.dateTimePickerTo.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
@@ -457,7 +456,6 @@ namespace CAS.UI.UICAAControls.Audit
             // dateTimePickerFrom
             // 
             this.dateTimePickerFrom.CalendarForeColor = System.Drawing.Color.DimGray;
-            this.dateTimePickerFrom.Enabled = false;
             this.dateTimePickerFrom.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.dateTimePickerFrom.Location = new System.Drawing.Point(148, 357);
             this.dateTimePickerFrom.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
