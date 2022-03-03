@@ -95,6 +95,7 @@ namespace SmartCore.CAA.Audit
             WorkflowStageId = -1;
             From = DateTime.Today;
             To = DateTime.Today;
+            Extations = new List<Extation>();
         }
 
         [JsonProperty("Status")]
@@ -102,6 +103,9 @@ namespace SmartCore.CAA.Audit
 
         [JsonProperty("WorkflowStageId")]
         public int WorkflowStageId { get; set; }
+        
+        [JsonProperty("Extations")]
+        public List<Extation> Extations{ get; set; }
 
 
         #region public DateTime CreateDate { get; set; }
@@ -217,6 +221,16 @@ namespace SmartCore.CAA.Audit
             }
         }
 
+    }
+
+    [Serializable]
+    public class Extation
+    {
+        [JsonProperty("Remark")]
+        public string Remark { get; set; }
+        
+        [JsonProperty("ExtationString")]
+        public string ExtationString { get; set; }
     }
 
 }

@@ -59,6 +59,8 @@ namespace CAS.UI.UICAAControls.Audit
             this.comboBoxWorkFlow = new System.Windows.Forms.ComboBox();
             this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             metroLabel2 = new MetroFramework.Controls.MetroLabel();
             metroLabel6 = new MetroFramework.Controls.MetroLabel();
             metroLabel1 = new MetroFramework.Controls.MetroLabel();
@@ -73,6 +75,7 @@ namespace CAS.UI.UICAAControls.Audit
             metroLabel5 = new MetroFramework.Controls.MetroLabel();
             metroLabel7 = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroLabel2
@@ -196,6 +199,28 @@ namespace CAS.UI.UICAAControls.Audit
             metroLabel4.Text = "Workflow Stage:";
             metroLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // metroLabel5
+            // 
+            metroLabel5.AutoSize = true;
+            metroLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            metroLabel5.Location = new System.Drawing.Point(22, 388);
+            metroLabel5.Name = "metroLabel5";
+            metroLabel5.Size = new System.Drawing.Size(25, 19);
+            metroLabel5.TabIndex = 362;
+            metroLabel5.Text = "To:";
+            metroLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // metroLabel7
+            // 
+            metroLabel7.AutoSize = true;
+            metroLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            metroLabel7.Location = new System.Drawing.Point(22, 360);
+            metroLabel7.Name = "metroLabel7";
+            metroLabel7.Size = new System.Drawing.Size(44, 19);
+            metroLabel7.TabIndex = 360;
+            metroLabel7.Text = "From:";
+            metroLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // metroTextBoxAuditNumber
             // 
             // 
@@ -243,7 +268,7 @@ namespace CAS.UI.UICAAControls.Audit
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(261, 436);
+            this.buttonOk.Location = new System.Drawing.Point(586, 436);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 340;
@@ -256,7 +281,7 @@ namespace CAS.UI.UICAAControls.Audit
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonCancel.Location = new System.Drawing.Point(342, 436);
+            this.buttonCancel.Location = new System.Drawing.Point(667, 436);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 33);
             this.buttonCancel.TabIndex = 339;
@@ -272,7 +297,6 @@ namespace CAS.UI.UICAAControls.Audit
             this.comboBoxStatus.Name = "comboBoxStatus";
             this.comboBoxStatus.Size = new System.Drawing.Size(250, 22);
             this.comboBoxStatus.TabIndex = 342;
-            this.comboBoxStatus.SelectedIndexChanged += new System.EventHandler(this.comboBoxStatus_SelectedIndexChanged);
             // 
             // numericUpDown1
             // 
@@ -421,17 +445,6 @@ namespace CAS.UI.UICAAControls.Audit
             this.comboBoxWorkFlow.Size = new System.Drawing.Size(250, 22);
             this.comboBoxWorkFlow.TabIndex = 358;
             // 
-            // metroLabel5
-            // 
-            metroLabel5.AutoSize = true;
-            metroLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel5.Location = new System.Drawing.Point(22, 388);
-            metroLabel5.Name = "metroLabel5";
-            metroLabel5.Size = new System.Drawing.Size(25, 19);
-            metroLabel5.TabIndex = 362;
-            metroLabel5.Text = "To:";
-            metroLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // dateTimePickerTo
             // 
             this.dateTimePickerTo.CalendarForeColor = System.Drawing.Color.DimGray;
@@ -441,17 +454,6 @@ namespace CAS.UI.UICAAControls.Audit
             this.dateTimePickerTo.Name = "dateTimePickerTo";
             this.dateTimePickerTo.Size = new System.Drawing.Size(250, 22);
             this.dateTimePickerTo.TabIndex = 361;
-            // 
-            // metroLabel7
-            // 
-            metroLabel7.AutoSize = true;
-            metroLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel7.Location = new System.Drawing.Point(22, 360);
-            metroLabel7.Name = "metroLabel7";
-            metroLabel7.Size = new System.Drawing.Size(44, 19);
-            metroLabel7.TabIndex = 360;
-            metroLabel7.Text = "From:";
-            metroLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // dateTimePickerFrom
             // 
@@ -463,11 +465,35 @@ namespace CAS.UI.UICAAControls.Audit
             this.dateTimePickerFrom.Size = new System.Drawing.Size(250, 22);
             this.dateTimePickerFrom.TabIndex = 359;
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.linkLabel1.Location = new System.Drawing.Point(3, 0);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.linkLabel1.Size = new System.Drawing.Size(36, 17);
+            this.linkLabel1.TabIndex = 0;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Add";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Controls.Add(this.linkLabel1);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(406, 54);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(330, 376);
+            this.flowLayoutPanel1.TabIndex = 363;
+            // 
             // EditAuditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(424, 481);
+            this.ClientSize = new System.Drawing.Size(749, 481);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(metroLabel5);
             this.Controls.Add(this.dateTimePickerTo);
             this.Controls.Add(metroLabel7);
@@ -502,9 +528,14 @@ namespace CAS.UI.UICAAControls.Audit
             this.Text = "Edit AuditForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AuditForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 
         private System.Windows.Forms.DateTimePicker dateTimePickerTo;
         private System.Windows.Forms.DateTimePicker dateTimePickerFrom;

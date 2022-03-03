@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
+using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Entity.Abstractions.Filters;
@@ -76,6 +77,10 @@ namespace CAS.UI.UICAAControls.Audit
             comboBoxOperator.Items.Add(AllOperators.Unknown);
             comboBoxOperator.SelectedItem = _operators.FirstOrDefault(i => i.ItemId == _audit.OperatorId) ?? _operators.FirstOrDefault();
             metroTextBoxAuditNumber.Text = _audit.AuditNumber;
+            
+            
+            foreach (var rec in _audit.Settings.Extations)
+                UpdateRecords(rec);
         }
 
         private void ApplyChanges()
@@ -106,6 +111,13 @@ namespace CAS.UI.UICAAControls.Audit
                     _audit.Settings.ClosedId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
                 }
                 
+            }
+            
+            _audit.Settings.Extations.Clear();
+            foreach (var control in flowLayoutPanel1.Controls.OfType<ExtationControl>())
+            {
+                control.ApplyChanges();
+                _audit.Settings.Extations.Add(control.Record);
             }
 
         }
@@ -143,10 +155,27 @@ namespace CAS.UI.UICAAControls.Audit
         {
             DialogResult = DialogResult.OK;
         }
-
-        private void comboBoxStatus_SelectedIndexChanged(object sender, EventArgs e)
+        
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            
+            UpdateRecords(new Extation());
+        }
+        
+        public void UpdateRecords(Extation record)
+        {
+            var control = new ExtationControl(record);
+            control.Deleted += Control_Deleted;
+            flowLayoutPanel1.Controls.Remove(linkLabel1);
+            flowLayoutPanel1.Controls.Add(control);
+            flowLayoutPanel1.Controls.Add(linkLabel1);
+        }
+        
+        private void Control_Deleted(object sender, EventArgs e)
+        {
+            var control = sender as ExtationControl;
+            flowLayoutPanel1.Controls.Remove(control);
+            control.Deleted -= Control_Deleted;
+            control.Dispose();
         }
     }
 }
