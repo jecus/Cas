@@ -961,7 +961,8 @@ namespace CAS.UI.UIControls.NewGrid
 				try
 				{
 					FillDisplayerRequestedParams(e);
-					DisplayerRequested(this, e);
+					if(!e.Cancel)
+						DisplayerRequested(this, e);
 				}
 				catch (Exception ex)
 				{

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CAS.UI.Interfaces;
 using CAS.UI.UIControls.NewGrid;
 using SmartCore.CAA.PEL;
 
@@ -68,7 +69,12 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 
 			return subItems;
 		}
-		
+
+
+		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		{
+			e.Cancel = true;
+		}
 
 		#endregion
 	}

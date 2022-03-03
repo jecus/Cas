@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
@@ -32,7 +33,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 			// SortDirection = SortDirection.Desc;
 			// EnableCustomSorting = true;
 			//
-			// this.radGridView1.MasterTemplate.GroupComparer = new GroupComparer();
+			//this.radGridView1.MasterTemplate.GroupComparer = new GroupComparer();
 		}
 		
 
@@ -101,6 +102,11 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 			};
 
 			return subItems;
+		}
+		
+		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		{
+			e.Cancel = true;
 		}
 		
 
