@@ -164,6 +164,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.avButtonT1.TextMain = "Add Personel";
             this.avButtonT1.TextSecondary = "";
             this.avButtonT1.ToolTipText = "";
+            this.avButtonT1.Click += new System.EventHandler(this.avButtonT1_Click);
             // 
             // PelItemForm
             // 
@@ -179,7 +180,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.MaximizeBox = false;
             this.Name = "PelItemForm";
             this.Resizable = false;
-            this.Text = "CheckList Revision Form";
+            this.Text = "Audit Management Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CheckListRevisionForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

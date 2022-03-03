@@ -192,9 +192,8 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         {
             DialogResult = DialogResult.OK;
         }
-
         
-        private void AvButtonT1OnClick(object sender, EventArgs e)
+        private void avButtonT1_Click(object sender, EventArgs e)
         {
             var listSpec = new CommonCollection<Specialist>();
             foreach (var s in specialists)
