@@ -26,14 +26,14 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 		public AuditPelRecordListView()
 		{
 			InitializeComponent();
-			// ColumnIndexes = new List<string>()
-			// {
-			// 	"Section №", "Part №","SubPart №","Item №"
-			// };
-			// SortDirection = SortDirection.Desc;
-			// EnableCustomSorting = true;
-			//
-			//this.radGridView1.MasterTemplate.GroupComparer = new GroupComparer();
+			ColumnIndexes = new List<string>()
+			{
+				"Section №", "Part №","SubPart №","Item №"
+			};
+			SortDirection = SortDirection.Desc;
+			EnableCustomSorting = true;
+
+			this.radGridView1.MasterTemplate.GroupComparer = new GroupComparer();
 		}
 		
 

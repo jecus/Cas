@@ -174,11 +174,26 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
             var yy = y.GetItems().FirstOrDefault()?.Tag;
 
 			if (xx != null && yy != null)
-            {
-                var xxx = xx as CheckLists;
-                var yyy = yy as CheckLists;
+			{
+				CheckLists xxx = null;
+				CheckLists yyy = null;
+				
+	            if (xx is CheckLists)
+		            xxx = xx as CheckLists;
+	            if (yy is CheckLists)
+		            yyy = yy as CheckLists;
+	        
+	        
+	            if (xx is AuditPelRecord)
+		            xxx = (xx as AuditPelRecord).CheckList;
+	            if (yy is AuditPelRecord)
+		            yyy = (yy as AuditPelRecord).CheckList;
+	            
+	            
+	            if (xx == null || y is null)
+		            return 0;
 
-                var xParts = xxx.Group;
+	            var xParts = xxx.Group;
                 var yParts = yyy.Group;
 
                 var partsLength = Math.Max(xParts.Length, yParts.Length);
