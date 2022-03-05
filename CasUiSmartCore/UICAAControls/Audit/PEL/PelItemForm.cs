@@ -94,22 +94,37 @@ namespace CAS.UI.UICAAControls.Audit.PEL
                     continue;
 
                 rec.CheckList = item;
-                rec.Specialist = specialists.FirstOrDefault(i => i.ItemId == rec.SpecialistId) ?? Specialist.Unknown;
+                rec.Auditor = specialists.FirstOrDefault(i => i.ItemId == rec.AuditorId) ?? Specialist.Unknown;
+                rec.Auditee = specialists.FirstOrDefault(i => i.ItemId == rec.AuditeeId) ?? Specialist.Unknown;
                 _addedChecks.Remove(item);
                 _updateChecks.Add(rec);
             }
 
 
-            foreach (var check in _updateChecks.GroupBy(i => i.SpecialistId))
+            foreach (var check in _updateChecks.GroupBy(i => i.AuditorId))
             {
                 var s = check.FirstOrDefault();
                 var spec = new PelSpecialist()
                 {
-                    ItemId = s.SpecialistId,
-                    FirstName = s.Specialist.FirstName,
-                    LastName = s.Specialist.LastName,
-                    Specialization = s.Specialist.Specialization,
-                    Operator = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(o => o.ItemId == s.Specialist.OperatorId) ?? AllOperators.Unknown
+                    ItemId = s.AuditorId,
+                    FirstName = s.Auditor.FirstName,
+                    LastName = s.Auditor.LastName,
+                    Specialization = s.Auditor.Specialization,
+                    Operator = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(o => o.ItemId == s.Auditor.OperatorId) ?? AllOperators.Unknown
+                };
+                pelSpec.Add(spec);
+            }
+            
+            foreach (var check in _updateChecks.GroupBy(i => i.AuditeeId))
+            {
+                var s = check.FirstOrDefault();
+                var spec = new PelSpecialist()
+                {
+                    ItemId = s.AuditeeId,
+                    FirstName = s.Auditee.FirstName,
+                    LastName = s.Auditee.LastName,
+                    Specialization = s.Auditee.Specialization,
+                    Operator = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(o => o.ItemId == s.Auditee.OperatorId) ?? AllOperators.Unknown
                 };
                 pelSpec.Add(spec);
             }
@@ -118,12 +133,14 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 
         private void UpdateInformation()
         {
-            comboBoxPersonel.Items.Clear();
-            comboBoxPersonel.Items.AddRange(pelSpec.ToArray());
+            comboBoxAuditor.Items.Clear();
+            comboBoxAuditor.Items.AddRange(pelSpec.Where(i => i.Operator == AllOperators.Unknown).ToArray());
+            
+            comboBoxAuditee.Items.Clear();
+            comboBoxAuditee.Items.AddRange(pelSpec.Where(i => i.Operator != AllOperators.Unknown).ToArray());
 
 
             _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
-
             _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
         }
 
@@ -141,7 +158,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         }
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            if (comboBoxPersonel.SelectedItem == null)
+            if (comboBoxAuditor.SelectedItem == null|| comboBoxAuditee.SelectedItem == null)
             {
                 MessageBox.Show("Please select staff!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -149,7 +166,8 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             
             if (_fromcheckRevisionListView.SelectedItems.Count > 0)
             {
-                var spec = comboBoxPersonel.SelectedItem as PelSpecialist;
+                var auditor = comboBoxAuditor.SelectedItem as PelSpecialist;
+                var auditee = comboBoxAuditee.SelectedItem as PelSpecialist;
                 
                 foreach (var item in _fromcheckRevisionListView.SelectedItems.ToArray())
                 {
@@ -157,15 +175,20 @@ namespace CAS.UI.UICAAControls.Audit.PEL
                     {
                         AuditRecordId = _auditId,
                         CheckListId = item.ItemId,
-                        SpecialistId = spec.ItemId,
+                        AuditorId = auditor.ItemId,
+                        AuditeeId = auditee.ItemId,
                         Settings = new AuditPelRecordSettings()
                         {
-                            RoleId = spec.Role.ItemId,
-                            PELResponsibilitiesId = spec.PELResponsibilities.ItemId,
+                            AuditorRoleId = auditor.Role.ItemId,
+                            AuditorPELResponsibilitiesId = auditor.PELResponsibilities.ItemId,
+                            AuditeeRoleId = auditee.Role.ItemId,
+                            AuditeePELResponsibilitiesId = auditee.PELResponsibilities.ItemId,
                         }
                     };
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
                     rec.CheckList = item;
+                    rec.Auditor = specialists.FirstOrDefault(i => i.ItemId == auditor.ItemId);
+                    rec.Auditee = specialists.FirstOrDefault(i => i.ItemId == auditee.ItemId);;
                     _updateChecks.Add(rec);
                     _addedChecks.Remove(item);
                 }
@@ -199,9 +222,9 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             var listSpec = new CommonCollection<Specialist>();
             foreach (var s in specialists)
             {
-                if(pelSpec.Any(i => i.ItemId == s.ItemId))
+                if (pelSpec.Any(i => i.ItemId == s.ItemId))
                     continue;
-                
+
                 listSpec.Add(s);
             }
             
@@ -209,11 +232,21 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             if (form.ShowDialog() == DialogResult.OK)
             {
                 Focus();
-                comboBoxPersonel.Items.Clear();
-                comboBoxPersonel.Items.AddRange(pelSpec.ToArray());
-                comboBoxPersonel.Items.AddRange(form.PelSpecialists);
-                if(comboBoxPersonel.Items.Count > 0)
-                    comboBoxPersonel.SelectedIndex = 0;
+                
+                comboBoxAuditor.Items.Clear();
+                comboBoxAuditor.Items.AddRange(pelSpec.Where(i => i.Operator == AllOperators.Unknown).ToArray());
+                comboBoxAuditor.Items.AddRange(form.PelSpecialists.Where(i => i.Operator == AllOperators.Unknown).ToArray());
+                
+                comboBoxAuditee.Items.Clear();
+                comboBoxAuditee.Items.AddRange(pelSpec.Where(i => i.Operator != AllOperators.Unknown).ToArray());
+                comboBoxAuditee.Items.AddRange(form.PelSpecialists.Where(i => i.Operator != AllOperators.Unknown).ToArray());
+                
+                
+                if(comboBoxAuditor.Items.Count > 0)
+                    comboBoxAuditor.SelectedIndex = 0;
+                
+                if(comboBoxAuditee.Items.Count > 0)
+                    comboBoxAuditee.SelectedIndex = 0;
             }
         }
     }

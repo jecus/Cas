@@ -23,7 +23,9 @@ namespace SmartCore.CAA.PEL
         
         public int CheckListId { get; set; }
         
-        public int SpecialistId { get; set; }
+        public int AuditorId { get; set; }
+        
+        public int AuditeeId { get; set; }
         
         public string SettingsJSON
         {
@@ -42,7 +44,8 @@ namespace SmartCore.CAA.PEL
         
         public AuditPelRecordSettings Settings { get; set; }
         public CheckLists CheckList { get; set; }
-        public Specialist Specialist { get; set; }
+        public Specialist Auditor { get; set; }
+        public Specialist Auditee { get; set; }
 
         public AuditPelRecord()
         {
@@ -53,11 +56,14 @@ namespace SmartCore.CAA.PEL
     [Serializable]
     public class AuditPelRecordSettings
     {
-        [JsonProperty("RoleId")]
-        public int RoleId { get; set; }
+        [JsonProperty("AuditorRoleId")]
+        public int AuditorRoleId { get; set; }
+        [JsonProperty("AuditorPELId")]
+        public int AuditorPELResponsibilitiesId { get; set; }
         
-        [JsonProperty("PELResponsibilitiesId")]
-        public int PELResponsibilitiesId { get; set; }
-        
+        [JsonProperty("AuditeeRoleId")]
+        public int AuditeeRoleId { get; set; }
+        [JsonProperty("AuditeePELId")]
+        public int AuditeePELResponsibilitiesId { get; set; }
     }
 }

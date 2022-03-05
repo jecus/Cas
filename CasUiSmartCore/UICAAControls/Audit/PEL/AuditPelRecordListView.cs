@@ -46,9 +46,10 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 		protected override void GroupingItems()
 		{
 			this.radGridView1.GroupDescriptors.Clear();
-			var descriptorGroup = new GroupDescriptor();
-			descriptorGroup.GroupNames.Add("Personnel",  ListSortDirection.Ascending);
-			this.radGridView1.GroupDescriptors.Add(descriptorGroup);
+			// var descriptorGroup = new GroupDescriptor();
+			// foreach (var colName in new List<string>{ "Auditor, Auditee" })
+			// 	descriptorGroup.GroupNames.Add(colName,  ListSortDirection.Ascending);
+			// this.radGridView1.GroupDescriptors.Add(descriptorGroup);
 			
 			var descriptor = new GroupDescriptor();
 			foreach (var colName in new List<string>{ "Section №" , "Section Name" , "Part №" , "Part Name", "SubPart №","SubPart Name" })
@@ -74,7 +75,8 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 			AddColumn("Item Name", (int)(radGridView1.Width * 0.5f));
 			AddColumn("Requirement", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Source", (int)(radGridView1.Width * 0.3f));
-			AddColumn("Personnel", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Auditor", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Auditee", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -96,7 +98,8 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 				CreateRow(item.CheckList.Settings.ItemtName, item.CheckList.Settings.ItemtName),
 				CreateRow(item.CheckList.Settings.Requirement, item.CheckList.Settings.Requirement),
 				CreateRow(item.CheckList.Source, item.CheckList.Source),
-				CreateRow($"{item.Specialist.FirstName} {item.Specialist.LastName}", item.Specialist),
+				CreateRow($"{item.Auditor.FirstName} {item.Auditor.LastName}", item.Auditor),
+				CreateRow($"{item.Auditee.FirstName} {item.Auditee.LastName}", item.Auditee),
 
 				CreateRow(author, author)
 			};
@@ -133,10 +136,10 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 		
 		protected override void GroupingItems()
 		{
-			this.radGridView1.GroupDescriptors.Clear();
-			var descriptorGroup = new GroupDescriptor();
-			descriptorGroup.GroupNames.Add("Personnel",  ListSortDirection.Ascending);
-			this.radGridView1.GroupDescriptors.Add(descriptorGroup);
+			// this.radGridView1.GroupDescriptors.Clear();
+			// var descriptorGroup = new GroupDescriptor();
+			// descriptorGroup.GroupNames.Add("Personnel",  ListSortDirection.Ascending);
+			// this.radGridView1.GroupDescriptors.Add(descriptorGroup);
 		}
 
 		#region protected override void SetHeaders()
@@ -151,7 +154,8 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 			AddColumn("Standard", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Standard Ref", (int)(radGridView1.Width * 0.24f));
 			AddColumn("PDF Code", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Personnel", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Auditor", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Auditee", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -169,7 +173,8 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 				CreateRow(item.CheckList.SettingsSafa.Standard, item.CheckList.SettingsSafa.Standard),
 				CreateRow(item.CheckList.SettingsSafa.StandardRef, item.CheckList.SettingsSafa.StandardRef),
 				CreateRow(item.CheckList.SettingsSafa.PdfCode, item.CheckList.SettingsSafa.PdfCode),
-				CreateRow($"{item.Specialist.FirstName} {item.Specialist.LastName}", item.Specialist),
+				CreateRow($"{item.Auditor.FirstName} {item.Auditor.LastName}", item.Auditor),
+				CreateRow($"{item.Auditee.FirstName} {item.Auditee.LastName}", item.Auditee),
 				CreateRow(author, author)
 			};
 
@@ -200,10 +205,10 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 		
 		protected override void GroupingItems()
 		{
-			this.radGridView1.GroupDescriptors.Clear();
-			var descriptorGroup = new GroupDescriptor();
-			descriptorGroup.GroupNames.Add("Personnel",  ListSortDirection.Ascending);
-			this.radGridView1.GroupDescriptors.Add(descriptorGroup);
+			// this.radGridView1.GroupDescriptors.Clear();
+			// var descriptorGroup = new GroupDescriptor();
+			// descriptorGroup.GroupNames.Add("Personnel",  ListSortDirection.Ascending);
+			// this.radGridView1.GroupDescriptors.Add(descriptorGroup);
 		}
 
 		#region protected override void SetHeaders()
@@ -222,7 +227,8 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 			AddColumn("Item Name", (int)(radGridView1.Width * 0.5f));
 			AddColumn("Standard or Recommended Practice", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Level", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Personnel", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Auditor", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Auditee", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -244,7 +250,8 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 				CreateRow(item.CheckList.SettingsIcao.ItemtName, item.CheckList.SettingsIcao.ItemtName),
 				CreateRow(item.CheckList.SettingsIcao.Standard, item.CheckList.SettingsIcao.Standard),
 				CreateRow(item.CheckList.Level.ToString(), item.CheckList.Level),
-				CreateRow($"{item.Specialist.FirstName} {item.Specialist.LastName}", item.Specialist),
+				CreateRow($"{item.Auditor.FirstName} {item.Auditor.LastName}", item.Auditor),
+				CreateRow($"{item.Auditee.FirstName} {item.Auditee.LastName}", item.Auditee),
 				CreateRow(author, author)
 			};
 

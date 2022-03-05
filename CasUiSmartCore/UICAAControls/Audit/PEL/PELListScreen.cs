@@ -88,7 +88,8 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 
             if (records.Any())
             {
-	            var ids = records.Select(i => i.SpecialistId).Distinct();
+	            var ids = records.Select(i => i.AuditorId).Distinct().ToList();
+	            ids.AddRange(records.Select(i => i.AuditeeId).Distinct());
 	            var specialists = GlobalObjects.CaaEnvironment.NewLoader
 		            .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("ItemId", ids),
 			            loadChild: true);
@@ -96,7 +97,8 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 	            foreach (var rec in records)
 	            {
 		            rec.CheckList = _checks.FirstOrDefault(i => i.ItemId == rec.CheckListId);;
-		            rec.Specialist = specialists.FirstOrDefault(i => i.ItemId == rec.SpecialistId) ?? Specialist.Unknown;
+		            rec.Auditor = specialists.FirstOrDefault(i => i.ItemId == rec.AuditorId) ?? Specialist.Unknown;
+		            rec.Auditee = specialists.FirstOrDefault(i => i.ItemId == rec.AuditeeId) ?? Specialist.Unknown;
 	            }
             }
             

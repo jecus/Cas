@@ -1600,7 +1600,8 @@ namespace SmartCore.DtoHelper
 		        CorrectorId = recordDto.CorrectorId,
 		        Updated = recordDto.Updated,
 		        CheckListId = recordDto.CheckListId,
-		        SpecialistId = recordDto.SpecialistId,
+		        AuditeeId = recordDto.AuditeeId,
+		        AuditorId = recordDto.AuditorId,
 		        AuditRecordId = recordDto.AuditRecordId,
 		        SettingsJSON = recordDto.SettingsJSON,
 
@@ -1616,7 +1617,8 @@ namespace SmartCore.DtoHelper
 		        CorrectorId = recordDto.CorrectorId,
 		        Updated = recordDto.Updated,
 		        CheckListId = recordDto.CheckListId,
-		        SpecialistId = recordDto.SpecialistId,
+		        AuditeeId = recordDto.AuditeeId,
+		        AuditorId = recordDto.AuditorId,
 		        AuditRecordId = recordDto.AuditRecordId,
 		        SettingsJSON = recordDto.SettingsJSON,
 

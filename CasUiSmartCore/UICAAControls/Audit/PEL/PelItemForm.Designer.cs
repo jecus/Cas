@@ -36,8 +36,10 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
-            this.comboBoxPersonel = new System.Windows.Forms.ComboBox();
+            this.comboBoxAuditor = new System.Windows.Forms.ComboBox();
             this.avButtonT1 = new AvControls.AvButtonT.AvButtonT();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.comboBoxAuditee = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -67,9 +69,9 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.metroLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.metroLabel6.Location = new System.Drawing.Point(9, 388);
             this.metroLabel6.Name = "metroLabel6";
-            this.metroLabel6.Size = new System.Drawing.Size(61, 19);
+            this.metroLabel6.Size = new System.Drawing.Size(57, 19);
             this.metroLabel6.TabIndex = 334;
-            this.metroLabel6.Text = "Personel:";
+            this.metroLabel6.Text = "Auditor:";
             this.metroLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ButtonAdd
@@ -128,15 +130,15 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.ButtonDelete.ToolTipText = "";
             this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
-            // comboBoxPersonel
+            // comboBoxAuditor
             // 
-            this.comboBoxPersonel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.comboBoxPersonel.ForeColor = System.Drawing.Color.DimGray;
-            this.comboBoxPersonel.FormattingEnabled = true;
-            this.comboBoxPersonel.Location = new System.Drawing.Point(76, 388);
-            this.comboBoxPersonel.Name = "comboBoxPersonel";
-            this.comboBoxPersonel.Size = new System.Drawing.Size(578, 22);
-            this.comboBoxPersonel.TabIndex = 333;
+            this.comboBoxAuditor.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxAuditor.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxAuditor.FormattingEnabled = true;
+            this.comboBoxAuditor.Location = new System.Drawing.Point(76, 388);
+            this.comboBoxAuditor.Name = "comboBoxAuditor";
+            this.comboBoxAuditor.Size = new System.Drawing.Size(328, 22);
+            this.comboBoxAuditor.TabIndex = 333;
             // 
             // avButtonT1
             // 
@@ -150,7 +152,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.avButtonT1.Icon = global::CAS.UI.Properties.Resources.AddUser;
             this.avButtonT1.IconLayout = System.Windows.Forms.ImageLayout.Center;
             this.avButtonT1.IconNotEnabled = null;
-            this.avButtonT1.Location = new System.Drawing.Point(694, 377);
+            this.avButtonT1.Location = new System.Drawing.Point(817, 377);
             this.avButtonT1.Margin = new System.Windows.Forms.Padding(4);
             this.avButtonT1.Name = "avButtonT1";
             this.avButtonT1.NormalBackgroundImage = null;
@@ -166,14 +168,37 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.avButtonT1.ToolTipText = "";
             this.avButtonT1.Click += new System.EventHandler(this.avButtonT1_Click);
             // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.metroLabel1.Location = new System.Drawing.Point(415, 388);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(57, 19);
+            this.metroLabel1.TabIndex = 337;
+            this.metroLabel1.Text = "Auditee:";
+            this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // comboBoxAuditee
+            // 
+            this.comboBoxAuditee.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxAuditee.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxAuditee.FormattingEnabled = true;
+            this.comboBoxAuditee.Location = new System.Drawing.Point(482, 388);
+            this.comboBoxAuditee.Name = "comboBoxAuditee";
+            this.comboBoxAuditee.Size = new System.Drawing.Size(328, 22);
+            this.comboBoxAuditee.TabIndex = 336;
+            // 
             // PelItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1440, 840);
+            this.Controls.Add(this.metroLabel1);
+            this.Controls.Add(this.comboBoxAuditee);
             this.Controls.Add(this.avButtonT1);
             this.Controls.Add(this.metroLabel6);
-            this.Controls.Add(this.comboBoxPersonel);
+            this.Controls.Add(this.comboBoxAuditor);
             this.Controls.Add(this.ButtonDelete);
             this.Controls.Add(this.ButtonAdd);
             this.Controls.Add(this.buttonOk);
@@ -186,10 +211,13 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.PerformLayout();
         }
 
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private System.Windows.Forms.ComboBox comboBoxAuditee;
+
         private AvControls.AvButtonT.AvButtonT avButtonT1;
 
         private MetroFramework.Controls.MetroLabel metroLabel6;
-        private System.Windows.Forms.ComboBox comboBoxPersonel;
+        private System.Windows.Forms.ComboBox comboBoxAuditor;
 
 
         #endregion

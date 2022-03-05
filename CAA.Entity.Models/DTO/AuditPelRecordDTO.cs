@@ -15,8 +15,11 @@ namespace CAA.Entity.Models.DTO
         [Column("CheckListId")]
         public int CheckListId { get; set; }
         
-        [Column("SpecialistId")]
-        public int SpecialistId { get; set; }
+        [Column("AuditorId")]
+        public int AuditorId { get; set; }
+        
+        [Column("AuditeeId")]
+        public int AuditeeId { get; set; }
         
         [Column("SettingsJSON")]
         public string SettingsJSON { get; set; }
