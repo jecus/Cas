@@ -9,6 +9,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
+using SmartCore.CAA;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.PEL;
 using SmartCore.Entities.Collections;
@@ -88,17 +89,24 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 
             if (records.Any())
             {
-	            var ids = records.Select(i => i.AuditorId).Distinct().ToList();
-	            ids.AddRange(records.Select(i => i.AuditeeId).Distinct());
+	            var pelSpec = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<PelSpecialistDTO, PelSpecialist>(new Filter("AuditId", _auditId));
+
+	            var ids = pelSpec.Select(i => i.SpecialistId);
 	            var specialists = GlobalObjects.CaaEnvironment.NewLoader
 		            .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("ItemId", ids),
 			            loadChild: true);
+	            
+	            foreach (var specialist in specialists)
+		            specialist.Operator = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(i => i.ItemId == specialist.OperatorId) ?? AllOperators.Unknown;
+            
+	            foreach (var pel in pelSpec)
+		            pel.Specialist = specialists.FirstOrDefault(i => i.ItemId == pel.SpecialistId);
             
 	            foreach (var rec in records)
 	            {
 		            rec.CheckList = _checks.FirstOrDefault(i => i.ItemId == rec.CheckListId);;
-		            rec.Auditor = specialists.FirstOrDefault(i => i.ItemId == rec.AuditorId) ?? Specialist.Unknown;
-		            rec.Auditee = specialists.FirstOrDefault(i => i.ItemId == rec.AuditeeId) ?? Specialist.Unknown;
+		            rec.Auditor = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditorId)?.Specialist ?? Specialist.Unknown;
+		            rec.Auditee = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditeeId)?.Specialist ?? Specialist.Unknown;
 	            }
             }
             
