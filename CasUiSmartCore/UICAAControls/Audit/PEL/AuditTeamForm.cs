@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -8,7 +7,6 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
-using SmartCore.CAA;
 using SmartCore.CAA.PEL;
 using SmartCore.CAA.RoutineAudits;
 using SmartCore.Entities.Collections;
@@ -21,12 +19,9 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         private readonly int _auditId;
         private readonly CommonCollection<Specialist> _specialists;
         
-        
         private CommonCollection<PelSpecialist> _addedChecks = new CommonCollection<PelSpecialist>();
         private CommonCollection<PelSpecialist> _updateChecks = new CommonCollection<PelSpecialist>();
-        
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
-        
         
         public AuditTeamForm(CommonCollection<Specialist> specialists, int auditId) 
         {
@@ -44,7 +39,6 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         {
             UpdateInformation();
         }
-
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
             _updateChecks.Clear();
@@ -53,7 +47,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             foreach (var rec in _updateChecks)
                 rec.Specialist = _specialists.FirstOrDefault(i => i.ItemId == rec.SpecialistId);
 
-            var ids = _updateChecks.Select(i => i.ItemId);
+            var ids = _updateChecks.Select(i => i.SpecialistId);
 
             if (ids.Any())
             {
@@ -77,7 +71,6 @@ namespace CAS.UI.UICAAControls.Audit.PEL
            
             
         }
-
         private void UpdateInformation()
         {
             comboBoxRoles.Items.Clear();

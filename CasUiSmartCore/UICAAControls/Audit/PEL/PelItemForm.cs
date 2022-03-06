@@ -20,8 +20,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
     public partial class PelItemForm : MetroForm
     {
         private readonly int _auditId;
-        private readonly int _operatorId;
-        
+
         private CommonCollection<CheckLists> _addedChecks = new CommonCollection<CheckLists>();
         private CommonCollection<AuditPelRecord> _updateChecks = new CommonCollection<AuditPelRecord>();
         private CommonCollection<Specialist> specialists = new CommonCollection<Specialist>();
@@ -32,7 +31,6 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         {
             InitializeComponent();
             _auditId = auditId;
-            _operatorId = operatorId;
             _addedChecks.AddRange(initialDocumentArray.ToArray());
             
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
@@ -81,20 +79,21 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         {
             pelSpec.Clear();
             specialists.Clear();
-            var records = GlobalObjects.CaaEnvironment.NewLoader
-                 .GetObjectListAll<AuditPelRecordDTO, AuditPelRecord>(new Filter("AuditId", _auditId));
-
+            
+            var records = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<AuditPelRecordDTO, AuditPelRecord>(new Filter("AuditId", _auditId));
             var audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_auditId);
             
-            
-            specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-                .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", new []{audit.OperatorId, -1}),
-                    loadChild: true));
+            specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", new []{audit.OperatorId, -1}), loadChild: true));
 
+            pelSpec.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<PelSpecialistDTO, PelSpecialist>(new Filter("AuditId", _auditId)));
+            
             foreach (var specialist in specialists)
                 specialist.Operator = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(i => i.ItemId == specialist.OperatorId) ?? AllOperators.Unknown;
+            
+            foreach (var pel in pelSpec)
+                pel.Specialist = specialists.FirstOrDefault(i => i.ItemId == pel.SpecialistId);
 
-
+            
             foreach (var rec in records)
             {
                 var item = _addedChecks.FirstOrDefault(i => i.ItemId == rec.CheckListId);
@@ -102,55 +101,24 @@ namespace CAS.UI.UICAAControls.Audit.PEL
                     continue;
 
                 rec.CheckList = item;
-                rec.Auditor = specialists.FirstOrDefault(i => i.ItemId == rec.AuditorId) ?? Specialist.Unknown;
-                rec.Auditee = specialists.FirstOrDefault(i => i.ItemId == rec.AuditeeId) ?? Specialist.Unknown;
+                rec.Auditor = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditorId)?.Specialist ?? Specialist.Unknown;
+                rec.Auditee = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditeeId)?.Specialist ?? Specialist.Unknown;
                 _addedChecks.Remove(item);
                 _updateChecks.Add(rec);
             }
-
-
-            foreach (var check in _updateChecks.GroupBy(i => i.AuditorId))
-            {
-                var s = check.FirstOrDefault();
-                var spec = new PelSpecialist()
-                {
-                    ItemId = s.AuditorId,
-                    // FirstName = s.Auditor.FirstName,
-                    // LastName = s.Auditor.LastName,
-                    // Specialization = s.Auditor.Specialization,
-                    // Operator = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(o => o.ItemId == s.Auditor.OperatorId) ?? AllOperators.Unknown
-                };
-                pelSpec.Add(spec);
-            }
-            
-            foreach (var check in _updateChecks.GroupBy(i => i.AuditeeId))
-            {
-                var s = check.FirstOrDefault();
-                var spec = new PelSpecialist()
-                {
-                    ItemId = s.AuditeeId,
-                    // FirstName = s.Auditee.FirstName,
-                    // LastName = s.Auditee.LastName,
-                    // Specialization = s.Auditee.Specialization,
-                    // Operator = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(o => o.ItemId == s.Auditee.OperatorId) ?? AllOperators.Unknown
-                };
-                pelSpec.Add(spec);
-            }
-            
         }
 
         private void UpdateInformation()
         {
             comboBoxAuditor.Items.Clear();
-            //comboBoxAuditor.Items.AddRange(pelSpec.Where(i => i.Operator == AllOperators.Unknown).ToArray());
+            comboBoxAuditor.Items.AddRange(pelSpec.Where(i => i.Specialist.Operator == AllOperators.Unknown).ToArray());
             
             comboBoxAuditee.Items.Clear();
-            //comboBoxAuditee.Items.AddRange(pelSpec.Where(i => i.Operator != AllOperators.Unknown).ToArray());
+            comboBoxAuditee.Items.AddRange(pelSpec.Where(i => i.Specialist.Operator != AllOperators.Unknown).ToArray());
             
             _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
             _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
         }
-
         private void buttonOk_Click(object sender, EventArgs e)
         {
             try
@@ -228,7 +196,11 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         {
             var form = new AuditTeamForm(specialists, _auditId);
             if (form.ShowDialog() == DialogResult.OK)
+            {
+                Focus();
                 _animatedThreadWorker.RunWorkerAsync();
+                Focus();
+            }
         }
     }
 }
