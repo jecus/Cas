@@ -82,6 +82,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             _currentCheck =
                 GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListDTO, CheckLists>(_currentCheck.ItemId);
+            
+            _currentCheck.EditionNumber = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListRevisionDTO, CheckListRevision>(_currentCheck.EditionId)?.Number.ToString() ?? "";
+            if(_currentCheck.RevisionId.HasValue)
+                _currentCheck.RevisionNumber = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListRevisionDTO, CheckListRevision>(_currentCheck.RevisionId.Value)?.Number.ToString() ?? "";
+            
             _currentAuditCheck =
                 GlobalObjects.CaaEnvironment.NewLoader.GetObject<AuditCheckDTO, AuditCheck>(new List<Filter>()
                 {
@@ -138,7 +143,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private void UpdateInformation()
         {
             labelSourceText.Text = _currentCheck.Source;
-            labelEditorText.Text = _currentCheck.EditionNumber?.ToString() ?? ""
+            labelEditorText.Text = _currentCheck.EditionNumber?.ToString() ?? "";
             labelRevisionText.Text = _currentCheck.RevisionNumber?.ToString() ?? "";
             labelLevelText.Text = _currentCheck.Level.ToString();
 
