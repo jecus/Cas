@@ -80,7 +80,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         {
             pelSpec.Clear();
             var records = GlobalObjects.CaaEnvironment.NewLoader
-                 .GetObjectListAll<AuditPelRecordDTO, AuditPelRecord>(new Filter("AuditRecordId", _auditId));
+                 .GetObjectListAll<AuditPelRecordDTO, AuditPelRecord>(new Filter("AuditId", _auditId));
 
             specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
                 .GetObjectListAll<CAASpecialistDTO, Specialist>(

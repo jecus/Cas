@@ -84,7 +84,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             AnimatedThreadWorker.ReportProgress(0, "load");
             
             var records = GlobalObjects.CaaEnvironment.NewLoader
-	            .GetObjectListAll<AuditPelRecordDTO, AuditPelRecord>(new Filter("AuditRecordId", _auditId));
+	            .GetObjectListAll<AuditPelRecordDTO, AuditPelRecord>(new Filter("AuditId", _auditId));
 
             if (records.Any())
             {
