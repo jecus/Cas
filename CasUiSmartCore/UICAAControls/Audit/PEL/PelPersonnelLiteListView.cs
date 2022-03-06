@@ -8,19 +8,13 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 	///<summary>
 	/// список для отображения сотрудников
 	///</summary>
-	public partial class PelPersonnelListView : BaseGridViewControl<PelSpecialist>
+	public partial class PelPersonnelLiteListView : BaseGridViewControl<PelSpecialist>
 	{
-
-		///<summary>
-		///</summary>
-		public PelPersonnelListView()
+		public PelPersonnelLiteListView()
 		{
 			InitializeComponent();
-			SortDirection = SortDirection.Asc;
-			OldColumnIndex = 0;
 		}
-
-
+		
 		#region Methods
 
 		protected override void GroupingItems()
@@ -37,9 +31,6 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 			AddColumn("First Name", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Last Name", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Occupation", (int)(radGridView1.Width * 0.4f));
-			AddColumn("Roles", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Responsibilities", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Position", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Operator", (int)(radGridView1.Width * 0.24f));
 		}
 		#endregion
@@ -52,9 +43,6 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 				CreateRow(item.Specialist.FirstName, item.Specialist.FirstName),
 				CreateRow(item.Specialist.LastName, item.Specialist.LastName),
 				CreateRow(item.Specialist.Specialization.ToString(), item.Specialist.Specialization),
-				CreateRow(item.Role.ToString(), item.Role),
-				CreateRow(item.PELResponsibilities.ToString(), item.PELResponsibilities),
-				CreateRow(item.PELPosition.ToString(), item.PELPosition),
 				CreateRow(item.Specialist.Operator.ToString(), item.Specialist.Operator),
 			};
 

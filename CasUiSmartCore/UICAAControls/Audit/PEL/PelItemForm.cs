@@ -80,6 +80,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
             pelSpec.Clear();
+            specialists.Clear();
             var records = GlobalObjects.CaaEnvironment.NewLoader
                  .GetObjectListAll<AuditPelRecordDTO, AuditPelRecord>(new Filter("AuditId", _auditId));
 
@@ -87,10 +88,13 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             
             
             specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-                .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId",audit.OperatorId),
+                .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", new []{audit.OperatorId, -1}),
                     loadChild: true));
-            
-            
+
+            foreach (var specialist in specialists)
+                specialist.Operator = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(i => i.ItemId == specialist.OperatorId) ?? AllOperators.Unknown;
+
+
             foreach (var rec in records)
             {
                 var item = _addedChecks.FirstOrDefault(i => i.ItemId == rec.CheckListId);
@@ -111,10 +115,10 @@ namespace CAS.UI.UICAAControls.Audit.PEL
                 var spec = new PelSpecialist()
                 {
                     ItemId = s.AuditorId,
-                    FirstName = s.Auditor.FirstName,
-                    LastName = s.Auditor.LastName,
-                    Specialization = s.Auditor.Specialization,
-                    Operator = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(o => o.ItemId == s.Auditor.OperatorId) ?? AllOperators.Unknown
+                    // FirstName = s.Auditor.FirstName,
+                    // LastName = s.Auditor.LastName,
+                    // Specialization = s.Auditor.Specialization,
+                    // Operator = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(o => o.ItemId == s.Auditor.OperatorId) ?? AllOperators.Unknown
                 };
                 pelSpec.Add(spec);
             }
@@ -125,10 +129,10 @@ namespace CAS.UI.UICAAControls.Audit.PEL
                 var spec = new PelSpecialist()
                 {
                     ItemId = s.AuditeeId,
-                    FirstName = s.Auditee.FirstName,
-                    LastName = s.Auditee.LastName,
-                    Specialization = s.Auditee.Specialization,
-                    Operator = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(o => o.ItemId == s.Auditee.OperatorId) ?? AllOperators.Unknown
+                    // FirstName = s.Auditee.FirstName,
+                    // LastName = s.Auditee.LastName,
+                    // Specialization = s.Auditee.Specialization,
+                    // Operator = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(o => o.ItemId == s.Auditee.OperatorId) ?? AllOperators.Unknown
                 };
                 pelSpec.Add(spec);
             }
@@ -138,12 +142,11 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         private void UpdateInformation()
         {
             comboBoxAuditor.Items.Clear();
-            comboBoxAuditor.Items.AddRange(pelSpec.Where(i => i.Operator == AllOperators.Unknown).ToArray());
+            //comboBoxAuditor.Items.AddRange(pelSpec.Where(i => i.Operator == AllOperators.Unknown).ToArray());
             
             comboBoxAuditee.Items.Clear();
-            comboBoxAuditee.Items.AddRange(pelSpec.Where(i => i.Operator != AllOperators.Unknown).ToArray());
-
-
+            //comboBoxAuditee.Items.AddRange(pelSpec.Where(i => i.Operator != AllOperators.Unknown).ToArray());
+            
             _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
             _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
         }
@@ -185,8 +188,9 @@ namespace CAS.UI.UICAAControls.Audit.PEL
                         {
                             AuditorRoleId = auditor.Role.ItemId,
                             AuditorPELResponsibilitiesId = auditor.PELResponsibilities.ItemId,
+                            AuditorPELPosition = auditor.PELPosition.ItemId,
                             AuditeeRoleId = auditee.Role.ItemId,
-                            AuditeePELResponsibilitiesId = auditee.PELResponsibilities.ItemId,
+                            AuditeePELPosition = auditee.PELPosition.ItemId,
                         }
                     };
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
@@ -220,38 +224,11 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         {
             DialogResult = DialogResult.OK;
         }
-        
         private void avButtonT1_Click(object sender, EventArgs e)
         {
-            var listSpec = new CommonCollection<Specialist>();
-            foreach (var s in specialists)
-            {
-                if (pelSpec.Any(i => i.ItemId == s.ItemId))
-                    continue;
-
-                listSpec.Add(s);
-            }
-            
-            var form = new AuditTeamForm(_operatorId,listSpec);
+            var form = new AuditTeamForm(specialists, _auditId);
             if (form.ShowDialog() == DialogResult.OK)
-            {
-                Focus();
-                
-                comboBoxAuditor.Items.Clear();
-                comboBoxAuditor.Items.AddRange(pelSpec.Where(i => i.Operator == AllOperators.Unknown).ToArray());
-                comboBoxAuditor.Items.AddRange(form.PelSpecialists.Where(i => i.Operator == AllOperators.Unknown).ToArray());
-                
-                comboBoxAuditee.Items.Clear();
-                comboBoxAuditee.Items.AddRange(pelSpec.Where(i => i.Operator != AllOperators.Unknown).ToArray());
-                comboBoxAuditee.Items.AddRange(form.PelSpecialists.Where(i => i.Operator != AllOperators.Unknown).ToArray());
-                
-                
-                if(comboBoxAuditor.Items.Count > 0)
-                    comboBoxAuditor.SelectedIndex = 0;
-                
-                if(comboBoxAuditee.Items.Count > 0)
-                    comboBoxAuditee.SelectedIndex = 0;
-            }
+                _animatedThreadWorker.RunWorkerAsync();
         }
     }
 }

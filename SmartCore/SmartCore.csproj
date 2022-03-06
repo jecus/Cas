@@ -426,6 +426,7 @@
     <Compile Include="CAA\Operators\SpecialOperations.cs" />
     <Compile Include="CAA\Operators\TypesOfOperations.cs" />
     <Compile Include="CAA\PEL\AuditPelRecord.cs" />
+    <Compile Include="CAA\PEL\PELPosition.cs" />
     <Compile Include="CAA\PEL\PELResponsibilities.cs" />
     <Compile Include="CAA\PEL\PelSpecialist.cs" />
     <Compile Include="CAA\PEL\PELRole.cs" />

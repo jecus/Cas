@@ -6,38 +6,34 @@ namespace SmartCore.CAA.PEL
 {
     
     [Serializable]
-    public class PELRole : StaticDictionary
+    public class PELPosition : StaticDictionary
     {
-        #region public static CommonDictionaryCollection<PELRole> _Items = new CommonDictionaryCollection<PELRole>();
+        #region public static CommonDictionaryCollection<PELPosition> _Items = new CommonDictionaryCollection<PELPosition>();
         /// <summary>
         /// Содержит все элементы
         /// </summary>
-        private static CommonDictionaryCollection<PELRole> _Items = new CommonDictionaryCollection<PELRole>();
+        private static CommonDictionaryCollection<PELPosition> _Items = new CommonDictionaryCollection<PELPosition>();
         #endregion
-        
-        public static PELRole KeyGroupManager = new PELRole(1, "Key Group Manager", "Key Group Manager", "");
-        public static PELRole Expert = new PELRole(2, "Expert", "Expert", "");
-        public static PELRole KeyExpert = new PELRole(3, "SKey Expert", "Key Expert", "");
-        public static PELRole Inspector = new PELRole(4, "Inspector", "Inspector", "");
-        public static PELRole Advisor = new PELRole(5, "Advisor", "Advisor", "");
-        public static PELRole TechnicalAdvisor = new PELRole(6, "Technical Advisor", "Technical Advisor", "");
-        public static PELRole SpecialAdvisor = new PELRole(7, "Special Advisor", "Special Advisor", "");
-        public static PELRole Associate = new PELRole(8, "Associate", "Associate", "");
-        public static PELRole Unknown = new PELRole(-1, "N/A", "Unknown", "N/A");
+
+        public static PELPosition GroupManager = new PELPosition(1, "Group Manager", "Group Manager", "");
+        public static PELPosition ProjectDirector = new PELPosition(2, "Project Director", "Project Director", "");
+        public static PELPosition ProjectManager = new PELPosition(3, "ProjectManager", "ProjectManager", "");
+        public static PELPosition LeaderTeam = new PELPosition(4, "Leader Team", "Leader Team", "");
+        public static PELPosition Unknown = new PELPosition(-1, "N/A", "N/A", "N/A");
 
         /*
          * Методы
          */
 
-        #region public static PELRole GetItemById(Int32 DirectiveTypeId)
+        #region public static PELPosition GetItemById(Int32 DirectiveTypeId)
         /// <summary>
         /// Возвращает тип диерктивы по его Id
         /// </summary>
         /// <param name="directiveTypeId"></param>
         /// <returns></returns>
-        public static PELRole GetItemById(int directiveTypeId)
+        public static PELPosition GetItemById(int directiveTypeId)
         {
-            foreach (PELRole t in _Items)
+            foreach (PELPosition t in _Items)
                 if (t.ItemId == directiveTypeId)
                     return t;
             //
@@ -46,11 +42,11 @@ namespace SmartCore.CAA.PEL
 
         #endregion
 
-        #region static public CommonDictionaryCollection<PELRole> Items
+        #region static public CommonDictionaryCollection<PELPosition> Items
         /// <summary>
         /// Возвращает список  элементов коллекции
         /// </summary>
-        public static CommonDictionaryCollection<PELRole> Items
+        public static CommonDictionaryCollection<PELPosition> Items
         {
             get
             {
@@ -77,16 +73,16 @@ namespace SmartCore.CAA.PEL
         /*
          * Реализация
          */
-        #region public PELRole()
+        #region public PELPosition()
         /// <summary>
         /// Конструктор создает объект типа директивы
         /// </summary>
-        public PELRole()
+        public PELPosition()
         {
         }
         #endregion
 
-        #region public PELRole(Int32 ItemId, String shortName, String fullName, String commonName)
+        #region public PELPosition(Int32 ItemId, String shortName, String fullName, String commonName)
         /// <summary>
         /// Конструктор создает объект типа директивы
         /// </summary>
@@ -94,7 +90,7 @@ namespace SmartCore.CAA.PEL
         /// <param name="shortName"></param>
         /// <param name="fullName"></param>
         /// <param name="commonName"></param>
-        public PELRole(Int32 itemID, String shortName, String fullName, String commonName)
+        public PELPosition(Int32 itemID, String shortName, String fullName, String commonName)
         {
             ItemId = itemID;
             ShortName = shortName;

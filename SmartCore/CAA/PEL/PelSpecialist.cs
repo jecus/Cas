@@ -1,21 +1,22 @@
-﻿using SmartCore.CAA.RoutineAudits;
-using SmartCore.Entities.Dictionaries;
+﻿using System;
+using CAA.Entity.Models.DTO;
+using Newtonsoft.Json;
+using SmartCore.CAA.RoutineAudits;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Personnel;
 
 namespace SmartCore.CAA.PEL
 {
+    [CAADto(typeof(PelSpecialistDTO))]
+    [Condition("IsDeleted", "0")]
+    [Serializable]
     public class PelSpecialist : BaseEntityObject
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public int AuditId { get; set; }
+        public int SpecialistId { get; set; }
         
-        
-        private Specialization _specialization;
-        public Specialization Specialization
-        {
-            get { return _specialization ?? Specialization.Unknown; }
-            set { _specialization = value; }
-        }
+        public Specialist Specialist { get; set; }
         
         private PELRole _role;
         public PELRole Role
@@ -30,26 +31,51 @@ namespace SmartCore.CAA.PEL
             get { return _responsibilities ?? PELResponsibilities.Unknown; }
             set { _responsibilities = value; }
         }
-
         
-        private static PelSpecialist _unknown;
-
-        public static PelSpecialist Unknown
+        
+        private PELPosition _position;
+        public PELPosition PELPosition
+        {
+            get { return _position ?? PELPosition.Unknown; }
+            set { _position = value; }
+        }
+        
+        public string SettingsJSON
         {
             get
             {
-                return _unknown ?? (_unknown = new PelSpecialist
-                {
-                    FirstName = "Unknown",
-                });
+                if (Settings == null)
+                    return null;
+
+                return JsonConvert.SerializeObject(Settings,
+                    Formatting.Indented,
+                    new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
             }
+
+            set => Settings = string.IsNullOrWhiteSpace(value) ? new PelSpecialistSettings() : JsonConvert.DeserializeObject<PelSpecialistSettings>(value);
         }
 
-        public AllOperators Operator { get; set; }
+        public PelSpecialistSettings Settings { get; set; }
 
+
+        public PelSpecialist()
+        {
+            Settings = new PelSpecialistSettings();
+        }
+        
         public override string ToString()
         {
-            return $"{FirstName} {LastName} / {Role} / {PELResponsibilities}";
+            return $"{Specialist.FirstName} {Specialist.LastName} / {Role} / {PELResponsibilities} / {PELPosition}";
+        }
+    }
+
+
+    [Serializable]
+    public class PelSpecialistSettings
+    {
+        public PelSpecialistSettings()
+        {
+            
         }
     }
 }

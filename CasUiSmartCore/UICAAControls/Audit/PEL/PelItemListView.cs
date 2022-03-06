@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA.Check;
-using SmartCore.CAA.PEL;
 using Telerik.WinControls.Data;
 
 namespace CAS.UI.UICAAControls.Audit.PEL

@@ -36,7 +36,7 @@ namespace SmartCore.CAA.RoutineAudits
         public static PELResponsibilities CGM = new PELResponsibilities(6, "Cargo and Mail Handling (CGM).", "Cargo and Mail Handling (CGM).", "", ProgramType.ISAGO);
         
         
-        public static PELResponsibilities Unknown = new PELResponsibilities(-1, "Unknown", "Unknown", "Unknown", ProgramType.Unknown);
+        public static PELResponsibilities Unknown = new PELResponsibilities(-1, "N/A", "N/A", "N/A", ProgramType.Unknown);
 
         /*
          * Методы

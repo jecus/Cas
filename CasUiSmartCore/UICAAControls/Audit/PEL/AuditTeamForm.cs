@@ -18,24 +18,23 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 {
     public partial class AuditTeamForm : MetroForm
     {
-        private readonly int _operatorId;
+        private readonly int _auditId;
         private readonly CommonCollection<Specialist> _specialists;
-
-        public PelSpecialist[] PelSpecialists => _updateChecks.OrderBy(i => i.FirstName).ThenBy(i => i.LastName).ToArray();
-
+        
+        
         private CommonCollection<PelSpecialist> _addedChecks = new CommonCollection<PelSpecialist>();
         private CommonCollection<PelSpecialist> _updateChecks = new CommonCollection<PelSpecialist>();
         
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
-
-        public AuditTeamForm(int operatorId, CommonCollection<Specialist> specialists)
+        
+        
+        public AuditTeamForm(CommonCollection<Specialist> specialists, int auditId) 
         {
-            _operatorId = operatorId;
-            _specialists = specialists;
+            
             InitializeComponent();
             
-
-           
+            _specialists = specialists;
+            _auditId = auditId;
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
             _animatedThreadWorker.RunWorkerAsync();
@@ -48,30 +47,34 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
-            // specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-            //     .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", -1),
-            //         loadChild: true));
-            // if (_operatorId >  -1)
-            // {
-            //     specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-            //         .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", _operatorId),
-            //             loadChild: true));
-            // }
+            _updateChecks.Clear();
+            _updateChecks.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<PelSpecialistDTO, PelSpecialist>(new Filter("AuditId", _auditId)));
 
-            _addedChecks.AddRange(_specialists.Select(i => new PelSpecialist()
+            foreach (var rec in _updateChecks)
+                rec.Specialist = _specialists.FirstOrDefault(i => i.ItemId == rec.SpecialistId);
+
+            var ids = _updateChecks.Select(i => i.ItemId);
+
+            if (ids.Any())
             {
-                ItemId = i.ItemId,
-                FirstName = i.FirstName,
-                LastName = i.LastName,
-                Specialization = i.Specialization,
-                Operator = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(o => o.ItemId == i.OperatorId) ?? AllOperators.Unknown
-            }));
-
-
-            foreach (var pelSpecialist in _updateChecks)
-            {
-                _addedChecks.Remove(pelSpecialist);
+                _addedChecks.AddRange(_specialists.Where(q => !ids.Contains(q.ItemId)).Select(i => new PelSpecialist
+                {
+                    SpecialistId = i.ItemId,
+                    Specialist = i,
+                    AuditId = _auditId
+                }));
             }
+            else
+            {
+                _addedChecks.AddRange(_specialists.Select(i => new PelSpecialist
+                {
+                    SpecialistId = i.ItemId,
+                    Specialist = i,
+                    AuditId = _auditId
+                }));
+            }
+            
+           
             
         }
 
@@ -84,6 +87,10 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             comboBoxResponsibilities.Items.Clear();
             comboBoxResponsibilities.Items.AddRange(PELResponsibilities.Items.ToArray());
             comboBoxResponsibilities.SelectedItem = PELResponsibilities.Unknown;
+            
+            comboBoxPosition.Items.Clear();
+            comboBoxPosition.Items.AddRange(PELPosition.Items.ToArray());
+            comboBoxPosition.SelectedItem = PELPosition.Unknown;
             
             _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
             _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
@@ -108,10 +115,17 @@ namespace CAS.UI.UICAAControls.Audit.PEL
                 {
                     item.Role = comboBoxRoles.SelectedItem as PELRole;
                     item.PELResponsibilities = comboBoxResponsibilities.SelectedItem as PELResponsibilities;
+                    item.PELPosition = comboBoxPosition.SelectedItem as PELPosition;
+
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(item);
                     
                     _updateChecks.Add(item);
                     _addedChecks.Remove(item);
                 }
+
+                comboBoxRoles.SelectedItem = PELRole.Unknown;
+                comboBoxResponsibilities.SelectedItem = PELResponsibilities.Unknown;
+                comboBoxPosition.SelectedItem = PELPosition.Unknown;
                 
                 _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
                 _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
@@ -125,6 +139,9 @@ namespace CAS.UI.UICAAControls.Audit.PEL
                 {
                     item.Role = PELRole.Unknown;
                     item.PELResponsibilities = PELResponsibilities.Unknown;
+                    item.PELPosition = PELPosition.Unknown;
+                    
+                    GlobalObjects.CaaEnvironment.NewKeeper.Delete(item);
                     
                     _updateChecks.Remove(item);
                     _addedChecks.Add(item);

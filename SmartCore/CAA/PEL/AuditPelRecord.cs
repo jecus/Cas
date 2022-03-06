@@ -65,5 +65,10 @@ namespace SmartCore.CAA.PEL
         public int AuditeeRoleId { get; set; }
         [JsonProperty("AuditeePELId")]
         public int AuditeePELResponsibilitiesId { get; set; }
+        [JsonProperty("AuditorPELPosition")]
+        public int AuditorPELPosition { get; set; }
+        
+        [JsonProperty("AuditeePELPosition")]
+        public int AuditeePELPosition { get; set; }
     }
 }

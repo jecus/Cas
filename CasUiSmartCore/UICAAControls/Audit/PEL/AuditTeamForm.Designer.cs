@@ -31,7 +31,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         {
             System.Windows.Forms.Label label3;
             this.buttonOk = new System.Windows.Forms.Button();
-            this._fromcheckRevisionListView = new CAS.UI.UICAAControls.Audit.PEL.PelPersonnelListView();
+            this._fromcheckRevisionListView = new CAS.UI.UICAAControls.Audit.PEL.PelPersonnelLiteListView();
             this._tocheckRevisionListView = new CAS.UI.UICAAControls.Audit.PEL.PelPersonnelListView();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
@@ -39,6 +39,8 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.comboBoxRoles = new System.Windows.Forms.ComboBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.comboBoxResponsibilities = new System.Windows.Forms.ComboBox();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.comboBoxPosition = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -64,9 +66,9 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             // 
             // _fromcheckRevisionListView
             // 
+            this._fromcheckRevisionListView.EnableCustomSorting = true;
             this._fromcheckRevisionListView.Location = new System.Drawing.Point(5, 53);
             this._fromcheckRevisionListView.Name = "_fromcheckRevisionListView";
-            this._fromcheckRevisionListView.PasteComplete = null;
             this._fromcheckRevisionListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._fromcheckRevisionListView.Size = new System.Drawing.Size(1419, 317);
             this._fromcheckRevisionListView.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Asc;
@@ -74,6 +76,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             // 
             // _tocheckRevisionListView
             // 
+            this._tocheckRevisionListView.EnableCustomSorting = true;
             this._tocheckRevisionListView.Location = new System.Drawing.Point(5, 417);
             this._tocheckRevisionListView.Name = "_tocheckRevisionListView";
             this._tocheckRevisionListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
@@ -179,11 +182,34 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.comboBoxResponsibilities.Size = new System.Drawing.Size(250, 22);
             this.comboBoxResponsibilities.TabIndex = 335;
             // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.metroLabel2.Location = new System.Drawing.Point(321, 385);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(57, 19);
+            this.metroLabel2.TabIndex = 338;
+            this.metroLabel2.Text = "Position:";
+            this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // comboBoxPosition
+            // 
+            this.comboBoxPosition.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxPosition.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxPosition.FormattingEnabled = true;
+            this.comboBoxPosition.Location = new System.Drawing.Point(384, 385);
+            this.comboBoxPosition.Name = "comboBoxPosition";
+            this.comboBoxPosition.Size = new System.Drawing.Size(250, 22);
+            this.comboBoxPosition.TabIndex = 337;
+            // 
             // AuditTeamForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1440, 840);
+            this.Controls.Add(this.metroLabel2);
+            this.Controls.Add(this.comboBoxPosition);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.comboBoxResponsibilities);
             this.Controls.Add(this.metroLabel6);
@@ -193,14 +219,17 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             this.Controls.Add(this._tocheckRevisionListView);
             this.Controls.Add(this._fromcheckRevisionListView);
             this.Controls.Add(this.buttonOk);
+            this.MaximizeBox = false;
             this.Name = "AuditTeamForm";
             this.Resizable = false;
-            this.MaximizeBox = false;
             this.Text = "CheckList Revision Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CheckListRevisionForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private System.Windows.Forms.ComboBox comboBoxPosition;
 
         private MetroFramework.Controls.MetroLabel metroLabel6;
         private System.Windows.Forms.ComboBox comboBoxRoles;
@@ -212,7 +241,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         System.Windows.Forms.Label label3;
 
         private System.Windows.Forms.Button buttonOk;
-        private CAS.UI.UICAAControls.Audit.PEL.PelPersonnelListView _fromcheckRevisionListView;
+        private CAS.UI.UICAAControls.Audit.PEL.PelPersonnelLiteListView _fromcheckRevisionListView;
         private CAS.UI.UICAAControls.Audit.PEL.PelPersonnelListView _tocheckRevisionListView;
         private AvControls.AvButtonT.AvButtonT ButtonAdd;
         private AvControls.AvButtonT.AvButtonT ButtonDelete;

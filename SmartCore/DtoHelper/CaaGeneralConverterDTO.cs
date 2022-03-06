@@ -1662,6 +1662,43 @@ namespace SmartCore.DtoHelper
 				PersonnelId = oper.PersonnelId
             };
         }
+		
+		
+		public static PelSpecialist ConvertCAA(this PelSpecialistDTO oper)
+		{
+			return new PelSpecialist
+			{
+				ItemId = oper.ItemId,
+				IsDeleted = oper.IsDeleted,
+				Updated = oper.Updated,
+				CorrectorId = oper.CorrectorId,
+				AuditId = oper.AuditId,
+				SettingsJSON = oper.SettingsJSON,
+				Role = PELRole.GetItemById(oper.RoleId),
+				PELResponsibilities = PELResponsibilities.GetItemById(oper.ResponsibilitiesId),
+				PELPosition = PELPosition.GetItemById(oper.PositionId),
+				SpecialistId = oper.SpecialistId
+			};
+		}
+
+
+		public static PelSpecialistDTO ConvertCAA(this PelSpecialist oper)
+		{
+			return new PelSpecialistDTO
+			{
+				ItemId = oper.ItemId,
+				IsDeleted = oper.IsDeleted,
+				Updated = oper.Updated,
+				CorrectorId = oper.CorrectorId,
+				SettingsJSON = oper.SettingsJSON,
+				AuditId = oper.AuditId,
+				PositionId = oper.PELPosition.ItemId,
+				ResponsibilitiesId = oper.PELResponsibilities.ItemId,
+				RoleId = oper.Role.ItemId,
+				SpecialistId = oper.SpecialistId
+			};
+		}
+		
 
         public static Operator ConvertCAA(this CAAOperatorDTO operdto)
         {
