@@ -9,6 +9,7 @@ using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA;
+using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.PEL;
 using SmartCore.Entities.Collections;
@@ -82,8 +83,11 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             var records = GlobalObjects.CaaEnvironment.NewLoader
                  .GetObjectListAll<AuditPelRecordDTO, AuditPelRecord>(new Filter("AuditId", _auditId));
 
+            var audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_auditId);
+            
+            
             specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-                .GetObjectListAll<CAASpecialistDTO, Specialist>(
+                .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId",audit.OperatorId),
                     loadChild: true));
             
             
