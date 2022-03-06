@@ -19,7 +19,7 @@ namespace SmartCore.CAA.PEL
     [Serializable]
     public class AuditPelRecord : BaseEntityObject, IAuditPelRecordFilterParams
     {
-        public int AuditRecordId { get; set; }
+        public int AuditId { get; set; }
         
         public int CheckListId { get; set; }
         

@@ -138,8 +138,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private void UpdateInformation()
         {
             labelSourceText.Text = _currentCheck.Source;
-            labelEditorText.Text = _currentCheck.EditionNumber.ToString();
-            labelRevisionText.Text = _currentCheck.RevisionNumber.ToString();
+            labelEditorText.Text = _currentCheck.EditionNumber?.ToString() ?? ""
+            labelRevisionText.Text = _currentCheck.RevisionNumber?.ToString() ?? "";
             labelLevelText.Text = _currentCheck.Level.ToString();
 
             metroTextBoxSection.Text = $"{_currentCheck.SectionNumber} {_currentCheck.SectionName}";

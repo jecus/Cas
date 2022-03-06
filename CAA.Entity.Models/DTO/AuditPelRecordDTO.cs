@@ -10,7 +10,7 @@ namespace CAA.Entity.Models.DTO
     public class AuditPelRecordDTO: BaseEntity
     {
         [Column("AuditRecordId")]
-        public int AuditRecordId { get; set; }
+        public int AuditId { get; set; }
         
         [Column("CheckListId")]
         public int CheckListId { get; set; }

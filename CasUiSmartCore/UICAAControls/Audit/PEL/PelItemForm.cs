@@ -173,7 +173,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
                 {
                     var rec = new AuditPelRecord()
                     {
-                        AuditRecordId = _auditId,
+                        AuditId = _auditId,
                         CheckListId = item.ItemId,
                         AuditorId = auditor.ItemId,
                         AuditeeId = auditee.ItemId,

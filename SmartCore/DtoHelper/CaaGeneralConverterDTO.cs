@@ -1602,7 +1602,7 @@ namespace SmartCore.DtoHelper
 		        CheckListId = recordDto.CheckListId,
 		        AuditeeId = recordDto.AuditeeId,
 		        AuditorId = recordDto.AuditorId,
-		        AuditRecordId = recordDto.AuditRecordId,
+		        AuditId = recordDto.AuditId,
 		        SettingsJSON = recordDto.SettingsJSON,
 
 	        };
@@ -1619,7 +1619,7 @@ namespace SmartCore.DtoHelper
 		        CheckListId = recordDto.CheckListId,
 		        AuditeeId = recordDto.AuditeeId,
 		        AuditorId = recordDto.AuditorId,
-		        AuditRecordId = recordDto.AuditRecordId,
+		        AuditId = recordDto.AuditId,
 		        SettingsJSON = recordDto.SettingsJSON,
 
 	        };
