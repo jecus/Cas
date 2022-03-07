@@ -9,6 +9,7 @@ using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls.CheckList;
+using CAS.UI.UICAAControls.CheckList.CheckListAudit;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
@@ -375,7 +376,7 @@ group by a.AuditId
                 var refE = new ReferenceEventArgs();
                 var dp = new DisplayerParams()
                 {
-                    Page = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _operatorId ?? -1, CheckListType.Audit, _directivesViewer.SelectedItem.ItemId),
+                    Page = new CheckListAuditScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _operatorId ?? -1, _directivesViewer.SelectedItem.ItemId),
                     TypeOfReflection = ReflectionTypes.DisplayInNew,
                     PageCaption = $"Audit: {_directivesViewer.SelectedItem.AuditNumber}",
                     DisplayerType = DisplayerType.Screen

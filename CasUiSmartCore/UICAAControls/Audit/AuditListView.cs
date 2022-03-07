@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls.CheckList;
+using CAS.UI.UICAAControls.CheckList.CheckListAudit;
 using CAS.UI.UICAAControls.RoutineAudit;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
@@ -179,7 +180,7 @@ namespace CAS.UI.UICAAControls.Audit
 		{
             if (SelectedItem != null)
             {
-                e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), OperatorId ,CheckListType.Audit,  SelectedItem.ItemId);
+                e.RequestedEntity = new CheckListAuditScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), OperatorId ,  SelectedItem.ItemId);
                 e.DisplayerText = $"Audit: {SelectedItem.AuditNumber}";
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
             }

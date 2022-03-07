@@ -1,10 +1,22 @@
-﻿using CAA.Entity.Models.Dictionary;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
+using CAS.UI.UICAAControls.Audit;
+using CAS.UI.UICAAControls.Audit.PEL;
+using CAS.UI.UICAAControls.CheckList.EditionRevision;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using Entity.Abstractions.Filters;
+using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.CAA.RoutineAudits;
@@ -13,37 +25,16 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using CAS.UI.Management.Dispatchering;
-using CAS.UI.UICAAControls.Audit;
-using CAS.UI.UICAAControls.Audit.PEL;
-using CAS.UI.UICAAControls.CheckList.CheckListAudit;
-using CAS.UI.UICAAControls.CheckList.EditionRevision;
-using CAS.UI.UIControls.NewGrid;
-using SmartCore.CAA.Audit;
 using Telerik.WinControls.UI;
-using FilterType = Entity.Abstractions.Attributte.FilterType;
 
-namespace CAS.UI.UICAAControls.CheckList
+namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 {
-	public enum CheckListType
-	{
-		CheckList,
-		Routine
-	}
-	
-    ///<summary>
+	///<summary>
     ///</summary>
     [ToolboxItem(false)]
-	public partial class CheckListsScreen : ScreenControl
+	public partial class CheckListAuditScreen : ScreenControl
 	{
         private readonly int _operatorId;
-        private readonly CheckListType _type;
         private readonly int _parentId;
         private SmartCore.CAA.StandartManual.StandartManual _manual;
 
@@ -69,7 +60,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		///<summary>
 		/// Конструктор по умолчанию
 		///</summary>
-		public CheckListsScreen()
+		public CheckListAuditScreen()
 		{
 			InitializeComponent();
 		}
@@ -79,7 +70,7 @@ namespace CAS.UI.UICAAControls.CheckList
         /// Создаёт экземпляр элемента управления, отображающего список директив
         ///</summary>
         ///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-        public CheckListsScreen(Operator currentOperator,int operatorId, CheckListType type, int parentId)
+        public CheckListAuditScreen(Operator currentOperator,int operatorId, int parentId)
             : this()
         {
             if (currentOperator == null)
@@ -87,7 +78,6 @@ namespace CAS.UI.UICAAControls.CheckList
             aircraftHeaderControl1.Operator = currentOperator;
 
             _operatorId = operatorId;
-            _type = type;
             _parentId = parentId;
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
@@ -95,22 +85,7 @@ namespace CAS.UI.UICAAControls.CheckList
             UpdateInformation();
 		}
 
-
-        public CheckListsScreen(Operator currentOperator, int operatorId, SmartCore.CAA.StandartManual.StandartManual manual)
-            : this()
-        {
-            if (currentOperator == null)
-                throw new ArgumentNullException("currentOperator");
-            _type = CheckListType.CheckList;
-            _operatorId = operatorId;
-            _manual = manual;
-            aircraftHeaderControl1.Operator = currentOperator;
-            statusControl.ShowStatus = false;
-            labelTitle.Visible = false;
-            
-            UpdateInformation();
-        }
-
+        
         #endregion
 
 		#region Methods
@@ -118,11 +93,21 @@ namespace CAS.UI.UICAAControls.CheckList
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			if (_type == CheckListType.Routine)
-				buttonAddNew.Visible = true;
 
-
-			if (_manual.CheckUIType == CheckUIType.Iosa)
+			pictureBox3.Visible = false;
+			buttonRevisions.Visible = false;
+	        
+	        
+			this.headerControl.ShowEditButton = true;
+			this.headerControl.EditButtonClick += HeaderControl_EditButtonClick;
+	            
+			pictureBox6.Visible = true;
+			buttonPel.Visible = true;
+	            
+			labelTitle.Text = $"Workflow Stage : {WorkFlowStage.GetItemById(_audit.Settings.WorkflowStageId)}";
+			labelTitle.Visible = true;
+            
+            if (_manual.CheckUIType == CheckUIType.Iosa)
 	            _filter = new CommonFilterCollection(typeof(ICheckListFilterParams));
             else if (_manual.CheckUIType == CheckUIType.Safa)
 	            _filter = new CommonFilterCollection(typeof(ICheckListSafaFilterParams));
@@ -134,6 +119,20 @@ namespace CAS.UI.UICAAControls.CheckList
             {
 	            InitToolStripMenuItems();
 	            InitListView();
+            }
+            
+            if (_directivesViewer is CheckListLiteView lite)
+            {
+	            lite.AuditId = _parentId;
+	            lite.IsAuditCheck = 
+	                                (_routineAudit?.Type == ProgramType.CAAKG ||
+	                                 _routineAudit?.Type == ProgramType.IOSA);
+            }
+            else if(_directivesViewer is CheckListView view)
+            {
+	            view.AuditId = _parentId;
+	            view.IsAuditCheck = (_routineAudit?.Type == ProgramType.CAAKG ||
+	                                 _routineAudit?.Type == ProgramType.IOSA);
             }
             
 			_directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
@@ -150,81 +149,53 @@ namespace CAS.UI.UICAAControls.CheckList
 			_resultDocumentArray.Clear();
 
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
-			
-            if (_type == CheckListType.Routine)
-            {
-	            _currentRoutineId = _parentId;
-				var records = GlobalObjects.CaaEnvironment.NewLoader
-                    .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", _parentId), loadChild: true).ToList();
-				
-				var routine = GlobalObjects.CaaEnvironment.NewLoader
-					.GetObjectById<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(_parentId);
-				var manuals = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(new []
-				{
-					new Filter("OperatorId", _operatorId),
-					new Filter("ProgramTypeId", routine.Settings.TypeId),
-				});
 
-				_manual = manuals.FirstOrDefault();
+	            _audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_parentId);
+                var records = GlobalObjects.CaaEnvironment.NewLoader
+                    .GetObjectListAll<CAAAuditRecordDTO, CAAAuditRecord>(new Filter("AuditId", _parentId), loadChild: true).ToList();
 
-                var ids = records.Select(i => i.CheckListId);
+                _currentRoutineId = records.Select(i => i.RoutineAuditId).FirstOrDefault();
+                _routineAudit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(_currentRoutineId.Value);
+                var manuals = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(new []
+                {
+	                new Filter("OperatorId", _operatorId),
+	                new Filter("ProgramTypeId", _routineAudit.Settings.TypeId),
+                });
 
+                _manual = manuals.FirstOrDefault();
+                
+				var routines = GlobalObjects.CaaEnvironment.NewLoader
+                    .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", _currentRoutineId), loadChild: true).ToList();
+
+                var ids = routines.Select(i => i.CheckListId).Distinct();
                 if (ids.Any())
-                    _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("ItemId", ids), loadChild: true));
-
-                
-                var revisions = new List<CheckListRevision>();
-                var revedIds = _initialDocumentArray.Where(i => i.RevisionId.HasValue).Select(i => i.RevisionId.Value).Distinct().ToList();
-                revedIds.AddRange(_initialDocumentArray.Select(i =>i.EditionId).Distinct());
-                if (revedIds.Any())
                 {
-	                revisions.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new List<Filter>()
-	                {
-		                new Filter("ItemId", values: revedIds),
-	                }));
-                }
+                    var auditChecks = GlobalObjects.CaaEnvironment.NewLoader
+                        .GetObjectListAll<AuditCheckDTO, AuditCheck>(new Filter("CheckListId", ids), loadChild: true).ToList();
+
+					_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("ItemId", ids), loadChild: true));
+					
+                    var revisions = new List<CheckListRevision>();
+                    var revedIds = _initialDocumentArray.Where(i => i.RevisionId.HasValue).Select(i => i.RevisionId.Value).Distinct().ToList();
+                    revedIds.AddRange(_initialDocumentArray.Select(i =>i.EditionId).Distinct());
+                    if (revedIds.Any())
+                    {
+	                    revisions.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new List<Filter>()
+	                    {
+		                    new Filter("ItemId", values: revedIds),
+	                    }));
+                    }
 		            
-                foreach (var check in _initialDocumentArray)
-                {
-	                check.RevisionNumber = revisions.FirstOrDefault(i => i.ItemId == check.RevisionId)?.Number.ToString() ?? "";
-	                check.EditionNumber = revisions.FirstOrDefault(i => i.ItemId == check.RevisionId)?.Number.ToString() ?? "";
-                }
-                
-			}
-            else
-            {
-	            var editions = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new List<Filter>()
-	            {
-		            new Filter("Status", (byte)EditionRevisionStatus.Current),
-		            new Filter("Type", (byte)RevisionType.Edition),
-		            new Filter("ManualId", _manual.ItemId),
-	            });
-	            
-	            if (editions.Any())
-	            {
-		            var edition = editions.FirstOrDefault();
-		            _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("EditionId", edition.ItemId), loadChild:true));
+                    foreach (var check in _initialDocumentArray)
+                    {
+	                    check.AuditCheck = auditChecks.FirstOrDefault(i => i.CheckListId == check.ItemId);
+	                    check.RevisionNumber = revisions.FirstOrDefault(i => i.ItemId == check.RevisionId)?.Number.ToString() ?? "";
+	                    check.EditionNumber = revisions.FirstOrDefault(i => i.ItemId == check.RevisionId)?.Number.ToString() ?? "";
+                    }
+                    
+				}
 
-		            var revisions = new List<CheckListRevision>();
-		            var revIds = _initialDocumentArray.Where(i => i.RevisionId.HasValue).Select(i => i.RevisionId.Value).Distinct();
-		            if (revIds.Any())
-		            {
-			            revisions.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRevisionDTO, CheckListRevision>(new List<Filter>()
-			            {
-				            new Filter("ItemId", values: revIds),
-			            }));
-		            }
-		            
-		            foreach (var check in _initialDocumentArray)
-		            {
-			            check.RevisionNumber = revisions.FirstOrDefault(i => i.ItemId == check.RevisionId)?.Number.ToString() ?? "";
-			            check.EditionNumber = edition.Number.ToString();
-		            }
-	            }
-            }
-
-
-            var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new []
+                var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new []
             {
 	            new Filter("OperatorId", _operatorId),
 	            new Filter("ProgramTypeId", _manual.ProgramTypeId),
@@ -304,10 +275,13 @@ namespace CAS.UI.UICAAControls.CheckList
 
 		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 		{
-			var form = new CheckListForm.CheckListForm(_directivesViewer.SelectedItem, false);
-			if (form.ShowDialog() == DialogResult.OK)
-				AnimatedThreadWorker.RunWorkerAsync();
-        }
+            if ((_routineAudit?.Type == ProgramType.CAAKG || _routineAudit?.Type == ProgramType.IOSA))
+            {
+                var form = new CheckListAuditForm(_directivesViewer.SelectedItem, _parentId);
+                if (form.ShowDialog() == DialogResult.OK)
+                    AnimatedThreadWorker.RunWorkerAsync();
+            }
+		}
 
 		#endregion
 		
@@ -316,7 +290,7 @@ namespace CAS.UI.UICAAControls.CheckList
 		private void InitListView()
         {
 	        if (_manual.CheckUIType == CheckUIType.Iosa)
-		        _directivesViewer = new CheckListView(AnimatedThreadWorker, false);
+		        _directivesViewer = new CheckListLiteView(AnimatedThreadWorker);
 	        else  if (_manual.CheckUIType == CheckUIType.Safa)
 		        _directivesViewer = new CheckListSAFAView(AnimatedThreadWorker, false);
 	        else  if (_manual.CheckUIType == CheckUIType.Icao)
