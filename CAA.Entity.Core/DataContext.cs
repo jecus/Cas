@@ -22,6 +22,7 @@ namespace CAA.Entity.Core
 
         public DbSet<CAAAircraftOtherParameterDTO> AircraftOtherParameterDtos { get; set; }
         public DbSet<PelSpecialistDTO> PelSpecialistDtos { get; set; }
+        public DbSet<CheckListTransferDTO> CheckListTransferDtos { get; set; }
         public DbSet<CAAAGWCategorieDTO> AGWCategorieDtos { get; set; }
         public DbSet<StandartManualDTO> StandartManualDtos { get; set; }
         public DbSet<CAAATAChapterDTO> ATAChapterDtos { get; set; }

@@ -22,6 +22,7 @@ namespace CAA.Entity.Models.DTO
         [Column("ManualId")]
         public int  ManualId{ get; set; }
 
+        [Column("SettingsJSON")]
         public string SettingsJSON { get; set; }
         
         #region Navigation Property

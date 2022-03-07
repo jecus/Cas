@@ -1699,6 +1699,48 @@ namespace SmartCore.DtoHelper
 			};
 		}
 		
+		
+		
+		public static CheckListTransfer ConvertCAA(this CheckListTransferDTO oper)
+		{
+			return new CheckListTransfer
+			{
+				ItemId = oper.ItemId,
+				IsDeleted = oper.IsDeleted,
+				Updated = oper.Updated,
+				CorrectorId = oper.CorrectorId,
+				AuditId = oper.AuditId,
+				SettingsJSON = oper.SettingsJSON,
+				From = oper.From,
+				To = oper.To,
+				FileId = oper.FileId,
+				CheckListId = oper.CheckListId,
+				Created = oper.Created,
+				
+			};
+		}
+
+
+		public static CheckListTransferDTO ConvertCAA(this CheckListTransfer oper)
+		{
+			return new CheckListTransferDTO
+			{
+				ItemId = oper.ItemId,
+				IsDeleted = oper.IsDeleted,
+				Updated = oper.Updated,
+				CorrectorId = oper.CorrectorId,
+				AuditId = oper.AuditId,
+				SettingsJSON = oper.SettingsJSON,
+				From = oper.From,
+				To = oper.To,
+				FileId = oper.FileId,
+				CheckListId = oper.CheckListId,
+				Created = oper.Created,
+
+			};
+		}
+		
+		
 
         public static Operator ConvertCAA(this CAAOperatorDTO operdto)
         {
