@@ -58,7 +58,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 To = _to,
                 AuditId = _auditId,
                 CheckListId = _checkListId,
-                FileId = attachedFileControl1.AttachedFile.ItemId,
                 Settings = new CheckListTransferSettings()
                 {
                     Remark = metroTextBoxRemark.Text
@@ -72,8 +71,10 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 fileControl.ApplyChanges();
                 rec.AttachedFile = fileControl.AttachedFile;
             }
-            
             GlobalObjects.CaaEnvironment.NewKeeper.SaveAttachedFile(rec);
+            
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

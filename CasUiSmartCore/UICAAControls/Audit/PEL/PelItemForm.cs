@@ -176,7 +176,6 @@ namespace CAS.UI.UICAAControls.Audit.PEL
                         To = (pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditorId)?.Specialist ?? Specialist.Unknown).ItemId,
                         AuditId = _auditId,
                         CheckListId = item.ItemId,
-                        FileId = -1,
                     });
                     
                     _updateChecks.Add(rec);
