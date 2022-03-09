@@ -196,7 +196,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 )
 SELECT CheckListId
 FROM cte
-WHERE rn = 1 and [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}
+WHERE rn = 1 and [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} and IsDeleted = 0
 ");
 					
 					var dt = ds.Tables[0];
