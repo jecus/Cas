@@ -29,6 +29,13 @@ using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 {
+	public enum CheckListAuditType
+	{
+		Admin,
+		User
+	}
+	
+	
 	///<summary>
     ///</summary>
     [ToolboxItem(false)]
@@ -36,6 +43,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 	{
         private readonly int _operatorId;
         private readonly int _parentId;
+        private readonly CheckListAuditType _type;
         private SmartCore.CAA.StandartManual.StandartManual _manual;
 
         #region Fields
@@ -70,7 +78,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         /// Создаёт экземпляр элемента управления, отображающего список директив
         ///</summary>
         ///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-        public CheckListAuditScreen(Operator currentOperator,int operatorId, int parentId)
+        public CheckListAuditScreen(Operator currentOperator,int operatorId, int parentId, CheckListAuditType type)
             : this()
         {
             if (currentOperator == null)
@@ -79,6 +87,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             _operatorId = operatorId;
             _parentId = parentId;
+            _type = type;
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
             
@@ -166,7 +175,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 
 				var routines = GlobalObjects.CaaEnvironment.NewLoader
                     .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", _currentRoutineId), loadChild: true).ToList();
-
+				
                 var ids = routines.Select(i => i.CheckListId).Distinct();
                 if (ids.Any())
                 {

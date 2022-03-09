@@ -27,6 +27,7 @@ namespace CAS.UI.UICAAControls.Audit
 	public partial class AuditListView : BaseGridViewControl<CAAAudit>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
+        private readonly CheckListAuditType _checkListAuditType;
 
         #region Fields
 
@@ -45,9 +46,13 @@ namespace CAS.UI.UICAAControls.Audit
         /// <summary>
         /// </summary>
         /// <param name="animatedThreadWorker"></param>
-        public AuditListView(AnimatedThreadWorker animatedThreadWorker)
+        /// <param
+        ///     name="checkListAuditType">
+        /// </param>
+        public AuditListView(AnimatedThreadWorker animatedThreadWorker, CheckListAuditType checkListAuditType)
 		{
             _animatedThreadWorker = animatedThreadWorker;
+            _checkListAuditType = checkListAuditType;
             InitializeComponent();
 			SortDirection = SortDirection.Asc;
 			OldColumnIndex = 1;
@@ -180,7 +185,7 @@ namespace CAS.UI.UICAAControls.Audit
 		{
             if (SelectedItem != null)
             {
-                e.RequestedEntity = new CheckListAuditScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), OperatorId ,  SelectedItem.ItemId);
+                e.RequestedEntity = new CheckListAuditScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), OperatorId ,  SelectedItem.ItemId, _checkListAuditType);
                 e.DisplayerText = $"Audit: {SelectedItem.AuditNumber}";
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
             }

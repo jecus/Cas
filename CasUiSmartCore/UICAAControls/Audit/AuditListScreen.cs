@@ -29,8 +29,7 @@ namespace CAS.UI.UICAAControls.Audit
 
     public enum AuditType
     {
-		CAA,
-		Operator,
+	    Operator,
 		All
     }
 	///<summary>
@@ -51,13 +50,13 @@ namespace CAS.UI.UICAAControls.Audit
 
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemEdit;
-		private RadMenuSeparatorItem _toolStripSeparator1;
 
-        private RadMenuSeparatorItem _toolStripSeparator2;
+		private RadMenuSeparatorItem _toolStripSeparator2;
 		private RadMenuItem _toolStripMenuItemPublish;
         private RadMenuItem _toolStripMenuItemClose;
+        private readonly CheckListAuditType _checkListAuditType;
 
-		#endregion
+        #endregion
 
 
 		#region Constructors
@@ -95,7 +94,7 @@ namespace CAS.UI.UICAAControls.Audit
 				buttonDeleteSelected.Visible =
 					pictureBox1.Visible =
 						editable;
-			
+			_checkListAuditType = CheckListAuditType.Admin;
 			InitToolStripMenuItems();
 			InitListView();
 			UpdateInformation();
@@ -115,8 +114,9 @@ namespace CAS.UI.UICAAControls.Audit
 
             _filter = new CommonFilterCollection(typeof(IAuditFilterParams));
             
+            _checkListAuditType = CheckListAuditType.User;
             buttonAddNew.Visible =
-	            pictureBox1.Visible = type == AuditType.CAA;
+	            pictureBox1.Visible = false;
             
             InitToolStripMenuItems();
             InitListView();
@@ -251,8 +251,7 @@ group by a.AuditId
 			_toolStripMenuItemEdit = new RadMenuItem();
 			_toolStripMenuItemClose = new RadMenuItem();
             _toolStripMenuItemPublish = new RadMenuItem();
-			_toolStripSeparator1 = new RadMenuSeparatorItem();
-			_toolStripSeparator2 = new RadMenuSeparatorItem();
+            _toolStripSeparator2 = new RadMenuSeparatorItem();
             // 
             // toolStripMenuItemView
             // 
@@ -376,7 +375,7 @@ group by a.AuditId
                 var refE = new ReferenceEventArgs();
                 var dp = new DisplayerParams()
                 {
-                    Page = new CheckListAuditScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _operatorId ?? -1, _directivesViewer.SelectedItem.ItemId),
+                    Page = new CheckListAuditScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _operatorId ?? -1, _directivesViewer.SelectedItem.ItemId, _checkListAuditType),
                     TypeOfReflection = ReflectionTypes.DisplayInNew,
                     PageCaption = $"Audit: {_directivesViewer.SelectedItem.AuditNumber}",
                     DisplayerType = DisplayerType.Screen
@@ -409,7 +408,7 @@ group by a.AuditId
 
 		private void InitListView()
 		{
-			_directivesViewer = new AuditListView(AnimatedThreadWorker);
+			_directivesViewer = new AuditListView(AnimatedThreadWorker, _checkListAuditType);
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.OperatorId = _operatorId ?? -1;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
