@@ -219,37 +219,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
 
         #endregion
-
-        public override void ButtonDeleteClick(object sender, EventArgs e)
-        {
-            if (this.SelectedItems == null ||
-                this.SelectedItems.Count == 0) return;
-
-            string typeName = nameof(CheckLists);
-
-            DialogResult confirmResult =
-                MessageBox.Show(this.SelectedItems.Count == 1
-                        ? "Do you really want to delete " + typeName + " " + this.SelectedItems[0] + "?"
-                        : "Do you really want to delete selected " + typeName + "s?", "Confirm delete operation",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-
-            if (confirmResult == DialogResult.Yes)
-            {
-                this.radGridView1.BeginUpdate();
-                GlobalObjects.NewKeeper.Delete(this.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
-                foreach (var audit in this.SelectedItems)
-                {
-                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
-                        $"update dbo.CheckListRecord set IsDeleted = 1 where CheckListId = {audit.ItemId}");
-
-                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
-                        $"update [dbo].[AuditChecks] set IsDeleted = 1 where CheckListId = {audit.ItemId}");
-                }
-                this.radGridView1.EndUpdate();
-                _animatedThreadWorker.RunWorkerAsync();
-            }
-        }
-
+        
     }
     
     public class CheckListSAFAAuditView : CheckListAuditView
