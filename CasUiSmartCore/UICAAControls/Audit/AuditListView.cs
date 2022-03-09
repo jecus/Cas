@@ -49,12 +49,11 @@ namespace CAS.UI.UICAAControls.Audit
         /// <param
         ///     name="checkListAuditType">
         /// </param>
-        public AuditListView(AnimatedThreadWorker animatedThreadWorker, CheckListAuditType checkListAuditType)
+        public AuditListView(AnimatedThreadWorker animatedThreadWorker, CheckListAuditType checkListAuditType) : this()
 		{
             _animatedThreadWorker = animatedThreadWorker;
             _checkListAuditType = checkListAuditType;
-            InitializeComponent();
-			SortDirection = SortDirection.Asc;
+            SortDirection = SortDirection.Asc;
 			OldColumnIndex = 1;
 		}
 
@@ -72,7 +71,8 @@ namespace CAS.UI.UICAAControls.Audit
 		/// </summary>
 		protected override void SetHeaders()
 		{
-            AddColumn("Operator", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Tasks", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Operator", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Audit №", (int)(radGridView1.Width * 0.20f));
             AddColumn("Status", (int)(radGridView1.Width * 0.20f));
 			AddColumn("CreateDate", (int)(radGridView1.Width * 0.30f));
@@ -103,7 +103,10 @@ namespace CAS.UI.UICAAControls.Audit
 		#region protected override List<CustomCell> GetListViewSubItems(Specialization item)
 
 		protected override List<CustomCell> GetListViewSubItems(CAAAudit item)
-        {
+		{
+			if(_checkListAuditType == CheckListAuditType.Admin)
+				radGridView1.Columns[0].Width = 0;
+	        
             var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
             var author = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.AuthorId);
             var published = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.PublishedId);
@@ -113,7 +116,11 @@ namespace CAS.UI.UICAAControls.Audit
             var publishedDate = item.Settings.PublishingDate > DateTimeExtend.GetCASMinDateTime() ? Convert.GetDateFormat(item.Settings.PublishingDate) : "";
             var closedDate = item.Settings.ClosingDate > DateTimeExtend.GetCASMinDateTime() ? Convert.GetDateFormat(item.Settings.ClosingDate) : "";
 
-			var subItems = new List<CustomCell>()
+            var subItems = new List<CustomCell>();
+            if(_checkListAuditType == CheckListAuditType.User)
+	            subItems.Add(CreateRow($"{item.TaskCount} tasks",item.TaskCount));
+            
+			subItems.AddRange(new List<CustomCell>()
             {
                 CreateRow(item.Operator.ToString(), item.Operator),
 				CreateRow(item.AuditNumber, item.AuditNumber),
@@ -136,7 +143,7 @@ namespace CAS.UI.UICAAControls.Audit
                 CreateRow(published, published),
                 CreateRow(closed, closed),
                 CreateRow(corrector, corrector)
-            };
+            });
 
             return subItems;
 		}

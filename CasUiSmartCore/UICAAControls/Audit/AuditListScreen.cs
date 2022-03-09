@@ -218,7 +218,6 @@ group by a.AuditId
 			
 
             var dt = ds.Tables[0];
-
             foreach (DataRow dr in dt.Rows)
             {
                 var id = (int)dr[0];
@@ -228,7 +227,38 @@ group by a.AuditId
                     find.MH = Convert.ToDouble(dr[1].ToString());
             }
 
-			foreach (var audit in _initialDocumentArray)
+
+            var auditIds = _initialDocumentArray.Select(i => i.ItemId);
+            if (auditIds.Any())
+            {
+	            ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@";WITH cte AS
+(
+   SELECT *,
+         ROW_NUMBER() OVER (PARTITION BY CheckListId ORDER BY Created DESC) AS rn
+   FROM [CheckListTransfer] where AuditId in ({string.Join(",", auditIds)})
+)
+SELECT AuditId, Count(*)
+FROM cte
+WHERE rn = 1 and [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}
+group by AuditId");
+
+	            var dtC = ds.Tables[0];
+	            foreach (DataRow dr in dtC.Rows)
+	            {
+		            var auditId = (int)dr[0];
+		            var count = (int)dr[1];
+
+		            var audit = _initialDocumentArray.FirstOrDefault(i => i.ItemId == auditId);
+		            if (audit != null)
+			            audit.TaskCount = count;
+
+
+	            }
+            }
+
+
+
+            foreach (var audit in _initialDocumentArray)
             {
                 audit.Operator =  GlobalObjects.CaaEnvironment
                     .AllOperators

@@ -240,7 +240,7 @@ namespace CAS.UI.UICAAControls
         private void LinkAuditOpDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Audit Operator";
-            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], AuditType.Operator, CheckListAuditType.Admin);
+            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], AuditType.Operator, CheckListAuditType.User);
         }
 
         private void LinkAuditAllDisplayerRequested(object sender, ReferenceEventArgs e)

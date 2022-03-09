@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.Interfaces;
@@ -12,7 +10,6 @@ using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
