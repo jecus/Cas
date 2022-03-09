@@ -20,6 +20,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
     public partial class PelItemForm : MetroForm
     {
         private readonly int _auditId;
+        private readonly int _operatorId;
 
         private CommonCollection<CheckLists> _addedChecks = new CommonCollection<CheckLists>();
         private CommonCollection<AuditPelRecord> _updateChecks = new CommonCollection<AuditPelRecord>();
@@ -31,6 +32,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         {
             InitializeComponent();
             _auditId = auditId;
+            _operatorId = operatorId;
             _addedChecks.AddRange(initialDocumentArray.ToArray());
             
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
@@ -83,7 +85,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             var records = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<AuditPelRecordDTO, AuditPelRecord>(new Filter("AuditId", _auditId));
             var audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_auditId);
             
-            specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", new []{audit.OperatorId, -1}), loadChild: true));
+            specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", new []{audit.OperatorId, -1, _operatorId}.Distinct()), loadChild: true));
 
             pelSpec.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<PelSpecialistDTO, PelSpecialist>(new Filter("AuditId", _auditId)));
             
@@ -163,8 +165,20 @@ namespace CAS.UI.UICAAControls.Audit.PEL
                     };
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
                     rec.CheckList = item;
-                    rec.Auditor = specialists.FirstOrDefault(i => i.ItemId == auditor.ItemId);
-                    rec.Auditee = specialists.FirstOrDefault(i => i.ItemId == auditee.ItemId);;
+                    rec.Auditor = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditorId)?.Specialist ?? Specialist.Unknown;
+                    rec.Auditee = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditeeId)?.Specialist ?? Specialist.Unknown;
+                    
+                    
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(new CheckListTransfer()
+                    {
+                        Created = DateTime.Now,
+                        From = -1,
+                        To = (pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditorId)?.Specialist ?? Specialist.Unknown).ItemId,
+                        AuditId = _auditId,
+                        CheckListId = item.ItemId,
+                        FileId = -1,
+                    });
+                    
                     _updateChecks.Add(rec);
                     _addedChecks.Remove(item);
                 }

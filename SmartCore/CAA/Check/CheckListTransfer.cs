@@ -34,6 +34,11 @@ namespace SmartCore.CAA.Check
         }
 
         public CheckListTransferSettings Settings { get; set; }
+
+        public CheckListTransfer()
+        {
+            Settings = new CheckListTransferSettings();
+        }
     }
 
     public class CheckListTransferSettings

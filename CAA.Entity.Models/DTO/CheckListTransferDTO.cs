@@ -24,7 +24,7 @@ namespace CAA.Entity.Models.DTO
         [Column("From")]
         public int From { get; set; }
         
-        [Column("From")]
+        [Column("To")]
         public int To { get; set; }
         
         [Column("SettingsJSON")]

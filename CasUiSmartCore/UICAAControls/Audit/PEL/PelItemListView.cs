@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA.Check;
@@ -18,14 +19,14 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 		public PelItemListView()
 		{
 			InitializeComponent();
-			// ColumnIndexes = new List<string>()
-			// {
-			// 	"Section №", "Part №","SubPart №","Item №"
-			// };
-			// SortDirection = SortDirection.Desc;
-			// EnableCustomSorting = true;
-			//
-			// this.radGridView1.MasterTemplate.GroupComparer = new GroupComparer();
+			ColumnIndexes = new List<string>()
+			{
+				"Section №", "Part №","SubPart №","Item №"
+			};
+			SortDirection = SortDirection.Desc;
+			EnableCustomSorting = true;
+			
+			this.radGridView1.MasterTemplate.GroupComparer = new GroupComparer();
 		}
 		
 		#endregion
