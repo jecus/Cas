@@ -175,8 +175,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 
 				var routines = GlobalObjects.CaaEnvironment.NewLoader
                     .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", _currentRoutineId), loadChild: true).ToList();
+
+				var ids = new List<int>();
+				if(_type == CheckListAuditType.Admin)
+					ids = routines.Select(i => i.CheckListId).Distinct().ToList();
+				else ids = routines.Select(i => i.CheckListId).Distinct().ToList();
 				
-                var ids = routines.Select(i => i.CheckListId).Distinct();
+                
                 if (ids.Any())
                 {
                     var auditChecks = GlobalObjects.CaaEnvironment.NewLoader

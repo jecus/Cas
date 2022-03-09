@@ -102,7 +102,7 @@ namespace CAS.UI.UICAAControls.Audit
 
 		
 
-        public AuditListScreen(Operator currentOperator, AuditType type)
+        public AuditListScreen(Operator currentOperator, AuditType type, bool editable = false)
             : this()
         {
             if (currentOperator == null)
@@ -116,7 +116,9 @@ namespace CAS.UI.UICAAControls.Audit
             
             _checkListAuditType = CheckListAuditType.User;
             buttonAddNew.Visible =
-	            pictureBox1.Visible = false;
+	            buttonDeleteSelected.Visible =
+		            pictureBox1.Visible =
+			            editable;
             
             InitToolStripMenuItems();
             InitListView();
