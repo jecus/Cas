@@ -251,4 +251,152 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         }
 
     }
+    
+    public class CheckListSAFAAuditView : CheckListAuditView
+    {
+        public CheckListSAFAAuditView() : base()
+        {
+            
+        }
+        
+        public CheckListSAFAAuditView(AnimatedThreadWorker worker) :  base(worker)
+        {
+        }
+        
+        #region protected override void SetHeaders()
+        /// <summary>
+        /// Устанавливает заголовки
+        /// </summary>
+        protected override void SetHeaders()
+        {
+            AddColumn("Source", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Inspection Item", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Inspection Title", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Standard", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Standard Ref", (int)(radGridView1.Width * 0.24f));
+            AddColumn("PDF Code", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Category", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Auditor", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Auditee", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+        }
+        #endregion
+
+        #region protected override List<CustomCell> GetListViewSubItems(Specialization item)
+
+        protected override List<CustomCell> GetListViewSubItems(CheckLists item)
+        {
+            var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
+
+            var auditor = Specialist.Unknown.FirstName;
+            var auditee = Specialist.Unknown.FirstName;
+
+            if (item.PelRecord != null)
+            {
+                auditor = $"{item.PelRecord?.Auditor.FirstName} {item.PelRecord?.Auditor.LastName}";
+                auditee = $"{item.PelRecord?.Auditee.FirstName} {item.PelRecord?.Auditee.LastName}";
+            }
+            
+            var subItems = new List<CustomCell>()
+            {
+                CreateRow(item.Source, item.Source),
+                CreateRow(item.SettingsSafa.Item, item.SettingsSafa.Item),
+                CreateRow(item.SettingsSafa.Title, item.SettingsSafa.Title),
+                CreateRow(item.SettingsSafa.Standard, item.SettingsSafa.Standard),
+                CreateRow(item.SettingsSafa.StandardRef, item.SettingsSafa.StandardRef),
+                CreateRow(item.SettingsSafa.PdfCode, item.SettingsSafa.PdfCode),
+                CreateRow(item.Level.ToString(), item.Level),
+                CreateRow(auditor, item.PelRecord?.Auditor),
+                CreateRow(auditee, item.PelRecord?.Auditee),
+                CreateRow(author, author)
+            };
+
+            return subItems;
+        }
+
+        protected override void GroupingItems()
+        {
+            
+        }
+
+        #endregion
+    }
+    
+    public class CheckListICAOAuditView : CheckListAuditView
+    {
+        public CheckListICAOAuditView() : base()
+        {
+            
+        }
+        
+        public CheckListICAOAuditView(AnimatedThreadWorker worker) :  base(worker)
+        {
+        }
+        
+        #region protected override void SetHeaders()
+        /// <summary>
+        /// Устанавливает заголовки
+        /// </summary>
+        protected override void SetHeaders()
+        {
+            AddColumn("Source", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Annex Ref", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Part №", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Part Name", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Chapter №", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Chapter Name", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Item №", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Item Name", (int)(radGridView1.Width * 0.5f));
+            AddColumn("Standard or Recommended Practice", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Level", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Auditor", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Auditee", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+        }
+        #endregion
+
+        #region protected override List<CustomCell> GetListViewSubItems(Specialization item)
+
+        protected override List<CustomCell> GetListViewSubItems(CheckLists item)
+        {
+            var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
+
+            var auditor = Specialist.Unknown.FirstName;
+            var auditee = Specialist.Unknown.FirstName;
+
+            if (item.PelRecord != null)
+            {
+                auditor = $"{item.PelRecord?.Auditor.FirstName} {item.PelRecord?.Auditor.LastName}";
+                auditee = $"{item.PelRecord?.Auditee.FirstName} {item.PelRecord?.Auditee.LastName}";
+            }
+            
+            var subItems = new List<CustomCell>()
+            {
+                CreateRow(item.Source, item.Source),
+                CreateRow(item.SettingsIcao.AnnexRef, item.SettingsIcao.AnnexRef),
+                CreateRow(item.SettingsIcao.PartNumber, item.SettingsIcao.PartNumber),
+                CreateRow(item.SettingsIcao.PartName, item.SettingsIcao.PartName),
+                CreateRow(item.SettingsIcao.ChapterNumber, item.SettingsIcao.ChapterName),
+                CreateRow(item.SettingsIcao.ChapterName, item.SettingsIcao.ChapterName),
+                CreateRow(item.SettingsIcao.ItemNumber, item.SettingsIcao.ItemNumber),
+                CreateRow(item.SettingsIcao.ItemtName, item.SettingsIcao.ItemtName),
+                CreateRow(item.SettingsIcao.Standard, item.SettingsIcao.Standard),
+                CreateRow(item.Level.ToString(), item.Level),
+                CreateRow(auditor, item.PelRecord?.Auditor),
+                CreateRow(auditee, item.PelRecord?.Auditee),
+                CreateRow(author, author),
+            };
+
+            return subItems;
+        }
+
+        protected override void GroupingItems()
+        {
+            
+        }
+
+        #endregion
+    }
+    
+    
 }

@@ -372,9 +372,9 @@ WHERE rn = 1 and [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}
 	        if (_manual.CheckUIType == CheckUIType.Iosa)
 		        _directivesViewer = new CheckListAuditView(AnimatedThreadWorker);
 	        else  if (_manual.CheckUIType == CheckUIType.Safa)
-		        _directivesViewer = new CheckListSAFAView(AnimatedThreadWorker, false);
+		        _directivesViewer = new CheckListSAFAAuditView(AnimatedThreadWorker);
 	        else  if (_manual.CheckUIType == CheckUIType.Icao)
-		        _directivesViewer = new CheckListICAOView(AnimatedThreadWorker, false);
+		        _directivesViewer = new CheckListICAOAuditView(AnimatedThreadWorker);
 	        else return;
 
 			_directivesViewer.TabIndex = 2;
