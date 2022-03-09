@@ -1,6 +1,6 @@
-﻿namespace CAS.UI.UICAAControls.CheckList
+﻿namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 {
-    partial class CheckListLiteView
+    partial class CheckListAuditView
     {
         /// <summary> 
         /// Требуется переменная конструктора.

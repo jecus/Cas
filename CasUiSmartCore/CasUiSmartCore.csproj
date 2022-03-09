@@ -889,12 +889,6 @@
     <Compile Include="UICAAControls\Audit\PEL\AuditTeamForm.Designer.cs">
       <DependentUpon>AuditTeamForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\Audit\PEL\PELListScreen.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UICAAControls\Audit\PEL\PELListScreen.Designer.cs">
-      <DependentUpon>PELListScreen.cs</DependentUpon>
-    </Compile>
     <Compile Include="UICAAControls\Audit\PEL\PelItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -943,6 +937,12 @@
     <Compile Include="UICAAControls\CheckList\CheckListAudit\CheckListAuditScreen.Designer.cs">
       <DependentUpon>CheckListAuditScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CheckList\CheckListAudit\CheckListAuditView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CheckList\CheckListAudit\CheckListAuditView.Designer.cs">
+      <DependentUpon>CheckListAuditView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CheckList\CheckListAudit\CheckMoveToForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -966,12 +966,6 @@
     </Compile>
     <Compile Include="UICAAControls\CheckList\CheckListForm\CheckListSAFAForm.Designer.cs">
       <DependentUpon>CheckListSAFAForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UICAAControls\CheckList\CheckListLiteView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UICAAControls\CheckList\CheckListLiteView.Designer.cs">
-      <DependentUpon>CheckListLiteView.cs</DependentUpon>
     </Compile>
     <Compile Include="UICAAControls\CheckList\CheckListRoutine\CheckListRoutineForm.cs">
       <SubType>Form</SubType>
@@ -4407,10 +4401,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Audit\PEL\AuditTeamForm.resx">
       <DependentUpon>AuditTeamForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UICAAControls\Audit\PEL\PELListScreen.resx">
-      <DependentUpon>PELListScreen.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Audit\PEL\PelItemForm.resx">
       <DependentUpon>PelItemForm.cs</DependentUpon>

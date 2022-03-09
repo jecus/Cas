@@ -17,14 +17,17 @@ using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using Entity.Abstractions.Filters;
+using SmartCore.CAA;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
+using SmartCore.CAA.PEL;
 using SmartCore.CAA.RoutineAudits;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
 
@@ -134,7 +137,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 	            InitListView();
             }
             
-            if (_directivesViewer is CheckListLiteView lite)
+            if (_directivesViewer is CheckListAuditView lite)
             {
 	            lite.AuditId = _parentId;
 	            lite.IsAuditCheck = 
@@ -166,7 +169,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 	            _audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_parentId);
                 var records = GlobalObjects.CaaEnvironment.NewLoader
                     .GetObjectListAll<CAAAuditRecordDTO, CAAAuditRecord>(new Filter("AuditId", _parentId), loadChild: true).ToList();
-
+                
                 _currentRoutineId = records.Select(i => i.RoutineAuditId).FirstOrDefault();
                 _routineAudit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(_currentRoutineId.Value);
                 var manuals = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(new []
@@ -228,6 +231,33 @@ WHERE rn = 1 and [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}
                     }
                     
 				}
+                
+                
+                var pelRecords = GlobalObjects.CaaEnvironment.NewLoader
+	                .GetObjectListAll<AuditPelRecordDTO, AuditPelRecord>(new Filter("AuditId", _parentId));
+                if (records.Any())
+                {
+	                var pelSpec = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<PelSpecialistDTO, PelSpecialist>(new Filter("AuditId", _parentId));
+
+	                var specIds = pelSpec.Select(i => i.SpecialistId);
+	                var specialists = GlobalObjects.CaaEnvironment.NewLoader
+		                .GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("ItemId", specIds),
+			                loadChild: true);
+	            
+	                foreach (var specialist in specialists)
+		                specialist.Operator = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(i => i.ItemId == specialist.OperatorId) ?? AllOperators.Unknown;
+            
+	                foreach (var pel in pelSpec)
+		                pel.Specialist = specialists.FirstOrDefault(i => i.ItemId == pel.SpecialistId);
+            
+	                foreach (var rec in pelRecords)
+	                {
+		                rec.CheckList = _initialDocumentArray.FirstOrDefault(i => i.ItemId == rec.CheckListId);;
+		                rec.Auditor = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditorId)?.Specialist ?? Specialist.Unknown;
+		                rec.Auditee = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditeeId)?.Specialist ?? Specialist.Unknown;
+	                }
+                }
+                
 
                 var levels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<FindingLevelsDTO, FindingLevels>(new []
             {
@@ -237,6 +267,8 @@ WHERE rn = 1 and [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}
             
             foreach (var check in _initialDocumentArray)
             {
+	            check.PelRecord = pelRecords.FirstOrDefault(i => i.CheckListId == check.ItemId);
+	            
 	            if (check.CheckUIType == CheckUIType.Iosa)
 	            {
 		            check.Level = levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
@@ -338,7 +370,7 @@ WHERE rn = 1 and [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}
 		private void InitListView()
         {
 	        if (_manual.CheckUIType == CheckUIType.Iosa)
-		        _directivesViewer = new CheckListLiteView(AnimatedThreadWorker);
+		        _directivesViewer = new CheckListAuditView(AnimatedThreadWorker);
 	        else  if (_manual.CheckUIType == CheckUIType.Safa)
 		        _directivesViewer = new CheckListSAFAView(AnimatedThreadWorker, false);
 	        else  if (_manual.CheckUIType == CheckUIType.Icao)
@@ -527,16 +559,9 @@ WHERE rn = 1 and [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}
         
         private void ButtonPelClick(object sender, EventArgs e)
         {
-	        var refE = new ReferenceEventArgs();
-	        var dp = new DisplayerParams()
-	        {
-		        Page = new PELListScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _operatorId, _parentId, _initialDocumentArray),
-		        TypeOfReflection = ReflectionTypes.DisplayInNew,
-		        PageCaption = $"PEL {_audit.AuditNumber}",
-		        DisplayerType = DisplayerType.Screen
-	        };
-	        refE.SetParameters(dp);
-	        InvokeDisplayerRequested(refE);
+	        var form = new PelItemForm(_parentId, _operatorId, _initialDocumentArray);
+	        if(form.ShowDialog() == DialogResult.OK)
+		        AnimatedThreadWorker.RunWorkerAsync();
         }
 	}
 }

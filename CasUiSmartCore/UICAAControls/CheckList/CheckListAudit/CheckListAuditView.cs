@@ -6,7 +6,6 @@ using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.Interfaces;
-using CAS.UI.UICAAControls.CheckList.CheckListAudit;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
@@ -14,27 +13,23 @@ using CASTerms;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Personnel;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
 
-namespace CAS.UI.UICAAControls.CheckList
+namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 {
 	///<summary>
 	/// список для отображения сотрудников
 	///</summary>
-	public partial class CheckListLiteView : BaseGridViewControl<CheckLists>
+	public partial class CheckListAuditView : BaseGridViewControl<CheckLists>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
 
-        #region Fields
+        public bool IsAuditCheck { get; set; }
+        public int? AuditId { get; set; }
 
-		#endregion
-
-		#region Constructors
-
-		#region public PersonnelListView()
-
-        public CheckListLiteView()
+        public CheckListAuditView()
         {
             InitializeComponent();
 
@@ -51,7 +46,7 @@ namespace CAS.UI.UICAAControls.CheckList
         /// <summary>
         /// </summary>
         /// <param name="animatedThreadWorker"></param>
-        public CheckListLiteView(AnimatedThreadWorker animatedThreadWorker)
+        public CheckListAuditView(AnimatedThreadWorker animatedThreadWorker)
 		{
             _animatedThreadWorker = animatedThreadWorker;
             InitializeComponent();
@@ -65,13 +60,8 @@ namespace CAS.UI.UICAAControls.CheckList
             this.radGridView1.MasterTemplate.GroupComparer = new GroupComparer();
         }
 
-        public bool IsAuditCheck { get; set; }
-        public int? AuditId { get; set; }
-
-		#endregion
-
-		#endregion
-
+        
+        
 		#region Methods
 
         protected override void GroupingItems()
@@ -105,6 +95,8 @@ namespace CAS.UI.UICAAControls.CheckList
             AddColumn("Condition", (int)(radGridView1.Width * 0.2f));
             AddColumn("Root Cause", (int)(radGridView1.Width * 0.35f));
             AddColumn("Workflow Status", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Auditor", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Auditee", (int)(radGridView1.Width * 0.3f));
 
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
         }
@@ -138,6 +130,16 @@ namespace CAS.UI.UICAAControls.CheckList
                 }
             }
 
+            var auditor = Specialist.Unknown.FirstName;
+            var auditee = Specialist.Unknown.FirstName;
+
+            if (item.PelRecord != null)
+            {
+                auditor = $"{item.PelRecord?.Auditor.FirstName} {item.PelRecord?.Auditor.LastName}";
+                auditee = $"{item.PelRecord?.Auditee.FirstName} {item.PelRecord?.Auditee.LastName}";
+            }
+            
+
             var subItems = new List<CustomCell>()
                 {
                     CreateRow(item.Settings.SectionNumber, item.Settings.SectionNumber),
@@ -147,15 +149,15 @@ namespace CAS.UI.UICAAControls.CheckList
                     CreateRow(item.Settings.SubPartNumber, item.Settings.SubPartNumber),
                     CreateRow(item.Settings.SubPartName, item.Settings.SubPartName),
                     CreateRow(item.Settings.ItemNumber, item.Settings.ItemNumber),
-
                     CreateRow(item.Settings.Requirement, item.Settings.Requirement),
-
                     CreateRow(item.Level.ToString(), item.Level),
                     CreateRow(condition, condition),
                     CreateRow(root, root),
                     CreateRow(status.ToString(), status),
-
-                    CreateRow(author, author)
+                    
+                    CreateRow(auditor, item.PelRecord?.Auditor),
+                    CreateRow(auditee, item.PelRecord?.Auditee),
+                    CreateRow(author, author),
                 };
 
             return subItems;

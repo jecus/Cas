@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.FindingLevel;
+using SmartCore.CAA.PEL;
 using SmartCore.CAA.RoutineAudits;
 using SmartCore.Calculations;
 using SmartCore.Entities;
@@ -174,7 +175,9 @@ namespace SmartCore.CAA.Check
                 return CheckUIType.None;
             }
         }
-        
+
+        public AuditPelRecord PelRecord { get; set; }
+
 
         public override BaseEntityObject GetCopyUnsaved(bool marked = true)
         {

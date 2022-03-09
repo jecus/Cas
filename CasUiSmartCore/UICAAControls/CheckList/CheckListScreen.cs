@@ -496,19 +496,5 @@ namespace CAS.UI.UICAAControls.CheckList
 	        refE.SetParameters(dp);
 	        InvokeDisplayerRequested(refE);
         }
-        
-        private void ButtonPelClick(object sender, EventArgs e)
-        {
-	        var refE = new ReferenceEventArgs();
-	        var dp = new DisplayerParams()
-	        {
-		        Page = new PELListScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _operatorId, _parentId, _initialDocumentArray),
-		        TypeOfReflection = ReflectionTypes.DisplayInNew,
-		        PageCaption = $"PEL {_audit.AuditNumber}",
-		        DisplayerType = DisplayerType.Screen
-	        };
-	        refE.SetParameters(dp);
-	        InvokeDisplayerRequested(refE);
-        }
 	}
 }

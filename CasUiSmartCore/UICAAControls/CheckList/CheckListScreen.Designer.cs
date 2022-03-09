@@ -37,7 +37,6 @@ namespace CAS.UI.UICAAControls.CheckList
             this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
             
             this.buttonRevisions = new AvControls.AvButtonT.AvButtonT();
-            this.buttonPel = new AvControls.AvButtonT.AvButtonT();
             this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -138,33 +137,6 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.buttonRevisions.ToolTipText = "Edition/Revison";
 			this.buttonRevisions.Click += ButtonRevisionsClick;
 			// 
-			// buttonPel
-			// 
-			this.buttonPel.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-			this.buttonPel.ActiveBackgroundImage = null;
-			this.buttonPel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonPel.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonPel.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
-			this.buttonPel.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonPel.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
-			this.buttonPel.Icon = global::CAS.UI.Properties.Resources.PEL;
-			this.buttonPel.IconLayout = System.Windows.Forms.ImageLayout.Center;
-			this.buttonPel.IconNotEnabled = null;
-			this.buttonPel.Location = new System.Drawing.Point(0, 0);
-			this.buttonPel.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
-			this.buttonPel.Name = "buttonPel";
-			this.buttonPel.NormalBackgroundImage = null;
-			this.buttonPel.PaddingMain = new System.Windows.Forms.Padding(0);
-			this.buttonPel.PaddingSecondary = new System.Windows.Forms.Padding(0);
-			this.buttonPel.ShowToolTip = true;
-			this.buttonPel.Size = new System.Drawing.Size(52, 57);
-			this.buttonPel.TabIndex = 18;
-			this.buttonPel.TextMain = "";
-			this.buttonPel.TextSecondary = "";
-			this.buttonPel.ToolTipText = "PEL";
-			this.buttonPel.Visible = false;
-			this.buttonPel.Click += ButtonPelClick;
-			// 
 			// buttonAddNew
 			// 
 			this.buttonAddNew.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
@@ -241,8 +213,7 @@ namespace CAS.UI.UICAAControls.CheckList
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox3);
 			this.flowLayoutPanel1.Controls.Add(this.buttonRevisions);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox6);
-			this.flowLayoutPanel1.Controls.Add(this.buttonPel);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
+			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(1291, 0);
 			this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -272,8 +243,7 @@ namespace CAS.UI.UICAAControls.CheckList
         private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
         private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddNew;
         private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
-
-        private AvControls.AvButtonT.AvButtonT buttonPel;
+        
         private AvControls.AvButtonT.AvButtonT buttonRevisions;
         private System.Windows.Forms.Label labelDateAsOf;
         private System.Windows.Forms.PictureBox pictureBox2;
