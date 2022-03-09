@@ -40,6 +40,7 @@
 		STCFile = 36,
 		ProductFile = 37,
 		CheckList = 38,
+		CheckListMove = 39,
 
 
 	}

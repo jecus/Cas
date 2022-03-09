@@ -34,7 +34,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             MetroFramework.Controls.MetroLabel labelValidFrom;
             MetroFramework.Controls.MetroLabel metroLabel2;
             this.dateTimePickerIssueCreateDate = new System.Windows.Forms.DateTimePicker();
-            this.metroTextBoxAuditNumber = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBoxRemark = new MetroFramework.Controls.MetroTextBox();
             this.fileControl = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -81,32 +81,32 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             // 
             // 
             // 
-            this.metroTextBoxAuditNumber.CustomButton.Image = null;
-            this.metroTextBoxAuditNumber.CustomButton.Location = new System.Drawing.Point(151, 1);
-            this.metroTextBoxAuditNumber.CustomButton.Name = "";
-            this.metroTextBoxAuditNumber.CustomButton.Size = new System.Drawing.Size(99, 99);
-            this.metroTextBoxAuditNumber.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTextBoxAuditNumber.CustomButton.TabIndex = 1;
-            this.metroTextBoxAuditNumber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTextBoxAuditNumber.CustomButton.UseSelectable = true;
-            this.metroTextBoxAuditNumber.CustomButton.Visible = false;
-            this.metroTextBoxAuditNumber.ForeColor = System.Drawing.Color.DimGray;
-            this.metroTextBoxAuditNumber.Lines = new string[0];
-            this.metroTextBoxAuditNumber.Location = new System.Drawing.Point(111, 92);
-            this.metroTextBoxAuditNumber.MaxLength = 32767;
-            this.metroTextBoxAuditNumber.Multiline = true;
-            this.metroTextBoxAuditNumber.Name = "metroTextBoxAuditNumber";
-            this.metroTextBoxAuditNumber.PasswordChar = '\0';
-            this.metroTextBoxAuditNumber.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.metroTextBoxAuditNumber.SelectedText = "";
-            this.metroTextBoxAuditNumber.SelectionLength = 0;
-            this.metroTextBoxAuditNumber.SelectionStart = 0;
-            this.metroTextBoxAuditNumber.ShortcutsEnabled = true;
-            this.metroTextBoxAuditNumber.Size = new System.Drawing.Size(251, 101);
-            this.metroTextBoxAuditNumber.TabIndex = 346;
-            this.metroTextBoxAuditNumber.UseSelectable = true;
-            this.metroTextBoxAuditNumber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.metroTextBoxAuditNumber.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.metroTextBoxRemark.CustomButton.Image = null;
+            this.metroTextBoxRemark.CustomButton.Location = new System.Drawing.Point(151, 1);
+            this.metroTextBoxRemark.CustomButton.Name = "";
+            this.metroTextBoxRemark.CustomButton.Size = new System.Drawing.Size(99, 99);
+            this.metroTextBoxRemark.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxRemark.CustomButton.TabIndex = 1;
+            this.metroTextBoxRemark.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxRemark.CustomButton.UseSelectable = true;
+            this.metroTextBoxRemark.CustomButton.Visible = false;
+            this.metroTextBoxRemark.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxRemark.Lines = new string[0];
+            this.metroTextBoxRemark.Location = new System.Drawing.Point(111, 92);
+            this.metroTextBoxRemark.MaxLength = 32767;
+            this.metroTextBoxRemark.Multiline = true;
+            this.metroTextBoxRemark.Name = "metroTextBoxRemark";
+            this.metroTextBoxRemark.PasswordChar = '\0';
+            this.metroTextBoxRemark.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxRemark.SelectedText = "";
+            this.metroTextBoxRemark.SelectionLength = 0;
+            this.metroTextBoxRemark.SelectionStart = 0;
+            this.metroTextBoxRemark.ShortcutsEnabled = true;
+            this.metroTextBoxRemark.Size = new System.Drawing.Size(251, 101);
+            this.metroTextBoxRemark.TabIndex = 346;
+            this.metroTextBoxRemark.UseSelectable = true;
+            this.metroTextBoxRemark.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxRemark.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // fileControl
             // 
@@ -182,7 +182,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(labelValidFrom);
             this.Controls.Add(this.dateTimePickerIssueCreateDate);
-            this.Controls.Add(this.metroTextBoxAuditNumber);
+            this.Controls.Add(this.metroTextBoxRemark);
             this.Controls.Add(metroLabel2);
             this.Name = "CheckMoveToForm";
             this.Resizable = false;
@@ -198,7 +198,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private System.Windows.Forms.Button buttonCancel;
 
         private System.Windows.Forms.DateTimePicker dateTimePickerIssueCreateDate;
-        private MetroFramework.Controls.MetroTextBox metroTextBoxAuditNumber;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxRemark;
 
         #endregion
     }

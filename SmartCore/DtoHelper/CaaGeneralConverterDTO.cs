@@ -1713,7 +1713,6 @@ namespace SmartCore.DtoHelper
 				SettingsJSON = oper.SettingsJSON,
 				From = oper.From,
 				To = oper.To,
-				FileId = oper.FileId,
 				CheckListId = oper.CheckListId,
 				Created = oper.Created,
 				
@@ -1733,7 +1732,6 @@ namespace SmartCore.DtoHelper
 				SettingsJSON = oper.SettingsJSON,
 				From = oper.From,
 				To = oper.To,
-				FileId = oper.FileId,
 				CheckListId = oper.CheckListId,
 				Created = oper.Created,
 

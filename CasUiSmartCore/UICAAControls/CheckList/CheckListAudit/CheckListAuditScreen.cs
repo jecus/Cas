@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -57,6 +58,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 		private BaseGridViewControl<CheckLists> _directivesViewer;
 
 		private RadMenuItem _toolStripMenuItemOpen;
+		private RadMenuItem _toolStripMenuMoveTo;
 		private SmartCore.CAA.RoutineAudits.RoutineAudit _routineAudit;
         private CAAAudit _audit;
 
@@ -90,6 +92,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             _type = type;
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
+
+            buttonPel.Visible = _type == CheckListAuditType.Admin;
             
             UpdateInformation();
 		}
@@ -179,7 +183,23 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 				var ids = new List<int>();
 				if(_type == CheckListAuditType.Admin)
 					ids = routines.Select(i => i.CheckListId).Distinct().ToList();
-				else ids = routines.Select(i => i.CheckListId).Distinct().ToList();
+				else
+				{
+					var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@";WITH cte AS
+(
+   SELECT *,
+         ROW_NUMBER() OVER (PARTITION BY CheckListId ORDER BY Created DESC) AS rn
+   FROM [CheckListTransfer] where AuditId = {_parentId}
+)
+SELECT CheckListId
+FROM cte
+WHERE rn = 1 and [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}
+");
+					
+					var dt = ds.Tables[0];
+
+					ids.AddRange(from DataRow dr in dt.Rows select (int)dr[0]);
+				}
 				
                 
                 if (ids.Any())
@@ -252,12 +272,26 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 		private void InitToolStripMenuItems()
 		{
 			_toolStripMenuItemOpen = new RadMenuItem();
+			_toolStripMenuMoveTo = new RadMenuItem();
 			// 
 			// toolStripMenuItemView
 			// 
 			_toolStripMenuItemOpen.Text = "Open";
 			_toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
+			// 
+			// toolStripMenuItemView
+			// 
+			_toolStripMenuMoveTo.Text = "Move To";
+			_toolStripMenuMoveTo.Click += ToolStripMenuMoveClick;
 		}
+
+		private void ToolStripMenuMoveClick(object sender, EventArgs e)
+		{
+			var form = new CheckMoveToForm(_directivesViewer.SelectedItem.ItemId, _parentId);
+			if (form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
+		}
+
 		#endregion
 
         private void HeaderControl_EditButtonClick(object sender, EventArgs e)
@@ -319,7 +353,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
-			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen);
+			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,_toolStripMenuMoveTo);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
@@ -328,6 +362,12 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
 					_toolStripMenuItemOpen.Enabled = true;
+					_toolStripMenuMoveTo.Enabled = true;
+				}
+				else
+				{
+					_toolStripMenuItemOpen.Enabled = false;
+					_toolStripMenuMoveTo.Enabled = false;
 				}
 			};
 

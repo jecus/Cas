@@ -9,6 +9,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.Activity;
 using CAS.UI.UICAAControls.Airacraft;
 using CAS.UI.UICAAControls.Audit;
+using CAS.UI.UICAAControls.CheckList.CheckListAudit;
 using CAS.UI.UICAAControls.Document;
 using CAS.UI.UICAAControls.RoutineAudit;
 using CAS.UI.UICAAControls.Specialists;
@@ -243,7 +244,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         private void LinkAuditDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Audit Operator";
-            e.RequestedEntity = new AuditListScreen(_getOperator(), _currentOperator.ItemId);
+            e.RequestedEntity = new AuditListScreen(_getOperator(), _currentOperator.ItemId, CheckListAuditType.User);
         }
 
 
@@ -261,7 +262,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         private void LinkAuditManagmentDisplayerRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Audit Management";
-	        e.RequestedEntity = new AuditListScreen(_getOperator(), _currentOperator.ItemId, true);
+	        e.RequestedEntity = new AuditListScreen(_getOperator(), _currentOperator.ItemId, CheckListAuditType.Admin, true);
         }
 	}
 }

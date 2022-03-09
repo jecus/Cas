@@ -486,6 +486,7 @@ namespace SmartCore.Entities.Dictionaries
 		public static SmartCoreType AuditCheck = new SmartCoreType(3084, "AuditCheck", "AuditCheck", typeof(AuditCheck));
 		public static SmartCoreType AuditCheckRecord = new SmartCoreType(3085, "AuditCheckRecord", "AuditCheckRecord", typeof(AuditCheckRecord));
 		public static SmartCoreType StandartManual = new SmartCoreType(3086, "StandartManual", "StandartManual", typeof(StandartManual));
+		public static SmartCoreType CheckListTransfer = new SmartCoreType(3087, "CheckListTransfer", "CheckListTransfer", typeof(CheckListTransfer));
 		
 		/*
          * Методы

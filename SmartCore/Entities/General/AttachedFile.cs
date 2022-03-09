@@ -8,7 +8,7 @@ using SmartCore.Entities.General.Attributes;
 namespace SmartCore.Entities.General
 {
     /// <summary>
-    /// Класс, описывает прикрепленный фаил
+    /// РљР»Р°СЃСЃ, РѕРїРёСЃС‹РІР°РµС‚ РїСЂРёРєСЂРµРїР»РµРЅРЅС‹Р№ С„Р°РёР»
     /// </summary>
     [Table("Files","dbo","ItemId")]
     [Dto(typeof(AttachedFileDTO))]
@@ -18,7 +18,7 @@ namespace SmartCore.Entities.General
     {
 
         /*
-        *  Свойства
+        *  РЎРІРѕР№СЃС‚РІР°
         */
 
         #region public String FileName { get; set; }
@@ -88,8 +88,8 @@ namespace SmartCore.Entities.General
         #region public bool Equals(AttachedFile other)
         public bool Equals(AttachedFile other)
         {
-            //Без переопределения метода GetHashCode данный метод не работает
-            //Почему? - ХЗ
+            //Р‘РµР· РїРµСЂРµРѕРїСЂРµРґРµР»РµРЅРёСЏ РјРµС‚РѕРґР° GetHashCode РґР°РЅРЅС‹Р№ РјРµС‚РѕРґ РЅРµ СЂР°Р±РѕС‚Р°РµС‚
+            //РџРѕС‡РµРјСѓ? - РҐР—
 
             //Check whether the compared object is null.
             if (ReferenceEquals(other, null)) return false;
@@ -119,8 +119,8 @@ namespace SmartCore.Entities.General
         #region public bool Equals(AttachedFile x, AttachedFile y)
         public bool Equals(AttachedFile x, AttachedFile y)
         {
-            //Без переопределения метода GetHashCode(AttachedFile) данный метод не работает
-            //Почему? - ХЗ
+            //Р‘РµР· РїРµСЂРµРѕРїСЂРµРґРµР»РµРЅРёСЏ РјРµС‚РѕРґР° GetHashCode(AttachedFile) РґР°РЅРЅС‹Р№ РјРµС‚РѕРґ РЅРµ СЂР°Р±РѕС‚Р°РµС‚
+            //РџРѕС‡РµРјСѓ? - РҐР—
 
             //Check whether the compared object references the same data.
             if (ReferenceEquals(x, y)) return true;
@@ -148,12 +148,12 @@ namespace SmartCore.Entities.General
         #endregion
 
         /*
-		*  Методы 
+		*  РњРµС‚РѕРґС‹ 
 		*/
 
         #region public AttachedFile()
         /// <summary>
-        /// Создает прикрепляемый без дополнительной информации
+        /// РЎРѕР·РґР°РµС‚ РїСЂРёРєСЂРµРїР»СЏРµРјС‹Р№ Р±РµР· РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё
         /// </summary>
         public AttachedFile()
         {
@@ -165,7 +165,7 @@ namespace SmartCore.Entities.General
 
         #region public override string ToString()
         /// <summary>
-        /// Перегружаем для отладки
+        /// РџРµСЂРµРіСЂСѓР¶Р°РµРј РґР»СЏ РѕС‚Р»Р°РґРєРё
         /// </summary>
         /// <returns></returns>
         public override string ToString()

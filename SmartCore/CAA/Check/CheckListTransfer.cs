@@ -1,17 +1,21 @@
 ﻿using System;
 using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
+using SmartCore.Auxiliary.Extentions;
+using SmartCore.Entities;
+using SmartCore.Entities.Collections;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Files;
 
 namespace SmartCore.CAA.Check
 {
     [CAADto(typeof(CheckListTransferDTO))]
     [Serializable]
-    public class CheckListTransfer: BaseEntityObject
+    public class CheckListTransfer: BaseEntityObject, IFileContainer
     {
         public DateTime Created { get; set; }
-        public int FileId { get; set; }
         public int AuditId { get; set; }
         public int CheckListId { get; set; }
         public int From { get; set; }
@@ -37,12 +41,50 @@ namespace SmartCore.CAA.Check
 
         public CheckListTransfer()
         {
+            SmartCoreObjectType = SmartCoreType.CheckListTransfer;
             Settings = new CheckListTransferSettings();
         }
+        
+        
+        #region public AttachedFile AttachedFile { get; set; }
+
+        private CommonCollection<ItemFileLink> _files;
+        
+        public CommonCollection<ItemFileLink> Files
+        {
+            get { return _files ?? (_files = new CommonCollection<ItemFileLink>()); }
+            set
+            {
+                if (_files != value)
+                {
+                    if (_files != null)
+                        _files.Clear();
+                    if (value != null)
+                        _files = value;
+                }
+            }
+        }
+        
+        
+        private AttachedFile _attachedFile;
+
+        public AttachedFile AttachedFile
+        {
+            get { return _attachedFile ?? (Files.GetFileByFileLinkType(FileLinkType.CheckListMove)); }
+            set
+            {
+                _attachedFile = value;
+                Files.SetFileByFileLinkType(SmartCoreObjectType.ItemId, value, FileLinkType.CheckListMove);
+            }
+        }
+
+        #endregion
     }
 
+    [Serializable]
     public class CheckListTransferSettings
     {
-        
+        [JsonProperty]
+        public string Remark { get; set; }
     }
 }

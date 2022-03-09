@@ -11,10 +11,7 @@ namespace CAA.Entity.Models.DTO
     {
         [Column("Created")]
         public DateTime Created { get; set; }
-        
-        [Column("FileId")]
-        public int FileId { get; set; }
-        
+
         [Column("AuditId")]
         public int AuditId { get; set; }
         

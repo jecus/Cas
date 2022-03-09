@@ -77,7 +77,7 @@ namespace CAS.UI.UICAAControls.Audit
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public AuditListScreen(Operator currentOperator, int? operatorId, bool editable = false)
+		public AuditListScreen(Operator currentOperator, int? operatorId, CheckListAuditType checkListAuditType, bool editable = false)
 			: this()
 		{
 			if (currentOperator == null)
@@ -94,7 +94,7 @@ namespace CAS.UI.UICAAControls.Audit
 				buttonDeleteSelected.Visible =
 					pictureBox1.Visible =
 						editable;
-			_checkListAuditType = CheckListAuditType.Admin;
+			_checkListAuditType = checkListAuditType;
 			InitToolStripMenuItems();
 			InitListView();
 			UpdateInformation();
@@ -102,7 +102,7 @@ namespace CAS.UI.UICAAControls.Audit
 
 		
 
-        public AuditListScreen(Operator currentOperator, AuditType type, bool editable = false)
+        public AuditListScreen(Operator currentOperator, AuditType type, CheckListAuditType checkListAuditType, bool editable = false)
             : this()
         {
             if (currentOperator == null)
@@ -114,7 +114,7 @@ namespace CAS.UI.UICAAControls.Audit
 
             _filter = new CommonFilterCollection(typeof(IAuditFilterParams));
             
-            _checkListAuditType = CheckListAuditType.User;
+            _checkListAuditType = checkListAuditType;
             buttonAddNew.Visible =
 	            buttonDeleteSelected.Visible =
 		            pictureBox1.Visible =
