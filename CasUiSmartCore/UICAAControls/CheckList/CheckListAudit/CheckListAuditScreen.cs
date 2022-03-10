@@ -315,6 +315,10 @@ WHERE rn = 1 and  IsDeleted = 0");
             {
 	            check.PelRecord = pelRecords.FirstOrDefault(i => i.CheckListId == check.ItemId);
 	            
+	            if (check.PelRecord?.Auditor.ItemId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+		            check.IsEditable = true;
+	            
+	            
 	            if (check.CheckUIType == CheckUIType.Iosa)
 	            {
 		            check.Level = levels.FirstOrDefault(i => i.ItemId == check.Settings.LevelId) ??
@@ -378,24 +382,7 @@ WHERE rn = 1 and  IsDeleted = 0");
             if (form.ShowDialog() == DialogResult.OK)
                 AnimatedThreadWorker.RunWorkerAsync();
 		}
-
-
-		#region private void HighlightItemClick(object sender, EventArgs e)
-
-		private void HighlightItemClick(object sender, EventArgs e)
-		{
-			for (int i = 0; i < _directivesViewer.SelectedItems.Count; i++)
-			{
-				Highlight highLight = (Highlight)((RadMenuItem)sender).Tag;
-				foreach (GridViewCellInfo cell in _directivesViewer.radGridView1.SelectedRows[i].Cells)
-				{
-					cell.Style.CustomizeFill = true;
-					cell.Style.BackColor = Color.FromArgb(highLight.Color);
-				}
-			}
-		}
-
-		#endregion
+        
 
 		#region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 
@@ -439,8 +426,17 @@ WHERE rn = 1 and  IsDeleted = 0");
 					return;
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
-					_toolStripMenuItemOpen.Enabled = true;
-					_toolStripMenuMoveTo.Enabled = _type == CheckListAuditType.User;
+
+					if (_directivesViewer.SelectedItem.IsEditable)
+					{
+						_toolStripMenuItemOpen.Enabled = false;
+						_toolStripMenuMoveTo.Enabled = false;
+					}
+					else
+					{
+						_toolStripMenuItemOpen.Enabled = true;
+						_toolStripMenuMoveTo.Enabled = _type == CheckListAuditType.User;
+					}
 				}
 				else
 				{
@@ -487,21 +483,7 @@ WHERE rn = 1 and  IsDeleted = 0");
 			AnimatedThreadWorker.RunWorkerAsync();
 		}
 		#endregion
-
-		#region private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
-
-		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
-		{
-            if (_currentRoutineId.HasValue)
-            {
-                var form = new CheckListRoutineForm(_currentRoutineId.Value, _operatorId);
-                if (form.ShowDialog() == DialogResult.OK)
-                    AnimatedThreadWorker.RunWorkerAsync();
-			}
-            e.Cancel = true;
-		}
-
-		#endregion
+		
 
 		#region private void ButtonApplyFilterClick(object sender, EventArgs e)
 

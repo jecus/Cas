@@ -38,7 +38,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             
             this.buttonRevisions = new AvControls.AvButtonT.AvButtonT();
             this.buttonPel = new AvControls.AvButtonT.AvButtonT();
-            this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.pictureBox3 = new System.Windows.Forms.PictureBox();
 			this.pictureBox6 = new System.Windows.Forms.PictureBox();
@@ -165,31 +164,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 			this.buttonPel.Visible = false;
 			this.buttonPel.Click += ButtonPelClick;
 			// 
-			// buttonAddNew
-			// 
-			this.buttonAddNew.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-			this.buttonAddNew.ActiveBackgroundImage = null;
-			this.buttonAddNew.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonAddNew.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonAddNew.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonAddNew.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonAddNew.ForeColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonAddNew.Icon = global::CAS.UI.Properties.Resources.AddIcon;
-			this.buttonAddNew.IconLayout = System.Windows.Forms.ImageLayout.Center;
-			this.buttonAddNew.IconNotEnabled = global::CAS.UI.Properties.Resources.AddIcon_gray;
-			this.buttonAddNew.Location = new System.Drawing.Point(66, 0);
-			this.buttonAddNew.Name = "buttonAddDocument";
-			this.buttonAddNew.NormalBackgroundImage = null;
-			this.buttonAddNew.ShowToolTip = true;
-			this.buttonAddNew.Size = new System.Drawing.Size(52, 57);
-			this.buttonAddNew.TabIndex = 0;
-			this.buttonAddNew.TextMain = "";
-			this.buttonAddNew.TextSecondary = "";
-			this.buttonAddNew.Visible = false;
-			this.buttonAddNew.ToolTipText = "Add new";
-			this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
-			this.buttonAddNew.Enabled = !(userType == UserType.ReadOnly);
-			// 
 			// pictureBox2
 			// 
 			this.pictureBox2.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
@@ -235,7 +209,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 			// 
 			this.flowLayoutPanel1.AutoSize = true;
 			this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.flowLayoutPanel1.Controls.Add(this.buttonAddNew);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox2);
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox3);
@@ -270,7 +243,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         #endregion
 
         private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
-        private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddNew;
         private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
 
         private AvControls.AvButtonT.AvButtonT buttonPel;

@@ -168,7 +168,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
     protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
-			if (SelectedItem != null)
+			if (SelectedItem != null && SelectedItem.IsEditable)
 			{
 				if (IsAuditCheck)
 				{

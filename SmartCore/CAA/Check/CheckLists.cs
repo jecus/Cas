@@ -177,8 +177,8 @@ namespace SmartCore.CAA.Check
         }
 
         public AuditPelRecord PelRecord { get; set; }
-
-
+        public bool IsEditable { get; set; }
+        
         public override BaseEntityObject GetCopyUnsaved(bool marked = true)
         {
             var clone = (CheckLists) MemberwiseClone();
