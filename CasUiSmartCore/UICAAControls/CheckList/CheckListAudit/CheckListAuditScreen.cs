@@ -315,7 +315,6 @@ WHERE rn = 1 and [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} 
 			// 
 			_toolStripMenuMoveTo.Text = "Move To";
 			_toolStripMenuMoveTo.Click += ToolStripMenuMoveClick;
-			_toolStripMenuMoveTo.Enabled = _type == CheckListAuditType.User;
 		}
 
 		private void ToolStripMenuMoveClick(object sender, EventArgs e)
@@ -395,7 +394,7 @@ WHERE rn = 1 and [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} 
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
 					_toolStripMenuItemOpen.Enabled = true;
-					_toolStripMenuMoveTo.Enabled = true;
+					_toolStripMenuMoveTo.Enabled = _type == CheckListAuditType.User;
 				}
 				else
 				{
