@@ -104,8 +104,11 @@ namespace CAS.UI.UICAAControls.Audit
 
 		protected override List<CustomCell> GetListViewSubItems(CAAAudit item)
 		{
-			if(_checkListAuditType == CheckListAuditType.Admin)
+			if (_checkListAuditType == CheckListAuditType.Admin)
+			{
 				radGridView1.Columns[0].Width = 0;
+				radGridView1.Columns[0].IsVisible = false;
+			}
 	        
             var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
             var author = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.AuthorId);
@@ -117,11 +120,11 @@ namespace CAS.UI.UICAAControls.Audit
             var closedDate = item.Settings.ClosingDate > DateTimeExtend.GetCASMinDateTime() ? Convert.GetDateFormat(item.Settings.ClosingDate) : "";
 
             var subItems = new List<CustomCell>();
-            if(_checkListAuditType == CheckListAuditType.User)
-	            subItems.Add(CreateRow($"{item.TaskCount} tasks",item.TaskCount));
+            
             
 			subItems.AddRange(new List<CustomCell>()
             {
+	            CreateRow($"{item.TaskCount} tasks",item.TaskCount),
                 CreateRow(item.Operator.ToString(), item.Operator),
 				CreateRow(item.AuditNumber, item.AuditNumber),
 				CreateRow(item.Settings.Status.ToString(), item.Settings.Status),

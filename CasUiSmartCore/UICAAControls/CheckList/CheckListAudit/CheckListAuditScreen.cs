@@ -315,6 +315,7 @@ WHERE rn = 1 and [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} 
 			// 
 			_toolStripMenuMoveTo.Text = "Move To";
 			_toolStripMenuMoveTo.Click += ToolStripMenuMoveClick;
+			_toolStripMenuMoveTo.Enabled = _type == CheckListAuditType.User;
 		}
 
 		private void ToolStripMenuMoveClick(object sender, EventArgs e)
