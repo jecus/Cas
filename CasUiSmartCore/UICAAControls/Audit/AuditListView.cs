@@ -71,7 +71,8 @@ namespace CAS.UI.UICAAControls.Audit
 		/// </summary>
 		protected override void SetHeaders()
 		{
-			AddColumn("Tasks", (int)(radGridView1.Width * 0.20f));
+			AddColumn("All Tasks", (int)(radGridView1.Width * 0.20f));
+			AddColumn("My Tasks", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Operator", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Audit №", (int)(radGridView1.Width * 0.20f));
             AddColumn("Status", (int)(radGridView1.Width * 0.20f));
@@ -108,6 +109,7 @@ namespace CAS.UI.UICAAControls.Audit
 			{
 				radGridView1.Columns[0].Width = 0;
 				radGridView1.Columns[0].IsVisible = false;
+				radGridView1.Columns[1].IsVisible = false;
 			}
 	        
             var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
@@ -125,6 +127,7 @@ namespace CAS.UI.UICAAControls.Audit
 			subItems.AddRange(new List<CustomCell>()
             {
 	            CreateRow($"{item.TaskCount} tasks",item.TaskCount),
+	            CreateRow($"{item.MyTask} tasks",item.MyTask),
                 CreateRow(item.Operator.ToString(), item.Operator),
 				CreateRow(item.AuditNumber, item.AuditNumber),
 				CreateRow(item.Settings.Status.ToString(), item.Settings.Status),

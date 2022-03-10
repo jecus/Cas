@@ -237,9 +237,9 @@ group by a.AuditId
          ROW_NUMBER() OVER (PARTITION BY CheckListId ORDER BY Created DESC) AS rn
    FROM [CheckListTransfer] where AuditId in ({string.Join(",", auditIds)})
 )
-SELECT AuditId, Count(*)
+SELECT AuditId, Count(*), Sum(case when [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} then 1 else 0 end)
 FROM cte
-WHERE rn = 1 and [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}
+WHERE rn = 1 and   ([To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} or [From] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId})  and IsDeleted = 0 
 group by AuditId");
 
 	            var dtC = ds.Tables[0];
@@ -247,10 +247,14 @@ group by AuditId");
 	            {
 		            var auditId = (int)dr[0];
 		            var count = (int)dr[1];
+		            var myTask = (int)dr[2];
 
 		            var audit = _initialDocumentArray.FirstOrDefault(i => i.ItemId == auditId);
 		            if (audit != null)
+		            {
 			            audit.TaskCount = count;
+			            audit.MyTask = myTask;
+		            }
 
 
 	            }

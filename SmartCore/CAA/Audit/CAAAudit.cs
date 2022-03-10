@@ -85,6 +85,7 @@ namespace SmartCore.CAA.Audit
 
         public int OperatorId { get; set; }
         public int TaskCount { get; set; }
+        public int MyTask { get; set; }
     }
 
 
