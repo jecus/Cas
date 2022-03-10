@@ -235,6 +235,7 @@ WHERE rn = 1 and [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} 
                 
                 var pelRecords = GlobalObjects.CaaEnvironment.NewLoader
 	                .GetObjectListAll<AuditPelRecordDTO, AuditPelRecord>(new Filter("AuditId", _parentId));
+                
                 if (records.Any())
                 {
 	                var pelSpec = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<PelSpecialistDTO, PelSpecialist>(new Filter("AuditId", _parentId));
@@ -249,12 +250,57 @@ WHERE rn = 1 and [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} 
             
 	                foreach (var pel in pelSpec)
 		                pel.Specialist = specialists.FirstOrDefault(i => i.ItemId == pel.SpecialistId);
-            
-	                foreach (var rec in pelRecords)
+
+	                
+	                var dsTransfer = GlobalObjects.CaaEnvironment.NewLoader.Execute($@";WITH cte AS
+(
+   SELECT *,
+         ROW_NUMBER() OVER (PARTITION BY CheckListId ORDER BY Created DESC) AS rn
+   FROM [CheckListTransfer] where AuditId = {_parentId}
+)
+SELECT CheckListId, [From], [To]
+FROM cte
+WHERE rn = 1 and  IsDeleted = 0");
+                
+	                var transfers = dsTransfer.Tables[0].Rows.OfType<DataRow>().Select(i => new
 	                {
-		                rec.CheckList = _initialDocumentArray.FirstOrDefault(i => i.ItemId == rec.CheckListId);;
-		                rec.Auditor = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditorId)?.Specialist ?? Specialist.Unknown;
-		                rec.Auditee = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditeeId)?.Specialist ?? Specialist.Unknown;
+		                CheckListId = (int)i[0],
+		                From = (int)i[1],
+		                To = (int)i[2],
+	                });
+	                
+	                if (_type == CheckListAuditType.Admin)
+	                {
+		                foreach (var rec in pelRecords)
+		                {
+			                rec.CheckList = _initialDocumentArray.FirstOrDefault(i => i.ItemId == rec.CheckListId);
+			                var tr = transfers.FirstOrDefault(i => i.CheckListId == rec.CheckListId);
+			                if (tr != null)
+			                {
+				                rec.Auditor = pelSpec.FirstOrDefault(i => i.SpecialistId == tr.To)?.Specialist ?? Specialist.Unknown;
+				                rec.Auditee = pelSpec.FirstOrDefault(i => i.SpecialistId == tr.From)?.Specialist ?? Specialist.Unknown;
+			                }
+		                }
+		                
+	                }
+	                else
+	                {
+		                foreach (var rec in pelRecords)
+		                {
+			                rec.CheckList = _initialDocumentArray.FirstOrDefault(i => i.ItemId == rec.CheckListId);
+			                
+			                var tr = transfers.FirstOrDefault(i => i.CheckListId == rec.CheckListId);
+			                if (tr != null)
+			                {
+				                rec.Auditor = pelSpec.FirstOrDefault(i => i.SpecialistId == tr.To)?.Specialist ?? Specialist.Unknown;
+				                rec.Auditee = pelSpec.FirstOrDefault(i => i.SpecialistId == tr.From)?.Specialist ?? Specialist.Unknown;
+			                }
+			                
+			                if(rec.Auditor.ItemId == -1)
+				                rec.Auditor = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditorId)?.Specialist ?? Specialist.Unknown;
+			                if(rec.Auditee.ItemId == -1)
+								rec.Auditee = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditeeId)?.Specialist ?? Specialist.Unknown;
+		                }
 	                }
                 }
                 
