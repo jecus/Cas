@@ -234,19 +234,19 @@ namespace CAS.UI.UICAAControls
         private void LinkAuditDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Audit CAA";
-            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1, CheckListAuditType.User);
+            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1, AuditType.CAA, CheckListAuditType.User);
         }
 
         private void LinkAuditOpDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Audit Operator";
-            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], AuditType.Operator, CheckListAuditType.User);
+            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1, AuditType.Operator, CheckListAuditType.User);
         }
 
         private void LinkAuditAllDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Audit All";
-            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], AuditType.All, CheckListAuditType.User);
+            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0],-1,  AuditType.All, CheckListAuditType.User);
         }
 
         private void LinkStandartManualDisplayerRequested(object sender, ReferenceEventArgs e)
@@ -258,7 +258,7 @@ namespace CAS.UI.UICAAControls
         private void LinkAuditManagmentDisplayerRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Audit Management";
-	        e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], AuditType.All,CheckListAuditType.Admin, true);
+	        e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1,AuditType.All, CheckListAuditType.Admin, true);
         }
 	}
 }

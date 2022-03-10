@@ -244,7 +244,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         private void LinkAuditDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Audit Operator";
-            e.RequestedEntity = new AuditListScreen(_getOperator(), _currentOperator.ItemId, CheckListAuditType.User);
+            e.RequestedEntity = new AuditListScreen(_getOperator(), _currentOperator.ItemId, AuditType.Operator,CheckListAuditType.User, true);
         }
 
 
@@ -262,7 +262,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         private void LinkAuditManagmentDisplayerRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Audit Management";
-	        e.RequestedEntity = new AuditListScreen(_getOperator(), _currentOperator.ItemId, CheckListAuditType.Admin, true);
+	        e.RequestedEntity = new AuditListScreen(_getOperator(), _currentOperator.ItemId, AuditType.All,CheckListAuditType.Admin, true);
         }
 	}
 }
