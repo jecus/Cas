@@ -184,6 +184,9 @@ namespace CAS.UI.UICAAControls.Audit
 
                     GlobalObjects.CaaEnvironment.NewLoader.Execute(
                         $"update [dbo].[AuditChecks] set IsDeleted = 1 where AuditId = {audit.ItemId}");
+                    
+                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
+	                    $"update [dbo].[AuditPelRecords] set IsDeleted = 1 where AuditId = {audit.ItemId}");
                 }
 
 
