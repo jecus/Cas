@@ -46,6 +46,7 @@ namespace SmartCore.CAA.PEL
         public CheckLists CheckList { get; set; }
         public Specialist Auditor { get; set; }
         public Specialist Auditee { get; set; }
+        public Specialist CurrentAuditor { get; set; }
 
         public AuditPelRecord()
         {

@@ -137,6 +137,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 	            InitListView();
             }
             
+            
             if (_directivesViewer is CheckListAuditView lite)
             {
 	            lite.AuditId = _parentId;
@@ -144,10 +145,16 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 	                                (_routineAudit?.Type == ProgramType.CAAKG ||
 	                                 _routineAudit?.Type == ProgramType.IOSA);
             }
-            else if(_directivesViewer is CheckListView view)
+            else if(_directivesViewer is CheckListSAFAAuditView view)
             {
 	            view.AuditId = _parentId;
 	            view.IsAuditCheck = (_routineAudit?.Type == ProgramType.CAAKG ||
+	                                 _routineAudit?.Type == ProgramType.IOSA);
+            }
+            else if(_directivesViewer is CheckListICAOAuditView icao)
+            {
+	            icao.AuditId = _parentId;
+	            icao.IsAuditCheck = (_routineAudit?.Type == ProgramType.CAAKG ||
 	                                 _routineAudit?.Type == ProgramType.IOSA);
             }
             
@@ -268,38 +275,17 @@ WHERE rn = 1 and  IsDeleted = 0");
 		                From = (int)i[1],
 		                To = (int)i[2],
 	                });
-	                
-	                if (_type == CheckListAuditType.Admin)
+
+	                foreach (var rec in pelRecords)
 	                {
-		                foreach (var rec in pelRecords)
-		                {
-			                rec.CheckList = _initialDocumentArray.FirstOrDefault(i => i.ItemId == rec.CheckListId);
-			                var tr = transfers.FirstOrDefault(i => i.CheckListId == rec.CheckListId);
-			                if (tr != null)
-			                {
-				                rec.Auditor = pelSpec.FirstOrDefault(i => i.SpecialistId == tr.To)?.Specialist ?? Specialist.Unknown;
-				                rec.Auditee = pelSpec.FirstOrDefault(i => i.SpecialistId == tr.From)?.Specialist ?? Specialist.Unknown;
-			                }
-		                }
+		                rec.CheckList = _initialDocumentArray.FirstOrDefault(i => i.ItemId == rec.CheckListId);
+		                rec.Auditor = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditorId)?.Specialist ?? Specialist.Unknown;
+		                rec.Auditee = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditeeId)?.Specialist ?? Specialist.Unknown;
 		                
-	                }
-	                else
-	                {
-		                foreach (var rec in pelRecords)
+		                var tr = transfers.FirstOrDefault(i => i.CheckListId == rec.CheckListId);
+		                if (tr != null)
 		                {
-			                rec.CheckList = _initialDocumentArray.FirstOrDefault(i => i.ItemId == rec.CheckListId);
-			                
-			                var tr = transfers.FirstOrDefault(i => i.CheckListId == rec.CheckListId);
-			                if (tr != null)
-			                {
-				                rec.Auditor = pelSpec.FirstOrDefault(i => i.SpecialistId == tr.To)?.Specialist ?? Specialist.Unknown;
-				                rec.Auditee = pelSpec.FirstOrDefault(i => i.SpecialistId == tr.From)?.Specialist ?? Specialist.Unknown;
-			                }
-			                
-			                if(rec.Auditor.ItemId == -1)
-				                rec.Auditor = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditorId)?.Specialist ?? Specialist.Unknown;
-			                if(rec.Auditee.ItemId == -1)
-								rec.Auditee = pelSpec.FirstOrDefault(i => i.ItemId == rec.AuditeeId)?.Specialist ?? Specialist.Unknown;
+			                rec.CurrentAuditor = pelSpec.FirstOrDefault(i => i.SpecialistId == tr.To)?.Specialist ?? Specialist.Unknown;
 		                }
 	                }
                 }
@@ -315,7 +301,7 @@ WHERE rn = 1 and  IsDeleted = 0");
             {
 	            check.PelRecord = pelRecords.FirstOrDefault(i => i.CheckListId == check.ItemId);
 	            
-	            if (check.PelRecord?.Auditor.ItemId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+	            if (check.PelRecord?.CurrentAuditor.ItemId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
 		            check.IsEditable = true;
 	            
 	            
@@ -427,7 +413,7 @@ WHERE rn = 1 and  IsDeleted = 0");
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
 
-					if (_directivesViewer.SelectedItem.IsEditable)
+					if (!_directivesViewer.SelectedItem.IsEditable)
 					{
 						_toolStripMenuItemOpen.Enabled = false;
 						_toolStripMenuMoveTo.Enabled = false;

@@ -64,9 +64,14 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         protected override void GroupingItems()
         {
             this.radGridView1.GroupDescriptors.Clear();
+            
+            var descriptor1 = new GroupDescriptor();
+            descriptor1.GroupNames.Add("Current",  ListSortDirection.Ascending);
+            
 			var descriptor = new GroupDescriptor();
             foreach (var colName in new List<string>{ "Section №" , "Section Name" , "Part №" , "Part Name", "SubPart №","SubPart Name" })
                 descriptor.GroupNames.Add(colName,  ListSortDirection.Ascending);
+            this.radGridView1.GroupDescriptors.Add(descriptor1);
             this.radGridView1.GroupDescriptors.Add(descriptor);
 
             
@@ -94,6 +99,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             AddColumn("Workflow Status", (int)(radGridView1.Width * 0.2f));
             AddColumn("Auditor", (int)(radGridView1.Width * 0.3f));
             AddColumn("Auditee", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Current", (int)(radGridView1.Width * 0.3f));
 
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
         }
@@ -129,11 +135,14 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             var auditor = Specialist.Unknown.FirstName;
             var auditee = Specialist.Unknown.FirstName;
-
+            var current = "";
             if (item.PelRecord != null)
             {
                 auditor = $"{item.PelRecord?.Auditor.FirstName} {item.PelRecord?.Auditor.LastName}";
                 auditee = $"{item.PelRecord?.Auditee.FirstName} {item.PelRecord?.Auditee.LastName}";
+                if(item.PelRecord?.CurrentAuditor != null)
+                    current = $"{item.PelRecord?.CurrentAuditor.FirstName} {item.PelRecord?.CurrentAuditor.LastName}";
+                else current = $"My Tasks";
             }
             
 
@@ -154,6 +163,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                     
                     CreateRow(auditor, item.PelRecord?.Auditor),
                     CreateRow(auditee, item.PelRecord?.Auditee),
+                    CreateRow(current, item.PelRecord?.CurrentAuditor),
                     CreateRow(author, author),
                 };
 
@@ -245,6 +255,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             AddColumn("Category", (int)(radGridView1.Width * 0.24f));
             AddColumn("Auditor", (int)(radGridView1.Width * 0.3f));
             AddColumn("Auditee", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Current", (int)(radGridView1.Width * 0.3f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
         }
         #endregion
@@ -257,11 +268,15 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             var auditor = Specialist.Unknown.FirstName;
             var auditee = Specialist.Unknown.FirstName;
+            var current = "";
 
             if (item.PelRecord != null)
             {
                 auditor = $"{item.PelRecord?.Auditor.FirstName} {item.PelRecord?.Auditor.LastName}";
                 auditee = $"{item.PelRecord?.Auditee.FirstName} {item.PelRecord?.Auditee.LastName}";
+                if(item.PelRecord?.CurrentAuditor != null)
+                    current = $"{item.PelRecord?.CurrentAuditor.FirstName} {item.PelRecord?.CurrentAuditor.LastName}";
+                else current = $"My Tasks";
             }
             
             var subItems = new List<CustomCell>()
@@ -275,6 +290,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 CreateRow(item.Level.ToString(), item.Level),
                 CreateRow(auditor, item.PelRecord?.Auditor),
                 CreateRow(auditee, item.PelRecord?.Auditee),
+                CreateRow(current, item.PelRecord?.CurrentAuditor),
                 CreateRow(author, author)
             };
 
@@ -318,6 +334,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             AddColumn("Level", (int)(radGridView1.Width * 0.2f));
             AddColumn("Auditor", (int)(radGridView1.Width * 0.3f));
             AddColumn("Auditee", (int)(radGridView1.Width * 0.3f));
+            AddColumn("Current", (int)(radGridView1.Width * 0.3f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
         }
         #endregion
@@ -330,11 +347,14 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             var auditor = Specialist.Unknown.FirstName;
             var auditee = Specialist.Unknown.FirstName;
-
+            var current = "";
             if (item.PelRecord != null)
             {
                 auditor = $"{item.PelRecord?.Auditor.FirstName} {item.PelRecord?.Auditor.LastName}";
                 auditee = $"{item.PelRecord?.Auditee.FirstName} {item.PelRecord?.Auditee.LastName}";
+                if(item.PelRecord?.CurrentAuditor != null)
+                    current = $"{item.PelRecord?.CurrentAuditor.FirstName} {item.PelRecord?.CurrentAuditor.LastName}";
+                else current = $"My Tasks";
             }
             
             var subItems = new List<CustomCell>()
@@ -351,6 +371,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 CreateRow(item.Level.ToString(), item.Level),
                 CreateRow(auditor, item.PelRecord?.Auditor),
                 CreateRow(auditee, item.PelRecord?.Auditee),
+                CreateRow(current, item.PelRecord?.CurrentAuditor),
                 CreateRow(author, author),
             };
 
