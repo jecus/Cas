@@ -22,6 +22,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 	public partial class CheckListAuditView : BaseGridViewControl<CheckLists>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
+        private readonly CheckListAuditType _type;
 
         public bool IsAuditCheck { get; set; }
         public int? AuditId { get; set; }
@@ -43,9 +44,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         /// <summary>
         /// </summary>
         /// <param name="animatedThreadWorker"></param>
-        public CheckListAuditView(AnimatedThreadWorker animatedThreadWorker)
+        /// <param
+        ///     name="checkListAuditType">
+        /// </param>
+        public CheckListAuditView(AnimatedThreadWorker animatedThreadWorker, CheckListAuditType type)
 		{
             _animatedThreadWorker = animatedThreadWorker;
+            _type = type;
             InitializeComponent();
             ColumnIndexes = new List<string>()
             {
@@ -65,13 +70,20 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         {
             this.radGridView1.GroupDescriptors.Clear();
             
-            var descriptor1 = new GroupDescriptor();
-            descriptor1.GroupNames.Add("Current",  ListSortDirection.Ascending);
+            
             
 			var descriptor = new GroupDescriptor();
             foreach (var colName in new List<string>{ "Section №" , "Section Name" , "Part №" , "Part Name", "SubPart №","SubPart Name" })
                 descriptor.GroupNames.Add(colName,  ListSortDirection.Ascending);
-            this.radGridView1.GroupDescriptors.Add(descriptor1);
+
+            if (_type == CheckListAuditType.User)
+            {
+                var descriptor1 = new GroupDescriptor();
+                descriptor1.GroupNames.Add("Current",  ListSortDirection.Ascending);
+                this.radGridView1.GroupDescriptors.Add(descriptor1);
+            }
+            
+            
             this.radGridView1.GroupDescriptors.Add(descriptor);
 
             
@@ -192,11 +204,10 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                     if (form.ShowDialog() == DialogResult.OK)
                         _animatedThreadWorker.RunWorkerAsync();
 				}
-
-
-				
-                e.Cancel = true;
-			}
+            }
+            
+            
+            e.Cancel = true;
 		}
 		#endregion
 
@@ -236,7 +247,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             
         }
         
-        public CheckListSAFAAuditView(AnimatedThreadWorker worker) :  base(worker)
+        public CheckListSAFAAuditView(AnimatedThreadWorker worker, CheckListAuditType type) :  base(worker, type)
         {
         }
         
@@ -312,7 +323,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             
         }
         
-        public CheckListICAOAuditView(AnimatedThreadWorker worker) :  base(worker)
+        public CheckListICAOAuditView(AnimatedThreadWorker worker, CheckListAuditType type) :  base(worker, type)
         {
         }
         

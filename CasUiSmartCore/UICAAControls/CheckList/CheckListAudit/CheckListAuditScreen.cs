@@ -217,7 +217,7 @@ WHERE rn = 1 and ([To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}
                     var auditChecks = GlobalObjects.CaaEnvironment.NewLoader
                         .GetObjectListAll<AuditCheckDTO, AuditCheck>(new Filter("CheckListId", ids), loadChild: true).ToList();
 
-					_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("ItemId", ids), loadChild: true));
+					_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("ItemId", ids), loadChild: true, true));
 					
                     var revisions = new List<CheckListRevision>();
                     var revedIds = _initialDocumentArray.Where(i => i.RevisionId.HasValue).Select(i => i.RevisionId.Value).Distinct().ToList();
@@ -389,11 +389,11 @@ WHERE rn = 1 and  IsDeleted = 0");
 		private void InitListView()
         {
 	        if (_manual.CheckUIType == CheckUIType.Iosa)
-		        _directivesViewer = new CheckListAuditView(AnimatedThreadWorker);
+		        _directivesViewer = new CheckListAuditView(AnimatedThreadWorker,_type);
 	        else  if (_manual.CheckUIType == CheckUIType.Safa)
-		        _directivesViewer = new CheckListSAFAAuditView(AnimatedThreadWorker);
+		        _directivesViewer = new CheckListSAFAAuditView(AnimatedThreadWorker,_type);
 	        else  if (_manual.CheckUIType == CheckUIType.Icao)
-		        _directivesViewer = new CheckListICAOAuditView(AnimatedThreadWorker);
+		        _directivesViewer = new CheckListICAOAuditView(AnimatedThreadWorker,_type);
 	        else return;
 
 			_directivesViewer.TabIndex = 2;
