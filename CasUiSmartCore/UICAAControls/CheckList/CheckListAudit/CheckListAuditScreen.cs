@@ -61,7 +61,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 		private BaseGridViewControl<CheckLists> _directivesViewer;
 
 		private RadMenuItem _toolStripMenuItemOpen;
-		private RadMenuItem _toolStripMenuMoveTo;
+		private RadMenuItem _toolStripMenuSendTo;
 		private SmartCore.CAA.RoutineAudits.RoutineAudit _routineAudit;
         private CAAAudit _audit;
 
@@ -340,7 +340,7 @@ WHERE rn = 1 and  IsDeleted = 0");
 		private void InitToolStripMenuItems()
 		{
 			_toolStripMenuItemOpen = new RadMenuItem();
-			_toolStripMenuMoveTo = new RadMenuItem();
+			_toolStripMenuSendTo = new RadMenuItem();
 			// 
 			// toolStripMenuItemView
 			// 
@@ -349,11 +349,11 @@ WHERE rn = 1 and  IsDeleted = 0");
 			// 
 			// toolStripMenuItemView
 			// 
-			_toolStripMenuMoveTo.Text = "Move To";
-			_toolStripMenuMoveTo.Click += ToolStripMenuMoveClick;
+			_toolStripMenuSendTo.Text = "Send To";
+			_toolStripMenuSendTo.Click += ToolStripMenuSendClick;
 		}
 
-		private void ToolStripMenuMoveClick(object sender, EventArgs e)
+		private void ToolStripMenuSendClick(object sender, EventArgs e)
 		{
 			var form = new CheckMoveToForm(_directivesViewer.SelectedItem.ItemId, _parentId);
 			if (form.ShowDialog() == DialogResult.OK)
@@ -404,7 +404,10 @@ WHERE rn = 1 and  IsDeleted = 0");
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
-			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,_toolStripMenuMoveTo);
+			
+			if(_audit.Settings.Status == RoutineStatus.Published)
+				_directivesViewer.AddMenuItems(_toolStripMenuItemOpen, _toolStripMenuSendTo);
+			else _directivesViewer.AddMenuItems(_toolStripMenuItemOpen);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
@@ -416,18 +419,18 @@ WHERE rn = 1 and  IsDeleted = 0");
 					if (!_directivesViewer.SelectedItem.IsEditable)
 					{
 						_toolStripMenuItemOpen.Enabled = false;
-						_toolStripMenuMoveTo.Enabled = false;
+						_toolStripMenuSendTo.Enabled = false;
 					}
 					else
 					{
 						_toolStripMenuItemOpen.Enabled = true;
-						_toolStripMenuMoveTo.Enabled = _type == CheckListAuditType.User;
+						_toolStripMenuSendTo.Enabled = _type == CheckListAuditType.User;
 					}
 				}
 				else
 				{
 					_toolStripMenuItemOpen.Enabled = false;
-					_toolStripMenuMoveTo.Enabled = false;
+					_toolStripMenuSendTo.Enabled = false;
 				}
 			};
 
