@@ -333,6 +333,11 @@ group by AuditId");
                     item.Settings.PublishingDate = DateTime.Now;
                     item.Settings.PublishedId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
 					GlobalObjects.CaaEnvironment.NewKeeper.Save(audit);
+
+					GlobalObjects.CaaEnvironment.Execute($@"update dbo.[AuditChecks] 
+					set SettingsJSON = JSON_MODIFY(JSON_MODIFY(SettingsJSON, '$.WorkflowStatusId' , {WorkFlowStatus.Open.ItemId.ToString()}), '$.WorkflowStageId' , {WorkFlowStage.Evaluation.ItemId.ToString()}) 
+					where AuditId = {audit.ItemId} and IsDeleted = 0");
+
                 }
                 else
                 {
