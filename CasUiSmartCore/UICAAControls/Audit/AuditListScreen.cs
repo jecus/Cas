@@ -329,8 +329,7 @@ group by AuditId");
                 var audit = item;
                 if (audit.Settings.Status != RoutineStatus.Closed)
                 {
-                    audit.Settings.WorkflowStageId = WorkFlowStage.Open.ItemId;
-                    audit.Settings.Status = RoutineStatus.Published;
+	                audit.Settings.Status = RoutineStatus.Published;
                     item.Settings.PublishingDate = DateTime.Now;
                     item.Settings.PublishedId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
 					GlobalObjects.CaaEnvironment.NewKeeper.Save(audit);

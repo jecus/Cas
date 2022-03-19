@@ -37,7 +37,8 @@ namespace SmartCore.CAA.Audit
         {
             Settings = new AuditCheckSettings()
             {
-                WorkflowStatusId = -1
+                WorkflowStatusId = WorkFlowStatus.Open.ItemId,
+                WorkflowStageId = WorkFlowStage.View.ItemId
             };
             SmartCoreObjectType = SmartCoreType.AuditCheck;
             ItemId = -1;
@@ -64,5 +65,8 @@ namespace SmartCore.CAA.Audit
 
         [JsonProperty("WorkflowStatusId")]
         public int WorkflowStatusId { get; set; }
+        
+        [JsonProperty("WorkflowStageId")]
+        public int WorkflowStageId { get; set; }
     }
 }

@@ -86,8 +86,7 @@ namespace CAS.UI.UICAAControls.Audit
 			AddColumn("K * MH", (int)(radGridView1.Width * 0.30f));
 
             AddColumn("WorkTime", (int)(radGridView1.Width * 0.30f));
-            AddColumn("Stage", (int)(radGridView1.Width * 0.30f));
-			AddColumn("Remark", (int)(radGridView1.Width * 0.30f));
+            AddColumn("Remark", (int)(radGridView1.Width * 0.30f));
             AddColumn("Author", (int)(radGridView1.Width * 0.30f));
             AddColumn("Published By", (int)(radGridView1.Width * 0.30f));
             AddColumn("Closed By", (int)(radGridView1.Width * 0.30f));
@@ -116,7 +115,6 @@ namespace CAS.UI.UICAAControls.Audit
             var author = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.AuthorId);
             var published = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.PublishedId);
             var closed = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.ClosedId);
-            var stage = WorkFlowStage.GetItemById(item.Settings.WorkflowStageId);
 
             var publishedDate = item.Settings.PublishingDate > DateTimeExtend.GetCASMinDateTime() ? Convert.GetDateFormat(item.Settings.PublishingDate) : "";
             var closedDate = item.Settings.ClosingDate > DateTimeExtend.GetCASMinDateTime() ? Convert.GetDateFormat(item.Settings.ClosingDate) : "";
@@ -143,7 +141,6 @@ namespace CAS.UI.UICAAControls.Audit
 
 				
                 CreateRow(item.WorkTime, item.WorkTime),
-                CreateRow(stage.ToString(), stage),
                 CreateRow(item.Settings.Remark, item.Settings.Remark),
                 CreateRow(author, author),
                 CreateRow(published, published),

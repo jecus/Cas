@@ -120,7 +120,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 			pictureBox6.Visible = true;
 			buttonPel.Visible = true;
 	            
-			labelTitle.Text = $"Workflow Stage : {WorkFlowStage.GetItemById(_audit.Settings.WorkflowStageId)}";
+			labelTitle.Text = $"Workflow Status : {_audit.Settings.Status.ToString()}";
 			labelTitle.Visible = true;
             
             if (_manual.CheckUIType == CheckUIType.Iosa)

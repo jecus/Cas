@@ -75,12 +75,7 @@ namespace CAS.UI.UICAAControls.Audit
             textBoxAuthor.Text = GlobalObjects.CaaEnvironment?.GetCorrector(_audit.Settings.AuthorId);
             textBoxPublishedBy.Text = GlobalObjects.CaaEnvironment?.GetCorrector(_audit.Settings.PublishedId);
             textBoxClosedBy.Text = GlobalObjects.CaaEnvironment?.GetCorrector(_audit.Settings.ClosedId);
-
-            comboBoxWorkFlow.Items.Clear();
-            comboBoxWorkFlow.Items.AddRange(WorkFlowStage.Items.ToArray());
-            comboBoxWorkFlow.SelectedItem = WorkFlowStage.GetItemById(_audit.Settings.WorkflowStageId);
-
-
+            
             comboBoxOperator.Items.Clear();
             comboBoxOperator.Items.AddRange(_operators.ToArray());
             comboBoxOperator.Items.Add(AllOperators.Unknown);
@@ -96,7 +91,6 @@ namespace CAS.UI.UICAAControls.Audit
         {
             _audit.OperatorId = ((AllOperators) comboBoxOperator.SelectedItem).ItemId;
             _audit.AuditNumber =  metroTextBoxAuditNumber.Text;
-            _audit.Settings.WorkflowStageId = (comboBoxWorkFlow.SelectedItem as WorkFlowStage).ItemId;
             _audit.Settings.KMH = numericUpDown1.Value;
             
             _audit.Settings.From =  dateTimePickerFrom.Value;
@@ -107,7 +101,6 @@ namespace CAS.UI.UICAAControls.Audit
             {
                 if (_audit.Settings.PublishingDate <= DateTimeExtend.GetCASMinDateTime())
                 {
-                    _audit.Settings.WorkflowStageId = WorkFlowStage.Open.ItemId;
                     _audit.Settings.PublishingDate = DateTime.Now;
                     _audit.Settings.PublishedId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
                 }

@@ -74,7 +74,6 @@ namespace SmartCore.CAA.Audit
             Settings = new CAAAuditSettings()
             {
                 Status = RoutineStatus.Open,
-                WorkflowStageId = -1,
                 PublishingDate =  DateTimeExtend.GetCASMinDateTime(),
                 ClosingDate = DateTimeExtend.GetCASMinDateTime(),
                 CreateDate = DateTime.Today
@@ -94,7 +93,6 @@ namespace SmartCore.CAA.Audit
     {
         public CAAAuditSettings()
         {
-            WorkflowStageId = -1;
             From = DateTime.Today;
             To = DateTime.Today;
             Extations = new List<Extation>();
@@ -103,8 +101,6 @@ namespace SmartCore.CAA.Audit
         [JsonProperty("Status")]
         public RoutineStatus Status { get; set; }
 
-        [JsonProperty("WorkflowStageId")]
-        public int WorkflowStageId { get; set; }
         
         [JsonProperty("Extations")]
         public List<Extation> Extations{ get; set; }

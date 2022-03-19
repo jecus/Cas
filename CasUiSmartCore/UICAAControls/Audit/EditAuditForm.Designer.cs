@@ -33,7 +33,6 @@ namespace CAS.UI.UICAAControls.Audit
         {
             MetroFramework.Controls.MetroLabel metroLabel2;
             MetroFramework.Controls.MetroLabel metroLabel6;
-            MetroFramework.Controls.MetroLabel metroLabel1;
             MetroFramework.Controls.MetroLabel metroLabel3;
             MetroFramework.Controls.MetroLabel label13;
             MetroFramework.Controls.MetroLabel label11;
@@ -41,9 +40,9 @@ namespace CAS.UI.UICAAControls.Audit
             MetroFramework.Controls.MetroLabel label3;
             MetroFramework.Controls.MetroLabel label2;
             MetroFramework.Controls.MetroLabel labelValidFrom;
-            MetroFramework.Controls.MetroLabel metroLabel4;
             MetroFramework.Controls.MetroLabel metroLabel5;
             MetroFramework.Controls.MetroLabel metroLabel7;
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroTextBoxAuditNumber = new MetroFramework.Controls.MetroTextBox();
             this.comboBoxOperator = new System.Windows.Forms.ComboBox();
             this.buttonOk = new System.Windows.Forms.Button();
@@ -56,14 +55,12 @@ namespace CAS.UI.UICAAControls.Audit
             this.textBoxAuthor = new MetroFramework.Controls.MetroTextBox();
             this.dateTimePickerPublishingDate = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerIssueCreateDate = new System.Windows.Forms.DateTimePicker();
-            this.comboBoxWorkFlow = new System.Windows.Forms.ComboBox();
             this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             metroLabel2 = new MetroFramework.Controls.MetroLabel();
             metroLabel6 = new MetroFramework.Controls.MetroLabel();
-            metroLabel1 = new MetroFramework.Controls.MetroLabel();
             metroLabel3 = new MetroFramework.Controls.MetroLabel();
             label13 = new MetroFramework.Controls.MetroLabel();
             label11 = new MetroFramework.Controls.MetroLabel();
@@ -71,7 +68,6 @@ namespace CAS.UI.UICAAControls.Audit
             label3 = new MetroFramework.Controls.MetroLabel();
             label2 = new MetroFramework.Controls.MetroLabel();
             labelValidFrom = new MetroFramework.Controls.MetroLabel();
-            metroLabel4 = new MetroFramework.Controls.MetroLabel();
             metroLabel5 = new MetroFramework.Controls.MetroLabel();
             metroLabel7 = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -102,20 +98,20 @@ namespace CAS.UI.UICAAControls.Audit
             // 
             // metroLabel1
             // 
-            metroLabel1.AutoSize = true;
-            metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel1.Location = new System.Drawing.Point(23, 115);
-            metroLabel1.Name = "metroLabel1";
-            metroLabel1.Size = new System.Drawing.Size(46, 19);
-            metroLabel1.TabIndex = 341;
-            metroLabel1.Text = "Status:";
-            metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.metroLabel1.Location = new System.Drawing.Point(23, 115);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(46, 19);
+            this.metroLabel1.TabIndex = 341;
+            this.metroLabel1.Text = "Status:";
+            this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // metroLabel3
             // 
             metroLabel3.AutoSize = true;
             metroLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel3.Location = new System.Drawing.Point(22, 334);
+            metroLabel3.Location = new System.Drawing.Point(22, 306);
             metroLabel3.Name = "metroLabel3";
             metroLabel3.Size = new System.Drawing.Size(65, 19);
             metroLabel3.TabIndex = 355;
@@ -126,7 +122,7 @@ namespace CAS.UI.UICAAControls.Audit
             // 
             label13.AutoSize = true;
             label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label13.Location = new System.Drawing.Point(23, 282);
+            label13.Location = new System.Drawing.Point(23, 254);
             label13.Name = "label13";
             label13.Size = new System.Drawing.Size(86, 19);
             label13.TabIndex = 353;
@@ -137,7 +133,7 @@ namespace CAS.UI.UICAAControls.Audit
             // 
             label11.AutoSize = true;
             label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label11.Location = new System.Drawing.Point(23, 228);
+            label11.Location = new System.Drawing.Point(23, 200);
             label11.Name = "label11";
             label11.Size = new System.Drawing.Size(86, 19);
             label11.TabIndex = 352;
@@ -148,7 +144,7 @@ namespace CAS.UI.UICAAControls.Audit
             // 
             label4.AutoSize = true;
             label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label4.Location = new System.Drawing.Point(23, 308);
+            label4.Location = new System.Drawing.Point(23, 280);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(70, 19);
             label4.TabIndex = 349;
@@ -159,7 +155,7 @@ namespace CAS.UI.UICAAControls.Audit
             // 
             label3.AutoSize = true;
             label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label3.Location = new System.Drawing.Point(23, 256);
+            label3.Location = new System.Drawing.Point(23, 228);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(53, 19);
             label3.TabIndex = 347;
@@ -170,7 +166,7 @@ namespace CAS.UI.UICAAControls.Audit
             // 
             label2.AutoSize = true;
             label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label2.Location = new System.Drawing.Point(23, 200);
+            label2.Location = new System.Drawing.Point(23, 172);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(102, 19);
             label2.TabIndex = 346;
@@ -181,29 +177,18 @@ namespace CAS.UI.UICAAControls.Audit
             // 
             labelValidFrom.AutoSize = true;
             labelValidFrom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            labelValidFrom.Location = new System.Drawing.Point(23, 172);
+            labelValidFrom.Location = new System.Drawing.Point(23, 144);
             labelValidFrom.Name = "labelValidFrom";
             labelValidFrom.Size = new System.Drawing.Size(82, 19);
             labelValidFrom.TabIndex = 344;
             labelValidFrom.Text = "Create Date:";
             labelValidFrom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // metroLabel4
-            // 
-            metroLabel4.AutoSize = true;
-            metroLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel4.Location = new System.Drawing.Point(23, 143);
-            metroLabel4.Name = "metroLabel4";
-            metroLabel4.Size = new System.Drawing.Size(104, 19);
-            metroLabel4.TabIndex = 357;
-            metroLabel4.Text = "Workflow Stage:";
-            metroLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // metroLabel5
             // 
             metroLabel5.AutoSize = true;
             metroLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel5.Location = new System.Drawing.Point(22, 388);
+            metroLabel5.Location = new System.Drawing.Point(22, 360);
             metroLabel5.Name = "metroLabel5";
             metroLabel5.Size = new System.Drawing.Size(25, 19);
             metroLabel5.TabIndex = 362;
@@ -214,7 +199,7 @@ namespace CAS.UI.UICAAControls.Audit
             // 
             metroLabel7.AutoSize = true;
             metroLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel7.Location = new System.Drawing.Point(22, 360);
+            metroLabel7.Location = new System.Drawing.Point(22, 332);
             metroLabel7.Name = "metroLabel7";
             metroLabel7.Size = new System.Drawing.Size(44, 19);
             metroLabel7.TabIndex = 360;
@@ -301,7 +286,7 @@ namespace CAS.UI.UICAAControls.Audit
             // numericUpDown1
             // 
             this.numericUpDown1.DecimalPlaces = 2;
-            this.numericUpDown1.Location = new System.Drawing.Point(148, 331);
+            this.numericUpDown1.Location = new System.Drawing.Point(148, 303);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(251, 20);
             this.numericUpDown1.TabIndex = 356;
@@ -323,7 +308,7 @@ namespace CAS.UI.UICAAControls.Audit
             this.textBoxPublishedBy.Enabled = false;
             this.textBoxPublishedBy.ForeColor = System.Drawing.Color.DimGray;
             this.textBoxPublishedBy.Lines = new string[0];
-            this.textBoxPublishedBy.Location = new System.Drawing.Point(149, 279);
+            this.textBoxPublishedBy.Location = new System.Drawing.Point(149, 251);
             this.textBoxPublishedBy.MaxLength = 32767;
             this.textBoxPublishedBy.Name = "textBoxPublishedBy";
             this.textBoxPublishedBy.PasswordChar = '\0';
@@ -343,7 +328,7 @@ namespace CAS.UI.UICAAControls.Audit
             this.dateTimePickerClosingDate.CalendarForeColor = System.Drawing.Color.DimGray;
             this.dateTimePickerClosingDate.Enabled = false;
             this.dateTimePickerClosingDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.dateTimePickerClosingDate.Location = new System.Drawing.Point(149, 225);
+            this.dateTimePickerClosingDate.Location = new System.Drawing.Point(149, 197);
             this.dateTimePickerClosingDate.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerClosingDate.Name = "dateTimePickerClosingDate";
             this.dateTimePickerClosingDate.Size = new System.Drawing.Size(250, 22);
@@ -366,7 +351,7 @@ namespace CAS.UI.UICAAControls.Audit
             this.textBoxClosedBy.Enabled = false;
             this.textBoxClosedBy.ForeColor = System.Drawing.Color.DimGray;
             this.textBoxClosedBy.Lines = new string[0];
-            this.textBoxClosedBy.Location = new System.Drawing.Point(149, 305);
+            this.textBoxClosedBy.Location = new System.Drawing.Point(149, 277);
             this.textBoxClosedBy.MaxLength = 32767;
             this.textBoxClosedBy.Name = "textBoxClosedBy";
             this.textBoxClosedBy.PasswordChar = '\0';
@@ -398,7 +383,7 @@ namespace CAS.UI.UICAAControls.Audit
             this.textBoxAuthor.Enabled = false;
             this.textBoxAuthor.ForeColor = System.Drawing.Color.DimGray;
             this.textBoxAuthor.Lines = new string[0];
-            this.textBoxAuthor.Location = new System.Drawing.Point(149, 253);
+            this.textBoxAuthor.Location = new System.Drawing.Point(149, 225);
             this.textBoxAuthor.MaxLength = 32767;
             this.textBoxAuthor.Name = "textBoxAuthor";
             this.textBoxAuthor.PasswordChar = '\0';
@@ -418,7 +403,7 @@ namespace CAS.UI.UICAAControls.Audit
             this.dateTimePickerPublishingDate.CalendarForeColor = System.Drawing.Color.DimGray;
             this.dateTimePickerPublishingDate.Enabled = false;
             this.dateTimePickerPublishingDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.dateTimePickerPublishingDate.Location = new System.Drawing.Point(149, 197);
+            this.dateTimePickerPublishingDate.Location = new System.Drawing.Point(149, 169);
             this.dateTimePickerPublishingDate.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerPublishingDate.Name = "dateTimePickerPublishingDate";
             this.dateTimePickerPublishingDate.Size = new System.Drawing.Size(250, 22);
@@ -429,27 +414,17 @@ namespace CAS.UI.UICAAControls.Audit
             this.dateTimePickerIssueCreateDate.CalendarForeColor = System.Drawing.Color.DimGray;
             this.dateTimePickerIssueCreateDate.Enabled = false;
             this.dateTimePickerIssueCreateDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.dateTimePickerIssueCreateDate.Location = new System.Drawing.Point(149, 169);
+            this.dateTimePickerIssueCreateDate.Location = new System.Drawing.Point(149, 141);
             this.dateTimePickerIssueCreateDate.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerIssueCreateDate.Name = "dateTimePickerIssueCreateDate";
             this.dateTimePickerIssueCreateDate.Size = new System.Drawing.Size(250, 22);
             this.dateTimePickerIssueCreateDate.TabIndex = 343;
             // 
-            // comboBoxWorkFlow
-            // 
-            this.comboBoxWorkFlow.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.comboBoxWorkFlow.ForeColor = System.Drawing.Color.DimGray;
-            this.comboBoxWorkFlow.FormattingEnabled = true;
-            this.comboBoxWorkFlow.Location = new System.Drawing.Point(149, 141);
-            this.comboBoxWorkFlow.Name = "comboBoxWorkFlow";
-            this.comboBoxWorkFlow.Size = new System.Drawing.Size(250, 22);
-            this.comboBoxWorkFlow.TabIndex = 358;
-            // 
             // dateTimePickerTo
             // 
             this.dateTimePickerTo.CalendarForeColor = System.Drawing.Color.DimGray;
             this.dateTimePickerTo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.dateTimePickerTo.Location = new System.Drawing.Point(148, 385);
+            this.dateTimePickerTo.Location = new System.Drawing.Point(148, 357);
             this.dateTimePickerTo.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerTo.Name = "dateTimePickerTo";
             this.dateTimePickerTo.Size = new System.Drawing.Size(250, 22);
@@ -459,7 +434,7 @@ namespace CAS.UI.UICAAControls.Audit
             // 
             this.dateTimePickerFrom.CalendarForeColor = System.Drawing.Color.DimGray;
             this.dateTimePickerFrom.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.dateTimePickerFrom.Location = new System.Drawing.Point(148, 357);
+            this.dateTimePickerFrom.Location = new System.Drawing.Point(148, 329);
             this.dateTimePickerFrom.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerFrom.Name = "dateTimePickerFrom";
             this.dateTimePickerFrom.Size = new System.Drawing.Size(250, 22);
@@ -498,8 +473,6 @@ namespace CAS.UI.UICAAControls.Audit
             this.Controls.Add(this.dateTimePickerTo);
             this.Controls.Add(metroLabel7);
             this.Controls.Add(this.dateTimePickerFrom);
-            this.Controls.Add(this.comboBoxWorkFlow);
-            this.Controls.Add(metroLabel4);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(metroLabel3);
             this.Controls.Add(this.textBoxPublishedBy);
@@ -515,7 +488,7 @@ namespace CAS.UI.UICAAControls.Audit
             this.Controls.Add(labelValidFrom);
             this.Controls.Add(this.dateTimePickerIssueCreateDate);
             this.Controls.Add(this.comboBoxStatus);
-            this.Controls.Add(metroLabel1);
+            this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(metroLabel6);
@@ -553,6 +526,5 @@ namespace CAS.UI.UICAAControls.Audit
         private MetroFramework.Controls.MetroTextBox textBoxAuthor;
         private System.Windows.Forms.DateTimePicker dateTimePickerPublishingDate;
         private System.Windows.Forms.DateTimePicker dateTimePickerIssueCreateDate;
-        private System.Windows.Forms.ComboBox comboBoxWorkFlow;
     }
 }

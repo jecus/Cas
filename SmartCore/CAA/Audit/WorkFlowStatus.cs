@@ -15,11 +15,13 @@ namespace SmartCore.CAA.Audit
         #endregion
 
        
-        public static WorkFlowStatus Review = new WorkFlowStatus(1, "Review", "Review", "Review");
-        public static WorkFlowStatus VOI = new WorkFlowStatus(2, "VOI/Acceptance", "VOI/Acceptance", "VOI/Acceptance");
-        public static WorkFlowStatus FAT = new WorkFlowStatus(3, "Final Action Taken (FAT)", "Final Action Taken (FAT)", "Final Action Taken (FAT)");
-        public static WorkFlowStatus Audite = new WorkFlowStatus(4, "Audite corrections", "Audite corrections", "Audite corrections");
-        public static WorkFlowStatus UnknAuditorown = new WorkFlowStatus(5, "Auditor corrections", "Auditor corrections", "Auditor corrections");
+        public static WorkFlowStatus Open = new WorkFlowStatus(1, "Open", "Open", "Open");
+        public static WorkFlowStatus Review = new WorkFlowStatus(2, "Review", "Review", "Review");
+        public static WorkFlowStatus IA = new WorkFlowStatus(3, "Interim Action (IA)", "Interim Action (IA)", "Interim Action (IA)");
+        public static WorkFlowStatus FAT = new WorkFlowStatus(4, "Final Action Taken (FAT)", "Final Action Taken (FAT)", "Final Action Taken (FAT)");
+        public static WorkFlowStatus VOI = new WorkFlowStatus(5, "VOI/Acceptance (VOI)", "VOI/Acceptance (VOI)", "VOI/Acceptance (VOI)");
+        public static WorkFlowStatus Closed = new WorkFlowStatus(6, "Closed", "Closed)", "Closed");
+
         public static WorkFlowStatus Unknown = new WorkFlowStatus(-1, "Unknown", "Unknown", "Unknown");
 
         /*
