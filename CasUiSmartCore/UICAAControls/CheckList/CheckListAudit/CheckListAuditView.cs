@@ -108,7 +108,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             AddColumn("Level", (int)(radGridView1.Width * 0.2f));
             AddColumn("Condition", (int)(radGridView1.Width * 0.2f));
             AddColumn("Root Cause", (int)(radGridView1.Width * 0.35f));
+            AddColumn("Workflow Stage", (int)(radGridView1.Width * 0.2f));
             AddColumn("Workflow Status", (int)(radGridView1.Width * 0.2f));
+            
             AddColumn("Auditor", (int)(radGridView1.Width * 0.3f));
             AddColumn("Auditee", (int)(radGridView1.Width * 0.3f));
             AddColumn("Current", (int)(radGridView1.Width * 0.3f));
@@ -127,10 +129,12 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             var condition = "Unknown";
             var root = "";
             var status = WorkFlowStatus.Unknown;
+            var stage = WorkFlowStage.Unknown;
             if (item.AuditCheck != null)
             {
                 root = item.AuditCheck.Settings.RootCause;
                 status = WorkFlowStatus.GetItemById(item.AuditCheck.Settings.WorkflowStatusId);
+                stage = WorkFlowStage.GetItemById(item.AuditCheck.Settings.WorkflowStageId);
 
                 if (item.AuditCheck.Settings.IsApplicable.HasValue &&item.AuditCheck.Settings.IsApplicable.Value)
                     condition = "Not Applicable";
@@ -171,6 +175,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                     CreateRow(item.Level.ToString(), item.Level),
                     CreateRow(condition, condition),
                     CreateRow(root, root),
+                    CreateRow(stage.ToString(), stage),
                     CreateRow(status.ToString(), status),
                     
                     CreateRow(auditor, item.PelRecord?.Auditor),
@@ -264,6 +269,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             AddColumn("Standard Ref", (int)(radGridView1.Width * 0.24f));
             AddColumn("PDF Code", (int)(radGridView1.Width * 0.24f));
             AddColumn("Category", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Workflow Stage", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Workflow Status", (int)(radGridView1.Width * 0.2f));
             AddColumn("Auditor", (int)(radGridView1.Width * 0.3f));
             AddColumn("Auditee", (int)(radGridView1.Width * 0.3f));
             AddColumn("Current", (int)(radGridView1.Width * 0.3f));
@@ -280,6 +287,14 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             var auditor = Specialist.Unknown.FirstName;
             var auditee = Specialist.Unknown.FirstName;
             var current = "";
+            
+            var status = WorkFlowStatus.Unknown;
+            var stage = WorkFlowStage.Unknown;
+            if (item.AuditCheck != null)
+            {
+                status = WorkFlowStatus.GetItemById(item.AuditCheck.Settings.WorkflowStatusId);
+                stage = WorkFlowStage.GetItemById(item.AuditCheck.Settings.WorkflowStageId);
+            }
 
             if (item.PelRecord != null)
             {
@@ -299,6 +314,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 CreateRow(item.SettingsSafa.StandardRef, item.SettingsSafa.StandardRef),
                 CreateRow(item.SettingsSafa.PdfCode, item.SettingsSafa.PdfCode),
                 CreateRow(item.Level.ToString(), item.Level),
+                CreateRow(stage.ToString(), stage),
+                CreateRow(status.ToString(), status),
                 CreateRow(auditor, item.PelRecord?.Auditor),
                 CreateRow(auditee, item.PelRecord?.Auditee),
                 CreateRow(current, item.PelRecord?.CurrentAuditor),
@@ -343,6 +360,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             AddColumn("Item Name", (int)(radGridView1.Width * 0.5f));
             AddColumn("Standard or Recommended Practice", (int)(radGridView1.Width * 0.3f));
             AddColumn("Level", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Workflow Stage", (int)(radGridView1.Width * 0.2f));
+            AddColumn("Workflow Status", (int)(radGridView1.Width * 0.2f));
             AddColumn("Auditor", (int)(radGridView1.Width * 0.3f));
             AddColumn("Auditee", (int)(radGridView1.Width * 0.3f));
             AddColumn("Current", (int)(radGridView1.Width * 0.3f));
@@ -359,6 +378,15 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             var auditor = Specialist.Unknown.FirstName;
             var auditee = Specialist.Unknown.FirstName;
             var current = "";
+            
+            var status = WorkFlowStatus.Unknown;
+            var stage = WorkFlowStage.Unknown;
+            if (item.AuditCheck != null)
+            {
+                status = WorkFlowStatus.GetItemById(item.AuditCheck.Settings.WorkflowStatusId);
+                stage = WorkFlowStage.GetItemById(item.AuditCheck.Settings.WorkflowStageId);
+            }
+            
             if (item.PelRecord != null)
             {
                 auditor = $"{item.PelRecord?.Auditor.FirstName} {item.PelRecord?.Auditor.LastName}";
@@ -380,6 +408,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 CreateRow(item.SettingsIcao.ItemtName, item.SettingsIcao.ItemtName),
                 CreateRow(item.SettingsIcao.Standard, item.SettingsIcao.Standard),
                 CreateRow(item.Level.ToString(), item.Level),
+                CreateRow(stage.ToString(), stage),
+                CreateRow(status.ToString(), status),
                 CreateRow(auditor, item.PelRecord?.Auditor),
                 CreateRow(auditee, item.PelRecord?.Auditee),
                 CreateRow(current, item.PelRecord?.CurrentAuditor),
