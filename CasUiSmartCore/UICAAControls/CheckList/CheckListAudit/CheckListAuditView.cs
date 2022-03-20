@@ -195,11 +195,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
     protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
-			if (SelectedItem != null && SelectedItem.IsEditable)
+			if (SelectedItem != null)
 			{
 				if (IsAuditCheck)
 				{
-					var form = new CheckListAuditForm(SelectedItem, AuditId.Value);
+					var form = new CheckListAuditForm(SelectedItem, AuditId.Value, SelectedItem.IsEditable);
 					if (form.ShowDialog() == DialogResult.OK)
                         _animatedThreadWorker.RunWorkerAsync();
 				}

@@ -19,6 +19,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
     {
         private CheckLists _currentCheck;
         private readonly int _auditId;
+        private readonly bool _editable;
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private IList<FindingLevels> _levels = new List<FindingLevels>();
         private AuditCheck _currentAuditCheck;
@@ -31,10 +32,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             InitializeComponent();
         }
 
-        public CheckListAuditForm(CheckLists currentCheck, int auditId) : this()
+        public CheckListAuditForm(CheckLists currentCheck, int auditId, bool editable = false) : this()
         {
             _currentCheck = currentCheck;
             _auditId = auditId;
+            _editable = editable;
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
             _animatedThreadWorker.RunWorkerAsync();
@@ -46,6 +48,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         {
             UpdateControls();
             UpdateInformation();
+
+            if (!_editable)
+            {
+                foreach (var c in this.Controls.OfType<Control>().Where(i => !(i.GetType() is Button)))
+                    c.Enabled = false;
+            }
+            
         }
 
         private void UpdateControls()
@@ -75,6 +84,30 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
+            if (_currentCheck.AuditCheck.Settings.WorkflowStatusId == WorkFlowStatus.Open.ItemId 
+                && _currentCheck.AuditCheck.Settings.WorkflowStageId == WorkFlowStage.View.ItemId)
+            {
+                if (_currentCheck.PelRecord?.Auditor.ItemId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+                {
+                    _currentCheck.AuditCheck.Settings.IsAuditorReview = true;
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentCheck.AuditCheck);
+                }
+                else if (_currentCheck.PelRecord?.Auditee.ItemId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+                {
+                    _currentCheck.AuditCheck.Settings.IsAuditeeReview = true;
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentCheck.AuditCheck);
+                }
+
+                if (_currentCheck.AuditCheck.Settings.IsAuditorReview.HasValue && _currentCheck.AuditCheck.Settings.IsAuditeeReview.HasValue &&
+                    _currentCheck.AuditCheck.Settings.IsAuditorReview.Value && _currentCheck.AuditCheck.Settings.IsAuditeeReview.Value)
+                {
+                    _currentCheck.AuditCheck.Settings.WorkflowStatusId = WorkFlowStatus.Review.ItemId;
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentCheck.AuditCheck);
+                }
+                
+            }
+            
+            
             if (_currentCheck == null) return;
 
 

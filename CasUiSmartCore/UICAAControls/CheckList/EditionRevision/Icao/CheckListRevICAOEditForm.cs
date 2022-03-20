@@ -31,7 +31,7 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Icao
             
             if (_revision.Status == EditionRevisionStatus.Current || _revision.Status == EditionRevisionStatus.Previous)
             {
-                foreach (var c in this.Controls.OfType<Control>())
+                foreach (var c in this.Controls.OfType<Control>().Where(i => !(i.GetType() is Button)))
                     c.Enabled = false;
             }
 

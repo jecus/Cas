@@ -68,5 +68,11 @@ namespace SmartCore.CAA.Audit
         
         [JsonProperty("WorkflowStageId")]
         public int WorkflowStageId { get; set; }
+
+        [JsonProperty("IsAuditorReview")]
+        public bool? IsAuditorReview { get; set; }
+        
+        [JsonProperty("IsAuditeeReview")]
+        public bool? IsAuditeeReview { get; set; }
     }
 }
