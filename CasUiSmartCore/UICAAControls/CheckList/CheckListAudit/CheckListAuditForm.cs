@@ -51,7 +51,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             if (!_editable)
             {
-                foreach (var c in this.Controls.OfType<Control>().Where(i => !(i.GetType() is Button)))
+                foreach (var c in this.Controls.OfType<Control>().Where(i => !(i.GetType() ==  typeof(Button))))
                     c.Enabled = false;
             }
             
