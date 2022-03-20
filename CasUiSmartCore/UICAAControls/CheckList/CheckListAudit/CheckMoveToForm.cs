@@ -42,6 +42,20 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             LoadData();
         }
 
+        public CheckMoveToForm(AuditCheck auditCheck, bool isAuditor)
+        {
+            InitializeComponent();
+            
+            _checkListId = auditCheck.CheckListId;
+            _auditId = auditCheck.AuditId;
+            _stageId = auditCheck.Settings.WorkflowStageId;
+            _isAuditor = isAuditor;
+            
+            
+            InitChart();
+            LoadData();
+        }
+
         private void InitChart()
         {
             radChat2.AutoAddUserMessages = false;
@@ -52,6 +66,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             radChat2.ChatElement.ShowToolbarButtonElement.Visibility = ElementVisibility.Hidden;
             radChat2.ChatElement.ShowToolbarButtonElement.TextWrap = true;
         }
+
         private void LoadData()
         {
             var record = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AuditPelRecordDTO, AuditPelRecord>(new List<Filter>()
@@ -59,19 +74,18 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 new Filter("AuditId", _auditId),
                 new Filter("CheckListId", _checkListId),
             });
-            
-                var pel = record.FirstOrDefault();
-                var auditee = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<PelSpecialistDTO, PelSpecialist>(pel.AuditeeId);
-                _auditor = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<PelSpecialistDTO, PelSpecialist>(pel.AuditorId);
-                
-                if (auditee != null && auditee.SpecialistId != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
-                    _to = auditee.SpecialistId;
-                else
-                {
-                    if (_auditor != null && _auditor.SpecialistId != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
-                        _to = _auditor.SpecialistId;
-                }
 
+            var pel = record.FirstOrDefault();
+            var auditee = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<PelSpecialistDTO, PelSpecialist>(pel.AuditeeId);
+            _auditor = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<PelSpecialistDTO, PelSpecialist>(pel.AuditorId);
+
+            if (auditee != null && auditee.SpecialistId != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+                _to = auditee.SpecialistId;
+            else
+            {
+                if (_auditor != null && _auditor.SpecialistId != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+                    _to = _auditor.SpecialistId;
+            }
 
             var records = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListTransferDTO, CheckListTransfer>(new List<Filter>()
             {
@@ -82,7 +96,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
 
             var spec = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<SpecialistDTO, Specialist>(_to);
-            
+
             if (_auditor.SpecialistId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
             {
                 _author1 = new Author(null, GlobalObjects.CaaEnvironment.IdentityUser.ToString());
@@ -93,8 +107,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 _author2 = new Author(null, GlobalObjects.CaaEnvironment.IdentityUser.ToString());
                 _author1 = new Author(null, spec.ToString());
             }
-            
-            
+
+
             radChat2.Author = _author1;
 
             var last = records.Count > 1 ? records.LastOrDefault() : null;
@@ -137,7 +151,14 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         
         private void radChat1_CardActionClicked(object sender, CardActionEventArgs e)
         {
-            
+            if (e.Action.Text == "Accept")
+            {
+                var res = MessageBox.Show($"Do you really want move to next stage({WorkFlowStage.GetItemById(_stageId + 1).FullName})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                if (res == DialogResult.Yes)
+                {
+                    
+                }
+            }
         }
         private void radChat1_SendMessage(object sender, SendMessageEventArgs e)
         {
