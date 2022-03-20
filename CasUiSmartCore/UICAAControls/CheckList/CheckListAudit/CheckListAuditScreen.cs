@@ -355,7 +355,7 @@ WHERE rn = 1 and  IsDeleted = 0");
 
 		private void ToolStripMenuSendClick(object sender, EventArgs e)
 		{
-			var form = new CheckMoveToForm(_directivesViewer.SelectedItem.ItemId, _parentId);
+			var form = new CheckMoveToForm(_directivesViewer.SelectedItem.ItemId, _parentId, _directivesViewer.SelectedItem.AuditCheck.Settings.WorkflowStageId);
 			if (form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
 		}

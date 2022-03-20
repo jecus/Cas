@@ -26,5 +26,8 @@ namespace CAA.Entity.Models.DTO
         
         [Column("SettingsJSON")]
         public string SettingsJSON { get; set; }
+        
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public int WorkflowStageId { get; set; }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel;
+using Telerik.WinControls.UI;
 
-namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
+namespace CAS.UI.UICAAControls
 {
-    partial class CheckMoveToForm
+    partial class Test
     {
         /// <summary>
         /// Required designer variable.
@@ -31,60 +32,54 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         /// </summary>
         private void InitializeComponent()
         {
+            Telerik.WinControls.UI.CartesianArea cartesianArea1 = new Telerik.WinControls.UI.CartesianArea();
             this.telerikMetroBlueTheme1 = new Telerik.WinControls.Themes.TelerikMetroBlueTheme();
-            this.fileControl = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
+            this.radChartView1 = new Telerik.WinControls.UI.RadChartView();
             this.radChat2 = new Telerik.WinControls.UI.RadChat();
+            ((System.ComponentModel.ISupportInitialize)(this.radChartView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radChat2)).BeginInit();
             this.SuspendLayout();
             // 
-            // fileControl
+            // radChartView1
             // 
-            this.fileControl.AutoSize = true;
-            this.fileControl.BackColor = System.Drawing.Color.Transparent;
-            this.fileControl.Description1 = null;
-            this.fileControl.Description2 = null;
-            this.fileControl.Filter = "PDF file (*.pdf)|*.pdf";
-            this.fileControl.Icon = null;
-            this.fileControl.IconNotEnabled = null;
-            this.fileControl.Location = new System.Drawing.Point(-938, -8);
-            this.fileControl.MaximumSize = new System.Drawing.Size(350, 100);
-            this.fileControl.MinimumSize = new System.Drawing.Size(350, 50);
-            this.fileControl.Name = "fileControl";
-            this.fileControl.ShowLinkLabelBrowse = true;
-            this.fileControl.ShowLinkLabelRemove = false;
-            this.fileControl.Size = new System.Drawing.Size(350, 100);
-            this.fileControl.TabIndex = 351;
+            this.radChartView1.AreaDesign = cartesianArea1;
+            this.radChartView1.Location = new System.Drawing.Point(0, 0);
+            this.radChartView1.Name = "radChartView1";
+            this.radChartView1.ShowGrid = false;
+            this.radChartView1.Size = new System.Drawing.Size(480, 320);
+            this.radChartView1.TabIndex = 0;
+
             // 
             // radChat2
             // 
             this.radChat2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radChat2.Location = new System.Drawing.Point(20, 60);
             this.radChat2.Name = "radChat2";
-            this.radChat2.Size = new System.Drawing.Size(580, 672);
-            this.radChat2.TabIndex = 352;
+            this.radChat2.Size = new System.Drawing.Size(566, 598);
+            this.radChat2.TabIndex = 0;
             this.radChat2.Text = "radChat2";
             this.radChat2.ThemeName = "TelerikMetroBlue";
             this.radChat2.TimeSeparatorInterval = System.TimeSpan.Parse("1.00:00:00");
             // 
-            // CheckMoveToForm
+            // Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(620, 752);
+            this.ClientSize = new System.Drawing.Size(606, 678);
             this.Controls.Add(this.radChat2);
-            this.Controls.Add(this.fileControl);
-            this.Name = "CheckMoveToForm";
-            this.Resizable = false;
-            this.Text = "Transfer Form";
+            this.Name = "Test";
+            this.Text = "Test";
+            this.Load += new System.EventHandler(this.Test_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.radChartView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radChat2)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
+
         }
 
-        private Telerik.WinControls.UI.RadChat radChat2;
-        private Telerik.WinControls.Themes.TelerikMetroBlueTheme telerikMetroBlueTheme1;
-        public CAS.UI.UIControls.Auxiliary.AttachedFileControl fileControl;
-
         #endregion
+        private Telerik.WinControls.Themes.TelerikMetroBlueTheme telerikMetroBlueTheme1;
+        private Telerik.WinControls.RadThemeManager radThemeManager1;
+        private RadChartView radChartView1;
+        private RadChat radChat2;
     }
 }

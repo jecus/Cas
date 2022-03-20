@@ -1713,6 +1713,7 @@ namespace SmartCore.DtoHelper
 				SettingsJSON = oper.SettingsJSON,
 				From = oper.From,
 				To = oper.To,
+				WorkflowStageId = oper.WorkflowStageId,
 				CheckListId = oper.CheckListId,
 				Created = oper.Created,
 				
@@ -1731,6 +1732,7 @@ namespace SmartCore.DtoHelper
 				AuditId = oper.AuditId,
 				SettingsJSON = oper.SettingsJSON,
 				From = oper.From,
+				WorkflowStageId = oper.WorkflowStageId,
 				To = oper.To,
 				CheckListId = oper.CheckListId,
 				Created = oper.Created,

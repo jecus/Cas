@@ -37,12 +37,14 @@ namespace SmartCore.CAA.Check
                 : JsonConvert.DeserializeObject<CheckListTransferSettings>(value);
         }
 
+        public int WorkflowStageId { get; set; }
+        
         public CheckListTransferSettings Settings { get; set; }
 
         public CheckListTransfer()
         {
             SmartCoreObjectType = SmartCoreType.CheckListTransfer;
-            Settings = new CheckListTransferSettings();
+            Settings = new CheckListTransferSettings(){WorkflowStageId = -1};
         }
         
         
@@ -86,5 +88,8 @@ namespace SmartCore.CAA.Check
     {
         [JsonProperty]
         public string Remark { get; set; }
+        
+        [JsonProperty]
+        public int WorkflowStageId { get; set; }
     }
 }
