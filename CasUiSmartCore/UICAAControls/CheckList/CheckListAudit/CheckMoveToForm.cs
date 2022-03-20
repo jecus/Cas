@@ -176,11 +176,16 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
             
             radChat2.ChatElement.SendButtonElement.Enabled = false;
-
+            
             if (_auditor.SpecialistId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+            {
+                radChat2.ChatElement.MessagesViewElement.Items.Remove(radChat2.ChatElement.MessagesViewElement.Items.Last());
                 AddAuditorMsg(textMessage.Message);
+            }
             else AddAuditeeMsg(textMessage.Message);
 
+           
+            
             _entedPressed = true;
 
         }
