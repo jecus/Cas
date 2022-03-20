@@ -344,8 +344,6 @@ group by AuditId");
                     MessageBox.Show($@"This audit {item.AuditNumber} is already closed!", (string) new GlobalTermsProvider()["SystemName"],
                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
                         MessageBoxDefaultButton.Button2);
-					continue;
-
                 }
             }
 
