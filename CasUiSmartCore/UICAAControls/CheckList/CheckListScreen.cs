@@ -161,7 +161,7 @@ namespace CAS.UI.UICAAControls.CheckList
 					.GetObjectById<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(_parentId);
 				var manuals = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(new []
 				{
-					new Filter("OperatorId", _operatorId),
+					new Filter("OperatorId", new []{_operatorId, -1}.Distinct()),
 					new Filter("ProgramTypeId", routine.Settings.TypeId),
 				});
 

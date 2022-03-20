@@ -207,9 +207,9 @@ group by a.AuditId
          ROW_NUMBER() OVER (PARTITION BY CheckListId ORDER BY Created DESC) AS rn
    FROM [CheckListTransfer] where AuditId in ({string.Join(",", auditIds)})
 )
-SELECT AuditId, Count(*), Sum(case when [To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} then 1 else 0 end)
+SELECT AuditId, Count(*), Sum(case when ([To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} or [From] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}) then 1 else 0 end)
 FROM cte
-WHERE rn = 1 and   ([To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} or [From] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId})  and IsDeleted = 0 
+WHERE rn = 1    and IsDeleted = 0 
 group by AuditId");
 
 	            var dtC = ds.Tables[0];

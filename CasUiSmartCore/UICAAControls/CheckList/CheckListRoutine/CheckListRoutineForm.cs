@@ -82,7 +82,7 @@ namespace CAS.UI.UICAAControls.CheckList
 
             var manuals = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(new []
             {
-                new Filter("OperatorId", _operatorId),
+                new Filter("OperatorId", new []{_operatorId, -1}.Distinct()),
                 new Filter("ProgramTypeId", routine.Settings.TypeId),
             });
             
