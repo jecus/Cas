@@ -76,6 +76,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.Name = "CheckMoveToForm";
             this.Resizable = false;
             this.Text = "Transfer Form";
+            this.FormClosed += OnFormClosed;
             ((System.ComponentModel.ISupportInitialize)(this.radChat2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
