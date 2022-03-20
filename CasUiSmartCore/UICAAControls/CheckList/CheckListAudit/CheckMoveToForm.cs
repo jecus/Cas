@@ -18,30 +18,20 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 {
     public partial class CheckMoveToForm : MetroForm
     {
+        private bool _entedPressed;
         private readonly int _checkListId;
+        
         private readonly int _auditId;
         private readonly int _stageId;
         
         private int _to;
+        private readonly AuditCheck _auditCheck;
         private bool _isAuditor;
         
         private  Author _author1;
         private  Author _author2;
         private PelSpecialist _auditor;
-        public CheckMoveToForm(int checkListId, int auditId, int stageId, bool isAuditor)
-        {
-            InitializeComponent();
-            
-            _checkListId = checkListId;
-            _auditId = auditId;
-            _stageId = stageId;
-            _isAuditor = isAuditor;
-            
-            
-            InitChart();
-            LoadData();
-        }
-
+        
         public CheckMoveToForm(AuditCheck auditCheck, bool isAuditor)
         {
             InitializeComponent();
@@ -49,6 +39,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             _checkListId = auditCheck.CheckListId;
             _auditId = auditCheck.AuditId;
             _stageId = auditCheck.Settings.WorkflowStageId;
+            _auditCheck = auditCheck;
             _isAuditor = isAuditor;
             
             
@@ -156,12 +147,17 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 var res = MessageBox.Show($"Do you really want move to next stage({WorkFlowStage.GetItemById(_stageId + 1).FullName})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
                 if (res == DialogResult.Yes)
                 {
-                    
+                    _auditCheck.Settings.WorkflowStageId = _stageId + 1;
+                    _auditCheck.Settings.WorkflowStatusId = WorkFlowStatus.Open.ItemId;
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_auditCheck);
                 }
             }
         }
         private void radChat1_SendMessage(object sender, SendMessageEventArgs e)
         {
+            if(_entedPressed)
+                return;
+            
             var textMessage = e.Message as ChatTextMessage;
             
             var rec = new CheckListTransfer()
@@ -185,10 +181,10 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 AddAuditorMsg(textMessage.Message);
             else AddAuditeeMsg(textMessage.Message);
 
+            _entedPressed = true;
+
         }
 
-        
-        
         
         private void OnFormClosed(object sender, FormClosedEventArgs e)
         {
