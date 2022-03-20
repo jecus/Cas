@@ -44,7 +44,7 @@ namespace SmartCore.CAA.Check
         public CheckListTransfer()
         {
             SmartCoreObjectType = SmartCoreType.CheckListTransfer;
-            Settings = new CheckListTransferSettings(){WorkflowStageId = -1};
+            Settings = new CheckListTransferSettings(){WorkflowStageId = 2};
         }
         
         
