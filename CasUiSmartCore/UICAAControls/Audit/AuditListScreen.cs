@@ -201,15 +201,36 @@ group by a.AuditId
             var auditIds = _initialDocumentArray.Select(i => i.ItemId);
             if (auditIds.Any())
             {
+	            //TODO: раньше искал по перемещениям что не гуд первое перемещение только у аудитора
+// 	            ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@";WITH cte AS
+// (
+//    SELECT *,
+//          ROW_NUMBER() OVER (PARTITION BY CheckListId ORDER BY Created DESC) AS rn
+//    FROM [CheckListTransfer] where AuditId in ({string.Join(",", auditIds)})
+// )
+// SELECT AuditId, Count(*), Sum(case when ([To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} or [From] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}) then 1 else 0 end)
+// FROM cte
+// WHERE rn = 1    and IsDeleted = 0 
+// group by AuditId");
+
+
 	            ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@";WITH cte AS
 (
-   SELECT *,
-         ROW_NUMBER() OVER (PARTITION BY CheckListId ORDER BY Created DESC) AS rn
-   FROM [CheckListTransfer] where AuditId in ({string.Join(",", auditIds)})
+   SELECT rec.*, auditor.Auditor ,auditee.Auditee, ROW_NUMBER() OVER (PARTITION BY rec.CheckListId ORDER BY rec.ItemId DESC) AS rn
+   FROM [AuditPelRecords] rec
+   cross apply
+   (
+		select SpecialistId as Auditor from  [dbo].[PelSpecialist] where ItemId = rec.AuditorId
+   ) as auditor
+   cross apply
+   (
+		select SpecialistId as Auditee from  [dbo].[PelSpecialist] where ItemId = rec.AuditeeId
+   ) as auditee
+   where rec.AuditId in ({string.Join(",", auditIds)}) and rec.IsDeleted = 0
 )
-SELECT AuditId, Count(*), Sum(case when ([To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} or [From] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}) then 1 else 0 end)
+SELECT AuditId, Count(*), Sum(case when ([Auditor] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} or [Auditee] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}) then 1 else 0 end)
 FROM cte
-WHERE rn = 1    and IsDeleted = 0 
+WHERE rn = 1
 group by AuditId");
 
 	            var dtC = ds.Tables[0];

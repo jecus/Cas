@@ -30,7 +30,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         
         private  Author _author1;
         private  Author _author2;
-        private PelSpecialist _auditor;
+        private PelSpecialist _opponent;
         
         public CheckMoveToForm(AuditCheck auditCheck, bool isAuditor)
         {
@@ -41,6 +41,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             _stageId = auditCheck.Settings.WorkflowStageId;
             _auditCheck = auditCheck;
             _isAuditor = isAuditor;
+            _entedPressed = !_isAuditor;
             
             
             InitChart();
@@ -68,14 +69,21 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             var pel = record.FirstOrDefault();
             var auditee = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<PelSpecialistDTO, PelSpecialist>(pel.AuditeeId);
-            _auditor = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<PelSpecialistDTO, PelSpecialist>(pel.AuditorId);
+
 
             if (auditee != null && auditee.SpecialistId != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+            {
+                _opponent = auditee;
                 _to = auditee.SpecialistId;
+            }
             else
             {
-                if (_auditor != null && _auditor.SpecialistId != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
-                    _to = _auditor.SpecialistId;
+                var auditor = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<PelSpecialistDTO, PelSpecialist>(pel.AuditorId);
+                if (auditor != null && auditor.SpecialistId != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+                {
+                    _opponent = auditor;
+                    _to = auditor.SpecialistId;
+                }
             }
 
             var records = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListTransferDTO, CheckListTransfer>(new List<Filter>()
@@ -88,24 +96,16 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             var spec = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<SpecialistDTO, Specialist>(_to);
 
-            if (_auditor.SpecialistId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
-            {
-                _author1 = new Author(null, GlobalObjects.CaaEnvironment.IdentityUser.ToString());
-                _author2 = new Author(null, spec.ToString());
-            }
-            else
-            {
-                _author2 = new Author(null, GlobalObjects.CaaEnvironment.IdentityUser.ToString());
-                _author1 = new Author(null, spec.ToString());
-            }
-
-
+            _author1 = new Author(null, GlobalObjects.CaaEnvironment.IdentityUser.ToString());
+            _author2 = new Author(null, spec.ToString());
+            
+            
             radChat2.Author = _author1;
 
             var last = records.Count > 1 ? records.LastOrDefault() : null;
             foreach (var message in records.Where(i => i.To > -1 && i.From > -1))
             {
-                if (message.From == _auditor.SpecialistId)
+                if (message.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
                 {
                     AddAuditorMsg(message.Settings.Remark);
                 }
@@ -114,7 +114,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                     AddAuditeeMsg(message.Settings.Remark);
                     if (last != null &&
                         last.ItemId == message.ItemId &&
-                        last.To == _auditor.SpecialistId)
+                        last.To == _opponent.SpecialistId)
                         AddBotMsg();
                 }
             }
@@ -177,7 +177,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             
             radChat2.ChatElement.SendButtonElement.Enabled = false;
             
-            if (_auditor.SpecialistId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+            if (_opponent.SpecialistId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
             {
                 radChat2.ChatElement.MessagesViewElement.Items.Remove(radChat2.ChatElement.MessagesViewElement.Items.Last());
                 AddAuditorMsg(textMessage.Message);

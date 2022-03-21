@@ -197,14 +197,21 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 				{
 					var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@";WITH cte AS
 (
-   SELECT *,
-         ROW_NUMBER() OVER (PARTITION BY CheckListId ORDER BY Created DESC) AS rn
-   FROM [CheckListTransfer] where AuditId = {_parentId}
+   SELECT rec.*, auditor.Auditor ,auditee.Auditee
+   FROM [AuditPelRecords] rec
+   cross apply
+   (
+		select SpecialistId as Auditor from  [dbo].[PelSpecialist] where ItemId = rec.AuditorId
+   ) as auditor
+   cross apply
+   (
+		select SpecialistId as Auditee from  [dbo].[PelSpecialist] where ItemId = rec.AuditeeId
+   ) as auditee
+   where rec.AuditId in ({_parentId.ToString()}) and rec.IsDeleted = 0
 )
 SELECT CheckListId
 FROM cte
-WHERE rn = 1 and ([To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} or [From] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId})  and IsDeleted = 0 
-");
+WHERE ([Auditor] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} or [Auditee] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId})");
 					
 					var dt = ds.Tables[0];
 
@@ -376,7 +383,7 @@ WHERE rn = 1 and  IsDeleted = 0");
 		{
             if ((_routineAudit?.Type == ProgramType.CAAKG || _routineAudit?.Type == ProgramType.IOSA))
             {
-                var form = new CheckListAuditForm(_directivesViewer.SelectedItem, _parentId);
+                var form = new CheckListAuditForm(_directivesViewer.SelectedItem, _parentId, _directivesViewer.SelectedItem.IsEditable );
                 if (form.ShowDialog() == DialogResult.OK)
                     AnimatedThreadWorker.RunWorkerAsync();
             }
@@ -416,16 +423,8 @@ WHERE rn = 1 and  IsDeleted = 0");
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
 
-					if (!_directivesViewer.SelectedItem.IsEditable)
-					{
-						_toolStripMenuItemOpen.Enabled = false;
-						_toolStripMenuSendTo.Enabled = false;
-					}
-					else
-					{
-						_toolStripMenuItemOpen.Enabled = true;
-						_toolStripMenuSendTo.Enabled = _type == CheckListAuditType.User;
-					}
+					_toolStripMenuItemOpen.Enabled = true;
+					_toolStripMenuSendTo.Enabled = _type == CheckListAuditType.User;
 				}
 				else
 				{
