@@ -33,8 +33,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         
         private  Author _author1;
         private  Author _author2;
+        private  Author _author3;
         private PelSpecialist _opponent;
-        private IList<CheckListTransfer> _records;
+        private IList<CheckListTransfer> _records = new List<CheckListTransfer>();
 
         public CheckMoveToForm(AuditCheck auditCheck, bool isAuditor)
         {
@@ -57,6 +58,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         void UpdateChat()
         {
+            _author3 = new Author(null, "bot");
             radChat2.ChatElement.ShowToolbarButtonElement.TextWrap = true;
             radChat2.ChatElement.ShowToolbarButtonElement.Visibility = ElementVisibility.Hidden;
             radChat2.AutoAddUserMessages = false;
@@ -73,7 +75,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             foreach (var message in _records.Where(i => i.To > -1 && i.From > -1))
             {
                 if (message.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+                {
                     AddAuditorMsg(message.Settings.Remark);
+                    if (last != null &&
+                        last.ItemId == message.ItemId &&
+                        last.From != _opponent.SpecialistId)
+                        AddBotWaitMsg();
+                }
                 else
                 {
                     AddAuditeeMsg(message.Settings.Remark);
@@ -84,9 +92,12 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 }
             }
         }
-
+        
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
+            radChat2.ChatElement.MessagesViewElement.Items.Clear();
+            _records.Clear();
+            
             var record = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AuditPelRecordDTO, AuditPelRecord>(new List<Filter>()
             {
                 new Filter("AuditId", _auditId),
@@ -137,6 +148,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private void AddAuditeeMsg(string text)
         {
             radChat2.AddMessage(new ChatTextMessage(text, _author2, DateTime.Now));
+        }
+        
+        private void AddBotWaitMsg()
+        {
+            radChat2.AddMessage(new ChatTextMessage($"Wait for a response from {_author2.Name}...", _author3, DateTime.Now));
         }
         
         
@@ -195,6 +211,12 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         {
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            _animatedThreadWorker.RunWorkerAsync();
+            Focus();
         }
     }
 }

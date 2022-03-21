@@ -34,6 +34,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.telerikMetroBlueTheme1 = new Telerik.WinControls.Themes.TelerikMetroBlueTheme();
             this.fileControl = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
             this.radChat2 = new Telerik.WinControls.UI.RadChat();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.radChat2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,21 +67,37 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.radChat2.ThemeName = "TelerikMetroBlue";
             this.radChat2.TimeSeparatorInterval = System.TimeSpan.Parse("1.00:00:00");
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.linkLabel1.Location = new System.Drawing.Point(538, 40);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.linkLabel1.Size = new System.Drawing.Size(62, 17);
+            this.linkLabel1.TabIndex = 353;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Refresh";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // CheckMoveToForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 752);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.radChat2);
             this.Controls.Add(this.fileControl);
             this.Name = "CheckMoveToForm";
             this.Resizable = false;
             this.Text = "Transfer Form";
-            this.FormClosed += OnFormClosed;
             ((System.ComponentModel.ISupportInitialize)(this.radChat2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.LinkLabel linkLabel1;
 
         private Telerik.WinControls.UI.RadChat radChat2;
         private Telerik.WinControls.Themes.TelerikMetroBlueTheme telerikMetroBlueTheme1;
