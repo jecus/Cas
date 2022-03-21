@@ -205,18 +205,16 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             _entedPressed = true;
 
         }
-
         
-        private void OnFormClosed(object sender, FormClosedEventArgs e)
-        {
-            DialogResult = DialogResult.OK;
-            Close();
-        }
-
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             _animatedThreadWorker.RunWorkerAsync();
             Focus();
+        }
+
+        private void CheckMoveToForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult = DialogResult.OK;
         }
     }
 }
