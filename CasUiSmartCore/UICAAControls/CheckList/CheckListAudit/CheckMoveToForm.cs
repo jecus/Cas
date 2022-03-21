@@ -73,7 +73,15 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 
             foreach (var message in _records.Where(i => i.To > -1 && i.From > -1))
             {
-                if (message.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+                if (message.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId && message.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId )
+                {
+                    AddAuditorMsg(message.Settings.Remark);
+                    if (last != null &&
+                        last.ItemId == message.ItemId &&
+                        last.From == _auditorId)
+                        AddBotMsg();
+                }
+                else if (message.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
                 {
                     AddAuditorMsg(message.Settings.Remark);
                     if (last != null &&
@@ -87,7 +95,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                     if (last != null &&
                         last.ItemId == message.ItemId &&
                         last.To == _auditorId)
-                        AddBotMsg();
+                    {
+                        if(!last.Settings.IsWorkFlowChanged)
+                            AddBotMsg();
+                        else AddBotWaitMsg();
+                    }
                 }
             }
         }
@@ -160,7 +172,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 var res = MessageBox.Show($"Do you really want move to next stage({WorkFlowStage.GetItemById(_stageId + 1).FullName})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
                 if (res == DialogResult.Yes)
                 {
-                    _stageId = _stageId + 1;
+                    _stageId += 1;
                     _auditCheck.Settings.WorkflowStageId = _stageId;
                     _auditCheck.Settings.WorkflowStatusId = WorkFlowStatus.Open.ItemId;
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(_auditCheck);
@@ -180,7 +192,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                         }
                     };
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
-                    
+                    _animatedThreadWorker.RunWorkerAsync();
+                    Focus();
                 }
             }
         }
