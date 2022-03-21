@@ -23,32 +23,29 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         
         private bool _entedPressed;
-        
-        private readonly int _checkListId;
-        private readonly int _auditId;
-        private  int _stageId;
+
+        private IList<CheckListTransfer> _records = new List<CheckListTransfer>();
+        public int _checkListId => _auditCheck.CheckListId; 
+        public int _auditId => _auditCheck.AuditId;
+        public int _stageId;
         
         private readonly AuditCheck _auditCheck;
         private bool _isAuditor;
+        private int _auditorId;
+        
         
         private  Author _author1;
         private  Author _author2;
         private  Author _author3;
         private PelSpecialist _opponent;
-        private IList<CheckListTransfer> _records = new List<CheckListTransfer>();
-        private int _auditorId;
+       
+        
 
-        public CheckMoveToForm(AuditCheck auditCheck, bool isAuditor)
+        public CheckMoveToForm(AuditCheck auditCheck)
         {
             InitializeComponent();
-            
-            _checkListId = auditCheck.CheckListId;
-            _auditId = auditCheck.AuditId;
-            _stageId = auditCheck.Settings.WorkflowStageId;
             _auditCheck = auditCheck;
-            _isAuditor = isAuditor;
-            _entedPressed = !_isAuditor;
-            
+            _stageId = _auditCheck.Settings.WorkflowStageId;
             UpdateChat();
             
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
