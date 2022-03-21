@@ -37,6 +37,9 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Iosa
                 {
                     if(c is FlowLayoutPanel)
                         continue;
+                    
+                    if(c.GetType().ToString() == "MetroFramework.Forms.MetroForm+MetroFormButton")
+                        continue;
                     c.Enabled = false;
                 }
             }

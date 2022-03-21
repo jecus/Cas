@@ -51,8 +51,12 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             if (!_editable)
             {
-                foreach (var c in this.Controls.OfType<Control>().Where(i => !(i.GetType() ==  typeof(Button))))
+                foreach (var c in this.Controls.OfType<Control>().Where(i => !(i.GetType() == typeof(Button))))
+                {
+                    if(c.GetType().ToString() == "MetroFramework.Forms.MetroForm+MetroFormButton")
+                        continue;
                     c.Enabled = false;
+                }
             }
             
         }

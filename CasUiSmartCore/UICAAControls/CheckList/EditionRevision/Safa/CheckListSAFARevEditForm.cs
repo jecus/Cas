@@ -35,8 +35,12 @@ namespace CAS.UI.UICAAControls.CheckList.EditionRevision.Safa
             
             if (_revision.Status == EditionRevisionStatus.Current || _revision.Status == EditionRevisionStatus.Previous)
             {
-                foreach (var c in this.Controls.OfType<Control>().Where(i => !(i.GetType() ==  typeof(Button))))
+                foreach (var c in this.Controls.OfType<Control>().Where(i => !(i.GetType() == typeof(Button))))
+                {
+                    if(c.GetType().ToString() == "MetroFramework.Forms.MetroForm+MetroFormButton")
+                        continue;
                     c.Enabled = false;
+                }
             }
 
         }
