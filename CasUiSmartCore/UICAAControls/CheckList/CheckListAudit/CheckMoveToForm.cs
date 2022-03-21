@@ -26,7 +26,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         
         private readonly int _checkListId;
         private readonly int _auditId;
-        private readonly int _stageId;
+        private  int _stageId;
         
         private readonly AuditCheck _auditCheck;
         private bool _isAuditor;
@@ -68,7 +68,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         
         private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            var last = _records.Count > 1 ? _records.LastOrDefault() : null;
+
+            var last = _records.Count == 1 ? _records.FirstOrDefault() : _records.Count > 1 ? _records.LastOrDefault() : null;
             radChat2.ChatElement.SendButtonElement.Enabled = last?.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId;
             _entedPressed = last?.To != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId;
                 
@@ -163,9 +164,26 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 var res = MessageBox.Show($"Do you really want move to next stage({WorkFlowStage.GetItemById(_stageId + 1).FullName})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
                 if (res == DialogResult.Yes)
                 {
-                    _auditCheck.Settings.WorkflowStageId = _stageId + 1;
+                    _stageId = _stageId + 1;
+                    _auditCheck.Settings.WorkflowStageId = _stageId;
                     _auditCheck.Settings.WorkflowStatusId = WorkFlowStatus.Open.ItemId;
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(_auditCheck);
+                    
+                    var rec = new CheckListTransfer()
+                    {
+                        Created = DateTime.Now,
+                        From = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
+                        To = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
+                        AuditId = _auditId,
+                        CheckListId = _checkListId,
+                        Settings = new CheckListTransferSettings()
+                        {
+                            Remark = "Workflow stage Updated!",
+                            WorkflowStageId = _stageId
+                        }
+                    };
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
+                    
                 }
             }
         }
@@ -190,16 +208,21 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 }
             };
             GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
+
+            if (_auditCheck.Settings.WorkflowStatusId != WorkFlowStatus.Review.ItemId)
+            {
+                _auditCheck.Settings.WorkflowStatusId = WorkFlowStatus.Review.ItemId;
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(_auditCheck);
+            }
+            
             
             radChat2.ChatElement.SendButtonElement.Enabled = false;
             
             if (_opponent.SpecialistId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
-            {
                 radChat2.ChatElement.MessagesViewElement.Items.Remove(radChat2.ChatElement.MessagesViewElement.Items.Last());
-                AddAuditorMsg(textMessage.Message);
-            }
-            else AddAuditeeMsg(textMessage.Message);
-
+            
+            AddAuditorMsg(textMessage.Message);
+            AddBotWaitMsg();
            
             
             _entedPressed = true;
