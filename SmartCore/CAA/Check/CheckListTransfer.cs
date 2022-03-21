@@ -91,5 +91,8 @@ namespace SmartCore.CAA.Check
         
         [JsonProperty]
         public int WorkflowStageId { get; set; }
+
+        [JsonProperty]
+        public bool IsWorkFlowChanged { get; set; }
     }
 }

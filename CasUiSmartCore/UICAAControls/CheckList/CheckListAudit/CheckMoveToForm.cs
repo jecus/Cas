@@ -36,6 +36,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private  Author _author3;
         private PelSpecialist _opponent;
         private IList<CheckListTransfer> _records = new List<CheckListTransfer>();
+        private int _auditorId;
 
         public CheckMoveToForm(AuditCheck auditCheck, bool isAuditor)
         {
@@ -68,7 +69,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         
         private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
+            radChat2.ChatElement.MessagesViewElement.Items.Clear();
             var last = _records.Count == 1 ? _records.FirstOrDefault() : _records.Count > 1 ? _records.LastOrDefault() : null;
             radChat2.ChatElement.SendButtonElement.Enabled = last?.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId;
             _entedPressed = last?.To != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId;
@@ -88,15 +89,14 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                     AddAuditeeMsg(message.Settings.Remark);
                     if (last != null &&
                         last.ItemId == message.ItemId &&
-                        last.To == _opponent.SpecialistId)
+                        last.To == _auditorId)
                         AddBotMsg();
                 }
             }
         }
-        
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
-            radChat2.ChatElement.MessagesViewElement.Items.Clear();
+            
             _records.Clear();
             
             var record = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AuditPelRecordDTO, AuditPelRecord>(new List<Filter>()
@@ -107,13 +107,14 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             var pel = record.FirstOrDefault();
             var auditee = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<PelSpecialistDTO, PelSpecialist>(pel.AuditeeId);
+            var auditor = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<PelSpecialistDTO, PelSpecialist>(pel.AuditorId);
 
-
+            _auditorId = auditor.SpecialistId;
+            
             if (auditee != null && auditee.SpecialistId != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
                 _opponent = auditee;
             else
             {
-                var auditor = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<PelSpecialistDTO, PelSpecialist>(pel.AuditorId);
                 if (auditor != null && auditor.SpecialistId != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
                     _opponent = auditor;
             }
@@ -122,7 +123,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             {
                 new Filter("AuditId", _auditId),
                 new Filter("CheckListId", _checkListId),
-                new Filter("WorkflowStageId", _stageId),
+                //new Filter("WorkflowStageId", _stageId),
             });
 
 
@@ -150,12 +151,10 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         {
             radChat2.AddMessage(new ChatTextMessage(text, _author2, DateTime.Now));
         }
-        
         private void AddBotWaitMsg()
         {
             radChat2.AddMessage(new ChatTextMessage($"Wait for a response from {_author2.Name}...", _author3, DateTime.Now));
         }
-        
         
         private void radChat1_CardActionClicked(object sender, CardActionEventArgs e)
         {
@@ -178,8 +177,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                         CheckListId = _checkListId,
                         Settings = new CheckListTransferSettings()
                         {
-                            Remark = "Workflow stage Updated!",
-                            WorkflowStageId = _stageId
+                            Remark = $"Workflow stage Updated to {WorkFlowStage.GetItemById(_stageId)}!",
+                            WorkflowStageId = _stageId,
+                            IsWorkFlowChanged = true
                         }
                     };
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
@@ -218,7 +218,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             
             radChat2.ChatElement.SendButtonElement.Enabled = false;
             
-            if (_opponent.SpecialistId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+            if (_auditorId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
                 radChat2.ChatElement.MessagesViewElement.Items.Remove(radChat2.ChatElement.MessagesViewElement.Items.Last());
             
             AddAuditorMsg(textMessage.Message);
@@ -234,7 +234,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             _animatedThreadWorker.RunWorkerAsync();
             Focus();
         }
-
         private void CheckMoveToForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult = DialogResult.OK;
