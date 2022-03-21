@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
+using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using MetroFramework.Forms;
 using SmartCore.CAA.Audit;
@@ -18,20 +20,22 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 {
     public partial class CheckMoveToForm : MetroForm
     {
-        private bool _entedPressed;
-        private readonly int _checkListId;
+        private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         
+        private bool _entedPressed;
+        
+        private readonly int _checkListId;
         private readonly int _auditId;
         private readonly int _stageId;
         
-        private int _to;
         private readonly AuditCheck _auditCheck;
         private bool _isAuditor;
         
         private  Author _author1;
         private  Author _author2;
         private PelSpecialist _opponent;
-        
+        private IList<CheckListTransfer> _records;
+
         public CheckMoveToForm(AuditCheck auditCheck, bool isAuditor)
         {
             InitializeComponent();
@@ -43,23 +47,45 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             _isAuditor = isAuditor;
             _entedPressed = !_isAuditor;
             
+            UpdateChat();
             
-            InitChart();
-            LoadData();
+            _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
+            _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
+            _animatedThreadWorker.RunWorkerAsync();
+            
         }
 
-        private void InitChart()
+        void UpdateChat()
         {
+            radChat2.ChatElement.ShowToolbarButtonElement.TextWrap = true;
+            radChat2.ChatElement.ShowToolbarButtonElement.Visibility = ElementVisibility.Hidden;
             radChat2.AutoAddUserMessages = false;
             radChat2.SendMessage += radChat1_SendMessage;
             radChat2.CardActionClicked += radChat1_CardActionClicked;
-
-            radChat2.ChatElement.SendButtonElement.Enabled = _isAuditor;
-            radChat2.ChatElement.ShowToolbarButtonElement.Visibility = ElementVisibility.Hidden;
-            radChat2.ChatElement.ShowToolbarButtonElement.TextWrap = true;
+        }
+        
+        private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            var last = _records.Count > 1 ? _records.LastOrDefault() : null;
+            radChat2.ChatElement.SendButtonElement.Enabled = last?.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId;
+            _entedPressed = last?.To != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId;
+                
+            foreach (var message in _records.Where(i => i.To > -1 && i.From > -1))
+            {
+                if (message.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+                    AddAuditorMsg(message.Settings.Remark);
+                else
+                {
+                    AddAuditeeMsg(message.Settings.Remark);
+                    if (last != null &&
+                        last.ItemId == message.ItemId &&
+                        last.To == _opponent.SpecialistId)
+                        AddBotMsg();
+                }
+            }
         }
 
-        private void LoadData()
+        private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
             var record = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AuditPelRecordDTO, AuditPelRecord>(new List<Filter>()
             {
@@ -72,21 +98,15 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
 
             if (auditee != null && auditee.SpecialistId != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
-            {
                 _opponent = auditee;
-                _to = auditee.SpecialistId;
-            }
             else
             {
                 var auditor = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<PelSpecialistDTO, PelSpecialist>(pel.AuditorId);
                 if (auditor != null && auditor.SpecialistId != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
-                {
                     _opponent = auditor;
-                    _to = auditor.SpecialistId;
-                }
             }
 
-            var records = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListTransferDTO, CheckListTransfer>(new List<Filter>()
+            _records = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListTransferDTO, CheckListTransfer>(new List<Filter>()
             {
                 new Filter("AuditId", _auditId),
                 new Filter("CheckListId", _checkListId),
@@ -94,32 +114,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             });
 
 
-            var spec = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<SpecialistDTO, Specialist>(_to);
+            var spec = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<SpecialistDTO, Specialist>(_opponent.SpecialistId);
 
             _author1 = new Author(null, GlobalObjects.CaaEnvironment.IdentityUser.ToString());
             _author2 = new Author(null, spec.ToString());
-            
-            
             radChat2.Author = _author1;
-
-            var last = records.Count > 1 ? records.LastOrDefault() : null;
-            foreach (var message in records.Where(i => i.To > -1 && i.From > -1))
-            {
-                if (message.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
-                {
-                    AddAuditorMsg(message.Settings.Remark);
-                }
-                else
-                {
-                    AddAuditeeMsg(message.Settings.Remark);
-                    if (last != null &&
-                        last.ItemId == message.ItemId &&
-                        last.To == _opponent.SpecialistId)
-                        AddBotMsg();
-                }
-            }
         }
-
+        
         private void AddBotMsg()
         {
             var actions = new List<ChatCardAction>();
@@ -137,7 +138,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         {
             radChat2.AddMessage(new ChatTextMessage(text, _author2, DateTime.Now));
         }
-        
         
         
         private void radChat1_CardActionClicked(object sender, CardActionEventArgs e)
@@ -164,7 +164,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             {
                 Created = DateTime.Now,
                 From = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
-                To = _to,
+                To = _opponent.SpecialistId,
                 AuditId = _auditId,
                 CheckListId = _checkListId,
                 Settings = new CheckListTransferSettings()
