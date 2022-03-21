@@ -13,6 +13,7 @@ using SmartCore.CAA.Check;
 using SmartCore.CAA.PEL;
 using SmartCore.Entities.General.Personnel;
 using Telerik.WinControls;
+using Telerik.WinControls.Localization;
 using Telerik.WinControls.UI;
 using Filter = Entity.Abstractions.Filters.Filter;
 
@@ -22,8 +23,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
     {
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         
-        private bool _entedPressed;
-
         private IList<CheckListTransfer> _records = new List<CheckListTransfer>();
         public int _checkListId => _auditCheck.CheckListId; 
         public int _auditId => _auditCheck.AuditId;
@@ -32,11 +31,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private readonly AuditCheck _auditCheck;
         private bool _isAuditor;
         private int _auditorId;
-        
+        private bool _entedPressed;
         
         private  Author _author1;
         private  Author _author2;
-        private  Author _author3;
+        private  Author _bot;
         private PelSpecialist _opponent;
        
         
@@ -56,7 +55,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         void UpdateChat()
         {
-            _author3 = new Author(null, "bot");
+            _bot = new Author(null, "bot");
             radChat2.ChatElement.ShowToolbarButtonElement.TextWrap = true;
             radChat2.ChatElement.ShowToolbarButtonElement.Visibility = ElementVisibility.Hidden;
             radChat2.AutoAddUserMessages = false;
@@ -145,12 +144,14 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         
         private void AddBotMsg()
         {
-            var actions = new List<ChatCardAction>();
-            actions.Add(new ChatCardAction("Accept"));
-            var imageCard = new ChatImageCardDataItem(null, "", "",$"Move to next stage({WorkFlowStage.GetItemById(_stageId + 1).FullName})?", actions, null);
-            var message = new ChatCardMessage(imageCard, _author1, DateTime.Now);
-            radChat2.AddMessage(message);;
-            
+            if (_stageId > WorkFlowStage.View.ItemId && _stageId < WorkFlowStage.Closed.ItemId)
+            {
+                var actions = new List<ChatCardAction>();
+                actions.Add(new ChatCardAction("Accept"));
+                var imageCard = new ChatImageCardDataItem(null, "", "",$"Move to next stage({WorkFlowStage.GetItemById(_stageId + 1).FullName})?", actions, null);
+                var message = new ChatCardMessage(imageCard, _author1, DateTime.Now);
+                radChat2.AddMessage(message);
+            }
         }
         private void AddAuditorMsg(string text)
         {
@@ -162,7 +163,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         }
         private void AddBotWaitMsg()
         {
-            radChat2.AddMessage(new ChatTextMessage($"Wait for a response from {_author2.Name}...", _author3, DateTime.Now));
+            radChat2.AddMessage(new ChatTextMessage($"Wait for a response from {_author2.Name}...", _bot, DateTime.Now));
         }
         
         private void radChat1_CardActionClicked(object sender, CardActionEventArgs e)
