@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
+using CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using MetroFramework.Forms;
@@ -66,20 +67,14 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             radChat2.ChatElement.MessagesViewElement.Items.Clear();
             var last = _records.Count == 1 ? _records.FirstOrDefault() : _records.Count > 1 ? _records.LastOrDefault() : null;
 
-            foreach (var message in _records.Where(i => i.To > -1 && i.From > -1))
+            foreach (var transfer in _records.Where(i => i.To > -1 && i.From > -1))
             {
-                if (message.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId && message.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId )
-                {
-                    AddAuditorMsg(message.Settings.Remark);
-                }
-                else if (message.From == _auditor.SpecialistId)
-                {
-                    AddAuditorMsg(message.Settings.Remark);
-                }
+                if (transfer.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId && transfer.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId )
+                    AddAuditorMsg(transfer);
+                else if (transfer.From == _auditor.SpecialistId)
+                    AddAuditorMsg(transfer);
                 else
-                {
-                    AddAuditeeMsg(message.Settings.Remark);
-                }
+                    AddAuditeeMsg(transfer);
             }
         }
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
@@ -125,13 +120,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 radChat2.AddMessage(message);
             }
         }
-        private void AddAuditorMsg(string text)
+        private void AddAuditorMsg(CheckListTransfer tag)
         {
-            radChat2.AddMessage(new ChatTextMessage(text, _author1, DateTime.Now));
+            radChat2.AddMessage(new CustomChatTextMessage<CheckListTransfer>(tag, tag.Settings.Remark, _author1, DateTime.Now));
         }
-        private void AddAuditeeMsg(string text)
+        private void AddAuditeeMsg(CheckListTransfer tag)
         {
-            radChat2.AddMessage(new ChatTextMessage(text, _author2, DateTime.Now));
+            radChat2.AddMessage(new CustomChatTextMessage<CheckListTransfer>(tag, tag.Settings.Remark, _author2, DateTime.Now));
         }
         
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -961,6 +961,7 @@
     <Compile Include="UICAAControls\CheckList\CheckListAudit\CheckMoveToForm.Designer.cs">
       <DependentUpon>CheckMoveToForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CheckList\CheckListAudit\MoveToForms\CustomChatTextMessage.cs" />
     <Compile Include="UICAAControls\CheckList\CheckListAudit\ShowMoveToForm.cs">
       <SubType>Form</SubType>
     </Compile>

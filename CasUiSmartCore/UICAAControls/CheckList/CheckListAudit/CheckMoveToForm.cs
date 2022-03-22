@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
+using CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using MetroFramework.Forms;
@@ -71,29 +72,29 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             radChat2.ChatElement.SendButtonElement.Enabled = last?.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId;
             _entedPressed = last?.To != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId;
                 
-            foreach (var message in _records.Where(i => i.To > -1 && i.From > -1))
+            foreach (var transfer in _records.Where(i => i.To > -1 && i.From > -1))
             {
-                if (message.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId && message.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId )
+                if (transfer.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId && transfer.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId )
                 {
-                    AddAuditorMsg(message.Settings.Remark);
+                    AddAuditorMsg(transfer);
                     if (last != null &&
-                        last.ItemId == message.ItemId &&
+                        last.ItemId == transfer.ItemId &&
                         last.From == _auditorId)
                         AddBotMsg();
                 }
-                else if (message.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+                else if (transfer.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
                 {
-                    AddAuditorMsg(message.Settings.Remark);
+                    AddAuditorMsg(transfer);
                     if (last != null &&
-                        last.ItemId == message.ItemId &&
+                        last.ItemId == transfer.ItemId &&
                         last.From != _opponent.SpecialistId)
                         AddBotWaitMsg();
                 }
                 else
                 {
-                    AddAuditeeMsg(message.Settings.Remark);
+                    AddAuditeeMsg(transfer);
                     if (last != null &&
-                        last.ItemId == message.ItemId &&
+                        last.ItemId == transfer.ItemId &&
                         last.To == _auditorId)
                     {
                         if(!last.Settings.IsWorkFlowChanged)
@@ -154,13 +155,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 radChat2.AddMessage(message);
             }
         }
-        private void AddAuditorMsg(string text)
+        private void AddAuditorMsg(CheckListTransfer tag)
         {
-            radChat2.AddMessage(new ChatTextMessage(text, _author1, DateTime.Now));
+            radChat2.AddMessage(new CustomChatTextMessage<CheckListTransfer>(tag, tag.Settings.Remark, _author1, DateTime.Now));
         }
-        private void AddAuditeeMsg(string text)
+        private void AddAuditeeMsg(CheckListTransfer tag)
         {
-            radChat2.AddMessage(new ChatTextMessage(text, _author2, DateTime.Now));
+            radChat2.AddMessage(new CustomChatTextMessage<CheckListTransfer>(tag, tag.Settings.Remark, _author2, DateTime.Now));
         }
         private void AddBotWaitMsg()
         {
@@ -204,7 +205,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             if(_entedPressed)
                 return;
             
-            var textMessage = e.Message as ChatTextMessage;
+            var textMessage = e.Message as CustomChatTextMessage<CheckListTransfer>;
             
             if(string.IsNullOrWhiteSpace(textMessage.Message))
                 return;
@@ -236,7 +237,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             if (_auditorId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
                 radChat2.ChatElement.MessagesViewElement.Items.Remove(radChat2.ChatElement.MessagesViewElement.Items.Last());
             
-            AddAuditorMsg(textMessage.Message);
+            AddAuditorMsg(rec);
             AddBotWaitMsg();
            
             
