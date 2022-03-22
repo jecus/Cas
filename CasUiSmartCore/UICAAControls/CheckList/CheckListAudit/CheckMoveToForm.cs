@@ -26,7 +26,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private IList<CheckListTransfer> _records = new List<CheckListTransfer>();
         public int _checkListId => _auditCheck.CheckListId; 
         public int _auditId => _auditCheck.AuditId;
-        public int _stageId => _auditCheck.Settings.WorkflowStageId;
+        public int _stageId;
         
         private readonly AuditCheck _auditCheck;
         private bool _isAuditor;
@@ -44,7 +44,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         {
             InitializeComponent();
             _auditCheck = auditCheck;
-
+            _stageId = _auditCheck.Settings.WorkflowStageId;
+            
             UpdateChat();
             
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
