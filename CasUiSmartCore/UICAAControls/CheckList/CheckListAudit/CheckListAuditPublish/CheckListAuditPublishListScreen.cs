@@ -93,11 +93,28 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.CheckListAuditPublish
             }
             else
             {
-	            var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@"select 
-WorkflowStageId as WorkflowStagId,
-Count(*) as AllTask 
-from dbo.CheckListTransfer 
-where AuditId = {_auditId} and IsDeleted = 0 and ([To] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} or [From] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId})
+	            var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@" ;WITH cte AS
+(
+   SELECT rec.*, auditor.Auditor ,auditee.Auditee, ac.*, ROW_NUMBER() OVER (PARTITION BY rec.CheckListId ORDER BY rec.ItemId DESC) AS rn
+   FROM [AuditPelRecords] rec
+   cross apply
+   (
+		select SpecialistId as Auditor from  [dbo].[PelSpecialist] where ItemId = rec.AuditorId
+   ) as auditor
+   cross apply
+   (
+		select SpecialistId as Auditee from  [dbo].[PelSpecialist] where ItemId = rec.AuditeeId
+   ) as auditee
+   cross apply
+   (
+		select JSON_VALUE(SettingsJSON, '$.WorkflowStageId') as WorkflowStageId, JSON_VALUE(SettingsJSON, '$.WorkflowStatusId') as WorkflowStatusId   from  [dbo].AuditChecks 
+		where AuditId = rec.AuditId and CheckListId = rec.CheckListId
+   ) as ac
+   where rec.AuditId in ({_auditId}) and rec.IsDeleted = 0
+)
+SELECT WorkflowStageId, Count(*), Sum(case when ([Auditor] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} or [Auditee] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}) then 1 else 0 end)
+FROM cte
+WHERE rn = 1
 group by WorkflowStageId");
 	            
 	            var dtC = ds.Tables[0];
@@ -107,6 +124,7 @@ group by WorkflowStageId");
 		            {
 			            WorkFlowStageId = int.Parse(dr[0].ToString()),
 			            AllTask = int.Parse(dr[1].ToString()),
+			            MyTask = int.Parse(dr[2].ToString()),
 		            });
 	            }
             }

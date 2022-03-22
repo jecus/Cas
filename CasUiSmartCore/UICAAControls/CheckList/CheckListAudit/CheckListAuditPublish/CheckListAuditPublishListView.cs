@@ -48,7 +48,8 @@ namespace CAS.UI.UICAAControls.Audit
 		protected override void SetHeaders()
 		{
 			AddColumn("WorkflowStage", (int)(radGridView1.Width * 0.40f));
-			AddColumn("AllTask", (int)(radGridView1.Width * 0.20f));
+			AddColumn("All Task", (int)(radGridView1.Width * 0.20f));
+			AddColumn("My Task", (int)(radGridView1.Width * 0.20f));
 		}
 		#endregion
 		
@@ -56,6 +57,11 @@ namespace CAS.UI.UICAAControls.Audit
 
 		protected override List<CustomCell> GetListViewSubItems(AuditPublish item)
 		{
+			if (_type == CheckListAuditType.Admin)
+			{
+				radGridView1.Columns[2].IsVisible = false;
+			}
+			
 			var subItems = new List<CustomCell>();
 
 			var stage = WorkFlowStage.GetItemById(item.WorkFlowStageId);
@@ -64,6 +70,7 @@ namespace CAS.UI.UICAAControls.Audit
             {
 	            CreateRow($"{stage.Order}.{stage}",stage),
 	            CreateRow($"{item.AllTask}",item.AllTask),
+	            CreateRow($"{item.MyTask}",item.MyTask),
             });
 
             return subItems;
