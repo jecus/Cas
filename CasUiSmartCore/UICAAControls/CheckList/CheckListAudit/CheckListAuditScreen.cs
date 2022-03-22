@@ -226,7 +226,7 @@ where AuditId in ({_parentId}) and IsDeleted = 0 and WorkflowStageId = {_stage.V
 		select JSON_VALUE(SettingsJSON, '$.WorkflowStageId') as WorkflowStageId   from  [dbo].AuditChecks 
 		where AuditId = rec.AuditId and CheckListId = rec.CheckListId
    ) as ac
-   where rec.AuditId in (_parentId) and rec.IsDeleted = 0  {condition}
+   where rec.AuditId in ({_parentId}) and rec.IsDeleted = 0  {condition} 
    and (auditor.Auditor = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} or auditee.Auditee = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId})");
 					
 					var dt = ds.Tables[0];
