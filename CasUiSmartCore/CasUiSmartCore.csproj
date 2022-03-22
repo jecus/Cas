@@ -961,6 +961,12 @@
     <Compile Include="UICAAControls\CheckList\CheckListAudit\CheckMoveToForm.Designer.cs">
       <DependentUpon>CheckMoveToForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CheckList\CheckListAudit\ShowMoveToForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CheckList\CheckListAudit\ShowMoveToForm.Designer.cs">
+      <DependentUpon>ShowMoveToForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CheckList\CheckListForm\CheckListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4436,6 +4442,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\CheckListAudit\CheckMoveToForm.resx">
       <DependentUpon>CheckMoveToForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CheckList\CheckListAudit\ShowMoveToForm.resx">
+      <DependentUpon>ShowMoveToForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\CheckListForm\CheckListForm.resx">
       <DependentUpon>CheckListForm.cs</DependentUpon>

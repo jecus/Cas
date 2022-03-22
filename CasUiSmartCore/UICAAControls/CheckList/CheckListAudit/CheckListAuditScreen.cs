@@ -377,15 +377,26 @@ WHERE rn = 1 and  IsDeleted = 0");
 			// 
 			// toolStripMenuItemView
 			// 
-			_toolStripMenuSendTo.Text = "Send To";
+			_toolStripMenuSendTo.Text = _type == CheckListAuditType.User ?  "Send To" : "Show Chat";
 			_toolStripMenuSendTo.Click += ToolStripMenuSendClick;
 		}
 
 		private void ToolStripMenuSendClick(object sender, EventArgs e)
 		{
-			var form = new CheckMoveToForm(_directivesViewer.SelectedItem.AuditCheck);
-			if (form.ShowDialog() == DialogResult.OK)
-				AnimatedThreadWorker.RunWorkerAsync();
+			if (_type == CheckListAuditType.User)
+			{
+				var form = new CheckMoveToForm(_directivesViewer.SelectedItem.AuditCheck);
+				if (form.ShowDialog() == DialogResult.OK)
+					AnimatedThreadWorker.RunWorkerAsync();
+			}
+			else
+			{
+				var form = new ShowMoveToForm(_directivesViewer.SelectedItem.AuditCheck);
+				if (form.ShowDialog() == DialogResult.OK)
+					AnimatedThreadWorker.RunWorkerAsync();
+			}
+			
+			
 		}
 
 		#endregion
@@ -445,7 +456,7 @@ WHERE rn = 1 and  IsDeleted = 0");
 				{
 
 					_toolStripMenuItemOpen.Enabled = true;
-					_toolStripMenuSendTo.Enabled = _type == CheckListAuditType.User;
+					_toolStripMenuSendTo.Enabled = true;
 				}
 				else
 				{

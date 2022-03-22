@@ -13,7 +13,6 @@ using SmartCore.CAA.Check;
 using SmartCore.CAA.PEL;
 using SmartCore.Entities.General.Personnel;
 using Telerik.WinControls;
-using Telerik.WinControls.Localization;
 using Telerik.WinControls.UI;
 using Filter = Entity.Abstractions.Filters.Filter;
 
@@ -29,6 +28,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         public int _stageId;
         
         private readonly AuditCheck _auditCheck;
+        private readonly bool _isUser;
         private bool _isAuditor;
         private int _auditorId;
         private bool _entedPressed;
@@ -45,6 +45,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             InitializeComponent();
             _auditCheck = auditCheck;
             _stageId = _auditCheck.Settings.WorkflowStageId;
+            
             UpdateChat();
             
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
