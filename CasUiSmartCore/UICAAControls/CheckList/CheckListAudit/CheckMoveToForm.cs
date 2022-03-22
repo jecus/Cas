@@ -205,6 +205,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             
             var textMessage = e.Message as ChatTextMessage;
             
+            if(string.IsNullOrWhiteSpace(textMessage.Message))
+                return;
+
             var rec = new CheckListTransfer()
             {
                 Created = DateTime.Now,
