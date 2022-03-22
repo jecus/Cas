@@ -133,10 +133,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         {
             radChat2.AddMessage(new ChatTextMessage(text, _author2, DateTime.Now));
         }
-        private void AddBotWaitMsg()
-        {
-            radChat2.AddMessage(new ChatTextMessage($"Wait for a response from {_author2.Name}...", _bot, DateTime.Now));
-        }
         
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
