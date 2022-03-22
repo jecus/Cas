@@ -15,10 +15,10 @@ namespace SmartCore.CAA.Audit
         #endregion
 
         public static WorkFlowStage View = new WorkFlowStage(1, "View", "View", "View");
-        public static WorkFlowStage Evaluation = new WorkFlowStage(2, "Evaluation", "Evaluation", "Evaluation");
-        public static WorkFlowStage CAR = new WorkFlowStage(3, "Corrective Action Report (CAR)", "Corrective Action Report (CAR)", "Corrective Action Report (CAR)");
-        public static WorkFlowStage RCA = new WorkFlowStage(4, "Root Causes Analysis (RCA) ", "Root Causes Analysis (RCA)", "Root Causes Analysis (RCA)");
-        public static WorkFlowStage CAP = new WorkFlowStage(5, "Corrective Action Plan (CAP)", "Corrective Action Plan (CAP)", "Corrective Action Plan (CAP)");
+        public static WorkFlowStage Evaluation = new WorkFlowStage(2, "Evaluation", "Evaluation", "Evaluation", 1);
+        public static WorkFlowStage CAR = new WorkFlowStage(3, "Corrective Action Report (CAR)", "Corrective Action Report (CAR)", "Corrective Action Report (CAR)",2);
+        public static WorkFlowStage RCA = new WorkFlowStage(4, "Root Causes Analysis (RCA) ", "Root Causes Analysis (RCA)", "Root Causes Analysis (RCA)",3);
+        public static WorkFlowStage CAP = new WorkFlowStage(5, "Corrective Action Plan (CAP)", "Corrective Action Plan (CAP)", "Corrective Action Plan (CAP)",4);
         public static WorkFlowStage Closed = new WorkFlowStage(6, "Closed ", "Closed ", "Closed");
         public static WorkFlowStage Unknown = new WorkFlowStage(-1, "Unknown", "Unknown", "Unknown");
 
@@ -66,6 +66,8 @@ namespace SmartCore.CAA.Audit
             return FullName;
         }
         #endregion
+        
+        public int Order { get; set; }
 
         /*
         * Свойства
@@ -97,6 +99,19 @@ namespace SmartCore.CAA.Audit
             ShortName = shortName;
             FullName = fullName;
             CommonName = commonName;
+
+            //if (_Items == null) _Items = new List<DetailType>();
+            _Items.Add(this);
+        }
+        
+        
+        public WorkFlowStage(Int32 itemID, String shortName, String fullName, String commonName, int order)
+        {
+            ItemId = itemID;
+            ShortName = shortName;
+            FullName = fullName;
+            CommonName = commonName;
+            Order = order;
 
             //if (_Items == null) _Items = new List<DetailType>();
             _Items.Add(this);

@@ -8,6 +8,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UICAAControls.CheckList.CheckListAudit;
+using CAS.UI.UICAAControls.CheckList.CheckListAudit.CheckListAuditPublish;
 using CAS.UI.UICAAControls.RoutineAudit;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
@@ -198,9 +199,18 @@ namespace CAS.UI.UICAAControls.Audit
 		{
             if (SelectedItem != null)
             {
-                e.RequestedEntity = new CheckListAuditScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), OperatorId ,  SelectedItem.ItemId, _checkListAuditType);
-                e.DisplayerText = $"Audit: {SelectedItem.AuditNumber}";
-                e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+	            if (SelectedItem.Settings.Status == RoutineStatus.Published)
+	            {
+		            e.RequestedEntity = new CheckListAuditPublishListScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(),OperatorId, SelectedItem, _checkListAuditType);
+		            e.DisplayerText = $"Publish Audit: {SelectedItem.AuditNumber}";
+		            e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+	            }
+	            else
+	            {
+		            e.RequestedEntity = new CheckListAuditScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), OperatorId ,  SelectedItem.ItemId, _checkListAuditType);
+		            e.DisplayerText = $"Audit: {SelectedItem.AuditNumber}";
+		            e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+	            }
             }
 		}
 		#endregion
