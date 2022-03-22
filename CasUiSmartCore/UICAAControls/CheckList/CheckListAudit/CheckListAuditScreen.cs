@@ -48,6 +48,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private readonly int _operatorId;
         private readonly int _parentId;
         private readonly CheckListAuditType _type;
+        private readonly int? _stage;
         private SmartCore.CAA.StandartManual.StandartManual _manual;
 
         #region Fields
@@ -79,11 +80,10 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 		}
 
 
-        ///<summary>
-        /// Создаёт экземпляр элемента управления, отображающего список директив
-        ///</summary>
-        ///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-        public CheckListAuditScreen(Operator currentOperator,int operatorId, int parentId, CheckListAuditType type)
+		/// <summary>
+		///  Создаёт экземпляр элемента управления, отображающего список директив
+		/// </summary>
+		public CheckListAuditScreen(Operator currentOperator, int operatorId, int parentId, CheckListAuditType type, int? stage = null)
             : this()
         {
             if (currentOperator == null)
@@ -93,6 +93,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             _operatorId = operatorId;
             _parentId = parentId;
             _type = type;
+            _stage = stage;
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
 
@@ -191,13 +192,26 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                     .GetObjectListAll<RoutineAuditRecordDTO, RoutineAuditRecord>(new Filter("RoutineAuditId", _currentRoutineId), loadChild: true).ToList();
 
 				var ids = new List<int>();
-				if(_type == CheckListAuditType.Admin)
-					ids = routines.Select(i => i.CheckListId).Distinct().ToList();
+				if (_type == CheckListAuditType.Admin)
+				{
+					if (_audit.Settings.Status == RoutineStatus.Published)
+					{
+						var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@"select CheckListId from dbo.AuditChecks 
+where AuditId in ({_parentId}) and IsDeleted = 0 and WorkflowStageId = {_stage.Value}");
+						
+						var dt = ds.Tables[0];
+						ids.AddRange(from DataRow dr in dt.Rows select (int)dr[0]);
+					}
+					else
+					{
+						ids = routines.Select(i => i.CheckListId).Distinct().ToList();
+					}
+				}
 				else
 				{
-					var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@";WITH cte AS
-(
-   SELECT rec.*, auditor.Auditor ,auditee.Auditee
+					var condition = _stage.HasValue ? $" and ac.WorkflowStageId = {_stage}" : "";
+					
+					var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@"SELECT rec.CheckListId
    FROM [AuditPelRecords] rec
    cross apply
    (
@@ -207,11 +221,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
    (
 		select SpecialistId as Auditee from  [dbo].[PelSpecialist] where ItemId = rec.AuditeeId
    ) as auditee
-   where rec.AuditId in ({_parentId.ToString()}) and rec.IsDeleted = 0
-)
-SELECT CheckListId
-FROM cte
-WHERE ([Auditor] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} or [Auditee] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId})");
+   cross apply
+   (
+		select JSON_VALUE(SettingsJSON, '$.WorkflowStageId') as WorkflowStageId   from  [dbo].AuditChecks 
+		where AuditId = rec.AuditId and CheckListId = rec.CheckListId
+   ) as ac
+   where rec.AuditId in (_parentId) and rec.IsDeleted = 0  {condition}
+   and (auditor.Auditor = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} or auditee.Auditee = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId})");
 					
 					var dt = ds.Tables[0];
 
@@ -221,8 +237,13 @@ WHERE ([Auditor] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} or [A
                 
                 if (ids.Any())
                 {
+	                var filter = new List<Filter>() { new Filter("CheckListId", ids) };
+	                
+	                if(_stage.HasValue)
+		                filter.Add(new Filter("WorkflowStageId", _stage.Value));
+	                
                     var auditChecks = GlobalObjects.CaaEnvironment.NewLoader
-                        .GetObjectListAll<AuditCheckDTO, AuditCheck>(new Filter("CheckListId", ids), loadChild: true).ToList();
+                        .GetObjectListAll<AuditCheckDTO, AuditCheck>(filter, loadChild: true).ToList();
 
 					_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CheckListDTO, CheckLists>(new Filter("ItemId", ids), loadChild: true, true));
 					

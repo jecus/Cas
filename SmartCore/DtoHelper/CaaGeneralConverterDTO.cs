@@ -34,6 +34,8 @@ namespace SmartCore.DtoHelper
                 CorrectorId = audit.CorrectorId,
                 AuditId =  audit.AuditId,
                 CheckListId =  audit.CheckListId,
+                WorkflowStatusId =  audit.WorkflowStatusId,
+                WorkflowStageId =  audit.WorkflowStageId,
                 SettingsJSON = audit.SettingsJSON,
             };
         }
@@ -48,6 +50,8 @@ namespace SmartCore.DtoHelper
                 CorrectorId = audit.CorrectorId,
                 AuditId =  audit.AuditId,
 				CheckListId =  audit.CheckListId,
+				WorkflowStatusId =  audit.WorkflowStatusId,
+				WorkflowStageId =  audit.WorkflowStageId,
 				SettingsJSON = audit.SettingsJSON,
             };
         }

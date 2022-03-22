@@ -14,6 +14,9 @@ namespace SmartCore.CAA.Audit
     {
         public int AuditId { get; set; }
         public int CheckListId { get; set; }
+        
+        public int WorkflowStatusId { get; set; }
+        public int WorkflowStageId { get; set; }
 
         public string SettingsJSON
         {
