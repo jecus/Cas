@@ -57,8 +57,8 @@ namespace SmartCore.CAA.Audit
         [JsonProperty("IsSatisfactory", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsSatisfactory { get; set; }
 
-        [JsonProperty("SubReference")]
-        public string SubReference { get; set; }
+        [JsonProperty("Findings")]
+        public string Findings { get; set; }
 
         [JsonProperty("Comments")]
         public string Comments { get; set; }

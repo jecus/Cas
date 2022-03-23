@@ -27,13 +27,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private IList<RootCause> _rootCase = new List<RootCause>();
 
         #region Constructors
-        public CheckListAuditForm()
+
+
+        public CheckListAuditForm(CheckLists currentCheck, int auditId, bool editable = false) 
         {
             InitializeComponent();
-        }
-
-        public CheckListAuditForm(CheckLists currentCheck, int auditId, bool editable = false) : this()
-        {
             _currentCheck = currentCheck;
             _auditId = auditId;
             _editable = editable;
@@ -63,10 +61,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         private void UpdateControls()
         {
-
-            comboBoxWorkFlowStatus.Items.Clear();
-            comboBoxWorkFlowStatus.Items.AddRange(WorkFlowStatus.Items.ToArray());
-
             checkedListBoxRoot.Items.Clear();
             checkedListBoxRoot.Items.AddRange(_rootCase.ToArray());
 
@@ -76,7 +70,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             radioButtonNotSatisfactory.Enabled =
                 radioButtonSatisfactory.Enabled =
-                    metroTextBoxReference.Enabled =
+                    metroTextBoxFindings.Enabled =
                         checkedListBoxRoot.Enabled =
                             metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
 
@@ -198,11 +192,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 radioButtonNotSatisfactory.Checked = !radioButtonSatisfactory.Checked;
             }
 
-            metroTextBoxReference.Text = _currentAuditCheck.Settings.SubReference;
+            metroTextBoxFindings.Text = _currentAuditCheck.Settings.Findings;
             metroTextBoxComments.Text = _currentAuditCheck.Settings.Comments;
 
-            comboBoxWorkFlowStatus.SelectedItem = WorkFlowStatus.GetItemById(_currentAuditCheck.Settings.WorkflowStatusId);
-
+            
+            metroTextBoxWorkflowStage.Text = WorkFlowStage.GetItemById(_currentAuditCheck.Settings.WorkflowStatusId).ToString();
+            metroTextBoxWorkFlowStatus.Text = WorkFlowStatus.GetItemById(_currentAuditCheck.Settings.WorkflowStatusId).ToString();
+            
             for (int i = 0; i < checkedListBoxRoot.Items.Count; i++)
             {
                 if (!string.IsNullOrEmpty(_currentAuditCheck.Settings.RootCause) &&_currentAuditCheck.Settings.RootCause.Contains(checkedListBoxRoot.Items[i].ToString()))
@@ -230,9 +226,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         {
             _currentAuditCheck.Settings.IsApplicable = checkBoxNotApplicable.Checked;
             _currentAuditCheck.Settings.IsSatisfactory = radioButtonSatisfactory.Checked;
-            _currentAuditCheck.Settings.SubReference = metroTextBoxReference.Text;
+            _currentAuditCheck.Settings.Findings = metroTextBoxFindings.Text;
             _currentAuditCheck.Settings.Comments = metroTextBoxComments.Text;
-            _currentAuditCheck.Settings.WorkflowStatusId = ((WorkFlowStatus)comboBoxWorkFlowStatus.SelectedItem).ItemId;
 
             foreach (var item in checkedListBoxRoot.CheckedItems)
                 _currentAuditCheck.Settings.RootCause += $"{item}, ";
@@ -277,7 +272,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         {
             radioButtonNotSatisfactory.Enabled =
                 radioButtonSatisfactory.Enabled =
-                    metroTextBoxReference.Enabled =
+                    metroTextBoxFindings.Enabled =
                         checkedListBoxRoot.Enabled = 
                 metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
 
