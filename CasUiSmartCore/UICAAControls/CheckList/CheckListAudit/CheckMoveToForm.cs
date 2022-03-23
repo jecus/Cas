@@ -70,42 +70,51 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             var last = _records.Count == 1 ? _records.FirstOrDefault() : _records.Count > 1 ? _records.LastOrDefault() : null;
             radChat2.ChatElement.SendButtonElement.Enabled = last?.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId;
             _entedPressed = last?.To != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId;
-                
-            foreach (var transfer in _records.Where(i => i.To > -1 && i.From > -1))
+
+
+            var data = _records.Where(i => i.To > -1 && i.From > -1);
+
+            if (!data.Any())
+                AddBotMsg();
+            else 
             {
-                if (transfer.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId && transfer.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId )
+                foreach (var transfer in data)
                 {
-                    AddAuditorMsg(transfer);
-                    if (last != null &&
-                        last.ItemId == transfer.ItemId &&
-                        last.From == _auditorId)
-                        AddBotMsg();
-                }
-                else if (transfer.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
-                {
-                    AddAuditorMsg(transfer);
-                    if (last != null &&
-                        last.ItemId == transfer.ItemId &&
-                        last.From != _opponent.SpecialistId)
-                        AddBotWaitMsg();
-                }
-                else
-                {
-                    AddAuditeeMsg(transfer);
-                    if (last != null &&
-                        last.ItemId == transfer.ItemId &&
-                        last.To == _auditorId)
+                    if (transfer.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId && transfer.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId )
                     {
-                        if(!last.Settings.IsWorkFlowChanged)
+                        AddAuditorMsg(transfer);
+                        if (last != null &&
+                            last.ItemId == transfer.ItemId &&
+                            last.From == _auditorId)
                             AddBotMsg();
-                        else AddBotWaitMsg();
+                    }
+                    else if (transfer.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+                    {
+                        AddAuditorMsg(transfer);
+                        if (last != null &&
+                            last.ItemId == transfer.ItemId &&
+                            last.From != _opponent.SpecialistId)
+                            AddBotWaitMsg();
+                    }
+                    else
+                    {
+                        AddAuditeeMsg(transfer);
+                        if (last != null &&
+                            last.ItemId == transfer.ItemId &&
+                            last.To == _auditorId)
+                        {
+                            if(!last.Settings.IsWorkFlowChanged)
+                                AddBotMsg();
+                            else AddBotWaitMsg();
+                        }
                     }
                 }
             }
+
+           
         }
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
-            
             _records.Clear();
             
             var record = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AuditPelRecordDTO, AuditPelRecord>(new List<Filter>()
