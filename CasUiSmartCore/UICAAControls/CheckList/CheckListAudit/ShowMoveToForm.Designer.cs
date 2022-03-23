@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 {
@@ -34,8 +33,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         {
             this.telerikMetroBlueTheme1 = new Telerik.WinControls.Themes.TelerikMetroBlueTheme();
             this.fileControl = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
+            this.radChat2 = new Telerik.WinControls.UI.RadChat();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            ((System.ComponentModel.ISupportInitialize)(this.radChat2)).BeginInit();
             this.SuspendLayout();
             // 
             // fileControl
@@ -56,6 +56,17 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.fileControl.Size = new System.Drawing.Size(350, 100);
             this.fileControl.TabIndex = 351;
             // 
+            // radChat2
+            // 
+            this.radChat2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radChat2.Location = new System.Drawing.Point(20, 60);
+            this.radChat2.Name = "radChat2";
+            this.radChat2.Size = new System.Drawing.Size(580, 672);
+            this.radChat2.TabIndex = 352;
+            this.radChat2.Text = "radChat2";
+            this.radChat2.ThemeName = "TelerikMetroBlue";
+            this.radChat2.TimeSeparatorInterval = System.TimeSpan.Parse("1.00:00:00");
+            // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
@@ -70,38 +81,29 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.linkLabel1.Text = "Refresh";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(2, 60);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(612, 403);
-            this.flowLayoutPanel1.TabIndex = 354;
-            this.flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            // 
-            // ShowMoveToForm
+            // CheckMoveToForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 752);
-            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.radChat2);
             this.Controls.Add(this.fileControl);
-            this.Name = "ShowMoveToForm";
+            this.Name = "CheckMoveToForm";
             this.Resizable = false;
             this.Text = "Transfer Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CheckMoveToForm_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.radChat2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         private System.Windows.Forms.LinkLabel linkLabel1;
-        
+
+        private Telerik.WinControls.UI.RadChat radChat2;
         private Telerik.WinControls.Themes.TelerikMetroBlueTheme telerikMetroBlueTheme1;
         public CAS.UI.UIControls.Auxiliary.AttachedFileControl fileControl;
 
         #endregion
-
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
