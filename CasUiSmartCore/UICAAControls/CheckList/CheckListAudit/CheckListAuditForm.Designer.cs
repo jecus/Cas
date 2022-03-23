@@ -56,6 +56,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.checkedListBoxRoot = new System.Windows.Forms.CheckedListBox();
             this.metroTextBoxWorkflowStage = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxWorkFlowStatus = new MetroFramework.Controls.MetroTextBox();
+            this.ButtonWf = new AvControls.AvButtonT.AvButtonT();
+            this.avButtonWfTracking = new AvControls.AvButtonT.AvButtonT();
             metroLabel1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
@@ -65,11 +67,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             label10 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
             labelSourceText = new System.Windows.Forms.Label();
             labelEditorText = new System.Windows.Forms.Label();
             labelRevisionText = new System.Windows.Forms.Label();
             labelLevelText = new System.Windows.Forms.Label();
-            label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -180,6 +182,66 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             label5.TabIndex = 361;
             label5.Text = "Workflow Stage";
             label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new System.Drawing.Font("Verdana", 9F);
+            label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label6.Location = new System.Drawing.Point(996, 109);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(110, 14);
+            label6.TabIndex = 363;
+            label6.Text = "Workflow Status";
+            label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelSourceText
+            // 
+            labelSourceText.AutoSize = true;
+            labelSourceText.Font = new System.Drawing.Font("Verdana", 9F);
+            labelSourceText.ForeColor = System.Drawing.Color.Black;
+            labelSourceText.Location = new System.Drawing.Point(63, 65);
+            labelSourceText.Name = "labelSourceText";
+            labelSourceText.Size = new System.Drawing.Size(50, 14);
+            labelSourceText.TabIndex = 323;
+            labelSourceText.Text = "Source";
+            labelSourceText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelEditorText
+            // 
+            labelEditorText.AutoSize = true;
+            labelEditorText.Font = new System.Drawing.Font("Verdana", 9F);
+            labelEditorText.ForeColor = System.Drawing.Color.Black;
+            labelEditorText.Location = new System.Drawing.Point(63, 90);
+            labelEditorText.Name = "labelEditorText";
+            labelEditorText.Size = new System.Drawing.Size(44, 14);
+            labelEditorText.TabIndex = 325;
+            labelEditorText.Text = "Editor";
+            labelEditorText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelRevisionText
+            // 
+            labelRevisionText.AutoSize = true;
+            labelRevisionText.Font = new System.Drawing.Font("Verdana", 9F);
+            labelRevisionText.ForeColor = System.Drawing.Color.Black;
+            labelRevisionText.Location = new System.Drawing.Point(185, 90);
+            labelRevisionText.Name = "labelRevisionText";
+            labelRevisionText.Size = new System.Drawing.Size(59, 14);
+            labelRevisionText.TabIndex = 327;
+            labelRevisionText.Text = "Revision";
+            labelRevisionText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelLevelText
+            // 
+            labelLevelText.AutoSize = true;
+            labelLevelText.Font = new System.Drawing.Font("Verdana", 9F);
+            labelLevelText.ForeColor = System.Drawing.Color.Black;
+            labelLevelText.Location = new System.Drawing.Point(315, 90);
+            labelLevelText.Name = "labelLevelText";
+            labelLevelText.Size = new System.Drawing.Size(40, 14);
+            labelLevelText.TabIndex = 332;
+            labelLevelText.Text = "Level";
+            labelLevelText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // buttonOk
             // 
@@ -494,54 +556,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.checkedListBoxRoot.TabIndex = 354;
             this.checkedListBoxRoot.Visible = false;
             // 
-            // labelSourceText
-            // 
-            labelSourceText.AutoSize = true;
-            labelSourceText.Font = new System.Drawing.Font("Verdana", 9F);
-            labelSourceText.ForeColor = System.Drawing.Color.Black;
-            labelSourceText.Location = new System.Drawing.Point(63, 65);
-            labelSourceText.Name = "labelSourceText";
-            labelSourceText.Size = new System.Drawing.Size(50, 14);
-            labelSourceText.TabIndex = 323;
-            labelSourceText.Text = "Source";
-            labelSourceText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelEditorText
-            // 
-            labelEditorText.AutoSize = true;
-            labelEditorText.Font = new System.Drawing.Font("Verdana", 9F);
-            labelEditorText.ForeColor = System.Drawing.Color.Black;
-            labelEditorText.Location = new System.Drawing.Point(63, 90);
-            labelEditorText.Name = "labelEditorText";
-            labelEditorText.Size = new System.Drawing.Size(44, 14);
-            labelEditorText.TabIndex = 325;
-            labelEditorText.Text = "Editor";
-            labelEditorText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelRevisionText
-            // 
-            labelRevisionText.AutoSize = true;
-            labelRevisionText.Font = new System.Drawing.Font("Verdana", 9F);
-            labelRevisionText.ForeColor = System.Drawing.Color.Black;
-            labelRevisionText.Location = new System.Drawing.Point(185, 90);
-            labelRevisionText.Name = "labelRevisionText";
-            labelRevisionText.Size = new System.Drawing.Size(59, 14);
-            labelRevisionText.TabIndex = 327;
-            labelRevisionText.Text = "Revision";
-            labelRevisionText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelLevelText
-            // 
-            labelLevelText.AutoSize = true;
-            labelLevelText.Font = new System.Drawing.Font("Verdana", 9F);
-            labelLevelText.ForeColor = System.Drawing.Color.Black;
-            labelLevelText.Location = new System.Drawing.Point(315, 90);
-            labelLevelText.Name = "labelLevelText";
-            labelLevelText.Size = new System.Drawing.Size(40, 14);
-            labelLevelText.TabIndex = 332;
-            labelLevelText.Text = "Level";
-            labelLevelText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // metroTextBoxWorkflowStage
             // 
             // 
@@ -608,23 +622,69 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.metroTextBoxWorkFlowStatus.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxWorkFlowStatus.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // label6
+            // ButtonWf
             // 
-            label6.AutoSize = true;
-            label6.Font = new System.Drawing.Font("Verdana", 9F);
-            label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label6.Location = new System.Drawing.Point(996, 109);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(110, 14);
-            label6.TabIndex = 363;
-            label6.Text = "Workflow Status";
-            label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ButtonWf.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.ButtonWf.ActiveBackgroundImage = null;
+            this.ButtonWf.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ButtonWf.FontMain = new System.Drawing.Font("Verdana", 8F);
+            this.ButtonWf.FontSecondary = new System.Drawing.Font("Verdana", 8F);
+            this.ButtonWf.ForeColorMain = System.Drawing.SystemColors.ControlText;
+            this.ButtonWf.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
+            this.ButtonWf.Icon = global::CAS.UI.Properties.Resources.GreenArrow;
+            this.ButtonWf.IconLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ButtonWf.IconNotEnabled = null;
+            this.ButtonWf.Location = new System.Drawing.Point(999, 172);
+            this.ButtonWf.Margin = new System.Windows.Forms.Padding(4);
+            this.ButtonWf.Name = "ButtonWf";
+            this.ButtonWf.NormalBackgroundImage = null;
+            this.ButtonWf.PaddingMain = new System.Windows.Forms.Padding(0);
+            this.ButtonWf.PaddingSecondary = new System.Windows.Forms.Padding(0);
+            this.ButtonWf.ShowToolTip = false;
+            this.ButtonWf.Size = new System.Drawing.Size(169, 33);
+            this.ButtonWf.TabIndex = 365;
+            this.ButtonWf.TextAlignMain = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ButtonWf.TextAlignSecondary = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ButtonWf.TextMain = "Workflow Comments";
+            this.ButtonWf.TextSecondary = "";
+            this.ButtonWf.ToolTipText = "";
+            this.ButtonWf.Click += new System.EventHandler(this.ButtonWf_Click);
+            // 
+            // avButtonWfTracking
+            // 
+            this.avButtonWfTracking.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.avButtonWfTracking.ActiveBackgroundImage = null;
+            this.avButtonWfTracking.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.avButtonWfTracking.FontMain = new System.Drawing.Font("Verdana", 8F);
+            this.avButtonWfTracking.FontSecondary = new System.Drawing.Font("Verdana", 8F);
+            this.avButtonWfTracking.ForeColorMain = System.Drawing.SystemColors.ControlText;
+            this.avButtonWfTracking.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
+            this.avButtonWfTracking.Icon = global::CAS.UI.Properties.Resources.RedArrow;
+            this.avButtonWfTracking.IconLayout = System.Windows.Forms.ImageLayout.Center;
+            this.avButtonWfTracking.IconNotEnabled = null;
+            this.avButtonWfTracking.Location = new System.Drawing.Point(999, 213);
+            this.avButtonWfTracking.Margin = new System.Windows.Forms.Padding(4);
+            this.avButtonWfTracking.Name = "avButtonWfTracking";
+            this.avButtonWfTracking.NormalBackgroundImage = null;
+            this.avButtonWfTracking.PaddingMain = new System.Windows.Forms.Padding(0);
+            this.avButtonWfTracking.PaddingSecondary = new System.Windows.Forms.Padding(0);
+            this.avButtonWfTracking.ShowToolTip = false;
+            this.avButtonWfTracking.Size = new System.Drawing.Size(297, 33);
+            this.avButtonWfTracking.TabIndex = 366;
+            this.avButtonWfTracking.TextAlignMain = System.Drawing.ContentAlignment.MiddleLeft;
+            this.avButtonWfTracking.TextAlignSecondary = System.Drawing.ContentAlignment.MiddleLeft;
+            this.avButtonWfTracking.TextMain = "Workflow Comments(Tracking)";
+            this.avButtonWfTracking.TextSecondary = "";
+            this.avButtonWfTracking.ToolTipText = "";
+            this.avButtonWfTracking.Click += new System.EventHandler(this.avButtonWfTracking_Click);
             // 
             // CheckListAuditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1350, 839);
+            this.Controls.Add(this.avButtonWfTracking);
+            this.Controls.Add(this.ButtonWf);
             this.Controls.Add(this.metroTextBoxWorkFlowStatus);
             this.Controls.Add(label6);
             this.Controls.Add(this.metroTextBoxWorkflowStage);
@@ -663,11 +723,15 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.PerformLayout();
         }
 
+        private AvControls.AvButtonT.AvButtonT avButtonWfTracking;
+
+        private AvControls.AvButtonT.AvButtonT ButtonWf;
+
         private MetroFramework.Controls.MetroTextBox metroTextBoxWorkflowStage;
         private MetroFramework.Controls.MetroTextBox metroTextBoxWorkFlowStatus;
 
         #endregion
-
+        
         System.Windows.Forms.Label labelSourceText;
         System.Windows.Forms.Label labelEditorText;
         System.Windows.Forms.Label labelRevisionText;

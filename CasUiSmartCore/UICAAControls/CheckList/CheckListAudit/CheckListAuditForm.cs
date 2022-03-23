@@ -49,8 +49,12 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             if (!_editable)
             {
-                foreach (var c in this.Controls.OfType<Control>().Where(i => !(i.GetType() == typeof(Button))))
+                foreach (var c in this.Controls.OfType<Control>()
+                             .Where(i => !(i.GetType() == typeof(Button) )))
                 {
+                    if(c.GetType() == typeof(AvControls.AvButtonT.AvButtonT))
+                        continue;
+                    
                     if(c.GetType().ToString() == "MetroFramework.Forms.MetroForm+MetroFormButton")
                         continue;
                     c.Enabled = false;
@@ -290,6 +294,26 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 checkedListBoxRoot.SelectionMode = SelectionMode.None;
             else checkedListBoxRoot.SelectionMode = SelectionMode.One;
             checkedListBoxRoot.Enabled = !radioButtonSatisfactory.Checked;
+        }
+
+        private void ButtonWf_Click(object sender, EventArgs e)
+        {
+            var form = new CheckMoveToForm(_currentAuditCheck);
+            if (form.ShowDialog() == DialogResult.OK)
+                _animatedThreadWorker.RunWorkerAsync();
+            
+            _currentCheck.AuditCheck = _currentAuditCheck;
+            Focus();
+        }
+
+        private void avButtonWfTracking_Click(object sender, EventArgs e)
+        {
+            var form = new ShowMoveToForm(_currentAuditCheck);
+            if (form.ShowDialog() == DialogResult.OK)
+                _animatedThreadWorker.RunWorkerAsync();
+            
+            _currentCheck.AuditCheck = _currentAuditCheck;
+            Focus();
         }
     }
 }
