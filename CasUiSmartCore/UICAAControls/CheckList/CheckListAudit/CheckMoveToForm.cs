@@ -204,7 +204,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             if(_entedPressed)
                 return;
             
-            var textMessage = e.Message as CustomChatTextMessage<CheckListTransfer>;
+            var textMessage = e.Message as ChatTextMessage;
             
             if(string.IsNullOrWhiteSpace(textMessage.Message))
                 return;
@@ -234,7 +234,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             radChat2.ChatElement.SendButtonElement.Enabled = false;
             
             if (_auditorId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
-                radChat2.ChatElement.MessagesViewElement.Items.Remove(radChat2.ChatElement.MessagesViewElement.Items.Last());
+                radChat2.ChatElement.MessagesViewElement.Items.Remove(radChat2.ChatElement.MessagesViewElement.Items.LastOrDefault());
             
             AddAuditorMsg(rec);
             AddBotWaitMsg();
