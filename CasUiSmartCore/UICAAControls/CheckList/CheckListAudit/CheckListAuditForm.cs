@@ -12,6 +12,7 @@ using MetroFramework.Forms;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
+using SmartCore.CAA.PEL;
 
 namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 {
@@ -35,6 +36,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             _currentCheck = currentCheck;
             _auditId = auditId;
             _editable = editable;
+
+            ButtonWf.Visible = _editable;
+            
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
             _animatedThreadWorker.RunWorkerAsync();
@@ -174,6 +178,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             _currentCheck.Level = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<FindingLevelsDTO, FindingLevels>(_currentCheck.Settings.LevelId) ??
                                   FindingLevels.Unknown;
         }
+        
+        
+        
 
         private void UpdateInformation()
         {
@@ -208,7 +215,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 if (!string.IsNullOrEmpty(_currentAuditCheck.Settings.RootCause) &&_currentAuditCheck.Settings.RootCause.Contains(checkedListBoxRoot.Items[i].ToString()))
                     checkedListBoxRoot.SetItemChecked(i, true);
             }
-
+            
+            
+            flowLayoutPanel1.Controls.Clear();
             foreach (var group in _currentCheck.CheckListRecords.GroupBy(i => i.OptionNumber))
             {
                 flowLayoutPanel1.Controls.Add(new Label()
@@ -242,9 +251,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         {
             try
             {
-
                 ApplyChanges();
-
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
 
 

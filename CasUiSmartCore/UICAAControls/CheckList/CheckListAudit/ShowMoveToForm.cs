@@ -63,8 +63,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             radChat2.ChatElement.MessagesViewElement.Items.Clear();
-            var last = _records.Count == 1 ? _records.FirstOrDefault() : _records.Count > 1 ? _records.LastOrDefault() : null;
-
             foreach (var transfer in _records.Where(i => i.To > -1 && i.From > -1))
             {
                 if (transfer.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId && transfer.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId )
@@ -84,7 +82,10 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 new Filter("AuditId", _auditId),
                 new Filter("CheckListId", _checkListId),
             });
-
+            
+            if(!record.Any())
+                return;
+            
             var pel = record.FirstOrDefault();
             _auditee = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<PelSpecialistDTO, PelSpecialist>(pel.AuditeeId);
             _auditor = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<PelSpecialistDTO, PelSpecialist>(pel.AuditorId);
@@ -107,17 +108,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             radChat2.Author = _author1;
         }
         
-        private void AddBotMsg()
-        {
-            if (_stageId > WorkFlowStage.View.ItemId && _stageId < WorkFlowStage.Closed.ItemId)
-            {
-                var actions = new List<ChatCardAction>();
-                actions.Add(new ChatCardAction("Accept"));
-                var imageCard = new ChatImageCardDataItem(null, "", "",$"Move to next stage({WorkFlowStage.GetItemById(_stageId + 1).FullName})?", actions, null);
-                var message = new ChatCardMessage(imageCard, _author1, DateTime.Now);
-                radChat2.AddMessage(message);
-            }
-        }
         private void AddAuditorMsg(CheckListTransfer tag)
         {
             radChat2.AddMessage(new CustomChatTextMessage<CheckListTransfer>(tag, tag.Settings.Remark, _author1, DateTime.Now));
