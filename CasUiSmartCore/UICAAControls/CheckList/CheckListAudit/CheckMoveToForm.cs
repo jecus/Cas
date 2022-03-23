@@ -141,7 +141,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             {
                 new Filter("AuditId", _auditId),
                 new Filter("CheckListId", _checkListId),
-                //new Filter("WorkflowStageId", _stageId),
+                new Filter("WorkflowStageId", _stageId),
             });
 
 
