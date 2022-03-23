@@ -54,23 +54,44 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         void UpdateChat()
         {
             _bot = new Author(null, "bot");
-            radChat2.ChatElement.ShowToolbarButtonElement.TextWrap = true;
-            radChat2.ChatElement.ShowToolbarButtonElement.Visibility = ElementVisibility.Hidden;
-            radChat2.ChatElement.SendButtonElement.Enabled = false;
-            radChat2.AutoAddUserMessages = false;
         }
         
         private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            radChat2.ChatElement.MessagesViewElement.Items.Clear();
-            foreach (var transfer in _records.Where(i => i.To > -1 && i.From > -1))
+            flowLayoutPanel1.Controls.Clear();
+            
+            foreach (var group in _records.Where(i => i.To > -1 && i.From > -1).GroupBy(i => i.WorkflowStageId))
             {
-                if (transfer.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId && transfer.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId )
-                    AddAuditorMsg(transfer);
-                else if (transfer.From == _auditor.SpecialistId)
-                    AddAuditorMsg(transfer);
-                else
-                    AddAuditeeMsg(transfer);
+                var radChat = new RadChat()
+                {
+                    ThemeName = "TelerikMetroBlue"
+                };
+                radChat.ChatElement.MessagesViewElement.Items.Clear();
+                radChat.ChatElement.ShowToolbarButtonElement.TextWrap = true;
+                radChat.ChatElement.ShowToolbarButtonElement.Visibility = ElementVisibility.Hidden;
+                radChat.ChatElement.SendButtonElement.Enabled = false;
+                radChat.AutoAddUserMessages = false;
+                radChat.Author = _author1;
+                
+                foreach (var transfer in group)
+                {
+                    if (transfer.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId && transfer.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId )
+                        AddAuditorMsg(radChat,transfer);
+                    else if (transfer.From == _auditor.SpecialistId)
+                        AddAuditorMsg(radChat,transfer);
+                    else
+                        AddAuditeeMsg(radChat,transfer);
+                }
+                
+                flowLayoutPanel1.Controls.Add(new RadCollapsiblePanel()
+                {
+                    Text = WorkFlowStage.GetItemById(group.Key).ToString(),
+                    IsExpanded = false,
+                    Dock = DockStyle.Fill,
+                    ThemeName = "TelerikMetroBlue",
+                    Controls = { radChat },
+                });
+                
             }
         }
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
@@ -105,16 +126,15 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             
             _author1 = new Author(null, _auditee.Specialist.ToString());
             _author2 = new Author(null, _auditor.Specialist.ToString());
-            radChat2.Author = _author1;
         }
         
-        private void AddAuditorMsg(CheckListTransfer tag)
+        private void AddAuditorMsg(RadChat chat, CheckListTransfer tag)
         {
-            radChat2.AddMessage(new CustomChatTextMessage<CheckListTransfer>(tag, tag.Settings.Remark, _author1, DateTime.Now));
+            chat.AddMessage(new CustomChatTextMessage<CheckListTransfer>(tag, tag.Settings.Remark, _author1, DateTime.Now));
         }
-        private void AddAuditeeMsg(CheckListTransfer tag)
+        private void AddAuditeeMsg(RadChat chat,CheckListTransfer tag)
         {
-            radChat2.AddMessage(new CustomChatTextMessage<CheckListTransfer>(tag, tag.Settings.Remark, _author2, DateTime.Now));
+            chat.AddMessage(new CustomChatTextMessage<CheckListTransfer>(tag, tag.Settings.Remark, _author2, DateTime.Now));
         }
         
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
