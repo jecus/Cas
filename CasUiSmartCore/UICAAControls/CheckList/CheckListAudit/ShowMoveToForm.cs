@@ -19,6 +19,25 @@ using Filter = Entity.Abstractions.Filters.Filter;
 
 namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 {
+    public class ComboboxItem
+    {
+        public string Name { get; set; }
+        public int? WorkflowId{ get; set; }
+        
+        private static ComboboxItem _all;
+
+        public static ComboboxItem All =>
+            _all ?? (_all = new ComboboxItem
+            {
+                Name = "All",
+            });
+
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
+    
     public partial class ShowMoveToForm : MetroForm
     {
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
@@ -26,7 +45,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private IList<CheckListTransfer> _records = new List<CheckListTransfer>();
         public int _checkListId => _auditCheck.CheckListId; 
         public int _auditId => _auditCheck.AuditId;
-        public int _stageId => _auditCheck.Settings.WorkflowStageId;
+        public int? _stageId;
         
         private readonly AuditCheck _auditCheck;
         private bool _isAuditor;
@@ -34,9 +53,10 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         private  Author _author1;
         private  Author _author2;
-        private  Author _bot;
         private PelSpecialist _auditee;
         private PelSpecialist _auditor;
+        private List<ComboboxItem> _groups = new List<ComboboxItem>();
+        private ComboboxItem _selectedItem = ComboboxItem.All;
 
         public ShowMoveToForm(AuditCheck auditCheck)
         {
@@ -53,7 +73,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         void UpdateChat()
         {
-            _bot = new Author(null, "bot");
             radChat2.ChatElement.ShowToolbarButtonElement.TextWrap = true;
             radChat2.ChatElement.ShowToolbarButtonElement.Visibility = ElementVisibility.Hidden;
             radChat2.ChatElement.SendButtonElement.Enabled = false;
@@ -62,8 +81,26 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         
         private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (_groups.All(i => !i.WorkflowId.HasValue))
+            {
+                _groups.Add(ComboboxItem.All);
+                _groups.AddRange(_records.Where(i => i.To > -1 && i.From > -1).GroupBy(i => i.WorkflowStageId)
+                    .Select(i => new ComboboxItem() { Name = WorkFlowStage.GetItemById(i.Key).ToString(), WorkflowId = i.Key }));
+                comboBoxWF.Items.Clear();
+                comboBoxWF.Items.AddRange(_groups.ToArray());
+                
+                this.comboBoxWF.SelectedIndexChanged -= new System.EventHandler(this.comboBoxWF_SelectedIndexChanged);
+                comboBoxWF.SelectedItem = _selectedItem; 
+                this.comboBoxWF.SelectedIndexChanged += new System.EventHandler(this.comboBoxWF_SelectedIndexChanged);
+            }
+            
             radChat2.ChatElement.MessagesViewElement.Items.Clear();
-            foreach (var transfer in _records.Where(i => i.To > -1 && i.From > -1))
+
+            var chatData = _records.Where(i => i.To > -1 && i.From > -1);
+            if (_selectedItem.WorkflowId.HasValue)
+                chatData = chatData.Where(i => i.WorkflowStageId == _selectedItem.WorkflowId.Value);
+            
+            foreach (var transfer in chatData)
             {
                 if (transfer.From == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId && transfer.To == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId )
                     AddAuditorMsg(transfer);
@@ -76,6 +113,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
             _records.Clear();
+            _groups.Clear();
             
             var record = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AuditPelRecordDTO, AuditPelRecord>(new List<Filter>()
             {
@@ -125,6 +163,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private void CheckMoveToForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void comboBoxWF_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedItem = comboBoxWF.SelectedItem as ComboboxItem;
+            _animatedThreadWorker.RunWorkerAsync();
+            Focus();
         }
     }
 }
