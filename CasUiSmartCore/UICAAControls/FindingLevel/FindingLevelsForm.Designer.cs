@@ -398,7 +398,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
         private System.Windows.Forms.Button buttonCancel;
 
         private System.Windows.Forms.ComboBox comboBoxProgramType;
-        private MetroFramework.Controls.MetroTextBox metroTextSource;
+        private MetroFramework.Controls.MetroTextBox metroTextLevel;
 
         #endregion
     }
