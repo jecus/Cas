@@ -53,7 +53,10 @@ namespace CAS.UI.UICAAControls.Audit
             _updateChecks.Clear();
             _addedChecks.Clear();
             
-            var routineAuditIds = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAuditRecordDTO, CAAAuditRecord>().ToList().Select(i => i.RoutineAuditId);
+            var routineAuditIds = GlobalObjects.CaaEnvironment.NewLoader
+                .GetObjectListAll<CAAAuditRecordDTO, CAAAuditRecord>().ToList()
+                .Select(i => i.RoutineAuditId)
+                .Distinct();
             
             
             _addedChecks = GlobalObjects.CaaEnvironment.NewLoader
