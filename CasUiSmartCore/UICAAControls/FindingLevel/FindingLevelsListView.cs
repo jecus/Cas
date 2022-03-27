@@ -117,7 +117,9 @@ namespace CAS.UI.UICAAControls.FindingLevel
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
-			
+			var form = new FindingLevelsForm(SelectedItem);
+			if(form.ShowDialog() == DialogResult.OK)
+				_animatedThreadWorker.RunWorkerAsync();
 		}
 
 

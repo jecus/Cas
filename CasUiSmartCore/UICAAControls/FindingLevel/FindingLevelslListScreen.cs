@@ -151,7 +151,9 @@ namespace CAS.UI.UICAAControls.FindingLevel
 
         private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
         {
-	        
+	        var form = new FindingLevelsForm(_directivesViewer.SelectedItem);
+	        if(form.ShowDialog() == DialogResult.OK)
+		        AnimatedThreadWorker.RunWorkerAsync();
         }
 
         #region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
@@ -161,9 +163,9 @@ namespace CAS.UI.UICAAControls.FindingLevel
 			if(_directivesViewer.SelectedItem == null)
 				return;
 			
-			// var form = new FindingLevelForm(_directivesViewer.SelectedItem);
-			// if(form.ShowDialog() == DialogResult.OK)
-			// 	AnimatedThreadWorker.RunWorkerAsync();
+			var form = new FindingLevelsForm(_directivesViewer.SelectedItem);
+			if(form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
         }
 
 		#endregion
@@ -246,9 +248,9 @@ namespace CAS.UI.UICAAControls.FindingLevel
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-			// var form = new FindingLevelForm(new FindingLevels(){OperatorId = _operatorId});
-			// if(form.ShowDialog() == DialogResult.OK)
-			// 	AnimatedThreadWorker.RunWorkerAsync();
+			var form = new FindingLevelsForm(new FindingLevels(){OperatorId = _operatorId});
+			if(form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
 		}
 
 		#endregion

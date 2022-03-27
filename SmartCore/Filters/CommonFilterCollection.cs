@@ -13,22 +13,22 @@ using SmartCore.Entities.General.Interfaces;
 namespace SmartCore.Filters
 {
     ///<summary>
-    /// Класс для выборки директив из коллекции директив
+    /// РљР»Р°СЃСЃ РґР»СЏ РІС‹Р±РѕСЂРєРё РґРёСЂРµРєС‚РёРІ РёР· РєРѕР»Р»РµРєС†РёРё РґРёСЂРµРєС‚РёРІ
     ///</summary>
     public class CommonFilterCollection: IEnumerable<ICommonFilter>
     {
 
         #region Fields
         /// <summary>
-        /// Исходная коллекция директив
+        /// РСЃС…РѕРґРЅР°СЏ РєРѕР»Р»РµРєС†РёСЏ РґРёСЂРµРєС‚РёРІ
         /// </summary>
         private BaseEntityObject[] _initialCollection;
         /// <summary>
-        /// Список фильтров выборки
+        /// РЎРїРёСЃРѕРє С„РёР»СЊС‚СЂРѕРІ РІС‹Р±РѕСЂРєРё
         /// </summary>
         private List<ICommonFilter> Items = new List<ICommonFilter>();
         /// <summary>
-        /// Тип для фильтрации
+        /// РўРёРї РґР»СЏ С„РёР»СЊС‚СЂР°С†РёРё
         /// </summary>
         private Type _filteredType;
 
@@ -39,9 +39,9 @@ namespace SmartCore.Filters
         #region public CommonFilterCollection(Type filteredType)
 
         ///<summary>
-        /// Создается объект для выборки элементов
+        /// РЎРѕР·РґР°РµС‚СЃСЏ РѕР±СЉРµРєС‚ РґР»СЏ РІС‹Р±РѕСЂРєРё СЌР»РµРјРµРЅС‚РѕРІ
         ///</summary>
-        ///<param name="filteredType">Тип для фильтрации</param>
+        ///<param name="filteredType">РўРёРї РґР»СЏ С„РёР»СЊС‚СЂР°С†РёРё</param>
         public CommonFilterCollection(Type filteredType)
         {
             _initialCollection = new BaseEntityObject[0];
@@ -50,14 +50,14 @@ namespace SmartCore.Filters
 
             if (_filteredType == null) 
                 return;
-            //определение своиств, имеющих атрибут "отображаемое в списке"
+            //РѕРїСЂРµРґРµР»РµРЅРёРµ СЃРІРѕРёСЃС‚РІ, РёРјРµСЋС‰РёС… Р°С‚СЂРёР±СѓС‚ "РѕС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РІ СЃРїРёСЃРєРµ"
             List<PropertyInfo> properties =
                 _filteredType.GetProperties().Where(p => p.GetCustomAttributes(typeof(FilterAttribute), false).Length != 0).ToList();
 
-            //поиск своиств у которых задан порядок отображения
-            //своиства, имеющие порядок отображения
+            //РїРѕРёСЃРє СЃРІРѕРёСЃС‚РІ Сѓ РєРѕС‚РѕСЂС‹С… Р·Р°РґР°РЅ РїРѕСЂСЏРґРѕРє РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ
+            //СЃРІРѕРёСЃС‚РІР°, РёРјРµСЋС‰РёРµ РїРѕСЂСЏРґРѕРє РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ
             Dictionary<int, PropertyInfo> orderedProperties = new Dictionary<int, PropertyInfo>();
-            //своиства, НЕ имеющие порядок отображения
+            //СЃРІРѕРёСЃС‚РІР°, РќР• РёРјРµСЋС‰РёРµ РїРѕСЂСЏРґРѕРє РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ
             List<PropertyInfo> unOrderedProperties = new List<PropertyInfo>();
             foreach (PropertyInfo propertyInfo in properties)
             {
@@ -77,14 +77,14 @@ namespace SmartCore.Filters
             {
                 Type propertyType = property.PropertyType;
 
-                #region фильтр для IEmunerable
+                #region С„РёР»СЊС‚СЂ РґР»СЏ IEmunerable
 
                 if (propertyType.Name.ToLower() != "string" && 
                     propertyType.GetInterface(typeof(IEnumerable<>).Name) != null)
                 {
-                    //Если свойство не string (string реализует интерфейс IEnumerable<>)
-                    //и реализует интерфейс IEnumerable<> то
-                    //производится поиск параметра универсального типа
+                    //Р•СЃР»Рё СЃРІРѕР№СЃС‚РІРѕ РЅРµ string (string СЂРµР°Р»РёР·СѓРµС‚ РёРЅС‚РµСЂС„РµР№СЃ IEnumerable<>)
+                    //Рё СЂРµР°Р»РёР·СѓРµС‚ РёРЅС‚РµСЂС„РµР№СЃ IEnumerable<> С‚Рѕ
+                    //РїСЂРѕРёР·РІРѕРґРёС‚СЃСЏ РїРѕРёСЃРє РїР°СЂР°РјРµС‚СЂР° СѓРЅРёРІРµСЂСЃР°Р»СЊРЅРѕРіРѕ С‚РёРїР°
                     Type t = propertyType;
 
                     while (t != null)
@@ -102,7 +102,7 @@ namespace SmartCore.Filters
                 if(propertyType == null)
                     continue;
 
-                #region фильтр для StaticDictionary
+                #region С„РёР»СЊС‚СЂ РґР»СЏ StaticDictionary
 
                 if (propertyType.IsSubclassOf(typeof(StaticDictionary)) ||
                     propertyType.IsSubclassOf(typeof(AbstractDictionary)))
@@ -116,7 +116,7 @@ namespace SmartCore.Filters
                 }
                 #endregion
 
-                #region фильтр для Lifelength
+                #region С„РёР»СЊС‚СЂ РґР»СЏ Lifelength
 
                 else if (propertyType.Name == typeof(Lifelength).Name)
                 {
@@ -124,7 +124,7 @@ namespace SmartCore.Filters
                 }
                 #endregion
 
-                #region фильтр для BaseEntityObject
+                #region С„РёР»СЊС‚СЂ РґР»СЏ BaseEntityObject
 
                 else if (propertyType.GetInterface(typeof(IBaseEntityObject).Name) != null)
                 {
@@ -138,7 +138,7 @@ namespace SmartCore.Filters
 
                 #endregion
 
-                #region фильтр для ENUM
+                #region С„РёР»СЊС‚СЂ РґР»СЏ ENUM
 
                 else if (propertyType.IsEnum)
                 {
@@ -152,7 +152,7 @@ namespace SmartCore.Filters
 
                 #endregion
 
-                #region фильтр для базовых типов
+                #region С„РёР»СЊС‚СЂ РґР»СЏ Р±Р°Р·РѕРІС‹С… С‚РёРїРѕРІ
 
                 string typeName = propertyType.Name.ToLower();
                 switch (typeName)
@@ -188,12 +188,12 @@ namespace SmartCore.Filters
 
         #region public CommonFilterCollection(IEnumerable<ICommonFilter> filters, bool filterTypeAnd = true)
         /// <summary>
-        ///  Создается объект для выборки элементов
+        ///  РЎРѕР·РґР°РµС‚СЃСЏ РѕР±СЉРµРєС‚ РґР»СЏ РІС‹Р±РѕСЂРєРё СЌР»РµРјРµРЅС‚РѕРІ
         /// </summary>
-        /// <param name="filters">Применяемые для выборки фильтры</param>
-        /// <param name="filterTypeAnd">Задает значение использования фильтров
-        /// <br/> true - Проверяемый элемент должен подходить под все фильтры, 
-        /// <br/> false - Проверяемый элемент должен подходить хотя бы под один фильтр</param>
+        /// <param name="filters">РџСЂРёРјРµРЅСЏРµРјС‹Рµ РґР»СЏ РІС‹Р±РѕСЂРєРё С„РёР»СЊС‚СЂС‹</param>
+        /// <param name="filterTypeAnd">Р—Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С„РёР»СЊС‚СЂРѕРІ
+        /// <br/> true - РџСЂРѕРІРµСЂСЏРµРјС‹Р№ СЌР»РµРјРµРЅС‚ РґРѕР»Р¶РµРЅ РїРѕРґС…РѕРґРёС‚СЊ РїРѕРґ РІСЃРµ С„РёР»СЊС‚СЂС‹, 
+        /// <br/> false - РџСЂРѕРІРµСЂСЏРµРјС‹Р№ СЌР»РµРјРµРЅС‚ РґРѕР»Р¶РµРЅ РїРѕРґС…РѕРґРёС‚СЊ С…РѕС‚СЏ Р±С‹ РїРѕРґ РѕРґРёРЅ С„РёР»СЊС‚СЂ</param>
         public CommonFilterCollection(IEnumerable<ICommonFilter> filters, bool filterTypeAnd = true)
         {
             Items.AddRange(filters);
@@ -205,10 +205,10 @@ namespace SmartCore.Filters
         #region public CommonFilterCollection(Type filteredType, IEnumerable<ICommonFilter> filters) : this(new BaseEntityObject[0], filteredType, filters)
 
         ///<summary>
-        /// Создается объект для выборки элементов
+        /// РЎРѕР·РґР°РµС‚СЃСЏ РѕР±СЉРµРєС‚ РґР»СЏ РІС‹Р±РѕСЂРєРё СЌР»РµРјРµРЅС‚РѕРІ
         ///</summary>
-        ///<param name="filteredType">Тип для фильтрации</param>
-        ///<param name="filters">Применяемые для выборки фильтры</param>
+        ///<param name="filteredType">РўРёРї РґР»СЏ С„РёР»СЊС‚СЂР°С†РёРё</param>
+        ///<param name="filters">РџСЂРёРјРµРЅСЏРµРјС‹Рµ РґР»СЏ РІС‹Р±РѕСЂРєРё С„РёР»СЊС‚СЂС‹</param>
         public CommonFilterCollection(Type filteredType, IEnumerable<ICommonFilter> filters)
             : this(new BaseEntityObject[0], filteredType, filters)
         {
@@ -219,11 +219,11 @@ namespace SmartCore.Filters
         #region public CommonFilterCollection(BaseEntityObject[] initialCollection, Type filteredType, IEnumerable<ICommonFilter> filters)
 
         ///<summary>
-        /// Создается объект для выборки директив
+        /// РЎРѕР·РґР°РµС‚СЃСЏ РѕР±СЉРµРєС‚ РґР»СЏ РІС‹Р±РѕСЂРєРё РґРёСЂРµРєС‚РёРІ
         ///</summary>
-        ///<param name="initialCollection">Исходная коллекция директив</param>
-        ///<param name="filteredType">Тип для фильтрации</param>
-        ///<param name="filters">Применяемые для выборки фильтры</param>
+        ///<param name="initialCollection">РСЃС…РѕРґРЅР°СЏ РєРѕР»Р»РµРєС†РёСЏ РґРёСЂРµРєС‚РёРІ</param>
+        ///<param name="filteredType">РўРёРї РґР»СЏ С„РёР»СЊС‚СЂР°С†РёРё</param>
+        ///<param name="filters">РџСЂРёРјРµРЅСЏРµРјС‹Рµ РґР»СЏ РІС‹Р±РѕСЂРєРё С„РёР»СЊС‚СЂС‹</param>
         public CommonFilterCollection(BaseEntityObject[] initialCollection, Type filteredType, IEnumerable<ICommonFilter> filters)
         {
             _initialCollection = initialCollection;
@@ -241,9 +241,9 @@ namespace SmartCore.Filters
         #region public ICommonFilter this[Int32 indexCollection]
 
         /// <summary>
-        /// Возвращает объект из колекции по заданному индексу
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РѕР±СЉРµРєС‚ РёР· РєРѕР»РµРєС†РёРё РїРѕ Р·Р°РґР°РЅРЅРѕРјСѓ РёРЅРґРµРєСЃСѓ
         /// </summary>
-        /// <param name="indexCollection">Порядковый номер элемента в колекции</param>
+        /// <param name="indexCollection">РџРѕСЂСЏРґРєРѕРІС‹Р№ РЅРѕРјРµСЂ СЌР»РµРјРµРЅС‚Р° РІ РєРѕР»РµРєС†РёРё</param>
         /// <returns></returns>
         public ICommonFilter this[Int32 indexCollection]
         {
@@ -256,7 +256,7 @@ namespace SmartCore.Filters
                 catch
                 {
                     //return default(T);
-                    //применять если не задано ограничение класс/структура для объектов, реализующих интерфейс IBaseEntityObject
+                    //РїСЂРёРјРµРЅСЏС‚СЊ РµСЃР»Рё РЅРµ Р·Р°РґР°РЅРѕ РѕРіСЂР°РЅРёС‡РµРЅРёРµ РєР»Р°СЃСЃ/СЃС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ РѕР±СЉРµРєС‚РѕРІ, СЂРµР°Р»РёР·СѓСЋС‰РёС… РёРЅС‚РµСЂС„РµР№СЃ IBaseEntityObject
                     return null;
                 }
             }
@@ -266,7 +266,7 @@ namespace SmartCore.Filters
 
         #region public BaseEntityObject InitialCollection
         /// <summary>
-        /// Исходная коллекция директив
+        /// РСЃС…РѕРґРЅР°СЏ РєРѕР»Р»РµРєС†РёСЏ РґРёСЂРµРєС‚РёРІ
         /// </summary>
         public BaseEntityObject[] InitialCollection
         {
@@ -277,30 +277,30 @@ namespace SmartCore.Filters
 
         #region public bool FilterTypeAnd { get; set; }
         /// <summary>
-        /// Возвращает или задает значение исрльзования фильтраов
-        /// <br/> true - Проверяемый элемент должен подходить под все фильтры, 
-        /// <br/> false - Проверяемый элемент должен подходить хотя бы под один фильтр
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ РёСЃСЂР»СЊР·РѕРІР°РЅРёСЏ С„РёР»СЊС‚СЂР°РѕРІ
+        /// <br/> true - РџСЂРѕРІРµСЂСЏРµРјС‹Р№ СЌР»РµРјРµРЅС‚ РґРѕР»Р¶РµРЅ РїРѕРґС…РѕРґРёС‚СЊ РїРѕРґ РІСЃРµ С„РёР»СЊС‚СЂС‹, 
+        /// <br/> false - РџСЂРѕРІРµСЂСЏРµРјС‹Р№ СЌР»РµРјРµРЅС‚ РґРѕР»Р¶РµРЅ РїРѕРґС…РѕРґРёС‚СЊ С…РѕС‚СЏ Р±С‹ РїРѕРґ РѕРґРёРЅ С„РёР»СЊС‚СЂ
         /// </summary>
         public bool FilterTypeAnd { get; set; }
         #endregion
 
         #region public Type FilteredType { get; }
         /// <summary>
-        /// Возвращает значение типа для фильтрации
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ С‚РёРїР° РґР»СЏ С„РёР»СЊС‚СЂР°С†РёРё
         /// </summary>
         public Type FilteredType { get { return _filteredType; } }
         #endregion
 
         #region public int Count
         /// <summary>
-        /// Возвращает количество фильтров в коллекции
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ С„РёР»СЊС‚СЂРѕРІ РІ РєРѕР»Р»РµРєС†РёРё
         /// </summary>
         public int Count { get { return Items.Count; } }
         #endregion
 
         #region public bool IsEmpty
         /// <summary>
-        /// Возвращает значение, является ли фильтр пустым. Т.е. для всех фильтров в колллекции не щаданы значения фильтрации
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ, СЏРІР»СЏРµС‚СЃСЏ Р»Рё С„РёР»СЊС‚СЂ РїСѓСЃС‚С‹Рј. Рў.Рµ. РґР»СЏ РІСЃРµС… С„РёР»СЊС‚СЂРѕРІ РІ РєРѕР»Р»Р»РµРєС†РёРё РЅРµ С‰Р°РґР°РЅС‹ Р·РЅР°С‡РµРЅРёСЏ С„РёР»СЊС‚СЂР°С†РёРё
         /// </summary>
         public bool IsEmpty
         {
@@ -310,7 +310,7 @@ namespace SmartCore.Filters
 
         #region public List<ICommonFilter> Filters
         /// <summary>
-        /// Возвращает все фильтры в коллекции
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РІСЃРµ С„РёР»СЊС‚СЂС‹ РІ РєРѕР»Р»РµРєС†РёРё
         /// </summary>
         public List<ICommonFilter> Filters
         {
@@ -325,9 +325,9 @@ namespace SmartCore.Filters
         #region public BaseEntityObject[] GatherDirectives()
 
         ///<summary>
-        /// Производится выборка директив
+        /// РџСЂРѕРёР·РІРѕРґРёС‚СЃСЏ РІС‹Р±РѕСЂРєР° РґРёСЂРµРєС‚РёРІ
         ///</summary>
-        ///<returns>Выбранные директивы</returns>
+        ///<returns>Р’С‹Р±СЂР°РЅРЅС‹Рµ РґРёСЂРµРєС‚РёРІС‹</returns>
         public BaseEntityObject[] GatherDirectives()
         {
             List<BaseEntityObject> directives = new List<BaseEntityObject>();
@@ -342,10 +342,10 @@ namespace SmartCore.Filters
 
         #region public Acceptable(BaseEntityObject item)
         ///<summary>
-        /// Проверяется, подходит ли элемент под фильтр
+        /// РџСЂРѕРІРµСЂСЏРµС‚СЃСЏ, РїРѕРґС…РѕРґРёС‚ Р»Рё СЌР»РµРјРµРЅС‚ РїРѕРґ С„РёР»СЊС‚СЂ
         ///</summary>
-        ///<param name="item">Проверяемый элемент</param>
-        ///<returns>Результат - подходит ли элемент</returns>
+        ///<param name="item">РџСЂРѕРІРµСЂСЏРµРјС‹Р№ СЌР»РµРјРµРЅС‚</param>
+        ///<returns>Р РµР·СѓР»СЊС‚Р°С‚ - РїРѕРґС…РѕРґРёС‚ Р»Рё СЌР»РµРјРµРЅС‚</returns>
         public bool Acceptable(BaseEntityObject item)
         {
             bool acceptable = true;
@@ -424,12 +424,12 @@ namespace SmartCore.Filters
 
         #endregion
 
-        #region Члены IEnumerable<T>
+        #region Р§Р»РµРЅС‹ IEnumerable<T>
         /// <summary>
-        /// Возвращает перечислитель, выполняющий перебор элементов в коллекции.
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РїРµСЂРµС‡РёСЃР»РёС‚РµР»СЊ, РІС‹РїРѕР»РЅСЏСЋС‰РёР№ РїРµСЂРµР±РѕСЂ СЌР»РµРјРµРЅС‚РѕРІ РІ РєРѕР»Р»РµРєС†РёРё.
         /// </summary>
         /// <returns>
-        /// Интерфейс <see cref="T:System.Collections.Generic.IEnumerator`1"/>, который может использоваться для перебора элементов коллекции.
+        /// РРЅС‚РµСЂС„РµР№СЃ <see cref="T:System.Collections.Generic.IEnumerator`1"/>, РєРѕС‚РѕСЂС‹Р№ РјРѕР¶РµС‚ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ РґР»СЏ РїРµСЂРµР±РѕСЂР° СЌР»РµРјРµРЅС‚РѕРІ РєРѕР»Р»РµРєС†РёРё.
         /// </returns>
         /// <filterpriority>1</filterpriority>
         public IEnumerator<ICommonFilter> GetEnumerator()
@@ -438,12 +438,12 @@ namespace SmartCore.Filters
         }
         #endregion
 
-        #region Члены IEnumerable
+        #region Р§Р»РµРЅС‹ IEnumerable
         /// <summary>
-        /// Возвращает перечислитель, который осуществляет перебор элементов коллекции.
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РїРµСЂРµС‡РёСЃР»РёС‚РµР»СЊ, РєРѕС‚РѕСЂС‹Р№ РѕСЃСѓС‰РµСЃС‚РІР»СЏРµС‚ РїРµСЂРµР±РѕСЂ СЌР»РµРјРµРЅС‚РѕРІ РєРѕР»Р»РµРєС†РёРё.
         /// </summary>
         /// <returns>
-        /// Объект <see cref="T:System.Collections.IEnumerator"/>, который может использоваться для перебора элементов коллекции.
+        /// РћР±СЉРµРєС‚ <see cref="T:System.Collections.IEnumerator"/>, РєРѕС‚РѕСЂС‹Р№ РјРѕР¶РµС‚ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ РґР»СЏ РїРµСЂРµР±РѕСЂР° СЌР»РµРјРµРЅС‚РѕРІ РєРѕР»Р»РµРєС†РёРё.
         /// </returns>
         /// <filterpriority>2</filterpriority>
         IEnumerator IEnumerable.GetEnumerator()
