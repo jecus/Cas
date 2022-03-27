@@ -100,7 +100,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
         private void comboBoxProgramType_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBoxAction.Items.Clear();
-            comboBoxAction.Items.AddRange(ActionProgramType.Items.Where(i => i.ProgramTypes.Contains(_level.ProgramType)).ToArray());
+            comboBoxAction.Items.AddRange(ActionProgramType.Items.Where(i => i.ProgramTypes.Contains((ProgramType)comboBoxProgramType.SelectedItem)).ToArray());
             comboBoxAction.Items.Add(ActionProgramType.Unknown);
             comboBoxAction.SelectedItem = _level.ActionProgramType;
             

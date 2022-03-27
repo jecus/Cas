@@ -131,6 +131,30 @@ namespace CAS.UI.UICAAControls.FindingLevel
             label5.Text = "Remark:";
             label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new System.Drawing.Font("Verdana", 9F);
+            label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label6.Location = new System.Drawing.Point(11, 201);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(118, 14);
+            label6.TabIndex = 339;
+            label6.Text = "Corrective Action:";
+            label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new System.Drawing.Font("Verdana", 9F);
+            label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label7.Location = new System.Drawing.Point(11, 254);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(83, 14);
+            label7.TabIndex = 340;
+            label7.Text = "Final Action:";
+            label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // comboBoxClass
             // 
             this.comboBoxClass.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -263,30 +287,6 @@ namespace CAS.UI.UICAAControls.FindingLevel
             this.metroTextBoxRemark.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxRemark.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new System.Drawing.Font("Verdana", 9F);
-            label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label6.Location = new System.Drawing.Point(11, 201);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(118, 14);
-            label6.TabIndex = 339;
-            label6.Text = "Corrective Action:";
-            label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new System.Drawing.Font("Verdana", 9F);
-            label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label7.Location = new System.Drawing.Point(11, 254);
-            label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(83, 14);
-            label7.TabIndex = 340;
-            label7.Text = "Final Action:";
-            label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // lifelengthCorrective
             // 
             this.lifelengthCorrective.AutoSize = true;
@@ -294,7 +294,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
             this.lifelengthCorrective.CalendarApplicable = false;
             this.lifelengthCorrective.CyclesApplicable = false;
             this.lifelengthCorrective.Enabled = false;
-            this.lifelengthCorrective.EnabledCalendar = false;
+            this.lifelengthCorrective.EnabledCalendar = true;
             this.lifelengthCorrective.EnabledCycle = false;
             this.lifelengthCorrective.EnabledHours = false;
             this.lifelengthCorrective.FieldsBackColor = System.Drawing.SystemColors.Window;
@@ -326,7 +326,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
             this.lifelengthViewerFinal.CalendarApplicable = false;
             this.lifelengthViewerFinal.CyclesApplicable = false;
             this.lifelengthViewerFinal.Enabled = false;
-            this.lifelengthViewerFinal.EnabledCalendar = false;
+            this.lifelengthViewerFinal.EnabledCalendar = true;
             this.lifelengthViewerFinal.EnabledCycle = false;
             this.lifelengthViewerFinal.EnabledHours = false;
             this.lifelengthViewerFinal.FieldsBackColor = System.Drawing.SystemColors.Window;

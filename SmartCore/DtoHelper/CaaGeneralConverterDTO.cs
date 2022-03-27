@@ -1362,6 +1362,7 @@ namespace SmartCore.DtoHelper
                 LevelName = levels.LevelName,
 				OperatorId = levels.OperatorId,
 				LevelColor = levels.LevelColor,
+				ActionProgramTypeId = levels.ActionProgramType?.ItemId ?? -1,
                 Remark = levels.Remark,
                 ProgramTypeId = levels.ProgramType?.ItemId ?? -1,
                 Updated = levels.Updated
@@ -1383,6 +1384,7 @@ namespace SmartCore.DtoHelper
                 LevelColor = levels.LevelColor,
                 Remark = levels.Remark,
                 ProgramType = ProgramType.GetItemById(levels.ProgramTypeId) ?? ProgramType.Unknown,
+                ActionProgramType = ActionProgramType.GetItemById(levels.ActionProgramTypeId) ?? ActionProgramType.Unknown,
                 Updated = levels.Updated
             };
         }

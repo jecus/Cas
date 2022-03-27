@@ -33,5 +33,8 @@ namespace CAA.Entity.Models.Dictionary
         
         [Column("ProgramTypeId")]
         public int ProgramTypeId { get; set; }
+        
+        [Column("ActionProgramTypeId")]
+        public int ActionProgramTypeId { get; set; }
     }
 }

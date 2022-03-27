@@ -54,7 +54,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
 			AddColumn("Operator", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Level/Category", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Class", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Action", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Action", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Color", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Corrective Action", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Final Action", (int)(radGridView1.Width * 0.24f));
@@ -120,6 +120,8 @@ namespace CAS.UI.UICAAControls.FindingLevel
 			var form = new FindingLevelsForm(SelectedItem);
 			if(form.ShowDialog() == DialogResult.OK)
 				_animatedThreadWorker.RunWorkerAsync();
+
+			e.Cancel = true;
 		}
 
 

@@ -24,7 +24,7 @@ namespace SmartCore.CAA.RoutineAudits
         
         
         public static ActionProgramType IOSAOperator = new ActionProgramType(10, "Providing information to operator", "Providing information to operator", "", new [] {ProgramType.IOSA });
-        public static ActionProgramType IOSACAA = new ActionProgramType(11, "Providing information to operator and CAA", "", "Providing information to operator and CAA", new [] {ProgramType.IOSA });
+        public static ActionProgramType IOSACAA = new ActionProgramType(11, "Providing information to operator and CAA", "Providing information to operator and CAA", "", new [] {ProgramType.IOSA });
         public static ActionProgramType IOSARestrictions = new ActionProgramType(12, "Restrictions on the Operator operation", "Restrictions on the Operator operation", "", new [] {ProgramType.IOSA });
         public static ActionProgramType IOSACorrective = new ActionProgramType(13, "Corrective actions before operation", "Corrective actions before operation", "", new [] {ProgramType.IOSA });
         public static ActionProgramType IOSAOperatorStopped = new ActionProgramType(14, "Operator's activity is operator stopped", "Operator's activity is operator stopped", "", new [] {ProgramType.IOSA });
