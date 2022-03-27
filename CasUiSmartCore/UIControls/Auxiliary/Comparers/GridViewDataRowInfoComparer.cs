@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
 using Microsoft.Office.Interop.Excel;
+using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.PEL;
 using SmartCore.Entities.Dictionaries;
@@ -166,6 +167,49 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
 	}
 
 
+	public class AuditGroupComparer : IComparer<Group<GridViewRowInfo>>
+    {
+	    private readonly int _sortMultiplier;
+
+	    public AuditGroupComparer()
+	    {
+		    
+	    }
+	    
+	    public AuditGroupComparer(int sortMultiplier)
+	    {
+		    _sortMultiplier = sortMultiplier;
+	    }
+
+
+
+	    public int Compare(Group<GridViewRowInfo> x, Group<GridViewRowInfo> y)
+        {
+            var xx = x.GetItems().FirstOrDefault()?.Tag;
+            var yy = y.GetItems().FirstOrDefault()?.Tag;
+
+			if (xx != null && yy != null)
+			{
+				CAAAudit xxx = null;
+				CAAAudit yyy = null;
+				
+	            if (xx is CAAAudit)
+		            xxx = xx as CAAAudit;
+	            if (yy is CAAAudit)
+		            yyy = yy as CAAAudit;
+
+	            var xParts = (int)xxx.Settings.Status;
+                var yParts = (int)xxx.Settings.Status;;
+
+                if (xParts == yParts)
+	                return 0;
+                
+                return (xParts < yParts ? -1 : 1);
+			}
+			return  -1;
+        }
+    }
+	
     public class GroupComparer : IComparer<Group<GridViewRowInfo>>
     {
         public int Compare(Group<GridViewRowInfo> x, Group<GridViewRowInfo> y)
@@ -289,12 +333,15 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
 
 	public class CheckListsComparer : IComparer<GridViewRowInfo>
     {
-        public CheckListsComparer(int sortMultiplier)
-        {
-			SortMultiplier = sortMultiplier;
-		}
+	    private readonly int _sortMultiplier;
 
-        public int SortMultiplier { get; set; }
+	    
+	    
+	    public CheckListsComparer(int sortMultiplier)
+	    {
+		    _sortMultiplier = sortMultiplier;
+	    }
+        
 
         public virtual int Compare(GridViewRowInfo x, GridViewRowInfo y)
         {
@@ -353,17 +400,17 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
                         // 3.a.45 compare part as string
                         var abcCompare = xPart.CompareTo(yPart);
                         if (abcCompare != 0)
-                            return SortMultiplier * abcCompare;
+                            return _sortMultiplier * abcCompare;
                         continue;
                     }
 
-                    if (xInt != yInt) return SortMultiplier *(xInt < yInt ? -1 : 1);
+                    if (xInt != yInt) return _sortMultiplier *(xInt < yInt ? -1 : 1);
                 }
-                return SortMultiplier * -1;
+                return _sortMultiplier * -1;
                 //return  0;
             }
             // compare as string
-            return SortMultiplier * xx.CompareTo(yy);
+            return _sortMultiplier * xx.CompareTo(yy);
         }
     }
 

@@ -1,23 +1,20 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UICAAControls.CheckList.CheckListAudit;
 using CAS.UI.UICAAControls.CheckList.CheckListAudit.CheckListAuditPublish;
-using CAS.UI.UICAAControls.RoutineAudit;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using SmartCore.Entities.General;
-using Telerik.WinControls.Data;
 using Convert = SmartCore.Auxiliary.Convert;
 
 namespace CAS.UI.UICAAControls.Audit
@@ -56,6 +53,8 @@ namespace CAS.UI.UICAAControls.Audit
             _checkListAuditType = checkListAuditType;
             SortDirection = SortDirection.Asc;
 			OldColumnIndex = 1;
+			
+			this.radGridView1.MasterTemplate.GroupComparer = new AuditGroupComparer((int)SortDirection);
 		}
 
         public int OperatorId { get; set; }
@@ -78,7 +77,7 @@ namespace CAS.UI.UICAAControls.Audit
 			AddColumn("Audit №", (int)(radGridView1.Width * 0.20f));
             AddColumn("Status", (int)(radGridView1.Width * 0.20f));
 			AddColumn("CreateDate", (int)(radGridView1.Width * 0.30f));
-            AddColumn("PublishedDate", (int)(radGridView1.Width * 0.30f));
+            AddColumn("Started Date", (int)(radGridView1.Width * 0.30f));
             AddColumn("Perform", (int)(radGridView1.Width * 0.30f));
             AddColumn("ClosingDate", (int)(radGridView1.Width * 0.30f));
             AddColumn("MH", (int)(radGridView1.Width * 0.30f));
@@ -89,16 +88,15 @@ namespace CAS.UI.UICAAControls.Audit
             AddColumn("WorkTime", (int)(radGridView1.Width * 0.30f));
             AddColumn("Remark", (int)(radGridView1.Width * 0.30f));
             AddColumn("Author", (int)(radGridView1.Width * 0.30f));
-            AddColumn("Published By", (int)(radGridView1.Width * 0.30f));
-            AddColumn("Closed By", (int)(radGridView1.Width * 0.30f));
+            AddColumn("Started by", (int)(radGridView1.Width * 0.30f));
+            AddColumn("Closed by", (int)(radGridView1.Width * 0.30f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
         protected override void GroupingItems()
         {
-            
-            Grouping("Status");
+	        Grouping("Status");
         }
 
 		#region protected override List<CustomCell> GetListViewSubItems(Specialization item)
@@ -107,9 +105,12 @@ namespace CAS.UI.UICAAControls.Audit
 		{
 			if (_checkListAuditType == CheckListAuditType.Admin)
 			{
-				radGridView1.Columns[0].Width = 0;
 				radGridView1.Columns[0].IsVisible = false;
 				radGridView1.Columns[1].IsVisible = false;
+				radGridView1.Columns[9].IsVisible = false;
+				radGridView1.Columns[10].IsVisible = false;
+				radGridView1.Columns[11].IsVisible = false;
+				radGridView1.Columns[12].IsVisible = false;
 			}
 	        
             var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
@@ -121,6 +122,21 @@ namespace CAS.UI.UICAAControls.Audit
             var closedDate = item.Settings.ClosingDate > DateTimeExtend.GetCASMinDateTime() ? Convert.GetDateFormat(item.Settings.ClosingDate) : "";
 
             var subItems = new List<CustomCell>();
+
+            var status = "";
+            switch (item.Settings.Status)
+            {
+				case  RoutineStatus.Open : status = $"{RoutineStatus.Open}";
+					break;
+				case RoutineStatus.Published:
+					status = "Audit in progress";
+					break;
+				case RoutineStatus.Closed:
+					status = $"{RoutineStatus.Closed}";
+					break;
+				default: status = ""; break;
+            }
+            
             
             
 			subItems.AddRange(new List<CustomCell>()
@@ -129,7 +145,7 @@ namespace CAS.UI.UICAAControls.Audit
 	            CreateRow($"{item.MyTask} tasks",item.MyTask),
                 CreateRow(item.Operator.ToString(), item.Operator),
 				CreateRow(item.AuditNumber, item.AuditNumber),
-				CreateRow(item.Settings.Status.ToString(), item.Settings.Status),
+				CreateRow(status, item.Settings.Status),
 
 				CreateRow(Convert.GetDateFormat(item.Settings.CreateDate), item.Settings.CreateDate),
 				CreateRow(publishedDate, item.Settings.PublishingDate),
