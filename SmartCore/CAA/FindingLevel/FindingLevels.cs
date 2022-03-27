@@ -28,28 +28,38 @@ namespace SmartCore.CAA.FindingLevel
         [Filter("Color", Order = 3)]
         [ListViewData("Color", 3)]
         public LevelColor LevelColor { get; set; }
-
-        [FormControl(150, "Corrective Action:", 1, Order = 4)]
-        [Filter("Corrective Action", Order = 4)]
-        [ListViewData("Corrective Action", 4)]
+        
+        [FormControl(150, "Action:", 1, Order = 4)]
+        [Filter("Action", Order = 4)]
+        [ListViewData("Action", 4)]
+        public ActionProgramType ActionProgramType { get; set; }
+        
+        [FormControl(150, "Corrective Action:", 1, Order = 5)]
+        [Filter("Corrective Action", Order = 5)]
+        [ListViewData("Corrective Action", 5)]
         [LifeLenghtCalendarOnly]
         public Lifelength CorrectiveAction { get; set; }
 
-        [FormControl(150, "Final Action:", 1, Order = 5)]
-        [Filter("Final Action", Order = 5)]
-        [ListViewData("Final Action", 5)]
+        [FormControl(150, "Final Action:", 1, Order = 6)]
+        [Filter("Final Action", Order = 6)]
+        [ListViewData("Final Action", 6)]
         [LifeLenghtCalendarOnly]
         public Lifelength FinalAction { get; set; }
         
-        [FormControl(150, "ProgramType:", 1, Order = 6)]
-        [Filter("ProgramType", Order = 6)]
-        [ListViewData("ProgramType", 6)]
+        [FormControl(150, "ProgramType:", 1, Order = 7)]
+        [Filter("ProgramType", Order = 7)]
+        [ListViewData("ProgramType", 7)]
         public ProgramType ProgramType { get; set; }
         
-        [FormControl(150, "Remark:", 1, Order = 7)]
-        [Filter("Remark", Order = 7)]
-        [ListViewData("Remark", 7)]
+        [FormControl(150, "Remark:", 1, Order = 8)]
+        [Filter("Remark", Order = 8)]
+        [ListViewData("Remark", 8)]
         public string Remark { get; set; }
+        
+        
+        
+        
+
         
         
         private static FindingLevels _unknown;

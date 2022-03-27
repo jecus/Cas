@@ -14,7 +14,8 @@
     public enum LevelClass
     {
         Major,
-        Minor
+        Minor,
+        Significant
     }
 
     public enum UserType
