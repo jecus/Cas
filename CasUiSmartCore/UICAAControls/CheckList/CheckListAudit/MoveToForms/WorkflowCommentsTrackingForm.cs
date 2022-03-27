@@ -37,7 +37,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
         }
     }
     
-    public partial class ShowMoveToForm : MetroForm
+    public partial class WorkflowCommentsTrackingForm : MetroForm
     {
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         
@@ -57,7 +57,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
         private List<ComboboxItem> _groups = new List<ComboboxItem>();
         private ComboboxItem _selectedItem = ComboboxItem.All;
 
-        public ShowMoveToForm(AuditCheck auditCheck)
+        public WorkflowCommentsTrackingForm(AuditCheck auditCheck)
         {
             InitializeComponent();
             _auditCheck = auditCheck;

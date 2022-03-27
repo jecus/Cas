@@ -386,13 +386,13 @@ WHERE rn = 1 and  IsDeleted = 0");
 		{
 			if (_type == CheckListAuditType.User)
 			{
-				var form = new CheckMoveToForm(_directivesViewer.SelectedItem.AuditCheck);
+				var form = new WorkflowCommentsForm(_directivesViewer.SelectedItem.AuditCheck);
 				if (form.ShowDialog() == DialogResult.OK)
 					AnimatedThreadWorker.RunWorkerAsync();
 			}
 			else
 			{
-				var form = new ShowMoveToForm(_directivesViewer.SelectedItem.AuditCheck);
+				var form = new WorkflowCommentsTrackingForm(_directivesViewer.SelectedItem.AuditCheck);
 				if (form.ShowDialog() == DialogResult.OK)
 					AnimatedThreadWorker.RunWorkerAsync();
 			}

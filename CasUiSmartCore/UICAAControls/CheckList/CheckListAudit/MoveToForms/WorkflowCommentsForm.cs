@@ -18,7 +18,7 @@ using Filter = Entity.Abstractions.Filters.Filter;
 
 namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
 {
-    public partial class CheckMoveToForm : MetroForm
+    public partial class WorkflowCommentsForm : MetroForm
     {
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         
@@ -39,7 +39,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
        
         
 
-        public CheckMoveToForm(AuditCheck auditCheck)
+        public WorkflowCommentsForm(AuditCheck auditCheck)
         {
             InitializeComponent();
             _auditCheck = auditCheck;

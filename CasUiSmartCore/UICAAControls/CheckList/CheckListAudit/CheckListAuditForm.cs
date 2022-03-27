@@ -306,7 +306,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         private void ButtonWf_Click(object sender, EventArgs e)
         {
-            var form = new CheckMoveToForm(_currentAuditCheck);
+            var form = new WorkflowCommentsForm(_currentAuditCheck);
             if (form.ShowDialog() == DialogResult.OK)
                 _animatedThreadWorker.RunWorkerAsync();
             
@@ -316,7 +316,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         private void avButtonWfTracking_Click(object sender, EventArgs e)
         {
-            var form = new ShowMoveToForm(_currentAuditCheck);
+            var form = new WorkflowCommentsTrackingForm(_currentAuditCheck);
             if (form.ShowDialog() == DialogResult.OK)
                 _animatedThreadWorker.RunWorkerAsync();
             
