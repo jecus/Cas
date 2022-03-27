@@ -96,7 +96,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             _type = type;
             _stage = stage;
             statusControl.ShowStatus = false;
-            labelTitle.Visible = false;
+            labelTitle.Visible = true;
 
             buttonPel.Visible = _type == CheckListAuditType.Admin;
             

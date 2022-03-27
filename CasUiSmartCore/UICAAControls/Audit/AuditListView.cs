@@ -123,20 +123,7 @@ namespace CAS.UI.UICAAControls.Audit
 
             var subItems = new List<CustomCell>();
 
-            var status = "";
-            switch (item.Settings.Status)
-            {
-				case  RoutineStatus.Open : status = $"{RoutineStatus.Open}";
-					break;
-				case RoutineStatus.Published:
-					status = "Audit in progress";
-					break;
-				case RoutineStatus.Closed:
-					status = $"{RoutineStatus.Closed}";
-					break;
-				default: status = ""; break;
-            }
-            
+
             
             
 			subItems.AddRange(new List<CustomCell>()
@@ -145,7 +132,7 @@ namespace CAS.UI.UICAAControls.Audit
 	            CreateRow($"{item.MyTask} tasks",item.MyTask),
                 CreateRow(item.Operator.ToString(), item.Operator),
 				CreateRow(item.AuditNumber, item.AuditNumber),
-				CreateRow(status, item.Settings.Status),
+				CreateRow(item.StatusName, item.Settings.Status),
 
 				CreateRow(Convert.GetDateFormat(item.Settings.CreateDate), item.Settings.CreateDate),
 				CreateRow(publishedDate, item.Settings.PublishingDate),

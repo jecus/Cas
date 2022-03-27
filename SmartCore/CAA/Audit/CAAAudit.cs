@@ -49,6 +49,25 @@ namespace SmartCore.CAA.Audit
 
         public string AuditNumber { get; set; }
 
+        public string StatusName
+        {
+            get
+            {
+                switch (Settings.Status)
+                {
+                    case  RoutineStatus.Open : return $"{RoutineStatus.Open}";
+                    case RoutineStatus.Published:
+                        return "Audit in progress";
+                    case RoutineStatus.Closed:
+                        return $"{RoutineStatus.Closed}";
+                    default: return "";
+                }
+            }
+        }
+        
+        
+        
+
         public string SettingsJSON
         {
             get
