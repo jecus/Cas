@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
+namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
 {
     partial class ShowMoveToForm
     {

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
-using CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using MetroFramework.Forms;
@@ -17,7 +16,7 @@ using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using Filter = Entity.Abstractions.Filters.Filter;
 
-namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
+namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
 {
     public partial class CheckMoveToForm : MetroForm
     {
