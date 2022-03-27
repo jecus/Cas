@@ -99,7 +99,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             labelTitle.Visible = true;
 
             buttonPel.Visible = _type == CheckListAuditType.Admin;
-            
             UpdateInformation();
 		}
 
@@ -121,8 +120,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 	            
 			pictureBox6.Visible = true;
 			buttonPel.Visible = true;
-	            
-			labelTitle.Text = $"Workflow Status : {_audit.Settings.Status.ToString()}";
+			
+			labelTitle.Text = $"Audit Status : {_audit.StatusName}";
 			labelTitle.Visible = true;
             
             if (_manual.CheckUIType == CheckUIType.Iosa)
