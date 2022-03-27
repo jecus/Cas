@@ -32,7 +32,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
             comboBoxProgramType.Items.AddRange(ProgramType.Items.ToArray());
             comboBoxProgramType.SelectedItem = _level.ProgramType;
 
-            metroTextSource.Text = _level.LevelName;
+            metroTextLevel.Text = _level.LevelName;
             metroTextBoxRemark.Text = _level.Remark;
             
             comboBoxColor.DataSource = Enum.GetValues(typeof(LevelColor));
@@ -59,7 +59,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
         private void ApplyChanges()
         {
             _level.ProgramType = (ProgramType)comboBoxProgramType.SelectedItem;
-            _level.LevelName = metroTextSource.Text;
+            _level.LevelName = metroTextLevel.Text;
             _level.Remark = metroTextBoxRemark.Text;
             _level.LevelColor = (LevelColor)comboBoxColor.SelectedItem ;
             _level.LevelClass = (LevelClass)comboBoxClass.SelectedItem ;
