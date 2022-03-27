@@ -25,6 +25,13 @@ namespace Entity.Abstractions.Filters
 			FilterType = FilterType.Equal;
 			Values = values;
 		}
+		
+		public Filter(string filterProperty, FilterType type ,IEnumerable<int> values)
+		{
+			FilterProperty = filterProperty;
+			FilterType = type;
+			Values = values;
+		}
 
 		#endregion
 

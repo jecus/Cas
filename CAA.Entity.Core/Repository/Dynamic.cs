@@ -9,17 +9,18 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading;
+using Entity.Abstractions.Attributte;
 using Label = System.Reflection.Emit.Label;
 
 namespace CAA.Entity.Core.Repository
 {
     public static class DynamicQueryable
     {
-	    public static IQueryable<T> Where<T>(this IQueryable<T> source, string propertyName, IEnumerable searchValues)
+	    public static IQueryable<T> Where<T>(this IQueryable<T> source, string propertyName, IEnumerable searchValues, FilterType type)
 	    {
-		    return (IQueryable<T>)Where((IQueryable)source, propertyName, searchValues);
+		    return (IQueryable<T>)Where((IQueryable)source, propertyName, searchValues, type);
 	    }
-	    public static IQueryable Where(this IQueryable source, string propertyName, IEnumerable searchValues)
+	    public static IQueryable Where(this IQueryable source, string propertyName, IEnumerable searchValues, FilterType type)
 	    {
 		    //Get target's T 
 		    var targetType = source.GetType().GetGenericArguments().FirstOrDefault();
@@ -50,8 +51,12 @@ namespace CAA.Entity.Core.Repository
 			//Create a method call -> searchValues.Contains(p.Id)
 			var containsBody = Expression.Call(typeof(Enumerable), "Contains", new[] { searchValuesType }, searchValuesAsConstant, res);
 
-		    //Create a lambda expression with the parameter p -> p => searchValues.Contains(p.Id)
-		    var containsLambda = Expression.Lambda(containsBody, containsLambdaParameter);
+            //Create a lambda expression with the parameter p -> p => searchValues.Contains(p.Id)
+            LambdaExpression containsLambda;
+            if(type == FilterType.NotContains || type == FilterType.NotEqual || type == FilterType.NotIn)
+                containsLambda = Expression.Lambda(Expression.Not(containsBody), containsLambdaParameter);
+            else containsLambda = Expression.Lambda(containsBody, containsLambdaParameter);
+            
 
 		    return source.Provider.CreateQuery(
 			    Expression.Call(

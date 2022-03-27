@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
+using Entity.Abstractions.Attributte;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA;
@@ -51,7 +52,16 @@ namespace CAS.UI.UICAAControls.Audit
 
             _updateChecks.Clear();
             _addedChecks.Clear();
-            _addedChecks = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(new Filter("OperatorId", _audit.OperatorId),loadChild: true).ToList();
+            
+            var routineAuditIds = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAuditRecordDTO, CAAAuditRecord>().ToList().Select(i => i.RoutineAuditId);
+            
+            
+            _addedChecks = GlobalObjects.CaaEnvironment.NewLoader
+                .GetObjectListAll<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(new List<Filter>()
+                {
+                    new Filter("OperatorId", _audit.OperatorId),
+                    new Filter("ItemId", FilterType.NotIn ,routineAuditIds),
+                },loadChild: true).ToList();
 
             if (_audit.ItemId > 0)
             {

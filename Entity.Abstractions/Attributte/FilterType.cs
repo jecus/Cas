@@ -12,6 +12,9 @@ namespace Entity.Abstractions.Attributte
 		[Description("In")]
 		[EnumMember]
 		In = 1,
+		[Description("In")]
+		[EnumMember]
+		NotIn = 2,
 		/// <summary>
 		/// Меньше 
 		/// </summary>
@@ -57,8 +60,12 @@ namespace Entity.Abstractions.Attributte
 		// <summary>
 		/// Между 2-мя значениями
 		/// </summary>
-		[Description("Between")]
+		[Description("Contains")]
 		[EnumMember]
-		Contains = 21
+		Contains = 21,
+		[Description("NotContains")]
+		[EnumMember]
+		NotContains = 22
+		
 	}
 }

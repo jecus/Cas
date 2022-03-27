@@ -49,7 +49,7 @@ namespace CAS.Entity.Core.Repository
 					foreach (var filter in filters)
 					{
 						if (filter.Values != null && filter.Values.Any())
-							query = query.Where(filter.FilterProperty, filter.Values);
+							query = query.Where(filter.FilterProperty, filter.Values, filter.FilterType);
 						else if (filter.Value != null)
 							query = query.Where(LambdaConstructor<T>(filter.FilterProperty, filter.Value, filter.FilterType));
 					}
@@ -184,7 +184,7 @@ namespace CAS.Entity.Core.Repository
 				foreach (var filter in filters)
 				{
 					if(filter.Values != null && filter.Values.Any())
-						query = query.Where(filter.FilterProperty, filter.Values);
+						query = query.Where(filter.FilterProperty, filter.Values, filter.FilterType);
 					else if(filter.Value != null)
 						query = query.Where(LambdaConstructor<T>(filter.FilterProperty, filter.Value, filter.FilterType));
 				}
