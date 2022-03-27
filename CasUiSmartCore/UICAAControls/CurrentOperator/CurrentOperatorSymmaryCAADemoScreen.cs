@@ -11,6 +11,7 @@ using CAS.UI.UICAAControls.Airacraft;
 using CAS.UI.UICAAControls.Audit;
 using CAS.UI.UICAAControls.CheckList.CheckListAudit;
 using CAS.UI.UICAAControls.Document;
+using CAS.UI.UICAAControls.FindingLevel;
 using CAS.UI.UICAAControls.RoutineAudit;
 using CAS.UI.UICAAControls.Specialists;
 using CAS.UI.UICAAControls.StandartManual;
@@ -163,11 +164,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         private void LinkFindingLevelsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Finding Level";
-            e.RequestedEntity = new CAACommonListScreen(typeof(FindingLevels), new List<Filter>()
-                {
-                    new Filter("OperatorId",_currentOperator.ItemId )
-                })
-                { OperatorId = _currentOperator.ItemId };
+            e.RequestedEntity = new FindingLevelslListScreen(_getOperator(), _currentOperator.ItemId);
         }
 
         private void LinkRootCauseDisplayerRequested(object sender, ReferenceEventArgs e)
