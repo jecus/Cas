@@ -45,7 +45,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.CheckListAuditPublish
 			_auditId = selectedItem.ItemId;
 			InitListView();
 			
-			labelTitle.Text = selectedItem.StatusName;
+			labelTitle.Text = $"Audit Status : {selectedItem.StatusName}";
 			AnimatedThreadWorker.RunWorkerAsync();
 		}
 
