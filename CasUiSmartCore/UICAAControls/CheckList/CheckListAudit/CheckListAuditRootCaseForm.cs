@@ -109,8 +109,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             }
 
             
-            _currentCheck =
-                GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListDTO, CheckLists>(_currentCheck.ItemId);
+            _currentCheck = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListDTO, CheckLists>(_currentCheck.ItemId);
             
             _currentCheck.EditionNumber = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListRevisionDTO, CheckListRevision>(_currentCheck.EditionId)?.Number.ToString() ?? "";
             if(_currentCheck.RevisionId.HasValue)
@@ -172,16 +171,14 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             var record = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AuditPelRecordDTO, AuditPelRecord>(new List<Filter>()
             {
                 new Filter("AuditId", _auditId),
-                new Filter("CheckListId", _checkListId),
+                new Filter("CheckListId", _currentAuditCheck.CheckListId),
             });
             var pel = record.FirstOrDefault();
             _auditor = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<PelSpecialistDTO, PelSpecialist>(pel.AuditorId);
             
             
-            
-            var roots = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<RootCauseDTO, RootCause>();
-            
-            
+            var audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_auditId);
+            var roots = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<RootCauseDTO, RootCause>(new Filter("OperatorId", audit.OperatorId));
             
             foreach (var root in roots)
             {
