@@ -23,7 +23,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private readonly int _auditId;
         private readonly bool _editable;
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
-        private IList<FindingLevels> _levels = new List<FindingLevels>();
         private AuditCheck _currentAuditCheck;
         private List<AuditCheckRecord> _currentAuditCheckRecords = new List<AuditCheckRecord>();
         private IList<RootCause> _rootCase = new List<RootCause>();
@@ -252,6 +251,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         {
             try
             {
+                if (radioButtonNotSatisfactory.Checked && string.IsNullOrEmpty(metroTextBoxFindings.Text))
+                {
+                    MessageBox.Show($"Please input some text in Findings and then save current CheckList!", "Exclamation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+                    return;
+                }
+                
+                
                 ApplyChanges();
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
 

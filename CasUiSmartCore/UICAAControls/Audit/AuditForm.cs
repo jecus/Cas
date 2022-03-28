@@ -53,17 +53,10 @@ namespace CAS.UI.UICAAControls.Audit
             _updateChecks.Clear();
             _addedChecks.Clear();
             
-            var routineAuditIds = GlobalObjects.CaaEnvironment.NewLoader
-                .GetObjectListAll<CAAAuditRecordDTO, CAAAuditRecord>().ToList()
-                .Select(i => i.RoutineAuditId)
-                .Distinct();
-            
-            
             _addedChecks = GlobalObjects.CaaEnvironment.NewLoader
                 .GetObjectListAll<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(new List<Filter>()
                 {
                     new Filter("OperatorId", _audit.OperatorId),
-                    new Filter("ItemId", FilterType.NotIn ,routineAuditIds),
                 },loadChild: true).ToList();
 
             if (_audit.ItemId > 0)
