@@ -17,7 +17,7 @@ using SmartCore.CAA.PEL;
 
 namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 {
-    public partial class CheckListAuditForm : MetroForm
+    public partial class CheckListAuditRootCaseForm : MetroForm
     {
         private CheckLists _currentCheck;
         private readonly int _auditId;
@@ -30,7 +30,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         #region Constructors
 
 
-        public CheckListAuditForm(CheckLists currentCheck, int auditId, bool editable = false) 
+        public CheckListAuditRootCaseForm(CheckLists currentCheck, int auditId, bool editable = false) 
         {
             InitializeComponent();
             _currentCheck = currentCheck;
@@ -39,6 +39,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             ButtonWf.Visible = _editable;
             button1.Visible = _editable;
+            button2.Visible = _editable;
 
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
@@ -70,20 +71,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         private void UpdateControls()
         {
-
-
-
-            radioButtonNotSatisfactory.CheckedChanged += RadioButtonSatisfactory_CheckedChange;
-            radioButtonSatisfactory.CheckedChanged += RadioButtonSatisfactory_CheckedChange;
-
-            radioButtonNotSatisfactory.Enabled =
-                radioButtonSatisfactory.Enabled =
-                    metroTextBoxFindings.Enabled =
-                        metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
             
-
-            foreach (var control in flowLayoutPanel1.Controls.OfType<AuditCheckControl>())
-                control.EnableCheckBox(!checkBoxNotApplicable.Checked);
         }
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
@@ -186,62 +174,19 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             labelEditorText.Text = _currentCheck.EditionNumber?.ToString() ?? "";
             labelRevisionText.Text = _currentCheck.RevisionNumber?.ToString() ?? "";
             labelLevelText.Text = _currentCheck.Level.ToString();
-
-            metroTextBoxSection.Text = $"{_currentCheck.SectionNumber} {_currentCheck.SectionName}";
-            metroTextBoxPart.Text = $"{_currentCheck.PartNumber} {_currentCheck.PartName}";
-            metroTextBoxSubPart.Text = $"{_currentCheck.SubPartNumber} {_currentCheck.SubPartName}";
-            metroTextBoxItem.Text = $"{_currentCheck.ItemNumber} {_currentCheck.ItemName}";
-            metroTextBoxRequirement.Text = _currentCheck.Requirement;
-
-            if(_currentAuditCheck.Settings.IsApplicable.HasValue)
-                checkBoxNotApplicable.Checked = _currentAuditCheck.Settings.IsApplicable.Value ;
-            if (_currentAuditCheck.Settings.IsSatisfactory.HasValue)
-            {
-                radioButtonSatisfactory.Checked = _currentAuditCheck.Settings.IsSatisfactory.Value;
-                radioButtonNotSatisfactory.Checked = !radioButtonSatisfactory.Checked;
-            }
-
-            metroTextBoxFindings.Text = _currentAuditCheck.Settings.Findings;
-            metroTextBoxComments.Text = _currentAuditCheck.Settings.Comments;
-
-            
-            metroTextBoxWorkflowStage.Text = WorkFlowStage.GetItemById(_currentAuditCheck.Settings.WorkflowStageId).ToString();
-            metroTextBoxWorkFlowStatus.Text = WorkFlowStatus.GetItemById(_currentAuditCheck.Settings.WorkflowStatusId).ToString();
-            
-            for (int i = 0; i < checkedListBoxRoot.Items.Count; i++)
-            {
-                if (!string.IsNullOrEmpty(_currentAuditCheck.Settings.RootCause) &&_currentAuditCheck.Settings.RootCause.Contains(checkedListBoxRoot.Items[i].ToString()))
-                    checkedListBoxRoot.SetItemChecked(i, true);
-            }
             
             
-            flowLayoutPanel1.Controls.Clear();
-            foreach (var group in _currentCheck.CheckListRecords.GroupBy(i => i.OptionNumber))
-            {
-                flowLayoutPanel1.Controls.Add(new Label()
-                {
-                    Text = $"Option: {group.Key}",
-                    Font = new System.Drawing.Font("Verdana", 9F),
-                    ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))))
-                });
-                foreach (var record in group)
-                {
-                    var control = new AuditCheckControl(_currentAuditCheckRecords.FirstOrDefault(i => i.CheckListRecordId == record.ItemId));
-                    flowLayoutPanel1.Controls.Add(control);
-                }
-            }
-
+            // for (int i = 0; i < checkedListBoxRoot.Items.Count; i++)
+            // {
+            //     if (!string.IsNullOrEmpty(_currentAuditCheck.Settings.RootCause) &&_currentAuditCheck.Settings.RootCause.Contains(checkedListBoxRoot.Items[i].ToString()))
+            //         checkedListBoxRoot.SetItemChecked(i, true);
+            // }
         }
 
         private void ApplyChanges()
         {
-            _currentAuditCheck.Settings.IsApplicable = checkBoxNotApplicable.Checked;
-            _currentAuditCheck.Settings.IsSatisfactory = radioButtonSatisfactory.Checked;
-            _currentAuditCheck.Settings.Findings = metroTextBoxFindings.Text;
-            _currentAuditCheck.Settings.Comments = metroTextBoxComments.Text;
-
-            foreach (var item in checkedListBoxRoot.CheckedItems)
-                _currentAuditCheck.Settings.RootCause += $"{item}, ";
+            // foreach (var item in checkedListBoxRoot.CheckedItems)
+            //     _currentAuditCheck.Settings.RootCause += $"{item}, ";
         }
 
 
@@ -249,23 +194,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         {
             try
             {
-                if (radioButtonNotSatisfactory.Checked && string.IsNullOrEmpty(metroTextBoxFindings.Text))
-                {
-                    MessageBox.Show($"Please input some text in Findings and then save current CheckList!", "Exclamation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
-                    return;
-                }
-                
                 
                 ApplyChanges();
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
-
-
-                foreach (var control in flowLayoutPanel1.Controls.OfType<AuditCheckControl>())
-                {
-                    control.ApplyChanges();
-                    GlobalObjects.CaaEnvironment.NewKeeper.Save(control.AuditCheckRecord, true);
-                }
-
 
                 DialogResult = DialogResult.OK;
                 Close();
@@ -281,33 +212,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             DialogResult = DialogResult.Cancel;
             Close();
         }
-
         
-
-        private void checkBoxNotApplicable_CheckedChanged(object sender, EventArgs e)
-        {
-            radioButtonNotSatisfactory.Enabled =
-                radioButtonSatisfactory.Enabled =
-                    metroTextBoxFindings.Enabled =
-                        checkedListBoxRoot.Enabled = 
-                metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
-
-            checkedListBoxRoot.Enabled = !radioButtonSatisfactory.Checked;
-
-            foreach (var control in flowLayoutPanel1.Controls.OfType<AuditCheckControl>())
-                control.EnableCheckBox(!checkBoxNotApplicable.Checked);
-        }
-
-
-
-        private void RadioButtonSatisfactory_CheckedChange(object sender, EventArgs e)
-        {
-            if(radioButtonSatisfactory.Checked)
-                checkedListBoxRoot.SelectionMode = SelectionMode.None;
-            else checkedListBoxRoot.SelectionMode = SelectionMode.One;
-            checkedListBoxRoot.Enabled = !radioButtonSatisfactory.Checked;
-        }
-
         private void ButtonWf_Click(object sender, EventArgs e)
         {
             var form = new WorkflowCommentsForm(_currentAuditCheck);
@@ -356,6 +261,16 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 _animatedThreadWorker.RunWorkerAsync();
                 Focus();
             }
+        }
+
+        private void ButtonDelete_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ButtonAdd_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

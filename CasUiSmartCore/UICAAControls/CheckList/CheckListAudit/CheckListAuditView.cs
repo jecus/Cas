@@ -199,9 +199,19 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 			{
 				if (IsAuditCheck)
 				{
-					var form = new CheckListAuditForm(SelectedItem, AuditId.Value, SelectedItem.IsEditable);
-					if (form.ShowDialog() == DialogResult.OK)
-                        _animatedThreadWorker.RunWorkerAsync();
+                    if (SelectedItem.AuditCheck.WorkflowStageId == WorkFlowStage.RCA.ItemId)
+                    {
+                        var form = new CheckListAuditRootCaseForm(SelectedItem, AuditId.Value, SelectedItem.IsEditable);
+                        if (form.ShowDialog() == DialogResult.OK)
+                            _animatedThreadWorker.RunWorkerAsync();
+                    }
+                    else
+                    {
+                        var form = new CheckListAuditForm(SelectedItem, AuditId.Value, SelectedItem.IsEditable);
+                        if (form.ShowDialog() == DialogResult.OK)
+                            _animatedThreadWorker.RunWorkerAsync();
+                    }
+                    
 				}
 				else
 				{

@@ -15,6 +15,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
+using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using SmartCore.Entities.General;
 using Telerik.WinControls.Data;
@@ -155,9 +156,20 @@ namespace CAS.UI.UICAAControls.CheckList
 			{
 				if (IsAuditCheck)
 				{
-					var form = new CheckListAuditForm(SelectedItem, AuditId.Value);
-					if (form.ShowDialog() == DialogResult.OK)
-                        _animatedThreadWorker.RunWorkerAsync();
+                    if (SelectedItem.AuditCheck.WorkflowStageId == WorkFlowStage.RCA.ItemId)
+                    {
+                        var form = new CheckListAuditRootCaseForm(SelectedItem, AuditId.Value);
+                        if (form.ShowDialog() == DialogResult.OK)
+                            _animatedThreadWorker.RunWorkerAsync();
+                    }
+                    else
+                    {
+                        var form = new CheckListAuditForm(SelectedItem, AuditId.Value);
+                        if (form.ShowDialog() == DialogResult.OK)
+                            _animatedThreadWorker.RunWorkerAsync();
+                    }
+                    
+					
 				}
 				else
 				{

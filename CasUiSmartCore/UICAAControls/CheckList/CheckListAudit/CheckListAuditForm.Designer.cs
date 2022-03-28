@@ -36,7 +36,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             System.Windows.Forms.Label label4;
             System.Windows.Forms.Label label8;
             System.Windows.Forms.Label label9;
-            System.Windows.Forms.Label label10;
             System.Windows.Forms.Label label1;
             System.Windows.Forms.Label label5;
             System.Windows.Forms.Label label6;
@@ -57,7 +56,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.metroTextBoxFindings = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxComments = new MetroFramework.Controls.MetroTextBox();
             this.checkBoxNotApplicable = new System.Windows.Forms.CheckBox();
-            this.checkedListBoxRoot = new System.Windows.Forms.CheckedListBox();
             this.metroTextBoxWorkflowStage = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxWorkFlowStatus = new MetroFramework.Controls.MetroTextBox();
             this.ButtonWf = new AvControls.AvButtonT.AvButtonT();
@@ -69,7 +67,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             label4 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
-            label10 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
@@ -150,19 +147,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             label9.TabIndex = 349;
             label9.Text = "Comments";
             label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new System.Drawing.Font("Verdana", 9F);
-            label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label10.Location = new System.Drawing.Point(996, 676);
-            label10.Name = "label10";
-            label10.Size = new System.Drawing.Size(139, 14);
-            label10.TabIndex = 351;
-            label10.Text = "Root cause Category";
-            label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            label10.Visible = false;
             // 
             // label1
             // 
@@ -503,16 +487,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.checkBoxNotApplicable.UseVisualStyleBackColor = true;
             this.checkBoxNotApplicable.CheckedChanged += new System.EventHandler(this.checkBoxNotApplicable_CheckedChanged);
             // 
-            // checkedListBoxRoot
-            // 
-            this.checkedListBoxRoot.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.checkedListBoxRoot.FormattingEnabled = true;
-            this.checkedListBoxRoot.Location = new System.Drawing.Point(999, 694);
-            this.checkedListBoxRoot.Name = "checkedListBoxRoot";
-            this.checkedListBoxRoot.Size = new System.Drawing.Size(342, 94);
-            this.checkedListBoxRoot.TabIndex = 354;
-            this.checkedListBoxRoot.Visible = false;
-            // 
             // metroTextBoxWorkflowStage
             // 
             // 
@@ -635,6 +609,20 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.avButtonWfTracking.ToolTipText = "";
             this.avButtonWfTracking.Click += new System.EventHandler(this.avButtonWfTracking_Click);
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.button1.Location = new System.Drawing.Point(1081, 801);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 33);
+            this.button1.TabIndex = 367;
+            this.button1.Text = "Accept";
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // labelSourceText
             // 
             labelSourceText.AutoSize = true;
@@ -683,20 +671,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             labelLevelText.Text = "Level";
             labelLevelText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.button1.Location = new System.Drawing.Point(1081, 801);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 33);
-            this.button1.TabIndex = 367;
-            this.button1.Text = "Accept";
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // CheckListAuditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -709,9 +683,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.Controls.Add(label6);
             this.Controls.Add(this.metroTextBoxWorkflowStage);
             this.Controls.Add(label5);
-            this.Controls.Add(this.checkedListBoxRoot);
             this.Controls.Add(label1);
-            this.Controls.Add(label10);
             this.Controls.Add(this.checkBoxNotApplicable);
             this.Controls.Add(label9);
             this.Controls.Add(this.metroTextBoxComments);

@@ -415,9 +415,19 @@ WHERE rn = 1 and  IsDeleted = 0");
 		{
             if ((_routineAudit?.Type == ProgramType.CAAKG || _routineAudit?.Type == ProgramType.IOSA))
             {
-                var form = new CheckListAuditForm(_directivesViewer.SelectedItem, _parentId, _directivesViewer.SelectedItem.IsEditable );
-                if (form.ShowDialog() == DialogResult.OK)
-                    AnimatedThreadWorker.RunWorkerAsync();
+	            if (_directivesViewer.SelectedItem.AuditCheck.WorkflowStageId == WorkFlowStage.RCA.ItemId)
+                {
+	                var form = new CheckListAuditRootCaseForm(_directivesViewer.SelectedItem, _parentId, _directivesViewer.SelectedItem.IsEditable);
+	                if (form.ShowDialog() == DialogResult.OK)
+		                AnimatedThreadWorker.RunWorkerAsync();
+                }
+                else
+                {
+	                var form = new CheckListAuditForm(_directivesViewer.SelectedItem, _parentId, _directivesViewer.SelectedItem.IsEditable);
+	                if (form.ShowDialog() == DialogResult.OK)
+		                AnimatedThreadWorker.RunWorkerAsync();
+                }
+                
             }
 		}
 

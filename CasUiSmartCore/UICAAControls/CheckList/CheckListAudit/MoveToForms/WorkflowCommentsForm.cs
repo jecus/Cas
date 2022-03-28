@@ -153,11 +153,28 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
         
         private void AddBotMsg()
         {
-            if (_stageId > WorkFlowStage.View.ItemId && _stageId < WorkFlowStage.Closed.ItemId)
+            if(_stageId == WorkFlowStage.Closed.ItemId)
+                return;
+            
+            if (_stageId > WorkFlowStage.View.ItemId && _stageId < WorkFlowStage.RCA.ItemId)
             {
-                var actions = new List<ChatCardAction>();
-                actions.Add(new ChatCardAction("Accept"));
+                var actions = new List<ChatCardAction>
+                {
+                    new ChatCardAction("Accept")
+                };
                 var imageCard = new ChatImageCardDataItem(null, "", "",$"Move to next stage({WorkFlowStage.GetItemById(_stageId + 1).FullName})?", actions, null);
+                var message = new ChatCardMessage(imageCard, _author1, DateTime.Now);
+                radChat2.AddMessage(message);
+            }
+            else if (_stageId >= WorkFlowStage.RCA.ItemId && _stageId < WorkFlowStage.Closed.ItemId)
+            {
+                var actions = new List<ChatCardAction>
+                {
+                    new ChatCardAction("Accept"),
+                    new ChatCardAction("Reject")
+                };
+                var imageCard = new ChatImageCardDataItem(null, "", "",$"Move to next stage({WorkFlowStage.GetItemById(_stageId + 1).FullName}) press Accept. " +
+                                                                       $"Move to previous stage({WorkFlowStage.GetItemById(_stageId - 1).FullName}) press Reject. ", actions, null);
                 var message = new ChatCardMessage(imageCard, _author1, DateTime.Now);
                 radChat2.AddMessage(message);
             }
@@ -183,6 +200,35 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
                 if (res == DialogResult.Yes)
                 {
                     _stageId += 1;
+                    _auditCheck.Settings.WorkflowStageId = _stageId;
+                    _auditCheck.Settings.WorkflowStatusId = WorkFlowStatus.Open.ItemId;
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_auditCheck);
+                    
+                    var rec = new CheckListTransfer()
+                    {
+                        Created = DateTime.Now,
+                        From = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
+                        To = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
+                        AuditId = _auditId,
+                        CheckListId = _checkListId,
+                        Settings = new CheckListTransferSettings()
+                        {
+                            Remark = $"Workflow stage Updated to {WorkFlowStage.GetItemById(_stageId)}!",
+                            WorkflowStageId = _stageId,
+                            IsWorkFlowChanged = true
+                        }
+                    };
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
+                    _animatedThreadWorker.RunWorkerAsync();
+                    Focus();
+                }
+            }
+            else if (e.Action.Text == "Reject")
+            {
+                var res = MessageBox.Show($"Do you really want move to previous stage({WorkFlowStage.GetItemById(_stageId + 1).FullName})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                if (res == DialogResult.Yes)
+                {
+                    _stageId -= 1;
                     _auditCheck.Settings.WorkflowStageId = _stageId;
                     _auditCheck.Settings.WorkflowStatusId = WorkFlowStatus.Open.ItemId;
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(_auditCheck);
