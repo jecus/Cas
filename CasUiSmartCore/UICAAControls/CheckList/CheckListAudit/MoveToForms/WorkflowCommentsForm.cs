@@ -207,8 +207,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
                     var rec = new CheckListTransfer()
                     {
                         Created = DateTime.Now,
-                        From = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
-                        To = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
+                        From = _auditorId,
+                        To = _auditorId,
                         AuditId = _auditId,
                         CheckListId = _checkListId,
                         Settings = new CheckListTransferSettings()
@@ -236,8 +236,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
                     var rec = new CheckListTransfer()
                     {
                         Created = DateTime.Now,
-                        From = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
-                        To = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
+                        From = _auditorId,
+                        To = _auditorId,
                         AuditId = _auditId,
                         CheckListId = _checkListId,
                         Settings = new CheckListTransferSettings()

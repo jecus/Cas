@@ -339,6 +339,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.button2.Size = new System.Drawing.Size(100, 33);
             this.button2.TabIndex = 368;
             this.button2.Text = "Reject";
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // CheckListAuditRootCaseForm
             // 

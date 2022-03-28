@@ -208,11 +208,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             metroTextBoxWorkflowStage.Text = WorkFlowStage.GetItemById(_currentAuditCheck.Settings.WorkflowStageId).ToString();
             metroTextBoxWorkFlowStatus.Text = WorkFlowStatus.GetItemById(_currentAuditCheck.Settings.WorkflowStatusId).ToString();
             
-            for (int i = 0; i < checkedListBoxRoot.Items.Count; i++)
-            {
-                if (!string.IsNullOrEmpty(_currentAuditCheck.Settings.RootCause) &&_currentAuditCheck.Settings.RootCause.Contains(checkedListBoxRoot.Items[i].ToString()))
-                    checkedListBoxRoot.SetItemChecked(i, true);
-            }
+            // for (int i = 0; i < checkedListBoxRoot.Items.Count; i++)
+            // {
+            //     if (!string.IsNullOrEmpty(_currentAuditCheck.Settings.RootCause) &&_currentAuditCheck.Settings.RootCause.Contains(checkedListBoxRoot.Items[i].ToString()))
+            //         checkedListBoxRoot.SetItemChecked(i, true);
+            // }
             
             
             flowLayoutPanel1.Controls.Clear();
@@ -240,8 +240,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             _currentAuditCheck.Settings.Findings = metroTextBoxFindings.Text;
             _currentAuditCheck.Settings.Comments = metroTextBoxComments.Text;
 
-            foreach (var item in checkedListBoxRoot.CheckedItems)
-                _currentAuditCheck.Settings.RootCause += $"{item}, ";
+            // foreach (var item in checkedListBoxRoot.CheckedItems)
+            //     _currentAuditCheck.Settings.RootCause += $"{item}, ";
         }
 
 

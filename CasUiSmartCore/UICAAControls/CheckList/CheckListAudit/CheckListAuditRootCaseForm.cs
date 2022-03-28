@@ -25,7 +25,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private AuditCheck _currentAuditCheck;
         private List<AuditCheckRecord> _currentAuditCheckRecords = new List<AuditCheckRecord>();
-        private IList<RootCause> _rootCase = new List<RootCause>();
+        
+        private List<RootCause> _fromList = new List<RootCause>();
+        private List<RootCause> _toList = new List<RootCause>();
+        private PelSpecialist _auditor;
+
 
         #region Constructors
 
@@ -76,6 +80,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
+            if (_currentCheck == null) return;
+            
+            _fromList.Clear();
+            _toList.Clear();
+            
             if (_currentCheck.AuditCheck.Settings.WorkflowStatusId == WorkFlowStatus.Open.ItemId 
                 && _currentCheck.AuditCheck.Settings.WorkflowStageId == WorkFlowStage.View.ItemId)
             {
@@ -98,13 +107,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 }
                 
             }
+
             
-            
-            if (_currentCheck == null) return;
-
-
-            _rootCase = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<RootCauseDTO, RootCause>();
-
             _currentCheck =
                 GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListDTO, CheckLists>(_currentCheck.ItemId);
             
@@ -163,6 +167,28 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             
             _currentCheck.Level = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<FindingLevelsDTO, FindingLevels>(_currentCheck.Settings.LevelId) ??
                                   FindingLevels.Unknown;
+            
+            
+            var record = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AuditPelRecordDTO, AuditPelRecord>(new List<Filter>()
+            {
+                new Filter("AuditId", _auditId),
+                new Filter("CheckListId", _checkListId),
+            });
+            var pel = record.FirstOrDefault();
+            _auditor = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<PelSpecialistDTO, PelSpecialist>(pel.AuditorId);
+            
+            
+            
+            var roots = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<RootCauseDTO, RootCause>();
+            
+            
+            
+            foreach (var root in roots)
+            {
+                if((bool)_currentAuditCheck.Settings.RootCauseIds?.Any(i => i == root.ItemId))
+                    _toList.Add(root);
+                else _fromList.Add(root);
+            }
         }
         
         
@@ -175,6 +201,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             labelRevisionText.Text = _currentCheck.RevisionNumber?.ToString() ?? "";
             labelLevelText.Text = _currentCheck.Level.ToString();
             
+            _from.SetItemsArray(_fromList.ToArray());
+            _to.SetItemsArray(_toList.ToArray());
+
             
             // for (int i = 0; i < checkedListBoxRoot.Items.Count; i++)
             // {
@@ -182,22 +211,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             //         checkedListBoxRoot.SetItemChecked(i, true);
             // }
         }
-
-        private void ApplyChanges()
-        {
-            // foreach (var item in checkedListBoxRoot.CheckedItems)
-            //     _currentAuditCheck.Settings.RootCause += $"{item}, ";
-        }
-
-
+        
         private void buttonOk_Click(object sender, System.EventArgs e)
         {
             try
             {
-                
-                ApplyChanges();
-                GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
-
                 DialogResult = DialogResult.OK;
                 Close();
             }
@@ -245,8 +263,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 var rec = new CheckListTransfer()
                 {
                     Created = DateTime.Now,
-                    From = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
-                    To = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
+                    From = _auditor.SpecialistId,
+                    To = _auditor.SpecialistId,
                     AuditId = _auditId,
                     CheckListId = _currentAuditCheck.CheckListId,
                     Settings = new CheckListTransferSettings()
@@ -262,15 +280,74 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 Focus();
             }
         }
+        
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var res = MessageBox.Show($"Do you really want move to previous stage({WorkFlowStage.GetItemById(_currentAuditCheck.Settings.WorkflowStageId + 1).FullName})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (res == DialogResult.Yes)
+            {
+                _currentAuditCheck.Settings.WorkflowStageId -= 1;
+                _currentAuditCheck.Settings.WorkflowStatusId = WorkFlowStatus.Open.ItemId;
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
+                    
+                var rec = new CheckListTransfer()
+                {
+                    Created = DateTime.Now,
+                    From = _auditor.SpecialistId,
+                    To = _auditor.SpecialistId,
+                    AuditId = _auditId,
+                    CheckListId = _currentAuditCheck.CheckListId,
+                    Settings = new CheckListTransferSettings()
+                    {
+                        Remark = $"Workflow stage Updated to {WorkFlowStage.GetItemById(_currentAuditCheck.Settings.WorkflowStageId)}!",
+                        WorkflowStageId = _currentAuditCheck.Settings.WorkflowStageId,
+                        IsWorkFlowChanged = true
+                    }
+                };
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
+                _animatedThreadWorker.RunWorkerAsync();
+                Focus();
+            }
+        }
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (_to.SelectedItems.Count == 0) return;
+            
+            foreach (var item in _to.SelectedItems.ToArray())
+            {
+                _fromList.Add(item);
+                _toList.Remove(item);
+            }
+
+            _from.SetItemsArray(_fromList.ToArray());
+            _to.SetItemsArray(_toList.ToArray());
+
+
+
+            _currentAuditCheck.Settings.RootCauseIds = new List<int>(_toList.Select(i => i.ItemId));
+            _currentAuditCheck.Settings.RootCause = string.Join(", " , _toList.Select(i => i.ToString()));
+            GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
         }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (_from.SelectedItems.Count == 0) return;
+            
+            foreach (var item in _from.SelectedItems.ToArray())
+            {
+                _fromList.Remove(item);
+                _toList.Add(item);
+            }
+
+            _from.SetItemsArray(_fromList.ToArray());
+            _to.SetItemsArray(_toList.ToArray());
+            
+            _currentAuditCheck.Settings.RootCauseIds = new List<int>(_toList.Select(i => i.ItemId));
+            _currentAuditCheck.Settings.RootCause = string.Join(", " , _toList.Select(i => i.ToString()));
+            GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
         }
+
+        
     }
 }

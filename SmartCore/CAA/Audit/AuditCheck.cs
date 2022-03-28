@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
 using SmartCore.Entities.Dictionaries;
@@ -51,6 +52,11 @@ namespace SmartCore.CAA.Audit
     [Serializable]
     public class AuditCheckSettings
     {
+        public AuditCheckSettings()
+        {
+            RootCauseIds = new List<int>();
+        }
+        
         [JsonProperty("IsApplicable", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsApplicable { get; set; }
 
@@ -65,6 +71,9 @@ namespace SmartCore.CAA.Audit
 
         [JsonProperty("RootCause")]
         public string RootCause { get; set; }
+        
+        [JsonProperty("RootCauseIds")]
+        public List<int> RootCauseIds { get; set; }
 
         [JsonProperty("WorkflowStatusId")]
         public int WorkflowStatusId { get; set; }
