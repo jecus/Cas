@@ -253,6 +253,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             var res = MessageBox.Show($"Do you really want move to next stage({WorkFlowStage.GetItemById(_currentAuditCheck.Settings.WorkflowStageId + 1).FullName})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (res == DialogResult.Yes)
             {
+                _currentAuditCheck.Settings.FromWorkflowStageId = _currentAuditCheck.Settings.WorkflowStageId;
                 _currentAuditCheck.Settings.WorkflowStageId += 1;
                 _currentAuditCheck.Settings.WorkflowStatusId = WorkFlowStatus.Open.ItemId;
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
@@ -283,6 +284,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             var res = MessageBox.Show($"Do you really want move to previous stage({WorkFlowStage.GetItemById(_currentAuditCheck.Settings.WorkflowStageId + 1).FullName})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (res == DialogResult.Yes)
             {
+                _currentAuditCheck.Settings.FromWorkflowStageId = _currentAuditCheck.Settings.WorkflowStageId;
                 _currentAuditCheck.Settings.WorkflowStageId -= 1;
                 _currentAuditCheck.Settings.WorkflowStatusId = WorkFlowStatus.Open.ItemId;
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);

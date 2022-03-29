@@ -199,6 +199,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
                 var res = MessageBox.Show($"Do you really want move to next stage({WorkFlowStage.GetItemById(_stageId + 1).FullName})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
                 if (res == DialogResult.Yes)
                 {
+                    _auditCheck.Settings.FromWorkflowStageId = _stageId;
                     _stageId += 1;
                     _auditCheck.Settings.WorkflowStageId = _stageId;
                     _auditCheck.Settings.WorkflowStatusId = WorkFlowStatus.Open.ItemId;
@@ -215,7 +216,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
                         {
                             Remark = $"Workflow stage Updated to {WorkFlowStage.GetItemById(_stageId)}!",
                             WorkflowStageId = _stageId,
-                            IsWorkFlowChanged = true
+                            IsWorkFlowChanged = true,
+                            
                         }
                     };
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
@@ -225,9 +227,10 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
             }
             else if (e.Action.Text == "Reject")
             {
-                var res = MessageBox.Show($"Do you really want move to previous stage({WorkFlowStage.GetItemById(_stageId + 1).FullName})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                var res = MessageBox.Show($"Do you really want move to previous stage({WorkFlowStage.GetItemById(_stageId - 1).FullName})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
                 if (res == DialogResult.Yes)
                 {
+                    _auditCheck.Settings.FromWorkflowStageId = _stageId;
                     _stageId -= 1;
                     _auditCheck.Settings.WorkflowStageId = _stageId;
                     _auditCheck.Settings.WorkflowStatusId = WorkFlowStatus.Open.ItemId;
@@ -244,7 +247,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
                         {
                             Remark = $"Workflow stage Updated to {WorkFlowStage.GetItemById(_stageId)}!",
                             WorkflowStageId = _stageId,
-                            IsWorkFlowChanged = true
+                            IsWorkFlowChanged = true,
                         }
                     };
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
