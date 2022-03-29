@@ -68,8 +68,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
 
             if ((_currentAuditCheck.WorkflowStageId == WorkFlowStage.CAR.ItemId &&
-                 (_currentAuditCheck.Settings.IsApplicable.HasValue && _currentAuditCheck.Settings.IsApplicable.Value) &&
-                 (_currentAuditCheck.Settings.IsSatisfactory.HasValue && _currentAuditCheck.Settings.IsSatisfactory.Value))
+                 ((_currentAuditCheck.Settings.IsApplicable.HasValue && _currentAuditCheck.Settings.IsApplicable.Value) &&
+                 (_currentAuditCheck.Settings.IsSatisfactory.HasValue && _currentAuditCheck.Settings.IsSatisfactory.Value)))
                 || _currentAuditCheck.WorkflowStageId == WorkFlowStage.Closed.ItemId)
                 button1.Visible = false;
             else button1.Visible = true;
