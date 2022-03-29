@@ -39,10 +39,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             System.Windows.Forms.Label label1;
             System.Windows.Forms.Label label5;
             System.Windows.Forms.Label label6;
-            System.Windows.Forms.Label labelSourceText;
-            System.Windows.Forms.Label labelEditorText;
-            System.Windows.Forms.Label labelRevisionText;
-            System.Windows.Forms.Label labelLevelText;
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.metroTextBoxItem = new MetroFramework.Controls.MetroTextBox();
@@ -743,6 +739,5 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private MetroFramework.Controls.MetroTextBox metroTextBoxFindings;
         private MetroFramework.Controls.MetroTextBox metroTextBoxComments;
         private CheckBox checkBoxNotApplicable;
-        private System.Windows.Forms.CheckedListBox checkedListBoxRoot;
     }
 }

@@ -153,8 +153,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
         
         private void AddBotMsg()
         {
-            if(_stageId == WorkFlowStage.Closed.ItemId)
-                return;
+            if ((_stageId == WorkFlowStage.CAR.ItemId &&
+                 (_auditCheck.Settings.IsApplicable.HasValue && _auditCheck.Settings.IsApplicable.Value) &&
+                 (_auditCheck.Settings.IsSatisfactory.HasValue && _auditCheck.Settings.IsSatisfactory.Value))
+                || _stageId == WorkFlowStage.Closed.ItemId)
+            
             
             if (_stageId > WorkFlowStage.View.ItemId && _stageId < WorkFlowStage.RCA.ItemId)
             {

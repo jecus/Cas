@@ -65,7 +65,15 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                     c.Enabled = false;
                 }
             }
-            
+
+
+            if ((_currentAuditCheck.WorkflowStageId == WorkFlowStage.CAR.ItemId &&
+                 (_currentAuditCheck.Settings.IsApplicable.HasValue && _currentAuditCheck.Settings.IsApplicable.Value) &&
+                 (_currentAuditCheck.Settings.IsSatisfactory.HasValue && _currentAuditCheck.Settings.IsSatisfactory.Value))
+                || _currentAuditCheck.WorkflowStageId == WorkFlowStage.Closed.ItemId)
+                button1.Visible = false;
+            else button1.Visible = true;
+
         }
 
         private void UpdateControls()
@@ -289,10 +297,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             radioButtonNotSatisfactory.Enabled =
                 radioButtonSatisfactory.Enabled =
                     metroTextBoxFindings.Enabled =
-                        checkedListBoxRoot.Enabled = 
-                metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
+                        metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
 
-            checkedListBoxRoot.Enabled = !radioButtonSatisfactory.Checked;
+            button1.Visible = !checkBoxNotApplicable.Checked;
 
             foreach (var control in flowLayoutPanel1.Controls.OfType<AuditCheckControl>())
                 control.EnableCheckBox(!checkBoxNotApplicable.Checked);
@@ -302,10 +309,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         private void RadioButtonSatisfactory_CheckedChange(object sender, EventArgs e)
         {
-            if(radioButtonSatisfactory.Checked)
-                checkedListBoxRoot.SelectionMode = SelectionMode.None;
-            else checkedListBoxRoot.SelectionMode = SelectionMode.One;
-            checkedListBoxRoot.Enabled = !radioButtonSatisfactory.Checked;
+            button1.Visible = !radioButtonNotSatisfactory.Checked;
         }
 
         private void ButtonWf_Click(object sender, EventArgs e)
