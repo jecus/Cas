@@ -11,13 +11,7 @@ using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.CAA.Audit
 {
-    public enum RoutineStatus
-    {
-        Open,
-        Published,
-        Closed
-    }
-
+    
     [CAADto(typeof(CAAAuditDTO))]
     [Condition("IsDeleted", "0")]
     [Serializable]

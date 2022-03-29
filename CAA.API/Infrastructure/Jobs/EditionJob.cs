@@ -29,7 +29,9 @@ namespace CAA.API.Infrastructure.Jobs
         
         public async Task Start()
         {
-            try
+            while (true)
+            {
+                try
             {
                 var context = _provider.GetService<DataContext>();
 
@@ -46,8 +48,9 @@ namespace CAA.API.Infrastructure.Jobs
                     var durationUntilMidnight = tomorrow.Date - now;
                     Thread.Sleep(durationUntilMidnight);
                 }
-
-                foreach (var nextEdition in nextEditions)
+                else
+                {
+                    foreach (var nextEdition in nextEditions)
                 {
                     if (nextEdition != null)
                     {
@@ -84,11 +87,17 @@ namespace CAA.API.Infrastructure.Jobs
                         await context.SaveChangesAsync();
                     }
                 }
+                }
+
+                
             }
             catch (Exception e)
             {
                 _logger.LogError(e, e.Message);
             }
+            }
+            
+            
         }
     }
 }

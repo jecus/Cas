@@ -82,17 +82,5 @@ namespace SmartCore.CAA.Check
 
         #endregion
     }
-
-    [Serializable]
-    public class CheckListTransferSettings
-    {
-        [JsonProperty]
-        public string Remark { get; set; }
-        
-        [JsonProperty]
-        public int WorkflowStageId { get; set; }
-
-        [JsonProperty]
-        public bool IsWorkFlowChanged { get; set; }
-    }
+    
 }

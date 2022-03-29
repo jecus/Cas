@@ -49,45 +49,5 @@ namespace SmartCore.CAA.Audit
         }
     }
 
-    [Serializable]
-    public class AuditCheckSettings
-    {
-        public AuditCheckSettings()
-        {
-            RootCauseIds = new List<int>();
-        }
-        
-        [JsonProperty("IsApplicable", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? IsApplicable { get; set; }
-
-        [JsonProperty("IsSatisfactory", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? IsSatisfactory { get; set; }
-
-        [JsonProperty("Findings")]
-        public string Findings { get; set; }
-
-        [JsonProperty("Comments")]
-        public string Comments { get; set; }
-
-        [JsonProperty("RootCause")]
-        public string RootCause { get; set; }
-        
-        [JsonProperty("RootCauseIds")]
-        public List<int> RootCauseIds { get; set; }
-
-        [JsonProperty("WorkflowStatusId")]
-        public int WorkflowStatusId { get; set; }
-        
-        [JsonProperty("WorkflowStageId")]
-        public int WorkflowStageId { get; set; }
-        
-        [JsonProperty]
-        public int FromWorkflowStageId { get; set; }
-
-        [JsonProperty("IsAuditorReview")]
-        public bool? IsAuditorReview { get; set; }
-        
-        [JsonProperty("IsAuditeeReview")]
-        public bool? IsAuditeeReview { get; set; }
-    }
+    
 }
