@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CAA.API.Infrastructure.Jobs
 {
-    public class ClosedJob: IWorker
+    public class ClosedJob : IWorker
     {
         private readonly ILogger<ClosedJob> _logger;
         private readonly IServiceProvider _provider;
@@ -21,10 +21,10 @@ namespace CAA.API.Infrastructure.Jobs
             _logger = logger;
             _provider = provider;
         }
-        
+
         public void Dispose()
         {
-			
+
         }
 
         public async Task Start()
@@ -73,7 +73,7 @@ namespace CAA.API.Infrastructure.Jobs
                                     auditCheck.Settings.WorkflowStatusId = 6;
 
                                     await context.AuditCheckDtos.AddAsync(auditCheck);
-                                    
+
                                     var rec = new CheckListTransferDTO()
                                     {
                                         Created = DateTime.Now,
@@ -89,20 +89,21 @@ namespace CAA.API.Infrastructure.Jobs
                                         }
                                     };
                                     await context.CheckListTransferDtos.AddAsync(rec);
-                                    
+
                                     await context.SaveChangesAsync();
                                 }
-                                
+
                             }
                         }
                     }
 
-                    
+
                 }
                 catch (Exception e)
                 {
                     _logger.LogError(e, e.Message);
                 }
             }
+        }
     }
 }
