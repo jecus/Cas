@@ -121,6 +121,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                     };
                     
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
+                    DialogResult = DialogResult.OK;
+                    Close();
                 }
                 else
                 {
