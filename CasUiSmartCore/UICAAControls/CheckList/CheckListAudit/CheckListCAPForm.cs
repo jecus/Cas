@@ -62,7 +62,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         {
             var wf = sender as WorkFlowStatus;
             
-            var res = MessageBox.Show($"Do you really want move to next status({wf})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            var res = MessageBox.Show(wf == WorkFlowStatus.Open ?  $"Do you really want move to next status({WorkFlowStatus.GetItemById(_currentAuditCheck.Settings.WorkflowStatusId)})?" :
+                $"Do you really want move to next status({WorkFlowStatus.GetItemById(_currentAuditCheck.Settings.WorkflowStatusId + 1)})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (res == DialogResult.Yes)
             {
                 _currentAuditCheck.Settings.FromWorkflowStatusId = wf.ItemId - 1;
@@ -85,13 +86,71 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 };
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
                 _animatedThreadWorker.RunWorkerAsync();
-                Focus();
+                
             }
+            Focus();
         }
         
         private void ControlOnReject(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var wf = sender as WorkFlowStatus;
+            
+            var res = MessageBox.Show(wf == WorkFlowStatus.IA ? $"Do you really want move to previous stage({WorkFlowStage.GetItemById(_currentAuditCheck.Settings.WorkflowStageId - 1)})?": 
+                $"Do you really want move to previous status({WorkFlowStatus.GetItemById(wf.ItemId - 1)})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (res == DialogResult.Yes)
+            {
+                if (wf == WorkFlowStatus.IA)
+                {
+                    _currentAuditCheck.Settings.FromWorkflowStageId = _currentAuditCheck.WorkflowStageId;
+                    _currentAuditCheck.Settings.WorkflowStageId = _currentAuditCheck.WorkflowStageId- 1;
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
+                    
+                    var rec = new CheckListTransfer()
+                    {
+                        Created = DateTime.Now,
+                        From = _auditor.SpecialistId,
+                        To = _auditor.SpecialistId,
+                        AuditId = _auditId,
+                        CheckListId = _currentAuditCheck.CheckListId,
+                        Settings = new CheckListTransferSettings()
+                        {
+                            Remark = $"Workflow stage Updated to {WorkFlowStage.GetItemById(_currentAuditCheck.WorkflowStageId- 1)}!",
+                            WorkflowStageId = _currentAuditCheck.WorkflowStageId,
+                            IsWorkFlowChanged = true,
+                        }
+                    };
+                    
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
+                }
+                else
+                {
+                    _currentAuditCheck.Settings.FromWorkflowStatusId = wf.ItemId;
+                    _currentAuditCheck.Settings.WorkflowStatusId = wf.ItemId - 1;
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
+                    
+                    var rec = new CheckListTransfer()
+                    {
+                        Created = DateTime.Now,
+                        From = _auditor.SpecialistId,
+                        To = _auditor.SpecialistId,
+                        AuditId = _auditId,
+                        CheckListId = _currentAuditCheck.CheckListId,
+                        Settings = new CheckListTransferSettings()
+                        {
+                            Remark = $"Workflow status Updated to {wf}!",
+                            WorkflowStageId = _currentAuditCheck.WorkflowStageId,
+                            IsWorkFlowChanged = true,
+                        }
+                    };
+                    
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
+                }
+                
+                
+                
+                _animatedThreadWorker.RunWorkerAsync();
+            }
+            Focus();
         }
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)

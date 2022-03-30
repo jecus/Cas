@@ -33,8 +33,9 @@ namespace CAA.API.Infrastructure.Jobs
             {
                 try
                 {
-
-                    var context = _provider.GetService<DataContext>();
+                    var scope = _provider.CreateScope();
+                    
+                    var context = scope.ServiceProvider.GetService<DataContext>();
 
                     var audits = await context.CAAAuditDtos
                         .AsNoTracking()
