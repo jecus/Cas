@@ -25,7 +25,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private AuditCheck _currentAuditCheck;
         private List<AuditCheckRecord> _currentAuditCheckRecords = new List<AuditCheckRecord>();
-        private IList<RootCause> _rootCase = new List<RootCause>();
 
         #region Constructors
 
@@ -96,6 +95,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
+            if (_currentCheck == null) return;
+            
             if (_currentCheck.AuditCheck.Settings.WorkflowStatusId == WorkFlowStatus.Open.ItemId 
                 && _currentCheck.AuditCheck.Settings.WorkflowStageId == WorkFlowStage.View.ItemId)
             {
@@ -119,11 +120,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 
             }
             
-            
-            if (_currentCheck == null) return;
-
-
-            _rootCase = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<RootCauseDTO, RootCause>();
 
             _currentCheck =
                 GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListDTO, CheckLists>(_currentCheck.ItemId);

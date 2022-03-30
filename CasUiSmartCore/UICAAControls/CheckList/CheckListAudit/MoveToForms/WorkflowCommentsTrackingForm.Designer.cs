@@ -31,27 +31,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Label label3;
             this.telerikMetroBlueTheme1 = new Telerik.WinControls.Themes.TelerikMetroBlueTheme();
             this.fileControl = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
             this.radChat2 = new Telerik.WinControls.UI.RadChat();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.comboBoxWF = new System.Windows.Forms.ComboBox();
-            label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.radChat2)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Verdana", 9F);
-            label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label3.Location = new System.Drawing.Point(189, 38);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(110, 14);
-            label3.TabIndex = 355;
-            label3.Text = "Workflow stage:";
-            label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // fileControl
             // 
@@ -112,14 +98,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 752);
-            this.Controls.Add(label3);
             this.Controls.Add(this.comboBoxWF);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.radChat2);
             this.Controls.Add(this.fileControl);
             this.Name = "WorkflowCommentsTrackingForm";
             this.Resizable = false;
-            this.Text = "Workflow Comments Tracking";
+            this.Text = "Workflow Tracking";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CheckMoveToForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.radChat2)).EndInit();
             this.ResumeLayout(false);

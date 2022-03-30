@@ -421,6 +421,12 @@ WHERE rn = 1 and  IsDeleted = 0");
 	                if (form.ShowDialog() == DialogResult.OK)
 		                AnimatedThreadWorker.RunWorkerAsync();
                 }
+	            else if (_directivesViewer.SelectedItem.AuditCheck.WorkflowStageId == WorkFlowStage.CAP.ItemId)
+	            {
+		            var form = new CheckListCAPForm(_directivesViewer.SelectedItem, _parentId, _directivesViewer.SelectedItem.IsEditable);
+		            if (form.ShowDialog() == DialogResult.OK)
+			            AnimatedThreadWorker.RunWorkerAsync();
+	            }
                 else
                 {
 	                var form = new CheckListAuditForm(_directivesViewer.SelectedItem, _parentId, _directivesViewer.SelectedItem.IsEditable);

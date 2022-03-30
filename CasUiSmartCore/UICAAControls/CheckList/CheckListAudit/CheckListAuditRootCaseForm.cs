@@ -24,8 +24,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private readonly bool _editable;
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private AuditCheck _currentAuditCheck;
-        private List<AuditCheckRecord> _currentAuditCheckRecords = new List<AuditCheckRecord>();
-        
+
         private List<RootCause> _fromList = new List<RootCause>();
         private List<RootCause> _toList = new List<RootCause>();
         private PelSpecialist _auditor;
@@ -85,30 +84,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             _fromList.Clear();
             _toList.Clear();
             
-            if (_currentCheck.AuditCheck.Settings.WorkflowStatusId == WorkFlowStatus.Open.ItemId 
-                && _currentCheck.AuditCheck.Settings.WorkflowStageId == WorkFlowStage.View.ItemId)
-            {
-                if (_currentCheck.PelRecord?.Auditor.ItemId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
-                {
-                    _currentCheck.AuditCheck.Settings.IsAuditorReview = true;
-                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentCheck.AuditCheck);
-                }
-                else if (_currentCheck.PelRecord?.Auditee.ItemId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
-                {
-                    _currentCheck.AuditCheck.Settings.IsAuditeeReview = true;
-                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentCheck.AuditCheck);
-                }
-
-                if (_currentCheck.AuditCheck.Settings.IsAuditorReview.HasValue && _currentCheck.AuditCheck.Settings.IsAuditeeReview.HasValue &&
-                    _currentCheck.AuditCheck.Settings.IsAuditorReview.Value && _currentCheck.AuditCheck.Settings.IsAuditeeReview.Value)
-                {
-                    _currentCheck.AuditCheck.Settings.WorkflowStatusId = WorkFlowStatus.Review.ItemId;
-                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentCheck.AuditCheck);
-                }
-                
-            }
-
-            
             _currentCheck = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListDTO, CheckLists>(_currentCheck.ItemId);
             
             _currentCheck.EditionNumber = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CheckListRevisionDTO, CheckListRevision>(_currentCheck.EditionId)?.Number.ToString() ?? "";
@@ -130,37 +105,12 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 };
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
             }
-
-            if (_currentAuditCheck.ItemId > 0)
-                _currentAuditCheckRecords = new List<AuditCheckRecord>(
-                    GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AuditCheckRecordDTO, AuditCheckRecord>(
-                        new Filter("AuditRecordId", _currentAuditCheck.ItemId)));
-            else _currentAuditCheckRecords = new List<AuditCheckRecord>();
-
-
+            
             var records =
                 GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CheckListRecordDTO, CheckListRecords>(
                     new Filter("CheckListId", _currentCheck.ItemId));
 
-
-            foreach (var rec in records)
-            {
-                var find = _currentAuditCheckRecords.FirstOrDefault(i => i.CheckListRecordId == rec.ItemId);
-                if (find == null)
-                {
-                    var newRecord = new AuditCheckRecord()
-                    {
-                        CheckListRecordId = rec.ItemId,
-                        AuditRecordId = _currentAuditCheck.ItemId,
-                        CheckListRecord = rec
-                    };
-                    GlobalObjects.CaaEnvironment.NewKeeper.Save(newRecord);
-
-                    _currentAuditCheckRecords.Add(newRecord);
-                }
-                else find.CheckListRecord = rec;
-            }
-
+            
             _currentCheck.CheckListRecords.Clear();
             _currentCheck.CheckListRecords.AddRange(records);
             

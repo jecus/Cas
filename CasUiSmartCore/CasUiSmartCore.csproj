@@ -961,6 +961,12 @@
     <Compile Include="UICAAControls\CheckList\CheckListAudit\CheckListAuditView.Designer.cs">
       <DependentUpon>CheckListAuditView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CheckList\CheckListAudit\CheckListCAPForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CheckList\CheckListAudit\CheckListCAPForm.Designer.cs">
+      <DependentUpon>CheckListCAPForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CheckList\CheckListAudit\CheckListCAPItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4473,6 +4479,9 @@
     <EmbeddedResource Include="UICAAControls\CheckList\CheckListAudit\CheckListAuditScreen.resx">
       <DependentUpon>CheckListAuditScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CheckList\CheckListAudit\CheckListCAPForm.resx">
+      <DependentUpon>CheckListCAPForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\CheckListAudit\CheckListCAPItem.resx">
       <DependentUpon>CheckListCAPItem.cs</DependentUpon>

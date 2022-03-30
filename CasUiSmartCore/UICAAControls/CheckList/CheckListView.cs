@@ -162,6 +162,12 @@ namespace CAS.UI.UICAAControls.CheckList
                         if (form.ShowDialog() == DialogResult.OK)
                             _animatedThreadWorker.RunWorkerAsync();
                     }
+                    else if (SelectedItem.AuditCheck.WorkflowStageId == WorkFlowStage.CAP.ItemId)
+                    {
+                        var form = new CheckListCAPForm(SelectedItem, AuditId.Value);
+                        if (form.ShowDialog() == DialogResult.OK)
+                            _animatedThreadWorker.RunWorkerAsync();
+                    }
                     else
                     {
                         var form = new CheckListAuditForm(SelectedItem, AuditId.Value);
