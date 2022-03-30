@@ -60,13 +60,14 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         private void ControlOnAccept(object sender, EventArgs e)
         {
-            var wf = sender as WorkFlowStatus;
+            var item = sender as CheckListCAPItem;
+            var wf = item._workFlowStatus;
             
             var res = MessageBox.Show(wf == WorkFlowStatus.Open ?  $"Do you really want move to next status({WorkFlowStatus.GetItemById(_currentAuditCheck.Settings.WorkflowStatusId)})?" :
                 $"Do you really want move to next status({WorkFlowStatus.GetItemById(_currentAuditCheck.Settings.WorkflowStatusId + 1)})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (res == DialogResult.Yes)
             {
-                _currentAuditCheck.Settings.FromWorkflowStatusId = wf.ItemId - 1;
+                _currentAuditCheck.Settings.FromWorkflowStatusId = wf == WorkFlowStatus.Open ?WorkFlowStatus.Open.ItemId : wf.ItemId - 1;
                 _currentAuditCheck.Settings.WorkflowStatusId = wf.ItemId;
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
                     
@@ -93,7 +94,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         
         private void ControlOnReject(object sender, EventArgs e)
         {
-            var wf = sender as WorkFlowStatus;
+            var item = sender as CheckListCAPItem;
+            var wf = item._workFlowStatus;
             
             var res = MessageBox.Show(wf == WorkFlowStatus.IA ? $"Do you really want move to previous stage({WorkFlowStage.GetItemById(_currentAuditCheck.Settings.WorkflowStageId - 1)})?": 
                 $"Do you really want move to previous status({WorkFlowStatus.GetItemById(wf.ItemId - 1)})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);

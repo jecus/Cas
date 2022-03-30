@@ -9,7 +9,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
     public partial class CheckListCAPItem : UserControl
     {
         private AuditCheck _currentAuditCheck;
-        private readonly WorkFlowStatus _workFlowStatus;
+        public readonly WorkFlowStatus _workFlowStatus;
 
         public CheckListCAPItem(AuditCheck currentAuditCheck, WorkFlowStatus workFlowStatus)
         {
@@ -55,13 +55,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private void buttonAccept_Click(object sender, EventArgs e)
         {
             if(Accept != null)
-                Accept.Invoke(_workFlowStatus, EventArgs.Empty);
+                Accept.Invoke(this, EventArgs.Empty);
         }
 
         private void buttonReject_Click(object sender, EventArgs e)
         {
             if(Reject != null)
-                Reject.Invoke(_workFlowStatus, EventArgs.Empty);
+                Reject.Invoke(this, EventArgs.Empty);
         }
 
         private void ButtonWf_Click(object sender, EventArgs e)
