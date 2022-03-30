@@ -29,13 +29,19 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             {
                 metroTextBoxComment.Visible = true;
                 label1label1.Visible = true;
+                metroTextBoxComment.Text = _currentAuditCheck.Settings.FatComments;
             }
             
             if (_currentAuditCheck.WorkflowStatusId  == _workFlowStatus.ItemId)
                 checkBoxItem.Checked = true;
             if (_currentAuditCheck.WorkflowStatusId +1  != _workFlowStatus.ItemId)
                 EnableControls(false);
+        }
 
+        public void ApplyChanges()
+        {
+            if (_workFlowStatus == WorkFlowStatus.FAT)
+                _currentAuditCheck.Settings.FatComments = metroTextBoxComment.Text;
         }
 
         public void EnableControls(bool enable)

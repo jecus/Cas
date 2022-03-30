@@ -61,6 +61,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private void ControlOnAccept(object sender, EventArgs e)
         {
             var item = sender as CheckListCAPItem;
+            
+            item.ApplyChanges();
+            
             var wf = item._workFlowStatus;
             
             var res = MessageBox.Show(wf == WorkFlowStatus.Open ?  $"Do you really want move to next status({WorkFlowStatus.GetItemById(_currentAuditCheck.Settings.WorkflowStatusId)})?" :
@@ -96,6 +99,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         {
             var item = sender as CheckListCAPItem;
             var wf = item._workFlowStatus;
+            
+            item.ApplyChanges();
             
             var res = MessageBox.Show(wf == WorkFlowStatus.IA ? $"Do you really want move to previous stage({WorkFlowStage.GetItemById(_currentAuditCheck.Settings.WorkflowStageId - 1)})?": 
                 $"Do you really want move to previous status({WorkFlowStatus.GetItemById(wf.ItemId - 1)})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);

@@ -92,5 +92,8 @@ namespace CAA.Entity.Models.DTO
         
         [JsonProperty("IsAuditeeReview")]
         public bool? IsAuditeeReview { get; set; }
+
+        [JsonProperty("FatComments")]
+        public string FatComments { get; set; }
     }
 }
