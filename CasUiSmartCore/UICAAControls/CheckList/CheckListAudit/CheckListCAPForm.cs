@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -43,15 +44,54 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private void UpdateInformation()
         {
             flowLayoutPanel1.Controls.Clear();
-            foreach (var status in new []{WorkFlowStatus.IA,WorkFlowStatus.FAT,WorkFlowStatus.IA,WorkFlowStatus.VOI,WorkFlowStatus.Closed,})
+            foreach (var status in new []{WorkFlowStatus.IA,WorkFlowStatus.FAT,WorkFlowStatus.VOI,WorkFlowStatus.Closed,})
             {
                 var control = new CheckListCAPItem(_currentAuditCheck ,status);
 
                 if (_currentAuditCheck.WorkflowStatusId == WorkFlowStatus.Open.ItemId && status.ItemId == WorkFlowStatus.IA.ItemId)
                     control.EnableControls(true);
                 
+                control.Accept += ControlOnAccept;
+                control.Reject+= ControlOnReject;
+                
                 flowLayoutPanel1.Controls.Add(control);
             }
+        }
+
+        private void ControlOnAccept(object sender, EventArgs e)
+        {
+            var wf = sender as WorkFlowStatus;
+            
+            var res = MessageBox.Show($"Do you really want move to next status({wf})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (res == DialogResult.Yes)
+            {
+                _currentAuditCheck.Settings.FromWorkflowStatusId = wf.ItemId - 1;
+                _currentAuditCheck.Settings.WorkflowStatusId = wf.ItemId;
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
+                    
+                var rec = new CheckListTransfer()
+                {
+                    Created = DateTime.Now,
+                    From = _auditor.SpecialistId,
+                    To = _auditor.SpecialistId,
+                    AuditId = _auditId,
+                    CheckListId = _currentAuditCheck.CheckListId,
+                    Settings = new CheckListTransferSettings()
+                    {
+                        Remark = $"Workflow status Updated to {wf}!",
+                        WorkflowStageId = _currentAuditCheck.WorkflowStageId,
+                        IsWorkFlowChanged = true,
+                    }
+                };
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(rec);
+                _animatedThreadWorker.RunWorkerAsync();
+                Focus();
+            }
+        }
+        
+        private void ControlOnReject(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)

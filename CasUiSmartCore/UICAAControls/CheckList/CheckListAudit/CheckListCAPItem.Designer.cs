@@ -38,7 +38,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.buttonReject = new System.Windows.Forms.Button();
             this.checkBoxItem = new System.Windows.Forms.CheckBox();
             labelStatus = new System.Windows.Forms.Label();
-            label1 = new System.Windows.Forms.Label();
             label1label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -65,7 +64,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             label1label1.TabIndex = 372;
             label1label1.Text = "Final Action Taken";
             label1label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            label1label1.Visible = false;
             // 
             // ButtonWf
             // 

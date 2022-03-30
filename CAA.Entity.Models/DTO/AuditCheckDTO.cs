@@ -84,6 +84,8 @@ namespace CAA.Entity.Models.DTO
         
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public int? FromWorkflowStageId { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public int? FromWorkflowStatusId { get; set; }
 
         [JsonProperty("IsAuditorReview")]
         public bool? IsAuditorReview { get; set; }

@@ -30,10 +30,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 metroTextBoxComment.Visible = true;
                 label1label1.Visible = true;
             }
-
-            if (_currentAuditCheck.WorkflowStatusId != _workFlowStatus.ItemId)
+            
+            if (_currentAuditCheck.WorkflowStatusId  == _workFlowStatus.ItemId)
+                checkBoxItem.Checked = true;
+            if (_currentAuditCheck.WorkflowStatusId +1  != _workFlowStatus.ItemId)
                 EnableControls(false);
-            else checkBoxItem.Checked = true;
 
         }
 
@@ -48,14 +49,19 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         }
         
 
+        public event EventHandler<EventArgs> Accept;
+        public event EventHandler<EventArgs> Reject;
+        
         private void buttonAccept_Click(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            if(Accept != null)
+                Accept.Invoke(_workFlowStatus, EventArgs.Empty);
         }
 
         private void buttonReject_Click(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            if(Reject != null)
+                Reject.Invoke(_workFlowStatus, EventArgs.Empty);
         }
 
         private void ButtonWf_Click(object sender, EventArgs e)
