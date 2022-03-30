@@ -46,6 +46,10 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             foreach (var status in new []{WorkFlowStatus.IA,WorkFlowStatus.FAT,WorkFlowStatus.IA,WorkFlowStatus.VOI,WorkFlowStatus.Closed,})
             {
                 var control = new CheckListCAPItem(_currentAuditCheck ,status);
+
+                if (_currentAuditCheck.WorkflowStatusId == WorkFlowStatus.Open.ItemId && status.ItemId == WorkFlowStatus.IA.ItemId)
+                    control.EnableControls(true);
+                
                 flowLayoutPanel1.Controls.Add(control);
             }
         }

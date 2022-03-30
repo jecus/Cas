@@ -156,7 +156,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.MoveToForms
             if ((_stageId == WorkFlowStage.CAR.ItemId &&
                  ((_auditCheck.Settings.IsApplicable.HasValue && _auditCheck.Settings.IsApplicable.Value) ||
                  (_auditCheck.Settings.IsSatisfactory.HasValue && _auditCheck.Settings.IsSatisfactory.Value)))
-                || _stageId == WorkFlowStage.Closed.ItemId)
+                || _stageId == WorkFlowStage.Closed.ItemId || _stageId == WorkFlowStage.CAP.ItemId)
                 return;
             
             

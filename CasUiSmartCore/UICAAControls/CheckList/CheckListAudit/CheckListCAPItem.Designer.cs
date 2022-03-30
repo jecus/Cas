@@ -31,16 +31,41 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Label labelStatus;
-            System.Windows.Forms.Label label1label1;
             this.ButtonWf = new AvControls.AvButtonT.AvButtonT();
             this.avButtonT1 = new AvControls.AvButtonT.AvButtonT();
             this.metroTextBoxComment = new MetroFramework.Controls.MetroTextBox();
             this.buttonAccept = new System.Windows.Forms.Button();
             this.buttonReject = new System.Windows.Forms.Button();
+            this.checkBoxItem = new System.Windows.Forms.CheckBox();
             labelStatus = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
             label1label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // labelStatus
+            // 
+            labelStatus.AutoSize = true;
+            labelStatus.Font = new System.Drawing.Font("Verdana", 9F);
+            labelStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            labelStatus.Location = new System.Drawing.Point(24, 15);
+            labelStatus.Name = "labelStatus";
+            labelStatus.Size = new System.Drawing.Size(106, 14);
+            labelStatus.TabIndex = 367;
+            labelStatus.Text = "Workflow Stage";
+            labelStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1label1
+            // 
+            label1label1.AutoSize = true;
+            label1label1.Font = new System.Drawing.Font("Verdana", 9F);
+            label1label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label1label1.Location = new System.Drawing.Point(203, 15);
+            label1label1.Name = "label1label1";
+            label1label1.Size = new System.Drawing.Size(119, 14);
+            label1label1.TabIndex = 372;
+            label1label1.Text = "Final Action Taken";
+            label1label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            label1label1.Visible = false;
             // 
             // ButtonWf
             // 
@@ -158,34 +183,21 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.buttonReject.Text = "Reject";
             this.buttonReject.Click += new System.EventHandler(this.buttonReject_Click);
             // 
-            // labelStatus
+            // checkBoxItem
             // 
-            labelStatus.AutoSize = true;
-            labelStatus.Font = new System.Drawing.Font("Verdana", 9F);
-            labelStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            labelStatus.Location = new System.Drawing.Point(3, 15);
-            labelStatus.Name = "labelStatus";
-            labelStatus.Size = new System.Drawing.Size(106, 14);
-            labelStatus.TabIndex = 367;
-            labelStatus.Text = "Workflow Stage";
-            labelStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label1label1
-            // 
-            label1label1.AutoSize = true;
-            label1label1.Font = new System.Drawing.Font("Verdana", 9F);
-            label1label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label1label1.Location = new System.Drawing.Point(203, 15);
-            label1label1.Name = "label1label1";
-            label1label1.Size = new System.Drawing.Size(119, 14);
-            label1label1.TabIndex = 372;
-            label1label1.Text = "Final Action Taken";
-            label1label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxItem.AutoSize = true;
+            this.checkBoxItem.Enabled = false;
+            this.checkBoxItem.Location = new System.Drawing.Point(3, 15);
+            this.checkBoxItem.Name = "checkBoxItem";
+            this.checkBoxItem.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxItem.TabIndex = 373;
+            this.checkBoxItem.UseVisualStyleBackColor = true;
             // 
             // CheckListCAPItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.checkBoxItem);
             this.Controls.Add(label1label1);
             this.Controls.Add(this.buttonReject);
             this.Controls.Add(this.buttonAccept);
@@ -199,8 +211,10 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.CheckBox checkBoxItem;
         System.Windows.Forms.Label labelStatus;
         System.Windows.Forms.Label label1;
+        System.Windows.Forms.Label label1label1;
         private MetroFramework.Controls.MetroTextBox metroTextBoxComment;
 
         private System.Windows.Forms.Button buttonAccept;
