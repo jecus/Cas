@@ -66,10 +66,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             }
 
 
-            if ((_currentAuditCheck.WorkflowStageId == WorkFlowStage.CAR.ItemId &&
-                 ((_currentAuditCheck.Settings.IsApplicable.HasValue && _currentAuditCheck.Settings.IsApplicable.Value) &&
-                 (_currentAuditCheck.Settings.IsSatisfactory.HasValue && _currentAuditCheck.Settings.IsSatisfactory.Value)))
-                || _currentAuditCheck.WorkflowStageId == WorkFlowStage.Closed.ItemId)
+            if (_currentAuditCheck.WorkflowStageId == WorkFlowStage.Closed.ItemId)
                 button1.Visible = false;
             else button1.Visible = true;
 
@@ -368,6 +365,25 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             var res = MessageBox.Show($"Do you really want move to next stage({WorkFlowStage.GetItemById(_currentAuditCheck.Settings.WorkflowStageId + 1).FullName})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (res == DialogResult.Yes)
             {
+                if (radioButtonNotSatisfactory.Checked && string.IsNullOrEmpty(metroTextBoxFindings.Text))
+                {
+                    MessageBox.Show($"Please input some text in Findings and then save current CheckList!", "Exclamation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+                    return;
+                }
+                
+                ApplyChanges();
+                
+                foreach (var control in flowLayoutPanel1.Controls.OfType<AuditCheckControl>())
+                {
+                    control.ApplyChanges();
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(control.AuditCheckRecord, true);
+                }
+
+
+                DialogResult = DialogResult.OK;
+                Close();
+                
+                
                 _currentAuditCheck.Settings.FromWorkflowStageId = _currentAuditCheck.Settings.WorkflowStageId;
                 _currentAuditCheck.Settings.WorkflowStageId += 1;
                 _currentAuditCheck.Settings.WorkflowStatusId = WorkFlowStatus.Open.ItemId;
