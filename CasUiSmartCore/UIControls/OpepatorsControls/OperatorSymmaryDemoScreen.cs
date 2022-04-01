@@ -722,6 +722,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			form.ShowDialog();
 			e.Cancel = true;
 		}
+		
 	}
 }
 

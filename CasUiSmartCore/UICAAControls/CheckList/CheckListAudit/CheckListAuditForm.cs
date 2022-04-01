@@ -77,11 +77,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         private void UpdateControls()
         {
-
-
-
-            radioButtonNotSatisfactory.CheckedChanged += RadioButtonSatisfactory_CheckedChange;
-            radioButtonSatisfactory.CheckedChanged += RadioButtonSatisfactory_CheckedChange;
+            
+            radioButtonNotSatisfactory.CheckedChanged += radioButtonNotSatisfactory_CheckedChange;
+            radioButtonSatisfactory.CheckedChanged += radioButtonSatisfactory_CheckedChange;
 
             radioButtonNotSatisfactory.Enabled =
                 radioButtonSatisfactory.Enabled =
@@ -92,7 +90,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             foreach (var control in flowLayoutPanel1.Controls.OfType<AuditCheckControl>())
                 control.EnableCheckBox(!checkBoxNotApplicable.Checked);
         }
-
+        
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
             if (_currentCheck == null) return;
@@ -240,7 +238,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private void ApplyChanges()
         {
             _currentAuditCheck.Settings.IsApplicable = checkBoxNotApplicable.Checked;
-            _currentAuditCheck.Settings.IsSatisfactory = radioButtonSatisfactory.Checked;
+            if (_currentAuditCheck.Settings.IsApplicable.HasValue && _currentAuditCheck.Settings.IsApplicable.Value)
+                _currentAuditCheck.Settings.IsSatisfactory = null;
+            else _currentAuditCheck.Settings.IsSatisfactory = radioButtonSatisfactory.Checked;
+            
+            
             _currentAuditCheck.Settings.Findings = metroTextBoxFindings.Text;
             _currentAuditCheck.Settings.Comments = metroTextBoxComments.Text;
 
@@ -290,6 +292,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         private void checkBoxNotApplicable_CheckedChanged(object sender, EventArgs e)
         {
+            radioButtonSatisfactory.CheckedChanged -= radioButtonSatisfactory_CheckedChange;
+            radioButtonSatisfactory.CheckedChanged -= radioButtonSatisfactory_CheckedChange;
+            
             radioButtonNotSatisfactory.Enabled =
                 radioButtonSatisfactory.Enabled =
                     metroTextBoxFindings.Enabled =
@@ -297,16 +302,46 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             button1.Visible = !checkBoxNotApplicable.Checked;
 
+            if(checkBoxNotApplicable.Checked)
+                radioButtonSatisfactory.Checked = radioButtonNotSatisfactory.Checked = false;
+
             foreach (var control in flowLayoutPanel1.Controls.OfType<AuditCheckControl>())
                 control.EnableCheckBox(!checkBoxNotApplicable.Checked);
+            
+            radioButtonSatisfactory.CheckedChanged += radioButtonSatisfactory_CheckedChange;
+            radioButtonNotSatisfactory.CheckedChanged += radioButtonNotSatisfactory_CheckedChange;
         }
 
-
-
-        private void RadioButtonSatisfactory_CheckedChange(object sender, EventArgs e)
+        
+        private void radioButtonSatisfactory_CheckedChange(object sender, EventArgs e)
         {
+            radioButtonSatisfactory.CheckedChanged -= radioButtonSatisfactory_CheckedChange;
+            radioButtonSatisfactory.CheckedChanged -= radioButtonSatisfactory_CheckedChange;
+            if (!radioButtonNotSatisfactory.Checked && !radioButtonSatisfactory.Checked)
+            {
+                
+            }
+            else radioButtonNotSatisfactory.Checked = !radioButtonSatisfactory.Checked ;
             button1.Visible = !radioButtonNotSatisfactory.Checked;
+            radioButtonNotSatisfactory.CheckedChanged += radioButtonNotSatisfactory_CheckedChange;
+            radioButtonSatisfactory.CheckedChanged += radioButtonSatisfactory_CheckedChange;
         }
+
+        private void radioButtonNotSatisfactory_CheckedChange(object sender, EventArgs e)
+        {
+            radioButtonSatisfactory.CheckedChanged -= radioButtonSatisfactory_CheckedChange;
+            radioButtonSatisfactory.CheckedChanged -= radioButtonSatisfactory_CheckedChange;
+            if (!radioButtonNotSatisfactory.Checked && !radioButtonSatisfactory.Checked)
+            {
+                
+            }
+            else radioButtonSatisfactory.Checked = !radioButtonNotSatisfactory.Checked;
+            button1.Visible = !radioButtonNotSatisfactory.Checked;
+            radioButtonNotSatisfactory.CheckedChanged += radioButtonNotSatisfactory_CheckedChange;
+            radioButtonSatisfactory.CheckedChanged += radioButtonSatisfactory_CheckedChange;
+        }
+        
+        
 
         private void ButtonWf_Click(object sender, EventArgs e)
         {

@@ -20,6 +20,7 @@ namespace CAA.API
             services.AddWorker<DictionaryWorker>();
             services.AddWorker<EditionJob>();
             services.AddWorker<RevisionJob>();
+            services.AddWorker<ClosedJob>();
         }
         public virtual void RegisterDataBase(IServiceCollection services)
         {

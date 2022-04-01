@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using API.Abstractions.Abstractions.Workers;
 using CAA.Entity.Core;
 using CAA.Entity.Models.DTO;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using API.Abstractions.Abstractions.Workers;
 
 namespace CAA.API.Infrastructure.Jobs
 {
@@ -34,7 +34,6 @@ namespace CAA.API.Infrastructure.Jobs
                 try
                 {
                     var scope = _provider.CreateScope();
-                    
                     var context = scope.ServiceProvider.GetService<DataContext>();
 
                     var audits = await context.CAAAuditDtos

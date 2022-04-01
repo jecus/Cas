@@ -47,8 +47,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             this.metroTextBoxSection = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxRequirement = new MetroFramework.Controls.MetroTextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.radioButtonSatisfactory = new System.Windows.Forms.RadioButton();
-            this.radioButtonNotSatisfactory = new System.Windows.Forms.RadioButton();
+            this.radioButtonSatisfactory = new System.Windows.Forms.CheckBox();
+            this.radioButtonNotSatisfactory = new System.Windows.Forms.CheckBox();
             this.metroTextBoxFindings = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxComments = new MetroFramework.Controls.MetroTextBox();
             this.checkBoxNotApplicable = new System.Windows.Forms.CheckBox();
@@ -734,8 +734,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
         private MetroFramework.Controls.MetroTextBox metroTextBoxSection;
         private MetroFramework.Controls.MetroTextBox metroTextBoxRequirement;
         private FlowLayoutPanel flowLayoutPanel1;
-        private RadioButton radioButtonSatisfactory;
-        private RadioButton radioButtonNotSatisfactory;
+        private CheckBox radioButtonSatisfactory;
+        private CheckBox radioButtonNotSatisfactory;
         private MetroFramework.Controls.MetroTextBox metroTextBoxFindings;
         private MetroFramework.Controls.MetroTextBox metroTextBoxComments;
         private CheckBox checkBoxNotApplicable;

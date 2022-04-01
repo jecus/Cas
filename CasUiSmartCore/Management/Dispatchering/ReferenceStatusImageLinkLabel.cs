@@ -6,7 +6,7 @@ using Microsoft.VisualBasic.Devices;
 namespace CAS.UI.Management.Dispatchering
 {
     /// <summary>
-    /// Элемент управления StatusImageLinkLabel поддерживающий переход по ссылке
+    /// Р­Р»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ StatusImageLinkLabel РїРѕРґРґРµСЂР¶РёРІР°СЋС‰РёР№ РїРµСЂРµС…РѕРґ РїРѕ СЃСЃС‹Р»РєРµ
     /// </summary>
     public class ReferenceStatusImageLinkLabel : StatusImageLinkLabel,IReference
     {
@@ -105,7 +105,7 @@ namespace CAS.UI.Management.Dispatchering
 		#region private void OnDisplayerRequested()
 
 		/// <summary>
-		/// Метод обработки события DisplayerRequested
+		/// РњРµС‚РѕРґ РѕР±СЂР°Р±РѕС‚РєРё СЃРѕР±С‹С‚РёСЏ DisplayerRequested
 		/// </summary>
 		private void OnDisplayerRequested()
         {
