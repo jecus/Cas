@@ -51,15 +51,20 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             UpdateControls();
             UpdateInformation();
 
-            if (!_editable)
+            if (!_editable || (_currentAuditCheck.WorkflowStageId == WorkFlowStage.Closed.ItemId || _currentAuditCheck.WorkflowStatusId == WorkFlowStatus.Closed.ItemId))
             {
-                foreach (var c in this.Controls.OfType<Control>()
-                             .Where(i => !(i.GetType() == typeof(Button) )))
+                foreach (var c in this.Controls.OfType<Control>())
                 {
                     if(c.GetType() == typeof(AvControls.AvButtonT.AvButtonT))
                         continue;
+
+                    if(c.GetType() == typeof(Button))
+                    {
+                        if(c.Text != "Accept")
+                            continue;
+                    }
                     
-                    if(c.GetType().ToString() == "MetroFramework.Forms.MetroForm+MetroFormButton")
+                    if (c.GetType().ToString() == "MetroFramework.Forms.MetroForm+MetroFormButton")
                         continue;
                     c.Enabled = false;
                 }
