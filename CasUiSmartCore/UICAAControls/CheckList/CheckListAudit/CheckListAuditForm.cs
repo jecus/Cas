@@ -73,7 +73,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             if (_currentAuditCheck.WorkflowStageId == WorkFlowStage.Closed.ItemId)
                 button1.Visible = false;
-            else button1.Visible = true;
 
         }
 
@@ -88,7 +87,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                     metroTextBoxFindings.Enabled =
                         metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
             
-
+            
             foreach (var control in flowLayoutPanel1.Controls.OfType<AuditCheckControl>())
                 control.EnableCheckBox(!checkBoxNotApplicable.Checked);
         }
@@ -212,6 +211,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             metroTextBoxWorkflowStage.Text = WorkFlowStage.GetItemById(_currentAuditCheck.Settings.WorkflowStageId).ToString();
             metroTextBoxWorkFlowStatus.Text = WorkFlowStatus.GetItemById(_currentAuditCheck.Settings.WorkflowStatusId).ToString();
             
+            button1.Visible = radioButtonNotSatisfactory.Checked;
+            
             // for (int i = 0; i < checkedListBoxRoot.Items.Count; i++)
             // {
             //     if (!string.IsNullOrEmpty(_currentAuditCheck.Settings.RootCause) &&_currentAuditCheck.Settings.RootCause.Contains(checkedListBoxRoot.Items[i].ToString()))
@@ -260,23 +261,24 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 if (radioButtonNotSatisfactory.Checked && string.IsNullOrEmpty(metroTextBoxFindings.Text))
                 {
                     MessageBox.Show($"Please input some text in Findings and then save current CheckList!", "Exclamation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
-                    return;
+                    Focus();
                 }
-                
-                
-                ApplyChanges();
-                GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
-
-
-                foreach (var control in flowLayoutPanel1.Controls.OfType<AuditCheckControl>())
+                else
                 {
-                    control.ApplyChanges();
-                    GlobalObjects.CaaEnvironment.NewKeeper.Save(control.AuditCheckRecord, true);
+                    ApplyChanges();
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
+
+
+                    foreach (var control in flowLayoutPanel1.Controls.OfType<AuditCheckControl>())
+                    {
+                        control.ApplyChanges();
+                        GlobalObjects.CaaEnvironment.NewKeeper.Save(control.AuditCheckRecord, true);
+                    }
+
+
+                    DialogResult = DialogResult.OK;
+                    Close();
                 }
-
-
-                DialogResult = DialogResult.OK;
-                Close();
             }
             catch (Exception ex)
             {
@@ -302,7 +304,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                     metroTextBoxFindings.Enabled =
                         metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
 
-            button1.Visible = !checkBoxNotApplicable.Checked;
+            button1.Visible = radioButtonNotSatisfactory.Checked;
 
             if(checkBoxNotApplicable.Checked)
                 radioButtonSatisfactory.Checked = radioButtonNotSatisfactory.Checked = false;
@@ -324,7 +326,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 
             }
             else radioButtonNotSatisfactory.Checked = !radioButtonSatisfactory.Checked ;
-            button1.Visible = !radioButtonNotSatisfactory.Checked;
+            button1.Visible = radioButtonNotSatisfactory.Checked;
             radioButtonNotSatisfactory.CheckedChanged += radioButtonNotSatisfactory_CheckedChange;
             radioButtonSatisfactory.CheckedChanged += radioButtonSatisfactory_CheckedChange;
         }
@@ -338,7 +340,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 
             }
             else radioButtonSatisfactory.Checked = !radioButtonNotSatisfactory.Checked;
-            button1.Visible = !radioButtonNotSatisfactory.Checked;
+            button1.Visible = radioButtonNotSatisfactory.Checked;
             radioButtonNotSatisfactory.CheckedChanged += radioButtonNotSatisfactory_CheckedChange;
             radioButtonSatisfactory.CheckedChanged += radioButtonSatisfactory_CheckedChange;
         }
