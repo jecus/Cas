@@ -81,8 +81,6 @@ SELECT
 FROM [dbo].[AuditChecks]  where AuditId = {_auditId} and IsDeleted = 0
 
 
-
-
 select 
  WorkflowStageId as WorkflowStageId,
  case when WorkflowStageId in(2,3,6) then @count else @countNotSatis end as AllTask,

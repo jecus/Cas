@@ -10,6 +10,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
+using SmartCore.CAA;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.FindingLevel;
@@ -128,7 +129,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             
             
             var audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_auditId);
-            var roots = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<RootCauseDTO, RootCause>(new Filter("OperatorId", audit.OperatorId));
+            var roots = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<RootCauseDTO, RootCause>(new Filter("OperatorId", new List<int>() {audit.OperatorId,  AllOperators.Unknown.ItemId}));
             
             foreach (var root in roots)
             {

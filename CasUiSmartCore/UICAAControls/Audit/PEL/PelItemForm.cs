@@ -27,6 +27,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         private CommonCollection<Specialist> specialists = new CommonCollection<Specialist>();
         private List<PelSpecialist> pelSpec = new List<PelSpecialist>();
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
+        private CAAAudit _audit;
 
         public PelItemForm(int auditId, int operatorId, CommonCollection<CheckLists> initialDocumentArray)
         {
@@ -83,9 +84,9 @@ namespace CAS.UI.UICAAControls.Audit.PEL
             specialists.Clear();
             
             var records = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<AuditPelRecordDTO, AuditPelRecord>(new Filter("AuditId", _auditId));
-            var audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_auditId);
+            _audit = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAAuditDTO, CAAAudit>(_auditId);
             
-            specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", new []{audit.OperatorId, -1, _operatorId}.Distinct()), loadChild: true));
+            specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", new []{_audit.OperatorId, -1, _operatorId}.Distinct()), loadChild: true));
 
             pelSpec.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<PelSpecialistDTO, PelSpecialist>(new Filter("AuditId", _auditId)));
             
@@ -114,9 +115,12 @@ namespace CAS.UI.UICAAControls.Audit.PEL
         {
             comboBoxAuditor.Items.Clear();
             comboBoxAuditor.Items.AddRange(pelSpec.Where(i => i.Specialist.Operator == AllOperators.Unknown).ToArray());
-            
+
+
             comboBoxAuditee.Items.Clear();
-            comboBoxAuditee.Items.AddRange(pelSpec.Where(i => i.Specialist.Operator != AllOperators.Unknown).ToArray());
+            if (_audit.OperatorId == AllOperators.Unknown.ItemId)
+                comboBoxAuditee.Items.AddRange(pelSpec.Where(i => i.Specialist.Operator == AllOperators.Unknown).ToArray());
+            else comboBoxAuditee.Items.AddRange(pelSpec.Where(i => i.Specialist.Operator != AllOperators.Unknown).ToArray());
             
             _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
             _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());

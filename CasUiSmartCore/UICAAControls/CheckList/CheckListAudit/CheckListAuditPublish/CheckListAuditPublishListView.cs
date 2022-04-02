@@ -50,6 +50,7 @@ namespace CAS.UI.UICAAControls.Audit
 			AddColumn("WorkflowStage", (int)(radGridView1.Width * 0.40f));
 			AddColumn("All Task", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Task In Progress", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Percentage of completes", (int)(radGridView1.Width * 0.20f));
 		}
 		#endregion
 		
@@ -66,6 +67,7 @@ namespace CAS.UI.UICAAControls.Audit
 	            CreateRow($"{stage.Order}.{stage}",stage),
 	            CreateRow($"{item.AllTask}",item.AllTask),
 	            CreateRow($"{item.TaskInProgress}",item.TaskInProgress),
+	            CreateRow($"{item.Persent}",item.Persent),
             });
 
             return subItems;
