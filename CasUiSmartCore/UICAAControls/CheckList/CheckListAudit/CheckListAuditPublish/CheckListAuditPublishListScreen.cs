@@ -105,7 +105,16 @@ select
             }
             else
             {
-	            var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@" ;WITH cte AS
+	            var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@"
+DECLARE @countNotSatis INT
+declare @T table(
+WorkflowStageId int,
+Auditor int,
+Auditee int,
+IsSatisfactory bit);
+
+
+;WITH cte AS
 (
    SELECT rec.*, auditor.Auditor ,auditee.Auditee, ac.*, ROW_NUMBER() OVER (PARTITION BY rec.CheckListId ORDER BY rec.ItemId DESC) AS rn
    FROM [AuditPelRecords] rec
@@ -119,15 +128,31 @@ select
    ) as auditee
    cross apply
    (
-		select JSON_VALUE(SettingsJSON, '$.WorkflowStageId') as WorkflowStageId, JSON_VALUE(SettingsJSON, '$.WorkflowStatusId') as WorkflowStatusId   from  [dbo].AuditChecks 
+		select WorkflowStageId,  WorkflowStatusId, IsSatisfactory   from  [dbo].AuditChecks 
 		where AuditId = rec.AuditId and CheckListId = rec.CheckListId
    ) as ac
    where rec.AuditId in ({_auditId}) and rec.IsDeleted = 0
 )
-SELECT WorkflowStageId, Count(*), Sum(case when ([Auditor] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} or [Auditee] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}) then 1 else 0 end)
-FROM cte
-WHERE rn = 1
-group by WorkflowStageId");
+
+insert into @T(WorkflowStageId, Auditor, Auditee, IsSatisfactory)
+select WorkflowStageId, Auditor, Auditee , IsSatisfactory
+from cte
+where  rn = 1;
+
+SELECT
+@countNotSatis = Sum(case when IsSatisfactory = 0 then 1 else 0 end)
+FROM @T
+
+SELECT 
+WorkflowStageId as WorkflowStageId,
+case when WorkflowStageId in(2,3,6) then Count(*) else @countNotSatis end as AllTask,
+Sum(case when ([Auditor] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId}  or [Auditee] = {GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId} ) then 1 else 0 end) as TaskInProgress 
+FROM @T
+group by WorkflowStageId
+
+
+
+");
 	            
 	            var dtC = ds.Tables[0];
 	            foreach (DataRow dr in dtC.Rows)
@@ -136,7 +161,7 @@ group by WorkflowStageId");
 		            {
 			            WorkFlowStageId = int.Parse(dr[0].ToString()),
 			            AllTask = int.Parse(dr[1].ToString()),
-			            MyTask = int.Parse(dr[2].ToString()),
+			            TaskInProgress = int.Parse(dr[2].ToString()),
 		            });
 	            }
             }

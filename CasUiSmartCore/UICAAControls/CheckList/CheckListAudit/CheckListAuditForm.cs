@@ -211,7 +211,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             metroTextBoxWorkflowStage.Text = WorkFlowStage.GetItemById(_currentAuditCheck.Settings.WorkflowStageId).ToString();
             metroTextBoxWorkFlowStatus.Text = WorkFlowStatus.GetItemById(_currentAuditCheck.Settings.WorkflowStatusId).ToString();
             
-            button1.Visible = radioButtonNotSatisfactory.Checked;
+            if(_currentAuditCheck.WorkflowStageId == WorkFlowStage.CAR.ItemId)
+                button1.Visible = radioButtonNotSatisfactory.Checked ;
             
             // for (int i = 0; i < checkedListBoxRoot.Items.Count; i++)
             // {
@@ -304,7 +305,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                     metroTextBoxFindings.Enabled =
                         metroTextBoxComments.Enabled = !checkBoxNotApplicable.Checked;
 
-            button1.Visible = radioButtonNotSatisfactory.Checked;
+            if(_currentAuditCheck.WorkflowStageId == WorkFlowStage.CAR.ItemId)
+                button1.Visible = radioButtonNotSatisfactory.Checked ;
 
             if(checkBoxNotApplicable.Checked)
                 radioButtonSatisfactory.Checked = radioButtonNotSatisfactory.Checked = false;
@@ -326,7 +328,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 
             }
             else radioButtonNotSatisfactory.Checked = !radioButtonSatisfactory.Checked ;
-            button1.Visible = radioButtonNotSatisfactory.Checked;
+            if(_currentAuditCheck.WorkflowStageId == WorkFlowStage.CAR.ItemId)
+                button1.Visible = radioButtonNotSatisfactory.Checked ;
             radioButtonNotSatisfactory.CheckedChanged += radioButtonNotSatisfactory_CheckedChange;
             radioButtonSatisfactory.CheckedChanged += radioButtonSatisfactory_CheckedChange;
         }
@@ -340,7 +343,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 
             }
             else radioButtonSatisfactory.Checked = !radioButtonNotSatisfactory.Checked;
-            button1.Visible = radioButtonNotSatisfactory.Checked;
+            if(_currentAuditCheck.WorkflowStageId == WorkFlowStage.CAR.ItemId)
+                button1.Visible = radioButtonNotSatisfactory.Checked ;
             radioButtonNotSatisfactory.CheckedChanged += radioButtonNotSatisfactory_CheckedChange;
             radioButtonSatisfactory.CheckedChanged += radioButtonSatisfactory_CheckedChange;
         }

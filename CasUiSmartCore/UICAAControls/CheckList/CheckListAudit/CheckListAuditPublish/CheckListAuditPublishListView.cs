@@ -84,7 +84,7 @@ namespace CAS.UI.UICAAControls.Audit
             {
 	            var stage = WorkFlowStage.GetItemById(SelectedItem.WorkFlowStageId);
 	            e.RequestedEntity = new CheckListAuditScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), _operatorId ,  _audit.ItemId, _type, SelectedItem.WorkFlowStageId);
-	            e.DisplayerText = $"Audit ({stage}): {_audit.AuditNumber}";
+	            e.DisplayerText = $"({stage}): {_audit.AuditNumber}";
 	            e.TypeOfReflection = ReflectionTypes.DisplayInNew;
             }
 		}

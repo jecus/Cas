@@ -329,7 +329,7 @@ WHERE rn = 1 and  IsDeleted = 0");
             {
 	            check.PelRecord = pelRecords.FirstOrDefault(i => i.CheckListId == check.ItemId);
 	            
-	            if (check.PelRecord?.CurrentAuditor.ItemId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+	            if (check.PelRecord?.CurrentAuditor?.ItemId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
 		            check.IsEditable = true;
 	            
 	            
