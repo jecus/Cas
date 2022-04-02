@@ -6,6 +6,7 @@ namespace SmartCore.CAA.Audit
     {
         public int WorkFlowStageId { get; set; }
         public int AllTask { get; set; }
+        public int TaskInProgress { get; set; }
         public int MyTask { get; set; }
     }
 }

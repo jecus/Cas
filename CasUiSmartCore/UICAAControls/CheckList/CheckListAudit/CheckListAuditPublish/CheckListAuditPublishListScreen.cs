@@ -70,15 +70,28 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.CheckListAuditPublish
 
             if (_type == CheckListAuditType.Admin)
             {
-	            var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@"select 
- JSON_VALUE(SettingsJSON, '$.WorkflowStageId') as WorkflowStagId,
- Count(*) as AllTask 
--- Sum(case when JSON_VALUE(SettingsJSON, '$.WorkflowStatusId') = 1 then 1 else 0 end) as [Open],
- --Sum(case when JSON_VALUE(SettingsJSON, '$.WorkflowStatusId') = 2 then 1 else 0 end) as [Review],
- --Sum(case when JSON_VALUE(SettingsJSON, '$.WorkflowStatusId') = 6 then 1 else 0 end) as [Closed]
+	            var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute($@"
+DECLARE @count INT
+DECLARE @countNotSatis INT
+DECLARE @countNotSatisRCA INT
+SELECT
+@count =  COUNT(*),
+@countNotSatis = Sum(case when IsSatisfactory = 0 then 1 else 0 end),
+@countNotSatisRCA = Sum(case when IsSatisfactory = 0 and WorkflowStageId in (4) then 1 else 0 end)
+FROM [dbo].[AuditChecks]  where AuditId = {_auditId} and IsDeleted = 0
+
+
+
+
+select 
+ WorkflowStageId as WorkflowStageId,
+ case when WorkflowStageId in(2,3,6) then @count else @countNotSatis end as AllTask,
+ case when WorkflowStageId in (4) then @countNotSatisRCA
+ else Count(*) end as TaskInProgress
  from dbo.AuditChecks 
  where AuditId = {_auditId} and IsDeleted = 0
- group by JSON_VALUE(SettingsJSON, '$.WorkflowStageId')");
+ group by WorkflowStageId
+");
 	            
 	            var dtC = ds.Tables[0];
 	            foreach (DataRow dr in dtC.Rows)
@@ -87,6 +100,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit.CheckListAuditPublish
 		            {
 			            WorkFlowStageId = int.Parse(dr[0].ToString()),
 			            AllTask = int.Parse(dr[1].ToString()),
+			            TaskInProgress = int.Parse(dr[2].ToString()),
 		            });
 	            }
 	            
