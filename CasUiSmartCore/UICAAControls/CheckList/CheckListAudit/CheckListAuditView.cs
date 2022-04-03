@@ -110,6 +110,8 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             AddColumn("Level", (int)(radGridView1.Width * 0.2f));
             AddColumn("Condition", (int)(radGridView1.Width * 0.2f));
             AddColumn("Root Cause", (int)(radGridView1.Width * 0.35f));
+            
+            AddColumn("CA Due Date", (int)(radGridView1.Width * 0.35f));
             AddColumn("FAT Date", (int)(radGridView1.Width * 0.35f));
             AddColumn("VOI Date", (int)(radGridView1.Width * 0.35f));
             
@@ -128,6 +130,39 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
         protected override List<CustomCell> GetListViewSubItems(CheckLists item)
         {
+
+            var stage = WorkFlowStage.GetItemById(item.AuditCheck.Settings.WorkflowStageId);
+            var status = WorkFlowStatus.GetItemById(item.AuditCheck.Settings.WorkflowStatusId);
+            if (stage == WorkFlowStage.Evaluation)
+            {
+                radGridView1.Columns["Finding"].IsVisible = false;
+                radGridView1.Columns["Comments"].IsVisible = false;
+                radGridView1.Columns["Condition"].IsVisible = false;
+                radGridView1.Columns["Root Cause"].IsVisible = false;
+                radGridView1.Columns["CA Due Date"].IsVisible = false;
+                radGridView1.Columns["FAT Date"].IsVisible = false;
+                radGridView1.Columns["VOI Date"].IsVisible = false;
+            }
+            else if (stage == WorkFlowStage.CAR)
+            {
+                radGridView1.Columns["Root Cause"].IsVisible = false;
+                radGridView1.Columns["CA Due Date"].IsVisible = false;
+                radGridView1.Columns["FAT Date"].IsVisible = false;
+                radGridView1.Columns["VOI Date"].IsVisible = false;
+            }
+            else if (stage == WorkFlowStage.RCA)
+            {
+                radGridView1.Columns["Condition"].IsVisible = false;
+                radGridView1.Columns["CA Due Date"].IsVisible = false;
+                radGridView1.Columns["FAT Date"].IsVisible = false;
+                radGridView1.Columns["VOI Date"].IsVisible = false;
+            }
+            else if (stage == WorkFlowStage.CAP || stage == WorkFlowStage.Closed)
+            {
+                radGridView1.Columns["Condition"].IsVisible = false;
+            }
+            
+            
             var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
 
 
@@ -137,15 +172,12 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             var comments = "";
             var fat = "";
             var voi = "";
-            var status = WorkFlowStatus.Unknown;
-            var stage = WorkFlowStage.Unknown;
+            var due = "";
             if (item.AuditCheck != null)
             {
                 root = item.AuditCheck.Settings.RootCause;
                 finding = item.AuditCheck.Settings.Findings;
                 comments = item.AuditCheck.Settings.Comments;
-                status = WorkFlowStatus.GetItemById(item.AuditCheck.Settings.WorkflowStatusId);
-                stage = WorkFlowStage.GetItemById(item.AuditCheck.Settings.WorkflowStageId);
 
                 if (item.AuditCheck.Settings.FATDate.HasValue)
                     fat = SmartCore.Auxiliary.Convert.GetDateFormat(item.AuditCheck.Settings.FATDate.Value);
@@ -195,8 +227,10 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                     CreateRow(item.Level.ToString(), item.Level),
                     CreateRow(condition, condition),
                     CreateRow(root, root),
+                    CreateRow(due, due),
                     CreateRow(fat, item.AuditCheck.Settings.FATDate),
                     CreateRow(voi, item.AuditCheck.Settings.VOIDate),
+                    CreateRow(stage.ToString(), stage),
                     CreateRow(stage.ToString(), stage),
                     CreateRow(status.ToString(), status),
                     
