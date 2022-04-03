@@ -72,6 +72,12 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             {
                 _currentAuditCheck.Settings.FromWorkflowStatusId = wf == WorkFlowStatus.Open ?WorkFlowStatus.Open.ItemId : wf.ItemId - 1;
                 _currentAuditCheck.Settings.WorkflowStatusId = wf.ItemId;
+
+                if (_currentAuditCheck.Settings.FromWorkflowStatusId == WorkFlowStatus.VOI.ItemId)
+                    _currentAuditCheck.Settings.VOIDate = DateTime.Now;
+                else if(_currentAuditCheck.Settings.FromWorkflowStatusId == WorkFlowStatus.FAT.ItemId)
+                    _currentAuditCheck.Settings.FATDate = DateTime.Now;
+                
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
                     
                 var rec = new CheckListTransfer()
@@ -133,6 +139,12 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 }
                 else
                 {
+                    if (_currentAuditCheck.Settings.FromWorkflowStatusId == WorkFlowStatus.VOI.ItemId)
+                        _currentAuditCheck.Settings.VOIDate = null;
+                    else if(_currentAuditCheck.Settings.FromWorkflowStatusId == WorkFlowStatus.FAT.ItemId)
+                        _currentAuditCheck.Settings.FATDate = null;
+                    
+                    
                     _currentAuditCheck.Settings.FromWorkflowStatusId = wf.ItemId;
                     _currentAuditCheck.Settings.WorkflowStatusId = wf.ItemId - 1;
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);

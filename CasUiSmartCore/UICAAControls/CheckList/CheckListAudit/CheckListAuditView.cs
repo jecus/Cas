@@ -104,10 +104,15 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             AddColumn("Item №", (int)(radGridView1.Width * 0.3f));
 
             AddColumn("Requirement", (int)(radGridView1.Width * 0.35f));
+            AddColumn("Finding", (int)(radGridView1.Width * 0.35f));
+            AddColumn("Comments", (int)(radGridView1.Width * 0.35f));
 
             AddColumn("Level", (int)(radGridView1.Width * 0.2f));
             AddColumn("Condition", (int)(radGridView1.Width * 0.2f));
             AddColumn("Root Cause", (int)(radGridView1.Width * 0.35f));
+            AddColumn("FAT Date", (int)(radGridView1.Width * 0.35f));
+            AddColumn("VOI Date", (int)(radGridView1.Width * 0.35f));
+            
             AddColumn("Workflow Stage", (int)(radGridView1.Width * 0.2f));
             AddColumn("Workflow Status", (int)(radGridView1.Width * 0.2f));
             
@@ -128,13 +133,26 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
 
             var condition = "Unknown";
             var root = "";
+            var finding = "";
+            var comments = "";
+            var fat = "";
+            var voi = "";
             var status = WorkFlowStatus.Unknown;
             var stage = WorkFlowStage.Unknown;
             if (item.AuditCheck != null)
             {
                 root = item.AuditCheck.Settings.RootCause;
+                finding = item.AuditCheck.Settings.Findings;
+                comments = item.AuditCheck.Settings.Comments;
                 status = WorkFlowStatus.GetItemById(item.AuditCheck.Settings.WorkflowStatusId);
                 stage = WorkFlowStage.GetItemById(item.AuditCheck.Settings.WorkflowStageId);
+
+                if (item.AuditCheck.Settings.FATDate.HasValue)
+                    fat = SmartCore.Auxiliary.Convert.GetDateFormat(item.AuditCheck.Settings.FATDate.Value);
+                
+                if (item.AuditCheck.Settings.VOIDate.HasValue)
+                    voi = SmartCore.Auxiliary.Convert.GetDateFormat(item.AuditCheck.Settings.VOIDate.Value);
+                
 
                 if (item.AuditCheck.Settings.IsApplicable.HasValue &&item.AuditCheck.Settings.IsApplicable.Value)
                     condition = "Not Applicable";
@@ -172,9 +190,13 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                     CreateRow(item.Settings.SubPartName, item.Settings.SubPartName),
                     CreateRow(item.Settings.ItemNumber, item.Settings.ItemNumber),
                     CreateRow(item.Settings.Requirement, item.Settings.Requirement),
+                    CreateRow(finding, finding),
+                    CreateRow(comments, comments),
                     CreateRow(item.Level.ToString(), item.Level),
                     CreateRow(condition, condition),
                     CreateRow(root, root),
+                    CreateRow(fat, item.AuditCheck.Settings.FATDate),
+                    CreateRow(voi, item.AuditCheck.Settings.VOIDate),
                     CreateRow(stage.ToString(), stage),
                     CreateRow(status.ToString(), status),
                     

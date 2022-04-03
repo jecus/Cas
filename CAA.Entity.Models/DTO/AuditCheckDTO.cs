@@ -53,6 +53,12 @@ namespace CAA.Entity.Models.DTO
     [Serializable]
     public class AuditCheckSettings
     {
+        [JsonProperty("VOIDate", NullValueHandling = NullValueHandling.Ignore)]
+        public DateTime? VOIDate { get; set; }
+        
+        [JsonProperty("FATDate", NullValueHandling = NullValueHandling.Ignore)]
+        public DateTime? FATDate { get; set; }
+
         public AuditCheckSettings()
         {
             RootCauseIds = new List<int>();
