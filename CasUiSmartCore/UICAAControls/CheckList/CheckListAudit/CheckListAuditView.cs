@@ -180,7 +180,12 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 comments = item.AuditCheck.Settings.Comments;
 
                 if (item.AuditCheck.Settings.FATDate.HasValue)
+                {
                     fat = SmartCore.Auxiliary.Convert.GetDateFormat(item.AuditCheck.Settings.FATDate.Value);
+                    
+                    if((bool)item.Level?.CorrectiveAction.CalendarValue.HasValue)
+                        due = SmartCore.Auxiliary.Convert.GetDateFormat(item.AuditCheck.Settings.FATDate.Value.AddDays(item.Level.CorrectiveAction.CalendarValue.Value));
+                }
                 
                 if (item.AuditCheck.Settings.VOIDate.HasValue)
                     voi = SmartCore.Auxiliary.Convert.GetDateFormat(item.AuditCheck.Settings.VOIDate.Value);
