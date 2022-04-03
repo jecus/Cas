@@ -70,12 +70,12 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 $"Do you really want move to next status({WorkFlowStatus.GetItemById(_currentAuditCheck.Settings.WorkflowStatusId + 1)})?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (res == DialogResult.Yes)
             {
-                _currentAuditCheck.Settings.FromWorkflowStatusId = wf == WorkFlowStatus.Open ?WorkFlowStatus.Open.ItemId : wf.ItemId - 1;
-                _currentAuditCheck.Settings.WorkflowStatusId = wf.ItemId + 1;
+                _currentAuditCheck.Settings.FromWorkflowStatusId = _currentAuditCheck.Settings.WorkflowStatusId  == WorkFlowStatus.Open.ItemId ? WorkFlowStatus.Open.ItemId : wf.ItemId;
+                _currentAuditCheck.Settings.WorkflowStatusId =  _currentAuditCheck.Settings.WorkflowStatusId == WorkFlowStatus.Open.ItemId ? wf.ItemId :  wf.ItemId + 1;
 
-                if (_currentAuditCheck.Settings.FromWorkflowStatusId == WorkFlowStatus.VOI.ItemId)
+                if (_currentAuditCheck.Settings.WorkflowStatusId == WorkFlowStatus.VOI.ItemId)
                     _currentAuditCheck.Settings.VOIDate = DateTime.Now;
-                else if(_currentAuditCheck.Settings.FromWorkflowStatusId == WorkFlowStatus.FAT.ItemId)
+                else if(_currentAuditCheck.Settings.WorkflowStatusId == WorkFlowStatus.FAT.ItemId)
                     _currentAuditCheck.Settings.FATDate = DateTime.Now;
                 
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentAuditCheck);
@@ -139,9 +139,9 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 }
                 else
                 {
-                    if (_currentAuditCheck.Settings.FromWorkflowStatusId == WorkFlowStatus.VOI.ItemId)
+                    if (_currentAuditCheck.Settings.WorkflowStatusId == WorkFlowStatus.VOI.ItemId)
                         _currentAuditCheck.Settings.VOIDate = null;
-                    else if(_currentAuditCheck.Settings.FromWorkflowStatusId == WorkFlowStatus.FAT.ItemId)
+                    else if(_currentAuditCheck.Settings.WorkflowStatusId == WorkFlowStatus.FAT.ItemId)
                         _currentAuditCheck.Settings.FATDate = null;
                     
                     
