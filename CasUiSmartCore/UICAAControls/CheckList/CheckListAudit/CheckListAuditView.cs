@@ -231,7 +231,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                     CreateRow(fat, item.AuditCheck.Settings.FATDate),
                     CreateRow(voi, item.AuditCheck.Settings.VOIDate),
                     CreateRow(stage.ToString(), stage),
-                    CreateRow(stage.ToString(), stage),
                     CreateRow(status.ToString(), status),
                     
                     CreateRow(auditor, item.PelRecord?.Auditor),
