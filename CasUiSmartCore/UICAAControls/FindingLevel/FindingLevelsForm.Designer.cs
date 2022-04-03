@@ -293,7 +293,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
             this.lifelengthCorrective.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.lifelengthCorrective.CalendarApplicable = false;
             this.lifelengthCorrective.CyclesApplicable = false;
-            this.lifelengthCorrective.Enabled = false;
+            this.lifelengthCorrective.Enabled = true;
             this.lifelengthCorrective.EnabledCalendar = true;
             this.lifelengthCorrective.EnabledCycle = false;
             this.lifelengthCorrective.EnabledHours = false;
@@ -325,7 +325,8 @@ namespace CAS.UI.UICAAControls.FindingLevel
             this.lifelengthViewerFinal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.lifelengthViewerFinal.CalendarApplicable = false;
             this.lifelengthViewerFinal.CyclesApplicable = false;
-            this.lifelengthViewerFinal.Enabled = false;
+            this.lifelengthViewerFinal.Enabled = true;
+            this.lifelengthViewerFinal.ShowHeaders = false;
             this.lifelengthViewerFinal.EnabledCalendar = true;
             this.lifelengthViewerFinal.EnabledCycle = false;
             this.lifelengthViewerFinal.EnabledHours = false;
@@ -377,7 +378,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
             this.MaximizeBox = false;
             this.Name = "FindingLevelsForm";
             this.Resizable = false;
-            this.Text = "Add Standart Manual Form";
+            this.Text = "Finding Level Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AuditForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
