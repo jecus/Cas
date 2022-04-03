@@ -112,7 +112,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
             label4.AutoSize = true;
             label4.Font = new System.Drawing.Font("Verdana", 9F);
             label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label4.Location = new System.Drawing.Point(11, 290);
+            label4.Location = new System.Drawing.Point(11, 273);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(98, 14);
             label4.TabIndex = 335;
@@ -124,7 +124,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
             label5.AutoSize = true;
             label5.Font = new System.Drawing.Font("Verdana", 9F);
             label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label5.Location = new System.Drawing.Point(11, 317);
+            label5.Location = new System.Drawing.Point(11, 300);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(59, 14);
             label5.TabIndex = 337;
@@ -148,7 +148,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
             label7.AutoSize = true;
             label7.Font = new System.Drawing.Font("Verdana", 9F);
             label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            label7.Location = new System.Drawing.Point(11, 254);
+            label7.Location = new System.Drawing.Point(11, 238);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(83, 14);
             label7.TabIndex = 340;
@@ -203,7 +203,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(236, 365);
+            this.buttonOk.Location = new System.Drawing.Point(236, 338);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 330;
@@ -217,7 +217,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonCancel.Location = new System.Drawing.Point(317, 365);
+            this.buttonCancel.Location = new System.Drawing.Point(317, 338);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 33);
             this.buttonCancel.TabIndex = 329;
@@ -249,7 +249,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
             this.comboBoxProgramType.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.comboBoxProgramType.ForeColor = System.Drawing.Color.DimGray;
             this.comboBoxProgramType.FormattingEnabled = true;
-            this.comboBoxProgramType.Location = new System.Drawing.Point(140, 287);
+            this.comboBoxProgramType.Location = new System.Drawing.Point(140, 270);
             this.comboBoxProgramType.Name = "comboBoxProgramType";
             this.comboBoxProgramType.Size = new System.Drawing.Size(252, 22);
             this.comboBoxProgramType.TabIndex = 336;
@@ -271,7 +271,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
             this.metroTextBoxRemark.CustomButton.Visible = false;
             this.metroTextBoxRemark.ForeColor = System.Drawing.Color.DimGray;
             this.metroTextBoxRemark.Lines = new string[0];
-            this.metroTextBoxRemark.Location = new System.Drawing.Point(140, 315);
+            this.metroTextBoxRemark.Location = new System.Drawing.Point(140, 298);
             this.metroTextBoxRemark.MaxLength = 32767;
             this.metroTextBoxRemark.Multiline = true;
             this.metroTextBoxRemark.Name = "metroTextBoxRemark";
@@ -326,7 +326,6 @@ namespace CAS.UI.UICAAControls.FindingLevel
             this.lifelengthViewerFinal.CalendarApplicable = false;
             this.lifelengthViewerFinal.CyclesApplicable = false;
             this.lifelengthViewerFinal.Enabled = true;
-            this.lifelengthViewerFinal.ShowHeaders = false;
             this.lifelengthViewerFinal.EnabledCalendar = true;
             this.lifelengthViewerFinal.EnabledCycle = false;
             this.lifelengthViewerFinal.EnabledHours = false;
@@ -346,9 +345,10 @@ namespace CAS.UI.UICAAControls.FindingLevel
             this.lifelengthViewerFinal.ShowCalendar = true;
             this.lifelengthViewerFinal.ShowCalendarOnly = true;
             this.lifelengthViewerFinal.ShowFormattedCalendar = false;
+            this.lifelengthViewerFinal.ShowHeaders = false;
             this.lifelengthViewerFinal.ShowLeftHeader = false;
             this.lifelengthViewerFinal.ShowMinutes = true;
-            this.lifelengthViewerFinal.Size = new System.Drawing.Size(172, 52);
+            this.lifelengthViewerFinal.Size = new System.Drawing.Size(172, 35);
             this.lifelengthViewerFinal.SystemCalculated = true;
             this.lifelengthViewerFinal.TabIndex = 342;
             // 
@@ -356,7 +356,7 @@ namespace CAS.UI.UICAAControls.FindingLevel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 405);
+            this.ClientSize = new System.Drawing.Size(395, 378);
             this.Controls.Add(this.lifelengthViewerFinal);
             this.Controls.Add(this.lifelengthCorrective);
             this.Controls.Add(label7);
