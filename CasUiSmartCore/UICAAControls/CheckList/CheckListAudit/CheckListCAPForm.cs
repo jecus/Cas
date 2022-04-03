@@ -71,7 +71,7 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             if (res == DialogResult.Yes)
             {
                 _currentAuditCheck.Settings.FromWorkflowStatusId = wf == WorkFlowStatus.Open ?WorkFlowStatus.Open.ItemId : wf.ItemId - 1;
-                _currentAuditCheck.Settings.WorkflowStatusId = wf.ItemId;
+                _currentAuditCheck.Settings.WorkflowStatusId = wf.ItemId + 1;
 
                 if (_currentAuditCheck.Settings.FromWorkflowStatusId == WorkFlowStatus.VOI.ItemId)
                     _currentAuditCheck.Settings.VOIDate = DateTime.Now;

@@ -31,10 +31,11 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
                 label1label1.Visible = true;
                 metroTextBoxComment.Text = _currentAuditCheck.Settings.FatComments;
             }
+            else label1label1.Visible = false;
             
             if (_currentAuditCheck.WorkflowStatusId  == _workFlowStatus.ItemId)
                 checkBoxItem.Checked = true;
-            if (_currentAuditCheck.WorkflowStatusId +1  != _workFlowStatus.ItemId)
+            if (_currentAuditCheck.WorkflowStatusId   != _workFlowStatus.ItemId)
                 EnableControls(false);
         }
 

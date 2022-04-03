@@ -156,7 +156,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             // buttonAccept
             // 
             this.buttonAccept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAccept.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonAccept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonAccept.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonAccept.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -170,7 +169,6 @@ namespace CAS.UI.UICAAControls.CheckList.CheckListAudit
             // buttonReject
             // 
             this.buttonReject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonReject.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonReject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonReject.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonReject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
