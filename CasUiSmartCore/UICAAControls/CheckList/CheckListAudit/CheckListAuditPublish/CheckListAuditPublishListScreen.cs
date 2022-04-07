@@ -165,6 +165,37 @@ group by WorkflowStageId
 		            });
 	            }
             }
+
+
+            foreach (var i in _initialDocumentArray.OrderBy(i => i.WorkFlowStageId))
+            {
+	            if (i.WorkFlowStageId == WorkFlowStage.Evaluation.ItemId || 
+	                i.WorkFlowStageId == WorkFlowStage.RCA.ItemId ||
+	                i.WorkFlowStageId == WorkFlowStage.CAP.ItemId)
+	            {
+		            var res = ((double)(i.AllTask - i.TaskInProgress) / i.AllTask) * 100;
+		            i.Persent =  (int)Math.Round(res);
+	            }
+	            else if (i.WorkFlowStageId == WorkFlowStage.CAR.ItemId)
+	            {
+		            if (_type == CheckListAuditType.Admin)
+		            {
+			            var eval = _initialDocumentArray.FirstOrDefault(q => q.WorkFlowStageId == WorkFlowStage.Evaluation.ItemId);
+			            var res = ((double)(i.AllTask - (i.TaskInProgress + eval.TaskInProgress)) / i.AllTask) * 100;
+			            i.Persent =  (int)Math.Round(res);
+		            }
+		            else
+		            {
+			            var res = ((double)(i.AllTask - i.TaskInProgress) / i.AllTask) * 100;
+			            i.Persent =  (int)Math.Round(res);
+		            }
+	            }
+	            else if (i.WorkFlowStageId == WorkFlowStage.Closed.ItemId)
+	            {
+		            var res = (double)(i.TaskInProgress / i.AllTask) * 100;
+		            i.Persent =  (int)Math.Round(res);
+	            }
+            }
             
             
             _resultDocumentArray.AddRange(_initialDocumentArray.ToList());
