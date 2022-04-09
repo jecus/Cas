@@ -53,6 +53,17 @@ namespace CAS.UI.UICAAControls.CurrentOperator
             //_authContainer
             this._authContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
             
+            this._settingSMS = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
+            
+            
+            this._settingPersonnel = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
+            this.LinkPersonnelTraining = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            this.LinkAuditRiskManagment = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            this.LinkEvents = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            this.LinkEventsCategories = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            this.LinkEventsClasses = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            this.LinkEventsTypes = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            
             
             this._documentsReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
 			this.LinkRigestry = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -173,6 +184,8 @@ namespace CAS.UI.UICAAControls.CurrentOperator
             this.flowLayoutPanelExport.Controls.Add(this._adminContainer);
 			this.flowLayoutPanelExport.Controls.Add(this._settingContainer);
 			this.flowLayoutPanelExport.Controls.Add(this._settingQuality);
+			this.flowLayoutPanelExport.Controls.Add(this._settingSMS);
+			this.flowLayoutPanelExport.Controls.Add(this._settingPersonnel);
 #endif
 			this.flowLayoutPanelExport.Dock = System.Windows.Forms.DockStyle.Left;
 			this.flowLayoutPanelExport.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -253,9 +266,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 			this._settingContainer.ReferenceLink03 = null;
 			this._settingContainer.ReferenceLink04 = null;
 			this._settingContainer.ReferenceLink05 = this.LinkDepartments;
-			this._settingContainer.ReferenceLink06 = this.LinkSpecializations;
-			this._settingContainer.ReferenceLink07 = this.LinkNomenclatures;
-            this._settingContainer.ReferenceLink08 = null;
+			this._settingContainer.ReferenceLink08 = null;
 			this._settingContainer.ReferenceLink09 = null;
 			this._settingContainer.ReferenceLink10 = null;
 			this._settingContainer.ReferenceLink11 = null;
@@ -1829,6 +1840,224 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 			this._authContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
 			this._authContainer.Visible = true;
 			
+			// _settingSMS
+            // 
+            this._settingSMS.AutoSize = true;
+            this._settingSMS.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this._settingSMS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this._settingSMS.Caption = "Setting (SMS)";
+            this._settingSMS.DescriptionTextColor = System.Drawing.Color.DimGray;
+            this._settingSMS.Extended = true;
+            this._settingSMS.Location = new System.Drawing.Point(3, 232);
+            this._settingSMS.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this._settingSMS.Name = "_settingSMS";
+            this._settingSMS.ReferenceLink = LinkAuditRiskManagment;
+            this._settingSMS.ReferenceLink02 = LinkEvents;
+            this._settingSMS.ReferenceLink03 = LinkEventsCategories;
+            this._settingSMS.ReferenceLink04 = LinkEventsClasses;
+            this._settingSMS.ReferenceLink05 = LinkEventsTypes;
+            this._settingSMS.ReferenceLink06 = null;
+            this._settingSMS.ReferenceLink07 = null;
+            this._settingSMS.ReferenceLink08 = null;
+            this._settingSMS.ReferenceLink09 = null;
+            this._settingSMS.ReferenceLink10 = null;
+            this._settingSMS.ReferenceLink11 = null;
+            this._settingSMS.ReferenceLink12 = null;
+            this._settingSMS.ReferenceLink13 = null;
+            this._settingSMS.ReferenceLink14 = null;
+            this._settingSMS.ReferenceLink15 = null;
+            this._settingSMS.ReferenceLink16 = null;
+            this._settingSMS.Size = new System.Drawing.Size(105, 42);
+            this._settingSMS.TabIndex = 1;
+            this._settingSMS.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
+            this._settingSMS.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UserType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin;
+            
+            
+            // 
+            // LinkAuditRiskManagment
+            // 
+            this.LinkAuditRiskManagment.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkAuditRiskManagment.Displayer = null;
+            this.LinkAuditRiskManagment.DisplayerText = null;
+            this.LinkAuditRiskManagment.Entity = null;
+            this.LinkAuditRiskManagment.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LinkAuditRiskManagment.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkAuditRiskManagment.ImageBackColor = System.Drawing.Color.Transparent;
+            this.LinkAuditRiskManagment.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.LinkAuditRiskManagment.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkAuditRiskManagment.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+            this.LinkAuditRiskManagment.Location = new System.Drawing.Point(10, 0);
+            this.LinkAuditRiskManagment.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.LinkAuditRiskManagment.Name = "LinkAuditRiskManagment";
+            this.LinkAuditRiskManagment.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this.LinkAuditRiskManagment.Size = new System.Drawing.Size(188, 20);
+            this.LinkAuditRiskManagment.Status = AvControls.Statuses.Satisfactory;
+            this.LinkAuditRiskManagment.TabIndex = 16;
+            this.LinkAuditRiskManagment.Text = "Audit Risk Management";
+            this.LinkAuditRiskManagment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LinkAuditRiskManagment.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkAuditRiskManagment.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkAuditRiskManagmentRequested);
+            
+            // 
+            // LinkEvents
+            // 
+            this.LinkEvents.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEvents.Displayer = null;
+            this.LinkEvents.DisplayerText = null;
+            this.LinkEvents.Entity = null;
+            this.LinkEvents.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LinkEvents.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEvents.ImageBackColor = System.Drawing.Color.Transparent;
+            this.LinkEvents.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.LinkEvents.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEvents.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+            this.LinkEvents.Location = new System.Drawing.Point(10, 0);
+            this.LinkEvents.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.LinkEvents.Name = "LinkEvents";
+            this.LinkEvents.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this.LinkEvents.Size = new System.Drawing.Size(188, 20);
+            this.LinkEvents.Status = AvControls.Statuses.Satisfactory;
+            this.LinkEvents.TabIndex = 16;
+            this.LinkEvents.Text = "Events";
+            this.LinkEvents.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LinkEvents.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkEvents.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkEventsRequested);
+            
+            // 
+            // LinkEventsCategories
+            // 
+            this.LinkEventsCategories.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEventsCategories.Displayer = null;
+            this.LinkEventsCategories.DisplayerText = null;
+            this.LinkEventsCategories.Entity = null;
+            this.LinkEventsCategories.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LinkEventsCategories.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEventsCategories.ImageBackColor = System.Drawing.Color.Transparent;
+            this.LinkEventsCategories.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.LinkEventsCategories.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEventsCategories.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+            this.LinkEventsCategories.Location = new System.Drawing.Point(10, 0);
+            this.LinkEventsCategories.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.LinkEventsCategories.Name = "LinkEventsCategories";
+            this.LinkEventsCategories.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this.LinkEventsCategories.Size = new System.Drawing.Size(188, 20);
+            this.LinkEventsCategories.Status = AvControls.Statuses.Satisfactory;
+            this.LinkEventsCategories.TabIndex = 16;
+            this.LinkEventsCategories.Text = "Events Categories";
+            this.LinkEventsCategories.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LinkEventsCategories.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkEventsCategories.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkEventsCategoriesRequested);
+            
+            // 
+            // LinkEventsClasses
+            // 
+            this.LinkEventsClasses.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEventsClasses.Displayer = null;
+            this.LinkEventsClasses.DisplayerText = null;
+            this.LinkEventsClasses.Entity = null;
+            this.LinkEventsClasses.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LinkEventsClasses.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEventsClasses.ImageBackColor = System.Drawing.Color.Transparent;
+            this.LinkEventsClasses.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.LinkEventsClasses.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEventsClasses.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+            this.LinkEventsClasses.Location = new System.Drawing.Point(10, 0);
+            this.LinkEventsClasses.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.LinkEventsClasses.Name = "LinkEventsClasses";
+            this.LinkEventsClasses.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this.LinkEventsClasses.Size = new System.Drawing.Size(188, 20);
+            this.LinkEventsClasses.Status = AvControls.Statuses.Satisfactory;
+            this.LinkEventsClasses.TabIndex = 16;
+            this.LinkEventsClasses.Text = "Events Classes";
+            this.LinkEventsClasses.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LinkEventsClasses.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkEventsClasses.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkEventsClassesRequested);
+            
+             // 
+            // LinkEventsTypes
+            // 
+            this.LinkEventsTypes.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEventsTypes.Displayer = null;
+            this.LinkEventsTypes.DisplayerText = null;
+            this.LinkEventsTypes.Entity = null;
+            this.LinkEventsTypes.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LinkEventsTypes.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEventsTypes.ImageBackColor = System.Drawing.Color.Transparent;
+            this.LinkEventsTypes.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.LinkEventsTypes.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEventsTypes.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+            this.LinkEventsTypes.Location = new System.Drawing.Point(10, 0);
+            this.LinkEventsTypes.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.LinkEventsTypes.Name = "LinkEventsTypes";
+            this.LinkEventsTypes.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this.LinkEventsTypes.Size = new System.Drawing.Size(188, 20);
+            this.LinkEventsTypes.Status = AvControls.Statuses.Satisfactory;
+            this.LinkEventsTypes.TabIndex = 16;
+            this.LinkEventsTypes.Text = "Events Types";
+            this.LinkEventsTypes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LinkEventsTypes.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkEventsTypes.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkEventsTypesRequested);
+            
+            
+            
+            // _settingPersonnel
+            // 
+            this._settingPersonnel.AutoSize = true;
+            this._settingPersonnel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this._settingPersonnel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this._settingPersonnel.Caption = "Setting (Personnel)";
+            this._settingPersonnel.DescriptionTextColor = System.Drawing.Color.DimGray;
+            this._settingPersonnel.Extended = true;
+            this._settingPersonnel.Location = new System.Drawing.Point(3, 232);
+            this._settingPersonnel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this._settingPersonnel.Name = "_settingPersonnel";
+            this._settingPersonnel.ReferenceLink = this.LinkPersonnelTraining;
+            this._settingPersonnel.ReferenceLink02 = this.LinkSpecializations;
+            this._settingPersonnel.ReferenceLink03 = this.LinkNomenclatures;
+            this._settingPersonnel.ReferenceLink04 = null;
+            this._settingPersonnel.ReferenceLink05 = null;
+            this._settingPersonnel.ReferenceLink06 = null;
+            this._settingPersonnel.ReferenceLink07 = null;
+            this._settingPersonnel.ReferenceLink08 = null;
+            this._settingPersonnel.ReferenceLink09 = null;
+            this._settingPersonnel.ReferenceLink10 = null;
+            this._settingPersonnel.ReferenceLink11 = null;
+            this._settingPersonnel.ReferenceLink12 = null;
+            this._settingPersonnel.ReferenceLink13 = null;
+            this._settingPersonnel.ReferenceLink14 = null;
+            this._settingPersonnel.ReferenceLink15 = null;
+            this._settingPersonnel.ReferenceLink16 = null;
+            this._settingPersonnel.Size = new System.Drawing.Size(105, 42);
+            this._settingPersonnel.TabIndex = 1;
+            this._settingPersonnel.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
+            this._settingPersonnel.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UserType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin;
+            
+             // 
+            // LinkPersonnelTraining
+            // 
+            this.LinkPersonnelTraining.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkPersonnelTraining.Displayer = null;
+            this.LinkPersonnelTraining.DisplayerText = null;
+            this.LinkPersonnelTraining.Entity = null;
+            this.LinkPersonnelTraining.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LinkPersonnelTraining.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkPersonnelTraining.ImageBackColor = System.Drawing.Color.Transparent;
+            this.LinkPersonnelTraining.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.LinkPersonnelTraining.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkPersonnelTraining.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+            this.LinkPersonnelTraining.Location = new System.Drawing.Point(10, 0);
+            this.LinkPersonnelTraining.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.LinkPersonnelTraining.Name = "LinkPersonnelTraining";
+            this.LinkPersonnelTraining.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this.LinkPersonnelTraining.Size = new System.Drawing.Size(188, 20);
+            this.LinkPersonnelTraining.Status = AvControls.Statuses.Satisfactory;
+            this.LinkPersonnelTraining.TabIndex = 16;
+            this.LinkPersonnelTraining.Text = "Personnel Training";
+            this.LinkPersonnelTraining.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LinkPersonnelTraining.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkPersonnelTraining.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkPersonnelTrainingRequested);
+
+			
 
             // 
 			// OperatorSymmaryDemoScreen
@@ -1889,6 +2118,17 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         private Management.Dispatchering.ReferenceStatusImageLinkLabel EventsLink;
         
         private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _authContainer;
+        
+        
+        private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _settingSMS;
+        private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _settingPersonnel;
+		
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPersonnelTraining;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkAuditRiskManagment;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEvents;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEventsCategories;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEventsClasses;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEventsTypes;
         
         
         

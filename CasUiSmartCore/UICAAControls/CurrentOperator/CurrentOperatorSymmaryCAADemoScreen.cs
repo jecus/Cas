@@ -282,6 +282,37 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         {
 	        e.Cancel = true;
         }
+        
+        
+        private void LinkPersonnelTrainingRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
+
+        private void LinkAuditRiskManagmentRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
+
+        private void LinkEventsRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
+        
+        private void LinkEventsCategoriesRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
+        
+        private void LinkEventsClassesRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
+        
+        private void LinkEventsTypesRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
 	}
 }
 

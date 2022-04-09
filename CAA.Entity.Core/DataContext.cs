@@ -44,6 +44,13 @@ namespace CAA.Entity.Core
 
         #region dbo
 
+        public DbSet<CAAEventDTO> CAAEventDto { get; set; }
+        public DbSet<CAAEventConditionDTO> CAAEventConditionDto { get; set; }
+        public DbSet<CAAEventCategorieDTO> CAAEventCategorieDto { get; set; }
+        public DbSet<CAAEventClassDTO> CAAEventClassDto { get; set; }
+        public DbSet<CAASmsEventTypeDTO> CAASmsEventTypeDto { get; set; }
+        public DbSet<CAAEventTypeRiskLevelChangeRecordDTO> CAAEventTypeRiskLevelChangeRecordDto { get; set; }
+        
         public DbSet<CAAAircraftDTO> AircraftDtos { get; set; }
         public DbSet<CAAAuditDTO> CAAAuditDtos { get; set; }
         public DbSet<AuditPelRecordDTO> AuditPelRecordDtos { get; set; }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
-using Newtonsoft.Json;
 
 namespace CAA.Entity.Models.DTO
 {

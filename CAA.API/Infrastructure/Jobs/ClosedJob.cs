@@ -41,14 +41,7 @@ namespace CAA.API.Infrastructure.Jobs
                         .Where(i => !i.IsDeleted && i.Status == RoutineStatus.Published)
                         .ToListAsync();
 
-                    if (!audits.Any())
-                    {
-                        var now = DateTime.Now;
-                        var tomorrow = now.AddDays(1);
-                        var durationUntilMidnight = tomorrow.Date - now;
-                        Thread.Sleep(durationUntilMidnight);
-                    }
-                    else
+                    if (audits.Any())
                     {
                         foreach (var audit in audits)
                         {
@@ -96,6 +89,11 @@ namespace CAA.API.Infrastructure.Jobs
                             }
                         }
                     }
+                    
+                    var now = DateTime.Now;
+                    var tomorrow = now.AddDays(1);
+                    var durationUntilMidnight = tomorrow.Date - now;
+                    Thread.Sleep(durationUntilMidnight);
 
 
                 }
