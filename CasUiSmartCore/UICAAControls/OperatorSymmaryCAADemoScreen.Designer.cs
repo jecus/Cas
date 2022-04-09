@@ -42,6 +42,26 @@ namespace CAS.UI.UICAAControls
             _operators = new AllOperatorsDemoCollectionControl();
             _aircrafts = new AllAircraftsDemoCollectionControl();
             this._documentsReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
+            
+            //_occurenceReferenceReportContainer
+            this._occurenceReferenceReportContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
+            this.OccurenceReReport = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            //_directiveContainer
+            this._directiveContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
+            this.DirectiveLink = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            //_occurenceReferenceReportContainer
+            this._concessionRequestContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
+            this.ConcessionRequestLink = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            //_smdContainer
+            this._smsContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
+            this.EventsLink = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            //_authContainer
+            this._authContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
+
+            
+            
+            
+            
 			this.LinkRigestry = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.ExportMonthly = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
 			this.Users = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -134,6 +154,11 @@ namespace CAS.UI.UICAAControls
 			this.flowLayoutPanelReferences.Controls.Add(this._documentsReferenceContainer);
             this.flowLayoutPanelReferences.Controls.Add(this._personnelReferenceContainer);
             this.flowLayoutPanelReferences.Controls.Add(this._qualityAssuranceReferenceContainer);
+            this.flowLayoutPanelReferences.Controls.Add(this._occurenceReferenceReportContainer);
+            this.flowLayoutPanelReferences.Controls.Add(this._directiveContainer);
+            this.flowLayoutPanelReferences.Controls.Add(this._concessionRequestContainer);
+            this.flowLayoutPanelReferences.Controls.Add(this._smsContainer);
+            this.flowLayoutPanelReferences.Controls.Add(this._authContainer);
 
             this.flowLayoutPanelReferences.AutoScroll = true;
 			this.flowLayoutPanelReferences.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
@@ -1601,6 +1626,275 @@ namespace CAS.UI.UICAAControls
             this._aircrafts.Name = "_operators";
             this._aircrafts.Size = new System.Drawing.Size(362, 168);
             this._aircrafts.TabIndex = 25;
+            
+            // 
+			// _occurenceReferenceReportContainer
+			// 
+			this._occurenceReferenceReportContainer.AutoSize = true;
+			this._occurenceReferenceReportContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this._occurenceReferenceReportContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this._occurenceReferenceReportContainer.Caption = "Occurrence Report";
+			this._occurenceReferenceReportContainer.DescriptionTextColor = System.Drawing.Color.DimGray;
+			this._occurenceReferenceReportContainer.Extended = false;
+			this._occurenceReferenceReportContainer.Location = new System.Drawing.Point(3, 232);
+			this._occurenceReferenceReportContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this._occurenceReferenceReportContainer.Name = "_occurenceReferenceReportContainer";
+			this._occurenceReferenceReportContainer.ReferenceLink = this.OccurenceReReport;
+			this._documentsReferenceContainer.ReferenceLink02 = null;
+			this._occurenceReferenceReportContainer.ReferenceLink03 = null;
+			this._occurenceReferenceReportContainer.ReferenceLink04 = null;
+			this._occurenceReferenceReportContainer.ReferenceLink05 = null;
+			this._occurenceReferenceReportContainer.ReferenceLink06 = null;
+			this._occurenceReferenceReportContainer.ReferenceLink07 = null;
+			this._occurenceReferenceReportContainer.ReferenceLink08 = null;
+			this._occurenceReferenceReportContainer.ReferenceLink09 = null;
+			this._occurenceReferenceReportContainer.ReferenceLink10 = null;
+			this._occurenceReferenceReportContainer.ReferenceLink11 = null;
+			this._occurenceReferenceReportContainer.ReferenceLink12 = null;
+			this._occurenceReferenceReportContainer.ReferenceLink13 = null;
+			this._occurenceReferenceReportContainer.ReferenceLink14 = null;
+			this._occurenceReferenceReportContainer.ReferenceLink15 = null;
+			this._occurenceReferenceReportContainer.ReferenceLink16 = null;
+			this._occurenceReferenceReportContainer.Size = new System.Drawing.Size(105, 42);
+			this._occurenceReferenceReportContainer.TabIndex = 1;
+			this._occurenceReferenceReportContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
+			this._occurenceReferenceReportContainer.Visible = true;
+			
+			// 
+			// OccurenceReReport
+			// 
+			this.OccurenceReReport.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.OccurenceReReport.Displayer = null;
+			this.OccurenceReReport.DisplayerText = null;
+			this.OccurenceReReport.Entity = null;
+			this.OccurenceReReport.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.OccurenceReReport.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.OccurenceReReport.ImageBackColor = System.Drawing.Color.Transparent;
+			this.OccurenceReReport.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.OccurenceReReport.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.OccurenceReReport.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.OccurenceReReport.Location = new System.Drawing.Point(10, 0);
+			this.OccurenceReReport.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.OccurenceReReport.Name = "LinkCheckList";
+			this.OccurenceReReport.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.OccurenceReReport.Size = new System.Drawing.Size(188, 20);
+			this.OccurenceReReport.Status = AvControls.Statuses.Satisfactory;
+			this.OccurenceReReport.TabIndex = 16;
+			this.OccurenceReReport.Text = "Occurrence Report";
+			this.OccurenceReReport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.OccurenceReReport.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.OccurenceReReport.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkOccurenceReReportRequested);
+			
+			
+			// 
+			// _directiveContainer
+			// 
+			this._directiveContainer.AutoSize = true;
+			this._directiveContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this._directiveContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this._directiveContainer.Caption = "Directives";
+			this._directiveContainer.DescriptionTextColor = System.Drawing.Color.DimGray;
+			this._directiveContainer.Extended = false;
+			this._directiveContainer.Location = new System.Drawing.Point(3, 232);
+			this._directiveContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this._directiveContainer.Name = "_directiveContainer";
+			this._directiveContainer.ReferenceLink = this.DirectiveLink;
+			this._directiveContainer.ReferenceLink02 = null;
+			this._directiveContainer.ReferenceLink03 = null;
+			this._directiveContainer.ReferenceLink04 = null;
+			this._directiveContainer.ReferenceLink05 = null;
+			this._directiveContainer.ReferenceLink06 = null;
+			this._directiveContainer.ReferenceLink07 = null;
+			this._directiveContainer.ReferenceLink08 = null;
+			this._directiveContainer.ReferenceLink09 = null;
+			this._directiveContainer.ReferenceLink10 = null;
+			this._directiveContainer.ReferenceLink11 = null;
+			this._directiveContainer.ReferenceLink12 = null;
+			this._directiveContainer.ReferenceLink13 = null;
+			this._directiveContainer.ReferenceLink14 = null;
+			this._directiveContainer.ReferenceLink15 = null;
+			this._directiveContainer.ReferenceLink16 = null;
+			this._directiveContainer.Size = new System.Drawing.Size(105, 42);
+			this._directiveContainer.TabIndex = 1;
+			this._directiveContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
+			this._directiveContainer.Visible = true;
+			
+			// 
+			// _directiveContainer
+			// 
+			this.DirectiveLink.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.DirectiveLink.Displayer = null;
+			this.DirectiveLink.DisplayerText = null;
+			this.DirectiveLink.Entity = null;
+			this.DirectiveLink.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.DirectiveLink.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.DirectiveLink.ImageBackColor = System.Drawing.Color.Transparent;
+			this.DirectiveLink.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.DirectiveLink.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.DirectiveLink.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.DirectiveLink.Location = new System.Drawing.Point(10, 0);
+			this.DirectiveLink.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.DirectiveLink.Name = "LinkCheckList";
+			this.DirectiveLink.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.DirectiveLink.Size = new System.Drawing.Size(188, 20);
+			this.DirectiveLink.Status = AvControls.Statuses.Satisfactory;
+			this.DirectiveLink.TabIndex = 16;
+			this.DirectiveLink.Text = "Directives";
+			this.DirectiveLink.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.DirectiveLink.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.DirectiveLink.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkDirectiveLinkRequested);
+			
+			
+			// 
+			// _concessionRequestContainer
+			// 
+			this._concessionRequestContainer.AutoSize = true;
+			this._concessionRequestContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this._concessionRequestContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this._concessionRequestContainer.Caption = "Concession Reques";
+			this._concessionRequestContainer.DescriptionTextColor = System.Drawing.Color.DimGray;
+			this._concessionRequestContainer.Extended = false;
+			this._concessionRequestContainer.Location = new System.Drawing.Point(3, 232);
+			this._concessionRequestContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this._concessionRequestContainer.Name = "_concessionRequestContainer";
+			this._concessionRequestContainer.ReferenceLink = this.ConcessionRequestLink;
+			this._concessionRequestContainer.ReferenceLink02 = null;
+			this._concessionRequestContainer.ReferenceLink03 = null;
+			this._concessionRequestContainer.ReferenceLink04 = null;
+			this._concessionRequestContainer.ReferenceLink05 = null;
+			this._concessionRequestContainer.ReferenceLink06 = null;
+			this._concessionRequestContainer.ReferenceLink07 = null;
+			this._concessionRequestContainer.ReferenceLink08 = null;
+			this._concessionRequestContainer.ReferenceLink09 = null;
+			this._concessionRequestContainer.ReferenceLink10 = null;
+			this._concessionRequestContainer.ReferenceLink11 = null;
+			this._concessionRequestContainer.ReferenceLink12 = null;
+			this._concessionRequestContainer.ReferenceLink13 = null;
+			this._concessionRequestContainer.ReferenceLink14 = null;
+			this._concessionRequestContainer.ReferenceLink15 = null;
+			this._concessionRequestContainer.ReferenceLink16 = null;
+			this._concessionRequestContainer.Size = new System.Drawing.Size(105, 42);
+			this._concessionRequestContainer.TabIndex = 1;
+			this._concessionRequestContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
+			this._concessionRequestContainer.Visible = true;
+			
+			// 
+			// ConcessionRequestLink
+			// 
+			this.ConcessionRequestLink.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.ConcessionRequestLink.Displayer = null;
+			this.ConcessionRequestLink.DisplayerText = null;
+			this.ConcessionRequestLink.Entity = null;
+			this.ConcessionRequestLink.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.ConcessionRequestLink.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.ConcessionRequestLink.ImageBackColor = System.Drawing.Color.Transparent;
+			this.ConcessionRequestLink.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.ConcessionRequestLink.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.ConcessionRequestLink.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.ConcessionRequestLink.Location = new System.Drawing.Point(10, 0);
+			this.ConcessionRequestLink.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.ConcessionRequestLink.Name = "LinkCheckList";
+			this.ConcessionRequestLink.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.ConcessionRequestLink.Size = new System.Drawing.Size(188, 20);
+			this.ConcessionRequestLink.Status = AvControls.Statuses.Satisfactory;
+			this.ConcessionRequestLink.TabIndex = 16;
+			this.ConcessionRequestLink.Text = "Concession Request";
+			this.ConcessionRequestLink.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.ConcessionRequestLink.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.ConcessionRequestLink.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkConcessionRequestLinkRequested);
+			
+			
+			// 
+			// _smdContainer
+			// 
+			this._smsContainer.AutoSize = true;
+			this._smsContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this._smsContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this._smsContainer.Caption = "SMS";
+			this._smsContainer.DescriptionTextColor = System.Drawing.Color.DimGray;
+			this._smsContainer.Extended = false;
+			this._smsContainer.Location = new System.Drawing.Point(3, 232);
+			this._smsContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this._smsContainer.Name = "_smdContainer";
+			this._smsContainer.ReferenceLink = this.EventsLink;
+			this._smsContainer.ReferenceLink02 = null;
+			this._smsContainer.ReferenceLink03 = null;
+			this._smsContainer.ReferenceLink04 = null;
+			this._smsContainer.ReferenceLink05 = null;
+			this._smsContainer.ReferenceLink06 = null;
+			this._smsContainer.ReferenceLink07 = null;
+			this._smsContainer.ReferenceLink08 = null;
+			this._smsContainer.ReferenceLink09 = null;
+			this._smsContainer.ReferenceLink10 = null;
+			this._smsContainer.ReferenceLink11 = null;
+			this._smsContainer.ReferenceLink12 = null;
+			this._smsContainer.ReferenceLink13 = null;
+			this._smsContainer.ReferenceLink14 = null;
+			this._smsContainer.ReferenceLink15 = null;
+			this._smsContainer.ReferenceLink16 = null;
+			this._smsContainer.Size = new System.Drawing.Size(105, 42);
+			this._smsContainer.TabIndex = 1;
+			this._smsContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
+			this._smsContainer.Visible = true;
+			
+			// 
+			// EventsLink
+			// 
+			this.EventsLink.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.EventsLink.Displayer = null;
+			this.EventsLink.DisplayerText = null;
+			this.EventsLink.Entity = null;
+			this.EventsLink.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.EventsLink.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.EventsLink.ImageBackColor = System.Drawing.Color.Transparent;
+			this.EventsLink.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.EventsLink.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.EventsLink.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.EventsLink.Location = new System.Drawing.Point(10, 0);
+			this.EventsLink.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.EventsLink.Name = "LinkCheckList";
+			this.EventsLink.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.EventsLink.Size = new System.Drawing.Size(188, 20);
+			this.EventsLink.Status = AvControls.Statuses.Satisfactory;
+			this.EventsLink.TabIndex = 16;
+			this.EventsLink.Text = "Events";
+			this.EventsLink.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.EventsLink.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.EventsLink.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.EventsLinkRequested);
+			
+			// 
+			// _authContainer
+			// 
+			this._authContainer.AutoSize = true;
+			this._authContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this._authContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this._authContainer.Caption = "Authorization";
+			this._authContainer.DescriptionTextColor = System.Drawing.Color.DimGray;
+			this._authContainer.Extended = false;
+			this._authContainer.Location = new System.Drawing.Point(3, 232);
+			this._authContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this._authContainer.Name = "_smdContainer";
+			this._authContainer.ReferenceLink = null;
+			this._authContainer.ReferenceLink02 = null;
+			this._authContainer.ReferenceLink03 = null;
+			this._authContainer.ReferenceLink04 = null;
+			this._authContainer.ReferenceLink05 = null;
+			this._authContainer.ReferenceLink06 = null;
+			this._authContainer.ReferenceLink07 = null;
+			this._authContainer.ReferenceLink08 = null;
+			this._authContainer.ReferenceLink09 = null;
+			this._authContainer.ReferenceLink10 = null;
+			this._authContainer.ReferenceLink11 = null;
+			this._authContainer.ReferenceLink12 = null;
+			this._authContainer.ReferenceLink13 = null;
+			this._authContainer.ReferenceLink14 = null;
+			this._authContainer.ReferenceLink15 = null;
+			this._authContainer.ReferenceLink16 = null;
+			this._authContainer.Size = new System.Drawing.Size(105, 42);
+			this._authContainer.TabIndex = 1;
+			this._authContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
+			this._authContainer.Visible = true;
+			
 
 			// 
 			// OperatorSymmaryDemoScreen
@@ -1627,6 +1921,9 @@ namespace CAS.UI.UICAAControls
 			this.flowLayoutPanelStores.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
+			
+			
+			
 
 		}
 
@@ -1647,6 +1944,24 @@ namespace CAS.UI.UICAAControls
 		private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _settingQuality;
         private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _certificationReferenceContainer;
         private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _oversightReferenceContainer;
+        
+        
+        private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _occurenceReferenceReportContainer;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel OccurenceReReport;
+        
+        private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _directiveContainer;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel DirectiveLink;
+        
+        private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _concessionRequestContainer;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel ConcessionRequestLink;
+        
+        private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _smsContainer;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel EventsLink;
+        
+        private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _authContainer;
+        
+        
+        
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRigestry;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel ExportMonthly;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel Users;

@@ -258,6 +258,26 @@ namespace CAS.UI.UICAAControls
 	        e.DisplayerText = "Audit Management";
 	        e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1,AuditType.All, CheckListAuditType.Admin, true);
         }
+
+        private void LinkOccurenceReReportRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
+
+        private void LinkConcessionRequestLinkRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
+
+        private void EventsLinkRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
+
+        private void LinkDirectiveLinkRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
 	}
 }
 
