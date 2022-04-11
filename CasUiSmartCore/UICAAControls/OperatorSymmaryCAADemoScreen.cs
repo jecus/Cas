@@ -294,7 +294,8 @@ namespace CAS.UI.UICAAControls
 
         private void LinkEventsRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Events";
+	        e.RequestedEntity = new CAAEventsListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
         }
         
         private void LinkEventsCategoriesRequested(object sender, ReferenceEventArgs e)

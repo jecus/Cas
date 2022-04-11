@@ -21,6 +21,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.CAA;
 using CAS.UI.UIControls.PersonnelControls;
+using CAS.UI.UIControls.SMSControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA;
@@ -298,7 +299,8 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkEventsRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText =  "Events";
+	        e.RequestedEntity = new CAAEventsListScreen(_getOperator(), _currentOperator.ItemId);
         }
         
         private void LinkEventsCategoriesRequested(object sender, ReferenceEventArgs e)

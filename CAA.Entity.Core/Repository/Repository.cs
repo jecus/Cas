@@ -463,11 +463,11 @@ namespace CAA.Entity.Core.Repository
             // 	return query.IncludeFilter(l);
             // }
             //
-            // if (typeCollection.Contains("EventConditionDTO"))
-            // {
-            // 	var l = Expression.Lambda<Func<T, IEnumerable<EventConditionDTO>>>(lambda.Body, lambda.Parameters);
-            // 	return query.IncludeFilter(l);
-            // }
+            if (typeCollection.Contains("EventConditionDTO"))
+            {
+            	var l = Expression.Lambda<Func<T, IEnumerable<CAAEventConditionDTO>>>(lambda.Body, lambda.Parameters);
+            	return query.IncludeFilter(l);
+            }
             //
             if (typeCollection.Contains("DocumentDTO"))
             {
@@ -707,12 +707,12 @@ namespace CAA.Entity.Core.Repository
             //              return query.IncludeFilter(l);
             // }
             //
-            //          if (typeCollection.Contains("EventConditionDTO"))
-            //          {
-            //              var l = Expression.Lambda<Func<T, IEnumerable<EventConditionDTO>>>(lambda.Body, lambda.Parameters);
-            //              return query.IncludeFilter(l);
-            // }
-            //
+            if (typeCollection.Contains("EventConditionDTO"))
+            {
+	            var l = Expression.Lambda<Func<T, IEnumerable<CAAEventConditionDTO>>>(lambda.Body, lambda.Parameters);
+	            return query.IncludeFilter(l);
+            }
+
             if (typeCollection.Contains("DocumentDTO"))
             {
                 var l = Expression.Lambda<Func<T, IEnumerable<CAADocumentDTO>>>(lambda.Body, lambda.Parameters);
