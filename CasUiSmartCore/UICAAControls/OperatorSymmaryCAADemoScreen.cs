@@ -11,6 +11,7 @@ using CAS.UI.UICAAControls.Audit;
 using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UICAAControls.CheckList.CheckListAudit;
 using CAS.UI.UICAAControls.Document;
+using CAS.UI.UICAAControls.Event;
 using CAS.UI.UICAAControls.FindingLevel;
 using CAS.UI.UICAAControls.Operators;
 using CAS.UI.UICAAControls.RoutineAudit;
@@ -21,6 +22,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.CAA;
 using CAS.UI.UIControls.PersonnelControls;
+using CAS.UI.UIControls.SMSControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA;
@@ -315,7 +317,8 @@ namespace CAS.UI.UICAAControls
         
         private void LinkEventsTypesRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Events Types";
+	        e.RequestedEntity = new CAAEventTypesListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
         }
 	}
 }

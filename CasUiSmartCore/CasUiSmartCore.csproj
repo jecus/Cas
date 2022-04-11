@@ -1118,6 +1118,30 @@
     <Compile Include="UICAAControls\Document\CAADocumentationListScreen.Designer.cs">
       <DependentUpon>CAADocumentationListScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\Event\CAAEventTypesListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Event\CAAEventTypesListScreen.Designer.cs">
+      <DependentUpon>CAAEventTypesListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\Event\CAAEventTypesListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Event\CAAEventTypesListView.Designer.cs">
+      <DependentUpon>CAAEventTypesListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\Event\CAASmsEventTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Event\CAASmsEventTypeForm.Designer.cs">
+      <DependentUpon>CAASmsEventTypeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\Event\CAASmsConditionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Event\CAASmsConditionControl.Designer.cs">
+      <DependentUpon>CAASmsConditionControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\FindingLevel\FindingLevelslListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4555,6 +4579,16 @@
     <EmbeddedResource Include="UICAAControls\Document\CAADocumentationListScreen.resx">
       <DependentUpon>CAADocumentationListScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\Event\CAAEventTypesListScreen.resx">
+      <DependentUpon>CAAEventTypesListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\Event\CAASmsEventTypeForm.resx">
+      <DependentUpon>CAASmsEventTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\Event\CAASmsConditionControl.resx">
+      <DependentUpon>CAASmsConditionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\FindingLevel\FindingLevelslListScreen.resx">
       <DependentUpon>FindingLevelslListScreen.cs</DependentUpon>

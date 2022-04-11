@@ -106,7 +106,7 @@ namespace SmartCore.CAA.Event
 		[FormControl(150, "Category", Enabled = false)]
 		[ListViewData(0.15f, "Category", 3)]
 		[NotNull]
-		public EventCategory EventCategory
+		public CAAEventCategory EventCategory
 		{
 			get { return LastChange != null ? LastChange.EventCategory : null; }
 		}
@@ -120,7 +120,7 @@ namespace SmartCore.CAA.Event
 		[FormControl(150, "Class", Enabled = false)]
 		[ListViewData(0.15f, "Class", 4)]
 		[NotNull]
-		public EventClass EventClass
+		public CAAEventClass EventClass
 		{
 			get { return LastChange != null ? LastChange.EventClass : null; }
 		}
@@ -179,12 +179,12 @@ namespace SmartCore.CAA.Event
 
 		#region public CommonCollection<EventCondition> EventConditions { get; private set; }
 
-		private CommonCollection<EventCondition> _eventConditions;
+		private CommonCollection<CAAEventCondition> _eventConditions;
 		/// <summary>
 		/// Условия возникновения события
 		/// </summary>
 		[Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 11)]
-		public CommonCollection<EventCondition> EventConditions
+		public CommonCollection<CAAEventCondition> EventConditions
 		{
 			get { return _eventConditions; }
 			internal set { _eventConditions = value; }
@@ -205,12 +205,12 @@ namespace SmartCore.CAA.Event
 
 		#region public BaseRecordCollection<EventTypeRiskLevelChangeRecord> ChangeRecords { get; private set; }
 
-		private BaseRecordCollection<EventTypeRiskLevelChangeRecord> _changeRecords;
+		private BaseRecordCollection<CAAEventTypeRiskLevelChangeRecord> _changeRecords;
 		/// <summary>
 		/// Коллекция содержит все записи о выполнении директивы
 		/// </summary>
 		[Child(RelationType.OneToMany, "ParentId", "ParentEventType")]
-		public BaseRecordCollection<EventTypeRiskLevelChangeRecord> ChangeRecords
+		public BaseRecordCollection<CAAEventTypeRiskLevelChangeRecord> ChangeRecords
 		{
 			get { return _changeRecords; }
 			internal set
@@ -230,7 +230,7 @@ namespace SmartCore.CAA.Event
 		/// <summary>
 		/// Последнее выполнение 
 		/// </summary>
-		public EventTypeRiskLevelChangeRecord LastChange { get { return _changeRecords.GetLast(); } }
+		public CAAEventTypeRiskLevelChangeRecord LastChange { get { return _changeRecords.GetLast(); } }
 
 		public int OperatorId { get; set; }
 
@@ -282,8 +282,8 @@ namespace SmartCore.CAA.Event
 			ItemId = -1;
 			_fullName = "";
 			_description = "";
-			_changeRecords = new BaseRecordCollection<EventTypeRiskLevelChangeRecord>();
-			_eventConditions = new CommonCollection<EventCondition>();
+			_changeRecords = new BaseRecordCollection<CAAEventTypeRiskLevelChangeRecord>();
+			_eventConditions = new CommonCollection<CAAEventCondition>();
 		}
 		#endregion
 
