@@ -97,6 +97,35 @@ namespace CAA.Entity.Core
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CAAEventDTO>()
+                .HasOne(i => i.EventType)
+                .WithMany(i => i.EventDtos)
+                .HasForeignKey(i => i.EventTypeId);
+            modelBuilder.Entity<CAAEventDTO>()
+                .HasOne(i => i.EventCategory)
+                .WithMany(i => i.EventDtos)
+                .HasForeignKey(i => i.EventCategoryId);
+            modelBuilder.Entity<CAAEventDTO>()
+                .HasOne(i => i.EventClass)
+                .WithMany(i => i.EventDtos)
+                .HasForeignKey(i => i.EventClassId);
+            modelBuilder.Entity<CAAEventDTO>()
+                .HasMany(i => i.EventConditions).WithOne(i => i.Event).HasForeignKey(i => i.ParentId);
+
+            modelBuilder.Entity<CAAEventTypeRiskLevelChangeRecordDTO>()
+                .HasOne(i => i.EventCategory)
+                .WithMany(i => i.ChangeRecordDtos)
+                .HasForeignKey(i => i.EventCategoryId);
+            modelBuilder.Entity<CAAEventTypeRiskLevelChangeRecordDTO>()
+                .HasOne(i => i.EventClass)
+                .WithMany(i => i.ChangeRecordDtos)
+                .HasForeignKey(i => i.EventClassId);
+            modelBuilder.Entity<CAAEventTypeRiskLevelChangeRecordDTO>()
+                .HasOne(i => i.ParentEventType)
+                .WithMany(i => i.ChangeRecordDtos)
+                .HasForeignKey(i => i.ParentId);
+            
+            
             modelBuilder.Entity<CheckListRecordDTO>()
                 .HasOne(i => i.CheckList)
                 .WithMany(i => i.CheckListRecords)
