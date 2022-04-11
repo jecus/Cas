@@ -6,6 +6,7 @@ using SmartCore.Auxiliary;
 using SmartCore.CAA;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
+using SmartCore.CAA.Event;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.CAA.PEL;
 using SmartCore.CAA.RoutineAudits;
@@ -17,6 +18,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Personnel;
+using SmartCore.Entities.General.SMS;
 using SmartCore.Files;
 using SmartCore.Purchase;
 
@@ -24,6 +26,239 @@ namespace SmartCore.DtoHelper
 {
     public static  class CaaGeneralConverterDTO
 	{
+		public static CAASmsEventTypeDTO ConvertCAA(this CAASmsEventType smsevent)
+		{
+			return new CAASmsEventTypeDTO
+			{
+				ItemId = smsevent.ItemId,
+				IsDeleted = smsevent.IsDeleted,
+				Updated = smsevent.Updated,
+				OperatorId = smsevent.OperatorId,
+				CorrectorId = smsevent.CorrectorId,
+				FullName = smsevent.FullName,
+				Description = smsevent.Description
+			};
+		}
+
+		public static CAASmsEventType ConvertCAA(this CAASmsEventTypeDTO smseventdto)
+		{
+			return new CAASmsEventType()
+			{
+				ItemId = smseventdto.ItemId,
+				OperatorId = smseventdto.OperatorId,
+				IsDeleted = smseventdto.IsDeleted,
+				Updated = smseventdto.Updated,
+				CorrectorId = smseventdto.CorrectorId,
+				FullName = smseventdto.FullName,
+				Description = smseventdto.Description
+			};
+		}
+		
+		
+		public static CAAEventTypeRiskLevelChangeRecordDTO ConvertCAA(this CAAEventTypeRiskLevelChangeRecord evtrisklvl)
+		{
+			return new CAAEventTypeRiskLevelChangeRecordDTO
+			{
+				ItemId = evtrisklvl.ItemId,
+				IsDeleted = evtrisklvl.IsDeleted,
+				Updated = evtrisklvl.Updated,
+				CorrectorId = evtrisklvl.CorrectorId,
+				EventCategoryId = evtrisklvl.EventCategory?.ItemId,
+				EventClassId = evtrisklvl.EventClass?.ItemId,
+				IncidentTypeId = evtrisklvl.IncidentType?.ItemId,
+				RecordDate = evtrisklvl.RecordDate,
+				Remarks = evtrisklvl.Remarks,
+				OperatorId = evtrisklvl.OperatorId,
+				ParentId = evtrisklvl.ParentEventType?.ItemId,
+			};
+		}
+
+		public static CAAEventTypeRiskLevelChangeRecord ConvertCAA(this CAAEventTypeRiskLevelChangeRecordDTO evtrisklvldto)
+		{
+			return new CAAEventTypeRiskLevelChangeRecord()
+			{
+				ItemId = evtrisklvldto.ItemId,
+				IsDeleted = evtrisklvldto.IsDeleted,
+				Updated = evtrisklvldto.Updated,
+				CorrectorId = evtrisklvldto.CorrectorId,
+				OperatorId = evtrisklvldto.OperatorId,
+				EventCategory = evtrisklvldto.EventCategory?.ConvertCAA(),
+				EventClass = evtrisklvldto.EventClass?.ConvertCAA(),
+				IncidentType = evtrisklvldto.IncidentTypeId.HasValue ? IncidentType.Items.GetItemById(evtrisklvldto.IncidentTypeId.Value) : IncidentType.UNK,
+				RecordDate = evtrisklvldto.RecordDate ?? DateTimeExtend.GetCASMinDateTime(),
+				Remarks = evtrisklvldto.Remarks,
+				ParentEventType = evtrisklvldto.ParentEventType?.ConvertCAA()
+			};
+		}
+		
+		
+		public static CAAEventDTO ConvertCAA(this CAAEvent evnt)
+		{
+			return new CAAEventDTO
+			{
+				ItemId = evnt.ItemId,
+				IsDeleted = evnt.IsDeleted,
+				Updated = evnt.Updated,
+				CorrectorId = evnt.CorrectorId,
+				EventTypeId = evnt.EventType?.ItemId,
+				EventCategoryId = evnt.EventCategory?.ItemId,
+				EventClassId = evnt.EventClass?.ItemId,
+				IncidentTypeId = evnt.IncidentType?.ItemId,
+				RecordDate = evnt.RecordDate,
+				ParentTypeId = evnt.ParentType?.ItemId,
+				ParentId = evnt.ParentId,
+				OperatorId = evnt.OperatorId,
+				Remarks = evnt.Remarks,
+				Description = evnt.Description,
+				EventStatusId = evnt.EventStatus?.ItemId,
+				AircraftId = evnt.AircraftId,
+				EventConditions = evnt.EventConditions?.Select(i => i.ConvertCAA()) as ICollection<CAAEventConditionDTO>
+			};
+		}
+
+		public static CAAEvent ConvertCAA(this CAAEventDTO evntdto)
+		{
+
+			var value = new CAAEvent()
+			{
+				ItemId = evntdto.ItemId,
+				IsDeleted = evntdto.IsDeleted,
+				Updated = evntdto.Updated,
+				CorrectorId = evntdto.CorrectorId,
+				OperatorId = evntdto.OperatorId,
+				EventType = evntdto.EventType?.ConvertCAA(),
+				EventCategory = evntdto.EventCategory?.ConvertCAA(),
+				EventClass = evntdto.EventClass?.ConvertCAA(),
+				IncidentType = evntdto.IncidentTypeId.HasValue ? IncidentType.Items.GetItemById(evntdto.IncidentTypeId.Value) : IncidentType.UNK,
+				RecordDate = evntdto.RecordDate ?? DateTimeExtend.GetCASMinDateTime(),
+				ParentType = evntdto.ParentTypeId.HasValue ? SmartCoreType.Items.GetItemById(evntdto.ParentTypeId.Value) : SmartCoreType.Unknown,
+				ParentId = evntdto.ParentId ?? default(int),
+				Remarks = evntdto.Remarks,
+				Description = evntdto.Description,
+				EventStatus = evntdto.EventStatusId.HasValue ? SmsEventStatus.Items.GetItemById(evntdto.EventStatusId.Value) : SmsEventStatus.UNK,
+				AircraftId = evntdto.AircraftId ?? default(int)
+			};
+
+			if (evntdto.EventConditions != null)
+				value.EventConditions.AddRange(evntdto.EventConditions.Select(i => i.ConvertCAA()));
+
+			return value;
+		}
+		
+		public static CAAEventConditionDTO ConvertCAA(this CAAEventCondition evtcond)
+		{
+			return new CAAEventConditionDTO
+			{
+				ItemId = evtcond.ItemId,
+				IsDeleted = evtcond.IsDeleted,
+				Updated = evtcond.Updated,
+				OperatorId = evtcond.OperatorId,
+				CorrectorId = evtcond.CorrectorId,
+				EventConditionTypeId = evtcond.EventConditionType?.ItemId,
+				ValueId = (int?)evtcond.Value,
+				ParentId = evtcond.ParentId,
+				ParentTypeId = evtcond.ParentType?.ItemId
+			};
+		}
+
+		public static CAAEventCondition ConvertCAA(this CAAEventConditionDTO evtconddto)
+		{
+			return new CAAEventCondition()
+			{
+				ItemId = evtconddto.ItemId,
+				IsDeleted = evtconddto.IsDeleted,
+				Updated = evtconddto.Updated,
+				OperatorId = evtconddto.OperatorId,
+				CorrectorId = evtconddto.CorrectorId,
+				EventConditionType = evtconddto.EventConditionTypeId.HasValue ? SmartCoreType.Items.GetItemById(evtconddto.EventConditionTypeId.Value) : SmartCoreType.Unknown,
+				Value = evtconddto.ValueId,
+				ParentId = evtconddto.ParentId ?? default(int),
+				ParentType = evtconddto.ParentTypeId.HasValue ? SmartCoreType.Items.GetItemById(evtconddto.ParentTypeId.Value) : SmartCoreType.Unknown
+			};
+		}
+		
+		public static CAAEventClassDTO ConvertCAA(this CAAEventClass eventclass)
+		{
+			return new CAAEventClassDTO
+			{
+				ItemId = eventclass.ItemId,
+				IsDeleted = eventclass.IsDeleted,
+				OperatorId = eventclass.OperatorId,
+				Updated = eventclass.Updated,
+				CorrectorId = eventclass.CorrectorId,
+				FullName = eventclass.FullName,
+				People = eventclass.PeopleDamage?.ItemId,
+				Failure = eventclass.FailureViolationDeviation?.ItemId,
+				Regularity = eventclass.Regularity?.ItemId,
+				Property = eventclass.PropertyDamage?.ItemId,
+				Environmental = eventclass.EnvironmentalDamage?.ItemId,
+				Reputation = eventclass.ReputationDamage?.ItemId,
+				Weight = eventclass.Weight
+			};
+		}
+
+		public static CAAEventClass ConvertCAA(this CAAEventClassDTO eventclassDto)
+		{
+			return new CAAEventClass
+			{
+				ItemId = eventclassDto.ItemId,
+				IsDeleted = eventclassDto.IsDeleted,
+				Updated = eventclassDto.Updated,
+				OperatorId = eventclassDto.OperatorId,
+				CorrectorId = eventclassDto.CorrectorId,
+				FullName = eventclassDto.FullName,
+				PeopleDamage = eventclassDto.People.HasValue ? HumanDamage.Items.GetItemById(eventclassDto.People.Value) : HumanDamage.UNK,
+				FailureViolationDeviation = eventclassDto.Failure.HasValue ? FailureViolationDeviation.Items.GetItemById(eventclassDto.Failure.Value) : FailureViolationDeviation.UNK,
+				Regularity = eventclassDto.Regularity.HasValue ? Regularity.Items.GetItemById(eventclassDto.Regularity.Value) : Regularity.UNK,
+				PropertyDamage = eventclassDto.Property.HasValue ? PropertyDamage.Items.GetItemById(eventclassDto.Property.Value) : PropertyDamage.UNK,
+				EnvironmentalDamage = eventclassDto.Environmental.HasValue ? EnvironmentalDamage.Items.GetItemById(eventclassDto.Environmental.Value) : EnvironmentalDamage.UNK,
+				ReputationDamage = eventclassDto.Reputation.HasValue ? ReputationDamage.Items.GetItemById(eventclassDto.Reputation.Value) : ReputationDamage.UNK
+			};
+		}
+		
+		
+		public static CAAEventCategorieDTO ConvertCAA(this CAAEventCategory eventcategorie)
+		{
+			return new CAAEventCategorieDTO
+			{
+				ItemId = eventcategorie.ItemId,
+				IsDeleted = eventcategorie.IsDeleted,
+				Updated = eventcategorie.Updated,
+				CorrectorId = eventcategorie.CorrectorId,
+				Weight = eventcategorie.Weight,
+				OperatorId = eventcategorie.OperatorId,
+				MinCompareOp = eventcategorie.MinCompareOperation?.ItemId,
+				EventCountMinPeriod = eventcategorie.EventCountMinPeriod,
+				MinReportPeriod = eventcategorie.MinReportPeriod?.ConvertToByteArray(),
+				MaxCompareOp = eventcategorie.MaxCompareOperation?.ItemId,
+				EventCountMaxPeriod = eventcategorie.EventCountMaxPeriod,
+				MaxReportPeriod = eventcategorie.MinReportPeriod?.ConvertToByteArray()
+			};
+		}
+
+		public static CAAEventCategory ConvertCAA(this CAAEventCategorieDTO eventcategorieDto)
+		{
+			return new CAAEventCategory
+			{
+				ItemId = eventcategorieDto.ItemId,
+				IsDeleted = eventcategorieDto.IsDeleted,
+				Updated = eventcategorieDto.Updated,
+				CorrectorId = eventcategorieDto.CorrectorId,
+				OperatorId = eventcategorieDto.OperatorId,
+				Weight = eventcategorieDto.Weight ?? default(int),
+				MinCompareOperation = eventcategorieDto.MinCompareOp.HasValue ? LogicOperation.Items.GetItemById(eventcategorieDto.MinCompareOp.Value) : LogicOperation.Unknown,
+				EventCountMinPeriod = eventcategorieDto.EventCountMinPeriod ?? default(int),
+				MinReportPeriod = Lifelength.ConvertFromByteArray(eventcategorieDto.MinReportPeriod),
+				MaxCompareOperation = eventcategorieDto.MaxCompareOp.HasValue ? LogicOperation.Items.GetItemById(eventcategorieDto.MaxCompareOp.Value) : LogicOperation.Unknown,
+				EventCountMaxPeriod = eventcategorieDto.EventCountMaxPeriod ?? default(int),
+				MaxReportPeriod = Lifelength.ConvertFromByteArray(eventcategorieDto.MaxReportPeriod),
+				FullName = EventCategory.Items.FirstOrDefault(i => i.ItemId == eventcategorieDto.ItemId)?.FullName,
+				ShortName = EventCategory.Items.FirstOrDefault(i => i.ItemId == eventcategorieDto.ItemId)?.ShortName
+			};
+		}
+		
+		
+		
         public static AuditCheck ConvertCAA(this AuditCheckDTO audit)
         {
             return new AuditCheck

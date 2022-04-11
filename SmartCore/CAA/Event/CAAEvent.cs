@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using CAS.Entity.Models.DTO.General;
+using CAA.Entity.Models.DTO;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.SMS;
 
-namespace SmartCore.Entities.General.SMS
+
+namespace SmartCore.CAA.Event
 {
-
-    /// <summary>
-    /// Описывает событие в системе безопасности полетов
-    /// </summary>
-    [Table("Events", "dbo", "ItemId")]
-    [Dto(typeof(EventDTO))]
+    [CAADto(typeof(CAAEventDTO))]
 	[Serializable]
-    public class Event : AbstractRecord, IComparable<Event>
+    public class CAAEvent : AbstractRecord, IComparable<CAAEvent>
     {
         private static System.Type _thisType;
 
@@ -58,7 +56,7 @@ namespace SmartCore.Entities.General.SMS
         [TableColumnAttribute("EventTypeId")]
         [FormControl(150, "Event type")]
         [NotNull]
-        public SmsEventType EventType
+        public CAASmsEventType EventType
         {
             get { return _eventType; }
             set
@@ -81,7 +79,7 @@ namespace SmartCore.Entities.General.SMS
         [FormControl(150, "Category")]
         [ListViewData(0.05f, "Category",2)]
         [NotNull]
-        public EventCategory EventCategory { get; set; }
+        public CAAEventCategory EventCategory { get; set; }
         #endregion
 
         #region public EventClass EventClass { get; set; }
@@ -92,7 +90,7 @@ namespace SmartCore.Entities.General.SMS
         [FormControl(150, "Class")]
         [ListViewData(0.2f, "Class", 3)]
         [NotNull]
-        public EventClass EventClass { get; set; }
+        public CAAEventClass EventClass { get; set; }
         #endregion
 
         #region public string RiskIndex { get; set; }
@@ -252,14 +250,14 @@ namespace SmartCore.Entities.General.SMS
 
         #region public CommonCollection<EventCondition> EventConditions { get; private set; }
 
-        private CommonCollection<EventCondition> _eventConditions;
+        private CommonCollection<CAAEventCondition> _eventConditions;
         /// <summary>
         /// Условия возникновения события
         /// </summary>
         [Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 12)]
-        public CommonCollection<EventCondition> EventConditions
+        public CommonCollection<CAAEventCondition> EventConditions
         {
-            get { return _eventConditions ?? (_eventConditions = new CommonCollection<EventCondition>()); }
+            get { return _eventConditions ?? (_eventConditions = new CommonCollection<CAAEventCondition>()); }
             internal set
             {
                 if(_eventConditions != value)
@@ -282,7 +280,9 @@ namespace SmartCore.Entities.General.SMS
                 return _eventConditions.Aggregate("", (current, condition) => current + (condition + "; "));
             }
         }
-       
+
+        public int OperatorId { get; set; }
+
         #endregion
 
         /*
@@ -291,7 +291,7 @@ namespace SmartCore.Entities.General.SMS
 
         #region Implement of ICompdreble
 
-        public int CompareTo(Event y)
+        public int CompareTo(CAAEvent y)
         {
             return ItemId.CompareTo(y.ItemId);
         }
@@ -306,7 +306,7 @@ namespace SmartCore.Entities.General.SMS
         /// <summary>
         /// Создает событие без дополнительной информации
         /// </summary>
-        public Event()
+        public CAAEvent()
         {
             //задаем все ID в -1
             ItemId = -1;
@@ -331,11 +331,10 @@ namespace SmartCore.Entities.General.SMS
         #endregion 
 
         #region private static Type GetCurrentType()
-        private static Type GetCurrentType()
+        private static System.Type GetCurrentType()
         {
-            return _thisType ?? (_thisType = typeof(Event));
+            return _thisType ?? (_thisType = typeof(CAAEvent));
         }
         #endregion
     }
-
 }

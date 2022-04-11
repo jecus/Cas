@@ -419,6 +419,12 @@
     <Compile Include="CAA\Check\CheckListTransfer.cs" />
     <Compile Include="CAA\Check\Option.cs" />
     <Compile Include="CAA\Check\OptionType.cs" />
+    <Compile Include="CAA\Event\CAAEvent.cs" />
+    <Compile Include="CAA\Event\CAAEventCategory.cs" />
+    <Compile Include="CAA\Event\CAAEventClass.cs" />
+    <Compile Include="CAA\Event\CAAEventCondition.cs" />
+    <Compile Include="CAA\Event\CAAEventTypeRiskLevelChangeRecord.cs" />
+    <Compile Include="CAA\Event\CAASmsEventType.cs" />
     <Compile Include="CAA\FindingLevel\FindingLevels.cs" />
     <Compile Include="CAA\FindingLevel\RootCause.cs" />
     <Compile Include="CAA\Operators\IAllOperatorFilterParams.cs" />
