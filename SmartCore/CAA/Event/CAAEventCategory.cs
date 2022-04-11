@@ -1,4 +1,5 @@
 ﻿using System;
+using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Calculations;
@@ -11,7 +12,7 @@ namespace SmartCore.CAA.Event
 	[CAADto(typeof(CAAEventCategorieDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
-	public class CAAEventCategory : StaticDictionary
+	public class CAAEventCategory : StaticDictionary,IOperatable
 	{
 		private int _weight;
 		private LogicOperation _minCompareOp;

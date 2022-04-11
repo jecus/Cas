@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
@@ -14,7 +15,7 @@ namespace SmartCore.CAA.Event
 {
     [CAADto(typeof(CAAEventDTO))]
 	[Serializable]
-    public class CAAEvent : AbstractRecord, IComparable<CAAEvent>
+    public class CAAEvent : AbstractRecord, IComparable<CAAEvent>,IOperatable
     {
         private static System.Type _thisType;
 
@@ -49,7 +50,7 @@ namespace SmartCore.CAA.Event
 
         #region public EventType EventType { get; set; }
 
-        private SmsEventType _eventType;
+        private CAASmsEventType _eventType;
         /// <summary>
         /// Тип события
         /// </summary>
@@ -312,7 +313,7 @@ namespace SmartCore.CAA.Event
             ItemId = -1;
             SmartCoreObjectType = SmartCoreType.SmsEvent;
             _recordDate = DateTime.Today;
-            _eventConditions = new CommonCollection<EventCondition>();
+            _eventConditions = new CommonCollection<CAAEventCondition>();
 
             EventStatus = SmsEventStatus.Discovered;
         }

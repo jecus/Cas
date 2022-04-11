@@ -25,6 +25,7 @@ using CASTerms;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA;
 using SmartCore.CAA.Check;
+using SmartCore.CAA.Event;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -296,12 +297,20 @@ namespace CAS.UI.UICAAControls
         
         private void LinkEventsCategoriesRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Events Categories";
+	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventCategory), new List<Filter>()
+	        {
+		        new Filter("OperatorId",-1 )
+	        });
         }
         
         private void LinkEventsClassesRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Events Classes";
+	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventClass), new List<Filter>()
+	        {
+		        new Filter("OperatorId",-1 )
+	        });
         }
         
         private void LinkEventsTypesRequested(object sender, ReferenceEventArgs e)

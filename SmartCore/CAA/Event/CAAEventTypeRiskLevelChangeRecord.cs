@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -12,7 +13,7 @@ namespace SmartCore.CAA.Event
 	[CAADto(typeof(CAAEventTypeRiskLevelChangeRecordDTO))]
 	[Condition("IsDeleted","0")]
 	[Serializable]
-	public class CAAEventTypeRiskLevelChangeRecord : AbstractRecord
+	public class CAAEventTypeRiskLevelChangeRecord : AbstractRecord,IOperatable
 	{
 		private static System.Type _thisType;
 

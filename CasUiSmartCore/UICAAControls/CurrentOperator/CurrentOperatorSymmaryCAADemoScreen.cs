@@ -23,6 +23,7 @@ using CAS.UI.UIControls.PersonnelControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA;
+using SmartCore.CAA.Event;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -301,12 +302,22 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         
         private void LinkEventsCategoriesRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Events Categories";
+	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventCategory), new List<Filter>()
+		        {
+			        new Filter("OperatorId",_currentOperator.ItemId )
+		        })
+		        { OperatorId = _currentOperator.ItemId };
         }
         
         private void LinkEventsClassesRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Events Classes";
+	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventClass), new List<Filter>()
+		        {
+			        new Filter("OperatorId",_currentOperator.ItemId )
+		        })
+		        { OperatorId = _currentOperator.ItemId };
         }
         
         private void LinkEventsTypesRequested(object sender, ReferenceEventArgs e)

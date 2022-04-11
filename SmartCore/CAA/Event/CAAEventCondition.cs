@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Entities.Dictionaries;
@@ -11,7 +12,7 @@ namespace SmartCore.CAA.Event
 {
 	[CAADto(typeof(CAAEventConditionDTO))]
 	[Serializable]
-	public class CAAEventCondition : BaseEntityObject, IComparable<CAAEventCondition>
+	public class CAAEventCondition : BaseEntityObject, IComparable<CAAEventCondition>,IOperatable
 	{
 		private SmartCoreType _valueType;
 		private object _conditionValue;

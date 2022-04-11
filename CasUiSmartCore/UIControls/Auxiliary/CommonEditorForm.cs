@@ -23,7 +23,7 @@ using Convert = System.Convert;
 namespace CAS.UI.UIControls.Auxiliary
 {
     /// <summary>
-    /// Общая Форма для редактирования объектов
+    /// РћР±С‰Р°СЏ Р¤РѕСЂРјР° РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ РѕР±СЉРµРєС‚РѕРІ
     /// </summary>
     public partial class CommonEditorForm : MetroForm
     {
@@ -42,7 +42,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public CommonEditorForm()
 
         /// <summary>
-        /// Создает форму для переноса шаблона ВС в рабочую базу данных
+        /// РЎРѕР·РґР°РµС‚ С„РѕСЂРјСѓ РґР»СЏ РїРµСЂРµРЅРѕСЃР° С€Р°Р±Р»РѕРЅР° Р’РЎ РІ СЂР°Р±РѕС‡СѓСЋ Р±Р°Р·Сѓ РґР°РЅРЅС‹С…
         /// </summary>
         public CommonEditorForm()
         {
@@ -53,7 +53,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public CommonEditorForm(BaseSmartCoreObject editingObject) : this()
         /// <summary>
-        /// Создает форму для редактирования переданного объекта
+        /// РЎРѕР·РґР°РµС‚ С„РѕСЂРјСѓ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ РїРµСЂРµРґР°РЅРЅРѕРіРѕ РѕР±СЉРµРєС‚Р°
         /// </summary>
         public CommonEditorForm(BaseEntityObject editingObject, bool saveChangesToDatabase = true) : this()
         {
@@ -82,7 +82,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region Properties
 
         ///<summary>
-        /// Возвращает редактируемый объект
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЂРµРґР°РєС‚РёСЂСѓРµРјС‹Р№ РѕР±СЉРµРєС‚
         ///</summary>
         public virtual  BaseEntityObject CurrentObject
         {
@@ -96,14 +96,14 @@ namespace CAS.UI.UIControls.Auxiliary
         protected List<PropertyInfo> GetTypeProperties(Type type)
         {
             if (type == null) return null;
-            //определение своиств, имеющих атрибут "отображаемое в списке"
+            //РѕРїСЂРµРґРµР»РµРЅРёРµ СЃРІРѕРёСЃС‚РІ, РёРјРµСЋС‰РёС… Р°С‚СЂРёР±СѓС‚ "РѕС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РІ СЃРїРёСЃРєРµ"
             List<PropertyInfo> properties =
                 type.GetProperties().Where(p => p.GetCustomAttributes(typeof(FormControlAttribute), false).Length != 0).ToList();
 
-            //поиск своиств у которых задан порядок отображения
-            //своиства, имеющие порядок отображения
+            //РїРѕРёСЃРє СЃРІРѕРёСЃС‚РІ Сѓ РєРѕС‚РѕСЂС‹С… Р·Р°РґР°РЅ РїРѕСЂСЏРґРѕРє РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ
+            //СЃРІРѕРёСЃС‚РІР°, РёРјРµСЋС‰РёРµ РїРѕСЂСЏРґРѕРє РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ
             Dictionary<int, PropertyInfo> orderedProperties = new Dictionary<int, PropertyInfo>();
-            //своиства, НЕ имеющие порядок отображения
+            //СЃРІРѕРёСЃС‚РІР°, РќР• РёРјРµСЋС‰РёРµ РїРѕСЂСЏРґРѕРє РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ
             List<PropertyInfo> unOrderedProperties = new List<PropertyInfo>();
             foreach (PropertyInfo propertyInfo in properties)
             {
@@ -141,7 +141,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
             if (properties.Count == 0) return;
 
-            int columnCount = properties.Count > 15 ? 2 : 1;//количество колонок ЭУ
+            int columnCount = properties.Count > 15 ? 2 : 1;//РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕР»РѕРЅРѕРє Р­РЈ
 
             List<Label> labels = new List<Label>();
             List<Control> controls = new List<Control>();
@@ -159,8 +159,8 @@ namespace CAS.UI.UIControls.Auxiliary
                     ForeColor = Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))))
             });
 
-                //Если значение должно быть не пустым или не NULL
-                //то шрифт леибла утснанавливается в ЖИРНЫЙ(BOLD)
+                //Р•СЃР»Рё Р·РЅР°С‡РµРЅРёРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РЅРµ РїСѓСЃС‚С‹Рј РёР»Рё РЅРµ NULL
+                //С‚Рѕ С€СЂРёС„С‚ Р»РµРёР±Р»Р° СѓС‚СЃРЅР°РЅР°РІР»РёРІР°РµС‚СЃСЏ РІ Р–РР РќР«Р™(BOLD)
                 NotNullAttribute notNullAttribute =
                     (NotNullAttribute)t.GetCustomAttributes(typeof(NotNullAttribute), false).FirstOrDefault();
                 if (notNullAttribute != null)
@@ -202,17 +202,17 @@ namespace CAS.UI.UIControls.Auxiliary
                 controls.Add(c);
             }
 
-            #region Компоновка контролов в одну колонку
+            #region РљРѕРјРїРѕРЅРѕРІРєР° РєРѕРЅС‚СЂРѕР»РѕРІ РІ РѕРґРЅСѓ РєРѕР»РѕРЅРєСѓ
             if (columnCount == 1)
             {
-                #region расчет длины лейблов и контролов
+                #region СЂР°СЃС‡РµС‚ РґР»РёРЅС‹ Р»РµР№Р±Р»РѕРІ Рё РєРѕРЅС‚СЂРѕР»РѕРІ
 
                 int maxLabelXSize = 0;
-                int maxControlXSize = 0;//максимальная длиня ЭУ
+                int maxControlXSize = 0;//РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґР»РёРЅСЏ Р­РЈ
                 for (int i = 0; i < labels.Count; i++)
                 {
-                    //на каждый лейбл приходится по одному контролу, 
-                    //поэтому обе коллекции просматриваются одновременно
+                    //РЅР° РєР°Р¶РґС‹Р№ Р»РµР№Р±Р» РїСЂРёС…РѕРґРёС‚СЃСЏ РїРѕ РѕРґРЅРѕРјСѓ РєРѕРЅС‚СЂРѕР»Сѓ, 
+                    //РїРѕСЌС‚РѕРјСѓ РѕР±Рµ РєРѕР»Р»РµРєС†РёРё РїСЂРѕСЃРјР°С‚СЂРёРІР°СЋС‚СЃСЏ РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕ
                     if (controls[i] != null && controls[i] is LifelengthViewer)
                     {
                         LifelengthViewer llv = (LifelengthViewer)controls[i];
@@ -224,11 +224,11 @@ namespace CAS.UI.UIControls.Auxiliary
                             llv.ShowHeaders = false;
                         continue;
                     }
-                    //выше рассматривались контролы, имеющие собственные лейблы
-                    //теперь идет просмотр самих леблов
+                    //РІС‹С€Рµ СЂР°СЃСЃРјР°С‚СЂРёРІР°Р»РёСЃСЊ РєРѕРЅС‚СЂРѕР»С‹, РёРјРµСЋС‰РёРµ СЃРѕР±СЃС‚РІРµРЅРЅС‹Рµ Р»РµР№Р±Р»С‹
+                    //С‚РµРїРµСЂСЊ РёРґРµС‚ РїСЂРѕСЃРјРѕС‚СЂ СЃР°РјРёС… Р»РµР±Р»РѕРІ
                     if (labels[i].PreferredWidth > maxLabelXSize)
                         maxLabelXSize = labels[i].PreferredWidth;
-                    //размеры контролов
+                    //СЂР°Р·РјРµСЂС‹ РєРѕРЅС‚СЂРѕР»РѕРІ
                     if (controls[i] != null && controls[i].Size.Width > maxControlXSize)
                     {
                         maxControlXSize = controls[i].Size.Width;
@@ -305,7 +305,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
                     if (controls[i] == null || (controls[i] != null && !(controls[i] is LifelengthViewer)))
                     {
-                        //Если контрол не является LifelengthViewer-ом то нужно добавить лейбл
+                        //Р•СЃР»Рё РєРѕРЅС‚СЂРѕР» РЅРµ СЏРІР»СЏРµС‚СЃСЏ LifelengthViewer-РѕРј С‚Рѕ РЅСѓР¶РЅРѕ РґРѕР±Р°РІРёС‚СЊ Р»РµР№Р±Р»
                         panelMain.Controls.Add(labels[i]);
                     }
                     if (pairControl != null)
@@ -316,45 +316,45 @@ namespace CAS.UI.UIControls.Auxiliary
             }
             #endregion
 
-            #region Компоновка контролов в две колонки
+            #region РљРѕРјРїРѕРЅРѕРІРєР° РєРѕРЅС‚СЂРѕР»РѕРІ РІ РґРІРµ РєРѕР»РѕРЅРєРё
             if (columnCount == 2)
             {
-                #region расчет длины лейблов и контролов
+                #region СЂР°СЃС‡РµС‚ РґР»РёРЅС‹ Р»РµР№Р±Р»РѕРІ Рё РєРѕРЅС‚СЂРѕР»РѕРІ
 
                 int fMaxLabelXSize = 0, sMaxLabelXSize = 0;
                 int fMaxControlXSize = 0, sMaxControlXSize = 0;
-                bool checkFirst = true;//флаг проверяемой колонки
+                bool checkFirst = true;//С„Р»Р°Рі РїСЂРѕРІРµСЂСЏРµРјРѕР№ РєРѕР»РѕРЅРєРё
 
                 for (int i = 0; i < labels.Count; i++)
                 {
-                    //на каждый лейбл приходится по одному контролу, 
-                    //поэтому обе коллекции просматриваются одновременно
+                    //РЅР° РєР°Р¶РґС‹Р№ Р»РµР№Р±Р» РїСЂРёС…РѕРґРёС‚СЃСЏ РїРѕ РѕРґРЅРѕРјСѓ РєРѕРЅС‚СЂРѕР»Сѓ, 
+                    //РїРѕСЌС‚РѕРјСѓ РѕР±Рµ РєРѕР»Р»РµРєС†РёРё РїСЂРѕСЃРјР°С‚СЂРёРІР°СЋС‚СЃСЏ РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕ
                     if (controls[i] is CommonDataGridViewControl)
                     {
-                        //контрол порога выполнения директивы
-                        //влияет на длину лейблов обоих колонок
+                        //РєРѕРЅС‚СЂРѕР» РїРѕСЂРѕРіР° РІС‹РїРѕР»РЅРµРЅРёСЏ РґРёСЂРµРєС‚РёРІС‹
+                        //РІР»РёСЏРµС‚ РЅР° РґР»РёРЅСѓ Р»РµР№Р±Р»РѕРІ РѕР±РѕРёС… РєРѕР»РѕРЅРѕРє
                         checkFirst = true;
                         continue;
                     }
                     if (controls[i] is ThresholdControl)
                     {
-                        //контрол порога выполнения директивы
-                        //влияет на длину лейблов обоих колонок
+                        //РєРѕРЅС‚СЂРѕР» РїРѕСЂРѕРіР° РІС‹РїРѕР»РЅРµРЅРёСЏ РґРёСЂРµРєС‚РёРІС‹
+                        //РІР»РёСЏРµС‚ РЅР° РґР»РёРЅСѓ Р»РµР№Р±Р»РѕРІ РѕР±РѕРёС… РєРѕР»РѕРЅРѕРє
                         ThresholdControl ddtc = (ThresholdControl)controls[i];
-                        //размеры заголовков
+                        //СЂР°Р·РјРµСЂС‹ Р·Р°РіРѕР»РѕРІРєРѕРІ
                         if (ddtc.MaxFirstColLabelWidth > fMaxLabelXSize)
                             fMaxLabelXSize = ddtc.MaxFirstColLabelWidth;
                         if (ddtc.MaxSecondColLabelWidth > sMaxLabelXSize)
                             sMaxLabelXSize = ddtc.MaxSecondColLabelWidth;
 
-                        //размеры контролов
+                        //СЂР°Р·РјРµСЂС‹ РєРѕРЅС‚СЂРѕР»РѕРІ
                         if (ddtc.MaxFirstColControlWidth > fMaxControlXSize)
                             fMaxControlXSize = ddtc.MaxFirstColControlWidth;
                         if (ddtc.MaxSecondColControlWidth > sMaxControlXSize)
                             sMaxControlXSize = ddtc.MaxSecondColControlWidth;
 
-                        //т.к. DetailDirectiveThresholdControl занимает 2 колонки, 
-                        //то следующий контрол всегда будет располагаться в первой колонке
+                        //С‚.Рє. DetailDirectiveThresholdControl Р·Р°РЅРёРјР°РµС‚ 2 РєРѕР»РѕРЅРєРё, 
+                        //С‚Рѕ СЃР»РµРґСѓСЋС‰РёР№ РєРѕРЅС‚СЂРѕР» РІСЃРµРіРґР° Р±СѓРґРµС‚ СЂР°СЃРїРѕР»Р°РіР°С‚СЊСЃСЏ РІ РїРµСЂРІРѕР№ РєРѕР»РѕРЅРєРµ
                         checkFirst = true;
                         continue;
                     }
@@ -368,7 +368,7 @@ namespace CAS.UI.UIControls.Auxiliary
                         if (!checkFirst && llv.LeftHeaderWidth > sMaxLabelXSize)
                             sMaxLabelXSize = llv.LeftHeaderWidth;
 
-                        //размеры контролов
+                        //СЂР°Р·РјРµСЂС‹ РєРѕРЅС‚СЂРѕР»РѕРІ
                         if (checkFirst && llv.WidthWithoutLeftHeader > fMaxControlXSize)
                             fMaxControlXSize = llv.WidthWithoutLeftHeader;
                         if (!checkFirst && llv.WidthWithoutLeftHeader > sMaxControlXSize)
@@ -378,14 +378,14 @@ namespace CAS.UI.UIControls.Auxiliary
                         continue;
                     }
 
-                    //выше рассматривались контролы, имеющие собственные лейблы
-                    //теперь идет просмотр самих леблов
+                    //РІС‹С€Рµ СЂР°СЃСЃРјР°С‚СЂРёРІР°Р»РёСЃСЊ РєРѕРЅС‚СЂРѕР»С‹, РёРјРµСЋС‰РёРµ СЃРѕР±СЃС‚РІРµРЅРЅС‹Рµ Р»РµР№Р±Р»С‹
+                    //С‚РµРїРµСЂСЊ РёРґРµС‚ РїСЂРѕСЃРјРѕС‚СЂ СЃР°РјРёС… Р»РµР±Р»РѕРІ
                     if (checkFirst && labels[i].PreferredWidth > fMaxLabelXSize)
                         fMaxLabelXSize = labels[i].PreferredWidth;
                     if (!checkFirst && labels[i].PreferredWidth > sMaxLabelXSize)
                         sMaxLabelXSize = labels[i].PreferredWidth;
 
-                    //размеры контролов
+                    //СЂР°Р·РјРµСЂС‹ РєРѕРЅС‚СЂРѕР»РѕРІ
                     if (controls[i] != null)
                     {
                         if (checkFirst && controls[i].Size.Width > fMaxControlXSize)
@@ -419,15 +419,15 @@ namespace CAS.UI.UIControls.Auxiliary
                             labelSize = labels[i].PreferredWidth;
                             controlSize = (fMaxLabelXSize + 5 + fMaxControlXSize + 50 + sMaxLabelXSize + 5 + sMaxControlXSize);
 
-                            //определение самого нижнего Bottoma 2-х предыдущих контролов
+                            //РѕРїСЂРµРґРµР»РµРЅРёРµ СЃР°РјРѕРіРѕ РЅРёР¶РЅРµРіРѕ Bottoma 2-С… РїСЂРµРґС‹РґСѓС‰РёС… РєРѕРЅС‚СЂРѕР»РѕРІ
                             int bottom1, bottom2;
-                            //определение нижней точки предыдущего контрола 
-                            //(он будет либо во второй колонке предыдущего ряда, либо занимать весь ряд)
+                            //РѕРїСЂРµРґРµР»РµРЅРёРµ РЅРёР¶РЅРµР№ С‚РѕС‡РєРё РїСЂРµРґС‹РґСѓС‰РµРіРѕ РєРѕРЅС‚СЂРѕР»Р° 
+                            //(РѕРЅ Р±СѓРґРµС‚ Р»РёР±Рѕ РІРѕ РІС‚РѕСЂРѕР№ РєРѕР»РѕРЅРєРµ РїСЂРµРґС‹РґСѓС‰РµРіРѕ СЂСЏРґР°, Р»РёР±Рѕ Р·Р°РЅРёРјР°С‚СЊ РІРµСЃСЊ СЂСЏРґ)
                             if (controls[i - 1] != null)
                                 bottom2 = controls[i - 1].Bottom + 5;
                             else bottom2 = labels[i - 1].Bottom + 5;
-                            //определение нижней точки пред-предыдущего контрола
-                            //он может и отсутствовать
+                            //РѕРїСЂРµРґРµР»РµРЅРёРµ РЅРёР¶РЅРµР№ С‚РѕС‡РєРё РїСЂРµРґ-РїСЂРµРґС‹РґСѓС‰РµРіРѕ РєРѕРЅС‚СЂРѕР»Р°
+                            //РѕРЅ РјРѕР¶РµС‚ Рё РѕС‚СЃСѓС‚СЃС‚РІРѕРІР°С‚СЊ
                             if ((i - 2) >= 0)
                             {
                                 if (controls[i - 2] != null)
@@ -444,15 +444,15 @@ namespace CAS.UI.UIControls.Auxiliary
                             labelSize = fMaxLabelXSize;
                             controlSize = fMaxControlXSize;
 
-                            //определение самого нижнего Bottoma 2-х предыдущих контролов
+                            //РѕРїСЂРµРґРµР»РµРЅРёРµ СЃР°РјРѕРіРѕ РЅРёР¶РЅРµРіРѕ Bottoma 2-С… РїСЂРµРґС‹РґСѓС‰РёС… РєРѕРЅС‚СЂРѕР»РѕРІ
                             int bottom1, bottom2;
-                            //определение нижней точки предыдущего контрола 
-                            //(он будет либо во второй колонке предыдущего ряда, либо занимать весь ряд)
+                            //РѕРїСЂРµРґРµР»РµРЅРёРµ РЅРёР¶РЅРµР№ С‚РѕС‡РєРё РїСЂРµРґС‹РґСѓС‰РµРіРѕ РєРѕРЅС‚СЂРѕР»Р° 
+                            //(РѕРЅ Р±СѓРґРµС‚ Р»РёР±Рѕ РІРѕ РІС‚РѕСЂРѕР№ РєРѕР»РѕРЅРєРµ РїСЂРµРґС‹РґСѓС‰РµРіРѕ СЂСЏРґР°, Р»РёР±Рѕ Р·Р°РЅРёРјР°С‚СЊ РІРµСЃСЊ СЂСЏРґ)
                             if (controls[i - 1] != null)
                                 bottom2 = controls[i - 1].Bottom + 5;
                             else bottom2 = labels[i - 1].Bottom + 5;
-                            //определение нижней точки пред-предыдущего контрола
-                            //он может и отсутствовать
+                            //РѕРїСЂРµРґРµР»РµРЅРёРµ РЅРёР¶РЅРµР№ С‚РѕС‡РєРё РїСЂРµРґ-РїСЂРµРґС‹РґСѓС‰РµРіРѕ РєРѕРЅС‚СЂРѕР»Р°
+                            //РѕРЅ РјРѕР¶РµС‚ Рё РѕС‚СЃСѓС‚СЃС‚РІРѕРІР°С‚СЊ
                             if ((i - 2) >= 0)
                             {
                                 if (controls[i - 2] != null)
@@ -501,9 +501,9 @@ namespace CAS.UI.UIControls.Auxiliary
                     {
                         ThresholdControl ddtc = (ThresholdControl)controls[i];
                         controls[i].Location = new Point(3, top);
-                        //выравнивание первой колонки
+                        //РІС‹СЂР°РІРЅРёРІР°РЅРёРµ РїРµСЂРІРѕР№ РєРѕР»РѕРЅРєРё
                         ddtc.SetFirstColumnPos(firstCol + fMaxLabelXSize);
-                        //выравнивание второй колонки
+                        //РІС‹СЂР°РІРЅРёРІР°РЅРёРµ РІС‚РѕСЂРѕР№ РєРѕР»РѕРЅРєРё
                         ddtc.SetSecondColumnPos(secondCol + sMaxLabelXSize);
 
                         panelMain.Controls.Add(controls[i]);
@@ -555,10 +555,15 @@ namespace CAS.UI.UIControls.Auxiliary
         {
 
             Type propertyType = propertyInfo.PropertyType;
-            FormControlAttribute fca =
-                    (FormControlAttribute)propertyInfo.GetCustomAttributes(typeof(FormControlAttribute), false).First();
+            
+            var find = propertyInfo.GetCustomAttributes(typeof(FormControlAttribute), false).FirstOrDefault();
 
-            #region ЭУ для прикрепленного файла
+            FormControlAttribute fca = null;
+
+            if (find != null)
+                fca = (FormControlAttribute)find;
+
+            #region Р­РЈ РґР»СЏ РїСЂРёРєСЂРµРїР»РµРЅРЅРѕРіРѕ С„Р°Р№Р»Р°
 
             if (propertyInfo.PropertyType.Name == typeof(AttachedFile).Name ||
                 propertyInfo.PropertyType.IsSubclassOf(typeof(AttachedFile)))
@@ -582,7 +587,7 @@ namespace CAS.UI.UIControls.Auxiliary
             }
             #endregion
 
-            #region ЭУ для StaticTreeDictionary
+            #region Р­РЈ РґР»СЏ StaticTreeDictionary
 
             if (propertyInfo.PropertyType.IsSubclassOf(typeof(StaticTreeDictionary)))
             {
@@ -598,13 +603,13 @@ namespace CAS.UI.UIControls.Auxiliary
                     Type = propertyInfo.PropertyType,
                     Width = controlWidth,
                 };
-                //для возможности вызова новой вкладки
+                //РґР»СЏ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РІС‹Р·РѕРІР° РЅРѕРІРѕР№ РІРєР»Р°РґРєРё
                 Program.MainDispatcher.ProcessControl(dc);
                 return dc;
             }
             #endregion
 
-            #region ЭУ для StaticDictionary
+            #region Р­РЈ РґР»СЏ StaticDictionary
 
             if (propertyInfo.PropertyType.IsSubclassOf(typeof(StaticDictionary)))
             {
@@ -620,7 +625,7 @@ namespace CAS.UI.UIControls.Auxiliary
                         Tag = propertyInfo,
                         Type = propertyInfo.PropertyType,
                     };
-                    //для возможности вызова новой вкладки
+                    //РґР»СЏ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РІС‹Р·РѕРІР° РЅРѕРІРѕР№ РІРєР»Р°РґРєРё
                     Program.MainDispatcher.ProcessControl(dc);
                     //
                     return dc;    
@@ -632,7 +637,7 @@ namespace CAS.UI.UIControls.Auxiliary
                                       Width = controlWidth,
                                   };
 
-                //поиск своиства Items у типа StaticDictionary
+                //РїРѕРёСЃРє СЃРІРѕРёСЃС‚РІР° Items Сѓ С‚РёРїР° StaticDictionary
                 Type t = propertyInfo.PropertyType;
                 PropertyInfo p = t.GetProperty("Items");
 
@@ -648,7 +653,7 @@ namespace CAS.UI.UIControls.Auxiliary
             }
             #endregion
 
-            #region  ЭУ для AbstractDictionary
+            #region  Р­РЈ РґР»СЏ AbstractDictionary
 
             if (propertyInfo.PropertyType.IsSubclassOf(typeof(AbstractDictionary)))
             {
@@ -660,14 +665,14 @@ namespace CAS.UI.UIControls.Auxiliary
                     Tag = propertyInfo,
                     Type = propertyInfo.PropertyType,
                 };
-                //для возможности вызова новой вкладки
+                //РґР»СЏ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РІС‹Р·РѕРІР° РЅРѕРІРѕР№ РІРєР»Р°РґРєРё
                 Program.MainDispatcher.ProcessControl(dc);
                 //
                 return dc;
             }
             #endregion
 
-            #region ЭУ для BaseEntityObject
+            #region Р­РЈ РґР»СЏ BaseEntityObject
 
             if (propertyInfo.PropertyType.IsSubclassOf(typeof(BaseEntityObject)))
             {
@@ -704,14 +709,14 @@ namespace CAS.UI.UIControls.Auxiliary
             }
             #endregion
 
-            #region ЭУ для IEnumerable<>
+            #region Р­РЈ РґР»СЏ IEnumerable<>
 
             if (propertyType.Name.ToLower() != "string" && 
                 propertyType.GetInterface(typeof(IEnumerable<>).Name) != null)
             {
-                //Если свойство не string (string реализует интерфейс IEnumerable<>)
-                //и реализует интерфейс IEnumerable<> то
-                //производится поиск параметра универсального типа
+                //Р•СЃР»Рё СЃРІРѕР№СЃС‚РІРѕ РЅРµ string (string СЂРµР°Р»РёР·СѓРµС‚ РёРЅС‚РµСЂС„РµР№СЃ IEnumerable<>)
+                //Рё СЂРµР°Р»РёР·СѓРµС‚ РёРЅС‚РµСЂС„РµР№СЃ IEnumerable<> С‚Рѕ
+                //РїСЂРѕРёР·РІРѕРґРёС‚СЃСЏ РїРѕРёСЃРє РїР°СЂР°РјРµС‚СЂР° СѓРЅРёРІРµСЂСЃР°Р»СЊРЅРѕРіРѕ С‚РёРїР°
                 Type t = propertyType;
 
                 while (t != null)
@@ -758,7 +763,7 @@ namespace CAS.UI.UIControls.Auxiliary
             }
             #endregion
 
-            #region ЭУ для Enum
+            #region Р­РЈ РґР»СЏ Enum
 
             if (propertyInfo.PropertyType.IsEnum)
             {
@@ -781,7 +786,7 @@ namespace CAS.UI.UIControls.Auxiliary
             }
             #endregion
 
-            #region  ЭУ для базовых типов
+            #region  Р­РЈ РґР»СЏ Р±Р°Р·РѕРІС‹С… С‚РёРїРѕРІ
 
             string typeName = propertyInfo.PropertyType.Name.ToLower();
             switch (typeName)
@@ -985,7 +990,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region protected virtual bool GetChangeStatus()
         /// <summary>
-        /// Возвращает значение, показывающее были ли изменения в данном элементе управления
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ Р±С‹Р»Рё Р»Рё РёР·РјРµРЅРµРЅРёСЏ РІ РґР°РЅРЅРѕРј СЌР»РµРјРµРЅС‚Рµ СѓРїСЂР°РІР»РµРЅРёСЏ
         /// </summary>
         /// <returns></returns>
         protected virtual bool GetChangeStatus()
@@ -1185,7 +1190,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region protected virtual bool ValidateData(out string message)
         /// <summary>
-        /// Возвращает значение, показывающее является ли значение элемента управления допустимым
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ СЏРІР»СЏРµС‚СЃСЏ Р»Рё Р·РЅР°С‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° СѓРїСЂР°РІР»РµРЅРёСЏ РґРѕРїСѓСЃС‚РёРјС‹Рј
         /// </summary>
         /// <returns></returns>
         protected virtual bool ValidateData(out string message)
@@ -1405,9 +1410,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region protected virtual void ApplyChanges()
         /// <summary>
-        /// Применить к объекту сделанные изменения на контроле. 
-        /// Если не все данные удовлетворяют формату ввода (например при вводе чисел), свойства объекта не изменяются, возвращается false
-        /// Вызов base.ApplyChanges() обязателен
+        /// РџСЂРёРјРµРЅРёС‚СЊ Рє РѕР±СЉРµРєС‚Сѓ СЃРґРµР»Р°РЅРЅС‹Рµ РёР·РјРµРЅРµРЅРёСЏ РЅР° РєРѕРЅС‚СЂРѕР»Рµ. 
+        /// Р•СЃР»Рё РЅРµ РІСЃРµ РґР°РЅРЅС‹Рµ СѓРґРѕРІР»РµС‚РІРѕСЂСЏСЋС‚ С„РѕСЂРјР°С‚Сѓ РІРІРѕРґР° (РЅР°РїСЂРёРјРµСЂ РїСЂРё РІРІРѕРґРµ С‡РёСЃРµР»), СЃРІРѕР№СЃС‚РІР° РѕР±СЉРµРєС‚Р° РЅРµ РёР·РјРµРЅСЏСЋС‚СЃСЏ, РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ false
+        /// Р’С‹Р·РѕРІ base.ApplyChanges() РѕР±СЏР·Р°С‚РµР»РµРЅ
         /// </summary>
         /// <returns></returns>
         protected virtual void ApplyChanges()
@@ -1608,7 +1613,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region protected virtual void AbortChanges()
         /// <summary>
-        /// Производит откат изменений
+        /// РџСЂРѕРёР·РІРѕРґРёС‚ РѕС‚РєР°С‚ РёР·РјРµРЅРµРЅРёР№
         /// </summary>
         protected virtual void AbortChanges()
         {
@@ -1617,7 +1622,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region protected virtual void Save()
         /// <summary>
-        /// Производит сохранение объекта в БД
+        /// РџСЂРѕРёР·РІРѕРґРёС‚ СЃРѕС…СЂР°РЅРµРЅРёРµ РѕР±СЉРµРєС‚Р° РІ Р‘Р”
         /// </summary>
         protected virtual void Save()
         {
@@ -1688,8 +1693,8 @@ namespace CAS.UI.UIControls.Auxiliary
             if (lcbPropertyInfo == null) return;
 
             BaseEntityObject value = lcb.SelectedItem;
-            //определение своиств, имеющих атрибут "отображаемое на форме"
-            //и связанных с данныс свойством
+            //РѕРїСЂРµРґРµР»РµРЅРёРµ СЃРІРѕРёСЃС‚РІ, РёРјРµСЋС‰РёС… Р°С‚СЂРёР±СѓС‚ "РѕС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РЅР° С„РѕСЂРјРµ"
+            //Рё СЃРІСЏР·Р°РЅРЅС‹С… СЃ РґР°РЅРЅС‹СЃ СЃРІРѕР№СЃС‚РІРѕРј
             List<PropertyInfo> properties =
                 _currentObject.GetType().GetProperties().
                 Where(p => p.GetCustomAttributes(typeof(FormControlAttribute), false).Length != 0 &&

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.Dictionaries;
 using SmartCore.Entities.Collections;
@@ -9,10 +10,10 @@ using SmartCore.Entities.General.Attributes;
 namespace SmartCore.CAA.Event
 {
 	[CAADto(typeof(CAAEventClassDTO))]
-	[DictionaryCollection(typeof(CommonDictionaryCollection<EventClass>))]
+	[DictionaryCollection(typeof(CommonDictionaryCollection<CAAEventClass>))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
-	public class CAAEventClass : AbstractDictionary
+	public class CAAEventClass : AbstractDictionary,IOperatable
 	{
 		#region Implement of Dictionary
 

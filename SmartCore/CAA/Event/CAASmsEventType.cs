@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using SmartCore.Auxiliary;
 using SmartCore.Entities.Collections;
@@ -11,7 +12,7 @@ namespace SmartCore.CAA.Event
 {
 	[CAADto(typeof(CAASmsEventTypeDTO))]
 	[Serializable]
-	public class CAASmsEventType : AbstractDictionary, IComparable<CAASmsEventType>
+	public class CAASmsEventType : AbstractDictionary, IComparable<CAASmsEventType>, IOperatable
 	{
 
 		#region Implement of Dictionary
