@@ -11,6 +11,7 @@ using CAS.UI.UICAAControls.Airacraft;
 using CAS.UI.UICAAControls.Audit;
 using CAS.UI.UICAAControls.CheckList.CheckListAudit;
 using CAS.UI.UICAAControls.Document;
+using CAS.UI.UICAAControls.Event;
 using CAS.UI.UICAAControls.FindingLevel;
 using CAS.UI.UICAAControls.RoutineAudit;
 using CAS.UI.UICAAControls.Specialists;
@@ -322,7 +323,8 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         
         private void LinkEventsTypesRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Events Types";
+	        e.RequestedEntity = new CAAEventTypesListScreen(_getOperator(), _currentOperator.ItemId);
         }
 	}
 }
