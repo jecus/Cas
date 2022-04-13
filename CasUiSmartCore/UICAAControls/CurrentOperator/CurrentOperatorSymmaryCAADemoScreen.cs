@@ -333,6 +333,21 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         {
 	        e.Cancel = true;
         }
+        
+        private void LinkTaskListsRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
+
+        private void LinkEducationRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
+
+        private void LinkEducationProcessManagementnRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
 	}
 }
 
