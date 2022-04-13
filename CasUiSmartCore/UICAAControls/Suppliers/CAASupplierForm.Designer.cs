@@ -809,7 +809,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			this.Name = "SupplierForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
-			this.Text = "Supplier Form";
+			this.Text = "Supplier/Provider Form";
 			this.panelLabelImages.ResumeLayout(false);
 			this.panelLabelImages.PerformLayout();
 			this.ResumeLayout(false);
