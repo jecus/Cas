@@ -30,6 +30,7 @@ using SmartCore.CAA;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.Event;
 using SmartCore.CAA.FindingLevel;
+using SmartCore.CAA.Tasks;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -326,7 +327,11 @@ namespace CAS.UI.UICAAControls
 
         private void LinkTaskListsRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Task";
+	        e.RequestedEntity = new CAACommonListScreen(typeof(CAATask), new List<Filter>()
+	        {
+		        new Filter("OperatorId",-1 )
+	        });
         }
 
         private void LinkEducationRequested(object sender, ReferenceEventArgs e)

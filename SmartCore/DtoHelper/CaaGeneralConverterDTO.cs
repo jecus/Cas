@@ -11,6 +11,7 @@ using SmartCore.CAA.FindingLevel;
 using SmartCore.CAA.PEL;
 using SmartCore.CAA.RoutineAudits;
 using SmartCore.CAA.StandartManual;
+using SmartCore.CAA.Tasks;
 using SmartCore.Calculations;
 using SmartCore.Entities;
 using SmartCore.Entities.Dictionaries;
@@ -26,6 +27,46 @@ namespace SmartCore.DtoHelper
 {
     public static  class CaaGeneralConverterDTO
 	{
+		public static TaskDTO ConvertCAA(this CAATask task)
+		{
+			return new TaskDTO
+			{
+				ItemId = task.ItemId,
+				IsDeleted = task.IsDeleted,
+				Updated = task.Updated,
+				OperatorId = task.OperatorId,
+				CorrectorId = task.CorrectorId,
+				Code = task.Code,
+				Description = task.Description,
+				CodeName = task.CodeName,
+				FullName = task.FullName,
+				LevelId = task.Level.ItemId,
+				ShortName = task.ShortName,
+				SubTaskCode = task.SubTaskCode,
+				
+			};
+		}
+
+		public static CAATask ConvertCAA(this TaskDTO task)
+		{
+			return new CAATask()
+			{
+				ItemId = task.ItemId,
+				OperatorId = task.OperatorId,
+				IsDeleted = task.IsDeleted,
+				Updated = task.Updated,
+				CorrectorId = task.CorrectorId,
+				Code = task.Code,
+				Description = task.Description,
+				CodeName = task.CodeName,
+				FullName = task.FullName,
+				Level = TaskLevel.GetItemById(task.LevelId),
+				ShortName = task.ShortName,
+				SubTaskCode = task.SubTaskCode,
+			};
+		}
+		
+		
 		public static CAASmsEventTypeDTO ConvertCAA(this CAASmsEventType smsevent)
 		{
 			return new CAASmsEventTypeDTO
