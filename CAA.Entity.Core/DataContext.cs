@@ -16,6 +16,7 @@ namespace CAA.Entity.Core
 
         #region Dictionary
 
+        public DbSet<TaskDTO> TaskDtos { get; set; }
         public DbSet<AuditCheckDTO> AuditCheckDtos { get; set; }
         public DbSet<AuditCheckRecordDTO> AuditCheckRecordDtos { get; set; }
         public DbSet<CAAAccessoryDescriptionDTO> AccessoryDescriptionDtos { get; set; }
