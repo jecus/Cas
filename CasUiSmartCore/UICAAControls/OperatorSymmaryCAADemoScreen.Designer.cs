@@ -60,6 +60,8 @@ namespace CAS.UI.UICAAControls
             
             this._settingSMS = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
             
+            this._settingProvider = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
+            this.LinkProvider = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             
             this.LinkEducationProcess = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkTaskList = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -197,6 +199,7 @@ namespace CAS.UI.UICAAControls
 			this.flowLayoutPanelExport.Controls.Add(this._settingQuality);
 			this.flowLayoutPanelExport.Controls.Add(this._settingSMS);
 			this.flowLayoutPanelExport.Controls.Add(this._settingPersonnel);
+			this.flowLayoutPanelExport.Controls.Add(this._settingProvider);
 #endif
 			this.flowLayoutPanelExport.Dock = System.Windows.Forms.DockStyle.Left;
 			this.flowLayoutPanelExport.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -2231,6 +2234,65 @@ namespace CAS.UI.UICAAControls
             
             
 
+            
+            // _settingProvider
+            // 
+            this._settingProvider.AutoSize = true;
+            this._settingProvider.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this._settingProvider.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this._settingProvider.Caption = "Setting (Provider)";
+            this._settingProvider.DescriptionTextColor = System.Drawing.Color.DimGray;
+            this._settingProvider.Extended = true;
+            this._settingProvider.Location = new System.Drawing.Point(3, 232);
+            this._settingProvider.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this._settingProvider.Name = "_settingPersonnel";
+            this._settingProvider.ReferenceLink = this.LinkProvider;
+            this._settingProvider.ReferenceLink02 = null;
+            this._settingProvider.ReferenceLink03 = null;
+            this._settingProvider.ReferenceLink04 = null;
+            this._settingProvider.ReferenceLink05 = null;
+            this._settingProvider.ReferenceLink06 = null;
+            this._settingProvider.ReferenceLink07 = null;
+            this._settingProvider.ReferenceLink08 = null;
+            this._settingProvider.ReferenceLink09 = null;
+            this._settingProvider.ReferenceLink10 = null;
+            this._settingProvider.ReferenceLink11 = null;
+            this._settingProvider.ReferenceLink12 = null;
+            this._settingProvider.ReferenceLink13 = null;
+            this._settingProvider.ReferenceLink14 = null;
+            this._settingProvider.ReferenceLink15 = null;
+            this._settingProvider.ReferenceLink16 = null;
+            this._settingProvider.Size = new System.Drawing.Size(105, 42);
+            this._settingProvider.TabIndex = 1;
+            this._settingProvider.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
+            this._settingProvider.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UserType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin;
+            
+             // 
+            // LinkProvider
+            // 
+            this.LinkProvider.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkProvider.Displayer = null;
+            this.LinkProvider.DisplayerText = null;
+            this.LinkProvider.Entity = null;
+            this.LinkProvider.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LinkProvider.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkProvider.ImageBackColor = System.Drawing.Color.Transparent;
+            this.LinkProvider.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.LinkProvider.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkProvider.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+            this.LinkProvider.Location = new System.Drawing.Point(10, 0);
+            this.LinkProvider.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.LinkProvider.Name = "LinkPersonnelTraining";
+            this.LinkProvider.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this.LinkProvider.Size = new System.Drawing.Size(188, 20);
+            this.LinkProvider.Status = AvControls.Statuses.Satisfactory;
+            this.LinkProvider.TabIndex = 16;
+            this.LinkProvider.Text = "Provider";
+            this.LinkProvider.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LinkProvider.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkProvider.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkProviderRequested);
+            
+            
 
 
 			// 
@@ -2315,6 +2377,9 @@ namespace CAS.UI.UICAAControls
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkTaskList;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEducation;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEducationProcessManagement;
+        
+        private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _settingProvider;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkProvider;
         
         
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRigestry;

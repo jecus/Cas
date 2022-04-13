@@ -341,6 +341,11 @@ namespace CAS.UI.UICAAControls
         {
 	        e.Cancel = true;
         }
+
+        private void LinkProviderRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
 	}
 }
 
