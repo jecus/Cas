@@ -10,7 +10,7 @@ namespace CAA.Entity.Models.DTO
 	[Table("Supplier", Schema = "dbo")]
 	
 	[Condition("IsDeleted", 0)]
-	public class CAASupplierDTO : BaseEntity
+	public class CAASupplierDTO : BaseEntity, IOperatable
 	{
 		
 		[Column("Name"), MaxLength(50)]
@@ -85,5 +85,8 @@ namespace CAA.Entity.Models.DTO
 		public ICollection<CAASpecialistTrainingDTO> SpecialistTrainingDtos { get; set; }
 
         #endregion
+        
+        [Column("OperatorId")]
+        public int OperatorId { get; set; }
 	}
 }

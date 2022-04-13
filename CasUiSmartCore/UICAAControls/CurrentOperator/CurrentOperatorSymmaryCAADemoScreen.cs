@@ -16,6 +16,7 @@ using CAS.UI.UICAAControls.FindingLevel;
 using CAS.UI.UICAAControls.RoutineAudit;
 using CAS.UI.UICAAControls.Specialists;
 using CAS.UI.UICAAControls.StandartManual;
+using CAS.UI.UICAAControls.Suppliers;
 using CAS.UI.UICAAControls.Users;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
@@ -351,7 +352,8 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkProviderRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Events Types";
+	        e.RequestedEntity = new CAASupplierListScreen(_getOperator(), _currentOperator.ItemId);
         }
 	}
 }

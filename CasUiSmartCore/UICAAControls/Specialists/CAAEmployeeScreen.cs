@@ -32,7 +32,7 @@ namespace CAS.UI.UICAAControls.Specialists
         private ToolStripMenuItem _itemPrintReportRecords;
         private ToolStripMenuItem _itemPrintReportHistory;
 		private List<AircraftModel> aircraftModels = new List<AircraftModel>();
-		private List<Supplier> _suppliers = new List<Supplier>();
+		private List<SmartCore.Purchase.Supplier> _suppliers = new List<SmartCore.Purchase.Supplier>();
 
         #endregion
 
@@ -257,7 +257,7 @@ namespace CAS.UI.UICAAControls.Specialists
 				}
 	            
 	            _suppliers.Clear();
-				_suppliers.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASupplierDTO, Supplier>());
+				_suppliers.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASupplierDTO, SmartCore.Purchase.Supplier>());
 
 				aircraftModels.Clear();
 				aircraftModels.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAAAccessoryDescriptionDTO, AircraftModel>(new Filter("ModelingObjectTypeId", 7)));

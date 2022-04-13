@@ -81,6 +81,14 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		public static SupplierClass Manufacturer = new SupplierClass(14, "Manufacturer", "Manufacturer", "Manufacturer");
+		
+		
+		
+		
+		public static SupplierClass Training = new SupplierClass(100, "Training", "Training", "Training", Provider);
+		public static SupplierClass Low = new SupplierClass(101, "Low", "Low", "Low", Provider);
+		public static SupplierClass Consalting = new SupplierClass(102, "Consalting", "Consalting", "Consalting", Provider);
+		public static SupplierClass Accaunt = new SupplierClass(103, "Accaunt", "Accaunt", "Accaunt", Provider);
 
 		#region public static SupplierClass Unknown = new SupplierClass(-1, "Unknown", "Unknown", "Unknown");
 		/// <summary> 

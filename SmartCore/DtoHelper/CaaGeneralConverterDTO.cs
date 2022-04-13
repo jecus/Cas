@@ -1300,6 +1300,7 @@ namespace SmartCore.DtoHelper
 				Products = supplier.Products,
 				Approved = supplier.Approved,
 				Remarks = supplier.Remarks,
+				OperatorId = supplier.OperatorId,
 				SupplierClassId = supplier.SupplierClass?.ItemId ?? -1,
 				Subject = supplier.Subject,
 				SupplierDocs = supplier.SupplierDocs?.Select(i => i.ConvertCAA()) as ICollection<CAADocumentDTO>
@@ -1320,6 +1321,7 @@ namespace SmartCore.DtoHelper
 				AirCode = supplier.AirCode,
 				VendorCode = supplier.VendorCode,
 				Phone = supplier.Phone,
+				OperatorId = supplier.OperatorId,
 				Fax = supplier.Fax,
 				Address = supplier.Address,
 				ContactPerson = supplier.ContactPerson,

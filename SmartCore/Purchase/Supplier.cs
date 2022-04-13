@@ -11,7 +11,7 @@ namespace SmartCore.Purchase
 {
 
 	/// <summary>
-	/// Класс описывает поставщика
+	/// РљР»Р°СЃСЃ РѕРїРёСЃС‹РІР°РµС‚ РїРѕСЃС‚Р°РІС‰РёРєР°
 	/// </summary>
 	[Table("Supplier", "dbo", "ItemId")]
 	[Dto(typeof(SupplierDTO))]
@@ -22,7 +22,7 @@ namespace SmartCore.Purchase
 	{
 		private static Type _thisType;
 		/*
-		*  Свойства
+		*  РЎРІРѕР№СЃС‚РІР°
 		*/
 
 		#region public String Name { get; set; }
@@ -217,12 +217,12 @@ namespace SmartCore.Purchase
 		}
 		#endregion
 		/*
-		*  Методы 
+		*  РњРµС‚РѕРґС‹ 
 		*/
 		
 		#region public Supplier()
 		/// <summary>
-		/// Создает воздушное судно без дополнительной информации
+		/// РЎРѕР·РґР°РµС‚ РІРѕР·РґСѓС€РЅРѕРµ СЃСѓРґРЅРѕ Р±РµР· РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё
 		/// </summary>
 		public Supplier()
 		{
@@ -264,7 +264,7 @@ namespace SmartCore.Purchase
 
 		#region public override string ToString()
 		/// <summary>
-		/// Перегружаем для отладки
+		/// РџРµСЂРµРіСЂСѓР¶Р°РµРј РґР»СЏ РѕС‚Р»Р°РґРєРё
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()
@@ -295,6 +295,8 @@ namespace SmartCore.Purchase
 				});
 			}
 		}
+
+		public int OperatorId { get; set; }
 
 		#endregion
 

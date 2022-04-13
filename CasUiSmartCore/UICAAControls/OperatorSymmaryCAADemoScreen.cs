@@ -17,6 +17,7 @@ using CAS.UI.UICAAControls.Operators;
 using CAS.UI.UICAAControls.RoutineAudit;
 using CAS.UI.UICAAControls.Specialists;
 using CAS.UI.UICAAControls.StandartManual;
+using CAS.UI.UICAAControls.Suppliers;
 using CAS.UI.UICAAControls.Users;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
@@ -344,7 +345,8 @@ namespace CAS.UI.UICAAControls
 
         private void LinkProviderRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Provider";
+	        e.RequestedEntity = new CAASupplierListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
         }
 	}
 }
