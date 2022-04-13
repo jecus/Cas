@@ -321,6 +321,11 @@ namespace CAS.UI.UICAAControls
 	        e.DisplayerText = "Events Types";
 	        e.RequestedEntity = new CAAEventTypesListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
         }
+
+        private void LinkLinkEducationProcessRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
 	}
 }
 

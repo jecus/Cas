@@ -65,6 +65,9 @@ namespace CAS.UI.UICAAControls.CurrentOperator
             this.LinkEventsTypes = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             
             
+            this.LinkEducationProcess = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            
+            
             this._documentsReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
 			this.LinkRigestry = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.ExportMonthly = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
@@ -760,7 +763,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 			this._personnelReferenceContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._personnelReferenceContainer.Name = "_personnelReferenceContainer";
 			this._personnelReferenceContainer.ReferenceLink = this.LinkPersonnel;
-			this._personnelReferenceContainer.ReferenceLink02 = null;
+			this._personnelReferenceContainer.ReferenceLink02 = this.LinkEducationProcess;
 			this._personnelReferenceContainer.ReferenceLink03 = null;
 			this._personnelReferenceContainer.ReferenceLink04 = null;
 			this._personnelReferenceContainer.ReferenceLink05 = null;
@@ -2057,6 +2060,31 @@ namespace CAS.UI.UICAAControls.CurrentOperator
             this.LinkPersonnelTraining.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             this.LinkPersonnelTraining.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkPersonnelTrainingRequested);
 
+            
+            // 
+            // LinkEducationProcess
+            // 
+            this.LinkEducationProcess.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEducationProcess.Displayer = null;
+            this.LinkEducationProcess.DisplayerText = null;
+            this.LinkEducationProcess.Entity = null;
+            this.LinkEducationProcess.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LinkEducationProcess.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEducationProcess.ImageBackColor = System.Drawing.Color.Transparent;
+            this.LinkEducationProcess.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.LinkEducationProcess.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEducationProcess.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+            this.LinkEducationProcess.Location = new System.Drawing.Point(10, 0);
+            this.LinkEducationProcess.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.LinkEducationProcess.Name = "LinkPersonnelTraining";
+            this.LinkEducationProcess.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this.LinkEducationProcess.Size = new System.Drawing.Size(188, 20);
+            this.LinkEducationProcess.Status = AvControls.Statuses.Satisfactory;
+            this.LinkEducationProcess.TabIndex = 16;
+            this.LinkEducationProcess.Text = "Education Process";
+            this.LinkEducationProcess.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LinkEducationProcess.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkEducationProcess.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkLinkEducationProcessRequested);
 			
 
             // 
@@ -2130,7 +2158,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEventsClasses;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEventsTypes;
         
-        
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEducationProcess;
         
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRigestry;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel ExportMonthly;

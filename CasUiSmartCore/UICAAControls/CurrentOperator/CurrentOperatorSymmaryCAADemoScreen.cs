@@ -328,6 +328,11 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 	        e.DisplayerText = "Events Types";
 	        e.RequestedEntity = new CAAEventTypesListScreen(_getOperator(), _currentOperator.ItemId);
         }
+
+        private void LinkLinkEducationProcessRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
 	}
 }
 
