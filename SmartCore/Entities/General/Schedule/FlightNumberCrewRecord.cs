@@ -8,7 +8,7 @@ namespace SmartCore.Entities.General.Schedule
 {
 
     /// <summary>
-    /// Класс, описывает должность члена экипажа на планируемый рейс
+    /// РљР»Р°СЃСЃ, РѕРїРёСЃС‹РІР°РµС‚ РґРѕР»Р¶РЅРѕСЃС‚СЊ С‡Р»РµРЅР° СЌРєРёРїР°Р¶Р° РЅР° РїР»Р°РЅРёСЂСѓРµРјС‹Р№ СЂРµР№СЃ
     /// </summary>
     [Table("FlightNumberCrewRecords", "dbo", "ItemId")]
     [Dto(typeof(FlightNumberCrewRecordDTO))]
@@ -18,12 +18,12 @@ namespace SmartCore.Entities.General.Schedule
     {
         private static Type _thisType;
         /*
-        *  Свойства
+        *  РЎРІРѕР№СЃС‚РІР°
         */
 
         #region public Int32 FlightNumberId { get; set; }
         /// <summary>
-		/// Идентификатор рейса
+		/// РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЂРµР№СЃР°
 		/// </summary>
         [TableColumnAttribute("FlightNumberId")]
         [ParentAttribute]
@@ -38,18 +38,18 @@ namespace SmartCore.Entities.General.Schedule
 
         #region public Int32 Specialization { get; set; }
         /// <summary>
-        /// Идентификатор должности 
+        /// РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РґРѕР»Р¶РЅРѕСЃС‚Рё 
         /// </summary>
         [TableColumnAttribute("SpecializationId")]
         [FormControl("Occupation")]
         [ListViewData(250f, "Occupation")]
         [NotNull]
-        public Specialization Specialization { get; set; }
+        public Occupation Occupation { get; set; }
         #endregion
 
         #region public Int32 Count { get; set; }
         /// <summary>
-        /// Количество специалистов данной должности, требуемое для рейса
+        /// РљРѕР»РёС‡РµСЃС‚РІРѕ СЃРїРµС†РёР°Р»РёСЃС‚РѕРІ РґР°РЅРЅРѕР№ РґРѕР»Р¶РЅРѕСЃС‚Рё, С‚СЂРµР±СѓРµРјРѕРµ РґР»СЏ СЂРµР№СЃР°
         /// </summary>
         [TableColumnAttribute("Count")]
         [FormControl("Count")]
@@ -59,12 +59,12 @@ namespace SmartCore.Entities.General.Schedule
         #endregion
 
         /*
-		*  Методы 
+		*  РњРµС‚РѕРґС‹ 
 		*/
 
         #region public FlightNumberCrewRecord()
         /// <summary>
-        /// Создает "пустую" запись о должности члена экипажа на планируемый рейс
+        /// РЎРѕР·РґР°РµС‚ "РїСѓСЃС‚СѓСЋ" Р·Р°РїРёСЃСЊ Рѕ РґРѕР»Р¶РЅРѕСЃС‚Рё С‡Р»РµРЅР° СЌРєРёРїР°Р¶Р° РЅР° РїР»Р°РЅРёСЂСѓРµРјС‹Р№ СЂРµР№СЃ
         /// </summary>
         public FlightNumberCrewRecord()
         {
@@ -75,7 +75,7 @@ namespace SmartCore.Entities.General.Schedule
 
         #region public override string ToString()
         /// <summary>
-        /// Перегружаем для отладки
+        /// РџРµСЂРµРіСЂСѓР¶Р°РµРј РґР»СЏ РѕС‚Р»Р°РґРєРё
         /// </summary>
         /// <returns></returns>
         public override string ToString()

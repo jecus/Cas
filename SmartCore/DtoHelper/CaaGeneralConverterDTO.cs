@@ -806,7 +806,7 @@ namespace SmartCore.DtoHelper
 				CorrectorId = specialist.CorrectorId,
 				FirstName = specialist.FirstName,
 				ShortName = specialist.ShortName,
-				SpecializationID = specialist.Specialization?.ItemId ?? -1,
+				SpecializationID = specialist.Occupation?.ItemId ?? -1,
 				LastName = specialist.LastName,
 				Gender = (short?)specialist.Gender,
 				AGWCategoryId = specialist.AGWCategory?.ItemId,
@@ -881,7 +881,7 @@ namespace SmartCore.DtoHelper
 				Combination = specialist.Combination ?? "",
 				AGWCategory = specialist.AGWCategory?.ConvertCAA(),
 				Facility = specialist.Facility?.ConvertCAA(),
-				Specialization = specialist.Specialization?.ConvertCAA(),
+				Occupation = specialist.Specialization?.ConvertCAA(),
 				IsCAA = specialist.IsCAA,
 				OperatorId = specialist.OperatorId
 			};

@@ -202,14 +202,14 @@ namespace SmartCore.Entities.General
 		#endregion
 
 		#region public Specialization ResponsibleOccupation { get; set; }
-		private Specialization _responsibleOccupation;
+		private Occupation _responsibleOccupation;
 
 		[TableColumnAttribute("ResponsibleOccupationId")]
 		[ListViewData(0.1f, "Responsible", 13)]
 		[Filter("Responsible:", Order = 14)]
-		public Specialization ResponsibleOccupation
+		public Occupation ResponsibleOccupation
 		{
-			get { return _responsibleOccupation ?? (_responsibleOccupation = Specialization.Unknown); }
+			get { return _responsibleOccupation ?? (_responsibleOccupation = Occupation.Unknown); }
 			set { _responsibleOccupation = value; }
 		}
 

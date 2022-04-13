@@ -21,7 +21,7 @@ namespace SmartCore.Entities.General.Interfaces
 		#region Specialization Specialization { get; }
 
 		[Filter("Occupation:", Order = 3)]
-		Specialization Specialization { get; }
+		Occupation Occupation { get; }
 			#endregion
 
 		#region List<AircraftModel> LicenseAircrafts { get; }

@@ -47,7 +47,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			labelAddressValue.Text = _currentItem.Address;
 			labelInformationValue.Text = _currentItem.Information;
 			labelFamilyStatusValue.Text = _currentItem.FamilyStatus.ToString();
-			labelOccupationValue.Text = _currentItem.Specialization.ToString();
+			labelOccupationValue.Text = _currentItem.Occupation.ToString();
 			labelEducationValue.Text = _currentItem.Education.ToString();
 			labelPositionValue.Text = _currentItem.Position.ToString();
 			labelLocationVAlue.Text = _currentItem.Facility.ToString();

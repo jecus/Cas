@@ -11,10 +11,10 @@ namespace SmartCore.Entities.Dictionaries
     [Table("Specializations", "Dictionaries", "ItemId")]
 	[Dto(typeof(SpecializationDTO))]
 	[CAADto(typeof(CAASpecializationDTO))]
-    [DictionaryCollection(typeof(CommonDictionaryCollection<Specialization>))]
+    [DictionaryCollection(typeof(CommonDictionaryCollection<Occupation>))]
     [Condition("IsDeleted", "0")]
 	[Serializable]
-    public class Specialization : AbstractDictionary, IOperatable
+    public class Occupation : AbstractDictionary, IOperatable
 	{
 		private static Type _thisType;
 
@@ -99,13 +99,13 @@ namespace SmartCore.Entities.Dictionaries
 		#region public override void SetProperties(AbstractDictionary dictionary)
 		public override void SetProperties(AbstractDictionary dictionary)
         {
-            if (dictionary is Specialization)
-                SetProperties((Specialization)dictionary);
+            if (dictionary is Occupation)
+                SetProperties((Occupation)dictionary);
         }
         #endregion
 
         #region public void SetProperties(Specialization dictionary)
-        public void SetProperties(Specialization dictionary)
+        public void SetProperties(Occupation dictionary)
         {
             FullName = dictionary.FullName;
             ShortName = dictionary.ShortName;
@@ -115,7 +115,7 @@ namespace SmartCore.Entities.Dictionaries
         #endregion
 
         #region public Specialization()
-        public Specialization()
+        public Occupation()
         {
             ItemId = -1;
             SmartCoreObjectType = SmartCoreType.Specialization;
@@ -123,14 +123,14 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		#region public static Department Unknown
-		private static Specialization _unknown;
+		private static Occupation _unknown;
 	    private Department _department;
 
-	    public static Specialization Unknown
+	    public static Occupation Unknown
 		{
 			get
 			{
-				return _unknown ?? (_unknown = new Specialization
+				return _unknown ?? (_unknown = new Occupation
 				{
 					FullName = "Unknown",
 					ShortName = "UNK",
@@ -142,7 +142,7 @@ namespace SmartCore.Entities.Dictionaries
 
 		#endregion
 
-		public Specialization(Int32 id, string name)
+		public Occupation(Int32 id, string name)
         {
             ShortName = name;
             ItemId = id;
@@ -151,7 +151,7 @@ namespace SmartCore.Entities.Dictionaries
 		#region private static Type GetCurrentType()
 		private static Type GetCurrentType()
 		{
-			return _thisType ?? (_thisType = typeof(Specialization));
+			return _thisType ?? (_thisType = typeof(Occupation));
 		}
 		#endregion
 

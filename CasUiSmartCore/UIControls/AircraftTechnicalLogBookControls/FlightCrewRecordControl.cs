@@ -16,8 +16,8 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
     ///</summary>
     public partial class FlightCrewRecordControl : EditObjectControl
     {
-        private CommonDictionaryCollection<Specialization> _specializations 
-            = new CommonDictionaryCollection<Specialization>();
+        private CommonDictionaryCollection<Occupation> _specializations 
+            = new CommonDictionaryCollection<Occupation>();
         private CommonCollection<Specialist> _specialists = new CommonCollection<Specialist>();
 
         #region public FlightCrewRecord FlightCrewRecord
@@ -83,9 +83,9 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         {
             if (FlightCrewRecord != null)
             {
-                if (comboSpecialization.SelectedItem is Specialization)
+                if (comboSpecialization.SelectedItem is Occupation)
                 {
-                    FlightCrewRecord.Specialization = ((Specialization)comboSpecialization.SelectedItem);
+                    FlightCrewRecord.Occupation = ((Occupation)comboSpecialization.SelectedItem);
                 }
                 if (comboSpecialist.SelectedItem is Specialist)
                 {
@@ -107,7 +107,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             BeginUpdate();
 
             _specializations.Clear();
-            _specializations.AddRange(((CommonDictionaryCollection<Specialization>)GlobalObjects.CasEnvironment.GetDictionary<Specialization>()).ToArray());
+            _specializations.AddRange(((CommonDictionaryCollection<Occupation>)GlobalObjects.CasEnvironment.GetDictionary<Occupation>()).ToArray());
             _specialists.Clear();
             _specialists.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SpecialistDTO,Specialist>());
             if (FlightCrewRecord != null)
@@ -118,7 +118,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
                 if (FlightCrewRecord.ItemId > 0)
                 {
-                    comboSpecialization.SelectedItem = FlightCrewRecord.Specialization;
+                    comboSpecialization.SelectedItem = FlightCrewRecord.Occupation;
                     Specialist selectedSpec = _specialists.GetItemById(FlightCrewRecord.Specialist.ItemId);
                     if(selectedSpec != null)
                         comboSpecialist.SelectedItem = selectedSpec;
@@ -131,7 +131,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
                 }
                 else
                 {
-                    comboSpecialization.SelectedItem = FlightCrewRecord.Specialization;
+                    comboSpecialization.SelectedItem = FlightCrewRecord.Occupation;
                     comboSpecialist.SelectedItem = FlightCrewRecord.Specialist != null
                         ? _specialists.GetItemById(FlightCrewRecord.Specialist.ItemId)
                         : null;
@@ -189,13 +189,13 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         #region private void ComboSpecializationSelectedIndexChanged(object sender, EventArgs e)
         private void ComboSpecializationSelectedIndexChanged(object sender, EventArgs e)
         {
-            Specialization specialization = comboSpecialization.SelectedItem as Specialization;
+            Occupation occupation = comboSpecialization.SelectedItem as Occupation;
 
             comboSpecialist.Items.Clear();
-            if(specialization != null)
+            if(occupation != null)
             {
-                comboSpecialist.Items.AddRange(_specialists.Where(s => s.Specialization == specialization).ToArray());
-                comboSpecialist.SelectedItem = _specialists.GetItemById(specialization.ItemId);
+                comboSpecialist.Items.AddRange(_specialists.Where(s => s.Occupation == occupation).ToArray());
+                comboSpecialist.SelectedItem = _specialists.GetItemById(occupation.ItemId);
             }
             else
             {

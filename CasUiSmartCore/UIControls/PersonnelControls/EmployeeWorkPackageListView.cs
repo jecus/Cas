@@ -72,7 +72,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 				CreateRow($"{aircraft?.RegistrationNumber} {aircraft?.Model.ShortName}", aircraft),
 				CreateRow($"Performed WP:{item.Title}", item.Title),
 				CreateRow(ratingString, ratingString),
-				CreateRow(CurrentSpecialist.Specialization.ToString(), CurrentSpecialist.Specialization),
+				CreateRow(CurrentSpecialist.Occupation.ToString(), CurrentSpecialist.Occupation),
 				CreateRow(item.Station, item.Status),
 				CreateRow(author, author)
 			};

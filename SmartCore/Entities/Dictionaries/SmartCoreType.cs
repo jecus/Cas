@@ -430,7 +430,7 @@ namespace SmartCore.Entities.Dictionaries
 		public static SmartCoreType SchedulePeriods = new SmartCoreType(3028, "SchedulePeriods", "SchedulePeriods", typeof(SchedulePeriods));
 		public static SmartCoreType ServiceType = new SmartCoreType(3029, "ServiceType", "ServiceType", typeof(ServiceType));
 		public static SmartCoreType Reason = new SmartCoreType(3030, "Reason", "Reason", typeof(Reason));
-		public static SmartCoreType Specialization = new SmartCoreType(3031, "Specialization", "Specialization", typeof(Specialization));
+		public static SmartCoreType Specialization = new SmartCoreType(3031, "Specialization", "Specialization", typeof(Occupation));
 		public static SmartCoreType TripName = new SmartCoreType(3032, "TripName", "TripName", typeof(TripName));
 		public static SmartCoreType ComponentLLPCategoryData = new SmartCoreType(3033, "ComponentLLPCategoryData", "ComponentLLPCategoryData", typeof(ComponentLLPCategoryData));
 		public static SmartCoreType ComponentWorkInRegimeParams = new SmartCoreType(3034, "ComponentWorkInRegimeParams", "ComponentWorkInRegimeParams", typeof(ComponentWorkInRegimeParams));

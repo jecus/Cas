@@ -374,15 +374,15 @@ namespace SmartCore.Entities.General.Personnel
 
 		#region public Specialization Specialization { get; set; }
 
-		private Specialization _specialization;
+		private Occupation _occupation;
 
 		[TableColumnAttribute("SpecializationId")]
 		[FormControl(120, "Occupation")]
 		[NotNull]
-		public Specialization Specialization
+		public Occupation Occupation
 		{
-			get { return _specialization ?? Specialization.Unknown; }
-			set { _specialization = value; }
+			get { return _occupation ?? Occupation.Unknown; }
+			set { _occupation = value; }
 		}
 
 		public static PropertyInfo SpecializationIdProperty
@@ -508,7 +508,7 @@ namespace SmartCore.Entities.General.Personnel
 		{
 			get
 			{
-				return Specialization.Department??Department.Unknown;
+				return Occupation.Department??Department.Unknown;
 			}
 		}
 

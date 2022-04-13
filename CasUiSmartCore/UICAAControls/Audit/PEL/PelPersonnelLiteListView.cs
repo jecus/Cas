@@ -42,7 +42,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 			{
 				CreateRow(item.Specialist.FirstName, item.Specialist.FirstName),
 				CreateRow(item.Specialist.LastName, item.Specialist.LastName),
-				CreateRow(item.Specialist.Specialization.ToString(), item.Specialist.Specialization),
+				CreateRow(item.Specialist.Occupation.ToString(), item.Specialist.Occupation),
 				CreateRow(item.Specialist.Operator.ToString(), item.Specialist.Operator),
 			};
 

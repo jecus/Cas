@@ -51,7 +51,7 @@ namespace CAS.UI.UICAAControls.Audit.PEL
 			{
 				CreateRow(item.Specialist.FirstName, item.Specialist.FirstName),
 				CreateRow(item.Specialist.LastName, item.Specialist.LastName),
-				CreateRow(item.Specialist.Specialization.ToString(), item.Specialist.Specialization),
+				CreateRow(item.Specialist.Occupation.ToString(), item.Specialist.Occupation),
 				CreateRow(item.Role.ToString(), item.Role),
 				CreateRow(item.PELResponsibilities.ToString(), item.PELResponsibilities),
 				CreateRow(item.PELPosition.ToString(), item.PELPosition),

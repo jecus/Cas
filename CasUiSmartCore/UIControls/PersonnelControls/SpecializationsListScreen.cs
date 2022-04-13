@@ -25,7 +25,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 		private Operator _currentOperator;
         private readonly int _operatorId;
 
-        private CommonDictionaryCollection<Specialization> _itemsArray = new CommonDictionaryCollection<Specialization>();
+        private CommonDictionaryCollection<Occupation> _itemsArray = new CommonDictionaryCollection<Occupation>();
 
 		private SpecializationListView _directivesViewer;
 
@@ -108,11 +108,11 @@ namespace CAS.UI.UIControls.PersonnelControls
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
 			if(GlobalObjects.CasEnvironment != null)
-			    _itemsArray.AddRange(GlobalObjects.CasEnvironment.GetDictionary<Specialization>());
+			    _itemsArray.AddRange(GlobalObjects.CasEnvironment.GetDictionary<Occupation>());
             else
             {
                 //_itemsArray.AddRange(GlobalObjects.CaaEnvironment.GetDictionary<Specialization>());
-                var res = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecializationDTO, Specialization>(
+                var res = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecializationDTO, Occupation>(
                     new Filter("OperatorId", _operatorId));
 
                 foreach (var specialization in res)
@@ -275,7 +275,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-			CommonEditorForm form = new CommonEditorForm(new Specialization()
+			CommonEditorForm form = new CommonEditorForm(new Occupation()
             {
 				OperatorId = _operatorId
             });

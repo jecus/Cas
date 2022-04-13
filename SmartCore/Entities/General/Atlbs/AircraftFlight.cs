@@ -18,7 +18,7 @@ namespace SmartCore.Entities.General.Atlbs
 {
 
 	/// <summary>
-	/// Класс описывает полет воздушного судна
+	/// РљР»Р°СЃСЃ РѕРїРёСЃС‹РІР°РµС‚ РїРѕР»РµС‚ РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР°
 	/// </summary>
 	[Serializable]
 	[Table("AircraftFlights", "dbo", "ItemId")]
@@ -27,13 +27,13 @@ namespace SmartCore.Entities.General.Atlbs
 	public class AircraftFlight: AbstractRecord, IFileContainer, IEmployeeFlightFilterParams, IMounthlyUtilizationFilter
 	{
 		/*
-		 * поля 
+		 * РїРѕР»СЏ 
 		 */
 
 		private static Type _thisType;
 
 		/*
-		*  Свойства
+		*  РЎРІРѕР№СЃС‚РІР°
 		*/
 
 		#region public Int32 ATLBId { get; set; }
@@ -65,7 +65,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public FlightAircraftCode FlightAircraftCode
 		/// <summary>
-		/// Код ВС на данный полет (Пассажирское, грузовое, смешанное)
+		/// РљРѕРґ Р’РЎ РЅР° РґР°РЅРЅС‹Р№ РїРѕР»РµС‚ (РџР°СЃСЃР°Р¶РёСЂСЃРєРѕРµ, РіСЂСѓР·РѕРІРѕРµ, СЃРјРµС€Р°РЅРЅРѕРµ)
 		/// </summary>
 		private FlightAircraftCode _flightAircraftCode;
 		[TableColumnAttribute("FlightAircraftCode")]
@@ -155,7 +155,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region  public CruiseLevel Level { get; set; }
 		/// <summary>
-		/// Эшелон полета
+		/// Р­С€РµР»РѕРЅ РїРѕР»РµС‚Р°
 		/// </summary>
 		[TableColumnAttribute("Level")]
 		public CruiseLevel Level { get; set; }
@@ -163,7 +163,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public double AlignmentBefore { get; set; }
 		/// <summary>
-		/// Центровка до  полета
+		/// Р¦РµРЅС‚СЂРѕРІРєР° РґРѕ  РїРѕР»РµС‚Р°
 		/// </summary>
 		[TableColumnAttribute("AlignmentBefore")]
 		public double AlignmentBefore { get; set; }
@@ -171,7 +171,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public Int32 AlignmentAfter { get; set; }
 		/// <summary>
-		/// Центровка после полета
+		/// Р¦РµРЅС‚СЂРѕРІРєР° РїРѕСЃР»Рµ РїРѕР»РµС‚Р°
 		/// </summary>
 		[TableColumnAttribute("AlignmentAfter")]
 		public double AlignmentAfter { get; set; }
@@ -179,7 +179,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region  public Int32 Distance { get; set; }
 		/// <summary>
-		/// Дистанция полета
+		/// Р”РёСЃС‚Р°РЅС†РёСЏ РїРѕР»РµС‚Р°
 		/// </summary>
 		[TableColumnAttribute("Distance")]
 		public Int32 Distance { get; set; }
@@ -187,7 +187,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public Measure DistanceMeasure { get; set; }
 		/// <summary>
-		/// Единица измерения дистанции полета
+		/// Р•РґРёРЅРёС†Р° РёР·РјРµСЂРµРЅРёСЏ РґРёСЃС‚Р°РЅС†РёРё РїРѕР»РµС‚Р°
 		/// </summary>
 		[TableColumnAttribute("DistanceMeasure")]
 		public Measure DistanceMeasure { get; set; }
@@ -195,7 +195,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public double TakeOffWeight { get; set; }
 		/// <summary>
-		/// Взлетный вес
+		/// Р’Р·Р»РµС‚РЅС‹Р№ РІРµСЃ
 		/// </summary>
 		[TableColumnAttribute("TakeOffWeight")]
 		public double TakeOffWeight { get; set; }
@@ -203,7 +203,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public String StationFrom { get; set; }
 		/// <summary>
-		/// Место вылета
+		/// РњРµСЃС‚Рѕ РІС‹Р»РµС‚Р°
 		/// </summary>
 		[TableColumnAttribute("StationFrom")]
 		public String StationFrom { get; set; }
@@ -211,7 +211,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public String StationTo { get; set; }
 		/// <summary>
-		/// Место посадки
+		/// РњРµСЃС‚Рѕ РїРѕСЃР°РґРєРё
 		/// </summary>
 		[TableColumnAttribute("StationTo")]
 		public String StationTo { get; set; }
@@ -222,7 +222,7 @@ namespace SmartCore.Entities.General.Atlbs
 		private AirportsCodes _stationFromId;
 
 		/// <summary>
-		/// Место вылета
+		/// РњРµСЃС‚Рѕ РІС‹Р»РµС‚Р°
 		/// </summary>
 		[TableColumnAttribute("StationFromId")]
 		public AirportsCodes StationFromId
@@ -243,7 +243,7 @@ namespace SmartCore.Entities.General.Atlbs
 		private AirportsCodes _stationToId;
 
 		/// <summary>
-		/// Место посадки
+		/// РњРµСЃС‚Рѕ РїРѕСЃР°РґРєРё
 		/// </summary>
 		[TableColumnAttribute("StationToId")]
 		public AirportsCodes StationToId
@@ -269,7 +269,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public Int32 DelayReasonId { get; set; }
 		/// <summary>
-		/// Причина задержки рейса
+		/// РџСЂРёС‡РёРЅР° Р·Р°РґРµСЂР¶РєРё СЂРµР№СЃР°
 		/// </summary>
 		[TableColumnAttribute("DelayReasonId")]
 		public Reason DelayReason { get; set; }
@@ -277,7 +277,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public Reason CancelReasonId { get; set; }
 		/// <summary>
-		/// Причина отмены рейса
+		/// РџСЂРёС‡РёРЅР° РѕС‚РјРµРЅС‹ СЂРµР№СЃР°
 		/// </summary>
 		[TableColumnAttribute("CancelReasonId")]
 		public Reason CancelReason { get; set; }
@@ -301,7 +301,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public Int32 TakeOffTime { get; set; }
 		/// <summary>
-		/// Время взлета воздушного судна (в абсолютных минутах относительно начала дня)
+		/// Р’СЂРµРјСЏ РІР·Р»РµС‚Р° РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР° (РІ Р°Р±СЃРѕР»СЋС‚РЅС‹С… РјРёРЅСѓС‚Р°С… РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РЅР°С‡Р°Р»Р° РґРЅСЏ)
 		/// </summary>
 		[TableColumnAttribute("TakeOffTime")]
 		public Int32 TakeOffTime { get; set; }
@@ -309,7 +309,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public Int32 LDGTime { get; set; }
 		/// <summary>
-		/// Время посадки воздушного судна (в абсолютных минутах относительно начала дня)
+		/// Р’СЂРµРјСЏ РїРѕСЃР°РґРєРё РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР° (РІ Р°Р±СЃРѕР»СЋС‚РЅС‹С… РјРёРЅСѓС‚Р°С… РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РЅР°С‡Р°Р»Р° РґРЅСЏ)
 		/// </summary>
 		[TableColumnAttribute("LDGTime")]
 		public Int32 LDGTime { get; set; }
@@ -317,7 +317,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public Int32 NightTime { get; set; }
 		/// <summary>
-		/// Ночное время полета воздушного судна (в абсолютных минутах относительно начала дня)
+		/// РќРѕС‡РЅРѕРµ РІСЂРµРјСЏ РїРѕР»РµС‚Р° РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР° (РІ Р°Р±СЃРѕР»СЋС‚РЅС‹С… РјРёРЅСѓС‚Р°С… РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РЅР°С‡Р°Р»Р° РґРЅСЏ)
 		/// </summary>
 		[TableColumnAttribute("NightTime")]
 		public Int32 NightTime { get; set; }
@@ -392,7 +392,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		private FuelTankConditionCollection _fuelTankCollection;
 		/// <summary>
-		/// Состояние топливных баков
+		/// РЎРѕСЃС‚РѕСЏРЅРёРµ С‚РѕРїР»РёРІРЅС‹С… Р±Р°РєРѕРІ
 		/// </summary>
 		public FuelTankConditionCollection FuelTankCollection
 		{
@@ -427,7 +427,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public CertificateOfReleaseToService CertificateOfReleaseToService
 		/// <summary>
-		/// Cертификат о допуске к эксплуптации
+		/// CРµСЂС‚РёС„РёРєР°С‚ Рѕ РґРѕРїСѓСЃРєРµ Рє СЌРєСЃРїР»СѓРїС‚Р°С†РёРё
 		/// </summary>
 		public CertificateOfReleaseToService CertificateOfReleaseToService
 		{
@@ -445,7 +445,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region  public string ListViewChecksPerformed
 		/// <summary>
-		/// Чеки, которые были выполнены перед полетом
+		/// Р§РµРєРё, РєРѕС‚РѕСЂС‹Рµ Р±С‹Р»Рё РІС‹РїРѕР»РЅРµРЅС‹ РїРµСЂРµРґ РїРѕР»РµС‚РѕРј
 		/// </summary>
 		public string ListViewChecksPerformed
 		{
@@ -471,7 +471,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public Highlight Highlight { get; set; }
 		/// <summary>
-		/// Подсветка
+		/// РџРѕРґСЃРІРµС‚РєР°
 		/// </summary>
 		[TableColumnAttribute("Highlight")]
 		public Highlight Highlight { get; set; }
@@ -526,23 +526,23 @@ namespace SmartCore.Entities.General.Atlbs
 
 		public AircraftModel AircraftModel { get {return Aircraft?.Model ?? AircraftModel.Unknown; } }
 
-		public Specialization Specialization
+		public Occupation Occupation
 		{
 			get
 			{
-				return FlightCrewRecords.First()?.Specialization ?? Specialization.Unknown;
+				return FlightCrewRecords.First()?.Occupation ?? Occupation.Unknown;
 			}
 		}
 
 		/*
-				 * Вложенные коллекции
+				 * Р’Р»РѕР¶РµРЅРЅС‹Рµ РєРѕР»Р»РµРєС†РёРё
 				 */
 
 		#region public CommonCollection<ComponentOilCondition> OilConditionCollection { get; set; }
 
 		private CommonCollection<ComponentOilCondition> _oilConditionCollection;
 		/// <summary>
-		/// Уровни масла по агрегатам
+		/// РЈСЂРѕРІРЅРё РјР°СЃР»Р° РїРѕ Р°РіСЂРµРіР°С‚Р°Рј
 		/// </summary>
 		public CommonCollection<ComponentOilCondition> OilConditionCollection
 		{
@@ -564,7 +564,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		private CommonCollection<EngineAccelerationTime> _engineAccelerationTimeCollection;
 		/// <summary>
-		/// Коллекция записей о приёмистости двигателей
+		/// РљРѕР»Р»РµРєС†РёСЏ Р·Р°РїРёСЃРµР№ Рѕ РїСЂРёС‘РјРёСЃС‚РѕСЃС‚Рё РґРІРёРіР°С‚РµР»РµР№
 		/// </summary>
 		public CommonCollection<EngineAccelerationTime> EngineAccelerationTimeCollection
 		{
@@ -586,7 +586,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		private BaseRecordCollection<EngineCondition> _engineConditions;
 		/// <summary>
-		/// Записи о состоянии силовых установок (Двигатели, ВСУ)
+		/// Р—Р°РїРёСЃРё Рѕ СЃРѕСЃС‚РѕСЏРЅРёРё СЃРёР»РѕРІС‹С… СѓСЃС‚Р°РЅРѕРІРѕРє (Р”РІРёРіР°С‚РµР»Рё, Р’РЎРЈ)
 		/// </summary>
 		public BaseRecordCollection<EngineCondition> EngineConditionCollection
 		{
@@ -608,7 +608,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		private CommonCollection<HydraulicCondition> _hydraulicConditionCollection;
 		/// <summary>
-		/// Уровни гидравлики по агрегатам
+		/// РЈСЂРѕРІРЅРё РіРёРґСЂР°РІР»РёРєРё РїРѕ Р°РіСЂРµРіР°С‚Р°Рј
 		/// </summary>
 		public CommonCollection<HydraulicCondition> HydraulicConditionCollection
 		{
@@ -630,7 +630,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		private CommonCollection<EngineTimeInRegime> _powerUnitTimeInRegineCollection;
 		/// <summary>
-		/// Коллекция записей о работе силовых установок в различных режимах
+		/// РљРѕР»Р»РµРєС†РёСЏ Р·Р°РїРёСЃРµР№ Рѕ СЂР°Р±РѕС‚Рµ СЃРёР»РѕРІС‹С… СѓСЃС‚Р°РЅРѕРІРѕРє РІ СЂР°Р·Р»РёС‡РЅС‹С… СЂРµР¶РёРјР°С…
 		/// </summary>
 		public CommonCollection<EngineTimeInRegime> PowerUnitTimeInRegimeCollection
 		{
@@ -652,7 +652,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		private BaseRecordCollection<LandingGearCondition> _landingGearConditions;
 		/// <summary>
-		/// Коллекция записей о состоянии шасси
+		/// РљРѕР»Р»РµРєС†РёСЏ Р·Р°РїРёСЃРµР№ Рѕ СЃРѕСЃС‚РѕСЏРЅРёРё С€Р°СЃСЃРё
 		/// </summary>
 		public BaseRecordCollection<LandingGearCondition> LandingGearConditions
 		{
@@ -677,7 +677,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		private RunupsCollection _runupsCollection;
 		/// <summary>
-		/// Коллекция записей о пусках силовых установок
+		/// РљРѕР»Р»РµРєС†РёСЏ Р·Р°РїРёСЃРµР№ Рѕ РїСѓСЃРєР°С… СЃРёР»РѕРІС‹С… СѓСЃС‚Р°РЅРѕРІРѕРє
 		/// </summary>
 		public RunupsCollection RunupsCollection
 		{
@@ -709,7 +709,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public String Remarks { get; set; }
 		/// <summary>
-		/// Унаследовано от AbstractRecord. Используется для хранения заметок
+		/// РЈРЅР°СЃР»РµРґРѕРІР°РЅРѕ РѕС‚ AbstractRecord. РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ Р·Р°РјРµС‚РѕРє
 		/// </summary>
 		[TableColumnAttribute("Remarks")]
 		public override String Remarks { get; set; }
@@ -717,7 +717,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public override DateTime RecordDate
 		/// <summary>
-		/// Уналедовано от AbstractRecord. Используется для сортировки по дате
+		/// РЈРЅР°Р»РµРґРѕРІР°РЅРѕ РѕС‚ AbstractRecord. РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё РїРѕ РґР°С‚Рµ
 		/// </summary>
 		public override DateTime RecordDate
 		{
@@ -728,18 +728,18 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public override Lifelength OnLifelength { get; set; }
 		/// <summary>
-		/// Унаследовано от AbstractRecord. Неиспользуется
+		/// РЈРЅР°СЃР»РµРґРѕРІР°РЅРѕ РѕС‚ AbstractRecord. РќРµРёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ
 		/// </summary>
 		public override Lifelength OnLifelength { get; set; }
 		#endregion
 
 		/*
-		 * Дополнительные свойства (вычисляемые)
+		 * Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СЃРІРѕР№СЃС‚РІР° (РІС‹С‡РёСЃР»СЏРµРјС‹Рµ)
 		 */
 
 		#region public TimeSpan BlockTime
 		/// <summary>
-		/// Время полета ВС по Out-In
+		/// Р’СЂРµРјСЏ РїРѕР»РµС‚Р° Р’РЎ РїРѕ Out-In
 		/// </summary>
 		public TimeSpan BlockTime
 		{
@@ -755,7 +755,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public TimeSpan FlightTime
 		/// <summary>
-		/// Время полета ВС по Takeoff-LDG
+		/// Р’СЂРµРјСЏ РїРѕР»РµС‚Р° Р’РЎ РїРѕ Takeoff-LDG
 		/// </summary>
 		public TimeSpan FlightTime
 		{
@@ -773,7 +773,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public TimeSpan TimespanLDGTime
 		/// <summary>
-		/// Время посадки воздушного судна
+		/// Р’СЂРµРјСЏ РїРѕСЃР°РґРєРё РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР°
 		/// </summary>
 		public TimeSpan TimespanLDGTime
 		{
@@ -787,7 +787,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public TimeSpan TimespanTakeOffTime
 		/// <summary>
-		/// Время посадки воздушного судна
+		/// Р’СЂРµРјСЏ РїРѕСЃР°РґРєРё РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР°
 		/// </summary>
 		public TimeSpan TimespanTakeOffTime
 		{
@@ -801,7 +801,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public TimeSpan TimespanInTime
 		/// <summary>
-		/// Время посадки воздушного судна
+		/// Р’СЂРµРјСЏ РїРѕСЃР°РґРєРё РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР°
 		/// </summary>
 		public TimeSpan TimespanInTime
 		{
@@ -815,7 +815,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public TimeSpan TimespanOutTime
 		/// <summary>
-		/// Время посадки воздушного судна
+		/// Р’СЂРµРјСЏ РїРѕСЃР°РґРєРё РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР°
 		/// </summary>
 		public TimeSpan TimespanOutTime
 		{
@@ -831,7 +831,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		private ATLB _parentATLB;
 		/// <summary>
-		/// Обратная ссылка борт журнал (родительский ATLB)
+		/// РћР±СЂР°С‚РЅР°СЏ СЃСЃС‹Р»РєР° Р±РѕСЂС‚ Р¶СѓСЂРЅР°Р» (СЂРѕРґРёС‚РµР»СЊСЃРєРёР№ ATLB)
 		/// </summary>
 		public ATLB ParentATLB
 		{
@@ -852,17 +852,17 @@ namespace SmartCore.Entities.General.Atlbs
 		private FlightNum _flightNumber;
 
 		/// <summary>
-		/// Коллекция незакрытых отклонений (созданных раньше этого полета)
+		/// РљРѕР»Р»РµРєС†РёСЏ РЅРµР·Р°РєСЂС‹С‚С‹С… РѕС‚РєР»РѕРЅРµРЅРёР№ (СЃРѕР·РґР°РЅРЅС‹С… СЂР°РЅСЊС€Рµ СЌС‚РѕРіРѕ РїРѕР»РµС‚Р°)
 		/// </summary>
 		public CommonCollection<Discrepancy> UnclosedDiscrepancies { get; set; }
 
 		/*
-		*  Методы 
+		*  РњРµС‚РѕРґС‹ 
 		*/
 		
 		#region public AircraftFlight()
 		/// <summary>
-		/// Создает воздушное судно без дополнительной информации
+		/// РЎРѕР·РґР°РµС‚ РІРѕР·РґСѓС€РЅРѕРµ СЃСѓРґРЅРѕ Р±РµР· РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё
 		/// </summary>
 		public AircraftFlight()
 		{
@@ -895,7 +895,7 @@ namespace SmartCore.Entities.General.Atlbs
 		#region public override string ToString()
 
 		/// <summary>
-		/// Перегружаем для отладки
+		/// РџРµСЂРµРіСЂСѓР¶Р°РµРј РґР»СЏ РѕС‚Р»Р°РґРєРё
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()
@@ -906,7 +906,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region private CertificateOfReleaseToService GetReleaseToService()
 		/// <summary>
-		/// Возвращает CorrectiveAction в зависимоти от условия существоваяния в базе данных
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ CorrectiveAction РІ Р·Р°РІРёСЃРёРјРѕС‚Рё РѕС‚ СѓСЃР»РѕРІРёСЏ СЃСѓС‰РµСЃС‚РІРѕРІР°СЏРЅРёСЏ РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С…
 		/// </summary>
 		/// <returns></returns>
 		private CertificateOfReleaseToService GetReleaseToService()
@@ -931,7 +931,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region private void SetReleaseToService(CertificateOfReleaseToService releaseToService)
 		/// <summary>
-		/// Записывает ReleaseToService в CorrectiveAction в завсимоти от существования данного(this) обекта в базе данных
+		/// Р—Р°РїРёСЃС‹РІР°РµС‚ ReleaseToService РІ CorrectiveAction РІ Р·Р°РІСЃРёРјРѕС‚Рё РѕС‚ СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ РґР°РЅРЅРѕРіРѕ(this) РѕР±РµРєС‚Р° РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С…
 		/// </summary>
 		/// <param name="releaseToService"></param>
 		private void SetReleaseToService(CertificateOfReleaseToService releaseToService)
@@ -979,13 +979,13 @@ namespace SmartCore.Entities.General.Atlbs
 		#endregion
 
 		/*
-		 * Математический аппарат
+		 * РњР°С‚РµРјР°С‚РёС‡РµСЃРєРёР№ Р°РїРїР°СЂР°С‚
 		 */
 
 
 		#region public Int32 BlockTimeTotalMinutes { get; }
 		/// <summary>
-		/// Возвращает время полета ВС по BlockTime(Out-In)
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РІСЂРµРјСЏ РїРѕР»РµС‚Р° Р’РЎ РїРѕ BlockTime(Out-In)
 		/// </summary>
 
 		public Int32 BlockTimeTotalMinutes
@@ -1002,7 +1002,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public Lifelength BlockTimeLifelenght { get; }
 		/// <summary> 
-		/// Возвращает наработку на основе BlockTime(In - Out) за заданный полет
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РЅР°СЂР°Р±РѕС‚РєСѓ РЅР° РѕСЃРЅРѕРІРµ BlockTime(In - Out) Р·Р° Р·Р°РґР°РЅРЅС‹Р№ РїРѕР»РµС‚
 		/// </summary>
 		public Lifelength BlockTimeLifelenght
 		{
@@ -1012,7 +1012,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public Int32 FlightTimeTotalMinutes { get; }
 		/// <summary>
-		/// Возвращает время полета воздушного судна
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РІСЂРµРјСЏ РїРѕР»РµС‚Р° РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР°
 		/// </summary>
 		public Int32 FlightTimeTotalMinutes
 		{
@@ -1027,7 +1027,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public Lifelength FlightTimeLifelength { get; }
 		/// <summary> 
-		/// Возвращает наработку на основе FlightTime(Ldg - TakeOff) за заданный полет
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РЅР°СЂР°Р±РѕС‚РєСѓ РЅР° РѕСЃРЅРѕРІРµ FlightTime(Ldg - TakeOff) Р·Р° Р·Р°РґР°РЅРЅС‹Р№ РїРѕР»РµС‚
 		/// </summary>
 		public Lifelength FlightTimeLifelength
 		{
@@ -1079,7 +1079,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public Specialist GetSpecialist(SpecializationCollection specialization_Name)
 		///// <summary>
-		///// Возвращает одного специалиста из коллекции по названию специальности
+		///// Р’РѕР·РІСЂР°С‰Р°РµС‚ РѕРґРЅРѕРіРѕ СЃРїРµС†РёР°Р»РёСЃС‚Р° РёР· РєРѕР»Р»РµРєС†РёРё РїРѕ РЅР°Р·РІР°РЅРёСЋ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
 		///// </summary>
 		///// <param name="specialization_Name"></param>
 		///// <returns></returns>
@@ -1098,7 +1098,7 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public Specialist GetSpecialistBySpecializationId(int specializationId)
 		/// <summary>
-		/// Возвращает одного специалиста из коллекции
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РѕРґРЅРѕРіРѕ СЃРїРµС†РёР°Р»РёСЃС‚Р° РёР· РєРѕР»Р»РµРєС†РёРё
 		/// </summary>
 		/// <param name="specializationId"></param>
 		/// <returns></returns>
@@ -1106,7 +1106,7 @@ namespace SmartCore.Entities.General.Atlbs
 		{
 			foreach (FlightCrewRecord item in FlightCrewRecords)
 			{
-			   if (item.Specialization.ItemId == specializationId)
+			   if (item.Occupation.ItemId == specializationId)
 					return item.Specialist;
 			}
 			

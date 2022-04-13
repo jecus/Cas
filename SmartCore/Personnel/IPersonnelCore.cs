@@ -6,7 +6,7 @@ namespace SmartCore.Personnel
 	public interface IPersonnelCore
 	{
 		void Save(Specialist specialist, bool isCAA = false);
-		void Delete(Specialization specialization);
+		void Delete(Occupation occupation);
 		void Delete(SpecialistLicense license);
 	}
 }

@@ -146,7 +146,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 
 			try
 			{
-				GlobalObjects.CasEnvironment.Loader.ReloadDictionary(typeof(DocumentSubType), typeof(ServiceType), typeof(Nomenclatures), typeof(Department), typeof(Specialization));
+				GlobalObjects.CasEnvironment.Loader.ReloadDictionary(typeof(DocumentSubType), typeof(ServiceType), typeof(Nomenclatures), typeof(Department), typeof(Occupation));
 				if (_filters == null)
 				{
 					if (_parent is Aircraft)

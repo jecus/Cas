@@ -124,7 +124,7 @@ namespace CAS.UI.UIControls.StoresControls
 				GlobalObjects.CasEnvironment.NewLoader.GetObject<DepartmentDTO, Department>(new Filter("FullName",
 					"Planning"));
 
-			var spec = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<SpecializationDTO, Specialization>(
+			var spec = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<SpecializationDTO, Occupation>(
 				new Filter("DepartmentId", _department.ItemId));
 			var ids = spec.Select(i => i.ItemId);
 

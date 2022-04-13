@@ -506,7 +506,7 @@ namespace SmartCore.DtoHelper
 				CorrectorId = specialist.CorrectorId,
 				FirstName = specialist.FirstName,
 				ShortName = specialist.ShortName,
-				SpecializationID = specialist.Specialization?.ItemId ?? -1,
+				SpecializationID = specialist.Occupation?.ItemId ?? -1,
 				LastName = specialist.LastName,
 				Gender = (short?) specialist.Gender,
 				AGWCategoryId = specialist.AGWCategory?.ItemId,
@@ -579,7 +579,7 @@ namespace SmartCore.DtoHelper
 				Combination = specialist.Combination ?? "",
 				AGWCategory = specialist.AGWCategory?.Convert(),
 				Facility = specialist.Facility?.Convert(),
-				Specialization = specialist.Specialization?.Convert()
+				Occupation = specialist.Specialization?.Convert()
 			};
 
 			if (specialist.Licenses != null)
@@ -3295,7 +3295,7 @@ namespace SmartCore.DtoHelper
 				CorrectorId = crewrec.CorrectorId,
 				FlightID = crewrec.FlightId,
 				SpecialistID = crewrec.Specialist?.ItemId,
-				SpecializationID = crewrec.Specialization?.ItemId,
+				SpecializationID = crewrec.Occupation?.ItemId,
 				IDNo = crewrec.IdNo,
 				Limitations = crewrec.Limitations,
 				Remarks = crewrec.Remarks,
@@ -3312,7 +3312,7 @@ namespace SmartCore.DtoHelper
 				CorrectorId = crewrecdto.CorrectorId,
 				FlightId = crewrecdto.FlightID,
 				Specialist = crewrecdto.Specialist?.Convert(),
-				Specialization = crewrecdto.Specialization?.Convert(),
+				Occupation = crewrecdto.Specialization?.Convert(),
 				IdNo = crewrecdto.IDNo ?? default(int),
 				Limitations = crewrecdto.Limitations,
 				Remarks = crewrecdto.Remarks
@@ -3384,7 +3384,7 @@ namespace SmartCore.DtoHelper
 				Updated = flightcrewrec.Updated,
 				CorrectorId = flightcrewrec.CorrectorId,
 				FlightNumberId = flightcrewrec.FlightNumber?.ItemId,
-				SpecializationId = flightcrewrec.Specialization?.ItemId,
+				SpecializationId = flightcrewrec.Occupation?.ItemId,
 				Count = flightcrewrec.Count,
 			};
 		}
@@ -3398,7 +3398,7 @@ namespace SmartCore.DtoHelper
 				Updated = flightcrewrecdto.Updated,
 				CorrectorId = flightcrewrecdto.CorrectorId,
 				FlightNumber = flightcrewrecdto.FlightNumber?.Convert(),
-				Specialization = flightcrewrecdto.Specialization?.Convert(),
+				Occupation = flightcrewrecdto.Specialization?.Convert(),
 				Count = flightcrewrecdto.Count ?? default(int)
 			};
 		}

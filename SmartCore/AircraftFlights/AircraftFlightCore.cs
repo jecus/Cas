@@ -175,7 +175,7 @@ namespace SmartCore.AircraftFlights
 					FlightCrewRecord newFtCondition = new FlightCrewRecord
 					{
 						Specialist = c.Specialist,
-						Specialization = c.Specialization
+						Occupation = c.Occupation
 					};
 					flight.FlightCrewRecords.Add(newFtCondition);
 				}

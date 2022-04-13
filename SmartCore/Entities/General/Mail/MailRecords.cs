@@ -143,14 +143,14 @@ namespace SmartCore.Entities.General.Mail
 
 		#region public Specialization Specialization { get; set; }
 
-		private Specialization _specialization;
+		private Occupation _occupation;
 		[Child]
 		[TableColumn("ResponsibleId")]
 		[Filter("Responsible:", Order = 8)]
-		public Specialization Specialization
+		public Occupation Occupation
 		{
-			get { return _specialization ?? Specialization.Unknown; }
-			set { _specialization = value; }
+			get { return _occupation ?? Occupation.Unknown; }
+			set { _occupation = value; }
 		}
 
 		#endregion

@@ -13,6 +13,6 @@ namespace SmartCore.Entities.General.Interfaces
 		AircraftModel AircraftModel { get; }
 
 		[Filter("Occupation : ", Order = 2)]
-		Specialization Specialization { get; }
+		Occupation Occupation { get; }
 	}
 }

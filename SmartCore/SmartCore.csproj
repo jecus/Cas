@@ -653,7 +653,7 @@
     <Compile Include="Entities\Dictionaries\SmsEventArea.cs" />
     <Compile Include="Entities\Dictionaries\SMSEventStatus.cs" />
     <Compile Include="Entities\Dictionaries\SmsEventType.cs" />
-    <Compile Include="Entities\Dictionaries\Specialization.cs" />
+    <Compile Include="Entities\Dictionaries\Occupation.cs" />
     <Compile Include="Entities\Dictionaries\StaticDictionary.cs" />
     <Compile Include="Entities\Dictionaries\StaticTreeDictionary.cs" />
     <Compile Include="Entities\Dictionaries\StatusOfDelivery.cs" />

@@ -87,7 +87,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			{
 				CreateRow(dateString, Tag = date),
 				CreateRow(aircraft, item.Aircraft),
-				CreateRow(item.Specialization.ToString(), item.Specialization),
+				CreateRow(item.Occupation.ToString(), item.Occupation),
 				CreateRow(route, route),
 				CreateRow(flightTimeString, item.FlightTime),
 				CreateRow(UsefulMethods.TimeToString(item.BlockTime), item.BlockTime),

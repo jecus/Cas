@@ -85,7 +85,7 @@ namespace CAS.UI.UIControls.MailControls
 			subItems.Add(CreateRow(item.Nomenclature.ToString(), item.Nomenclature));
 			subItems.Add(CreateRow(item.Location.ToString(), item.Location));
 			subItems.Add(CreateRow(item.Department.ToString(), item.Department));
-			subItems.Add(CreateRow(item.Specialization.ToString(), item.Specialization));
+			subItems.Add(CreateRow(item.Occupation.ToString(), item.Occupation));
 			subItems.Add(CreateRow(item.Specialist.ToString(), item.Specialist));
 			subItems.Add(CreateRow(author, author));
 

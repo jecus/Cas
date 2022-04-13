@@ -223,7 +223,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("CMM") as DocumentSubType;
 			var dep = GlobalObjects.CasEnvironment.GetDictionary<Department>().GetByFullName("Planning") as Department;
-			var spec = GlobalObjects.CasEnvironment.GetDictionary<Specialization>().GetByFullName("Maintenance Data Librarian") as Specialization;
+			var spec = GlobalObjects.CasEnvironment.GetDictionary<Occupation>().GetByFullName("Maintenance Data Librarian") as Occupation;
 			var nomen = GlobalObjects.CasEnvironment.GetDictionary<Nomenclatures>().GetByFullName("e-library") as Nomenclatures;
 			var location = GlobalObjects.CasEnvironment.GetDictionary<Locations>().GetByFullName("e-Server CIT") as Locations;
 			var newDocument = new Document
@@ -256,7 +256,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("IPC Ref") as DocumentSubType;
 			var dep = GlobalObjects.CasEnvironment.GetDictionary<Department>().GetByFullName("Planning") as Department;
-			var spec = GlobalObjects.CasEnvironment.GetDictionary<Specialization>().GetByFullName("Maintenance Data Librarian") as Specialization;
+			var spec = GlobalObjects.CasEnvironment.GetDictionary<Occupation>().GetByFullName("Maintenance Data Librarian") as Occupation;
 			var nomen = GlobalObjects.CasEnvironment.GetDictionary<Nomenclatures>().GetByFullName("e-library") as Nomenclatures;
 			var location = GlobalObjects.CasEnvironment.GetDictionary<Locations>().GetByFullName("e-Server CIT") as Locations;
 			var newDocument = new Document

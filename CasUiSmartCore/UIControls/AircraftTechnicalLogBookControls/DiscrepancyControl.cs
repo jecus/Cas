@@ -315,7 +315,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 	        _specialists.Clear();
 	        try
 	        {
-		        _specialists.AddRange(GlobalObjects.CasEnvironment.Loader.GetObjectListAll<Specialist>(loadChild: true).Where(i => i.Specialization?.Department?.FullName == "Line Maintenance"));
+		        _specialists.AddRange(GlobalObjects.CasEnvironment.Loader.GetObjectListAll<Specialist>(loadChild: true).Where(i => i.Occupation?.Department?.FullName == "Line Maintenance"));
 	        }
 	        catch (Exception ex)
 	        {

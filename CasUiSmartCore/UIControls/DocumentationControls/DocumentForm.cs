@@ -474,8 +474,8 @@ namespace CAS.UI.UIControls.DocumentationControls
 				: Department.Unknown;
 
 			_currentDocument.ResponsibleOccupation = comboBoxResponsible.SelectedItem != null
-				? (Specialization) comboBoxResponsible.SelectedItem
-				: Specialization.Unknown;
+				? (Occupation) comboBoxResponsible.SelectedItem
+				: Occupation.Unknown;
 
 		    _currentDocument.Location = dictionaryComboBoxLocation.SelectedItem != null
 			    ? (Locations)dictionaryComboBoxLocation.SelectedItem
@@ -647,13 +647,13 @@ namespace CAS.UI.UIControls.DocumentationControls
 			comboBoxNomenclature.Items.Add(Nomenclatures.Unknown);
 			comboBoxNomenclature.SelectedItem = _currentDocument.Nomenсlature;
 
-            Specialization[] specialization;
+            Occupation[] specialization;
             if (GlobalObjects.CasEnvironment != null)
-				specialization = GlobalObjects.CasEnvironment.GetDictionary<Specialization>().Cast<Specialization>().Where(i => i.Department?.ItemId == department.ItemId).ToArray();
-			else specialization = GlobalObjects.CaaEnvironment.GetDictionary<Specialization>().Cast<Specialization>().Where(i => i.Department?.ItemId == department.ItemId).ToArray();
+				specialization = GlobalObjects.CasEnvironment.GetDictionary<Occupation>().Cast<Occupation>().Where(i => i.Department?.ItemId == department.ItemId).ToArray();
+			else specialization = GlobalObjects.CaaEnvironment.GetDictionary<Occupation>().Cast<Occupation>().Where(i => i.Department?.ItemId == department.ItemId).ToArray();
 			comboBoxResponsible.Items.Clear();
 			comboBoxResponsible.Items.AddRange(specialization);
-			comboBoxResponsible.Items.Add(Specialization.Unknown);
+			comboBoxResponsible.Items.Add(Occupation.Unknown);
 			comboBoxResponsible.SelectedItem = _currentDocument.ResponsibleOccupation;
 
 			dictionaryComboBoxLocation.Type = typeof(Locations);

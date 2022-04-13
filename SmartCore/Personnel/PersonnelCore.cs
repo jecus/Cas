@@ -115,16 +115,16 @@ namespace SmartCore.Personnel
 		/// <summary>
 		/// Удаление specialization
 		/// </summary>
-		/// <param name="specialization"></param>
-		public void Delete(Specialization specialization)
+		/// <param name="occupation"></param>
+		public void Delete(Occupation occupation)
 		{
 			// Объект остается в базе, т.к. через него могли проходить записи Transfer Record
-			specialization.IsDeleted = true;
-			_casEnvironment.NewKeeper.Save(specialization);
+			occupation.IsDeleted = true;
+			_casEnvironment.NewKeeper.Save(occupation);
 
-			var collection = _casEnvironment.GetDictionary<Specialization>();
+			var collection = _casEnvironment.GetDictionary<Occupation>();
 			if (collection == null) return;
-			collection.Remove(specialization);
+			collection.Remove(occupation);
 		}
 
 		#endregion

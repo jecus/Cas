@@ -185,7 +185,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkSpecializationsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "Specializations";
+            e.DisplayerText = "Occupation";
             e.RequestedEntity = new SpecializationsListScreen(_getOperator(), _currentOperator.ItemId);
         }
 

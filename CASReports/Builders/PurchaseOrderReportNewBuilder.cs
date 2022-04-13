@@ -11,7 +11,7 @@ using SmartCore.Purchase;
 namespace CASReports.Builders
 {
 	/// <summary>
-	/// Построитель отчета Release To Service 
+	/// РџРѕСЃС‚СЂРѕРёС‚РµР»СЊ РѕС‚С‡РµС‚Р° Release To Service 
 	/// </summary>
 	public class PurchaseOrderReportNewBuilder : AbstractReportBuilder
 	{
@@ -42,14 +42,14 @@ namespace CASReports.Builders
 
 		#region Constructor
 		/// <summary>
-		/// Создается пустой построитель
+		/// РЎРѕР·РґР°РµС‚СЃСЏ РїСѓСЃС‚РѕР№ РїРѕСЃС‚СЂРѕРёС‚РµР»СЊ
 		/// </summary>
 		public PurchaseOrderReportNewBuilder()
 		{
 		}
 
 		/// <summary>
-		/// Создается построитель отчета Release To Service 
+		/// РЎРѕР·РґР°РµС‚СЃСЏ РїРѕСЃС‚СЂРѕРёС‚РµР»СЊ РѕС‚С‡РµС‚Р° Release To Service 
 		/// </summary>
 		/// <param name="op"></param>
 		/// <param name="orderRecords"></param>
@@ -74,9 +74,9 @@ namespace CASReports.Builders
 		#region public override object GenerateReport()
 
 		/// <summary>
-		/// Сгенерируовать отчет по данным, добавленным в текущий объект
+		/// РЎРіРµРЅРµСЂРёСЂСѓРѕРІР°С‚СЊ РѕС‚С‡РµС‚ РїРѕ РґР°РЅРЅС‹Рј, РґРѕР±Р°РІР»РµРЅРЅС‹Рј РІ С‚РµРєСѓС‰РёР№ РѕР±СЉРµРєС‚
 		/// </summary>
-		/// <returns>Построенный отчет</returns>
+		/// <returns>РџРѕСЃС‚СЂРѕРµРЅРЅС‹Р№ РѕС‚С‡РµС‚</returns>
 		public override object GenerateReport()
 		{
 			var report = new PurchaseOrderReportNew();
@@ -143,7 +143,7 @@ namespace CASReports.Builders
 		private void AddPersonnelToDataSet(PurchaseRecordNewDataSet dataSet)
 		{
 			dataSet.Personnel.AddPersonnelRow(_specialist.ShortName, _specialist.Email, _specialist.PhoneMobile, 
-				_specialist.Phone, string.IsNullOrEmpty(_specialist.Additional) ? "" : $"({_specialist.Additional})", _specialist.Specialization.ToString());
+				_specialist.Phone, string.IsNullOrEmpty(_specialist.Additional) ? "" : $"({_specialist.Additional})", _specialist.Occupation.ToString());
 		}
 		#endregion
 

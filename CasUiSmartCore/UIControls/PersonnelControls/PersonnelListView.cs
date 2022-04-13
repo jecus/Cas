@@ -84,7 +84,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 					ratingString += $"{rating.Key} ({string.Join(",", rating.Select(r => r.Rights.ShortName).ToArray())}) ";
 			}
 
-			var department = item.Specialization?.Department ??  Department.Unknown;
+			var department = item.Occupation?.Department ??  Department.Unknown;
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var phone = string.IsNullOrEmpty(item.Additional) ? item.Phone : $"{item.Phone} | Add.: {item.Additional}";
 
@@ -94,7 +94,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 				CreateRow(item.Status.ToString(), item.Status),
 				CreateRow(item.FirstName, item.FirstName),
 				CreateRow(item.LastName, item.LastName),
-				CreateRow(item.Specialization.ToString(), item.Specialization),
+				CreateRow(item.Occupation.ToString(), item.Occupation),
 				CreateRow(item.Combination, item.Combination),
 				CreateRow(department.ToString(), department),
 				CreateRow(ratingString, ratingString),

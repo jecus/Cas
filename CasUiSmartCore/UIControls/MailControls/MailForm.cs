@@ -23,7 +23,7 @@ namespace CAS.UI.UIControls.MailControls
 		private List<Supplier> _suppliers = new List<Supplier>();
 		private List<Department> _departments = new List<Department>();
 		private List<Specialist> _specialists = new List<Specialist>();
-		private List<Specialization> _specializations = new List<Specialization>();
+		private List<Occupation> _specializations = new List<Occupation>();
 		private List<Nomenclatures> _nomenclatures = new List<Nomenclatures>();
 
 		#endregion
@@ -68,7 +68,7 @@ namespace CAS.UI.UIControls.MailControls
 
 			comboBoxOccupation.Items.Clear();
 			comboBoxOccupation.Items.AddRange(_specializations.ToArray());
-			comboBoxOccupation.Items.Add(Specialization.Unknown);
+			comboBoxOccupation.Items.Add(Occupation.Unknown);
 
 			comboBoxNomenclature.Items.Clear();
 			comboBoxNomenclature.Items.AddRange(_nomenclatures.ToArray());
@@ -85,7 +85,7 @@ namespace CAS.UI.UIControls.MailControls
 			comboBoxSupplier.SelectedItem = _currentRecords.Supplier;
 			comboBoxDepartment.SelectedItem = _currentRecords.Department;
 			comboBoxSpecialist.SelectedItem = _currentRecords.Specialist;
-			comboBoxOccupation.SelectedItem = _currentRecords.Specialization;
+			comboBoxOccupation.SelectedItem = _currentRecords.Occupation;
 			comboBoxNomenclature.SelectedItem = _currentRecords.Nomenclature;
 			comboBoxDocumentClass.SelectedItem = _currentRecords.DocClass;
 			dictionaryComboBoxLocation.SelectedItem = _currentRecords.Location;
@@ -126,7 +126,7 @@ namespace CAS.UI.UIControls.MailControls
 			_suppliers.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SupplierDTO,Supplier>());
 			_departments.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<DepartmentDTO,Department>());
 			_specialists.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SpecialistDTO,Specialist>());
-			_specializations.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SpecializationDTO,Specialization>());
+			_specializations.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SpecializationDTO,Occupation>());
 			_nomenclatures.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<NomenclatureDTO,Nomenclatures>());
 
 			_animatedThreadWorker.ReportProgress(100, "Loading complete");
@@ -161,7 +161,7 @@ namespace CAS.UI.UIControls.MailControls
 			_currentRecords.Supplier = comboBoxSupplier.SelectedItem as Supplier;
 			_currentRecords.Department = comboBoxDepartment.SelectedItem as Department;
 			_currentRecords.Specialist = comboBoxSpecialist.SelectedItem as Specialist;
-			_currentRecords.Specialization = comboBoxOccupation.SelectedItem as Specialization;
+			_currentRecords.Occupation = comboBoxOccupation.SelectedItem as Occupation;
 			_currentRecords.Nomenclature = comboBoxNomenclature.SelectedItem as Nomenclatures;
 			_currentRecords.Location = dictionaryComboBoxLocation.SelectedItem as Locations;
 			_currentRecords.DocClass = comboBoxDocumentClass.SelectedItem as DocumentClass;

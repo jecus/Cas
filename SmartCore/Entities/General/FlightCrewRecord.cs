@@ -9,7 +9,7 @@ namespace SmartCore.Entities.General
 {
 
 	/// <summary>
-	/// Класс, описывает запись о полете определенного специалиста
+	/// РљР»Р°СЃСЃ, РѕРїРёСЃС‹РІР°РµС‚ Р·Р°РїРёСЃСЊ Рѕ РїРѕР»РµС‚Рµ РѕРїСЂРµРґРµР»РµРЅРЅРѕРіРѕ СЃРїРµС†РёР°Р»РёСЃС‚Р°
 	/// </summary>
 	[Table("FlightCrews", "dbo", "ItemId")]
 	[Dto(typeof(FlightCrewRecordDTO))]
@@ -18,12 +18,12 @@ namespace SmartCore.Entities.General
 	{
 		private static Type _thisType;
 		/*
-		*  Свойства
+		*  РЎРІРѕР№СЃС‚РІР°
 		*/
 
 		#region public Int32 FlightId { get; set; }
 		/// <summary>
-		/// Идентификатор полета
+		/// РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РїРѕР»РµС‚Р°
 		/// </summary>
 		[TableColumnAttribute("FlightId")]
 		public Int32 FlightId { get; set; }
@@ -37,7 +37,7 @@ namespace SmartCore.Entities.General
 
 		#region public Int32 Specialist { get; set; }
 		/// <summary>
-		/// Идентификатор специалиста
+		/// РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЃРїРµС†РёР°Р»РёСЃС‚Р°
 		/// </summary>
 		[TableColumnAttribute("SpecialistId")]
 		[Child(false)]
@@ -52,10 +52,10 @@ namespace SmartCore.Entities.General
 
 		#region public Int32 Specialization { get; set; }
 		/// <summary>
-		/// Идентификатор специализации специалиста 
+		/// РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЃРїРµС†РёР°Р»РёР·Р°С†РёРё СЃРїРµС†РёР°Р»РёСЃС‚Р° 
 		/// </summary>
 		[TableColumnAttribute("SpecializationId")]
-		public Specialization Specialization { get; set; }
+		public Occupation Occupation { get; set; }
 		#endregion
 
 		#region public Int32 IDNo { get; set; }
@@ -83,12 +83,12 @@ namespace SmartCore.Entities.General
 		#endregion
 
 		/*
-		*  Методы 
+		*  РњРµС‚РѕРґС‹ 
 		*/
 
 		#region public FlightCrewRecord()
 		/// <summary>
-		/// Создает "пустую" запись о полете специалиста
+		/// РЎРѕР·РґР°РµС‚ "РїСѓСЃС‚СѓСЋ" Р·Р°РїРёСЃСЊ Рѕ РїРѕР»РµС‚Рµ СЃРїРµС†РёР°Р»РёСЃС‚Р°
 		/// </summary>
 		public FlightCrewRecord()
 		{
@@ -100,7 +100,7 @@ namespace SmartCore.Entities.General
 
 		#region public override string ToString()
 		/// <summary>
-		/// Перегружаем для отладки
+		/// РџРµСЂРµРіСЂСѓР¶Р°РµРј РґР»СЏ РѕС‚Р»Р°РґРєРё
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()

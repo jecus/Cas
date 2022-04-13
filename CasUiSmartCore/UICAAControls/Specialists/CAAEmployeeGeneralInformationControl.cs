@@ -122,7 +122,7 @@ namespace CAS.UI.UICAAControls.Specialists
                         textBoxPhoneMobile.Text != _currentItem.PhoneMobile ||
                         textBoxSkype.Text != _currentItem.Skype ||
                         (Gender)comboBoxGender.SelectedItem != _currentItem.Gender ||
-                        dictionaryComboBoxOccupation.SelectedItem != _currentItem.Specialization ||
+                        dictionaryComboBoxOccupation.SelectedItem != _currentItem.Occupation ||
                         fileControlPassportCopy.GetChangeStatus() ||
                         fileControlResume.GetChangeStatus() ||
                         _logotypeChanged || _signChanged);
@@ -221,7 +221,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			comboBoxGender.Items.Clear();
             foreach (object o in Enum.GetValues(typeof(Gender)))
                 comboBoxGender.Items.Add(o);
-            dictionaryComboBoxOccupation.Type = typeof(Specialization);
+            dictionaryComboBoxOccupation.Type = typeof(Occupation);
             dictionaryComboBoxLocation.Type = typeof(LocationsType);
 
 
@@ -262,7 +262,7 @@ namespace CAS.UI.UICAAControls.Specialists
 
 
            checkedListBox1.Items.Clear();
-			checkedListBox1.Items.AddRange(GlobalObjects.CasEnvironment?.GetDictionary<Specialization>().ToArray() ?? GlobalObjects.CaaEnvironment?.GetDictionary<Specialization>().ToArray());
+			checkedListBox1.Items.AddRange(GlobalObjects.CasEnvironment?.GetDictionary<Occupation>().ToArray() ?? GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray());
 
 			for (int i = 0; i < checkedListBox1.Items.Count; i++)
 			{
@@ -304,7 +304,7 @@ namespace CAS.UI.UICAAControls.Specialists
             textBoxInformation.Text = _currentItem.Information;
             comboBoxGender.SelectedItem = _currentItem.Gender;
 	        comboBoxPosition.SelectedItem = _currentItem.Position;
-            dictionaryComboBoxOccupation.SelectedItem = _currentItem.Specialization;
+            dictionaryComboBoxOccupation.SelectedItem = _currentItem.Occupation;
             dictionaryComboBoxLocation.SelectedItem = _currentItem.Facility;
             textBoxEmail.Text = _currentItem.Email;
             textBoxPhone.Text = _currentItem.Phone;
@@ -375,7 +375,7 @@ namespace CAS.UI.UICAAControls.Specialists
             _currentItem.Gender = (Gender)comboBoxGender.SelectedItem;
 	        _currentItem.Position = (SpecialistPosition) comboBoxPosition.SelectedItem;
 	        _currentItem.Status = (SpecialistStatus)comboBoxStatus.SelectedItem;
-            _currentItem.Specialization = dictionaryComboBoxOccupation.SelectedItem as Specialization;
+            _currentItem.Occupation = dictionaryComboBoxOccupation.SelectedItem as Occupation;
             _currentItem.Facility = dictionaryComboBoxLocation.SelectedItem as LocationsType;
             _currentItem.Email = textBoxEmail.Text;
             _currentItem.Phone = textBoxPhone.Text;

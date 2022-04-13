@@ -18,7 +18,7 @@ using SmartCore.Entities.General.MaintenanceWorkscope;
 namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 {
 	/// <summary>
-	/// Форма для переноса шаблона ВС в рабочую базу данных
+	/// Р¤РѕСЂРјР° РґР»СЏ РїРµСЂРµРЅРѕСЃР° С€Р°Р±Р»РѕРЅР° Р’РЎ РІ СЂР°Р±РѕС‡СѓСЋ Р±Р°Р·Сѓ РґР°РЅРЅС‹С…
 	/// </summary>
 	public partial class MaintenanceCheckExtensionForm : MetroForm
 	{
@@ -41,7 +41,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		#region private LDNDCheckFormNew()
 
 		/// <summary>
-		/// Создает форму для создания жесткой связи между чеками программы обслуживания и задачами программы обслуживания
+		/// РЎРѕР·РґР°РµС‚ С„РѕСЂРјСѓ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ Р¶РµСЃС‚РєРѕР№ СЃРІСЏР·Рё РјРµР¶РґСѓ С‡РµРєР°РјРё РїСЂРѕРіСЂР°РјРјС‹ РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ Рё Р·Р°РґР°С‡Р°РјРё РїСЂРѕРіСЂР°РјРјС‹ РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ
 		/// </summary>
 		private MaintenanceCheckExtensionForm()
 		{
@@ -53,7 +53,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		#region public LDNDCheckFormNew(MaintenanceCheck maintenanceCheck) : this()
 
 		/// <summary>
-		/// Создает форму для привязки задач к выполнению чека программы обслуживания
+		/// РЎРѕР·РґР°РµС‚ С„РѕСЂРјСѓ РґР»СЏ РїСЂРёРІСЏР·РєРё Р·Р°РґР°С‡ Рє РІС‹РїРѕР»РЅРµРЅРёСЋ С‡РµРєР° РїСЂРѕРіСЂР°РјРјС‹ РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ
 		/// </summary>
 		public MaintenanceCheckExtensionForm(Aircraft aircraft,IEnumerable<MaintenanceDirective> allDirectives)
 			: this()
@@ -152,37 +152,37 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 					.Distinct()
 					.OrderBy(l => l)
 					.ToList();
-			//Интервалы, содержащие только часы
+			//РРЅС‚РµСЂРІР°Р»С‹, СЃРѕРґРµСЂР¶Р°С‰РёРµ С‚РѕР»СЊРєРѕ С‡Р°СЃС‹
 			var intervalsGroupHours =
 				tempIntervals.Where(i => i.Hours != null
 									  && i.Cycles == null
 									  && i.Days == null);
-			//Интервалы, содержащие только циклы
+			//РРЅС‚РµСЂРІР°Р»С‹, СЃРѕРґРµСЂР¶Р°С‰РёРµ С‚РѕР»СЊРєРѕ С†РёРєР»С‹
 			var intervalsGroupCycles =
 				tempIntervals.Where(i => i.Hours == null
 									  && i.Cycles != null
 									  && i.Days == null);
-			//Интервалы, содержащие только дни
+			//РРЅС‚РµСЂРІР°Р»С‹, СЃРѕРґРµСЂР¶Р°С‰РёРµ С‚РѕР»СЊРєРѕ РґРЅРё
 			var intervalsGroupDays =
 				tempIntervals.Where(i => i.Hours == null
 									  && i.Cycles == null
 									  && i.Days != null);
-			//Интервалы, содержащие часы/циклы
+			//РРЅС‚РµСЂРІР°Р»С‹, СЃРѕРґРµСЂР¶Р°С‰РёРµ С‡Р°СЃС‹/С†РёРєР»С‹
 			var intervalsGroupHoursCycles =
 				tempIntervals.Where(i => i.Hours != null
 									  && i.Cycles != null
 									  && i.Days == null);
-			//Интервалы, содержащие часы/дни
+			//РРЅС‚РµСЂРІР°Р»С‹, СЃРѕРґРµСЂР¶Р°С‰РёРµ С‡Р°СЃС‹/РґРЅРё
 			var intervalsGroupHoursDays =
 				tempIntervals.Where(i => i.Hours != null
 									  && i.Cycles == null
 									  && i.Days != null);
-			//Интервалы, содержащие только циклы/дни
+			//РРЅС‚РµСЂРІР°Р»С‹, СЃРѕРґРµСЂР¶Р°С‰РёРµ С‚РѕР»СЊРєРѕ С†РёРєР»С‹/РґРЅРё
 			var intervalsGroupCyclesDays =
 				tempIntervals.Where(i => i.Hours == null
 									  && i.Cycles != null
 									  && i.Days != null);
-			//Интервалы, содержащие часы/циклы/дни
+			//РРЅС‚РµСЂРІР°Р»С‹, СЃРѕРґРµСЂР¶Р°С‰РёРµ С‡Р°СЃС‹/С†РёРєР»С‹/РґРЅРё
 			var intervalsGroupAll =
 				tempIntervals.Where(i => i.Hours != null
 									  && i.Cycles != null
@@ -330,7 +330,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		private void buttonAddDoc_Click(object sender, EventArgs e)
 		{
 			var _departmentPalanning = GlobalObjects.CasEnvironment.NewLoader.GetObject<DepartmentDTO, Department>(new Filter("FullName", "Planning"));
-			var spec = GlobalObjects.CasEnvironment.GetDictionary<Specialization>().GetByFullName("Records and Planning Manager") as Specialization;
+			var spec = GlobalObjects.CasEnvironment.GetDictionary<Occupation>().GetByFullName("Records and Planning Manager") as Occupation;
 			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("EXEMPTION") as DocumentSubType;
 			var newDocument = new Document
 			{

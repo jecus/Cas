@@ -178,7 +178,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 
             try
             {
-				GlobalObjects.CasEnvironment.Loader.ReloadDictionary(typeof(Specialization), typeof(LocationsType));
+				GlobalObjects.CasEnvironment.Loader.ReloadDictionary(typeof(Occupation), typeof(LocationsType));
                 if (_currentItem.ItemId > 0)
 	                _currentItem = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<SpecialistDTO,Specialist>(_currentItem.ItemId, true);
 

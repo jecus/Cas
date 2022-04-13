@@ -1028,26 +1028,26 @@ namespace SmartCore.DtoHelper
 			};
 		}
 
-		public static SpecializationDTO Convert(this Specialization specialization)
+		public static SpecializationDTO Convert(this Occupation occupation)
 		{
 			return new SpecializationDTO
 			{
-				ItemId = specialization.ItemId,
-				IsDeleted = specialization.IsDeleted,
-				Updated = specialization.Updated,
-				CorrectorId = specialization.CorrectorId,
-				ShortName = specialization.ShortName,
-				FullName = specialization.FullName,
-				DepartmentId = specialization.Department?.ItemId ?? -1,
-				Level = specialization.Level,
-				KeyPersonel = specialization.KeyPersonel,
-				Department = specialization.Department?.Convert()
+				ItemId = occupation.ItemId,
+				IsDeleted = occupation.IsDeleted,
+				Updated = occupation.Updated,
+				CorrectorId = occupation.CorrectorId,
+				ShortName = occupation.ShortName,
+				FullName = occupation.FullName,
+				DepartmentId = occupation.Department?.ItemId ?? -1,
+				Level = occupation.Level,
+				KeyPersonel = occupation.KeyPersonel,
+				Department = occupation.Department?.Convert()
 			};
 		}
 
-		public static Specialization Convert(this SpecializationDTO specializationDto)
+		public static Occupation Convert(this SpecializationDTO specializationDto)
 		{
-			var spec =  new Specialization
+			var spec =  new Occupation
 			{
 				ItemId = specializationDto.ItemId,
 				IsDeleted = specializationDto.IsDeleted,
@@ -1458,26 +1458,26 @@ namespace SmartCore.DtoHelper
 			};
 		}
 
-		public static CAASpecializationDTO ConvertCAA(this Specialization specialization)
+		public static CAASpecializationDTO ConvertCAA(this Occupation occupation)
 		{
 			return new CAASpecializationDTO
 			{
-				ItemId = specialization.ItemId,
-				IsDeleted = specialization.IsDeleted,
-				Updated = specialization.Updated,
-				CorrectorId = specialization.CorrectorId,
-				ShortName = specialization.ShortName,
-				FullName = specialization.FullName,
-				DepartmentId = specialization.Department?.ItemId ?? -1,
-				Level = specialization.Level,
-				OperatorId = specialization.OperatorId,
-				KeyPersonel = specialization.KeyPersonel,
+				ItemId = occupation.ItemId,
+				IsDeleted = occupation.IsDeleted,
+				Updated = occupation.Updated,
+				CorrectorId = occupation.CorrectorId,
+				ShortName = occupation.ShortName,
+				FullName = occupation.FullName,
+				DepartmentId = occupation.Department?.ItemId ?? -1,
+				Level = occupation.Level,
+				OperatorId = occupation.OperatorId,
+				KeyPersonel = occupation.KeyPersonel,
             };
 		}
 
-		public static Specialization ConvertCAA(this CAASpecializationDTO specializationDto)
+		public static Occupation ConvertCAA(this CAASpecializationDTO specializationDto)
 		{
-			var spec = new Specialization
+			var spec = new Occupation
 			{
 				ItemId = specializationDto.ItemId,
 				IsDeleted = specializationDto.IsDeleted,

@@ -9,7 +9,7 @@ namespace CAS.UI.UIControls.PersonnelControls
     ///<summary>
     /// список для отображения ордеров запроса
     ///</summary>
-    public partial class SpecializationListView : BaseGridViewControl<Specialization>
+    public partial class SpecializationListView : BaseGridViewControl<Occupation>
     {
         #region Fields
 

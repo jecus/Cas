@@ -111,7 +111,7 @@ namespace SmartCore.Mail
 			}
 
 			var personnel = specialist.FirstName + " " + specialist.LastName;
-			var specialization = specialist.Specialization.ToString();
+			var specialization = specialist.Occupation.ToString();
 
 
 			var placeholders = new Dictionary<string, string>
@@ -127,7 +127,7 @@ namespace SmartCore.Mail
 		public static string GenerateShipperTemlpate(Supplier shipper, Specialist personnel, string station)
 		{
 			var pers = personnel.FirstName + " " + personnel.LastName;
-			var specialization = personnel.Specialization.ToString();
+			var specialization = personnel.Occupation.ToString();
 
 			var placeholders = new Dictionary<string, string>
 			{

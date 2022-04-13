@@ -51,7 +51,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
 			subItems.Add(CreateRow(item.FirstName, item.FirstName ));
 			subItems.Add(CreateRow(item.LastName, item.LastName ));
-			subItems.Add(CreateRow(item.Specialization.ToString(), item.Specialization ));
+			subItems.Add(CreateRow(item.Occupation.ToString(), item.Occupation ));
 			subItems.Add(CreateRow(ratingString, ratingString ));
 			subItems.Add(CreateRow(author, author ));
 

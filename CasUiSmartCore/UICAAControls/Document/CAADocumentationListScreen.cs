@@ -119,7 +119,7 @@ namespace CAS.UI.UICAAControls.Document
 
 			try
 			{
-				GlobalObjects.CaaEnvironment.NewLoader.ReloadDictionary(typeof(DocumentSubType), typeof(ServiceType), typeof(Nomenclatures), typeof(Department), typeof(Specialization));
+				GlobalObjects.CaaEnvironment.NewLoader.ReloadDictionary(typeof(DocumentSubType), typeof(ServiceType), typeof(Nomenclatures), typeof(Department), typeof(Occupation));
                 
                 _initialDocumentArray.AddRange(GlobalObjects
                     .CaaEnvironment
