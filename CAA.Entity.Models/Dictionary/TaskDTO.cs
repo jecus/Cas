@@ -37,6 +37,9 @@ namespace CAA.Entity.Models.Dictionary
 	    
 	    [Column("FullName"), MaxLength(256)]
 		public string FullName { get; set; }
+		
+		[JsonIgnore]
+		public ICollection<EducationDTO> EducationDtos { get; set; }
 
 	}
 }

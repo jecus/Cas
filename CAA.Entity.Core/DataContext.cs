@@ -227,9 +227,9 @@ namespace CAA.Entity.Core
             
             
             modelBuilder.Entity<EducationDTO>()
-                .HasOne(i => i.Department)
+                .HasOne(i => i.Task)
                 .WithMany(i => i.EducationDtos)
-                .HasForeignKey(i => i.DepartmentId);
+                .HasForeignKey(i => i.TaskId);
             
             modelBuilder.Entity<EducationDTO>()
                 .HasOne(i => i.Occupation)
