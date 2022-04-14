@@ -11,6 +11,7 @@ using CAS.UI.UICAAControls.Audit;
 using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UICAAControls.CheckList.CheckListAudit;
 using CAS.UI.UICAAControls.Document;
+using CAS.UI.UICAAControls.Education;
 using CAS.UI.UICAAControls.Event;
 using CAS.UI.UICAAControls.FindingLevel;
 using CAS.UI.UICAAControls.Operators;
@@ -336,7 +337,9 @@ namespace CAS.UI.UICAAControls
 
         private void LinkEducationRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Education";
+	        e.RequestedEntity = new EducationListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+	        
         }
 
         private void LinkEducationProcessManagementnRequested(object sender, ReferenceEventArgs e)

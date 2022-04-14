@@ -4,24 +4,19 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using CAA.Entity.Models.DTO;
+using CAA.Entity.Models.Dictionary;
 using CAS.UI.Interfaces;
-using CAS.UI.Management.Dispatchering;
-using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
-using CrystalDecisions.Windows.Forms;
 using Entity.Abstractions.Filters;
-using SmartCore.CAA.Check;
-using SmartCore.CAA.RoutineAudits;
+using SmartCore.CAA.Education;
 using SmartCore.Entities.Collections;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
 
-namespace CAS.UI.UICAAControls.RoutineAudit
+namespace CAS.UI.UICAAControls.Education
 {
 	///<summary>
 	///</summary>
@@ -32,11 +27,11 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
         #region Fields
 
-		private CommonCollection<SmartCore.CAA.RoutineAudits.RoutineAudit> _initialDocumentArray = new CommonCollection<SmartCore.CAA.RoutineAudits.RoutineAudit>();
-		private CommonCollection<SmartCore.CAA.RoutineAudits.RoutineAudit> _resultDocumentArray = new CommonCollection<SmartCore.CAA.RoutineAudits.RoutineAudit>();
+		private CommonCollection<CAAEducation> _initialDocumentArray = new CommonCollection<CAAEducation>();
+		private CommonCollection<CAAEducation> _resultDocumentArray = new CommonCollection<CAAEducation>();
 		private CommonFilterCollection _filter;
 
-		private RoutineAuditListView _directivesViewer;
+		private EducationListView _directivesViewer;
 
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemEdit;
@@ -51,7 +46,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 		///<summary>
 		/// Конструктор по умолчанию
 		///</summary>
-		public RoutineAuditListScreen()
+		public EducationListScreen()
 		{
 			InitializeComponent();
 		}
@@ -63,7 +58,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public RoutineAuditListScreen(Operator currentOperator, int operatorId)
+		public EducationListScreen(Operator currentOperator, int operatorId)
 			: this()
 		{
 			if (currentOperator == null)
@@ -73,7 +68,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 
-			_filter = new CommonFilterCollection(typeof(IRoutineAuditFilterParams));
+			_filter = new CommonFilterCollection(typeof(EducationListScreen));
 
 			InitToolStripMenuItems();
 			InitListView();
@@ -104,7 +99,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-                .GetObjectListAll<RoutineAuditDTO, SmartCore.CAA.RoutineAudits.RoutineAudit>(new Filter("OperatorId", _operatorId),loadChild:true));
+                .GetObjectListAll<EducationDTO, CAAEducation>(new Filter("OperatorId", _operatorId),loadChild:true));
 
             
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
@@ -138,49 +133,18 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
         private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
         {
-            if (_directivesViewer.SelectedItem != null)
-            {
-                var refE = new ReferenceEventArgs();
-                var dp = new DisplayerParams()
-                {
-                    Page = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(),_operatorId, CheckListType.Routine, _directivesViewer.SelectedItem.ItemId),
-					TypeOfReflection = ReflectionTypes.DisplayInNew,
-                    PageCaption = $"Routine Audit: {_directivesViewer.SelectedItem.Title}",
-					DisplayerType = DisplayerType.Screen
-			    };
-                refE.SetParameters(dp);
-                InvokeDisplayerRequested(refE);
-			}
+            
             
 		}
 
         #endregion
-
-
-		#region private void HighlightItemClick(object sender, EventArgs e)
-
-		private void HighlightItemClick(object sender, EventArgs e)
-		{
-			for (int i = 0; i < _directivesViewer.SelectedItems.Count; i++)
-			{
-				Highlight highLight = (Highlight)((RadMenuItem)sender).Tag;
-				foreach (GridViewCellInfo cell in _directivesViewer.radGridView1.SelectedRows[i].Cells)
-				{
-					cell.Style.CustomizeFill = true;
-					cell.Style.BackColor = Color.FromArgb(highLight.Color);
-				}
-			}
-		}
-
-		#endregion
+        
 
 		#region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 
 		private void ToolStripMenuItemEditClick(object sender, EventArgs e)
 		{
-            var form = new RoutineAuditForm(_directivesViewer.SelectedItem);
-            if (form.ShowDialog() == DialogResult.OK)
-                AnimatedThreadWorker.RunWorkerAsync();
+           
         }
 
 		#endregion
@@ -197,7 +161,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
 		private void InitListView()
 		{
-			_directivesViewer = new RoutineAuditListView(AnimatedThreadWorker);
+			_directivesViewer = new EducationListView(AnimatedThreadWorker);
 			_directivesViewer.OperatorId = _operatorId;
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
@@ -263,17 +227,17 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-            var form = new RoutineAuditForm(new SmartCore.CAA.RoutineAudits.RoutineAudit()
-            {
-                OperatorId = _operatorId,
-				Settings =  new RoutineAuditSettings()
-                {
-                    Created = DateTime.Now,
-                    AuthorId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId
-				}
-            });
-			if(form.ShowDialog() == DialogResult.OK)
-				AnimatedThreadWorker.RunWorkerAsync();
+   //          var form = new RoutineAuditForm(new SmartCore.CAA.RoutineAudits.RoutineAudit()
+   //          {
+   //              OperatorId = _operatorId,
+			// 	Settings =  new RoutineAuditSettings()
+   //              {
+   //                  Created = DateTime.Now,
+   //                  AuthorId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId
+			// 	}
+   //          });
+			// if(form.ShowDialog() == DialogResult.OK)
+			// 	AnimatedThreadWorker.RunWorkerAsync();
             e.Cancel = true;
         }
 
@@ -303,7 +267,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 		///</summary>
 		///<param name="initialCollection"></param>
 		///<param name="resultCollection"></param>
-		private void FilterItems(IEnumerable<SmartCore.CAA.RoutineAudits.RoutineAudit> initialCollection, ICommonCollection<SmartCore.CAA.RoutineAudits.RoutineAudit> resultCollection)
+		private void FilterItems(IEnumerable<CAAEducation> initialCollection, ICommonCollection<CAAEducation> resultCollection)
 		{
 			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{

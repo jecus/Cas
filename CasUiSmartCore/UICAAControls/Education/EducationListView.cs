@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
-using CAS.UI.Management.Dispatchering;
-using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
-using SmartCore.CAA.Check;
+using SmartCore.CAA.Education;
 using SmartCore.Entities.General;
 
-namespace CAS.UI.UICAAControls.RoutineAudit
+namespace CAS.UI.UICAAControls.Education
 {
 	///<summary>
 	/// список для отображения сотрудников
 	///</summary>
-	public partial class EducationListView : BaseGridViewControl<SmartCore.CAA.RoutineAudits.RoutineAudit>
+	public partial class EducationListView : BaseGridViewControl<CAAEducation>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
 
@@ -28,7 +26,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
 		#region public PersonnelListView()
 
-        public RoutineAuditListView()
+        public EducationListView()
         {
             InitializeComponent();
 		}
@@ -36,7 +34,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
         /// <summary>
         /// </summary>
         /// <param name="animatedThreadWorker"></param>
-        public RoutineAuditListView(AnimatedThreadWorker animatedThreadWorker) : this()
+        public EducationListView(AnimatedThreadWorker animatedThreadWorker) : this()
 		{
             _animatedThreadWorker = animatedThreadWorker;
             SortDirection = SortDirection.Asc;
@@ -57,12 +55,16 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 		/// </summary>
 		protected override void SetHeaders()
 		{
+            AddColumn("Occupation", (int)(radGridView1.Width * 0.20f));
+            AddColumn("Department", (int)(radGridView1.Width * 0.20f));
             AddColumn("Code", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Program Type", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Object", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Description", (int)(radGridView1.Width * 0.45f));
-            AddColumn("Remark", (int)(radGridView1.Width * 0.45f));
-            AddColumn("Author", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Code", (int)(radGridView1.Width * 0.20f));
+			AddColumn("CodeName", (int)(radGridView1.Width * 0.24f));
+			AddColumn("SubTask code", (int)(radGridView1.Width * 0.24f));
+			AddColumn("FullName", (int)(radGridView1.Width * 0.45f));
+            AddColumn("Description", (int)(radGridView1.Width * 0.45f));
+            AddColumn("Level", (int)(radGridView1.Width * 0.24f));
+            AddColumn("ShortName", (int)(radGridView1.Width * 0.3f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -84,11 +86,6 @@ namespace CAS.UI.UICAAControls.RoutineAudit
             {
                 this.radGridView1.BeginUpdate();
                 GlobalObjects.NewKeeper.Delete(this.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
-                foreach (var audit in this.SelectedItems)
-                {
-                    GlobalObjects.CaaEnvironment.NewLoader.Execute(
-                        $"update dbo.RoutineAuditRecords set IsDeleted = 1 where RoutineAuditId = {audit.ItemId}");
-                }
                 this.radGridView1.EndUpdate();
                 _animatedThreadWorker.RunWorkerAsync();
             }
@@ -96,19 +93,22 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
 		#region protected override List<CustomCell> GetListViewSubItems(Specialization item)
 
-		protected override List<CustomCell> GetListViewSubItems(SmartCore.CAA.RoutineAudits.RoutineAudit item)
+		protected override List<CustomCell> GetListViewSubItems(CAAEducation item)
         {
-            var author = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.AuthorId);
-            var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
+	        var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
 
             var subItems = new List<CustomCell>()
 			{
-                CreateRow(item.Title, item.Title),
-                CreateRow(item.Type.ToString(), item.Type),
-                CreateRow(item.RoutineObject.ToString(), item.Type),
-                CreateRow(item.Description, item.Description),
-                CreateRow(item.Remark, item.Remark),
-                CreateRow($"{author} ({SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.Created)} {item.Settings.Created.TimeOfDay.Hours}:{item.Settings.Created.TimeOfDay.Minutes}:{item.Settings.Created.TimeOfDay.Seconds})", author),
+                CreateRow(item.Occupation.ToString(), item.Occupation),
+                CreateRow(item.Occupation.Department.ToString(), item.Occupation.Department),
+                CreateRow(item.Task.Code, item.Task.Code),
+                CreateRow(item.Task.Code, item.Task.Code),
+                CreateRow(item.Task.CodeName, item.Task.CodeName),
+                CreateRow(item.Task.SubTaskCode, item.Task.SubTaskCode),
+                CreateRow(item.Task.FullName, item.Task.FullName),
+                CreateRow(item.Task.Description, item.Task.Description),
+                CreateRow(item.Task.Level.ToString(), item.Task.Level),
+                CreateRow(item.Task.ShortName.ToString(), item.Task.ShortName),
                 CreateRow(corrector, corrector)
 			};
 
@@ -121,14 +121,7 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
-			if (SelectedItem != null)
-            {
-
-                e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(),OperatorId, CheckListType.Routine,SelectedItem.ItemId);
-                e.DisplayerText = $"Routine Audit: {SelectedItem.Title}";
-                e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-
-            }
+			e.Cancel = true;
 		}
 		#endregion
 

@@ -1,7 +1,7 @@
 ﻿using CASTerms;
 using Entity.Abstractions;
 
-namespace CAS.UI.UICAAControls.RoutineAudit
+namespace CAS.UI.UICAAControls.Education
 {
     partial class EducationListScreen
 	{

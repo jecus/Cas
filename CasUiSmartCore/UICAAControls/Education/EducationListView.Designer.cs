@@ -1,4 +1,4 @@
-﻿namespace CAS.UI.UICAAControls.RoutineAudit
+﻿namespace CAS.UI.UICAAControls.Education
 {
     partial class EducationListView
     {

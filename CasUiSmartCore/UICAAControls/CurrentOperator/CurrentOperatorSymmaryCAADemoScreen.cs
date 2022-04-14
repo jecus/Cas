@@ -11,6 +11,7 @@ using CAS.UI.UICAAControls.Airacraft;
 using CAS.UI.UICAAControls.Audit;
 using CAS.UI.UICAAControls.CheckList.CheckListAudit;
 using CAS.UI.UICAAControls.Document;
+using CAS.UI.UICAAControls.Education;
 using CAS.UI.UICAAControls.Event;
 using CAS.UI.UICAAControls.FindingLevel;
 using CAS.UI.UICAAControls.RoutineAudit;
@@ -28,6 +29,7 @@ using Entity.Abstractions.Filters;
 using SmartCore.CAA;
 using SmartCore.CAA.Event;
 using SmartCore.CAA.FindingLevel;
+using SmartCore.CAA.Tasks;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -337,12 +339,17 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         
         private void LinkTaskListsRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Task";
+	        e.RequestedEntity = new CAACommonListScreen(typeof(CAATask), new List<Filter>()
+	        {
+		        new Filter("OperatorId",_currentOperator.ItemId )
+	        });
         }
 
         private void LinkEducationRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Education";
+	        e.RequestedEntity = new EducationListScreen(_getOperator(), _currentOperator.ItemId);
         }
 
         private void LinkEducationProcessManagementnRequested(object sender, ReferenceEventArgs e)
