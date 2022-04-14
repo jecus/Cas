@@ -17,6 +17,7 @@ namespace CAA.Entity.Core
         #region Dictionary
 
         public DbSet<TaskDTO> TaskDtos { get; set; }
+        public DbSet<EducationDTO> EducationDtos { get; set; }
         public DbSet<AuditCheckDTO> AuditCheckDtos { get; set; }
         public DbSet<AuditCheckRecordDTO> AuditCheckRecordDtos { get; set; }
         public DbSet<CAAAccessoryDescriptionDTO> AccessoryDescriptionDtos { get; set; }
@@ -222,6 +223,18 @@ namespace CAA.Entity.Core
                 .HasOne(i => i.Document)
                 .WithMany(i => i.ProcedureDocumentReferenceDtos)
                 .HasForeignKey(i => i.DocumentId);
+            
+            
+            
+            modelBuilder.Entity<EducationDTO>()
+                .HasOne(i => i.Department)
+                .WithMany(i => i.EducationDtos)
+                .HasForeignKey(i => i.DepartmentId);
+            
+            modelBuilder.Entity<EducationDTO>()
+                .HasOne(i => i.Occupation)
+                .WithMany(i => i.EducationDtos)
+                .HasForeignKey(i => i.Occupation);
 
 
             modelBuilder.Entity<CAASpecialistLicenseDTO>()

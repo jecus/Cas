@@ -45,6 +45,9 @@ namespace CAA.Entity.Models.Dictionary
 		public ICollection<CAADocumentDTO> DocumentDtos { get; set; }
         [JsonIgnore]
 		public ICollection<CAASpecialistDTO> SpecialistDtos { get; set; }
+		
+		[JsonIgnore]
+		public ICollection<EducationDTO> EducationDtos { get; set; }
 
 		#endregion
 
