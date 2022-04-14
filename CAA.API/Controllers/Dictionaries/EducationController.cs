@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CAA.API.Controllers.Dictionaries
 {
-	[Route("task")]
+	[Route("education")]
 	public class EducationController : BaseDictionaryController<EducationDTO>
 	{
 
