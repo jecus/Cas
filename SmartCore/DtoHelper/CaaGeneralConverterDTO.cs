@@ -6,6 +6,7 @@ using SmartCore.Auxiliary;
 using SmartCore.CAA;
 using SmartCore.CAA.Audit;
 using SmartCore.CAA.Check;
+using SmartCore.CAA.Education;
 using SmartCore.CAA.Event;
 using SmartCore.CAA.FindingLevel;
 using SmartCore.CAA.PEL;
@@ -27,6 +28,38 @@ namespace SmartCore.DtoHelper
 {
     public static  class CaaGeneralConverterDTO
 	{
+		public static EducationDTO ConvertCAA(this CAAEducation task)
+		{
+			return new EducationDTO
+			{
+				ItemId = task.ItemId,
+				IsDeleted = task.IsDeleted,
+				Updated = task.Updated,
+				OperatorId = task.OperatorId,
+				CorrectorId = task.CorrectorId,
+				OccupationId = task.OccupationId,
+				TaskId = task.TaskId
+
+				
+			};
+		}
+
+		public static CAAEducation ConvertCAA(this EducationDTO task)
+		{
+			return new CAAEducation()
+			{
+				ItemId = task.ItemId,
+				OperatorId = task.OperatorId,
+				IsDeleted = task.IsDeleted,
+				Updated = task.Updated,
+				CorrectorId = task.CorrectorId,
+				OccupationId = task.OccupationId,
+				TaskId = task.TaskId,
+				Occupation = task.Occupation?.ConvertCAA(),
+				Task = task.Task?.ConvertCAA(),
+			};
+		}
+		
 		public static TaskDTO ConvertCAA(this CAATask task)
 		{
 			return new TaskDTO
