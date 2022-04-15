@@ -6,7 +6,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 
-namespace SmartCore.CAA.Education
+namespace SmartCore.CAA.CAAEducation
 {
     [CAADto(typeof(EducationDTO))]
     [Serializable]

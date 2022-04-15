@@ -1118,16 +1118,16 @@
     <Compile Include="UICAAControls\Document\CAADocumentationListScreen.Designer.cs">
       <DependentUpon>CAADocumentationListScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\Education\EducationListScreen.cs">
+    <Compile Include="UICAAControls\CAAEducation\EducationListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UICAAControls\Education\EducationListScreen.Designer.cs">
+    <Compile Include="UICAAControls\CAAEducation\EducationListScreen.Designer.cs">
       <DependentUpon>EducationListScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\Education\EducationListView.cs">
+    <Compile Include="UICAAControls\CAAEducation\EducationListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UICAAControls\Education\EducationListView.Designer.cs">
+    <Compile Include="UICAAControls\CAAEducation\EducationListView.Designer.cs">
       <DependentUpon>EducationListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UICAAControls\Event\CAAEventTypesListScreen.cs">
@@ -4628,7 +4628,7 @@
       <DependentUpon>CAADocumentationListScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UICAAControls\Education\EducationListScreen.resx">
+    <EmbeddedResource Include="UICAAControls\CAAEducation\EducationListScreen.resx">
       <DependentUpon>EducationListScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

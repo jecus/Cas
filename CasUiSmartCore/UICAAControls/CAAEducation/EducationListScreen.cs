@@ -10,13 +10,12 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
-using SmartCore.CAA.Education;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
 
-namespace CAS.UI.UICAAControls.Education
+namespace CAS.UI.UICAAControls.CAAEducation
 {
 	///<summary>
 	///</summary>
@@ -27,8 +26,8 @@ namespace CAS.UI.UICAAControls.Education
 
         #region Fields
 
-		private CommonCollection<CAAEducation> _initialDocumentArray = new CommonCollection<CAAEducation>();
-		private CommonCollection<CAAEducation> _resultDocumentArray = new CommonCollection<CAAEducation>();
+		private CommonCollection<SmartCore.CAA.CAAEducation.CAAEducation> _initialDocumentArray = new CommonCollection<SmartCore.CAA.CAAEducation.CAAEducation>();
+		private CommonCollection<SmartCore.CAA.CAAEducation.CAAEducation> _resultDocumentArray = new CommonCollection<SmartCore.CAA.CAAEducation.CAAEducation>();
 		private CommonFilterCollection _filter;
 
 		private EducationListView _directivesViewer;
@@ -99,7 +98,7 @@ namespace CAS.UI.UICAAControls.Education
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-                .GetObjectListAll<EducationDTO, CAAEducation>(new Filter("OperatorId", _operatorId),loadChild:true));
+                .GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _operatorId),loadChild:true));
 
             
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
@@ -267,7 +266,7 @@ namespace CAS.UI.UICAAControls.Education
 		///</summary>
 		///<param name="initialCollection"></param>
 		///<param name="resultCollection"></param>
-		private void FilterItems(IEnumerable<CAAEducation> initialCollection, ICommonCollection<CAAEducation> resultCollection)
+		private void FilterItems(IEnumerable<SmartCore.CAA.CAAEducation.CAAEducation> initialCollection, ICommonCollection<SmartCore.CAA.CAAEducation.CAAEducation> resultCollection)
 		{
 			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{

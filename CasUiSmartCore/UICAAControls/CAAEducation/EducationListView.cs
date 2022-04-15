@@ -6,15 +6,14 @@ using CAS.UI.Interfaces;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
-using SmartCore.CAA.Education;
 using SmartCore.Entities.General;
 
-namespace CAS.UI.UICAAControls.Education
+namespace CAS.UI.UICAAControls.CAAEducation
 {
 	///<summary>
 	/// список для отображения сотрудников
 	///</summary>
-	public partial class EducationListView : BaseGridViewControl<CAAEducation>
+	public partial class EducationListView : BaseGridViewControl<SmartCore.CAA.CAAEducation.CAAEducation>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
 
@@ -48,6 +47,12 @@ namespace CAS.UI.UICAAControls.Education
 		#endregion
 
 		#region Methods
+		
+		
+		protected override void GroupingItems()
+		{
+			Grouping("Occupation");
+		}
 
 		#region protected override void SetHeaders()
 		/// <summary>
@@ -93,7 +98,7 @@ namespace CAS.UI.UICAAControls.Education
 
 		#region protected override List<CustomCell> GetListViewSubItems(Specialization item)
 
-		protected override List<CustomCell> GetListViewSubItems(CAAEducation item)
+		protected override List<CustomCell> GetListViewSubItems(SmartCore.CAA.CAAEducation.CAAEducation item)
         {
 	        var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
 

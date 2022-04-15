@@ -419,7 +419,7 @@
     <Compile Include="CAA\Check\CheckListTransfer.cs" />
     <Compile Include="CAA\Check\Option.cs" />
     <Compile Include="CAA\Check\OptionType.cs" />
-    <Compile Include="CAA\Education\Education.cs" />
+    <Compile Include="CAA\CAAEducation\CAAEducation.cs" />
     <Compile Include="CAA\Event\CAAEvent.cs" />
     <Compile Include="CAA\Event\CAAEventCategory.cs" />
     <Compile Include="CAA\Event\CAAEventClass.cs" />

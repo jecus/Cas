@@ -1,4 +1,4 @@
-﻿namespace CAS.UI.UICAAControls.Education
+﻿namespace CAS.UI.UICAAControls.CAAEducation
 {
     partial class EducationListView
     {

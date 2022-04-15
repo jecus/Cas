@@ -1,7 +1,7 @@
 ﻿using CASTerms;
 using Entity.Abstractions;
 
-namespace CAS.UI.UICAAControls.Education
+namespace CAS.UI.UICAAControls.CAAEducation
 {
     partial class EducationListScreen
 	{
