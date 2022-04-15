@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
@@ -88,6 +89,9 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 
                 foreach (var item in _fromcheckRevisionListView.SelectedItems.ToArray())
                 {
+                    
+                    if(_updateChecks.Any(i => i.TaskId == item.ItemId && i.OccupationId == occupation.ItemId))
+                        continue;
                     var newItem = new SmartCore.CAA.CAAEducation.CAAEducation()
                     {
                         OperatorId = _operatorId,
