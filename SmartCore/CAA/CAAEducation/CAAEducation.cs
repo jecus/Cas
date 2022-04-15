@@ -8,7 +8,7 @@ using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.CAA.CAAEducation
 {
-    [CAADto(typeof(EducationDTO))]
+    [CAADto(typeof(CAAEducationDTO))]
     [Serializable]
     public class CAAEducation : BaseEntityObject, IOperatable
     {

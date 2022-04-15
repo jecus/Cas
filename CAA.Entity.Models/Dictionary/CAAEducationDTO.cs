@@ -13,7 +13,6 @@ namespace CAA.Entity.Models.Dictionary
 	[Condition("IsDeleted", 0)]
 	public class EducationDTO : BaseEntity, IBaseDictionary
 	{
-
 		
 		[Column("OperatorId")]
 		public int OperatorId { get; set; }
@@ -24,12 +23,6 @@ namespace CAA.Entity.Models.Dictionary
 		[Column("OccupationId")]
 		public int OccupationId { get; set; }
 		
-		[Include]
-		public CAASpecializationDTO Occupation { get; set; }
 		
-		[Include]
-		public TaskDTO Task { get; set; }
-		
-
 	}
 }

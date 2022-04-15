@@ -98,7 +98,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-                .GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _operatorId),loadChild:true));
+                .GetObjectListAll<CAAEducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _operatorId),loadChild:true));
 
             
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
@@ -226,19 +226,10 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-   //          var form = new RoutineAuditForm(new SmartCore.CAA.RoutineAudits.RoutineAudit()
-   //          {
-   //              OperatorId = _operatorId,
-			// 	Settings =  new RoutineAuditSettings()
-   //              {
-   //                  Created = DateTime.Now,
-   //                  AuthorId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId
-			// 	}
-   //          });
-			// if(form.ShowDialog() == DialogResult.OK)
-			// 	AnimatedThreadWorker.RunWorkerAsync();
-            e.Cancel = true;
-        }
+			var form = new EducationForm(_operatorId);
+			if(form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
+		}
 
 		#endregion
 

@@ -28,9 +28,9 @@ namespace SmartCore.DtoHelper
 {
     public static  class CaaGeneralConverterDTO
 	{
-		public static EducationDTO ConvertCAA(this CAAEducation task)
+		public static CAAEducationDTO ConvertCAA(this CAAEducation task)
 		{
-			return new EducationDTO
+			return new CAAEducationDTO
 			{
 				ItemId = task.ItemId,
 				IsDeleted = task.IsDeleted,
@@ -44,7 +44,7 @@ namespace SmartCore.DtoHelper
 			};
 		}
 
-		public static CAAEducation ConvertCAA(this EducationDTO task)
+		public static CAAEducation ConvertCAA(this CAAEducationDTO task)
 		{
 			return new CAAEducation()
 			{

@@ -41,9 +41,7 @@ namespace CAA.Entity.Models.Dictionary
 
 
 		#region Navigation Property
-
-		[JsonIgnore]
-		public ICollection<EducationDTO> EducationDtos { get; set; }
+		
 		[JsonIgnore]
 		public ICollection<CAADocumentDTO> DocumentDtos { get; set; }
 		[JsonIgnore]
