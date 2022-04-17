@@ -98,7 +98,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-                .GetObjectListAll<CAAEducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _operatorId),loadChild:true));
+                .GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _operatorId),loadChild:true));
 
             
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");

@@ -43,7 +43,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
             _updateChecks.Clear();
-            _updateChecks.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAAEducationDTO,SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _operatorId), true));
+            _updateChecks.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<EducationDTO,SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _operatorId), true));
 
             _addedChecks.Clear();
             _addedChecks.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<TaskDTO,CAATask>(new Filter("OperatorId", _operatorId)));
