@@ -9,6 +9,7 @@ using CAS.UI.UICAAControls.Activity;
 using CAS.UI.UICAAControls.Airacraft;
 using CAS.UI.UICAAControls.Audit;
 using CAS.UI.UICAAControls.CAAEducation;
+using CAS.UI.UICAAControls.CAATask;
 using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UICAAControls.CheckList.CheckListAudit;
 using CAS.UI.UICAAControls.Document;
@@ -329,10 +330,8 @@ namespace CAS.UI.UICAAControls
         private void LinkTaskListsRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Task";
-	        e.RequestedEntity = new CAACommonListScreen(typeof(CAATask), new List<Filter>()
-	        {
-		        new Filter("OperatorId",-1 )
-	        });
+	        e.RequestedEntity = new CAATaskListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+	        
         }
 
         private void LinkEducationRequested(object sender, ReferenceEventArgs e)

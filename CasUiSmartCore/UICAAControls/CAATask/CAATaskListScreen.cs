@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.Dictionary;
 using CAS.UI.Interfaces;
+using CAS.UI.UICAAControls.CAAEducation;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
@@ -15,22 +16,22 @@ using SmartCore.Entities.General;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
 
-namespace CAS.UI.UICAAControls.CAAEducation
+namespace CAS.UI.UICAAControls.CAATask
 {
 	///<summary>
 	///</summary>
 	[ToolboxItem(false)]
-	public partial class EducationListScreen : ScreenControl
+	public partial class CAATaskListScreen : ScreenControl
 	{
         private readonly int _operatorId;
 
         #region Fields
 
-		private CommonCollection<SmartCore.CAA.CAAEducation.CAAEducation> _initialDocumentArray = new CommonCollection<SmartCore.CAA.CAAEducation.CAAEducation>();
-		private CommonCollection<SmartCore.CAA.CAAEducation.CAAEducation> _resultDocumentArray = new CommonCollection<SmartCore.CAA.CAAEducation.CAAEducation>();
+		private CommonCollection<SmartCore.CAA.Tasks.CAATask> _initialDocumentArray = new CommonCollection<SmartCore.CAA.Tasks.CAATask>();
+		private CommonCollection<SmartCore.CAA.Tasks.CAATask> _resultDocumentArray = new CommonCollection<SmartCore.CAA.Tasks.CAATask>();
 		private CommonFilterCollection _filter;
 
-		private EducationListView _directivesViewer;
+		private CAATaskListView _directivesViewer;
 
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemEdit;
@@ -41,23 +42,23 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		#region Constructors
 
-		#region public RoutineAuditListScreen()
+		#region public CAATaskListScreen()
 		///<summary>
 		/// Конструктор по умолчанию
 		///</summary>
-		public EducationListScreen()
+		public CAATaskListScreen()
 		{
 			InitializeComponent();
 		}
 		#endregion
 
-		#region public RoutineAuditListScreen(Operator currentOperator)
+		#region public CAATaskListScreen(Operator currentOperator)
 
 		///<summary>
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public EducationListScreen(Operator currentOperator, int operatorId)
+		public CAATaskListScreen(Operator currentOperator, int operatorId)
 			: this()
 		{
 			if (currentOperator == null)
@@ -67,7 +68,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 
-			_filter = new CommonFilterCollection(typeof(SmartCore.CAA.CAAEducation.CAAEducation));
+			_filter = new CommonFilterCollection(typeof(SmartCore.CAA.Tasks.CAATask));
 
 			InitToolStripMenuItems();
 			InitListView();
@@ -98,7 +99,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-                .GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _operatorId),loadChild:true));
+                .GetObjectListAll<TaskDTO, SmartCore.CAA.Tasks.CAATask>(new Filter("OperatorId", _operatorId),loadChild:true));
 
             
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
@@ -160,7 +161,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		private void InitListView()
 		{
-			_directivesViewer = new EducationListView(AnimatedThreadWorker);
+			_directivesViewer = new CAATaskListView(AnimatedThreadWorker);
 			_directivesViewer.OperatorId = _operatorId;
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
@@ -226,7 +227,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-			var form = new EducationForm(_operatorId);
+			var form = new CommonEditorForm(new SmartCore.CAA.Tasks.CAATask(){OperatorId = _operatorId});
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
 		}
@@ -257,7 +258,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		///</summary>
 		///<param name="initialCollection"></param>
 		///<param name="resultCollection"></param>
-		private void FilterItems(IEnumerable<SmartCore.CAA.CAAEducation.CAAEducation> initialCollection, ICommonCollection<SmartCore.CAA.CAAEducation.CAAEducation> resultCollection)
+		private void FilterItems(IEnumerable<SmartCore.CAA.Tasks.CAATask> initialCollection, ICommonCollection<SmartCore.CAA.Tasks.CAATask> resultCollection)
 		{
 			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{

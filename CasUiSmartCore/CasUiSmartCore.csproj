@@ -925,6 +925,18 @@
     <Compile Include="UICAAControls\CAAEducation\EducationForm.Designer.cs">
       <DependentUpon>EducationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CAATask\CAATaskListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CAATask\CAATaskListScreen.Designer.cs">
+      <DependentUpon>CAATaskListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\CAATask\CAATaskListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CAATask\CAATaskListView.Designer.cs">
+      <DependentUpon>CAATaskListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CheckList\AuditCheckControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4546,6 +4558,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CAAEducation\EducationForm.resx">
       <DependentUpon>EducationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CAATask\CAATaskListScreen.resx">
+      <DependentUpon>CAATaskListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\AuditCheckControl.resx">
       <DependentUpon>AuditCheckControl.cs</DependentUpon>

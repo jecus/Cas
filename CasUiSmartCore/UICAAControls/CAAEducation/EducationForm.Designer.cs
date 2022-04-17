@@ -33,8 +33,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
         {
             System.Windows.Forms.Label label3;
             this.buttonOk = new System.Windows.Forms.Button();
-            this._tocheckRevisionListView = new CAS.UI.UICAAControls.CAAEducation.EducationListView();
-            this._fromcheckRevisionListView = new CAS.UI.UICAAControls.CAAEducation.CAATaskListView();
+            this._tocheckRevisionListView = new EducationListView();
+            this._fromcheckRevisionListView = new CAATask.CAATaskListView();
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
@@ -87,7 +87,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this._fromcheckRevisionListView.Displayer = null;
             this._fromcheckRevisionListView.DisplayerText = null;
             this._fromcheckRevisionListView.Entity = null;
-            this._fromcheckRevisionListView.ViewedType = typeof(CAATask);
             this._fromcheckRevisionListView.Location = new System.Drawing.Point(5, 53);
             this._fromcheckRevisionListView.MenuOpeningAction = null;
             this._fromcheckRevisionListView.Name = "_fromcheckRevisionListView";
@@ -201,7 +200,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
         System.Windows.Forms.Label label3;
 
         private System.Windows.Forms.Button buttonOk;
-        private CAATaskListView _fromcheckRevisionListView;
+        private CAATask.CAATaskListView _fromcheckRevisionListView;
         private EducationListView _tocheckRevisionListView;
         private AvControls.AvButtonT.AvButtonT ButtonAdd;
         private AvControls.AvButtonT.AvButtonT ButtonDelete;

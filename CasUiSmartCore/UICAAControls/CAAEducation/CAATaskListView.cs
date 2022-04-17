@@ -23,12 +23,12 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		/// <summary>
 		/// Выбранный элемент
 		/// </summary>
-		public new CAATask SelectedItem
+		public new SmartCore.CAA.Tasks.CAATask SelectedItem
 		{
 			get
 			{
 				if (radGridView1.SelectedRows.Count == 1)
-					return (radGridView1.SelectedRows[0].Tag as CAATask);
+					return (radGridView1.SelectedRows[0].Tag as SmartCore.CAA.Tasks.CAATask);
 				return null;
 			}
 		}

@@ -10,6 +10,7 @@ using CAS.UI.UICAAControls.Activity;
 using CAS.UI.UICAAControls.Airacraft;
 using CAS.UI.UICAAControls.Audit;
 using CAS.UI.UICAAControls.CAAEducation;
+using CAS.UI.UICAAControls.CAATask;
 using CAS.UI.UICAAControls.CheckList.CheckListAudit;
 using CAS.UI.UICAAControls.Document;
 using CAS.UI.UICAAControls.Event;
@@ -331,19 +332,12 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 	        e.DisplayerText = "Events Types";
 	        e.RequestedEntity = new CAAEventTypesListScreen(_getOperator(), _currentOperator.ItemId);
         }
-
-        private void LinkLinkEducationProcessRequested(object sender, ReferenceEventArgs e)
-        {
-	        e.Cancel = true;
-        }
+        
         
         private void LinkTaskListsRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Task";
-	        e.RequestedEntity = new CAACommonListScreen(typeof(CAATask), new List<Filter>()
-	        {
-		        new Filter("OperatorId",_currentOperator.ItemId )
-	        });
+	        e.RequestedEntity = new CAATaskListScreen(_getOperator(), _currentOperator.ItemId);
         }
 
         private void LinkEducationRequested(object sender, ReferenceEventArgs e)

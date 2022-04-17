@@ -20,7 +20,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
         private readonly int _operatorId;
 
         private List<Occupation> _occupation = new List<Occupation>();
-        private CommonCollection<CAATask> _addedChecks = new CommonCollection<CAATask>();
+        private CommonCollection<SmartCore.CAA.Tasks.CAATask> _addedChecks = new CommonCollection<SmartCore.CAA.Tasks.CAATask>();
         private CommonCollection<SmartCore.CAA.CAAEducation.CAAEducation> _updateChecks = new CommonCollection<SmartCore.CAA.CAAEducation.CAAEducation>();
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         
@@ -46,7 +46,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             _updateChecks.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<EducationDTO,SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _operatorId), true));
 
             _addedChecks.Clear();
-            _addedChecks.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<TaskDTO,CAATask>(new Filter("OperatorId", _operatorId)));
+            _addedChecks.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<TaskDTO,SmartCore.CAA.Tasks.CAATask>(new Filter("OperatorId", _operatorId)));
 
             _occupation.Clear();
             var res = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecializationDTO, Occupation>(new Filter("OperatorId", _operatorId));
@@ -97,7 +97,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                         OperatorId = _operatorId,
                         Occupation = occupation,
                         OccupationId = occupation.ItemId,
-                        Task = item as CAATask,
+                        Task = item as SmartCore.CAA.Tasks.CAATask,
                         TaskId = item.ItemId,
                     };
 
