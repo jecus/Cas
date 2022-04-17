@@ -352,6 +352,11 @@ namespace CAS.UI.UICAAControls
 	        e.DisplayerText = "Provider";
 	        e.RequestedEntity = new CAASupplierListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
         }
+
+        private void LinkEducationProcessRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.Cancel = true;
+        }
 	}
 }
 

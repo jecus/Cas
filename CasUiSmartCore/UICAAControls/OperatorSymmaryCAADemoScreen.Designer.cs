@@ -66,6 +66,9 @@ namespace CAS.UI.UICAAControls
             this.LinkTaskList = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkEducation = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkEducationProcessManagement = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            
+            
+            this.LinkEducationProcess = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 
 
             this._settingPersonnel = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
@@ -277,7 +280,7 @@ namespace CAS.UI.UICAAControls
 			this._settingContainer.ReferenceLink02 = this.Operator;
 			this._settingContainer.ReferenceLink03 = null;
 			this._settingContainer.ReferenceLink04 = null;
-			this._settingContainer.ReferenceLink05 = this.LinkDepartments;
+			this._settingContainer.ReferenceLink05 = null;
 			this._settingContainer.ReferenceLink06 = null;
 			this._settingContainer.ReferenceLink07 = null;
             this._settingContainer.ReferenceLink08 = null;
@@ -748,7 +751,7 @@ namespace CAS.UI.UICAAControls
 			this._personnelReferenceContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._personnelReferenceContainer.Name = "_personnelReferenceContainer";
 			this._personnelReferenceContainer.ReferenceLink = this.LinkPersonnel;
-			this._personnelReferenceContainer.ReferenceLink02 = null;
+			this._personnelReferenceContainer.ReferenceLink02 = this.LinkEducationProcess;
 			this._personnelReferenceContainer.ReferenceLink03 = null;
 			this._personnelReferenceContainer.ReferenceLink04 = null;
 			this._personnelReferenceContainer.ReferenceLink05 = null;
@@ -2089,7 +2092,7 @@ namespace CAS.UI.UICAAControls
             this._settingPersonnel.ReferenceLink04 = this.LinkEducationProcessManagement;
             this._settingPersonnel.ReferenceLink05 = this.LinkSpecializations;
             this._settingPersonnel.ReferenceLink06 = this.LinkNomenclatures;
-            this._settingPersonnel.ReferenceLink07 = null;
+            this._settingPersonnel.ReferenceLink07 = this.LinkDepartments;
             this._settingPersonnel.ReferenceLink08 = null;
             this._settingPersonnel.ReferenceLink09 = null;
             this._settingPersonnel.ReferenceLink10 = null;
@@ -2262,7 +2265,32 @@ namespace CAS.UI.UICAAControls
             this.LinkProvider.Text = "Provider";
             this.LinkProvider.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.LinkProvider.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-            this.LinkProvider.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkProviderRequested);
+            this.LinkProvider.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkProviderRequested); 
+            
+            // 
+            // LinkEducationProcess
+            // 
+            this.LinkEducationProcess.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEducationProcess.Displayer = null;
+            this.LinkEducationProcess.DisplayerText = null;
+            this.LinkEducationProcess.Entity = null;
+            this.LinkEducationProcess.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LinkEducationProcess.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEducationProcess.ImageBackColor = System.Drawing.Color.Transparent;
+            this.LinkEducationProcess.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.LinkEducationProcess.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkEducationProcess.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+            this.LinkEducationProcess.Location = new System.Drawing.Point(10, 0);
+            this.LinkEducationProcess.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.LinkEducationProcess.Name = "LinkEducationProcess";
+            this.LinkEducationProcess.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this.LinkEducationProcess.Size = new System.Drawing.Size(188, 20);
+            this.LinkEducationProcess.Status = AvControls.Statuses.Satisfactory;
+            this.LinkEducationProcess.TabIndex = 16;
+            this.LinkEducationProcess.Text = "Education Process";
+            this.LinkEducationProcess.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LinkEducationProcess.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkEducationProcess.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkEducationProcessRequested);
             
             
 
@@ -2351,6 +2379,8 @@ namespace CAS.UI.UICAAControls
         
         private CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer _settingProvider;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkProvider;
+        
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEducationProcess;
         
         
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRigestry;
