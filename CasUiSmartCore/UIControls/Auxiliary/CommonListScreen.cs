@@ -269,7 +269,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			else
 			{
 				//TODO:(Evgenii Babak) нужен Helper
-				if (ViewedType.Name == typeof(NonRoutineJob).Name)
+				if (ViewedType.Name == nameof(NonRoutineJob))
 					InitialDirectiveArray.AddRange(GlobalObjects.NonRoutineJobCore.GetNonRoutineJobs().ToArray());
                 else
                 {
@@ -964,7 +964,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			{
 				Form form;
 
-				if (ViewedType.Name == typeof(AircraftWorkerCategory).Name)
+				if (ViewedType.Name == nameof(AircraftWorkerCategory))
 				{
 					form = new AircraftWorkerCategoryForm(new AircraftWorkerCategory());
 				}
@@ -974,15 +974,15 @@ namespace CAS.UI.UIControls.Auxiliary
 				//    BaseEntityObject item = (BaseEntityObject)ci.Invoke(null);
 				//    form = new CommonEditorForm(item);
 				//}
-				else if(ViewedType.Name == typeof(Product).Name)
+				else if(ViewedType.Name == nameof(Product))
 				{
 					form = new ProductForm(new Product());   
 				}
-				else if (ViewedType.Name == typeof(ComponentModel).Name)
+				else if (ViewedType.Name == nameof(ComponentModel))
 				{
 					form = new ModelForm(new ComponentModel());
 				}
-				else if (ViewedType.Name == typeof(GoodStandart).Name)
+				else if (ViewedType.Name == nameof(GoodStandart))
 				{
 					form = new GoodStandardForm(new GoodStandart());
 				}

@@ -315,7 +315,7 @@ namespace CAS.UI.UIControls.Auxiliary.TreeDataGridView
 					foreach (DataGridViewCell cell in base.Cells)
 					{
 						if (cell.GetType().IsSubclassOf(typeof(TreeDataGridViewTextBoxCell)) ||
-                            cell.GetType().Name == (typeof(TreeDataGridViewTextBoxCell)).Name)
+                            cell.GetType().Name == nameof(TreeDataGridViewTextBoxCell))
 						{
 							treeCell = (TreeDataGridViewTextBoxCell)cell;
 							break;

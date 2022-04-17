@@ -17,7 +17,7 @@ using SmartCore.Entities.General.Attributes;
 namespace CAS.UI.UIControls.Auxiliary.Importing
 {
     /// <summary>
-    /// Общая Форма для редактирования объектов
+    /// РћР±С‰Р°СЏ Р¤РѕСЂРјР° РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ РѕР±СЉРµРєС‚РѕРІ
     /// </summary>
     public partial class CommonExcelImportForm : MetroForm
     {
@@ -37,7 +37,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
         #region public CommonExcelImportForm()
 
         /// <summary>
-        /// Создает форму для переноса шаблона ВС в рабочую базу данных
+        /// РЎРѕР·РґР°РµС‚ С„РѕСЂРјСѓ РґР»СЏ РїРµСЂРµРЅРѕСЃР° С€Р°Р±Р»РѕРЅР° Р’РЎ РІ СЂР°Р±РѕС‡СѓСЋ Р±Р°Р·Сѓ РґР°РЅРЅС‹С…
         /// </summary>
         public CommonExcelImportForm()
         {
@@ -48,7 +48,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
 
         #region public CommonExcelImportForm(Type typeToImport, bool saveChangesToDatabase = true) : this()
         /// <summary>
-        /// Создает форму для редактирования переданного объекта
+        /// РЎРѕР·РґР°РµС‚ С„РѕСЂРјСѓ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ РїРµСЂРµРґР°РЅРЅРѕРіРѕ РѕР±СЉРµРєС‚Р°
         /// </summary>
         public CommonExcelImportForm(Type typeToImport, bool saveChangesToDatabase = true)
             : this()
@@ -74,7 +74,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
         #region Properties
 
         /////<summary>
-        ///// Возвращает редактируемый объект
+        ///// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЂРµРґР°РєС‚РёСЂСѓРµРјС‹Р№ РѕР±СЉРµРєС‚
         /////</summary>
         //public BaseEntityObject CurrentObject
         //{
@@ -88,14 +88,14 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
         protected List<PropertyInfo> GetTypeProperties(Type type)
         {
             if (type == null) return null;
-            //определение своиств, имеющих атрибут "отображаемое в списке"
+            //РѕРїСЂРµРґРµР»РµРЅРёРµ СЃРІРѕРёСЃС‚РІ, РёРјРµСЋС‰РёС… Р°С‚СЂРёР±СѓС‚ "РѕС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РІ СЃРїРёСЃРєРµ"
             List<PropertyInfo> properties =
                 type.GetProperties().Where(p => p.GetCustomAttributes(typeof(ExcelImportAttribute), false).Length != 0).ToList();
 
-            //поиск своиств у которых задан порядок отображения
-            //своиства, имеющие порядок отображения
+            //РїРѕРёСЃРє СЃРІРѕРёСЃС‚РІ Сѓ РєРѕС‚РѕСЂС‹С… Р·Р°РґР°РЅ РїРѕСЂСЏРґРѕРє РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ
+            //СЃРІРѕРёСЃС‚РІР°, РёРјРµСЋС‰РёРµ РїРѕСЂСЏРґРѕРє РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ
             Dictionary<int, PropertyInfo> orderedProperties = new Dictionary<int, PropertyInfo>();
-            //своиства, НЕ имеющие порядок отображения
+            //СЃРІРѕРёСЃС‚РІР°, РќР• РёРјРµСЋС‰РёРµ РїРѕСЂСЏРґРѕРє РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ
             List<PropertyInfo> unOrderedProperties = new List<PropertyInfo>();
             foreach (PropertyInfo propertyInfo in properties)
             {
@@ -123,9 +123,9 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
                                    bool controlEnabled)
         {
 
-            #region ЭУ для прикрепленного файла
+            #region Р­РЈ РґР»СЏ РїСЂРёРєСЂРµРїР»РµРЅРЅРѕРіРѕ С„Р°Р№Р»Р°
 
-            if (propertyInfo.PropertyType.Name == typeof(AttachedFile).Name ||
+            if (propertyInfo.PropertyType.Name == nameof(AttachedFile) ||
                 propertyInfo.PropertyType.IsSubclassOf(typeof(AttachedFile)))
             {
                 object val = propertyInfo.GetValue(obj, null);
@@ -142,7 +142,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
             }
             #endregion
 
-            #region ЭУ для StaticDictionary
+            #region Р­РЈ РґР»СЏ StaticDictionary
 
             if (propertyInfo.PropertyType.IsSubclassOf(typeof(StaticDictionary)))
             {
@@ -158,7 +158,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
                         Tag = propertyInfo,
                         Type = propertyInfo.PropertyType,
                     };
-                    //для возможности вызова новой вкладки
+                    //РґР»СЏ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РІС‹Р·РѕРІР° РЅРѕРІРѕР№ РІРєР»Р°РґРєРё
                     Program.MainDispatcher.ProcessControl(dc);
                     //
                     return dc;    
@@ -170,7 +170,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
                                       Width = controlWidth,
                                   };
 
-                //поиск своиства Items у типа StaticDictionary
+                //РїРѕРёСЃРє СЃРІРѕРёСЃС‚РІР° Items Сѓ С‚РёРїР° StaticDictionary
                 Type t = propertyInfo.PropertyType;
                 PropertyInfo p = t.GetProperty("Items");
 
@@ -186,7 +186,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
             }
             #endregion
 
-            #region  ЭУ для AbstractDictionary
+            #region  Р­РЈ РґР»СЏ AbstractDictionary
 
             if (propertyInfo.PropertyType.IsSubclassOf(typeof(AbstractDictionary)))
             {
@@ -198,14 +198,14 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
                     Tag = propertyInfo,
                     Type = propertyInfo.PropertyType,
                 };
-                //для возможности вызова новой вкладки
+                //РґР»СЏ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РІС‹Р·РѕРІР° РЅРѕРІРѕР№ РІРєР»Р°РґРєРё
                 Program.MainDispatcher.ProcessControl(dc);
                 //
                 return dc;
             }
             #endregion
 
-            #region ЭУ для BaseEntityObject
+            #region Р­РЈ РґР»СЏ BaseEntityObject
 
             if (propertyInfo.PropertyType.IsSubclassOf(typeof(BaseEntityObject)))
             {
@@ -222,7 +222,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
             }
             #endregion
 
-            #region ЭУ для Enum
+            #region Р­РЈ РґР»СЏ Enum
 
             if (propertyInfo.PropertyType.IsEnum)
             {
@@ -245,7 +245,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
             }
             #endregion
 
-            //#region  ЭУ для базовых типов
+            //#region  Р­РЈ РґР»СЏ Р±Р°Р·РѕРІС‹С… С‚РёРїРѕРІ
 
             //string typeName = propertyInfo.PropertyType.Name.ToLower();
             //switch (typeName)
@@ -434,7 +434,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
 
         #region protected virtual bool ValidateData(out string message)
         /// <summary>
-        /// Возвращает значение, показывающее является ли значение элемента управления допустимым
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ СЏРІР»СЏРµС‚СЃСЏ Р»Рё Р·РЅР°С‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° СѓРїСЂР°РІР»РµРЅРёСЏ РґРѕРїСѓСЃС‚РёРјС‹Рј
         /// </summary>
         /// <returns></returns>
         protected virtual bool ValidateData(out string message)
@@ -609,7 +609,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
 
         #region protected virtual bool GetChangeStatus()
         /// <summary>
-        /// Возвращает значение, показывающее были ли изменения в данном элементе управления
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ Р±С‹Р»Рё Р»Рё РёР·РјРµРЅРµРЅРёСЏ РІ РґР°РЅРЅРѕРј СЌР»РµРјРµРЅС‚Рµ СѓРїСЂР°РІР»РµРЅРёСЏ
         /// </summary>
         /// <returns></returns>
         protected virtual bool GetChangeStatus()
@@ -622,9 +622,9 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
 
         #region protected virtual void ApplyChanges()
         /// <summary>
-        /// Применить к объекту сделанные изменения на контроле. 
-        /// Если не все данные удовлетворяют формату ввода (например при вводе чисел), свойства объекта не изменяются, возвращается false
-        /// Вызов base.ApplyChanges() обязателен
+        /// РџСЂРёРјРµРЅРёС‚СЊ Рє РѕР±СЉРµРєС‚Сѓ СЃРґРµР»Р°РЅРЅС‹Рµ РёР·РјРµРЅРµРЅРёСЏ РЅР° РєРѕРЅС‚СЂРѕР»Рµ. 
+        /// Р•СЃР»Рё РЅРµ РІСЃРµ РґР°РЅРЅС‹Рµ СѓРґРѕРІР»РµС‚РІРѕСЂСЏСЋС‚ С„РѕСЂРјР°С‚Сѓ РІРІРѕРґР° (РЅР°РїСЂРёРјРµСЂ РїСЂРё РІРІРѕРґРµ С‡РёСЃРµР»), СЃРІРѕР№СЃС‚РІР° РѕР±СЉРµРєС‚Р° РЅРµ РёР·РјРµРЅСЏСЋС‚СЃСЏ, РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ false
+        /// Р’С‹Р·РѕРІ base.ApplyChanges() РѕР±СЏР·Р°С‚РµР»РµРЅ
         /// </summary>
         /// <returns></returns>
         protected virtual void ApplyChanges()

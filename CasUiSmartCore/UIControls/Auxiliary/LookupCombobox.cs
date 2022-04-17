@@ -1050,15 +1050,15 @@ namespace CAS.UI.UIControls.Auxiliary
                 try
                 {
                     CommonEditorForm form;
-                    if (_type.Name == typeof(AircraftWorkerCategory).Name)
+                    if (_type.Name == nameof(AircraftWorkerCategory))
                     {
                         form = new AircraftWorkerCategoryForm(new AircraftWorkerCategory());
                     }
-                    else if (_type.Name == typeof(Product).Name)
+                    else if (_type.Name == nameof(Product))
                     {
                         form = new ProductForm(new Product());
                     }
-                    else if (_type.Name == typeof(GoodStandart).Name)
+                    else if (_type.Name == nameof(GoodStandart))
                     {
                         form = new GoodStandardForm(new GoodStandart());
                     }

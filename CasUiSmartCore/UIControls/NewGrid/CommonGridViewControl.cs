@@ -62,7 +62,7 @@ namespace CAS.UI.UIControls.NewGrid
 				{
 					//цикл прошел до низа иерархии и невстретил тип BaseSmartCoreObject
 					//значит переданный тип не является его наследником
-					throw new ArgumentNullException("value", "not inherit from " + typeof(BaseEntityObject).Name);
+					throw new ArgumentNullException("value", "not inherit from " + nameof(BaseEntityObject));
 				}
 				#endregion
 

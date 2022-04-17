@@ -565,7 +565,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
             #region ЭУ для прикрепленного файла
 
-            if (propertyInfo.PropertyType.Name == typeof(AttachedFile).Name ||
+            if (propertyInfo.PropertyType.Name == nameof(AttachedFile) ||
                 propertyInfo.PropertyType.IsSubclassOf(typeof(AttachedFile)))
             {
                 object val = propertyInfo.GetValue(obj, null);

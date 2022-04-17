@@ -244,11 +244,11 @@ namespace CAS.UI.UIControls.Auxiliary
                 if (value == null)
                     throw new ArgumentNullException("value", "type must be not null");
                 //Проверка, является ли переданный тип наследником BaseSmartCoreObject
-                if (value.Name != typeof(BaseEntityObject).Name && !value.IsSubclassOf(typeof(BaseEntityObject)))
+                if (value.Name != nameof(BaseEntityObject) && !value.IsSubclassOf(typeof(BaseEntityObject)))
                 {
                     //цикл прошел до низа иерархии и невстретил тип BaseSmartCoreObject
                     //значит переданный тип не является его наследником
-                    throw new ArgumentNullException("value", "not inherit from " + typeof(BaseEntityObject).Name);
+                    throw new ArgumentNullException("value", "not inherit from " + nameof(BaseEntityObject));
                 }
                 #endregion
 

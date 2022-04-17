@@ -90,7 +90,7 @@ namespace CAS.UI.UIControls.Auxiliary
                 {
                     //цикл прошел до низа иерархии и невстретил тип BaseSmartCoreObject
                     //значит переданный тип не является его наследником
-                    throw new ArgumentNullException("value", "not inherit from " + typeof(BaseEntityObject).Name);
+                    throw new ArgumentNullException("value", "not inherit from " + nameof(BaseEntityObject));
                 }
                 #endregion
 
@@ -1018,21 +1018,21 @@ namespace CAS.UI.UIControls.Auxiliary
             {
                 Form form;
 
-                if (ViewedType.Name == typeof(AircraftWorkerCategory).Name)
+                if (ViewedType.Name == nameof(AircraftWorkerCategory))
                 {
                     form = new AircraftWorkerCategoryForm(new AircraftWorkerCategory());
                 }
-                else if (ViewedType.Name == typeof(Product).Name)
+                else if (ViewedType.Name == nameof(Product))
                 {
                     form = new ProductForm(new Product());
                 }
-                else if (ViewedType.Name == typeof(AccessoryRequired).Name)
+                else if (ViewedType.Name == nameof(AccessoryRequired))
                 {
                     form = new KitForm(new AccessoryRequired());
                 }
                 else
                 {
-                    ConstructorInfo ci = ViewedType.GetConstructor(new Type[0]);
+                    ConstructorInfo ci = ViewedType.GetConstructor(Type.EmptyTypes);
                     BaseEntityObject item = (BaseEntityObject)ci.Invoke(null);
                     form = new CommonEditorForm(item);
                 }

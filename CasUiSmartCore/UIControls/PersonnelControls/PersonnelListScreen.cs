@@ -196,7 +196,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			if (_directivesViewer.SelectedItems == null ||
 				_directivesViewer.SelectedItems.Count == 0) return;
 
-			string typeName = typeof (Specialist).Name;
+			string typeName = nameof(Specialist);
 
 			DialogResult confirmResult =
 				MessageBox.Show(_directivesViewer.SelectedItems.Count == 1

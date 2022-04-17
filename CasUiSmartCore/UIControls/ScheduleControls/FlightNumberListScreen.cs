@@ -466,7 +466,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 			if (_directivesViewer.SelectedItems == null ||
 				_directivesViewer.SelectedItems.Count == 0) return;
 
-			string typeName = typeof(FlightNumber).Name;
+			string typeName = nameof(FlightNumber);
 
 			DialogResult confirmResult =
 				MessageBox.Show(_directivesViewer.SelectedItems.Count == 1

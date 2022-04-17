@@ -22,7 +22,7 @@ using SmartCore.Filters;
 namespace CAS.UI.UIControls.FiltersControls
 {
     /// <summary>
-    /// Общая Форма для редактирования объектов
+    /// РћР±С‰Р°СЏ Р¤РѕСЂРјР° РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ РѕР±СЉРµРєС‚РѕРІ
     /// </summary>
     public partial class CommonFilterForm : MetroForm
     {
@@ -41,7 +41,7 @@ namespace CAS.UI.UIControls.FiltersControls
         #region private CommonFilterForm()
 
         /// <summary>
-        /// Создает форму для переноса шаблона ВС в рабочую базу данных
+        /// РЎРѕР·РґР°РµС‚ С„РѕСЂРјСѓ РґР»СЏ РїРµСЂРµРЅРѕСЃР° С€Р°Р±Р»РѕРЅР° Р’РЎ РІ СЂР°Р±РѕС‡СѓСЋ Р±Р°Р·Сѓ РґР°РЅРЅС‹С…
         /// </summary>
         private CommonFilterForm()
         {
@@ -53,7 +53,7 @@ namespace CAS.UI.UIControls.FiltersControls
 
         #region public CommonFilterForm(CommonFilterCollection filterCollection) : this()
         /// <summary>
-        /// Создает форму для фильтрации элементов переданного типа
+        /// РЎРѕР·РґР°РµС‚ С„РѕСЂРјСѓ РґР»СЏ С„РёР»СЊС‚СЂР°С†РёРё СЌР»РµРјРµРЅС‚РѕРІ РїРµСЂРµРґР°РЅРЅРѕРіРѕ С‚РёРїР°
         /// </summary>
         public CommonFilterForm(CommonFilterCollection filterCollection, ICommonCollection items = null)
             : this()
@@ -81,10 +81,10 @@ namespace CAS.UI.UIControls.FiltersControls
 
         #region public static CommonFilterForm GetInstanceForType<T>() where T : BaseEntityObject
         ///<summary>
-        /// Возвращает Объект формы для фильтрации элементов переданного типа
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РћР±СЉРµРєС‚ С„РѕСЂРјС‹ РґР»СЏ С„РёР»СЊС‚СЂР°С†РёРё СЌР»РµРјРµРЅС‚РѕРІ РїРµСЂРµРґР°РЅРЅРѕРіРѕ С‚РёРїР°
         ///</summary>
-        ///<typeparam name="T">Тип-параметр задающий тип элементов фильтрации</typeparam>
-        ///<returns>Объект формы для фильтрации элементов переданного типа</returns>
+        ///<typeparam name="T">РўРёРї-РїР°СЂР°РјРµС‚СЂ Р·Р°РґР°СЋС‰РёР№ С‚РёРї СЌР»РµРјРµРЅС‚РѕРІ С„РёР»СЊС‚СЂР°С†РёРё</typeparam>
+        ///<returns>РћР±СЉРµРєС‚ С„РѕСЂРјС‹ РґР»СЏ С„РёР»СЊС‚СЂР°С†РёРё СЌР»РµРјРµРЅС‚РѕРІ РїРµСЂРµРґР°РЅРЅРѕРіРѕ С‚РёРїР°</returns>
         public static CommonFilterForm GetInstanceForType<T>() where T : BaseEntityObject
         {
             return new CommonFilterForm();
@@ -94,7 +94,7 @@ namespace CAS.UI.UIControls.FiltersControls
         #region private Control GetControl(ICommonFilter commonFilter)
         private Control GetControl(ICommonFilter commonFilter)
         {
-            #region  ЭУ для базовых типов
+            #region  Р­РЈ РґР»СЏ Р±Р°Р·РѕРІС‹С… С‚РёРїРѕРІ
 
             if (commonFilter is CommonFilter<bool>)
             {
@@ -138,7 +138,7 @@ namespace CAS.UI.UIControls.FiltersControls
 	            DateTime maxDate = DateTime.Today;
 
 	            if (_items != null && _items.Count > 0 &&
-	                commonFilter.FilterProperty.PropertyType.Name == typeof(DateTime).Name)
+	                commonFilter.FilterProperty.PropertyType.Name == nameof(DateTime))
 	            {
 					var p = commonFilter.FilterProperty;
 
@@ -168,7 +168,7 @@ namespace CAS.UI.UIControls.FiltersControls
             }
             #endregion
 
-            #region ЭУ для ENUM, IDictionaryItem, IBaseEntityObject
+            #region Р­РЈ РґР»СЏ ENUM, IDictionaryItem, IBaseEntityObject
 
             Type filterType = commonFilter.GetType();
             if (filterType.IsGenericType)
@@ -191,7 +191,7 @@ namespace CAS.UI.UIControls.FiltersControls
                         return null;
                     }
                 }
-                if (genericArgumentType.GetInterface(typeof(IDictionaryItem).Name) != null)
+                if (genericArgumentType.GetInterface(nameof(IDictionaryItem)) != null)
                 {
                     try
                     {
@@ -204,7 +204,7 @@ namespace CAS.UI.UIControls.FiltersControls
 							{
 								Type filterPropertyGenericArgument = t.GetGenericArguments().FirstOrDefault();
 								if (filterPropertyGenericArgument != null &&
-								   filterPropertyGenericArgument.GetInterface(typeof(IDictionaryItem).Name) != null)
+								   filterPropertyGenericArgument.GetInterface(nameof(IDictionaryItem)) != null)
 								{
 									PropertyInfo p = commonFilter.FilterProperty;
 									values = _items.OfType<BaseEntityObject>()
@@ -241,7 +241,7 @@ namespace CAS.UI.UIControls.FiltersControls
                         return null;
                     }
                 }
-                if (genericArgumentType.GetInterface(typeof(IBaseEntityObject).Name) != null)
+                if (genericArgumentType.GetInterface(nameof(IBaseEntityObject)) != null)
                 {
                     try
                     {
@@ -251,8 +251,8 @@ namespace CAS.UI.UIControls.FiltersControls
                         {
                             if(commonFilter.FilterProperty.PropertyType.GetInterface(typeof(IEnumerable<>).Name) != null)
                             {
-                                //Свойство типа является универсальным типом, типом аргумента которого является
-                                //является тип аргумента данного фильтра  
+                                //РЎРІРѕР№СЃС‚РІРѕ С‚РёРїР° СЏРІР»СЏРµС‚СЃСЏ СѓРЅРёРІРµСЂСЃР°Р»СЊРЅС‹Рј С‚РёРїРѕРј, С‚РёРїРѕРј Р°СЂРіСѓРјРµРЅС‚Р° РєРѕС‚РѕСЂРѕРіРѕ СЏРІР»СЏРµС‚СЃСЏ
+                                //СЏРІР»СЏРµС‚СЃСЏ С‚РёРї Р°СЂРіСѓРјРµРЅС‚Р° РґР°РЅРЅРѕРіРѕ С„РёР»СЊС‚СЂР°  
                                 Type t = commonFilter.FilterProperty.PropertyType;
                                 while (t != null)
                                 {
@@ -265,7 +265,7 @@ namespace CAS.UI.UIControls.FiltersControls
                                 {
                                     Type filterPropertyGenericArgument = t.GetGenericArguments().FirstOrDefault();
                                     if(filterPropertyGenericArgument != null &&
-                                       filterPropertyGenericArgument.GetInterface(typeof(IBaseEntityObject).Name) != null)
+                                       filterPropertyGenericArgument.GetInterface(nameof(IBaseEntityObject)) != null)
                                     {
                                         PropertyInfo p = commonFilter.FilterProperty;
 
@@ -280,7 +280,7 @@ namespace CAS.UI.UIControls.FiltersControls
                                 }
 
                             }
-                            if(commonFilter.FilterProperty.PropertyType.GetInterface(typeof(IBaseEntityObject).Name) != null)
+                            if(commonFilter.FilterProperty.PropertyType.GetInterface(nameof(IBaseEntityObject)) != null)
                             {
                                 PropertyInfo p = commonFilter.FilterProperty;
 
@@ -308,14 +308,14 @@ namespace CAS.UI.UIControls.FiltersControls
 
             #endregion
 
-            #region  ЭУ для CommonFilter<Lifelength>
+            #region  Р­РЈ РґР»СЏ CommonFilter<Lifelength>
 
             if (commonFilter is CommonFilter<Lifelength>)
             {
                 var lifelengthFilter = commonFilter as CommonFilter<Lifelength>;
                 Lifelength[] values = null;
                 if (_items != null && _items.Count > 0 && 
-                    commonFilter.FilterProperty.PropertyType.Name == typeof(Lifelength).Name)
+                    commonFilter.FilterProperty.PropertyType.Name == nameof(Lifelength))
                 {
                     PropertyInfo p = commonFilter.FilterProperty;
 
@@ -336,14 +336,14 @@ namespace CAS.UI.UIControls.FiltersControls
 
             #endregion
 
-            #region  ЭУ для CommonFilter<BaseEntityObject>
+            #region  Р­РЈ РґР»СЏ CommonFilter<BaseEntityObject>
 
             if (commonFilter is CommonFilter<IBaseEntityObject>)
             {
                 var lifelengthFilter = commonFilter as CommonFilter<IBaseEntityObject>;
                 BaseEntityObject[] values = null;
                 if (_items != null && _items.Count > 0 &&
-                    commonFilter.FilterProperty.PropertyType.Name == typeof(Lifelength).Name)
+                    commonFilter.FilterProperty.PropertyType.Name == nameof(Lifelength))
                 {
                     PropertyInfo p = commonFilter.FilterProperty;
 
@@ -370,7 +370,7 @@ namespace CAS.UI.UIControls.FiltersControls
 
         #region private bool GetChangeStatus()
         /// <summary>
-        /// Возвращает значение, показывающее были ли изменения в данном элементе управления
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ Р±С‹Р»Рё Р»Рё РёР·РјРµРЅРµРЅРёСЏ РІ РґР°РЅРЅРѕРј СЌР»РµРјРµРЅС‚Рµ СѓРїСЂР°РІР»РµРЅРёСЏ
         /// </summary>
         /// <returns></returns>
         private bool GetChangeStatus()
@@ -388,7 +388,7 @@ namespace CAS.UI.UIControls.FiltersControls
 
         #region private bool ValidateData(out string message)
         /// <summary>
-        /// Возвращает значение, показывающее является ли значение элемента управления допустимым
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ СЏРІР»СЏРµС‚СЃСЏ Р»Рё Р·РЅР°С‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° СѓРїСЂР°РІР»РµРЅРёСЏ РґРѕРїСѓСЃС‚РёРјС‹Рј
         /// </summary>
         /// <returns></returns>
         private bool ValidateData(out string message)
@@ -419,9 +419,9 @@ namespace CAS.UI.UIControls.FiltersControls
 
         #region private void ApplyChanges()
         /// <summary>
-        /// Применить к объекту сделанные изменения на контроле. 
-        /// Если не все данные удовлетворяют формату ввода (например при вводе чисел), свойства объекта не изменяются, возвращается false
-        /// Вызов base.ApplyChanges() обязателен
+        /// РџСЂРёРјРµРЅРёС‚СЊ Рє РѕР±СЉРµРєС‚Сѓ СЃРґРµР»Р°РЅРЅС‹Рµ РёР·РјРµРЅРµРЅРёСЏ РЅР° РєРѕРЅС‚СЂРѕР»Рµ. 
+        /// Р•СЃР»Рё РЅРµ РІСЃРµ РґР°РЅРЅС‹Рµ СѓРґРѕРІР»РµС‚РІРѕСЂСЏСЋС‚ С„РѕСЂРјР°С‚Сѓ РІРІРѕРґР° (РЅР°РїСЂРёРјРµСЂ РїСЂРё РІРІРѕРґРµ С‡РёСЃРµР»), СЃРІРѕР№СЃС‚РІР° РѕР±СЉРµРєС‚Р° РЅРµ РёР·РјРµРЅСЏСЋС‚СЃСЏ, РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ false
+        /// Р’С‹Р·РѕРІ base.ApplyChanges() РѕР±СЏР·Р°С‚РµР»РµРЅ
         /// </summary>
         /// <returns></returns>
         private void ApplyChanges()
@@ -521,7 +521,7 @@ namespace CAS.UI.UIControls.FiltersControls
             if (_filters == null) return;
 
             panelMain.Controls.Clear();
-            int columnCount = _filters.Count > 5 ? 2 : 1;//количество колонок ЭУ
+            int columnCount = _filters.Count > 5 ? 2 : 1;//РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕР»РѕРЅРѕРє Р­РЈ
 
             var labels = new List<Label>();
             var controls = new List<Control>();
@@ -538,8 +538,8 @@ namespace CAS.UI.UIControls.FiltersControls
                 var attr = (FilterAttribute)t.FilterProperty.GetCustomAttributes(typeof(FilterAttribute), false).First();
                 labels.Add(new Label { Text = attr.Title, AutoSize = true });
 
-                //Если значение должно быть не пустым или не NULL
-                //то шрифт леибла утснанавливается в ЖИРНЫЙ(BOLD)
+                //Р•СЃР»Рё Р·РЅР°С‡РµРЅРёРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РЅРµ РїСѓСЃС‚С‹Рј РёР»Рё РЅРµ NULL
+                //С‚Рѕ С€СЂРёС„С‚ Р»РµРёР±Р»Р° СѓС‚СЃРЅР°РЅР°РІР»РёРІР°РµС‚СЃСЏ РІ Р–РР РќР«Р™(BOLD)
                 var notNullAttribute = (NotNullAttribute)t.FilterProperty.GetCustomAttributes(typeof(NotNullAttribute), false).FirstOrDefault();
                 if (notNullAttribute != null)
                     labels.Last().Font = new Font(labels.Last().Font, FontStyle.Bold);
@@ -580,17 +580,17 @@ namespace CAS.UI.UIControls.FiltersControls
                 controls.Add(c);
             }
 
-            #region Компоновка контролов в одну колонку
+            #region РљРѕРјРїРѕРЅРѕРІРєР° РєРѕРЅС‚СЂРѕР»РѕРІ РІ РѕРґРЅСѓ РєРѕР»РѕРЅРєСѓ
             if (columnCount == 1)
             {
-                #region расчет длины лейблов и контролов
+                #region СЂР°СЃС‡РµС‚ РґР»РёРЅС‹ Р»РµР№Р±Р»РѕРІ Рё РєРѕРЅС‚СЂРѕР»РѕРІ
 
                 int maxLabelXSize = 0;
-                int maxControlXSize = 0;//максимальная длиня ЭУ
+                int maxControlXSize = 0;//РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґР»РёРЅСЏ Р­РЈ
                 for (int i = 0; i < labels.Count; i++)
                 {
-                    //на каждый лейбл приходится по одному контролу, 
-                    //поэтому обе коллекции просматриваются одновременно
+                    //РЅР° РєР°Р¶РґС‹Р№ Р»РµР№Р±Р» РїСЂРёС…РѕРґРёС‚СЃСЏ РїРѕ РѕРґРЅРѕРјСѓ РєРѕРЅС‚СЂРѕР»Сѓ, 
+                    //РїРѕСЌС‚РѕРјСѓ РѕР±Рµ РєРѕР»Р»РµРєС†РёРё РїСЂРѕСЃРјР°С‚СЂРёРІР°СЋС‚СЃСЏ РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕ
                     if (controls[i] != null && controls[i] is LifelengthViewer)
                     {
                         var llv = (LifelengthViewer)controls[i];
@@ -602,11 +602,11 @@ namespace CAS.UI.UIControls.FiltersControls
                             llv.ShowHeaders = false;
                         continue;
                     }
-                    //выше рассматривались контролы, имеющие собственные лейблы
-                    //теперь идет просмотр самих леблов
+                    //РІС‹С€Рµ СЂР°СЃСЃРјР°С‚СЂРёРІР°Р»РёСЃСЊ РєРѕРЅС‚СЂРѕР»С‹, РёРјРµСЋС‰РёРµ СЃРѕР±СЃС‚РІРµРЅРЅС‹Рµ Р»РµР№Р±Р»С‹
+                    //С‚РµРїРµСЂСЊ РёРґРµС‚ РїСЂРѕСЃРјРѕС‚СЂ СЃР°РјРёС… Р»РµР±Р»РѕРІ
                     if (labels[i].PreferredWidth > maxLabelXSize)
                         maxLabelXSize = labels[i].PreferredWidth;
-                    //размеры контролов
+                    //СЂР°Р·РјРµСЂС‹ РєРѕРЅС‚СЂРѕР»РѕРІ
                     if (controls[i] != null && controls[i].Size.Width > maxControlXSize)
                     {
                         maxControlXSize = controls[i].Size.Width;
@@ -683,7 +683,7 @@ namespace CAS.UI.UIControls.FiltersControls
 
                     if (controls[i] == null || (controls[i] != null && !(controls[i] is LifelengthViewer)))
                     {
-                        //Если контрол не является LifelengthViewer-ом то нужно добавить лейбл
+                        //Р•СЃР»Рё РєРѕРЅС‚СЂРѕР» РЅРµ СЏРІР»СЏРµС‚СЃСЏ LifelengthViewer-РѕРј С‚Рѕ РЅСѓР¶РЅРѕ РґРѕР±Р°РІРёС‚СЊ Р»РµР№Р±Р»
                         panelMain.Controls.Add(labels[i]);
                     }
                     if (pairControl != null)
@@ -694,38 +694,38 @@ namespace CAS.UI.UIControls.FiltersControls
             }
             #endregion
 
-            #region Компоновка контролов в две колонки
+            #region РљРѕРјРїРѕРЅРѕРІРєР° РєРѕРЅС‚СЂРѕР»РѕРІ РІ РґРІРµ РєРѕР»РѕРЅРєРё
             if (columnCount == 2)
             {
-                #region расчет длины лейблов и контролов
+                #region СЂР°СЃС‡РµС‚ РґР»РёРЅС‹ Р»РµР№Р±Р»РѕРІ Рё РєРѕРЅС‚СЂРѕР»РѕРІ
 
                 int fMaxLabelXSize = 0, sMaxLabelXSize = 0;
                 int fMaxControlXSize = 0, sMaxControlXSize = 0;
-                bool checkFirst = true;//флаг проверяемой колонки
+                bool checkFirst = true;//С„Р»Р°Рі РїСЂРѕРІРµСЂСЏРµРјРѕР№ РєРѕР»РѕРЅРєРё
 
                 for (int i = 0; i < labels.Count; i++)
                 {
-                    //на каждый лейбл приходится по одному контролу, 
-                    //поэтому обе коллекции просматриваются одновременно
+                    //РЅР° РєР°Р¶РґС‹Р№ Р»РµР№Р±Р» РїСЂРёС…РѕРґРёС‚СЃСЏ РїРѕ РѕРґРЅРѕРјСѓ РєРѕРЅС‚СЂРѕР»Сѓ, 
+                    //РїРѕСЌС‚РѕРјСѓ РѕР±Рµ РєРѕР»Р»РµРєС†РёРё РїСЂРѕСЃРјР°С‚СЂРёРІР°СЋС‚СЃСЏ РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕ
                     if (controls[i] != null && controls[i] is ThresholdControl)
                     {
-                        //контрол порога выполнения директивы
-                        //влияет на длину лейблов обоих колонок
+                        //РєРѕРЅС‚СЂРѕР» РїРѕСЂРѕРіР° РІС‹РїРѕР»РЅРµРЅРёСЏ РґРёСЂРµРєС‚РёРІС‹
+                        //РІР»РёСЏРµС‚ РЅР° РґР»РёРЅСѓ Р»РµР№Р±Р»РѕРІ РѕР±РѕРёС… РєРѕР»РѕРЅРѕРє
                         var ddtc = (ThresholdControl)controls[i];
-                        //размеры заголовков
+                        //СЂР°Р·РјРµСЂС‹ Р·Р°РіРѕР»РѕРІРєРѕРІ
                         if (ddtc.MaxFirstColLabelWidth > fMaxLabelXSize)
                             fMaxLabelXSize = ddtc.MaxFirstColLabelWidth;
                         if (ddtc.MaxSecondColLabelWidth > sMaxLabelXSize)
                             sMaxLabelXSize = ddtc.MaxSecondColLabelWidth;
 
-                        //размеры контролов
+                        //СЂР°Р·РјРµСЂС‹ РєРѕРЅС‚СЂРѕР»РѕРІ
                         if (ddtc.MaxFirstColControlWidth > fMaxControlXSize)
                             fMaxControlXSize = ddtc.MaxFirstColControlWidth;
                         if (ddtc.MaxSecondColControlWidth > sMaxControlXSize)
                             sMaxControlXSize = ddtc.MaxSecondColControlWidth;
 
-                        //т.к. DetailDirectiveThresholdControl занимает 2 колонки, 
-                        //то следующий контрол всегда будет располагаться в первой колонке
+                        //С‚.Рє. DetailDirectiveThresholdControl Р·Р°РЅРёРјР°РµС‚ 2 РєРѕР»РѕРЅРєРё, 
+                        //С‚Рѕ СЃР»РµРґСѓСЋС‰РёР№ РєРѕРЅС‚СЂРѕР» РІСЃРµРіРґР° Р±СѓРґРµС‚ СЂР°СЃРїРѕР»Р°РіР°С‚СЊСЃСЏ РІ РїРµСЂРІРѕР№ РєРѕР»РѕРЅРєРµ
                         checkFirst = true;
                         continue;
                     }
@@ -739,7 +739,7 @@ namespace CAS.UI.UIControls.FiltersControls
                         if (!checkFirst && llv.LeftHeaderWidth > sMaxLabelXSize)
                             sMaxLabelXSize = llv.LeftHeaderWidth;
 
-                        //размеры контролов
+                        //СЂР°Р·РјРµСЂС‹ РєРѕРЅС‚СЂРѕР»РѕРІ
                         if (checkFirst && llv.WidthWithoutLeftHeader > fMaxControlXSize)
                             fMaxControlXSize = llv.WidthWithoutLeftHeader;
                         if (!checkFirst && llv.WidthWithoutLeftHeader > sMaxControlXSize)
@@ -749,14 +749,14 @@ namespace CAS.UI.UIControls.FiltersControls
                         continue;
                     }
 
-                    //выше рассматривались контролы, имеющие собственные лейблы
-                    //теперь идет просмотр самих леблов
+                    //РІС‹С€Рµ СЂР°СЃСЃРјР°С‚СЂРёРІР°Р»РёСЃСЊ РєРѕРЅС‚СЂРѕР»С‹, РёРјРµСЋС‰РёРµ СЃРѕР±СЃС‚РІРµРЅРЅС‹Рµ Р»РµР№Р±Р»С‹
+                    //С‚РµРїРµСЂСЊ РёРґРµС‚ РїСЂРѕСЃРјРѕС‚СЂ СЃР°РјРёС… Р»РµР±Р»РѕРІ
                     if (checkFirst && labels[i].PreferredWidth > fMaxLabelXSize)
                         fMaxLabelXSize = labels[i].PreferredWidth;
                     if (!checkFirst && labels[i].PreferredWidth > sMaxLabelXSize)
                         sMaxLabelXSize = labels[i].PreferredWidth;
 
-                    //размеры контролов
+                    //СЂР°Р·РјРµСЂС‹ РєРѕРЅС‚СЂРѕР»РѕРІ
                     if (controls[i] != null)
                     {
                         if (checkFirst && controls[i].Size.Width > fMaxControlXSize)
@@ -786,32 +786,32 @@ namespace CAS.UI.UIControls.FiltersControls
                     {
                         if (checkFirst || (controls[i] != null && controls[i] is ThresholdControl))
                         {
-                            //Заполняется первая колока или 
-                            //контрол является контролом отображения порогов выполнения
-                            //(контрол порогов выполнения располагается в первой колонке)
+                            //Р—Р°РїРѕР»РЅСЏРµС‚СЃСЏ РїРµСЂРІР°СЏ РєРѕР»РѕРєР° РёР»Рё 
+                            //РєРѕРЅС‚СЂРѕР» СЏРІР»СЏРµС‚СЃСЏ РєРѕРЅС‚СЂРѕР»РѕРј РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РїРѕСЂРѕРіРѕРІ РІС‹РїРѕР»РЅРµРЅРёСЏ
+                            //(РєРѕРЅС‚СЂРѕР» РїРѕСЂРѕРіРѕРІ РІС‹РїРѕР»РЅРµРЅРёСЏ СЂР°СЃРїРѕР»Р°РіР°РµС‚СЃСЏ РІ РїРµСЂРІРѕР№ РєРѕР»РѕРЅРєРµ)
                             left = firstCol;
                             labelSize = fMaxLabelXSize;
                             controlSize = fMaxControlXSize;
 
-                            //определение самого нижнего Bottoma 2-х предыдущих контролов
+                            //РѕРїСЂРµРґРµР»РµРЅРёРµ СЃР°РјРѕРіРѕ РЅРёР¶РЅРµРіРѕ Bottoma 2-С… РїСЂРµРґС‹РґСѓС‰РёС… РєРѕРЅС‚СЂРѕР»РѕРІ
                             int bottom1, bottom2;
-                            //определение нижней точки предыдущего контрола 
-                            //(он будет либо во второй колонке предыдущего ряда, либо занимать весь ряд)
+                            //РѕРїСЂРµРґРµР»РµРЅРёРµ РЅРёР¶РЅРµР№ С‚РѕС‡РєРё РїСЂРµРґС‹РґСѓС‰РµРіРѕ РєРѕРЅС‚СЂРѕР»Р° 
+                            //(РѕРЅ Р±СѓРґРµС‚ Р»РёР±Рѕ РІРѕ РІС‚РѕСЂРѕР№ РєРѕР»РѕРЅРєРµ РїСЂРµРґС‹РґСѓС‰РµРіРѕ СЂСЏРґР°, Р»РёР±Рѕ Р·Р°РЅРёРјР°С‚СЊ РІРµСЃСЊ СЂСЏРґ)
                             if (controls[i - 1] != null)
                             {
                                 if(controls[i - 1].Left <= (firstCol + fMaxLabelXSize + 5))
                                 {
-                                    //Если пред. контрол также располагается в первой колонке
-                                    //(Занимает 2 колонки), то верхней точкой будет нижняя точка пред. контрола
+                                    //Р•СЃР»Рё РїСЂРµРґ. РєРѕРЅС‚СЂРѕР» С‚Р°РєР¶Рµ СЂР°СЃРїРѕР»Р°РіР°РµС‚СЃСЏ РІ РїРµСЂРІРѕР№ РєРѕР»РѕРЅРєРµ
+                                    //(Р—Р°РЅРёРјР°РµС‚ 2 РєРѕР»РѕРЅРєРё), С‚Рѕ РІРµСЂС…РЅРµР№ С‚РѕС‡РєРѕР№ Р±СѓРґРµС‚ РЅРёР¶РЅСЏСЏ С‚РѕС‡РєР° РїСЂРµРґ. РєРѕРЅС‚СЂРѕР»Р°
                                     bottom2 = controls[i - 1].Bottom + 5;
                                 }
                                 else
                                 {
-                                    //Пред. контрол располагается во второй колонке
+                                    //РџСЂРµРґ. РєРѕРЅС‚СЂРѕР» СЂР°СЃРїРѕР»Р°РіР°РµС‚СЃСЏ РІРѕ РІС‚РѕСЂРѕР№ РєРѕР»РѕРЅРєРµ
                                     if(controls[i] is ThresholdControl)
                                     {
-                                        //Текущий контрол является контролом пороговых значений
-                                        //значит его верхняя точка может расчитываться по нижней точке пред контрола
+                                        //РўРµРєСѓС‰РёР№ РєРѕРЅС‚СЂРѕР» СЏРІР»СЏРµС‚СЃСЏ РєРѕРЅС‚СЂРѕР»РѕРј РїРѕСЂРѕРіРѕРІС‹С… Р·РЅР°С‡РµРЅРёР№
+                                        //Р·РЅР°С‡РёС‚ РµРіРѕ РІРµСЂС…РЅСЏСЏ С‚РѕС‡РєР° РјРѕР¶РµС‚ СЂР°СЃС‡РёС‚С‹РІР°С‚СЊСЃСЏ РїРѕ РЅРёР¶РЅРµР№ С‚РѕС‡РєРµ РїСЂРµРґ РєРѕРЅС‚СЂРѕР»Р°
                                         bottom2 = controls[i - 1].Bottom + 5;    
                                     }
                                     else
@@ -827,8 +827,8 @@ namespace CAS.UI.UIControls.FiltersControls
                                 }
                             }
                             else bottom2 = labels[i - 1].Bottom + 5;
-                            //определение нижней точки пред-предыдущего контрола
-                            //он может и отсутствовать
+                            //РѕРїСЂРµРґРµР»РµРЅРёРµ РЅРёР¶РЅРµР№ С‚РѕС‡РєРё РїСЂРµРґ-РїСЂРµРґС‹РґСѓС‰РµРіРѕ РєРѕРЅС‚СЂРѕР»Р°
+                            //РѕРЅ РјРѕР¶РµС‚ Рё РѕС‚СЃСѓС‚СЃС‚РІРѕРІР°С‚СЊ
                             if ((i - 2) >= 0)
                             {
                                 if (controls[i - 2] != null)
@@ -858,9 +858,9 @@ namespace CAS.UI.UIControls.FiltersControls
                     {
                         var ddtc = (ThresholdControl)controls[i];
                         controls[i].Location = new Point(3, top);
-                        //выравнивание первой колонки
+                        //РІС‹СЂР°РІРЅРёРІР°РЅРёРµ РїРµСЂРІРѕР№ РєРѕР»РѕРЅРєРё
                         ddtc.SetFirstColumnPos(firstCol + fMaxLabelXSize);
-                        //выравнивание второй колонки
+                        //РІС‹СЂР°РІРЅРёРІР°РЅРёРµ РІС‚РѕСЂРѕР№ РєРѕР»РѕРЅРєРё
                         ddtc.SetSecondColumnPos(secondCol + sMaxLabelXSize);
 
                         panelMain.Controls.Add(controls[i]);
@@ -901,39 +901,39 @@ namespace CAS.UI.UIControls.FiltersControls
 	        var maxSize = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
 	        if (Width > maxSize.Width || Height > maxSize.Height)
 	        {
-				//текущий размер формы сохраняем в локальной переменной , т.к после отключения AutoSize текущий размер формы поменяется
+				//С‚РµРєСѓС‰РёР№ СЂР°Р·РјРµСЂ С„РѕСЂРјС‹ СЃРѕС…СЂР°РЅСЏРµРј РІ Р»РѕРєР°Р»СЊРЅРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№ , С‚.Рє РїРѕСЃР»Рµ РѕС‚РєР»СЋС‡РµРЅРёСЏ AutoSize С‚РµРєСѓС‰РёР№ СЂР°Р·РјРµСЂ С„РѕСЂРјС‹ РїРѕРјРµРЅСЏРµС‚СЃСЏ
 		        var currentSize = Size;
-				//Выключаем автосайз у формы и у панели где лежат контролы
+				//Р’С‹РєР»СЋС‡Р°РµРј Р°РІС‚РѕСЃР°Р№Р· Сѓ С„РѕСЂРјС‹ Рё Сѓ РїР°РЅРµР»Рё РіРґРµ Р»РµР¶Р°С‚ РєРѕРЅС‚СЂРѕР»С‹
 				AutoSize = false;
 				panelMain.AutoSize = false;
 				panelMain.AutoScroll = true;
-				//подгонка размера формы
+				//РїРѕРґРіРѕРЅРєР° СЂР°Р·РјРµСЂР° С„РѕСЂРјС‹
 				if (Width > maxSize.Width && Height > maxSize.Height)
 		        {
-					//Ширина и высота формы больше размера рабочей области экрана
-					//в данном случае единственный вариант это ограничить размер формы размерами экрана
+					//РЁРёСЂРёРЅР° Рё РІС‹СЃРѕС‚Р° С„РѕСЂРјС‹ Р±РѕР»СЊС€Рµ СЂР°Р·РјРµСЂР° СЂР°Р±РѕС‡РµР№ РѕР±Р»Р°СЃС‚Рё СЌРєСЂР°РЅР°
+					//РІ РґР°РЅРЅРѕРј СЃР»СѓС‡Р°Рµ РµРґРёРЅСЃС‚РІРµРЅРЅС‹Р№ РІР°СЂРёР°РЅС‚ СЌС‚Рѕ РѕРіСЂР°РЅРёС‡РёС‚СЊ СЂР°Р·РјРµСЂ С„РѕСЂРјС‹ СЂР°Р·РјРµСЂР°РјРё СЌРєСЂР°РЅР°
 					Width = maxSize.Width;
 			        Height = maxSize.Height;
 		        }
 				else if (Width > maxSize.Width)
 				{
-					//Ширина формы больше ширины рабочей области
+					//РЁРёСЂРёРЅР° С„РѕСЂРјС‹ Р±РѕР»СЊС€Рµ С€РёСЂРёРЅС‹ СЂР°Р±РѕС‡РµР№ РѕР±Р»Р°СЃС‚Рё
 					Width = maxSize.Width;
 					Height = currentSize.Height;
-					//Надо проверить, можно ли вставить горизонтальный scrollbar без вставки вертикального
+					//РќР°РґРѕ РїСЂРѕРІРµСЂРёС‚СЊ, РјРѕР¶РЅРѕ Р»Рё РІСЃС‚Р°РІРёС‚СЊ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Р№ scrollbar Р±РµР· РІСЃС‚Р°РІРєРё РІРµСЂС‚РёРєР°Р»СЊРЅРѕРіРѕ
 					if (Height + 20 <= maxSize.Height)
 						Height += 20;
 				}
 			    else // (Height > maxSize.Height)
 				{
-					//Высота формы больше высоты рабочей области
+					//Р’С‹СЃРѕС‚Р° С„РѕСЂРјС‹ Р±РѕР»СЊС€Рµ РІС‹СЃРѕС‚С‹ СЂР°Р±РѕС‡РµР№ РѕР±Р»Р°СЃС‚Рё
 					Height = maxSize.Height;
 					Width = currentSize.Width;
-					//Надо проверить, можно ли вставить вертикальный scrollbar без вставки горизонтального
+					//РќР°РґРѕ РїСЂРѕРІРµСЂРёС‚СЊ, РјРѕР¶РЅРѕ Р»Рё РІСЃС‚Р°РІРёС‚СЊ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Р№ scrollbar Р±РµР· РІСЃС‚Р°РІРєРё РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕРіРѕ
 					if (Width + 20 <= maxSize.Width)
 						Width += 20;
 				}
-				//Задаем размеры панели : у ширины отнимаем 20 чтобы влезла полоса прокрутки , а у высоты 85 чтобы влезла панель с кнопками
+				//Р—Р°РґР°РµРј СЂР°Р·РјРµСЂС‹ РїР°РЅРµР»Рё : Сѓ С€РёСЂРёРЅС‹ РѕС‚РЅРёРјР°РµРј 20 С‡С‚РѕР±С‹ РІР»РµР·Р»Р° РїРѕР»РѕСЃР° РїСЂРѕРєСЂСѓС‚РєРё , Р° Сѓ РІС‹СЃРѕС‚С‹ 85 С‡С‚РѕР±С‹ РІР»РµР·Р»Р° РїР°РЅРµР»СЊ СЃ РєРЅРѕРїРєР°РјРё
 				panelMain.Width = Width - 20;
 				panelMain.Height = Height - 105;
 
