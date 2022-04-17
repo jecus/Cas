@@ -97,9 +97,7 @@ namespace SmartCore.Entities.Dictionaries
 		[NotNull]
 		[Child]
 		public Department Department { get; set; }
-
-        [FormControl(150, "Test", 1, Order = 55)]
-		public Lifelength Test { get; set; }
+		
 		#endregion
 
 		#region public static Nomenclatures Unknown

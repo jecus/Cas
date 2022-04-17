@@ -63,13 +63,12 @@ namespace CAS.UI.UICAAControls.CAAEducation
             AddColumn("Occupation", (int)(radGridView1.Width * 0.20f));
             AddColumn("Department", (int)(radGridView1.Width * 0.20f));
             AddColumn("Code", (int)(radGridView1.Width * 0.20f));
-            AddColumn("Code", (int)(radGridView1.Width * 0.20f));
 			AddColumn("CodeName", (int)(radGridView1.Width * 0.24f));
+			AddColumn("SubTaskCode", (int)(radGridView1.Width * 0.3f));
 			AddColumn("SubTask code", (int)(radGridView1.Width * 0.24f));
 			AddColumn("FullName", (int)(radGridView1.Width * 0.45f));
             AddColumn("Description", (int)(radGridView1.Width * 0.45f));
             AddColumn("Level", (int)(radGridView1.Width * 0.24f));
-            AddColumn("ShortName", (int)(radGridView1.Width * 0.3f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -106,7 +105,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			{
                 CreateRow(item.Occupation.ToString(), item.Occupation),
                 CreateRow(item.Occupation.Department.ToString(), item.Occupation.Department),
-                CreateRow(item.Task.Code, item.Task.Code),
                 CreateRow(item.Task.Code, item.Task.Code),
                 CreateRow(item.Task.CodeName, item.Task.CodeName),
                 CreateRow(item.Task.SubTaskCode, item.Task.SubTaskCode),

@@ -26,6 +26,10 @@ namespace SmartCore.CAA.Tasks
         [FormControl(250, "SubTaskCode",Order = 3)]
         public string SubTaskCode { get; set; }
         
+        [ListViewData(0.2f, "SubTaskName")]
+        [FormControl(250, "SubTaskName",Order = 4)]
+        public string ShortName { get; set; }
+        
         [ListViewData(0.4f, "FullName")]
         [FormControl(250, "FullName",Order = 5, Height = 80)]
         public string FullName { get; set; }
@@ -39,9 +43,6 @@ namespace SmartCore.CAA.Tasks
         [FormControl(250, "Level",Order = 7)]
         public TaskLevel Level { get; set; }
         
-        [ListViewData(0.2f, "ShortName")]
-        [FormControl(250, "ShortName",Order = 4)]
-        public string ShortName { get; set; }
         
         public int OperatorId { get; set; }
         
