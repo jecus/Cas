@@ -31,7 +31,6 @@ namespace SmartCore.CAA.Tasks
         public string ShortName { get; set; }
         
         [ListViewData(0.4f, "FullName")]
-        [FormControl(250, "FullName",Order = 5, Height = 80)]
         public string FullName { get; set; }
         
         
