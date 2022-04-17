@@ -99,8 +99,8 @@ namespace CAS.UI.UIControls.Auxiliary
                 try
                 {
                     if (_selectedItemsList != null) _selectedItemsList.Clear();
-                    Type genericType = typeof(CommonCollection<>);
-                    Type genericList = genericType.MakeGenericType(_viewedType);
+                    var genericType = typeof(CommonCollection<>);
+                    var genericList = genericType.MakeGenericType(_viewedType);
                     _selectedItemsList = (ICommonCollection)Activator.CreateInstance(genericList);
                 }
                 catch (Exception ex)
@@ -163,10 +163,8 @@ namespace CAS.UI.UIControls.Auxiliary
         ///<summary>
         /// возвращает ListView 
         ///</summary>
-        public ListView ItemListView
-        {
-            get { return itemsListView; }
-        }
+        public ListView ItemListView => itemsListView;
+
         #endregion
 
         #region Implement of IReference
@@ -258,17 +256,17 @@ namespace CAS.UI.UIControls.Auxiliary
             if (_viewedType == null) 
                 throw new NullReferenceException("_viewedType is null");
             //определение своиств, имеющих атрибут "отображаемое в списке"
-            List<PropertyInfo> properties =
+            var properties =
                 _viewedType.GetProperties().Where(p => p.GetCustomAttributes(typeof(ListViewDataAttribute), false).Length != 0).ToList();
 
             //поиск своиств у которых задан порядок отображения
             //своиства, имеющие порядок отображения
-            Dictionary<int, PropertyInfo> orderedProperties = new Dictionary<int, PropertyInfo>();
+            var orderedProperties = new Dictionary<int, PropertyInfo>();
             //своиства, НЕ имеющие порядок отображения
-            List<PropertyInfo> unOrderedProperties = new List<PropertyInfo>();
-            foreach (PropertyInfo propertyInfo in properties)
+            var unOrderedProperties = new List<PropertyInfo>();
+            foreach (var propertyInfo in properties)
             {
-                ListViewDataAttribute lvda = (ListViewDataAttribute)
+                var lvda = (ListViewDataAttribute)
                     propertyInfo.GetCustomAttributes(typeof(ListViewDataAttribute), false).FirstOrDefault();
                 if (lvda.Order > 0) orderedProperties.Add(lvda.Order, propertyInfo);
                 else unOrderedProperties.Add(propertyInfo);
@@ -353,9 +351,9 @@ namespace CAS.UI.UIControls.Auxiliary
             if (itemsArray.Count == 0)
                 return;
 
-            List<ListViewItem> listViewItems = itemsArray.Cast<BaseEntityObject>().Select(GetItemforInserting).ToList();
+            var listViewItems = itemsArray.Cast<BaseEntityObject>().Select(GetItemforInserting).ToList();
 
-            for (int i = listViewItems.Count - 1; i >= 0; i--)
+            for (var i = listViewItems.Count - 1; i >= 0; i--)
             {
                 ListViewItemList.Add(listViewItems[i]);
             }
@@ -384,7 +382,7 @@ namespace CAS.UI.UIControls.Auxiliary
                 throw new ArgumentNullException("item", "itemsArray can't be null");
             try
             {
-                ListViewItem listViewItem = new ListViewItem(GetListViewSubItems(item), null) { Tag = item };
+                var listViewItem = new ListViewItem(GetListViewSubItems(item), null) { Tag = item };
                 ListViewItemList.Add(listViewItem);
                 ListViewItemList.Sort(new BaseListViewComparer(OldColumnIndex, SortMultiplier));
 
@@ -412,13 +410,13 @@ namespace CAS.UI.UIControls.Auxiliary
         {
             try
             {
-                int count = itemsListView.Items.Count;
-                Type genericType = typeof(CommonCollection<>);
-                Type genericList = genericType.MakeGenericType(_viewedType);
-                ICommonCollection returnDetailArray = (ICommonCollection)Activator.CreateInstance(genericList);
+                var count = itemsListView.Items.Count;
+                var genericType = typeof(CommonCollection<>);
+                var genericList = genericType.MakeGenericType(_viewedType);
+                var returnDetailArray = (ICommonCollection)Activator.CreateInstance(genericList);
                 if (count > 0)
                 {
-                    for (int i = 0; i < count; i++)
+                    for (var i = 0; i < count; i++)
                     {
                         returnDetailArray.Add(itemsListView.Items[i].Tag as BaseEntityObject);
                     }
@@ -443,11 +441,11 @@ namespace CAS.UI.UIControls.Auxiliary
 
             try
             {
-                List<PropertyInfo> properties = GetTypeProperties();
+                var properties = GetTypeProperties();
                 ColumnHeader columnHeader;
-                foreach (PropertyInfo propertyInfo in properties)
+                foreach (var propertyInfo in properties)
                 {
-                    ListViewDataAttribute attr =
+                    var attr =
                         (ListViewDataAttribute)propertyInfo.GetCustomAttributes(typeof(ListViewDataAttribute), false)[0];
                     columnHeader = new ColumnHeader();
                     columnHeader.Width = attr.HeaderWidth > 1 ? (int)attr.HeaderWidth : (int)(itemsListView.Width * attr.HeaderWidth);
@@ -499,7 +497,7 @@ namespace CAS.UI.UIControls.Auxiliary
         {
             if (itemsArray.Count() != 0)
             {
-                foreach (BaseEntityObject o in itemsArray)
+                foreach (var o in itemsArray)
                 {
                     CreateItem(o);
                 }
@@ -525,7 +523,7 @@ namespace CAS.UI.UIControls.Auxiliary
         {
             try
             {
-                ListViewItem listViewItem = new ListViewItem(GetListViewSubItems(item),null) {Tag = item};
+                var listViewItem = new ListViewItem(GetListViewSubItems(item),null) {Tag = item};
                 ListViewItemList.Add(listViewItem);
                 return;
             }
@@ -547,7 +545,7 @@ namespace CAS.UI.UIControls.Auxiliary
         {
             try
             {
-                ListViewItem listViewItem = new ListViewItem(GetListViewSubItems(item), null) { Tag = item };
+                var listViewItem = new ListViewItem(GetListViewSubItems(item), null) { Tag = item };
                 return listViewItem;
             }
             catch (Exception ex)
@@ -569,7 +567,7 @@ namespace CAS.UI.UIControls.Auxiliary
                 throw new ArgumentNullException("item", "itemsArray can't be null");
             try
             {
-                ListViewItem listViewItem = itemsListView.Items.OfType<ListViewItem>()
+                var listViewItem = itemsListView.Items.OfType<ListViewItem>()
                     .FirstOrDefault(i => i.Tag is BaseEntityObject
                                          && ((BaseEntityObject) i.Tag).ItemId == item.ItemId
                                          && ((BaseEntityObject) i.Tag).SmartCoreObjectType.Equals(item.SmartCoreObjectType));
@@ -594,12 +592,12 @@ namespace CAS.UI.UIControls.Auxiliary
 
         protected virtual ListViewItem.ListViewSubItem[] GetListViewSubItems(BaseEntityObject item)
         {
-            List<PropertyInfo> properties = GetTypeProperties();
+            var properties = GetTypeProperties();
 
-            ListViewItem.ListViewSubItem[] subItems = new ListViewItem.ListViewSubItem[properties.Count];
-            for (int i = 0; i < properties.Count; i++ )
+            var subItems = new ListViewItem.ListViewSubItem[properties.Count];
+            for (var i = 0; i < properties.Count; i++ )
             {
-                object value = properties[i].GetValue(item, null);
+                var value = properties[i].GetValue(item, null);
                 if(value != null)
                 {
 	                if (properties[i].Name == "CorrectorId")
@@ -670,16 +668,16 @@ namespace CAS.UI.UIControls.Auxiliary
                 return;
 
             itemsListView.Groups.Clear();
-            foreach (ListViewItem item in ListViewItemList)
+            foreach (var item in ListViewItemList)
             {
-                String temp;
+                string temp;
 
                 if (item.Tag == null) continue;
-                BaseEntityObject ob = item.Tag as BaseEntityObject;
+                var ob = item.Tag as BaseEntityObject;
                 if (ob == null) continue;
 
                 //Извлечение значения
-                object value = _beginGroup.GetValue(ob, null);
+                var value = _beginGroup.GetValue(ob, null);
                 //Проверка значения на null
                 if (value == null) 
                     continue;
@@ -728,7 +726,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region private void SetItemsColor(IEnumerable<ListViewItem> listViewItems)
         private void SetItemsColor(IEnumerable<ListViewItem> listViewItems)
         {
-            foreach (ListViewItem item in listViewItems)
+            foreach (var item in listViewItems)
             {
                 SetItemColor(item, (BaseEntityObject)item.Tag);
             }
@@ -738,7 +736,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region protected virtual void SetItemColor(ListViewItem listViewItem, BaseEntityObject item)
         protected virtual void SetItemColor(ListViewItem listViewItem, BaseEntityObject item)
         {
-            IDirective imd = item as IDirective;
+            var imd = item as IDirective;
             if (imd == null) return;
 
             if (imd.Condition == ConditionState.Overdue)
@@ -757,12 +755,12 @@ namespace CAS.UI.UIControls.Auxiliary
         /// <param name="items">Элементы, для которых требуется обновить подсветку</param>
         public void UpdateItemsColor(IEnumerable<BaseEntityObject> items)
         {
-            List<ListViewItem> lvi =
+            var lvi =
                 items.SelectMany(i => itemsListView.Items.Cast<ListViewItem>()
                                                          .Where(listViewItem => listViewItem.Tag == i))
                      .ToList();
 
-            foreach (ListViewItem item in lvi)
+            foreach (var item in lvi)
             {
                 SetItemColor(item, (BaseEntityObject)item.Tag);
             }
@@ -776,12 +774,12 @@ namespace CAS.UI.UIControls.Auxiliary
         /// <param name="item">Элемент, для которого требуется обновить подсветку</param>
         public void UpdateItemColor(BaseEntityObject item)
         {
-            List<ListViewItem> lvi = 
+            var lvi = 
                 itemsListView.Items.Cast<ListViewItem>()
                                    .Where(listViewItem => listViewItem.Tag == item)
                                    .ToList();
 
-            foreach (ListViewItem listViewItem in lvi)
+            foreach (var listViewItem in lvi)
             {
                 SetItemColor(listViewItem, (BaseEntityObject)listViewItem.Tag);
             }
@@ -806,11 +804,11 @@ namespace CAS.UI.UIControls.Auxiliary
         ///</summary>
         private void SearchItem(string stringToSearch)
         {
-            int searchStartIndex = 0;
+            var searchStartIndex = 0;
             //очистка выделенных элементов списка
             ClearSelectedItems();
-            List<ListViewItem> findItems = new List<ListViewItem>();
-            ListViewItem item = itemsListView.FindItemWithText(stringToSearch, true, searchStartIndex);
+            var findItems = new List<ListViewItem>();
+            var item = itemsListView.FindItemWithText(stringToSearch, true, searchStartIndex);
             while (item != null && searchStartIndex < itemsListView.Items.Count)
             {
                 item.Selected = true;
@@ -946,18 +944,18 @@ namespace CAS.UI.UIControls.Auxiliary
                 return;
 
             //определение своиств типа
-            List<PropertyInfo> preProrerty = GetTypeProperties();
+            var preProrerty = GetTypeProperties();
             //определение своиств, имеющих атрибут "отображаемое в списке"
-            List<PropertyInfo> properties =
+            var properties =
                 preProrerty.Where(p => p.GetCustomAttributes(typeof(ListViewDataAttribute), false).Length != 0).ToList();
-            for (int i = 0; i < ColumnHeaderList.Count; i++)
+            for (var i = 0; i < ColumnHeaderList.Count; i++)
             {
                 if (i >= properties.Count)
                 {
                     ColumnHeaderList[i].Width = (int)(itemsListView.Width * 0.1f);
                     continue;
                 }
-                ListViewDataAttribute attr =
+                var attr =
                     (ListViewDataAttribute)properties[i].GetCustomAttributes(typeof(ListViewDataAttribute), false)[0];
                 ColumnHeaderList[i].Width = attr.HeaderWidth > 1 
                                          ? (int) attr.HeaderWidth
@@ -974,8 +972,8 @@ namespace CAS.UI.UIControls.Auxiliary
         {
             if (null != DisplayerRequested)
             {
-                ReflectionTypes reflection = ReflectionType;
-                Keyboard k = new Keyboard();
+                var reflection = ReflectionType;
+                var k = new Keyboard();
                 if (k.ShiftKeyDown && reflection == ReflectionTypes.DisplayInCurrent) reflection = ReflectionTypes.DisplayInNew;
                 ReferenceEventArgs e;
                 if (null != Displayer)
@@ -1018,23 +1016,24 @@ namespace CAS.UI.UIControls.Auxiliary
             {
                 Form form;
 
-                if (ViewedType.Name == nameof(AircraftWorkerCategory))
+                switch (ViewedType.Name)
                 {
-                    form = new AircraftWorkerCategoryForm(new AircraftWorkerCategory());
-                }
-                else if (ViewedType.Name == nameof(Product))
-                {
-                    form = new ProductForm(new Product());
-                }
-                else if (ViewedType.Name == nameof(AccessoryRequired))
-                {
-                    form = new KitForm(new AccessoryRequired());
-                }
-                else
-                {
-                    ConstructorInfo ci = ViewedType.GetConstructor(Type.EmptyTypes);
-                    BaseEntityObject item = (BaseEntityObject)ci.Invoke(null);
-                    form = new CommonEditorForm(item);
+                    case nameof(AircraftWorkerCategory):
+                        form = new AircraftWorkerCategoryForm(new AircraftWorkerCategory());
+                        break;
+                    case nameof(Product):
+                        form = new ProductForm(new Product());
+                        break;
+                    case nameof(AccessoryRequired):
+                        form = new KitForm(new AccessoryRequired());
+                        break;
+                    default:
+                    {
+                        var ci = ViewedType.GetConstructor(Type.EmptyTypes);
+                        var item = (BaseEntityObject)ci.Invoke(null);
+                        form = new CommonEditorForm(item);
+                        break;
+                    }
                 }
                 if (form.ShowDialog() == DialogResult.OK)
                 {
