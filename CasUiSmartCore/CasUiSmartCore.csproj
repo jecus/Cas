@@ -913,12 +913,6 @@
     <Compile Include="UICAAControls\Audit\PEL\PelPersonnelLiteListView.Designer.cs">
       <DependentUpon>PelPersonnelLiteListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CAATaskListView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CAATaskListView.Designer.cs">
-      <DependentUpon>CAATaskListView.cs</DependentUpon>
-    </Compile>
     <Compile Include="UICAAControls\CAAEducation\EducationForm.cs">
       <SubType>Form</SubType>
     </Compile>

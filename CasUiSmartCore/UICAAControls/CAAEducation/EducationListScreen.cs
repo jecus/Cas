@@ -11,9 +11,11 @@ using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using SmartCore.Entities.Collections;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
+using FilterType = Entity.Abstractions.Attributte.FilterType;
 
 namespace CAS.UI.UICAAControls.CAAEducation
 {
@@ -99,7 +101,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
                 .GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _operatorId),loadChild:true));
-
+			
             
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
 

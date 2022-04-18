@@ -63,6 +63,9 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		#region public Department Department { get; set; }
+		
+		public int?  DepartmentId { get; set; }
+		
 
 	    [TableColumn("DepartmentId", 50)]
 	    [FormControl(150, "Department", 1, Order = 3)]
