@@ -348,7 +348,8 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkEducationProcessManagementnRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Education Management";
+	        e.RequestedEntity = new EducationManagmentListScreen(_getOperator(), _currentOperator.ItemId);
         }
 
         private void LinkProviderRequested(object sender, ReferenceEventArgs e)

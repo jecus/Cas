@@ -343,7 +343,8 @@ namespace CAS.UI.UICAAControls
 
         private void LinkEducationProcessManagementnRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Education Management";
+	        e.RequestedEntity = new EducationManagmentListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
         }
 
         private void LinkProviderRequested(object sender, ReferenceEventArgs e)

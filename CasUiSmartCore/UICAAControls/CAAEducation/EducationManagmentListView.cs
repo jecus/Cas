@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Personnel;
+using Telerik.WinControls.Data;
 
 namespace CAS.UI.UICAAControls.CAAEducation
 {
 	///<summary>
 	/// список для отображения сотрудников
 	///</summary>
-	public partial class EducationListView : BaseGridViewControl<SmartCore.CAA.CAAEducation.CAAEducation>
+	public partial class EducationManagmentListView : BaseGridViewControl<CAAEducationManagment>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
 
@@ -25,7 +29,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		#region public PersonnelListView()
 
-        public EducationListView()
+        public EducationManagmentListView()
         {
             InitializeComponent();
 		}
@@ -33,7 +37,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
         /// <summary>
         /// </summary>
         /// <param name="animatedThreadWorker"></param>
-        public EducationListView(AnimatedThreadWorker animatedThreadWorker) : this()
+        public EducationManagmentListView(AnimatedThreadWorker animatedThreadWorker) : this()
 		{
             _animatedThreadWorker = animatedThreadWorker;
             SortDirection = SortDirection.Asc;
@@ -51,7 +55,11 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		
 		protected override void GroupingItems()
 		{
-			Grouping("Occupation");
+			this.radGridView1.GroupDescriptors.Clear();
+			var descriptor = new GroupDescriptor();
+			foreach (var colName in new List<string>{ "First Name", "Last Name" })
+				descriptor.GroupNames.Add(colName,  ListSortDirection.Ascending);
+			this.radGridView1.GroupDescriptors.Add(descriptor);
 		}
 
 		#region protected override void SetHeaders()
@@ -60,9 +68,10 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		/// </summary>
 		protected override void SetHeaders()
 		{
+            AddColumn("First Name", (int)(radGridView1.Width * 0.20f));
+            AddColumn("Last Name", (int)(radGridView1.Width * 0.20f));
             AddColumn("Occupation", (int)(radGridView1.Width * 0.20f));
-            AddColumn("Department", (int)(radGridView1.Width * 0.20f));
-            AddColumn("Code", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Code", (int)(radGridView1.Width * 0.20f));
 			AddColumn("CodeName", (int)(radGridView1.Width * 0.24f));
 			AddColumn("SubTaskCode", (int)(radGridView1.Width * 0.3f));
 			AddColumn("FullName", (int)(radGridView1.Width * 0.45f));
@@ -96,25 +105,24 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		#region protected override List<CustomCell> GetListViewSubItems(Specialization item)
 
-		protected override List<CustomCell> GetListViewSubItems(SmartCore.CAA.CAAEducation.CAAEducation item)
+		protected override List<CustomCell> GetListViewSubItems(CAAEducationManagment item)
         {
-	        var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
+	        var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item.Specialist);
 
-            var subItems = new List<CustomCell>()
-			{
-                CreateRow(item.Occupation.ToString(), item.Occupation),
-                CreateRow(item.Occupation.Department.ToString(), item.Occupation.Department),
-                CreateRow(item.Task.Code, item.Task.Code),
-                CreateRow(item.Task.CodeName, item.Task.CodeName),
-                CreateRow(item.Task.SubTaskCode, item.Task.SubTaskCode),
-                CreateRow(item.Task.FullName, item.Task.FullName),
-                CreateRow(item.Task.Description, item.Task.Description),
-                CreateRow(item.Task.Level.ToString(), item.Task.Level),
-                CreateRow(corrector, corrector)
-			};
-
-			return subItems;
-		}
+	        return  new List<CustomCell>()
+	        {
+		        CreateRow(item.Specialist.FirstName, item.Specialist.FirstName),
+		        CreateRow(item.Specialist.LastName,item.Specialist.LastName),
+		        CreateRow(item.Occupation.FullName, item.Occupation.FullName),
+		        CreateRow(item.Education?.Task?.Code, item.Education?.Task?.Code),
+		        CreateRow(item.Education?.Task?.CodeName, item.Education?.Task?.CodeName),
+		        CreateRow(item.Education?.Task?.SubTaskCode, item.Education?.Task?.SubTaskCode),
+		        CreateRow(item.Education?.Task?.FullName, item.Education?.Task?.FullName),
+		        CreateRow(item.Education?.Task?.Description, item.Education?.Task?.Description),
+		        CreateRow(item.Education?.Task?.Level.ToString(), item.Education?.Task?.Level),
+		        CreateRow(corrector, corrector)
+	        };
+        }
 
 		#endregion
 
@@ -127,5 +135,14 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		#endregion
 
 		#endregion
+	}
+
+
+
+	public class CAAEducationManagment : BaseEntityObject
+	{
+		public Specialist Specialist { get; set; }
+		public Occupation Occupation { get; set; }
+		public SmartCore.CAA.CAAEducation.CAAEducation Education { get; set; }
 	}
 }

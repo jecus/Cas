@@ -919,6 +919,18 @@
     <Compile Include="UICAAControls\CAAEducation\EducationForm.Designer.cs">
       <DependentUpon>EducationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CAAEducation\EducationManagmentListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CAAEducation\EducationManagmentListScreen.Designer.cs">
+      <DependentUpon>EducationManagmentListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\CAAEducation\EducationManagmentListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CAAEducation\EducationManagmentListView.Designer.cs">
+      <DependentUpon>EducationManagmentListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CAATask\CAATaskListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4552,6 +4564,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CAAEducation\EducationForm.resx">
       <DependentUpon>EducationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CAAEducation\EducationManagmentListScreen.resx">
+      <DependentUpon>EducationManagmentListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CAATask\CAATaskListScreen.resx">
       <DependentUpon>CAATaskListScreen.cs</DependentUpon>

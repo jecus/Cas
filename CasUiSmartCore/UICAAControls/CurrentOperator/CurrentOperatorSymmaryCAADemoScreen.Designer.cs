@@ -2138,7 +2138,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
             this.LinkEducationProcessManagement.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.LinkEducationProcessManagement.Name = "LinkEducation";
             this.LinkEducationProcessManagement.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-            this.LinkEducationProcessManagement.Size = new System.Drawing.Size(188, 20);
+            this.LinkEducationProcessManagement.Size = new System.Drawing.Size(250, 20);
             this.LinkEducationProcessManagement.Status = AvControls.Statuses.Satisfactory;
             this.LinkEducationProcessManagement.TabIndex = 16;
             this.LinkEducationProcessManagement.Text = "Education Process Management";
