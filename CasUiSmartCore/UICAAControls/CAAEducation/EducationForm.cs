@@ -9,6 +9,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
+using SmartCore.CAA.PEL;
 using SmartCore.CAA.Tasks;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -59,6 +60,11 @@ namespace CAS.UI.UICAAControls.CAAEducation
             comboBoxOccupation.Items.Add(Occupation.Unknown);
             comboBoxOccupation.SelectedItem = Occupation.Unknown;
             
+            comboBoxPriority.Items.Clear();
+            comboBoxPriority.Items.AddRange(EducationPriority.Items.ToArray());
+            comboBoxPriority.Items.Add(EducationPriority.Unknown);
+            comboBoxPriority.SelectedItem = EducationPriority.Unknown;
+            
             
             _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
             _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
@@ -86,18 +92,26 @@ namespace CAS.UI.UICAAControls.CAAEducation
                     return;
                 }
                 
+                if (comboBoxPriority.SelectedItem == null)
+                {
+                    MessageBox.Show("Please select Priority!", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                    return;
+                }
+                
                 var occupation = comboBoxOccupation.SelectedItem as Occupation;
+                var priority = comboBoxPriority.SelectedItem as EducationPriority;
                 
                 foreach (var item in _fromcheckRevisionListView.SelectedItems.ToArray())
                 {
                     
-                    if(_updateChecks.Any(i => i.TaskId == item.ItemId && i.OccupationId == occupation.ItemId))
+                    if(_updateChecks.Any(i => i.TaskId == item.ItemId && i.OccupationId == occupation.ItemId && i.Priority.ItemId == priority.ItemId))
                         continue;
                     var newItem = new SmartCore.CAA.CAAEducation.CAAEducation()
                     {
                         OperatorId = _operatorId,
                         Occupation = occupation,
                         OccupationId = occupation.ItemId,
+                        Priority = priority,
                         Task = item,
                         TaskId = item.ItemId,
                     };
