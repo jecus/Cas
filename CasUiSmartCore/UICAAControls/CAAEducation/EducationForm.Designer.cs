@@ -211,7 +211,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.MaximizeBox = false;
             this.Name = "EducationForm";
             this.Resizable = false;
-            this.Text = "CheckList Revision Form";
+            this.Text = "Education Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CheckListRevisionForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
