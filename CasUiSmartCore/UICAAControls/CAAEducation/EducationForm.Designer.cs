@@ -156,7 +156,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             // 
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.metroLabel1.Location = new System.Drawing.Point(945, 382);
+            this.metroLabel1.Location = new System.Drawing.Point(604,385);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(79, 19);
             this.metroLabel1.TabIndex = 336;
@@ -168,7 +168,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.comboBoxOccupation.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.comboBoxOccupation.ForeColor = System.Drawing.Color.DimGray;
             this.comboBoxOccupation.FormattingEnabled = true;
-            this.comboBoxOccupation.Location = new System.Drawing.Point(1050, 379);
+            this.comboBoxOccupation.Location = new System.Drawing.Point(689, 382);
             this.comboBoxOccupation.Name = "comboBoxOccupation";
             this.comboBoxOccupation.Size = new System.Drawing.Size(250, 22);
             this.comboBoxOccupation.TabIndex = 335;
@@ -177,11 +177,11 @@ namespace CAS.UI.UICAAControls.CAAEducation
             // 
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.metroLabel2.Location = new System.Drawing.Point(945, 382);
+            this.metroLabel2.Location = new System.Drawing.Point(965, 382);
             this.metroLabel2.Name = "metroLabel1";
             this.metroLabel2.Size = new System.Drawing.Size(79, 19);
             this.metroLabel2.TabIndex = 336;
-            this.metroLabel2.Text = "Occupation:";
+            this.metroLabel2.Text = "Priority:";
             this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // comboBoxPriority
