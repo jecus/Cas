@@ -38,6 +38,7 @@ namespace SmartCore.DtoHelper
 				OperatorId = task.OperatorId,
 				CorrectorId = task.CorrectorId,
 				OccupationId = task.OccupationId,
+				PriorityId = task.Priority?.ItemId ?? -1,
 				TaskId = task.TaskId
 
 				
@@ -55,6 +56,7 @@ namespace SmartCore.DtoHelper
 				CorrectorId = task.CorrectorId,
 				OccupationId = task.OccupationId,
 				TaskId = task.TaskId,
+				Priority = EducationPriority.GetItemById(task.PriorityId),
 				Occupation = task.Occupation?.ConvertCAA(),
 				Task = task.Task?.ConvertCAA(),
 			};

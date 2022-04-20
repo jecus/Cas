@@ -78,6 +78,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			AddColumn("FullName", (int)(radGridView1.Width * 0.45f));
             AddColumn("Description", (int)(radGridView1.Width * 0.45f));
             AddColumn("Level", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Priority", (int)(radGridView1.Width * 0.24f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -124,6 +125,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        CreateRow(item.Education?.Task?.FullName, item.Education?.Task?.FullName),
 		        CreateRow(item.Education?.Task?.Description, item.Education?.Task?.Description),
 		        CreateRow(item.Education?.Task?.Level.ToString(), item.Education?.Task?.Level),
+		        CreateRow(item.Education?.Priority?.ToString(), item.Education?.Priority),
 		        CreateRow(corrector, corrector)
 	        };
         }

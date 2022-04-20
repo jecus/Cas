@@ -1,6 +1,7 @@
 ﻿using System;
 using CAA.Entity.Models;
 using CAA.Entity.Models.Dictionary;
+using SmartCore.CAA.PEL;
 using SmartCore.CAA.Tasks;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -17,6 +18,7 @@ namespace SmartCore.CAA.CAAEducation
         public int TaskId { get; set; }
         
         public int OccupationId { get; set; }
+        public EducationPriority Priority { get; set; }
         
         public Occupation Occupation { get; set; }
         

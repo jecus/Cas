@@ -59,6 +59,12 @@ namespace CAS.UI.UICAAControls.CAAEducation
             comboBoxOccupation.Items.Add(Occupation.Unknown);
             comboBoxOccupation.SelectedItem = Occupation.Unknown;
             
+            
+            combobox.Items.Clear();
+            comboBoxOccupation.Items.AddRange(_occupation.ToArray());
+            comboBoxOccupation.Items.Add(Occupation.Unknown);
+            comboBoxOccupation.SelectedItem = Occupation.Unknown;
+            
             _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
             _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
         }
@@ -97,7 +103,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                         OperatorId = _operatorId,
                         Occupation = occupation,
                         OccupationId = occupation.ItemId,
-                        Task = item as SmartCore.CAA.Tasks.CAATask,
+                        Task = item,
                         TaskId = item.ItemId,
                     };
 

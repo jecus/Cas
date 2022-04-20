@@ -24,6 +24,9 @@ namespace CAA.Entity.Models.Dictionary
 		[Column("OccupationId")]
 		public int OccupationId { get; set; }
 		
+		[Column("PriorityId")]
+		public int PriorityId { get; set; }
+		
 		[Include]
 		public CAASpecializationDTO Occupation { get; set; }
 		
