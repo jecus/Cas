@@ -38,7 +38,9 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.comboBoxOccupation = new System.Windows.Forms.ComboBox();
+            this.comboBoxPriority = new System.Windows.Forms.ComboBox();
             label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -170,6 +172,27 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.comboBoxOccupation.Name = "comboBoxOccupation";
             this.comboBoxOccupation.Size = new System.Drawing.Size(250, 22);
             this.comboBoxOccupation.TabIndex = 335;
+// 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.metroLabel2.Location = new System.Drawing.Point(945, 382);
+            this.metroLabel2.Name = "metroLabel1";
+            this.metroLabel2.Size = new System.Drawing.Size(79, 19);
+            this.metroLabel2.TabIndex = 336;
+            this.metroLabel2.Text = "Occupation:";
+            this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // comboBoxPriority
+            // 
+            this.comboBoxPriority.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxPriority.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxPriority.FormattingEnabled = true;
+            this.comboBoxPriority.Location = new System.Drawing.Point(1050, 379);
+            this.comboBoxPriority.Name = "comboBoxPriority";
+            this.comboBoxPriority.Size = new System.Drawing.Size(250, 22);
+            this.comboBoxPriority.TabIndex = 335;            
             // 
             // EducationForm
             // 
@@ -178,6 +201,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.ClientSize = new System.Drawing.Size(1440, 840);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.comboBoxOccupation);
+            this.Controls.Add(this.metroLabel2);
+            this.Controls.Add(this.comboBoxPriority);
             this.Controls.Add(this.ButtonDelete);
             this.Controls.Add(this.ButtonAdd);
             this.Controls.Add(this._tocheckRevisionListView);
@@ -192,11 +217,16 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.PerformLayout();
         }
 
-        private MetroFramework.Controls.MetroLabel metroLabel1;
-        private System.Windows.Forms.ComboBox comboBoxOccupation;
+        
 
         #endregion
 
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private System.Windows.Forms.ComboBox comboBoxOccupation;
+        
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private System.Windows.Forms.ComboBox comboBoxPriority;
+        
         System.Windows.Forms.Label label3;
 
         private System.Windows.Forms.Button buttonOk;

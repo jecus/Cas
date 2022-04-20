@@ -60,11 +60,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
             comboBoxOccupation.SelectedItem = Occupation.Unknown;
             
             
-            combobox.Items.Clear();
-            comboBoxOccupation.Items.AddRange(_occupation.ToArray());
-            comboBoxOccupation.Items.Add(Occupation.Unknown);
-            comboBoxOccupation.SelectedItem = Occupation.Unknown;
-            
             _fromcheckRevisionListView.SetItemsArray(_addedChecks.ToArray());
             _tocheckRevisionListView.SetItemsArray(_updateChecks.ToArray());
         }
