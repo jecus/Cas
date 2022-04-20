@@ -121,43 +121,12 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 			foreach (var specialist in specialists)
 			{
+				FillCollection(educations, specialist.Occupation, specialist, false);
 				foreach (Occupation dict in occupation)
 				{
 					if (specialist.Combination != null && specialist.Combination.Contains(dict.FullName))
-					{
-						
-
-						var education = educations.Where(i => i.OccupationId == dict.ItemId);
-						if (education.Any())
-						{
-							foreach (var ed in education)
-							{
-								var item = new CAAEducationManagment()
-								{
-									Specialist = specialist,
-									Occupation = dict,
-									Education = ed
-								};
-								_initialDocumentArray.Add(item);
-							}
-						}
-						else
-						{
-							var item = new CAAEducationManagment()
-							{
-								Specialist = specialist,
-								Occupation = dict
-							};
-							_initialDocumentArray.Add(item);
-						}
-						
-						
-						
-					}
+						FillCollection(educations, dict, specialist);
 				}
-				
-				
-				
 			}
 			
 			
@@ -170,6 +139,38 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			FilterItems(_initialDocumentArray, _resultDocumentArray);
 
 			AnimatedThreadWorker.ReportProgress(100, "Complete");
+		}
+
+
+		private void FillCollection(List<SmartCore.CAA.CAAEducation.CAAEducation> education,
+			Occupation occupation,
+			Specialist specialist, bool isCombination = true)
+		{
+			var educations = education.Where(i => i.OccupationId == occupation.ItemId);
+			if (educations.Any())
+			{
+				foreach (var ed in educations)
+				{
+					var item = new CAAEducationManagment()
+					{
+						Specialist = specialist,
+						Occupation = occupation,
+						Education = ed,
+						IsCombination = isCombination
+					};
+					_initialDocumentArray.Add(item);
+				}
+			}
+			else
+			{
+				var item = new CAAEducationManagment()
+				{
+					Specialist = specialist,
+					Occupation = occupation,
+					IsCombination = isCombination
+				};
+				_initialDocumentArray.Add(item);
+			}
 		}
 		#endregion
 
@@ -288,9 +289,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-			var form = new EducationForm(_operatorId);
-			if(form.ShowDialog() == DialogResult.OK)
-				AnimatedThreadWorker.RunWorkerAsync();
+			e.Cancel = true;
 		}
 
 		#endregion

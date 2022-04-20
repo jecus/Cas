@@ -71,6 +71,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             AddColumn("First Name", (int)(radGridView1.Width * 0.20f));
             AddColumn("Last Name", (int)(radGridView1.Width * 0.20f));
             AddColumn("Occupation", (int)(radGridView1.Width * 0.20f));
+            AddColumn("Combination", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Code", (int)(radGridView1.Width * 0.20f));
 			AddColumn("CodeName", (int)(radGridView1.Width * 0.24f));
 			AddColumn("SubTaskCode", (int)(radGridView1.Width * 0.3f));
@@ -108,12 +109,15 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		protected override List<CustomCell> GetListViewSubItems(CAAEducationManagment item)
         {
 	        var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item.Specialist);
+	        var occupation = item.IsCombination ? null : item.Occupation;
+	        var combination = item.IsCombination ?  item.Occupation : null;
 
 	        return  new List<CustomCell>()
 	        {
 		        CreateRow(item.Specialist.FirstName, item.Specialist.FirstName),
 		        CreateRow(item.Specialist.LastName,item.Specialist.LastName),
-		        CreateRow(item.Occupation.FullName, item.Occupation.FullName),
+		        CreateRow(occupation?.FullName, occupation?.FullName),
+		        CreateRow(combination?.FullName, combination?.FullName),
 		        CreateRow(item.Education?.Task?.Code, item.Education?.Task?.Code),
 		        CreateRow(item.Education?.Task?.CodeName, item.Education?.Task?.CodeName),
 		        CreateRow(item.Education?.Task?.SubTaskCode, item.Education?.Task?.SubTaskCode),
@@ -143,6 +147,12 @@ namespace CAS.UI.UICAAControls.CAAEducation
 	{
 		public Specialist Specialist { get; set; }
 		public Occupation Occupation { get; set; }
+		public bool IsCombination { get; set; }
 		public SmartCore.CAA.CAAEducation.CAAEducation Education { get; set; }
+
+		public CAAEducationManagment()
+		{
+			IsCombination = true;
+		}
 	}
 }
