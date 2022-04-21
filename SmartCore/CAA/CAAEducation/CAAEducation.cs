@@ -1,6 +1,7 @@
 ﻿using System;
 using CAA.Entity.Models;
 using CAA.Entity.Models.Dictionary;
+using CAA.Entity.Models.DTO;
 using SmartCore.CAA.PEL;
 using SmartCore.CAA.Tasks;
 using SmartCore.Entities.Dictionaries;

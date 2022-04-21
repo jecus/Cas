@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.Dictionary;
+using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
