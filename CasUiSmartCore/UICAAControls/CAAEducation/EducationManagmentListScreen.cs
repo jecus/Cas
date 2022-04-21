@@ -11,6 +11,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
+using SmartCore.CAA.CAAEducation;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -105,6 +106,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 			var specialists = new List<Specialist>();
 			var educations = new List<SmartCore.CAA.CAAEducation.CAAEducation>();
+			var records = new List<SmartCore.CAA.CAAEducation.CAAEducationRecord>();
 			var occupation = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray();
 			if (_operatorId == -1)
 			{
@@ -112,6 +114,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
 					.GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(loadChild:true));
 				specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
 					.GetObjectListAll<CAASpecialistDTO, Specialist>());
+				records.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+					.GetObjectListAll<EducationRecordsDTO, CAAEducationRecord>());
 			}
 			else
 			{
@@ -119,15 +123,17 @@ namespace CAS.UI.UICAAControls.CAAEducation
 					.GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _operatorId),loadChild:true));
 				specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
 					.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", _operatorId)));
+				records.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+					.GetObjectListAll<EducationRecordsDTO, CAAEducationRecord>(new Filter("OperatorId", _operatorId)));
 			}
 
 			foreach (var specialist in specialists)
 			{
-				FillCollection(educations, specialist.Occupation, specialist, false);
+				FillCollection(educations, specialist.Occupation, specialist,records, false);
 				foreach (Occupation dict in occupation)
 				{
 					if (specialist.Combination != null && specialist.Combination.Contains(dict.FullName))
-						FillCollection(educations, dict, specialist);
+						FillCollection(educations, dict, specialist,records);
 				}
 			}
 			
@@ -146,19 +152,24 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		private void FillCollection(List<SmartCore.CAA.CAAEducation.CAAEducation> education,
 			Occupation occupation,
-			Specialist specialist, bool isCombination = true)
+			Specialist specialist, List<CAAEducationRecord> records, bool isCombination = true)
 		{
 			var educations = education.Where(i => i.OccupationId == occupation.ItemId);
 			if (educations.Any())
 			{
 				foreach (var ed in educations)
 				{
+					var rec = records.FirstOrDefault(i => i.OccupationId == occupation.ItemId 
+					                                    && i.EducationId == ed.ItemId
+					                                    && i.PriorityId == ed.Priority.ItemId);
+					
 					var item = new CAAEducationManagment()
 					{
 						Specialist = specialist,
 						Occupation = occupation,
 						Education = ed,
-						IsCombination = isCombination
+						IsCombination = isCombination,
+						Record = rec
 					};
 					_initialDocumentArray.Add(item);
 				}

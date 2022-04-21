@@ -139,9 +139,13 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
-			e.DisplayerText = "";
-			e.RequestedEntity = new EducationScreen(CurrentOperator, SelectedItem);
-			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			if (SelectedItem.Occupation != null && SelectedItem.Education != null)
+			{
+				e.DisplayerText = "";
+				e.RequestedEntity = new EducationScreen(CurrentOperator, SelectedItem);
+				e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			}
+			else e.Cancel = true;
 		}
 		#endregion
 

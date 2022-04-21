@@ -1,6 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows.Forms;
+using CAA.Entity.Models.DTO;
 using CAS.UI.UIControls.Auxiliary;
+using CASTerms;
+using SmartCore.CAA.CAAEducation;
 using SmartCore.Entities.General;
 
 namespace CAS.UI.UICAAControls.CAAEducation
@@ -43,15 +47,36 @@ namespace CAS.UI.UICAAControls.CAAEducation
         protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             
-            extendableRichContainerSummary.LabelCaption.Text = "Summary " + ""
-                                                           + " Status: " + "";
+            extendableRichContainerSummary.LabelCaption.Text = "Summary " 
+                                                           + " Status: " + $"{(_educationManagment.Record.Settings.IsClosed ? "Closed" : "Open")}";
+
+            _educationPerformanceControl.Object = _educationManagment;
         }
         #endregion
 
         #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         {
-            AnimatedThreadWorker.ReportProgress(0, "load directives");
+            AnimatedThreadWorker.ReportProgress(0, "Load");
+
+            if (_educationManagment.Record != null)
+            {
+                _educationManagment.Record = GlobalObjects.CaaEnvironment.NewLoader
+                    .GetObjectById<EducationRecordsDTO, CAAEducationRecord>(_educationManagment.Record.ItemId);
+            }
+            else
+            {
+                _educationManagment.Record = new CAAEducationRecord()
+                {
+                    EducationId = _educationManagment.Education.ItemId,
+                    OccupationId = _educationManagment.Occupation.ItemId,
+                    SpecialistId = _educationManagment.Specialist.ItemId,
+                    OperatorId = _educationManagment.Specialist.OperatorId,
+                    PriorityId = _educationManagment.Education.Priority.ItemId
+                };
+            }
+
+
             AnimatedThreadWorker.ReportProgress(40, "calculation of directives");
             AnimatedThreadWorker.ReportProgress(100, "Complete");
         }
@@ -121,7 +146,11 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
         private void HeaderControlButtonSaveClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            _educationPerformanceControl.ApplyChanges();
+            GlobalObjects.CaaEnvironment.NewKeeper.Save(_educationManagment.Record);
+            
+            MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
 
         private void extendableRichContainerComplianceExtending(object sender, EventArgs e)

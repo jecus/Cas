@@ -19,6 +19,9 @@ namespace CAA.Entity.Models.DTO
 		[Column("OccupationId")]
 		public int OccupationId { get; set; }
 		
+		[Column("PriorityId")]
+		public int PriorityId { get; set; }
+		
 		[Column("EducationId")]
 		public int EducationId { get; set; }
 		

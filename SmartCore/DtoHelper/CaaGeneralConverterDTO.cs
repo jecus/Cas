@@ -40,6 +40,7 @@ namespace SmartCore.DtoHelper
 				CorrectorId = task.CorrectorId,
 				OccupationId = task.OccupationId,
 				EducationId = task.EducationId,
+				PriorityId = task.PriorityId,
 				SpecialistId = task.SpecialistId,
 				SettingsJSON = task.SettingsJSON
 			};
@@ -55,6 +56,7 @@ namespace SmartCore.DtoHelper
 				OperatorId = task.OperatorId,
 				CorrectorId = task.CorrectorId,
 				OccupationId = task.OccupationId,
+				PriorityId = task.PriorityId,
 				EducationId = task.EducationId,
 				SpecialistId = task.SpecialistId,
 				SettingsJSON = task.SettingsJSON
