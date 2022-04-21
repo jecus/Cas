@@ -156,7 +156,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.extendableRichContainerCompliance.AutoSize = true;
             this.extendableRichContainerCompliance.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.extendableRichContainerCompliance.BackColor = System.Drawing.Color.Transparent;
-            this.extendableRichContainerCompliance.Caption = "Performance";
+            this.extendableRichContainerCompliance.Caption = "Compliance";
             this.extendableRichContainerCompliance.CaptionFont = new System.Drawing.Font("Verdana", 27.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.extendableRichContainerCompliance.Condition = null;
             this.extendableRichContainerCompliance.DescriptionTextColor = System.Drawing.Color.DimGray;
