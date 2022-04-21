@@ -913,6 +913,12 @@
     <Compile Include="UICAAControls\Audit\PEL\PelPersonnelLiteListView.Designer.cs">
       <DependentUpon>PelPersonnelLiteListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CAAEducation\EducationScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CAAEducation\EducationScreen.Designer.cs">
+      <DependentUpon>EducationScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CAAEducation\EducationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4561,6 +4567,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Audit\PEL\PelItemForm.resx">
       <DependentUpon>PelItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CAAEducation\EducationScreen.resx">
+      <DependentUpon>EducationScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CAAEducation\EducationForm.resx">
       <DependentUpon>EducationForm.cs</DependentUpon>

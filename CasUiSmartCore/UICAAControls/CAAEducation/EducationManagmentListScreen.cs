@@ -26,7 +26,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
 	[ToolboxItem(false)]
 	public partial class EducationManagmentListScreen : ScreenControl
 	{
-        private readonly int _operatorId;
+		private readonly Operator _currentOperator;
+		private readonly int _operatorId;
 
         #region Fields
 
@@ -66,7 +67,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		{
 			if (currentOperator == null)
 				throw new ArgumentNullException("currentOperator");
-            _operatorId = operatorId;
+			_currentOperator = currentOperator;
+			_operatorId = operatorId;
             aircraftHeaderControl1.Operator = currentOperator;
             statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
@@ -225,6 +227,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		{
 			_directivesViewer = new EducationManagmentListView(AnimatedThreadWorker);
 			_directivesViewer.OperatorId = _operatorId;
+			_directivesViewer.CurrentOperator = _currentOperator;
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;

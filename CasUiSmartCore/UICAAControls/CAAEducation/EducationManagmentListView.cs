@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
@@ -45,6 +46,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		}
 
         public int OperatorId { get; set; }
+        public Operator CurrentOperator { get; set; }
 
         #endregion
 
@@ -136,7 +138,9 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
-			e.Cancel = true;
+			e.DisplayerText = "";
+			e.RequestedEntity = new EducationScreen(CurrentOperator);
+			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 		}
 		#endregion
 
