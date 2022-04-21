@@ -8,6 +8,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
+using SmartCore.CAA.CAAEducation;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
@@ -139,7 +140,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
 			e.DisplayerText = "";
-			e.RequestedEntity = new EducationScreen(CurrentOperator);
+			e.RequestedEntity = new EducationScreen(CurrentOperator, SelectedItem);
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 		}
 		#endregion
@@ -155,6 +156,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		public Occupation Occupation { get; set; }
 		public bool IsCombination { get; set; }
 		public SmartCore.CAA.CAAEducation.CAAEducation Education { get; set; }
+		
+		public CAAEducationRecord  Record{ get; set; }
 
 		public CAAEducationManagment()
 		{

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using SmartCore.Entities.General;
 
@@ -10,10 +9,13 @@ namespace CAS.UI.UICAAControls.CAAEducation
     ///</summary>
     public partial class EducationScreen : ScreenControl
     {
+        private readonly CAAEducationManagment _educationManagment;
+
         ///<summary>
         ///</summary>
-        public EducationScreen(Operator currentOperator)
+        public EducationScreen(Operator currentOperator, CAAEducationManagment educationManagment)
         {
+            _educationManagment = educationManagment;
             InitializeComponent();
             
             aircraftHeaderControl1.Operator = currentOperator;
@@ -80,30 +82,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
         #endregion
         
         
-        #region private bool SaveData()
-        /// <summary>
-        /// Сохранение измененных данных в редактируемом элементе
-        /// </summary>
-        private bool SaveData(bool changePageTitle = true)
-        {
-            return true;
-        }
-        
-     
-
-        #endregion
-        
-
-        #region private void ButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
-
-        private void ButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
-        {
-            e.Cancel = true;
-        }
-
-        #endregion
-        
-
         #region private void HeaderControl1ReloadRised(object sender, EventArgs e)
 
         private void HeaderControl1ReloadRised(object sender, EventArgs e)
@@ -133,7 +111,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
         private void ExtendableRichContainerPerformanceExtending(object sender, EventArgs e)
         {
-            //_performanceControl.Visible = !_performanceControl.Visible;
+            _educationPerformanceControl.Visible = !_educationPerformanceControl.Visible;
         }
         #endregion
         

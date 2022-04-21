@@ -65,7 +65,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
             // 
             // lifelengthViewer_Repeat
             // 
-            this.lifelengthViewer_Repeat.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lifelengthViewer_Repeat.AutoSize = true;
             this.lifelengthViewer_Repeat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.lifelengthViewer_Repeat.CalendarApplicable = false;
@@ -96,7 +95,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
             // 
             // lifelengthViewerNotify
             // 
-            this.lifelengthViewerNotify.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lifelengthViewerNotify.AutoSize = true;
             this.lifelengthViewerNotify.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.lifelengthViewerNotify.CalendarApplicable = false;

@@ -1,4 +1,5 @@
 ﻿using CAS.UI.UIControls.DirectivesControls;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 
 namespace CAS.UI.UICAAControls.CAAEducation
 {
@@ -33,6 +34,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.extendableRichContainerGeneral = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
             this.extendableRichContainerPerformance = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
             this.extendableRichContainerCompliance = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
+            this._educationPerformanceControl = new EducationPerformanceControl();
             this.headerControl.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanelMain.SuspendLayout();
@@ -70,6 +72,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.flowLayoutPanelMain.Controls.Add(this.extendableRichContainerSummary);
             this.flowLayoutPanelMain.Controls.Add(this.extendableRichContainerGeneral);
             this.flowLayoutPanelMain.Controls.Add(this.extendableRichContainerPerformance);
+            this.flowLayoutPanelMain.Controls.Add(this._educationPerformanceControl);
             this.flowLayoutPanelMain.Controls.Add(this.extendableRichContainerCompliance);
             this.flowLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelMain.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -166,6 +169,18 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.extendableRichContainerCompliance.TabIndex = 11;
             this.extendableRichContainerCompliance.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
             this.extendableRichContainerCompliance.Extending += new System.EventHandler(this.extendableRichContainerComplianceExtending);
+            
+            // 
+            // _educationPerformanceControl
+            // 
+            this._educationPerformanceControl.AutoSize = true;
+            this._educationPerformanceControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this._educationPerformanceControl.Location = new System.Drawing.Point(3, 1268);
+            this._educationPerformanceControl.Name = "_performanceControl";
+            this._educationPerformanceControl.Size = new System.Drawing.Size(1182, 425);
+            this._educationPerformanceControl.TabIndex = 14;
+            this._educationPerformanceControl.Visible = true;
+            
             // 
             // DirectiveScreen
             // 
@@ -189,6 +204,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelMain;
+        private EducationPerformanceControl _educationPerformanceControl;
         private UIControls.ReferenceControls.ExtendableRichContainer extendableRichContainerSummary;
         private UIControls.ReferenceControls.ExtendableRichContainer extendableRichContainerGeneral;
         private UIControls.ReferenceControls.ExtendableRichContainer extendableRichContainerPerformance;
