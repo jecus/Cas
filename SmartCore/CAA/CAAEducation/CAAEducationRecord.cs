@@ -53,17 +53,61 @@ namespace SmartCore.CAA.CAAEducation
     [Serializable]
     public class CAAEducationRecordSettings
     {
+	    private byte[] _repeatByte;
+	    private byte[] _notifyByte;
+	    private Lifelength _repeat;
+	    private Lifelength _notify;
+
 	    [JsonProperty]
 	    public DateTime StartDate { get; set; }
 	    
 	    [JsonProperty]
 	    public bool IsClosed { get; set; }
-	    
+
 	    [JsonProperty]
-	    public Lifelength Repeat { get; set; }
-	    
+	    public byte[] RepeatByte
+	    {
+		    get => _repeatByte;
+		    set
+		    {
+			    _repeatByte = value;
+			    _repeat = Lifelength.ConvertFromByteArray(value);
+		    }
+	    }
+
 	    [JsonProperty]
-	    public Lifelength Notify { get; set; }
+	    public byte[] NotifyByte
+	    {
+		    get => _notifyByte;
+		    set
+		    {
+			    _notifyByte = value;
+			    _notify = Lifelength.ConvertFromByteArray(value);
+		    }
+	    }
+
+
+	    [JsonIgnore]
+	    public Lifelength Repeat
+	    {
+		    get => _repeat;
+		    set
+		    {
+			    _repeat = value;
+			    _repeatByte = value.ConvertToByteArray();
+		    }
+	    }
+
+	    [JsonIgnore]
+	    public Lifelength Notify
+	    {
+		    get => _notify;
+		    set
+		    {
+			    _notify = value;
+			    _notifyByte = value.ConvertToByteArray();
+		    }
+	    }
     }
     
 }
