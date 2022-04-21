@@ -28,6 +28,40 @@ namespace SmartCore.DtoHelper
 {
     public static  class CaaGeneralConverterDTO
 	{
+		
+		public static EducationRecordsDTO ConvertCAA(this CAAEducationRecord task)
+		{
+			return new EducationRecordsDTO
+			{
+				ItemId = task.ItemId,
+				IsDeleted = task.IsDeleted,
+				Updated = task.Updated,
+				OperatorId = task.OperatorId,
+				CorrectorId = task.CorrectorId,
+				OccupationId = task.OccupationId,
+				EducationId = task.EducationId,
+				SpecialistId = task.SpecialistId,
+				SettingsJSON = task.SettingsJSON
+			};
+		}
+
+		public static CAAEducationRecord ConvertCAA(this EducationRecordsDTO task)
+		{
+			return new CAAEducationRecord()
+			{
+				ItemId = task.ItemId,
+				IsDeleted = task.IsDeleted,
+				Updated = task.Updated,
+				OperatorId = task.OperatorId,
+				CorrectorId = task.CorrectorId,
+				OccupationId = task.OccupationId,
+				EducationId = task.EducationId,
+				SpecialistId = task.SpecialistId,
+				SettingsJSON = task.SettingsJSON
+			};
+		}
+		
+		
 		public static EducationDTO ConvertCAA(this CAAEducation task)
 		{
 			return new EducationDTO
