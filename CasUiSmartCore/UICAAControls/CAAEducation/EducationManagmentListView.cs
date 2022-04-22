@@ -180,7 +180,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		{
 			if (SelectedItem.Occupation != null && SelectedItem.Education != null)
 			{
-				e.DisplayerText = "";
+				e.DisplayerText = SelectedItem.Education?.Task?.FullName;
 				e.RequestedEntity = new EducationScreen(CurrentOperator, SelectedItem);
 				e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			}

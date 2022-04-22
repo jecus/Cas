@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CAA.Entity.Models;
 using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
@@ -47,6 +48,7 @@ namespace SmartCore.CAA.CAAEducation
 			    Condition = ConditionState.Satisfactory,
 			    Repeat = Lifelength.Null,
 			    Notify = Lifelength.Null,
+			    LastCompliances = new List<LastCompliance>()
 		    };
 	    }
 	    
@@ -90,6 +92,10 @@ namespace SmartCore.CAA.CAAEducation
 		    }
 	    }
 	    
+	    [JsonProperty]
+	    public List<LastCompliance> LastCompliances { get; set; }
+
+	    
 	    [JsonIgnore]
 	    public Lifelength Repeat
 	    {
@@ -120,6 +126,15 @@ namespace SmartCore.CAA.CAAEducation
 
 	    [JsonIgnore]
 	    public ConditionState Condition { get; set; }
+    }
+
+    [Serializable]
+    public class LastCompliance
+    {
+	    [JsonProperty]
+	    public DateTime LastDate { get; set; }
+	    [JsonProperty]
+	    public string Remark { get; set; }
     }
     
 }

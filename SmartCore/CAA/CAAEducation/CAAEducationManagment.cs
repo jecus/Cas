@@ -9,7 +9,7 @@ namespace SmartCore.CAA.CAAEducation
         public Specialist Specialist { get; set; }
         public Occupation Occupation { get; set; }
         public bool IsCombination { get; set; }
-        public SmartCore.CAA.CAAEducation.CAAEducation Education { get; set; }
+        public CAAEducation Education { get; set; }
 		
         public CAAEducationRecord  Record{ get; set; }
 
