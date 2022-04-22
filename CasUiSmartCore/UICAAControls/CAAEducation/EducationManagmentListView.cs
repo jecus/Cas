@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
@@ -13,6 +15,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
 using Telerik.WinControls.Data;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CAAEducation
 {
@@ -85,6 +88,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             AddColumn("Start", (int)(radGridView1.Width * 0.24f));
             AddColumn("Repeat", (int)(radGridView1.Width * 0.24f));
             AddColumn("Next", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Remain", (int)(radGridView1.Width * 0.24f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -110,6 +114,31 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 _animatedThreadWorker.RunWorkerAsync();
             }
 		}
+        
+        
+        #region protected override void SetItemColor(GridViewRowInfo listViewItem, Document item)
+
+        protected override void SetItemColor(GridViewRowInfo listViewItem, CAAEducationManagment item)
+        {
+	        var itemBackColor = UsefulMethods.GetColor(item);
+	        var itemForeColor = Color.Gray;
+
+	        foreach (GridViewCellInfo cell in listViewItem.Cells)
+	        {
+		        cell.Style.DrawFill = true;
+		        cell.Style.CustomizeFill = true;
+		        cell.Style.BackColor = UsefulMethods.GetColor(item);
+
+		        var listViewForeColor = cell.Style.ForeColor;
+
+		        if (listViewForeColor != Color.MediumVioletRed)
+			        cell.Style.ForeColor = itemForeColor;
+		        cell.Style.BackColor = itemBackColor;
+	        }
+        }
+
+
+        #endregion
 
 		#region protected override List<CustomCell> GetListViewSubItems(Specialization item)
 
@@ -138,6 +167,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Record?.Settings?.StartDate), item.Record?.Settings?.StartDate),
 		        CreateRow(item.Record?.Settings?.Repeat.ToRepeatIntervalsFormat(), item.Record?.Settings?.Repeat),
 		        CreateRow(next, item.Record?.Settings?.Next),
+		        CreateRow(item.Record?.Settings?.Remains?.ToRepeatIntervalsFormat(), item.Record?.Settings?.Remains),
 		        CreateRow(corrector, corrector)
 	        };
         }
@@ -159,22 +189,5 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		#endregion
 
 		#endregion
-	}
-
-
-
-	public class CAAEducationManagment : BaseEntityObject
-	{
-		public Specialist Specialist { get; set; }
-		public Occupation Occupation { get; set; }
-		public bool IsCombination { get; set; }
-		public SmartCore.CAA.CAAEducation.CAAEducation Education { get; set; }
-		
-		public CAAEducationRecord  Record{ get; set; }
-
-		public CAAEducationManagment()
-		{
-			IsCombination = true;
-		}
 	}
 }

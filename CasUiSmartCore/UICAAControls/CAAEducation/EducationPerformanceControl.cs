@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using SmartCore.CAA.CAAEducation;
 
 namespace CAS.UI.UICAAControls.CAAEducation
 {

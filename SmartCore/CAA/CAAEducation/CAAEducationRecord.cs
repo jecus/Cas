@@ -43,7 +43,8 @@ namespace SmartCore.CAA.CAAEducation
 	    {
 		    Settings = new CAAEducationRecordSettings()
 		    {
-			    StartDate = DateTime.Today
+			    StartDate = DateTime.Today,
+			    Condition = ConditionState.Satisfactory
 		    };
 	    }
 	    
@@ -63,7 +64,8 @@ namespace SmartCore.CAA.CAAEducation
 	    
 	    [JsonProperty]
 	    public bool IsClosed { get; set; }
-
+	    
+	    
 	    [JsonProperty]
 	    public byte[] RepeatByte
 	    {
@@ -85,8 +87,7 @@ namespace SmartCore.CAA.CAAEducation
 			    _notify = Lifelength.ConvertFromByteArray(value);
 		    }
 	    }
-
-
+	    
 	    [JsonIgnore]
 	    public Lifelength Repeat
 	    {
@@ -110,7 +111,13 @@ namespace SmartCore.CAA.CAAEducation
 	    }
 
 	    [JsonIgnore]
-	    public DateTime Next { get; set; }
+	    public DateTime? Next { get; set; }
+
+	    [JsonIgnore]
+	    public Lifelength Remains { get; set; }
+
+	    [JsonIgnore]
+	    public ConditionState Condition { get; set; }
     }
     
 }
