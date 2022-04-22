@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace CAS.UI.UICAAControls.CAAEducation
 {
@@ -31,6 +32,9 @@ namespace CAS.UI.UICAAControls.CAAEducation
         /// </summary>
         private void InitializeComponent()
         {
+            NextCourse = new ColumnHeader();
+            NextLimitDate = new ColumnHeader();
+            columnRemarks = new ColumnHeader();
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Need new compliance:", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Last compliance", System.Windows.Forms.HorizontalAlignment.Left);
             this.listViewCompliance = new System.Windows.Forms.ListView();
@@ -70,6 +74,26 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.panelContainer.Name = "panelContainer";
             this.panelContainer.Size = new System.Drawing.Size(951, 236);
             this.panelContainer.TabIndex = 1;
+            
+            // 
+            // NextCourse
+            // 
+            this.NextCourse.Text = "Courses";
+            this.NextCourse.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NextCourse.Width = 200;
+            // 
+            // columnWorkType
+            // 
+            this.NextLimitDate.Text = "Date";
+            this.NextLimitDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NextLimitDate.Width = 200;
+            // 
+            // columnWorkType
+            // 
+            this.columnRemarks.Text = "Remark";
+            this.columnRemarks.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnRemarks.Width = 200;
+            
             // 
             // EducationsComplianceControl
             // 

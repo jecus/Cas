@@ -155,7 +155,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
         private void extendableRichContainerComplianceExtending(object sender, EventArgs e)
         {
-            //_performanceControl.Visible = !_performanceControl.Visible;
+            educationsComplianceControl1.Visible = !educationsComplianceControl1.Visible;
         }
     }
 }
