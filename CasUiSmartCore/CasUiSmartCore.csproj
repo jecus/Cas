@@ -919,6 +919,12 @@
     <Compile Include="UICAAControls\CAAEducation\EducationPerformanceControl.Designer.cs">
       <DependentUpon>EducationPerformanceControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CAAEducation\EducationsComplianceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\CAAEducation\EducationsComplianceControl.Designer.cs">
+      <DependentUpon>EducationsComplianceControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CAAEducation\EducationScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4576,6 +4582,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CAAEducation\EducationPerformanceControl.resx">
       <DependentUpon>EducationPerformanceControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CAAEducation\EducationsComplianceControl.resx">
+      <DependentUpon>EducationsComplianceControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CAAEducation\EducationScreen.resx">
       <DependentUpon>EducationScreen.cs</DependentUpon>
