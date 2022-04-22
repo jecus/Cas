@@ -116,6 +116,19 @@ namespace CAS.UI.UIControls.Auxiliary
                 labelStatus.Visible = value;
             }
         }
+        
+        
+        public bool ShowOperatorAircraft
+        {
+            set
+            {
+                labelTitle.Visible = value;
+                label1.Visible = value;
+                label2.Visible = value;
+                labelDate.Visible = value;
+                labelPerformance.Visible = value;
+            }
+        }
 
         #endregion
 

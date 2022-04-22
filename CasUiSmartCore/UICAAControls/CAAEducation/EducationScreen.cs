@@ -24,8 +24,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
             
             aircraftHeaderControl1.Operator = currentOperator;
             statusControl.ShowStatus = true;
-            statusControl.Operator = currentOperator;
-            
+            statusControl.ShowOperatorAircraft = false;
+
         }
 
 

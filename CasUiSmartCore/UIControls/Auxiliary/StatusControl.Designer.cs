@@ -30,8 +30,7 @@ namespace CAS.UI.UIControls.Auxiliary
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Label label2;
-            System.Windows.Forms.Label label1;
+
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.statusImageLinkLabel1 = new AvControls.StatusImageLink.StatusImageLinkLabel();
             this.labelStatus = new System.Windows.Forms.Label();
@@ -166,7 +165,8 @@ namespace CAS.UI.UIControls.Auxiliary
         }
 
         #endregion
-
+        System.Windows.Forms.Label label2;
+        System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private StatusImageLinkLabel statusImageLinkLabel1;
         private System.Windows.Forms.Label labelDate;
