@@ -133,6 +133,7 @@ namespace SmartCore.CAA.CAAEducation
     {
 	    [JsonProperty]
 	    public DateTime LastDate { get; set; }
+	    
 	    [JsonProperty]
 	    public string Remark { get; set; }
     }

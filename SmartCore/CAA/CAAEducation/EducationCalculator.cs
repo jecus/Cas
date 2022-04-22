@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 
@@ -15,8 +16,18 @@ namespace SmartCore.CAA.CAAEducation
                 return;
             
             if ((bool)record.Settings?.Repeat?.Days.HasValue)
-                record.Settings.Next = record.Settings.StartDate.AddDays(record.Settings.Repeat.Days.Value);
-
+            {
+                if (record.Settings.LastCompliances.Any())
+                {
+                    var last = record.Settings.LastCompliances.OrderBy(i => i.LastDate).Last().LastDate;
+                    record.Settings.Next = last.AddDays(record.Settings.Repeat.Days.Value);
+                }
+                else
+                {
+                    record.Settings.Next = record.Settings.StartDate.AddDays(record.Settings.Repeat.Days.Value);
+                }
+            }
+            
             if (record.Settings.Next.HasValue)
             {
                 var days = (record.Settings.Next.Value - DateTime.Today).Days;
@@ -28,8 +39,6 @@ namespace SmartCore.CAA.CAAEducation
                     record.Settings.Condition = ConditionState.Notify;
                 else record.Settings.Condition = ConditionState.Satisfactory;
             }
-            
-            
         }
     }
 }
