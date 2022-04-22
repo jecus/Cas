@@ -108,6 +108,9 @@ namespace SmartCore.CAA.CAAEducation
 			    _notifyByte = value.ConvertToByteArray();
 		    }
 	    }
+
+	    [JsonIgnore]
+	    public DateTime Next { get; set; }
     }
     
 }

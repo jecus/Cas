@@ -161,7 +161,9 @@ namespace CAS.UI.UICAAControls.CAAEducation
 				{
 					var rec = records.FirstOrDefault(i => i.OccupationId == occupation.ItemId 
 					                                    && i.EducationId == ed.ItemId
-					                                    && i.PriorityId == ed.Priority.ItemId);
+					                                    && i.PriorityId == ed.Priority.ItemId && i.SpecialistId == specialist.ItemId);
+					
+					EducationCalculator.CalculateEducation(rec);
 					
 					var item = new CAAEducationManagment()
 					{

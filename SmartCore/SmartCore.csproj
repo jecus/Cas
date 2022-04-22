@@ -412,6 +412,7 @@
     <Compile Include="CAA\Audit\WorkFlowStatus.cs" />
     <Compile Include="CAA\Audit\WorkFlowStage.cs" />
     <Compile Include="CAA\CAAEducation\CAAEducationRecord.cs" />
+    <Compile Include="CAA\CAAEducation\EducationCalculator.cs" />
     <Compile Include="CAA\CAAEducation\EducationPriority.cs" />
     <Compile Include="CAA\Check\CheckListFilterParams.cs" />
     <Compile Include="CAA\Check\CheckListRecords.cs" />
