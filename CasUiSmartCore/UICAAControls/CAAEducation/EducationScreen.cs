@@ -23,7 +23,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
             InitializeComponent();
             
             aircraftHeaderControl1.Operator = currentOperator;
-            statusControl.ShowStatus = false;
+            statusControl.ShowStatus = true;
+            
         }
 
 
@@ -46,7 +47,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
         #region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            
+            statusControl.ConditionState = _educationManagment.Record.Settings.Condition;
             extendableRichContainerSummary.LabelCaption.Text = "Summary " 
                                                            + " Status: " + $"{(_educationManagment.Record.Settings.IsClosed ? "Closed" : "Open")}";
 

@@ -68,10 +68,17 @@ namespace CAS.UI.UICAAControls.CAAEducation
         
         private void ListViewComplainceMouseDoubleClick(object sender, MouseEventArgs e)
         {
-            var form = new EducationComplianceForm(_record);
-            if (form.ShowDialog() == DialogResult.OK)
+            if (listViewCompliance.SelectedItems.Count == 0)
+                return;
+
+            var item = listViewCompliance.SelectedItems[0];
+            if (!item.Group.Name.Contains("Last"))
             {
-                _animatedThreadWorker.RunWorkerAsync();
+                var form = new EducationComplianceForm(_record);
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    _animatedThreadWorker.RunWorkerAsync();
+                }
             }
         }
 
