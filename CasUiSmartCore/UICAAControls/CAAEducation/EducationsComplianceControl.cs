@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
+using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using SmartCore.CAA.CAAEducation;
 using SmartCore.Calculations;
 
@@ -8,53 +9,58 @@ namespace CAS.UI.UICAAControls.CAAEducation
 {
     public partial class EducationsComplianceControl : UserControl
     {
+        private AnimatedThreadWorker _animatedThreadWorker;
+        private CAAEducationRecord _record;
+
         public EducationsComplianceControl()
         {
             InitializeComponent();
         }
         
-        public void UpdateInformation(CAAEducationManagment managment)
+        public void UpdateInformation(CAAEducationManagment managment, AnimatedThreadWorker animatedThreadWorker)
         {
-            var record = managment.Record;
+            listViewCompliance.Items.Clear();
+            _animatedThreadWorker = animatedThreadWorker;
+            _record = managment.Record;
             
-            if (record.Settings.LastCompliances.Any())
+            if (_record.Settings.LastCompliances != null && _record.Settings.LastCompliances.Any())
             {
-                foreach (var comp in record.Settings.LastCompliances)
+                foreach (var comp in _record.Settings.LastCompliances)
                 {
                     var lastsubs =
                         new[]
                         {
                             managment.Education?.Task?.FullName,
-                            SmartCore.Auxiliary.Convert.GetDateFormat(record?.Settings?.Next),
-                            ""
+                            SmartCore.Auxiliary.Convert.GetDateFormat(comp.LastDate),
+                            comp.Remark
                         };
             
                     var lastItem = new ListViewItem(lastsubs)
                     {
-                        BackColor = UsefulMethods.GetColor(record),
+                        BackColor = UsefulMethods.GetColor(managment),
                         Group = listViewCompliance.Groups[1],
-                        Tag = record,
+                        Tag = _record,
                     };
                     listViewCompliance.Items.Add(lastItem);
                 }
             }
             
-            if(record.Settings.Repeat == Lifelength.Null)
+            if(_record.Settings.Repeat == Lifelength.Null)
                 return;
             
             var subs =
                 new[]
                 {
                     managment.Education?.Task?.FullName,
-                    SmartCore.Auxiliary.Convert.GetDateFormat(record?.Settings?.Next),
+                    SmartCore.Auxiliary.Convert.GetDateFormat(_record?.Settings?.Next),
                     ""
                 };
             
             var newItem = new ListViewItem(subs)
             {
-                BackColor = UsefulMethods.GetColor(record),
+                BackColor = UsefulMethods.GetColor(managment),
                 Group = listViewCompliance.Groups[0],
-                Tag = record,
+                Tag = _record,
             };
             listViewCompliance.Items.Add(newItem);
         }
@@ -62,7 +68,11 @@ namespace CAS.UI.UICAAControls.CAAEducation
         
         private void ListViewComplainceMouseDoubleClick(object sender, MouseEventArgs e)
         {
-            throw new System.NotImplementedException();
+            var form = new EducationComplianceForm(_record);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                _animatedThreadWorker.RunWorkerAsync();
+            }
         }
 
         

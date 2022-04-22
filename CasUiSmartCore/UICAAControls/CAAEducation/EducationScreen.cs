@@ -51,7 +51,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                                                            + " Status: " + $"{(_educationManagment.Record.Settings.IsClosed ? "Closed" : "Open")}";
 
             _educationPerformanceControl.Object = _educationManagment;
-            educationsComplianceControl1.UpdateInformation(_educationManagment);
+            educationsComplianceControl1.UpdateInformation(_educationManagment, AnimatedThreadWorker);
         }
         #endregion
 
@@ -153,6 +153,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
             
             MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+            
+            AnimatedThreadWorker.RunWorkerAsync();
         }
 
         private void extendableRichContainerComplianceExtending(object sender, EventArgs e)

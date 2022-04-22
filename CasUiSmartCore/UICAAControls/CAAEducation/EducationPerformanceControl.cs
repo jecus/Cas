@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using SmartCore.CAA.CAAEducation;
 
 namespace CAS.UI.UICAAControls.CAAEducation
@@ -16,7 +17,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 UpdateInformation();
             }
         }
-
+        
         public EducationPerformanceControl()
         {
             InitializeComponent();

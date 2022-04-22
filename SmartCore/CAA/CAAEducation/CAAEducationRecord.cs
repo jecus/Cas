@@ -62,6 +62,7 @@ namespace SmartCore.CAA.CAAEducation
 	    private byte[] _notifyByte;
 	    private Lifelength _repeat;
 	    private Lifelength _notify;
+	    private List<LastCompliance> _lastCompliances;
 
 	    [JsonProperty]
 	    public DateTime StartDate { get; set; }
@@ -91,11 +92,15 @@ namespace SmartCore.CAA.CAAEducation
 			    _notify = Lifelength.ConvertFromByteArray(value);
 		    }
 	    }
-	    
-	    [JsonProperty]
-	    public List<LastCompliance> LastCompliances { get; set; }
 
-	    
+	    [JsonProperty]
+	    public List<LastCompliance> LastCompliances
+	    {
+		    get => _lastCompliances ?? (_lastCompliances = new List<LastCompliance>());
+		    set => _lastCompliances = value;
+	    }
+
+
 	    [JsonIgnore]
 	    public Lifelength Repeat
 	    {
