@@ -44,7 +44,9 @@ namespace SmartCore.CAA.CAAEducation
 		    Settings = new CAAEducationRecordSettings()
 		    {
 			    StartDate = DateTime.Today,
-			    Condition = ConditionState.Satisfactory
+			    Condition = ConditionState.Satisfactory,
+			    Repeat = Lifelength.Null,
+			    Notify = Lifelength.Null,
 		    };
 	    }
 	    

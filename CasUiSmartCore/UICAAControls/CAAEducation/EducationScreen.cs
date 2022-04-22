@@ -51,6 +51,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                                                            + " Status: " + $"{(_educationManagment.Record.Settings.IsClosed ? "Closed" : "Open")}";
 
             _educationPerformanceControl.Object = _educationManagment;
+            educationsComplianceControl1.UpdateInformation(_educationManagment);
         }
         #endregion
 
@@ -76,8 +77,9 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 };
             }
 
-
-            AnimatedThreadWorker.ReportProgress(40, "calculation of directives");
+            
+            AnimatedThreadWorker.ReportProgress(40, "Calculation");
+            EducationCalculator.CalculateEducation(_educationManagment.Record);
             AnimatedThreadWorker.ReportProgress(100, "Complete");
         }
 
