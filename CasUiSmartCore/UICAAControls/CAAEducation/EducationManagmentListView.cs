@@ -89,6 +89,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             AddColumn("Repeat", (int)(radGridView1.Width * 0.24f));
             AddColumn("Next", (int)(radGridView1.Width * 0.24f));
             AddColumn("Remain", (int)(radGridView1.Width * 0.24f));
+            AddColumn("Last", (int)(radGridView1.Width * 0.24f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -149,6 +150,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 	        var combination = item.IsCombination ?  item.Occupation : null;
 
 	        var next = item.Record == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat(item.Record?.Settings?.Next);
+	        var last = item.Record == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat(item.Record?.Settings?.LastCompliances?.LastOrDefault()?.LastDate);
 	        
 
 	        return  new List<CustomCell>()
@@ -168,6 +170,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        CreateRow(item.Record?.Settings?.Repeat.ToRepeatIntervalsFormat(), item.Record?.Settings?.Repeat),
 		        CreateRow(next, item.Record?.Settings?.Next),
 		        CreateRow(item.Record?.Settings?.Remains?.ToRepeatIntervalsFormat(), item.Record?.Settings?.Remains),
+		        CreateRow(last, item.Record?.Settings?.LastCompliances?.LastOrDefault()?.LastDate),
 		        CreateRow(corrector, corrector)
 	        };
         }

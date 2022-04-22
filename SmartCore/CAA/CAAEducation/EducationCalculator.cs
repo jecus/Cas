@@ -17,7 +17,7 @@ namespace SmartCore.CAA.CAAEducation
             
             if ((bool)record.Settings?.Repeat?.Days.HasValue)
             {
-                if (record.Settings.LastCompliances.Any())
+                if (record.Settings.LastCompliances != null && record.Settings.LastCompliances.Any())
                 {
                     var last = record.Settings.LastCompliances.OrderBy(i => i.LastDate).Last().LastDate;
                     record.Settings.Next = last.AddDays(record.Settings.Repeat.Days.Value);
