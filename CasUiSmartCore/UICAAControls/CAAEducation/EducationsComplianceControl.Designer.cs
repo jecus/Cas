@@ -43,8 +43,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
             // 
             // listViewCompliance
             // 
-            this.listViewCompliance.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewCompliance.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { this.NextCourse, this.NextLimitDate, this.columnRemarks });
+            this.listViewCompliance.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewCompliance.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.listViewCompliance.ForeColor = System.Drawing.SystemColors.ControlText;
             this.listViewCompliance.FullRowSelect = true;
@@ -56,7 +56,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.listViewCompliance.Location = new System.Drawing.Point(0, 0);
             this.listViewCompliance.Name = "listViewCompliance";
             this.listViewCompliance.ShowItemToolTips = true;
-            this.listViewCompliance.Size = new System.Drawing.Size(635, 196);
+            this.listViewCompliance.Size = new System.Drawing.Size(951, 236);
             this.listViewCompliance.TabIndex = 0;
             this.listViewCompliance.UseCompatibleStateImageBehavior = false;
             this.listViewCompliance.View = System.Windows.Forms.View.Details;
@@ -64,11 +64,11 @@ namespace CAS.UI.UICAAControls.CAAEducation
             // 
             // panelContainer
             // 
-            this.panelContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.panelContainer.Controls.Add(this.listViewCompliance);
-            this.panelContainer.Location = new System.Drawing.Point(3, 49);
+            this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelContainer.Location = new System.Drawing.Point(0, 0);
             this.panelContainer.Name = "panelContainer";
-            this.panelContainer.Size = new System.Drawing.Size(845, 184);
+            this.panelContainer.Size = new System.Drawing.Size(951, 236);
             this.panelContainer.TabIndex = 1;
             // 
             // EducationsComplianceControl
@@ -78,7 +78,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.Controls.Add(this.panelContainer);
             this.DoubleBuffered = true;
             this.Name = "EducationsComplianceControl";
-            this.Size = new System.Drawing.Size(851, 236);
+            this.Size = new System.Drawing.Size(951, 236);
             this.panelContainer.ResumeLayout(false);
             this.ResumeLayout(false);
         }
