@@ -32,7 +32,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 documentControl1.CurrentDocument = document;
             }
             
-            if (_compliance.LastDate.HasValue)
+            if (_compliance.LastDate != null && _compliance.LastDate.HasValue)
             {
                 dateTimePickeValidTo.Value = _compliance.LastDate.Value;
                 metroTextBoxRemark.Text = _compliance.Remark;

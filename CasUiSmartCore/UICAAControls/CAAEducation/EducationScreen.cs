@@ -48,9 +48,18 @@ namespace CAS.UI.UICAAControls.CAAEducation
         #region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            statusControl.ConditionState = _educationManagment.Record.Settings.Condition;
-            extendableRichContainerSummary.LabelCaption.Text = "Summary " 
-                                                           + " Status: " + $"{(_educationManagment.Record.Settings.IsClosed ? "Closed" : "Open")}";
+            statusControl.ConditionState = _educationManagment.Record?.Settings?.Condition;
+
+            if (_educationManagment.Record == null)
+            {
+                extendableRichContainerSummary.LabelCaption.Text = "Open";
+            }
+            else
+            {
+                extendableRichContainerSummary.LabelCaption.Text = " Status: " + $"{(_educationManagment.Record.Settings.IsClosed ? "Closed" : "Open")}";
+            }
+            
+            
 
             _educationPerformanceControl.Object = _educationManagment;
             educationsComplianceControl1.UpdateInformation(_educationManagment, AnimatedThreadWorker);
@@ -62,7 +71,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
         {
             AnimatedThreadWorker.ReportProgress(0, "Load");
 
-            if (_educationManagment.Record != null)
+            if (_educationManagment.Record != null && _educationManagment.Record.ItemId > 0)
             {
                 _educationManagment.Record = GlobalObjects.CaaEnvironment.NewLoader
                     .GetObjectById<EducationRecordsDTO, CAAEducationRecord>(_educationManagment.Record.ItemId);

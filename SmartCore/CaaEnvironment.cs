@@ -31,6 +31,7 @@ namespace SmartCore
 {
     public interface ICaaEnvironment : IBaseEnvironment
     {
+        int ObtainId();
         AircraftCollection Aircraft { get; set; }
         List<AllOperators> AllOperators { get; set; }
 
