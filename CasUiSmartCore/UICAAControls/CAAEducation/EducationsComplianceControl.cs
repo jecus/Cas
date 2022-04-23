@@ -39,7 +39,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                     {
                         BackColor = UsefulMethods.GetColor(managment),
                         Group = listViewCompliance.Groups[1],
-                        Tag = _record,
+                        Tag = comp,
                     };
                     listViewCompliance.Items.Add(lastItem);
                 }
@@ -72,13 +72,18 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 return;
 
             var item = listViewCompliance.SelectedItems[0];
-            if (!item.Group.Name.Contains("Last"))
+
+            if (item.Tag is LastCompliance tag)
             {
-                var form = new EducationComplianceForm(_record);
+                var form = new EducationComplianceForm(_record, tag);
                 if (form.ShowDialog() == DialogResult.OK)
-                {
                     _animatedThreadWorker.RunWorkerAsync();
-                }
+            }
+            else
+            {
+                var form = new EducationComplianceForm(_record, new LastCompliance());
+                if (form.ShowDialog() == DialogResult.OK)
+                    _animatedThreadWorker.RunWorkerAsync();
             }
         }
 

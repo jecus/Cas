@@ -20,7 +20,7 @@ namespace SmartCore.CAA.CAAEducation
                 if (record.Settings.LastCompliances != null && record.Settings.LastCompliances.Any())
                 {
                     var last = record.Settings.LastCompliances.OrderBy(i => i.LastDate).Last().LastDate;
-                    record.Settings.Next = last.AddDays(record.Settings.Repeat.Days.Value);
+                    record.Settings.Next = last.Value.AddDays(record.Settings.Repeat.Days.Value);
                 }
                 else
                 {

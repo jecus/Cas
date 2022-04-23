@@ -137,7 +137,7 @@ namespace SmartCore.CAA.CAAEducation
     public class LastCompliance
     {
 	    [JsonProperty]
-	    public DateTime LastDate { get; set; }
+	    public DateTime? LastDate { get; set; }
 	    
 	    [JsonProperty]
 	    public string Remark { get; set; }
