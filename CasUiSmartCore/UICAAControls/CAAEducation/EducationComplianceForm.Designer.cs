@@ -37,6 +37,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.buttonCancel = new System.Windows.Forms.Button();
             this.metroTextBoxRemark = new MetroFramework.Controls.MetroTextBox();
             this.dateTimePickeValidTo = new System.Windows.Forms.DateTimePicker();
+            this.documentControl1 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
             label3 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -71,7 +72,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(249, 197);
+            this.buttonOk.Location = new System.Drawing.Point(249, 261);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 330;
@@ -85,7 +86,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonCancel.Location = new System.Drawing.Point(330, 197);
+            this.buttonCancel.Location = new System.Drawing.Point(330, 261);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 33);
             this.buttonCancel.TabIndex = 329;
@@ -134,11 +135,20 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.dateTimePickeValidTo.Size = new System.Drawing.Size(282, 20);
             this.dateTimePickeValidTo.TabIndex = 335;
             // 
+            // documentControl1
+            // 
+            this.documentControl1.CurrentDocument = null;
+            this.documentControl1.Location = new System.Drawing.Point(3, 194);
+            this.documentControl1.Name = "documentControl1";
+            this.documentControl1.Size = new System.Drawing.Size(402, 41);
+            this.documentControl1.TabIndex = 338;
+            // 
             // EducationComplianceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 237);
+            this.ClientSize = new System.Drawing.Size(408, 301);
+            this.Controls.Add(this.documentControl1);
             this.Controls.Add(label13);
             this.Controls.Add(this.dateTimePickeValidTo);
             this.Controls.Add(this.metroTextBoxRemark);
@@ -153,6 +163,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private CAS.UI.UIControls.DocumentationControls.DocumentControl documentControl1;
 
         private MetroFramework.Controls.MetroTextBox metroTextBoxRemark;
         private System.Windows.Forms.DateTimePicker dateTimePickeValidTo;

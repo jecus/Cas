@@ -32,7 +32,7 @@ namespace SmartCore
         INewLoader NewLoader { get; }
         INewKeeper NewKeeper { get; }
 
-
+        int ObtainId();
         DataSet Execute(string sql);
         DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results);
         DataSet Execute(string query, SqlParameter[] parameters);

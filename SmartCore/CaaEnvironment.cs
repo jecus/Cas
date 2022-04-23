@@ -50,6 +50,13 @@ namespace SmartCore
         public IAuditRepository AuditRepository { get; set; }
         public ApiProvider ApiProvider { get; set; }
 
+
+        public int ObtainId()
+        {
+            var ds = _newLoader.Execute("SELECT NEXT VALUE FOR item_counter");
+            return (int)ds.Tables[0].Rows[0][0];
+        }
+
         public DataSet Execute(string sql)
         {
             return _newLoader.Execute(sql);

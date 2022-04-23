@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
+using CASTerms;
 using SmartCore.CAA.CAAEducation;
 using SmartCore.Calculations;
 

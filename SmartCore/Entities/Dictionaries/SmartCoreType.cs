@@ -1,5 +1,6 @@
 ﻿using System;
 using SmartCore.CAA.Audit;
+using SmartCore.CAA.CAAEducation;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.RoutineAudits;
 using SmartCore.CAA.StandartManual;
@@ -487,6 +488,7 @@ namespace SmartCore.Entities.Dictionaries
 		public static SmartCoreType AuditCheckRecord = new SmartCoreType(3085, "AuditCheckRecord", "AuditCheckRecord", typeof(AuditCheckRecord));
 		public static SmartCoreType StandartManual = new SmartCoreType(3086, "StandartManual", "StandartManual", typeof(StandartManual));
 		public static SmartCoreType CheckListTransfer = new SmartCoreType(3087, "CheckListTransfer", "CheckListTransfer", typeof(CheckListTransfer));
+		public static SmartCoreType CAAEducationRecord = new SmartCoreType(3087, "CAAEducationRecord", "CAAEducationRecord", typeof(CAAEducationRecord));
 		
 		/*
          * Методы

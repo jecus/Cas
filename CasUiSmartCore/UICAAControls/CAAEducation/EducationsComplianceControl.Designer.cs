@@ -32,9 +32,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
         /// </summary>
         private void InitializeComponent()
         {
-            NextCourse = new ColumnHeader();
-            NextLimitDate = new ColumnHeader();
-            columnRemarks = new ColumnHeader();
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Need new compliance:", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Last compliance", System.Windows.Forms.HorizontalAlignment.Left);
             this.listViewCompliance = new System.Windows.Forms.ListView();

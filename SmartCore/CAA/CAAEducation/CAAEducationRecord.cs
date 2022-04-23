@@ -42,6 +42,7 @@ namespace SmartCore.CAA.CAAEducation
 
 	    public CAAEducationRecord()
 	    {
+		    SmartCoreObjectType = SmartCoreType.CAAEducationRecord;
 		    Settings = new CAAEducationRecordSettings()
 		    {
 			    StartDate = DateTime.Today,
@@ -141,6 +142,12 @@ namespace SmartCore.CAA.CAAEducation
 	    
 	    [JsonProperty]
 	    public string Remark { get; set; }
+	    
+	    [JsonProperty]
+	    public int? DocumentId { get; set; }
+	    
+	    [JsonIgnore]
+	    public Document Document { get; set; }
     }
     
 }
