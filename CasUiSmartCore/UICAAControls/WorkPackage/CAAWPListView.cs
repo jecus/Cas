@@ -41,7 +41,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		protected override void GroupingItems()
 		{
-			Grouping("Operator");
+			Grouping("Status");
 		}
 
 
@@ -51,6 +51,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		/// </summary>
 		protected override void SetHeaders()
 		{
+			AddColumn("Status", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Number", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Title", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
@@ -88,6 +89,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 	        
 	        var subItems = new List<CustomCell>()
 			{
+				CreateRow(item.StatusName, item.Settings.Status),
 				CreateRow(item.Settings.Number, item.Settings.Number),
 				CreateRow(item.Title, item.Title),
 				CreateRow(corrector, corrector)
@@ -98,9 +100,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		#endregion
 		
-
-
-
+		
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
 			var form = new CAAWorkPackageEditorForm(SelectedItem);

@@ -248,7 +248,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-			var form = new FindingLevelsForm(new FindingLevels(){OperatorId = _operatorId});
+			var form = new CAAWorkPackageEditorForm(new CAAWorkPackage(){OperatorId = _operatorId});
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
 		}

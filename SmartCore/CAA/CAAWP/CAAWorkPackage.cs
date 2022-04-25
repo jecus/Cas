@@ -32,13 +32,37 @@ namespace SmartCore.CAA.CAAWP
 
         public CAAWorkPackagekSettings Settings { get; set; }
         
+        
+        public string StatusName
+        {
+            get
+            {
+                switch (Settings.Status)
+                {
+                    case  WPStatus.Open : return $"{RoutineStatus.Open}";
+                    case WPStatus.Published:
+                        return "In progress";
+                    case WPStatus.Closed:
+                        return $"{RoutineStatus.Closed}";
+                    default: return "";
+                }
+            }
+        }
+        
 
 
         public CAAWorkPackage()
         {
             Settings = new CAAWorkPackagekSettings()
             {
-                Status = WPStatus.Open
+                CreateDate = DateTime.Now,
+                PublishingDate = DateTime.Now,
+                ClosingDate = DateTime.Now,
+                OpeningDate = DateTime.Now,
+                PerformDate = DateTime.Now,
+                Status = WPStatus.Open,
+                ClosingDocument =new List<Document>(),
+                DocumentIds = new List<int>()
             };
             ItemId = -1;
         }
