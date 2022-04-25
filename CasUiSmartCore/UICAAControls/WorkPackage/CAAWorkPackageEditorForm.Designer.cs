@@ -376,6 +376,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			// dateTimePickerPublishingDate
 			// 
 			this.dateTimePickerPublishingDate.CalendarForeColor = System.Drawing.Color.DimGray;
+			this.dateTimePickerPublishingDate.Enabled = false;
 			this.dateTimePickerPublishingDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.dateTimePickerPublishingDate.Location = new System.Drawing.Point(180, 223);
 			this.dateTimePickerPublishingDate.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
@@ -481,6 +482,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			// dateTimePickerClosingDate
 			// 
 			this.dateTimePickerClosingDate.CalendarForeColor = System.Drawing.Color.DimGray;
+			this.dateTimePickerClosingDate.Enabled = false;
 			this.dateTimePickerClosingDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.dateTimePickerClosingDate.Location = new System.Drawing.Point(180, 251);
 			this.dateTimePickerClosingDate.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
