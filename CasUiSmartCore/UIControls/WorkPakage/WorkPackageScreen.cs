@@ -1135,7 +1135,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		private void ButtonEditClick(object sender, EventArgs e)
 		{
-			var form = new UICAAControls.WorkPackage.WorkPackageEditorForm(_currentWorkPackage);
+			var form = new WorkPackageEditorForm(_currentWorkPackage);
 			form.ShowDialog();
 		}
 

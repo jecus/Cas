@@ -21,6 +21,7 @@ using CAS.UI.UICAAControls.Specialists;
 using CAS.UI.UICAAControls.StandartManual;
 using CAS.UI.UICAAControls.Suppliers;
 using CAS.UI.UICAAControls.Users;
+using CAS.UI.UICAAControls.WorkPackage;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.CAA;
@@ -341,7 +342,7 @@ namespace CAS.UI.UICAAControls
 	        
         }
 
-        private void LinkEducationProcessManagementnRequested(object sender, ReferenceEventArgs e)
+        private void LinkEducationSummaryRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Education Summary Pag";
 	        e.RequestedEntity = new EducationManagmentListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
@@ -356,6 +357,12 @@ namespace CAS.UI.UICAAControls
         private void LinkEducationProcessRequested(object sender, ReferenceEventArgs e)
         {
 	        e.Cancel = true;
+        }
+
+        private void LinkEducationLinkEducationManagmentRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.DisplayerText = "Education Process Management";
+	        e.RequestedEntity = new CAAWPListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
         }
 	}
 }

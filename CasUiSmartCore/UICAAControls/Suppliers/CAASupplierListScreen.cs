@@ -36,7 +36,7 @@ namespace CAS.UI.UICAAControls.Suppliers
 		private ICommonCollection<SmartCore.Purchase.Supplier> _initialDirectiveArray = new CommonCollection<SmartCore.Purchase.Supplier>();
 		private ICommonCollection<SmartCore.Purchase.Supplier> _resultDirectiveArray = new CommonCollection<SmartCore.Purchase.Supplier>();
 
-		private CommonCollection<WorkPackage> _openPubWorkPackages = new CommonCollection<WorkPackage>();
+		private CommonCollection<SmartCore.Entities.General.WorkPackage.WorkPackage> _openPubWorkPackages = new CommonCollection<SmartCore.Entities.General.WorkPackage.WorkPackage>();
 
 		private Forecast _currentForecast;
 

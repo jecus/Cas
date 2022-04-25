@@ -360,7 +360,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		{
 			if (_directivesViewer.SelectedItems.Count == 1)
 			{
-				var form = new UICAAControls.WorkPackage.WorkPackageEditorForm(_directivesViewer.SelectedItem);
+				var form = new WorkPackageEditorForm(_directivesViewer.SelectedItem);
 				if (form.ShowDialog() == DialogResult.OK)
 				{
 					AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
