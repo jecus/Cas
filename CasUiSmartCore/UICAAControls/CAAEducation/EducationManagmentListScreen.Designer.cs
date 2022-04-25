@@ -212,8 +212,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			// 
 			this.flowLayoutPanel2.AutoSize = true;
 			this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.flowLayoutPanel2.Controls.Add(this.radio_ByName);
 			this.flowLayoutPanel2.Controls.Add(this.radio_ByCode);
+			this.flowLayoutPanel2.Controls.Add(this.radio_ByName);
 			this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
 			this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
 			this.flowLayoutPanel2.Location = new System.Drawing.Point(1291, 0);
@@ -227,7 +227,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             // 
             this.radio_ByName.AutoSize = true;
             this.radio_ByName.Checked = true;
-            this.radio_ByName.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radio_ByName.Font = new System.Drawing.Font("Verdana", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radio_ByName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radio_ByName.Location = new System.Drawing.Point(775, 163);
             this.radio_ByName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -241,7 +241,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             // radio_WhicheverFirst
             // 
             this.radio_ByCode.AutoSize = true;
-            this.radio_ByCode.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radio_ByCode.Font = new System.Drawing.Font("Verdana", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radio_ByCode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.radio_ByCode.Location = new System.Drawing.Point(448, 163);
             this.radio_ByCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
