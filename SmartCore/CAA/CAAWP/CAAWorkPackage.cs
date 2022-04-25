@@ -105,6 +105,9 @@ namespace SmartCore.CAA.CAAWP
         [JsonIgnore]
         public List<Document> ClosingDocument { get; set; }
         
+        
+        [JsonProperty]
+        public List<int> DocumentIds { get; set; }
     }
 
     

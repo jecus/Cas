@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.DocumentationControls;
 using CAS.UI.UIControls.WorkPakage;
@@ -132,6 +133,9 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			_currentWp.Settings.ClosingRemarks = textBoxClosingRemarks.Text;
 			_currentWp.Settings.Remarks = textBoxRemarks.Text;
 			_currentWp.Settings.PerformDate = dateTimePickerFlightDate.Value;
+			_currentWp.Settings.DocumentIds.Clear();
+			_currentWp.Settings.DocumentIds.AddRange(_currentWp.Settings.ClosingDocument.Select(i => i.ItemId));
+			
 			
 			
 			
