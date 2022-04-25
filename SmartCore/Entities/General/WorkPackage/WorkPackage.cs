@@ -21,12 +21,12 @@ using SmartCore.Packages;
 using SmartCore.Purchase;
 using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 using Convert = System.Convert;
-using Currency =  SmartCore.Entities.Dictionaries.Сurrency;
+using Currency =  SmartCore.Entities.Dictionaries.РЎurrency;
 
 namespace SmartCore.Entities.General.WorkPackage
 {
 	/// <summary>
-	/// Класс описывает рабочий пакет - набор заданий 
+	/// РљР»Р°СЃСЃ РѕРїРёСЃС‹РІР°РµС‚ СЂР°Р±РѕС‡РёР№ РїР°РєРµС‚ - РЅР°Р±РѕСЂ Р·Р°РґР°РЅРёР№ 
 	/// </summary>
 	[Table("WorkPackages", "dbo", "ItemId")]
 	[Dto(typeof(WorkPackageDTO))]
@@ -36,12 +36,12 @@ namespace SmartCore.Entities.General.WorkPackage
 	{
 		private static Type _thisType;
 		/*
-		*  Свойства взятые из базы данных
+		*  РЎРІРѕР№СЃС‚РІР° РІР·СЏС‚С‹Рµ РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 		*/
 
 		#region public Int32 ParentId { get; set; }
 		/// <summary>
-		/// Id воздушного судна, для которого составлен рабочий пакет
+		/// Id РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР°, РґР»СЏ РєРѕС‚РѕСЂРѕРіРѕ СЃРѕСЃС‚Р°РІР»РµРЅ СЂР°Р±РѕС‡РёР№ РїР°РєРµС‚
 		/// </summary>
 		[TableColumn("ParentId")]
 		public Int32 ParentId { get; set; }
@@ -58,8 +58,8 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// 
 		/// </summary>
 		[TableColumn("Number")]
-		[ListViewData(100f, "WP/WO №", 3)]
-		[FilterAttribute("WP/WO №", Order = 1)]
+		[ListViewData(100f, "WP/WO в„–", 3)]
+		[FilterAttribute("WP/WO в„–", Order = 1)]
 		public String Number { get; set; }
 		#endregion
 
@@ -88,7 +88,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		#region public double ManHours { get; set; }
 
 		/// <summary>
-		/// Трудозатраты пакета работ
+		/// РўСЂСѓРґРѕР·Р°С‚СЂР°С‚С‹ РїР°РєРµС‚Р° СЂР°Р±РѕС‚
 		/// </summary>
 		[SubQueryAttribute("ManHours",
 			@"(select sum(manhours) 
@@ -191,7 +191,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		private WorkPackageStatus _status;
 		/// <summary>
-		/// Статус (состояние) рабочего пакета
+		/// РЎС‚Р°С‚СѓСЃ (СЃРѕСЃС‚РѕСЏРЅРёРµ) СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 		/// </summary>
 		[TableColumn("Status")]
 		[FormControl("Status:", Enabled = false)]
@@ -214,7 +214,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		private DateTime _createDate;
 		/// <summary>
-		/// Дата открытия Рабочего Пакета 
+		/// Р”Р°С‚Р° РѕС‚РєСЂС‹С‚РёСЏ Р Р°Р±РѕС‡РµРіРѕ РџР°РєРµС‚Р° 
 		/// </summary>
 		[TableColumn("CreateDate")]
 		[FormControl("Create Date:", Enabled = false)]
@@ -237,7 +237,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		private DateTime _openingDate;
 		/// <summary>
-		/// Дата открытия Рабочего Пакета 
+		/// Р”Р°С‚Р° РѕС‚РєСЂС‹С‚РёСЏ Р Р°Р±РѕС‡РµРіРѕ РџР°РєРµС‚Р° 
 		/// </summary>
 		[TableColumn("OpeningDate")]
 		[FormControl("Opening Date:")]
@@ -260,7 +260,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		private DateTime _publishingDate;
 		/// <summary>
-		/// Дата публикации рабочего пакета 
+		/// Р”Р°С‚Р° РїСѓР±Р»РёРєР°С†РёРё СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р° 
 		/// </summary>
 		[TableColumn("PublishingDate")]
 		[FormControl("Publishing Date:")]
@@ -347,7 +347,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		private DateTime _closingDate;
 		/// <summary>
-		/// Дата закрытия рабочего пакета
+		/// Р”Р°С‚Р° Р·Р°РєСЂС‹С‚РёСЏ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 		/// </summary>
 		[TableColumn("ClosingDate")]
 		[FormControl("Closing Date:")]
@@ -366,7 +366,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		}
 
 		/// <summary>
-		/// Представление даты закрытия рабочего пакета для списка
+		/// РџСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РґР°С‚С‹ Р·Р°РєСЂС‹С‚РёСЏ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р° РґР»СЏ СЃРїРёСЃРєР°
 		/// </summary>
 		[ListViewData(0.1f, "Closing date", 12)]
 		public DateTime? ListViewClosingDate
@@ -382,7 +382,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public String WorkTimeString { get; set; }
 		/// <summary>
-		/// Для закрытого рабочего пакета, возвращает временной интервал, затраченный на исполнение задач в виде строки
+		/// Р”Р»СЏ Р·Р°РєСЂС‹С‚РѕРіРѕ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°, РІРѕР·РІСЂР°С‰Р°РµС‚ РІСЂРµРјРµРЅРЅРѕР№ РёРЅС‚РµСЂРІР°Р», Р·Р°С‚СЂР°С‡РµРЅРЅС‹Р№ РЅР° РёСЃРїРѕР»РЅРµРЅРёРµ Р·Р°РґР°С‡ РІ РІРёРґРµ СЃС‚СЂРѕРєРё
 		/// </summary>
 		[ListViewData(100, "Work time", 16)]
 		public String WorkTimeString
@@ -405,7 +405,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public String Author { get; set; }
 		/// <summary>
-		/// Автор рабочего пакета 
+		/// РђРІС‚РѕСЂ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р° 
 		/// </summary>
 		[TableColumn("Author")]
 		[FormControl("Author:", Enabled = false)]
@@ -416,7 +416,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public String PublishedBy { get; set; }
 		/// <summary>
-		/// Имя пользователя опубликовавшего рабочий пакет
+		/// РРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РѕРїСѓР±Р»РёРєРѕРІР°РІС€РµРіРѕ СЂР°Р±РѕС‡РёР№ РїР°РєРµС‚
 		/// </summary>
 		[TableColumn("PublishedBy")]
 		[FormControl("Published By:", Enabled = false)]
@@ -427,7 +427,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public String ClosedBy { get; set; }
 		/// <summary>
-		/// Имя пользователя закрывшего рабочий пакет
+		/// РРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ Р·Р°РєСЂС‹РІС€РµРіРѕ СЂР°Р±РѕС‡РёР№ РїР°РєРµС‚
 		/// </summary>
 		[TableColumn("ClosedBy")]
 		[FormControl("Closed By:", Enabled = false)]
@@ -438,7 +438,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public String Remarks { get; set; }
 		/// <summary>
-		/// Примечания рабочего пакета 
+		/// РџСЂРёРјРµС‡Р°РЅРёСЏ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р° 
 		/// </summary>
 		[TableColumn("Remarks")]
 		[FormControl("Remarks:")]
@@ -573,14 +573,14 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#endregion
 		/*
-		 * Дополнительные свойства
+		 * Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СЃРІРѕР№СЃС‚РІР°
 		 */
 
 		#region public Aircraft Aircraft { get; set; }
 
 		/// <summary>
-		/// Обратная ссылка на воздушное судно, для которого составлен рабочий пакет. 
-		/// Может быть null если рабочий пакет составлен не для воздушного судна
+		/// РћР±СЂР°С‚РЅР°СЏ СЃСЃС‹Р»РєР° РЅР° РІРѕР·РґСѓС€РЅРѕРµ СЃСѓРґРЅРѕ, РґР»СЏ РєРѕС‚РѕСЂРѕРіРѕ СЃРѕСЃС‚Р°РІР»РµРЅ СЂР°Р±РѕС‡РёР№ РїР°РєРµС‚. 
+		/// РњРѕР¶РµС‚ Р±С‹С‚СЊ null РµСЃР»Рё СЂР°Р±РѕС‡РёР№ РїР°РєРµС‚ СЃРѕСЃС‚Р°РІР»РµРЅ РЅРµ РґР»СЏ РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР°
 		/// </summary>
 		[FilterAttribute("Aircraft", Order = 41)]
 		public Aircraft Aircraft { get; set; }
@@ -590,8 +590,8 @@ namespace SmartCore.Entities.General.WorkPackage
 		#region public Lifelength AircraftCurrentLifelenght { get; set; }
 
 		/// <summary>
-		/// Обратная ссылка на воздушное судно, для которого составлен рабочий пакет. 
-		/// Может быть null если рабочий пакет составлен не для воздушного судна
+		/// РћР±СЂР°С‚РЅР°СЏ СЃСЃС‹Р»РєР° РЅР° РІРѕР·РґСѓС€РЅРѕРµ СЃСѓРґРЅРѕ, РґР»СЏ РєРѕС‚РѕСЂРѕРіРѕ СЃРѕСЃС‚Р°РІР»РµРЅ СЂР°Р±РѕС‡РёР№ РїР°РєРµС‚. 
+		/// РњРѕР¶РµС‚ Р±С‹С‚СЊ null РµСЃР»Рё СЂР°Р±РѕС‡РёР№ РїР°РєРµС‚ СЃРѕСЃС‚Р°РІР»РµРЅ РЅРµ РґР»СЏ РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР°
 		/// </summary>
 		public Lifelength AircraftCurrentLifelenght { get; set; }
 
@@ -600,8 +600,8 @@ namespace SmartCore.Entities.General.WorkPackage
 		#region public Lifelength AircraftString { get; set; }
 
 		/// <summary>
-		/// Обратная ссылка на воздушное судно, для которого составлен рабочий пакет. 
-		/// Может быть null если рабочий пакет составлен не для воздушного судна
+		/// РћР±СЂР°С‚РЅР°СЏ СЃСЃС‹Р»РєР° РЅР° РІРѕР·РґСѓС€РЅРѕРµ СЃСѓРґРЅРѕ, РґР»СЏ РєРѕС‚РѕСЂРѕРіРѕ СЃРѕСЃС‚Р°РІР»РµРЅ СЂР°Р±РѕС‡РёР№ РїР°РєРµС‚. 
+		/// РњРѕР¶РµС‚ Р±С‹С‚СЊ null РµСЃР»Рё СЂР°Р±РѕС‡РёР№ РїР°РєРµС‚ СЃРѕСЃС‚Р°РІР»РµРЅ РЅРµ РґР»СЏ РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР°
 		/// </summary>
 		[ListViewData(85, "Aircraft", 1)]
 		public string AircraftString
@@ -622,7 +622,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region ICommonCollection IDirectivePackage.PakageRecords { get; }
 		/// <summary>
-		/// Взвращает массив элементов для привязки директив к рабочему пакету
+		/// Р’Р·РІСЂР°С‰Р°РµС‚ РјР°СЃСЃРёРІ СЌР»РµРјРµРЅС‚РѕРІ РґР»СЏ РїСЂРёРІСЏР·РєРё РґРёСЂРµРєС‚РёРІ Рє СЂР°Р±РѕС‡РµРјСѓ РїР°РєРµС‚Сѓ
 		/// </summary>
 		ICommonCollection IDirectivePackage.PackageRecords { get { return _workPackageRecords; } }
 
@@ -632,7 +632,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		private CommonCollection<WorkPackageRecord> _workPackageRecords;
 		/// <summary>
-		/// Взвращает массив элементов для привязки директив к рабочему пакету
+		/// Р’Р·РІСЂР°С‰Р°РµС‚ РјР°СЃСЃРёРІ СЌР»РµРјРµРЅС‚РѕРІ РґР»СЏ РїСЂРёРІСЏР·РєРё РґРёСЂРµРєС‚РёРІ Рє СЂР°Р±РѕС‡РµРјСѓ РїР°РєРµС‚Сѓ
 		/// </summary>
 		[Child(RelationType.OneToMany, "WorkPakageId", "WorkPackage", false)]
 		public CommonCollection<WorkPackageRecord> WorkPakageRecords
@@ -650,7 +650,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		private PerformAfter _perfAfter;
 
 		/// <summary>
-		/// Возвращает массив записей о привязке задач к чекам находящимся в данном рабочем пакете
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РјР°СЃСЃРёРІ Р·Р°РїРёСЃРµР№ Рѕ РїСЂРёРІСЏР·РєРµ Р·Р°РґР°С‡ Рє С‡РµРєР°Рј РЅР°С…РѕРґСЏС‰РёРјСЃСЏ РІ РґР°РЅРЅРѕРј СЂР°Р±РѕС‡РµРј РїР°РєРµС‚Рµ
 		/// </summary>
 		public CommonCollection<MaintenanceCheckBindTaskRecord> MaintenanceCheckBindTaskRecords
 		{
@@ -662,7 +662,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		#region Boolean Boolean WorkPackageItemsLoaded { get; set; }
 
 		/// <summary>
-		/// Были ли загружены элементы рабочего пакета - по умолчанию - false
+		/// Р‘С‹Р»Рё Р»Рё Р·Р°РіСЂСѓР¶РµРЅС‹ СЌР»РµРјРµРЅС‚С‹ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р° - РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ - false
 		/// </summary>
 		public Boolean WorkPackageItemsLoaded { get; set; }
 
@@ -671,7 +671,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		#region public DateTime MinClosingDate { get; set; }
 
 		/// <summary>
-		/// Минимальная дата закрытия рабочего пакета
+		/// РњРёРЅРёРјР°Р»СЊРЅР°СЏ РґР°С‚Р° Р·Р°РєСЂС‹С‚РёСЏ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 		/// </summary>
 		public DateTime? MinClosingDate { get; set; }
 
@@ -680,7 +680,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		#region public DateTime MaxClosingDate { get; set; }
 
 		/// <summary>
-		/// Максимальная дата закрытия рабочего пакета
+		/// РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґР°С‚Р° Р·Р°РєСЂС‹С‚РёСЏ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 		/// </summary>
 		public DateTime? MaxClosingDate { get; set; }
 
@@ -688,32 +688,32 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public bool CanPublish { get; set; }
 		/// <summary>
-		/// Можно ли опубликовать пакет
+		/// РњРѕР¶РЅРѕ Р»Рё РѕРїСѓР±Р»РёРєРѕРІР°С‚СЊ РїР°РєРµС‚
 		/// </summary>
 		public bool CanPublish { get; set; }
 		#endregion
 
 		#region public string BlockPublishReason { get; set; }
 		/// <summary>
-		/// ПРичина невозможности публикации рабочего пакета
+		/// РџР РёС‡РёРЅР° РЅРµРІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РїСѓР±Р»РёРєР°С†РёРё СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 		/// </summary>
 		public string BlockPublishReason { get; set; }
 		#endregion
 
 		#region bool bool CanClose { get; set; }
 		/// <summary>
-		/// Можно ли закрыть пакет
+		/// РњРѕР¶РЅРѕ Р»Рё Р·Р°РєСЂС‹С‚СЊ РїР°РєРµС‚
 		/// </summary>
 		public bool CanClose { get; set; }
 		#endregion
 
 		/*
-		 * Элементы рабочего пакета, Work Package содержит все виды работ из Forecast + Job Cards + Non Routine Jobs + Maintenance Cheks + Maintenance Workscope Items
+		 * Р­Р»РµРјРµРЅС‚С‹ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°, Work Package СЃРѕРґРµСЂР¶РёС‚ РІСЃРµ РІРёРґС‹ СЂР°Р±РѕС‚ РёР· Forecast + Job Cards + Non Routine Jobs + Maintenance Cheks + Maintenance Workscope Items
 		 */
 
 		#region public BaseComponentCollection BaseComponents { get; internal set; }
 		/// <summary>
-		/// Базовые агрегаты, для которых задан Lifelimit
+		/// Р‘Р°Р·РѕРІС‹Рµ Р°РіСЂРµРіР°С‚С‹, РґР»СЏ РєРѕС‚РѕСЂС‹С… Р·Р°РґР°РЅ Lifelimit
 		/// </summary>
 		public BaseComponentCollection BaseComponents
 		{
@@ -735,7 +735,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public ComponentCollection Components { get; internal set; }
 		/// <summary>
-		/// Компоненты, которые необходимо заменить (Remove/Replace)
+		/// РљРѕРјРїРѕРЅРµРЅС‚С‹, РєРѕС‚РѕСЂС‹Рµ РЅРµРѕР±С…РѕРґРёРјРѕ Р·Р°РјРµРЅРёС‚СЊ (Remove/Replace)
 		/// </summary>
 		public ComponentCollection Components
 		{
@@ -757,7 +757,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public IEnumerable<ComponentDirective> ComponentDirectives { get; }
 		/// <summary>
-		/// Работы по компонентам, которые необходимо выполнить. Важно - для Component Directive родителем могут быть как BaseComponent так и Component
+		/// Р Р°Р±РѕС‚С‹ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј, РєРѕС‚РѕСЂС‹Рµ РЅРµРѕР±С…РѕРґРёРјРѕ РІС‹РїРѕР»РЅРёС‚СЊ. Р’Р°Р¶РЅРѕ - РґР»СЏ Component Directive СЂРѕРґРёС‚РµР»РµРј РјРѕРіСѓС‚ Р±С‹С‚СЊ РєР°Рє BaseComponent С‚Р°Рє Рё Component
 		/// </summary>
 		public IEnumerable<ComponentDirective> ComponentDirectives
 		{
@@ -777,7 +777,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public ICommonCollection<Directive> AdStatus { get; }
 		/// <summary>
-		/// Директивы Ad статуса, которые должны быть выполнены
+		/// Р”РёСЂРµРєС‚РёРІС‹ Ad СЃС‚Р°С‚СѓСЃР°, РєРѕС‚РѕСЂС‹Рµ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РІС‹РїРѕР»РЅРµРЅС‹
 		/// </summary>
 		public ICommonCollection<Directive> AdStatus
 		{
@@ -800,7 +800,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public IEnumerable<Directive> SbStatus { get; }
 		/// <summary>
-		/// Элементы отчета Cpcp, которые требуют выполнения 
+		/// Р­Р»РµРјРµРЅС‚С‹ РѕС‚С‡РµС‚Р° Cpcp, РєРѕС‚РѕСЂС‹Рµ С‚СЂРµР±СѓСЋС‚ РІС‹РїРѕР»РЅРµРЅРёСЏ 
 		/// </summary>
 		public IEnumerable<Directive> SbStatus
 		{
@@ -823,7 +823,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public IEnumerable<Directive> EoStatus { get; }
 		/// <summary>
-		/// Элементы отчета Cpcp, которые требуют выполнения 
+		/// Р­Р»РµРјРµРЅС‚С‹ РѕС‚С‡РµС‚Р° Cpcp, РєРѕС‚РѕСЂС‹Рµ С‚СЂРµР±СѓСЋС‚ РІС‹РїРѕР»РЅРµРЅРёСЏ 
 		/// </summary>
 		public IEnumerable<Directive> EoStatus
 		{
@@ -846,7 +846,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public IEnumerable<Directive> Damages { get; }
 		/// <summary>
-		/// Элементы отчета Cpcp, которые требуют выполнения 
+		/// Р­Р»РµРјРµРЅС‚С‹ РѕС‚С‡РµС‚Р° Cpcp, РєРѕС‚РѕСЂС‹Рµ С‚СЂРµР±СѓСЋС‚ РІС‹РїРѕР»РЅРµРЅРёСЏ 
 		/// </summary>
 		public IEnumerable<Directive> Damages
 		{
@@ -864,7 +864,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public IEnumerable<Directive> DefferedItems { get; }
 		/// <summary>
-		/// Элементы отчета DefferedItems, которые требуют выполнения 
+		/// Р­Р»РµРјРµРЅС‚С‹ РѕС‚С‡РµС‚Р° DefferedItems, РєРѕС‚РѕСЂС‹Рµ С‚СЂРµР±СѓСЋС‚ РІС‹РїРѕР»РЅРµРЅРёСЏ 
 		/// </summary>
 		public IEnumerable<Directive> DefferedItems
 		{
@@ -882,7 +882,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public IEnumerable<Directive> OutOfPhaseItems { get; }
 		/// <summary>
-		/// Элементы отчета OutOfPhaseItems, которые требуют выполнения 
+		/// Р­Р»РµРјРµРЅС‚С‹ РѕС‚С‡РµС‚Р° OutOfPhaseItems, РєРѕС‚РѕСЂС‹Рµ С‚СЂРµР±СѓСЋС‚ РІС‹РїРѕР»РЅРµРЅРёСЏ 
 		/// </summary>
 		public IEnumerable<Directive> OutOfPhaseItems
 		{
@@ -900,7 +900,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public IEnumerable<NonRoutineJob> NonRoutines
 		/// <summary>
-		/// Список не рутинных операций
+		/// РЎРїРёСЃРѕРє РЅРµ СЂСѓС‚РёРЅРЅС‹С… РѕРїРµСЂР°С†РёР№
 		/// </summary>
 		public IEnumerable<NonRoutineJob> NonRoutines
 		{
@@ -917,7 +917,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public IEnumerable<MaintenanceCheck> MaintenanceChecks { get; }
 		/// <summary>
-		/// Элементы пакета MaintenanceChecks, которые требуют выполнения 
+		/// Р­Р»РµРјРµРЅС‚С‹ РїР°РєРµС‚Р° MaintenanceChecks, РєРѕС‚РѕСЂС‹Рµ С‚СЂРµР±СѓСЋС‚ РІС‹РїРѕР»РЅРµРЅРёСЏ 
 		/// </summary>
 		public IEnumerable<MaintenanceCheck> MaintenanceChecks
 		{
@@ -934,7 +934,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region  public IEnumerable<MaintenanceDirective> MaintenanceDirectives { get; }
 		/// <summary>
-		/// Директивы программы обслуживания
+		/// Р”РёСЂРµРєС‚РёРІС‹ РїСЂРѕРіСЂР°РјРјС‹ РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ
 		/// </summary>
 		public IEnumerable<MaintenanceDirective> MaintenanceDirectives
 		{
@@ -1001,7 +1001,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		#endregion
 
 		/*
-		*  Методы 
+		*  РњРµС‚РѕРґС‹ 
 		*/
 
 		public string ComboBoxMember
@@ -1012,7 +1012,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public WorkPackage()
 		/// <summary>
-		/// Создает воздушное судно без дополнительной информации
+		/// РЎРѕР·РґР°РµС‚ РІРѕР·РґСѓС€РЅРѕРµ СЃСѓРґРЅРѕ Р±РµР· РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё
 		/// </summary>
 		public WorkPackage()
 		{
@@ -1022,7 +1022,7 @@ namespace SmartCore.Entities.General.WorkPackage
 			CanPublish = true;
 			WorkPackageItemsLoaded = false;
 			Title = "";
-			// создаем все коллекции
+			// СЃРѕР·РґР°РµРј РІСЃРµ РєРѕР»Р»РµРєС†РёРё
 		}
 		#endregion
 
@@ -1035,7 +1035,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public override string ToString()
 		/// <summary>
-		/// Перегружаем для отладки
+		/// РџРµСЂРµРіСЂСѓР¶Р°РµРј РґР»СЏ РѕС‚Р»Р°РґРєРё
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()

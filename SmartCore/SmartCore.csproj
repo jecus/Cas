@@ -415,6 +415,7 @@
     <Compile Include="CAA\CAAEducation\CAAEducationRecord.cs" />
     <Compile Include="CAA\CAAEducation\EducationCalculator.cs" />
     <Compile Include="CAA\CAAEducation\EducationPriority.cs" />
+    <Compile Include="CAA\CAAWP\CAAWorkPackage.cs" />
     <Compile Include="CAA\Check\CheckListFilterParams.cs" />
     <Compile Include="CAA\Check\CheckListRecords.cs" />
     <Compile Include="CAA\Check\CheckListRevision.cs" />

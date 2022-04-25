@@ -5,13 +5,14 @@ using CAS.UI.UIControls.DocumentationControls;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
 using MetroFramework.Forms;
+using SmartCore.CAA.CAAWP;
 using SmartCore.Entities.Dictionaries;
 
 namespace CAS.UI.UICAAControls.WorkPackage
 {
 	public partial class CAAWorkPackageEditorForm : MetroForm
 	{
-		private readonly SmartCore.Entities.General.WorkPackage.WorkPackage _currentWp;
+		private readonly CAAWorkPackage _currentWp;
 		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 
 		#region Costructor
@@ -21,7 +22,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			InitializeComponent();
 		}
 
-		public CAAWorkPackageEditorForm(SmartCore.Entities.General.WorkPackage.WorkPackage currentWp) : this()
+		public CAAWorkPackageEditorForm(CAAWorkPackage currentWp) : this()
 		{
 			if(currentWp == null)
 				return;
@@ -37,33 +38,33 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		private void UpdateInformation()
 		{
-			metroTextBox1.Text = $"{_currentWp.ProviderPrice.Count} Count";
-			textBoxWpNumber.Text = _currentWp.Number;
-			textBoxDescription.Text = _currentWp.Description;
-			dateTimePickerIssueCreateDate.Value = _currentWp.CreateDate;
-			dateTimePickerPublishingDate.Value = _currentWp.PublishingDate;
-			textBoxAuthor.Text = _currentWp.Author;
-			textBoxClosedBy.Text = _currentWp.ClosedBy;
-			textBoxPublishingRemark.Text = _currentWp.PublishingRemarks;
-			textBoxDuration.Text = _currentWp.MaintenanceRepairOrzanization;
+			//metroTextBox1.Text = $"{_currentWp.ProviderPrice.Count} Count";
+			textBoxWpNumber.Text = _currentWp.Settings.Number;
+			textBoxDescription.Text = _currentWp.Settings.Description;
+			dateTimePickerIssueCreateDate.Value = _currentWp.Settings.CreateDate;
+			dateTimePickerPublishingDate.Value = _currentWp.Settings.PublishingDate;
+			textBoxAuthor.Text = _currentWp.Settings.Author;
+			textBoxClosedBy.Text = _currentWp.Settings.ClosedBy;
+			textBoxPublishingRemark.Text = _currentWp.Settings.PublishingRemarks;
+			textBoxDuration.Text = _currentWp.Settings.Duration;
 			textBoxTitle.Text = _currentWp.Title;
-			textBoxStatus.Text = _currentWp.Status.ToString();
-			dateTimePickerOpeningDate.Value = _currentWp.OpeningDate;
-			dateTimePickerClosingDate.Value = _currentWp.ClosingDate;
-			textBoxPublishedBy.Text = _currentWp.PublishedBy;
-			textBoxRemarks.Text = _currentWp.Remarks;
-			textBoxClosingRemarks.Text = _currentWp.ClosingRemarks;
-			textBoxLocation.Text = _currentWp.Station;
-			dateTimePickerFlightDate.Value = _currentWp.PerfAfter.PerformDate;
+			textBoxStatus.Text = _currentWp.Settings.Status.ToString();
+			dateTimePickerOpeningDate.Value = _currentWp.Settings.OpeningDate;
+			dateTimePickerClosingDate.Value = _currentWp.Settings.ClosingDate;
+			textBoxPublishedBy.Text = _currentWp.Settings.PublishedBy;
+			textBoxRemarks.Text = _currentWp.Settings.Remarks;
+			textBoxClosingRemarks.Text = _currentWp.Settings.ClosingRemarks;
+			textBoxLocation.Text = _currentWp.Settings.Location;
+			dateTimePickerFlightDate.Value = _currentWp.Settings.PerformDate;
 			
 
 			foreach (var control in DocumentControls)
 				control.Added += DocumentControl1_Added;
 
-			for (int i = 0; i < _currentWp.ClosingDocument.Count; i++)
+			for (int i = 0; i < _currentWp.Settings.ClosingDocument.Count; i++)
 			{
 				var control = DocumentControls[i];
-				control.CurrentDocument = _currentWp.ClosingDocument[i];
+				control.CurrentDocument = _currentWp.Settings.ClosingDocument[i];
 			}
 
 	}
@@ -84,15 +85,14 @@ namespace CAS.UI.UICAAControls.WorkPackage
 				DocType = DocumentType.TechnicalRecords,
 				DocumentSubType = docSubType,
 				IsClosed = true,
-				ContractNumber = $"{_currentWp.Number}",
+				ContractNumber = $"{_currentWp.Settings.Number}",
 				Description = _currentWp.Title,
-				ParentAircraftId = _currentWp.ParentId
 			};
 
 			var form = new DocumentForm(newDocument, false);
 			if (form.ShowDialog() == DialogResult.OK)
 			{
-				_currentWp.ClosingDocument.Add(newDocument);
+				_currentWp.Settings.ClosingDocument.Add(newDocument);
 				control.CurrentDocument = newDocument;
 
 			}
@@ -124,22 +124,23 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		private void ApplyChanges()
 		{
-			_currentWp.Number = textBoxWpNumber.Text;
-			_currentWp.Description = textBoxDescription.Text;
-			_currentWp.PublishingDate = dateTimePickerPublishingDate.Value;
-			_currentWp.PublishingRemarks = textBoxPublishingRemark.Text;
-			_currentWp.MaintenanceRepairOrzanization = textBoxDuration.Text;
 			_currentWp.Title = textBoxTitle.Text;
-			_currentWp.OpeningDate = dateTimePickerOpeningDate.Value;
-			_currentWp.ClosingDate = dateTimePickerClosingDate.Value;
-			_currentWp.Remarks = textBoxRemarks.Text;
-			_currentWp.ClosingRemarks = textBoxClosingRemarks.Text;
-			_currentWp.Station = textBoxLocation.Text;
-			_currentWp.PerfAfter.FlightNumId = _currentWp.PerfAfter.FlightNum?.ItemId ?? -1;
-			_currentWp.PerfAfter.AirportFromId = _currentWp.PerfAfter.AirportFrom?.ItemId ?? -1;
-			_currentWp.PerfAfter.AirportToId = _currentWp.PerfAfter.AirportTo?.ItemId ?? -1;
-
-			_currentWp.PerfAfter.PerformDate = dateTimePickerFlightDate.Value;
+			_currentWp.Settings.Number = textBoxWpNumber.Text;
+			_currentWp.Settings.PublishingRemarks = textBoxPublishingRemark.Text;
+			_currentWp.Settings.Location = textBoxLocation.Text;
+			_currentWp.Settings.Duration = textBoxDuration.Text;
+			_currentWp.Settings.ClosingRemarks = textBoxClosingRemarks.Text;
+			_currentWp.Settings.Remarks = textBoxRemarks.Text;
+			_currentWp.Settings.PerformDate = dateTimePickerFlightDate.Value;
+			
+			
+			
+			if (_currentWp.ItemId <= 0)
+			{
+				_currentWp.Settings.OpeningDate = DateTime.Now;
+				_currentWp.Settings.CreateDate = DateTime.Now;
+				_currentWp.Settings.Author = GlobalObjects.CaaEnvironment.IdentityUser.ToString();
+			}
 		}
 
 		#endregion
@@ -156,9 +157,9 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		private void LinkLabelEditComponents_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			var form = new WpProviderForm(_currentWp);
-			if (form.ShowDialog() == DialogResult.OK)
-				metroTextBox1.Text = $"{_currentWp.ProviderPrice.Count} Count";
+			// var form = new WpProviderForm(_currentWp);
+			// if (form.ShowDialog() == DialogResult.OK)
+			// 	metroTextBox1.Text = $"{_currentWp.ProviderPrice.Count} Count";
 		}
 	}
 }
