@@ -17,6 +17,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
+using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
 using FilterType = Entity.Abstractions.Attributte.FilterType;
 
@@ -396,5 +397,24 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		#endregion
 
-    }
+		private void Radio_ByNameOnCheckedChanged(object sender, EventArgs e)
+		{
+			if (radio_ByName.Checked)
+			{
+				_directivesViewer.radGridView1.GroupDescriptors.Clear();
+				var descriptor = new GroupDescriptor();
+				foreach (var colName in new List<string>{ "First Name", "Last Name" })
+					descriptor.GroupNames.Add(colName,  ListSortDirection.Ascending);
+				_directivesViewer.radGridView1.GroupDescriptors.Add(descriptor);
+			}
+			else
+			{
+				_directivesViewer.radGridView1.GroupDescriptors.Clear();
+				var descriptor = new GroupDescriptor();
+				foreach (var colName in new List<string>{ "Code", "CodeName", "SubTaskCode","FullName","Description","Level" })
+					descriptor.GroupNames.Add(colName,  ListSortDirection.Ascending);
+				_directivesViewer.radGridView1.GroupDescriptors.Add(descriptor);
+			}
+		}
+	}
 }

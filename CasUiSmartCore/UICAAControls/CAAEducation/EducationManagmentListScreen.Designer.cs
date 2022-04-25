@@ -40,9 +40,13 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.radio_ByName = new System.Windows.Forms.RadioButton();
+            this.radio_ByCode = new System.Windows.Forms.RadioButton();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
 			this.SuspendLayout();
             // 
             // panel1
@@ -66,6 +70,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             //
             this.panelTopContainer.Controls.Add(this.labelTitle);
 			this.panelTopContainer.Controls.Add(this.flowLayoutPanel1);
+			this.panelTopContainer.Controls.Add(this.flowLayoutPanel2);
 			this.panelTopContainer.Size = new System.Drawing.Size(1138, 62);
             
             // 
@@ -203,6 +208,51 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			this.flowLayoutPanel1.TabIndex = 3;
 			this.flowLayoutPanel1.WrapContents = false;
 			// 
+			// flowLayoutPanel1
+			// 
+			this.flowLayoutPanel2.AutoSize = true;
+			this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.flowLayoutPanel2.Controls.Add(this.radio_ByName);
+			this.flowLayoutPanel2.Controls.Add(this.radio_ByCode);
+			this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
+			this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+			this.flowLayoutPanel2.Location = new System.Drawing.Point(1291, 0);
+			this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
+			this.flowLayoutPanel2.Name = "flowLayoutPanel1";
+			this.flowLayoutPanel2.Size = new System.Drawing.Size(190, 62);
+			this.flowLayoutPanel2.TabIndex = 3;
+			this.flowLayoutPanel2.WrapContents = false;
+			// 
+            // radio_WhicheverLater
+            // 
+            this.radio_ByName.AutoSize = true;
+            this.radio_ByName.Checked = true;
+            this.radio_ByName.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radio_ByName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.radio_ByName.Location = new System.Drawing.Point(775, 163);
+            this.radio_ByName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.radio_ByName.Name = "radio_ByName";
+            this.radio_ByName.Size = new System.Drawing.Size(149, 22);
+            this.radio_ByName.TabIndex = 68;
+            this.radio_ByName.Text = "Group By Name";
+            this.radio_ByName.UseVisualStyleBackColor = true;
+            this.radio_ByName.CheckedChanged += Radio_ByNameOnCheckedChanged;
+            // 
+            // radio_WhicheverFirst
+            // 
+            this.radio_ByCode.AutoSize = true;
+            this.radio_ByCode.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radio_ByCode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.radio_ByCode.Location = new System.Drawing.Point(448, 163);
+            this.radio_ByCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.radio_ByCode.Name = "radio_ByCode";
+            this.radio_ByCode.Size = new System.Drawing.Size(143, 22);
+            this.radio_ByCode.TabIndex = 67;
+            this.radio_ByCode.TabStop = true;
+            this.radio_ByCode.Text = "Group By Code";
+            this.radio_ByCode.UseVisualStyleBackColor = true;
+            this.radio_ByCode.CheckedChanged += Radio_ByNameOnCheckedChanged;
+			// 
 			// RequestForQuotationListScreen
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -213,6 +263,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
 			this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,5 +279,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.RadioButton radio_ByName;
+        private System.Windows.Forms.RadioButton radio_ByCode;
 	}
 }
