@@ -143,8 +143,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			{
 				_currentWp.Settings.OpeningDate = DateTime.Now;
 				_currentWp.Settings.CreateDate = DateTime.Now;
-				_currentWp.Settings.Author = GlobalObjects.CaaEnvironment.IdentityUser.ToString();
-				_currentWp.Settings.Author = GlobalObjects.CaaEnvironment.IdentityUser.ToString();
+				_currentWp.Settings.Author = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
 			}
 		}
 

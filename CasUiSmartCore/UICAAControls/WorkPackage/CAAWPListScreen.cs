@@ -247,7 +247,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
                 item.Settings.Status = WPStatus.Closed;
                 item.Settings.ClosingDate = DateTime.Now;
-                item.Settings.ClosedBy = GlobalObjects.CaaEnvironment.IdentityUser.ToString();
+                item.Settings.ClosedBy = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(item);
                 AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
                 AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
@@ -276,7 +276,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
                 {
 	                audit.Settings.Status = WPStatus.Published;
                     item.Settings.PublishingDate = DateTime.Now;
-                    item.Settings.PublishedBy = GlobalObjects.CaaEnvironment.IdentityUser.ToString();
+                    item.Settings.PublishedBy = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
 					GlobalObjects.CaaEnvironment.NewKeeper.Save(audit);
                 }
                 else

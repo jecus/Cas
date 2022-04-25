@@ -91,10 +91,10 @@ namespace SmartCore.CAA.CAAWP
         public DateTime PublishingDate { get; set; }
         
         [JsonProperty]
-        public string Author { get; set; }
+        public int Author { get; set; }
         
         [JsonProperty]
-        public string ClosedBy { get; set; }
+        public int ClosedBy { get; set; }
         
         [JsonProperty]
         public string PublishingRemarks { get; set; }
@@ -109,7 +109,7 @@ namespace SmartCore.CAA.CAAWP
         public DateTime ClosingDate { get; set; }
         
         [JsonProperty]
-        public string PublishedBy { get; set; }
+        public int PublishedBy { get; set; }
         
         [JsonProperty]
         public string Remarks { get; set; }
