@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
@@ -19,7 +18,6 @@ using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
-using FilterType = Entity.Abstractions.Attributte.FilterType;
 
 namespace CAS.UI.UICAAControls.CAAEducation
 {

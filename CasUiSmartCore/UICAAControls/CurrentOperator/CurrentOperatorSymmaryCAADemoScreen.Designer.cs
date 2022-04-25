@@ -2141,7 +2141,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
             this.LinkEducationProcessManagement.Size = new System.Drawing.Size(250, 20);
             this.LinkEducationProcessManagement.Status = AvControls.Statuses.Satisfactory;
             this.LinkEducationProcessManagement.TabIndex = 16;
-            this.LinkEducationProcessManagement.Text = "Education Process Management";
+            this.LinkEducationProcessManagement.Text = "Education Summary Pag";
             this.LinkEducationProcessManagement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.LinkEducationProcessManagement.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             this.LinkEducationProcessManagement.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkEducationProcessManagementnRequested);
