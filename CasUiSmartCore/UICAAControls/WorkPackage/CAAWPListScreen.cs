@@ -4,17 +4,14 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
-using CAS.UI.UICAAControls.FindingLevel;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using Entity.Abstractions;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA.CAAWP;
-using SmartCore.CAA.FindingLevel;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
@@ -37,8 +34,11 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		private CAAWPListView _directivesViewer;
 
+		private RadMenuSeparatorItem _toolStripSeparator2;
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemEdit;
+		private RadMenuItem _toolStripMenuItemPublish;
+		private RadMenuItem _toolStripMenuItemClose;
 
 		#endregion
 
@@ -134,6 +134,9 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		{
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuItemEdit = new RadMenuItem();
+			_toolStripMenuItemClose = new RadMenuItem();
+			_toolStripMenuItemPublish = new RadMenuItem();
+			_toolStripSeparator2 = new RadMenuSeparatorItem();
 			// 
             // toolStripMenuItemView
             // 
@@ -144,6 +147,17 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			// 
             _toolStripMenuItemEdit.Text = "Edit";
             _toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
+            
+            // 
+            // toolStripMenuItemView
+            // 
+            _toolStripMenuItemPublish.Text = "Publish";
+            _toolStripMenuItemPublish.Click += ToolStripMenuItemPublishClick;
+            // 
+            // toolStripMenuItemClose
+            // 
+            _toolStripMenuItemClose.Text = "Close";
+            _toolStripMenuItemClose.Click += ToolStripMenuItemCloseClick;
 		}
 		
         #endregion
@@ -193,7 +207,10 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
 			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
-				_toolStripMenuItemEdit);
+				_toolStripMenuItemEdit,
+				_toolStripSeparator2,
+				_toolStripMenuItemPublish,
+				_toolStripMenuItemClose);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
@@ -213,6 +230,72 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		}
 
 		#endregion
+		
+			#region private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
+
+		private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
+		{
+            foreach (var item in _directivesViewer.SelectedItems)
+            {
+                if (item.Settings.Status == WPStatus.Closed)
+                {
+					MessageBox.Show($@"This audit {item.Title} is already closed!", (string)new GlobalTermsProvider()["SystemName"],
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+                        MessageBoxDefaultButton.Button2);
+					continue;
+                }
+
+                item.Settings.Status = WPStatus.Closed;
+                item.Settings.ClosingDate = DateTime.Now;
+                item.Settings.ClosedBy = GlobalObjects.CaaEnvironment.IdentityUser.ToString();
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(item);
+                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+                AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+
+                AnimatedThreadWorker.RunWorkerAsync();
+			}
+
+        }
+
+		#endregion
+
+
+		#region private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
+		/// <summary>
+		/// Публикует рабочий пакет
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
+        {
+            foreach (var item in _directivesViewer.SelectedItems)
+            {
+                var audit = item;
+                if (audit.Settings.Status != WPStatus.Closed)
+                {
+	                audit.Settings.Status = WPStatus.Published;
+                    item.Settings.PublishingDate = DateTime.Now;
+                    item.Settings.PublishedBy = GlobalObjects.CaaEnvironment.IdentityUser.ToString();
+					GlobalObjects.CaaEnvironment.NewKeeper.Save(audit);
+                }
+                else
+                {
+                    MessageBox.Show($@"This audit {item.Title} is already closed!", (string) new GlobalTermsProvider()["SystemName"],
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+                        MessageBoxDefaultButton.Button2);
+                }
+            }
+
+            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+            AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+
+            AnimatedThreadWorker.RunWorkerAsync();
+        }
+
+        #endregion
+		
 
 		#region private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
 
