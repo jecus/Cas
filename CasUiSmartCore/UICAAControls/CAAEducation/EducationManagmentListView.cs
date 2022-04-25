@@ -81,7 +81,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			AddColumn("Code", (int)(radGridView1.Width * 0.20f));
 			AddColumn("CodeName", (int)(radGridView1.Width * 0.24f));
 			AddColumn("SubTaskCode", (int)(radGridView1.Width * 0.3f));
-			AddColumn("FullName", (int)(radGridView1.Width * 0.45f));
+			AddColumn("SubTaskName", (int)(radGridView1.Width * 0.45f));
             AddColumn("Description", (int)(radGridView1.Width * 0.45f));
             AddColumn("Level", (int)(radGridView1.Width * 0.24f));
             AddColumn("Priority", (int)(radGridView1.Width * 0.24f));

@@ -1370,6 +1370,12 @@
     <Compile Include="UICAAControls\Users\CAAUserForm.Designer.cs">
       <DependentUpon>CAAUserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\WorkPackage\CAAWorkPackageEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\WorkPackage\CAAWorkPackageEditorForm.Designer.cs">
+      <DependentUpon>CAAWorkPackageEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\Auxiliary\CAA\CAACommonListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4784,6 +4790,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Users\CAAUserForm.resx">
       <DependentUpon>CAAUserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\WorkPackage\CAAWorkPackageEditorForm.resx">
+      <DependentUpon>CAAWorkPackageEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\Auxiliary\CAA\CAACommonListScreen.resx">
       <DependentUpon>CAACommonListScreen.cs</DependentUpon>
