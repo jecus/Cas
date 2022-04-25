@@ -20,6 +20,7 @@ using CAS.UI.UICAAControls.Specialists;
 using CAS.UI.UICAAControls.StandartManual;
 using CAS.UI.UICAAControls.Suppliers;
 using CAS.UI.UICAAControls.Users;
+using CAS.UI.UICAAControls.WorkPackage;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.CAA;
@@ -361,6 +362,12 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         private void LinkEducationProcessRequested(object sender, ReferenceEventArgs e)
         {
 	        e.Cancel = true;
+        }
+
+        private void LinkEducationLinkEducationManagmentRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.DisplayerText = "Education Process Management";
+	        e.RequestedEntity = new CAAWPListScreen(_getOperator(), _currentOperator.ItemId);
         }
 	}
 }
