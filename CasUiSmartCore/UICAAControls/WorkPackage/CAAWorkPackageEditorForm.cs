@@ -40,19 +40,24 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		private void UpdateInformation()
 		{
 			//metroTextBox1.Text = $"{_currentWp.ProviderPrice.Count} Count";
+			
+			var author = GlobalObjects.CaaEnvironment?.GetCorrector(_currentWp.Settings.Author);
+			var published = GlobalObjects.CaaEnvironment?.GetCorrector(_currentWp.Settings.PublishedBy);
+			var closed = GlobalObjects.CaaEnvironment?.GetCorrector(_currentWp.Settings.ClosedBy);
+			
 			textBoxWpNumber.Text = _currentWp.Settings.Number;
 			textBoxDescription.Text = _currentWp.Settings.Description;
 			dateTimePickerIssueCreateDate.Value = _currentWp.Settings.CreateDate;
 			dateTimePickerPublishingDate.Value = _currentWp.Settings.PublishingDate;
-			textBoxAuthor.Text = _currentWp.Settings.Author;
-			textBoxClosedBy.Text = _currentWp.Settings.ClosedBy;
+			textBoxAuthor.Text =author;
+			textBoxClosedBy.Text = closed;
 			textBoxPublishingRemark.Text = _currentWp.Settings.PublishingRemarks;
 			textBoxDuration.Text = _currentWp.Settings.Duration;
 			textBoxTitle.Text = _currentWp.Title;
 			textBoxStatus.Text = _currentWp.Settings.Status.ToString();
 			dateTimePickerOpeningDate.Value = _currentWp.Settings.OpeningDate;
 			dateTimePickerClosingDate.Value = _currentWp.Settings.ClosingDate;
-			textBoxPublishedBy.Text = _currentWp.Settings.PublishedBy;
+			textBoxPublishedBy.Text = published;
 			textBoxRemarks.Text = _currentWp.Settings.Remarks;
 			textBoxClosingRemarks.Text = _currentWp.Settings.ClosingRemarks;
 			textBoxLocation.Text = _currentWp.Settings.Location;
@@ -133,8 +138,15 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			_currentWp.Settings.ClosingRemarks = textBoxClosingRemarks.Text;
 			_currentWp.Settings.Remarks = textBoxRemarks.Text;
 			_currentWp.Settings.PerformDate = dateTimePickerFlightDate.Value;
+			
+			
 			_currentWp.Settings.DocumentIds.Clear();
-			_currentWp.Settings.DocumentIds.AddRange(_currentWp.Settings.ClosingDocument.Select(i => i.ItemId));
+			foreach (var control in DocumentControls)
+			{
+				if(control.CurrentDocument == null)
+					continue;
+				_currentWp.Settings.DocumentIds.Add(control.CurrentDocument.ItemId);
+			}
 			
 			
 			
