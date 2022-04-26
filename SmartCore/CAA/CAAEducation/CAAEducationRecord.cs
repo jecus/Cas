@@ -39,7 +39,7 @@ namespace SmartCore.CAA.CAAEducation
 	    }
 
 	    public CAAEducationRecordSettings Settings { get; set; }
-
+	    
 	    public CAAEducationRecord()
 	    {
 		    SmartCoreObjectType = SmartCoreType.CAAEducationRecord;
@@ -65,6 +65,9 @@ namespace SmartCore.CAA.CAAEducation
 	    private Lifelength _notify;
 	    private List<LastCompliance> _lastCompliances;
 
+	    [JsonProperty]
+	    public bool IsCombination { get; set; }
+	    
 	    [JsonProperty]
 	    public DateTime StartDate { get; set; }
 	    

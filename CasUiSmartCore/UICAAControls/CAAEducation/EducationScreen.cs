@@ -84,7 +84,12 @@ namespace CAS.UI.UICAAControls.CAAEducation
                     OccupationId = _educationManagment.Occupation.ItemId,
                     SpecialistId = _educationManagment.Specialist.ItemId,
                     OperatorId = _educationManagment.Specialist.OperatorId,
-                    PriorityId = _educationManagment.Education.Priority.ItemId
+                    PriorityId = _educationManagment.Education.Priority.ItemId,
+                    Settings = new CAAEducationRecordSettings()
+                    {
+                        IsCombination =_educationManagment.IsCombination,
+                    }
+                    
                 };
             }
 

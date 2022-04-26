@@ -11,9 +11,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA.CAAEducation;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Personnel;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
 

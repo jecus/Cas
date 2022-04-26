@@ -6,14 +6,17 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
+using CAS.UI.UICAAControls.CAAEducation;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using Entity.Abstractions;
 using Entity.Abstractions.Filters;
+using SmartCore.CAA.CAAEducation;
 using SmartCore.CAA.CAAWP;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
 
@@ -28,11 +31,11 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		#region Fields
 
-		private CommonCollection<CAAWorkPackageRecord> _initialDocumentArray = new CommonCollection<CAAWorkPackageRecord>();
-		private CommonCollection<CAAWorkPackageRecord> _resultDocumentArray = new CommonCollection<CAAWorkPackageRecord>();
+		private CommonCollection<CAAEducationManagment> _initialDocumentArray = new CommonCollection<CAAEducationManagment>();
+		private CommonCollection<CAAEducationManagment> _resultDocumentArray = new CommonCollection<CAAEducationManagment>();
 		private CommonFilterCollection _filter;
 
-		private CAAWPRecordListView _directivesViewer;
+		private EducationManagmentListView _directivesViewer;
 		
 		#endregion
 
@@ -101,8 +104,38 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
 
-			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-				.GetObjectListAll<CAAWorkPackageRecordDTO, CAAWorkPackageRecord>(new Filter("WorkPackageId", _wpId)));
+			var records = GlobalObjects.CaaEnvironment.NewLoader
+				.GetObjectListAll<CAAWorkPackageRecordDTO, CAAWorkPackageRecord>(new Filter("WorkPackageId", _wpId));
+			
+			var ids = records.Select(i => i.ObjectId).Distinct();
+
+			if (ids.Any())
+			{
+				var educationRecords = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<EducationRecordsDTO, CAAEducationRecord>(new Filter("ItemId", ids));
+
+				var edIds = educationRecords.Select(i => i.EducationId);
+				var educations = GlobalObjects.CaaEnvironment.NewLoader
+					.GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("ItemId", edIds),loadChild:true);
+				
+				var spIds = educationRecords.Select(i => i.SpecialistId);
+				var specialists = GlobalObjects.CaaEnvironment.NewLoader
+					.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("ItemId", spIds));
+
+				
+				foreach (var r in educationRecords)
+				{
+					EducationCalculator.CalculateEducation(r);
+					var item = new CAAEducationManagment()
+					{
+						Specialist = specialists.FirstOrDefault(i => i.ItemId == r.SpecialistId),
+						Education = educations.FirstOrDefault(i => i.ItemId == r.EducationId),
+						Record = r,
+					};
+					item.IsCombination = item.Record.Settings.IsCombination;
+					_initialDocumentArray.Add(item);
+				}
+				
+			}
 			
 			AnimatedThreadWorker.ReportProgress(70, "filter directives");
 
@@ -127,7 +160,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		private void InitListView()
 		{
-			_directivesViewer = new CAAWPRecordListView(AnimatedThreadWorker);
+			_directivesViewer = new EducationManagmentListView(AnimatedThreadWorker);
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
@@ -157,9 +190,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		#endregion
 		
-
 		
-
 		#region private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
 
 		private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
@@ -225,7 +256,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		///</summary>
 		///<param name="initialCollection"></param>
 		///<param name="resultCollection"></param>
-		private void FilterItems(IEnumerable<CAAWorkPackageRecord> initialCollection, ICommonCollection<CAAWorkPackageRecord> resultCollection)
+		private void FilterItems(IEnumerable<CAAEducationManagment> initialCollection, ICommonCollection<CAAEducationManagment> resultCollection)
 		{
 			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
