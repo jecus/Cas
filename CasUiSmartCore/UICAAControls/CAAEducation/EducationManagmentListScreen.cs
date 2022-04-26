@@ -6,7 +6,9 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
@@ -38,8 +40,9 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		private EducationManagmentListView _directivesViewer;
 
 		private RadMenuItem _toolStripMenuItemOpen;
-		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuSeparatorItem _toolStripSeparator1;
+		private RadMenuItem _toolStripMenuItemComposeWorkPackage;
+		private RadMenuItem _toolStripMenuItemsWorkPackages;
 
 		#endregion
 
@@ -193,37 +196,46 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		private void InitToolStripMenuItems()
 		{
 			_toolStripMenuItemOpen = new RadMenuItem();
-			_toolStripMenuItemEdit = new RadMenuItem();
+			_toolStripMenuItemComposeWorkPackage = new RadMenuItem();
+			_toolStripMenuItemsWorkPackages = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
             // 
             // toolStripMenuItemView
             // 
             _toolStripMenuItemOpen.Text = "Open";
             _toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
-			// 
-			// toolStripMenuItemView
-			// 
-            _toolStripMenuItemEdit.Text = "Edit";
-            _toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
+            //
+            // toolStripMenuItemComposeWorkPackage
+            //
+            _toolStripMenuItemComposeWorkPackage.Text = "Compose a work package";
+            _toolStripMenuItemComposeWorkPackage.Click += ButtonCreateWorkPakageClick;
+            //
+            // _toolStripMenuItemsWorkPackages
+            //
+            _toolStripMenuItemsWorkPackages.Text = "Add to Work package";
 		}
-
-        private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
-        {
-            
-            
-		}
+		
 
         #endregion
         
-
-		#region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
-
-		private void ToolStripMenuItemEditClick(object sender, EventArgs e)
-		{
-           
+        
+        private void ButtonCreateWorkPakageClick(object sender, EventArgs e)
+        {
+	        throw new NotImplementedException();
         }
 
-		#endregion
+        private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
+        {
+	        if (_directivesViewer.SelectedItem.Occupation != null && _directivesViewer.SelectedItem.Education != null)
+	        {
+		        var refE = new ReferenceEventArgs();
+		        refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
+		        refE.DisplayerText =_directivesViewer.SelectedItem.Education?.Task?.FullName;
+		        refE.RequestedEntity = new EducationScreen(CurrentOperator, _directivesViewer.SelectedItem);
+		        InvokeDisplayerRequested(refE);
+	        }
+        }
+        
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
 		private void ButtonDeleteClick(object sender, EventArgs e)
@@ -249,7 +261,10 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
 			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
-				_toolStripMenuItemEdit);
+				_toolStripSeparator1,
+				_toolStripMenuItemComposeWorkPackage,
+				_toolStripMenuItemsWorkPackages
+				);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
