@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.DTO;
 using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.CAAWP;
 using SmartCore.Entities.Dictionaries;
@@ -70,6 +73,10 @@ namespace CAS.UI.UICAAControls.WorkPackage
 				control.Added += DocumentControl1_Added;
 
 
+
+			if (_currentWp.Settings.DocumentIds.Any())
+				_currentWp.Settings.ClosingDocument.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ItemId",_currentWp.Settings.DocumentIds )));
+			
 			if (_currentWp.Settings.ClosingDocument != null)
 			{
 				for (int i = 0; i < _currentWp.Settings.ClosingDocument.Count; i++)
@@ -146,19 +153,13 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 			_currentWp.Settings.DocumentIds = new List<int>();
 			_currentWp.Settings.DocumentIds.Clear();
-			foreach (var control in DocumentControls)
-			{
-				if(control.CurrentDocument == null)
-					continue;
+			foreach (var control in DocumentControls.Where(control => control.CurrentDocument != null))
 				_currentWp.Settings.DocumentIds.Add(control.CurrentDocument.ItemId);
-			}
-			
-			if (_currentWp.ItemId <= 0)
-			{
-				_currentWp.Settings.OpeningDate = DateTime.Now;
-				_currentWp.Settings.CreateDate = DateTime.Now;
-				_currentWp.Settings.Author = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
-			}
+
+			if (_currentWp.ItemId > 0) return;
+			_currentWp.Settings.OpeningDate = DateTime.Now;
+			_currentWp.Settings.CreateDate = DateTime.Now;
+			_currentWp.Settings.Author = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
 		}
 
 		#endregion
