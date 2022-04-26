@@ -246,8 +246,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        wp.Title = $"{first.Education?.Task.FullName} - {DateTime.Now:G}";
 		        
 		        GlobalObjects.NewKeeper.Save(wp);
-
-		        var wpr = new List<CAAWorkPackageRecord>();
 		        
 		        foreach (var item in items)
 		        {
@@ -269,12 +267,14 @@ namespace CAS.UI.UICAAControls.CAAEducation
 				        GlobalObjects.NewKeeper.Save(item.Record);
 			        }
 			        
-			        wpr.Add(new CAAWorkPackageRecord()
+			        
+			        GlobalObjects.NewKeeper.Save(new CAAWorkPackageRecord()
 			        {
 				        ObjectId = item.Record.ItemId,
 				        WorkPackageId = wp.ItemId,
 				        Parent = item,
 			        });
+			        
 		        }
 		        
 		        var refE = new ReferenceEventArgs();
