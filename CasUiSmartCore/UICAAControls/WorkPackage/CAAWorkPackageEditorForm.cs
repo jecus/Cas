@@ -72,9 +72,10 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			foreach (var control in DocumentControls)
 				control.Added += DocumentControl1_Added;
 
+			if (_currentWp.Settings.ClosingDocument == null)
+				_currentWp.Settings.ClosingDocument = new List<SmartCore.Entities.General.Document>();
 
-
-			if (_currentWp.Settings.DocumentIds.Any())
+			if (_currentWp.Settings.DocumentIds != null && _currentWp.Settings.DocumentIds.Any())
 				_currentWp.Settings.ClosingDocument.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ItemId",_currentWp.Settings.DocumentIds )));
 			
 			if (_currentWp.Settings.ClosingDocument != null)
@@ -94,7 +95,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		private void DocumentControl1_Added(object sender, EventArgs e)
 		{
 			var control = sender as DocumentControl;
-			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Work package") as DocumentSubType;
+			var docSubType = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Work package") as DocumentSubType;
 			var newDocument = new SmartCore.Entities.General.Document
 			{
 				Parent = _currentWp,
@@ -110,6 +111,8 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			var form = new DocumentForm(newDocument, false);
 			if (form.ShowDialog() == DialogResult.OK)
 			{
+				if (_currentWp.Settings.ClosingDocument == null)
+					_currentWp.Settings.ClosingDocument = new List<SmartCore.Entities.General.Document>();
 				_currentWp.Settings.ClosingDocument.Add(newDocument);
 				control.CurrentDocument = newDocument;
 
@@ -150,6 +153,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			_currentWp.Settings.ClosingRemarks = textBoxClosingRemarks.Text;
 			_currentWp.Settings.Remarks = textBoxRemarks.Text;
 			_currentWp.Settings.PerformDate = dateTimePickerFlightDate.Value;
+			_currentWp.Settings.Description = textBoxDescription.Text;
 
 			_currentWp.Settings.DocumentIds = new List<int>();
 			_currentWp.Settings.DocumentIds.Clear();
