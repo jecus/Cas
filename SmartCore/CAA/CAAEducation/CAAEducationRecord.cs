@@ -140,7 +140,7 @@ namespace SmartCore.CAA.CAAEducation
 	    public ConditionState Condition { get; set; }
 
 	    [JsonProperty]
-	    public bool IsWorkPackage { get; set; }
+	    public int? BlockedWpId { get; set; }
     }
 
     [Serializable]

@@ -261,12 +261,11 @@ namespace CAS.UI.UICAAControls.CAAEducation
 					        Settings = new CAAEducationRecordSettings()
 					        {
 						        IsCombination =item.IsCombination,
-						        IsWorkPackage = true
+						        BlockedWpId = wp.ItemId
 					        }
 				        };
 				        GlobalObjects.NewKeeper.Save(item.Record);
 			        }
-			        
 			        
 			        GlobalObjects.NewKeeper.Save(new CAAWorkPackageRecord()
 			        {
@@ -276,6 +275,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			        });
 			        
 		        }
+		        
+		        _directivesViewer.UpdateItemColor();
 		        
 		        var refE = new ReferenceEventArgs();
 		        refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
