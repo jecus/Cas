@@ -130,7 +130,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		{
 			e.DisplayerText = $"WP:{SelectedItem.Title}";
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-			e.RequestedEntity = new CAAWPRecordListScreen(_operator, SelectedItem.ItemId);
+			e.RequestedEntity = new CAAWPRecordListScreen(_operator, SelectedItem);
 		}
 
 

@@ -1370,6 +1370,12 @@
     <Compile Include="UICAAControls\Users\CAAUserForm.Designer.cs">
       <DependentUpon>CAAUserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\WorkPackage\WPRAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\WorkPackage\WPRAddForm.Designer.cs">
+      <DependentUpon>WPRAddForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\WorkPackage\CAAWorkPackageEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4814,6 +4820,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Users\CAAUserForm.resx">
       <DependentUpon>CAAUserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\WorkPackage\WPRAddForm.resx">
+      <DependentUpon>WPRAddForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\WorkPackage\CAAWorkPackageEditorForm.resx">
       <DependentUpon>CAAWorkPackageEditorForm.cs</DependentUpon>

@@ -27,7 +27,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 	[ToolboxItem(false)]
 	public partial class CAAWPRecordListScreen : ScreenControl
 	{
-		private readonly int _wpId;
+		private readonly CAAWorkPackage _wp;
 
 		#region Fields
 
@@ -58,12 +58,12 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public CAAWPRecordListScreen(Operator currentOperator, int wpId)
+		public CAAWPRecordListScreen(Operator currentOperator, CAAWorkPackage wp)
 			: this()
 		{
 			if (currentOperator == null)
 				throw new ArgumentNullException("currentOperator");
-			_wpId = wpId;
+			_wp = wp;
 			aircraftHeaderControl1.Operator = currentOperator;
             statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
@@ -105,7 +105,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-				.GetObjectListAll<CAAWorkPackageRecordDTO, CAAWorkPackageRecord>(new Filter("WorkPackageId", _wpId)));
+				.GetObjectListAll<CAAWorkPackageRecordDTO, CAAWorkPackageRecord>(new Filter("WorkPackageId", _wp.ItemId)));
 			
 			var ids = _initialDocumentArray.Select(i => i.ObjectId).Distinct();
 
@@ -134,6 +134,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 						Education = educations.FirstOrDefault(i => i.ItemId == r.EducationId),
 						Record = r,
 					};
+					item.Occupation = item.Education.Occupation;
 					item.IsCombination = item.Record.Settings.IsCombination;
 
 					wpR.Parent = item;
@@ -229,9 +230,9 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-			// var form = new CAAWorkPackageEditorForm(new CAAWorkPackage(){OperatorId = _operatorId});
-			// if(form.ShowDialog() == DialogResult.OK)
-			// 	AnimatedThreadWorker.RunWorkerAsync();
+			var form = new WPRAddForm(_wp);
+			if(form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
 		}
 
 		#endregion
