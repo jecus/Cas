@@ -196,7 +196,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		private void InitListView()
 		{
-			_directivesViewer = new CAAWPListView(AnimatedThreadWorker);
+			_directivesViewer = new CAAWPListView(AnimatedThreadWorker, aircraftHeaderControl1.Operator);
 			_directivesViewer.OperatorId = _operatorId;
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
@@ -237,7 +237,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		{
             foreach (var item in _directivesViewer.SelectedItems)
             {
-                if (item.Settings.Status == WPStatus.Closed)
+                if (item.Status == WPStatus.Closed)
                 {
 					MessageBox.Show($@"This audit {item.Title} is already closed!", (string)new GlobalTermsProvider()["SystemName"],
                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
@@ -245,7 +245,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 					continue;
                 }
 
-                item.Settings.Status = WPStatus.Closed;
+                item.Status = WPStatus.Closed;
                 item.Settings.ClosingDate = DateTime.Now;
                 item.Settings.ClosedBy = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(item);
@@ -272,9 +272,9 @@ namespace CAS.UI.UICAAControls.WorkPackage
             foreach (var item in _directivesViewer.SelectedItems)
             {
                 var audit = item;
-                if (audit.Settings.Status != WPStatus.Closed)
+                if (audit.Status != WPStatus.Closed)
                 {
-	                audit.Settings.Status = WPStatus.Published;
+	                audit.Status = WPStatus.Published;
                     item.Settings.PublishingDate = DateTime.Now;
                     item.Settings.PublishedBy = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
 					GlobalObjects.CaaEnvironment.NewKeeper.Save(audit);

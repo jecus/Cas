@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
@@ -18,7 +19,8 @@ namespace CAS.UI.UICAAControls.WorkPackage
 	public partial class CAAWPListView : BaseGridViewControl<CAAWorkPackage>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
-        
+        private readonly Operator _operator;
+
         public CAAWPListView()
         {
             InitializeComponent();
@@ -27,9 +29,13 @@ namespace CAS.UI.UICAAControls.WorkPackage
         /// <summary>
         /// </summary>
         /// <param name="animatedThreadWorker"></param>
-        public CAAWPListView(AnimatedThreadWorker animatedThreadWorker) : this()
+        /// <param
+        ///     name="operator">
+        /// </param>
+        public CAAWPListView(AnimatedThreadWorker animatedThreadWorker, Operator @operator) : this()
 		{
             _animatedThreadWorker = animatedThreadWorker;
+            _operator = @operator;
             SortDirection = SortDirection.Asc;
 			OldColumnIndex = 1;
 		}
@@ -89,7 +95,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 	        
 	        var subItems = new List<CustomCell>()
 			{
-				CreateRow(item.StatusName, item.Settings.Status),
+				CreateRow(item.StatusName, item.Status),
 				CreateRow(item.Settings.Number, item.Settings.Number),
 				CreateRow(item.Title, item.Title),
 				CreateRow(corrector, corrector)
@@ -103,6 +109,10 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
+			e.DisplayerText = "";
+			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			e.RequestedEntity = new CAAWPRecordListScreen(_operator, SelectedItem.ItemId);
+			
 			var form = new CAAWorkPackageEditorForm(SelectedItem);
 			if(form.ShowDialog() == DialogResult.OK)
 				_animatedThreadWorker.RunWorkerAsync();
