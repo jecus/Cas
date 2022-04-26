@@ -147,7 +147,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
             this.MaximizeBox = false;
             this.Name = "AuditTeamForm";
             this.Resizable = false;
-            this.Text = "CheckList Revision Form";
+            this.Text = "Workpackage Record Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CheckListRevisionForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
