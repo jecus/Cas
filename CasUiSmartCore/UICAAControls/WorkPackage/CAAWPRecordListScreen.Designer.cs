@@ -59,6 +59,8 @@ namespace CAS.UI.UICAAControls.WorkPackage
             // headerControl
             // 
             this.headerControl.Size = new System.Drawing.Size(985, 58);
+            this.headerControl.EditButtonEnabled = true;
+            this.headerControl.EditButtonClick += HeaderControlOnEditButtonClick;
             this.headerControl.ReloadButtonClick += new System.EventHandler(this.HeaderControlButtonReloadClick);
             //
             // panelTopContainer
@@ -179,7 +181,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			// RequestForQuotationListScreen
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "RequestForQuotationListScreen";
             this.ShowAircraftStatusPanel = false;
             this.Size = new System.Drawing.Size(917, 590);

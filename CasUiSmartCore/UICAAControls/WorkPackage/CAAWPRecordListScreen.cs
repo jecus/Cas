@@ -308,5 +308,11 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		#endregion
 
-    }
+		private void HeaderControlOnEditButtonClick(object sender, EventArgs e)
+		{
+			var form = new CAAWorkPackageEditorForm(_wp);
+			if(form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
+		}
+	}
 }
