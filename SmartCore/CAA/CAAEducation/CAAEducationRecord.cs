@@ -138,6 +138,9 @@ namespace SmartCore.CAA.CAAEducation
 
 	    [JsonIgnore]
 	    public ConditionState Condition { get; set; }
+
+	    [JsonProperty]
+	    public bool IsWorkPackage { get; set; }
     }
 
     [Serializable]

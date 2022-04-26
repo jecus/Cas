@@ -7,12 +7,15 @@ using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
+using CAS.UI.UICAAControls.WorkPackage;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
+using CrystalDecisions.Windows.Forms;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA.CAAEducation;
+using SmartCore.CAA.CAAWP;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -221,7 +224,66 @@ namespace CAS.UI.UICAAControls.CAAEducation
         
         private void ButtonCreateWorkPakageClick(object sender, EventArgs e)
         {
-	        throw new NotImplementedException();
+	        if (_directivesViewer.SelectedItems.Count <= 0) return;
+
+	        var items = _directivesViewer.SelectedItems;
+
+	        var first = items.FirstOrDefault();
+	        if (!items.All(i => i.Education?.Task.ItemId == first.Education?.Task.ItemId))
+	        {
+		        MessageBox.Show("Not all educations has equality Task!", (string)new GlobalTermsProvider()["SystemName"],
+			        MessageBoxButtons.OK, MessageBoxIcon.Error);
+		        return;
+	        }
+
+	        if (MessageBox.Show("Create and save a Work Package?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+	        {
+		        var wp = new CAAWorkPackage();
+		        wp.Settings.OpeningDate = DateTime.Now;
+		        wp.Settings.CreateDate = DateTime.Now;
+		        wp.Settings.Author = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
+		        wp.Settings.Number = $"{GlobalObjects.CaaEnvironment.ObtainId()} - {DateTime.Now:G}";
+		        wp.Title = $"{first.Education?.Task.FullName} - {DateTime.Now:G}";
+		        
+		        GlobalObjects.NewKeeper.Save(wp);
+
+		        var wpr = new List<CAAWorkPackageRecord>();
+		        
+		        foreach (var item in items)
+		        {
+			        if (item.Record == null)
+			        {
+				        item.Record = new CAAEducationRecord()
+				        {
+					        EducationId = item.Education.ItemId,
+					        OccupationId = item.Occupation.ItemId,
+					        SpecialistId = item.Specialist.ItemId,
+					        OperatorId = item.Specialist.OperatorId,
+					        PriorityId = item.Education.Priority.ItemId,
+					        Settings = new CAAEducationRecordSettings()
+					        {
+						        IsCombination =item.IsCombination,
+						        IsWorkPackage = true
+					        }
+				        };
+				        GlobalObjects.NewKeeper.Save(item.Record);
+			        }
+			        
+			        wpr.Add(new CAAWorkPackageRecord()
+			        {
+				        ObjectId = item.Record.ItemId,
+				        WorkPackageId = wp.ItemId,
+				        Parent = item,
+			        });
+		        }
+		        
+		        var refE = new ReferenceEventArgs();
+		        refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
+		        refE.DisplayerText =$"WP:{wp.Title}";
+		        refE.RequestedEntity = new CAAWPRecordListScreen(CurrentOperator, wp);
+		        InvokeDisplayerRequested(refE);
+		        
+	        }
         }
 
         private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
