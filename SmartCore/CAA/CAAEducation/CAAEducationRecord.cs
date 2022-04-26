@@ -43,14 +43,7 @@ namespace SmartCore.CAA.CAAEducation
 	    public CAAEducationRecord()
 	    {
 		    SmartCoreObjectType = SmartCoreType.CAAEducationRecord;
-		    Settings = new CAAEducationRecordSettings()
-		    {
-			    StartDate = DateTime.Today,
-			    Condition = ConditionState.Satisfactory,
-			    Repeat = Lifelength.Null,
-			    Notify = Lifelength.Null,
-			    LastCompliances = new List<LastCompliance>()
-		    };
+		    Settings = new CAAEducationRecordSettings();
 	    }
 	    
     }
@@ -59,6 +52,16 @@ namespace SmartCore.CAA.CAAEducation
     [Serializable]
     public class CAAEducationRecordSettings
     {
+	    public CAAEducationRecordSettings()
+	    {
+		    StartDate = DateTime.Today;
+		    Condition = ConditionState.Satisfactory;
+		    Repeat = Lifelength.Null;
+		    Notify = Lifelength.Null;
+		    LastCompliances = new List<LastCompliance>();
+	    }
+	    
+	    
 	    private byte[] _repeatByte;
 	    private byte[] _notifyByte;
 	    private Lifelength _repeat;

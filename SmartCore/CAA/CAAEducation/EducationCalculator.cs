@@ -12,10 +12,11 @@ namespace SmartCore.CAA.CAAEducation
             if(record == null)
                 return;
             
+            
             if(record.Settings.IsClosed)
                 return;
             
-            if ((bool)record.Settings?.Repeat?.Days.HasValue)
+            if (record.Settings?.Repeat != null &&(bool)record.Settings?.Repeat?.Days.HasValue)
             {
                 if (record.Settings.LastCompliances != null && record.Settings.LastCompliances.Any())
                 {
