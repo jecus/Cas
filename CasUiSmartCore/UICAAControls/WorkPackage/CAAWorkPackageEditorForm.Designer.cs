@@ -314,6 +314,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			this.textBoxWpNumber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
 			this.textBoxWpNumber.CustomButton.UseSelectable = true;
 			this.textBoxWpNumber.CustomButton.Visible = false;
+			this.textBoxWpNumber.Enabled = false;
 			this.textBoxWpNumber.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxWpNumber.Lines = new string[0];
 			this.textBoxWpNumber.Location = new System.Drawing.Point(180, 89);
