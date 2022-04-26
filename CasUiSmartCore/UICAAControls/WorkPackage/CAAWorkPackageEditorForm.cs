@@ -54,7 +54,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			textBoxPublishingRemark.Text = _currentWp.Settings.PublishingRemarks;
 			textBoxDuration.Text = _currentWp.Settings.Duration;
 			textBoxTitle.Text = _currentWp.Title;
-			textBoxStatus.Text = _currentWp.Settings.Status.ToString();
+			textBoxStatus.Text = _currentWp.Status.ToString();
 			dateTimePickerOpeningDate.Value = _currentWp.Settings.OpeningDate;
 			dateTimePickerClosingDate.Value = _currentWp.Settings.ClosingDate;
 			textBoxPublishedBy.Text = published;

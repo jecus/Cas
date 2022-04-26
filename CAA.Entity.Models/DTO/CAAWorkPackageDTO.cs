@@ -17,7 +17,9 @@ namespace CAA.Entity.Models.DTO
 
         [Column("OperatorId")]
         public int OperatorId { get; set; }
-        
+
+        [Column("Status")]
+        public int Status { get; set; }
     }
 
 }

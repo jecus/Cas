@@ -33,11 +33,14 @@ namespace SmartCore.CAA.CAAWP
         public CAAWorkPackagekSettings Settings { get; set; }
         
         
+        
+        public WPStatus Status { get; set; }
+        
         public string StatusName
         {
             get
             {
-                switch (Settings.Status)
+                switch (Status)
                 {
                     case  WPStatus.Open : return $"{RoutineStatus.Open}";
                     case WPStatus.Published:
@@ -53,6 +56,7 @@ namespace SmartCore.CAA.CAAWP
 
         public CAAWorkPackage()
         {
+            Status = WPStatus.Open;
             Settings = new CAAWorkPackagekSettings()
             {
                 CreateDate = DateTime.Now,
@@ -60,7 +64,6 @@ namespace SmartCore.CAA.CAAWP
                 ClosingDate = DateTime.Now,
                 OpeningDate = DateTime.Now,
                 PerformDate = DateTime.Now,
-                Status = WPStatus.Open,
                 ClosingDocument =new List<Document>(),
                 DocumentIds = new List<int>()
             };
@@ -98,9 +101,6 @@ namespace SmartCore.CAA.CAAWP
         
         [JsonProperty]
         public string PublishingRemarks { get; set; }
-        
-        [JsonProperty]
-        public WPStatus Status { get; set; }
         
         [JsonProperty]
         public DateTime OpeningDate { get; set; }

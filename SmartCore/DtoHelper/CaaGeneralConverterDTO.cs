@@ -38,6 +38,7 @@ namespace SmartCore.DtoHelper
 				IsDeleted = task.IsDeleted,
 				Updated = task.Updated,
 				OperatorId = task.OperatorId,
+				Status = (int)task.Status,
 				CorrectorId = task.CorrectorId,
 				SettingsJSON = task.SettingsJSON,
 				Title = task.Title
@@ -51,6 +52,7 @@ namespace SmartCore.DtoHelper
 				ItemId = task.ItemId,
 				IsDeleted = task.IsDeleted,
 				Updated = task.Updated,
+				Status = (WPStatus)task.Status,
 				OperatorId = task.OperatorId,
 				CorrectorId = task.CorrectorId,
 				SettingsJSON = task.SettingsJSON,
