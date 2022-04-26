@@ -60,6 +60,14 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			AddColumn("Status", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Number", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Title", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Perform Date", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Duration", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Remark", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Closing Date", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Location", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Author", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Start By", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Closed By", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -91,6 +99,9 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		protected override List<CustomCell> GetListViewSubItems(CAAWorkPackage item)
         {
 	        var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
+	        var author = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.Author);
+	        var published = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.PublishedBy);
+	        var closed = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.ClosedBy);
 	        var op = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(i => i.ItemId == item.OperatorId) ?? AllOperators.Unknown;
 	        
 	        var subItems = new List<CustomCell>()
@@ -98,6 +109,14 @@ namespace CAS.UI.UICAAControls.WorkPackage
 				CreateRow(item.StatusName, item.Status),
 				CreateRow(item.Settings.Number, item.Settings.Number),
 				CreateRow(item.Title, item.Title),
+				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.PerformDate), item.Settings.PerformDate),
+				CreateRow(item.Settings.Duration,item.Settings.Duration),
+				CreateRow(item.Settings.Remarks,item.Settings.Remarks),
+				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.ClosingDate),item.Settings.ClosingDate),
+				CreateRow(item.Settings.Location, item.Settings.Location),
+				CreateRow(author,author),
+				CreateRow(published,published),
+				CreateRow(closed,closed),
 				CreateRow(corrector, corrector)
 			};
 

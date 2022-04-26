@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.DocumentationControls;
-using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
 using MetroFramework.Forms;
 using SmartCore.CAA.CAAWP;
@@ -40,7 +38,11 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		private void UpdateInformation()
 		{
 			//metroTextBox1.Text = $"{_currentWp.ProviderPrice.Count} Count";
-			
+
+			if (_currentWp.ItemId <= 0)
+				_currentWp.Settings.Number = $"{GlobalObjects.CaaEnvironment.ObtainId()} {DateTime.Now:G}";
+
+
 			var author = GlobalObjects.CaaEnvironment?.GetCorrector(_currentWp.Settings.Author);
 			var published = GlobalObjects.CaaEnvironment?.GetCorrector(_currentWp.Settings.PublishedBy);
 			var closed = GlobalObjects.CaaEnvironment?.GetCorrector(_currentWp.Settings.ClosedBy);
