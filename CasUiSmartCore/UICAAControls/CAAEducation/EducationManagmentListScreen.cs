@@ -299,15 +299,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			AnimatedThreadWorker.RunWorkerAsync();
 		}
 		#endregion
-
-		#region private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
-
-		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
-		{
-			e.Cancel = true;
-		}
-
-		#endregion
+		
 
 		#region private void ButtonApplyFilterClick(object sender, EventArgs e)
 
