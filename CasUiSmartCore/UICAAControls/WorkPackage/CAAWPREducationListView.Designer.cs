@@ -1,6 +1,6 @@
 ﻿namespace CAS.UI.UICAAControls.WorkPackage
 {
-    partial class CAAWPRecordListView
+    partial class CAAWPREducationListView
     {
         /// <summary> 
         /// Требуется переменная конструктора.

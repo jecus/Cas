@@ -35,7 +35,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		private CommonCollection<CAAWorkPackageRecord> _resultDocumentArray = new CommonCollection<CAAWorkPackageRecord>();
 		private CommonFilterCollection _filter;
 
-		private CAAWPRecordListView _directivesViewer;
+		private CAAWPREducationListView _directivesViewer;
 		
 		#endregion
 
@@ -164,7 +164,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		private void InitListView()
 		{
-			_directivesViewer = new CAAWPRecordListView(AnimatedThreadWorker);
+			_directivesViewer = new CAAWPREducationListView(AnimatedThreadWorker);
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;

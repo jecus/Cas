@@ -21,7 +21,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 	///<summary>
 	/// список для отображения сотрудников
 	///</summary>
-	public partial class CAAWPRecordListView : BaseGridViewControl<CAAWorkPackageRecord>
+	public partial class CAAWPREducationListView : BaseGridViewControl<CAAWorkPackageRecord>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
 
@@ -33,7 +33,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		#region public PersonnelListView()
 
-        public CAAWPRecordListView()
+        public CAAWPREducationListView()
         {
             InitializeComponent();
 		}
@@ -41,7 +41,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
         /// <summary>
         /// </summary>
         /// <param name="animatedThreadWorker"></param>
-        public CAAWPRecordListView(AnimatedThreadWorker animatedThreadWorker) : this()
+        public CAAWPREducationListView(AnimatedThreadWorker animatedThreadWorker) : this()
 		{
             _animatedThreadWorker = animatedThreadWorker;
             SortDirection = SortDirection.Asc;
