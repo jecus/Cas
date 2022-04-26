@@ -15,6 +15,9 @@ namespace CAA.Entity.Models.DTO
         [Column("WorkPackageId")]
         public int WorkPackageId { get; set; }
         
+        [Column("ObjectId")]
+        public int ObjectId { get; set; }
+        
     }
 
 }

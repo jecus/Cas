@@ -30,6 +30,35 @@ namespace SmartCore.DtoHelper
     public static  class CaaGeneralConverterDTO
 	{
 		
+		public static CAAWorkPackageRecord ConvertCAA(this CAAWorkPackageRecordDTO task)
+		{
+			return new CAAWorkPackageRecord
+			{
+				ItemId = task.ItemId,
+				IsDeleted = task.IsDeleted,
+				Updated = task.Updated,
+				ObjectId = task.ObjectId,
+				WorkPackageId = task.WorkPackageId,
+				CorrectorId = task.CorrectorId,
+				SettingsJSON = task.SettingsJSON,
+			};
+		}
+
+		public static CAAWorkPackageRecordDTO ConvertCAA(this CAAWorkPackageRecord task)
+		{
+			return new CAAWorkPackageRecordDTO()
+			{
+				ItemId = task.ItemId,
+				IsDeleted = task.IsDeleted,
+				Updated = task.Updated,
+				ObjectId = task.ObjectId,
+				WorkPackageId = task.WorkPackageId,
+				CorrectorId = task.CorrectorId,
+				SettingsJSON = task.SettingsJSON,
+
+			};
+		}
+		
 		public static CAAWorkPackageDTO ConvertCAA(this CAAWorkPackage task)
 		{
 			return new CAAWorkPackageDTO
