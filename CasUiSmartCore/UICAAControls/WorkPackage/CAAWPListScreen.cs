@@ -165,6 +165,9 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
         private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
         {
+	        if(_directivesViewer.SelectedItem == null)
+		        return;
+	        
 	        var form = new CAAWorkPackageEditorForm(_directivesViewer.SelectedItem);
 	        if(form.ShowDialog() == DialogResult.OK)
 		        AnimatedThreadWorker.RunWorkerAsync();

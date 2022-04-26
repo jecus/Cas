@@ -128,15 +128,9 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
-			e.DisplayerText = "";
+			e.DisplayerText = $"WP:{SelectedItem.Title}";
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			e.RequestedEntity = new CAAWPRecordListScreen(_operator, SelectedItem.ItemId);
-			
-			var form = new CAAWorkPackageEditorForm(SelectedItem);
-			if(form.ShowDialog() == DialogResult.OK)
-				_animatedThreadWorker.RunWorkerAsync();
-
-			e.Cancel = true;
 		}
 
 

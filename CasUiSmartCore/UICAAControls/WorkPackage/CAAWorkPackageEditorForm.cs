@@ -69,13 +69,16 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			foreach (var control in DocumentControls)
 				control.Added += DocumentControl1_Added;
 
-			for (int i = 0; i < _currentWp.Settings.ClosingDocument.Count; i++)
-			{
-				var control = DocumentControls[i];
-				control.CurrentDocument = _currentWp.Settings.ClosingDocument[i];
-			}
 
-	}
+			if (_currentWp.Settings.ClosingDocument != null)
+			{
+				for (int i = 0; i < _currentWp.Settings.ClosingDocument.Count; i++)
+				{
+					var control = DocumentControls[i];
+					control.CurrentDocument = _currentWp.Settings.ClosingDocument[i];
+				}
+			}
+		}
 
 		#endregion
 
@@ -140,8 +143,8 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			_currentWp.Settings.ClosingRemarks = textBoxClosingRemarks.Text;
 			_currentWp.Settings.Remarks = textBoxRemarks.Text;
 			_currentWp.Settings.PerformDate = dateTimePickerFlightDate.Value;
-			
-			
+
+			_currentWp.Settings.DocumentIds = new List<int>();
 			_currentWp.Settings.DocumentIds.Clear();
 			foreach (var control in DocumentControls)
 			{
@@ -149,9 +152,6 @@ namespace CAS.UI.UICAAControls.WorkPackage
 					continue;
 				_currentWp.Settings.DocumentIds.Add(control.CurrentDocument.ItemId);
 			}
-			
-			
-			
 			
 			if (_currentWp.ItemId <= 0)
 			{
