@@ -1394,6 +1394,12 @@
     <Compile Include="UICAAControls\WorkPackage\CAAWPRecordListScreen.Designer.cs">
       <DependentUpon>CAAWPRecordListScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\WorkPackage\CAAWPRecordListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\WorkPackage\CAAWPRecordListView.Designer.cs">
+      <DependentUpon>CAAWPRecordListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\Auxiliary\CAA\CAACommonListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -31,11 +31,11 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		#region Fields
 
-		private CommonCollection<CAAEducationManagment> _initialDocumentArray = new CommonCollection<CAAEducationManagment>();
-		private CommonCollection<CAAEducationManagment> _resultDocumentArray = new CommonCollection<CAAEducationManagment>();
+		private CommonCollection<CAAWorkPackageRecord> _initialDocumentArray = new CommonCollection<CAAWorkPackageRecord>();
+		private CommonCollection<CAAWorkPackageRecord> _resultDocumentArray = new CommonCollection<CAAWorkPackageRecord>();
 		private CommonFilterCollection _filter;
 
-		private EducationManagmentListView _directivesViewer;
+		private CAAWPRecordListView _directivesViewer;
 		
 		#endregion
 
@@ -68,7 +68,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
             statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 
-			_filter = new CommonFilterCollection(typeof(CAAWorkPackage));
+			_filter = new CommonFilterCollection(typeof(CAAWorkPackageRecord));
 			
 			InitListView();
 			UpdateInformation();
@@ -104,10 +104,10 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
 
-			var records = GlobalObjects.CaaEnvironment.NewLoader
-				.GetObjectListAll<CAAWorkPackageRecordDTO, CAAWorkPackageRecord>(new Filter("WorkPackageId", _wpId));
+			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+				.GetObjectListAll<CAAWorkPackageRecordDTO, CAAWorkPackageRecord>(new Filter("WorkPackageId", _wpId)));
 			
-			var ids = records.Select(i => i.ObjectId).Distinct();
+			var ids = _initialDocumentArray.Select(i => i.ObjectId).Distinct();
 
 			if (ids.Any())
 			{
@@ -122,8 +122,11 @@ namespace CAS.UI.UICAAControls.WorkPackage
 					.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("ItemId", spIds));
 
 				
-				foreach (var r in educationRecords)
+				foreach (var wpR in _initialDocumentArray)
 				{
+					var r = educationRecords.FirstOrDefault(i => i.ItemId == wpR.ObjectId);
+					if(r == null)
+						continue;
 					EducationCalculator.CalculateEducation(r);
 					var item = new CAAEducationManagment()
 					{
@@ -132,7 +135,8 @@ namespace CAS.UI.UICAAControls.WorkPackage
 						Record = r,
 					};
 					item.IsCombination = item.Record.Settings.IsCombination;
-					_initialDocumentArray.Add(item);
+
+					wpR.Parent = item;
 				}
 				
 			}
@@ -160,7 +164,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		private void InitListView()
 		{
-			_directivesViewer = new EducationManagmentListView(AnimatedThreadWorker);
+			_directivesViewer = new CAAWPRecordListView(AnimatedThreadWorker);
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
@@ -256,7 +260,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		///</summary>
 		///<param name="initialCollection"></param>
 		///<param name="resultCollection"></param>
-		private void FilterItems(IEnumerable<CAAEducationManagment> initialCollection, ICommonCollection<CAAEducationManagment> resultCollection)
+		private void FilterItems(IEnumerable<CAAWorkPackageRecord> initialCollection, ICommonCollection<CAAWorkPackageRecord> resultCollection)
 		{
 			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
