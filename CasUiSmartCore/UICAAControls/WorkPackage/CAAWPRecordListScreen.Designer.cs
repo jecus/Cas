@@ -35,7 +35,6 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			this.labelDateAsOf = new System.Windows.Forms.Label();
             this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
             this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
-            this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -106,30 +105,6 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			this.buttonApplyFilter.TextSecondary = "";
 			this.buttonApplyFilter.ToolTipText = "Apply filter";
 			this.buttonApplyFilter.Click += ButtonApplyFilterClick;
-            // 
-			// buttonAddNew
-			// 
-			this.buttonAddNew.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-			this.buttonAddNew.ActiveBackgroundImage = null;
-			this.buttonAddNew.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonAddNew.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonAddNew.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonAddNew.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonAddNew.ForeColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonAddNew.Icon = global::CAS.UI.Properties.Resources.AddIcon;
-			this.buttonAddNew.IconLayout = System.Windows.Forms.ImageLayout.Center;
-			this.buttonAddNew.IconNotEnabled = global::CAS.UI.Properties.Resources.AddIcon_gray;
-			this.buttonAddNew.Location = new System.Drawing.Point(66, 0);
-			this.buttonAddNew.Name = "buttonAddDocument";
-			this.buttonAddNew.NormalBackgroundImage = null;
-			this.buttonAddNew.ShowToolTip = true;
-			this.buttonAddNew.Size = new System.Drawing.Size(52, 57);
-			this.buttonAddNew.TabIndex = 0;
-			this.buttonAddNew.TextMain = "";
-			this.buttonAddNew.TextSecondary = "";
-			this.buttonAddNew.ToolTipText = "Add new";
-			this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
-			this.buttonAddNew.Enabled = !(userType == UserType.ReadOnly);
 			// 
 			// buttonDeleteSelected
 			// 
@@ -190,8 +165,6 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			this.flowLayoutPanel1.AutoSize = true;
 			this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.flowLayoutPanel1.Controls.Add(this.buttonDeleteSelected);
-			this.flowLayoutPanel1.Controls.Add(this.pictureBox1);
-			this.flowLayoutPanel1.Controls.Add(this.buttonAddNew);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox2);
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -221,7 +194,6 @@ namespace CAS.UI.UICAAControls.WorkPackage
         #endregion
 
         private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
-        private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddNew;
         private AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
         private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
         private System.Windows.Forms.Label labelDateAsOf;

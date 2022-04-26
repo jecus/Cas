@@ -72,12 +72,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			
 			InitListView();
 			UpdateInformation();
-
-			if (GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAA ||
-			    GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.Operator)
-			{
-				pictureBox1.Visible = buttonAddNew.Visible  = buttonDeleteSelected.Visible = false;
-			}
+			
 		}
 
 		#endregion
@@ -226,17 +221,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		}
 		#endregion
 
-		#region private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
-
-		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
-		{
-			var form = new WPRAddForm(_wp);
-			if(form.ShowDialog() == DialogResult.OK)
-				AnimatedThreadWorker.RunWorkerAsync();
-		}
-
-		#endregion
-
+		
 		#region private void ButtonApplyFilterClick(object sender, EventArgs e)
 
 		private void ButtonApplyFilterClick(object sender, EventArgs e)

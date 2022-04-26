@@ -102,7 +102,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 	        var author = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.Author);
 	        var published = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.PublishedBy);
 	        var closed = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.ClosedBy);
-	        var op = GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(i => i.ItemId == item.OperatorId) ?? AllOperators.Unknown;
+	        var closingDate = item.Settings.ClosingDate.HasValue ? SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.ClosingDate) : String.Empty ;
 	        
 	        var subItems = new List<CustomCell>()
 			{
@@ -112,7 +112,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.PerformDate), item.Settings.PerformDate),
 				CreateRow(item.Settings.Duration,item.Settings.Duration),
 				CreateRow(item.Settings.Remarks,item.Settings.Remarks),
-				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.ClosingDate),item.Settings.ClosingDate),
+				CreateRow(closingDate,item.Settings.ClosingDate),
 				CreateRow(item.Settings.Location, item.Settings.Location),
 				CreateRow(author,author),
 				CreateRow(published,published),

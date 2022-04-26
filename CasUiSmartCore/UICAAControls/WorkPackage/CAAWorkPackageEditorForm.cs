@@ -53,7 +53,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			textBoxWpNumber.Text = _currentWp.Settings.Number;
 			textBoxDescription.Text = _currentWp.Settings.Description;
 			dateTimePickerIssueCreateDate.Value = _currentWp.Settings.CreateDate;
-			dateTimePickerPublishingDate.Value = _currentWp.Settings.PublishingDate;
+			dateTimePickerPublishingDate.Value = _currentWp.Settings.PublishingDate ?? SmartCore.Auxiliary.DateTimeExtend.GetCASMinDateTime();
 			textBoxAuthor.Text =author;
 			textBoxClosedBy.Text = closed;
 			textBoxPublishingRemark.Text = _currentWp.Settings.PublishingRemarks;
@@ -61,7 +61,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			textBoxTitle.Text = _currentWp.Title;
 			textBoxStatus.Text = _currentWp.Status.ToString();
 			dateTimePickerOpeningDate.Value = _currentWp.Settings.OpeningDate;
-			dateTimePickerClosingDate.Value = _currentWp.Settings.ClosingDate;
+			dateTimePickerClosingDate.Value = _currentWp.Settings.ClosingDate ?? SmartCore.Auxiliary.DateTimeExtend.GetCASMinDateTime();
 			textBoxPublishedBy.Text = published;
 			textBoxRemarks.Text = _currentWp.Settings.Remarks;
 			textBoxClosingRemarks.Text = _currentWp.Settings.ClosingRemarks;
