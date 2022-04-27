@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UICAAControls.WorkPackage;
+using CAS.UI.UICAAControls.CAAEducation.CoursePackage;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.FiltersControls;

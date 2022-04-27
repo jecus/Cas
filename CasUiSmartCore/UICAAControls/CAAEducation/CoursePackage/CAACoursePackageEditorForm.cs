@@ -10,7 +10,7 @@ using MetroFramework.Forms;
 using SmartCore.CAA.CAAWP;
 using SmartCore.Entities.Dictionaries;
 
-namespace CAS.UI.UICAAControls.WorkPackage
+namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 {
 	public partial class CAAWorkPackageEditorForm : MetroForm
 	{

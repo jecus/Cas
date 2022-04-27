@@ -7,7 +7,6 @@ using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UICAAControls.CAAEducation;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
@@ -16,12 +15,12 @@ using SmartCore.Entities.General;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
 
-namespace CAS.UI.UICAAControls.WorkPackage
+namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 {
 	///<summary>
 	/// список для отображения сотрудников
 	///</summary>
-	public partial class CAAWPREducationListView : BaseGridViewControl<CAAWorkPackageRecord>
+	public partial class CAACourseRecordEducationListView : BaseGridViewControl<CAAWorkPackageRecord>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
 
@@ -33,7 +32,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		#region public PersonnelListView()
 
-        public CAAWPREducationListView()
+        public CAACourseRecordEducationListView()
         {
             InitializeComponent();
 		}
@@ -41,7 +40,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
         /// <summary>
         /// </summary>
         /// <param name="animatedThreadWorker"></param>
-        public CAAWPREducationListView(AnimatedThreadWorker animatedThreadWorker) : this()
+        public CAACourseRecordEducationListView(AnimatedThreadWorker animatedThreadWorker) : this()
 		{
             _animatedThreadWorker = animatedThreadWorker;
             SortDirection = SortDirection.Asc;

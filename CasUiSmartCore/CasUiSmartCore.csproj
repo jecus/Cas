@@ -913,6 +913,26 @@
     <Compile Include="UICAAControls\Audit\PEL\PelPersonnelLiteListView.Designer.cs">
       <DependentUpon>PelPersonnelLiteListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACoursePackageEditorForm.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACoursePackageEditorForm.Designer.cs">
+      <DependentUpon>CAACoursePackageEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACourseListScreen.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACourseListScreen.Designer.cs">
+      <DependentUpon>CAACourseListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACoursePackageListView.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACoursePackageListView.Designer.cs">
+      <DependentUpon>CAACoursePackageListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACourseRecordListScreen.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACourseRecordListScreen.Designer.cs">
+      <DependentUpon>CAACourseRecordListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACourseRecordEducationListView.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACourseRecordEducationListView.Designer.cs">
+      <DependentUpon>CAACourseRecordEducationListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CAAEducation\EducationPerformanceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1369,36 +1389,6 @@
     </Compile>
     <Compile Include="UICAAControls\Users\CAAUserForm.Designer.cs">
       <DependentUpon>CAAUserForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UICAAControls\WorkPackage\CAAWorkPackageEditorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UICAAControls\WorkPackage\CAAWorkPackageEditorForm.Designer.cs">
-      <DependentUpon>CAAWorkPackageEditorForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UICAAControls\WorkPackage\CAAWPListView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UICAAControls\WorkPackage\CAAWPListView.Designer.cs">
-      <DependentUpon>CAAWPListView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UICAAControls\WorkPackage\CAAWPListScreen.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UICAAControls\WorkPackage\CAAWPListScreen.Designer.cs">
-      <DependentUpon>CAAWPListScreen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UICAAControls\WorkPackage\CAAWPRecordListScreen.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UICAAControls\WorkPackage\CAAWPRecordListScreen.Designer.cs">
-      <DependentUpon>CAAWPRecordListScreen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UICAAControls\WorkPackage\CAAWPREducationListView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UICAAControls\WorkPackage\CAAWPREducationListView.Designer.cs">
-      <DependentUpon>CAAWPREducationListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\Auxiliary\CAA\CAACommonListScreen.cs">
       <SubType>UserControl</SubType>
@@ -4616,6 +4606,15 @@
     <EmbeddedResource Include="UICAAControls\Audit\PEL\PelItemForm.resx">
       <DependentUpon>PelItemForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CAAEducation\CoursePackage\CAACoursePackageEditorForm.resx">
+      <DependentUpon>CAACoursePackageEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CAAEducation\CoursePackage\CAACourseListScreen.resx">
+      <DependentUpon>CAACourseListScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CAAEducation\CoursePackage\CAACourseRecordListScreen.resx">
+      <DependentUpon>CAACourseRecordListScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CAAEducation\EducationPerformanceControl.resx">
       <DependentUpon>EducationPerformanceControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -4814,17 +4813,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\Users\CAAUserForm.resx">
       <DependentUpon>CAAUserForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UICAAControls\WorkPackage\CAAWorkPackageEditorForm.resx">
-      <DependentUpon>CAAWorkPackageEditorForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UICAAControls\WorkPackage\CAAWPListScreen.resx">
-      <DependentUpon>CAAWPListScreen.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UICAAControls\WorkPackage\CAAWPRecordListScreen.resx">
-      <DependentUpon>CAAWPRecordListScreen.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\Auxiliary\CAA\CAACommonListScreen.resx">
       <DependentUpon>CAACommonListScreen.cs</DependentUpon>

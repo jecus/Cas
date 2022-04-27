@@ -17,12 +17,12 @@ using SmartCore.Entities.General;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
 
-namespace CAS.UI.UICAAControls.WorkPackage
+namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 {
 	///<summary>
 	///</summary>
 	[ToolboxItem(false)]
-	public partial class CAAWPListScreen : ScreenControl
+	public partial class CAACourseListScreen : ScreenControl
 	{
         private readonly int _operatorId;
 
@@ -32,7 +32,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		private CommonCollection<CAAWorkPackage> _resultDocumentArray = new CommonCollection<CAAWorkPackage>();
 		private CommonFilterCollection _filter;
 
-		private CAAWPListView _directivesViewer;
+		private CAACoursePackageListView _directivesViewer;
 
 		private RadMenuSeparatorItem _toolStripSeparator2;
 		private RadMenuItem _toolStripMenuItemOpen;
@@ -49,7 +49,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		///<summary>
 		/// Конструктор по умолчанию
 		///</summary>
-		public CAAWPListScreen()
+		public CAACourseListScreen()
 		{
 			InitializeComponent();
 		}
@@ -61,7 +61,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public CAAWPListScreen(Operator currentOperator, int operatorId)
+		public CAACourseListScreen(Operator currentOperator, int operatorId)
 			: this()
 		{
 			if (currentOperator == null)
@@ -199,7 +199,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		private void InitListView()
 		{
-			_directivesViewer = new CAAWPListView(AnimatedThreadWorker, aircraftHeaderControl1.Operator);
+			_directivesViewer = new CAACoursePackageListView(AnimatedThreadWorker, aircraftHeaderControl1.Operator);
 			_directivesViewer.OperatorId = _operatorId;
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);

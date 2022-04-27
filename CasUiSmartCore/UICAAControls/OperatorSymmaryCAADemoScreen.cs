@@ -9,6 +9,7 @@ using CAS.UI.UICAAControls.Activity;
 using CAS.UI.UICAAControls.Airacraft;
 using CAS.UI.UICAAControls.Audit;
 using CAS.UI.UICAAControls.CAAEducation;
+using CAS.UI.UICAAControls.CAAEducation.CoursePackage;
 using CAS.UI.UICAAControls.CAATask;
 using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UICAAControls.CheckList.CheckListAudit;
@@ -21,7 +22,6 @@ using CAS.UI.UICAAControls.Specialists;
 using CAS.UI.UICAAControls.StandartManual;
 using CAS.UI.UICAAControls.Suppliers;
 using CAS.UI.UICAAControls.Users;
-using CAS.UI.UICAAControls.WorkPackage;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.CAA;
@@ -362,7 +362,7 @@ namespace CAS.UI.UICAAControls
         private void LinkEducationLinkEducationManagmentRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Education Process Management";
-	        e.RequestedEntity = new CAAWPListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+	        e.RequestedEntity = new CAACourseListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
         }
 	}
 }

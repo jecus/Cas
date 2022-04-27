@@ -1,7 +1,7 @@
 ﻿using CASTerms;
 using Entity.Abstractions;
 
-namespace CAS.UI.UICAAControls.WorkPackage
+namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 {
     partial class CAAWPRecordListScreen
 	{

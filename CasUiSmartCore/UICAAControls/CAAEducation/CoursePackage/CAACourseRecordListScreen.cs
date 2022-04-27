@@ -5,12 +5,9 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
-using CAS.UI.Interfaces;
-using CAS.UI.UICAAControls.CAAEducation;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
-using Entity.Abstractions;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA.CAAEducation;
 using SmartCore.CAA.CAAWP;
@@ -18,9 +15,8 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
-using Telerik.WinControls.UI;
 
-namespace CAS.UI.UICAAControls.WorkPackage
+namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 {
 	///<summary>
 	///</summary>
@@ -35,7 +31,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 		private CommonCollection<CAAWorkPackageRecord> _resultDocumentArray = new CommonCollection<CAAWorkPackageRecord>();
 		private CommonFilterCollection _filter;
 
-		private CAAWPREducationListView _directivesViewer;
+		private CAACourseRecordEducationListView _directivesViewer;
 		
 		#endregion
 
@@ -160,7 +156,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
 
 		private void InitListView()
 		{
-			_directivesViewer = new CAAWPREducationListView(AnimatedThreadWorker);
+			_directivesViewer = new CAACourseRecordEducationListView(AnimatedThreadWorker);
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;

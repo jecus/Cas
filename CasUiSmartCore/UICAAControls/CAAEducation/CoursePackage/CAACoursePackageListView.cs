@@ -7,21 +7,20 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
-using SmartCore.CAA;
 using SmartCore.CAA.CAAWP;
 using SmartCore.Entities.General;
 
-namespace CAS.UI.UICAAControls.WorkPackage
+namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 {
 	///<summary>
 	/// список для отображения сотрудников
 	///</summary>
-	public partial class CAAWPListView : BaseGridViewControl<CAAWorkPackage>
+	public partial class CAACoursePackageListView : BaseGridViewControl<CAAWorkPackage>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
         private readonly Operator _operator;
 
-        public CAAWPListView()
+        public CAACoursePackageListView()
         {
             InitializeComponent();
 		}
@@ -32,7 +31,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
         /// <param
         ///     name="operator">
         /// </param>
-        public CAAWPListView(AnimatedThreadWorker animatedThreadWorker, Operator @operator) : this()
+        public CAACoursePackageListView(AnimatedThreadWorker animatedThreadWorker, Operator @operator) : this()
 		{
             _animatedThreadWorker = animatedThreadWorker;
             _operator = @operator;
