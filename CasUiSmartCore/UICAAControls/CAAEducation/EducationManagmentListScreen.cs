@@ -35,7 +35,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		private readonly int _operatorId;
 
         #region Fields
-
+        private CommonCollection<CAAWorkPackage> _openPubWorkPackages = new CommonCollection<CAAWorkPackage>();
 		private CommonCollection<CAAEducationManagment> _initialDocumentArray = new CommonCollection<CAAEducationManagment>();
 		private CommonCollection<CAAEducationManagment> _resultDocumentArray = new CommonCollection<CAAEducationManagment>();
 		private CommonFilterCollection _filter;
@@ -98,6 +98,23 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			_directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
+			
+			
+			if (_toolStripMenuItemsWorkPackages != null)
+			{
+				foreach (var item in _toolStripMenuItemsWorkPackages.Items)
+					item.Click -= AddToWorkPackageItemClick;
+				_toolStripMenuItemsWorkPackages.Items.Clear();
+
+				foreach (var workPackage in _openPubWorkPackages)
+				{
+					var item = new RadMenuItem($"{workPackage.Title}");
+					item.Click += AddToWorkPackageItemClick;
+					item.Tag = workPackage;
+					_toolStripMenuItemsWorkPackages.Items.Add(item);
+				}
+			}
+			
 		}
 		#endregion
 
@@ -147,8 +164,32 @@ namespace CAS.UI.UICAAControls.CAAEducation
             
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
 
-			AnimatedThreadWorker.ReportProgress(70, "filter directives");
-
+			
+			if(_openPubWorkPackages == null)
+				_openPubWorkPackages = new CommonCollection<CAAWorkPackage>();
+			
+			_openPubWorkPackages.Clear();
+			
+			if (_operatorId == -1)
+			{
+				_openPubWorkPackages.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+					.GetObjectListAll<CAAWorkPackageDTO, CAAWorkPackage>(new List<Filter>()
+					{
+						new Filter("Status", 0)
+					}));
+			}
+			else
+			{
+				_openPubWorkPackages.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+					.GetObjectListAll<CAAWorkPackageDTO, CAAWorkPackage>(
+						new List<Filter>()
+						{
+							new Filter("Status", 0),
+							new Filter("OperatorId", _operatorId)
+						}
+					));
+			}
+			
 			FilterItems(_initialDocumentArray, _resultDocumentArray);
 
 			AnimatedThreadWorker.ReportProgress(100, "Complete");
@@ -220,7 +261,75 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		
 
         #endregion
-        
+
+
+        private void AddToWorkPackageItemClick(object sender, EventArgs e)
+        {
+	        if (_directivesViewer.SelectedItems.Count <= 0) return;
+	        
+	        var wp = (CAAWorkPackage)((RadMenuItem)sender).Tag;
+	        var items = _directivesViewer.SelectedItems;
+	        if (!items.All(i => i.Education?.Task.ItemId == wp.Settings.TaskId))
+	        {
+		        MessageBox.Show("Not all educations has equality Task!", (string)new GlobalTermsProvider()["SystemName"],
+			        MessageBoxButtons.OK, MessageBoxIcon.Error);
+		        return;
+	        }
+	        
+	        foreach (var item in items)
+	        {
+		        if (item.Record == null)
+		        {
+			        item.Record = new CAAEducationRecord()
+			        {
+				        EducationId = item.Education.ItemId,
+				        OccupationId = item.Occupation.ItemId,
+				        SpecialistId = item.Specialist.ItemId,
+				        OperatorId = item.Specialist.OperatorId,
+				        PriorityId = item.Education.Priority.ItemId,
+				        Settings = new CAAEducationRecordSettings()
+				        {
+					        IsCombination = item.IsCombination,
+					        BlockedWpId = wp.ItemId
+				        }
+			        };
+			        GlobalObjects.NewKeeper.Save(item.Record);
+		        }
+		        else item.Record.Settings.BlockedWpId = wp.ItemId;
+			        
+		        GlobalObjects.NewKeeper.Save(new CAAWorkPackageRecord()
+		        {
+			        ObjectId = item.Record.ItemId,
+			        WorkPackageId = wp.ItemId,
+			        Parent = item,
+		        });
+			        
+	        }
+		        
+	        _directivesViewer.UpdateItemColor();
+		        
+		        
+	        //Добавление нового рабочего пакета в коллекцию открытых рабочих пакетов
+	        _openPubWorkPackages.Add(wp);
+	        //Создание пункта в меню открытых рабочих пакетов
+	        var raditem = new RadMenuItem(wp.Title);
+	        raditem.Click += AddToWorkPackageItemClick;
+	        raditem.Tag = wp;
+	        _toolStripMenuItemsWorkPackages.Items.Add(raditem);
+
+
+	        if (MessageBox.Show("Items added successfully. Open work package?", (string)new GlobalTermsProvider()["SystemName"],
+		            MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
+	            == DialogResult.Yes)
+	        {
+		        var refE = new ReferenceEventArgs();
+		        refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
+		        refE.DisplayerText =$"WP:{wp.Title}";
+		        refE.RequestedEntity = new CAAWPRecordListScreen(CurrentOperator, wp);
+		        InvokeDisplayerRequested(refE);
+	        }
+	       
+        }
         
         private void ButtonCreateWorkPakageClick(object sender, EventArgs e)
         {
@@ -280,12 +389,26 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        
 		        _directivesViewer.UpdateItemColor();
 		        
-		        var refE = new ReferenceEventArgs();
-		        refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
-		        refE.DisplayerText =$"WP:{wp.Title}";
-		        refE.RequestedEntity = new CAAWPRecordListScreen(CurrentOperator, wp);
-		        InvokeDisplayerRequested(refE);
 		        
+		        //Добавление нового рабочего пакета в коллекцию открытых рабочих пакетов
+		        _openPubWorkPackages.Add(wp);
+		        //Создание пункта в меню открытых рабочих пакетов
+		        var raditem = new RadMenuItem(wp.Title);
+		        raditem.Click += AddToWorkPackageItemClick;
+		        raditem.Tag = wp;
+		        _toolStripMenuItemsWorkPackages.Items.Add(raditem);
+
+
+		        if (MessageBox.Show("Items added successfully. Open work package?", (string)new GlobalTermsProvider()["SystemName"],
+			            MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
+		            == DialogResult.Yes)
+		        {
+			        var refE = new ReferenceEventArgs();
+			        refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			        refE.DisplayerText =$"WP:{wp.Title}";
+			        refE.RequestedEntity = new CAAWPRecordListScreen(CurrentOperator, wp);
+			        InvokeDisplayerRequested(refE);
+		        }
 	        }
         }
 
