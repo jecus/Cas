@@ -132,6 +132,9 @@ namespace SmartCore.CAA.CAAWP
         
         [JsonProperty]
         public List<int> DocumentIds { get; set; }
+
+        [JsonProperty]
+        public int? TaskId { get; set; }
     }
 
     

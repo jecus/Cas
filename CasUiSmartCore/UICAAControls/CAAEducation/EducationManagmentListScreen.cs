@@ -243,6 +243,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        wp.Settings.CreateDate = DateTime.Now;
 		        wp.Settings.Author = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
 		        wp.Settings.Number = $"{GlobalObjects.CaaEnvironment.ObtainId()} - {DateTime.Now:G}";
+		        wp.Settings.TaskId = first.Education?.Task.ItemId;
 		        wp.Title = $"{first.Education?.Task.FullName} - {DateTime.Now:d}";
 		        
 		        GlobalObjects.NewKeeper.Save(wp);
@@ -260,12 +261,13 @@ namespace CAS.UI.UICAAControls.CAAEducation
 					        PriorityId = item.Education.Priority.ItemId,
 					        Settings = new CAAEducationRecordSettings()
 					        {
-						        IsCombination =item.IsCombination,
+						        IsCombination = item.IsCombination,
 						        BlockedWpId = wp.ItemId
 					        }
 				        };
 				        GlobalObjects.NewKeeper.Save(item.Record);
 			        }
+			        else item.Record.Settings.BlockedWpId = wp.ItemId;
 			        
 			        GlobalObjects.NewKeeper.Save(new CAAWorkPackageRecord()
 			        {
