@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.Dictionary;
+using CAA.Entity.Models.DTO;
+using CAS.Entity.Models.DTO.General;
 using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.CAAEducation;
 using CAS.UI.UIControls.Auxiliary;
@@ -13,6 +15,7 @@ using CASTerms;
 using Entity.Abstractions.Filters;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
+using SmartCore.Files;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
 
@@ -101,7 +104,33 @@ namespace CAS.UI.UICAAControls.CAATask
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
                 .GetObjectListAll<TaskDTO, SmartCore.CAA.Tasks.CAATask>(new Filter("OperatorId", _operatorId),loadChild:true));
 
-            
+			var ids = _initialDocumentArray.Select(i => i.ItemId);
+			var links = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+			{
+				new Filter("ParentId",ids),
+				new Filter("ParentTypeId",3088)
+			}, true);
+
+			var fileIds = links.Where(i => i.FileId.HasValue).Select(i => i.FileId.Value);
+			if (fileIds.Any())
+			{
+				var files = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAAAttachedFileDTO, AttachedFile>(new Filter("ItemId", values: fileIds));
+				foreach (var file in links)
+				{
+					var f = files.FirstOrDefault(i => i.ItemId == file.FileId)?.GetCopyUnsaved(false);
+					if (f == null) continue;
+					f.ItemId = file.FileId.Value;
+					file.File = (AttachedFile)f;
+
+				}
+			}
+
+
+			foreach (var task in _initialDocumentArray)
+			{
+				task.Files.AddRange(links.Where(i => i.ParentId == task.ItemId));
+			}
+			
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
 
 			AnimatedThreadWorker.ReportProgress(70, "filter directives");

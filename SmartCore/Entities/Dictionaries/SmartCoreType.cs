@@ -4,6 +4,7 @@ using SmartCore.CAA.CAAEducation;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.RoutineAudits;
 using SmartCore.CAA.StandartManual;
+using SmartCore.CAA.Tasks;
 using SmartCore.DataAccesses.AttachedFiles;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
@@ -489,6 +490,7 @@ namespace SmartCore.Entities.Dictionaries
 		public static SmartCoreType StandartManual = new SmartCoreType(3086, "StandartManual", "StandartManual", typeof(StandartManual));
 		public static SmartCoreType CheckListTransfer = new SmartCoreType(3087, "CheckListTransfer", "CheckListTransfer", typeof(CheckListTransfer));
 		public static SmartCoreType CAAEducationRecord = new SmartCoreType(3087, "CAAEducationRecord", "CAAEducationRecord", typeof(CAAEducationRecord));
+		public static SmartCoreType CAATask = new SmartCoreType(3088, "CAATask", "CAATask", typeof(CAATask));
 		
 		/*
          * Методы

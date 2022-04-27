@@ -6,6 +6,7 @@ using CAA.Entity.Models.Dictionary;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Files;
@@ -15,8 +16,13 @@ namespace SmartCore.CAA.Tasks
 	[CAADto(typeof(TaskDTO))]
 	[Serializable]
 	[Description("Task")]
-    public class CAATask : BaseEntityObject, IOperatable
+    public class CAATask : BaseEntityObject, IOperatable, IFileContainer
     {
+
+	    public CAATask()
+	    {
+		    SmartCoreObjectType = SmartCoreType.CAATask;
+	    }
 
 	    [ListViewData(0.2f, "Code")]
 	    [FormControl(250, "Code", Order = 1)]
