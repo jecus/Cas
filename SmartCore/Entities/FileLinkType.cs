@@ -41,6 +41,7 @@
 		ProductFile = 37,
 		CheckList = 38,
 		CheckListMove = 39,
+		CAATask = 40,
 
 
 	}

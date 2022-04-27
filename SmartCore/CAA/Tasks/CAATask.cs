@@ -3,8 +3,12 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using CAA.Entity.Models;
 using CAA.Entity.Models.Dictionary;
+using SmartCore.Auxiliary.Extentions;
+using SmartCore.Entities;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Files;
 
 namespace SmartCore.CAA.Tasks
 {
@@ -38,12 +42,53 @@ namespace SmartCore.CAA.Tasks
         [FormControl(250, "Description",Order = 6, Height = 80)]
         public string Description { get; set; }
 		
+        
+        [ListViewData(0.2f, "Type")]
+        [FormControl(250, "Type",Order = 7)]
+        public TaskType Type { get; set; }
+        
+        [ListViewData(0.2f, "Hour")]
+        [FormControl(250, "Hour",Order = 8)]
+        public string Hour { get; set; }
+        
         [ListViewData(0.2f, "Level")]
-        [FormControl(250, "Level",Order = 7)]
+        [FormControl(250, "Level",Order = 9)]
         public TaskLevel Level { get; set; }
         
-        
         public int OperatorId { get; set; }
+        
+        
+        private CommonCollection<ItemFileLink> _files;
+        
+        public CommonCollection<ItemFileLink> Files
+        {
+	        get { return _files ?? (_files = new CommonCollection<ItemFileLink>()); }
+	        set
+	        {
+		        if (_files != value)
+		        {
+			        if (_files != null)
+				        _files.Clear();
+			        if (value != null)
+				        _files = value;
+		        }
+	        }
+        }
+        
+        
+        private AttachedFile _attachedFile;
+        [FormControl(250, "File",Order = 10)]
+        public AttachedFile AttachedFile
+        {
+	        get { return _attachedFile ?? (Files.GetFileByFileLinkType(FileLinkType.CAATask)); }
+	        set
+	        {
+		        _attachedFile = value;
+		        Files.SetFileByFileLinkType(SmartCoreObjectType.ItemId, value, FileLinkType.CAATask);
+	        }
+        }
+        
+        
         
     }
 }

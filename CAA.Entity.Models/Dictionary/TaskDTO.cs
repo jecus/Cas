@@ -41,5 +41,10 @@ namespace CAA.Entity.Models.Dictionary
 		[JsonIgnore]
 		public ICollection<EducationDTO> EducationDtos { get; set; }
 
+		[Column("Hour")]
+		public string Hour { get; set; }
+
+		[Column("Type")]
+		public int Type { get; set; }
 	}
 }

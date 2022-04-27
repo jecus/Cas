@@ -82,6 +82,8 @@ namespace CAS.UI.UICAAControls.CAATask
             AddColumn("SubTaskCode", (int)(radGridView1.Width * 0.20f));
 			AddColumn("SubTaskName", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Type", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Hour", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Level", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
@@ -122,6 +124,8 @@ namespace CAS.UI.UICAAControls.CAATask
                 CreateRow(item.SubTaskCode, item.SubTaskCode),
                 CreateRow(item.ShortName, item.ShortName),
                 CreateRow(item.Description, item.Description),
+                CreateRow(item.Type.ToString(), item.Type),
+                CreateRow(item.Hour, item.Hour),
                 CreateRow(item.Level.ToString(), item.Level),
                 CreateRow(corrector, corrector)
 			};
