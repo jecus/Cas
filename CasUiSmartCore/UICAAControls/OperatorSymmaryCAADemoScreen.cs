@@ -362,7 +362,7 @@ namespace CAS.UI.UICAAControls
         private void LinkEducationLinkEducationManagmentRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Education Process Management";
-	        e.RequestedEntity = new CAACourseListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+	        e.RequestedEntity = new CourseListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
         }
 	}
 }

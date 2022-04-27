@@ -2,7 +2,7 @@
 
 namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 {
-	partial class CAAWorkPackageEditorForm
+	partial class CAACourseCloseForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -960,7 +960,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.Controls.Add(labelNumber);
 			this.MaximumSize = new System.Drawing.Size(937, 750);
 			this.MinimumSize = new System.Drawing.Size(800, 382);
-			this.Name = "CAAWorkPackageEditorForm";
+			this.Name = "WorkPackageEditorForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
 			this.Text = "Work Package Editor Form";

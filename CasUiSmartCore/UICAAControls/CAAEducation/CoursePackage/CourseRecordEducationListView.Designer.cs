@@ -1,6 +1,6 @@
 ﻿namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 {
-    partial class CAACourseRecordEducationListView
+    partial class CourseRecordEducationListView
     {
         /// <summary> 
         /// Требуется переменная конструктора.

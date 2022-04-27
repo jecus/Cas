@@ -21,7 +21,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 	///<summary>
 	///</summary>
 	[ToolboxItem(false)]
-	public partial class CAAWPRecordListScreen : ScreenControl
+	public partial class CourseRecordListScreen : ScreenControl
 	{
 		private readonly CAAWorkPackage _wp;
 
@@ -31,7 +31,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		private CommonCollection<CAAWorkPackageRecord> _resultDocumentArray = new CommonCollection<CAAWorkPackageRecord>();
 		private CommonFilterCollection _filter;
 
-		private CAACourseRecordEducationListView _directivesViewer;
+		private CourseRecordEducationListView _directivesViewer;
 		
 		#endregion
 
@@ -42,7 +42,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		///<summary>
 		/// Конструктор по умолчанию
 		///</summary>
-		public CAAWPRecordListScreen()
+		public CourseRecordListScreen()
 		{
 			InitializeComponent();
 		}
@@ -54,7 +54,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public CAAWPRecordListScreen(Operator currentOperator, CAAWorkPackage wp)
+		public CourseRecordListScreen(Operator currentOperator, CAAWorkPackage wp)
 			: this()
 		{
 			if (currentOperator == null)
@@ -156,7 +156,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		private void InitListView()
 		{
-			_directivesViewer = new CAACourseRecordEducationListView(AnimatedThreadWorker);
+			_directivesViewer = new CourseRecordEducationListView(AnimatedThreadWorker);
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
@@ -306,7 +306,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		private void HeaderControlOnEditButtonClick(object sender, EventArgs e)
 		{
-			var form = new CAAWorkPackageEditorForm(_wp);
+			var form = new WorkPackageEditorForm(_wp);
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
 		}

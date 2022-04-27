@@ -15,12 +15,12 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 	///<summary>
 	/// список для отображения сотрудников
 	///</summary>
-	public partial class CAACoursePackageListView : BaseGridViewControl<CAAWorkPackage>
+	public partial class CoursePackageListView : BaseGridViewControl<CAAWorkPackage>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
         private readonly Operator _operator;
 
-        public CAACoursePackageListView()
+        public CoursePackageListView()
         {
             InitializeComponent();
 		}
@@ -31,7 +31,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
         /// <param
         ///     name="operator">
         /// </param>
-        public CAACoursePackageListView(AnimatedThreadWorker animatedThreadWorker, Operator @operator) : this()
+        public CoursePackageListView(AnimatedThreadWorker animatedThreadWorker, Operator @operator) : this()
 		{
             _animatedThreadWorker = animatedThreadWorker;
             _operator = @operator;
@@ -140,7 +140,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		{
 			e.DisplayerText = $"WP:{SelectedItem.Title}";
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-			e.RequestedEntity = new CAAWPRecordListScreen(_operator, SelectedItem);
+			e.RequestedEntity = new CourseRecordListScreen(_operator, SelectedItem);
 		}
 
 

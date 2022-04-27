@@ -12,19 +12,19 @@ using SmartCore.Entities.Dictionaries;
 
 namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 {
-	public partial class CAAWorkPackageEditorForm : MetroForm
+	public partial class WorkPackageEditorForm : MetroForm
 	{
 		private readonly CAAWorkPackage _currentWp;
 		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 
 		#region Costructor
 
-		public CAAWorkPackageEditorForm()
+		public WorkPackageEditorForm()
 		{
 			InitializeComponent();
 		}
 
-		public CAAWorkPackageEditorForm(CAAWorkPackage currentWp) : this()
+		public WorkPackageEditorForm(CAAWorkPackage currentWp) : this()
 		{
 			if(currentWp == null)
 				return;

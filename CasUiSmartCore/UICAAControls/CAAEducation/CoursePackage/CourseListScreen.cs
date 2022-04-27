@@ -22,7 +22,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 	///<summary>
 	///</summary>
 	[ToolboxItem(false)]
-	public partial class CAACourseListScreen : ScreenControl
+	public partial class CourseListScreen : ScreenControl
 	{
         private readonly int _operatorId;
 
@@ -32,7 +32,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		private CommonCollection<CAAWorkPackage> _resultDocumentArray = new CommonCollection<CAAWorkPackage>();
 		private CommonFilterCollection _filter;
 
-		private CAACoursePackageListView _directivesViewer;
+		private CoursePackageListView _directivesViewer;
 
 		private RadMenuSeparatorItem _toolStripSeparator2;
 		private RadMenuItem _toolStripMenuItemOpen;
@@ -49,7 +49,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		///<summary>
 		/// Конструктор по умолчанию
 		///</summary>
-		public CAACourseListScreen()
+		public CourseListScreen()
 		{
 			InitializeComponent();
 		}
@@ -61,7 +61,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public CAACourseListScreen(Operator currentOperator, int operatorId)
+		public CourseListScreen(Operator currentOperator, int operatorId)
 			: this()
 		{
 			if (currentOperator == null)
@@ -168,7 +168,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 	        if(_directivesViewer.SelectedItem == null)
 		        return;
 	        
-	        var form = new CAAWorkPackageEditorForm(_directivesViewer.SelectedItem);
+	        var form = new WorkPackageEditorForm(_directivesViewer.SelectedItem);
 	        if(form.ShowDialog() == DialogResult.OK)
 		        AnimatedThreadWorker.RunWorkerAsync();
         }
@@ -180,7 +180,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			if(_directivesViewer.SelectedItem == null)
 				return;
 			
-			var form = new CAAWorkPackageEditorForm(_directivesViewer.SelectedItem);
+			var form = new WorkPackageEditorForm(_directivesViewer.SelectedItem);
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
         }
@@ -199,7 +199,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		private void InitListView()
 		{
-			_directivesViewer = new CAACoursePackageListView(AnimatedThreadWorker, aircraftHeaderControl1.Operator);
+			_directivesViewer = new CoursePackageListView(AnimatedThreadWorker, aircraftHeaderControl1.Operator);
 			_directivesViewer.OperatorId = _operatorId;
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
@@ -334,7 +334,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-			var form = new CAAWorkPackageEditorForm(new CAAWorkPackage(){OperatorId = _operatorId});
+			var form = new WorkPackageEditorForm(new CAAWorkPackage(){OperatorId = _operatorId});
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
 		}

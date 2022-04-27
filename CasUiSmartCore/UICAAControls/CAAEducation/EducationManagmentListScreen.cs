@@ -332,7 +332,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        var refE = new ReferenceEventArgs();
 		        refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
 		        refE.DisplayerText =$"WP:{wp.Title}";
-		        refE.RequestedEntity = new CAAWPRecordListScreen(CurrentOperator, wp);
+		        refE.RequestedEntity = new CourseRecordListScreen(CurrentOperator, wp);
 		        InvokeDisplayerRequested(refE);
 	        }
 	       
@@ -428,7 +428,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			        var refE = new ReferenceEventArgs();
 			        refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			        refE.DisplayerText =$"WP:{wp.Title}";
-			        refE.RequestedEntity = new CAAWPRecordListScreen(CurrentOperator, wp);
+			        refE.RequestedEntity = new CourseRecordListScreen(CurrentOperator, wp);
 			        InvokeDisplayerRequested(refE);
 		        }
 	        }

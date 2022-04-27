@@ -913,25 +913,29 @@
     <Compile Include="UICAAControls\Audit\PEL\PelPersonnelLiteListView.Designer.cs">
       <DependentUpon>PelPersonnelLiteListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACoursePackageEditorForm.cs" />
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACoursePackageEditorForm.Designer.cs">
-      <DependentUpon>CAACoursePackageEditorForm.cs</DependentUpon>
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseCloseForm.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseCloseForm.Designer.cs">
+      <DependentUpon>CourseCloseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACourseListScreen.cs" />
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACourseListScreen.Designer.cs">
-      <DependentUpon>CAACourseListScreen.cs</DependentUpon>
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CoursePackageEditorForm.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CoursePackageEditorForm.Designer.cs">
+      <DependentUpon>CoursePackageEditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACoursePackageListView.cs" />
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACoursePackageListView.Designer.cs">
-      <DependentUpon>CAACoursePackageListView.cs</DependentUpon>
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseListScreen.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseListScreen.Designer.cs">
+      <DependentUpon>CourseListScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACourseRecordListScreen.cs" />
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACourseRecordListScreen.Designer.cs">
-      <DependentUpon>CAACourseRecordListScreen.cs</DependentUpon>
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CoursePackageListView.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CoursePackageListView.Designer.cs">
+      <DependentUpon>CoursePackageListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACourseRecordEducationListView.cs" />
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CAACourseRecordEducationListView.Designer.cs">
-      <DependentUpon>CAACourseRecordEducationListView.cs</DependentUpon>
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordListScreen.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordListScreen.Designer.cs">
+      <DependentUpon>CourseRecordListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordEducationListView.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordEducationListView.Designer.cs">
+      <DependentUpon>CourseRecordEducationListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UICAAControls\CAAEducation\EducationPerformanceControl.cs">
       <SubType>UserControl</SubType>
@@ -4606,14 +4610,17 @@
     <EmbeddedResource Include="UICAAControls\Audit\PEL\PelItemForm.resx">
       <DependentUpon>PelItemForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UICAAControls\CAAEducation\CoursePackage\CAACoursePackageEditorForm.resx">
-      <DependentUpon>CAACoursePackageEditorForm.cs</DependentUpon>
+    <EmbeddedResource Include="UICAAControls\CAAEducation\CoursePackage\CourseCloseForm.resx">
+      <DependentUpon>CourseCloseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UICAAControls\CAAEducation\CoursePackage\CAACourseListScreen.resx">
-      <DependentUpon>CAACourseListScreen.cs</DependentUpon>
+    <EmbeddedResource Include="UICAAControls\CAAEducation\CoursePackage\CoursePackageEditorForm.resx">
+      <DependentUpon>CoursePackageEditorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UICAAControls\CAAEducation\CoursePackage\CAACourseRecordListScreen.resx">
-      <DependentUpon>CAACourseRecordListScreen.cs</DependentUpon>
+    <EmbeddedResource Include="UICAAControls\CAAEducation\CoursePackage\CourseListScreen.resx">
+      <DependentUpon>CourseListScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordListScreen.resx">
+      <DependentUpon>CourseRecordListScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CAAEducation\EducationPerformanceControl.resx">
       <DependentUpon>EducationPerformanceControl.cs</DependentUpon>

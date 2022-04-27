@@ -20,7 +20,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 	///<summary>
 	/// список для отображения сотрудников
 	///</summary>
-	public partial class CAACourseRecordEducationListView : BaseGridViewControl<CAAWorkPackageRecord>
+	public partial class CourseRecordEducationListView : BaseGridViewControl<CAAWorkPackageRecord>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
 
@@ -32,7 +32,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		#region public PersonnelListView()
 
-        public CAACourseRecordEducationListView()
+        public CourseRecordEducationListView()
         {
             InitializeComponent();
 		}
@@ -40,7 +40,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
         /// <summary>
         /// </summary>
         /// <param name="animatedThreadWorker"></param>
-        public CAACourseRecordEducationListView(AnimatedThreadWorker animatedThreadWorker) : this()
+        public CourseRecordEducationListView(AnimatedThreadWorker animatedThreadWorker) : this()
 		{
             _animatedThreadWorker = animatedThreadWorker;
             SortDirection = SortDirection.Asc;
