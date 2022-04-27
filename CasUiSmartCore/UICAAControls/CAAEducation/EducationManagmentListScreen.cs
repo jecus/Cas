@@ -293,10 +293,10 @@ namespace CAS.UI.UICAAControls.CAAEducation
 					        BlockedWpId = wp.ItemId
 				        }
 			        };
-			        GlobalObjects.NewKeeper.Save(item.Record);
 		        }
 		        else item.Record.Settings.BlockedWpId = wp.ItemId;
-			        
+		        
+		        GlobalObjects.NewKeeper.Save(item.Record);
 		        GlobalObjects.NewKeeper.Save(new CAAWorkPackageRecord()
 		        {
 			        ObjectId = item.Record.ItemId,
@@ -374,10 +374,10 @@ namespace CAS.UI.UICAAControls.CAAEducation
 						        BlockedWpId = wp.ItemId
 					        }
 				        };
-				        GlobalObjects.NewKeeper.Save(item.Record);
 			        }
 			        else item.Record.Settings.BlockedWpId = wp.ItemId;
 			        
+			        GlobalObjects.NewKeeper.Save(item.Record);
 			        GlobalObjects.NewKeeper.Save(new CAAWorkPackageRecord()
 			        {
 				        ObjectId = item.Record.ItemId,
