@@ -91,6 +91,8 @@ namespace CAS.UI.UICAAControls.WorkPackage
                 GlobalObjects.NewKeeper.Delete(this.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
                 var ids = this.SelectedItems.OfType<BaseEntityObject>().ToList().Select(i => i.ItemId);
                 GlobalObjects.CaaEnvironment.Execute($"update  [dbo].[WorkPackageRecords] set IsDeleted = 1 where WorkPackageId in ({string.Join(",", ids)})");
+                GlobalObjects.CaaEnvironment.Execute($"update [dbo].[EducationRecords] set SettingsJSON = JSON_MODIFY(SettingsJSON, '$.BlockedWpId', null)" +
+                                                     $" where ItemId in (select ObjectId from [dbo].[WorkPackageRecords] where ItemId in ({string.Join(",", ids)}))");
                 
                 this.radGridView1.EndUpdate();
                 _animatedThreadWorker.RunWorkerAsync();

@@ -110,6 +110,11 @@ namespace CAS.UI.UICAAControls.WorkPackage
             {
                 this.radGridView1.BeginUpdate();
                 GlobalObjects.NewKeeper.Delete(this.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
+                var ids = this.SelectedItems.ToList().Select(i => i.ObjectId);
+                GlobalObjects.CaaEnvironment.Execute($"update [dbo].[EducationRecords] set SettingsJSON = JSON_MODIFY(SettingsJSON, '$.BlockedWpId', null)" +
+                                                     $" where ItemId in ({string.Join(",", ids)})");
+                
+                
                 this.radGridView1.EndUpdate();
                 _animatedThreadWorker.RunWorkerAsync();
             }
