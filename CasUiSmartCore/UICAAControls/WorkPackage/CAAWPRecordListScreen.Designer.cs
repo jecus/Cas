@@ -60,6 +60,7 @@ namespace CAS.UI.UICAAControls.WorkPackage
             // 
             this.headerControl.Size = new System.Drawing.Size(985, 58);
             this.headerControl.EditButtonEnabled = true;
+            this.headerControl.ShowEditButton = true;
             this.headerControl.EditButtonClick += HeaderControlOnEditButtonClick;
             this.headerControl.ReloadButtonClick += new System.EventHandler(this.HeaderControlButtonReloadClick);
             //

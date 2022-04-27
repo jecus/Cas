@@ -46,6 +46,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private RadMenuItem _toolStripMenuItemComposeWorkPackage;
 		private RadMenuItem _toolStripMenuItemsWorkPackages;
+		private RadMenuItem _toolStripMenuItemsWShowWP;
 
 		#endregion
 
@@ -242,6 +243,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuItemComposeWorkPackage = new RadMenuItem();
 			_toolStripMenuItemsWorkPackages = new RadMenuItem();
+			_toolStripMenuItemsWShowWP = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
             // 
             // toolStripMenuItemView
@@ -251,12 +253,17 @@ namespace CAS.UI.UICAAControls.CAAEducation
             //
             // toolStripMenuItemComposeWorkPackage
             //
-            _toolStripMenuItemComposeWorkPackage.Text = "Compose a work package";
+            _toolStripMenuItemComposeWorkPackage.Text = "Compose a Course package";
             _toolStripMenuItemComposeWorkPackage.Click += ButtonCreateWorkPakageClick;
             //
             // _toolStripMenuItemsWorkPackages
             //
-            _toolStripMenuItemsWorkPackages.Text = "Add to Work package";
+            _toolStripMenuItemsWorkPackages.Text = "Add to Course package";
+            //
+            // _toolStripMenuItemsWShowWP
+            //
+            _toolStripMenuItemsWShowWP.Text = "Show Title";
+            _toolStripMenuItemsWShowWP.Click += _toolStripMenuItemsWShowWP_Click; ;
 		}
 		
 
@@ -331,6 +338,21 @@ namespace CAS.UI.UICAAControls.CAAEducation
 	       
         }
         
+        private void _toolStripMenuItemsWShowWP_Click(object sender, EventArgs e)
+        {
+	        if (_directivesViewer.SelectedItems.Count <= 0) return;
+
+	        if(_directivesViewer.SelectedItem.Record?.Settings.BlockedWpId == null)
+		        return;
+
+
+	        var wp = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAWorkPackageDTO, CAAWorkPackage>(_directivesViewer.SelectedItem.Record.Settings.BlockedWpId.Value);
+	        
+	        var res = $"{wp.Title} - {wp.Settings.Number}";
+	        MessageBox.Show(res, "",
+		        MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        
         private void ButtonCreateWorkPakageClick(object sender, EventArgs e)
         {
 	        if (_directivesViewer.SelectedItems.Count <= 0) return;
@@ -351,7 +373,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        wp.Settings.OpeningDate = DateTime.Now;
 		        wp.Settings.CreateDate = DateTime.Now;
 		        wp.Settings.Author = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
-		        wp.Settings.Number = $"{GlobalObjects.CaaEnvironment.ObtainId()} - {DateTime.Now:G}";
+		        wp.Settings.Number = $"{GlobalObjects.CaaEnvironment.ObtainId()}";
 		        wp.Settings.TaskId = first.Education?.Task.ItemId;
 		        wp.Title = $"{first.Education?.Task.FullName} - {DateTime.Now:d}";
 		        
@@ -451,7 +473,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
 				_toolStripSeparator1,
 				_toolStripMenuItemComposeWorkPackage,
-				_toolStripMenuItemsWorkPackages
+				_toolStripMenuItemsWorkPackages,
+				_toolStripMenuItemsWShowWP
 				);
 
 			_directivesViewer.MenuOpeningAction = () =>

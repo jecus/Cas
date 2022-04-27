@@ -63,6 +63,8 @@ namespace CAS.UI.UICAAControls.WorkPackage
 			AddColumn("Perform Date", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Duration", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Remark", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Open Date", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Start Date", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Closing Date", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Location", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Author", (int)(radGridView1.Width * 0.24f));
@@ -107,7 +109,9 @@ namespace CAS.UI.UICAAControls.WorkPackage
 	        var author = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.Author);
 	        var published = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.PublishedBy);
 	        var closed = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.ClosedBy);
-	        var closingDate = item.Settings.ClosingDate.HasValue ? SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.ClosingDate) : String.Empty ;
+	        var openDate = SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.OpeningDate);
+	        var publisherDate = item.Status > WPStatus.Open ? SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.PublishingDate) : String.Empty ;
+	        var closingDate = item.Status > WPStatus.Published ? SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.ClosingDate) : String.Empty ;
 	        
 	        var subItems = new List<CustomCell>()
 			{
@@ -117,6 +121,8 @@ namespace CAS.UI.UICAAControls.WorkPackage
 				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.PerformDate), item.Settings.PerformDate),
 				CreateRow(item.Settings.Duration,item.Settings.Duration),
 				CreateRow(item.Settings.Remarks,item.Settings.Remarks),
+				CreateRow(openDate,item.Settings.OpeningDate),
+				CreateRow(publisherDate,item.Settings.PublishedBy),
 				CreateRow(closingDate,item.Settings.ClosingDate),
 				CreateRow(item.Settings.Location, item.Settings.Location),
 				CreateRow(author,author),
