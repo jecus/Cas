@@ -243,7 +243,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        wp.Settings.CreateDate = DateTime.Now;
 		        wp.Settings.Author = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
 		        wp.Settings.Number = $"{GlobalObjects.CaaEnvironment.ObtainId()} - {DateTime.Now:G}";
-		        wp.Title = $"{first.Education?.Task.FullName} - {DateTime.Now:G}";
+		        wp.Title = $"{first.Education?.Task.FullName} - {DateTime.Now:d}";
 		        
 		        GlobalObjects.NewKeeper.Save(wp);
 		        
