@@ -59,7 +59,9 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeTraining
 			comboBoxTrainingType.Items.AddRange(TrainingType.Items.ToArray());
 
 
-			lookupComboboxSubject.LoadObjectsFunc = GlobalObjects.CasEnvironment.GetEmployeeSubject;
+			if(GlobalObjects.CasEnvironment != null)
+				lookupComboboxSubject.LoadObjectsFunc = GlobalObjects.CasEnvironment.GetEmployeeSubject;
+			
 			lookupComboboxSubject.FilterParam1 = categoryId;
 			lookupComboboxSubject.Type = typeof(EmployeeSubject);
 			lookupComboboxSubject.SelectedItem = _training.EmployeeSubject;
@@ -94,7 +96,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeTraining
 		{
 			var selectedCategory = (EmployeeLicenceType)sender;
 
-			lookupComboboxSubject.LoadObjectsFunc = GlobalObjects.CasEnvironment.GetEmployeeSubject;
+			if(GlobalObjects.CasEnvironment != null)
+				lookupComboboxSubject.LoadObjectsFunc = GlobalObjects.CasEnvironment.GetEmployeeSubject;
 			lookupComboboxSubject.FilterParam1 = selectedCategory.ItemId;
 			lookupComboboxSubject.UpdateInformation();
 		}
@@ -119,7 +122,10 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeTraining
 
 		private Document CreateNewDocument()
 		{
-			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Personnel Training") as DocumentSubType;
+			DocumentSubType docSubType;
+			if (GlobalObjects.CasEnvironment != null)
+				 docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Personnel Training") as DocumentSubType;
+			else  docSubType = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Personnel Training") as DocumentSubType;
 			var description = _training.Description;
 
 			return new Document
