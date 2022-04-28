@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
 using Microsoft.Office.Interop.Excel;
 using SmartCore.CAA.Audit;
+using SmartCore.CAA.CAAWP;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.PEL;
 using SmartCore.Entities.Dictionaries;
@@ -199,7 +200,7 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
 		            yyy = yy as CAAAudit;
 
 	            var xParts = (int)xxx.Settings.Status;
-                var yParts = (int)xxx.Settings.Status;;
+                var yParts = (int)yyy.Settings.Status;;
 
                 if (xParts == yParts)
 	                return 0;
@@ -209,6 +210,53 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
 			return  -1;
         }
     }
+	
+	
+	public class CourseGroupComparer : IComparer<Group<GridViewRowInfo>>
+	{
+		private readonly int _sortMultiplier;
+
+		public CourseGroupComparer()
+		{
+		    
+		}
+	    
+		public CourseGroupComparer(int sortMultiplier)
+		{
+			_sortMultiplier = sortMultiplier;
+		}
+
+
+
+		public int Compare(Group<GridViewRowInfo> x, Group<GridViewRowInfo> y)
+		{
+			var xx = x.GetItems().FirstOrDefault()?.Tag;
+			var yy = y.GetItems().FirstOrDefault()?.Tag;
+
+			if (xx != null && yy != null)
+			{
+				CoursePackage xxx = null;
+				CoursePackage yyy = null;
+				
+				if (xx is CoursePackage)
+					xxx = xx as CoursePackage;
+				if (yy is CoursePackage)
+					yyy = yy as CoursePackage;
+
+				var xParts = (int)xxx.Status;
+				var yParts = (int)yyy.Status;;
+
+				if (xParts == yParts)
+					return 0;
+                
+				return (xParts < yParts ? -1 : 1);
+			}
+			return  -1;
+		}
+	}
+	
+	
+	
 	
     public class GroupComparer : IComparer<Group<GridViewRowInfo>>
     {

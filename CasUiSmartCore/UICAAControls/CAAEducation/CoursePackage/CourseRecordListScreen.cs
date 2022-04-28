@@ -23,7 +23,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 	[ToolboxItem(false)]
 	public partial class CourseRecordListScreen : ScreenControl
 	{
-		private readonly CAAWorkPackage _wp;
+		private readonly SmartCore.CAA.CAAWP.CoursePackage _wp;
 
 		#region Fields
 
@@ -54,7 +54,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public CourseRecordListScreen(Operator currentOperator, CAAWorkPackage wp)
+		public CourseRecordListScreen(Operator currentOperator, SmartCore.CAA.CAAWP.CoursePackage wp)
 			: this()
 		{
 			if (currentOperator == null)

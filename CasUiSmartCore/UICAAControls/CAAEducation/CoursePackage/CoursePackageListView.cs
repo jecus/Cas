@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA.CAAWP;
@@ -15,7 +16,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 	///<summary>
 	/// список для отображения сотрудников
 	///</summary>
-	public partial class CoursePackageListView : BaseGridViewControl<CAAWorkPackage>
+	public partial class CoursePackageListView : BaseGridViewControl<SmartCore.CAA.CAAWP.CoursePackage>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
         private readonly Operator _operator;
@@ -37,6 +38,9 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
             _operator = @operator;
             SortDirection = SortDirection.Asc;
 			OldColumnIndex = 1;
+			
+			
+			this.radGridView1.MasterTemplate.GroupComparer = new CourseGroupComparer((int)SortDirection);
 		}
 
         public int OperatorId { get; set; }
@@ -102,7 +106,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		#region protected override List<CustomCell> GetListViewSubItems(FindingLevels item)
 
-		protected override List<CustomCell> GetListViewSubItems(CAAWorkPackage item)
+		protected override List<CustomCell> GetListViewSubItems(SmartCore.CAA.CAAWP.CoursePackage item)
         {
 	        var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
 	        var author = GlobalObjects.CaaEnvironment?.GetCorrector(item.Settings.Author);

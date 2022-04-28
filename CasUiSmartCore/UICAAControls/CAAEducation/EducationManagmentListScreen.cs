@@ -35,7 +35,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		private readonly int _operatorId;
 
         #region Fields
-        private CommonCollection<CAAWorkPackage> _openPubWorkPackages = new CommonCollection<CAAWorkPackage>();
+        private CommonCollection<SmartCore.CAA.CAAWP.CoursePackage> _openPubWorkPackages = new CommonCollection<SmartCore.CAA.CAAWP.CoursePackage>();
 		private CommonCollection<CAAEducationManagment> _initialDocumentArray = new CommonCollection<CAAEducationManagment>();
 		private CommonCollection<CAAEducationManagment> _resultDocumentArray = new CommonCollection<CAAEducationManagment>();
 		private CommonFilterCollection _filter;
@@ -167,14 +167,14 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 			
 			if(_openPubWorkPackages == null)
-				_openPubWorkPackages = new CommonCollection<CAAWorkPackage>();
+				_openPubWorkPackages = new CommonCollection<SmartCore.CAA.CAAWP.CoursePackage>();
 			
 			_openPubWorkPackages.Clear();
 			
 			if (_operatorId == -1)
 			{
 				_openPubWorkPackages.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-					.GetObjectListAll<CoursePackageDTO, CAAWorkPackage>(new List<Filter>()
+					.GetObjectListAll<CoursePackageDTO, SmartCore.CAA.CAAWP.CoursePackage>(new List<Filter>()
 					{
 						new Filter("Status", 0)
 					}));
@@ -182,7 +182,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			else
 			{
 				_openPubWorkPackages.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-					.GetObjectListAll<CoursePackageDTO, CAAWorkPackage>(
+					.GetObjectListAll<CoursePackageDTO, SmartCore.CAA.CAAWP.CoursePackage>(
 						new List<Filter>()
 						{
 							new Filter("Status", 0),
@@ -274,7 +274,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
         {
 	        if (_directivesViewer.SelectedItems.Count <= 0) return;
 	        
-	        var wp = (CAAWorkPackage)((RadMenuItem)sender).Tag;
+	        var wp = (SmartCore.CAA.CAAWP.CoursePackage)((RadMenuItem)sender).Tag;
 	        var items = _directivesViewer.SelectedItems;
 	        if (!items.All(i => i.Education?.Task.ItemId == wp.Settings.TaskId))
 	        {
@@ -347,7 +347,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        return;
 
 
-	        var wp = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CoursePackageDTO, CAAWorkPackage>(_directivesViewer.SelectedItem.Record.Settings.BlockedWpId.Value);
+	        var wp = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CoursePackageDTO, SmartCore.CAA.CAAWP.CoursePackage>(_directivesViewer.SelectedItem.Record.Settings.BlockedWpId.Value);
 	        
 	        var res = $"{wp.Title} - {wp.Settings.Number}";
 	        MessageBox.Show(res, "",
@@ -370,7 +370,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 	        if (MessageBox.Show("Create and save a Work Package?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
 	        {
-		        var wp = new CAAWorkPackage();
+		        var wp = new SmartCore.CAA.CAAWP.CoursePackage();
 		        wp.Settings.OpeningDate = DateTime.Now;
 		        wp.Settings.CreateDate = DateTime.Now;
 		        wp.Settings.Author = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;

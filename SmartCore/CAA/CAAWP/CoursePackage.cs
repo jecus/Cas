@@ -10,7 +10,7 @@ namespace SmartCore.CAA.CAAWP
     [CAADto(typeof(CoursePackageDTO))]
     [Condition("IsDeleted", "0")]
     [Serializable]
-    public class CAAWorkPackage : BaseEntityObject
+    public class CoursePackage : BaseEntityObject
     {
         public string Title { get; set; }
         public int OperatorId { get; set; }
@@ -54,7 +54,7 @@ namespace SmartCore.CAA.CAAWP
         
 
 
-        public CAAWorkPackage()
+        public CoursePackage()
         {
             Status = WPStatus.Open;
             Settings = new CAAWorkPackagekSettings()

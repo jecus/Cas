@@ -14,7 +14,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 {
 	public partial class WorkPackageEditorForm : MetroForm
 	{
-		private readonly CAAWorkPackage _currentWp;
+		private readonly SmartCore.CAA.CAAWP.CoursePackage _currentWp;
 		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 
 		#region Costructor
@@ -24,7 +24,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			InitializeComponent();
 		}
 
-		public WorkPackageEditorForm(CAAWorkPackage currentWp) : this()
+		public WorkPackageEditorForm(SmartCore.CAA.CAAWP.CoursePackage currentWp) : this()
 		{
 			if(currentWp == null)
 				return;

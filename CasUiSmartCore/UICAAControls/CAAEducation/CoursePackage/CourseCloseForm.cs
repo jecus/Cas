@@ -18,7 +18,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 {
 	public partial class CAACourseCloseForm : MetroForm
 	{
-		private readonly CAAWorkPackage _currentWp;
+		private readonly SmartCore.CAA.CAAWP.CoursePackage _currentWp;
 		private CommonCollection<CourseRecord> _initialDocumentArray = new CommonCollection<CourseRecord>();
 		
 		#region Costructor
@@ -28,7 +28,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			InitializeComponent();
 		}
 
-		public CAACourseCloseForm(CAAWorkPackage currentWp) : this()
+		public CAACourseCloseForm(SmartCore.CAA.CAAWP.CoursePackage currentWp) : this()
 		{
 			if(currentWp == null)
 				return;

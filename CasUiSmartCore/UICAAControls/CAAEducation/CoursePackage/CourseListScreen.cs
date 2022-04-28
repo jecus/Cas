@@ -28,8 +28,8 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
         #region Fields
 
-		private CommonCollection<CAAWorkPackage> _initialDocumentArray = new CommonCollection<CAAWorkPackage>();
-		private CommonCollection<CAAWorkPackage> _resultDocumentArray = new CommonCollection<CAAWorkPackage>();
+		private CommonCollection<SmartCore.CAA.CAAWP.CoursePackage> _initialDocumentArray = new CommonCollection<SmartCore.CAA.CAAWP.CoursePackage>();
+		private CommonCollection<SmartCore.CAA.CAAWP.CoursePackage> _resultDocumentArray = new CommonCollection<SmartCore.CAA.CAAWP.CoursePackage>();
 		private CommonFilterCollection _filter;
 
 		private CoursePackageListView _directivesViewer;
@@ -71,7 +71,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
             statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 
-			_filter = new CommonFilterCollection(typeof(CAAWorkPackage));
+			_filter = new CommonFilterCollection(typeof(SmartCore.CAA.CAAWP.CoursePackage));
 
 			InitToolStripMenuItems();
 			InitListView();
@@ -112,12 +112,12 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			if (_operatorId == -1)
 			{
 				_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-					.GetObjectListAll<CoursePackageDTO, CAAWorkPackage>());
+					.GetObjectListAll<CoursePackageDTO, SmartCore.CAA.CAAWP.CoursePackage>());
 			}
 			else
 			{
 				_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-					.GetObjectListAll<CoursePackageDTO, CAAWorkPackage>(new Filter("OperatorId", _operatorId)));
+					.GetObjectListAll<CoursePackageDTO, SmartCore.CAA.CAAWP.CoursePackage>(new Filter("OperatorId", _operatorId)));
 			}
 			
 			AnimatedThreadWorker.ReportProgress(70, "filter directives");
@@ -328,7 +328,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-			var form = new WorkPackageEditorForm(new CAAWorkPackage(){OperatorId = _operatorId});
+			var form = new WorkPackageEditorForm(new SmartCore.CAA.CAAWP.CoursePackage(){OperatorId = _operatorId});
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
 		}
@@ -359,7 +359,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		///</summary>
 		///<param name="initialCollection"></param>
 		///<param name="resultCollection"></param>
-		private void FilterItems(IEnumerable<CAAWorkPackage> initialCollection, ICommonCollection<CAAWorkPackage> resultCollection)
+		private void FilterItems(IEnumerable<SmartCore.CAA.CAAWP.CoursePackage> initialCollection, ICommonCollection<SmartCore.CAA.CAAWP.CoursePackage> resultCollection)
 		{
 			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{

@@ -61,7 +61,7 @@ namespace SmartCore.DtoHelper
 			};
 		}
 		
-		public static CoursePackageDTO ConvertCAA(this CAAWorkPackage task)
+		public static CoursePackageDTO ConvertCAA(this CoursePackage task)
 		{
 			return new CoursePackageDTO
 			{
@@ -76,9 +76,9 @@ namespace SmartCore.DtoHelper
 			};
 		}
 
-		public static CAAWorkPackage ConvertCAA(this CoursePackageDTO task)
+		public static CoursePackage ConvertCAA(this CoursePackageDTO task)
 		{
-			return new CAAWorkPackage()
+			return new CoursePackage()
 			{
 				ItemId = task.ItemId,
 				IsDeleted = task.IsDeleted,
