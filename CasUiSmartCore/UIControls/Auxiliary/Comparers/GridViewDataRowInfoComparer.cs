@@ -205,7 +205,7 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
                 if (xParts == yParts)
 	                return 0;
                 
-                return (xParts < yParts ? -1 : 1);
+                return (xParts < yParts ? -1 : 1) ;
 			}
 			return  -1;
         }
@@ -249,7 +249,7 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
 				if (xParts == yParts)
 					return 0;
                 
-				return (xParts < yParts ? -1 : 1);
+				return (xParts < yParts ? -1 : 1) * _sortMultiplier;
 			}
 			return  -1;
 		}
