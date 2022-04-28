@@ -96,6 +96,11 @@ namespace SmartCore.CAA.CAAEducation
     [Serializable]
     public class LastCompliance
     {
+	    public LastCompliance()
+	    {
+		    LastDate = DateTime.Now;
+	    }
+	    
 	    [JsonProperty]
 	    public DateTime? LastDate { get; set; }
 	    

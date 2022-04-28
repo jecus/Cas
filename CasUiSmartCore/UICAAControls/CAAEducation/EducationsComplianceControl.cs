@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
@@ -88,6 +89,28 @@ namespace CAS.UI.UICAAControls.CAAEducation
             }
         }
 
+
+        private void ButtonAddOnClick(object sender, EventArgs e)
+        {
+            var form = new EducationComplianceForm(_record, new LastCompliance());
+            if (form.ShowDialog() == DialogResult.OK)
+                _animatedThreadWorker.RunWorkerAsync();
+        }
         
+        private void ButtonDeleteOnClick(object sender, EventArgs e)
+        {
+            if (listViewCompliance.SelectedItems.Count == 0)
+                return;
+
+            foreach (var item in listViewCompliance.SelectedItems.OfType<ListViewItem>())
+            {
+                if (item.Tag is LastCompliance tag)
+                {
+                    _record.Settings.LastCompliances.Remove(tag);
+                    listViewCompliance.Items.Remove(item);
+                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_record);
+                }
+            }
+        }
     }
 }
