@@ -59,6 +59,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			AddColumn("Occupation", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Combination", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Department", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Qualification", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Operator", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Privileges", (int)(radGridView1.Width * 0.5f));
 			AddColumn("Date of Birth", (int)(radGridView1.Width * 0.3f));
@@ -116,6 +117,7 @@ namespace CAS.UI.UICAAControls.Specialists
 				CreateRow(item.Occupation.ToString(), item.Occupation),
 				CreateRow(item.Combination, item.Combination),
 				CreateRow(department.ToString(), department),
+				CreateRow(item.Qualification, item.Qualification),
 				CreateRow(op.ToString(), op),
 				CreateRow(ratingString, ratingString),
 				CreateRow(item.DateOfBirth.ToString("dd-MMMM-yyyy"), item.DateOfBirth),
