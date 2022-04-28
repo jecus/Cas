@@ -172,11 +172,17 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 				 	_currentWp.Settings.ClosingDate = DateTime.Now;
 				 	_currentWp.Settings.ClosedBy = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
 				 	GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentWp);
+				    DialogResult = DialogResult.OK;
+				    Close();
 				}
+				 else
+				 {
+					 MessageBox.Show("Bind document for all personnel!", (string)new GlobalTermsProvider()["SystemName"],
+						 MessageBoxButtons.OK, MessageBoxIcon.Error);
+				 }
 				
 				
-				DialogResult = DialogResult.OK;
-				Close();
+				
 			}
 			catch (Exception ex)
 			{

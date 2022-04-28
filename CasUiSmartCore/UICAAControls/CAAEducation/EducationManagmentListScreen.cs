@@ -485,7 +485,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 					return;
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
-					_toolStripMenuItemsWorkPackages.Enabled = _directivesViewer.SelectedItem?.Record?.Settings?.BlockedWpId!= null;
+					_toolStripMenuItemsWShowWP.Enabled = _directivesViewer.SelectedItem?.Record?.Settings?.BlockedWpId!= null;
 					_toolStripMenuItemOpen.Enabled = true;
 				}
 			};

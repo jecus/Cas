@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.Dictionary;
@@ -182,6 +183,16 @@ namespace CAS.UI.UICAAControls.Specialists
                 _currentItem.Files.AddRange(links);
 
 
+                var ds = GlobalObjects.CaaEnvironment.Execute($@"select r.ItemId  from [dbo].[CourseRecords] r
+                inner join [dbo].[CoursePackage] p on p.ItemId = r.WorkPackageId
+                where p.Status >= 1 and r.IsDeleted = 0 and p.IsDeleted = 0  and r.SpecialistId = {_currentItem.ItemId}");
+                
+                var data = ds.Tables[0].AsEnumerable().Select(dataRow => new
+                {
+	                ItemId = dataRow.Field<int>("ItemId")
+                });
+                var courses = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ParentID",data.Select(i => i.ItemId)));
+                _currentItem.EmployeeDocuments.AddRange(courses);
                 if (_currentItem.EmployeeDocuments.Any())
                 {
 	                var docIds = _currentItem.EmployeeDocuments.Select(i => i.ItemId);

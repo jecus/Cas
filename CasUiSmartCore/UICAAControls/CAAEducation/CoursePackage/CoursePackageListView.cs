@@ -138,7 +138,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
-			e.DisplayerText = $"WP:{SelectedItem.Title}";
+			e.DisplayerText = $"WP:{SelectedItem.Settings.Number} - {SelectedItem.Title}";
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			e.RequestedEntity = new CourseRecordListScreen(_operator, SelectedItem);
 		}

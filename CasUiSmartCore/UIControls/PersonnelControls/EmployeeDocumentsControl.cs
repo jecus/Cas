@@ -145,8 +145,12 @@ namespace CAS.UI.UIControls.PersonnelControls
 
 			_initialDocumentArray.AddRange(_currentItem.EmployeeDocuments.ToArray());
 
-			foreach (Document document in _initialDocumentArray)
-				GlobalObjects.PerformanceCalculator.GetNextPerformance(document);
+
+			if (GlobalObjects.CasEnvironment != null)
+			{
+				foreach (Document document in _initialDocumentArray)
+					GlobalObjects.PerformanceCalculator.GetNextPerformance(document);
+			}
 
 			FilterItems(_initialDocumentArray, _resultDocumentArray);
 
