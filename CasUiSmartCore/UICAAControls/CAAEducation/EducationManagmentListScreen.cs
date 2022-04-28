@@ -131,24 +131,13 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			var educations = new List<SmartCore.CAA.CAAEducation.CAAEducation>();
 			var records = new List<SmartCore.CAA.CAAEducation.CAAEducationRecord>();
 			var occupation = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray();
-			if (_operatorId == -1)
-			{
-				educations.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-					.GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(loadChild:true));
-				specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-					.GetObjectListAll<CAASpecialistDTO, Specialist>());
-				records.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-					.GetObjectListAll<EducationRecordsDTO, CAAEducationRecord>());
-			}
-			else
-			{
-				educations.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+			educations.AddRange(GlobalObjects.CaaEnvironment.NewLoader
 					.GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _operatorId),loadChild:true));
 				specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
 					.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", _operatorId)));
 				records.AddRange(GlobalObjects.CaaEnvironment.NewLoader
 					.GetObjectListAll<EducationRecordsDTO, CAAEducationRecord>(new Filter("OperatorId", _operatorId)));
-			}
+			
 
 			foreach (var specialist in specialists)
 			{
@@ -161,8 +150,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			}
 			
 			
-			
-            
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
 
 			

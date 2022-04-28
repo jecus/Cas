@@ -107,20 +107,11 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			_resultDocumentArray.Clear();
 
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
-
-
-			if (_operatorId == -1)
-			{
-				_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-					.GetObjectListAll<CoursePackageDTO, SmartCore.CAA.CAAWP.CoursePackage>());
-			}
-			else
-			{
+			
 				_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
 					.GetObjectListAll<CoursePackageDTO, SmartCore.CAA.CAAWP.CoursePackage>(new Filter("OperatorId", _operatorId)));
-			}
-			
-			AnimatedThreadWorker.ReportProgress(70, "filter directives");
+
+				AnimatedThreadWorker.ReportProgress(70, "filter directives");
 
 			FilterItems(_initialDocumentArray, _resultDocumentArray);
 

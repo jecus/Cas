@@ -263,7 +263,7 @@ namespace CAS.UI.UICAAControls.Specialists
 
 
            checkedListBox1.Items.Clear();
-			checkedListBox1.Items.AddRange(GlobalObjects.CasEnvironment?.GetDictionary<Occupation>().ToArray() ?? GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray());
+			checkedListBox1.Items.AddRange(GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray());
 
 			for (int i = 0; i < checkedListBox1.Items.Count; i++)
 			{

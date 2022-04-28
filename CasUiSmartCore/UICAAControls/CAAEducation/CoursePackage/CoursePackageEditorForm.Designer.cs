@@ -650,7 +650,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.groupBox1.Size = new System.Drawing.Size(404, 51);
 			this.groupBox1.TabIndex = 254;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Perform after";
+			this.groupBox1.Text = "Perform up to";
 			// 
 			// dateTimePickerFlightDate
 			// 
@@ -904,7 +904,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
-			// CAAWorkPackageEditorForm
+			// Course PackageEditorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -960,7 +960,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.Controls.Add(labelNumber);
 			this.MaximumSize = new System.Drawing.Size(937, 750);
 			this.MinimumSize = new System.Drawing.Size(800, 382);
-			this.Name = "WorkPackageEditorForm";
+			this.Name = "Course PackageEditorForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
 			this.Text = "Work Package Editor Form";
