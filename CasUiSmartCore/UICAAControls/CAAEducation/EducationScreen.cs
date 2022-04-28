@@ -51,17 +51,10 @@ namespace CAS.UI.UICAAControls.CAAEducation
             statusControl.ConditionState = _educationManagment.Record?.Settings?.Condition;
 
             if (_educationManagment.Record == null)
-            {
                 extendableRichContainerSummary.LabelCaption.Text = "Open";
-            }
             else
-            {
                 extendableRichContainerSummary.LabelCaption.Text = " Status: " + $"{(_educationManagment.Record.Settings.IsClosed ? "Closed" : "Open")}";
-            }
-            
-            
 
-            _educationPerformanceControl.Object = _educationManagment;
             educationsComplianceControl1.UpdateInformation(_educationManagment, AnimatedThreadWorker);
         }
         #endregion
@@ -92,7 +85,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
                     
                 };
             }
-
+            
+            _educationManagment.Record.Education = _educationManagment.Education;
             
             AnimatedThreadWorker.ReportProgress(40, "Calculation");
             EducationCalculator.CalculateEducation(_educationManagment.Record);
@@ -149,22 +143,11 @@ namespace CAS.UI.UICAAControls.CAAEducation
             //_directiveGeneralInformation.Visible = !_directiveGeneralInformation.Visible;
         }
         #endregion
-
-        #region private void ExtendableRichContainerPerformanceExtending(object sender, EventArgs e)
-
-        private void ExtendableRichContainerPerformanceExtending(object sender, EventArgs e)
-        {
-            _educationPerformanceControl.Visible = !_educationPerformanceControl.Visible;
-        }
-        #endregion
         
-        
-
         #endregion
 
         private void HeaderControlButtonSaveClick(object sender, EventArgs e)
         {
-            _educationPerformanceControl.ApplyChanges();
             GlobalObjects.CaaEnvironment.NewKeeper.Save(_educationManagment.Record);
             
             MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,

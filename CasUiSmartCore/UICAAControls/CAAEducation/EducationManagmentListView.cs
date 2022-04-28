@@ -83,7 +83,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
             AddColumn("Description", (int)(radGridView1.Width * 0.45f));
             AddColumn("Level", (int)(radGridView1.Width * 0.24f));
             AddColumn("Priority", (int)(radGridView1.Width * 0.24f));
-            AddColumn("Start", (int)(radGridView1.Width * 0.24f));
             AddColumn("Repeat", (int)(radGridView1.Width * 0.24f));
             AddColumn("Next", (int)(radGridView1.Width * 0.24f));
             AddColumn("Remain", (int)(radGridView1.Width * 0.24f));
@@ -164,8 +163,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        CreateRow(item.Education?.Task?.Description, item.Education?.Task?.Description),
 		        CreateRow(item.Education?.Task?.Level.ToString(), item.Education?.Task?.Level),
 		        CreateRow(item.Education?.Priority?.ToString(), item.Education?.Priority),
-		        CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Record?.Settings?.StartDate), item.Record?.Settings?.StartDate),
-		        CreateRow(item.Record?.Settings?.Repeat.ToRepeatIntervalsFormat(), item.Record?.Settings?.Repeat),
+		        CreateRow(item?.Education?.Task?.Repeat.ToRepeatIntervalsFormat(), item?.Education?.Task?.Repeat),
 		        CreateRow(next, item.Record?.Settings?.Next),
 		        CreateRow(item.Record?.Settings?.Remains?.ToRepeatIntervalsFormat(), item.Record?.Settings?.Remains),
 		        CreateRow(last, item.Record?.Settings?.LastCompliances?.LastOrDefault()?.LastDate),

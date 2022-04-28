@@ -118,6 +118,8 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 					var r = educationRecords.FirstOrDefault(i => i.ItemId == wpR.ObjectId);
 					if(r == null)
 						continue;
+					
+					r.Education = educations.FirstOrDefault(i => i.ItemId == r.EducationId);
 					EducationCalculator.CalculateEducation(r);
 					var item = new CAAEducationManagment()
 					{

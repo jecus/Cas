@@ -937,12 +937,6 @@
     <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordListView.Designer.cs">
       <DependentUpon>CourseRecordListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CAAEducation\EducationPerformanceControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UICAAControls\CAAEducation\EducationPerformanceControl.Designer.cs">
-      <DependentUpon>EducationPerformanceControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="UICAAControls\CAAEducation\EducationsComplianceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4621,9 +4615,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordListScreen.resx">
       <DependentUpon>CourseRecordListScreen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UICAAControls\CAAEducation\EducationPerformanceControl.resx">
-      <DependentUpon>EducationPerformanceControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CAAEducation\EducationsComplianceControl.resx">
       <DependentUpon>EducationsComplianceControl.cs</DependentUpon>

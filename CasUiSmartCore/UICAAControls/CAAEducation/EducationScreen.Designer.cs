@@ -32,8 +32,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.flowLayoutPanelMain = new System.Windows.Forms.FlowLayoutPanel();
             this.extendableRichContainerSummary = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
             this.extendableRichContainerGeneral = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
-            this.extendableRichContainerPerformance = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
-            this._educationPerformanceControl = new CAS.UI.UICAAControls.CAAEducation.EducationPerformanceControl();
             this.extendableRichContainerCompliance = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
             this.educationsComplianceControl1 = new CAS.UI.UICAAControls.CAAEducation.EducationsComplianceControl();
             this.headerControl.SuspendLayout();
@@ -72,8 +70,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.flowLayoutPanelMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.flowLayoutPanelMain.Controls.Add(this.extendableRichContainerSummary);
             this.flowLayoutPanelMain.Controls.Add(this.extendableRichContainerGeneral);
-            this.flowLayoutPanelMain.Controls.Add(this.extendableRichContainerPerformance);
-            this.flowLayoutPanelMain.Controls.Add(this._educationPerformanceControl);
             this.flowLayoutPanelMain.Controls.Add(this.extendableRichContainerCompliance);
             this.flowLayoutPanelMain.Controls.Add(this.educationsComplianceControl1);
             this.flowLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -128,37 +124,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.extendableRichContainerGeneral.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
             this.extendableRichContainerGeneral.Extending += new System.EventHandler(this.ExtendableRichContainerGeneralExtending);
             // 
-            // extendableRichContainerPerformance
-            // 
-            this.extendableRichContainerPerformance.AfterCaptionControl = null;
-            this.extendableRichContainerPerformance.AfterCaptionControl2 = null;
-            this.extendableRichContainerPerformance.AfterCaptionControl3 = null;
-            this.extendableRichContainerPerformance.AutoSize = true;
-            this.extendableRichContainerPerformance.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.extendableRichContainerPerformance.BackColor = System.Drawing.Color.Transparent;
-            this.extendableRichContainerPerformance.Caption = "Performance";
-            this.extendableRichContainerPerformance.CaptionFont = new System.Drawing.Font("Verdana", 27.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.extendableRichContainerPerformance.Condition = null;
-            this.extendableRichContainerPerformance.DescriptionTextColor = System.Drawing.Color.DimGray;
-            this.extendableRichContainerPerformance.Extendable = true;
-            this.extendableRichContainerPerformance.Extended = true;
-            this.extendableRichContainerPerformance.Location = new System.Drawing.Point(3, 95);
-            this.extendableRichContainerPerformance.MainControl = null;
-            this.extendableRichContainerPerformance.Name = "extendableRichContainerPerformance";
-            this.extendableRichContainerPerformance.Size = new System.Drawing.Size(233, 40);
-            this.extendableRichContainerPerformance.TabIndex = 11;
-            this.extendableRichContainerPerformance.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
-            this.extendableRichContainerPerformance.Extending += new System.EventHandler(this.ExtendableRichContainerPerformanceExtending);
-            // 
-            // _educationPerformanceControl
-            // 
-            this._educationPerformanceControl.AutoSize = true;
-            this._educationPerformanceControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this._educationPerformanceControl.Location = new System.Drawing.Point(3, 141);
-            this._educationPerformanceControl.Name = "_educationPerformanceControl";
-            this._educationPerformanceControl.Size = new System.Drawing.Size(351, 168);
-            this._educationPerformanceControl.TabIndex = 14;
-            // 
             // extendableRichContainerCompliance
             // 
             this.extendableRichContainerCompliance.AfterCaptionControl = null;
@@ -209,10 +174,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
         #endregion
         private CAS.UI.UICAAControls.CAAEducation.EducationsComplianceControl educationsComplianceControl1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelMain;
-        private EducationPerformanceControl _educationPerformanceControl;
         private UIControls.ReferenceControls.ExtendableRichContainer extendableRichContainerSummary;
         private UIControls.ReferenceControls.ExtendableRichContainer extendableRichContainerGeneral;
-        private UIControls.ReferenceControls.ExtendableRichContainer extendableRichContainerPerformance;
         private UIControls.ReferenceControls.ExtendableRichContainer extendableRichContainerCompliance;
     }
 }

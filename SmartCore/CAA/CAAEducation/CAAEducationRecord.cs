@@ -21,6 +21,8 @@ namespace SmartCore.CAA.CAAEducation
 	    public int SpecialistId { get; set; }
 	    public int OccupationId { get; set; }
 	    public int EducationId { get; set; }
+	    public CAAEducation Education { get; set; }
+	    
 	    public int PriorityId { get; set; }
 
 	    public string SettingsJSON
@@ -54,51 +56,21 @@ namespace SmartCore.CAA.CAAEducation
     {
 	    public CAAEducationRecordSettings()
 	    {
-		    StartDate = DateTime.Today;
 		    Condition = ConditionState.Satisfactory;
-		    Repeat = Lifelength.Null;
-		    Notify = Lifelength.Null;
 		    LastCompliances = new List<LastCompliance>();
 	    }
 	    
 	    
 	    private byte[] _repeatByte;
 	    private byte[] _notifyByte;
-	    private Lifelength _repeat;
-	    private Lifelength _notify;
 	    private List<LastCompliance> _lastCompliances;
 
 	    [JsonProperty]
 	    public bool IsCombination { get; set; }
 	    
 	    [JsonProperty]
-	    public DateTime StartDate { get; set; }
-	    
-	    [JsonProperty]
 	    public bool IsClosed { get; set; }
 	    
-	    
-	    [JsonProperty]
-	    public byte[] RepeatByte
-	    {
-		    get => _repeatByte;
-		    set
-		    {
-			    _repeatByte = value;
-			    _repeat = Lifelength.ConvertFromByteArray(value);
-		    }
-	    }
-
-	    [JsonProperty]
-	    public byte[] NotifyByte
-	    {
-		    get => _notifyByte;
-		    set
-		    {
-			    _notifyByte = value;
-			    _notify = Lifelength.ConvertFromByteArray(value);
-		    }
-	    }
 
 	    [JsonProperty]
 	    public List<LastCompliance> LastCompliances
@@ -106,29 +78,7 @@ namespace SmartCore.CAA.CAAEducation
 		    get => _lastCompliances ?? (_lastCompliances = new List<LastCompliance>());
 		    set => _lastCompliances = value;
 	    }
-
-
-	    [JsonIgnore]
-	    public Lifelength Repeat
-	    {
-		    get => _repeat;
-		    set
-		    {
-			    _repeat = value;
-			    _repeatByte = value.ConvertToByteArray();
-		    }
-	    }
-
-	    [JsonIgnore]
-	    public Lifelength Notify
-	    {
-		    get => _notify;
-		    set
-		    {
-			    _notify = value;
-			    _notifyByte = value.ConvertToByteArray();
-		    }
-	    }
+	    
 
 	    [JsonIgnore]
 	    public DateTime? Next { get; set; }

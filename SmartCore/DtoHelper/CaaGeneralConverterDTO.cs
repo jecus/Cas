@@ -198,7 +198,7 @@ namespace SmartCore.DtoHelper
 				CodeName = task.CodeName,
 				FullName = task.FullName,
 				Hour = task.Hour,
-				Repeat = Lifelength.ConvertFromByteArray(task.RepeatByte),
+				Repeat = Lifelength.ConvertFromByteArray(task.RepeatByte) ?? Lifelength.Null,
 				Type = TaskType.GetItemById(task.Type),
 				Level = TaskLevel.GetItemById(task.LevelId),
 				ShortName = task.ShortName,

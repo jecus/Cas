@@ -46,7 +46,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 }
             }
             
-            if(_record.Settings.Repeat.IsNullOrZero())
+            if((bool)_record.Education?.Task?.Repeat.IsNullOrZero())
                 return;
             
             var subs =

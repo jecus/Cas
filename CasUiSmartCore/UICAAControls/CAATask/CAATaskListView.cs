@@ -85,6 +85,7 @@ namespace CAS.UI.UICAAControls.CAATask
 			AddColumn("Type", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Hour", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Level", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Repeat", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -127,6 +128,7 @@ namespace CAS.UI.UICAAControls.CAATask
                 CreateRow(item.Type.ToString(), item.Type),
                 CreateRow(item.Hour, item.Hour),
                 CreateRow(item.Level.ToString(), item.Level),
+                CreateRow(item.Repeat.ToRepeatIntervalsFormat(), item.Repeat.ToRepeatIntervalsFormat()),
                 CreateRow(corrector, corrector)
 			};
 

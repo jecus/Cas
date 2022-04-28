@@ -22,6 +22,7 @@ namespace SmartCore.CAA.Tasks
 
 	    public CAATask()
 	    {
+		    Repeat = Lifelength.Null;
 		    SmartCoreObjectType = SmartCoreType.CAATask;
 	    }
 
