@@ -30,7 +30,7 @@ namespace SmartCore.DtoHelper
     public static  class CaaGeneralConverterDTO
 	{
 		
-		public static CAAWorkPackageRecord ConvertCAA(this CAAWorkPackageRecordDTO task)
+		public static CAAWorkPackageRecord ConvertCAA(this CoursePackageRecordDTO task)
 		{
 			return new CAAWorkPackageRecord
 			{
@@ -38,20 +38,22 @@ namespace SmartCore.DtoHelper
 				IsDeleted = task.IsDeleted,
 				Updated = task.Updated,
 				ObjectId = task.ObjectId,
+				SpecialistId = task.SpecialistId,
 				WorkPackageId = task.WorkPackageId,
 				CorrectorId = task.CorrectorId,
 				SettingsJSON = task.SettingsJSON,
 			};
 		}
 
-		public static CAAWorkPackageRecordDTO ConvertCAA(this CAAWorkPackageRecord task)
+		public static CoursePackageRecordDTO ConvertCAA(this CAAWorkPackageRecord task)
 		{
-			return new CAAWorkPackageRecordDTO()
+			return new CoursePackageRecordDTO()
 			{
 				ItemId = task.ItemId,
 				IsDeleted = task.IsDeleted,
 				Updated = task.Updated,
 				ObjectId = task.ObjectId,
+				SpecialistId = task.SpecialistId,
 				WorkPackageId = task.WorkPackageId,
 				CorrectorId = task.CorrectorId,
 				SettingsJSON = task.SettingsJSON,
@@ -59,9 +61,9 @@ namespace SmartCore.DtoHelper
 			};
 		}
 		
-		public static CAAWorkPackageDTO ConvertCAA(this CAAWorkPackage task)
+		public static CoursePackageDTO ConvertCAA(this CAAWorkPackage task)
 		{
-			return new CAAWorkPackageDTO
+			return new CoursePackageDTO
 			{
 				ItemId = task.ItemId,
 				IsDeleted = task.IsDeleted,
@@ -74,7 +76,7 @@ namespace SmartCore.DtoHelper
 			};
 		}
 
-		public static CAAWorkPackage ConvertCAA(this CAAWorkPackageDTO task)
+		public static CAAWorkPackage ConvertCAA(this CoursePackageDTO task)
 		{
 			return new CAAWorkPackage()
 			{

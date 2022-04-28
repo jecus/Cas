@@ -5,9 +5,9 @@ using Entity.Abstractions.Attributte;
 namespace CAA.Entity.Models.DTO
 {
     
-    [Table("WorkPackages", Schema = "dbo")]
+    [Table("CoursePackage", Schema = "dbo")]
     [Condition("IsDeleted", 0)]
-    public class CAAWorkPackageDTO : BaseEntity, IOperatable
+    public class CoursePackageDTO : BaseEntity, IOperatable
     {
         [Column("Title")]
         public string Title { get; set; }

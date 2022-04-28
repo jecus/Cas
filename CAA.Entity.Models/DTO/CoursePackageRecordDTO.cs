@@ -5,9 +5,9 @@ using Entity.Abstractions.Attributte;
 namespace CAA.Entity.Models.DTO
 {
     
-    [Table("WorkPackageRecords", Schema = "dbo")]
+    [Table("CourseRecords", Schema = "dbo")]
     [Condition("IsDeleted", 0)]
-    public class CAAWorkPackageRecordDTO : BaseEntity
+    public class CoursePackageRecordDTO : BaseEntity
     {
         [Column("SettingsJSON")]
         public string SettingsJSON { get; set; }
@@ -17,7 +17,9 @@ namespace CAA.Entity.Models.DTO
         
         [Column("ObjectId")]
         public int ObjectId { get; set; }
-        
+
+        [Column("SpecialistId")]
+        public int SpecialistId { get; set; }
     }
 
 }

@@ -7,7 +7,7 @@ using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.CAA.CAAWP
 {
-    [CAADto(typeof(CAAWorkPackageDTO))]
+    [CAADto(typeof(CoursePackageDTO))]
     [Condition("IsDeleted", "0")]
     [Serializable]
     public class CAAWorkPackage : BaseEntityObject

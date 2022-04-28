@@ -112,12 +112,12 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			if (_operatorId == -1)
 			{
 				_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-					.GetObjectListAll<CAAWorkPackageDTO, CAAWorkPackage>());
+					.GetObjectListAll<CoursePackageDTO, CAAWorkPackage>());
 			}
 			else
 			{
 				_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-					.GetObjectListAll<CAAWorkPackageDTO, CAAWorkPackage>(new Filter("OperatorId", _operatorId)));
+					.GetObjectListAll<CoursePackageDTO, CAAWorkPackage>(new Filter("OperatorId", _operatorId)));
 			}
 			
 			AnimatedThreadWorker.ReportProgress(70, "filter directives");
@@ -238,26 +238,30 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
 		{
-            foreach (var item in _directivesViewer.SelectedItems)
-            {
-                if (item.Status == WPStatus.Closed)
-                {
-					MessageBox.Show($@"This audit {item.Title} is already closed!", (string)new GlobalTermsProvider()["SystemName"],
-                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
-                        MessageBoxDefaultButton.Button2);
-					continue;
-                }
-
-                item.Status = WPStatus.Closed;
-                item.Settings.ClosingDate = DateTime.Now;
-                item.Settings.ClosedBy = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
-                GlobalObjects.CaaEnvironment.NewKeeper.Save(item);
-                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-                AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
-
-                AnimatedThreadWorker.RunWorkerAsync();
-			}
+			CAACourseCloseForm f = new CAACourseCloseForm(_directivesViewer.SelectedItem);
+			f.ShowDialog();
+			
+			
+   //          foreach (var item in _directivesViewer.SelectedItems)
+   //          {
+   //              if (item.Status == WPStatus.Closed)
+   //              {
+			// 		MessageBox.Show($@"This audit {item.Title} is already closed!", (string)new GlobalTermsProvider()["SystemName"],
+   //                      MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+   //                      MessageBoxDefaultButton.Button2);
+			// 		continue;
+   //              }
+   //
+   //              item.Status = WPStatus.Closed;
+   //              item.Settings.ClosingDate = DateTime.Now;
+   //              item.Settings.ClosedBy = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
+   //              GlobalObjects.CaaEnvironment.NewKeeper.Save(item);
+   //              AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+   //              AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+   //              AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+   //
+   //              AnimatedThreadWorker.RunWorkerAsync();
+			// }
 
         }
 

@@ -31,7 +31,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		private CommonCollection<CAAWorkPackageRecord> _resultDocumentArray = new CommonCollection<CAAWorkPackageRecord>();
 		private CommonFilterCollection _filter;
 
-		private CourseRecordEducationListView _directivesViewer;
+		private CourseRecordListView _directivesViewer;
 		
 		#endregion
 
@@ -96,7 +96,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-				.GetObjectListAll<CAAWorkPackageRecordDTO, CAAWorkPackageRecord>(new Filter("WorkPackageId", _wp.ItemId)));
+				.GetObjectListAll<CoursePackageRecordDTO, CAAWorkPackageRecord>(new Filter("WorkPackageId", _wp.ItemId)));
 			
 			var ids = _initialDocumentArray.Select(i => i.ObjectId).Distinct();
 
@@ -156,7 +156,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		private void InitListView()
 		{
-			_directivesViewer = new CourseRecordEducationListView(AnimatedThreadWorker);
+			_directivesViewer = new CourseRecordListView(AnimatedThreadWorker);
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;

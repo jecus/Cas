@@ -174,7 +174,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			if (_operatorId == -1)
 			{
 				_openPubWorkPackages.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-					.GetObjectListAll<CAAWorkPackageDTO, CAAWorkPackage>(new List<Filter>()
+					.GetObjectListAll<CoursePackageDTO, CAAWorkPackage>(new List<Filter>()
 					{
 						new Filter("Status", 0)
 					}));
@@ -182,7 +182,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			else
 			{
 				_openPubWorkPackages.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-					.GetObjectListAll<CAAWorkPackageDTO, CAAWorkPackage>(
+					.GetObjectListAll<CoursePackageDTO, CAAWorkPackage>(
 						new List<Filter>()
 						{
 							new Filter("Status", 0),
@@ -308,6 +308,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        {
 			        ObjectId = item.Record.ItemId,
 			        WorkPackageId = wp.ItemId,
+			        SpecialistId =  item.Specialist.ItemId,
 			        Parent = item,
 		        });
 			        
@@ -346,7 +347,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        return;
 
 
-	        var wp = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAWorkPackageDTO, CAAWorkPackage>(_directivesViewer.SelectedItem.Record.Settings.BlockedWpId.Value);
+	        var wp = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CoursePackageDTO, CAAWorkPackage>(_directivesViewer.SelectedItem.Record.Settings.BlockedWpId.Value);
 	        
 	        var res = $"{wp.Title} - {wp.Settings.Number}";
 	        MessageBox.Show(res, "",
@@ -404,6 +405,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			        {
 				        ObjectId = item.Record.ItemId,
 				        WorkPackageId = wp.ItemId,
+				        SpecialistId =  item.Specialist.ItemId,
 				        Parent = item,
 			        });
 			        

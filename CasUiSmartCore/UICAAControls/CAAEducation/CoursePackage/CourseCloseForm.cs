@@ -4,19 +4,23 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.UI.UIControls.DocumentationControls;
+using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
+using SmartCore.CAA.CAAEducation;
 using SmartCore.CAA.CAAWP;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 {
 	public partial class CAACourseCloseForm : MetroForm
 	{
 		private readonly CAAWorkPackage _currentWp;
-		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
-
+		private CommonCollection<CAAWorkPackageRecord> _initialDocumentArray = new CommonCollection<CAAWorkPackageRecord>();
+		
 		#region Costructor
 
 		public CAACourseCloseForm()
@@ -28,8 +32,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		{
 			if(currentWp == null)
 				return;
-
-			DocumentControls.AddRange(new[] { documentControl1, documentControl2, documentControl3, documentControl4, documentControl5, documentControl6 , documentControl7, documentControl8, documentControl9, documentControl10});
+			
 			_currentWp = currentWp;
 			UpdateInformation();
 		}
@@ -40,55 +43,84 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		private void UpdateInformation()
 		{
-			//metroTextBox1.Text = $"{_currentWp.ProviderPrice.Count} Count";
-
-			if (_currentWp.ItemId <= 0)
-				_currentWp.Settings.Number = $"{GlobalObjects.CaaEnvironment.ObtainId()} {DateTime.Now:G}";
-
-
-			var author = GlobalObjects.CaaEnvironment?.GetCorrector(_currentWp.Settings.Author);
-			var published = GlobalObjects.CaaEnvironment?.GetCorrector(_currentWp.Settings.PublishedBy);
-			var closed = GlobalObjects.CaaEnvironment?.GetCorrector(_currentWp.Settings.ClosedBy);
+			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+				.GetObjectListAll<CoursePackageRecordDTO, CAAWorkPackageRecord>(new Filter("WorkPackageId", _currentWp.ItemId)));
 			
-			textBoxWpNumber.Text = _currentWp.Settings.Number;
-			textBoxDescription.Text = _currentWp.Settings.Description;
-			dateTimePickerIssueCreateDate.Value = _currentWp.Settings.CreateDate;
-			dateTimePickerPublishingDate.Value = _currentWp.Settings.PublishingDate ?? SmartCore.Auxiliary.DateTimeExtend.GetCASMinDateTime();
-			textBoxAuthor.Text =author;
-			textBoxClosedBy.Text = closed;
-			textBoxPublishingRemark.Text = _currentWp.Settings.PublishingRemarks;
-			textBoxDuration.Text = _currentWp.Settings.Duration;
-			textBoxTitle.Text = _currentWp.Title;
-			textBoxStatus.Text = _currentWp.Status.ToString();
-			dateTimePickerOpeningDate.Value = _currentWp.Settings.OpeningDate;
-			dateTimePickerClosingDate.Value = _currentWp.Settings.ClosingDate ?? SmartCore.Auxiliary.DateTimeExtend.GetCASMinDateTime();
-			textBoxPublishedBy.Text = published;
-			textBoxRemarks.Text = _currentWp.Settings.Remarks;
-			textBoxClosingRemarks.Text = _currentWp.Settings.ClosingRemarks;
-			textBoxLocation.Text = _currentWp.Settings.Location;
-			dateTimePickerFlightDate.Value = _currentWp.Settings.PerformDate;
-			
+			var ids = _initialDocumentArray.Select(i => i.ObjectId).Distinct();
 
-			foreach (var control in DocumentControls)
-				control.Added += DocumentControl1_Added;
-
-			if (_currentWp.Settings.ClosingDocument == null)
-				_currentWp.Settings.ClosingDocument = new List<SmartCore.Entities.General.Document>();
-
-			if (_currentWp.Settings.DocumentIds != null && _currentWp.Settings.DocumentIds.Any())
-				_currentWp.Settings.ClosingDocument.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ItemId",_currentWp.Settings.DocumentIds )));
-			
-			if (_currentWp.Settings.ClosingDocument != null)
+			if (ids.Any())
 			{
-				for (int i = 0; i < _currentWp.Settings.ClosingDocument.Count; i++)
+				var educationRecords = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<EducationRecordsDTO, CAAEducationRecord>(new Filter("ItemId", ids));
+
+				var edIds = educationRecords.Select(i => i.EducationId);
+				var educations = GlobalObjects.CaaEnvironment.NewLoader
+					.GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("ItemId", edIds),loadChild:true);
+				
+				var spIds = educationRecords.Select(i => i.SpecialistId);
+				var specialists = GlobalObjects.CaaEnvironment.NewLoader
+					.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("ItemId", spIds));
+
+				
+				foreach (var wpR in _initialDocumentArray)
 				{
-					var control = DocumentControls[i];
-					control.CurrentDocument = _currentWp.Settings.ClosingDocument[i];
+					var r = educationRecords.FirstOrDefault(i => i.ItemId == wpR.ObjectId);
+					if(r == null)
+						continue;
+					//EducationCalculator.CalculateEducation(r);
+					var item = new CAAEducationManagment()
+					{
+						Specialist = specialists.FirstOrDefault(i => i.ItemId == r.SpecialistId),
+						Education = educations.FirstOrDefault(i => i.ItemId == r.EducationId),
+						Record = r,
+					};
+					item.Occupation = item.Education.Occupation;
+					item.IsCombination = item.Record.Settings.IsCombination;
+
+					wpR.Parent = item;
+				}
+
+
+				foreach (var item in _initialDocumentArray)
+				{
+					var r = dataGridViewItems.Rows[dataGridViewItems.Rows.Add(new DataGridViewRow(){Tag = item})];
+					r.Cells[0].Value = item.Parent.Specialist.FirstName;
+					r.Cells[1].Value = item.Parent.Specialist.LastName;
+					r.Cells[2].Value = false;
+					r.Cells[2].ReadOnly = true;
 				}
 			}
+			
+			
+			dataGridViewItems.CellClick +=DataGridViewItemsOnCellClick;
 		}
-
+		
 		#endregion
+		
+		private void DataGridViewItemsOnCellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			if(e.RowIndex < 0)
+				return;
+
+			var row = dataGridViewItems.Rows[e.RowIndex];
+			var item = row.Tag as CAAWorkPackageRecord;
+			
+			if (item != null && item.Document == null)
+			{
+				var type = GlobalObjects.CaaEnvironment.GetDictionary<ServiceType>().GetByFullName("Training") as ServiceType;
+				item.Document = new SmartCore.Entities.General.Document
+				{
+					Parent = item,
+					ParentId = item.ItemId,
+					ParentTypeId = item.SmartCoreObjectType.ItemId,
+					DocType = DocumentType.Certificate,
+					ServiceType = type
+				};
+			}
+			
+			var form = new DocumentForm(item.Document, false);
+			if (form.ShowDialog() == DialogResult.OK)
+				item.Document = item.Document;
+		}
 
 		#region private void DocumentControl1_Added(object sender, EventArgs e)
 
@@ -127,9 +159,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		{
 			try
 			{
-				ApplyChanges();
-				GlobalObjects.NewKeeper.Save(_currentWp);
-
+				
 				DialogResult = DialogResult.OK;
 				Close();
 			}
@@ -140,34 +170,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		}
 
 		#endregion
-
-		#region private void ApplyChanges()
-
-		private void ApplyChanges()
-		{
-			_currentWp.Title = textBoxTitle.Text;
-			_currentWp.Settings.Number = textBoxWpNumber.Text;
-			_currentWp.Settings.PublishingRemarks = textBoxPublishingRemark.Text;
-			_currentWp.Settings.Location = textBoxLocation.Text;
-			_currentWp.Settings.Duration = textBoxDuration.Text;
-			_currentWp.Settings.ClosingRemarks = textBoxClosingRemarks.Text;
-			_currentWp.Settings.Remarks = textBoxRemarks.Text;
-			_currentWp.Settings.PerformDate = dateTimePickerFlightDate.Value;
-			_currentWp.Settings.Description = textBoxDescription.Text;
-
-			_currentWp.Settings.DocumentIds = new List<int>();
-			_currentWp.Settings.DocumentIds.Clear();
-			foreach (var control in DocumentControls.Where(control => control.CurrentDocument != null))
-				_currentWp.Settings.DocumentIds.Add(control.CurrentDocument.ItemId);
-
-			if (_currentWp.ItemId > 0) return;
-			_currentWp.Settings.OpeningDate = DateTime.Now;
-			_currentWp.Settings.CreateDate = DateTime.Now;
-			_currentWp.Settings.Author = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
-		}
-
-		#endregion
-
+		
 		#region private void buttonClose_Click(object sender, EventArgs e)
 
 		private void buttonClose_Click(object sender, EventArgs e)
@@ -177,12 +180,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		}
 
 		#endregion
-
-		private void LinkLabelEditComponents_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			// var form = new WpProviderForm(_currentWp);
-			// if (form.ShowDialog() == DialogResult.OK)
-			// 	metroTextBox1.Text = $"{_currentWp.ProviderPrice.Count} Count";
-		}
+		
 	}
 }

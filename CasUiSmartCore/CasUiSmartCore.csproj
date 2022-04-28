@@ -933,9 +933,9 @@
     <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordListScreen.Designer.cs">
       <DependentUpon>CourseRecordListScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordEducationListView.cs" />
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordEducationListView.Designer.cs">
-      <DependentUpon>CourseRecordEducationListView.cs</DependentUpon>
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordListView.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordListView.Designer.cs">
+      <DependentUpon>CourseRecordListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UICAAControls\CAAEducation\EducationPerformanceControl.cs">
       <SubType>UserControl</SubType>
