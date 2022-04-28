@@ -30,9 +30,9 @@ namespace SmartCore.DtoHelper
     public static  class CaaGeneralConverterDTO
 	{
 		
-		public static CAAWorkPackageRecord ConvertCAA(this CoursePackageRecordDTO task)
+		public static CourseRecord ConvertCAA(this CourseRecordDTO task)
 		{
-			return new CAAWorkPackageRecord
+			return new CourseRecord
 			{
 				ItemId = task.ItemId,
 				IsDeleted = task.IsDeleted,
@@ -45,9 +45,9 @@ namespace SmartCore.DtoHelper
 			};
 		}
 
-		public static CoursePackageRecordDTO ConvertCAA(this CAAWorkPackageRecord task)
+		public static CourseRecordDTO ConvertCAA(this CourseRecord task)
 		{
-			return new CoursePackageRecordDTO()
+			return new CourseRecordDTO()
 			{
 				ItemId = task.ItemId,
 				IsDeleted = task.IsDeleted,

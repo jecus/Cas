@@ -304,7 +304,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        else item.Record.Settings.BlockedWpId = wp.ItemId;
 		        
 		        GlobalObjects.NewKeeper.Save(item.Record);
-		        GlobalObjects.NewKeeper.Save(new CAAWorkPackageRecord()
+		        GlobalObjects.NewKeeper.Save(new CourseRecord()
 		        {
 			        ObjectId = item.Record.ItemId,
 			        WorkPackageId = wp.ItemId,
@@ -401,7 +401,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			        else item.Record.Settings.BlockedWpId = wp.ItemId;
 			        
 			        GlobalObjects.NewKeeper.Save(item.Record);
-			        GlobalObjects.NewKeeper.Save(new CAAWorkPackageRecord()
+			        GlobalObjects.NewKeeper.Save(new CourseRecord()
 			        {
 				        ObjectId = item.Record.ItemId,
 				        WorkPackageId = wp.ItemId,
@@ -478,13 +478,14 @@ namespace CAS.UI.UICAAControls.CAAEducation
 				_toolStripMenuItemsWorkPackages,
 				_toolStripMenuItemsWShowWP
 				);
-
+			
 			_directivesViewer.MenuOpeningAction = () =>
 			{
 				if (_directivesViewer.SelectedItems.Count <= 0)
 					return;
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
+					_toolStripMenuItemsWorkPackages.Enabled = _directivesViewer.SelectedItem?.Record?.Settings?.BlockedWpId!= null;
 					_toolStripMenuItemOpen.Enabled = true;
 				}
 			};

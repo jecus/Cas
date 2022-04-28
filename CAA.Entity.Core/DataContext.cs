@@ -46,7 +46,7 @@ namespace CAA.Entity.Core
 
         #region dbo
 
-        public DbSet<CoursePackageRecordDTO> CourseRecordDto { get; set; }
+        public DbSet<CourseRecordDTO> CourseRecordDto { get; set; }
         public DbSet<CoursePackageDTO> CoursePackageDto { get; set; }
         public DbSet<EducationRecordsDTO> EducationRecordsDto { get; set; }
         public DbSet<CAAEventDTO> CAAEventDto { get; set; }

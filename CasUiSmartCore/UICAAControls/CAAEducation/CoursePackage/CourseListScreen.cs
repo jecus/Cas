@@ -215,13 +215,19 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 				_toolStripMenuItemPublish,
 				_toolStripMenuItemClose);
 
+
+			_toolStripMenuItemClose.Enabled = false;
+			_toolStripMenuItemPublish.Enabled = false;
+			
 			_directivesViewer.MenuOpeningAction = () =>
 			{
-				if (_directivesViewer.SelectedItems.Count <= 0)
+				if (_directivesViewer.SelectedItems.Count <= 0 ||_directivesViewer.SelectedItems.Count > 1 )
 					return;
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
 					_toolStripMenuItemOpen.Enabled = true;
+					_toolStripMenuItemPublish.Enabled = _directivesViewer.SelectedItem.Status == WPStatus.Open;
+					_toolStripMenuItemClose.Enabled = _directivesViewer.SelectedItem.Status == WPStatus.Published;
 				}
 			};
 			
@@ -238,32 +244,16 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
 		{
-			CAACourseCloseForm f = new CAACourseCloseForm(_directivesViewer.SelectedItem);
-			f.ShowDialog();
-			
-			
-   //          foreach (var item in _directivesViewer.SelectedItems)
-   //          {
-   //              if (item.Status == WPStatus.Closed)
-   //              {
-			// 		MessageBox.Show($@"This audit {item.Title} is already closed!", (string)new GlobalTermsProvider()["SystemName"],
-   //                      MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
-   //                      MessageBoxDefaultButton.Button2);
-			// 		continue;
-   //              }
-   //
-   //              item.Status = WPStatus.Closed;
-   //              item.Settings.ClosingDate = DateTime.Now;
-   //              item.Settings.ClosedBy = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
-   //              GlobalObjects.CaaEnvironment.NewKeeper.Save(item);
-   //              AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-   //              AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-   //              AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
-   //
-   //              AnimatedThreadWorker.RunWorkerAsync();
-			// }
-
-        }
+			var f = new CAACourseCloseForm(_directivesViewer.SelectedItem);
+			if (f.ShowDialog() == DialogResult.OK)
+			{
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+				
+				AnimatedThreadWorker.RunWorkerAsync();
+			}
+		}
 
 		#endregion
 

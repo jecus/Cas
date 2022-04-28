@@ -20,7 +20,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 	///<summary>
 	/// список для отображения сотрудников
 	///</summary>
-	public partial class CourseRecordListView : BaseGridViewControl<CAAWorkPackageRecord>
+	public partial class CourseRecordListView : BaseGridViewControl<CourseRecord>
 	{
         private readonly AnimatedThreadWorker _animatedThreadWorker;
 
@@ -122,7 +122,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
         
         #region protected override void SetItemColor(GridViewRowInfo listViewItem, Document item)
 
-        protected override void SetItemColor(GridViewRowInfo listViewItem, CAAWorkPackageRecord item)
+        protected override void SetItemColor(GridViewRowInfo listViewItem, CourseRecord item)
         {
 	        var itemBackColor = UsefulMethods.GetColor(item);
 	        var itemForeColor = Color.Gray;
@@ -146,7 +146,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		#region protected override List<CustomCell> GetListViewSubItems(Specialization item)
 
-		protected override List<CustomCell> GetListViewSubItems(CAAWorkPackageRecord item)
+		protected override List<CustomCell> GetListViewSubItems(CourseRecord item)
         {
 	        var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item.Parent.Specialist);
 	        var occupation = item.Parent.IsCombination ? null : item.Parent.Occupation;

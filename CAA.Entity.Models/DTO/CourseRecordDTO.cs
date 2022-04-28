@@ -7,7 +7,7 @@ namespace CAA.Entity.Models.DTO
     
     [Table("CourseRecords", Schema = "dbo")]
     [Condition("IsDeleted", 0)]
-    public class CoursePackageRecordDTO : BaseEntity
+    public class CourseRecordDTO : BaseEntity
     {
         [Column("SettingsJSON")]
         public string SettingsJSON { get; set; }

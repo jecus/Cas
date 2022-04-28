@@ -19,7 +19,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 	public partial class CAACourseCloseForm : MetroForm
 	{
 		private readonly CAAWorkPackage _currentWp;
-		private CommonCollection<CAAWorkPackageRecord> _initialDocumentArray = new CommonCollection<CAAWorkPackageRecord>();
+		private CommonCollection<CourseRecord> _initialDocumentArray = new CommonCollection<CourseRecord>();
 		
 		#region Costructor
 
@@ -44,7 +44,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		private void UpdateInformation()
 		{
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-				.GetObjectListAll<CoursePackageRecordDTO, CAAWorkPackageRecord>(new Filter("WorkPackageId", _currentWp.ItemId)));
+				.GetObjectListAll<CourseRecordDTO, CourseRecord>(new Filter("WorkPackageId", _currentWp.ItemId)));
 			
 			var ids = _initialDocumentArray.Select(i => i.ObjectId).Distinct();
 
@@ -60,6 +60,9 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 				var specialists = GlobalObjects.CaaEnvironment.NewLoader
 					.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("ItemId", spIds));
 
+				var recordIds = _initialDocumentArray.Select(i => i.ItemId);
+				var documents = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ParentID",recordIds));
+				
 				
 				foreach (var wpR in _initialDocumentArray)
 				{
@@ -76,17 +79,20 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 					item.Occupation = item.Education.Occupation;
 					item.IsCombination = item.Record.Settings.IsCombination;
 
+					wpR.CloseDocument = documents.FirstOrDefault(i => i.ParentId == wpR.ItemId);
 					wpR.Parent = item;
+					
 				}
-
-
+				
 				foreach (var item in _initialDocumentArray)
 				{
 					var r = dataGridViewItems.Rows[dataGridViewItems.Rows.Add(new DataGridViewRow(){Tag = item})];
 					r.Cells[0].Value = item.Parent.Specialist.FirstName;
 					r.Cells[1].Value = item.Parent.Specialist.LastName;
-					r.Cells[2].Value = false;
-					r.Cells[2].ReadOnly = true;
+					r.Cells[2].Value = item.CloseDocument != null;
+					r.Cells[0].ReadOnly = false;
+					r.Cells[1].ReadOnly = false;
+					r.Cells[2].ReadOnly = false;
 				}
 			}
 			
@@ -102,12 +108,12 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 				return;
 
 			var row = dataGridViewItems.Rows[e.RowIndex];
-			var item = row.Tag as CAAWorkPackageRecord;
+			var item = row.Tag as CourseRecord;
 			
-			if (item != null && item.Document == null)
+			if (item != null && item.CloseDocument == null)
 			{
 				var type = GlobalObjects.CaaEnvironment.GetDictionary<ServiceType>().GetByFullName("Training") as ServiceType;
-				item.Document = new SmartCore.Entities.General.Document
+				item.CloseDocument = new SmartCore.Entities.General.Document
 				{
 					Parent = item,
 					ParentId = item.ItemId,
@@ -117,9 +123,9 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 				};
 			}
 			
-			var form = new DocumentForm(item.Document, false);
+			var form = new DocumentForm(item.CloseDocument, false);
 			if (form.ShowDialog() == DialogResult.OK)
-				item.Document = item.Document;
+				item.CloseDocument = item.CloseDocument;
 		}
 
 		#region private void DocumentControl1_Added(object sender, EventArgs e)
@@ -159,6 +165,15 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		{
 			try
 			{
+				var items = dataGridViewItems.Rows.OfType<DataGridViewRow>().Select(i => i.Tag).OfType<CourseRecord>();
+				 if (items.All(i => i.CloseDocument != null))
+				 {
+				 	_currentWp.Status = WPStatus.Closed;
+				 	_currentWp.Settings.ClosingDate = DateTime.Now;
+				 	_currentWp.Settings.ClosedBy = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
+				 	GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentWp);
+				}
+				
 				
 				DialogResult = DialogResult.OK;
 				Close();

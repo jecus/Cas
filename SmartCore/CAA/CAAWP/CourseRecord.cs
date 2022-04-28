@@ -9,12 +9,12 @@ using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.CAA.CAAWP
 {
-    [CAADto(typeof(CoursePackageRecordDTO))]
+    [CAADto(typeof(CourseRecordDTO))]
     [Condition("IsDeleted", "0")]
     [Serializable]
-    public class CAAWorkPackageRecord : BaseEntityObject
+    public class CourseRecord : BaseEntityObject
     {
-        public CAAWorkPackageRecord()
+        public CourseRecord()
         {
             SmartCoreObjectType = SmartCoreType.Aircraft;
         }
@@ -24,7 +24,6 @@ namespace SmartCore.CAA.CAAWP
         public int WorkPackageId { get; set; }
         public string SettingsJSON{ get; set; }
         public CAAEducationManagment Parent { get; set; }
-        public Document Document { get; set; }
-        
+        public Document CloseDocument { get; set; }
     }
 }

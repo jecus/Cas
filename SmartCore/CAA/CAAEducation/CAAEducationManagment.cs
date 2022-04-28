@@ -10,12 +10,13 @@ namespace SmartCore.CAA.CAAEducation
         public Occupation Occupation { get; set; }
         public bool IsCombination { get; set; }
         public CAAEducation Education { get; set; }
-		
         public CAAEducationRecord  Record{ get; set; }
+        
 
         public CAAEducationManagment()
         {
             IsCombination = true;
         }
+        
     }
 }

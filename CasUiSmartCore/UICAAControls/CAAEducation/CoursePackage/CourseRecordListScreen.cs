@@ -27,8 +27,8 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		#region Fields
 
-		private CommonCollection<CAAWorkPackageRecord> _initialDocumentArray = new CommonCollection<CAAWorkPackageRecord>();
-		private CommonCollection<CAAWorkPackageRecord> _resultDocumentArray = new CommonCollection<CAAWorkPackageRecord>();
+		private CommonCollection<CourseRecord> _initialDocumentArray = new CommonCollection<CourseRecord>();
+		private CommonCollection<CourseRecord> _resultDocumentArray = new CommonCollection<CourseRecord>();
 		private CommonFilterCollection _filter;
 
 		private CourseRecordListView _directivesViewer;
@@ -64,7 +64,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
             statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 
-			_filter = new CommonFilterCollection(typeof(CAAWorkPackageRecord));
+			_filter = new CommonFilterCollection(typeof(CourseRecord));
 			
 			InitListView();
 			UpdateInformation();
@@ -96,7 +96,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-				.GetObjectListAll<CoursePackageRecordDTO, CAAWorkPackageRecord>(new Filter("WorkPackageId", _wp.ItemId)));
+				.GetObjectListAll<CourseRecordDTO, CourseRecord>(new Filter("WorkPackageId", _wp.ItemId)));
 			
 			var ids = _initialDocumentArray.Select(i => i.ObjectId).Distinct();
 
@@ -242,7 +242,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		///</summary>
 		///<param name="initialCollection"></param>
 		///<param name="resultCollection"></param>
-		private void FilterItems(IEnumerable<CAAWorkPackageRecord> initialCollection, ICommonCollection<CAAWorkPackageRecord> resultCollection)
+		private void FilterItems(IEnumerable<CourseRecord> initialCollection, ICommonCollection<CourseRecord> resultCollection)
 		{
 			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
