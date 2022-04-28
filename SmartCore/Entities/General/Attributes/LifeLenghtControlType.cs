@@ -9,9 +9,11 @@ namespace SmartCore.Entities.General.Attributes
     [AttributeUsage(AttributeTargets.Property)]
     public class LifeLenghtCalendarOnlyAttribute : Attribute
     {
-        public LifeLenghtCalendarOnlyAttribute()
+        public readonly bool _leftHeader;
+
+        public LifeLenghtCalendarOnlyAttribute(bool leftHeader = true)
         {
-            
+            _leftHeader = leftHeader;
         }
     }
 }

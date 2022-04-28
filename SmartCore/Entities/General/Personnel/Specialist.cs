@@ -396,8 +396,12 @@ namespace SmartCore.Entities.General.Personnel
 
 		[TableColumn("Combination")]
 		public string Combination { get; set; }
+		
 
 		#endregion
+		
+		
+		public string Qualification { get; set; }
 
 		#region public bool IsSertificier { get; set; }
 		/// <summary>

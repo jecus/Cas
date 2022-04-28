@@ -46,5 +46,8 @@ namespace CAA.Entity.Models.Dictionary
 
 		[Column("Type")]
 		public int Type { get; set; }
+
+		[Column("Repeat")]
+		public byte[] RepeatByte { get; set; }
 	}
 }

@@ -128,6 +128,9 @@ namespace CAA.Entity.Models.DTO
 		
 		[Column("Combination")]
 		public string Combination { get; set; }
+		
+		[Column("Qualification")]
+		public string Qualification { get; set; }
 
         [Column("IsCAA")]
 		public bool IsCAA { get; set; }

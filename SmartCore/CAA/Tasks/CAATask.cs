@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using CAA.Entity.Models;
 using CAA.Entity.Models.Dictionary;
 using SmartCore.Auxiliary.Extentions;
+using SmartCore.Calculations;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -61,6 +62,11 @@ namespace SmartCore.CAA.Tasks
         [FormControl(250, "Level",Order = 9)]
         public TaskLevel Level { get; set; }
         
+        [ListViewData(0.2f, "Repeat")]
+        [FormControl(250, "Repeat",Order = 10)]
+        [LifeLenghtCalendarOnly(false)]
+        public Lifelength Repeat { get; set; }
+        
         public int OperatorId { get; set; }
         
         
@@ -83,7 +89,7 @@ namespace SmartCore.CAA.Tasks
         
         
         private AttachedFile _attachedFile;
-        [FormControl(250, "File",Order = 10)]
+        [FormControl(250, "File",Order = 11)]
         public AttachedFile AttachedFile
         {
 	        get { return _attachedFile ?? (Files.GetFileByFileLinkType(FileLinkType.CAATask)); }

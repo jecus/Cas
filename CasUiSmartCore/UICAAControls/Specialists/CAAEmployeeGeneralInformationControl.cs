@@ -11,6 +11,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CASTerms;
 using SmartCore.CAA;
+using SmartCore.CAA.Specialists;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Personnel;
 
@@ -269,6 +270,15 @@ namespace CAS.UI.UICAAControls.Specialists
 				if(_currentItem.Combination!= null && _currentItem.Combination.Contains(checkedListBox1.Items[i].ToString()))
 					checkedListBox1.SetItemChecked(i,true);
 			}
+			
+			
+			checkedListBoxQualification.Items.Clear();
+			checkedListBoxQualification.Items.AddRange(SpecialistQualification.Items.ToArray());
+			for (int i = 0; i < checkedListBoxQualification.Items.Count; i++)
+			{
+				if(_currentItem.Qualification!= null && _currentItem.Qualification.Contains(checkedListBoxQualification.Items[i].ToString()))
+					checkedListBoxQualification.SetItemChecked(i,true);
+			}
 
 			comboBoxPosition.Items.Clear();
 	        foreach (var o in Enum.GetValues(typeof(SpecialistPosition)))
@@ -385,11 +395,15 @@ namespace CAS.UI.UICAAControls.Specialists
 
 	        _currentItem.Combination = "";
 	        foreach (var item in checkedListBox1.CheckedItems)
-	        {
 		        _currentItem.Combination += $"{item} ";
-	        }
+	        
+	        
+	        
+	        _currentItem.Qualification = "";
+	        foreach (var item in checkedListBoxQualification.CheckedItems)
+		        _currentItem.Qualification += $"{item} ";
 
-            if(fileControlPassportCopy.GetChangeStatus())
+	        if(fileControlPassportCopy.GetChangeStatus())
             {
                 fileControlPassportCopy.ApplyChanges();
                 _currentItem.PassportCopyFile = fileControlPassportCopy.AttachedFile;    

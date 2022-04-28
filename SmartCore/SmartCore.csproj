@@ -451,6 +451,7 @@
     <Compile Include="CAA\RoutineAudits\ProgramType.cs" />
     <Compile Include="CAA\RoutineAudits\RoutineAudit.cs" />
     <Compile Include="CAA\RoutineAudits\RoutineAuditRecord.cs" />
+    <Compile Include="CAA\Specialists\SpecialistQualification.cs" />
     <Compile Include="CAA\StandartManual\StandartManual.cs" />
     <Compile Include="CAA\Tasks\CAATask.cs" />
     <Compile Include="CAA\Tasks\TaskLevel.cs" />

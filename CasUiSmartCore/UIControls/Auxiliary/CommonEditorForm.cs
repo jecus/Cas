@@ -308,6 +308,17 @@ namespace CAS.UI.UIControls.Auxiliary
                         //Если контрол не является LifelengthViewer-ом то нужно добавить лейбл
                         panelMain.Controls.Add(labels[i]);
                     }
+                    
+                    if (controls[i] == null || (controls[i] != null &&  (controls[i] is LifelengthViewer)))
+                    {
+                        var c = controls[i] as LifelengthViewer;
+                        if (!c.ShowLeftHeader)
+                        {
+                            labels[i].Location = new Point(labels[i].Location.X, labels[i].Location.Y + 10);
+                            panelMain.Controls.Add(labels[i]);
+                        }
+                    }
+                    
                     if (pairControl != null)
                         panelMain.Controls.Add(pairControl);
 
@@ -960,7 +971,11 @@ namespace CAS.UI.UIControls.Auxiliary
                         var controlType =
                             (LifeLenghtCalendarOnlyAttribute)propertyInfo.GetCustomAttributes(typeof(LifeLenghtCalendarOnlyAttribute), false).FirstOrDefault();
                         if (controlType != null)
+                        {
                             ll.ShowCalendarOnly = true;
+                            ll.ShowLeftHeader = controlType._leftHeader;
+                            ll.ShowHeaders = controlType._leftHeader;
+                        }
 
                         return ll;
                     }
