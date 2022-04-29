@@ -112,5 +112,17 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 }
             }
         }
+
+        private void ListViewComplianceOnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            ButtonDelete.Enabled = false;
+            
+            if (listViewCompliance.SelectedItems.Count == 0)
+                return;
+            
+            if(listViewCompliance.SelectedItems.OfType<ListViewItem>().All(i => i.Group == listViewCompliance.Groups[1]))
+                ButtonDelete.Enabled = true;
+            
+        }
     }
 }

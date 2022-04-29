@@ -61,7 +61,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.ButtonDelete.Icon = global::CAS.UI.Properties.Resources.DeleteIcon;
             this.ButtonDelete.IconLayout = System.Windows.Forms.ImageLayout.Center;
             this.ButtonDelete.IconNotEnabled = global::CAS.UI.Properties.Resources.DeleteIcon_gray;
-            this.ButtonDelete.Location = new System.Drawing.Point(140, 235);
+            this.ButtonDelete.Location = new System.Drawing.Point(140, 225);
             this.ButtonDelete.Margin = new System.Windows.Forms.Padding(5);
             this.ButtonDelete.Name = "ButtonDelete";
             this.ButtonDelete.NormalBackgroundImage = null;
@@ -90,7 +90,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.ButtonAdd.Icon = global::CAS.UI.Properties.Resources.AddIcon;
             this.ButtonAdd.IconLayout = System.Windows.Forms.ImageLayout.Center;
             this.ButtonAdd.IconNotEnabled = global::CAS.UI.Properties.Resources.AddIcon_gray;
-            this.ButtonAdd.Location = new System.Drawing.Point(4, 235);
+            this.ButtonAdd.Location = new System.Drawing.Point(4, 225);
             this.ButtonAdd.Margin = new System.Windows.Forms.Padding(5);
             this.ButtonAdd.Name = "ButtonAdd";
             this.ButtonAdd.NormalBackgroundImage = null;
@@ -129,6 +129,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.listViewCompliance.UseCompatibleStateImageBehavior = false;
             this.listViewCompliance.View = System.Windows.Forms.View.Details;
             this.listViewCompliance.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListViewComplainceMouseDoubleClick);
+            this.listViewCompliance.SelectedIndexChanged += ListViewComplianceOnSelectedIndexChanged;
             // 
             // NextCourse
             // 
