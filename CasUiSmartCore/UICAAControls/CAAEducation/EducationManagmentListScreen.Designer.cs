@@ -42,6 +42,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.radio_ByName = new System.Windows.Forms.RadioButton();
             this.radio_ByCode = new System.Windows.Forms.RadioButton();
+            this.radio_Non = new System.Windows.Forms.RadioButton();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -185,8 +186,10 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			// 
 			this.flowLayoutPanel2.AutoSize = true;
 			this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.flowLayoutPanel2.Controls.Add(this.radio_Non);
 			this.flowLayoutPanel2.Controls.Add(this.radio_ByCode);
 			this.flowLayoutPanel2.Controls.Add(this.radio_ByName);
+			
 			this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
 			this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
 			this.flowLayoutPanel2.Location = new System.Drawing.Point(1291, 0);
@@ -225,6 +228,22 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.radio_ByCode.Text = "Group By Code";
             this.radio_ByCode.UseVisualStyleBackColor = true;
             this.radio_ByCode.CheckedChanged += Radio_ByNameOnCheckedChanged;
+            // 
+            // radio_WhicheverFirst
+            // 
+            this.radio_Non.AutoSize = true;
+            this.radio_Non.Checked = true;
+            this.radio_Non.Font = new System.Drawing.Font("Verdana", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radio_Non.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.radio_Non.Location = new System.Drawing.Point(448, 163);
+            this.radio_Non.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.radio_Non.Name = "radio_Non";
+            this.radio_Non.Size = new System.Drawing.Size(143, 22);
+            this.radio_Non.TabIndex = 67;
+            this.radio_Non.TabStop = true;
+            this.radio_Non.Text = "No Gropping";
+            this.radio_Non.UseVisualStyleBackColor = true;
+            this.radio_Non.CheckedChanged += Radio_ByNameOnCheckedChanged;
 			// 
 			// RequestForQuotationListScreen
 			// 
@@ -254,5 +273,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.RadioButton radio_ByName;
         private System.Windows.Forms.RadioButton radio_ByCode;
+        private System.Windows.Forms.RadioButton radio_Non;
 	}
 }

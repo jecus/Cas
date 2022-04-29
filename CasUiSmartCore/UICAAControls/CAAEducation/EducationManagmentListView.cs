@@ -43,8 +43,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
         public EducationManagmentListView(AnimatedThreadWorker animatedThreadWorker) : this()
 		{
             _animatedThreadWorker = animatedThreadWorker;
-            SortDirection = SortDirection.Asc;
-			OldColumnIndex = 1;
+            SortDirection = SortDirection.Desc;
+			OldColumnIndex = 12;
 		}
 
         public int OperatorId { get; set; }
@@ -60,11 +60,11 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		
 		protected override void GroupingItems()
 		{
-			this.radGridView1.GroupDescriptors.Clear();
-			var descriptor = new GroupDescriptor();
-			foreach (var colName in new List<string>{ "First Name", "Last Name" })
-				descriptor.GroupNames.Add(colName,  ListSortDirection.Ascending);
-			this.radGridView1.GroupDescriptors.Add(descriptor);
+			// this.radGridView1.GroupDescriptors.Clear();
+			// var descriptor = new GroupDescriptor();
+			// foreach (var colName in new List<string>{ "First Name", "Last Name" })
+			// 	descriptor.GroupNames.Add(colName,  ListSortDirection.Ascending);
+			// this.radGridView1.GroupDescriptors.Add(descriptor);
 		}
 
 		#region protected override void SetHeaders()

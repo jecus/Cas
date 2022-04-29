@@ -609,6 +609,9 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		private void Radio_ByNameOnCheckedChanged(object sender, EventArgs e)
 		{
+			if(_directivesViewer == null)
+				return;
+			
 			if (radio_ByName.Checked)
 			{
 				_directivesViewer.radGridView1.GroupDescriptors.Clear();
@@ -616,6 +619,10 @@ namespace CAS.UI.UICAAControls.CAAEducation
 				foreach (var colName in new List<string>{ "First Name", "Last Name" })
 					descriptor.GroupNames.Add(colName,  ListSortDirection.Ascending);
 				_directivesViewer.radGridView1.GroupDescriptors.Add(descriptor);
+			}
+			else if (radio_Non.Checked)
+			{
+				_directivesViewer.radGridView1.GroupDescriptors.Clear();
 			}
 			else
 			{
