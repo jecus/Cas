@@ -102,13 +102,19 @@ namespace CAS.UI.UICAAControls.CAAEducation
             if (listViewCompliance.SelectedItems.Count == 0)
                 return;
 
-            foreach (var item in listViewCompliance.SelectedItems.OfType<ListViewItem>())
+            var res = MessageBox.Show(@"Delete selected compliances?", (string)new GlobalTermsProvider()["SystemName"],
+                MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,
+                MessageBoxDefaultButton.Button2);
+            if (res == DialogResult.OK)
             {
-                if (item.Tag is LastCompliance tag)
+                foreach (var item in listViewCompliance.SelectedItems.OfType<ListViewItem>())
                 {
-                    _record.Settings.LastCompliances.Remove(tag);
-                    listViewCompliance.Items.Remove(item);
-                    GlobalObjects.CaaEnvironment.NewKeeper.Save(_record);
+                    if (item.Tag is LastCompliance tag)
+                    {
+                        _record.Settings.LastCompliances.Remove(tag);
+                        listViewCompliance.Items.Remove(item);
+                        GlobalObjects.CaaEnvironment.NewKeeper.Save(_record);
+                    }
                 }
             }
         }
