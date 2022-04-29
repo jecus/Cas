@@ -60,9 +60,6 @@ namespace SmartCore.CAA.CAAEducation
 		    LastCompliances = new List<LastCompliance>();
 	    }
 	    
-	    
-	    private byte[] _repeatByte;
-	    private byte[] _notifyByte;
 	    private List<LastCompliance> _lastCompliances;
 
 	    [JsonProperty]

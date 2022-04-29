@@ -76,11 +76,11 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.linkLabelEditComponents = new System.Windows.Forms.LinkLabel();
 			this.textBoxClosedBy = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxPublishingRemark = new MetroFramework.Controls.MetroTextBox();
-			this.textBoxDuration = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxPublishedBy = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxClosingRemarks = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxLocation = new MetroFramework.Controls.MetroTextBox();
 			this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
+			this.lifelengthViewerDuration = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			labelNumber = new MetroFramework.Controls.MetroLabel();
 			label1 = new MetroFramework.Controls.MetroLabel();
 			labelValidFrom = new MetroFramework.Controls.MetroLabel();
@@ -249,7 +249,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// 
 			label7.AutoSize = true;
 			label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label7.Location = new System.Drawing.Point(23, 409);
+			label7.Location = new System.Drawing.Point(23, 414);
 			label7.Name = "label7";
 			label7.Size = new System.Drawing.Size(62, 19);
 			label7.TabIndex = 44;
@@ -282,7 +282,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// 
 			label17.AutoSize = true;
 			label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label17.Location = new System.Drawing.Point(23, 435);
+			label17.Location = new System.Drawing.Point(23, 442);
 			label17.Name = "label17";
 			label17.Size = new System.Drawing.Size(61, 19);
 			label17.TabIndex = 62;
@@ -293,7 +293,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// 
 			metroLabel2.AutoSize = true;
 			metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			metroLabel2.Location = new System.Drawing.Point(23, 461);
+			metroLabel2.Location = new System.Drawing.Point(23, 468);
 			metroLabel2.Name = "metroLabel2";
 			metroLabel2.Size = new System.Drawing.Size(67, 19);
 			metroLabel2.TabIndex = 257;
@@ -675,7 +675,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// 
 			this.linkLabelEditComponents.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.linkLabelEditComponents.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.linkLabelEditComponents.Location = new System.Drawing.Point(394, 461);
+			this.linkLabelEditComponents.Location = new System.Drawing.Point(394, 468);
 			this.linkLabelEditComponents.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.linkLabelEditComponents.Name = "linkLabelEditComponents";
 			this.linkLabelEditComponents.Size = new System.Drawing.Size(37, 23);
@@ -747,37 +747,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.textBoxPublishingRemark.UseSelectable = true;
 			this.textBoxPublishingRemark.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxPublishingRemark.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// textBoxDuration
-			// 
-			// 
-			// 
-			// 
-			this.textBoxDuration.CustomButton.Image = null;
-			this.textBoxDuration.CustomButton.Location = new System.Drawing.Point(233, 2);
-			this.textBoxDuration.CustomButton.Name = "";
-			this.textBoxDuration.CustomButton.Size = new System.Drawing.Size(15, 15);
-			this.textBoxDuration.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxDuration.CustomButton.TabIndex = 1;
-			this.textBoxDuration.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxDuration.CustomButton.UseSelectable = true;
-			this.textBoxDuration.CustomButton.Visible = false;
-			this.textBoxDuration.ForeColor = System.Drawing.Color.DimGray;
-			this.textBoxDuration.Lines = new string[0];
-			this.textBoxDuration.Location = new System.Drawing.Point(180, 409);
-			this.textBoxDuration.MaxLength = 32767;
-			this.textBoxDuration.Name = "textBoxDuration";
-			this.textBoxDuration.PasswordChar = '\0';
-			this.textBoxDuration.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxDuration.SelectedText = "";
-			this.textBoxDuration.SelectionLength = 0;
-			this.textBoxDuration.SelectionStart = 0;
-			this.textBoxDuration.ShortcutsEnabled = true;
-			this.textBoxDuration.Size = new System.Drawing.Size(251, 20);
-			this.textBoxDuration.TabIndex = 45;
-			this.textBoxDuration.UseSelectable = true;
-			this.textBoxDuration.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxDuration.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// textBoxPublishedBy
 			// 
@@ -858,7 +827,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.textBoxLocation.CustomButton.Visible = false;
 			this.textBoxLocation.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxLocation.Lines = new string[0];
-			this.textBoxLocation.Location = new System.Drawing.Point(180, 435);
+			this.textBoxLocation.Location = new System.Drawing.Point(180, 442);
 			this.textBoxLocation.MaxLength = 32767;
 			this.textBoxLocation.Name = "textBoxLocation";
 			this.textBoxLocation.PasswordChar = '\0';
@@ -889,7 +858,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.metroTextBox1.CustomButton.Visible = false;
 			this.metroTextBox1.ForeColor = System.Drawing.Color.DimGray;
 			this.metroTextBox1.Lines = new string[0];
-			this.metroTextBox1.Location = new System.Drawing.Point(180, 461);
+			this.metroTextBox1.Location = new System.Drawing.Point(180, 468);
 			this.metroTextBox1.MaxLength = 32767;
 			this.metroTextBox1.Name = "metroTextBox1";
 			this.metroTextBox1.PasswordChar = '\0';
@@ -904,11 +873,44 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
-			// Course PackageEditorForm
+			// lifelengthViewerDuration
+			// 
+			this.lifelengthViewerDuration.AutoSize = true;
+			this.lifelengthViewerDuration.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.lifelengthViewerDuration.CalendarApplicable = false;
+			this.lifelengthViewerDuration.CyclesApplicable = false;
+			this.lifelengthViewerDuration.EnabledCalendar = true;
+			this.lifelengthViewerDuration.EnabledCycle = false;
+			this.lifelengthViewerDuration.EnabledHours = false;
+			this.lifelengthViewerDuration.FieldsBackColor = System.Drawing.SystemColors.Window;
+			this.lifelengthViewerDuration.ForeColor = System.Drawing.Color.DimGray;
+			this.lifelengthViewerDuration.HeaderCalendar = "Calendar";
+			this.lifelengthViewerDuration.HeaderCycles = "Cycles";
+			this.lifelengthViewerDuration.HeaderFormattedCalendar = "Calendar";
+			this.lifelengthViewerDuration.HeaderHours = "Hours";
+			this.lifelengthViewerDuration.HoursApplicable = false;
+			this.lifelengthViewerDuration.LeftHeader = "";
+			this.lifelengthViewerDuration.Location = new System.Drawing.Point(179, 405);
+			this.lifelengthViewerDuration.Margin = new System.Windows.Forms.Padding(4);
+			this.lifelengthViewerDuration.Modified = false;
+			this.lifelengthViewerDuration.Name = "lifelengthViewerDuration";
+			this.lifelengthViewerDuration.ReadOnly = false;
+			this.lifelengthViewerDuration.ShowCalendar = true;
+			this.lifelengthViewerDuration.ShowCalendarOnly = true;
+			this.lifelengthViewerDuration.ShowFormattedCalendar = false;
+			this.lifelengthViewerDuration.ShowHeaders = false;
+			this.lifelengthViewerDuration.ShowLeftHeader = false;
+			this.lifelengthViewerDuration.ShowMinutes = true;
+			this.lifelengthViewerDuration.Size = new System.Drawing.Size(172, 35);
+			this.lifelengthViewerDuration.SystemCalculated = true;
+			this.lifelengthViewerDuration.TabIndex = 343;
+			// 
+			// WorkPackageEditorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(866, 693);
+			this.Controls.Add(this.lifelengthViewerDuration);
 			this.Controls.Add(this.linkLabelEditComponents);
 			this.Controls.Add(this.metroTextBox1);
 			this.Controls.Add(metroLabel2);
@@ -942,7 +944,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.Controls.Add(label9);
 			this.Controls.Add(this.textBoxTitle);
 			this.Controls.Add(label10);
-			this.Controls.Add(this.textBoxDuration);
 			this.Controls.Add(label7);
 			this.Controls.Add(this.textBoxPublishingRemark);
 			this.Controls.Add(label6);
@@ -960,7 +961,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.Controls.Add(labelNumber);
 			this.MaximumSize = new System.Drawing.Size(937, 750);
 			this.MinimumSize = new System.Drawing.Size(800, 382);
-			this.Name = "CoursePackageEditorForm";
+			this.Name = "WorkPackageEditorForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
 			this.Text = "Course Package Editor Form";
@@ -969,6 +970,8 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+
+		private CAS.UI.UIControls.Auxiliary.LifelengthViewer lifelengthViewerDuration;
 
 		#endregion
 
@@ -1000,10 +1003,9 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		private System.Windows.Forms.LinkLabel linkLabelEditComponents;
 		private MetroFramework.Controls.MetroTextBox textBoxClosedBy;
 		private MetroFramework.Controls.MetroTextBox textBoxPublishingRemark;
-		private MetroTextBox textBoxDuration;
 		private MetroFramework.Controls.MetroTextBox textBoxPublishedBy;
 		private MetroFramework.Controls.MetroTextBox textBoxClosingRemarks;
-		private MetroTextBox textBoxLocation;
+		private MetroFramework.Controls.MetroTextBox textBoxLocation;
 		private MetroFramework.Controls.MetroTextBox metroTextBox1;
 	}
 }

@@ -57,7 +57,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			textBoxAuthor.Text =author;
 			textBoxClosedBy.Text = closed;
 			textBoxPublishingRemark.Text = _currentWp.Settings.PublishingRemarks;
-			textBoxDuration.Text = _currentWp.Settings.Duration;
+			lifelengthViewerDuration.Lifelength = _currentWp.Settings.Duration;
 			textBoxTitle.Text = _currentWp.Title;
 			textBoxStatus.Text = _currentWp.Status.ToString();
 			dateTimePickerOpeningDate.Value = _currentWp.Settings.OpeningDate;
@@ -149,7 +149,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			_currentWp.Settings.Number = textBoxWpNumber.Text;
 			_currentWp.Settings.PublishingRemarks = textBoxPublishingRemark.Text;
 			_currentWp.Settings.Location = textBoxLocation.Text;
-			_currentWp.Settings.Duration = textBoxDuration.Text;
+			_currentWp.Settings.Duration = lifelengthViewerDuration.Lifelength;
 			_currentWp.Settings.ClosingRemarks = textBoxClosingRemarks.Text;
 			_currentWp.Settings.Remarks = textBoxRemarks.Text;
 			_currentWp.Settings.PerformDate = dateTimePickerFlightDate.Value;

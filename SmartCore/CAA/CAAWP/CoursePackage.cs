@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
+using SmartCore.Calculations;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 
@@ -64,6 +65,7 @@ namespace SmartCore.CAA.CAAWP
                 ClosingDate = DateTime.Now,
                 OpeningDate = DateTime.Now,
                 PerformDate = DateTime.Now,
+                Duration = Lifelength.Null,
                 ClosingDocument =new List<Document>(),
                 DocumentIds = new List<int>()
             };
@@ -82,6 +84,8 @@ namespace SmartCore.CAA.CAAWP
     [Serializable]
     public  class CAAWorkPackagekSettings
     {
+        private Lifelength _duration;
+
         [JsonProperty]
         public string Number { get; set; }
         [JsonProperty]
@@ -121,8 +125,35 @@ namespace SmartCore.CAA.CAAWP
         public string Location { get; set; }
         
         [JsonProperty]
-        public string Duration { get; set; }
+        public byte[] DurationLifelength { get; set; }
+
+
         
+        [JsonIgnore]
+        public Lifelength Duration
+        {
+            get => _duration;
+            set
+            {
+                _duration = value;
+                _durationByte = value.ConvertToByteArray();
+            }
+        }
+        
+
+        private byte[] _durationByte;
+        [JsonProperty]
+        public byte[] DurationyByte
+        {
+            get => _durationByte;
+            set
+            {
+                _durationByte = value;
+                _duration = Lifelength.ConvertFromByteArray(value);
+            }
+        }
+        
+
         [JsonProperty]
         public DateTime PerformDate { get; set; }
         

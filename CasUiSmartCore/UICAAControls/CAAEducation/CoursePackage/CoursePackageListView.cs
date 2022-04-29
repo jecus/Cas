@@ -9,6 +9,7 @@ using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA.CAAWP;
+using SmartCore.Calculations;
 using SmartCore.Entities.General;
 
 namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
@@ -116,13 +117,16 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 	        var publisherDate = item.Status > WPStatus.Open ? SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.PublishingDate) : String.Empty ;
 	        var closingDate = item.Status > WPStatus.Published ? SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.ClosingDate) : String.Empty ;
 	        
+	        if(item.Settings.Duration == null)
+				item.Settings.Duration  = Lifelength.Null;
+	        
 	        var subItems = new List<CustomCell>()
 			{
 				CreateRow(item.StatusName, item.Status),
 				CreateRow(item.Settings.Number, item.Settings.Number),
 				CreateRow(item.Title, item.Title),
 				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.PerformDate), item.Settings.PerformDate),
-				CreateRow(item.Settings.Duration,item.Settings.Duration),
+				CreateRow(item.Settings.Duration.ToRepeatIntervalsFormat(),item.Settings.Duration),
 				CreateRow(item.Settings.Remarks,item.Settings.Remarks),
 				CreateRow(openDate,item.Settings.OpeningDate),
 				CreateRow(publisherDate,item.Settings.PublishedBy),
