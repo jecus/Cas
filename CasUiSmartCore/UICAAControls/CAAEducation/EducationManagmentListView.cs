@@ -49,6 +49,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
         public int OperatorId { get; set; }
         public Operator CurrentOperator { get; set; }
+        public bool DisableEdit { get; set; }
 
         #endregion
 
@@ -177,6 +178,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
+			if(DisableEdit)
+				e.Cancel = true;
 			if (SelectedItem.Occupation != null && SelectedItem.Education != null)
 			{
 				e.DisplayerText = $"{SelectedItem.Specialist.ToString()} - {SelectedItem.Education?.Task?.FullName}";;

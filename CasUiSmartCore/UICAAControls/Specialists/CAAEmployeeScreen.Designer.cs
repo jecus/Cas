@@ -51,7 +51,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.extendableRichContainerTrainingRecord = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
 			this.extendableRichContainerTraining = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
 			this.extendableRichContainerProcessing = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
-            this.employeeTrainingListControl1 = new CAS.UI.UIControls.PersonnelControls.EmployeeTraining.EmployeeTrainingListControl();
+            this.employeeTrainingListControl1 = new CAAEmployeeTraining();
 			this.extendableRichContainerRecords = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
 			this.employeeFlightControl = new CAS.UI.UIControls.PersonnelControls.EmployeeFlightControl();
 			this.extendableRichContainer1 = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
@@ -380,7 +380,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.employeeTrainingListControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.employeeTrainingListControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
 			this.employeeTrainingListControl1.Location = new System.Drawing.Point(3, 2760);
-			this.employeeTrainingListControl1.MinimumSize = new System.Drawing.Size(1206, 50);
+			this.employeeTrainingListControl1.MinimumSize = new System.Drawing.Size(1300, 50);
 			this.employeeTrainingListControl1.Name = "employeeTrainingListControl1";
 			this.employeeTrainingListControl1.Size = new System.Drawing.Size(1206, 50);
 			this.employeeTrainingListControl1.TabIndex = 24;
@@ -547,7 +547,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		private EmployeeSummary employeeSummary;
 		private UIControls.ReferenceControls.ExtendableRichContainer extendableRichContainerTraining;
 		private UIControls.ReferenceControls.ExtendableRichContainer extendableRichContainerProcessing;
-		private UIControls.PersonnelControls.EmployeeTraining.EmployeeTrainingListControl employeeTrainingListControl1;
+		private CAAEmployeeTraining employeeTrainingListControl1;
 		private EmployeeMedicalControl employeeMedicalControl1;
     }
 }

@@ -11,6 +11,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.PersonnelControls.EmployeeControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
+using SmartCore.CAA.CAAEducation;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -25,7 +26,7 @@ namespace CAS.UI.UICAAControls.Specialists
     public partial class CAAEmployeeScreen : ScreenControl
     {
         #region Fields
-
+        private CommonCollection<CAAEducationManagment> _initialDocumentArray = new CommonCollection<CAAEducationManagment>();
         private bool _needReload;
         private Specialist _currentItem;
         private readonly int _opearatorId;
@@ -135,7 +136,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			//complianceControl.cu = _currentItem;
 			employeeLicenceControl.UpdateControl(_currentItem, aircraftModels);
 			employeeMedicalControl1.UpdateControl(_currentItem);
-			employeeTrainingListControl1.UpdateControl(_currentItem, _suppliers, aircraftModels, employeeLicenceControl.FlowLayoutPanelGeneralControl.Controls.OfType<EmployeeLicenceGeneralControl>());
+			employeeTrainingListControl1.UpdateControl(_initialDocumentArray, aircraftHeaderControl1.Operator);
 	        employeeFlightControl.CurrentItem = _currentItem;
 	        employeeFlightControl.Reload += DocumentsControl_Reload;
 
@@ -327,9 +328,73 @@ namespace CAS.UI.UICAAControls.Specialists
             }
             #endregion
 
+
+            #region Training
+            
+            var educations = new List<SmartCore.CAA.CAAEducation.CAAEducation>();
+            var records = new List<CAAEducationRecord>();
+            var occupation = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray();
+            educations.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+	            .GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _opearatorId),loadChild:true));
+            records.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+	            .GetObjectListAll<EducationRecordsDTO, CAAEducationRecord>(new Filter("OperatorId", _opearatorId)));
+			
+
+            FillCollection(educations, _currentItem.Occupation, _currentItem,records, false);
+            foreach (Occupation dict in occupation)
+            {
+	            if (_currentItem.Combination != null && _currentItem.Combination.Contains(dict.FullName))
+		            FillCollection(educations, dict, _currentItem,records);
+            }
+
+            #endregion
+
             AnimatedThreadWorker.ReportProgress(100, "Complete");
         }
 		#endregion
+		
+		
+		private void FillCollection(List<SmartCore.CAA.CAAEducation.CAAEducation> education,
+			Occupation occupation,
+			Specialist specialist, List<CAAEducationRecord> records, bool isCombination = true)
+		{
+			var educations = education.Where(i => i.OccupationId == occupation.ItemId);
+			if (educations.Any())
+			{
+				foreach (var ed in educations)
+				{
+					var rec = records.FirstOrDefault(i => i.OccupationId == occupation.ItemId 
+					                                      && i.EducationId == ed.ItemId
+					                                      && i.PriorityId == ed.Priority.ItemId && i.SpecialistId == specialist.ItemId);
+
+					
+					if(rec != null)
+						rec.Education = ed;
+					
+					EducationCalculator.CalculateEducation(rec);
+					var item = new CAAEducationManagment()
+					{
+						Specialist = specialist,
+						Occupation = occupation,
+						Education = ed,
+						IsCombination = isCombination,
+						Record = rec
+					};
+					_initialDocumentArray.Add(item);
+				}
+			}
+			else
+			{
+				var item = new CAAEducationManagment()
+				{
+					Specialist = specialist,
+					Occupation = occupation,
+					IsCombination = isCombination
+				};
+				_initialDocumentArray.Add(item);
+				
+			}
+		}
 
 		#region private void DocumentsControl_Reload(object sender, EventArgs e)
 
@@ -430,8 +495,7 @@ namespace CAS.UI.UICAAControls.Specialists
         {
             if (!_directiveGeneralInformation.ValidateData(out message) || 
                 !DocumentsControl.ValidateData(out message) || 
-                !employeeLicenceControl.ValidateData(out message) || 
-				!employeeTrainingListControl1.ValidateData(out message))
+                !employeeLicenceControl.ValidateData(out message))
             {
                 return false;
             }
@@ -450,8 +514,7 @@ namespace CAS.UI.UICAAControls.Specialists
             if (_directiveGeneralInformation.GetChangeStatus(_currentItem.ItemId > 0 ) || 
                 DocumentsControl.GetChangeStatus() ||
 				employeeLicenceControl.GetChangeStatus() ||
-				employeeTrainingListControl1.GetChangeStatus() ||
-				employeeMedicalControl1.GetChangeStatus())
+                employeeMedicalControl1.GetChangeStatus())
             {
                 return true;
             }
@@ -470,7 +533,6 @@ namespace CAS.UI.UICAAControls.Specialists
             DocumentsControl.ApplyChanges();
             _directiveGeneralInformation.ApplyChanges();
 			employeeLicenceControl.ApplyChanges();
-			employeeTrainingListControl1.ApplyChanges();
 			employeeMedicalControl1.ApplyChanges();
 
 			DocumentsControl.SaveData();
