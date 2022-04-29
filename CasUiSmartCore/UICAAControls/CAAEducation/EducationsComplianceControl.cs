@@ -26,7 +26,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             
             if (_record.Settings.LastCompliances != null && _record.Settings.LastCompliances.Any())
             {
-                foreach (var comp in _record.Settings.LastCompliances)
+                foreach (var comp in _record.Settings.LastCompliances.OrderByDescending(i => i.LastDate))
                 {
                     var lastsubs =
                         new[]
@@ -91,7 +91,11 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
         private void ButtonAddOnClick(object sender, EventArgs e)
         {
-            var form = new EducationComplianceForm(_record, new LastCompliance());
+            var last = new LastCompliance();
+            if(_record?.Settings?.Next != null)
+                last.LastDate = _record?.Settings?.Next;
+            
+            var form = new EducationComplianceForm(_record, last);
             if (form.ShowDialog() == DialogResult.OK)
                 _animatedThreadWorker.RunWorkerAsync();
         }
@@ -115,6 +119,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                         GlobalObjects.CaaEnvironment.NewKeeper.Save(_record);
                     }
                 }
+                _animatedThreadWorker.RunWorkerAsync();
             }
         }
 
