@@ -960,10 +960,10 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.Controls.Add(labelNumber);
 			this.MaximumSize = new System.Drawing.Size(937, 750);
 			this.MinimumSize = new System.Drawing.Size(800, 382);
-			this.Name = "Course PackageEditorForm";
+			this.Name = "CoursePackageEditorForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
-			this.Text = "Work Package Editor Form";
+			this.Text = "Course Package Editor Form";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.ResumeLayout(false);
