@@ -45,28 +45,28 @@ namespace CAS.UI.UICAAControls.CAAEducation
                     };
                     listViewCompliance.Items.Add(lastItem);
                 }
-            }
+                
+                
+                if((bool)_record.Education?.Task?.Repeat.IsNullOrZero())
+                    return;
             
-            if((bool)_record.Education?.Task?.Repeat.IsNullOrZero())
-                return;
+                var subs =
+                    new[]
+                    {
+                        managment.Education?.Task?.FullName,
+                        SmartCore.Auxiliary.Convert.GetDateFormat(_record?.Settings?.Next),
+                        ""
+                    };
             
-            var subs =
-                new[]
+                var newItem = new ListViewItem(subs)
                 {
-                    managment.Education?.Task?.FullName,
-                    SmartCore.Auxiliary.Convert.GetDateFormat(_record?.Settings?.Next),
-                    ""
+                    BackColor = UsefulMethods.GetColor(managment),
+                    Group = listViewCompliance.Groups[0],
+                    Tag = _record,
                 };
-            
-            var newItem = new ListViewItem(subs)
-            {
-                BackColor = UsefulMethods.GetColor(managment),
-                Group = listViewCompliance.Groups[0],
-                Tag = _record,
-            };
-            listViewCompliance.Items.Add(newItem);
+                listViewCompliance.Items.Add(newItem);
+            }
         }
-        
         
         private void ListViewComplainceMouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -105,7 +105,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             var res = MessageBox.Show(@"Delete selected compliances?", (string)new GlobalTermsProvider()["SystemName"],
                 MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,
                 MessageBoxDefaultButton.Button2);
-            if (res == DialogResult.OK)
+            if (res == DialogResult.Yes)
             {
                 foreach (var item in listViewCompliance.SelectedItems.OfType<ListViewItem>())
                 {
