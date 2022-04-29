@@ -5,7 +5,6 @@ using Auxiliary;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using SmartCore.CAA.CAAEducation;
-using SmartCore.Calculations;
 
 namespace CAS.UI.UICAAControls.CAAEducation
 {

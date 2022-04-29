@@ -140,13 +140,13 @@ namespace CAS.UI.UICAAControls.CAAEducation
             // 
             this.NextLimitDate.Text = "Date";
             this.NextLimitDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NextLimitDate.Width = 200;
+            this.NextLimitDate.Width = 150;
             // 
             // columnRemarks
             // 
             this.columnRemarks.Text = "Remark";
             this.columnRemarks.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnRemarks.Width = 200;
+            this.columnRemarks.Width = 400;
             // 
             // panelContainer
             // 

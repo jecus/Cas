@@ -126,6 +126,8 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			var form = new DocumentForm(item.CloseDocument, false);
 			if (form.ShowDialog() == DialogResult.OK)
 				item.CloseDocument = item.CloseDocument;
+			
+			row.Cells[2].Value = item.CloseDocument != null;
 		}
 
 		#region private void DocumentControl1_Added(object sender, EventArgs e)
