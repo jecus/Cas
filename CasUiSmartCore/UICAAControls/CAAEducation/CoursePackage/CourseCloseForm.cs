@@ -169,9 +169,27 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 				 if (items.All(i => i.CloseDocument != null))
 				 {
 				 	_currentWp.Status = WPStatus.Closed;
-				 	_currentWp.Settings.ClosingDate = DateTime.Now;
+				 	_currentWp.Settings.ClosingDate = dateTimePickerClosingDate.Value;
 				 	_currentWp.Settings.ClosedBy = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
-				 	GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentWp);
+				    GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentWp);
+				    
+				    
+				    foreach (var record in _initialDocumentArray)
+				    {
+					    record.Parent.Record.Settings.BlockedWpId = null;
+
+					    if (record.Parent.Record.Settings.LastCompliances == null)
+						    record.Parent.Record.Settings.LastCompliances = new List<LastCompliance>();
+					    
+					    record.Parent.Record.Settings.LastCompliances.Add(new LastCompliance()
+					    {
+						    LastDate = _currentWp.Settings.ClosingDate,
+						    Remark = $"Closed by course package : {_currentWp.Settings.Number} - {_currentWp.Title}"
+					    });
+					    
+					    GlobalObjects.CaaEnvironment.NewKeeper.Save( record.Parent.Record);
+				    }
+				    
 				    DialogResult = DialogResult.OK;
 				    Close();
 				}

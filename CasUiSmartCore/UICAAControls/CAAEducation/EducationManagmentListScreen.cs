@@ -361,6 +361,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 	        if (MessageBox.Show("Create and save a Work Package?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
 	        {
 		        var wp = new SmartCore.CAA.CAAWP.CoursePackage();
+		        wp.OperatorId = _operatorId;
 		        wp.Settings.OpeningDate = DateTime.Now;
 		        wp.Settings.CreateDate = DateTime.Now;
 		        wp.Settings.Author = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
