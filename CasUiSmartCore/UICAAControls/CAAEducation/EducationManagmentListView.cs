@@ -147,7 +147,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 	        var occupation = item.IsCombination ? null : item.Occupation;
 	        var combination = item.IsCombination ?  item.Occupation : null;
 
-	        var next = item.Record == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat(item.Record?.Settings?.Next);
+	        var next = item.Record == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat(item.Record?.Settings?.NextCompliance?.Next);
 	        var last = item.Record == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat(item.Record?.Settings?.LastCompliances?.LastOrDefault()?.LastDate);
 	        
 
@@ -165,8 +165,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        CreateRow(item.Education?.Task?.Level.ToString(), item.Education?.Task?.Level),
 		        CreateRow(item.Education?.Priority?.ToString(), item.Education?.Priority),
 		        CreateRow(item?.Education?.Task?.Repeat.ToRepeatIntervalsFormat(), item?.Education?.Task?.Repeat),
-		        CreateRow(next, item.Record?.Settings?.Next),
-		        CreateRow(item.Record?.Settings?.Remains?.ToRepeatIntervalsFormat(), item.Record?.Settings?.Remains),
+		        CreateRow(next, item.Record?.Settings?.NextCompliance?.Next),
+		        CreateRow(item.Record?.Settings?.NextCompliance?.Remains?.ToRepeatIntervalsFormat(), item.Record?.Settings?.NextCompliance?.Remains),
 		        CreateRow(last, item.Record?.Settings?.LastCompliances?.LastOrDefault()?.LastDate),
 		        CreateRow(corrector, corrector)
 	        };

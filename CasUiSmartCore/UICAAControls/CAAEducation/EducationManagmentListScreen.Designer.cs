@@ -1,4 +1,5 @@
-﻿using CASTerms;
+﻿using System.Collections.Generic;
+using CASTerms;
 using Entity.Abstractions;
 
 namespace CAS.UI.UICAAControls.CAAEducation
@@ -64,6 +65,20 @@ namespace CAS.UI.UICAAControls.CAAEducation
             // headerControl
             // 
             this.headerControl.Size = new System.Drawing.Size(985, 58);
+            this.headerControl.ShowForecastButton = true;
+            this.headerControl.CustomMenu = new List<string>()
+            {
+	            "1 Month",
+	            "3 Month",
+	            "6 Month",
+	            "1 Year",
+	            "2 Year",
+	            "3 Year",
+	            "4 Year",
+	            "5 Year",
+	            "None"
+            };
+            this.headerControl.ForecastContextMenuClick += new System.EventHandler(this.ForecastMenuClick);
             this.headerControl.ReloadButtonClick += new System.EventHandler(this.HeaderControlButtonReloadClick);
             //
             // panelTopContainer

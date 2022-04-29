@@ -48,7 +48,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
         #region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            statusControl.ConditionState = _educationManagment.Record?.Settings?.Condition;
+            statusControl.ConditionState = _educationManagment.Record?.Settings?.NextCompliance?.Condition;
 
             if (_educationManagment.Record == null)
                 extendableRichContainerSummary.LabelCaption.Text = "Open";

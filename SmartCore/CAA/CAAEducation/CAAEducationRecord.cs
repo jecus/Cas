@@ -56,7 +56,6 @@ namespace SmartCore.CAA.CAAEducation
     {
 	    public CAAEducationRecordSettings()
 	    {
-		    Condition = ConditionState.Satisfactory;
 		    LastCompliances = new List<LastCompliance>();
 	    }
 	    
@@ -76,19 +75,35 @@ namespace SmartCore.CAA.CAAEducation
 		    set => _lastCompliances = value;
 	    }
 	    
+	    [JsonIgnore]
+	    public NextCompliance NextCompliance { get; set; }
+	    
+	    [JsonIgnore]
+	    public List<NextCompliance> NextCompliances { get; set; }
+	    
+	    [JsonProperty]
+	    public int? BlockedWpId { get; set; }
+    }
 
+    
+    [Serializable]
+    public class NextCompliance
+    {
+	    public NextCompliance()
+	    {
+		    Condition = ConditionState.Satisfactory;
+	    }
+	    
 	    [JsonIgnore]
 	    public DateTime? Next { get; set; }
 
 	    [JsonIgnore]
 	    public Lifelength Remains { get; set; }
-
+	    
 	    [JsonIgnore]
 	    public ConditionState Condition { get; set; }
-
-	    [JsonProperty]
-	    public int? BlockedWpId { get; set; }
     }
+    
 
     [Serializable]
     public class LastCompliance

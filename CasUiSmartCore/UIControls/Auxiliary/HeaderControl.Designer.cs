@@ -452,7 +452,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.PictureBox pictureBoxF;
-        private ForecastControl forecastControl;
+        public ForecastControl forecastControl;
         private System.Windows.Forms.PictureBox pictureBoxS2;
         private Management.Dispatchering.RichReferenceButton richReferenceButtonSave2;
         private System.Windows.Forms.PictureBox pictureBoxS;

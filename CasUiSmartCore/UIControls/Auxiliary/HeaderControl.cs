@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
@@ -7,7 +8,7 @@ using CAS.UI.Management.Dispatchering;
 namespace CAS.UI.UIControls.Auxiliary
 {
     ///<summary>
-    /// Класс, описывающий верхний заголовок
+    /// РљР»Р°СЃСЃ, РѕРїРёСЃС‹РІР°СЋС‰РёР№ РІРµСЂС…РЅРёР№ Р·Р°РіРѕР»РѕРІРѕРє
     ///</summary>
     public partial class HeaderControl : UserControl
     {
@@ -18,7 +19,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region Constructor
         ///<summary>
-        /// Создается новый объект
+        /// РЎРѕР·РґР°РµС‚СЃСЏ РЅРѕРІС‹Р№ РѕР±СЉРµРєС‚
         ///</summary>
         public HeaderControl()
         {
@@ -35,9 +36,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public IDisplayer CloseButtonDisplayer
         ///<summary>
-        /// Вкладка назначения
+        /// Р’РєР»Р°РґРєР° РЅР°Р·РЅР°С‡РµРЅРёСЏ
         ///</summary>
-        [Category("Appearance"), Description("Вкладка назначения кнопки Close")]
+        [Category("Appearance"), Description("Р’РєР»Р°РґРєР° РЅР°Р·РЅР°С‡РµРЅРёСЏ РєРЅРѕРїРєРё Close")]
         [DefaultValue(null)]
         public IDisplayer CloseButtonDisplayer
         {
@@ -55,9 +56,9 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public string CloseButtonDisplayerText
 
         ///<summary>
-        /// Заголовок открытого окна
+        /// Р—Р°РіРѕР»РѕРІРѕРє РѕС‚РєСЂС‹С‚РѕРіРѕ РѕРєРЅР°
         ///</summary>
-        [Category("Appearance"), Description("Заголовок вкладки открываемой кнопкой Close")]
+        [Category("Appearance"), Description("Р—Р°РіРѕР»РѕРІРѕРє РІРєР»Р°РґРєРё РѕС‚РєСЂС‹РІР°РµРјРѕР№ РєРЅРѕРїРєРѕР№ Close")]
         [DefaultValue("")]
         public string CloseButtonDisplayerText
         {
@@ -74,9 +75,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool CloseButtonEnabled
         /// <summary>
-        /// Возвращает или устанавливает значение, доступна ли кнопка Close
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РґРѕСЃС‚СѓРїРЅР° Р»Рё РєРЅРѕРїРєР° Close
         /// </summary>
-        [Category("Layout"), Description("Доступна ли кнопка Close")]
+        [Category("Layout"), Description("Р”РѕСЃС‚СѓРїРЅР° Р»Рё РєРЅРѕРїРєР° Close")]
         [DefaultValue(true)]
         public bool CloseButtonEnabled
         {
@@ -89,9 +90,9 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public IDisplayingEntity CloseButtonEntity
 
         ///<summary>
-        /// Отображаемая сущность
+        /// РћС‚РѕР±СЂР°Р¶Р°РµРјР°СЏ СЃСѓС‰РЅРѕСЃС‚СЊ
         ///</summary>
-        [Category("Appearance"), Description("Содержимое вкладки назначения кнопки Close")]
+        [Category("Appearance"), Description("РЎРѕРґРµСЂР¶РёРјРѕРµ РІРєР»Р°РґРєРё РЅР°Р·РЅР°С‡РµРЅРёСЏ РєРЅРѕРїРєРё Close")]
         [DefaultValue(null)]
         public IDisplayingEntity CloseButtonEntity
         {
@@ -108,9 +109,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public ReflectionTypes CloseButtonReflectionType
         ///<summary>
-        /// Тип отображения окна
+        /// РўРёРї РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РѕРєРЅР°
         ///</summary>
-        [Category("Appearance"), Description("Тип отображения окна кнопкой Close")]
+        [Category("Appearance"), Description("РўРёРї РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РѕРєРЅР° РєРЅРѕРїРєРѕР№ Close")]
         [DefaultValue(ReflectionTypes.CloseSelected)]
         public ReflectionTypes CloseButtonReflectionType
         {
@@ -127,9 +128,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool CloseButtonShowToolTip
         /// <summary>
-        /// Возвращает или устанавливает значение, показывать подсказки для кнопки CloseTab
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°С‚СЊ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё CloseTab
         /// </summary>
-        [Category("Appearance"), Description("Показывать текст всплывающей подсказки для кнопки CloseTab")]
+        [Category("Appearance"), Description("РџРѕРєР°Р·С‹РІР°С‚СЊ С‚РµРєСЃС‚ РІСЃРїР»С‹РІР°СЋС‰РµР№ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё CloseTab")]
         [DefaultValue(true)]
         public bool CloseButtonShowToolTip
         {
@@ -140,9 +141,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool CloseButtonToolTipText
         /// <summary>
-        /// Возвращает или устанавливает значение текста подсказки для кнопки CloseTab
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ С‚РµРєСЃС‚Р° РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё CloseTab
         /// </summary>
-        [Category("Appearance"), Description("Текст всплывающей подсказки для кнопки CloseTab")]
+        [Category("Appearance"), Description("РўРµРєСЃС‚ РІСЃРїР»С‹РІР°СЋС‰РµР№ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё CloseTab")]
         [DefaultValue("Close Tab")]
         public string CloseButtonToolTipText
         {
@@ -153,9 +154,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public string EditButtonDisplayerText
         /// <summary>
-        /// Заголовок открытого окна редактирования
+        /// Р—Р°РіРѕР»РѕРІРѕРє РѕС‚РєСЂС‹С‚РѕРіРѕ РѕРєРЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ
         /// </summary>
-        [Category("Appearance"), Description("Заголовок вкладки открываемой кнопкой Edit")]
+        [Category("Appearance"), Description("Р—Р°РіРѕР»РѕРІРѕРє РІРєР»Р°РґРєРё РѕС‚РєСЂС‹РІР°РµРјРѕР№ РєРЅРѕРїРєРѕР№ Edit")]
         [DefaultValue("")]
         public string EditButtonDisplayerText
         {
@@ -167,9 +168,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool EditButtonEnabled
         /// <summary>
-        /// Возвращает или устанавливает значение, доступна ли кнопка Edit
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РґРѕСЃС‚СѓРїРЅР° Р»Рё РєРЅРѕРїРєР° Edit
         /// </summary>
-        [Category("Layout"), Description("Доступна ли кнопка Edit")]
+        [Category("Layout"), Description("Р”РѕСЃС‚СѓРїРЅР° Р»Рё РєРЅРѕРїРєР° Edit")]
         [DefaultValue(true)]
         public bool EditButtonEnabled
         {
@@ -181,9 +182,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public ReflectionTypes EditReflectionType
         /// <summary>
-        /// Тип отображения окна редактирования
+        /// РўРёРї РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РѕРєРЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ
         /// </summary>
-        [Category("Appearance"), Description("Тип отображения окна редактирования Edit")]
+        [Category("Appearance"), Description("РўРёРї РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РѕРєРЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ Edit")]
         [DefaultValue(null)]
         public ReflectionTypes EditReflectionType
         {
@@ -195,9 +196,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool EditButtonShowToolTip
         /// <summary>
-        /// Возвращает или устанавливает значение, показывать подсказки для кнопки Edit
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°С‚СЊ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Edit
         /// </summary>
-        [Category("Appearance"), Description("Показывать текст всплывающей подсказки для кнопки Edit")]
+        [Category("Appearance"), Description("РџРѕРєР°Р·С‹РІР°С‚СЊ С‚РµРєСЃС‚ РІСЃРїР»С‹РІР°СЋС‰РµР№ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Edit")]
         [DefaultValue(false)]
         public bool EditButtonShowToolTip
         {
@@ -208,9 +209,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool EditButtonToolTipText
         /// <summary>
-        /// Возвращает или устанавливает значение текста подсказки для кнопки Edit
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ С‚РµРєСЃС‚Р° РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Edit
         /// </summary>
-        [Category("Appearance"), Description("Текст всплывающей подсказки для кнопки Edit")]
+        [Category("Appearance"), Description("РўРµРєСЃС‚ РІСЃРїР»С‹РІР°СЋС‰РµР№ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Edit")]
         [DefaultValue("")]
         public string EditButtonToolTipText
         {
@@ -221,9 +222,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool HelpButtonTopicId
         /// <summary>
-        /// Возвращает или устанавливает значение Идентификатора справочного материала
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂР° СЃРїСЂР°РІРѕС‡РЅРѕРіРѕ РјР°С‚РµСЂРёР°Р»Р°
         /// </summary>
-        [Category("Appearance"), Description("Идентификатор справочного материала для кнокпи Help")]
+        [Category("Appearance"), Description("РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЃРїСЂР°РІРѕС‡РЅРѕРіРѕ РјР°С‚РµСЂРёР°Р»Р° РґР»СЏ РєРЅРѕРєРїРё Help")]
         [DefaultValue("")]
         public string HelpButtonTopicId
         {
@@ -234,7 +235,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool PrintButtonContextMenuStrip
         /// <summary>
-        /// Возвращает или устанавливает контекстное меню для кнопки Print
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РєРѕРЅС‚РµРєСЃС‚РЅРѕРµ РјРµРЅСЋ РґР»СЏ РєРЅРѕРїРєРё Print
         /// </summary>
         public ContextMenuStrip PrintButtonContextMenuStrip
         {
@@ -246,9 +247,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool PrintButtonEnabled
         /// <summary>
-        /// Возвращает или устанавливает значение, доступна ли кнопка Print
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РґРѕСЃС‚СѓРїРЅР° Р»Рё РєРЅРѕРїРєР° Print
         /// </summary>
-        [Category("Layout"), Description("Доступна ли кнопка Print")]
+        [Category("Layout"), Description("Р”РѕСЃС‚СѓРїРЅР° Р»Рё РєРЅРѕРїРєР° Print")]
         [DefaultValue(true)]
         public bool PrintButtonEnabled
         {
@@ -260,9 +261,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool PrintButtonShowToolTip
         /// <summary>
-        /// Возвращает или устанавливает значение, показывать подсказки для кнопки Print
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°С‚СЊ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Print
         /// </summary>
-        [Category("Appearance"), Description("Показывать текст всплывающей подсказки для кнопки Print")]
+        [Category("Appearance"), Description("РџРѕРєР°Р·С‹РІР°С‚СЊ С‚РµРєСЃС‚ РІСЃРїР»С‹РІР°СЋС‰РµР№ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Print")]
         [DefaultValue(true)]
         public bool PrintButtonShowToolTip
         {
@@ -273,9 +274,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool PrintButtonToolTipText
         /// <summary>
-        /// Возвращает или устанавливает значение текста подсказки для кнопки Print
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ С‚РµРєСЃС‚Р° РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Print
         /// </summary>
-        [Category("Appearance"), Description("Текст всплывающей подсказки для кнопки Print")]
+        [Category("Appearance"), Description("РўРµРєСЃС‚ РІСЃРїР»С‹РІР°СЋС‰РµР№ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Print")]
         [DefaultValue("Print Preview")]
         public string PrintButtonToolTipText
         {
@@ -286,9 +287,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool ReloadButtonEnabled
         /// <summary>
-        /// Возвращает или устанавливает значение, доступна ли кнопка Reload
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РґРѕСЃС‚СѓРїРЅР° Р»Рё РєРЅРѕРїРєР° Reload
         /// </summary>
-        [Category("Layout"), Description("Доступна ли кнопка Reload")]
+        [Category("Layout"), Description("Р”РѕСЃС‚СѓРїРЅР° Р»Рё РєРЅРѕРїРєР° Reload")]
         [DefaultValue(true)]
         public bool ReloadButtonEnabled
         {
@@ -300,9 +301,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool ReloadButtonShowToolTip
         /// <summary>
-        /// Возвращает или устанавливает значение, показывать подсказки для кнопки Reload
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°С‚СЊ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Reload
         /// </summary>
-        [Category("Appearance"), Description("Показывать текст всплывающей подсказки для кнопки Reload")]
+        [Category("Appearance"), Description("РџРѕРєР°Р·С‹РІР°С‚СЊ С‚РµРєСЃС‚ РІСЃРїР»С‹РІР°СЋС‰РµР№ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Reload")]
         [DefaultValue(true)]
         public bool ReloadButtonShowToolTip
         {
@@ -313,9 +314,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool ReloadButtonToolTipText
         /// <summary>
-        /// Возвращает или устанавливает значение текста подсказки для кнопки Reload
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ С‚РµРєСЃС‚Р° РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Reload
         /// </summary>
-        [Category("Appearance"), Description("Текст всплывающей подсказки для кнопки Reload")]
+        [Category("Appearance"), Description("РўРµРєСЃС‚ РІСЃРїР»С‹РІР°СЋС‰РµР№ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Reload")]
         [DefaultValue("Reload")]
         public string ReloadButtonToolTipText
         {
@@ -326,9 +327,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public ReflectionTypes SaveReflectionType
         /// <summary>
-        /// Тип отображения окна сохранения
+        /// РўРёРї РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РѕРєРЅР° СЃРѕС…СЂР°РЅРµРЅРёСЏ
         /// </summary>
-        [Category("Appearance"), Description("Тип отображения окна кнопкой Save")]
+        [Category("Appearance"), Description("РўРёРї РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РѕРєРЅР° РєРЅРѕРїРєРѕР№ Save")]
         [DefaultValue(ReflectionTypes.DisplayInNew)]
         public ReflectionTypes SaveReflectionType
         {
@@ -340,9 +341,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool SaveButtonEnabled
         /// <summary>
-        /// Возвращает или устанавливает значение, доступна ли кнопка SaveAndEdit
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РґРѕСЃС‚СѓРїРЅР° Р»Рё РєРЅРѕРїРєР° SaveAndEdit
         /// </summary>
-        [Category("Layout"), Description("Доступна ли кнопка SaveAndEdit")]
+        [Category("Layout"), Description("Р”РѕСЃС‚СѓРїРЅР° Р»Рё РєРЅРѕРїРєР° SaveAndEdit")]
         [DefaultValue(true)]
         public bool SaveButtonEnabled
         {
@@ -354,9 +355,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool SaveButtonShowToolTip
         /// <summary>
-        /// Возвращает или устанавливает значение, показывать подсказки для кнопки Save
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°С‚СЊ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Save
         /// </summary>
-        [Category("Appearance"), Description("Показывать текст всплывающей подсказки для кнопки Save")]
+        [Category("Appearance"), Description("РџРѕРєР°Р·С‹РІР°С‚СЊ С‚РµРєСЃС‚ РІСЃРїР»С‹РІР°СЋС‰РµР№ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Save")]
         [DefaultValue(false)]
         public bool SaveButtonShowToolTip
         {
@@ -367,9 +368,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool SaveButtonToolTipText
         /// <summary>
-        /// Возвращает или устанавливает значение текста подсказки для кнопки Save
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ С‚РµРєСЃС‚Р° РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Save
         /// </summary>
-        [Category("Appearance"), Description("Текст всплывающей подсказки для кнопки Save")]
+        [Category("Appearance"), Description("РўРµРєСЃС‚ РІСЃРїР»С‹РІР°СЋС‰РµР№ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Save")]
         [DefaultValue("")]
         public string SaveButtonToolTipText
         {
@@ -380,9 +381,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public ReflectionTypes Save2ReflectionType
         /// <summary>
-        /// Тип отображения окна сохранения2
+        /// РўРёРї РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РѕРєРЅР° СЃРѕС…СЂР°РЅРµРЅРёСЏ2
         /// </summary>
-        [Category("Appearance"), Description("Тип отображения окна кнопкой Save2")]
+        [Category("Appearance"), Description("РўРёРї РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РѕРєРЅР° РєРЅРѕРїРєРѕР№ Save2")]
         [DefaultValue(ReflectionTypes.DisplayInNew)]
         public ReflectionTypes Save2ReflectionType
         {
@@ -394,9 +395,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool SaveAndAddButtonEnabled
         /// <summary>
-        /// Возвращает или устанавливает значение, доступна ли кнопка SaveAndAdd
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РґРѕСЃС‚СѓРїРЅР° Р»Рё РєРЅРѕРїРєР° SaveAndAdd
         /// </summary>
-        [Category("Layout"), Description("Доступна ли кнопка SaveAndAdd")]
+        [Category("Layout"), Description("Р”РѕСЃС‚СѓРїРЅР° Р»Рё РєРЅРѕРїРєР° SaveAndAdd")]
         [DefaultValue(true)]
         public bool SaveAndAddButtonEnabled
         {
@@ -408,9 +409,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool Save2ButtonShowToolTip
         /// <summary>
-        /// Возвращает или устанавливает значение, показывать подсказки для кнопки Save2
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°С‚СЊ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Save2
         /// </summary>
-        [Category("Appearance"), Description("Показывать текст всплывающей подсказки для кнопки Save2")]
+        [Category("Appearance"), Description("РџРѕРєР°Р·С‹РІР°С‚СЊ С‚РµРєСЃС‚ РІСЃРїР»С‹РІР°СЋС‰РµР№ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Save2")]
         [DefaultValue(false)]
         public bool Save2ButtonShowToolTip
         {
@@ -421,9 +422,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool Save2ButtonToolTipText
         /// <summary>
-        /// Возвращает или устанавливает значение текста подсказки для кнопки Save2
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ С‚РµРєСЃС‚Р° РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Save2
         /// </summary>
-        [Category("Appearance"), Description("Текст всплывающей подсказки для кнопки Save2")]
+        [Category("Appearance"), Description("РўРµРєСЃС‚ РІСЃРїР»С‹РІР°СЋС‰РµР№ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РєРЅРѕРїРєРё Save2")]
         [DefaultValue("")]
         public string Save2ButtonToolTipText
         {
@@ -434,9 +435,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool ShowCloseButton
         /// <summary>
-        /// Возвращает или устанавливает значение, показывающее нужно ли отображать кнопку Close
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ РЅСѓР¶РЅРѕ Р»Рё РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ РєРЅРѕРїРєСѓ Close
         /// </summary>
-        [Description("Нужно ли показывать кнопку Close"), Category("Layout")]
+        [Description("РќСѓР¶РЅРѕ Р»Рё РїРѕРєР°Р·С‹РІР°С‚СЊ РєРЅРѕРїРєСѓ Close"), Category("Layout")]
         [DefaultValue(true)]
         public bool ShowCloseButton
         {
@@ -454,9 +455,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool ShowEditButton
         /// <summary>
-        /// Возвращает или устанавливает значение, показывающее нужно ли отображать кнопку Edit
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ РЅСѓР¶РЅРѕ Р»Рё РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ РєРЅРѕРїРєСѓ Edit
         /// </summary>
-        [Description("Нужно ли показывать кнопку Edit"), Category("Layout")]
+        [Description("РќСѓР¶РЅРѕ Р»Рё РїРѕРєР°Р·С‹РІР°С‚СЊ РєРЅРѕРїРєСѓ Edit"), Category("Layout")]
         [DefaultValue(false)]
         public bool ShowEditButton
         {
@@ -476,9 +477,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool ShowForecastButton
         /// <summary>
-        /// Возвращает или устанавливает значение, показывающее нужно ли отображать кнопку Forecast
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ РЅСѓР¶РЅРѕ Р»Рё РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ РєРЅРѕРїРєСѓ Forecast
         /// </summary>
-        [Description("Нужно ли показывать кнопку Forecast"), Category("Layout")]
+        [Description("РќСѓР¶РЅРѕ Р»Рё РїРѕРєР°Р·С‹РІР°С‚СЊ РєРЅРѕРїРєСѓ Forecast"), Category("Layout")]
         [DefaultValue(false)]
         public bool ShowForecastButton
         {
@@ -496,9 +497,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool ShowNoForecastMenuItem
         ///<summary>
-        /// Показать/Скрыть пункт меню "Без прогноза"
+        /// РџРѕРєР°Р·Р°С‚СЊ/РЎРєСЂС‹С‚СЊ РїСѓРЅРєС‚ РјРµРЅСЋ "Р‘РµР· РїСЂРѕРіРЅРѕР·Р°"
         ///</summary>
-        [Description("Показать/Скрыть пункт меню Без прогноза"), Category("Layout")]
+        [Description("РџРѕРєР°Р·Р°С‚СЊ/РЎРєСЂС‹С‚СЊ РїСѓРЅРєС‚ РјРµРЅСЋ Р‘РµР· РїСЂРѕРіРЅРѕР·Р°"), Category("Layout")]
         [DefaultValue(false)]
         public bool ShowNoForecastMenuItem
         {
@@ -509,9 +510,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool ShowHelpButton
         /// <summary>
-        /// Возвращает или устанавливает значение, показывающее нужно ли отображать кнопку Help
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ РЅСѓР¶РЅРѕ Р»Рё РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ РєРЅРѕРїРєСѓ Help
         /// </summary>
-        [Description("Нужно ли показывать кнопку Help"), Category("Layout")]
+        [Description("РќСѓР¶РЅРѕ Р»Рё РїРѕРєР°Р·С‹РІР°С‚СЊ РєРЅРѕРїРєСѓ Help"), Category("Layout")]
         [DefaultValue(false)]
         public bool ShowHelpButton
         {
@@ -529,9 +530,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool ShowPrintButton
         /// <summary>
-        /// Возвращает или устанавливает значение, показывающее нужно ли отображать кнопку Print
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ РЅСѓР¶РЅРѕ Р»Рё РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ РєРЅРѕРїРєСѓ Print
         /// </summary>
-        [Description("Нужно ли показывать кнопку Print"), Category("Layout")]
+        [Description("РќСѓР¶РЅРѕ Р»Рё РїРѕРєР°Р·С‹РІР°С‚СЊ РєРЅРѕРїРєСѓ Print"), Category("Layout")]
         [DefaultValue(false)]
         public bool ShowPrintButton
         {
@@ -550,9 +551,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool ShowReloadButton
         ///<summary>
-        /// Возвращает или устанавливает значение, показывающее нужно ли отображать кнопку Reload
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ РЅСѓР¶РЅРѕ Р»Рё РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ РєРЅРѕРїРєСѓ Reload
         ///</summary>
-        [Description("Нужно ли показывать кнопку Reload"), Category("Layout")]
+        [Description("РќСѓР¶РЅРѕ Р»Рё РїРѕРєР°Р·С‹РІР°С‚СЊ РєРЅРѕРїРєСѓ Reload"), Category("Layout")]
         [DefaultValue(true)]
         public bool ShowReloadButton
         {
@@ -570,9 +571,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool ShowSaveButton
         /// <summary>
-        /// Возвращает или устанавливает значение, показывающее нужно ли отображать кнопку Save
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ РЅСѓР¶РЅРѕ Р»Рё РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ РєРЅРѕРїРєСѓ Save
         /// </summary>
-        [Description("Нужно ли показывать кнопку Save"), Category("Layout")]
+        [Description("РќСѓР¶РЅРѕ Р»Рё РїРѕРєР°Р·С‹РІР°С‚СЊ РєРЅРѕРїРєСѓ Save"), Category("Layout")]
         [DefaultValue(false)]
         public bool ShowSaveButton
         {
@@ -591,9 +592,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool ShowSaveButton2
         /// <summary>
-        /// Возвращает или устанавливает значение, показывающее нужно ли отображать кнопку Save2
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ РЅСѓР¶РЅРѕ Р»Рё РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ РєРЅРѕРїРєСѓ Save2
         /// </summary>
-        [Description("Нужно ли показывать кнопку Save2"), Category("Layout")]
+        [Description("РќСѓР¶РЅРѕ Р»Рё РїРѕРєР°Р·С‹РІР°С‚СЊ РєРЅРѕРїРєСѓ Save2"), Category("Layout")]
         [DefaultValue(false)]
         public bool ShowSaveButton2
         {
@@ -612,11 +613,12 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region IDisplayer currentDisplayer;
         /// <summary>
-        /// Указывает на текущий отображатель (вкладку)
+        /// РЈРєР°Р·С‹РІР°РµС‚ РЅР° С‚РµРєСѓС‰РёР№ РѕС‚РѕР±СЂР°Р¶Р°С‚РµР»СЊ (РІРєР»Р°РґРєСѓ)
         /// </summary>
         private IDisplayer _currentDisplayer;
+        
         ///<summary>
-        /// Указывает на текущий отображатель (вкладку)
+        /// РЈРєР°Р·С‹РІР°РµС‚ РЅР° С‚РµРєСѓС‰РёР№ РѕС‚РѕР±СЂР°Р¶Р°С‚РµР»СЊ (РІРєР»Р°РґРєСѓ)
         ///</summary>
         public IDisplayer CurrentDisplayer
         {
@@ -634,6 +636,14 @@ namespace CAS.UI.UIControls.Auxiliary
                 }
             }
         }
+        
+        
+        public List<string> CustomMenu
+        {
+            get => forecastControl.CustomMenu;
+            set => forecastControl.CustomMenu = value;
+        }
+
         #endregion
 
         #endregion
@@ -642,7 +652,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region private void CurrentDisplayerScreenChanget(object sender, EventArgs e)
         /// <summary>
-        /// Реагирует на изменение кол-ва вкладок у родителя связной с данным заголовком вкладки (мультивкладочного контрола)
+        /// Р РµР°РіРёСЂСѓРµС‚ РЅР° РёР·РјРµРЅРµРЅРёРµ РєРѕР»-РІР° РІРєР»Р°РґРѕРє Сѓ СЂРѕРґРёС‚РµР»СЏ СЃРІСЏР·РЅРѕР№ СЃ РґР°РЅРЅС‹Рј Р·Р°РіРѕР»РѕРІРєРѕРј РІРєР»Р°РґРєРё (РјСѓР»СЊС‚РёРІРєР»Р°РґРѕС‡РЅРѕРіРѕ РєРѕРЅС‚СЂРѕР»Р°)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -655,7 +665,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region protected override void OnSizeChanged(EventArgs e)
 
         ///// <summary>
-        ///// Метод, необходимый для корректного отображения данного элемента управления
+        ///// РњРµС‚РѕРґ, РЅРµРѕР±С…РѕРґРёРјС‹Р№ РґР»СЏ РєРѕСЂСЂРµРєС‚РЅРѕРіРѕ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РґР°РЅРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° СѓРїСЂР°РІР»РµРЅРёСЏ
         ///// </summary>
         ///// <param name="e"></param>
         //protected override void OnSizeChanged(EventArgs e)
@@ -673,7 +683,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region protected override void OnControlAdded(ControlEventArgs e)
 
         /// <summary>
-        /// Метод, обрабатывающий события добавления нового элемента управления
+        /// РњРµС‚РѕРґ, РѕР±СЂР°Р±Р°С‚С‹РІР°СЋС‰РёР№ СЃРѕР±С‹С‚РёСЏ РґРѕР±Р°РІР»РµРЅРёСЏ РЅРѕРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р° СѓРїСЂР°РІР»РµРЅРёСЏ
         /// </summary>
         /// <param name="e"></param>
         protected override void OnControlAdded(ControlEventArgs e)
@@ -693,7 +703,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region ButtonEditClick
         ///<summary>
-        /// Нажатие кнопки редактирования
+        /// РќР°Р¶Р°С‚РёРµ РєРЅРѕРїРєРё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ
         ///</summary>
         [Category("Buttons")]
         public event EventHandler EditButtonClick;
@@ -707,7 +717,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region ForecastContextMenuClick
         ///<summary>
-        /// Нажатие пункта контекстного меню в прогнозе
+        /// РќР°Р¶Р°С‚РёРµ РїСѓРЅРєС‚Р° РєРѕРЅС‚РµРєСЃС‚РЅРѕРіРѕ РјРµРЅСЋ РІ РїСЂРѕРіРЅРѕР·Рµ
         ///</summary>
         [Category("Buttons")]
         public event EventHandler ForecastContextMenuClick;
@@ -721,7 +731,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region ButtonReloadClick
         ///<summary>
-        /// Нажатие кнопки обновления
+        /// РќР°Р¶Р°С‚РёРµ РєРЅРѕРїРєРё РѕР±РЅРѕРІР»РµРЅРёСЏ
         ///</summary>
         [Category("Buttons")]
         public event EventHandler ReloadButtonClick;
@@ -735,7 +745,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region ButtonSaveClick
         ///<summary>
-        /// Нажатие кнопки сохранения
+        /// РќР°Р¶Р°С‚РёРµ РєРЅРѕРїРєРё СЃРѕС…СЂР°РЅРµРЅРёСЏ
         ///</summary>
         [Category("Buttons")]
         public event EventHandler SaveButtonClick;
@@ -749,7 +759,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region SaveButtonDisplayerRequested
         ///<summary>
-        /// Нажатие кнопки сохранения с запросом на новую вкладку
+        /// РќР°Р¶Р°С‚РёРµ РєРЅРѕРїРєРё СЃРѕС…СЂР°РЅРµРЅРёСЏ СЃ Р·Р°РїСЂРѕСЃРѕРј РЅР° РЅРѕРІСѓСЋ РІРєР»Р°РґРєСѓ
         ///</summary>
         [Category("Buttons")]
         public event EventHandler<ReferenceEventArgs> SaveButtonDisplayerRequested;
@@ -765,7 +775,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region ButtonSaveClick2
         ///<summary>
-        /// Нажатие кнопки сохранения 2
+        /// РќР°Р¶Р°С‚РёРµ РєРЅРѕРїРєРё СЃРѕС…СЂР°РЅРµРЅРёСЏ 2
         ///</summary>
         [Category("Buttons")]
         public event EventHandler SaveButton2Click;
@@ -779,7 +789,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region ButtonPrintDisplayerRequested
         ///<summary>
-        /// Нажатие кнопки отображения отчета
+        /// РќР°Р¶Р°С‚РёРµ РєРЅРѕРїРєРё РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РѕС‚С‡РµС‚Р°
         ///</summary>
         [Category("Buttons")]
         public event EventHandler<ReferenceEventArgs> PrintButtonDisplayerRequested;

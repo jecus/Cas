@@ -53,7 +53,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                     new[]
                     {
                         managment.Education?.Task?.FullName,
-                        SmartCore.Auxiliary.Convert.GetDateFormat(_record?.Settings?.Next),
+                        SmartCore.Auxiliary.Convert.GetDateFormat(_record?.Settings?.NextCompliance?.Next),
                         ""
                     };
             
@@ -92,8 +92,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
         private void ButtonAddOnClick(object sender, EventArgs e)
         {
             var last = new LastCompliance();
-            if(_record?.Settings?.Next != null)
-                last.LastDate = _record?.Settings?.Next;
+            if(_record?.Settings?.NextCompliance?.Next != null)
+                last.LastDate = _record?.Settings?.NextCompliance?.Next;
             
             var form = new EducationComplianceForm(_record, last);
             if (form.ShowDialog() == DialogResult.OK)

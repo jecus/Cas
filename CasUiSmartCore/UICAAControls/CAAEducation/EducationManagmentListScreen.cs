@@ -9,10 +9,8 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls.CAAEducation.CoursePackage;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
-using CrystalDecisions.Windows.Forms;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA.CAAEducation;
 using SmartCore.CAA.CAAWP;
@@ -47,6 +45,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		private RadMenuItem _toolStripMenuItemComposeWorkPackage;
 		private RadMenuItem _toolStripMenuItemsWorkPackages;
 		private RadMenuItem _toolStripMenuItemsWShowWP;
+		private DateTime? _toDate;
 
 		#endregion
 
@@ -201,7 +200,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 					if(rec != null)
 						rec.Education = ed;
 					
-					EducationCalculator.CalculateEducation(rec);
+					EducationCalculator.CalculateEducation(rec, _toDate);
 					var item = new CAAEducationManagment()
 					{
 						Specialist = specialist,
@@ -632,6 +631,34 @@ namespace CAS.UI.UICAAControls.CAAEducation
 					descriptor.GroupNames.Add(colName,  ListSortDirection.Ascending);
 				_directivesViewer.radGridView1.GroupDescriptors.Add(descriptor);
 			}
+		}
+
+		private void ForecastMenuClick(object sender, EventArgs e)
+		{
+			_toDate = DateTime.Now;
+			switch ((string)sender)
+			{
+				case"1 Month" : _toDate = _toDate.Value.AddMonths(1);
+					break;
+				case	"3 Month" : _toDate = _toDate.Value.AddMonths(3);
+					break;
+				case	"6 Month": _toDate = _toDate.Value.AddMonths(6);
+					break;
+				case	"1 Year" : _toDate = _toDate.Value.AddYears(1);
+					break;
+				case	"2 Year" : _toDate = _toDate.Value.AddYears(2);
+					break;
+				case	"3 Year": _toDate = _toDate.Value.AddYears(3);
+					break;
+				case	"4 Year": _toDate = _toDate.Value.AddYears(4);
+					break;
+				case	"5 Year": _toDate = _toDate.Value.AddYears(5);
+					break;
+				case	"None": _toDate = null;
+					break;
+			}
+			
+			AnimatedThreadWorker.RunWorkerAsync();
 		}
 	}
 }

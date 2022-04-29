@@ -1,7 +1,9 @@
 ﻿#region
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
 using AvControls.AvButtonT;
@@ -31,8 +33,22 @@ namespace CAS.UI.UIControls.Auxiliary
         ToolStripMenuItem _todayMenuItem;
         ToolStripSeparator _toolStripSeparator1;
         ToolStripMenuItem _twoWeeksMenuItem;
+        
 
         #endregion
+
+        
+        private List<string> _customMenu;
+        public List<string> CustomMenu
+        {
+            get => _customMenu;
+            set
+            {
+                _customMenu = value;
+                InitializeComponent();
+            }
+        }
+
 
         #region Properties
         ///<summary>
@@ -63,103 +79,124 @@ namespace CAS.UI.UIControls.Auxiliary
         #endregion
 
         #region Methods
+        
 
         #region private void InitializeComponent()
 
         private void InitializeComponent()
         {
-            AvButtonForecast = new AvButtonT();
             _contextMenuStrip = new ContextMenuStrip();
-            _noForecastMenuItem = new ToolStripMenuItem();
-            _todayMenuItem = new ToolStripMenuItem();
-            _thisWeekMenuItem = new ToolStripMenuItem();
-            _twoWeeksMenuItem = new ToolStripMenuItem();
-            _monthMenuItem = new ToolStripMenuItem();
-            _customMenuItem = new ToolStripMenuItem();
-            _toolStripSeparator1 = new ToolStripSeparator();
-
-            //
-            // avButtonForecast
-            //
-            AvButtonForecast.ActiveBackgroundImage = _icons.HeaderBarClicked;
-            AvButtonForecast.Dock = DockStyle.Right;
-            AvButtonForecast.Icon = _icons.Forecast;
-            AvButtonForecast.IconNotEnabled = _icons.ReloadGray;
-            AvButtonForecast.IconLayout = ImageLayout.Center;
-            AvButtonForecast.FontMain = new Font("Verdana", 14F, (((FontStyle.Bold | FontStyle.Underline))),
-                                                 GraphicsUnit.Pixel);
-            AvButtonForecast.FontSecondary = Css.HeaderControl.Fonts.SecondaryFont;
-            AvButtonForecast.ForeColorMain = Css.HeaderControl.Colors.PrimaryColor;
-            AvButtonForecast.ForeColorSecondary = Css.HeaderControl.Colors.SecondaryColor;
-            AvButtonForecast.Margin = new Padding(0);
-            AvButtonForecast.ShowToolTip = true;
-            AvButtonForecast.TextMain = "";
-            AvButtonForecast.TextSecondary = "";
-            AvButtonForecast.TextAlignMain = ContentAlignment.MiddleLeft;
-            AvButtonForecast.TextAlignSecondary = ContentAlignment.TopLeft;
-            AvButtonForecast.ToolTipText = "Calculate Forecast";
-            AvButtonForecast.Width = 70;
-            AvButtonForecast.Height = 58;
-            AvButtonForecast.Click += AvButtonForecastClick;
-
             //
             // contextMenuStrip
             //
             _contextMenuStrip.AutoSize = true;
             _contextMenuStrip.Tag = 1;
             _contextMenuStrip.Closed += ContextMenuStripClosed;
+            _contextMenuStrip.Items.Clear();
+           
 
-            _customMenuItem.Click += MenuItemClick;
-            _noForecastMenuItem.Click += MenuItemClick;
-            _todayMenuItem.Click += MenuItemClick;
-            _thisWeekMenuItem.Click += MenuItemClick;
-            _twoWeeksMenuItem.Click += MenuItemClick;
-            _monthMenuItem.Click += MenuItemClick;
+            if (CustomMenu != null && CustomMenu.Any())
+            {
+                foreach (var name in CustomMenu)
+                {
+                    var item = new ToolStripMenuItem();
+                    item.Click += MenuItemClick;
+                    item.Text = name;
+                    item.Font = new Font("Verdana", 10F);
+                    _contextMenuStrip.Items.Add(item);
+                }
+            }
+            else
+            {
+                
+                AvButtonForecast = new AvButtonT();
+                _noForecastMenuItem = new ToolStripMenuItem();
+                _todayMenuItem = new ToolStripMenuItem();
+                _thisWeekMenuItem = new ToolStripMenuItem();
+                _twoWeeksMenuItem = new ToolStripMenuItem();
+                _monthMenuItem = new ToolStripMenuItem();
+                _customMenuItem = new ToolStripMenuItem();
+                _toolStripSeparator1 = new ToolStripSeparator();
 
-            //
-            // todayMenuItem
-            //
-            _noForecastMenuItem.Text = "No Forecast";
-            _noForecastMenuItem.Font = new Font("Verdana", 10F);
+                //
+                // avButtonForecast
+                //
+                AvButtonForecast.ActiveBackgroundImage = _icons.HeaderBarClicked;
+                AvButtonForecast.Dock = DockStyle.Right;
+                AvButtonForecast.Icon = _icons.Forecast;
+                AvButtonForecast.IconNotEnabled = _icons.ReloadGray;
+                AvButtonForecast.IconLayout = ImageLayout.Center;
+                AvButtonForecast.FontMain = new Font("Verdana", 14F, (((FontStyle.Bold | FontStyle.Underline))),
+                    GraphicsUnit.Pixel);
+                AvButtonForecast.FontSecondary = Css.HeaderControl.Fonts.SecondaryFont;
+                AvButtonForecast.ForeColorMain = Css.HeaderControl.Colors.PrimaryColor;
+                AvButtonForecast.ForeColorSecondary = Css.HeaderControl.Colors.SecondaryColor;
+                AvButtonForecast.Margin = new Padding(0);
+                AvButtonForecast.ShowToolTip = true;
+                AvButtonForecast.TextMain = "";
+                AvButtonForecast.TextSecondary = "";
+                AvButtonForecast.TextAlignMain = ContentAlignment.MiddleLeft;
+                AvButtonForecast.TextAlignSecondary = ContentAlignment.TopLeft;
+                AvButtonForecast.ToolTipText = "Calculate Forecast";
+                AvButtonForecast.Width = 70;
+                AvButtonForecast.Height = 58;
+                AvButtonForecast.Click += AvButtonForecastClick;
+                
+                _customMenuItem.Click += MenuItemClick;
+                _noForecastMenuItem.Click += MenuItemClick;
+                _todayMenuItem.Click += MenuItemClick;
+                _thisWeekMenuItem.Click += MenuItemClick;
+                _twoWeeksMenuItem.Click += MenuItemClick;
+                _monthMenuItem.Click += MenuItemClick;
 
-            //
-            // todayMenuItem
-            //
-            _todayMenuItem.Text = "Today";
-            _todayMenuItem.Font = new Font("Verdana", 10F);
+                //
+                // todayMenuItem
+                //
+                _noForecastMenuItem.Text = "No Forecast";
+                _noForecastMenuItem.Font = new Font("Verdana", 10F);
 
-            //
-            // thisWeekMenuItem
-            //
-            _thisWeekMenuItem.Text = "This week";
-            _thisWeekMenuItem.Font = new Font("Verdana", 10F);
+                //
+                // todayMenuItem
+                //
+                _todayMenuItem.Text = "Today";
+                _todayMenuItem.Font = new Font("Verdana", 10F);
 
-            //
-            // twoWeeksMenuItem
-            //
-            _twoWeeksMenuItem.Text = "Two weeks";
-            _twoWeeksMenuItem.Font = new Font("Verdana", 10F);
+                //
+                // thisWeekMenuItem
+                //
+                _thisWeekMenuItem.Text = "This week";
+                _thisWeekMenuItem.Font = new Font("Verdana", 10F);
 
-            //
-            // monthMenuItem
-            //
-            _monthMenuItem.Text = "Month";
-            _monthMenuItem.Font = new Font("Verdana", 10F);
+                //
+                // twoWeeksMenuItem
+                //
+                _twoWeeksMenuItem.Text = "Two weeks";
+                _twoWeeksMenuItem.Font = new Font("Verdana", 10F);
 
-            //
-            // customMenuItem
-            //
-            _customMenuItem.Text = "Custom";
-            _customMenuItem.Font = new Font("Verdana", 10F);
+                //
+                // monthMenuItem
+                //
+                _monthMenuItem.Text = "Month";
+                _monthMenuItem.Font = new Font("Verdana", 10F);
 
-            _contextMenuStrip.Items.Add(_noForecastMenuItem);
-            _contextMenuStrip.Items.Add(_todayMenuItem);
-            _contextMenuStrip.Items.Add(_thisWeekMenuItem);
-            _contextMenuStrip.Items.Add(_twoWeeksMenuItem);
-            _contextMenuStrip.Items.Add(_monthMenuItem);
-            _contextMenuStrip.Items.Add(_toolStripSeparator1);
-            _contextMenuStrip.Items.Add(_customMenuItem);
+                //
+                // customMenuItem
+                //
+                _customMenuItem.Text = "Custom";
+                _customMenuItem.Font = new Font("Verdana", 10F);
 
+                _contextMenuStrip.Items.Add(_noForecastMenuItem);
+                _contextMenuStrip.Items.Add(_todayMenuItem);
+                _contextMenuStrip.Items.Add(_thisWeekMenuItem);
+                _contextMenuStrip.Items.Add(_twoWeeksMenuItem);
+                _contextMenuStrip.Items.Add(_monthMenuItem);
+                _contextMenuStrip.Items.Add(_toolStripSeparator1);
+                _contextMenuStrip.Items.Add(_customMenuItem);
+
+            }
+            
+            
+            
             Controls.Add(AvButtonForecast);
         }
         #endregion
