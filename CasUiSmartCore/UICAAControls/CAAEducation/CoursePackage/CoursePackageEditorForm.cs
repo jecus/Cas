@@ -40,8 +40,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		private void UpdateInformation()
 		{
-			//metroTextBox1.Text = $"{_currentWp.ProviderPrice.Count} Count";
-
 			if (_currentWp.ItemId <= 0)
 				_currentWp.Settings.Number = $"{GlobalObjects.CaaEnvironment.ObtainId()} {DateTime.Now:G}";
 
@@ -50,6 +48,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			var published = GlobalObjects.CaaEnvironment?.GetCorrector(_currentWp.Settings.PublishedBy);
 			var closed = GlobalObjects.CaaEnvironment?.GetCorrector(_currentWp.Settings.ClosedBy);
 			
+			metroTextBox1.Text = $"{_currentWp.Settings.ProviderPrice.Count} Count";
 			textBoxWpNumber.Text = _currentWp.Settings.Number;
 			textBoxDescription.Text = _currentWp.Settings.Description;
 			dateTimePickerIssueCreateDate.Value = _currentWp.Settings.CreateDate;
@@ -180,9 +179,9 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		private void LinkLabelEditComponents_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			// var form = new WpProviderForm(_currentWp);
-			// if (form.ShowDialog() == DialogResult.OK)
-			// 	metroTextBox1.Text = $"{_currentWp.ProviderPrice.Count} Count";
+			var form = new CourseProviderForm(_currentWp);
+			if (form.ShowDialog() == DialogResult.OK)
+				metroTextBox1.Text = $"{_currentWp.Settings.ProviderPrice.Count} Count";
 		}
 	}
 }

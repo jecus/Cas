@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
 using SmartCore.Calculations;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.WorkPackage;
+using SmartCore.Purchase;
 
 namespace SmartCore.CAA.CAAWP
 {
@@ -128,6 +132,15 @@ namespace SmartCore.CAA.CAAWP
         public byte[] DurationLifelength { get; set; }
 
 
+        private List<CourseProviderPrice> _providerPrice;
+        
+        [JsonProperty]
+        public List<CourseProviderPrice> ProviderPrice
+        {
+            get => _providerPrice ?? (_providerPrice = new List<CourseProviderPrice>());
+            set => _providerPrice = value;
+        }
+        
         
         [JsonIgnore]
         public Lifelength Duration
@@ -166,6 +179,73 @@ namespace SmartCore.CAA.CAAWP
 
         [JsonProperty]
         public int? TaskId { get; set; }
+    }
+    
+    
+    [JsonObject]
+    [Serializable]
+    public class CourseProviderPrice : BaseEntityObject
+    {
+        [JsonIgnore] public Supplier Supplier { get; set; }
+
+        [JsonIgnore] public CoursePackage Parent { get; set; }
+
+        [JsonIgnore]
+        [ListViewData(200, "Supplier", 1)]
+        public string SupplierName
+        {
+            get => Supplier?.Name ?? Supplier.Unknown.Name;
+        }
+
+        [JsonProperty] public int SupplierId { get; set; }
+
+        [ListViewData(80, "Offering", 2)]
+        [JsonProperty]
+        public decimal Offering { get; set; }
+
+        [ListViewData(80, "Routine", 4)]
+        [JsonProperty]
+        public decimal Routine { get; set; }
+
+        [ListViewData(80, "K for MH", 5)]
+        [JsonProperty]
+        public decimal RoutineKMH { get; set; }
+
+        [ListViewData(80, "NDT", 6)]
+        [JsonProperty]
+        public decimal NDT { get; set; }
+
+        [ListViewData(80, "K for MH", 7)]
+        [JsonProperty]
+        public decimal NDTKMH { get; set; }
+
+        [ListViewData(80, "AD", 8)]
+        [JsonProperty]
+        public decimal AD { get; set; }
+
+        [ListViewData(80, "K for MH", 9)]
+        [JsonProperty]
+        public decimal ADKMH { get; set; }
+
+        [ListViewData(80, "NRC", 10)]
+        [JsonProperty]
+        public decimal NRC { get; set; }
+
+        [ListViewData(80, "K for MH", 11)]
+        [JsonProperty]
+        public decimal NRCKMH { get; set; }
+
+        [DefaultValue(-1)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public int CurrencyOfferingId { get; set; }
+        
+        [JsonIgnore]
+        [ListViewData(80, "Currency", 12)]
+        public Сurrency CurrencyOffering
+        {
+            get => Сurrency.GetItemById(CurrencyOfferingId);
+            set => CurrencyOfferingId = value.ItemId;
+        }
     }
 
     
