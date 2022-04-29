@@ -7,7 +7,6 @@ using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
-using SmartCore.CAA.CAAWP;
 using SmartCore.Entities.Dictionaries;
 
 namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.UI.UIControls.DocumentationControls;
-using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
