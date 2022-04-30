@@ -8,7 +8,6 @@ using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.PersonnelControls.EmployeeControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA.CAAEducation;
@@ -17,7 +16,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Files;
-using SmartCore.Purchase;
 
 namespace CAS.UI.UICAAControls.Specialists
 {
@@ -26,6 +24,7 @@ namespace CAS.UI.UICAAControls.Specialists
     public partial class CAAEmployeeScreen : ScreenControl
     {
         #region Fields
+        private DateTime? _toDate;
         private CommonCollection<CAAEducationManagment> _initialDocumentArray = new CommonCollection<CAAEducationManagment>();
         private bool _needReload;
         private Specialist _currentItem;
@@ -340,11 +339,40 @@ namespace CAS.UI.UICAAControls.Specialists
 	            .GetObjectListAll<EducationRecordsDTO, CAAEducationRecord>(new Filter("OperatorId", _opearatorId)));
 			
 
+            _initialDocumentArray.Clear();
             FillCollection(educations, _currentItem.Occupation, _currentItem,records, false);
             foreach (Occupation dict in occupation)
             {
 	            if (_currentItem.Combination != null && _currentItem.Combination.Contains(dict.FullName))
 		            FillCollection(educations, dict, _currentItem,records);
+            }
+            
+            
+            var temp = new CommonCollection<CAAEducationManagment>();
+            if (_toDate.HasValue)
+            {
+	            temp.AddRange(_initialDocumentArray.ToArray());
+	            _initialDocumentArray.Clear();
+				
+
+	            foreach (var t in temp)
+	            {
+		            if (t.Record.Settings.NextCompliances != null &&  t.Record.Settings.NextCompliances.Any())
+		            {
+			            foreach (var next in t.Record.Settings.NextCompliances)
+			            {
+				            var newItem = t.DeepClone();
+				            newItem.Record.Settings.NextCompliance = next;
+				            _initialDocumentArray.Add(newItem);
+			            }
+		            }
+		            else
+		            {
+			            var newItem = t.DeepClone();
+			            newItem.Record.Settings.NextCompliance = new NextCompliance();
+			            _initialDocumentArray.Add(t);
+		            }
+	            }
             }
 
             #endregion
@@ -826,5 +854,33 @@ namespace CAS.UI.UICAAControls.Specialists
 	    }
 
 	    #endregion
+	    
+	    private void ForecastMenuClick(object sender, EventArgs e)
+	    {
+		    _toDate = DateTime.Now;
+		    switch ((string)sender)
+		    {
+			    case"1 Month" : _toDate = _toDate.Value.AddMonths(1);
+				    break;
+			    case	"3 Month" : _toDate = _toDate.Value.AddMonths(3);
+				    break;
+			    case	"6 Month": _toDate = _toDate.Value.AddMonths(6);
+				    break;
+			    case	"1 Year" : _toDate = _toDate.Value.AddYears(1);
+				    break;
+			    case	"2 Year" : _toDate = _toDate.Value.AddYears(2);
+				    break;
+			    case	"3 Year": _toDate = _toDate.Value.AddYears(3);
+				    break;
+			    case	"4 Year": _toDate = _toDate.Value.AddYears(4);
+				    break;
+			    case	"5 Year": _toDate = _toDate.Value.AddYears(5);
+				    break;
+			    case	"None": _toDate = null;
+				    break;
+		    }
+			
+		    AnimatedThreadWorker.RunWorkerAsync();
+	    }
     }
 }

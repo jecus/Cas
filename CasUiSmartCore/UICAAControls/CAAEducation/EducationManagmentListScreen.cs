@@ -116,13 +116,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 				}
 			}
 
-
-			if (_toDate.HasValue)
-			{
-				
-			}
-			
-				_toolStripMenuItemComposeWorkPackage.Visibility = 
+			_toolStripMenuItemComposeWorkPackage.Visibility = 
 					_toolStripMenuItemsWorkPackages.Visibility =
 						_toolStripMenuItemsWShowWP.Visibility  = _toDate.HasValue ? ElementVisibility.Collapsed : ElementVisibility.Visible;
 
@@ -199,7 +193,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 				foreach (var t in temp)
 				{
-					if (t.Record.Settings.NextCompliances.Any())
+					if (t.Record.Settings.NextCompliances != null && t.Record.Settings.NextCompliances.Any())
 					{
 						foreach (var next in t.Record.Settings.NextCompliances)
 						{

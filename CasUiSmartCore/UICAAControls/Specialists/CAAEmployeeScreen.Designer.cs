@@ -1,4 +1,5 @@
-﻿using CAS.UI.UIControls.MaintananceProgram;
+﻿using System.Collections.Generic;
+using CAS.UI.UIControls.MaintananceProgram;
 using CAS.UI.UIControls.PersonnelControls;
 using CAS.UI.UIControls.PersonnelControls.EmployeeCompliance;
 using CAS.UI.UIControls.PersonnelControls.EmployeeControls;
@@ -72,6 +73,21 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.headerControl.ShowSaveButton = true;
 			this.headerControl.ShowSaveButton2 = true;
 			this.headerControl.Size = new System.Drawing.Size(1406, 58);
+			this.headerControl.ShowForecastButton = true;
+			this.headerControl.CustomMenu = new List<string>()
+			{
+				"None",
+				"1 Month",
+				"3 Month",
+				"6 Month",
+				"1 Year",
+				"2 Year",
+				"3 Year",
+				"4 Year",
+				"5 Year",
+	            
+			};
+			this.headerControl.ForecastContextMenuClick += new System.EventHandler(this.ForecastMenuClick);
 			this.headerControl.ReloadButtonClick += new System.EventHandler(this.HeaderControl1ReloadRised);
 			this.headerControl.SaveButtonClick += new System.EventHandler(this.HeaderControlButtonSaveClick);
 			this.headerControl.SaveButton2Click += new System.EventHandler(this.HeaderControlButtonSaveAndAddClick);

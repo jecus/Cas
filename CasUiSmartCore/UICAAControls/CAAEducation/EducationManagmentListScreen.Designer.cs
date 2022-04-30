@@ -68,6 +68,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.headerControl.ShowForecastButton = true;
             this.headerControl.CustomMenu = new List<string>()
             {
+	            "None",
 	            "1 Month",
 	            "3 Month",
 	            "6 Month",
@@ -76,7 +77,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 	            "3 Year",
 	            "4 Year",
 	            "5 Year",
-	            "None"
+	            
             };
             this.headerControl.ForecastContextMenuClick += new System.EventHandler(this.ForecastMenuClick);
             this.headerControl.ReloadButtonClick += new System.EventHandler(this.HeaderControlButtonReloadClick);
