@@ -37,7 +37,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 dateTimePickeValidTo.Value = _compliance.LastDate.Value;
                 metroTextBoxRemark.Text = _compliance.Remark;
             }
-            else dateTimePickeValidTo.Value = _record.Settings.NextCompliance.Next.Value;
+            else dateTimePickeValidTo.Value = _record.Settings.NextCompliance.NextDate.Value;
             documentControl1.Added += DocumentControl1_Added;
         }
         

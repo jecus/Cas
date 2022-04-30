@@ -95,7 +95,7 @@ namespace SmartCore.CAA.CAAEducation
 	    }
 	    
 	    [JsonIgnore]
-	    public DateTime? Next { get; set; }
+	    public DateTime? NextDate { get; set; }
 
 	    [JsonIgnore]
 	    public Lifelength Remains { get; set; }

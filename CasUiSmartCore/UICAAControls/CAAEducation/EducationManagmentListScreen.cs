@@ -11,7 +11,6 @@ using CAS.UI.UICAAControls.CAAEducation.CoursePackage;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
-using Entity.Abstractions.Filters;
 using SmartCore.CAA.CAAEducation;
 using SmartCore.CAA.CAAWP;
 using SmartCore.Entities.Collections;
@@ -19,8 +18,10 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
+using Telerik.WinControls;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
+using Filter = Entity.Abstractions.Filters.Filter;
 
 namespace CAS.UI.UICAAControls.CAAEducation
 {
@@ -114,13 +115,24 @@ namespace CAS.UI.UICAAControls.CAAEducation
 					_toolStripMenuItemsWorkPackages.Items.Add(item);
 				}
 			}
+
+
+			if (_toDate.HasValue)
+			{
+				
+			}
 			
+				_toolStripMenuItemComposeWorkPackage.Visibility = 
+					_toolStripMenuItemsWorkPackages.Visibility =
+						_toolStripMenuItemsWShowWP.Visibility  = _toDate.HasValue ? ElementVisibility.Collapsed : ElementVisibility.Visible;
+
 		}
 		#endregion
 
 		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		{
+			var temp = new CommonCollection<CAAEducationManagment>();
 			_initialDocumentArray.Clear();
 			_resultDocumentArray.Clear();
 
@@ -128,7 +140,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 			var specialists = new List<Specialist>();
 			var educations = new List<SmartCore.CAA.CAAEducation.CAAEducation>();
-			var records = new List<SmartCore.CAA.CAAEducation.CAAEducationRecord>();
+			var records = new List<CAAEducationRecord>();
 			var occupation = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray();
 			educations.AddRange(GlobalObjects.CaaEnvironment.NewLoader
 					.GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _operatorId),loadChild:true));
@@ -176,6 +188,35 @@ namespace CAS.UI.UICAAControls.CAAEducation
 						}
 					));
 			}
+			
+			
+
+			if (_toDate.HasValue)
+			{
+				temp.AddRange(_initialDocumentArray.ToArray());
+				_initialDocumentArray.Clear();
+				
+
+				foreach (var t in temp)
+				{
+					if (t.Record.Settings.NextCompliances.Any())
+					{
+						foreach (var next in t.Record.Settings.NextCompliances)
+						{
+							var newItem = t.DeepClone();
+							newItem.Record.Settings.NextCompliance = next;
+							_initialDocumentArray.Add(newItem);
+						}
+					}
+					else
+					{
+						var newItem = t.DeepClone();
+						newItem.Record.Settings.NextCompliance = new NextCompliance();
+						_initialDocumentArray.Add(t);
+					}
+				}
+			}
+			
 			
 			FilterItems(_initialDocumentArray, _resultDocumentArray);
 

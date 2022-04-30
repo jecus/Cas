@@ -1,9 +1,11 @@
-﻿using SmartCore.Entities.Dictionaries;
+﻿using System;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
 
 namespace SmartCore.CAA.CAAEducation
 {
+    [Serializable]
     public class CAAEducationManagment : BaseEntityObject
     {
         public Specialist Specialist { get; set; }
@@ -17,6 +19,5 @@ namespace SmartCore.CAA.CAAEducation
         {
             IsCombination = true;
         }
-        
     }
 }
