@@ -43,7 +43,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
         public EducationManagmentListView(AnimatedThreadWorker animatedThreadWorker) : this()
 		{
             _animatedThreadWorker = animatedThreadWorker;
-            SortDirection = SortDirection.Desc;
+            SortDirection = SortDirection.Asc;
 			OldColumnIndex = 12;
 		}
 

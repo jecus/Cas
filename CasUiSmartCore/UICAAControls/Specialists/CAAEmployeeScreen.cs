@@ -326,10 +326,10 @@ namespace CAS.UI.UICAAControls.Specialists
                 return;
             }
             #endregion
-
-
+            
             #region Training
             
+            _initialDocumentArray.Clear();
             var educations = new List<SmartCore.CAA.CAAEducation.CAAEducation>();
             var records = new List<CAAEducationRecord>();
             var occupation = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray();
@@ -339,7 +339,7 @@ namespace CAS.UI.UICAAControls.Specialists
 	            .GetObjectListAll<EducationRecordsDTO, CAAEducationRecord>(new Filter("OperatorId", _opearatorId)));
 			
 
-            _initialDocumentArray.Clear();
+            
             FillCollection(educations, _currentItem.Occupation, _currentItem,records, false);
             foreach (Occupation dict in occupation)
             {
@@ -399,7 +399,7 @@ namespace CAS.UI.UICAAControls.Specialists
 					if(rec != null)
 						rec.Education = ed;
 					
-					EducationCalculator.CalculateEducation(rec);
+					EducationCalculator.CalculateEducation(rec, _toDate);
 					var item = new CAAEducationManagment()
 					{
 						Specialist = specialist,

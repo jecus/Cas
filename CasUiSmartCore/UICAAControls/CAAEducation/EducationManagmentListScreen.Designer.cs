@@ -226,7 +226,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.radio_ByName.Name = "radio_ByName";
             this.radio_ByName.Size = new System.Drawing.Size(149, 22);
             this.radio_ByName.TabIndex = 68;
-            this.radio_ByName.Text = "Group By Name";
+            this.radio_ByName.Text = "By Name";
             this.radio_ByName.UseVisualStyleBackColor = true;
             this.radio_ByName.CheckedChanged += Radio_ByNameOnCheckedChanged;
             // 
@@ -241,7 +241,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.radio_ByCode.Size = new System.Drawing.Size(143, 22);
             this.radio_ByCode.TabIndex = 67;
             this.radio_ByCode.TabStop = true;
-            this.radio_ByCode.Text = "Group By Code";
+            this.radio_ByCode.Text = "By Code";
             this.radio_ByCode.UseVisualStyleBackColor = true;
             this.radio_ByCode.CheckedChanged += Radio_ByNameOnCheckedChanged;
             // 
@@ -257,7 +257,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.radio_Non.Size = new System.Drawing.Size(143, 22);
             this.radio_Non.TabIndex = 67;
             this.radio_Non.TabStop = true;
-            this.radio_Non.Text = "No Gropping";
+            this.radio_Non.Text = "No Groping";
             this.radio_Non.UseVisualStyleBackColor = true;
             this.radio_Non.CheckedChanged += Radio_ByNameOnCheckedChanged;
 			// 

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using CAS.UI.UIControls.NewGrid;
 using SmartCore.CAA.CAAEducation;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
@@ -16,6 +17,8 @@ namespace CAS.UI.UICAAControls.Specialists
         {
             _managmentListView.DisableEdit = true;
             _managmentListView.CurrentOperator = @operator;
+            _managmentListView.SortDirection = SortDirection.Asc;
+            _managmentListView.OldColumnIndex = 12;
             _managmentListView.SetItemsArray(initialDocumentArray.ToArray());
         }
     }
