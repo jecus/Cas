@@ -47,6 +47,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		private RadMenuItem _toolStripMenuItemsWorkPackages;
 		private RadMenuItem _toolStripMenuItemsWShowWP;
 		private DateTime? _toDate;
+		private string _schedule;
 
 		#endregion
 
@@ -115,6 +116,17 @@ namespace CAS.UI.UICAAControls.CAAEducation
 					_toolStripMenuItemsWorkPackages.Items.Add(item);
 				}
 			}
+
+			if (_toDate.HasValue)
+			{
+				labelTitle.Visible = true;
+				labelTitle.Text = $"Schedule Period : {_schedule}";
+			}
+			else
+			{
+				labelTitle.Visible = false;
+			}
+			
 
 			_toolStripMenuItemComposeWorkPackage.Visibility = 
 					_toolStripMenuItemsWorkPackages.Visibility =
@@ -671,28 +683,38 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		private void ForecastMenuClick(object sender, EventArgs e)
 		{
 			_toDate = DateTime.Now;
+			_schedule = (string)sender;
 			switch ((string)sender)
 			{
-				case"1 Month" : _toDate = _toDate.Value.AddMonths(1);
+				case "1 Month":
+					_toDate = _toDate.Value.AddMonths(1);
 					break;
-				case	"3 Month" : _toDate = _toDate.Value.AddMonths(3);
+				case "3 Month":
+					_toDate = _toDate.Value.AddMonths(3);
 					break;
-				case	"6 Month": _toDate = _toDate.Value.AddMonths(6);
+				case "6 Month":
+					_toDate = _toDate.Value.AddMonths(6);
 					break;
-				case	"1 Year" : _toDate = _toDate.Value.AddYears(1);
+				case "1 Year":
+					_toDate = _toDate.Value.AddYears(1);
 					break;
-				case	"2 Year" : _toDate = _toDate.Value.AddYears(2);
+				case "2 Year":
+					_toDate = _toDate.Value.AddYears(2);
 					break;
-				case	"3 Year": _toDate = _toDate.Value.AddYears(3);
+				case "3 Year":
+					_toDate = _toDate.Value.AddYears(3);
 					break;
-				case	"4 Year": _toDate = _toDate.Value.AddYears(4);
+				case "4 Year":
+					_toDate = _toDate.Value.AddYears(4);
 					break;
-				case	"5 Year": _toDate = _toDate.Value.AddYears(5);
+				case "5 Year":
+					_toDate = _toDate.Value.AddYears(5);
 					break;
-				case	"None": _toDate = null;
+				case "None":
+					_toDate = null;
 					break;
 			}
-			
+
 			AnimatedThreadWorker.RunWorkerAsync();
 		}
 	}

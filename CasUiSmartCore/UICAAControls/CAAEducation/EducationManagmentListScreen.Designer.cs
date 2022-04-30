@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Forms;
 using CASTerms;
 using Entity.Abstractions;
 
@@ -34,7 +35,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
         {
 	        var userType = GlobalObjects.CasEnvironment?.IdentityUser.UserType ?? GlobalObjects.CaaEnvironment?.IdentityUser.UserType;;
 			this.labelDateAsOf = new System.Windows.Forms.Label();
-            this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
+            this.labelTitle = new Label();
             this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -93,10 +94,9 @@ namespace CAS.UI.UICAAControls.CAAEducation
             // labelTitle
             // 
             this.labelTitle.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            this.labelTitle.ForeColor = System.Drawing.Color.DimGray;
+            this.labelTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.labelTitle.Enabled = false;
-            this.labelTitle.ImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.labelTitle.Location = new System.Drawing.Point(28, 3);
+            this.labelTitle.Location = new System.Drawing.Point(10, 33);
             this.labelTitle.Margin = new System.Windows.Forms.Padding(0);
             this.labelTitle.Size = new System.Drawing.Size(600, 27);
             this.labelTitle.TabIndex = 16;
@@ -279,7 +279,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
         #endregion
 
-        private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
+        private Label labelTitle;
         private AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
         private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
         private System.Windows.Forms.Label labelDateAsOf;
