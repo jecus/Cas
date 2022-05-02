@@ -10,6 +10,7 @@ using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Interfaces;
 
 namespace SmartCore.CAA.CAAEducation
 {
@@ -103,27 +104,35 @@ namespace SmartCore.CAA.CAAEducation
 	    [JsonIgnore]
 	    public ConditionState Condition { get; set; }
     }
-    
+
 
     [Serializable]
-    public class LastCompliance
+    public class LastCompliance  : BaseEntityObject
     {
-	    public LastCompliance()
-	    {
-		    LastDate = DateTime.Now;
-	    }
-	    
-	    [JsonProperty]
-	    public DateTime? LastDate { get; set; }
-	    
-	    [JsonProperty]
-	    public string Remark { get; set; }
-	    
-	    [JsonProperty]
-	    public int? DocumentId { get; set; }
-	    
-	    [JsonIgnore]
-	    public Document Document { get; set; }
+    public LastCompliance()
+    {
+	    LastDate = DateTime.Now;
     }
-    
+
+    [JsonProperty] public DateTime? LastDate { get; set; }
+
+    [JsonProperty] public string Remark { get; set; }
+
+    [JsonProperty] public int? DocumentId { get; set; }
+
+    [JsonIgnore] public Document Document { get; set; }
+
+
+    }
+
+
+    [Serializable]
+    public class LastComplianceView : BaseEntityObject
+    {
+	    public string LastDate { get; set; }
+	    public string Remark { get; set; }
+	    public string Group { get; set; }
+	    public string Course { get; set; }
+    }
+
 }
