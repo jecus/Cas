@@ -34,6 +34,7 @@ namespace CAS.UI.UICAAControls.Specialists
         private ToolStripMenuItem _itemPrintReportHistory;
 		private List<AircraftModel> aircraftModels = new List<AircraftModel>();
 		private List<SmartCore.Purchase.Supplier> _suppliers = new List<SmartCore.Purchase.Supplier>();
+		List<CAAEducationRecord> _records = new List<CAAEducationRecord>();
 
         #endregion
 
@@ -135,7 +136,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			//complianceControl.cu = _currentItem;
 			employeeLicenceControl.UpdateControl(_currentItem, aircraftModels);
 			employeeMedicalControl1.UpdateControl(_currentItem);
-			employeeTrainingListControl1.UpdateControl(_initialDocumentArray, aircraftHeaderControl1.Operator);
+			employeeTrainingListControl1.UpdateControl(_initialDocumentArray, aircraftHeaderControl1.Operator, _records);
 	        employeeFlightControl.CurrentItem = _currentItem;
 	        employeeFlightControl.Reload += DocumentsControl_Reload;
 
@@ -331,20 +332,22 @@ namespace CAS.UI.UICAAControls.Specialists
             
             _initialDocumentArray.Clear();
             var educations = new List<SmartCore.CAA.CAAEducation.CAAEducation>();
-            var records = new List<CAAEducationRecord>();
+            _records.Clear();
             var occupation = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray();
             educations.AddRange(GlobalObjects.CaaEnvironment.NewLoader
 	            .GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _opearatorId),loadChild:true));
-            records.AddRange(GlobalObjects.CaaEnvironment.NewLoader
-	            .GetObjectListAll<EducationRecordsDTO, CAAEducationRecord>(new Filter("OperatorId", _opearatorId)));
-			
-
+            _records.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+	            .GetObjectListAll<EducationRecordsDTO, CAAEducationRecord>(new []
+	            {
+		            new Filter("OperatorId", _opearatorId),
+		            new Filter("SpecialistId", _currentItem.ItemId),
+	            }));
             
-            FillCollection(educations, _currentItem.Occupation, _currentItem,records, false);
+            FillCollection(educations, _currentItem.Occupation, _currentItem,_records, false);
             foreach (Occupation dict in occupation)
             {
 	            if (_currentItem.Combination != null && _currentItem.Combination.Contains(dict.FullName))
-		            FillCollection(educations, dict, _currentItem,records);
+		            FillCollection(educations, dict, _currentItem,_records);
             }
             
             
