@@ -34,10 +34,7 @@ namespace CAS.UI.UICAAControls.Specialists
         private void InitializeComponent()
         {
             this._managmentListView = new CAS.UI.UICAAControls.CAAEducation.EducationManagmentListView();
-            this.listViewCompliance = new EducationComplianceListView();
-            this.NextCourse = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.NextLimitDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnRemarks = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listViewCompliance = new CAS.UI.UICAAControls.CAAEducation.EducationComplianceListView();
             this.labelSkype = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -65,28 +62,23 @@ namespace CAS.UI.UICAAControls.Specialists
             // 
             // listViewCompliance
             // 
+            this.listViewCompliance.ColumnIndexes = null;
+            this.listViewCompliance.ConfigurePaste = null;
+            this.listViewCompliance.Displayer = null;
+            this.listViewCompliance.DisplayerText = null;
+            this.listViewCompliance.EnableCustomSorting = true;
+            this.listViewCompliance.Entity = null;
             this.listViewCompliance.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.listViewCompliance.IgnoreEnterPress = false;
             this.listViewCompliance.Location = new System.Drawing.Point(3, 572);
+            this.listViewCompliance.MenuOpeningAction = null;
             this.listViewCompliance.Name = "listViewCompliance";
-            this.listViewCompliance.Size = new System.Drawing.Size(1040, 227);
+            this.listViewCompliance.OldColumnIndex = 2;
+            this.listViewCompliance.PasteComplete = null;
+            this.listViewCompliance.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this.listViewCompliance.Size = new System.Drawing.Size(1040, 315);
+            this.listViewCompliance.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Asc;
             this.listViewCompliance.TabIndex = 1;
-            // 
-            // NextCourse
-            // 
-            this.NextCourse.Text = "Courses";
-            this.NextCourse.Width = 200;
-            // 
-            // NextLimitDate
-            // 
-            this.NextLimitDate.Text = "Date";
-            this.NextLimitDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NextLimitDate.Width = 150;
-            // 
-            // columnRemarks
-            // 
-            this.columnRemarks.Text = "Remark";
-            this.columnRemarks.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnRemarks.Width = 400;
             // 
             // labelSkype
             // 
@@ -107,10 +99,9 @@ namespace CAS.UI.UICAAControls.Specialists
             this.Controls.Add(this.listViewCompliance);
             this.Controls.Add(this._managmentListView);
             this.Name = "CAAEmployeeTraining";
-            this.Size = new System.Drawing.Size(1046, 805);
+            this.Size = new System.Drawing.Size(1046, 890);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         private EducationManagmentListView _managmentListView;
@@ -118,10 +109,7 @@ namespace CAS.UI.UICAAControls.Specialists
 
         #endregion
 
-        public EducationComplianceListView listViewCompliance;
-        private System.Windows.Forms.ColumnHeader NextCourse;
-        private System.Windows.Forms.ColumnHeader NextLimitDate;
-        private System.Windows.Forms.ColumnHeader columnRemarks;
+        public CAS.UI.UICAAControls.CAAEducation.EducationComplianceListView listViewCompliance;
         private System.Windows.Forms.Label labelSkype;
     }
 }

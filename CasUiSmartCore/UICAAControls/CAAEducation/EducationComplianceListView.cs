@@ -59,8 +59,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		{
 			AddColumn("Group", (int)(radGridView1.Width * 0.40f));
             AddColumn("Courses", (int)(radGridView1.Width * 0.40f));
-            AddColumn("Date", (int)(radGridView1.Width * 0.40f));
-            AddColumn("Remark", (int)(radGridView1.Width * 0.80f));
+            AddColumn("Date", (int)(radGridView1.Width * 0.20f));
+            AddColumn("Remark", (int)(radGridView1.Width * 0.60f));
 		}
 		#endregion
 		
