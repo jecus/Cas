@@ -150,7 +150,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             // 
             this.educationsComplianceControl1.Location = new System.Drawing.Point(3, 367);
             this.educationsComplianceControl1.Name = "educationsComplianceControl1";
-            this.educationsComplianceControl1.Size = new System.Drawing.Size(874, 310);
+            this.educationsComplianceControl1.Size = new System.Drawing.Size(941, 400);
             this.educationsComplianceControl1.TabIndex = 15;
             // 
             // EducationScreen
