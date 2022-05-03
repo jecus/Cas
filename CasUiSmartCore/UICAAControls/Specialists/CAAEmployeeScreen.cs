@@ -66,6 +66,8 @@ namespace CAS.UI.UICAAControls.Specialists
             _opearatorId = opearatorId;
 
             aircraftHeaderControl1.Operator = GlobalObjects.CaaEnvironment?.Operators[0];
+            statusControl.ShowStatus = true;
+            statusControl.ShowOperatorAircraft = false;
 
 			Initialize();
         }

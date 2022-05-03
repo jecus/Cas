@@ -129,7 +129,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.flowLayoutPanelMain.Controls.Add(this.employeeWorkPackageControl);
 			this.flowLayoutPanelMain.Controls.Add(this.extendableRichContainerLicenseRecord);
 			this.flowLayoutPanelMain.Controls.Add(this.medicalCompliance);
-			this.flowLayoutPanelMain.Controls.Add(this.extendableRichContainerTrainingRecord);
+			//this.flowLayoutPanelMain.Controls.Add(this.extendableRichContainerTrainingRecord);
 			this.flowLayoutPanelMain.Controls.Add(this.trainingCompliance);
 			this.flowLayoutPanelMain.Controls.Add(this.maintenanceDirectiveComplianceControl1);
 			this.flowLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
