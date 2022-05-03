@@ -121,18 +121,18 @@ namespace SmartCore.CAA.CAAEducation
     [JsonProperty] public int? DocumentId { get; set; }
 
     [JsonIgnore] public Document Document { get; set; }
-
-
+    
     }
 
 
     [Serializable]
     public class LastComplianceView : BaseEntityObject
     {
-	    public string LastDate { get; set; }
-	    public string Remark { get; set; }
+	    public CAAEducationRecord Record { get; set; }
+	    public LastCompliance  LastCompliance{ get; set; }
 	    public string Group { get; set; }
 	    public string Course { get; set; }
+	    
     }
 
 }

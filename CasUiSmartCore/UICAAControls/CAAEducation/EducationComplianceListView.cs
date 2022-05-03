@@ -33,8 +33,10 @@ namespace CAS.UI.UICAAControls.CAAEducation
             SortDirection = SortDirection.Asc;
             OldColumnIndex = 2;
 		}
-        
-        
+
+        public AnimatedThreadWorker AnimatedThreadWorker { get; set; }
+        public bool IsEditable { get; set; }
+
         #endregion
 
 		#endregion
@@ -72,8 +74,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
 	        {
 		        CreateRow(item.Group, item.Group),
 		        CreateRow(item.Course,item.Course),
-		        CreateRow(item.LastDate, item.LastDate),
-		        CreateRow(item.Remark, item.Remark),
+		        CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.LastCompliance.LastDate), item.LastCompliance.LastDate),
+		        CreateRow(item.LastCompliance.Remark, item.LastCompliance.Remark),
 	        };
         }
 
@@ -83,7 +85,26 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
-			e.Cancel = true;
+			if(!IsEditable)
+				return;
+			
+			if (SelectedItems.Count == 0)
+				return;
+
+			var item = SelectedItems[0];
+
+			if (item.Group.Contains("Last"))
+			{
+				var form = new EducationComplianceForm(item.Record, item.LastCompliance);
+				if (form.ShowDialog() == DialogResult.OK)
+					AnimatedThreadWorker.RunWorkerAsync();
+			}
+			else
+			{
+				var form = new EducationComplianceForm(item.Record,  item.LastCompliance);
+				if (form.ShowDialog() == DialogResult.OK)
+					AnimatedThreadWorker.RunWorkerAsync();
+			}
 		}
 		#endregion
 

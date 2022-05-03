@@ -31,15 +31,16 @@ namespace CAS.UI.UICAAControls.Specialists
                 {
                     last.Add(new LastComplianceView()
                     {
+                        Record = record,
                         Course = record.Education?.Task?.FullName,
-                        Remark = comp.Remark,
-                        LastDate = SmartCore.Auxiliary.Convert.GetDateFormat(comp.LastDate),
+                        LastCompliance = comp,
                         Group = "Last compliance"
                     });
                     
                 }
             }
             listViewCompliance.SetItemsArray(last.ToArray());
+            listViewCompliance.IsEditable = false;
         }
     }
 }

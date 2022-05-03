@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
@@ -20,7 +21,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
         
         public void UpdateInformation(CAAEducationManagment managment, AnimatedThreadWorker animatedThreadWorker)
         {
-            listViewCompliance.Items.Clear();
+            var last = new List<LastComplianceView>();
             _animatedThreadWorker = animatedThreadWorker;
             _record = managment.Record;
             
@@ -28,74 +29,40 @@ namespace CAS.UI.UICAAControls.CAAEducation
             {
                 foreach (var comp in _record.Settings.LastCompliances.OrderByDescending(i => i.LastDate))
                 {
-                    var lastsubs =
-                        new[]
-                        {
-                            managment.Education?.Task?.FullName,
-                            SmartCore.Auxiliary.Convert.GetDateFormat(comp.LastDate),
-                            comp.Remark
-                        };
-            
-                    var lastItem = new ListViewItem(lastsubs)
+                    last.Add(new LastComplianceView()
                     {
-                        BackColor = UsefulMethods.GetColor(managment),
-                        Group = listViewCompliance.Groups[1],
-                        Tag = comp,
-                    };
-                    listViewCompliance.Items.Add(lastItem);
+                        Record = _record,
+                        Course = managment.Education?.Task?.FullName,
+                        LastCompliance = comp,
+                        Group = "Last compliance"
+                    });
                 }
                 
                 
                 if((bool)_record.Education?.Task?.Repeat.IsNullOrZero())
                     return;
             
-                var subs =
-                    new[]
-                    {
-                        managment.Education?.Task?.FullName,
-                        SmartCore.Auxiliary.Convert.GetDateFormat(_record?.Settings?.NextCompliance?.NextDate),
-                        ""
-                    };
-            
-                var newItem = new ListViewItem(subs)
+                last.Add(new LastComplianceView()
                 {
-                    BackColor = UsefulMethods.GetColor(managment),
-                    Group = listViewCompliance.Groups[0],
-                    Tag = _record,
-                };
-                listViewCompliance.Items.Add(newItem);
+                    Record = _record,
+                    Course = managment.Education?.Task?.FullName,
+                    LastCompliance = new LastCompliance(),
+                    Group = "Need new compliance"
+                });
             }
+            
+            listViewCompliance.SetItemsArray(last.ToArray());
+            listViewCompliance.AnimatedThreadWorker = _animatedThreadWorker;
+            listViewCompliance.IsEditable = true;
         }
         
-        private void ListViewComplainceMouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (listViewCompliance.SelectedItems.Count == 0)
-                return;
-
-            var item = listViewCompliance.SelectedItems[0];
-
-            if (item.Tag is LastCompliance tag)
-            {
-                var form = new EducationComplianceForm(_record, tag);
-                if (form.ShowDialog() == DialogResult.OK)
-                    _animatedThreadWorker.RunWorkerAsync();
-            }
-            else
-            {
-                var form = new EducationComplianceForm(_record, new LastCompliance());
-                if (form.ShowDialog() == DialogResult.OK)
-                    _animatedThreadWorker.RunWorkerAsync();
-            }
-        }
-
-
         private void ButtonAddOnClick(object sender, EventArgs e)
         {
-            var last = new LastCompliance();
+            var last = new LastComplianceView();
             if(_record?.Settings?.NextCompliance?.NextDate != null)
-                last.LastDate = _record?.Settings?.NextCompliance?.NextDate;
+                last.LastCompliance.LastDate = _record?.Settings?.NextCompliance?.NextDate;
             
-            var form = new EducationComplianceForm(_record, last);
+            var form = new EducationComplianceForm(_record, last.LastCompliance);
             if (form.ShowDialog() == DialogResult.OK)
                 _animatedThreadWorker.RunWorkerAsync();
         }
@@ -112,27 +79,14 @@ namespace CAS.UI.UICAAControls.CAAEducation
             {
                 foreach (var item in listViewCompliance.SelectedItems.OfType<ListViewItem>())
                 {
-                    if (item.Tag is LastCompliance tag)
+                    if (item.Tag is LastComplianceView tag)
                     {
-                        _record.Settings.LastCompliances.Remove(tag);
-                        listViewCompliance.Items.Remove(item);
+                        _record.Settings.LastCompliances.Remove(tag.LastCompliance);
                         GlobalObjects.CaaEnvironment.NewKeeper.Save(_record);
                     }
                 }
                 _animatedThreadWorker.RunWorkerAsync();
             }
-        }
-
-        private void ListViewComplianceOnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            ButtonDelete.Enabled = false;
-            
-            if (listViewCompliance.SelectedItems.Count == 0)
-                return;
-            
-            if(listViewCompliance.SelectedItems.OfType<ListViewItem>().All(i => i.Group == listViewCompliance.Groups[1]))
-                ButtonDelete.Enabled = true;
-            
         }
     }
 }
