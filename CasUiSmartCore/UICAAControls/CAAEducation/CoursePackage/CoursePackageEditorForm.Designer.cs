@@ -43,10 +43,8 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			MetroFramework.Controls.MetroLabel label18;
 			MetroFramework.Controls.MetroLabel label4;
 			MetroFramework.Controls.MetroLabel label6;
-			MetroFramework.Controls.MetroLabel label7;
 			MetroFramework.Controls.MetroLabel label13;
 			MetroFramework.Controls.MetroLabel label15;
-			MetroFramework.Controls.MetroLabel label17;
 			MetroFramework.Controls.MetroLabel metroLabel2;
 			this.textBoxWpNumber = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxDescription = new MetroFramework.Controls.MetroTextBox();
@@ -71,16 +69,30 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.documentControl9 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.documentControl10 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.numericUpDownFact = new System.Windows.Forms.NumericUpDown();
+			this.numericUpDownMax = new System.Windows.Forms.NumericUpDown();
+			this.numericUpDownMin = new System.Windows.Forms.NumericUpDown();
+			this.label20 = new System.Windows.Forms.Label();
+			this.label19 = new System.Windows.Forms.Label();
+			this.label17 = new System.Windows.Forms.Label();
+			this.label16 = new System.Windows.Forms.Label();
+			this.label8 = new System.Windows.Forms.Label();
+			this.comboBoxPerOne = new System.Windows.Forms.ComboBox();
+			this.numericUpDownPerOne = new System.Windows.Forms.NumericUpDown();
+			this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+			this.comboBoxTotal = new System.Windows.Forms.ComboBox();
+			this.numericUpTotal = new System.Windows.Forms.NumericUpDown();
+			this.label7 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
+			this.lifelengthViewerDuration = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.dateTimePickerFlightDate = new System.Windows.Forms.DateTimePicker();
 			this.label21 = new System.Windows.Forms.Label();
-			this.linkLabelEditComponents = new System.Windows.Forms.LinkLabel();
+			this.textBoxLocation = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxClosedBy = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxPublishingRemark = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxPublishedBy = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxClosingRemarks = new MetroFramework.Controls.MetroTextBox();
-			this.textBoxLocation = new MetroFramework.Controls.MetroTextBox();
-			this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
-			this.lifelengthViewerDuration = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
+			this.comboBoxProvider = new System.Windows.Forms.ComboBox();
 			labelNumber = new MetroFramework.Controls.MetroLabel();
 			label1 = new MetroFramework.Controls.MetroLabel();
 			labelValidFrom = new MetroFramework.Controls.MetroLabel();
@@ -94,12 +106,15 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			label18 = new MetroFramework.Controls.MetroLabel();
 			label4 = new MetroFramework.Controls.MetroLabel();
 			label6 = new MetroFramework.Controls.MetroLabel();
-			label7 = new MetroFramework.Controls.MetroLabel();
 			label13 = new MetroFramework.Controls.MetroLabel();
 			label15 = new MetroFramework.Controls.MetroLabel();
-			label17 = new MetroFramework.Controls.MetroLabel();
 			metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.groupBox1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownFact)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownMax)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownMin)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownPerOne)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpTotal)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// labelNumber
@@ -205,7 +220,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// 
 			label14.AutoSize = true;
 			label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label14.Location = new System.Drawing.Point(447, 89);
+			label14.Location = new System.Drawing.Point(442, 65);
 			label14.Name = "label14";
 			label14.Size = new System.Drawing.Size(57, 19);
 			label14.TabIndex = 56;
@@ -216,7 +231,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// 
 			label18.AutoSize = true;
 			label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label18.Location = new System.Drawing.Point(447, 161);
+			label18.Location = new System.Drawing.Point(442, 142);
 			label18.Name = "label18";
 			label18.Size = new System.Drawing.Size(72, 19);
 			label18.TabIndex = 64;
@@ -245,17 +260,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			label6.Text = "Start Remarks:";
 			label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label7
-			// 
-			label7.AutoSize = true;
-			label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label7.Location = new System.Drawing.Point(23, 414);
-			label7.Name = "label7";
-			label7.Size = new System.Drawing.Size(62, 19);
-			label7.TabIndex = 44;
-			label7.Text = "Duration:";
-			label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
 			// label13
 			// 
 			label13.AutoSize = true;
@@ -278,26 +282,15 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			label15.Text = "Closing Remarks:";
 			label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label17
-			// 
-			label17.AutoSize = true;
-			label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label17.Location = new System.Drawing.Point(23, 442);
-			label17.Name = "label17";
-			label17.Size = new System.Drawing.Size(61, 19);
-			label17.TabIndex = 62;
-			label17.Text = "Location:";
-			label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
 			// metroLabel2
 			// 
 			metroLabel2.AutoSize = true;
 			metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			metroLabel2.Location = new System.Drawing.Point(23, 468);
+			metroLabel2.Location = new System.Drawing.Point(24, 409);
 			metroLabel2.Name = "metroLabel2";
-			metroLabel2.Size = new System.Drawing.Size(67, 19);
+			metroLabel2.Size = new System.Drawing.Size(63, 19);
 			metroLabel2.TabIndex = 257;
-			metroLabel2.Text = "Providers:";
+			metroLabel2.Text = "Provider:";
 			metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// textBoxWpNumber
@@ -517,7 +510,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.textBoxRemarks.CustomButton.Visible = false;
 			this.textBoxRemarks.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxRemarks.Lines = new string[0];
-			this.textBoxRemarks.Location = new System.Drawing.Point(522, 89);
+			this.textBoxRemarks.Location = new System.Drawing.Point(517, 65);
 			this.textBoxRemarks.MaxLength = 32767;
 			this.textBoxRemarks.Multiline = true;
 			this.textBoxRemarks.Name = "textBoxRemarks";
@@ -540,7 +533,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(694, 646);
+			this.buttonOk.Location = new System.Drawing.Point(694, 663);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 242;
@@ -554,7 +547,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonClose.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonClose.Location = new System.Drawing.Point(775, 646);
+			this.buttonClose.Location = new System.Drawing.Point(775, 663);
 			this.buttonClose.Name = "buttonClose";
 			this.buttonClose.Size = new System.Drawing.Size(75, 33);
 			this.buttonClose.TabIndex = 241;
@@ -564,7 +557,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// documentControl1
 			// 
 			this.documentControl1.CurrentDocument = null;
-			this.documentControl1.Location = new System.Drawing.Point(541, 139);
+			this.documentControl1.Location = new System.Drawing.Point(536, 120);
 			this.documentControl1.Name = "documentControl1";
 			this.documentControl1.Size = new System.Drawing.Size(314, 41);
 			this.documentControl1.TabIndex = 65;
@@ -572,7 +565,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// documentControl2
 			// 
 			this.documentControl2.CurrentDocument = null;
-			this.documentControl2.Location = new System.Drawing.Point(541, 186);
+			this.documentControl2.Location = new System.Drawing.Point(536, 167);
 			this.documentControl2.Name = "documentControl2";
 			this.documentControl2.Size = new System.Drawing.Size(314, 41);
 			this.documentControl2.TabIndex = 243;
@@ -580,7 +573,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// documentControl3
 			// 
 			this.documentControl3.CurrentDocument = null;
-			this.documentControl3.Location = new System.Drawing.Point(541, 233);
+			this.documentControl3.Location = new System.Drawing.Point(536, 214);
 			this.documentControl3.Name = "documentControl3";
 			this.documentControl3.Size = new System.Drawing.Size(314, 41);
 			this.documentControl3.TabIndex = 244;
@@ -588,7 +581,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// documentControl4
 			// 
 			this.documentControl4.CurrentDocument = null;
-			this.documentControl4.Location = new System.Drawing.Point(541, 280);
+			this.documentControl4.Location = new System.Drawing.Point(536, 261);
 			this.documentControl4.Name = "documentControl4";
 			this.documentControl4.Size = new System.Drawing.Size(314, 41);
 			this.documentControl4.TabIndex = 245;
@@ -596,7 +589,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// documentControl5
 			// 
 			this.documentControl5.CurrentDocument = null;
-			this.documentControl5.Location = new System.Drawing.Point(541, 327);
+			this.documentControl5.Location = new System.Drawing.Point(536, 308);
 			this.documentControl5.Name = "documentControl5";
 			this.documentControl5.Size = new System.Drawing.Size(314, 41);
 			this.documentControl5.TabIndex = 246;
@@ -604,7 +597,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// documentControl6
 			// 
 			this.documentControl6.CurrentDocument = null;
-			this.documentControl6.Location = new System.Drawing.Point(541, 374);
+			this.documentControl6.Location = new System.Drawing.Point(536, 355);
 			this.documentControl6.Name = "documentControl6";
 			this.documentControl6.Size = new System.Drawing.Size(314, 41);
 			this.documentControl6.TabIndex = 247;
@@ -612,7 +605,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// documentControl7
 			// 
 			this.documentControl7.CurrentDocument = null;
-			this.documentControl7.Location = new System.Drawing.Point(542, 421);
+			this.documentControl7.Location = new System.Drawing.Point(537, 402);
 			this.documentControl7.Name = "documentControl7";
 			this.documentControl7.Size = new System.Drawing.Size(314, 41);
 			this.documentControl7.TabIndex = 248;
@@ -620,7 +613,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// documentControl8
 			// 
 			this.documentControl8.CurrentDocument = null;
-			this.documentControl8.Location = new System.Drawing.Point(541, 468);
+			this.documentControl8.Location = new System.Drawing.Point(536, 449);
 			this.documentControl8.Name = "documentControl8";
 			this.documentControl8.Size = new System.Drawing.Size(314, 41);
 			this.documentControl8.TabIndex = 249;
@@ -628,7 +621,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// documentControl9
 			// 
 			this.documentControl9.CurrentDocument = null;
-			this.documentControl9.Location = new System.Drawing.Point(542, 515);
+			this.documentControl9.Location = new System.Drawing.Point(537, 496);
 			this.documentControl9.Name = "documentControl9";
 			this.documentControl9.Size = new System.Drawing.Size(314, 41);
 			this.documentControl9.TabIndex = 250;
@@ -636,25 +629,213 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// documentControl10
 			// 
 			this.documentControl10.CurrentDocument = null;
-			this.documentControl10.Location = new System.Drawing.Point(541, 562);
+			this.documentControl10.Location = new System.Drawing.Point(536, 543);
 			this.documentControl10.Name = "documentControl10";
 			this.documentControl10.Size = new System.Drawing.Size(314, 41);
 			this.documentControl10.TabIndex = 251;
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.numericUpDownFact);
+			this.groupBox1.Controls.Add(this.numericUpDownMax);
+			this.groupBox1.Controls.Add(this.numericUpDownMin);
+			this.groupBox1.Controls.Add(this.label20);
+			this.groupBox1.Controls.Add(this.label19);
+			this.groupBox1.Controls.Add(this.label17);
+			this.groupBox1.Controls.Add(this.label16);
+			this.groupBox1.Controls.Add(this.label8);
+			this.groupBox1.Controls.Add(this.comboBoxPerOne);
+			this.groupBox1.Controls.Add(this.numericUpDownPerOne);
+			this.groupBox1.Controls.Add(this.metroLabel5);
+			this.groupBox1.Controls.Add(this.comboBoxTotal);
+			this.groupBox1.Controls.Add(this.numericUpTotal);
+			this.groupBox1.Controls.Add(this.label7);
+			this.groupBox1.Controls.Add(this.label5);
+			this.groupBox1.Controls.Add(this.lifelengthViewerDuration);
 			this.groupBox1.Controls.Add(this.dateTimePickerFlightDate);
 			this.groupBox1.Controls.Add(this.label21);
-			this.groupBox1.Location = new System.Drawing.Point(448, 32);
+			this.groupBox1.Controls.Add(this.textBoxLocation);
+			this.groupBox1.Location = new System.Drawing.Point(24, 440);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(404, 51);
+			this.groupBox1.Size = new System.Drawing.Size(407, 256);
 			this.groupBox1.TabIndex = 254;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Perform up to";
+			this.groupBox1.Text = "Offering";
+			// 
+			// numericUpDownFact
+			// 
+			this.numericUpDownFact.DecimalPlaces = 2;
+			this.numericUpDownFact.Location = new System.Drawing.Point(78, 134);
+			this.numericUpDownFact.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
+			this.numericUpDownFact.Name = "numericUpDownFact";
+			this.numericUpDownFact.Size = new System.Drawing.Size(87, 20);
+			this.numericUpDownFact.TabIndex = 362;
+			// 
+			// numericUpDownMax
+			// 
+			this.numericUpDownMax.DecimalPlaces = 2;
+			this.numericUpDownMax.Location = new System.Drawing.Point(78, 108);
+			this.numericUpDownMax.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
+			this.numericUpDownMax.Name = "numericUpDownMax";
+			this.numericUpDownMax.Size = new System.Drawing.Size(87, 20);
+			this.numericUpDownMax.TabIndex = 361;
+			// 
+			// numericUpDownMin
+			// 
+			this.numericUpDownMin.DecimalPlaces = 2;
+			this.numericUpDownMin.Location = new System.Drawing.Point(78, 82);
+			this.numericUpDownMin.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
+			this.numericUpDownMin.Name = "numericUpDownMin";
+			this.numericUpDownMin.Size = new System.Drawing.Size(87, 20);
+			this.numericUpDownMin.TabIndex = 360;
+			// 
+			// label20
+			// 
+			this.label20.AutoSize = true;
+			this.label20.Location = new System.Drawing.Point(6, 137);
+			this.label20.Name = "label20";
+			this.label20.Size = new System.Drawing.Size(28, 13);
+			this.label20.TabIndex = 359;
+			this.label20.Text = "Fact";
+			// 
+			// label19
+			// 
+			this.label19.AutoSize = true;
+			this.label19.Location = new System.Drawing.Point(6, 111);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(27, 13);
+			this.label19.TabIndex = 357;
+			this.label19.Text = "Max";
+			// 
+			// label17
+			// 
+			this.label17.AutoSize = true;
+			this.label17.Location = new System.Drawing.Point(6, 84);
+			this.label17.Name = "label17";
+			this.label17.Size = new System.Drawing.Size(24, 13);
+			this.label17.TabIndex = 356;
+			this.label17.Text = "Min";
+			// 
+			// label16
+			// 
+			this.label16.AutoSize = true;
+			this.label16.Location = new System.Drawing.Point(6, 58);
+			this.label16.Name = "label16";
+			this.label16.Size = new System.Drawing.Size(70, 13);
+			this.label16.TabIndex = 355;
+			this.label16.Text = "Cost Per One";
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(6, 32);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(55, 13);
+			this.label8.TabIndex = 354;
+			this.label8.Text = "Total Cost";
+			// 
+			// comboBoxPerOne
+			// 
+			this.comboBoxPerOne.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.comboBoxPerOne.FormattingEnabled = true;
+			this.comboBoxPerOne.ItemHeight = 12;
+			this.comboBoxPerOne.Location = new System.Drawing.Point(171, 57);
+			this.comboBoxPerOne.Name = "comboBoxPerOne";
+			this.comboBoxPerOne.Size = new System.Drawing.Size(88, 20);
+			this.comboBoxPerOne.TabIndex = 350;
+			// 
+			// numericUpDownPerOne
+			// 
+			this.numericUpDownPerOne.DecimalPlaces = 2;
+			this.numericUpDownPerOne.Location = new System.Drawing.Point(78, 56);
+			this.numericUpDownPerOne.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
+			this.numericUpDownPerOne.Name = "numericUpDownPerOne";
+			this.numericUpDownPerOne.Size = new System.Drawing.Size(87, 20);
+			this.numericUpDownPerOne.TabIndex = 349;
+			// 
+			// metroLabel5
+			// 
+			this.metroLabel5.AutoSize = true;
+			this.metroLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabel5.Location = new System.Drawing.Point(182, 8);
+			this.metroLabel5.Name = "metroLabel5";
+			this.metroLabel5.Size = new System.Drawing.Size(61, 19);
+			this.metroLabel5.TabIndex = 348;
+			this.metroLabel5.Text = "Currency";
+			this.metroLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// comboBoxTotal
+			// 
+			this.comboBoxTotal.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.comboBoxTotal.FormattingEnabled = true;
+			this.comboBoxTotal.ItemHeight = 12;
+			this.comboBoxTotal.Location = new System.Drawing.Point(171, 31);
+			this.comboBoxTotal.Name = "comboBoxTotal";
+			this.comboBoxTotal.Size = new System.Drawing.Size(88, 20);
+			this.comboBoxTotal.TabIndex = 347;
+			// 
+			// numericUpTotal
+			// 
+			this.numericUpTotal.DecimalPlaces = 2;
+			this.numericUpTotal.Location = new System.Drawing.Point(78, 30);
+			this.numericUpTotal.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
+			this.numericUpTotal.Name = "numericUpTotal";
+			this.numericUpTotal.Size = new System.Drawing.Size(87, 20);
+			this.numericUpTotal.TabIndex = 345;
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(6, 225);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(47, 13);
+			this.label7.TabIndex = 344;
+			this.label7.Text = "Duration";
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(6, 188);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(48, 13);
+			this.label5.TabIndex = 64;
+			this.label5.Text = "Location";
+			// 
+			// lifelengthViewerDuration
+			// 
+			this.lifelengthViewerDuration.AutoSize = true;
+			this.lifelengthViewerDuration.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.lifelengthViewerDuration.CalendarApplicable = false;
+			this.lifelengthViewerDuration.CyclesApplicable = false;
+			this.lifelengthViewerDuration.EnabledCalendar = true;
+			this.lifelengthViewerDuration.EnabledCycle = false;
+			this.lifelengthViewerDuration.EnabledHours = false;
+			this.lifelengthViewerDuration.FieldsBackColor = System.Drawing.SystemColors.Window;
+			this.lifelengthViewerDuration.ForeColor = System.Drawing.Color.DimGray;
+			this.lifelengthViewerDuration.HeaderCalendar = "Calendar";
+			this.lifelengthViewerDuration.HeaderCycles = "Cycles";
+			this.lifelengthViewerDuration.HeaderFormattedCalendar = "Calendar";
+			this.lifelengthViewerDuration.HeaderHours = "Hours";
+			this.lifelengthViewerDuration.HoursApplicable = false;
+			this.lifelengthViewerDuration.LeftHeader = "";
+			this.lifelengthViewerDuration.Location = new System.Drawing.Point(78, 212);
+			this.lifelengthViewerDuration.Margin = new System.Windows.Forms.Padding(4);
+			this.lifelengthViewerDuration.Modified = false;
+			this.lifelengthViewerDuration.Name = "lifelengthViewerDuration";
+			this.lifelengthViewerDuration.ReadOnly = false;
+			this.lifelengthViewerDuration.ShowCalendar = true;
+			this.lifelengthViewerDuration.ShowCalendarOnly = true;
+			this.lifelengthViewerDuration.ShowFormattedCalendar = false;
+			this.lifelengthViewerDuration.ShowHeaders = false;
+			this.lifelengthViewerDuration.ShowLeftHeader = false;
+			this.lifelengthViewerDuration.ShowMinutes = true;
+			this.lifelengthViewerDuration.Size = new System.Drawing.Size(172, 35);
+			this.lifelengthViewerDuration.SystemCalculated = true;
+			this.lifelengthViewerDuration.TabIndex = 343;
 			// 
 			// dateTimePickerFlightDate
 			// 
-			this.dateTimePickerFlightDate.Location = new System.Drawing.Point(73, 18);
+			this.dateTimePickerFlightDate.Location = new System.Drawing.Point(78, 160);
 			this.dateTimePickerFlightDate.Margin = new System.Windows.Forms.Padding(2);
 			this.dateTimePickerFlightDate.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
 			this.dateTimePickerFlightDate.Name = "dateTimePickerFlightDate";
@@ -665,25 +846,42 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// label21
 			// 
 			this.label21.AutoSize = true;
-			this.label21.Location = new System.Drawing.Point(6, 23);
+			this.label21.Location = new System.Drawing.Point(6, 164);
 			this.label21.Name = "label21";
 			this.label21.Size = new System.Drawing.Size(30, 13);
 			this.label21.TabIndex = 29;
 			this.label21.Text = "Date";
 			// 
-			// linkLabelEditComponents
+			// textBoxLocation
 			// 
-			this.linkLabelEditComponents.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.linkLabelEditComponents.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.linkLabelEditComponents.Location = new System.Drawing.Point(394, 468);
-			this.linkLabelEditComponents.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-			this.linkLabelEditComponents.Name = "linkLabelEditComponents";
-			this.linkLabelEditComponents.Size = new System.Drawing.Size(37, 23);
-			this.linkLabelEditComponents.TabIndex = 259;
-			this.linkLabelEditComponents.TabStop = true;
-			this.linkLabelEditComponents.Text = "Edit";
-			this.linkLabelEditComponents.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.linkLabelEditComponents.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelEditComponents_LinkClicked);
+			// 
+			// 
+			// 
+			this.textBoxLocation.CustomButton.Image = null;
+			this.textBoxLocation.CustomButton.Location = new System.Drawing.Point(299, 2);
+			this.textBoxLocation.CustomButton.Name = "";
+			this.textBoxLocation.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.textBoxLocation.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxLocation.CustomButton.TabIndex = 1;
+			this.textBoxLocation.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxLocation.CustomButton.UseSelectable = true;
+			this.textBoxLocation.CustomButton.Visible = false;
+			this.textBoxLocation.ForeColor = System.Drawing.Color.DimGray;
+			this.textBoxLocation.Lines = new string[0];
+			this.textBoxLocation.Location = new System.Drawing.Point(78, 185);
+			this.textBoxLocation.MaxLength = 32767;
+			this.textBoxLocation.Name = "textBoxLocation";
+			this.textBoxLocation.PasswordChar = '\0';
+			this.textBoxLocation.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxLocation.SelectedText = "";
+			this.textBoxLocation.SelectionLength = 0;
+			this.textBoxLocation.SelectionStart = 0;
+			this.textBoxLocation.ShortcutsEnabled = true;
+			this.textBoxLocation.Size = new System.Drawing.Size(317, 20);
+			this.textBoxLocation.TabIndex = 63;
+			this.textBoxLocation.UseSelectable = true;
+			this.textBoxLocation.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxLocation.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// textBoxClosedBy
 			// 
@@ -811,108 +1009,22 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.textBoxClosingRemarks.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxClosingRemarks.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
-			// textBoxLocation
+			// comboBoxProvider
 			// 
-			// 
-			// 
-			// 
-			this.textBoxLocation.CustomButton.Image = null;
-			this.textBoxLocation.CustomButton.Location = new System.Drawing.Point(233, 2);
-			this.textBoxLocation.CustomButton.Name = "";
-			this.textBoxLocation.CustomButton.Size = new System.Drawing.Size(15, 15);
-			this.textBoxLocation.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxLocation.CustomButton.TabIndex = 1;
-			this.textBoxLocation.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxLocation.CustomButton.UseSelectable = true;
-			this.textBoxLocation.CustomButton.Visible = false;
-			this.textBoxLocation.ForeColor = System.Drawing.Color.DimGray;
-			this.textBoxLocation.Lines = new string[0];
-			this.textBoxLocation.Location = new System.Drawing.Point(180, 442);
-			this.textBoxLocation.MaxLength = 32767;
-			this.textBoxLocation.Name = "textBoxLocation";
-			this.textBoxLocation.PasswordChar = '\0';
-			this.textBoxLocation.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxLocation.SelectedText = "";
-			this.textBoxLocation.SelectionLength = 0;
-			this.textBoxLocation.SelectionStart = 0;
-			this.textBoxLocation.ShortcutsEnabled = true;
-			this.textBoxLocation.Size = new System.Drawing.Size(251, 20);
-			this.textBoxLocation.TabIndex = 63;
-			this.textBoxLocation.UseSelectable = true;
-			this.textBoxLocation.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxLocation.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// metroTextBox1
-			// 
-			// 
-			// 
-			// 
-			this.metroTextBox1.CustomButton.Image = null;
-			this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(190, 2);
-			this.metroTextBox1.CustomButton.Name = "";
-			this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(15, 15);
-			this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.metroTextBox1.CustomButton.TabIndex = 1;
-			this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.metroTextBox1.CustomButton.UseSelectable = true;
-			this.metroTextBox1.CustomButton.Visible = false;
-			this.metroTextBox1.ForeColor = System.Drawing.Color.DimGray;
-			this.metroTextBox1.Lines = new string[0];
-			this.metroTextBox1.Location = new System.Drawing.Point(180, 468);
-			this.metroTextBox1.MaxLength = 32767;
-			this.metroTextBox1.Name = "metroTextBox1";
-			this.metroTextBox1.PasswordChar = '\0';
-			this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.metroTextBox1.SelectedText = "";
-			this.metroTextBox1.SelectionLength = 0;
-			this.metroTextBox1.SelectionStart = 0;
-			this.metroTextBox1.ShortcutsEnabled = true;
-			this.metroTextBox1.Size = new System.Drawing.Size(208, 20);
-			this.metroTextBox1.TabIndex = 258;
-			this.metroTextBox1.UseSelectable = true;
-			this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// lifelengthViewerDuration
-			// 
-			this.lifelengthViewerDuration.AutoSize = true;
-			this.lifelengthViewerDuration.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.lifelengthViewerDuration.CalendarApplicable = false;
-			this.lifelengthViewerDuration.CyclesApplicable = false;
-			this.lifelengthViewerDuration.EnabledCalendar = true;
-			this.lifelengthViewerDuration.EnabledCycle = false;
-			this.lifelengthViewerDuration.EnabledHours = false;
-			this.lifelengthViewerDuration.FieldsBackColor = System.Drawing.SystemColors.Window;
-			this.lifelengthViewerDuration.ForeColor = System.Drawing.Color.DimGray;
-			this.lifelengthViewerDuration.HeaderCalendar = "Calendar";
-			this.lifelengthViewerDuration.HeaderCycles = "Cycles";
-			this.lifelengthViewerDuration.HeaderFormattedCalendar = "Calendar";
-			this.lifelengthViewerDuration.HeaderHours = "Hours";
-			this.lifelengthViewerDuration.HoursApplicable = false;
-			this.lifelengthViewerDuration.LeftHeader = "";
-			this.lifelengthViewerDuration.Location = new System.Drawing.Point(179, 405);
-			this.lifelengthViewerDuration.Margin = new System.Windows.Forms.Padding(4);
-			this.lifelengthViewerDuration.Modified = false;
-			this.lifelengthViewerDuration.Name = "lifelengthViewerDuration";
-			this.lifelengthViewerDuration.ReadOnly = false;
-			this.lifelengthViewerDuration.ShowCalendar = true;
-			this.lifelengthViewerDuration.ShowCalendarOnly = true;
-			this.lifelengthViewerDuration.ShowFormattedCalendar = false;
-			this.lifelengthViewerDuration.ShowHeaders = false;
-			this.lifelengthViewerDuration.ShowLeftHeader = false;
-			this.lifelengthViewerDuration.ShowMinutes = true;
-			this.lifelengthViewerDuration.Size = new System.Drawing.Size(172, 35);
-			this.lifelengthViewerDuration.SystemCalculated = true;
-			this.lifelengthViewerDuration.TabIndex = 343;
+			this.comboBoxProvider.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.comboBoxProvider.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.comboBoxProvider.FormattingEnabled = true;
+			this.comboBoxProvider.Location = new System.Drawing.Point(180, 409);
+			this.comboBoxProvider.Name = "comboBoxProvider";
+			this.comboBoxProvider.Size = new System.Drawing.Size(251, 25);
+			this.comboBoxProvider.TabIndex = 344;
 			// 
 			// WorkPackageEditorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(866, 693);
-			this.Controls.Add(this.lifelengthViewerDuration);
-			this.Controls.Add(this.linkLabelEditComponents);
-			this.Controls.Add(this.metroTextBox1);
+			this.ClientSize = new System.Drawing.Size(866, 710);
+			this.Controls.Add(this.comboBoxProvider);
 			this.Controls.Add(metroLabel2);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.documentControl10);
@@ -928,8 +1040,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.Controls.Add(this.buttonClose);
 			this.Controls.Add(this.documentControl1);
 			this.Controls.Add(label18);
-			this.Controls.Add(this.textBoxLocation);
-			this.Controls.Add(label17);
 			this.Controls.Add(this.textBoxClosingRemarks);
 			this.Controls.Add(label15);
 			this.Controls.Add(this.textBoxRemarks);
@@ -944,7 +1054,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.Controls.Add(label9);
 			this.Controls.Add(this.textBoxTitle);
 			this.Controls.Add(label10);
-			this.Controls.Add(label7);
 			this.Controls.Add(this.textBoxPublishingRemark);
 			this.Controls.Add(label6);
 			this.Controls.Add(this.textBoxClosedBy);
@@ -967,9 +1076,35 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.Text = "Course Package Editor Form";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownFact)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownMax)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownMin)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownPerOne)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpTotal)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+
+		private System.Windows.Forms.NumericUpDown numericUpDownMax;
+		private System.Windows.Forms.NumericUpDown numericUpDownMin;
+		private System.Windows.Forms.NumericUpDown numericUpDownFact;
+
+		private MetroFramework.Controls.MetroLabel metroLabel5;
+		private System.Windows.Forms.ComboBox comboBoxTotal;
+		private System.Windows.Forms.NumericUpDown numericUpTotal;
+		private System.Windows.Forms.ComboBox comboBoxPerOne;
+		private System.Windows.Forms.NumericUpDown numericUpDownPerOne;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.Label label16;
+		private System.Windows.Forms.Label label17;
+		private System.Windows.Forms.Label label19;
+		private System.Windows.Forms.Label label20;
+
+		private System.Windows.Forms.Label label7;
+
+		private System.Windows.Forms.Label label5;
+
+		private System.Windows.Forms.ComboBox comboBoxProvider;
 
 		private CAS.UI.UIControls.Auxiliary.LifelengthViewer lifelengthViewerDuration;
 
@@ -1000,12 +1135,10 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.DateTimePicker dateTimePickerFlightDate;
 		private System.Windows.Forms.Label label21;
-		private System.Windows.Forms.LinkLabel linkLabelEditComponents;
 		private MetroFramework.Controls.MetroTextBox textBoxClosedBy;
 		private MetroFramework.Controls.MetroTextBox textBoxPublishingRemark;
 		private MetroFramework.Controls.MetroTextBox textBoxPublishedBy;
 		private MetroFramework.Controls.MetroTextBox textBoxClosingRemarks;
 		private MetroFramework.Controls.MetroTextBox textBoxLocation;
-		private MetroFramework.Controls.MetroTextBox metroTextBox1;
 	}
 }

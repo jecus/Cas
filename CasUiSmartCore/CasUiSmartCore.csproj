@@ -937,18 +937,6 @@
     <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordListView.Designer.cs">
       <DependentUpon>CourseRecordListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseProviderForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseProviderForm.Designer.cs">
-      <DependentUpon>CourseProviderForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseProviderPriceListView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseProviderPriceListView.Designer.cs">
-      <DependentUpon>CourseProviderPriceListView.cs</DependentUpon>
-    </Compile>
     <Compile Include="UICAAControls\CAAEducation\EducationComplianceListView.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -117,21 +117,21 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 	        var publisherDate = item.Status > WPStatus.Open ? SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.PublishingDate) : String.Empty ;
 	        var closingDate = item.Status > WPStatus.Published ? SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.ClosingDate) : String.Empty ;
 	        
-	        if(item.Settings.Duration == null)
-				item.Settings.Duration  = Lifelength.Null;
+	        if(item.Settings.Offering.Duration == null)
+				item.Settings.Offering.Duration  = Lifelength.Null;
 	        
 	        var subItems = new List<CustomCell>()
 			{
 				CreateRow(item.StatusName, item.Status),
 				CreateRow(item.Settings.Number, item.Settings.Number),
 				CreateRow(item.Title, item.Title),
-				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.PerformDate), item.Settings.PerformDate),
-				CreateRow(item.Settings.Duration.ToRepeatIntervalsFormat(),item.Settings.Duration),
+				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Settings.Offering.PerformDate), item.Settings.Offering.PerformDate),
+				CreateRow(item.Settings.Offering.Duration.ToRepeatIntervalsFormat(),item.Settings.Offering.Duration),
 				CreateRow(item.Settings.Remarks,item.Settings.Remarks),
 				CreateRow(openDate,item.Settings.OpeningDate),
 				CreateRow(publisherDate,item.Settings.PublishedBy),
 				CreateRow(closingDate,item.Settings.ClosingDate),
-				CreateRow(item.Settings.Location, item.Settings.Location),
+				CreateRow(item.Settings.Offering.Location, item.Settings.Offering.Location),
 				CreateRow(author,author),
 				CreateRow(published,published),
 				CreateRow(closed,closed),

@@ -8,6 +8,7 @@ using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Purchase;
 
 namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 {
@@ -39,6 +40,22 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		private void UpdateInformation()
 		{
+			var providers = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASupplierDTO, Supplier>();
+			comboBoxProvider.Items.Clear();
+			comboBoxProvider.Items.AddRange(providers.ToArray());
+			comboBoxProvider.Items.Add(Supplier.Unknown);
+			comboBoxProvider.SelectedItem = providers.FirstOrDefault(i => i.ItemId == _currentWp.Settings.Offering.ProviderId) ?? Supplier.Unknown;
+
+
+			comboBoxTotal.Items.Clear();
+			comboBoxTotal.Items.AddRange(Сurrency.Items.ToArray());
+			comboBoxTotal.SelectedItem = Сurrency.UNK;
+			
+			comboBoxPerOne.Items.Clear();
+			comboBoxPerOne.Items.AddRange(Сurrency.Items.ToArray());
+			comboBoxPerOne.SelectedItem = Сurrency.UNK;
+			
+			
 			if (_currentWp.ItemId <= 0)
 				_currentWp.Settings.Number = $"{GlobalObjects.CaaEnvironment.ObtainId()} {DateTime.Now:G}";
 
@@ -47,7 +64,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			var published = GlobalObjects.CaaEnvironment?.GetCorrector(_currentWp.Settings.PublishedBy);
 			var closed = GlobalObjects.CaaEnvironment?.GetCorrector(_currentWp.Settings.ClosedBy);
 			
-			metroTextBox1.Text = $"{_currentWp.Settings.ProviderPrice.Count} Count";
 			textBoxWpNumber.Text = _currentWp.Settings.Number;
 			textBoxDescription.Text = _currentWp.Settings.Description;
 			dateTimePickerIssueCreateDate.Value = _currentWp.Settings.CreateDate;
@@ -55,7 +71,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			textBoxAuthor.Text =author;
 			textBoxClosedBy.Text = closed;
 			textBoxPublishingRemark.Text = _currentWp.Settings.PublishingRemarks;
-			lifelengthViewerDuration.Lifelength = _currentWp.Settings.Duration;
+			
 			textBoxTitle.Text = _currentWp.Title;
 			textBoxStatus.Text = _currentWp.Status.ToString();
 			dateTimePickerOpeningDate.Value = _currentWp.Settings.OpeningDate;
@@ -63,10 +79,20 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			textBoxPublishedBy.Text = published;
 			textBoxRemarks.Text = _currentWp.Settings.Remarks;
 			textBoxClosingRemarks.Text = _currentWp.Settings.ClosingRemarks;
-			textBoxLocation.Text = _currentWp.Settings.Location;
-			dateTimePickerFlightDate.Value = _currentWp.Settings.PerformDate;
 			
-
+			
+			lifelengthViewerDuration.Lifelength = _currentWp.Settings.Offering.Duration;
+			textBoxLocation.Text = _currentWp.Settings.Offering.Location;
+			dateTimePickerFlightDate.Value = _currentWp.Settings.Offering.PerformDate;
+			comboBoxTotal.SelectedItem = Сurrency.GetItemById(_currentWp.Settings.Offering.TotalCurrency);
+			comboBoxPerOne.SelectedItem = Сurrency.GetItemById(_currentWp.Settings.Offering.PerOneCurrency);
+			numericUpTotal.Value = _currentWp.Settings.Offering.Total;
+			numericUpDownPerOne.Value = _currentWp.Settings.Offering.PerOne;
+			numericUpDownMin.Value = _currentWp.Settings.Offering.Min;
+			numericUpDownMax.Value = _currentWp.Settings.Offering.Max;
+			numericUpDownFact.Value = _currentWp.Settings.Offering.Fact;
+			
+			
 			foreach (var control in DocumentControls)
 				control.Added += DocumentControl1_Added;
 
@@ -146,13 +172,24 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			_currentWp.Title = textBoxTitle.Text;
 			_currentWp.Settings.Number = textBoxWpNumber.Text;
 			_currentWp.Settings.PublishingRemarks = textBoxPublishingRemark.Text;
-			_currentWp.Settings.Location = textBoxLocation.Text;
-			_currentWp.Settings.Duration = lifelengthViewerDuration.Lifelength;
 			_currentWp.Settings.ClosingRemarks = textBoxClosingRemarks.Text;
 			_currentWp.Settings.Remarks = textBoxRemarks.Text;
-			_currentWp.Settings.PerformDate = dateTimePickerFlightDate.Value;
 			_currentWp.Settings.Description = textBoxDescription.Text;
-
+			
+			
+			_currentWp.Settings.Offering.PerformDate = dateTimePickerFlightDate.Value;
+			_currentWp.Settings.Offering.Location = textBoxLocation.Text;
+			_currentWp.Settings.Offering.Duration = lifelengthViewerDuration.Lifelength;
+			_currentWp.Settings.Offering.TotalCurrency = (comboBoxTotal.SelectedItem as Сurrency).ItemId;
+			_currentWp.Settings.Offering.PerOneCurrency = (comboBoxPerOne.SelectedItem as Сurrency).ItemId;
+			_currentWp.Settings.Offering.Total = numericUpTotal.Value;
+			_currentWp.Settings.Offering.PerOne = numericUpDownPerOne.Value;
+			_currentWp.Settings.Offering.Min = numericUpDownMin.Value;
+			_currentWp.Settings.Offering.Max = numericUpDownMax.Value;
+			_currentWp.Settings.Offering.Fact = numericUpDownFact.Value;
+			_currentWp.Settings.Offering.ProviderId = (comboBoxProvider.SelectedItem as Supplier).ItemId;
+			
+			
 			_currentWp.Settings.DocumentIds = new List<int>();
 			_currentWp.Settings.DocumentIds.Clear();
 			foreach (var control in DocumentControls.Where(control => control.CurrentDocument != null))
@@ -175,12 +212,5 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		}
 
 		#endregion
-
-		private void LinkLabelEditComponents_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			var form = new CourseProviderForm(_currentWp);
-			if (form.ShowDialog() == DialogResult.OK)
-				metroTextBox1.Text = $"{_currentWp.Settings.ProviderPrice.Count} Count";
-		}
 	}
 }

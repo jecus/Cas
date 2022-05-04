@@ -68,8 +68,6 @@ namespace SmartCore.CAA.CAAWP
                 PublishingDate = DateTime.Now,
                 ClosingDate = DateTime.Now,
                 OpeningDate = DateTime.Now,
-                PerformDate = DateTime.Now,
-                Duration = Lifelength.Null,
                 ClosingDocument =new List<Document>(),
                 DocumentIds = new List<int>()
             };
@@ -88,7 +86,7 @@ namespace SmartCore.CAA.CAAWP
     [Serializable]
     public  class CAAWorkPackagekSettings
     {
-        private Lifelength _duration;
+        
 
         [JsonProperty]
         public string Number { get; set; }
@@ -125,36 +123,49 @@ namespace SmartCore.CAA.CAAWP
         [JsonProperty]
         public string ClosingRemarks { get; set; }
         
+        private Offering _offering;
+        
+        [JsonProperty]
+        public Offering Offering
+        {
+            get => _offering ?? (_offering = new Offering());
+            set => _offering = value;
+        }
+        
+        
+
+        
+        [JsonIgnore]
+        public List<Document> ClosingDocument { get; set; }
+        
+        
+        [JsonProperty]
+        public List<int> DocumentIds { get; set; }
+
+        [JsonProperty]
+        public int? TaskId { get; set; }
+    }
+
+    [Serializable]
+    public class Offering
+    {
+        private Lifelength _duration;
+        private byte[] _durationByte;
+        
+        public Offering()
+        {
+            PerformDate = DateTime.Now;
+            Duration = Lifelength.Null;
+            ProviderId = -1;
+        }
+
+
         [JsonProperty]
         public string Location { get; set; }
         
         [JsonProperty]
         public byte[] DurationLifelength { get; set; }
-
-
-        private List<CourseProviderPrice> _providerPrice;
         
-        [JsonProperty]
-        public List<CourseProviderPrice> ProviderPrice
-        {
-            get => _providerPrice ?? (_providerPrice = new List<CourseProviderPrice>());
-            set => _providerPrice = value;
-        }
-        
-        
-        [JsonIgnore]
-        public Lifelength Duration
-        {
-            get => _duration;
-            set
-            {
-                _duration = value;
-                _durationByte = value.ConvertToByteArray();
-            }
-        }
-        
-
-        private byte[] _durationByte;
         [JsonProperty]
         public byte[] DurationyByte
         {
@@ -171,82 +182,37 @@ namespace SmartCore.CAA.CAAWP
         public DateTime PerformDate { get; set; }
         
         [JsonIgnore]
-        public List<Document> ClosingDocument { get; set; }
-        
-        
-        [JsonProperty]
-        public List<int> DocumentIds { get; set; }
-
-        [JsonProperty]
-        public int? TaskId { get; set; }
-    }
-    
-    
-    [JsonObject]
-    [Serializable]
-    public class CourseProviderPrice : BaseEntityObject
-    {
-        [JsonIgnore] public Supplier Supplier { get; set; }
-
-        [JsonIgnore] public CoursePackage Parent { get; set; }
-
-        [JsonIgnore]
-        [ListViewData(200, "Supplier", 1)]
-        public string SupplierName
+        public Lifelength Duration
         {
-            get => Supplier?.Name ?? Supplier.Unknown.Name;
+            get => _duration;
+            set
+            {
+                _duration = value;
+                _durationByte = value.ConvertToByteArray();
+            }
         }
 
-        [JsonProperty] public int SupplierId { get; set; }
-
-        [ListViewData(80, "Offering", 2)]
         [JsonProperty]
-        public decimal Offering { get; set; }
+        public int TotalCurrency { get; set; }
 
-        [ListViewData(80, "Routine", 4)]
         [JsonProperty]
-        public decimal Routine { get; set; }
+        public int PerOneCurrency { get; set; }
 
-        [ListViewData(80, "K for MH", 5)]
         [JsonProperty]
-        public decimal RoutineKMH { get; set; }
+        public decimal Total { get; set; }
 
-        [ListViewData(80, "NDT", 6)]
         [JsonProperty]
-        public decimal NDT { get; set; }
+        public decimal PerOne { get; set; }
 
-        [ListViewData(80, "K for MH", 7)]
         [JsonProperty]
-        public decimal NDTKMH { get; set; }
-
-        [ListViewData(80, "AD", 8)]
+        public decimal Min { get; set; }
         [JsonProperty]
-        public decimal AD { get; set; }
-
-        [ListViewData(80, "K for MH", 9)]
-        [JsonProperty]
-        public decimal ADKMH { get; set; }
-
-        [ListViewData(80, "NRC", 10)]
-        [JsonProperty]
-        public decimal NRC { get; set; }
-
-        [ListViewData(80, "K for MH", 11)]
-        [JsonProperty]
-        public decimal NRCKMH { get; set; }
-
-        [DefaultValue(-1)]
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-        public int CurrencyOfferingId { get; set; }
+        public decimal Max { get; set; }
         
-        [JsonIgnore]
-        [ListViewData(80, "Currency", 12)]
-        public Сurrency CurrencyOffering
-        {
-            get => Сurrency.GetItemById(CurrencyOfferingId);
-            set => CurrencyOfferingId = value.ItemId;
-        }
-    }
+        [JsonProperty]
+        public decimal Fact { get; set; }
 
-    
+        [JsonProperty]
+        public int ProviderId { get; set; }
+    }
 }
