@@ -51,9 +51,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			comboBoxTotal.Items.AddRange(Сurrency.Items.ToArray());
 			comboBoxTotal.SelectedItem = Сurrency.UNK;
 			
-			comboBoxPerOne.Items.Clear();
-			comboBoxPerOne.Items.AddRange(Сurrency.Items.ToArray());
-			comboBoxPerOne.SelectedItem = Сurrency.UNK;
 			
 			
 			if (_currentWp.ItemId <= 0)
@@ -85,7 +82,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			textBoxLocation.Text = _currentWp.Settings.Offering.Location;
 			dateTimePickerFlightDate.Value = _currentWp.Settings.Offering.PerformDate;
 			comboBoxTotal.SelectedItem = Сurrency.GetItemById(_currentWp.Settings.Offering.TotalCurrency);
-			comboBoxPerOne.SelectedItem = Сurrency.GetItemById(_currentWp.Settings.Offering.PerOneCurrency);
 			numericUpTotal.Value = _currentWp.Settings.Offering.Total;
 			numericUpDownPerOne.Value = _currentWp.Settings.Offering.PerOne;
 			numericUpDownMin.Value = _currentWp.Settings.Offering.Min;
@@ -181,7 +177,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			_currentWp.Settings.Offering.Location = textBoxLocation.Text;
 			_currentWp.Settings.Offering.Duration = lifelengthViewerDuration.Lifelength;
 			_currentWp.Settings.Offering.TotalCurrency = (comboBoxTotal.SelectedItem as Сurrency).ItemId;
-			_currentWp.Settings.Offering.PerOneCurrency = (comboBoxPerOne.SelectedItem as Сurrency).ItemId;
 			_currentWp.Settings.Offering.Total = numericUpTotal.Value;
 			_currentWp.Settings.Offering.PerOne = numericUpDownPerOne.Value;
 			_currentWp.Settings.Offering.Min = numericUpDownMin.Value;

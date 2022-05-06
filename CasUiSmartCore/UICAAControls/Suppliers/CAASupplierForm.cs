@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.DTO;
+using CAS.UI.UICAAControls.Suppliers;
 using CAS.UI.UIControls.DocumentationControls;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
+using SmartCore.CAA.CAAWP;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Purchase;
@@ -20,7 +26,9 @@ namespace CAS.UI.UIControls.SupplierControls
         #region Fields
         private readonly Supplier _currentSupplier;
         private readonly List<Document> _documents = new List<Document>();
-        private readonly List<Product> _products = new List<Product>(); 
+        private readonly List<SupplierCourse> _courses = new List<SupplierCourse>(); 
+        
+        private CommonCollection<SmartCore.CAA.CAAWP.CoursePackage> _initialDocumentArray = new CommonCollection<SmartCore.CAA.CAAWP.CoursePackage>();
         #endregion
 
         #region Properties
@@ -66,6 +74,35 @@ namespace CAS.UI.UIControls.SupplierControls
         /// </summary>
         private void UpdateInformation()
         {
+
+            _courses.Clear();
+            var ds = GlobalObjects.CaaEnvironment.Execute($"  select ItemId  from [dbo].[CoursePackage] where  JSON_VALUE(JSON_QUERY(SettingsJSON, '$.Offering'), '$.ProviderId') = {_currentSupplier.ItemId}");
+            var data = ds.Tables[0].AsEnumerable().Select(dataRow => new 
+            {
+                ItemId = dataRow.Field<int>("ItemId")
+            });
+
+            if (data.Any())
+            {
+                _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader
+                    .GetObjectListAll<CoursePackageDTO, SmartCore.CAA.CAAWP.CoursePackage>(new Filter("ItemId", data.Select(i => i.ItemId))));
+
+                foreach (var package in _initialDocumentArray)
+                {
+                    _courses.Add(new SupplierCourse()
+                    {
+                        No = package.Settings.Number,
+                        Title = package.Title,
+                        Total = package.Settings.Offering?.Total,
+                        PerOne = package.Settings.Offering?.PerOne,
+                        Currency = Сurrency.GetItemById(package.Settings.Offering.TotalCurrency).ShortName,
+                        Duration = package.Settings.Offering?.Duration.ToString(),
+                        Location = package.Settings.Offering?.Location,
+                    });
+                }
+            }
+            
+            
             textBoxName.Text = _currentSupplier.Name;
             textBoxShortName.Text = _currentSupplier.ShortName;
             textBoxAirCode.Text = _currentSupplier.AirCode;
@@ -99,19 +136,16 @@ namespace CAS.UI.UIControls.SupplierControls
            
 
             documentationListView.SetItemsArray(_documents.ToArray());
-
-
-			_products.Clear();
-
-            dataGridViewControlSuppliers.ViewedTypeProperties.Clear();
-			dataGridViewControlSuppliers.ViewedTypeProperties.AddRange(new[]
-			{
-				Product.NameProperty,
-				Product.PartNumberProperty,
-				Product.DescriptionProperty,
-			});
-			dataGridViewControlSuppliers.ViewedType = typeof(Product);
-	        dataGridViewControlSuppliers.SetItemsArray(_products.ToArray());
+            
+   //          dataGridViewControlSuppliers.ViewedTypeProperties.Clear();
+			// dataGridViewControlSuppliers.ViewedTypeProperties.AddRange(new[]
+			// {
+			// 	Product.NameProperty,
+			// 	Product.PartNumberProperty,
+			// 	Product.DescriptionProperty,
+			// });
+			// dataGridViewControlSuppliers.ViewedType = typeof(Product);
+	  dataGridViewControlSuppliers.SetItemsArray(_courses.ToArray());
 			
 			documentationListView.Focus();
         }                                                            

@@ -1364,6 +1364,12 @@
     <Compile Include="UICAAControls\StandartManual\StandartManualListScreen.Designer.cs">
       <DependentUpon>StandartManualListScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\Suppliers\CAASupplierCourseListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Suppliers\CAASupplierCourseListView.Designer.cs">
+      <DependentUpon>CAASupplierCourseListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\Suppliers\CAASupplierListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>

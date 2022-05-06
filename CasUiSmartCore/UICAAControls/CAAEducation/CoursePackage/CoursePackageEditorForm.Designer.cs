@@ -69,7 +69,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.label17 = new System.Windows.Forms.Label();
 			this.label16 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
-			this.comboBoxPerOne = new System.Windows.Forms.ComboBox();
 			this.numericUpDownPerOne = new System.Windows.Forms.NumericUpDown();
 			this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
 			this.comboBoxTotal = new System.Windows.Forms.ComboBox();
@@ -574,7 +573,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.groupBox1.Controls.Add(this.label17);
 			this.groupBox1.Controls.Add(this.label16);
 			this.groupBox1.Controls.Add(this.label8);
-			this.groupBox1.Controls.Add(this.comboBoxPerOne);
 			this.groupBox1.Controls.Add(this.numericUpDownPerOne);
 			this.groupBox1.Controls.Add(this.metroLabel5);
 			this.groupBox1.Controls.Add(this.comboBoxTotal);
@@ -663,16 +661,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.label8.Size = new System.Drawing.Size(55, 13);
 			this.label8.TabIndex = 354;
 			this.label8.Text = "Total Cost";
-			// 
-			// comboBoxPerOne
-			// 
-			this.comboBoxPerOne.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.comboBoxPerOne.FormattingEnabled = true;
-			this.comboBoxPerOne.ItemHeight = 12;
-			this.comboBoxPerOne.Location = new System.Drawing.Point(171, 57);
-			this.comboBoxPerOne.Name = "comboBoxPerOne";
-			this.comboBoxPerOne.Size = new System.Drawing.Size(88, 20);
-			this.comboBoxPerOne.TabIndex = 350;
 			// 
 			// numericUpDownPerOne
 			// 
@@ -945,9 +933,9 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.comboBoxProvider.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.comboBoxProvider.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxProvider.FormattingEnabled = true;
-			this.comboBoxProvider.Location = new System.Drawing.Point(599, 63);
+			this.comboBoxProvider.Location = new System.Drawing.Point(517, 63);
 			this.comboBoxProvider.Name = "comboBoxProvider";
-			this.comboBoxProvider.Size = new System.Drawing.Size(251, 25);
+			this.comboBoxProvider.Size = new System.Drawing.Size(333, 25);
 			this.comboBoxProvider.TabIndex = 344;
 			// 
 			// documentControl3
@@ -1033,7 +1021,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		private MetroFramework.Controls.MetroLabel metroLabel5;
 		private System.Windows.Forms.ComboBox comboBoxTotal;
 		private System.Windows.Forms.NumericUpDown numericUpTotal;
-		private System.Windows.Forms.ComboBox comboBoxPerOne;
 		private System.Windows.Forms.NumericUpDown numericUpDownPerOne;
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Label label16;

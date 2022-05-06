@@ -1,4 +1,5 @@
-﻿using MetroFramework.Controls;
+﻿using CAS.UI.UICAAControls.Suppliers;
+using MetroFramework.Controls;
 using CASTerms;
 using Entity.Abstractions;
 
@@ -65,7 +66,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			this.label1 = new MetroFramework.Controls.MetroLabel();
 			this.comboBoxSupplierClass = new CAS.UI.UIControls.Auxiliary.TreeDictionaryComboBox();
 			this.documentationListView = new CAS.UI.UIControls.DocumentationControls.DocumentationListView();
-			this.dataGridViewControlSuppliers = new CAS.UI.UIControls.Auxiliary.CommonDataGridViewControl();
+			this.dataGridViewControlSuppliers = new CAASupplierCourseListView();
 			this.labelSupplier = new MetroFramework.Controls.MetroLabel();
 			this.textBoxSubject = new MetroFramework.Controls.MetroTextBox();
 			this.label2 = new MetroFramework.Controls.MetroLabel();
@@ -81,7 +82,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(912, 689);
+			this.buttonCancel.Location = new System.Drawing.Point(912, 700);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 18;
@@ -94,7 +95,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonSave.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonSave.Location = new System.Drawing.Point(810, 689);
+			this.buttonSave.Location = new System.Drawing.Point(810, 700);
 			this.buttonSave.Name = "buttonSave";
 			this.buttonSave.Size = new System.Drawing.Size(96, 33);
 			this.buttonSave.TabIndex = 17;
@@ -607,7 +608,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			this.buttonFormCertificate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonFormCertificate.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonFormCertificate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonFormCertificate.Location = new System.Drawing.Point(4, 689);
+			this.buttonFormCertificate.Location = new System.Drawing.Point(4, 700);
 			this.buttonFormCertificate.Name = "buttonFormCertificate";
 			this.buttonFormCertificate.Size = new System.Drawing.Size(141, 33);
 			this.buttonFormCertificate.TabIndex = 16;
@@ -654,18 +655,12 @@ namespace CAS.UI.UIControls.SupplierControls
 			// 
 			// dataGridViewControlSuppliers
 			// 
-			this.dataGridViewControlSuppliers.CanOpenEditFormOnDoubleClick = false;
 			this.dataGridViewControlSuppliers.Displayer = null;
 			this.dataGridViewControlSuppliers.DisplayerText = null;
 			this.dataGridViewControlSuppliers.Entity = null;
-			this.dataGridViewControlSuppliers.Location = new System.Drawing.Point(4, 524);
+			this.dataGridViewControlSuppliers.Location = new System.Drawing.Point(4, 544);
 			this.dataGridViewControlSuppliers.Name = "dataGridViewControlSuppliers";
 			this.dataGridViewControlSuppliers.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.dataGridViewControlSuppliers.RowHeadersVisible = false;
-			this.dataGridViewControlSuppliers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect;
-			this.dataGridViewControlSuppliers.ShowAddNew = false;
-			this.dataGridViewControlSuppliers.ShowDelete = false;
-			this.dataGridViewControlSuppliers.ShowQuickSearch = false;
 			this.dataGridViewControlSuppliers.Size = new System.Drawing.Size(990, 152);
 			this.dataGridViewControlSuppliers.TabIndex = 126;
 			// 
@@ -673,7 +668,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			// 
 			this.labelSupplier.AutoSize = true;
 			this.labelSupplier.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelSupplier.Location = new System.Drawing.Point(427, 503);
+			this.labelSupplier.Location = new System.Drawing.Point(427, 513);
 			this.labelSupplier.Name = "labelSupplier";
 			this.labelSupplier.Size = new System.Drawing.Size(77, 19);
 			this.labelSupplier.TabIndex = 125;
@@ -767,7 +762,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
-			this.ClientSize = new System.Drawing.Size(1003, 724);
+			this.ClientSize = new System.Drawing.Size(1003, 744);
 			this.Controls.Add(this.textBoxAirCode);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.textBoxSubject);
@@ -850,7 +845,7 @@ namespace CAS.UI.UIControls.SupplierControls
         private System.Windows.Forms.Button buttonFormCertificate;
 		private Auxiliary.TreeDictionaryComboBox comboBoxSupplierClass;
 		private MetroLabel label1;
-		private Auxiliary.CommonDataGridViewControl dataGridViewControlSuppliers;
+		private CAASupplierCourseListView dataGridViewControlSuppliers;
 		private MetroLabel labelSupplier;
 		private MetroTextBox textBoxSubject;
 		private MetroLabel label2;
