@@ -85,8 +85,11 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
-			if(!IsEditable)
+			if (!IsEditable)
+			{
+				e.Cancel = true;
 				return;
+			}
 			
 			if (SelectedItems.Count == 0)
 				return;
@@ -105,6 +108,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
 				if (form.ShowDialog() == DialogResult.OK)
 					AnimatedThreadWorker.RunWorkerAsync();
 			}
+			
+			e.Cancel = true;
 		}
 		#endregion
 
