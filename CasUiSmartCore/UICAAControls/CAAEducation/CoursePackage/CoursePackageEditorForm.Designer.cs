@@ -60,14 +60,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.documentControl1 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.documentControl2 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl3 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl4 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl5 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl6 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl7 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl8 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl9 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl10 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.numericUpDownFact = new System.Windows.Forms.NumericUpDown();
 			this.numericUpDownMax = new System.Windows.Forms.NumericUpDown();
@@ -93,6 +85,8 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.textBoxPublishedBy = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxClosingRemarks = new MetroFramework.Controls.MetroTextBox();
 			this.comboBoxProvider = new System.Windows.Forms.ComboBox();
+			this.documentControl3 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.documentControl4 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			labelNumber = new MetroFramework.Controls.MetroLabel();
 			label1 = new MetroFramework.Controls.MetroLabel();
 			labelValidFrom = new MetroFramework.Controls.MetroLabel();
@@ -220,7 +214,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// 
 			label14.AutoSize = true;
 			label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label14.Location = new System.Drawing.Point(442, 65);
+			label14.Location = new System.Drawing.Point(442, 383);
 			label14.Name = "label14";
 			label14.Size = new System.Drawing.Size(57, 19);
 			label14.TabIndex = 56;
@@ -231,7 +225,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// 
 			label18.AutoSize = true;
 			label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label18.Location = new System.Drawing.Point(442, 142);
+			label18.Location = new System.Drawing.Point(23, 432);
 			label18.Name = "label18";
 			label18.Size = new System.Drawing.Size(72, 19);
 			label18.TabIndex = 64;
@@ -286,7 +280,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// 
 			metroLabel2.AutoSize = true;
 			metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			metroLabel2.Location = new System.Drawing.Point(24, 409);
+			metroLabel2.Location = new System.Drawing.Point(443, 63);
 			metroLabel2.Name = "metroLabel2";
 			metroLabel2.Size = new System.Drawing.Size(63, 19);
 			metroLabel2.TabIndex = 257;
@@ -510,7 +504,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.textBoxRemarks.CustomButton.Visible = false;
 			this.textBoxRemarks.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxRemarks.Lines = new string[0];
-			this.textBoxRemarks.Location = new System.Drawing.Point(517, 65);
+			this.textBoxRemarks.Location = new System.Drawing.Point(517, 383);
 			this.textBoxRemarks.MaxLength = 32767;
 			this.textBoxRemarks.Multiline = true;
 			this.textBoxRemarks.Name = "textBoxRemarks";
@@ -533,7 +527,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(694, 663);
+			this.buttonOk.Location = new System.Drawing.Point(694, 570);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 242;
@@ -547,7 +541,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonClose.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonClose.Location = new System.Drawing.Point(775, 663);
+			this.buttonClose.Location = new System.Drawing.Point(775, 570);
 			this.buttonClose.Name = "buttonClose";
 			this.buttonClose.Size = new System.Drawing.Size(75, 33);
 			this.buttonClose.TabIndex = 241;
@@ -557,7 +551,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// documentControl1
 			// 
 			this.documentControl1.CurrentDocument = null;
-			this.documentControl1.Location = new System.Drawing.Point(536, 120);
+			this.documentControl1.Location = new System.Drawing.Point(117, 410);
 			this.documentControl1.Name = "documentControl1";
 			this.documentControl1.Size = new System.Drawing.Size(314, 41);
 			this.documentControl1.TabIndex = 65;
@@ -565,74 +559,10 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// documentControl2
 			// 
 			this.documentControl2.CurrentDocument = null;
-			this.documentControl2.Location = new System.Drawing.Point(536, 167);
+			this.documentControl2.Location = new System.Drawing.Point(117, 457);
 			this.documentControl2.Name = "documentControl2";
 			this.documentControl2.Size = new System.Drawing.Size(314, 41);
 			this.documentControl2.TabIndex = 243;
-			// 
-			// documentControl3
-			// 
-			this.documentControl3.CurrentDocument = null;
-			this.documentControl3.Location = new System.Drawing.Point(536, 214);
-			this.documentControl3.Name = "documentControl3";
-			this.documentControl3.Size = new System.Drawing.Size(314, 41);
-			this.documentControl3.TabIndex = 244;
-			// 
-			// documentControl4
-			// 
-			this.documentControl4.CurrentDocument = null;
-			this.documentControl4.Location = new System.Drawing.Point(536, 261);
-			this.documentControl4.Name = "documentControl4";
-			this.documentControl4.Size = new System.Drawing.Size(314, 41);
-			this.documentControl4.TabIndex = 245;
-			// 
-			// documentControl5
-			// 
-			this.documentControl5.CurrentDocument = null;
-			this.documentControl5.Location = new System.Drawing.Point(536, 308);
-			this.documentControl5.Name = "documentControl5";
-			this.documentControl5.Size = new System.Drawing.Size(314, 41);
-			this.documentControl5.TabIndex = 246;
-			// 
-			// documentControl6
-			// 
-			this.documentControl6.CurrentDocument = null;
-			this.documentControl6.Location = new System.Drawing.Point(536, 355);
-			this.documentControl6.Name = "documentControl6";
-			this.documentControl6.Size = new System.Drawing.Size(314, 41);
-			this.documentControl6.TabIndex = 247;
-			// 
-			// documentControl7
-			// 
-			this.documentControl7.CurrentDocument = null;
-			this.documentControl7.Location = new System.Drawing.Point(537, 402);
-			this.documentControl7.Name = "documentControl7";
-			this.documentControl7.Size = new System.Drawing.Size(314, 41);
-			this.documentControl7.TabIndex = 248;
-			// 
-			// documentControl8
-			// 
-			this.documentControl8.CurrentDocument = null;
-			this.documentControl8.Location = new System.Drawing.Point(536, 449);
-			this.documentControl8.Name = "documentControl8";
-			this.documentControl8.Size = new System.Drawing.Size(314, 41);
-			this.documentControl8.TabIndex = 249;
-			// 
-			// documentControl9
-			// 
-			this.documentControl9.CurrentDocument = null;
-			this.documentControl9.Location = new System.Drawing.Point(537, 496);
-			this.documentControl9.Name = "documentControl9";
-			this.documentControl9.Size = new System.Drawing.Size(314, 41);
-			this.documentControl9.TabIndex = 250;
-			// 
-			// documentControl10
-			// 
-			this.documentControl10.CurrentDocument = null;
-			this.documentControl10.Location = new System.Drawing.Point(536, 543);
-			this.documentControl10.Name = "documentControl10";
-			this.documentControl10.Size = new System.Drawing.Size(314, 41);
-			this.documentControl10.TabIndex = 251;
 			// 
 			// groupBox1
 			// 
@@ -655,9 +585,9 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.groupBox1.Controls.Add(this.dateTimePickerFlightDate);
 			this.groupBox1.Controls.Add(this.label21);
 			this.groupBox1.Controls.Add(this.textBoxLocation);
-			this.groupBox1.Location = new System.Drawing.Point(24, 440);
+			this.groupBox1.Location = new System.Drawing.Point(443, 89);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(407, 256);
+			this.groupBox1.Size = new System.Drawing.Size(407, 287);
 			this.groupBox1.TabIndex = 254;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Offering";
@@ -786,7 +716,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// label7
 			// 
 			this.label7.AutoSize = true;
-			this.label7.Location = new System.Drawing.Point(6, 225);
+			this.label7.Location = new System.Drawing.Point(6, 249);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(47, 13);
 			this.label7.TabIndex = 344;
@@ -818,7 +748,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.lifelengthViewerDuration.HeaderHours = "Hours";
 			this.lifelengthViewerDuration.HoursApplicable = false;
 			this.lifelengthViewerDuration.LeftHeader = "";
-			this.lifelengthViewerDuration.Location = new System.Drawing.Point(78, 212);
+			this.lifelengthViewerDuration.Location = new System.Drawing.Point(78, 240);
 			this.lifelengthViewerDuration.Margin = new System.Windows.Forms.Padding(4);
 			this.lifelengthViewerDuration.Modified = false;
 			this.lifelengthViewerDuration.Name = "lifelengthViewerDuration";
@@ -848,9 +778,9 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.label21.AutoSize = true;
 			this.label21.Location = new System.Drawing.Point(6, 164);
 			this.label21.Name = "label21";
-			this.label21.Size = new System.Drawing.Size(30, 13);
+			this.label21.Size = new System.Drawing.Size(69, 13);
 			this.label21.TabIndex = 29;
-			this.label21.Text = "Date";
+			this.label21.Text = "Perform Date";
 			// 
 			// textBoxLocation
 			// 
@@ -858,9 +788,9 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			// 
 			// 
 			this.textBoxLocation.CustomButton.Image = null;
-			this.textBoxLocation.CustomButton.Location = new System.Drawing.Point(299, 2);
+			this.textBoxLocation.CustomButton.Location = new System.Drawing.Point(269, 2);
 			this.textBoxLocation.CustomButton.Name = "";
-			this.textBoxLocation.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.textBoxLocation.CustomButton.Size = new System.Drawing.Size(45, 45);
 			this.textBoxLocation.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
 			this.textBoxLocation.CustomButton.TabIndex = 1;
 			this.textBoxLocation.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -870,6 +800,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.textBoxLocation.Lines = new string[0];
 			this.textBoxLocation.Location = new System.Drawing.Point(78, 185);
 			this.textBoxLocation.MaxLength = 32767;
+			this.textBoxLocation.Multiline = true;
 			this.textBoxLocation.Name = "textBoxLocation";
 			this.textBoxLocation.PasswordChar = '\0';
 			this.textBoxLocation.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -877,7 +808,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.textBoxLocation.SelectionLength = 0;
 			this.textBoxLocation.SelectionStart = 0;
 			this.textBoxLocation.ShortcutsEnabled = true;
-			this.textBoxLocation.Size = new System.Drawing.Size(317, 20);
+			this.textBoxLocation.Size = new System.Drawing.Size(317, 50);
 			this.textBoxLocation.TabIndex = 63;
 			this.textBoxLocation.UseSelectable = true;
 			this.textBoxLocation.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -1014,25 +945,35 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 			this.comboBoxProvider.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.comboBoxProvider.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxProvider.FormattingEnabled = true;
-			this.comboBoxProvider.Location = new System.Drawing.Point(180, 409);
+			this.comboBoxProvider.Location = new System.Drawing.Point(599, 63);
 			this.comboBoxProvider.Name = "comboBoxProvider";
 			this.comboBoxProvider.Size = new System.Drawing.Size(251, 25);
 			this.comboBoxProvider.TabIndex = 344;
+			// 
+			// documentControl3
+			// 
+			this.documentControl3.CurrentDocument = null;
+			this.documentControl3.Location = new System.Drawing.Point(117, 504);
+			this.documentControl3.Name = "documentControl3";
+			this.documentControl3.Size = new System.Drawing.Size(314, 41);
+			this.documentControl3.TabIndex = 244;
+			// 
+			// documentControl4
+			// 
+			this.documentControl4.CurrentDocument = null;
+			this.documentControl4.Location = new System.Drawing.Point(117, 551);
+			this.documentControl4.Name = "documentControl4";
+			this.documentControl4.Size = new System.Drawing.Size(314, 41);
+			this.documentControl4.TabIndex = 245;
 			// 
 			// WorkPackageEditorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(866, 710);
+			this.ClientSize = new System.Drawing.Size(866, 617);
 			this.Controls.Add(this.comboBoxProvider);
 			this.Controls.Add(metroLabel2);
 			this.Controls.Add(this.groupBox1);
-			this.Controls.Add(this.documentControl10);
-			this.Controls.Add(this.documentControl9);
-			this.Controls.Add(this.documentControl8);
-			this.Controls.Add(this.documentControl7);
-			this.Controls.Add(this.documentControl6);
-			this.Controls.Add(this.documentControl5);
 			this.Controls.Add(this.documentControl4);
 			this.Controls.Add(this.documentControl3);
 			this.Controls.Add(this.documentControl2);
@@ -1126,12 +1067,6 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		private CAS.UI.UIControls.DocumentationControls.DocumentControl documentControl2;
 		private CAS.UI.UIControls.DocumentationControls.DocumentControl documentControl3;
 		private CAS.UI.UIControls.DocumentationControls.DocumentControl documentControl4;
-		private CAS.UI.UIControls.DocumentationControls.DocumentControl documentControl5;
-		private CAS.UI.UIControls.DocumentationControls.DocumentControl documentControl6;
-		private CAS.UI.UIControls.DocumentationControls.DocumentControl documentControl7;
-		private CAS.UI.UIControls.DocumentationControls.DocumentControl documentControl8;
-		private CAS.UI.UIControls.DocumentationControls.DocumentControl documentControl9;
-		private CAS.UI.UIControls.DocumentationControls.DocumentControl documentControl10;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.DateTimePicker dateTimePickerFlightDate;
 		private System.Windows.Forms.Label label21;
