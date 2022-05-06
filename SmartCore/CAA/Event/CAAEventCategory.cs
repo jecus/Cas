@@ -12,7 +12,7 @@ namespace SmartCore.CAA.Event
 	[CAADto(typeof(CAAEventCategorieDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
-	public class CAAEventCategory : BaseEntityObject,IOperatable
+	public class CAAEventCategory : BaseEntityObject,IOperatable, IDictionaryItem
 	{
 		private int _weight;
 		private LogicOperation _minCompareOp;
@@ -138,10 +138,14 @@ namespace SmartCore.CAA.Event
 		
 
 		public int OperatorId { get; set; }
-		
+
+		public string ShortName { get; set; }
+
 		[FormControl(250, "FullName", Order = 1)]
 		[ListViewData(0.2f, "FullName", 1)]
 		public string FullName { get; set; }
+
+		public string CommonName { get; set; }
 
 
 		/*

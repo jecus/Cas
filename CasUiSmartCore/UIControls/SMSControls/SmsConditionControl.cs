@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using CAS.Entity.Models.DTO.Dictionaries;
@@ -162,7 +163,11 @@ namespace CAS.UI.UIControls.SMSControls
             newNode = new TreeNode { Text = "Model", Name = "Model" };
             currentParent.Nodes.Add(newNode);
             currentParent = newNode;
-            var aircraftModels = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, AircraftModel>(new Filter("ModelingObjectTypeId", 7));
+
+            IList<AircraftModel> aircraftModels;
+            if(GlobalObjects.CasEnvironment != null)
+                aircraftModels = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, AircraftModel>(new Filter("ModelingObjectTypeId", 7));
+            else aircraftModels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, AircraftModel>(new Filter("ModelingObjectTypeId", 7));
             foreach (var o in aircraftModels)
             {
                 newNode = new TreeNode { Text = o.ToString(), Name = o.ToString(), Tag = o };

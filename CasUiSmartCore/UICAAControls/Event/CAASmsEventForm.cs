@@ -93,7 +93,7 @@ namespace CAS.UI.UIControls.SMSControls
             if (_smsEvent != null)
             {
                 dictionaryComboEventType.SelectedItem = _smsEvent.EventType;
-                //dictionaryComboBoxCategory.SelectedItem = _smsEvent.EventCategory;
+                dictionaryComboBoxCategory.SelectedItem = _smsEvent.EventCategory;
                 dictionaryComboEventClass.SelectedItem = _smsEvent.EventClass;
                 comboBoxIncident.SelectedItem = _smsEvent.IncidentType;
                 dateTimePickerEventDate.Value = _smsEvent.RecordDate;
