@@ -413,7 +413,8 @@ namespace SmartCore.DtoHelper
 				MinReportPeriod = eventcategorie.MinReportPeriod?.ConvertToByteArray(),
 				MaxCompareOp = eventcategorie.MaxCompareOperation?.ItemId,
 				EventCountMaxPeriod = eventcategorie.EventCountMaxPeriod,
-				MaxReportPeriod = eventcategorie.MinReportPeriod?.ConvertToByteArray()
+				MaxReportPeriod = eventcategorie.MinReportPeriod?.ConvertToByteArray(),
+				FullName = eventcategorie.FullName,
 			};
 		}
 
@@ -433,8 +434,7 @@ namespace SmartCore.DtoHelper
 				MaxCompareOperation = eventcategorieDto.MaxCompareOp.HasValue ? LogicOperation.Items.GetItemById(eventcategorieDto.MaxCompareOp.Value) : LogicOperation.Unknown,
 				EventCountMaxPeriod = eventcategorieDto.EventCountMaxPeriod ?? default(int),
 				MaxReportPeriod = Lifelength.ConvertFromByteArray(eventcategorieDto.MaxReportPeriod),
-				FullName = EventCategory.Items.FirstOrDefault(i => i.ItemId == eventcategorieDto.ItemId)?.FullName,
-				ShortName = EventCategory.Items.FirstOrDefault(i => i.ItemId == eventcategorieDto.ItemId)?.ShortName
+				FullName = eventcategorieDto.FullName,
 			};
 		}
 		

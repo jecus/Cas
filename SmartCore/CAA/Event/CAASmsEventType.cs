@@ -138,7 +138,7 @@ namespace SmartCore.CAA.Event
 			{
 				if (EventClass != null && EventCategory != null)
 				{
-					return EventClass.Weight + EventCategory.ShortName + (EventClass.Weight * EventCategory.Weight);
+					return EventClass.Weight + EventCategory.FullName + (EventClass.Weight * EventCategory.Weight);
 				}
 				return "";
 			}

@@ -52,6 +52,9 @@ namespace CAA.Entity.Models.DTO
 		[JsonIgnore]
 		public ICollection<CAAEventTypeRiskLevelChangeRecordDTO> ChangeRecordDtos { get; set; }
 
+		[Column("FullName")]
+		public string FullName { get; set; }
+
 		#endregion
 
 	}
