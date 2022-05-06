@@ -65,6 +65,10 @@ namespace CAS.UI.UICAAControls.Event
         {
             if (e.Cancelled)
                 return;
+
+            if (DirectivesViewer == null)
+                InitListView();
+            
             DirectivesViewer.SetItemsArray(InitialDirectiveArray.OfType<BaseEntityObject>());
             DirectivesViewer.Focus();
 

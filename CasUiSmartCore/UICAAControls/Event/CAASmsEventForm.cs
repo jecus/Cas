@@ -84,10 +84,10 @@ namespace CAS.UI.UIControls.SMSControls
             foreach (IncidentType o in IncidentType.Items)
                 comboBoxIncident.Items.Add(o);
 
-            dictionaryComboEventClass.Type = typeof(EventClass);
-            dictionaryComboBoxCategory.Type = typeof(EventCategory);
+            dictionaryComboEventClass.Type = typeof(CAAEventClass);
+            dictionaryComboBoxCategory.Type = typeof(CAAEventCategory);
 
-            dictionaryComboEventType.Type = typeof(SmsEventType);
+            dictionaryComboEventType.Type = typeof(CAASmsEventType);
             dictionaryComboEventType.ScreenControl = new CAAEventTypesListScreen();
 
             if (_smsEvent != null)

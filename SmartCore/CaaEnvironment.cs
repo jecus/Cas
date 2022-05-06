@@ -207,7 +207,8 @@ namespace SmartCore
 
             var assembly = Assembly.GetAssembly(typeof(BaseEntityObject));
             var types = assembly.GetTypes()
-                .Where(t => t.Namespace != null && t.IsClass && t.Namespace.StartsWith("SmartCore.Entities.Dictionaries"));
+                .Where(t => t.Namespace != null && t.IsClass && 
+                            (t.Namespace.StartsWith("SmartCore.Entities.Dictionaries") || t.Namespace.StartsWith("SmartCore.CAA")));
 
             var staticDictionaryType = types.Where(t => t.IsSubclassOf(typeof(StaticDictionary))
                                                             && t.GetCustomAttributes(typeof(TableAttribute), false).Length > 0).ToList();
@@ -252,11 +253,18 @@ namespace SmartCore
                     var dca = (DictionaryCollectionAttribute)type.GetCustomAttributes(typeof(DictionaryCollectionAttribute), false).FirstOrDefault();
                     var bl = (DtoAttribute)type.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
 
+                    var tt = bl?.Type;
+                    if (tt == null)
+                    {
+                        var caaBl = (CAADtoAttribute)type.GetCustomAttributes(typeof(CAADtoAttribute), false).FirstOrDefault();
+                        tt = caaBl.Type;
+                    }
+
                     var typeDict = dca == null
                         ? new CommonDictionaryCollection<AbstractDictionary>()
                         : dca.GetInstance();
 
-                    IEnumerable items = _newLoader.GetObjectList(bl.Type, type, true);
+                    IEnumerable items = _newLoader.GetObjectList(tt, type, true);
                     typeDict.AddRange((IEnumerable<IDictionaryItem>)items);
                     AddDictionary(type, typeDict);
 
