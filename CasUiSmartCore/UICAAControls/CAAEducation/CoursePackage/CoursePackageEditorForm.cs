@@ -40,7 +40,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		private void UpdateInformation()
 		{
-			var providers = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASupplierDTO, Supplier>();
+			var providers = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASupplierDTO, Supplier>(new Filter("SupplierClassId", 100));
 			comboBoxProvider.Items.Clear();
 			comboBoxProvider.Items.AddRange(providers.ToArray());
 			comboBoxProvider.Items.Add(Supplier.Unknown);
