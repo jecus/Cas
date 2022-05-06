@@ -57,5 +57,9 @@ namespace CAA.Entity.Models.DTO
 
 		#endregion
 
+		public override string ToString()
+		{
+			return FullName;
+		}
 	}
 }

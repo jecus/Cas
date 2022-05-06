@@ -32,7 +32,7 @@ namespace CAS.UI.UIControls.SMSControls
 		private void InitializeComponent()
 		{
 			MetroFramework.Controls.MetroLabel labelDescription;
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SmsEventForm));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CAASmsEventForm));
 			this.textBoxDescription = new MetroFramework.Controls.MetroTextBox();
 			this.labelConditions = new MetroFramework.Controls.MetroLabel();
 			this.flowLayoutPanelConditions = new System.Windows.Forms.FlowLayoutPanel();
@@ -53,16 +53,25 @@ namespace CAS.UI.UIControls.SMSControls
 			this.labelEventType = new MetroFramework.Controls.MetroLabel();
 			this.dictionaryComboEventType = new CAS.UI.UIControls.Auxiliary.DictionaryComboBox();
 			this.dictionaryComboEventClass = new CAS.UI.UIControls.Auxiliary.DictionaryComboBox();
-			this.dictionaryComboBoxCategory = new CAS.UI.UIControls.Auxiliary.DictionaryComboBox();
+			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			labelDescription = new MetroFramework.Controls.MetroLabel();
 			this.flowLayoutPanelConditions.SuspendLayout();
 			this.panelAddCondition.SuspendLayout();
 			this.SuspendLayout();
 			// 
+			// labelDescription
+			// 
+			labelDescription.AutoSize = true;
+			labelDescription.Location = new System.Drawing.Point(11, 60);
+			labelDescription.Name = "labelDescription";
+			labelDescription.Size = new System.Drawing.Size(77, 19);
+			labelDescription.TabIndex = 0;
+			labelDescription.Text = "Description:";
+			labelDescription.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
 			// textBoxDescription
 			// 
-			this.textBoxDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// 
 			// 
@@ -94,8 +103,7 @@ namespace CAS.UI.UIControls.SMSControls
 			// 
 			// labelConditions
 			// 
-			this.labelConditions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.labelConditions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelConditions.Location = new System.Drawing.Point(14, 312);
 			this.labelConditions.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.labelConditions.Name = "labelConditions";
@@ -106,8 +114,7 @@ namespace CAS.UI.UIControls.SMSControls
 			// 
 			// flowLayoutPanelConditions
 			// 
-			this.flowLayoutPanelConditions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.flowLayoutPanelConditions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
 			this.flowLayoutPanelConditions.AutoScroll = true;
 			this.flowLayoutPanelConditions.Controls.Add(this.panelAddCondition);
 			this.flowLayoutPanelConditions.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -181,8 +188,7 @@ namespace CAS.UI.UIControls.SMSControls
 			// 
 			// textBoxRiskIndex
 			// 
-			this.textBoxRiskIndex.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxRiskIndex.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// 
 			// 
@@ -214,21 +220,17 @@ namespace CAS.UI.UIControls.SMSControls
 			// 
 			// comboBoxIncident
 			// 
-			this.comboBoxIncident.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxIncident.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxIncident.FormattingEnabled = true;
 			this.comboBoxIncident.Location = new System.Drawing.Point(119, 252);
 			this.comboBoxIncident.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.comboBoxIncident.Name = "comboBoxIncident";
 			this.comboBoxIncident.Size = new System.Drawing.Size(356, 21);
 			this.comboBoxIncident.TabIndex = 6;
-			this.comboBoxIncident.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxRemarks
 			// 
-			this.textBoxRemarks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-			| System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxRemarks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// 
 			// 
@@ -278,8 +280,7 @@ namespace CAS.UI.UIControls.SMSControls
 			// 
 			// dateTimePickerEventDate
 			// 
-			this.dateTimePickerEventDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.dateTimePickerEventDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
 			this.dateTimePickerEventDate.Location = new System.Drawing.Point(119, 277);
 			this.dateTimePickerEventDate.Margin = new System.Windows.Forms.Padding(2);
 			this.dateTimePickerEventDate.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
@@ -326,8 +327,7 @@ namespace CAS.UI.UIControls.SMSControls
 			// 
 			// dictionaryComboEventType
 			// 
-			this.dictionaryComboEventType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.dictionaryComboEventType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
 			this.dictionaryComboEventType.Displayer = null;
 			this.dictionaryComboEventType.DisplayerText = null;
 			this.dictionaryComboEventType.Entity = null;
@@ -341,8 +341,7 @@ namespace CAS.UI.UIControls.SMSControls
 			// 
 			// dictionaryComboEventClass
 			// 
-			this.dictionaryComboEventClass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.dictionaryComboEventClass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
 			this.dictionaryComboEventClass.Displayer = null;
 			this.dictionaryComboEventClass.DisplayerText = null;
 			this.dictionaryComboEventClass.Entity = null;
@@ -354,40 +353,24 @@ namespace CAS.UI.UIControls.SMSControls
 			this.dictionaryComboEventClass.TabIndex = 244;
 			this.dictionaryComboEventClass.SelectedIndexChanged += new System.EventHandler(this.DictionaryComboEventClassSelectedIndexChanged);
 			// 
-			// dictionaryComboBoxCategory
+			// comboBox1
 			// 
-			this.dictionaryComboBoxCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
-			this.dictionaryComboBoxCategory.Displayer = null;
-			this.dictionaryComboBoxCategory.DisplayerText = null;
-			this.dictionaryComboBoxCategory.Entity = null;
-			this.dictionaryComboBoxCategory.Location = new System.Drawing.Point(119, 202);
-			this.dictionaryComboBoxCategory.Margin = new System.Windows.Forms.Padding(4);
-			this.dictionaryComboBoxCategory.Name = "dictionaryComboBoxCategory";
-			this.dictionaryComboBoxCategory.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.dictionaryComboBoxCategory.Size = new System.Drawing.Size(356, 21);
-			this.dictionaryComboBoxCategory.TabIndex = 245;
-			this.dictionaryComboBoxCategory.SelectedIndexChanged += new System.EventHandler(this.DictionaryComboBoxCategorySelectedIndexChanged);
-			this.dictionaryComboBoxCategory.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBox1.FormattingEnabled = true;
+			this.comboBox1.Location = new System.Drawing.Point(119, 201);
+			this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+			this.comboBox1.Name = "comboBox1";
+			this.comboBox1.Size = new System.Drawing.Size(356, 21);
+			this.comboBox1.TabIndex = 245;
 			// 
-			// labelDescription
-			// 
-			labelDescription.AutoSize = true;
-			labelDescription.Location = new System.Drawing.Point(11, 60);
-			labelDescription.Name = "labelDescription";
-			labelDescription.Size = new System.Drawing.Size(77, 19);
-			labelDescription.TabIndex = 0;
-			labelDescription.Text = "Description:";
-			labelDescription.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
-			// SmsEventForm
+			// CAASmsEventForm
 			// 
 			this.AcceptButton = this.buttonOK;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
 			this.ClientSize = new System.Drawing.Size(485, 636);
-			this.Controls.Add(this.dictionaryComboBoxCategory);
+			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.dictionaryComboEventClass);
 			this.Controls.Add(this.dictionaryComboEventType);
 			this.Controls.Add(this.labelRiskIndex);
@@ -412,14 +395,15 @@ namespace CAS.UI.UIControls.SMSControls
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(485, 534);
-			this.Name = "SmsEventForm";
+			this.Name = "CAASmsEventForm";
 			this.Text = "SMS Event Form";
 			this.flowLayoutPanelConditions.ResumeLayout(false);
 			this.panelAddCondition.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
-
 		}
+
+		private System.Windows.Forms.ComboBox comboBox1;
 
 		#endregion
 		private MetroTextBox textBoxDescription;
@@ -442,6 +426,5 @@ namespace CAS.UI.UIControls.SMSControls
 		private MetroLabel labelEventType;
 		private Auxiliary.DictionaryComboBox dictionaryComboEventType;
 		private Auxiliary.DictionaryComboBox dictionaryComboEventClass;
-		private Auxiliary.DictionaryComboBox dictionaryComboBoxCategory;
 	}
 }

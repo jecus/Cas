@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.DTO;
 using CAS.UI.UICAAControls.Event;
 using CASTerms;
 using MetroFramework.Forms;
@@ -48,7 +49,7 @@ namespace CAS.UI.UIControls.SMSControls
 
         private void SetRiskIndex()
         {
-            EventCategory cat = dictionaryComboBoxCategory.SelectedItem as EventCategory;
+            EventCategory cat = comboBox1.SelectedItem as EventCategory;
             EventClass eventClass = dictionaryComboEventClass.SelectedItem as EventClass;
             if (cat != null && eventClass != null)
             {
@@ -68,7 +69,7 @@ namespace CAS.UI.UIControls.SMSControls
         {
             Program.MainDispatcher.ProcessControl(dictionaryComboEventType);
             Program.MainDispatcher.ProcessControl(dictionaryComboEventClass);
-            Program.MainDispatcher.ProcessControl(dictionaryComboBoxCategory);
+            Program.MainDispatcher.ProcessControl(comboBox1);
 
             foreach (Control c in flowLayoutPanelConditions.Controls)
             {
@@ -78,14 +79,20 @@ namespace CAS.UI.UIControls.SMSControls
 
             dictionaryComboEventType.SelectedIndexChanged -= LookupComboboxEventTypeSelectedIndexChanged;
             dictionaryComboEventClass.SelectedIndexChanged -= DictionaryComboEventClassSelectedIndexChanged;
-            dictionaryComboBoxCategory.SelectedIndexChanged -= DictionaryComboBoxCategorySelectedIndexChanged;
+            comboBox1.SelectedIndexChanged -= DictionaryComboBoxCategorySelectedIndexChanged;
 
             comboBoxIncident.Items.Clear();
             foreach (IncidentType o in IncidentType.Items)
                 comboBoxIncident.Items.Add(o);
 
             dictionaryComboEventClass.Type = typeof(CAAEventClass);
-            dictionaryComboBoxCategory.Type = typeof(CAAEventCategory);
+            
+            var events = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAEventCategorieDTO, CAAEventCategory>();
+            comboBox1.Items.Clear();
+            comboBox1.Items.AddRange(events.ToArray());
+            comboBox1.DisplayMember = "FullName";
+            comboBox1.SelectedItem = events.FirstOrDefault();
+
 
             dictionaryComboEventType.Type = typeof(CAASmsEventType);
             dictionaryComboEventType.ScreenControl = new CAAEventTypesListScreen();
@@ -93,7 +100,7 @@ namespace CAS.UI.UIControls.SMSControls
             if (_smsEvent != null)
             {
                 dictionaryComboEventType.SelectedItem = _smsEvent.EventType;
-                dictionaryComboBoxCategory.SelectedItem = _smsEvent.EventCategory;
+                comboBox1.SelectedItem = _smsEvent.EventCategory;
                 dictionaryComboEventClass.SelectedItem = _smsEvent.EventClass;
                 comboBoxIncident.SelectedItem = _smsEvent.IncidentType;
                 dateTimePickerEventDate.Value = _smsEvent.RecordDate;
@@ -114,7 +121,7 @@ namespace CAS.UI.UIControls.SMSControls
 
             dictionaryComboEventType.SelectedIndexChanged += LookupComboboxEventTypeSelectedIndexChanged;
             dictionaryComboEventClass.SelectedIndexChanged += DictionaryComboEventClassSelectedIndexChanged;
-            dictionaryComboBoxCategory.SelectedIndexChanged += DictionaryComboBoxCategorySelectedIndexChanged;
+            comboBox1.SelectedIndexChanged += DictionaryComboBoxCategorySelectedIndexChanged;
             
             flowLayoutPanelConditions.Controls.Add(panelAddCondition);
         }
@@ -129,7 +136,7 @@ namespace CAS.UI.UIControls.SMSControls
         {
             if (textBoxDescription.Text != obj.Description 
                 ||  dictionaryComboEventType.SelectedItem != _smsEvent.EventType
-                || dictionaryComboBoxCategory.SelectedItem != _smsEvent.EventCategory
+                || comboBox1.SelectedItem != _smsEvent.EventCategory
                 || dictionaryComboEventClass.SelectedItem != _smsEvent.EventClass
                 || comboBoxIncident.SelectedItem != _smsEvent.IncidentType
                 || dateTimePickerEventDate.Value != _smsEvent.RecordDate
@@ -200,7 +207,7 @@ namespace CAS.UI.UIControls.SMSControls
         private void ApplyChanges(CAAEvent obj)
         {
             obj.EventType = dictionaryComboEventType.SelectedItem as CAASmsEventType;
-            obj.EventCategory = dictionaryComboBoxCategory.SelectedItem as CAAEventCategory;
+            obj.EventCategory = comboBox1.SelectedItem as CAAEventCategory;
             obj.EventClass = dictionaryComboEventClass.SelectedItem as CAAEventClass;
             obj.IncidentType = comboBoxIncident.SelectedItem as IncidentType;
             obj.RecordDate = dateTimePickerEventDate.Value;
@@ -246,7 +253,7 @@ namespace CAS.UI.UIControls.SMSControls
             {
                 textBoxDescription.Text = eventType.Description;
                 dictionaryComboEventClass.SelectedItem = eventType.EventClass;
-                dictionaryComboBoxCategory.SelectedItem = eventType.EventCategory;
+                comboBox1.SelectedItem = eventType.EventCategory;
                 comboBoxIncident.SelectedItem = eventType.IncidentType;
             }
         }
