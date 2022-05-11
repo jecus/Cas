@@ -2167,6 +2167,42 @@ namespace SmartCore.DtoHelper
 		}
 		
 		
+		public static ConcessionRequest ConvertCAA(this ConcessionRequestDTO oper)
+		{
+			return new ConcessionRequest
+			{
+				ItemId = oper.ItemId,
+				IsDeleted = oper.IsDeleted,
+				Updated = oper.Updated,
+				CorrectorId = oper.CorrectorId,
+				Status = oper.Status,
+				SettingsJSON = oper.SettingsJSON,
+				From = oper.From,
+				To = oper.To,
+				Created = oper.Created,
+				
+			};
+		}
+
+
+		public static ConcessionRequestDTO ConvertCAA(this ConcessionRequest oper)
+		{
+			return new ConcessionRequestDTO
+			{
+				ItemId = oper.ItemId,
+				IsDeleted = oper.IsDeleted,
+				Updated = oper.Updated,
+				CorrectorId = oper.CorrectorId,
+				Status = oper.Status,
+				SettingsJSON = oper.SettingsJSON,
+				From = oper.From,
+				To = oper.To,
+				Created = oper.Created,
+			};
+		}
+		
+		
+		
 
         public static Operator ConvertCAA(this CAAOperatorDTO operdto)
         {
