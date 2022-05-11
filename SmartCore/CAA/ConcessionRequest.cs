@@ -59,5 +59,15 @@ namespace SmartCore.CAA
 
         [JsonProperty]
         public string Number { get; set; }
+        
+        [JsonProperty]
+        public Provider Provider { get; set; }
+    }
+
+    public enum Provider
+    {
+        Expedite,
+        Routine,
+        AOG
     }
 }

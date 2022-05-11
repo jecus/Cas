@@ -55,7 +55,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.dateTimePickerCreated = new System.Windows.Forms.DateTimePicker();
             this.metroTextBox6 = new MetroFramework.Controls.MetroTextBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBoxProvider = new System.Windows.Forms.ComboBox();
             metroLabel6 = new MetroFramework.Controls.MetroLabel();
             metroLabel4 = new MetroFramework.Controls.MetroLabel();
             metroLabel9 = new MetroFramework.Controls.MetroLabel();
@@ -466,7 +466,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.groupBox4.Controls.Add(metroLabel11);
             this.groupBox4.Controls.Add(this.metroTextBox6);
             this.groupBox4.Controls.Add(metroLabel10);
-            this.groupBox4.Controls.Add(this.comboBox3);
+            this.groupBox4.Controls.Add(this.comboBoxProvider);
             this.groupBox4.Controls.Add(metroLabel7);
             this.groupBox4.Location = new System.Drawing.Point(4, 528);
             this.groupBox4.Name = "groupBox4";
@@ -516,15 +516,15 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.metroTextBox6.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBox6.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // comboBox3
+            // comboBoxProvider
             // 
-            this.comboBox3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.comboBox3.ForeColor = System.Drawing.Color.DimGray;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(87, 17);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(128, 22);
-            this.comboBox3.TabIndex = 375;
+            this.comboBoxProvider.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxProvider.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxProvider.FormattingEnabled = true;
+            this.comboBoxProvider.Location = new System.Drawing.Point(87, 17);
+            this.comboBoxProvider.Name = "comboBoxProvider";
+            this.comboBoxProvider.Size = new System.Drawing.Size(128, 22);
+            this.comboBoxProvider.TabIndex = 375;
             // 
             // EditConcessionRequestForm
             // 
@@ -557,7 +557,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private System.Windows.Forms.GroupBox groupBox4;
         private MetroFramework.Controls.MetroTextBox metroTextBox6;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBoxProvider;
         private System.Windows.Forms.DateTimePicker dateTimePickerCreated;
 
         private System.Windows.Forms.GroupBox groupBox1;

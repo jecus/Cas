@@ -8,6 +8,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
+using SmartCore.CAA;
 using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UICAAControls.ConcessionRequest
@@ -52,9 +53,6 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             _from = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO, Specialist>(_concessionRequest.From);
             _caa.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", -1)));
             
-            
-            
-
         }
 
 
@@ -65,6 +63,12 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             metroTextBoxFromTel.Text = _from.PhoneMobile;
             metroTextBoxStation.Text = _concessionRequest.Settings.Station;
             metroTextBoxReason.Text = _concessionRequest.Settings.Reason;
+            
+            comboBoxProvider.Items.Clear();
+            foreach (object o in Enum.GetValues(typeof(Provider)).Cast<Provider>())
+                comboBoxProvider.Items.Add(o);
+            comboBoxProvider.SelectedItem = _concessionRequest.Settings.Provider;
+            
             
             comboBoxTo.Items.Clear();
             comboBoxTo.Items.AddRange(_caa.ToArray());
@@ -84,6 +88,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             _concessionRequest.To = to.ItemId;
             _concessionRequest.Settings.Station = metroTextBoxStation.Text;
             _concessionRequest.Settings.Reason = metroTextBoxReason.Text;
+            _concessionRequest.Settings.Provider = (Provider)comboBoxProvider.SelectedItem;
 
         }
 
