@@ -12,12 +12,6 @@ namespace CAA.Entity.Models.DTO
     {
         [Column("Created")]
         public DateTime Created { get; set; }
-
-        [Column("AuditId")]
-        public int AuditId { get; set; }
-        
-        [Column("CheckListId")]
-        public int CheckListId { get; set; }
         
         [Column("From")]
         public int From { get; set; }
