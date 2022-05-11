@@ -4,14 +4,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
-using CAS.UI.UICAAControls.CheckList;
+using CAS.Entity.Models.DTO.General;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
-using SmartCore.Auxiliary;
-using SmartCore.CAA;
-using SmartCore.CAA.Audit;
+using SmartCore.Entities;
+using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UICAAControls.ConcessionRequest
 {
@@ -20,7 +19,8 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
         private readonly int _auditId;
         private SmartCore.CAA.ConcessionRequest _concessionRequest;
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
-        private List<AllOperators> _operators = new List<AllOperators>();
+        private List<Specialist> _caa = new List<Specialist>();
+        private Specialist _from;
 
         public EditConcessionRequestForm()
         {
@@ -43,19 +43,37 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
-            _operators = GlobalObjects.CaaEnvironment.AllOperators;
+            _caa.Clear();
             _concessionRequest = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(_auditId);
+
+            
+            _from = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO, Specialist>(_concessionRequest.From);
+            _caa.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", -1)));
+
         }
 
 
         private void UpdateInformation()
         {
+            metroTextBoxFrom.Text = _from.ToString();
+            metroTextBoxFromTel.Text = _from.PhoneMobile;
+            metroTextBoxStation.Text = _concessionRequest.Settings.Station;
             
+            comboBoxTo.Items.Clear();
+            comboBoxTo.Items.AddRange(_caa.ToArray());
+            comboBoxTo.Items.Add( Specialist.Unknown);
+            comboBoxTo.SelectedItem = Specialist.Unknown;
+            var to = _caa.FirstOrDefault(i => i.ItemId == _concessionRequest.To);
+            if (to != null)
+            {
+                comboBoxTo.SelectedItem = _caa.FirstOrDefault(i => i.ItemId == _concessionRequest.To);
+                metroTextBoxToTel.Text = to.PhoneMobile;
+            }
         }
 
         private void ApplyChanges()
         {
-            
+            _concessionRequest.Settings.Station = metroTextBoxStation.Text;
 
         }
 

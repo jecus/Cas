@@ -45,6 +45,7 @@ namespace SmartCore.CAA
     [Serializable]
     public class ConcessionRequestSettings
     {
-        
+        [JsonProperty]
+        public string Station { get; set; }
     }
 }
