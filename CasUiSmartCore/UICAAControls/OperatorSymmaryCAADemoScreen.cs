@@ -13,6 +13,7 @@ using CAS.UI.UICAAControls.CAAEducation.CoursePackage;
 using CAS.UI.UICAAControls.CAATask;
 using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UICAAControls.CheckList.CheckListAudit;
+using CAS.UI.UICAAControls.ConcessionRequest;
 using CAS.UI.UICAAControls.Document;
 using CAS.UI.UICAAControls.Event;
 using CAS.UI.UICAAControls.FindingLevel;
@@ -274,7 +275,8 @@ namespace CAS.UI.UICAAControls
 
         private void LinkConcessionRequestLinkRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Concession Request";
+	        e.RequestedEntity = new ConcessionRequestScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
         }
 
         private void EventsLinkRequested(object sender, ReferenceEventArgs e)

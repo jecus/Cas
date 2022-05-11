@@ -1178,6 +1178,18 @@
     <Compile Include="UICAAControls\CheckList\RevisionControl.Designer.cs">
       <DependentUpon>RevisionControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\ConcessionRequest\ConcessionRequestListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\ConcessionRequest\ConcessionRequestListView.Designer.cs">
+      <DependentUpon>ConcessionRequestListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UICAAControls\ConcessionRequest\ConcessionRequestScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\ConcessionRequest\ConcessionRequestScreen.Designer.cs">
+      <DependentUpon>ConcessionRequestScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\CurrentOperator\CurrentOperatorSymmaryCAADemoScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4739,6 +4751,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CheckList\RevisionControl.resx">
       <DependentUpon>RevisionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\ConcessionRequest\ConcessionRequestScreen.resx">
+      <DependentUpon>ConcessionRequestScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\CurrentOperator\CurrentOperatorSymmaryCAADemoScreen.resx">
       <DependentUpon>CurrentOperatorSymmaryCAADemoScreen.cs</DependentUpon>

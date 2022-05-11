@@ -13,6 +13,7 @@ using CAS.UI.UICAAControls.CAAEducation;
 using CAS.UI.UICAAControls.CAAEducation.CoursePackage;
 using CAS.UI.UICAAControls.CAATask;
 using CAS.UI.UICAAControls.CheckList.CheckListAudit;
+using CAS.UI.UICAAControls.ConcessionRequest;
 using CAS.UI.UICAAControls.Document;
 using CAS.UI.UICAAControls.Event;
 using CAS.UI.UICAAControls.FindingLevel;
@@ -31,7 +32,6 @@ using Entity.Abstractions.Filters;
 using SmartCore.CAA;
 using SmartCore.CAA.Event;
 using SmartCore.CAA.FindingLevel;
-using SmartCore.CAA.Tasks;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -278,7 +278,8 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkConcessionRequestLinkRequested(object sender, ReferenceEventArgs e)
         {
-	        e.Cancel = true;
+	        e.DisplayerText = "Concession Request";
+	        e.RequestedEntity = new ConcessionRequestScreen(_getOperator(), _currentOperator.ItemId);
         }
 
         private void EventsLinkRequested(object sender, ReferenceEventArgs e)

@@ -1706,7 +1706,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 			this._concessionRequestContainer.AutoSize = true;
 			this._concessionRequestContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this._concessionRequestContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-			this._concessionRequestContainer.Caption = "Concession Reques";
+			this._concessionRequestContainer.Caption = "Concession Request";
 			this._concessionRequestContainer.DescriptionTextColor = System.Drawing.Color.DimGray;
 			this._concessionRequestContainer.Extended = false;
 			this._concessionRequestContainer.Location = new System.Drawing.Point(3, 232);
