@@ -163,7 +163,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private void ToolStripMenuItemEditClick(object sender, EventArgs e)
         {
-            var form = new EditAuditForm(_directivesViewer.SelectedItem.ItemId);
+            var form = new EditConcessionRequestForm(_directivesViewer.SelectedItem);
             if (form.ShowDialog() == DialogResult.OK)
                 AnimatedThreadWorker.RunWorkerAsync();
         }
@@ -248,14 +248,10 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-            var form = new AuditForm(new CAAAudit()
+            var form = new EditConcessionRequestForm(new SmartCore.CAA.ConcessionRequest()
             {
-				OperatorId = _operatorId.Value,
-				Settings = new CAAAuditSettings()
-                {
-					CreateDate = DateTime.Now,
-					AuthorId = GlobalObjects.CaaEnvironment.IdentityUser.ItemId
-                }
+	            Created = DateTime.Now,
+	            From = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId
             });
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();

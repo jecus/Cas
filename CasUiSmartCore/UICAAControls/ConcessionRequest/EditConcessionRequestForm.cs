@@ -4,12 +4,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
-using CAS.Entity.Models.DTO.General;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
-using SmartCore.Entities;
 using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UICAAControls.ConcessionRequest
@@ -27,9 +25,9 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             InitializeComponent();
         }
 
-        public EditConcessionRequestForm(int auditId) : this()
+        public EditConcessionRequestForm(SmartCore.CAA.ConcessionRequest  concessionRequest ) : this()
         {
-            _auditId = auditId;
+            _concessionRequest = concessionRequest;
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
             _animatedThreadWorker.RunWorkerAsync();
@@ -38,17 +36,24 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            this.Text += $" No: {_concessionRequest.Settings.Number}";
             UpdateInformation();
         }
 
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
             _caa.Clear();
-            _concessionRequest = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(_auditId);
+
+            if (_concessionRequest.ItemId > 0)
+                _concessionRequest = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(_auditId);
+            else _concessionRequest.Settings.Number = $"CR.B-{GlobalObjects.CaaEnvironment.ObtainId()}";
 
             
             _from = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO, Specialist>(_concessionRequest.From);
             _caa.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", -1)));
+            
+            
+            
 
         }
 
@@ -56,8 +61,10 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
         private void UpdateInformation()
         {
             metroTextBoxFrom.Text = _from.ToString();
+            dateTimePickerCreated.Value = _concessionRequest.Created;
             metroTextBoxFromTel.Text = _from.PhoneMobile;
             metroTextBoxStation.Text = _concessionRequest.Settings.Station;
+            metroTextBoxReason.Text = _concessionRequest.Settings.Reason;
             
             comboBoxTo.Items.Clear();
             comboBoxTo.Items.AddRange(_caa.ToArray());
@@ -73,7 +80,10 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private void ApplyChanges()
         {
+            var to = comboBoxTo.SelectedItem as Specialist;
+            _concessionRequest.To = to.ItemId;
             _concessionRequest.Settings.Station = metroTextBoxStation.Text;
+            _concessionRequest.Settings.Reason = metroTextBoxReason.Text;
 
         }
 
@@ -109,6 +119,18 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
         private void AuditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void comboBoxTo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var to = comboBoxTo.SelectedItem as Specialist;
+            if (to != null)
+                metroTextBoxToTel.Text = to.PhoneMobile;
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
