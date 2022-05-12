@@ -11,7 +11,6 @@ using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA;
-using SmartCore.CAA.Audit;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -72,7 +71,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             _operatorId = operatorId;
 
             pictureBox1.Visible = buttonAddNew.Visible = _operatorId > 0;
-            
+
             InitToolStripMenuItems();
             InitListView();
             UpdateInformation();
@@ -101,7 +100,9 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
-			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(new Filter("Current", GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId), loadChild: true));
+			if(_operatorId > 0)
+				_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(new Filter("From", GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId), loadChild: true));
+			else _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(new Filter("To", GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId), loadChild: true));
 
 			var ids = _initialDocumentArray.Select(i => i.FromId).ToList();
 			ids.AddRange(_initialDocumentArray.Select(i => i.ToId));
@@ -269,6 +270,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 	            Created = DateTime.Now,
 	            FromId = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
 	            CurrentId =  GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
+	            Status = ConcessionRequestStatus.Operator,
 	            Settings = new ConcessionRequestSettings()
 	            {
 		            OperatorId = _operatorId.Value

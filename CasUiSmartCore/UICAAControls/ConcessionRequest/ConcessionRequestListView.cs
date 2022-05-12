@@ -47,6 +47,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 		protected override void SetHeaders()
 		{
 			AddColumn("Operator", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Status", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Number", (int)(radGridView1.Width * 0.3f));
 			AddColumn("From", (int)(radGridView1.Width * 0.3f));
 			AddColumn("To", (int)(radGridView1.Width * 0.3f));
@@ -73,6 +74,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 			subItems.AddRange(new List<CustomCell>()
             {
 	            CreateRow(op.ToString(), op),
+	            CreateRow(item.Status.ToString(), item.Status),
 	            CreateRow(item.Settings.Number, item.Settings.Number),
 	            CreateRow(item.From.ToString(), item.From),
 	            CreateRow(item.To.ToString(), item.To),
@@ -130,9 +132,19 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
-			var form = new EditConcessionRequestForm(SelectedItem);
-			if (form.ShowDialog() == DialogResult.OK)
-				_animatedThreadWorker.RunWorkerAsync();
+			if (GlobalObjects.CaaEnvironment.IdentityUser.OperatorId > 0)
+			{
+				var form = new EditConcessionRequestForm(SelectedItem);
+				if (form.ShowDialog() == DialogResult.OK)
+					_animatedThreadWorker.RunWorkerAsync();
+			}
+			else
+			{
+				var form = new EditCAAConcessionRequestForm(SelectedItem);
+				if (form.ShowDialog() == DialogResult.OK)
+					_animatedThreadWorker.RunWorkerAsync();
+				
+			}
 			
 			e.Cancel = true;
 		}

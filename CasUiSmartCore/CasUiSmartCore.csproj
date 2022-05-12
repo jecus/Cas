@@ -1190,6 +1190,12 @@
     <Compile Include="UICAAControls\ConcessionRequest\ConcessionRequestScreen.Designer.cs">
       <DependentUpon>ConcessionRequestScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\ConcessionRequest\EditCAAConcessionRequestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\ConcessionRequest\EditCAAConcessionRequestForm.Designer.cs">
+      <DependentUpon>EditCAAConcessionRequestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\ConcessionRequest\EditConcessionRequestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4761,6 +4767,9 @@
     <EmbeddedResource Include="UICAAControls\ConcessionRequest\ConcessionRequestScreen.resx">
       <DependentUpon>ConcessionRequestScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UICAAControls\ConcessionRequest\EditCAAConcessionRequestForm.resx">
+      <DependentUpon>EditCAAConcessionRequestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UICAAControls\ConcessionRequest\EditConcessionRequestForm.resx">
       <DependentUpon>EditConcessionRequestForm.cs</DependentUpon>

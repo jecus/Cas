@@ -19,7 +19,7 @@ namespace SmartCore.CAA
         
         public int CurrentId { get; set; }
         
-        public int Status { get; set; }
+        public ConcessionRequestStatus Status { get; set; }
         
         public string SettingsJSON
         {
@@ -73,6 +73,12 @@ namespace SmartCore.CAA
         public int OperatorId { get; set; }
     }
 
+    public enum ConcessionRequestStatus
+    {
+        CAA,
+        Operator
+    }
+    
     public enum Provider
     {
         Expedite,

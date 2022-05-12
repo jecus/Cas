@@ -14,7 +14,7 @@ using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UICAAControls.ConcessionRequest
 {
-    public partial class EditConcessionRequestForm : MetroForm
+    public partial class EditCAAConcessionRequestForm : MetroForm
     {
         private SmartCore.CAA.ConcessionRequest _concessionRequest;
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
@@ -22,35 +22,30 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
         private List<Aircraft> _aircaraft = new List<Aircraft>();
         private Specialist _from;
 
-        public EditConcessionRequestForm()
+        public EditCAAConcessionRequestForm()
         {
             InitializeComponent();
         }
 
-        public EditConcessionRequestForm(SmartCore.CAA.ConcessionRequest  concessionRequest ) : this()
+        public EditCAAConcessionRequestForm(SmartCore.CAA.ConcessionRequest  concessionRequest ) : this()
         {
             _concessionRequest = concessionRequest;
-            button1.Visible = concessionRequest.CurrentId == GlobalObjects.CaaEnvironment.IdentityUser.OperatorId;
-            if (concessionRequest.CurrentId != GlobalObjects.CaaEnvironment.IdentityUser.OperatorId)
-            {
-                foreach (var control in this.Controls.OfType<GroupBox>())
-                {
-                    var group = control;
-                    foreach (var g in group.Controls)
-                    {
-                        var c = g as Control;
-                        c.Enabled = false;
-                    }
-                }
-            }
-            
-            
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
             _animatedThreadWorker.RunWorkerAsync();
+
+
+            foreach (var control in groupBox5.Controls)
+            {
+                var group = control as GroupBox;
+                foreach (var g in group.Controls)
+                {
+                    var c = g as Control;
+                    c.Enabled = false;
+                }
+            }
         }
-
-
+        
         private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.Text += $" No: {_concessionRequest.Settings.Number}";
@@ -163,18 +158,6 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             var aircraft = comboBoxAircraft.SelectedItem as Aircraft;
             if (aircraft != null)
                 metroTextBoxAircraft.Text = $"Reg:{aircraft.RegistrationNumber} S/N:{aircraft.SerialNumber} MSG:{aircraft.MSG}";
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (_concessionRequest.ToId > 0)
-            {
-                _concessionRequest.CurrentId = _concessionRequest.ToId;
-                _concessionRequest.Status = ConcessionRequestStatus.CAA;
-                GlobalObjects.CaaEnvironment.NewKeeper.Save(_concessionRequest);
-                DialogResult = DialogResult.OK;
-            }
-            else MessageBox.Show("Please select CAA!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
         }
     }
 }
