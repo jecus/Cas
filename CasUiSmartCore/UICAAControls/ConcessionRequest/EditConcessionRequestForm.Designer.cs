@@ -48,8 +48,8 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.metroTextBoxFrom = new MetroFramework.Controls.MetroTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.metroTextBox3 = new MetroFramework.Controls.MetroTextBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.metroTextBoxAircraft = new MetroFramework.Controls.MetroTextBox();
+            this.comboBoxAircraft = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.metroTextBoxReason = new MetroFramework.Controls.MetroTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -366,8 +366,8 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.metroTextBox3);
-            this.groupBox2.Controls.Add(this.comboBox2);
+            this.groupBox2.Controls.Add(this.metroTextBoxAircraft);
+            this.groupBox2.Controls.Add(this.comboBoxAircraft);
             this.groupBox2.Controls.Add(metroLabel1);
             this.groupBox2.Location = new System.Drawing.Point(4, 173);
             this.groupBox2.Name = "groupBox2";
@@ -375,48 +375,48 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.groupBox2.TabIndex = 374;
             this.groupBox2.TabStop = false;
             // 
-            // metroTextBox3
+            // metroTextBoxAircraft
             // 
             // 
             // 
             // 
-            this.metroTextBox3.CustomButton.Image = null;
-            this.metroTextBox3.CustomButton.Location = new System.Drawing.Point(320, 2);
-            this.metroTextBox3.CustomButton.Name = "";
-            this.metroTextBox3.CustomButton.Size = new System.Drawing.Size(15, 15);
-            this.metroTextBox3.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTextBox3.CustomButton.TabIndex = 1;
-            this.metroTextBox3.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTextBox3.CustomButton.UseSelectable = true;
-            this.metroTextBox3.CustomButton.Visible = false;
-            this.metroTextBox3.Enabled = false;
-            this.metroTextBox3.ForeColor = System.Drawing.Color.DimGray;
-            this.metroTextBox3.Lines = new string[0];
-            this.metroTextBox3.Location = new System.Drawing.Point(344, 19);
-            this.metroTextBox3.MaxLength = 32767;
-            this.metroTextBox3.Name = "metroTextBox3";
-            this.metroTextBox3.PasswordChar = '\0';
-            this.metroTextBox3.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.metroTextBox3.SelectedText = "";
-            this.metroTextBox3.SelectionLength = 0;
-            this.metroTextBox3.SelectionStart = 0;
-            this.metroTextBox3.ShortcutsEnabled = true;
-            this.metroTextBox3.Size = new System.Drawing.Size(338, 20);
-            this.metroTextBox3.TabIndex = 373;
-            this.metroTextBox3.UseSelectable = true;
-            this.metroTextBox3.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.metroTextBox3.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.metroTextBoxAircraft.CustomButton.Image = null;
+            this.metroTextBoxAircraft.CustomButton.Location = new System.Drawing.Point(320, 2);
+            this.metroTextBoxAircraft.CustomButton.Name = "";
+            this.metroTextBoxAircraft.CustomButton.Size = new System.Drawing.Size(15, 15);
+            this.metroTextBoxAircraft.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxAircraft.CustomButton.TabIndex = 1;
+            this.metroTextBoxAircraft.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxAircraft.CustomButton.UseSelectable = true;
+            this.metroTextBoxAircraft.CustomButton.Visible = false;
+            this.metroTextBoxAircraft.Enabled = false;
+            this.metroTextBoxAircraft.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxAircraft.Lines = new string[0];
+            this.metroTextBoxAircraft.Location = new System.Drawing.Point(344, 19);
+            this.metroTextBoxAircraft.MaxLength = 32767;
+            this.metroTextBoxAircraft.Name = "metroTextBoxAircraft";
+            this.metroTextBoxAircraft.PasswordChar = '\0';
+            this.metroTextBoxAircraft.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxAircraft.SelectedText = "";
+            this.metroTextBoxAircraft.SelectionLength = 0;
+            this.metroTextBoxAircraft.SelectionStart = 0;
+            this.metroTextBoxAircraft.ShortcutsEnabled = true;
+            this.metroTextBoxAircraft.Size = new System.Drawing.Size(338, 20);
+            this.metroTextBoxAircraft.TabIndex = 373;
+            this.metroTextBoxAircraft.UseSelectable = true;
+            this.metroTextBoxAircraft.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxAircraft.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // comboBox2
+            // comboBoxAircraft
             // 
-            this.comboBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.comboBox2.ForeColor = System.Drawing.Color.DimGray;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(87, 19);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(250, 22);
-            this.comboBox2.TabIndex = 373;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.comboBoxAircraft.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxAircraft.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxAircraft.FormattingEnabled = true;
+            this.comboBoxAircraft.Location = new System.Drawing.Point(87, 19);
+            this.comboBoxAircraft.Name = "comboBoxAircraft";
+            this.comboBoxAircraft.Size = new System.Drawing.Size(250, 22);
+            this.comboBoxAircraft.TabIndex = 373;
+            this.comboBoxAircraft.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // groupBox3
             // 
@@ -562,9 +562,9 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private MetroFramework.Controls.MetroTextBox metroTextBox3;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxAircraft;
         private MetroFramework.Controls.MetroTextBox metroTextBoxReason;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBoxAircraft;
         private System.Windows.Forms.GroupBox groupBox3;
 
         private MetroFramework.Controls.MetroTextBox metroTextBoxToTel;

@@ -6,14 +6,15 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
-using CAS.UI.UICAAControls.Audit;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using SmartCore.CAA.Audit;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
 
@@ -66,8 +67,10 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             statusControl.ShowStatus = false;
             labelTitle.Visible = false;
 
-            _filter = new CommonFilterCollection(typeof(IAuditFilterParams));
+            _filter = new CommonFilterCollection(typeof(SmartCore.CAA.ConcessionRequest));
             _operatorId = operatorId;
+
+            pictureBox1.Visible = buttonAddNew.Visible = _operatorId > 0;
             
             InitToolStripMenuItems();
             InitListView();
@@ -99,10 +102,24 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>( loadChild: true));
 
-            
-			AnimatedThreadWorker.ReportProgress(40, "filter directives");
+			var ids = _initialDocumentArray.Select(i => i.From).ToList();
+			ids.AddRange(_initialDocumentArray.Select(i => i.To));
+			
+			
+			var specialists = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("ItemId", ids.Distinct()));
+			var aircraft = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAircraftDTO, Aircraft>();
 
-			AnimatedThreadWorker.ReportProgress(70, "filter directives");
+
+			foreach (var req in _initialDocumentArray)
+			{
+				req.Aircraft = aircraft.FirstOrDefault(i => i.ItemId == req.Settings.AircraftId);
+				req.From = specialists.FirstOrDefault(i => i.ItemId == req.FromId);
+				req.To = specialists.FirstOrDefault(i => i.ItemId == req.ToId);
+			}
+			
+			
+			AnimatedThreadWorker.ReportProgress(40, "filter directives");
+			
 
 			FilterItems(_initialDocumentArray, _resultDocumentArray);
 
@@ -167,9 +184,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             if (form.ShowDialog() == DialogResult.OK)
                 AnimatedThreadWorker.RunWorkerAsync();
         }
-
-
-
+        
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
@@ -251,7 +266,8 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             var form = new EditConcessionRequestForm(new SmartCore.CAA.ConcessionRequest()
             {
 	            Created = DateTime.Now,
-	            From = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId
+	            FromId = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
+	            CurrentId =  GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId
             });
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();

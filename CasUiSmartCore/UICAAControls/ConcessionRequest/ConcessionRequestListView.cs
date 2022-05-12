@@ -45,6 +45,11 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 		protected override void SetHeaders()
 		{
 			AddColumn("Number", (int)(radGridView1.Width * 0.3f));
+			AddColumn("From", (int)(radGridView1.Width * 0.3f));
+			AddColumn("To", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Aircraft", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Station", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Provider", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -64,6 +69,11 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 			subItems.AddRange(new List<CustomCell>()
             {
 	            CreateRow(item.Settings.Number, item.Settings.Number),
+	            CreateRow(item.From.ToString(), item.From),
+	            CreateRow(item.To.ToString(), item.To),
+	            CreateRow(item.Aircraft.ToString(), item.Aircraft),
+	            CreateRow(item.Settings.Station, item.Settings.Station),
+	            CreateRow(item.Settings.Provider.ToString(), item.Settings.Provider),
 	            CreateRow(corrector, corrector)
             });
 

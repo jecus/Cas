@@ -9,6 +9,7 @@ using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UICAAControls.ConcessionRequest
@@ -19,6 +20,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
         private SmartCore.CAA.ConcessionRequest _concessionRequest;
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private List<Specialist> _caa = new List<Specialist>();
+        private List<Aircraft> _aircaraft = new List<Aircraft>();
         private Specialist _from;
 
         public EditConcessionRequestForm()
@@ -44,14 +46,16 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
             _caa.Clear();
+            _aircaraft.Clear();
 
             if (_concessionRequest.ItemId > 0)
                 _concessionRequest = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(_auditId);
             else _concessionRequest.Settings.Number = $"CR.B-{GlobalObjects.CaaEnvironment.ObtainId()}";
 
             
-            _from = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO, Specialist>(_concessionRequest.From);
+            _from = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO, Specialist>(_concessionRequest.FromId);
             _caa.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("OperatorId", -1)));
+            _aircaraft.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAircraftDTO, Aircraft>());
             
         }
 
@@ -70,14 +74,20 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             comboBoxProvider.SelectedItem = _concessionRequest.Settings.Provider;
             
             
+            comboBoxAircraft.Items.Clear();
+            comboBoxAircraft.Items.AddRange(_aircaraft.ToArray());
+            comboBoxAircraft.Items.Add(Aircraft.Unknown);
+            comboBoxAircraft.SelectedItem = _aircaraft.FirstOrDefault(i => i.ItemId == _concessionRequest.Settings.AircraftId) ?? Aircraft.Unknown;
+            
+            
             comboBoxTo.Items.Clear();
             comboBoxTo.Items.AddRange(_caa.ToArray());
-            comboBoxTo.Items.Add( Specialist.Unknown);
+            comboBoxTo.Items.Add(Specialist.Unknown);
             comboBoxTo.SelectedItem = Specialist.Unknown;
-            var to = _caa.FirstOrDefault(i => i.ItemId == _concessionRequest.To);
+            var to = _caa.FirstOrDefault(i => i.ItemId == _concessionRequest.ToId);
             if (to != null)
             {
-                comboBoxTo.SelectedItem = _caa.FirstOrDefault(i => i.ItemId == _concessionRequest.To);
+                comboBoxTo.SelectedItem = _caa.FirstOrDefault(i => i.ItemId == _concessionRequest.ToId);
                 metroTextBoxToTel.Text = to.PhoneMobile;
             }
         }
@@ -85,10 +95,11 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
         private void ApplyChanges()
         {
             var to = comboBoxTo.SelectedItem as Specialist;
-            _concessionRequest.To = to.ItemId;
+            _concessionRequest.ToId = to.ItemId;
             _concessionRequest.Settings.Station = metroTextBoxStation.Text;
             _concessionRequest.Settings.Reason = metroTextBoxReason.Text;
             _concessionRequest.Settings.Provider = (Provider)comboBoxProvider.SelectedItem;
+            _concessionRequest.Settings.AircraftId = (comboBoxAircraft.SelectedItem as Aircraft).ItemId;
 
         }
 
@@ -135,7 +146,9 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            var aircraft = comboBoxAircraft.SelectedItem as Aircraft;
+            if (aircraft != null)
+                metroTextBoxAircraft.Text = $"Reg:{aircraft.RegistrationNumber} S/N:{aircraft.SerialNumber} MSG:{aircraft.MSG}";
         }
     }
 }

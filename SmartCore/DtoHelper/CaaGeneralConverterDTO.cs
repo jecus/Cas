@@ -2177,8 +2177,8 @@ namespace SmartCore.DtoHelper
 				CorrectorId = oper.CorrectorId,
 				Status = oper.Status,
 				SettingsJSON = oper.SettingsJSON,
-				From = oper.From,
-				To = oper.To,
+				FromId = oper.From,
+				ToId = oper.To,
 				Created = oper.Created,
 				
 			};
@@ -2195,8 +2195,8 @@ namespace SmartCore.DtoHelper
 				CorrectorId = oper.CorrectorId,
 				Status = oper.Status,
 				SettingsJSON = oper.SettingsJSON,
-				From = oper.From,
-				To = oper.To,
+				From = oper.FromId,
+				To = oper.ToId,
 				Created = oper.Created,
 			};
 		}

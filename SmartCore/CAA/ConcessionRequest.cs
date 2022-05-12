@@ -3,6 +3,7 @@ using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Personnel;
 
 namespace SmartCore.CAA
 {
@@ -12,15 +13,14 @@ namespace SmartCore.CAA
     {
         public DateTime Created { get; set; }
         
-        public int From { get; set; }
+        public int FromId { get; set; }
         
-        public int To { get; set; }
+        public int ToId { get; set; }
         
-        public int Current { get; set; }
+        public int CurrentId { get; set; }
         
         public int Status { get; set; }
         
-
         public string SettingsJSON
         {
             get
@@ -38,14 +38,17 @@ namespace SmartCore.CAA
                 : JsonConvert.DeserializeObject<ConcessionRequestSettings>(value);
         }
         
-        
         public ConcessionRequestSettings Settings { get; set; }
-
-
+        
         public ConcessionRequest()
         {
             Settings = new ConcessionRequestSettings();
         }
+        
+        public Specialist From { get; set; }
+        public Specialist To { get; set; }
+        public Entities.General.Aircraft Aircraft { get; set; }
+        
     }
 
     [Serializable]
@@ -62,6 +65,9 @@ namespace SmartCore.CAA
         
         [JsonProperty]
         public Provider Provider { get; set; }
+        
+        [JsonProperty]
+        public int AircraftId { get; set; }
     }
 
     public enum Provider
