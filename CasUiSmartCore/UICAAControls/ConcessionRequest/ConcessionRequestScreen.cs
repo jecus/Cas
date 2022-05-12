@@ -100,7 +100,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
-			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>( loadChild: true));
+			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(new Filter("Current", GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId), loadChild: true));
 
 			var ids = _initialDocumentArray.Select(i => i.From).ToList();
 			ids.AddRange(_initialDocumentArray.Select(i => i.To));
