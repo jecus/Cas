@@ -54,6 +54,11 @@ namespace SmartCore.CAA
     [Serializable]
     public class ConcessionRequestSettings
     {
+        public ConcessionRequestSettings()
+        {
+            CAA = new ConcessionRequestCAA();
+        }
+        
         [JsonProperty]
         public string Station { get; set; }
 
@@ -71,6 +76,36 @@ namespace SmartCore.CAA
         
         [JsonProperty]
         public int OperatorId { get; set; }
+        
+        [JsonProperty]
+        public ConcessionRequestCAA CAA { get; set; }
+    }
+
+    [Serializable]
+    public class ConcessionRequestCAA
+    {
+        public ConcessionRequestCAA()
+        {
+            Created = DateTime.Now;
+        }
+        
+        [JsonProperty]
+        public Concession Concession { get; set; }
+
+        [JsonProperty]
+        public DateTime Permitted { get; set; }
+
+        [JsonProperty]
+        public string Remark { get; set; }
+
+        [JsonProperty]
+        public DateTime Created { get; set; }
+    }
+    
+    public enum Concession
+    {
+        Granted,
+        Rejected
     }
 
     public enum ConcessionRequestStatus
