@@ -35,7 +35,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             _animatedThreadWorker.RunWorkerAsync();
 
             
-            if (concessionRequest.CurrentId != GlobalObjects.CaaEnvironment.IdentityUser.OperatorId)
+            if (concessionRequest.CurrentId != GlobalObjects.CaaEnvironment.IdentityUser.ItemId)
             {
                 foreach (var control in groupBox6.Controls)
                 {

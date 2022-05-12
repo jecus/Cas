@@ -87,6 +87,7 @@ namespace SmartCore.CAA
         public ConcessionRequestCAA()
         {
             Created = DateTime.Now;
+            Permitted = DateTime.Now;
         }
         
         [JsonProperty]
