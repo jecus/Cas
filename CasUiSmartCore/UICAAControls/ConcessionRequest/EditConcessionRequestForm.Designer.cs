@@ -56,6 +56,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.dateTimePickerCreated = new System.Windows.Forms.DateTimePicker();
             this.metroTextBox6 = new MetroFramework.Controls.MetroTextBox();
             this.comboBoxProvider = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             metroLabel6 = new MetroFramework.Controls.MetroLabel();
             metroLabel4 = new MetroFramework.Controls.MetroLabel();
             metroLabel9 = new MetroFramework.Controls.MetroLabel();
@@ -188,7 +189,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(553, 632);
+            this.buttonOk.Location = new System.Drawing.Point(553, 598);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 340;
@@ -201,7 +202,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonCancel.Location = new System.Drawing.Point(634, 632);
+            this.buttonCancel.Location = new System.Drawing.Point(634, 598);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 33);
             this.buttonCancel.TabIndex = 339;
@@ -526,11 +527,25 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.comboBoxProvider.Size = new System.Drawing.Size(128, 22);
             this.comboBoxProvider.TabIndex = 375;
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.button1.Location = new System.Drawing.Point(395, 598);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(152, 33);
+            this.button1.TabIndex = 376;
+            this.button1.Text = "Send To";
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // EditConcessionRequestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(716, 677);
+            this.ClientSize = new System.Drawing.Size(716, 643);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -552,6 +567,8 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button button1;
 
         private MetroFramework.Controls.MetroTextBox metroTextBoxFrom;
 

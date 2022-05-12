@@ -149,5 +149,16 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             if (aircraft != null)
                 metroTextBoxAircraft.Text = $"Reg:{aircraft.RegistrationNumber} S/N:{aircraft.SerialNumber} MSG:{aircraft.MSG}";
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (_concessionRequest.ToId > 0)
+            {
+                _concessionRequest.CurrentId = _concessionRequest.ToId;
+                GlobalObjects.CaaEnvironment.NewKeeper.Save(_concessionRequest);
+                DialogResult = DialogResult.OK;
+            }
+            else MessageBox.Show("Please select CAA!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+        }
     }
 }
