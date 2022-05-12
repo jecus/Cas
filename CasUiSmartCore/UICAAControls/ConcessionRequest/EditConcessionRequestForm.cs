@@ -30,7 +30,6 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
         public EditConcessionRequestForm(SmartCore.CAA.ConcessionRequest  concessionRequest ) : this()
         {
             _concessionRequest = concessionRequest;
-            button1.Visible = concessionRequest.CurrentId == GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
             if (concessionRequest.CurrentId != GlobalObjects.CaaEnvironment.IdentityUser.ItemId)
             {
                 foreach (var control in this.Controls.OfType<GroupBox>())
@@ -167,6 +166,9 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if(_concessionRequest.ItemId <= 0)
+                ApplyChanges();
+            
             if (_concessionRequest.ToId > 0)
             {
                 _concessionRequest.CurrentId = _concessionRequest.ToId;
