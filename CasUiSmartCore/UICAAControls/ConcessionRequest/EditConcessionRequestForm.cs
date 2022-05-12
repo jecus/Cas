@@ -65,7 +65,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
             if (_concessionRequest.ItemId > 0)
                 _concessionRequest = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(_concessionRequest.ItemId);
-            else _concessionRequest.Settings.Number = $"CR.B-{GlobalObjects.CaaEnvironment.ObtainId()}";
+            else _concessionRequest.Settings.Number = $"CR-{GlobalObjects.CaaEnvironment.ObtainId()}";
 
             
             _from = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO, Specialist>(_concessionRequest.FromId);
