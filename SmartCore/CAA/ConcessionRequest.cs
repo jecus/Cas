@@ -68,6 +68,9 @@ namespace SmartCore.CAA
         
         [JsonProperty]
         public int AircraftId { get; set; }
+        
+        [JsonProperty]
+        public int OperatorId { get; set; }
     }
 
     public enum Provider

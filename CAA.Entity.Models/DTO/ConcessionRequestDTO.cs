@@ -27,6 +27,5 @@ namespace CAA.Entity.Models.DTO
         
         [Column("SettingsJSON")]
         public string SettingsJSON { get; set; }
-        
     }
 }

@@ -10,6 +10,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
+using SmartCore.CAA;
 using SmartCore.CAA.Audit;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -267,7 +268,11 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             {
 	            Created = DateTime.Now,
 	            FromId = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
-	            CurrentId =  GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId
+	            CurrentId =  GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
+	            Settings = new ConcessionRequestSettings()
+	            {
+		            OperatorId = _operatorId.Value
+	            }
             });
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();

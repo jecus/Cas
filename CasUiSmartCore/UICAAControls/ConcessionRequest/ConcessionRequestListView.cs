@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
@@ -44,6 +45,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 		/// </summary>
 		protected override void SetHeaders()
 		{
+			AddColumn("Operator", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Number", (int)(radGridView1.Width * 0.3f));
 			AddColumn("From", (int)(radGridView1.Width * 0.3f));
 			AddColumn("To", (int)(radGridView1.Width * 0.3f));
@@ -64,10 +66,12 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 		protected override List<CustomCell> GetListViewSubItems(SmartCore.CAA.ConcessionRequest item)
 		{
 			var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
+			var op = GlobalObjects.CaaEnvironment?.Operators.FirstOrDefault(i => i.ItemId == item.Settings.OperatorId);
             var subItems = new List<CustomCell>();
             
 			subItems.AddRange(new List<CustomCell>()
             {
+	            CreateRow(op.ToString(), op),
 	            CreateRow(item.Settings.Number, item.Settings.Number),
 	            CreateRow(item.From.ToString(), item.From),
 	            CreateRow(item.To.ToString(), item.To),
