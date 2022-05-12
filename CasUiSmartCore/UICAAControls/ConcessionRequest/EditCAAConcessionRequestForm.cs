@@ -34,7 +34,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
             _animatedThreadWorker.RunWorkerAsync();
 
-            
+            button1.Enabled = concessionRequest.CurrentId == GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
             if (concessionRequest.CurrentId != GlobalObjects.CaaEnvironment.IdentityUser.ItemId)
             {
                 foreach (var control in groupBox6.Controls)
@@ -176,6 +176,15 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             var aircraft = comboBoxAircraft.SelectedItem as Aircraft;
             if (aircraft != null)
                 metroTextBoxAircraft.Text = $"Reg:{aircraft.RegistrationNumber} S/N:{aircraft.SerialNumber} MSG:{aircraft.MSG}";
+        }
+        
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _concessionRequest.CurrentId = _concessionRequest.FromId;
+            _concessionRequest.Status = ConcessionRequestStatus.Operator;
+            GlobalObjects.CaaEnvironment.NewKeeper.Save(_concessionRequest);
+            DialogResult = DialogResult.OK;
         }
     }
 }
