@@ -30,9 +30,9 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
         public EditConcessionRequestForm(SmartCore.CAA.ConcessionRequest  concessionRequest ) : this()
         {
             _concessionRequest = concessionRequest;
-            button1.Enabled = concessionRequest.CurrentId == GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
+            button1.Enabled = concessionRequest.CurrentId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId;
             
-            if (concessionRequest.CurrentId != GlobalObjects.CaaEnvironment.IdentityUser.ItemId)
+            if (concessionRequest.CurrentId != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
             {
                 foreach (var control in this.Controls.OfType<GroupBox>())
                 {

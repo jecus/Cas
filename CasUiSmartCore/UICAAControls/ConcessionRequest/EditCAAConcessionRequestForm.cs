@@ -34,8 +34,8 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
             _animatedThreadWorker.RunWorkerAsync();
 
-            button1.Enabled = concessionRequest.CurrentId == GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
-            if (concessionRequest.CurrentId != GlobalObjects.CaaEnvironment.IdentityUser.ItemId)
+            button1.Enabled = concessionRequest.CurrentId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId;
+            if (concessionRequest.CurrentId != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
             {
                 foreach (var control in groupBox6.Controls)
                 {
