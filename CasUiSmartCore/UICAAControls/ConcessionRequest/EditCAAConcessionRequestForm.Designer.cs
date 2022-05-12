@@ -724,7 +724,6 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             // dateTimePickerPermitted
             // 
             this.dateTimePickerPermitted.CalendarForeColor = System.Drawing.Color.DimGray;
-            this.dateTimePickerPermitted.Enabled = false;
             this.dateTimePickerPermitted.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.dateTimePickerPermitted.Location = new System.Drawing.Point(380, 36);
             this.dateTimePickerPermitted.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
