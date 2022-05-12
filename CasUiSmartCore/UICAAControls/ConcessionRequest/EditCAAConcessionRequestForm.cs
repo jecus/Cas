@@ -34,6 +34,15 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
             _animatedThreadWorker.RunWorkerAsync();
 
+            
+            if (concessionRequest.CurrentId != GlobalObjects.CaaEnvironment.IdentityUser.OperatorId)
+            {
+                foreach (var control in groupBox6.Controls)
+                {
+                    var c = control as Control;
+                    c.Enabled = false;
+                }
+            }
 
             foreach (var control in groupBox5.Controls)
             {
