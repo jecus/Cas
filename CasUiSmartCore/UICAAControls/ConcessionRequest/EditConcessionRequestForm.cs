@@ -16,7 +16,6 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 {
     public partial class EditConcessionRequestForm : MetroForm
     {
-        private readonly int _auditId;
         private SmartCore.CAA.ConcessionRequest _concessionRequest;
         private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
         private List<Specialist> _caa = new List<Specialist>();
@@ -49,7 +48,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             _aircaraft.Clear();
 
             if (_concessionRequest.ItemId > 0)
-                _concessionRequest = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(_auditId);
+                _concessionRequest = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(_concessionRequest.ItemId);
             else _concessionRequest.Settings.Number = $"CR.B-{GlobalObjects.CaaEnvironment.ObtainId()}";
 
             

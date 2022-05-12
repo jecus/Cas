@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
@@ -58,7 +59,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         protected override void GroupingItems()
         {
-	        Grouping("Status");
+	        Grouping("Operator");
         }
 
 		#region protected override List<CustomCell> GetListViewSubItems(Specialization item)
@@ -129,6 +130,10 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
+			var form = new EditConcessionRequestForm(SelectedItem);
+			if (form.ShowDialog() == DialogResult.OK)
+				_animatedThreadWorker.RunWorkerAsync();
+			
 			e.Cancel = true;
 		}
 		#endregion

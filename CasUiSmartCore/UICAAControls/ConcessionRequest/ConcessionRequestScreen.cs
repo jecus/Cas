@@ -103,8 +103,8 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
 			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(new Filter("Current", GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId), loadChild: true));
 
-			var ids = _initialDocumentArray.Select(i => i.From).ToList();
-			ids.AddRange(_initialDocumentArray.Select(i => i.To));
+			var ids = _initialDocumentArray.Select(i => i.FromId).ToList();
+			ids.AddRange(_initialDocumentArray.Select(i => i.ToId));
 			
 			
 			var specialists = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecialistDTO, Specialist>(new Filter("ItemId", ids.Distinct()));
