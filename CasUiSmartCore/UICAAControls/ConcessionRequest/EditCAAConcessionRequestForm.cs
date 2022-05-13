@@ -33,15 +33,16 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
             _animatedThreadWorker.RunWorkerAsync();
-
-            button1.Enabled = concessionRequest.CurrentId == GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId;
-            if (concessionRequest.CurrentId != GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId)
+            
+            foreach (var control in groupBox6.Controls)
             {
-                foreach (var control in groupBox6.Controls)
-                {
-                    var c = control as Control;
-                    c.Enabled = false;
-                }
+                var c = control as Control;
+                c.Enabled = _concessionRequest.Status == ConcessionRequestStatus.CAA;
+            }
+            foreach (var control in groupBox7.Controls)
+            {
+                var c = control as Control;
+                c.Enabled = _concessionRequest.Status == ConcessionRequestStatus.Operator;
             }
 
             foreach (var control in groupBox5.Controls)
@@ -206,6 +207,8 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private void button1_Click(object sender, EventArgs e)
         {
+            ApplyChanges();
+            
             _concessionRequest.CurrentId = _concessionRequest.FromId;
             _concessionRequest.Status = ConcessionRequestStatus.Operator;
             _concessionRequest.Settings.OperatorRecords.Add(new ConcessionRequestRecord());
@@ -215,6 +218,8 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private void button2_Click(object sender, EventArgs e)
         {
+            ApplyChanges();
+        
             _concessionRequest.CurrentId = _concessionRequest.ToId;
             _concessionRequest.Status = ConcessionRequestStatus.CAA;
             _concessionRequest.Settings.CAARecords.Add(new ConcessionRequestRecord());

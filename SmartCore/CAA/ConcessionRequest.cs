@@ -88,7 +88,7 @@ namespace SmartCore.CAA
     }
     
     [Serializable]
-    public class ConcessionRequestRecord
+    public class ConcessionRequestRecord : BaseEntityObject
     {
         public ConcessionRequestRecord()
         {

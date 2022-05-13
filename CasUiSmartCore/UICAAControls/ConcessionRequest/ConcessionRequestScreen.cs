@@ -100,9 +100,12 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
-			if(_operatorId > 0)
-				_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(new Filter("From", GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId), loadChild: true));
-			else _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(new Filter("To", GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId), loadChild: true));
+			
+			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(new Filter("Current", GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId), loadChild: true));
+			
+			// if(_operatorId > 0)
+			// 	_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(new Filter("From", GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId), loadChild: true));
+			// else _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(new Filter("To", GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId), loadChild: true));
 
 			var ids = _initialDocumentArray.Select(i => i.FromId).ToList();
 			ids.AddRange(_initialDocumentArray.Select(i => i.ToId));

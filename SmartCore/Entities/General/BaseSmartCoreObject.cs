@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Newtonsoft.Json;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
@@ -20,6 +21,7 @@ namespace SmartCore.Entities.General
         /// <summary>
         /// Тип объекта - директива, деталь, чек и т.д.
         /// </summary>
+        [JsonIgnore]
         public SmartCoreType SmartCoreObjectType { get;  set; }
         #endregion
 
