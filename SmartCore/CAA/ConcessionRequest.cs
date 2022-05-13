@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CAA.Entity.Models.DTO;
 using Newtonsoft.Json;
 using SmartCore.Entities.General;
@@ -54,6 +55,13 @@ namespace SmartCore.CAA
     [Serializable]
     public class ConcessionRequestSettings
     {
+
+        public ConcessionRequestSettings()
+        {
+            CAARecords = new List<ConcessionRequestCAA>();
+            OperatorRecords = new List<ConcessionRequestOperator>();
+        }
+        
         [JsonProperty]
         public string Station { get; set; }
 
@@ -73,9 +81,16 @@ namespace SmartCore.CAA
         public int OperatorId { get; set; }
         
         [JsonProperty]
-        public ConcessionRequestCAA CAA { get; set; }
+        public List<ConcessionRequestCAA> CAARecords { get; set; }
+        public List<ConcessionRequestOperator> OperatorRecords { get; set; }
     }
 
+    [Serializable]
+    public class ConcessionRequestOperator
+    {
+        
+    }
+    
     [Serializable]
     public class ConcessionRequestCAA
     {

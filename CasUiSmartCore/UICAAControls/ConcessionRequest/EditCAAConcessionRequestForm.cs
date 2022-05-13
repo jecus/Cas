@@ -80,8 +80,14 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private void UpdateInformation()
         {
-            if (_concessionRequest.Settings.CAA == null)
-                _concessionRequest.Settings.CAA = new ConcessionRequestCAA();
+            ConcessionRequestCAA _caaRecord;
+            if (_concessionRequest.Settings.CAARecords.Any())
+                _caaRecord = _concessionRequest.Settings.CAARecords.LastOrDefault();
+            else
+            {
+                _caaRecord = new ConcessionRequestCAA();
+                _concessionRequest.Settings.CAARecords.Add(_caaRecord);
+            }
             
             metroTextBoxFrom.Text = _from.ToString();
             dateTimePickerCreated.Value = _concessionRequest.Created;
@@ -98,11 +104,11 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             comboBoxCOncession.Items.Clear();
             foreach (object o in Enum.GetValues(typeof(Concession)).Cast<Concession>())
                 comboBoxCOncession.Items.Add(o);
-            comboBoxCOncession.SelectedItem = _concessionRequest.Settings.CAA.Concession;
+            comboBoxCOncession.SelectedItem = _caaRecord.Concession;
             
-            dateTimePickerPermitted.Value = _concessionRequest.Settings.CAA.Permitted;
-            metroTextBoxRemark.Text = _concessionRequest.Settings.CAA.Remark;
-            dateTimePickerCAACreated.Value = _concessionRequest.Settings.CAA.Created;
+            dateTimePickerPermitted.Value = _caaRecord.Permitted;
+            metroTextBoxRemark.Text = _caaRecord.Remark;
+            dateTimePickerCAACreated.Value = _caaRecord.Created;
             
             comboBoxAircraft.Items.Clear();
             comboBoxAircraft.Items.AddRange(_aircaraft.ToArray());
@@ -124,10 +130,10 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private void ApplyChanges()
         {
-            _concessionRequest.Settings.CAA.Concession = (Concession)comboBoxCOncession.SelectedItem;
-            _concessionRequest.Settings.CAA.Permitted = dateTimePickerPermitted.Value;
-            _concessionRequest.Settings.CAA.Remark = metroTextBoxRemark.Text;
-
+            var _caaRecord = _concessionRequest.Settings.CAARecords.LastOrDefault();
+            _caaRecord.Concession = (Concession)comboBoxCOncession.SelectedItem;
+            _caaRecord.Permitted = dateTimePickerPermitted.Value;
+            _caaRecord.Remark = metroTextBoxRemark.Text;
         }
 
         private void Save()
