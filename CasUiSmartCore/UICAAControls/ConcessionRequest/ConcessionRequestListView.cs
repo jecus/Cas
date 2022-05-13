@@ -134,9 +134,18 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 		{
 			if (GlobalObjects.CaaEnvironment.IdentityUser.OperatorId > 0)
 			{
-				var form = new EditConcessionRequestForm(SelectedItem);
-				if (form.ShowDialog() == DialogResult.OK)
-					_animatedThreadWorker.RunWorkerAsync();
+				if (SelectedItem.Settings.OperatorRecords.Any())
+				{
+					var form = new EditCAAConcessionRequestForm(SelectedItem);
+					if (form.ShowDialog() == DialogResult.OK)
+						_animatedThreadWorker.RunWorkerAsync();
+				}
+				else
+				{
+					var form = new EditConcessionRequestForm(SelectedItem);
+					if (form.ShowDialog() == DialogResult.OK)
+						_animatedThreadWorker.RunWorkerAsync();
+				}
 			}
 			else
 			{
