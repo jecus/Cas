@@ -80,15 +80,6 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private void UpdateInformation()
         {
-            ConcessionRequestCAA _caaRecord;
-            if (_concessionRequest.Settings.CAARecords.Any())
-                _caaRecord = _concessionRequest.Settings.CAARecords.LastOrDefault();
-            else
-            {
-                _caaRecord = new ConcessionRequestCAA();
-                _concessionRequest.Settings.CAARecords.Add(_caaRecord);
-            }
-            
             metroTextBoxFrom.Text = _from.ToString();
             dateTimePickerCreated.Value = _concessionRequest.Created;
             metroTextBoxFromTel.Text = _from.PhoneMobile;
@@ -99,16 +90,34 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             foreach (object o in Enum.GetValues(typeof(Provider)).Cast<Provider>())
                 comboBoxProvider.Items.Add(o);
             comboBoxProvider.SelectedItem = _concessionRequest.Settings.Provider;
+
+
+            if (_concessionRequest.Status == ConcessionRequestStatus.CAA)
+            {
+                var _caaRecord = _concessionRequest.Settings.CAARecords.LastOrDefault();
+                comboBoxCOncession.Items.Clear();
+                foreach (object o in Enum.GetValues(typeof(Concession)).Cast<Concession>())
+                    comboBoxCOncession.Items.Add(o);
+                comboBoxCOncession.SelectedItem = _caaRecord.Concession;
             
+                dateTimePickerPermitted.Value = _caaRecord.Permitted;
+                metroTextBoxRemark.Text = _caaRecord.Remark;
+                dateTimePickerCAACreated.Value = _caaRecord.Created;
+            }
+            else if (_concessionRequest.Status == ConcessionRequestStatus.Operator)
+            {
+                var _opRecord = _concessionRequest.Settings.OperatorRecords.LastOrDefault();
+                comboBoxConcessionOperator.Items.Clear();
+                foreach (object o in Enum.GetValues(typeof(Concession)).Cast<Concession>())
+                    comboBoxConcessionOperator.Items.Add(o);
+                comboBoxConcessionOperator.SelectedItem = _opRecord.Concession;
             
-            comboBoxCOncession.Items.Clear();
-            foreach (object o in Enum.GetValues(typeof(Concession)).Cast<Concession>())
-                comboBoxCOncession.Items.Add(o);
-            comboBoxCOncession.SelectedItem = _caaRecord.Concession;
+                dateTimePickerPermittedOperator.Value = _opRecord.Permitted;
+                metroTextBoxRemarkOperator.Text = _opRecord.Remark;
+                dateTimePickerOperatorCreated.Value = _opRecord.Created;
+            }
             
-            dateTimePickerPermitted.Value = _caaRecord.Permitted;
-            metroTextBoxRemark.Text = _caaRecord.Remark;
-            dateTimePickerCAACreated.Value = _caaRecord.Created;
+           
             
             comboBoxAircraft.Items.Clear();
             comboBoxAircraft.Items.AddRange(_aircaraft.ToArray());
@@ -130,10 +139,20 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private void ApplyChanges()
         {
-            var _caaRecord = _concessionRequest.Settings.CAARecords.LastOrDefault();
-            _caaRecord.Concession = (Concession)comboBoxCOncession.SelectedItem;
-            _caaRecord.Permitted = dateTimePickerPermitted.Value;
-            _caaRecord.Remark = metroTextBoxRemark.Text;
+            if (_concessionRequest.Status == ConcessionRequestStatus.CAA)
+            {
+                var _caaRecord = _concessionRequest.Settings.CAARecords.LastOrDefault();
+                _caaRecord.Concession = (Concession)comboBoxCOncession.SelectedItem;
+                _caaRecord.Permitted = dateTimePickerPermitted.Value;
+                _caaRecord.Remark = metroTextBoxRemark.Text;
+            }
+            else if (_concessionRequest.Status == ConcessionRequestStatus.Operator)
+            {
+                var _opRecord = _concessionRequest.Settings.OperatorRecords.LastOrDefault();
+                _opRecord.Concession = (Concession)comboBoxConcessionOperator.SelectedItem;
+                _opRecord.Permitted = dateTimePickerPermittedOperator.Value;
+                _opRecord.Remark = metroTextBoxRemarkOperator.Text;
+            }
         }
 
         private void Save()
@@ -189,6 +208,16 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
         {
             _concessionRequest.CurrentId = _concessionRequest.FromId;
             _concessionRequest.Status = ConcessionRequestStatus.Operator;
+            _concessionRequest.Settings.OperatorRecords.Add(new ConcessionRequestRecord());
+            GlobalObjects.CaaEnvironment.NewKeeper.Save(_concessionRequest);
+            DialogResult = DialogResult.OK;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            _concessionRequest.CurrentId = _concessionRequest.ToId;
+            _concessionRequest.Status = ConcessionRequestStatus.CAA;
+            _concessionRequest.Settings.CAARecords.Add(new ConcessionRequestRecord());
             GlobalObjects.CaaEnvironment.NewKeeper.Save(_concessionRequest);
             DialogResult = DialogResult.OK;
         }

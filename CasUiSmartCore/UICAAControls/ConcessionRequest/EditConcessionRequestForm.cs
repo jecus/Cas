@@ -175,6 +175,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             {
                 _concessionRequest.CurrentId = _concessionRequest.ToId;
                 _concessionRequest.Status = ConcessionRequestStatus.CAA;
+                _concessionRequest.Settings.CAARecords.Add(new ConcessionRequestRecord());
                 GlobalObjects.CaaEnvironment.NewKeeper.Save(_concessionRequest);
                 DialogResult = DialogResult.OK;
             }

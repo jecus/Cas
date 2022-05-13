@@ -58,8 +58,8 @@ namespace SmartCore.CAA
 
         public ConcessionRequestSettings()
         {
-            CAARecords = new List<ConcessionRequestCAA>();
-            OperatorRecords = new List<ConcessionRequestOperator>();
+            CAARecords = new List<ConcessionRequestRecord>();
+            OperatorRecords = new List<ConcessionRequestRecord>();
         }
         
         [JsonProperty]
@@ -81,25 +81,21 @@ namespace SmartCore.CAA
         public int OperatorId { get; set; }
         
         [JsonProperty]
-        public List<ConcessionRequestCAA> CAARecords { get; set; }
-        public List<ConcessionRequestOperator> OperatorRecords { get; set; }
-    }
-
-    [Serializable]
-    public class ConcessionRequestOperator
-    {
+        public List<ConcessionRequestRecord> CAARecords { get; set; }
         
+        [JsonProperty]
+        public List<ConcessionRequestRecord> OperatorRecords { get; set; }
     }
     
     [Serializable]
-    public class ConcessionRequestCAA
+    public class ConcessionRequestRecord
     {
-        public ConcessionRequestCAA()
+        public ConcessionRequestRecord()
         {
             Created = DateTime.Now;
             Permitted = DateTime.Now;
         }
-        
+
         [JsonProperty]
         public Concession Concession { get; set; }
 
