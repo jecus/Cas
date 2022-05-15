@@ -142,27 +142,34 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 		{
 			if (GlobalObjects.CaaEnvironment.IdentityUser.OperatorId > 0)
 			{
-				if (SelectedItem.Settings.OperatorRecords.Any())
+				if (SelectedItem.Status == ConcessionRequestStatus.CAA)
+				{
+					if (SelectedItem.Settings.OperatorRecords.Any())
+					{
+						var form = new EditCAAConcessionRequestForm(SelectedItem);
+						if (form.ShowDialog() == DialogResult.OK)
+							_animatedThreadWorker.RunWorkerAsync();
+					}
+					else
+					{
+						var form = new EditConcessionRequestForm(SelectedItem);
+						if (form.ShowDialog() == DialogResult.OK)
+							_animatedThreadWorker.RunWorkerAsync();
+					}
+				}
+			}
+			else
+			{
+				if (SelectedItem.Status == ConcessionRequestStatus.CAA)
 				{
 					var form = new EditCAAConcessionRequestForm(SelectedItem);
 					if (form.ShowDialog() == DialogResult.OK)
 						_animatedThreadWorker.RunWorkerAsync();
 				}
-				else
-				{
-					var form = new EditConcessionRequestForm(SelectedItem);
-					if (form.ShowDialog() == DialogResult.OK)
-						_animatedThreadWorker.RunWorkerAsync();
-				}
-			}
-			else
-			{
-				var form = new EditCAAConcessionRequestForm(SelectedItem);
-				if (form.ShowDialog() == DialogResult.OK)
-					_animatedThreadWorker.RunWorkerAsync();
+				
+				
 				
 			}
-			
 			e.Cancel = true;
 		}
 		#endregion
