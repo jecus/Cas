@@ -12,7 +12,7 @@ namespace SmartCore.Entities.General
 {
 
     /// <summary>
-    /// Класс описывает оператора 
+    /// РљР»Р°СЃСЃ РѕРїРёСЃС‹РІР°РµС‚ РѕРїРµСЂР°С‚РѕСЂР° 
     /// </summary>
     [Serializable]
     [Dto(typeof(OperatorDTO))]
@@ -21,14 +21,14 @@ namespace SmartCore.Entities.General
 	{
 
 		/*
-		*  Свойства
+		*  РЎРІРѕР№СЃС‚РІР°
 		*/
 
 		#region public String Name { get; set; }
 
         private string _name;
 		/// <summary>
-		/// Название эксплуатанта
+		/// РќР°Р·РІР°РЅРёРµ СЌРєСЃРїР»СѓР°С‚Р°РЅС‚Р°
 		/// </summary>
 		public String Name 
         { 
@@ -45,7 +45,7 @@ namespace SmartCore.Entities.General
 
         private Byte[] _logoType;
         /// <summary>
-        /// Логотип эксплуатанта
+        /// Р›РѕРіРѕС‚РёРї СЌРєСЃРїР»СѓР°С‚Р°РЅС‚Р°
         /// </summary>
         public Byte[] LogoType
         {
@@ -62,7 +62,7 @@ namespace SmartCore.Entities.General
 
         private string _icaoCode;
         /// <summary>
-        /// ICAO код оператора
+        /// ICAO РєРѕРґ РѕРїРµСЂР°С‚РѕСЂР°
         /// </summary>
         public String ICAOCode
         {
@@ -80,7 +80,7 @@ namespace SmartCore.Entities.General
         private string _address;
 
         /// <summary>
-        /// Адрес оператора
+        /// РђРґСЂРµСЃ РѕРїРµСЂР°С‚РѕСЂР°
         /// </summary>
         public String Address
         {
@@ -97,7 +97,7 @@ namespace SmartCore.Entities.General
 
         private string _phone;
         /// <summary>
-        /// Телефон оператора
+        /// РўРµР»РµС„РѕРЅ РѕРїРµСЂР°С‚РѕСЂР°
         /// </summary>
         public String Phone
         {
@@ -114,7 +114,7 @@ namespace SmartCore.Entities.General
 
         private string _fax;
         /// <summary>
-        /// Факс оператора
+        /// Р¤Р°РєСЃ РѕРїРµСЂР°С‚РѕСЂР°
         /// </summary>
         public String Fax
         {
@@ -148,7 +148,7 @@ namespace SmartCore.Entities.General
 
         private Byte[] _logotypeReportLarge;
         /// <summary>
-        /// Логопит оператора (широкий) для отчета
+        /// Р›РѕРіРѕРїРёС‚ РѕРїРµСЂР°С‚РѕСЂР° (С€РёСЂРѕРєРёР№) РґР»СЏ РѕС‚С‡РµС‚Р°
         /// </summary>
         public Byte[] LogotypeReportLarge
         {
@@ -165,7 +165,7 @@ namespace SmartCore.Entities.General
 
         private Byte[] _logotypeReportVeryLarge;
         /// <summary>
-        /// Логопит оператора (очень широкий) для отчета
+        /// Р›РѕРіРѕРїРёС‚ РѕРїРµСЂР°С‚РѕСЂР° (РѕС‡РµРЅСЊ С€РёСЂРѕРєРёР№) РґР»СЏ РѕС‚С‡РµС‚Р°
         /// </summary>
         public Byte[] LogotypeReportVeryLarge
         {
@@ -282,12 +282,12 @@ namespace SmartCore.Entities.General
 		#endregion
 		
 		/*
-		*  Методы 
+		*  РњРµС‚РѕРґС‹ 
 		*/
 		
 		#region public Operator()
         /// <summary>
-        /// Создает воздушное судно без дополнительной информации
+        /// РЎРѕР·РґР°РµС‚ РІРѕР·РґСѓС€РЅРѕРµ СЃСѓРґРЅРѕ Р±РµР· РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё
         /// </summary>
         public Operator()
         {
@@ -298,7 +298,7 @@ namespace SmartCore.Entities.General
       
         #region public override string ToString()
         /// <summary>
-        /// Перегружаем для отладки
+        /// РџРµСЂРµРіСЂСѓР¶Р°РµРј РґР»СЏ РѕС‚Р»Р°РґРєРё
         /// </summary>
         /// <returns></returns>
         public override string ToString()

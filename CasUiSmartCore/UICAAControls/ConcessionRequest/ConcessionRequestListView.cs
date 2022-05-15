@@ -6,6 +6,9 @@ using CAS.UI.Interfaces;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
+using SmartCore.CAA;
+using Telerik.Data.Expressions;
+using Operator = SmartCore.Entities.General.Operator;
 
 namespace CAS.UI.UICAAControls.ConcessionRequest
 {
@@ -68,7 +71,12 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 		protected override List<CustomCell> GetListViewSubItems(SmartCore.CAA.ConcessionRequest item)
 		{
 			var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
-			var op = GlobalObjects.CaaEnvironment?.Operators.FirstOrDefault(i => i.ItemId == item.Settings.OperatorId);
+
+			AllOperators op = null;
+			if (item.Status == ConcessionRequestStatus.CAA)
+				op = GlobalObjects.CaaEnvironment?.AllOperators.FirstOrDefault(i => i.ItemId == item.Settings.OperatorId);
+			else op = AllOperators.Unknown;
+			
             var subItems = new List<CustomCell>();
             
 			subItems.AddRange(new List<CustomCell>()
