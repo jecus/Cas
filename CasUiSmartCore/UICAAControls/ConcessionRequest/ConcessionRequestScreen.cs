@@ -36,8 +36,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 		private CommonFilterCollection _filter;
 
 		private ConcessionRequestListView _directivesViewer;
-
-		private RadMenuItem _toolStripMenuItemOpen;
+		
 		private RadMenuItem _toolStripMenuItemEdit;
 		
 
@@ -101,11 +100,10 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
 			
-			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(new Filter("Current", GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId), loadChild: true));
 			
-			// if(_operatorId > 0)
-			// 	_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(new Filter("From", GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId), loadChild: true));
-			// else _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(new Filter("To", GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId), loadChild: true));
+			if(_operatorId > 0)
+			    _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(new Filter("From", GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId), loadChild: true));
+			else _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<ConcessionRequestDTO, SmartCore.CAA.ConcessionRequest>(new Filter("To", GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId), loadChild: true));
 
 			var ids = _initialDocumentArray.Select(i => i.FromId).ToList();
 			ids.AddRange(_initialDocumentArray.Select(i => i.ToId));
@@ -136,15 +134,8 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
 		private void InitToolStripMenuItems()
 		{
-			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuItemEdit = new RadMenuItem();
-
-            // 
-            // toolStripMenuItemView
-            // 
-            _toolStripMenuItemOpen.Text = "Open";
-            _toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
-            // 
+			// 
             // toolStripMenuItemView
             // 
             _toolStripMenuItemEdit.Text = "Edit";
@@ -174,14 +165,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
 		#endregion
 
-		#region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 
-		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
-		{
-			
-		}
-
-		#endregion
 
         private void ToolStripMenuItemEditClick(object sender, EventArgs e)
         {
@@ -212,7 +196,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
-			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
+			_directivesViewer.AddMenuItems(
                 _toolStripMenuItemEdit);
 
 			_directivesViewer.MenuOpeningAction = () =>
@@ -221,7 +205,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 					return;
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
-					_toolStripMenuItemOpen.Enabled = true;
+					_toolStripMenuItemEdit.Enabled = true;
 				}
 			};
 			
