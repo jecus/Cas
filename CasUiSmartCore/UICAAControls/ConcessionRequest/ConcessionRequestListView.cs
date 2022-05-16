@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA;
+using SmartCore.CAA.CAAEducation;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.ConcessionRequest
 {
@@ -116,6 +120,26 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 		}
 
 		#endregion
+		
+		
+		protected override void SetItemColor(GridViewRowInfo listViewItem, SmartCore.CAA.ConcessionRequest item)
+		{
+			var itemBackColor = UsefulMethods.GetColor(item);
+			var itemForeColor = Color.Gray;
+
+			foreach (GridViewCellInfo cell in listViewItem.Cells)
+			{
+				cell.Style.DrawFill = true;
+				cell.Style.CustomizeFill = true;
+				cell.Style.BackColor = UsefulMethods.GetColor(item);
+
+				var listViewForeColor = cell.Style.ForeColor;
+
+				if (listViewForeColor != Color.MediumVioletRed)
+					cell.Style.ForeColor = itemForeColor;
+				cell.Style.BackColor = itemBackColor;
+			}
+		}
 
         public override void ButtonDeleteClick(object sender, EventArgs e)
         {
