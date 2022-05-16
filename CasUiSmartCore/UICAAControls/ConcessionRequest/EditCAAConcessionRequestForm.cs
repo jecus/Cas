@@ -91,6 +91,12 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             foreach (object o in Enum.GetValues(typeof(Provider)).Cast<Provider>())
                 comboBoxProvider.Items.Add(o);
             comboBoxProvider.SelectedItem = _concessionRequest.Settings.Provider;
+            
+            
+            comboBoxStatus.Items.Clear();
+            foreach (object o in Enum.GetValues(typeof(ConcessionRequestStatus)).Cast<ConcessionRequestStatus>())
+                comboBoxStatus.Items.Add(o);
+            comboBoxStatus.SelectedItem = _concessionRequest.Status;
 
 
             if (_concessionRequest.Settings.Type == ConcessionRequestType.CAA)

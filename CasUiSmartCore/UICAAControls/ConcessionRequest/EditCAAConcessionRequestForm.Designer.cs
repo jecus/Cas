@@ -37,18 +37,16 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             MetroFramework.Controls.MetroLabel metroLabel1;
             MetroFramework.Controls.MetroLabel metroLabel5;
             MetroFramework.Controls.MetroLabel metroLabel7;
-            MetroFramework.Controls.MetroLabel metroLabel10;
             MetroFramework.Controls.MetroLabel metroLabel11;
             MetroFramework.Controls.MetroLabel metroLabel2;
             MetroFramework.Controls.MetroLabel metroLabel12;
             MetroFramework.Controls.MetroLabel metroLabel13;
             MetroFramework.Controls.MetroLabel metroLabel14;
-            MetroFramework.Controls.MetroLabel metroLabel15;
             MetroFramework.Controls.MetroLabel metroLabel16;
             MetroFramework.Controls.MetroLabel metroLabel17;
-            MetroFramework.Controls.MetroLabel metroLabel18;
             MetroFramework.Controls.MetroLabel metroLabel19;
             MetroFramework.Controls.MetroLabel metroLabel20;
+            MetroFramework.Controls.MetroLabel metroLabel10;
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.comboBoxTo = new System.Windows.Forms.ComboBox();
@@ -64,23 +62,21 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.metroTextBoxReason = new MetroFramework.Controls.MetroTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.dateTimePickerCreated = new System.Windows.Forms.DateTimePicker();
-            this.metroTextBoxOpSignature = new MetroFramework.Controls.MetroTextBox();
             this.comboBoxProvider = new System.Windows.Forms.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.dateTimePickerCAACreated = new System.Windows.Forms.DateTimePicker();
             this.metroTextBoxRemark = new MetroFramework.Controls.MetroTextBox();
-            this.metroTextBoxCAACignature = new MetroFramework.Controls.MetroTextBox();
             this.dateTimePickerPermitted = new System.Windows.Forms.DateTimePicker();
             this.comboBoxCOncession = new System.Windows.Forms.ComboBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.dateTimePickerOperatorCreated = new System.Windows.Forms.DateTimePicker();
             this.metroTextBoxRemarkOperator = new MetroFramework.Controls.MetroTextBox();
-            this.metroTextBox2 = new MetroFramework.Controls.MetroTextBox();
             this.dateTimePickerPermittedOperator = new System.Windows.Forms.DateTimePicker();
             this.comboBoxConcessionOperator = new System.Windows.Forms.ComboBox();
+            this.comboBoxStatus = new System.Windows.Forms.ComboBox();
             metroLabel6 = new MetroFramework.Controls.MetroLabel();
             metroLabel4 = new MetroFramework.Controls.MetroLabel();
             metroLabel9 = new MetroFramework.Controls.MetroLabel();
@@ -89,18 +85,16 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             metroLabel1 = new MetroFramework.Controls.MetroLabel();
             metroLabel5 = new MetroFramework.Controls.MetroLabel();
             metroLabel7 = new MetroFramework.Controls.MetroLabel();
-            metroLabel10 = new MetroFramework.Controls.MetroLabel();
             metroLabel11 = new MetroFramework.Controls.MetroLabel();
             metroLabel2 = new MetroFramework.Controls.MetroLabel();
             metroLabel12 = new MetroFramework.Controls.MetroLabel();
             metroLabel13 = new MetroFramework.Controls.MetroLabel();
             metroLabel14 = new MetroFramework.Controls.MetroLabel();
-            metroLabel15 = new MetroFramework.Controls.MetroLabel();
             metroLabel16 = new MetroFramework.Controls.MetroLabel();
             metroLabel17 = new MetroFramework.Controls.MetroLabel();
-            metroLabel18 = new MetroFramework.Controls.MetroLabel();
             metroLabel19 = new MetroFramework.Controls.MetroLabel();
             metroLabel20 = new MetroFramework.Controls.MetroLabel();
+            metroLabel10 = new MetroFramework.Controls.MetroLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -191,23 +185,12 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             // 
             metroLabel7.AutoSize = true;
             metroLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel7.Location = new System.Drawing.Point(20, 20);
+            metroLabel7.Location = new System.Drawing.Point(247, 24);
             metroLabel7.Name = "metroLabel7";
             metroLabel7.Size = new System.Drawing.Size(54, 19);
             metroLabel7.TabIndex = 374;
             metroLabel7.Text = "Priority:";
             metroLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // metroLabel10
-            // 
-            metroLabel10.AutoSize = true;
-            metroLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel10.Location = new System.Drawing.Point(232, 20);
-            metroLabel10.Name = "metroLabel10";
-            metroLabel10.Size = new System.Drawing.Size(67, 19);
-            metroLabel10.TabIndex = 376;
-            metroLabel10.Text = "Signature:";
-            metroLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // metroLabel11
             // 
@@ -264,17 +247,6 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             metroLabel14.Text = "Date:";
             metroLabel14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // metroLabel15
-            // 
-            metroLabel15.AutoSize = true;
-            metroLabel15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel15.Location = new System.Drawing.Point(92, 175);
-            metroLabel15.Name = "metroLabel15";
-            metroLabel15.Size = new System.Drawing.Size(67, 19);
-            metroLabel15.TabIndex = 379;
-            metroLabel15.Text = "Signature:";
-            metroLabel15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // metroLabel16
             // 
             metroLabel16.AutoSize = true;
@@ -296,17 +268,6 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             metroLabel17.TabIndex = 376;
             metroLabel17.Text = "Remark:";
             metroLabel17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // metroLabel18
-            // 
-            metroLabel18.AutoSize = true;
-            metroLabel18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel18.Location = new System.Drawing.Point(92, 175);
-            metroLabel18.Name = "metroLabel18";
-            metroLabel18.Size = new System.Drawing.Size(67, 19);
-            metroLabel18.TabIndex = 379;
-            metroLabel18.Text = "Signature:";
-            metroLabel18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // metroLabel19
             // 
@@ -610,10 +571,10 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.comboBoxStatus);
+            this.groupBox4.Controls.Add(metroLabel10);
             this.groupBox4.Controls.Add(this.dateTimePickerCreated);
             this.groupBox4.Controls.Add(metroLabel11);
-            this.groupBox4.Controls.Add(this.metroTextBoxOpSignature);
-            this.groupBox4.Controls.Add(metroLabel10);
             this.groupBox4.Controls.Add(this.comboBoxProvider);
             this.groupBox4.Controls.Add(metroLabel7);
             this.groupBox4.Location = new System.Drawing.Point(9, 484);
@@ -633,43 +594,12 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.dateTimePickerCreated.Size = new System.Drawing.Size(161, 22);
             this.dateTimePickerCreated.TabIndex = 376;
             // 
-            // metroTextBoxOpSignature
-            // 
-            // 
-            // 
-            // 
-            this.metroTextBoxOpSignature.CustomButton.Image = null;
-            this.metroTextBoxOpSignature.CustomButton.Location = new System.Drawing.Point(110, 2);
-            this.metroTextBoxOpSignature.CustomButton.Name = "";
-            this.metroTextBoxOpSignature.CustomButton.Size = new System.Drawing.Size(15, 15);
-            this.metroTextBoxOpSignature.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTextBoxOpSignature.CustomButton.TabIndex = 1;
-            this.metroTextBoxOpSignature.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTextBoxOpSignature.CustomButton.UseSelectable = true;
-            this.metroTextBoxOpSignature.CustomButton.Visible = false;
-            this.metroTextBoxOpSignature.ForeColor = System.Drawing.Color.DimGray;
-            this.metroTextBoxOpSignature.Lines = new string[0];
-            this.metroTextBoxOpSignature.Location = new System.Drawing.Point(305, 20);
-            this.metroTextBoxOpSignature.MaxLength = 32767;
-            this.metroTextBoxOpSignature.Name = "metroTextBoxOpSignature";
-            this.metroTextBoxOpSignature.PasswordChar = '\0';
-            this.metroTextBoxOpSignature.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.metroTextBoxOpSignature.SelectedText = "";
-            this.metroTextBoxOpSignature.SelectionLength = 0;
-            this.metroTextBoxOpSignature.SelectionStart = 0;
-            this.metroTextBoxOpSignature.ShortcutsEnabled = true;
-            this.metroTextBoxOpSignature.Size = new System.Drawing.Size(128, 20);
-            this.metroTextBoxOpSignature.TabIndex = 373;
-            this.metroTextBoxOpSignature.UseSelectable = true;
-            this.metroTextBoxOpSignature.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.metroTextBoxOpSignature.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
             // comboBoxProvider
             // 
             this.comboBoxProvider.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.comboBoxProvider.ForeColor = System.Drawing.Color.DimGray;
             this.comboBoxProvider.FormattingEnabled = true;
-            this.comboBoxProvider.Location = new System.Drawing.Point(87, 17);
+            this.comboBoxProvider.Location = new System.Drawing.Point(314, 21);
             this.comboBoxProvider.Name = "comboBoxProvider";
             this.comboBoxProvider.Size = new System.Drawing.Size(128, 22);
             this.comboBoxProvider.TabIndex = 375;
@@ -692,9 +622,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.groupBox6.Controls.Add(this.dateTimePickerCAACreated);
             this.groupBox6.Controls.Add(metroLabel14);
             this.groupBox6.Controls.Add(this.metroTextBoxRemark);
-            this.groupBox6.Controls.Add(this.metroTextBoxCAACignature);
             this.groupBox6.Controls.Add(metroLabel13);
-            this.groupBox6.Controls.Add(metroLabel15);
             this.groupBox6.Controls.Add(this.dateTimePickerPermitted);
             this.groupBox6.Controls.Add(this.comboBoxCOncession);
             this.groupBox6.Controls.Add(metroLabel12);
@@ -762,37 +690,6 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.metroTextBoxRemark.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxRemark.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // metroTextBoxCAACignature
-            // 
-            // 
-            // 
-            // 
-            this.metroTextBoxCAACignature.CustomButton.Image = null;
-            this.metroTextBoxCAACignature.CustomButton.Location = new System.Drawing.Point(125, 2);
-            this.metroTextBoxCAACignature.CustomButton.Name = "";
-            this.metroTextBoxCAACignature.CustomButton.Size = new System.Drawing.Size(15, 15);
-            this.metroTextBoxCAACignature.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTextBoxCAACignature.CustomButton.TabIndex = 1;
-            this.metroTextBoxCAACignature.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTextBoxCAACignature.CustomButton.UseSelectable = true;
-            this.metroTextBoxCAACignature.CustomButton.Visible = false;
-            this.metroTextBoxCAACignature.ForeColor = System.Drawing.Color.DimGray;
-            this.metroTextBoxCAACignature.Lines = new string[0];
-            this.metroTextBoxCAACignature.Location = new System.Drawing.Point(165, 175);
-            this.metroTextBoxCAACignature.MaxLength = 32767;
-            this.metroTextBoxCAACignature.Name = "metroTextBoxCAACignature";
-            this.metroTextBoxCAACignature.PasswordChar = '\0';
-            this.metroTextBoxCAACignature.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.metroTextBoxCAACignature.SelectedText = "";
-            this.metroTextBoxCAACignature.SelectionLength = 0;
-            this.metroTextBoxCAACignature.SelectionStart = 0;
-            this.metroTextBoxCAACignature.ShortcutsEnabled = true;
-            this.metroTextBoxCAACignature.Size = new System.Drawing.Size(143, 20);
-            this.metroTextBoxCAACignature.TabIndex = 378;
-            this.metroTextBoxCAACignature.UseSelectable = true;
-            this.metroTextBoxCAACignature.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.metroTextBoxCAACignature.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
             // dateTimePickerPermitted
             // 
             this.dateTimePickerPermitted.CalendarForeColor = System.Drawing.Color.DimGray;
@@ -819,9 +716,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.groupBox7.Controls.Add(this.dateTimePickerOperatorCreated);
             this.groupBox7.Controls.Add(metroLabel16);
             this.groupBox7.Controls.Add(this.metroTextBoxRemarkOperator);
-            this.groupBox7.Controls.Add(this.metroTextBox2);
             this.groupBox7.Controls.Add(metroLabel17);
-            this.groupBox7.Controls.Add(metroLabel18);
             this.groupBox7.Controls.Add(this.dateTimePickerPermittedOperator);
             this.groupBox7.Controls.Add(this.comboBoxConcessionOperator);
             this.groupBox7.Controls.Add(metroLabel19);
@@ -889,37 +784,6 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.metroTextBoxRemarkOperator.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxRemarkOperator.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // metroTextBox2
-            // 
-            // 
-            // 
-            // 
-            this.metroTextBox2.CustomButton.Image = null;
-            this.metroTextBox2.CustomButton.Location = new System.Drawing.Point(125, 2);
-            this.metroTextBox2.CustomButton.Name = "";
-            this.metroTextBox2.CustomButton.Size = new System.Drawing.Size(15, 15);
-            this.metroTextBox2.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTextBox2.CustomButton.TabIndex = 1;
-            this.metroTextBox2.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTextBox2.CustomButton.UseSelectable = true;
-            this.metroTextBox2.CustomButton.Visible = false;
-            this.metroTextBox2.ForeColor = System.Drawing.Color.DimGray;
-            this.metroTextBox2.Lines = new string[0];
-            this.metroTextBox2.Location = new System.Drawing.Point(165, 175);
-            this.metroTextBox2.MaxLength = 32767;
-            this.metroTextBox2.Name = "metroTextBox2";
-            this.metroTextBox2.PasswordChar = '\0';
-            this.metroTextBox2.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.metroTextBox2.SelectedText = "";
-            this.metroTextBox2.SelectionLength = 0;
-            this.metroTextBox2.SelectionStart = 0;
-            this.metroTextBox2.ShortcutsEnabled = true;
-            this.metroTextBox2.Size = new System.Drawing.Size(143, 20);
-            this.metroTextBox2.TabIndex = 378;
-            this.metroTextBox2.UseSelectable = true;
-            this.metroTextBox2.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.metroTextBox2.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
             // dateTimePickerPermittedOperator
             // 
             this.dateTimePickerPermittedOperator.CalendarForeColor = System.Drawing.Color.DimGray;
@@ -939,6 +803,28 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.comboBoxConcessionOperator.Name = "comboBoxConcessionOperator";
             this.comboBoxConcessionOperator.Size = new System.Drawing.Size(196, 22);
             this.comboBoxConcessionOperator.TabIndex = 374;
+            // 
+            // comboBoxStatus
+            // 
+            this.comboBoxStatus.Enabled = false;
+            this.comboBoxStatus.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxStatus.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxStatus.FormattingEnabled = true;
+            this.comboBoxStatus.Location = new System.Drawing.Point(113, 24);
+            this.comboBoxStatus.Name = "comboBoxStatus";
+            this.comboBoxStatus.Size = new System.Drawing.Size(128, 22);
+            this.comboBoxStatus.TabIndex = 379;
+            // 
+            // metroLabel10
+            // 
+            metroLabel10.AutoSize = true;
+            metroLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            metroLabel10.Location = new System.Drawing.Point(46, 27);
+            metroLabel10.Name = "metroLabel10";
+            metroLabel10.Size = new System.Drawing.Size(46, 19);
+            metroLabel10.TabIndex = 378;
+            metroLabel10.Text = "Status:";
+            metroLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // EditCAAConcessionRequestForm
             // 
@@ -971,11 +857,12 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.ResumeLayout(false);
         }
 
+        private System.Windows.Forms.ComboBox comboBoxStatus;
+
         private System.Windows.Forms.ComboBox comboBoxConcessionOperator;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DateTimePicker dateTimePickerOperatorCreated;
         private MetroFramework.Controls.MetroTextBox metroTextBoxRemarkOperator;
-        private MetroFramework.Controls.MetroTextBox metroTextBox2;
         private System.Windows.Forms.DateTimePicker dateTimePickerPermittedOperator;
 
         private System.Windows.Forms.GroupBox groupBox7;
@@ -986,7 +873,6 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
         private System.Windows.Forms.DateTimePicker dateTimePickerPermitted;
         private MetroFramework.Controls.MetroTextBox metroTextBoxRemark;
         private System.Windows.Forms.DateTimePicker dateTimePickerCAACreated;
-        private MetroFramework.Controls.MetroTextBox metroTextBoxCAACignature;
 
         private System.Windows.Forms.GroupBox groupBox6;
 
@@ -995,7 +881,6 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
         private MetroFramework.Controls.MetroTextBox metroTextBoxFrom;
 
         private System.Windows.Forms.GroupBox groupBox4;
-        private MetroFramework.Controls.MetroTextBox metroTextBoxOpSignature;
         private System.Windows.Forms.ComboBox comboBoxProvider;
         private System.Windows.Forms.DateTimePicker dateTimePickerCreated;
 
