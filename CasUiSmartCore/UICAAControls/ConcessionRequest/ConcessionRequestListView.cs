@@ -7,8 +7,6 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA;
-using Telerik.Data.Expressions;
-using Operator = SmartCore.Entities.General.Operator;
 
 namespace CAS.UI.UICAAControls.ConcessionRequest
 {
@@ -57,6 +55,18 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 			AddColumn("Aircraft", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Station", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Provider", (int)(radGridView1.Width * 0.3f));
+			
+			AddColumn("Operator", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Concession", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Permitted", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Remark", (int)(radGridView1.Width * 0.3f));
+
+
+			AddColumn("CAA", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Concession", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Permitted", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Remark", (int)(radGridView1.Width * 0.3f));
+			
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -73,11 +83,13 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 			var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
 
 			AllOperators op = null;
-			if (item.Settings.Type == ConcessionRequestType.CAA)
+			if (item.Settings.Type == ConcessionRequestType.Operator)
 				op = GlobalObjects.CaaEnvironment?.AllOperators.FirstOrDefault(i => i.ItemId == item.Settings.OperatorId);
 			else op = AllOperators.Unknown;
 			
             var subItems = new List<CustomCell>();
+            var caaRec = item.Settings.CAARecords.LastOrDefault();
+            var opRec = item.Settings.OperatorRecords.LastOrDefault();
             
 			subItems.AddRange(new List<CustomCell>()
             {
@@ -89,6 +101,14 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 	            CreateRow(item.Aircraft.ToString(), item.Aircraft),
 	            CreateRow(item.Settings.Station, item.Settings.Station),
 	            CreateRow(item.Settings.Provider.ToString(), item.Settings.Provider),
+	            CreateRow("", ""),
+	            CreateRow(opRec?.Concession.ToString() ?? "", opRec?.Concession),
+	            CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(opRec?.Permitted) ?? "", opRec?.Permitted),
+	            CreateRow(opRec?.Remark ?? "", opRec?.Remark),
+	            CreateRow("", ""),
+	            CreateRow(caaRec?.Concession.ToString() ?? "", caaRec?.Concession),
+	            CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(caaRec?.Permitted) ?? "", caaRec?.Permitted),
+	            CreateRow(caaRec?.Remark ?? "", caaRec?.Remark),
 	            CreateRow(corrector, corrector)
             });
 
