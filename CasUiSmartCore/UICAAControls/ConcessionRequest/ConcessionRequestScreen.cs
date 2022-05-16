@@ -115,9 +115,10 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
 			foreach (var req in _initialDocumentArray)
 			{
-				req.Aircraft = aircraft.FirstOrDefault(i => i.ItemId == req.Settings.AircraftId);
+				req.Aircraft = aircraft.FirstOrDefault(i => i.ItemId == req.Settings.AircraftId) ?? Aircraft.Unknown;
 				req.From = specialists.FirstOrDefault(i => i.ItemId == req.FromId);
 				req.To = specialists.FirstOrDefault(i => i.ItemId == req.ToId);
+				req.Current = specialists.FirstOrDefault(i => i.ItemId == req.CurrentId);
 			}
 			
 			
@@ -167,12 +168,12 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
 
 
-        private void ToolStripMenuItemEditClick(object sender, EventArgs e)
-        {
-	        var form = new EditConcessionRequestForm(_directivesViewer.SelectedItem);
-            if (form.ShowDialog() == DialogResult.OK)
-                AnimatedThreadWorker.RunWorkerAsync();
-        }
+		private void ToolStripMenuItemEditClick(object sender, EventArgs e)
+		{
+			var form = new EditConcessionRequestForm(_directivesViewer.SelectedItem);
+			if (form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
+		}
         
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
 		private void ButtonDeleteClick(object sender, EventArgs e)
@@ -196,8 +197,8 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
-			_directivesViewer.AddMenuItems(
-                _toolStripMenuItemEdit);
+			// _directivesViewer.AddMenuItems(
+   //              _toolStripMenuItemEdit);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{

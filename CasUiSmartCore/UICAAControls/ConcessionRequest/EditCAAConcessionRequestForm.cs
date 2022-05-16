@@ -92,13 +92,8 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
                 comboBoxProvider.Items.Add(o);
             comboBoxProvider.SelectedItem = _concessionRequest.Settings.Provider;
             
+            checkBoxRevisionValidTo.Checked = _concessionRequest.Status == ConcessionRequestStatus.Close;
             
-            comboBoxStatus.Items.Clear();
-            foreach (object o in Enum.GetValues(typeof(ConcessionRequestStatus)).Cast<ConcessionRequestStatus>())
-                comboBoxStatus.Items.Add(o);
-            comboBoxStatus.SelectedItem = _concessionRequest.Status;
-
-
             if (_concessionRequest.Settings.Type == ConcessionRequestType.CAA)
             {
                 var _caaRecord = _concessionRequest.Settings.CAARecords.LastOrDefault();

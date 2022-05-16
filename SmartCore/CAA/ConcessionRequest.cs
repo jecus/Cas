@@ -48,6 +48,7 @@ namespace SmartCore.CAA
         
         public Specialist From { get; set; }
         public Specialist To { get; set; }
+        public Specialist Current { get; set; }
         public Entities.General.Aircraft Aircraft { get; set; }
         
     }

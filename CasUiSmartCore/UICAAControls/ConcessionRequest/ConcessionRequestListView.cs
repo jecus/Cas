@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -10,6 +11,7 @@ using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA;
 using SmartCore.CAA.CAAEducation;
+using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.ConcessionRequest
@@ -51,7 +53,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 		/// </summary>
 		protected override void SetHeaders()
 		{
-			AddColumn("Operator", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Current", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Status", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Number", (int)(radGridView1.Width * 0.3f));
 			AddColumn("From", (int)(radGridView1.Width * 0.3f));
@@ -77,7 +79,17 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         protected override void GroupingItems()
         {
-	        Grouping("Operator");
+	        //Grouping("Operator");
+	        this.radGridView1.GroupDescriptors.Clear();
+	        var radSortOrder = SortDirection == 0 ? ListSortDirection.Ascending : ListSortDirection.Descending;
+
+	        var descriptor = new GroupDescriptor();
+	        descriptor.GroupNames.Add("Current", radSortOrder);
+	        var descriptor1 = new GroupDescriptor();
+	        descriptor1.GroupNames.Add("Status", radSortOrder);
+	        
+	        this.radGridView1.GroupDescriptors.Add(descriptor);
+	        this.radGridView1.GroupDescriptors.Add(descriptor1);
         }
 
 		#region protected override List<CustomCell> GetListViewSubItems(Specialization item)
@@ -88,17 +100,17 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
 			AllOperators op = null;
 			if (item.Settings.Type == ConcessionRequestType.Operator)
-				op = GlobalObjects.CaaEnvironment?.AllOperators.FirstOrDefault(i => i.ItemId == item.Settings.OperatorId);
+				op = GlobalObjects.CaaEnvironment?.AllOperators.FirstOrDefault(i => i.ItemId == item.Current.OperatorId);
 			else op = AllOperators.Unknown;
 			
             var subItems = new List<CustomCell>();
-            var caaRec = item.Settings.CAARecords.LastOrDefault();
-            var opRec = item.Settings.OperatorRecords.LastOrDefault();
+            var caaRec = item.Settings.CAARecords?.LastOrDefault();
+            var opRec = item.Settings.OperatorRecords?.LastOrDefault();
             
 			subItems.AddRange(new List<CustomCell>()
             {
 	            CreateRow(op.ToString(), op),
-	            CreateRow(item.Settings.Type.ToString(), item.Settings.Type),
+	            CreateRow(item.Status.ToString(), item.Status),
 	            CreateRow(item.Settings.Number, item.Settings.Number),
 	            CreateRow(item.From.ToString(), item.From),
 	            CreateRow(item.To.ToString(), item.To),
@@ -186,7 +198,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 		{
 			if (GlobalObjects.CaaEnvironment.IdentityUser.OperatorId > 0)
 			{
-				if (SelectedItem.Settings.Type == ConcessionRequestType.CAA)
+				if (SelectedItem.Settings.Type == ConcessionRequestType.Operator)
 				{
 					if (SelectedItem.Settings.OperatorRecords.Any())
 					{
