@@ -62,6 +62,8 @@ namespace SmartCore.CAA
             OperatorRecords = new List<ConcessionRequestRecord>();
         }
         
+        public ConcessionRequestType Type { get; set; }
+        
         [JsonProperty]
         public string Station { get; set; }
 
@@ -115,10 +117,16 @@ namespace SmartCore.CAA
         Rejected
     }
 
-    public enum ConcessionRequestStatus
+    public enum ConcessionRequestType
     {
         CAA,
         Operator
+    }
+    
+    public enum ConcessionRequestStatus
+    {
+        Open,
+        Close
     }
     
     public enum Provider

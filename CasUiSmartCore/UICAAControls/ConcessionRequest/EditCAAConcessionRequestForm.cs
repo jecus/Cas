@@ -37,12 +37,12 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             foreach (var control in groupBox6.Controls)
             {
                 var c = control as Control;
-                c.Enabled = _concessionRequest.Status == ConcessionRequestStatus.CAA;
+                c.Enabled = _concessionRequest.Settings.Type == ConcessionRequestType.CAA;
             }
             foreach (var control in groupBox7.Controls)
             {
                 var c = control as Control;
-                c.Enabled = _concessionRequest.Status == ConcessionRequestStatus.Operator;
+                c.Enabled = _concessionRequest.Settings.Type == ConcessionRequestType.Operator;
             }
 
             foreach (var control in groupBox5.Controls)
@@ -93,7 +93,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             comboBoxProvider.SelectedItem = _concessionRequest.Settings.Provider;
 
 
-            if (_concessionRequest.Status == ConcessionRequestStatus.CAA)
+            if (_concessionRequest.Settings.Type == ConcessionRequestType.CAA)
             {
                 var _caaRecord = _concessionRequest.Settings.CAARecords.LastOrDefault();
                 comboBoxCOncession.Items.Clear();
@@ -105,7 +105,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
                 metroTextBoxRemark.Text = _caaRecord.Remark;
                 dateTimePickerCAACreated.Value = _caaRecord.Created;
             }
-            else if (_concessionRequest.Status == ConcessionRequestStatus.Operator)
+            else if (_concessionRequest.Settings.Type == ConcessionRequestType.Operator)
             {
                 var _opRecord = _concessionRequest.Settings.OperatorRecords.LastOrDefault();
                 comboBoxConcessionOperator.Items.Clear();
@@ -140,14 +140,14 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private void ApplyChanges()
         {
-            if (_concessionRequest.Status == ConcessionRequestStatus.CAA)
+            if (_concessionRequest.Settings.Type == ConcessionRequestType.CAA)
             {
                 var _caaRecord = _concessionRequest.Settings.CAARecords.LastOrDefault();
                 _caaRecord.Concession = (Concession)comboBoxCOncession.SelectedItem;
                 _caaRecord.Permitted = dateTimePickerPermitted.Value;
                 _caaRecord.Remark = metroTextBoxRemark.Text;
             }
-            else if (_concessionRequest.Status == ConcessionRequestStatus.Operator)
+            else if (_concessionRequest.Settings.Type == ConcessionRequestType.Operator)
             {
                 var _opRecord = _concessionRequest.Settings.OperatorRecords.LastOrDefault();
                 _opRecord.Concession = (Concession)comboBoxConcessionOperator.SelectedItem;
@@ -210,7 +210,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             ApplyChanges();
             
             _concessionRequest.CurrentId = _concessionRequest.FromId;
-            _concessionRequest.Status = ConcessionRequestStatus.Operator;
+            _concessionRequest.Settings.Type = ConcessionRequestType.Operator;
             _concessionRequest.Settings.OperatorRecords.Add(new ConcessionRequestRecord());
             GlobalObjects.CaaEnvironment.NewKeeper.Save(_concessionRequest);
             DialogResult = DialogResult.OK;
@@ -221,7 +221,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             ApplyChanges();
         
             _concessionRequest.CurrentId = _concessionRequest.ToId;
-            _concessionRequest.Status = ConcessionRequestStatus.CAA;
+            _concessionRequest.Settings.Type = ConcessionRequestType.CAA;
             _concessionRequest.Settings.CAARecords.Add(new ConcessionRequestRecord());
             GlobalObjects.CaaEnvironment.NewKeeper.Save(_concessionRequest);
             DialogResult = DialogResult.OK;

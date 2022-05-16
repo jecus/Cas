@@ -257,9 +257,10 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 	            Created = DateTime.Now,
 	            FromId = GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
 	            CurrentId =  GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId,
-	            Status = ConcessionRequestStatus.Operator,
+	            Status = ConcessionRequestStatus.Open,
 	            Settings = new ConcessionRequestSettings()
 	            {
+		            Type = ConcessionRequestType.Operator,
 		            OperatorId = _operatorId.Value
 	            }
             });

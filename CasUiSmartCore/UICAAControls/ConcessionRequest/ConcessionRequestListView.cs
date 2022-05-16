@@ -73,7 +73,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 			var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item);
 
 			AllOperators op = null;
-			if (item.Status == ConcessionRequestStatus.CAA)
+			if (item.Settings.Type == ConcessionRequestType.CAA)
 				op = GlobalObjects.CaaEnvironment?.AllOperators.FirstOrDefault(i => i.ItemId == item.Settings.OperatorId);
 			else op = AllOperators.Unknown;
 			
@@ -82,7 +82,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 			subItems.AddRange(new List<CustomCell>()
             {
 	            CreateRow(op.ToString(), op),
-	            CreateRow(item.Status.ToString(), item.Status),
+	            CreateRow(item.Settings.Type.ToString(), item.Settings.Type),
 	            CreateRow(item.Settings.Number, item.Settings.Number),
 	            CreateRow(item.From.ToString(), item.From),
 	            CreateRow(item.To.ToString(), item.To),
@@ -142,7 +142,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 		{
 			if (GlobalObjects.CaaEnvironment.IdentityUser.OperatorId > 0)
 			{
-				if (SelectedItem.Status == ConcessionRequestStatus.CAA)
+				if (SelectedItem.Settings.Type == ConcessionRequestType.CAA)
 				{
 					if (SelectedItem.Settings.OperatorRecords.Any())
 					{
@@ -160,7 +160,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 			}
 			else
 			{
-				if (SelectedItem.Status == ConcessionRequestStatus.CAA)
+				if (SelectedItem.Settings.Type == ConcessionRequestType.CAA)
 				{
 					var form = new EditCAAConcessionRequestForm(SelectedItem);
 					if (form.ShowDialog() == DialogResult.OK)
