@@ -37,12 +37,12 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             foreach (var control in groupBox6.Controls)
             {
                 var c = control as Control;
-                c.Enabled = _concessionRequest.Settings.Type == ConcessionRequestType.CAA;
+                c.Enabled = _concessionRequest.Status == ConcessionRequestStatus.Open && _concessionRequest.Settings.Type == ConcessionRequestType.CAA;
             }
             foreach (var control in groupBox7.Controls)
             {
                 var c = control as Control;
-                c.Enabled = _concessionRequest.Settings.Type == ConcessionRequestType.Operator;
+                c.Enabled = _concessionRequest.Status == ConcessionRequestStatus.Open &&_concessionRequest.Settings.Type == ConcessionRequestType.Operator;
             }
 
             foreach (var control in groupBox5.Controls)
@@ -152,6 +152,8 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
                 _caaRecord.Concession = (Concession)comboBoxCOncession.SelectedItem;
                 _caaRecord.Permitted = dateTimePickerPermitted.Value;
                 _caaRecord.Remark = metroTextBoxRemark.Text;
+                if (checkBoxRevisionValidTo.Checked)
+                    _concessionRequest.Status = ConcessionRequestStatus.Close;
             }
             else if (_concessionRequest.Settings.Type == ConcessionRequestType.Operator)
             {
@@ -214,10 +216,13 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
         private void button1_Click(object sender, EventArgs e)
         {
             ApplyChanges();
-            
-            _concessionRequest.CurrentId = _concessionRequest.FromId;
-            _concessionRequest.Settings.Type = ConcessionRequestType.Operator;
-            _concessionRequest.Settings.OperatorRecords.Add(new ConcessionRequestRecord());
+
+            if (!checkBoxRevisionValidTo.Checked)
+            {
+                _concessionRequest.CurrentId = _concessionRequest.FromId;
+                _concessionRequest.Settings.Type = ConcessionRequestType.Operator;
+                _concessionRequest.Settings.OperatorRecords.Add(new ConcessionRequestRecord());
+            }
             GlobalObjects.CaaEnvironment.NewKeeper.Save(_concessionRequest);
             DialogResult = DialogResult.OK;
         }

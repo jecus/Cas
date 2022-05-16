@@ -169,7 +169,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
 
         private void ToolStripMenuItemEditClick(object sender, EventArgs e)
         {
-            var form = new EditConcessionRequestForm(_directivesViewer.SelectedItem);
+	        var form = new EditConcessionRequestForm(_directivesViewer.SelectedItem);
             if (form.ShowDialog() == DialogResult.OK)
                 AnimatedThreadWorker.RunWorkerAsync();
         }

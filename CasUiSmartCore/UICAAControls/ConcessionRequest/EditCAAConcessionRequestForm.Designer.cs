@@ -61,6 +61,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.metroTextBoxReason = new MetroFramework.Controls.MetroTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.comboBoxStatus = new System.Windows.Forms.ComboBox();
             this.dateTimePickerCreated = new System.Windows.Forms.DateTimePicker();
             this.comboBoxProvider = new System.Windows.Forms.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -76,7 +77,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.metroTextBoxRemarkOperator = new MetroFramework.Controls.MetroTextBox();
             this.dateTimePickerPermittedOperator = new System.Windows.Forms.DateTimePicker();
             this.comboBoxConcessionOperator = new System.Windows.Forms.ComboBox();
-            this.comboBoxStatus = new System.Windows.Forms.ComboBox();
+            this.checkBoxRevisionValidTo = new MetroFramework.Controls.MetroCheckBox();
             metroLabel6 = new MetroFramework.Controls.MetroLabel();
             metroLabel4 = new MetroFramework.Controls.MetroLabel();
             metroLabel9 = new MetroFramework.Controls.MetroLabel();
@@ -290,6 +291,17 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             metroLabel20.TabIndex = 375;
             metroLabel20.Text = "Concession:";
             metroLabel20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // metroLabel10
+            // 
+            metroLabel10.AutoSize = true;
+            metroLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            metroLabel10.Location = new System.Drawing.Point(46, 27);
+            metroLabel10.Name = "metroLabel10";
+            metroLabel10.Size = new System.Drawing.Size(46, 19);
+            metroLabel10.TabIndex = 378;
+            metroLabel10.Text = "Status:";
+            metroLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // buttonOk
             // 
@@ -583,6 +595,17 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.groupBox4.TabIndex = 375;
             this.groupBox4.TabStop = false;
             // 
+            // comboBoxStatus
+            // 
+            this.comboBoxStatus.Enabled = false;
+            this.comboBoxStatus.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxStatus.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxStatus.FormattingEnabled = true;
+            this.comboBoxStatus.Location = new System.Drawing.Point(113, 24);
+            this.comboBoxStatus.Name = "comboBoxStatus";
+            this.comboBoxStatus.Size = new System.Drawing.Size(128, 22);
+            this.comboBoxStatus.TabIndex = 379;
+            // 
             // dateTimePickerCreated
             // 
             this.dateTimePickerCreated.CalendarForeColor = System.Drawing.Color.DimGray;
@@ -618,6 +641,7 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.checkBoxRevisionValidTo);
             this.groupBox6.Controls.Add(this.button1);
             this.groupBox6.Controls.Add(this.dateTimePickerCAACreated);
             this.groupBox6.Controls.Add(metroLabel14);
@@ -804,27 +828,18 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.comboBoxConcessionOperator.Size = new System.Drawing.Size(196, 22);
             this.comboBoxConcessionOperator.TabIndex = 374;
             // 
-            // comboBoxStatus
+            // checkBoxRevisionValidTo
             // 
-            this.comboBoxStatus.Enabled = false;
-            this.comboBoxStatus.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.comboBoxStatus.ForeColor = System.Drawing.Color.DimGray;
-            this.comboBoxStatus.FormattingEnabled = true;
-            this.comboBoxStatus.Location = new System.Drawing.Point(113, 24);
-            this.comboBoxStatus.Name = "comboBoxStatus";
-            this.comboBoxStatus.Size = new System.Drawing.Size(128, 22);
-            this.comboBoxStatus.TabIndex = 379;
-            // 
-            // metroLabel10
-            // 
-            metroLabel10.AutoSize = true;
-            metroLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            metroLabel10.Location = new System.Drawing.Point(46, 27);
-            metroLabel10.Name = "metroLabel10";
-            metroLabel10.Size = new System.Drawing.Size(46, 19);
-            metroLabel10.TabIndex = 378;
-            metroLabel10.Text = "Status:";
-            metroLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxRevisionValidTo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxRevisionValidTo.Enabled = false;
+            this.checkBoxRevisionValidTo.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.checkBoxRevisionValidTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.checkBoxRevisionValidTo.Location = new System.Drawing.Point(92, 173);
+            this.checkBoxRevisionValidTo.Name = "checkBoxRevisionValidTo";
+            this.checkBoxRevisionValidTo.Size = new System.Drawing.Size(80, 25);
+            this.checkBoxRevisionValidTo.TabIndex = 382;
+            this.checkBoxRevisionValidTo.Text = "Closed";
+            this.checkBoxRevisionValidTo.UseSelectable = true;
             // 
             // EditCAAConcessionRequestForm
             // 
@@ -856,6 +871,8 @@ namespace CAS.UI.UICAAControls.ConcessionRequest
             this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
         }
+
+        private MetroFramework.Controls.MetroCheckBox checkBoxRevisionValidTo;
 
         private System.Windows.Forms.ComboBox comboBoxStatus;
 
