@@ -237,7 +237,11 @@ where AuditId in ({_parentId}) and IsDeleted = 0 and WorkflowStageId = {_stage.V
                 
                 if (ids.Any())
                 {
-	                var filter = new List<Filter>() { new Filter("CheckListId", ids) };
+	                var filter = new List<Filter>()
+	                {
+		                new Filter("CheckListId", ids),
+		                new Filter("AuditId", _audit.ItemId)
+	                };
 	                
 	                if(_stage.HasValue)
 		                filter.Add(new Filter("WorkflowStageId", _stage.Value));
