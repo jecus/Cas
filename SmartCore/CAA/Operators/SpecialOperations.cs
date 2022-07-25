@@ -18,7 +18,7 @@ namespace SmartCore.CAA.Operators
         private static CommonDictionaryCollection<SpecialOperations> _Items = new CommonDictionaryCollection<SpecialOperations>();
         #endregion
 
-        public static SpecialOperations Newsmedia = new SpecialOperations(1, "News mediao", "News media", "");
+        public static SpecialOperations Newsmedia = new SpecialOperations(1, "News media", "News media", "");
         public static SpecialOperations Flightinspection = new SpecialOperations(2, "Flight inspection", "Flight inspection", "");
         public static SpecialOperations Televisionandmovie = new SpecialOperations(3, "Television and movie", "Television and movie", "");
         public static SpecialOperations Parachuteoperation = new SpecialOperations(4, "Parachute operation", "Parachute operation", "");
@@ -27,6 +27,10 @@ namespace SmartCore.CAA.Operators
         public static SpecialOperations Maintenancecheckflight = new SpecialOperations(7, "Maintenance check flight", "Maintenance check flight", "");
         public static SpecialOperations Medicalservice = new SpecialOperations(8, "Medical service", "Medical service", "");
         public static SpecialOperations Other = new SpecialOperations(9, "Other", "Other", "");
+        public static SpecialOperations OtherAerialWork = new SpecialOperations(10, "Other aerial work", "Other aerial work", "");
+        public static SpecialOperations Training = new SpecialOperations(11, "Training", "Training", "");
+        public static SpecialOperations Sport = new SpecialOperations(12, "Sport", "Sport", "");
+        public static SpecialOperations Acrobatic = new SpecialOperations(13, "Acrobatic", "Acrobatic", "");
         public static SpecialOperations Unknown = new SpecialOperations(-1, "Unknown", "Unknown", "Unknown");
 
         /*

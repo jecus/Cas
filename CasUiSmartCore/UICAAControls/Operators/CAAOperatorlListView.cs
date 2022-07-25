@@ -83,6 +83,7 @@ namespace CAS.UI.UICAAControls.Operators
 				CreateRow(item.Description, item.Description),
 				CreateRow(item.PrivilagesString, item.PrivilagesString),
 				CreateRow(item.Address, item.Address),
+				CreateRow(item.Phone, item.Phone),
 				CreateRow(item.Fax, item.Fax),
 				CreateRow(item.Web, item.Web),
 				CreateRow(item.Email, item.Email),

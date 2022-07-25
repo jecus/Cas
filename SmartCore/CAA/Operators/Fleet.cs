@@ -14,12 +14,14 @@ namespace SmartCore.CAA.Operators
         private static CommonDictionaryCollection<Fleet> _Items = new CommonDictionaryCollection<Fleet>();
         #endregion
 
-        public static Fleet Aircraft = new Fleet(1, "Aircraft", "Aircraft", "");
-        public static Fleet Helicopter = new Fleet(2, "Helicopter", "Helicopter", "");
+        public static Fleet AircraftCA = new Fleet(1, "Aircraft (CA)", "Aircraft (CA)", "");
+        public static Fleet HelicopterCA = new Fleet(2, "Helicopter (CA)", "Helicopter (CA)", "");
         public static Fleet Ballon = new Fleet(3, "Ballon", "Ballon", "");
         public static Fleet Unmannedaircraft = new Fleet(4, "Unmanned aircraft", "Unmanned aircraft", "");
         public static Fleet Sailpnane = new Fleet(5, "Sailpnane", "Sailpnane", "");
         public static Fleet Other = new Fleet(6, "Other", "Other", "");
+        public static Fleet AircraftNCA = new Fleet(7, "Aircraft (NCA)", "Aircraft (NCA)", "");
+        public static Fleet HelicopterNCA = new Fleet(8, "Helicopter (NCA)", "Helicopter (NCA)", "");
         public static Fleet Unknown = new Fleet(-1, "Unknown", "Unknown", "Unknown");
         
         /*
