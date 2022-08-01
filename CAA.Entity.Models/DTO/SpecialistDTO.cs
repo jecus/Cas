@@ -138,6 +138,10 @@ namespace CAA.Entity.Models.DTO
 
         [Column("OperatorId")]
 		public int OperatorId { get; set; }
+		
+		
+		[Column("SettingsJSON")]
+		public string SettingsJSON { get; set; }
 
 
 		[Include]

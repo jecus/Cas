@@ -38,6 +38,7 @@ namespace CAA.Entity.Models.DTO
 		[Column("Fax"), MaxLength(100)]
 		public string Fax { get; set; }
 
+
 		
 		[Column("LogoTypeWhite", TypeName = "image")]
 		public byte[] LogoTypeWhite { get; set; }
@@ -53,6 +54,10 @@ namespace CAA.Entity.Models.DTO
 		
 		[Column("LogotypeReportVeryLarge", TypeName = "image")]
 		public byte[] LogotypeReportVeryLarge { get; set; }
+		
+				
+		[Column("SettingsJSON")]
+		public string SettingsJSON { get; set; }
 
 	}
 }

@@ -3,9 +3,11 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
+using Newtonsoft.Json;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
+using SmartCore.Entities.General.Personnel;
 using SmartCore.Management;
 
 namespace SmartCore.Entities.General
@@ -279,7 +281,27 @@ namespace SmartCore.Entities.General
                 OnPropertyChanged("Email");
             }
         }
+        
+        
 		#endregion
+        
+        
+        
+        public OperatorSettings Settings { get; set; }
+        public string SettingsJSON
+        {
+            get
+            {
+                if (Settings == null)
+                    return null;
+
+                return JsonConvert.SerializeObject(Settings,
+                    Formatting.Indented,
+                    new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+            }
+
+            set => Settings = string.IsNullOrWhiteSpace(value) ? new OperatorSettings() : JsonConvert.DeserializeObject<OperatorSettings>(value);
+        }
 		
 		/*
 		*  Методы 
@@ -307,6 +329,20 @@ namespace SmartCore.Entities.General
         }
         #endregion
 
+    }
+    
+    
+    [JsonObject]
+    public class OperatorSettings
+    {
+        [JsonProperty]
+        public string CEO { get; set; }
+	    
+        [JsonProperty]
+        public string Status { get; set; }
+	    
+        [JsonProperty]
+        public string Remarks { get; set; }
     }
 
 }

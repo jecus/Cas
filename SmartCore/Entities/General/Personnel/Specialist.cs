@@ -7,6 +7,7 @@ using System.Reflection;
 using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
+using Newtonsoft.Json;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.CAA;
@@ -402,6 +403,21 @@ namespace SmartCore.Entities.General.Personnel
 		
 		
 		public string Qualification { get; set; }
+		public SpecialistSettings Settings { get; set; }
+		public string SettingsJSON
+		{
+			get
+			{
+				if (Settings == null)
+					return null;
+
+				return JsonConvert.SerializeObject(Settings,
+					Formatting.Indented,
+					new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+			}
+
+			set => Settings = string.IsNullOrWhiteSpace(value) ? new SpecialistSettings() : JsonConvert.DeserializeObject<SpecialistSettings>(value);
+		}
 
 		#region public bool IsSertificier { get; set; }
 		/// <summary>
@@ -673,4 +689,9 @@ namespace SmartCore.Entities.General.Personnel
 		}
 		#endregion
 	}
+
+    [JsonObject]
+    public class SpecialistSettings
+    {
+    }
 }

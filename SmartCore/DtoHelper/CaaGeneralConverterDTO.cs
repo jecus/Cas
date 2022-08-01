@@ -1017,6 +1017,7 @@ namespace SmartCore.DtoHelper
 				Qualification = specialist.Qualification,
                 IsCAA = specialist.IsCAA,
                 OperatorId = specialist.OperatorId,
+                SettingsJSON = specialist.SettingsJSON,
 				Licenses = specialist.Licenses?.Select(i => i.ConvertCAA()) as ICollection<CAASpecialistLicenseDTO>,
 				SpecialistTrainings = specialist.SpecialistTrainings?.Select(i => i.ConvertCAA()) as ICollection<CAASpecialistTrainingDTO>,
 				LicenseDetails = specialist.LicenseDetails?.Select(i => i.ConvertCAA()) as ICollection<CAASpecialistLicenseDetailDTO>,
@@ -1066,7 +1067,8 @@ namespace SmartCore.DtoHelper
 				Facility = specialist.Facility?.ConvertCAA(),
 				Occupation = specialist.Specialization?.ConvertCAA(),
 				IsCAA = specialist.IsCAA,
-				OperatorId = specialist.OperatorId
+				OperatorId = specialist.OperatorId,
+				SettingsJSON = specialist.SettingsJSON,
 			};
 
 			if (specialist.Licenses != null)
@@ -2218,6 +2220,7 @@ namespace SmartCore.DtoHelper
                 LogoTypeImageByteView = operdto.LogoTypeWhite,
                 LogoType = operdto.LogoType,
                 ICAOCode = operdto.ICAOCode,
+                SettingsJSON = operdto.SettingsJSON,
                 Address = operdto.Address,
                 Phone = operdto.Phone,
                 Fax = operdto.Fax,
