@@ -58,6 +58,12 @@ namespace CAS.UI.UICAAControls.Specialists
 			AddColumn("Last Name", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Occupation", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Combination", (int)(radGridView1.Width * 0.4f));
+			
+			AddColumn("Personnel", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Licence Type", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Type Aircraft", (int)(radGridView1.Width * 0.4f));
+			
+			
 			AddColumn("Department", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Qualification", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Operator", (int)(radGridView1.Width * 0.3f));
@@ -108,6 +114,19 @@ namespace CAS.UI.UICAAControls.Specialists
 
             if (item.IsCAA)
                 op = "CAA";
+            
+            
+            var licensePers = PersonnelCategory.UNK;
+            var licenseType = EmployeeLicenceType.UNK;
+            var licenseAir = AircraftModel.Unknown;
+			
+            licensePers = item.PersonnelCategory;
+            if (item.Licenses.Any())
+            {
+	            var license = item.Licenses.FirstOrDefault();
+	            licenseType = license.EmployeeLicenceType;
+	            licenseAir = license.AircraftType;
+            }
 
 			var subItems = new List<CustomCell>()
 			{
@@ -116,6 +135,12 @@ namespace CAS.UI.UICAAControls.Specialists
 				CreateRow(item.LastName, item.LastName),
 				CreateRow(item.Occupation.ToString(), item.Occupation),
 				CreateRow(item.Combination, item.Combination),
+				
+				CreateRow(licensePers.ToString(), licensePers),
+				CreateRow(licenseType.ToString(), licenseType),
+				CreateRow(licenseAir.ToString(), licenseAir),
+				
+				
 				CreateRow(department.ToString(), department),
 				CreateRow(item.Qualification, item.Qualification),
 				CreateRow(op.ToString(), op),

@@ -225,7 +225,13 @@ namespace CAS.UI.UICAAControls.Specialists
 	                var specialistLicenseRemark = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseRemarkDTO, SpecialistLicenseRemark>(new Filter("SpecialistLicenseId", FilterType.In,ids));
 	                var specialistInstrumentRating = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistInstrumentRatingDTO, SpecialistInstrumentRating>(new Filter("SpecialistLicenseId", FilterType.In,ids));
 
+	                
+	                var det = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseDetailDTO, SpecialistLicenseDetail>(new Filter("SpecialistId",_currentItem.ItemId), loadChild:true);
+	                var remarks = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseRemarkDTO, SpecialistLicenseRemark>(new Filter("SpecialistId",_currentItem.ItemId), loadChild:true);
 
+	                _currentItem.LicenseDetails = new CommonCollection<SpecialistLicenseDetail>(det);
+	                _currentItem.LicenseRemark = new CommonCollection<SpecialistLicenseRemark>(remarks);
+	                
 
 	                foreach (var license in _currentItem.Licenses)
 	                {
