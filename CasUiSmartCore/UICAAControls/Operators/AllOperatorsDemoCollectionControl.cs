@@ -135,7 +135,7 @@ namespace CAS.UI.UICAAControls.Operators
                 e.Cancel = true;
 
             e.TypeOfReflection = ReflectionTypes.DisplayInCurrent;
-            e.DisplayerText = "";
+            e.DisplayerText = op.ShortName;
             e.RequestedEntity = new CurrentOperatorSymmaryCAADemoScreen(op);
         }
 
