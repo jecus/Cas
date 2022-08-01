@@ -102,6 +102,7 @@ namespace CAA.Entity.Models.DTO
 
         [JsonProperty("Ratings")]
         public string Ratings { get; set; }
+        
 
         [JsonProperty("Privilages")]
         public string Privilages { get; set; }
@@ -120,5 +121,14 @@ namespace CAA.Entity.Models.DTO
 
         [JsonProperty("IsCAO")]
         public bool IsCAO { get; set; }
+        
+        [JsonProperty("CEO")]
+        public string CEO { get; set; }
+        
+        [JsonProperty("IsOther")]
+        public bool IsOther { get; set; }
+        
+        [JsonProperty("OperatorStatusId")]
+        public int  OperatorStatusId { get; set; }
     }
 }

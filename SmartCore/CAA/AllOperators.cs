@@ -198,6 +198,9 @@ namespace SmartCore.CAA
         public string Fleet { get; set; }
         public string Privilages { get; set; }
         public string Ratings { get; set; }
+        
+        public string CEO { get; set; }
+        public int  OperatorStatusId { get; set; }
 
 
         public string IATACode { get; set; }
@@ -205,6 +208,7 @@ namespace SmartCore.CAA
         public bool IsAirOperator { get; set; }
         public bool IsCAMO { get; set; }
         public bool IsCAO { get; set; }
+        public bool IsOther { get; set; }
 
 
         public string TypeString => TypeFilter.ToString();

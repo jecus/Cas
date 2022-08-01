@@ -436,6 +436,7 @@
     <Compile Include="CAA\FindingLevel\FindingLevels.cs" />
     <Compile Include="CAA\FindingLevel\RootCause.cs" />
     <Compile Include="CAA\Operators\IAllOperatorFilterParams.cs" />
+    <Compile Include="CAA\Operators\OperatorStatus.cs" />
     <Compile Include="CAA\Operators\Ratings.cs" />
     <Compile Include="CAA\Operators\Privileges.cs" />
     <Compile Include="CAA\Operators\Fleet.cs" />

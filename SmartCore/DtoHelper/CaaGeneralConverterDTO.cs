@@ -1721,11 +1721,14 @@ namespace SmartCore.DtoHelper
 					Fleet = oper.Fleet,
                     Privilages = oper.Privilages,
 					Ratings = oper.Ratings,
+					CEO = oper.CEO,
+					OperatorStatusId = oper.OperatorStatusId,
                     IATACode = oper.IATACode,
                     Description = oper.Description,
                     IsAirOperator = oper.IsAirOperator,
                     IsCAMO = oper.IsCAMO,
                     IsCAO = oper.IsCAO,
+                    IsOther = oper.IsOther,
 				},
 			};
 		}
@@ -1762,11 +1765,14 @@ namespace SmartCore.DtoHelper
 				Fleet = operdto.Settings.Fleet,
                 Privilages = operdto.Settings.Privilages,
 				Ratings = operdto.Settings.Ratings,
+				CEO = operdto.Settings.CEO,
                 IATACode = operdto.Settings.IATACode,
+                OperatorStatusId = operdto.Settings.OperatorStatusId,
                 Description = operdto.Settings.Description,
                 IsAirOperator = operdto.Settings.IsAirOperator,
                 IsCAMO = operdto.Settings.IsCAMO,
                 IsCAO = operdto.Settings.IsCAO,
+                IsOther = operdto.Settings.IsOther,
 
 			};
 		}

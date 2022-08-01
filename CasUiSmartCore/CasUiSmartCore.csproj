@@ -925,7 +925,9 @@
     <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseListScreen.Designer.cs">
       <DependentUpon>CourseListScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CoursePackageListView.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CoursePackageListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UICAAControls\CAAEducation\CoursePackage\CoursePackageListView.Designer.cs">
       <DependentUpon>CoursePackageListView.cs</DependentUpon>
     </Compile>

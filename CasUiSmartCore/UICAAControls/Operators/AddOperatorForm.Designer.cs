@@ -39,6 +39,7 @@ namespace CAS.UI.UICAAControls.Operators
             System.Windows.Forms.Label metroLabel6;
             System.Windows.Forms.Label metroLabel7;
             System.Windows.Forms.Label metroLabel8;
+            System.Windows.Forms.Label label7;
             this.textBoxFullName = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxShortName = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxIcao = new MetroFramework.Controls.MetroTextBox();
@@ -103,6 +104,12 @@ namespace CAS.UI.UICAAControls.Operators
             this.metroTextBoxIATA = new MetroFramework.Controls.MetroTextBox();
             this.radioButtonAirOperator = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.metroTextBoxCEO = new MetroFramework.Controls.MetroTextBox();
+            this.radioButtonOther = new System.Windows.Forms.RadioButton();
+            this.metroTextBoxOther = new MetroFramework.Controls.MetroTextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.comboBoxStatus = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             labelDescription = new System.Windows.Forms.Label();
             metroLabel1 = new System.Windows.Forms.Label();
             metroLabel2 = new System.Windows.Forms.Label();
@@ -112,6 +119,7 @@ namespace CAS.UI.UICAAControls.Operators
             metroLabel6 = new System.Windows.Forms.Label();
             metroLabel7 = new System.Windows.Forms.Label();
             metroLabel8 = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReportLogoVeryLarge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReportLogoLarge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).BeginInit();
@@ -226,6 +234,18 @@ namespace CAS.UI.UICAAControls.Operators
             metroLabel8.TabIndex = 337;
             metroLabel8.Text = "IATA code:";
             metroLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new System.Drawing.Font("Verdana", 9F);
+            label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            label7.Location = new System.Drawing.Point(5, 357);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(39, 14);
+            label7.TabIndex = 341;
+            label7.Text = "CEO:";
+            label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // textBoxFullName
             // 
@@ -487,7 +507,7 @@ namespace CAS.UI.UICAAControls.Operators
             // 
             this._linkDeleteReportLogoVeryLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkDeleteReportLogoVeryLarge.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkDeleteReportLogoVeryLarge.Location = new System.Drawing.Point(402, 541);
+            this._linkDeleteReportLogoVeryLarge.Location = new System.Drawing.Point(397, 573);
             this._linkDeleteReportLogoVeryLarge.Name = "_linkDeleteReportLogoVeryLarge";
             this._linkDeleteReportLogoVeryLarge.Size = new System.Drawing.Size(85, 48);
             this._linkDeleteReportLogoVeryLarge.TabIndex = 43;
@@ -500,7 +520,7 @@ namespace CAS.UI.UICAAControls.Operators
             // 
             this._linkDeleteChengeReportLogoLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkDeleteChengeReportLogoLarge.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkDeleteChengeReportLogoLarge.Location = new System.Drawing.Point(402, 483);
+            this._linkDeleteChengeReportLogoLarge.Location = new System.Drawing.Point(397, 515);
             this._linkDeleteChengeReportLogoLarge.Name = "_linkDeleteChengeReportLogoLarge";
             this._linkDeleteChengeReportLogoLarge.Size = new System.Drawing.Size(85, 48);
             this._linkDeleteChengeReportLogoLarge.TabIndex = 42;
@@ -513,7 +533,7 @@ namespace CAS.UI.UICAAControls.Operators
             // 
             this._linkDeleteWhiteBackgroundLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkDeleteWhiteBackgroundLogotype.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkDeleteWhiteBackgroundLogotype.Location = new System.Drawing.Point(402, 421);
+            this._linkDeleteWhiteBackgroundLogotype.Location = new System.Drawing.Point(397, 453);
             this._linkDeleteWhiteBackgroundLogotype.Name = "_linkDeleteWhiteBackgroundLogotype";
             this._linkDeleteWhiteBackgroundLogotype.Size = new System.Drawing.Size(85, 48);
             this._linkDeleteWhiteBackgroundLogotype.TabIndex = 41;
@@ -526,7 +546,7 @@ namespace CAS.UI.UICAAControls.Operators
             // 
             this._linkDeleteTransparentLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkDeleteTransparentLogotype.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkDeleteTransparentLogotype.Location = new System.Drawing.Point(402, 362);
+            this._linkDeleteTransparentLogotype.Location = new System.Drawing.Point(397, 394);
             this._linkDeleteTransparentLogotype.Name = "_linkDeleteTransparentLogotype";
             this._linkDeleteTransparentLogotype.Size = new System.Drawing.Size(85, 48);
             this._linkDeleteTransparentLogotype.TabIndex = 40;
@@ -539,7 +559,7 @@ namespace CAS.UI.UICAAControls.Operators
             // 
             this.labelReportLogoVeryLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.labelReportLogoVeryLarge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.labelReportLogoVeryLarge.Location = new System.Drawing.Point(10, 541);
+            this.labelReportLogoVeryLarge.Location = new System.Drawing.Point(5, 573);
             this.labelReportLogoVeryLarge.Name = "labelReportLogoVeryLarge";
             this.labelReportLogoVeryLarge.Size = new System.Drawing.Size(184, 53);
             this.labelReportLogoVeryLarge.TabIndex = 34;
@@ -552,7 +572,7 @@ namespace CAS.UI.UICAAControls.Operators
             this.pictureBoxReportLogoVeryLarge.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
             this.pictureBoxReportLogoVeryLarge.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBoxReportLogoVeryLarge.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxReportLogoVeryLarge.Location = new System.Drawing.Point(200, 541);
+            this.pictureBoxReportLogoVeryLarge.Location = new System.Drawing.Point(195, 573);
             this.pictureBoxReportLogoVeryLarge.Name = "pictureBoxReportLogoVeryLarge";
             this.pictureBoxReportLogoVeryLarge.Size = new System.Drawing.Size(48, 48);
             this.pictureBoxReportLogoVeryLarge.TabIndex = 35;
@@ -563,7 +583,7 @@ namespace CAS.UI.UICAAControls.Operators
             // 
             this.linkLabelChengeReportLogoVeryLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.linkLabelChengeReportLogoVeryLarge.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.linkLabelChengeReportLogoVeryLarge.Location = new System.Drawing.Point(325, 541);
+            this.linkLabelChengeReportLogoVeryLarge.Location = new System.Drawing.Point(320, 573);
             this.linkLabelChengeReportLogoVeryLarge.Name = "linkLabelChengeReportLogoVeryLarge";
             this.linkLabelChengeReportLogoVeryLarge.Size = new System.Drawing.Size(85, 48);
             this.linkLabelChengeReportLogoVeryLarge.TabIndex = 38;
@@ -576,7 +596,7 @@ namespace CAS.UI.UICAAControls.Operators
             // 
             this.labelReportLogoLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.labelReportLogoLarge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.labelReportLogoLarge.Location = new System.Drawing.Point(10, 481);
+            this.labelReportLogoLarge.Location = new System.Drawing.Point(5, 513);
             this.labelReportLogoLarge.Name = "labelReportLogoLarge";
             this.labelReportLogoLarge.Size = new System.Drawing.Size(184, 53);
             this.labelReportLogoLarge.TabIndex = 36;
@@ -589,7 +609,7 @@ namespace CAS.UI.UICAAControls.Operators
             this.pictureBoxReportLogoLarge.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
             this.pictureBoxReportLogoLarge.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBoxReportLogoLarge.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxReportLogoLarge.Location = new System.Drawing.Point(200, 481);
+            this.pictureBoxReportLogoLarge.Location = new System.Drawing.Point(195, 513);
             this.pictureBoxReportLogoLarge.Name = "pictureBoxReportLogoLarge";
             this.pictureBoxReportLogoLarge.Size = new System.Drawing.Size(48, 48);
             this.pictureBoxReportLogoLarge.TabIndex = 37;
@@ -600,7 +620,7 @@ namespace CAS.UI.UICAAControls.Operators
             // 
             this.linkLabelChengeReportLogoLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.linkLabelChengeReportLogoLarge.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.linkLabelChengeReportLogoLarge.Location = new System.Drawing.Point(325, 481);
+            this.linkLabelChengeReportLogoLarge.Location = new System.Drawing.Point(320, 513);
             this.linkLabelChengeReportLogoLarge.Name = "linkLabelChengeReportLogoLarge";
             this.linkLabelChengeReportLogoLarge.Size = new System.Drawing.Size(85, 48);
             this.linkLabelChengeReportLogoLarge.TabIndex = 39;
@@ -613,7 +633,7 @@ namespace CAS.UI.UICAAControls.Operators
             // 
             this._labelTransparentLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._labelTransparentLogotype.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._labelTransparentLogotype.Location = new System.Drawing.Point(10, 362);
+            this._labelTransparentLogotype.Location = new System.Drawing.Point(5, 394);
             this._labelTransparentLogotype.Name = "_labelTransparentLogotype";
             this._labelTransparentLogotype.Size = new System.Drawing.Size(184, 48);
             this._labelTransparentLogotype.TabIndex = 28;
@@ -624,7 +644,7 @@ namespace CAS.UI.UICAAControls.Operators
             // 
             this._labelWhiteBackgroundLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._labelWhiteBackgroundLogotype.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._labelWhiteBackgroundLogotype.Location = new System.Drawing.Point(10, 421);
+            this._labelWhiteBackgroundLogotype.Location = new System.Drawing.Point(5, 453);
             this._labelWhiteBackgroundLogotype.Name = "_labelWhiteBackgroundLogotype";
             this._labelWhiteBackgroundLogotype.Size = new System.Drawing.Size(184, 53);
             this._labelWhiteBackgroundLogotype.TabIndex = 31;
@@ -637,7 +657,7 @@ namespace CAS.UI.UICAAControls.Operators
             this._pictureBoxTransparentLogotype.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
             this._pictureBoxTransparentLogotype.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this._pictureBoxTransparentLogotype.Cursor = System.Windows.Forms.Cursors.Hand;
-            this._pictureBoxTransparentLogotype.Location = new System.Drawing.Point(200, 362);
+            this._pictureBoxTransparentLogotype.Location = new System.Drawing.Point(195, 394);
             this._pictureBoxTransparentLogotype.Name = "_pictureBoxTransparentLogotype";
             this._pictureBoxTransparentLogotype.Size = new System.Drawing.Size(48, 48);
             this._pictureBoxTransparentLogotype.TabIndex = 29;
@@ -650,7 +670,7 @@ namespace CAS.UI.UICAAControls.Operators
             this._pictureBoxWhiteBackgroundLogotype.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
             this._pictureBoxWhiteBackgroundLogotype.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this._pictureBoxWhiteBackgroundLogotype.Cursor = System.Windows.Forms.Cursors.Hand;
-            this._pictureBoxWhiteBackgroundLogotype.Location = new System.Drawing.Point(200, 421);
+            this._pictureBoxWhiteBackgroundLogotype.Location = new System.Drawing.Point(195, 453);
             this._pictureBoxWhiteBackgroundLogotype.Name = "_pictureBoxWhiteBackgroundLogotype";
             this._pictureBoxWhiteBackgroundLogotype.Size = new System.Drawing.Size(48, 48);
             this._pictureBoxWhiteBackgroundLogotype.TabIndex = 30;
@@ -661,7 +681,7 @@ namespace CAS.UI.UICAAControls.Operators
             // 
             this._linkChangeTransparentLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkChangeTransparentLogotype.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkChangeTransparentLogotype.Location = new System.Drawing.Point(325, 362);
+            this._linkChangeTransparentLogotype.Location = new System.Drawing.Point(320, 394);
             this._linkChangeTransparentLogotype.Name = "_linkChangeTransparentLogotype";
             this._linkChangeTransparentLogotype.Size = new System.Drawing.Size(85, 48);
             this._linkChangeTransparentLogotype.TabIndex = 32;
@@ -674,7 +694,7 @@ namespace CAS.UI.UICAAControls.Operators
             // 
             this._linkChangeWhiteBackgroundLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkChangeWhiteBackgroundLogotype.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkChangeWhiteBackgroundLogotype.Location = new System.Drawing.Point(325, 421);
+            this._linkChangeWhiteBackgroundLogotype.Location = new System.Drawing.Point(320, 453);
             this._linkChangeWhiteBackgroundLogotype.Name = "_linkChangeWhiteBackgroundLogotype";
             this._linkChangeWhiteBackgroundLogotype.Size = new System.Drawing.Size(85, 48);
             this._linkChangeWhiteBackgroundLogotype.TabIndex = 33;
@@ -690,7 +710,7 @@ namespace CAS.UI.UICAAControls.Operators
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(1297, 576);
+            this.buttonOk.Location = new System.Drawing.Point(1297, 619);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 297;
@@ -704,7 +724,7 @@ namespace CAS.UI.UICAAControls.Operators
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonCancel.Location = new System.Drawing.Point(1378, 576);
+            this.buttonCancel.Location = new System.Drawing.Point(1378, 619);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 33);
             this.buttonCancel.TabIndex = 296;
@@ -1326,11 +1346,128 @@ namespace CAS.UI.UICAAControls.Operators
             this.panel1.Size = new System.Drawing.Size(248, 28);
             this.panel1.TabIndex = 340;
             // 
+            // metroTextBoxCEO
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBoxCEO.CustomButton.Image = null;
+            this.metroTextBoxCEO.CustomButton.Location = new System.Drawing.Point(344, 1);
+            this.metroTextBoxCEO.CustomButton.Name = "";
+            this.metroTextBoxCEO.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.metroTextBoxCEO.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxCEO.CustomButton.TabIndex = 1;
+            this.metroTextBoxCEO.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxCEO.CustomButton.UseSelectable = true;
+            this.metroTextBoxCEO.CustomButton.Visible = false;
+            this.metroTextBoxCEO.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxCEO.Lines = new string[0];
+            this.metroTextBoxCEO.Location = new System.Drawing.Point(100, 355);
+            this.metroTextBoxCEO.MaxLength = 32767;
+            this.metroTextBoxCEO.Multiline = true;
+            this.metroTextBoxCEO.Name = "metroTextBoxCEO";
+            this.metroTextBoxCEO.PasswordChar = '\0';
+            this.metroTextBoxCEO.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxCEO.SelectedText = "";
+            this.metroTextBoxCEO.SelectionLength = 0;
+            this.metroTextBoxCEO.SelectionStart = 0;
+            this.metroTextBoxCEO.ShortcutsEnabled = true;
+            this.metroTextBoxCEO.Size = new System.Drawing.Size(364, 21);
+            this.metroTextBoxCEO.TabIndex = 342;
+            this.metroTextBoxCEO.UseSelectable = true;
+            this.metroTextBoxCEO.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxCEO.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // radioButtonOther
+            // 
+            this.radioButtonOther.AutoSize = true;
+            this.radioButtonOther.Font = new System.Drawing.Font("Verdana", 9F);
+            this.radioButtonOther.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.radioButtonOther.Location = new System.Drawing.Point(1007, 469);
+            this.radioButtonOther.Name = "radioButtonOther";
+            this.radioButtonOther.Size = new System.Drawing.Size(61, 18);
+            this.radioButtonOther.TabIndex = 343;
+            this.radioButtonOther.Text = "Other";
+            this.radioButtonOther.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
+            // metroTextBoxOther
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBoxOther.CustomButton.Image = null;
+            this.metroTextBoxOther.CustomButton.Location = new System.Drawing.Point(318, 2);
+            this.metroTextBoxOther.CustomButton.Name = "";
+            this.metroTextBoxOther.CustomButton.Size = new System.Drawing.Size(31, 31);
+            this.metroTextBoxOther.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxOther.CustomButton.TabIndex = 1;
+            this.metroTextBoxOther.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxOther.CustomButton.UseSelectable = true;
+            this.metroTextBoxOther.CustomButton.Visible = false;
+            this.metroTextBoxOther.ForeColor = System.Drawing.Color.DimGray;
+            this.metroTextBoxOther.Lines = new string[0];
+            this.metroTextBoxOther.Location = new System.Drawing.Point(1112, 492);
+            this.metroTextBoxOther.MaxLength = 32767;
+            this.metroTextBoxOther.Multiline = true;
+            this.metroTextBoxOther.Name = "metroTextBoxOther";
+            this.metroTextBoxOther.PasswordChar = '\0';
+            this.metroTextBoxOther.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxOther.SelectedText = "";
+            this.metroTextBoxOther.SelectionLength = 0;
+            this.metroTextBoxOther.SelectionStart = 0;
+            this.metroTextBoxOther.ShortcutsEnabled = true;
+            this.metroTextBoxOther.Size = new System.Drawing.Size(352, 36);
+            this.metroTextBoxOther.TabIndex = 344;
+            this.metroTextBoxOther.UseSelectable = true;
+            this.metroTextBoxOther.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxOther.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.label13.Location = new System.Drawing.Point(1007, 495);
+            this.label13.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(54, 14);
+            this.label13.TabIndex = 345;
+            this.label13.Text = "Remark";
+            // 
+            // comboBoxStatus
+            // 
+            this.comboBoxStatus.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.comboBoxStatus.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxStatus.FormattingEnabled = true;
+            this.comboBoxStatus.Location = new System.Drawing.Point(1112, 534);
+            this.comboBoxStatus.Name = "comboBoxStatus";
+            this.comboBoxStatus.Size = new System.Drawing.Size(352, 22);
+            this.comboBoxStatus.TabIndex = 346;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.label14.Location = new System.Drawing.Point(1007, 537);
+            this.label14.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(48, 14);
+            this.label14.TabIndex = 347;
+            this.label14.Text = "Status";
+            // 
             // AddOperatorFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1476, 632);
+            this.ClientSize = new System.Drawing.Size(1476, 675);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.comboBoxStatus);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.metroTextBoxOther);
+            this.Controls.Add(this.radioButtonOther);
+            this.Controls.Add(this.metroTextBoxCEO);
+            this.Controls.Add(label7);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radioButtonAirOperator);
             this.Controls.Add(this.metroTextBoxIATA);
@@ -1402,9 +1539,9 @@ namespace CAS.UI.UICAAControls.Operators
             this.Controls.Add(metroLabel1);
             this.Controls.Add(this.textBoxFullName);
             this.Controls.Add(labelDescription);
+            this.MaximizeBox = false;
             this.Name = "AddOperatorFrom";
             this.Resizable = false;
-            this.MaximizeBox = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Add Operator";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReportLogoVeryLarge)).EndInit();
@@ -1415,8 +1552,16 @@ namespace CAS.UI.UICAAControls.Operators
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.ComboBox comboBoxStatus;
+        private System.Windows.Forms.Label label14;
+
+        private System.Windows.Forms.RadioButton radioButtonOther;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxOther;
+        private System.Windows.Forms.Label label13;
+
+        private MetroFramework.Controls.MetroTextBox metroTextBoxCEO;
 
         #endregion
 

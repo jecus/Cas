@@ -55,6 +55,7 @@ namespace CAS.UI.UICAAControls.Operators
 
         private void UpdateInformation()
         {
+            metroTextBoxCEO.Text = _currentOperator.CEO;
             textBoxFullName.Text = _currentOperator.FullName;
             metroTextBoxShortName.Text = _currentOperator.ShortName;
             metroTextBoxAddress.Text = _currentOperator.Address;
@@ -72,6 +73,9 @@ namespace CAS.UI.UICAAControls.Operators
             metroTextBoxATCANS.Text = _currentOperator.Description;
             metroTextBoxFuel.Text = _currentOperator.Description;
             metroTextBoxTraining.Text = _currentOperator.Description;
+            
+            metroTextBoxOther.Text = _currentOperator.Description;
+            comboBoxStatus.SelectedItem = OperatorStatus.GetItemById(_currentOperator.OperatorStatusId) ?? OperatorStatus.Unknown;
 
             for (int i = 0; i < checkedListBoxTypeOfOper.Items.Count; i++)
             {
@@ -127,6 +131,8 @@ namespace CAS.UI.UICAAControls.Operators
             radioButtonAirOperator.Checked = _currentOperator.IsAirOperator;
             radioButtonCAMO.Checked = _currentOperator.IsCAMO;
             radioButtonCAO.Checked = _currentOperator.IsCAO;
+            radioButtonOther.Checked = _currentOperator.IsCAO;
+            radioButtonOther.Checked = _currentOperator.IsOther;
 
 
             if (_currentOperator.IsCommertial)
@@ -148,6 +154,8 @@ namespace CAS.UI.UICAAControls.Operators
             _currentOperator.Web = metroTextBoxWeb.Text;
             _currentOperator.Email = metroTextBoxEmail.Text;
 
+            _currentOperator.CEO = metroTextBoxCEO.Text;
+            
             if(radioButtonAirOperator.Checked)
                 _currentOperator.Description = metroTextBoxOperatorType.Text;
             else if (radioButtonAmo.Checked)
@@ -156,6 +164,11 @@ namespace CAS.UI.UICAAControls.Operators
                 _currentOperator.Description = metroTextBoxCAMO.Text;
             else if(radioButtonCAO.Checked)
                 _currentOperator.Description = metroTextBoxCAO.Text;
+            else if (radioButtonOther.Checked)
+            {
+                _currentOperator.Description = metroTextBoxOther.Text;
+                _currentOperator.OperatorStatusId = (comboBoxStatus.SelectedItem as OperatorStatus).ItemId;
+            }
             else if (radioButtonAirdromeOp.Checked)
                 _currentOperator.Description = metroTextBoxAirdrome.Text;
             else if (radioButtonATC.Checked)
@@ -169,7 +182,9 @@ namespace CAS.UI.UICAAControls.Operators
             _currentOperator.IsAirOperator = radioButtonAirOperator.Checked;
             _currentOperator.IsCAMO = radioButtonCAMO.Checked;
             _currentOperator.IsCAO= radioButtonCAO.Checked;
+            _currentOperator.IsOther= radioButtonOther.Checked;
 
+            _currentOperator.IsATC = radioButtonATC.Checked;
             _currentOperator.IsATC = radioButtonATC.Checked;
             _currentOperator.IsFuel = radioButtonFuel.Checked;
             _currentOperator.IsTraningOperation = radioButtonTraningOrg.Checked;
@@ -230,6 +245,9 @@ namespace CAS.UI.UICAAControls.Operators
             checkedListBoxRatings.Items.AddRange(Ratings.Items.ToArray());
             checkedListBoxSpecialOp.Items.Clear();
             checkedListBoxSpecialOp.Items.AddRange(SpecialOperations.Items.ToArray());
+            
+            comboBoxStatus.Items.Clear();
+            comboBoxStatus.Items.AddRange(OperatorStatus.Items.ToArray());
 
 
             checkedListBoxAemcPrivilages.Enabled = radioButtonAemc.Checked;
@@ -458,7 +476,17 @@ namespace CAS.UI.UICAAControls.Operators
                 metroTextBoxCAMO.Text = string.Empty;
 
             metroTextBoxCAO.Enabled =
-                radioButtonCAO.Checked;
+                radioButtonCAO.Checked; 
+            
+            
+            metroTextBoxOther.Enabled =
+                radioButtonOther.Checked;
+
+            if (!radioButtonOther.Checked)
+            {
+                metroTextBoxOther.Text = string.Empty;
+                comboBoxStatus.SelectedItem =  OperatorStatus.Unknown;
+            }
 
             if (!radioButtonCAO.Checked)
                 metroTextBoxCAO.Text = string.Empty;
