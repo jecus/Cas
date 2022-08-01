@@ -81,7 +81,7 @@ namespace CAA.Entity.Core
         public DbSet<CAAProcedureDocumentReferenceDTO> ProcedureDocumentReferenceDtos { get; set; }
 
 
-        public DbSet<CAASpecialistCAADTO> SpecialistCaadtos { get; set; }
+        public DbSet<CAASpecialistCustomDTO> SpecialistCaadtos { get; set; }
         public DbSet<CAASpecialistDTO> SpecialistDtos { get; set; }
         public DbSet<CAASpecialistInstrumentRatingDTO> SpecialistInstrumentRatingDtos { get; set; }
         public DbSet<CAASpecialistLicenseDetailDTO> SpecialistLicenseDetailDtos { get; set; }

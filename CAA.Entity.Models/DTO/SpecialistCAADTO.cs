@@ -10,7 +10,7 @@ namespace CAA.Entity.Models.DTO
 	[Table("SpecialistsCAA", Schema = "dbo")]
 	
 	[Condition("IsDeleted", 0)]
-	public class CAASpecialistCAADTO : BaseEntity
+	public class CAASpecialistCustomDTO : BaseEntity
 	{
 		
 		[Column("NumberCAA"), MaxLength(25)]

@@ -561,7 +561,7 @@ namespace CAA.Entity.Core.Repository
 
             if (typeCollection.Contains("SpecialistCAADTO"))
             {
-                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistCAADTO>>>(lambda.Body, lambda.Parameters);
+                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistCustomDTO>>>(lambda.Body, lambda.Parameters);
                 return query.IncludeFilter(l);
             }
 
@@ -805,7 +805,7 @@ namespace CAA.Entity.Core.Repository
 
             if (typeCollection.Contains("SpecialistCAADTO"))
             {
-                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistCAADTO>>>(lambda.Body, lambda.Parameters);
+                var l = Expression.Lambda<Func<T, IEnumerable<CAASpecialistCustomDTO>>>(lambda.Body, lambda.Parameters);
                 return query.IncludeFilter(l);
             }
 

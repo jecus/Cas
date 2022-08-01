@@ -219,11 +219,11 @@ namespace CAS.UI.UICAAControls.Specialists
                 if (_currentItem.Licenses.Any())
                 {
 	                var ids = _currentItem.Licenses.Select(i => i.ItemId);
-	                var caaLicense = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistCAADTO, SpecialistCAA>(new Filter("SpecialistLicenseId", FilterType.In,ids));
-	                var caaLicenseDetails = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseDetailDTO, SpecialistLicenseDetail>(new Filter("SpecialistLicenseId", FilterType.In,ids));
-	                var specialistLicenseRating = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseRatingDTO, SpecialistLicenseRating>(new Filter("SpecialistLicenseId", FilterType.In,ids));
-	                var specialistLicenseRemark = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseRemarkDTO, SpecialistLicenseRemark>(new Filter("SpecialistLicenseId", FilterType.In,ids));
-	                var specialistInstrumentRating = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistInstrumentRatingDTO, SpecialistInstrumentRating>(new Filter("SpecialistLicenseId", FilterType.In,ids));
+	                var caaLicense = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASpecialistCustomDTO, SpecialistCAA>(new Filter("SpecialistLicenseId", FilterType.In,ids), loadChild:true);
+	                var caaLicenseDetails = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseDetailDTO, SpecialistLicenseDetail>(new Filter("SpecialistLicenseId", FilterType.In,ids), loadChild:true);
+	                var specialistLicenseRating = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseRatingDTO, SpecialistLicenseRating>(new Filter("SpecialistLicenseId", FilterType.In,ids), loadChild:true);
+	                var specialistLicenseRemark = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseRemarkDTO, SpecialistLicenseRemark>(new Filter("SpecialistLicenseId", FilterType.In,ids), loadChild:true);
+	                var specialistInstrumentRating = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistInstrumentRatingDTO, SpecialistInstrumentRating>(new Filter("SpecialistLicenseId", FilterType.In,ids), loadChild:true);
 
 	                
 	                var det = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseDetailDTO, SpecialistLicenseDetail>(new Filter("SpecialistId",_currentItem.ItemId), loadChild:true);

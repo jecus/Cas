@@ -913,15 +913,21 @@
     <Compile Include="UICAAControls\Audit\PEL\PelPersonnelLiteListView.Designer.cs">
       <DependentUpon>PelPersonnelLiteListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseCloseForm.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseCloseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseCloseForm.Designer.cs">
       <DependentUpon>CourseCloseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CoursePackageEditorForm.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CoursePackageEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UICAAControls\CAAEducation\CoursePackage\CoursePackageEditorForm.Designer.cs">
       <DependentUpon>CoursePackageEditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseListScreen.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseListScreen.Designer.cs">
       <DependentUpon>CourseListScreen.cs</DependentUpon>
     </Compile>
@@ -931,11 +937,15 @@
     <Compile Include="UICAAControls\CAAEducation\CoursePackage\CoursePackageListView.Designer.cs">
       <DependentUpon>CoursePackageListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordListScreen.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordListScreen.Designer.cs">
       <DependentUpon>CourseRecordListScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordListView.cs" />
+    <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UICAAControls\CAAEducation\CoursePackage\CourseRecordListView.Designer.cs">
       <DependentUpon>CourseRecordListView.cs</DependentUpon>
     </Compile>

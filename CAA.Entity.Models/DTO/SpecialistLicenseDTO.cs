@@ -48,7 +48,7 @@ namespace CAA.Entity.Models.DTO
 
 		
 		[Child]
-		public ICollection<CAASpecialistCAADTO> CaaLicense { get; set; }
+		public ICollection<CAASpecialistCustomDTO> CaaLicense { get; set; }
 
 		
 		[Child]

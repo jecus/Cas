@@ -214,8 +214,17 @@ namespace CAS.UI.Helpers
 
 		public int Save<T>(T value, bool saveAttachedFile = true, bool writeAudit = true) where T : BaseEntity
 		{
-			var res = _httpClient.SendJsonAsync<T, int>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").Replace("CAA", "").ToLower()}/save", value);
-			return res?.Data ?? -1;
+			try
+			{
+				var res = _httpClient.SendJsonAsync<T, int>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").Replace("CAA", "").ToLower()}/save", value);
+				return res?.Data ?? -1;
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+				throw;
+			}
+			
 		}
 
 		public void BulkDelete<T>(IEnumerable<T> entity, int? batchSize = null) where T : BaseEntity

@@ -1163,7 +1163,7 @@ namespace SmartCore.DtoHelper
 				Notify = license.NotifyLifelength?.ConvertToByteArray(),
 				IssueDate = license.IssueDate,
 				ValidToDate = license.ValidToDate,
-				CaaLicense = license.CaaLicense?.Select(i => i.ConvertCAA()) as ICollection<CAASpecialistCAADTO>,
+				CaaLicense = license.CaaLicense?.Select(i => i.ConvertCAA()) as ICollection<CAASpecialistCustomDTO>,
 				LicenseDetails = license.LicenseDetails?.Select(i => i.ConvertCAA()) as ICollection<CAASpecialistLicenseDetailDTO>,
 				LicenseRatings = license.LicenseRatings?.Select(i => i.ConvertCAA()) as ICollection<CAASpecialistLicenseRatingDTO>,
 				SpecialistInstrumentRatings = license.SpecialistInstrumentRatings?.Select(i => i.ConvertCAA()) as ICollection<CAASpecialistInstrumentRatingDTO>,
@@ -1335,9 +1335,9 @@ namespace SmartCore.DtoHelper
 			};
 		}
 
-		public static CAASpecialistCAADTO ConvertCAA(this SpecialistCAA specialistCaa)
+		public static CAASpecialistCustomDTO ConvertCAA(this SpecialistCAA specialistCaa)
 		{
-			return new CAASpecialistCAADTO
+			return new CAASpecialistCustomDTO
 			{
 				ItemId = specialistCaa.ItemId,
 				IsDeleted = specialistCaa.IsDeleted,
@@ -1353,7 +1353,7 @@ namespace SmartCore.DtoHelper
 			};
 		}
 
-		public static SpecialistCAA ConvertCAA(this CAASpecialistCAADTO specialistCaa)
+		public static SpecialistCAA ConvertCAA(this CAASpecialistCustomDTO specialistCaa)
 		{
 			return new SpecialistCAA
 			{

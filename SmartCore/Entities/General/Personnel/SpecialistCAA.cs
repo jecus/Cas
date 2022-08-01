@@ -10,7 +10,7 @@ namespace SmartCore.Entities.General.Personnel
 {
 	[Table("SpecialistsCAA", "dbo", "ItemId")]
 	[Dto(typeof(SpecialistCAADTO))]
-	[CAADto(typeof(CAASpecialistCAADTO))]
+	[CAADto(typeof(CAASpecialistCustomDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class SpecialistCAA : BaseEntityObject

@@ -6,10 +6,10 @@ using Microsoft.Extensions.Logging;
 
 namespace CAS.API.Controllers.General
 {
-	[Route("specialistcaa")]
-	public class SpecialistCAAController : BaseController<CAASpecialistCAADTO>
+	[Route("specialistcustom")]
+	public class SpecialistCAAController : BaseController<CAASpecialistCustomDTO>
 	{
-		public SpecialistCAAController(DataContext context, ILogger<BaseController<CAASpecialistCAADTO>> logger) : base(context, logger)
+		public SpecialistCAAController(DataContext context, ILogger<BaseController<CAASpecialistCustomDTO>> logger) : base(context, logger)
 		{
 
 		}

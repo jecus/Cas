@@ -45,12 +45,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 		public bool ValidateData(out string message)
 		{
 			message = "";
-
-			if (textboxDescription.Text == "")
-			{
-				if (message != "") message += "\n ";
-				message += "Please input Description";
-			}
+			
 
 			if (message != "")
 				return false;
