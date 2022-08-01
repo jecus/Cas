@@ -6,9 +6,11 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
+using CAS.Entity.Models.DTO.General;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
+using Entity.Abstractions.Attributte;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA.CAAEducation;
 using SmartCore.Entities.Collections;
@@ -210,6 +212,28 @@ namespace CAS.UI.UICAAControls.Specialists
 	                {
 		                document.Parent = _currentItem;
 		                document.Files = new CommonCollection<ItemFileLink>(links.Where(i => i.ParentId == document.ItemId));
+	                }
+                }
+
+
+                if (_currentItem.Licenses.Any())
+                {
+	                var ids = _currentItem.Licenses.Select(i => i.ItemId);
+	                var caaLicense = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistCAADTO, SpecialistCAA>(new Filter("SpecialistLicenseId", FilterType.In,ids));
+	                var caaLicenseDetails = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseDetailDTO, SpecialistLicenseDetail>(new Filter("SpecialistLicenseId", FilterType.In,ids));
+	                var specialistLicenseRating = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseRatingDTO, SpecialistLicenseRating>(new Filter("SpecialistLicenseId", FilterType.In,ids));
+	                var specialistLicenseRemark = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseRemarkDTO, SpecialistLicenseRemark>(new Filter("SpecialistLicenseId", FilterType.In,ids));
+	                var specialistInstrumentRating = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistInstrumentRatingDTO, SpecialistInstrumentRating>(new Filter("SpecialistLicenseId", FilterType.In,ids));
+
+
+
+	                foreach (var license in _currentItem.Licenses)
+	                {
+		                license.CaaLicense = new CommonCollection<SpecialistCAA>(caaLicense.Where(i => i.SpecialistLicenseId == license.ItemId));
+		                license.LicenseDetails = new CommonCollection<SpecialistLicenseDetail>(caaLicenseDetails.Where(i => i.SpecialistLicenseId == license.ItemId));
+		                license.LicenseRatings = new CommonCollection<SpecialistLicenseRating>(specialistLicenseRating.Where(i => i.SpecialistLicenseId == license.ItemId));
+		                license.LicenseRemark = new CommonCollection<SpecialistLicenseRemark>(specialistLicenseRemark.Where(i => i.SpecialistLicenseId == license.ItemId));
+		                license.SpecialistInstrumentRatings = new CommonCollection<SpecialistInstrumentRating>(specialistInstrumentRating.Where(i => i.SpecialistLicenseId == license.ItemId));
 	                }
                 }
 
@@ -573,6 +597,42 @@ namespace CAS.UI.UICAAControls.Specialists
             try
             {
 				GlobalObjects.PersonnelCore.Save(_currentItem, true);
+
+
+				foreach (var remark in _currentItem.LicenseRemark)
+					remark.SpecialistId = _currentItem.ItemId;
+				foreach (var detail in _currentItem.LicenseDetails)
+					detail.SpecialistId = _currentItem.ItemId;
+
+				foreach (var l in _currentItem.Licenses)
+				{
+					l.SpecialistId = _currentItem.ItemId;
+
+					foreach (var caa in l.CaaLicense)
+						caa.SpecialistLicenseId = l.ItemId;
+
+					foreach (var detail in l.LicenseDetails)
+					{
+						detail.SpecialistLicenseId = l.ItemId;
+						detail.SpecialistId = _currentItem.ItemId;
+					}
+					
+					foreach (var rating in l.LicenseRatings)
+						rating.SpecialistLicenseId = l.ItemId;
+					
+					foreach (var remark in l.LicenseRemark)
+					{
+						remark.SpecialistLicenseId = l.ItemId;
+						remark.SpecialistId = _currentItem.ItemId;
+					}
+					
+					foreach (var inst in l.SpecialistInstrumentRatings)
+						inst.SpecialistLicenseId = l.ItemId;
+				}
+
+				GlobalObjects.PersonnelCore.Save(_currentItem, true);
+
+
             }
             catch (Exception ex)
             {
