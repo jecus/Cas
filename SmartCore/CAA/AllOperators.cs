@@ -205,6 +205,7 @@ namespace SmartCore.CAA
 
         public string IATACode { get; set; }
         public string Description { get; set; }
+        public string Remark { get; set; }
         public bool IsAirOperator { get; set; }
         public bool IsCAMO { get; set; }
         public bool IsCAO { get; set; }

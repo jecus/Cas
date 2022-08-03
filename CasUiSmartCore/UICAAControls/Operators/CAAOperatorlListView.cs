@@ -5,6 +5,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA;
+using SmartCore.CAA.Operators;
 
 namespace CAS.UI.UICAAControls.Operators
 {
@@ -61,6 +62,7 @@ namespace CAS.UI.UICAAControls.Operators
 			AddColumn("Web", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Email", (int)(radGridView1.Width * 0.3f));
 			AddColumn("CEO", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Status", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Remark", (int)(radGridView1.Width * 0.3f));
             AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
@@ -73,10 +75,11 @@ namespace CAS.UI.UICAAControls.Operators
             var author = GlobalObjects.CaaEnvironment?.GetCorrector(item);
 
             var type = item.TypeString;
-            var remark = "";
+            var remark = item.Remark;
+            var status = OperatorStatus.GetItemById(item.OperatorStatusId) ?? OperatorStatus.Unknown;
+            
             if (item.IsOther)
             {
-	            remark = item.Description;
 	            type = "Other";
             }
             
@@ -100,6 +103,7 @@ namespace CAS.UI.UICAAControls.Operators
 				CreateRow(item.Web, item.Web),
 				CreateRow(item.Email, item.Email),
 				CreateRow(item.CEO, item.CEO),
+				CreateRow(status.ToString(), status),
 				CreateRow(remark, remark),
                 CreateRow(author, author)
 			};

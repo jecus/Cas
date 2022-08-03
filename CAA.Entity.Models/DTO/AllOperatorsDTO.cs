@@ -130,5 +130,8 @@ namespace CAA.Entity.Models.DTO
         
         [JsonProperty("OperatorStatusId")]
         public int  OperatorStatusId { get; set; }
+        
+        [JsonProperty("Remark")]
+        public string  Remark { get; set; }
     }
 }

@@ -74,7 +74,7 @@ namespace CAS.UI.UICAAControls.Operators
             metroTextBoxFuel.Text = _currentOperator.Description;
             metroTextBoxTraining.Text = _currentOperator.Description;
             
-            metroTextBoxOther.Text = _currentOperator.Description;
+            metroTextBoxOther.Text = _currentOperator.Remark;
             comboBoxStatus.SelectedItem = OperatorStatus.GetItemById(_currentOperator.OperatorStatusId) ?? OperatorStatus.Unknown;
 
             for (int i = 0; i < checkedListBoxTypeOfOper.Items.Count; i++)
@@ -156,6 +156,9 @@ namespace CAS.UI.UICAAControls.Operators
 
             _currentOperator.CEO = metroTextBoxCEO.Text;
             
+            _currentOperator.Remark = metroTextBoxOther.Text;
+            _currentOperator.OperatorStatusId = (comboBoxStatus.SelectedItem as OperatorStatus).ItemId;
+            
             if(radioButtonAirOperator.Checked)
                 _currentOperator.Description = metroTextBoxOperatorType.Text;
             else if (radioButtonAmo.Checked)
@@ -164,11 +167,6 @@ namespace CAS.UI.UICAAControls.Operators
                 _currentOperator.Description = metroTextBoxCAMO.Text;
             else if(radioButtonCAO.Checked)
                 _currentOperator.Description = metroTextBoxCAO.Text;
-            else if (radioButtonOther.Checked)
-            {
-                _currentOperator.Description = metroTextBoxOther.Text;
-                _currentOperator.OperatorStatusId = (comboBoxStatus.SelectedItem as OperatorStatus).ItemId;
-            }
             else if (radioButtonAirdromeOp.Checked)
                 _currentOperator.Description = metroTextBoxAirdrome.Text;
             else if (radioButtonATC.Checked)
@@ -479,14 +477,14 @@ namespace CAS.UI.UICAAControls.Operators
                 radioButtonCAO.Checked; 
             
             
-            metroTextBoxOther.Enabled =
-                radioButtonOther.Checked;
-
-            if (!radioButtonOther.Checked)
-            {
-                metroTextBoxOther.Text = string.Empty;
-                comboBoxStatus.SelectedItem =  OperatorStatus.Unknown;
-            }
+            // metroTextBoxOther.Enabled =
+            //     radioButtonOther.Checked;
+            //
+            // if (!radioButtonOther.Checked)
+            // {
+            //     metroTextBoxOther.Text = string.Empty;
+            //     comboBoxStatus.SelectedItem =  OperatorStatus.Unknown;
+            // }
 
             if (!radioButtonCAO.Checked)
                 metroTextBoxCAO.Text = string.Empty;

@@ -1729,6 +1729,7 @@ namespace SmartCore.DtoHelper
                     IsCAMO = oper.IsCAMO,
                     IsCAO = oper.IsCAO,
                     IsOther = oper.IsOther,
+                    Remark = oper.Remark,
 				},
 			};
 		}
@@ -1770,6 +1771,7 @@ namespace SmartCore.DtoHelper
                 OperatorStatusId = operdto.Settings.OperatorStatusId,
                 Description = operdto.Settings.Description,
                 IsAirOperator = operdto.Settings.IsAirOperator,
+                Remark = operdto.Settings.Remark,
                 IsCAMO = operdto.Settings.IsCAMO,
                 IsCAO = operdto.Settings.IsCAO,
                 IsOther = operdto.Settings.IsOther,
