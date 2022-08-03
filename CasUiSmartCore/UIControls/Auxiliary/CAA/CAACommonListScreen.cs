@@ -522,11 +522,11 @@ namespace CAS.UI.UIControls.Auxiliary.CAA
 				{
 					ConstructorInfo ci = ViewedType.GetConstructor(new Type[0]);
 					BaseEntityObject item = (BaseEntityObject)ci.Invoke(null);
+					
+					if (item is IOperatable oper)
+						oper.OperatorId = OperatorId;
+					form = new CommonEditorForm(item, OperatorId);
 
-                    if (item is IOperatable oper)
-                        oper.OperatorId = OperatorId;
-
-					form = new CommonEditorForm(item);
 				}
 
 				if (form.ShowDialog(this) == DialogResult.OK)

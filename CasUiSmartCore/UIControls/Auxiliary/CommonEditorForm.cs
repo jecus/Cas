@@ -27,6 +27,8 @@ namespace CAS.UI.UIControls.Auxiliary
     /// </summary>
     public partial class CommonEditorForm : MetroForm
     {
+        private int _operatorId;
+        
         #region Fields
 
         private bool _saveChangesToDatabase;
@@ -69,6 +71,29 @@ namespace CAS.UI.UIControls.Auxiliary
                 ? da.Description 
                 : t.Name;
 
+            _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
+            _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
+
+            _animatedThreadWorker.RunWorkerAsync();
+        }
+        
+        
+        public CommonEditorForm(BaseEntityObject editingObject,int operatorId , bool saveChangesToDatabase = true) : this()
+        {
+            if(editingObject == null)
+                throw new ArgumentNullException("editingObject", "can not be null");
+            _currentObject = editingObject;
+            _saveChangesToDatabase = saveChangesToDatabase;
+
+            Type t = _currentObject.GetType();
+            DescriptionAttribute da =
+                t.GetCustomAttributes(typeof (DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;
+            _typeName = da != null && !string.IsNullOrEmpty(da.Description) 
+                ? da.Description 
+                : t.Name;
+
+            _operatorId = operatorId;
+            
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
 
@@ -630,6 +655,7 @@ namespace CAS.UI.UIControls.Auxiliary
                 {
                     DictionaryComboBox dc = new DictionaryComboBox
                     {
+                        OperatorId = _operatorId,
                         Enabled = controlEnabled,
                         Name = propertyInfo.Name,
                         SelectedItem = (StaticDictionary)val,
@@ -671,6 +697,7 @@ namespace CAS.UI.UIControls.Auxiliary
                 AbstractDictionary val = (AbstractDictionary)propertyInfo.GetValue(obj, null);
                 DictionaryComboBox dc = new DictionaryComboBox
                 {
+                    OperatorId = _operatorId,
                     Enabled = controlEnabled,
                     SelectedItem = val,
                     Tag = propertyInfo,

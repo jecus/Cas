@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
+using CAA.Entity.Models;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CASTerms;
@@ -257,6 +260,8 @@ namespace CAS.UI.UIControls.Auxiliary
             }
         }
 
+        public int OperatorId { get; set; }
+
         #endregion
 
         #endregion
@@ -425,6 +430,35 @@ namespace CAS.UI.UIControls.Auxiliary
                     if(GlobalObjects.CasEnvironment != null)
                         _typeItemsCollection = GlobalObjects.CasEnvironment.GetDictionary(_type);
                     else _typeItemsCollection = GlobalObjects.CaaEnvironment.GetDictionary(_type);
+
+                    if (OperatorId != 0)
+                    {
+                        if (_type.GetInterfaces().Contains(typeof(IOperatable)) && GlobalObjects.CaaEnvironment != null)
+                        {
+                            if (_type.Name ==  nameof(Department))
+                            {
+                                var res =  new CommonDictionaryCollection<Department>( _typeItemsCollection.OfType<IOperatable>().Where(i => i.OperatorId == OperatorId).OfType<Department>());
+                                res.Add(Department.Unknown);
+                                _typeItemsCollection = res;
+
+                            }
+                            else if (_type.Name == nameof(Occupation))
+                            {
+                                var res =  new CommonDictionaryCollection<Occupation>( _typeItemsCollection.OfType<IOperatable>().Where(i => i.OperatorId == OperatorId).OfType<Occupation>());
+                                res.Add(Occupation.Unknown);
+                                _typeItemsCollection = res;
+                            }
+                            else if (_type.Name == nameof(Nomenclatures))
+                            {
+                                var res = new CommonDictionaryCollection<Nomenclatures>( _typeItemsCollection.OfType<IOperatable>().Where(i => i.OperatorId == OperatorId).OfType<Nomenclatures>());
+                                res.Add(Nomenclatures.Unknown);
+                                _typeItemsCollection = res;
+                            }
+                        }
+                    }
+                    //TODO: затычка!!!!!!!
+                    
+                        
                 }
                 catch (Exception)
                 {

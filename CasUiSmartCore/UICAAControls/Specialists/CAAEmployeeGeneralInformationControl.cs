@@ -123,7 +123,7 @@ namespace CAS.UI.UICAAControls.Specialists
                         textBoxPhoneMobile.Text != _currentItem.PhoneMobile ||
                         textBoxSkype.Text != _currentItem.Skype ||
                         (Gender)comboBoxGender.SelectedItem != _currentItem.Gender ||
-                        dictionaryComboBoxOccupation.SelectedItem != _currentItem.Occupation ||
+                        (Occupation)comboBoxOccupation.SelectedItem != _currentItem.Occupation ||
                         fileControlPassportCopy.GetChangeStatus() ||
                         fileControlResume.GetChangeStatus() ||
                         _logotypeChanged || _signChanged);
@@ -222,7 +222,6 @@ namespace CAS.UI.UICAAControls.Specialists
 			comboBoxGender.Items.Clear();
             foreach (object o in Enum.GetValues(typeof(Gender)))
                 comboBoxGender.Items.Add(o);
-            dictionaryComboBoxOccupation.Type = typeof(Occupation);
             dictionaryComboBoxLocation.Type = typeof(LocationsType);
 
 
@@ -262,14 +261,14 @@ namespace CAS.UI.UICAAControls.Specialists
 
 
 
-           checkedListBox1.Items.Clear();
-			checkedListBox1.Items.AddRange(GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray());
-
-			for (int i = 0; i < checkedListBox1.Items.Count; i++)
-			{
-				if(_currentItem.Combination!= null && _currentItem.Combination.Contains(checkedListBox1.Items[i].ToString()))
-					checkedListBox1.SetItemChecked(i,true);
-			}
+			// checkedListBox1.Items.Clear();
+			// checkedListBox1.Items.AddRange(GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray());
+			//
+			// for (int i = 0; i < checkedListBox1.Items.Count; i++)
+			// {
+			// 	if(_currentItem.Combination!= null && _currentItem.Combination.Contains(checkedListBox1.Items[i].ToString()))
+			// 		checkedListBox1.SetItemChecked(i,true);
+			// }
 			
 			
 			checkedListBoxQualification.Items.Clear();
@@ -314,8 +313,7 @@ namespace CAS.UI.UICAAControls.Specialists
             textBoxInformation.Text = _currentItem.Information;
             comboBoxGender.SelectedItem = _currentItem.Gender;
 	        comboBoxPosition.SelectedItem = _currentItem.Position;
-            dictionaryComboBoxOccupation.SelectedItem = _currentItem.Occupation;
-            dictionaryComboBoxLocation.SelectedItem = _currentItem.Facility;
+	        dictionaryComboBoxLocation.SelectedItem = _currentItem.Facility;
             textBoxEmail.Text = _currentItem.Email;
             textBoxPhone.Text = _currentItem.Phone;
 			textBoxAdditional.Text = _currentItem.Additional;
@@ -337,6 +335,28 @@ namespace CAS.UI.UICAAControls.Specialists
             //dateTimePickerDateOfBirth.ValueChanged += DateTimePickerEffDateValueChanged;
             this.radioButtonCAA.CheckedChanged += new System.EventHandler(this.radioButtonCAA_CheckedChanged);
             this.radioButtonOperator.CheckedChanged += new System.EventHandler(this.radioButtonCAA_CheckedChanged);
+        }
+        
+        
+        
+        private void ComboBoxOperatorOnSelectedIndexChanged(object sender, EventArgs e)
+        {
+	        var op = comboBoxOperator.SelectedItem as AllOperators;
+
+	        var items = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().Cast<Occupation>().Where(i => i.OperatorId == op.ItemId).ToArray();
+	        comboBoxOccupation.Items.Clear();
+	        comboBoxOccupation.Items.AddRange(items);
+	        comboBoxOccupation.Items.Add(Occupation.Unknown);
+	        comboBoxOccupation.SelectedItem = _currentItem.Occupation;
+	        checkedListBox1.Items.Clear();
+	        checkedListBox1.Items.AddRange(items);
+	        
+	        
+	        for (int i = 0; i < checkedListBox1.Items.Count; i++)
+	        {
+		        if(_currentItem.Combination!= null && _currentItem.Combination.Contains(checkedListBox1.Items[i].ToString()))
+			        checkedListBox1.SetItemChecked(i,true);
+	        }
         }
 
         #endregion
@@ -385,7 +405,7 @@ namespace CAS.UI.UICAAControls.Specialists
             _currentItem.Gender = (Gender)comboBoxGender.SelectedItem;
 	        _currentItem.Position = (SpecialistPosition) comboBoxPosition.SelectedItem;
 	        _currentItem.Status = (SpecialistStatus)comboBoxStatus.SelectedItem;
-            _currentItem.Occupation = dictionaryComboBoxOccupation.SelectedItem as Occupation;
+            _currentItem.Occupation = comboBoxOccupation.SelectedItem as Occupation;
             _currentItem.Facility = dictionaryComboBoxLocation.SelectedItem as LocationsType;
             _currentItem.Email = textBoxEmail.Text;
             _currentItem.Phone = textBoxPhone.Text;
@@ -436,7 +456,7 @@ namespace CAS.UI.UICAAControls.Specialists
             textBoxPhoneMobile.Text = "";
             textBoxSkype.Text = "";
             comboBoxGender.SelectedItem = null;
-            dictionaryComboBoxOccupation.SelectedItem = null;
+            comboBoxOccupation.SelectedItem = null;
 
             fileControlPassportCopy.AttachedFile = null;
             fileControlResume.AttachedFile = null;
@@ -529,7 +549,8 @@ namespace CAS.UI.UICAAControls.Specialists
                 comboBoxOperator.Enabled = false;
             }
         }
-
+        
+        
         /// <summary>
         /// Occurs when linked invoker requests displaying 
         /// </summary>

@@ -77,7 +77,6 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.label3 = new System.Windows.Forms.Label();
 			this.comboBoxStatus = new System.Windows.Forms.ComboBox();
 			this.dictionaryComboBoxLocation = new CAS.UI.UIControls.Auxiliary.DictionaryComboBox();
-			this.dictionaryComboBoxOccupation = new CAS.UI.UIControls.Auxiliary.DictionaryComboBox();
 			this.fileControlResume = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
 			this.fileControlPassportCopy = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
 			this.label4 = new System.Windows.Forms.Label();
@@ -91,6 +90,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.comboBoxOperator = new System.Windows.Forms.ComboBox();
 			this.label7 = new System.Windows.Forms.Label();
 			this.checkedListBoxQualification = new System.Windows.Forms.CheckedListBox();
+			this.comboBoxOccupation = new System.Windows.Forms.ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSign)).BeginInit();
 			this.SuspendLayout();
@@ -562,23 +562,10 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.dictionaryComboBoxLocation.Location = new System.Drawing.Point(608, 394);
 			this.dictionaryComboBoxLocation.Margin = new System.Windows.Forms.Padding(4);
 			this.dictionaryComboBoxLocation.Name = "dictionaryComboBoxLocation";
+			this.dictionaryComboBoxLocation.OperatorId = 0;
 			this.dictionaryComboBoxLocation.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.dictionaryComboBoxLocation.Size = new System.Drawing.Size(350, 22);
 			this.dictionaryComboBoxLocation.TabIndex = 72;
-			// 
-			// dictionaryComboBoxOccupation
-			// 
-			this.dictionaryComboBoxOccupation.Displayer = null;
-			this.dictionaryComboBoxOccupation.DisplayerText = null;
-			this.dictionaryComboBoxOccupation.Entity = null;
-			this.dictionaryComboBoxOccupation.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.dictionaryComboBoxOccupation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.dictionaryComboBoxOccupation.Location = new System.Drawing.Point(608, 157);
-			this.dictionaryComboBoxOccupation.Margin = new System.Windows.Forms.Padding(4);
-			this.dictionaryComboBoxOccupation.Name = "dictionaryComboBoxOccupation";
-			this.dictionaryComboBoxOccupation.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.dictionaryComboBoxOccupation.Size = new System.Drawing.Size(350, 22);
-			this.dictionaryComboBoxOccupation.TabIndex = 16;
 			// 
 			// fileControlResume
 			// 
@@ -717,6 +704,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.comboBoxOperator.Name = "comboBoxOperator";
 			this.comboBoxOperator.Size = new System.Drawing.Size(350, 25);
 			this.comboBoxOperator.TabIndex = 84;
+			this.comboBoxOperator.SelectedIndexChanged += ComboBoxOperatorOnSelectedIndexChanged;
 			// 
 			// label7
 			// 
@@ -739,10 +727,21 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.checkedListBoxQualification.Size = new System.Drawing.Size(350, 79);
 			this.checkedListBoxQualification.TabIndex = 85;
 			// 
+			// comboBoxOccupation
+			// 
+			this.comboBoxOccupation.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.comboBoxOccupation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.comboBoxOccupation.FormattingEnabled = true;
+			this.comboBoxOccupation.Location = new System.Drawing.Point(608, 156);
+			this.comboBoxOccupation.Name = "comboBoxOccupation";
+			this.comboBoxOccupation.Size = new System.Drawing.Size(350, 25);
+			this.comboBoxOccupation.TabIndex = 87;
+			// 
 			// CAAEmployeeGeneralInformationControl
 			// 
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.Controls.Add(this.comboBoxOccupation);
 			this.Controls.Add(this.label7);
 			this.Controls.Add(this.checkedListBoxQualification);
 			this.Controls.Add(this.comboBoxOperator);
@@ -776,7 +775,6 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.Controls.Add(this.textBoxPhone);
 			this.Controls.Add(this.labelPhoneMobile);
 			this.Controls.Add(this.textBoxPhoneMobile);
-			this.Controls.Add(this.dictionaryComboBoxOccupation);
 			this.Controls.Add(this.labelOccupation);
 			this.Controls.Add(this.labelResume);
 			this.Controls.Add(this.labelPhoto);
@@ -805,6 +803,8 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.PerformLayout();
 		}
 
+		private System.Windows.Forms.ComboBox comboBoxOccupation;
+
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.CheckedListBox checkedListBoxQualification;
 
@@ -829,7 +829,6 @@ namespace CAS.UI.UICAAControls.Specialists
 		private Label labelPhoto;
 		private PictureBox _pictureBoxTransparentLogotype;
 		private System.Windows.Forms.Label labelResume;
-		private DictionaryComboBox dictionaryComboBoxOccupation;
 		private Label labelOccupation;
 		private Label labelPhoneMobile;
 		private TextBox textBoxPhoneMobile;

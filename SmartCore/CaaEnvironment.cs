@@ -251,12 +251,12 @@ namespace SmartCore
                 try
                 {
                     var dca = (DictionaryCollectionAttribute)type.GetCustomAttributes(typeof(DictionaryCollectionAttribute), false).FirstOrDefault();
-                    var bl = (DtoAttribute)type.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
+                    var bl = (CAADtoAttribute)type.GetCustomAttributes(typeof(CAADtoAttribute), false).FirstOrDefault();
 
                     var tt = bl?.Type;
                     if (tt == null)
                     {
-                        var caaBl = (CAADtoAttribute)type.GetCustomAttributes(typeof(CAADtoAttribute), false).FirstOrDefault();
+                        var caaBl = (DtoAttribute)type.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
                         tt = caaBl.Type;
                     }
 
