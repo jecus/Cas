@@ -298,7 +298,7 @@ namespace CAS.UI.UICAAControls.Document
 		#region private void ButtonAddNonRoutineJobClick(object sender, EventArgs e)
 		private void ButtonAddNonRoutineJobClick(object sender, EventArgs e)
 		{
-			var form = new DocumentForm(new SmartCore.Entities.General.Document(), _parent, _operatorId);
+			var form = new DocumentForm(new SmartCore.Entities.General.Document(){OperatorId = _operatorId}, _parent, _operatorId);
 
 			if (form.ShowDialog() == DialogResult.OK)
 			{

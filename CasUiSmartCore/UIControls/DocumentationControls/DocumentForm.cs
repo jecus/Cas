@@ -553,6 +553,7 @@ namespace CAS.UI.UIControls.DocumentationControls
                 {
                     if (CurrentDocument.ItemId <= 0)
                         CurrentDocument.Author = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
+                    CurrentDocument.OperatorId = _operatorId.Value;
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(CurrentDocument);
                 }
             
