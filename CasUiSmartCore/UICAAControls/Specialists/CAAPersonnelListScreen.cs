@@ -305,7 +305,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		{
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			e.DisplayerText = "New Employee";
-			var newSpec = new Specialist {Status = SpecialistStatus.Unknown, Position = SpecialistPosition.Unknown, Education = Education.UNK, Citizenship = Citizenship.UNK};
+			var newSpec = new Specialist {Status = SpecialistStatus.Unknown, Position = SpecialistPosition.Unknown, Education = Education.UNK, Citizenship = Citizenship.UNK, IsCAA = _operatorId == -1};
 			e.RequestedEntity = new CAAEmployeeScreen(newSpec, _operatorId);
 		}
 

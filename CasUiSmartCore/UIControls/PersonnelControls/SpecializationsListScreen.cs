@@ -278,7 +278,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			CommonEditorForm form = new CommonEditorForm(new Occupation()
             {
 				OperatorId = _operatorId
-            });
+            }, _operatorId);
 
 			if (form.ShowDialog() == DialogResult.OK) 
 				AnimatedThreadWorker.RunWorkerAsync();

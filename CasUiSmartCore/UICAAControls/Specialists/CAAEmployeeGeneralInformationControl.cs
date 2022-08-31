@@ -343,13 +343,13 @@ namespace CAS.UI.UICAAControls.Specialists
         {
 	        var op = comboBoxOperator.SelectedItem as AllOperators;
 
-	        var items = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().Cast<Occupation>().Where(i => i.OperatorId == op.ItemId).ToArray();
+	        var items = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().Cast<Occupation>().Where(i => i.OperatorId == op.ItemId).ToList();
+	        items.Add(Occupation.Unknown);
 	        comboBoxOccupation.Items.Clear();
-	        comboBoxOccupation.Items.AddRange(items);
-	        comboBoxOccupation.Items.Add(Occupation.Unknown);
+	        comboBoxOccupation.Items.AddRange(items.ToArray());
 	        comboBoxOccupation.SelectedItem = _currentItem.Occupation;
 	        checkedListBox1.Items.Clear();
-	        checkedListBox1.Items.AddRange(items);
+	        checkedListBox1.Items.AddRange(items.ToArray());
 	        
 	        
 	        for (int i = 0; i < checkedListBox1.Items.Count; i++)
