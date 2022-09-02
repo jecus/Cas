@@ -16,10 +16,10 @@ namespace CAA.Entity.Models.Dictionary
 		[Column("Code"), MaxLength(50)]
 		public string Code { get; set; }
 		
-		[Column("CodeName"), MaxLength(256)]
+		[Column("CodeName")]
 		public string CodeName { get; set; }
 		
-		[Column("SubTaskCode"), MaxLength(256)]
+		[Column("SubTaskCode")]
 		public string SubTaskCode { get; set; }
 		
 		[Column("Description")]
@@ -31,11 +31,11 @@ namespace CAA.Entity.Models.Dictionary
 		[Column("OperatorId")]
 		public int OperatorId { get; set; }
 		
-		[Column("ShortName"), MaxLength(50)]
+		[Column("ShortName")]
 		public string ShortName { get; set; }
 
 	    
-	    [Column("FullName"), MaxLength(256)]
+	    [Column("FullName")]
 		public string FullName { get; set; }
 		
 		[JsonIgnore]

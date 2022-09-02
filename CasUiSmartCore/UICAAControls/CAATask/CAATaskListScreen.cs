@@ -256,7 +256,7 @@ namespace CAS.UI.UICAAControls.CAATask
 
 		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
-			var form = new CommonEditorForm(new SmartCore.CAA.Tasks.CAATask(){OperatorId = _operatorId});
+			var form = new CommonEditorForm(new SmartCore.CAA.Tasks.CAATask(){OperatorId = _operatorId, FullName = ""});
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
 		}

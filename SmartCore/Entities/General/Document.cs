@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Auxiliary;
@@ -25,7 +26,7 @@ namespace SmartCore.Entities.General
 	[CAADto(typeof(CAADocumentDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
-	public class Document : BaseEntityObject, IDirective, IComparable<Document>, IEquatable<Document>, IFileContainer
+	public class Document : BaseEntityObject, IDirective, IComparable<Document>, IEquatable<Document>, IFileContainer, IOperatable
 	{
 		private static Type _thisType;
 
