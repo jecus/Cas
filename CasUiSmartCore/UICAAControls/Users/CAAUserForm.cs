@@ -119,6 +119,13 @@ namespace CAS.UI.UICAAControls.Users
 				return false;
 			}
 
+			if (metroComboBoxPersonnel.SelectedItem == null)
+			{
+				MessageBox.Show("Please select personnel!", "Information", MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
+				return false;
+			}
+
             if (_user.ItemId <= 0)
             {
                 var ds = GlobalObjects.CaaEnvironment.NewLoader.Execute(
