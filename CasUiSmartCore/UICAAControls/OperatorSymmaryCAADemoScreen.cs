@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
@@ -11,7 +10,6 @@ using CAS.UI.UICAAControls.Audit;
 using CAS.UI.UICAAControls.CAAEducation;
 using CAS.UI.UICAAControls.CAAEducation.CoursePackage;
 using CAS.UI.UICAAControls.CAATask;
-using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UICAAControls.CheckList.CheckListAudit;
 using CAS.UI.UICAAControls.ConcessionRequest;
 using CAS.UI.UICAAControls.Document;
@@ -31,10 +29,8 @@ using CAS.UI.UIControls.SMSControls;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA;
-using SmartCore.CAA.Check;
 using SmartCore.CAA.Event;
 using SmartCore.CAA.FindingLevel;
-using SmartCore.CAA.Tasks;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -132,7 +128,7 @@ namespace CAS.UI.UICAAControls
         private void LinkPersonnelDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Personnel";
-            e.RequestedEntity = new CAAPersonnelListScreen(_currentOperator, -1);
+            e.RequestedEntity = new CAAPersonnelListScreen(_currentOperator, -1){OperatorId = -1};
         }
 
         #endregion
@@ -140,13 +136,13 @@ namespace CAS.UI.UICAAControls
 		private void Users_Click(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Users";
-            e.RequestedEntity = new CAAUserListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+            e.RequestedEntity = new CAAUserListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1){OperatorId = -1};
         }
 
         private void Activity_DisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Activity";
-            e.RequestedEntity = new CAAActivityListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+            e.RequestedEntity = new CAAActivityListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1){OperatorId = -1};
         }
 
 
@@ -157,7 +153,7 @@ namespace CAS.UI.UICAAControls
             e.RequestedEntity = new CAACommonListScreen(typeof(Department), new List<Filter>()
             {
                 new Filter("OperatorId",-1 )
-            });
+            }){OperatorId = -1};
         }
 
 		#endregion
@@ -170,14 +166,14 @@ namespace CAS.UI.UICAAControls
             e.RequestedEntity = new CAACommonListScreen(typeof(Nomenclatures), new List<Filter>()
             {
                 new Filter("OperatorId",-1 )
-            });
+            }){OperatorId = -1};
         }
         #endregion
 
         private void LinkFindingLevelsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Finding Level";
-            e.RequestedEntity = new FindingLevelslListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+            e.RequestedEntity = new FindingLevelslListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1){OperatorId = -1};
         }
 
         private void LinkRootCauseDisplayerRequested(object sender, ReferenceEventArgs e)
@@ -186,7 +182,7 @@ namespace CAS.UI.UICAAControls
             e.RequestedEntity = new CAACommonListScreen(typeof(RootCause), new List<Filter>()
             {
                 new Filter("OperatorId",-1 )
-            });
+            }){OperatorId = -1};
         }
 
         #region private void LinkSpecializationsDisplayerRequested(object sender, ReferenceEventArgs e)
@@ -194,7 +190,7 @@ namespace CAS.UI.UICAAControls
         private void LinkSpecializationsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Occupation";
-            e.RequestedEntity = new SpecializationsListScreen(_currentOperator, -1);
+            e.RequestedEntity = new SpecializationsListScreen(_currentOperator, -1){OperatorId = -1};
         }
 
 		#endregion
@@ -203,13 +199,13 @@ namespace CAS.UI.UICAAControls
 		private void Operator_Click(object sender, ReferenceEventArgs e)
         {
 			e.DisplayerText = "Operators";
-            e.RequestedEntity = new CAAOperatorlListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            e.RequestedEntity = new CAAOperatorlListScreen(GlobalObjects.CaaEnvironment.Operators[0]){OperatorId = -1};
 		}
 
         private void Aircraft_Click(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Aircrafts";
-            e.RequestedEntity = new CAAAircraftListScreen(GlobalObjects.CaaEnvironment.Operators[0]);
+            e.RequestedEntity = new CAAAircraftListScreen(GlobalObjects.CaaEnvironment.Operators[0]){OperatorId = -1};
         }
 
         #region private void LabelDocumentsDisplayerRequested(object sender, ReferenceEventArgs e)
@@ -217,7 +213,7 @@ namespace CAS.UI.UICAAControls
         private void LabelDocumentsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = CurrentOperator.Name + ". " + "Documents";
-            e.RequestedEntity = new CAADocumentationListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+            e.RequestedEntity = new CAADocumentationListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1){OperatorId = -1};
         }
 
         #endregion
@@ -228,44 +224,44 @@ namespace CAS.UI.UICAAControls
         private void LinkCheckListsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Standart Manual";
-	        e.RequestedEntity = new StandartManualListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+	        e.RequestedEntity = new StandartManualListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1){OperatorId = -1};
         }
 
 
         private void LinkRoutineAuditDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Routine Audit";
-            e.RequestedEntity = new RoutineAuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+            e.RequestedEntity = new RoutineAuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1){OperatorId = -1};
         }
 
         private void LinkAuditDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Audit CAA";
-            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1, AuditType.CAA, CheckListAuditType.User);
+            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1, AuditType.CAA, CheckListAuditType.User){OperatorId = -1};
         }
 
         private void LinkAuditOpDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Audit Operator";
-            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1, AuditType.Operator, CheckListAuditType.User);
+            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1, AuditType.Operator, CheckListAuditType.User){OperatorId = -1};
         }
 
         private void LinkAuditAllDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Audit All";
-            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0],-1,  AuditType.All, CheckListAuditType.User);
+            e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0],-1,  AuditType.All, CheckListAuditType.User){OperatorId = -1};
         }
 
         private void LinkStandartManualDisplayerRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Standart Manual";
-	        e.RequestedEntity = new StandartManualListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+	        e.RequestedEntity = new StandartManualListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1){OperatorId = -1};
         }
 
         private void LinkAuditManagmentDisplayerRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Audit Management";
-	        e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1,AuditType.All, CheckListAuditType.Admin, true);
+	        e.RequestedEntity = new AuditListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1,AuditType.All, CheckListAuditType.Admin, true){OperatorId = -1};
         }
 
         private void LinkOccurenceReReportRequested(object sender, ReferenceEventArgs e)
@@ -276,7 +272,7 @@ namespace CAS.UI.UICAAControls
         private void LinkConcessionRequestLinkRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Concession Request";
-	        e.RequestedEntity = new ConcessionRequestScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+	        e.RequestedEntity = new ConcessionRequestScreen(GlobalObjects.CaaEnvironment.Operators[0], -1){OperatorId = -1};
         }
 
         private void EventsLinkRequested(object sender, ReferenceEventArgs e)
@@ -302,7 +298,7 @@ namespace CAS.UI.UICAAControls
         private void LinkEventsRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Events";
-	        e.RequestedEntity = new CAAEventsListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+	        e.RequestedEntity = new CAAEventsListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1){OperatorId = -1};
         }
         
         private void LinkEventsCategoriesRequested(object sender, ReferenceEventArgs e)
@@ -311,7 +307,7 @@ namespace CAS.UI.UICAAControls
 	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventCategory), new List<Filter>()
 	        {
 		        new Filter("OperatorId",-1 )
-	        });
+	        }){OperatorId = -1};
         }
         
         private void LinkEventsClassesRequested(object sender, ReferenceEventArgs e)
@@ -320,40 +316,40 @@ namespace CAS.UI.UICAAControls
 	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventClass), new List<Filter>()
 	        {
 		        new Filter("OperatorId",-1 )
-	        });
+	        }){OperatorId = -1};
         }
         
         private void LinkEventsTypesRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Events Types";
-	        e.RequestedEntity = new CAAEventTypesListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+	        e.RequestedEntity = new CAAEventTypesListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1){OperatorId = -1};
         }
         
 
         private void LinkTaskListsRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Task";
-	        e.RequestedEntity = new CAATaskListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+	        e.RequestedEntity = new CAATaskListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1){OperatorId = -1};
 	        
         }
 
         private void LinkEducationRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Education";
-	        e.RequestedEntity = new EducationListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+	        e.RequestedEntity = new EducationListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1){OperatorId = -1};
 	        
         }
 
         private void LinkEducationSummaryRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Education Summary Pag";
-	        e.RequestedEntity = new EducationManagmentListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+	        e.RequestedEntity = new EducationManagmentListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1){OperatorId = -1};
         }
 
         private void LinkProviderRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Provider";
-	        e.RequestedEntity = new CAASupplierListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+	        e.RequestedEntity = new CAASupplierListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1){OperatorId = -1};
         }
 
         private void LinkEducationProcessRequested(object sender, ReferenceEventArgs e)
@@ -364,7 +360,7 @@ namespace CAS.UI.UICAAControls
         private void LinkEducationLinkEducationManagmentRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Education Process Management";
-	        e.RequestedEntity = new CourseListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1);
+	        e.RequestedEntity = new CourseListScreen(GlobalObjects.CaaEnvironment.Operators[0], -1){OperatorId = -1};
         }
 	}
 }

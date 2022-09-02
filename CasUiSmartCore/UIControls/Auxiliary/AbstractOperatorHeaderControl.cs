@@ -4,14 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Auxiliary;
+using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls;
+using CAS.UI.UICAAControls.CurrentOperator;
 using CAS.UI.UIControls.AircraftsControls;
 using CAS.UI.UIControls.OpepatorsControls;
 using CAS.UI.UIControls.StoresControls;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using Microsoft.VisualBasic.Devices;
+using SmartCore.CAA;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Store;
 
@@ -452,7 +456,18 @@ namespace CAS.UI.UIControls.Auxiliary
 
                 if(GlobalObjects.CasEnvironment!=null)
                     e.RequestedEntity = new OperatorSymmaryDemoScreen(_currentOperator);
-                else e.RequestedEntity = new OperatorSymmaryCAADemoScreen(_currentOperator);
+                else
+                {
+                    var op = GlobalObjects.CaaEnvironment.NewLoader.GetObject<AllOperatorsDTO, AllOperators>(new Filter("FullName", e.DisplayerText));
+                    if (op == null)
+                    {
+                        e.RequestedEntity = new OperatorSymmaryCAADemoScreen(_currentOperator);
+                    }
+                    else
+                    {
+                        e.RequestedEntity = new CurrentOperatorSymmaryCAADemoScreen(op);
+                    }
+                }
 
                 Keyboard keyboard = new Keyboard();
                 e.TypeOfReflection = keyboard.ShiftKeyDown ? ReflectionTypes.DisplayInNew : ReflectionTypes.DisplayInCurrent;

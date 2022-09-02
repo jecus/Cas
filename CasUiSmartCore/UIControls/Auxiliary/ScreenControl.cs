@@ -279,6 +279,8 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region Properties
 
+        public int OperatorId { get; set; } = -1;
+
         #region public bool ChildClickable
         /// <summary>
         /// Возврашает или задает значение того, обрабатывает ли 1-й дочерний элемент навигационного контрола нажатия

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
+using CAA.Entity.Models;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
@@ -1116,6 +1117,16 @@ namespace CAS.UI.UIControls.NewGrid
 				var objectToPaste = new List<T>();
 				if (pds.Count > 0)
 				{
+					if (this.Parent.Parent is ScreenControl ctr)
+					{
+						foreach (var o in pds)
+						{
+							if (o is IOperatable op)
+								op.OperatorId = ctr.OperatorId;
+						}
+					}
+					
+					
 					if (pds.Any(i => i is Component))
 					{
 						var components = pds.Where(i => i is Component && !(i is BaseComponent)).Cast<BaseEntityObject>().ToList();
@@ -1159,7 +1170,7 @@ namespace CAS.UI.UIControls.NewGrid
 				if (objectToPaste.Any(i => i is ComponentDirective))
 					GlobalObjects.NewKeeper.BulkInsert(objectToPaste.Where(i => i is ComponentDirective).Cast<BaseEntityObject>().ToList());
 
-
+				
 				InsertItems(objectToPaste.ToArray());
 			}
 			catch (Exception ex)
