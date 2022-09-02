@@ -136,7 +136,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkPersonnelDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "Personnel";
+            e.DisplayerText = $"{_currentOperator.ShortName} Personnel";
             e.RequestedEntity = new CAAPersonnelListScreen(_getOperator(), _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
 
@@ -147,7 +147,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkDepartmentsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "Departments";
+            e.DisplayerText = $"{_currentOperator.ShortName} Departments";
             e.RequestedEntity = new CAACommonListScreen(typeof(Department), new List<Filter>()
             {
                 new Filter("OperatorId",_currentOperator.ItemId )
@@ -160,7 +160,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkNomenclaturesDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "Nomenclatures";
+            e.DisplayerText = $"{_currentOperator.ShortName} Nomenclatures";
             e.RequestedEntity = new CAACommonListScreen(typeof(Nomenclatures), new List<Filter>()
                 {
                     new Filter("OperatorId",_currentOperator.ItemId )
@@ -171,13 +171,13 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkFindingLevelsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "Finding Level";
+            e.DisplayerText = $"{_currentOperator.ShortName} Finding Level";
             e.RequestedEntity = new FindingLevelslListScreen(_getOperator(), _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
 
         private void LinkRootCauseDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "Root Cause";
+            e.DisplayerText = $"{_currentOperator.ShortName} Root Cause";
             e.RequestedEntity = new CAACommonListScreen(typeof(RootCause), new List<Filter>()
                 {
                     new Filter("OperatorId",_currentOperator.ItemId )
@@ -189,7 +189,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkSpecializationsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "Occupation";
+            e.DisplayerText = $"{_currentOperator.ShortName} Occupation";
             e.RequestedEntity = new SpecializationsListScreen(_getOperator(), _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
 
@@ -198,7 +198,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void Aircraft_Click(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "Aircrafts";
+            e.DisplayerText = $"{_currentOperator.ShortName} Aircrafts";
             e.RequestedEntity = new CAAAircraftListScreen(_getOperator()){OperatorId = _currentOperator.ItemId};
         }
 
@@ -220,13 +220,13 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void Users_Click(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "Users";
+            e.DisplayerText = $"{_currentOperator.ShortName} Users";
             e.RequestedEntity = new CAAUserListScreen(_getOperator(), _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
 
         private void Activity_DisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "Activity";
+            e.DisplayerText = $"{_currentOperator.ShortName} Activity";
             e.RequestedEntity = new CAAActivityListScreen(_getOperator(), _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
 
@@ -235,20 +235,20 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkCheckListsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText = "Standart Manual";
+	        e.DisplayerText = $"{_currentOperator.ShortName} Standart Manual";
 	        e.RequestedEntity = new StandartManualListScreen(GlobalObjects.CaaEnvironment.Operators[0], _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
 
 
         private void LinkRoutineAuditDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "Routine Audit";
+            e.DisplayerText = $"{_currentOperator.ShortName} Routine Audit";
             e.RequestedEntity = new RoutineAuditListScreen(_getOperator(), _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
 
         private void LinkAuditDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.DisplayerText = "Audit Operator";
+            e.DisplayerText = $"{_currentOperator.ShortName} Audit Operator";
             e.RequestedEntity = new AuditListScreen(_getOperator(), _currentOperator.ItemId, AuditType.Operator,CheckListAuditType.User, true){OperatorId = _currentOperator.ItemId};
         }
 
@@ -260,13 +260,13 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkStandartManualDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText = "Standart Manual";
+	        e.DisplayerText = $"{_currentOperator.ShortName} Standart Manual";
 	        e.RequestedEntity = new StandartManualListScreen(GlobalObjects.CaaEnvironment.Operators[0], _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
         
         private void LinkAuditManagmentDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText = "Audit Management";
+	        e.DisplayerText = $"{_currentOperator.ShortName} Audit Management";
 	        e.RequestedEntity = new AuditListScreen(_getOperator(), _currentOperator.ItemId, AuditType.All,CheckListAuditType.Admin, true){OperatorId = _currentOperator.ItemId};
         }
         
@@ -278,7 +278,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkConcessionRequestLinkRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText = "Concession Request";
+	        e.DisplayerText = $"{_currentOperator.ShortName} Concession Request";
 	        e.RequestedEntity = new ConcessionRequestScreen(_getOperator(), _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
 
@@ -305,13 +305,13 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkEventsRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText =  "Events";
+	        e.DisplayerText =  $"{_currentOperator.ShortName} Events";
 	        e.RequestedEntity = new CAAEventsListScreen(_getOperator(), _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
         
         private void LinkEventsCategoriesRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText = "Events Categories";
+	        e.DisplayerText = $"{_currentOperator.ShortName} Events Categories";
 	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventCategory), new List<Filter>()
 		        {
 			        new Filter("OperatorId",_currentOperator.ItemId )
@@ -321,7 +321,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         
         private void LinkEventsClassesRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText = "Events Classes";
+	        e.DisplayerText = $"{_currentOperator.ShortName} Events Classes";
 	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventClass), new List<Filter>()
 		        {
 			        new Filter("OperatorId",_currentOperator.ItemId )
@@ -331,32 +331,32 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         
         private void LinkEventsTypesRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText = "Events Types";
+	        e.DisplayerText = $"{_currentOperator.ShortName} Events Types";
 	        e.RequestedEntity = new CAAEventTypesListScreen(_getOperator(), _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
         
         
         private void LinkTaskListsRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText = "Task";
+	        e.DisplayerText = $"{_currentOperator.ShortName} Task";
 	        e.RequestedEntity = new CAATaskListScreen(_getOperator(), _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
 
         private void LinkEducationRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText = "Education";
+	        e.DisplayerText = $"{_currentOperator.ShortName} Education";
 	        e.RequestedEntity = new EducationListScreen(_getOperator(), _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
 
         private void LinkEducationProcessManagementnRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText = "Education Summary Page";
+	        e.DisplayerText = $"{_currentOperator.ShortName} Education Summary Page";
 	        e.RequestedEntity = new EducationManagmentListScreen(_getOperator(), _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
 
         private void LinkProviderRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText = "Events Types";
+	        e.DisplayerText = $"{_currentOperator.ShortName} Events Types";
 	        e.RequestedEntity = new CAASupplierListScreen(_getOperator(), _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
         
@@ -367,7 +367,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkEducationLinkEducationManagmentRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText = "Education Process Management";
+	        e.DisplayerText = $"{_currentOperator.ShortName} Education Process Management";
 	        e.RequestedEntity = new CourseListScreen(_getOperator(), _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
 	}
