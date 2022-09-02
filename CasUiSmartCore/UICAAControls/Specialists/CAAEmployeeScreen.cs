@@ -196,8 +196,14 @@ namespace CAS.UI.UICAAControls.Specialists
                 {
 	                ItemId = dataRow.Field<int>("ItemId")
                 });
-                var courses = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ParentID",data.Select(i => i.ItemId)));
-                _currentItem.EmployeeDocuments.AddRange(courses);
+
+                if (data.Any())
+                {
+	                var courses = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ParentID",data.Select(i => i.ItemId)));
+	                _currentItem.EmployeeDocuments.AddRange(courses);
+                }
+                
+                
                 if (_currentItem.EmployeeDocuments.Any())
                 {
 	                var docIds = _currentItem.EmployeeDocuments.Select(i => i.ItemId);
