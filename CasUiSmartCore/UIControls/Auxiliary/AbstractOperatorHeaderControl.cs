@@ -18,7 +18,7 @@ using SmartCore.Entities.General.Store;
 namespace CAS.UI.UIControls.Auxiliary
 {
     ///<summary>
-    /// Класс, описывающий отображение информации об операторе или коллекции шаблонных ВС
+    /// РљР»Р°СЃСЃ, РѕРїРёСЃС‹РІР°СЋС‰РёР№ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РёРЅС„РѕСЂРјР°С†РёРё РѕР± РѕРїРµСЂР°С‚РѕСЂРµ РёР»Рё РєРѕР»Р»РµРєС†РёРё С€Р°Р±Р»РѕРЅРЅС‹С… Р’РЎ
     ///</summary>
     public partial class AbstractOperatorHeaderControl : UserControl
     {
@@ -47,7 +47,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public IDisplayer CurrentDisplayer
         private IDisplayer _currentDisplayer;
         ///<summary>
-        /// Указывает на отобрахаемый скрин
+        /// РЈРєР°Р·С‹РІР°РµС‚ РЅР° РѕС‚РѕР±СЂР°С…Р°РµРјС‹Р№ СЃРєСЂРёРЅ
         ///</summary>
         public IDisplayer CurrentDisplayer
         {
@@ -78,7 +78,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public AbstractOperatorHeaderControl()
 
         ///<summary>
-        /// Создается новый объект отображения оператора
+        /// РЎРѕР·РґР°РµС‚СЃСЏ РЅРѕРІС‹Р№ РѕР±СЉРµРєС‚ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РѕРїРµСЂР°С‚РѕСЂР°
         ///</summary>
         
         public AbstractOperatorHeaderControl()
@@ -95,7 +95,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public RichReferenceButton LogotypeButton
 
         /// <summary>
-        /// Возвращает кнопку, которая отображает иконку оператора
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРЅРѕРїРєСѓ, РєРѕС‚РѕСЂР°СЏ РѕС‚РѕР±СЂР°Р¶Р°РµС‚ РёРєРѕРЅРєСѓ РѕРїРµСЂР°С‚РѕСЂР°
         /// </summary>
         public RichReferenceButton LogotypeButton
         {
@@ -110,7 +110,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public RichReferenceButton TitleButton
 
         /// <summary>
-        /// Возвращает кнопку, которая отображает название оператора
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРЅРѕРїРєСѓ, РєРѕС‚РѕСЂР°СЏ РѕС‚РѕР±СЂР°Р¶Р°РµС‚ РЅР°Р·РІР°РЅРёРµ РѕРїРµСЂР°С‚РѕСЂР°
         /// </summary>
         public RichReferenceButton TitleButton
         {
@@ -125,7 +125,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public RichReferenceButton PreviousButton
 
         /// <summary>
-        /// Возвращает кнопку "Назад"
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРЅРѕРїРєСѓ "РќР°Р·Р°Рґ"
         /// </summary>
         public RichReferenceButton PreviousButton
         {
@@ -137,7 +137,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public RichReferenceButton NextButton
 
         /// <summary>
-        /// Возвращает кнопку "Вперед"
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРЅРѕРїРєСѓ "Р’РїРµСЂРµРґ"
         /// </summary>
         public RichReferenceButton NextButton
         {
@@ -148,7 +148,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool NextClickable
         /// <summary>
-        /// Возврашает или задает значение того, обрабатывает ли элемент "След. экран" навигационного контрола нажатия
+        /// Р’РѕР·РІСЂР°С€Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ С‚РѕРіРѕ, РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚ Р»Рё СЌР»РµРјРµРЅС‚ "РЎР»РµРґ. СЌРєСЂР°РЅ" РЅР°РІРёРіР°С†РёРѕРЅРЅРѕРіРѕ РєРѕРЅС‚СЂРѕР»Р° РЅР°Р¶Р°С‚РёСЏ
         /// </summary>
         public bool NextClickable
         {
@@ -168,8 +168,8 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public bool OperatorClickable
 
         /// <summary>
-        /// Возвращет или устанавливает значение, показывающее нужно ли переходить на какую-либо страницу, 
-        /// при клике на иконку или текст
+        /// Р’РѕР·РІСЂР°С‰РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ РЅСѓР¶РЅРѕ Р»Рё РїРµСЂРµС…РѕРґРёС‚СЊ РЅР° РєР°РєСѓСЋ-Р»РёР±Рѕ СЃС‚СЂР°РЅРёС†Сѓ, 
+        /// РїСЂРё РєР»РёРєРµ РЅР° РёРєРѕРЅРєСѓ РёР»Рё С‚РµРєСЃС‚
         /// </summary>
         public bool OperatorClickable
         {
@@ -189,7 +189,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public Operator Operator
 
         /// <summary>
-        /// Возвращает или устанавливает текущий эксплуатант
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ С‚РµРєСѓС‰РёР№ СЌРєСЃРїР»СѓР°С‚Р°РЅС‚
         /// </summary>
         public Operator Operator
         {
@@ -216,7 +216,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool PrevClickable
         /// <summary>
-        /// Возврашает или задает значение того, обрабатывает ли элемент "Пред. экран" навигационного контрола нажатия
+        /// Р’РѕР·РІСЂР°С€Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ С‚РѕРіРѕ, РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚ Р»Рё СЌР»РµРјРµРЅС‚ "РџСЂРµРґ. СЌРєСЂР°РЅ" РЅР°РІРёРіР°С†РёРѕРЅРЅРѕРіРѕ РєРѕРЅС‚СЂРѕР»Р° РЅР°Р¶Р°С‚РёСЏ
         /// </summary>
         public bool PrevClickable
         {
@@ -338,7 +338,7 @@ namespace CAS.UI.UIControls.Auxiliary
         
         #region public bool ChildClickable
         /// <summary>
-        /// Возврашает или задает значение того, обрабатывает ли 1-й дочерний элемент нажатия
+        /// Р’РѕР·РІСЂР°С€Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ С‚РѕРіРѕ, РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚ Р»Рё 1-Р№ РґРѕС‡РµСЂРЅРёР№ СЌР»РµРјРµРЅС‚ РЅР°Р¶Р°С‚РёСЏ
         /// </summary>
         public bool ChildClickable
         {
@@ -361,7 +361,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region protected void UpdateOperatorInfo(Operator op)
 
         /// <summary>
-        /// Обновить информацию по оператору
+        /// РћР±РЅРѕРІРёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ РїРѕ РѕРїРµСЂР°С‚РѕСЂСѓ
         /// </summary>
         protected void UpdateOperatorInfo(Operator op)
         {
@@ -380,7 +380,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region private void UpdateOperatorHeaderControl()
 
         /// <summary>
-        /// Обновляется отображение элментов управления
+        /// РћР±РЅРѕРІР»СЏРµС‚СЃСЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ СЌР»РјРµРЅС‚РѕРІ СѓРїСЂР°РІР»РµРЅРёСЏ
         /// </summary>
         private void UpdateOperatorHeaderControl()
         {
@@ -449,13 +449,11 @@ namespace CAS.UI.UIControls.Auxiliary
             if (_currentOperator != null && _operatorClickable)
             {
                 e.DisplayerText = _currentOperator.Name;
-#if DEBUG
+
                 if(GlobalObjects.CasEnvironment!=null)
                     e.RequestedEntity = new OperatorSymmaryDemoScreen(_currentOperator);
                 else e.RequestedEntity = new OperatorSymmaryCAADemoScreen(_currentOperator);
-#else
-                e.RequestedEntity = new OperatorSymmaryDemoScreen(_currentOperator);
-#endif
+
                 Keyboard keyboard = new Keyboard();
                 e.TypeOfReflection = keyboard.ShiftKeyDown ? ReflectionTypes.DisplayInNew : ReflectionTypes.DisplayInCurrent;
             }
