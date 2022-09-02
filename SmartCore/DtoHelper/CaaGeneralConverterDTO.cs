@@ -2228,7 +2228,7 @@ namespace SmartCore.DtoHelper
                 LogoTypeImageByteView = operdto.LogoTypeWhite,
                 LogoType = operdto.LogoType,
                 ICAOCode = operdto.ICAOCode,
-                SettingsJSON = operdto.SettingsJSON,
+                SettingsJSON = !string.IsNullOrEmpty(operdto.SettingsJSON) ?operdto.SettingsJSON : "",
                 Address = operdto.Address,
                 Phone = operdto.Phone,
                 Fax = operdto.Fax,
@@ -2237,6 +2237,28 @@ namespace SmartCore.DtoHelper
                 LogotypeReportLarge = operdto.LogotypeReportLarge,
                 LogotypeReportVeryLarge = operdto.LogotypeReportVeryLarge
             };
+        }
+        
+        public static CAAOperatorDTO ConvertCAA(this Operator operdto)
+        {
+	        return new CAAOperatorDTO()
+	        {
+		        ItemId = operdto.ItemId,
+		        IsDeleted = operdto.IsDeleted,
+		        Updated = operdto.Updated,
+		        CorrectorId = operdto.CorrectorId,
+		        Name = operdto.Name,
+		        LogoType = operdto.LogoType,
+		        ICAOCode = operdto.ICAOCode,
+		        SettingsJSON = !string.IsNullOrEmpty(operdto.SettingsJSON) ?operdto.SettingsJSON : "",
+		        Address = operdto.Address,
+		        Phone = operdto.Phone,
+		        Fax = operdto.Fax,
+		        LogoTypeWhite = operdto.LogoTypeWhite,
+		        Email = operdto.Email,
+		        LogotypeReportLarge = operdto.LogotypeReportLarge,
+		        LogotypeReportVeryLarge = operdto.LogotypeReportVeryLarge
+	        };
         }
 
 

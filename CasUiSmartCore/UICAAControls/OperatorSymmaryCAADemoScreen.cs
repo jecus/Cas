@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using CAA.Entity.Models.DTO;
+using CAS.Entity.Models.DTO.General;
 using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
 using CAS.UI.UICAAControls.Activity;
@@ -94,6 +95,7 @@ namespace CAS.UI.UICAAControls
 		/// </summary>
 		private void UpdateInformation()
 		{
+			
 			_operatorInfoReference.CurrentOperator = _currentOperator;
         }
         #endregion
@@ -107,18 +109,23 @@ namespace CAS.UI.UICAAControls
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            var operators = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<AllOperatorsDTO, AllOperators>();
-            _operators.OperatorCollection = new CommonCollection<AllOperators>(operators);
-            var aircaraft = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAircraftDTO, Aircraft>();
-            _aircrafts.AircraftCollection = new CommonCollection<Aircraft>(aircaraft);
-
-            GlobalObjects.CaaEnvironment.AllOperators = new List<AllOperators>(operators);
-            GlobalObjects.CaaEnvironment.Aircraft = new AircraftCollection(aircaraft);
+	        var operators = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<AllOperatorsDTO, AllOperators>();
+	        _operators.OperatorCollection = new CommonCollection<AllOperators>(operators);
+	        var aircaraft = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAAircraftDTO, Aircraft>();
+	        GlobalObjects.CaaEnvironment.AllOperators = new List<AllOperators>(operators);
+	        GlobalObjects.CaaEnvironment.Aircraft = new AircraftCollection(aircaraft);
+	        _aircrafts.AircraftCollection = new CommonCollection<Aircraft>(aircaraft);
+            UpdateInformation();
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-			UpdateInformation();
+        {         
+	        
+	        
+
+	        
+	        _currentOperator = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<OperatorDTO, Operator>(CurrentOperator.ItemId);
+	        
 		}
 
 		#endregion
