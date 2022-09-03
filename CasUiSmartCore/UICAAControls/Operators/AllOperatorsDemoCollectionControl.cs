@@ -9,6 +9,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls.CurrentOperator;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
+using Microsoft.VisualBasic.Devices;
 using SmartCore.CAA;
 using SmartCore.Entities.Collections;
 
@@ -133,8 +134,11 @@ namespace CAS.UI.UICAAControls.Operators
 
             if (op == null)
                 e.Cancel = true;
-
-            e.TypeOfReflection = ReflectionTypes.DisplayInCurrent;
+            
+            Keyboard k = new Keyboard();
+            if (k.ShiftKeyDown)
+                e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+            else e.TypeOfReflection = ReflectionTypes.DisplayInCurrent;
             e.DisplayerText = op.ShortName;
             e.RequestedEntity = new CurrentOperatorSymmaryCAADemoScreen(op);
         }

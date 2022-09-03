@@ -7,7 +7,7 @@ using CAS.UI.UIControls.Auxiliary;
 namespace CAS.UI.Interfaces
 {
     ///<summary>
-    /// Интерфейс, описывает сущность, которая может создать запрос о предоставлении некой вклакди для некого содержимого
+    /// РРЅС‚РµСЂС„РµР№СЃ, РѕРїРёСЃС‹РІР°РµС‚ СЃСѓС‰РЅРѕСЃС‚СЊ, РєРѕС‚РѕСЂР°СЏ РјРѕР¶РµС‚ СЃРѕР·РґР°С‚СЊ Р·Р°РїСЂРѕСЃ Рѕ РїСЂРµРґРѕСЃС‚Р°РІР»РµРЅРёРё РЅРµРєРѕР№ РІРєР»Р°РєРґРё РґР»СЏ РЅРµРєРѕРіРѕ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ
     ///</summary>
     public interface IReference
     {
@@ -24,7 +24,7 @@ namespace CAS.UI.Interfaces
 
         #region string DisplayerText { get; set;}
         /// <summary>
-        /// Текст заголовка вкладки, когда на ней будет отображатся переданное содержимое
+        /// РўРµРєСЃС‚ Р·Р°РіРѕР»РѕРІРєР° РІРєР»Р°РґРєРё, РєРѕРіРґР° РЅР° РЅРµР№ Р±СѓРґРµС‚ РѕС‚РѕР±СЂР°Р¶Р°С‚СЃСЏ РїРµСЂРµРґР°РЅРЅРѕРµ СЃРѕРґРµСЂР¶РёРјРѕРµ
         /// </summary>
         string DisplayerText { get; set;}
         #endregion
@@ -32,7 +32,7 @@ namespace CAS.UI.Interfaces
         #region IDisplayingEntity Entity
 
         /// <summary>
-        /// Содержимое, которое необходимо отобразить
+        /// РЎРѕРґРµСЂР¶РёРјРѕРµ, РєРѕС‚РѕСЂРѕРµ РЅРµРѕР±С…РѕРґРёРјРѕ РѕС‚РѕР±СЂР°Р·РёС‚СЊ
         /// </summary>
         IDisplayingEntity Entity { get; set; }
 
@@ -41,7 +41,7 @@ namespace CAS.UI.Interfaces
         #region ReflectionTypes ReflectionType
 
         /// <summary>
-        /// Тип предоставления вкладки (в этой, в новой, в какой-то из имеющихся, и т.д.)
+        /// РўРёРї РїСЂРµРґРѕСЃС‚Р°РІР»РµРЅРёСЏ РІРєР»Р°РґРєРё (РІ СЌС‚РѕР№, РІ РЅРѕРІРѕР№, РІ РєР°РєРѕР№-С‚Рѕ РёР· РёРјРµСЋС‰РёС…СЃСЏ, Рё С‚.Рґ.)
         /// </summary>
         ReflectionTypes ReflectionType { get; set; }
 
@@ -54,7 +54,7 @@ namespace CAS.UI.Interfaces
         #region event EventHandler<ReferenceEventArgs> DisplayerRequested
 
         /// <summary>
-        /// Событие, сообщающее о необходимости предоставления вкладки
+        /// РЎРѕР±С‹С‚РёРµ, СЃРѕРѕР±С‰Р°СЋС‰РµРµ Рѕ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё РїСЂРµРґРѕСЃС‚Р°РІР»РµРЅРёСЏ РІРєР»Р°РґРєРё
         /// </summary>
         event EventHandler<ReferenceEventArgs> DisplayerRequested;
 
@@ -64,7 +64,7 @@ namespace CAS.UI.Interfaces
     }
 
     /// <summary>
-    /// класс - хранилише обектов требующихся для отбражения вкладки
+    /// РєР»Р°СЃСЃ - С…СЂР°РЅРёР»РёС€Рµ РѕР±РµРєС‚РѕРІ С‚СЂРµР±СѓСЋС‰РёС…СЃСЏ РґР»СЏ РѕС‚Р±СЂР°Р¶РµРЅРёСЏ РІРєР»Р°РґРєРё
     /// </summary>
     public class DisplayingObject
     {
@@ -80,7 +80,7 @@ namespace CAS.UI.Interfaces
         #region public DisplayingObject()
 
         ///<summary>
-        /// Создается пустой класс - хранилише обектов требующихся для отбражения вкладки
+        /// РЎРѕР·РґР°РµС‚СЃСЏ РїСѓСЃС‚РѕР№ РєР»Р°СЃСЃ - С…СЂР°РЅРёР»РёС€Рµ РѕР±РµРєС‚РѕРІ С‚СЂРµР±СѓСЋС‰РёС…СЃСЏ РґР»СЏ РѕС‚Р±СЂР°Р¶РµРЅРёСЏ РІРєР»Р°РґРєРё
         ///</summary>
         public DisplayingObject()
         {
@@ -92,10 +92,10 @@ namespace CAS.UI.Interfaces
         #region public DisplayingObject(IDisplayingEntity displayingEntity, string displayingText)
 
         ///<summary>
-        /// Создается класс - хранилише обектов требующихся для отбражения вкладки
+        /// РЎРѕР·РґР°РµС‚СЃСЏ РєР»Р°СЃСЃ - С…СЂР°РЅРёР»РёС€Рµ РѕР±РµРєС‚РѕРІ С‚СЂРµР±СѓСЋС‰РёС…СЃСЏ РґР»СЏ РѕС‚Р±СЂР°Р¶РµРЅРёСЏ РІРєР»Р°РґРєРё
         ///</summary> 
-        ///<param name="displayingEntity">Содержимое вкладки</param>
-        ///<param name="displayingText">Название вкладки</param>               
+        ///<param name="displayingEntity">РЎРѕРґРµСЂР¶РёРјРѕРµ РІРєР»Р°РґРєРё</param>
+        ///<param name="displayingText">РќР°Р·РІР°РЅРёРµ РІРєР»Р°РґРєРё</param>               
         public DisplayingObject(IDisplayingEntity displayingEntity, string displayingText)
         {
             this.displayingEntity = displayingEntity;
@@ -129,7 +129,7 @@ namespace CAS.UI.Interfaces
 
         #region public IDisplayingEntity DisplayingEntity
         /// <summary>
-        /// Содержимое вкладки
+        /// РЎРѕРґРµСЂР¶РёРјРѕРµ РІРєР»Р°РґРєРё
         /// </summary>
         public IDisplayingEntity DisplayingEntity
         {
@@ -344,7 +344,7 @@ namespace CAS.UI.Interfaces
 
 		#region public DisplayerType DisplayerType { get; set; }
 		/// <summary>
-		/// Тип отображателя, экран или форма
+		/// РўРёРї РѕС‚РѕР±СЂР°Р¶Р°С‚РµР»СЏ, СЌРєСЂР°РЅ РёР»Рё С„РѕСЂРјР°
 		/// </summary>
 		public DisplayerType DisplayerType { get; set; }
 
@@ -359,7 +359,7 @@ namespace CAS.UI.Interfaces
 
 		#region public string PageCaption { get; set; }
 		/// <summary>
-		/// текст заголовка вкладки для screenControl
+		/// С‚РµРєСЃС‚ Р·Р°РіРѕР»РѕРІРєР° РІРєР»Р°РґРєРё РґР»СЏ screenControl
 		/// </summary>
 		public string PageCaption { get; set; }
 
@@ -367,7 +367,7 @@ namespace CAS.UI.Interfaces
 
 		#region public ReflectionTypes TypeOfReflection { get; set; }
 		/// <summary>
-		/// как нужно открывать новый ScreenControl
+		/// РєР°Рє РЅСѓР¶РЅРѕ РѕС‚РєСЂС‹РІР°С‚СЊ РЅРѕРІС‹Р№ ScreenControl
 		/// </summary>
 		public ReflectionTypes TypeOfReflection { get; set; }
 
