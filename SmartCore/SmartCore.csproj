@@ -447,6 +447,8 @@
     <Compile Include="CAA\PEL\PELResponsibilities.cs" />
     <Compile Include="CAA\PEL\PelSpecialist.cs" />
     <Compile Include="CAA\PEL\PELRole.cs" />
+    <Compile Include="CAA\Repositories\CaaPerformanceRepository.cs" />
+    <Compile Include="CAA\Repositories\ICaaPerformanceRepository.cs" />
     <Compile Include="CAA\RoutineAudits\ActionProgramType.cs" />
     <Compile Include="CAA\RoutineAudits\IRoutineAuditFilterParams.cs" />
     <Compile Include="CAA\RoutineAudits\RoutineObject.cs" />

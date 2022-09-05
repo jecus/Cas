@@ -12,6 +12,7 @@ using CAS.UI.UIControls.FiltersControls;
 using CASReports.Builders;
 using CASTerms;
 using Entity.Abstractions.Filters;
+using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -133,6 +134,9 @@ namespace CAS.UI.UICAAControls.Document
 
 			AnimatedThreadWorker.ReportProgress(20, "calculation documents");
 
+			foreach (SmartCore.Entities.General.Document document in _initialDocumentArray)
+				GlobalObjects.CaaEnvironment.CaaPerformanceRepository.GetNextPerformance(document);
+			
             AnimatedThreadWorker.ReportProgress(70, "filter documents");
 			FilterItems(_initialDocumentArray, _resultDocumentArray);
 
@@ -499,7 +503,9 @@ namespace CAS.UI.UICAAControls.Document
 		}
 		#endregion
 
-
+		
+		
+		
 		#endregion
 
 	}

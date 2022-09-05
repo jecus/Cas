@@ -15,6 +15,7 @@ using CAS.UI.Helpers;
 using Entity.Abstractions;
 using SmartCore.AuditMongo.Repository;
 using SmartCore.CAA;
+using SmartCore.CAA.Repositories;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -34,6 +35,10 @@ namespace SmartCore
         int ObtainId();
         AircraftCollection Aircraft { get; set; }
         List<AllOperators> AllOperators { get; set; }
+        
+         ICaaPerformanceRepository CaaPerformanceRepository { get; set; }
+        
+        
 
     }
 
@@ -49,6 +54,7 @@ namespace SmartCore
         public AircraftCollection Aircraft { get; set; }
         public List<AllOperators> AllOperators { get; set; }
         public IAuditRepository AuditRepository { get; set; }
+        public ICaaPerformanceRepository CaaPerformanceRepository { get; set; }
         public ApiProvider ApiProvider { get; set; }
 
 

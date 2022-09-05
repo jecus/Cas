@@ -213,9 +213,12 @@ namespace CAS.UI.UICAAControls.Specialists
 		                new Filter("ParentId",docIds),
 		                new Filter("ParentTypeId",SmartCoreType.Document.ItemId)
 	                }, false);
-	                
+
+
+
 	                foreach (var document in _currentItem.EmployeeDocuments)
 	                {
+		                GlobalObjects.CaaEnvironment.CaaPerformanceRepository.GetNextPerformance(document);
 		                document.Parent = _currentItem;
 		                document.Files = new CommonCollection<ItemFileLink>(links.Where(i => i.ParentId == document.ItemId));
 	                }
@@ -264,6 +267,8 @@ namespace CAS.UI.UICAAControls.Specialists
 
 	            if (documents.Count > 0)
 	            {
+		           
+		            
 					if (_currentItem.MedicalRecord != null)
 					{
 						var crs = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Medical Records") as DocumentSubType;

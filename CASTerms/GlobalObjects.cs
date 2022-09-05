@@ -7,6 +7,7 @@ using SmartCore.AuditMongo;
 using SmartCore.AuditMongo.Repository;
 using SmartCore.Audits;
 using SmartCore.AverageUtilizations;
+using SmartCore.CAA.Repositories;
 using SmartCore.Calculations.MTOP;
 using SmartCore.Calculations.PerformanceCalculator;
 using SmartCore.Calculations.PlanOpsCalculator;
@@ -45,7 +46,7 @@ namespace CASTerms
 
 		public static AuditContext  AuditContext { get; set; }
 		public static IAuditRepository  AuditRepository { get; set; }
-        public static ICasEnvironment CasEnvironment { get; set; }
+		public static ICasEnvironment CasEnvironment { get; set; }
         public static INewKeeper NewKeeper => CasEnvironment?.NewKeeper ?? CaaEnvironment.NewKeeper;
         public static ICaaEnvironment CaaEnvironment { get; set; }
         public static IPackageCore PackageCore { get; set; }

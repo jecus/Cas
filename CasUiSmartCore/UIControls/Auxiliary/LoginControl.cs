@@ -27,6 +27,7 @@ using SmartCore.AuditMongo.Repository;
 using SmartCore.Audits;
 using SmartCore.AverageUtilizations;
 using SmartCore.CAA;
+using SmartCore.CAA.Repositories;
 using SmartCore.Calculations;
 using SmartCore.Calculations.MTOP;
 using SmartCore.Calculations.PerformanceCalculator;
@@ -820,6 +821,7 @@ namespace CAS.UI.UIControls.Auxiliary
                 _isCAA = true;
                 var environment = DbTypes.CaaEnvironment = new CaaEnvironment();
                 environment.AuditRepository = GlobalObjects.AuditRepository;
+                environment.CaaPerformanceRepository = new CaaPerformanceRepository();
                 environment.ApiProvider = new ApiProvider(con.Connection);
                 
 
