@@ -5,13 +5,13 @@ using CAS.UI.Management.Dispatchering;
 namespace CAS.UI.Interfaces
 {
     /// <summary>
-    /// Интерфейс самой вкладки: 
+    /// РРЅС‚РµСЂС„РµР№СЃ СЃР°РјРѕР№ РІРєР»Р°РґРєРё: 
     /// </summary>
     public interface IDisplayer
     {
         #region IDisplayingEntity Entity
         /// <summary>
-        /// Скрин, отображаемый вкладкой
+        /// РЎРєСЂРёРЅ, РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹Р№ РІРєР»Р°РґРєРѕР№
         /// </summary>
         IDisplayingEntity Entity
         {
@@ -20,12 +20,12 @@ namespace CAS.UI.Interfaces
         #endregion
 
         /// <summary>
-        /// Текст заголовка вкладки
+        /// РўРµРєСЃС‚ Р·Р°РіРѕР»РѕРІРєР° РІРєР»Р°РґРєРё
         /// </summary>
         string Text{ get; set;}
 
         /// <summary>
-        /// Выполнять ли проветку перед закрытием отображателя
+        /// Р’С‹РїРѕР»РЅСЏС‚СЊ Р»Рё РїСЂРѕРІРµС‚РєСѓ РїРµСЂРµРґ Р·Р°РєСЂС‹С‚РёРµРј РѕС‚РѕР±СЂР°Р¶Р°С‚РµР»СЏ
         /// </summary>
         bool PerformCloseChecking { get; set; }
 
@@ -55,99 +55,99 @@ namespace CAS.UI.Interfaces
         bool ContainedDisplayingEntityEquals(IDisplayer obj);
 
         /// <summary>
-        /// Возникает при удвлении отображателя
+        /// Р’РѕР·РЅРёРєР°РµС‚ РїСЂРё СѓРґРІР»РµРЅРёРё РѕС‚РѕР±СЂР°Р¶Р°С‚РµР»СЏ
         /// </summary>
         event EventHandler DisplayerRemoving;
 
         /// <summary>
-        /// Проверяется возможность удаления отображателя
+        /// РџСЂРѕРІРµСЂСЏРµС‚СЃСЏ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ СѓРґР°Р»РµРЅРёСЏ РѕС‚РѕР±СЂР°Р¶Р°С‚РµР»СЏ
         /// </summary>
         /// <param name="arguments"></param>
         void OnDisplayerRemoving(DisplayerCancelEventArgs arguments);
 
         /// <summary>
-        /// Возникает после удаления отображателя
+        /// Р’РѕР·РЅРёРєР°РµС‚ РїРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ РѕС‚РѕР±СЂР°Р¶Р°С‚РµР»СЏ
         /// </summary>
         event EventHandler DisplayerRemoved;
 
         /// <summary>
-        /// Проверяется возможность удаление отображателя
+        /// РџСЂРѕРІРµСЂСЏРµС‚СЃСЏ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ СѓРґР°Р»РµРЅРёРµ РѕС‚РѕР±СЂР°Р¶Р°С‚РµР»СЏ
         /// </summary>
         /// <param name="arguments"></param>
         void OnDisplayerRemoved(DisplayerCancelEventArgs arguments);
 
         /// <summary>
-        /// Действия, происходящие при деактвации отображателя
+        /// Р”РµР№СЃС‚РІРёСЏ, РїСЂРѕРёСЃС…РѕРґСЏС‰РёРµ РїСЂРё РґРµР°РєС‚РІР°С†РёРё РѕС‚РѕР±СЂР°Р¶Р°С‚РµР»СЏ
         /// </summary>
         /// <param name="arguments"></param>
         void OnDisplayerDeselecting(DisplayerCancelEventArgs arguments);
 
-        #region  Для кнопок вперед и назад
+        #region  Р”Р»СЏ РєРЅРѕРїРѕРє РІРїРµСЂРµРґ Рё РЅР°Р·Р°Рґ
         /// <summary>
-        /// Для открытия предыдущей страници в данной вкладке
+        /// Р”Р»СЏ РѕС‚РєСЂС‹С‚РёСЏ РїСЂРµРґС‹РґСѓС‰РµР№ СЃС‚СЂР°РЅРёС†Рё РІ РґР°РЅРЅРѕР№ РІРєР»Р°РґРєРµ
         /// </summary>
         void PreviousPage();
         /// <summary>
-        /// Для открытия следующей страници в данной вкладке
+        /// Р”Р»СЏ РѕС‚РєСЂС‹С‚РёСЏ СЃР»РµРґСѓСЋС‰РµР№ СЃС‚СЂР°РЅРёС†Рё РІ РґР°РЅРЅРѕР№ РІРєР»Р°РґРєРµ
         /// </summary>
         void NextPage();
 
         ///<summary>
-        /// Происходит при смене отображаемого скрина в данной вкладке
+        /// РџСЂРѕРёСЃС…РѕРґРёС‚ РїСЂРё СЃРјРµРЅРµ РѕС‚РѕР±СЂР°Р¶Р°РµРјРѕРіРѕ СЃРєСЂРёРЅР° РІ РґР°РЅРЅРѕР№ РІРєР»Р°РґРєРµ
         ///</summary>
         event EventHandler ScreenChanged;
 
         ///<summary>
-        /// Показывает есть-ли PreviousPage
+        /// РџРѕРєР°Р·С‹РІР°РµС‚ РµСЃС‚СЊ-Р»Рё PreviousPage
         ///</summary>
         ///<returns></returns>
         bool CanPreviousPage();
 
         ///<summary>
-        /// Показывает есть-ли NextPage
+        /// РџРѕРєР°Р·С‹РІР°РµС‚ РµСЃС‚СЊ-Р»Рё NextPage
         ///</summary>
         ///<returns></returns>
         bool CanNextPage();
         #endregion
 
-        #region Для кнопки закрытия вкладки
+        #region Р”Р»СЏ РєРЅРѕРїРєРё Р·Р°РєСЂС‹С‚РёСЏ РІРєР»Р°РґРєРё
 
         /// <summary>
-        /// Событие, сигнализирующее об изменении количества вкладок у родителя данной вкладки
+        /// РЎРѕР±С‹С‚РёРµ, СЃРёРіРЅР°Р»РёР·РёСЂСѓСЋС‰РµРµ РѕР± РёР·РјРµРЅРµРЅРёРё РєРѕР»РёС‡РµСЃС‚РІР° РІРєР»Р°РґРѕРє Сѓ СЂРѕРґРёС‚РµР»СЏ РґР°РЅРЅРѕР№ РІРєР»Р°РґРєРё
         /// </summary>
         event EventHandler CountScreenChanget;
 
         /// <summary>
-        /// Показывает активность кнопки закрытия данной вкладки
+        /// РџРѕРєР°Р·С‹РІР°РµС‚ Р°РєС‚РёРІРЅРѕСЃС‚СЊ РєРЅРѕРїРєРё Р·Р°РєСЂС‹С‚РёСЏ РґР°РЅРЅРѕР№ РІРєР»Р°РґРєРё
         /// </summary>
         /// <returns></returns>
         bool CanEnableCloseTab();
         #endregion
 
-        #region Обработка кнопки закрытия формы
+        #region РћР±СЂР°Р±РѕС‚РєР° РєРЅРѕРїРєРё Р·Р°РєСЂС‹С‚РёСЏ С„РѕСЂРјС‹
         /// <summary>
-        /// Вызывается при нажатии кнопки закрытия программы
+        /// Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё РЅР°Р¶Р°С‚РёРё РєРЅРѕРїРєРё Р·Р°РєСЂС‹С‚РёСЏ РїСЂРѕРіСЂР°РјРјС‹
         /// </summary>
         event EventHandler ClosingWindow;
 
         /// <summary>
-        /// Вызывает событие ClosingWindow
+        /// Р’С‹Р·С‹РІР°РµС‚ СЃРѕР±С‹С‚РёРµ ClosingWindow
         /// </summary>
         void OnClosingWindow();
 
         /// <summary>
-        /// Вызывается при отмене закрытия программы 
+        /// Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё РѕС‚РјРµРЅРµ Р·Р°РєСЂС‹С‚РёСЏ РїСЂРѕРіСЂР°РјРјС‹ 
         /// </summary>
         event EventHandler CancelClosingWindow;
 
         /// <summary>
-        /// Вызывает событие  CancelClosingWindow
+        /// Р’С‹Р·С‹РІР°РµС‚ СЃРѕР±С‹С‚РёРµ  CancelClosingWindow
         /// </summary>
         void OnCancelClosingWindow();
         #endregion
        
         /// <summary>
-        /// Доступ к родительскому элементу
+        /// Р”РѕСЃС‚СѓРї Рє СЂРѕРґРёС‚РµР»СЊСЃРєРѕРјСѓ СЌР»РµРјРµРЅС‚Сѓ
         /// </summary>
         AvMultitabControl ParentControl { get; }
     }

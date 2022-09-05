@@ -213,8 +213,8 @@ namespace CAS.UI.UICAAControls.CAATask
 				}
 			};
 			
-			_directivesViewer.DisableDeleteContext();
-			_directivesViewer.DisableCopyPaste();
+			// _directivesViewer.DisableDeleteContext();
+			// _directivesViewer.DisableCopyPaste();
 
 
 			panel1.Controls.Add(_directivesViewer);
