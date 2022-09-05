@@ -116,6 +116,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				foreach (var o in listFunction)
 					comboBoxFunction.Items.Add(o);
 
+				comboBoxFunction.Items.Add(LicenseFunction.UNK);
+
 				listRights = LicenseRights.Items.Where(l => l.Category == selectedCategory.Category);
 				foreach (var o in listRights)
 					comboBoxRights.Items.Add(o);

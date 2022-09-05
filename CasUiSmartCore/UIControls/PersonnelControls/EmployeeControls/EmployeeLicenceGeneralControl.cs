@@ -297,7 +297,9 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				{
 					try
 					{
-						GlobalObjects.CasEnvironment.Manipulator.Delete(control.SpecialistCaa, false);
+						if(GlobalObjects.CasEnvironment != null)
+							GlobalObjects.CasEnvironment.Manipulator.Delete(control.SpecialistCaa, false);
+						else GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.SpecialistCaa, false);
 					}
 					catch (Exception ex)
 					{
@@ -338,7 +340,9 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				{
 					try
 					{
-						GlobalObjects.CasEnvironment.Manipulator.Delete(control.LicenseRating, false);
+						if(GlobalObjects.CasEnvironment != null)
+							GlobalObjects.CasEnvironment.Manipulator.Delete(control.LicenseRating, false);
+						else GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.LicenseRating, false);
 					}
 					catch (Exception ex)
 					{
@@ -380,7 +384,9 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				{
 					try
 					{
-						GlobalObjects.CasEnvironment.Manipulator.Delete(control.InstrumentRating, false);
+						if(GlobalObjects.CasEnvironment != null)
+							GlobalObjects.CasEnvironment.Manipulator.Delete(control.InstrumentRating, false);
+						else GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.InstrumentRating, false);
 					}
 					catch (Exception ex)
 					{
@@ -462,7 +468,9 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				{
 					try
 					{
-						GlobalObjects.CasEnvironment.Manipulator.Delete(control.LicenseDetail, false);
+						if(GlobalObjects.CasEnvironment != null)
+							GlobalObjects.CasEnvironment.Manipulator.Delete(control.LicenseDetail, false);
+						else GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.LicenseDetail, false);
 					}
 					catch (Exception ex)
 					{
