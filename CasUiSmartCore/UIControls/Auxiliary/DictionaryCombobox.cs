@@ -217,14 +217,19 @@ namespace CAS.UI.UIControls.Auxiliary
         {
             get
             {
-                if (comboBoxReason != null && comboBoxReason.SelectedItem != null 
-                    && comboBoxReason.SelectedItem.ToString() != "N/A") 
+                if (comboBoxReason != null && comboBoxReason.SelectedItem != null
+                                           && comboBoxReason.SelectedItem.ToString() != "N/A")
                     return (IDictionaryItem)comboBoxReason.SelectedItem;
                 return null;
+                
             }
             set
             {
-                if (comboBoxReason == null || value == null) return;
+                if (comboBoxReason == null || value == null)
+                {
+                    comboBoxReason.SelectedItem = comboBoxReason.Items[0];
+                    return;
+                }
 
                 foreach (object item in
                     comboBoxReason.Items.Cast<object>().Where(item => (item is IDictionaryItem) && item.ToString() == value.ToString()))
@@ -232,6 +237,8 @@ namespace CAS.UI.UIControls.Auxiliary
                     comboBoxReason.SelectedItem = item;
                     break;
                 }
+                if(value.ItemId == -1)
+                    comboBoxReason.SelectedItem = comboBoxReason.Items[0];
                 _selectedItem = value;
             }
         }

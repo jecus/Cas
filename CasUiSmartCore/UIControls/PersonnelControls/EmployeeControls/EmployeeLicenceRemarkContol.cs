@@ -35,8 +35,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			dictionaryComboBoxRestriction.Type = typeof(LicenseRestriction);
 			dictionaryComboBoxRights.Type = typeof(LicenseRemarkRights);
 
-			dictionaryComboBoxRights.SelectedItem = _licenseRemark.Rights;
-			dictionaryComboBoxRestriction.SelectedItem = _licenseRemark.LicenseRestriction;
+			dictionaryComboBoxRights.SelectedItem = _licenseRemark.Rights ?? LicenseRemarkRights.Unknown;
+			dictionaryComboBoxRestriction.SelectedItem = _licenseRemark.LicenseRestriction ?? LicenseRestriction.Unknown;
 			dateTimePickerIssue.Value = _licenseRemark.IssueDate;
 		}
 
@@ -82,8 +82,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 		public void ApplyChanges()
 		{
-			_licenseRemark.Rights = (LicenseRemarkRights)dictionaryComboBoxRights.SelectedItem;
-			_licenseRemark.LicenseRestriction = (LicenseRestriction)dictionaryComboBoxRestriction.SelectedItem;
+			_licenseRemark.Rights = (LicenseRemarkRights)dictionaryComboBoxRights.SelectedItem ?? LicenseRemarkRights.Unknown;
+			_licenseRemark.LicenseRestriction = (LicenseRestriction)dictionaryComboBoxRestriction.SelectedItem ?? LicenseRestriction.Unknown;
 			_licenseRemark.IssueDate = dateTimePickerIssue.Value;
 		}
 
