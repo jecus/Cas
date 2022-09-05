@@ -48,13 +48,13 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 		{
 			message = "";
 
-			if (dictionaryComboBoxRights.SelectedItem == null)
+			if (dictionaryComboBoxRights.SelectedItem == null && string.IsNullOrEmpty(dictionaryComboBoxRights.Text))
 			{
 				if (message != "") message += "\n ";
 				message += "Please select Rights";
 			}
 
-			if (dictionaryComboBoxRestriction.SelectedItem == null)
+			if (dictionaryComboBoxRestriction.SelectedItem == null&& string.IsNullOrEmpty(dictionaryComboBoxRestriction.Text))
 			{
 				if (message != "") message += "\n ";
 				message += "Please select Restriction";
@@ -82,8 +82,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 		public void ApplyChanges()
 		{
-			_licenseRemark.Rights = (LicenseRemarkRights)dictionaryComboBoxRights.SelectedItem ?? LicenseRemarkRights.Unknown;
-			_licenseRemark.LicenseRestriction = (LicenseRestriction)dictionaryComboBoxRestriction.SelectedItem ?? LicenseRestriction.Unknown;
+			_licenseRemark.Rights = dictionaryComboBoxRights.SelectedItem != null ? (LicenseRemarkRights)dictionaryComboBoxRights.SelectedItem : LicenseRemarkRights.Unknown;
+			_licenseRemark.LicenseRestriction = dictionaryComboBoxRestriction.SelectedItem != null ? (LicenseRestriction)dictionaryComboBoxRestriction.SelectedItem : LicenseRestriction.Unknown;
 			_licenseRemark.IssueDate = dateTimePickerIssue.Value;
 		}
 
