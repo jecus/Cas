@@ -48,7 +48,7 @@ namespace SmartCore.Entities.Dictionaries
 		#region public override string FullName { get; set; }
 
 		private string _fullName;
-
+		
 		/// <summary>
 		/// Полное название Категории
 		/// </summary>
@@ -124,5 +124,21 @@ namespace SmartCore.Entities.Dictionaries
 		}
 
 		#endregion
+		
+		
+		private static LicenseRemarkRights _unknown;
+		public static LicenseRemarkRights Unknown
+		{
+			get
+			{
+				return _unknown ?? (_unknown = new LicenseRemarkRights
+				{
+					FullName = "Unknown",
+					ShortName = "UNK",
+					Category = "",
+					CommonName = "Unknown"
+				});
+			}
+		}
 	}
 }

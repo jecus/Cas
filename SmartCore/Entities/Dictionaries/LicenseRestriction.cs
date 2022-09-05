@@ -124,5 +124,20 @@ namespace SmartCore.Entities.Dictionaries
 		}
 
 		#endregion
+		
+		private static LicenseRestriction _unknown;
+		public static LicenseRestriction Unknown
+		{
+			get
+			{
+				return _unknown ?? (_unknown = new LicenseRestriction
+				{
+					FullName = "Unknown",
+					ShortName = "UNK",
+					Category = "",
+					CommonName = "Unknown"
+				});
+			}
+		}
 	}
 }

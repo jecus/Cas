@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models;
 using CAS.Entity.Models.DTO.General;
 using CAS.UI.Helpers;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
@@ -453,6 +454,11 @@ namespace CAS.UI.UIControls.DocumentationControls
 
             if (_operatorId.HasValue &&  _currentDocument.OperatorId != 0)
                 _currentDocument.OperatorId = _operatorId.Value;
+            else
+            {
+	            if(_parent is IOperatable op)
+		            _currentDocument.OperatorId = op.OperatorId;
+            }
 
             if (_parent is Aircraft)
 			    _currentDocument.ParentAircraftId = _parent.ItemId;
@@ -553,7 +559,7 @@ namespace CAS.UI.UIControls.DocumentationControls
                 {
                     if (CurrentDocument.ItemId <= 0)
                         CurrentDocument.Author = GlobalObjects.CaaEnvironment.IdentityUser.ItemId;
-                    CurrentDocument.OperatorId = _operatorId.Value;
+                    //CurrentDocument.OperatorId = _operatorId.Value;
                     GlobalObjects.CaaEnvironment.NewKeeper.Save(CurrentDocument);
                 }
             
