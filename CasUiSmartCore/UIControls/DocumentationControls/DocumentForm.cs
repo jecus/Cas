@@ -604,9 +604,12 @@ namespace CAS.UI.UIControls.DocumentationControls
             maintenanceTypeEdit.ShowDialog(this);
            
             comboBoxSubType.Items.Clear();
+            DocumentSubTypeCollection dstc;
+            if(GlobalObjects.CasEnvironment != null)
+	            dstc = (DocumentSubTypeCollection) GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>();
+            else dstc = (DocumentSubTypeCollection) GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>();
 
-            var dstc = (DocumentSubTypeCollection) GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>();
-            List<DocumentSubType> list = dstc.GetSubTypesByDocType((DocumentType)comboBoxDocumentType.SelectedItem);
+            var list = dstc.GetSubTypesByDocType((DocumentType)comboBoxDocumentType.SelectedItem);
             foreach (DocumentSubType item in list)
             {
                 comboBoxSubType.Items.Add(item);
@@ -675,8 +678,17 @@ namespace CAS.UI.UIControls.DocumentationControls
 
 			comboBoxNomenclature.Items.Clear();
 			var department = comboBoxDepartment.SelectedItem as Department;
-			foreach (var dic in GlobalObjects.CasEnvironment.GetDictionary<Nomenclatures>().Cast<Nomenclatures>().Where(i => i.Department?.ItemId == department.ItemId).Where(i => i.ToString().ToLowerInvariant().Contains(_filterString.ToLowerInvariant())))
-				comboBoxNomenclature.Items.Add(dic);
+			if (GlobalObjects.CasEnvironment != null)
+			{
+				foreach (var dic in GlobalObjects.CasEnvironment.GetDictionary<Nomenclatures>().Cast<Nomenclatures>().Where(i => i.Department?.ItemId == department.ItemId).Where(i => i.ToString().ToLowerInvariant().Contains(_filterString.ToLowerInvariant())))
+					comboBoxNomenclature.Items.Add(dic);
+			}
+			else
+			{
+				foreach (var dic in GlobalObjects.CaaEnvironment.GetDictionary<Nomenclatures>().Cast<Nomenclatures>().Where(i => i.Department?.ItemId == department.ItemId).Where(i => i.ToString().ToLowerInvariant().Contains(_filterString.ToLowerInvariant())))
+					comboBoxNomenclature.Items.Add(dic);
+			}
+			
 
 			comboBoxNomenclature.DropDownStyle = ComboBoxStyle.DropDown;
 			comboBoxNomenclature.SelectionStart = _filterString.Length;

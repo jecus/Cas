@@ -53,8 +53,10 @@ namespace CAS.UI.UIControls.Auxiliary
 
             Text = "Edit " + _parentDocType.FullName + " Types:";
             listViewDocTypes.Columns[0].Text = _parentDocType.FullName + " Types";
-
-            var dst = (DocumentSubTypeCollection) GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>();
+            DocumentSubTypeCollection dst;
+            if(GlobalObjects.CasEnvironment != null)
+                 dst = (DocumentSubTypeCollection) GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>();
+            else dst = (DocumentSubTypeCollection) GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>();
             var list = dst.GetSubTypesByDocType(_parentDocType);
             foreach (DocumentSubType item in list)
             {
@@ -78,7 +80,10 @@ namespace CAS.UI.UIControls.Auxiliary
             //    GlobalObjects.CasEnvironment.DocSubTypes.ToArray().
             //    Where(d => d.DocumentTypeId == _parentDocType.ItemID && d.FullName == textBoxName.Text.Trim()).
             //        FirstOrDefault();
-            var dst = (DocumentSubTypeCollection)GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>();
+            DocumentSubTypeCollection dst;
+            if(GlobalObjects.CasEnvironment != null)
+                dst = (DocumentSubTypeCollection) GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>();
+            else dst = (DocumentSubTypeCollection) GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>();
             var exist = dst.ToArray().FirstOrDefault(d => d.DocumentTypeId == _parentDocType.ItemId && 
                                                           d.FullName == textBoxName.Text.Trim());
 
@@ -98,8 +103,9 @@ namespace CAS.UI.UIControls.Auxiliary
             listViewDocTypes.Items.Add(listViewItem);
 
             textBoxName.Text = "";
-
-            GlobalObjects.NewKeeper.Save(newSubType);
+            if(GlobalObjects.CasEnvironment != null)
+                GlobalObjects.NewKeeper.Save(newSubType);
+            else GlobalObjects.CaaEnvironment.NewKeeper.Save(newSubType);
             dst.Add(newSubType);
         }
         #endregion
@@ -127,7 +133,10 @@ namespace CAS.UI.UIControls.Auxiliary
             //    Where(d => d.DocumentTypeId == _parentDocType.ItemID && d.FullName == name).
             //        FirstOrDefault();
 
-            var dst = (DocumentSubTypeCollection)GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>();
+            DocumentSubTypeCollection dst;
+            if(GlobalObjects.CasEnvironment != null)
+                dst = (DocumentSubTypeCollection) GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>();
+            else dst = (DocumentSubTypeCollection) GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>();
             var exist = dst.ToArray().FirstOrDefault(d => d.DocumentTypeId == _parentDocType.ItemId && d.FullName == name);
             //Проверка на то, не существует ли такой подтип для данного типа документов в словаре
             if (name == "" || exist != null)
@@ -137,7 +146,9 @@ namespace CAS.UI.UIControls.Auxiliary
             }
             DocumentSubType docSubType = ((DocumentSubType)listViewDocTypes.Items[e.Item].Tag);
             docSubType.FullName = e.Label.Trim();
-            GlobalObjects.NewKeeper.Save(docSubType);
+            if(GlobalObjects.CasEnvironment != null)
+                GlobalObjects.NewKeeper.Save(docSubType);
+            else GlobalObjects.CaaEnvironment.NewKeeper.Save(docSubType);
         }
         #endregion
 
