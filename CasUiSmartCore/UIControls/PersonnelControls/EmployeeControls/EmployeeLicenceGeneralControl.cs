@@ -137,7 +137,10 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 		private Document CreateNewDocument()
 		{
-			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Personnel License") as DocumentSubType;
+			DocumentSubType docSubType;
+			if(GlobalObjects.CasEnvironment != null)
+				docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Personnel License") as DocumentSubType;
+			else docSubType = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Personnel License") as DocumentSubType;
 
 			return new Document
 			{

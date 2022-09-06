@@ -16,6 +16,13 @@ namespace SmartCore.CAA.Tasks
 
         public static TaskType Training = new TaskType(1, "Training", "Training", "Training");
         public static TaskType OJT = new TaskType(2, "OJT", "OJT", "OJT");
+        public static TaskType Simulator = new TaskType(3, "Simulator", "Simulator", "Simulator");
+        public static TaskType Testing = new TaskType(4, "Testing", "Testing", "Testing");
+        public static TaskType Сheck = new TaskType(5, "Сheck", "Сheck", "Сheck");
+        public static TaskType Verification = new TaskType(6, "Verification", "Verification", "Verification");
+        public static TaskType Examination = new TaskType(7, "Examination", "Examination", "Examination");
+        public static TaskType Review = new TaskType(8, "Review", "Review", "Review");
+        public static TaskType Control = new TaskType(9, "Control", "Control", "Control");
 
         /*
          * Методы
