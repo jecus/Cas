@@ -98,6 +98,8 @@ namespace CAS.UI.UIControls.DocumentationControls
 					GlobalObjects.NewKeeper.Delete(_currentDocument);
 					_currentDocument = null;
 					UpdateDocument();
+					if (Remove != null)
+						Remove(this, EventArgs.Empty);
 				}
 				catch (Exception ex)
 				{
@@ -112,6 +114,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 		#region Event
 
 		public event EventHandler Added;
+		public event EventHandler Remove;
 
 		#endregion
 	}

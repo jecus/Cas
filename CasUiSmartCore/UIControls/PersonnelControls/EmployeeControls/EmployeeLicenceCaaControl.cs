@@ -63,10 +63,19 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 			documentControl1.CurrentDocument = _specialistCaa.Document;
 			documentControl1.Added += DocumentControl1_Added;
+			documentControl1.Remove += DocumentControl1_Removed;
 		}
+
+		
 
 		#endregion
 
+		
+		private void DocumentControl1_Removed(object sender, EventArgs e)
+		{
+			InvokeReload();
+		}
+		
 		#region private void DocumentControl1_Added(object sender, EventArgs e)
 
 		private void DocumentControl1_Added(object sender, EventArgs e)
@@ -77,7 +86,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			{
 				_specialistCaa.Document = newDocument;
 				documentControl1.CurrentDocument = newDocument;
-				InvokeReload();
+				
 
 			}
 		}

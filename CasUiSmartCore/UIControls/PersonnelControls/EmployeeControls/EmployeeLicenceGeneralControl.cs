@@ -114,9 +114,15 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 			documentControl1.CurrentDocument = _license.Document;
 			documentControl1.Added += DocumentControl1_Added;
+			documentControl1.Remove += DocumentControl1_Removed;
 		}
 
 		#endregion
+		
+		private void DocumentControl1_Removed(object sender, EventArgs e)
+		{
+			InvokeReload();
+		}
 
 		#region private void DocumentControl1_Added(object sender, EventArgs e)
 
