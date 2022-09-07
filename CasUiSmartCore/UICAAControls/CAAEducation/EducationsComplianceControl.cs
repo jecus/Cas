@@ -32,7 +32,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                     last.Add(new LastComplianceView()
                     {
                         Record = _record,
-                        Course = managment.Education?.Task?.FullName,
+                        Course = managment.Education?.Task?.ShortName,
                         LastCompliance = comp,
                         Group = "Last compliance"
                     });
@@ -48,7 +48,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 last.Add(new LastComplianceView()
                 {
                     Record = _record,
-                    Course = managment.Education?.Task?.FullName,
+                    Course = managment.Education?.Task?.ShortName,
                     LastCompliance = new LastCompliance()
                     {
                         LastDate = _record.Settings.NextCompliance.NextDate
@@ -61,7 +61,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 last.Add(new LastComplianceView()
                 {
                     Record = _record,
-                    Course = managment.Education?.Task?.FullName,
+                    Course = managment.Education?.Task?.ShortName,
                     LastCompliance = new LastCompliance(),
                     Group = "Need new compliance"
                 });

@@ -49,7 +49,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			this.radGridView1.GroupDescriptors.Clear();
 			var descriptor = new GroupDescriptor();
 			foreach (var colName in new List<string>{  "Group" })
-				descriptor.GroupNames.Add(colName,  ListSortDirection.Ascending);
+				descriptor.GroupNames.Add(colName,  ListSortDirection.Descending);
 			this.radGridView1.GroupDescriptors.Add(descriptor);
 		}
 
