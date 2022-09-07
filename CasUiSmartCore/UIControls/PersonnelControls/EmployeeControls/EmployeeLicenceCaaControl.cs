@@ -30,6 +30,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			set { labelIssueBy.Text = value; }
 		}
 
+		public int OperatorId { get; set; }
+
 		#endregion
 
 		#region Constructot
@@ -94,12 +96,13 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 			return new Document
 			{
+				OperatorId = OperatorId,
 				ParentId = _specialistCaa.ItemId,
 				Parent = _specialistCaa,
 				ParentTypeId = _specialistCaa.SmartCoreObjectType.ItemId,
 				DocType = DocumentType.Document,
 				DocumentSubType = docSubType,
-				IsClosed = true,
+				IsClosed = false,
 			};
 		}
 

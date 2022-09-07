@@ -35,6 +35,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 		public SpecialistLicense License { get { return _license; } }
 
 		public int EmployeeLicenceTypeId { get { return ((EmployeeLicenceType) comboBoxLicenceType.SelectedItem).ItemId; } }
+		public int OperatorId { get; set; }
 
 		#endregion
 
@@ -144,12 +145,13 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 			return new Document
 			{
+				OperatorId = OperatorId,
 				ParentId = _license.ItemId,
 				Parent = _license,
 				ParentTypeId = _license.SmartCoreObjectType.ItemId,
 				DocType = DocumentType.Document,
 				DocumentSubType = docSubType,
-				IsClosed = true,
+				IsClosed = false,
 			};
 		}
 
@@ -503,7 +505,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 		private void AddCaaControl(SpecialistCAA caa)
 		{
-			var control = new EmployeeLicenceCaaControl { ShowButtonDelete = true };
+			var control = new EmployeeLicenceCaaControl { ShowButtonDelete = true, OperatorId = OperatorId };
 			control.Deleted += Control_Deleted;
 			control.Reload += ControlOnReload;
 

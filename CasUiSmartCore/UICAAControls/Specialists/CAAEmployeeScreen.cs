@@ -123,7 +123,7 @@ namespace CAS.UI.UICAAControls.Specialists
                 headerControl.ShowSaveButton2 = false;
                 headerControl.SaveButtonToolTipText = "Save";
             }
-
+            employeeLicenceControl.OperatorId = _currentItem.OperatorId;
             statusControl.ConditionState = ConditionState.Satisfactory;// GlobalObjects.CaaEnvironment.Calculator.GetConditionState(_currentItem);
 
             //extendableRichContainerSummary.LabelCaption.Text = "Summary " + _currentDirective.TaskNumberCheck
@@ -140,6 +140,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			//complianceControl.cu = _currentItem;
 			employeeLicenceControl.UpdateControl(_currentItem, aircraftModels);
 			employeeLicenceControl.Reload += DocumentsControl_Reload;
+			
 			employeeMedicalControl1.UpdateControl(_currentItem);
 			employeeTrainingListControl1.UpdateControl(_initialDocumentArray, aircraftHeaderControl1.Operator, _records);
 	        employeeFlightControl.CurrentItem = _currentItem;

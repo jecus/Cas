@@ -24,6 +24,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			get { return flowLayoutPanelGeneralControl; }
 		}
 
+		public int OperatorId { get; set; }
+
 		#endregion
 
 		#region Constructor
@@ -347,7 +349,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 		private void AddLicenseGeneralControl(SpecialistLicense license, bool showLink = true)
 		{
-			var control = new EmployeeLicenceGeneralControl { ShowLinkDelete = showLink };
+			var control = new EmployeeLicenceGeneralControl { ShowLinkDelete = showLink, OperatorId = OperatorId };
 			control.UpdateControl(license, _currentItem.PersonnelCategory, _aircraftModels);
 			control.Deleted += Control_Deleted;
 			control.Reload += ControlOnReload;
