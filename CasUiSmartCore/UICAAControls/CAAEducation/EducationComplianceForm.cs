@@ -51,6 +51,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
         {
             var newDocument = new SmartCore.Entities.General.Document
             {
+                OperatorId = _record.OperatorId,
                 Parent = _record,
                 ParentId = _record.ItemId,
                 ParentTypeId = _record.SmartCoreObjectType.ItemId,
