@@ -62,7 +62,10 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 {
                     Record = _record,
                     Course = managment.Education?.Task?.ShortName,
-                    LastCompliance = new LastCompliance(),
+                    LastCompliance = new LastCompliance()
+                    {
+                        LastDate = DateTime.Now
+                    },
                     Group = "Need new compliance"
                 });
             }

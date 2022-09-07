@@ -72,8 +72,12 @@ namespace CAS.UI.UICAAControls.CAAEducation
             _compliance.LastDate = dateTimePickeValidTo.Value;
             if (documentControl1.CurrentDocument != null)
                 _compliance.DocumentId = documentControl1.CurrentDocument.ItemId;
-            
-            _record.Settings.LastCompliances.Add(_compliance);
+
+            if (_compliance.ItemId <= 0)
+            {
+                _compliance.ItemId = GlobalObjects.CaaEnvironment.ObtainId();
+                _record.Settings.LastCompliances.Add(_compliance);
+            }
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
