@@ -267,9 +267,7 @@ namespace CAS.UI.UICAAControls.Specialists
 
 	            if (documents.Count > 0)
 	            {
-		           
-		            
-					if (_currentItem.MedicalRecord != null)
+		            if (_currentItem.MedicalRecord != null)
 					{
 						var crs = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Medical Records") as DocumentSubType;
 						var personalTraining = documents.FirstOrDefault(d => d.ParentId == _currentItem.MedicalRecord.ItemId && d.ParentTypeId == SmartCoreType.SpecialistMedicalRecord.ItemId && d.DocumentSubType == crs);
@@ -281,8 +279,8 @@ namespace CAS.UI.UICAAControls.Specialists
 					}
 		            foreach (var license in _currentItem.Licenses)
 		            {
-			            var crs = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Personnel License") as DocumentSubType;
-			            var p = documents.FirstOrDefault(d => d.ParentId == license.ItemId && d.ParentTypeId == SmartCoreType.SpecialistLicense.ItemId && d.DocumentSubType == crs);
+			            var q = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Personnel License") as DocumentSubType;
+			            var p = documents.FirstOrDefault(d => d.ParentId == license.ItemId && d.ParentTypeId == SmartCoreType.SpecialistLicense.ItemId && d.DocumentSubType.ItemId == q.ItemId);
 			            if (p != null)
 			            {
 				            license.Document = p;
@@ -290,7 +288,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			            }
 						foreach (var caa in license.CaaLicense)
 			            {
-				            var personalTraining = documents.FirstOrDefault(d => d.ParentId == caa.ItemId && d.ParentTypeId == SmartCoreType.SpecialistCAA.ItemId && d.DocumentSubType == crs);
+				            var personalTraining = documents.FirstOrDefault(d => d.ParentId == caa.ItemId && d.ParentTypeId == SmartCoreType.SpecialistCAA.ItemId && d.DocumentSubType.ItemId == q.ItemId);
 				            if (personalTraining != null)
 				            {
 					            caa.Document = personalTraining;
@@ -309,6 +307,12 @@ namespace CAS.UI.UICAAControls.Specialists
 							training.Document.Parent = training;
 						}
 					}
+					
+					
+					foreach (var document in documents)
+						GlobalObjects.CaaEnvironment.CaaPerformanceRepository.GetNextPerformance(document);
+
+					_currentItem.EmployeeDocuments.AddRange(documents);
 				}
 	            
 	            _suppliers.Clear();

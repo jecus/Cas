@@ -24,8 +24,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 		#region Component Designer generated code
 
-		/// <summary> 
-		/// Required method for Designer support - do not modify 
+		/// <summary>
+		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent()
@@ -84,7 +84,6 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.comboBoxPersonnel.Size = new System.Drawing.Size(564, 25);
 			this.comboBoxPersonnel.TabIndex = 31;
 			this.comboBoxPersonnel.SelectedIndexChanged += new System.EventHandler(this.comboBoxPersonnel_SelectedIndexChanged);
-			this.comboBoxPersonnel.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// linkLabelAddGeneralControl
 			// 
@@ -272,7 +271,6 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.comboBoxClass.Name = "comboBoxClass";
 			this.comboBoxClass.Size = new System.Drawing.Size(88, 25);
 			this.comboBoxClass.TabIndex = 52;
-			this.comboBoxClass.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelIssue
 			// 
@@ -315,7 +313,6 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.comboBoxGrade.Name = "comboBoxGrade";
 			this.comboBoxGrade.Size = new System.Drawing.Size(88, 25);
 			this.comboBoxGrade.TabIndex = 52;
-			this.comboBoxGrade.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label5
 			// 
@@ -356,7 +353,6 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.flowLayoutPanel2.ResumeLayout(false);
 			this.flowLayoutPanel2.PerformLayout();
 			this.ResumeLayout(false);
-
 		}
 
 		#endregion
