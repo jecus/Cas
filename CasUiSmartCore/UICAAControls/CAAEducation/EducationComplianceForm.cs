@@ -25,19 +25,24 @@ namespace CAS.UI.UICAAControls.CAAEducation
         
         private void UpdateInformation()
         {
-            if (_compliance.DocumentId.HasValue)
+            if (_compliance?.DocumentId != null)
             {
                 var document = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAADocumentDTO, SmartCore.Entities.General.Document>(_compliance.DocumentId.Value);
                 _compliance.Document = document;
                 documentControl1.CurrentDocument = document;
             }
             
-            if (_compliance.LastDate != null && _compliance.LastDate.HasValue)
+            if (_compliance?.LastDate != null)
             {
                 dateTimePickeValidTo.Value = _compliance.LastDate.Value;
                 metroTextBoxRemark.Text = _compliance.Remark;
             }
-            else dateTimePickeValidTo.Value = _record.Settings.NextCompliance.NextDate.Value;
+            else
+            {
+                if (_record.Settings.NextCompliance != null && _record.Settings.NextCompliance.NextDate != null)
+                    dateTimePickeValidTo.Value = _record.Settings.NextCompliance.NextDate.Value;
+                else dateTimePickeValidTo.Value = DateTime.Now;
+            }
             documentControl1.Added += DocumentControl1_Added;
         }
         
