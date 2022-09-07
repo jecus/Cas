@@ -65,7 +65,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             AddColumn("Code", (int)(radGridView1.Width * 0.20f));
 			AddColumn("CodeName", (int)(radGridView1.Width * 0.24f));
 			AddColumn("SubTaskCode", (int)(radGridView1.Width * 0.3f));
-			AddColumn("FullName", (int)(radGridView1.Width * 0.45f));
+			AddColumn("SubTaskName", (int)(radGridView1.Width * 0.45f));
             AddColumn("Description", (int)(radGridView1.Width * 0.45f));
             AddColumn("Level", (int)(radGridView1.Width * 0.24f));
             AddColumn("Priority", (int)(radGridView1.Width * 0.24f));
@@ -108,7 +108,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 CreateRow(item.Task.Code, item.Task.Code),
                 CreateRow(item.Task.CodeName, item.Task.CodeName),
                 CreateRow(item.Task.SubTaskCode, item.Task.SubTaskCode),
-                CreateRow(item.Task.FullName, item.Task.FullName),
+                CreateRow(item.Task.ShortName, item.Task.ShortName),
                 CreateRow(item.Task.Description, item.Task.Description),
                 CreateRow(item.Task.Level.ToString(), item.Task.Level),
                 CreateRow(item.Priority.ToString(), item.Priority),

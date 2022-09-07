@@ -58,7 +58,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
         
         private void ButtonAddOnClick(object sender, EventArgs e)
         {
-            var last = new LastComplianceView();
+            var last = new LastComplianceView(){LastCompliance = new LastCompliance()};
             if(_record?.Settings?.NextCompliance?.NextDate != null)
                 last.LastCompliance.LastDate = _record?.Settings?.NextCompliance?.NextDate;
             
@@ -77,9 +77,9 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 MessageBoxDefaultButton.Button2);
             if (res == DialogResult.Yes)
             {
-                foreach (var item in listViewCompliance.SelectedItems.OfType<ListViewItem>())
+                foreach (var item in listViewCompliance.SelectedItems.OfType<LastComplianceView>())
                 {
-                    if (item.Tag is LastComplianceView tag)
+                    if (item is LastComplianceView tag)
                     {
                         _record.Settings.LastCompliances.Remove(tag.LastCompliance);
                         GlobalObjects.CaaEnvironment.NewKeeper.Save(_record);

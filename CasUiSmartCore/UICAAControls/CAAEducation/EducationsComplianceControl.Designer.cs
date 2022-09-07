@@ -49,7 +49,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.ButtonDelete.ActiveBackgroundImage = null;
             this.ButtonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ButtonDelete.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ButtonDelete.Enabled = false;
+            this.ButtonDelete.Enabled = true;
             this.ButtonDelete.FontMain = new System.Drawing.Font("Verdana", 14.25F);
             this.ButtonDelete.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
             this.ButtonDelete.ForeColorMain = System.Drawing.SystemColors.ControlText;
