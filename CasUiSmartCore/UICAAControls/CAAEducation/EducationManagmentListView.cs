@@ -160,7 +160,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        CreateRow(item.Education?.Task?.Code, item.Education?.Task?.Code),
 		        CreateRow(item.Education?.Task?.CodeName, item.Education?.Task?.CodeName),
 		        CreateRow(item.Education?.Task?.SubTaskCode, item.Education?.Task?.SubTaskCode),
-		        CreateRow(item.Education?.Task?.FullName, item.Education?.Task?.FullName),
+		        CreateRow(item.Education?.Task?.ShortName, item.Education?.Task?.ShortName),
 		        CreateRow(item.Education?.Task?.Description, item.Education?.Task?.Description),
 		        CreateRow(item.Education?.Task?.Level.ToString(), item.Education?.Task?.Level),
 		        CreateRow(item.Education?.Priority?.ToString(), item.Education?.Priority),

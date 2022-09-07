@@ -101,7 +101,16 @@ namespace SmartCore.CAA.Tasks
 	        }
         }
         
-        
+        public override BaseEntityObject GetCopyUnsaved(bool marked = true)
+        {
+	        var locations = (CAATask)MemberwiseClone();
+	        locations.ItemId = -1;
+	        if(marked)
+		        locations.ShortName += " Copy";
+	        locations.UnSetEvents();
+
+	        return locations;
+        }
         
     }
 }
