@@ -41,7 +41,23 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 
                 if((bool)_record.Education?.Task?.Repeat.IsNullOrZero())
                     return;
+            }
             
+            if (_record.Settings.NextCompliance != null)
+            {
+                last.Add(new LastComplianceView()
+                {
+                    Record = _record,
+                    Course = managment.Education?.Task?.FullName,
+                    LastCompliance = new LastCompliance()
+                    {
+                        LastDate = _record.Settings.NextCompliance.NextDate
+                    },
+                    Group = "Need new compliance"
+                });
+            }
+            else
+            {
                 last.Add(new LastComplianceView()
                 {
                     Record = _record,
@@ -79,6 +95,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
             {
                 foreach (var item in listViewCompliance.SelectedItems.OfType<LastComplianceView>())
                 {
+                    if (item.Group == "Need new compliance")
+                        continue;
                     if (item is LastComplianceView tag)
                     {
                         _record.Settings.LastCompliances.Remove(tag.LastCompliance);

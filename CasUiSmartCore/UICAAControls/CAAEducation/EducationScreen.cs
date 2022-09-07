@@ -54,7 +54,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 extendableRichContainerSummary.LabelCaption.Text = "Open";
             else
                 extendableRichContainerSummary.LabelCaption.Text = " Status: " + $"{(_educationManagment.Record.Settings.IsClosed ? "Closed" : "Open")}";
-
+            
+            EducationCalculator.CalculateEducation(_educationManagment.Record, null);
             educationsComplianceControl1.UpdateInformation(_educationManagment, AnimatedThreadWorker);
         }
         #endregion
