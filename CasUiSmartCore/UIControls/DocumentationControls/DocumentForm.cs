@@ -285,16 +285,27 @@ namespace CAS.UI.UIControls.DocumentationControls
 			comboBoxSubType.Items.Clear();
 			comboBoxSubType.Items.AddRange(certificatesSubs.ToArray());
 			comboBoxSubType.Items.Add(DocumentSubType.Unknown);
+			
+			//оператору недоступен тип AW
+			if (_parent is Operator)
+			{
+				comboBoxSubType.Items.Remove(certificatesSubs.GetTypeByName("AW"));
+			}
+			//воздушному судну недоступен тип AOC
+			else if (_parent is Aircraft)
+			{
+				comboBoxSubType.Items.Remove(certificatesSubs.GetTypeByName("AOC"));
+			}
+			
+			comboBoxSubType.SelectedItem = _currentDocument.DocumentSubType;
 
+			
 			comboBoxSupplier.Items.Clear();
 			comboBoxSupplier.Items.AddRange(_suppliers.ToArray());
 			comboBoxSupplier.Items.Add(Supplier.Unknown);
 			comboBoxSupplier.SelectedItem = _currentDocument.Supplier;
 
-			//оператору недоступен тип AW
-			if (_parent is Operator) comboBoxSubType.Items.Remove(certificatesSubs.GetTypeByName("AW"));
-			//воздушному судну недоступен тип AOC
-			if (_parent is Aircraft) comboBoxSubType.Items.Remove(certificatesSubs.GetTypeByName("AOC"));
+			
 			comboBoxSubType.SelectedItem = _currentDocument.DocumentSubType;
 
 			textBoxContractNumber.Text = _currentDocument.ContractNumber;
