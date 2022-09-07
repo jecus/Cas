@@ -144,7 +144,6 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 			return new Document
 			{
-				OperatorId = _license.Specialist.OperatorId,
 				ParentId = _license.ItemId,
 				Parent = _license,
 				ParentTypeId = _license.SmartCoreObjectType.ItemId,

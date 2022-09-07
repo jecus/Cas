@@ -627,6 +627,15 @@ namespace CAS.UI.UICAAControls.Specialists
 
 				foreach (var l in _currentItem.Licenses)
 				{
+
+					if(l.Document != null)
+						l.Document.OperatorId = _currentItem.OperatorId;
+					foreach (var specialistCaa in l.CaaLicense)
+					{
+						if(specialistCaa.Document != null)
+						specialistCaa.Document.OperatorId = _currentItem.OperatorId;
+					}
+					
 					l.SpecialistId = _currentItem.ItemId;
 
 					foreach (var caa in l.CaaLicense)

@@ -73,7 +73,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			}
 			else
 			{
-				var newLicense = new SpecialistLicense {SpecialistId = _currentItem.ItemId, Specialist = _currentItem};
+				var newLicense = new SpecialistLicense {SpecialistId = _currentItem.ItemId};
 				_currentItem.Licenses.Add(newLicense);
 				employeeLicenceGeneralControl.UpdateControl(newLicense, _currentItem.PersonnelCategory, aircraftModels);
 			}
@@ -348,7 +348,6 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 		private void AddLicenseGeneralControl(SpecialistLicense license, bool showLink = true)
 		{
 			var control = new EmployeeLicenceGeneralControl { ShowLinkDelete = showLink };
-			license.Specialist = _currentItem;
 			control.UpdateControl(license, _currentItem.PersonnelCategory, _aircraftModels);
 			control.Deleted += Control_Deleted;
 			flowLayoutPanelGeneralControl.Controls.Add(control);

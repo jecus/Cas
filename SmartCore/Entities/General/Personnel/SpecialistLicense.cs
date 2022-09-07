@@ -47,8 +47,6 @@ namespace SmartCore.Entities.General.Personnel
 
 		[TableColumn("SpecialistId")]
 		public int SpecialistId { get; set; }
-		
-		public Specialist Specialist { get; set; }
 
 		#endregion
 
