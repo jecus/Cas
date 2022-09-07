@@ -350,9 +350,28 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			var control = new EmployeeLicenceGeneralControl { ShowLinkDelete = showLink };
 			control.UpdateControl(license, _currentItem.PersonnelCategory, _aircraftModels);
 			control.Deleted += Control_Deleted;
+			control.Reload += ControlOnReload;
 			flowLayoutPanelGeneralControl.Controls.Add(control);
 		}
 
+		private void ControlOnReload(object sender, EventArgs e)
+		{
+			InvokeReload();
+		}
+
+		#endregion
+		
+		#region Events
+		/// <summary>
+		/// Событие возникает при добавлени, удалении и фильтрации(Производится перегрузка EmployeeScreen)
+		/// </summary>
+		public event EventHandler Reload;
+		public void InvokeReload()
+		{
+			EventHandler handler = Reload;
+			if (Reload != null) handler(this, new EventArgs());
+
+		}
 		#endregion
 	}
 }

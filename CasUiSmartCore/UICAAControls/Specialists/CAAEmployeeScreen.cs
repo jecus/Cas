@@ -139,6 +139,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			////обновление информации об выполнении директивы
 			//complianceControl.cu = _currentItem;
 			employeeLicenceControl.UpdateControl(_currentItem, aircraftModels);
+			employeeLicenceControl.Reload += DocumentsControl_Reload;
 			employeeMedicalControl1.UpdateControl(_currentItem);
 			employeeTrainingListControl1.UpdateControl(_initialDocumentArray, aircraftHeaderControl1.Operator, _records);
 	        employeeFlightControl.CurrentItem = _currentItem;

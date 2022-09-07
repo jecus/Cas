@@ -127,7 +127,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			{
 				_license.Document = newDocument;
 				documentControl1.CurrentDocument = newDocument;
-
+				InvokeReload();
 			}
 		}
 
@@ -505,6 +505,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 		{
 			var control = new EmployeeLicenceCaaControl { ShowButtonDelete = true };
 			control.Deleted += Control_Deleted;
+			control.Reload += ControlOnReload;
 
 			control.UpdateControl(caa);
 
@@ -515,7 +516,10 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 		}
 
 		#endregion
-
+		private void ControlOnReload(object sender, EventArgs e)
+		{
+			InvokeReload();
+		}
 		#region private void AddDetailControl(SpecialistLicenseDetail licenseDetail)
 
 		private void AddDetailControl(SpecialistLicenseDetail licenseDetail)
@@ -613,5 +617,19 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			foreach (var control in flowLayoutPanelRating.Controls.OfType<EmployeeLicenceRatingControl>())
 				control.UpdateComboboxs(selectedCategory);
 		}
+		
+		
+		#region Events
+		/// <summary>
+		/// Событие возникает при добавлени, удалении и фильтрации(Производится перегрузка EmployeeScreen)
+		/// </summary>
+		public event EventHandler Reload;
+		public void InvokeReload()
+		{
+			EventHandler handler = Reload;
+			if (Reload != null) handler(this, new EventArgs());
+
+		}
+		#endregion
 	}
 }

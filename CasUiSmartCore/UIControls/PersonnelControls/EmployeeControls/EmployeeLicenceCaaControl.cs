@@ -75,6 +75,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			{
 				_specialistCaa.Document = newDocument;
 				documentControl1.CurrentDocument = newDocument;
+				InvokeReload();
 
 			}
 		}
@@ -157,8 +158,23 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 		}
 
 		public event EventHandler Deleted;
+		
+		
 
-#endregion
+		/// <summary>
+		/// Событие возникает при добавлени, удалении и фильтрации(Производится перегрузка EmployeeScreen)
+		/// </summary>
+		public event EventHandler Reload;
+		public void InvokeReload()
+		{
+			EventHandler handler = Reload;
+			if (Reload != null) handler(this, new EventArgs());
+
+		}
+
+		#endregion
+
+
 
 		#endregion
 	}
