@@ -19,6 +19,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			InitializeComponent();
 		}
 
+		public int OperatorId { get; set; }
+
 		#endregion
 
 		#region public void UpdateControl(Specialist currentSpecialist)
@@ -68,16 +70,20 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 		private Document CreateNewDocument()
 		{
-			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Medical Records") as DocumentSubType;
+			DocumentSubType docSubType;
+			if(GlobalObjects.CasEnvironment != null)
+				docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Medical Records") as DocumentSubType;
+			else docSubType = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Medical Records") as DocumentSubType;
 
 			return new Document
 			{
+				OperatorId = OperatorId,
 				ParentId = _currentItem.ItemId,
 				Parent = _currentItem,
 				ParentTypeId = _currentItem.SmartCoreObjectType.ItemId,
 				DocType = DocumentType.Certificate,
 				DocumentSubType = docSubType,
-				IsClosed = true,
+				IsClosed = false,
 			};
 		}
 

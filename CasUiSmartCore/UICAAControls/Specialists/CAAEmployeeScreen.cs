@@ -141,6 +141,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			employeeLicenceControl.UpdateControl(_currentItem, aircraftModels);
 			employeeLicenceControl.Reload += DocumentsControl_Reload;
 			
+			employeeMedicalControl1.OperatorId = _currentItem.OperatorId;
 			employeeMedicalControl1.UpdateControl(_currentItem);
 			employeeTrainingListControl1.UpdateControl(_initialDocumentArray, aircraftHeaderControl1.Operator, _records);
 	        employeeFlightControl.CurrentItem = _currentItem;
@@ -276,7 +277,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		            if (_currentItem.MedicalRecord != null)
 					{
 						var crs = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Medical Records") as DocumentSubType;
-						var personalTraining = documents.FirstOrDefault(d => d.ParentId == _currentItem.MedicalRecord.ItemId && d.ParentTypeId == SmartCoreType.SpecialistMedicalRecord.ItemId && d.DocumentSubType == crs);
+						var personalTraining = documents.FirstOrDefault(d => d.ParentId == _currentItem.MedicalRecord.ItemId && d.ParentTypeId == SmartCoreType.SpecialistMedicalRecord.ItemId && d.DocumentSubType.ItemId == crs.ItemId);
 						if (personalTraining != null)
 						{
 							_currentItem.MedicalRecord.Document = personalTraining;
