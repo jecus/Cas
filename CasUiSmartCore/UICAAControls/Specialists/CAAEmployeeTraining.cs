@@ -32,7 +32,7 @@ namespace CAS.UI.UICAAControls.Specialists
                     last.Add(new LastComplianceView()
                     {
                         Record = record,
-                        Course = record.Education?.Task?.FullName,
+                        Course = record.Education?.Task?.ShortName,
                         LastCompliance = comp,
                         Group = "Last compliance"
                     });
