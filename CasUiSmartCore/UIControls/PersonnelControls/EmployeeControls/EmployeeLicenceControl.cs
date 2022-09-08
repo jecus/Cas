@@ -281,7 +281,23 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				var license = control.License;
 				if (control.License.ItemId > 0)
 				{
-					GlobalObjects.PersonnelCore.Delete(license);
+					if(GlobalObjects.CasEnvironment != null)
+						GlobalObjects.PersonnelCore.Delete(license);
+					else
+					{
+						foreach (var remark in license.LicenseRemark)
+							GlobalObjects.CaaEnvironment.NewKeeper.Delete(remark);
+						foreach (var caa in license.CaaLicense)
+							GlobalObjects.CaaEnvironment.NewKeeper.Delete(caa);
+						foreach (var detail in license.LicenseDetails)
+							GlobalObjects.CaaEnvironment.NewKeeper.Delete(detail);
+						foreach (var rating in license.LicenseRatings)
+							GlobalObjects.CaaEnvironment.NewKeeper.Delete(rating);
+						foreach (var instrumentRating in license.SpecialistInstrumentRatings)
+							GlobalObjects.CaaEnvironment.NewKeeper.Delete(instrumentRating);
+
+						GlobalObjects.CaaEnvironment.NewKeeper.Delete(license);
+					} 
 				}
 
 				flowLayoutPanelGeneralControl.Controls.Remove(control);
