@@ -288,7 +288,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 			this._settingContainer.Size = new System.Drawing.Size(105, 42);
 			this._settingContainer.TabIndex = 1;
 			this._settingContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
-            this._settingContainer.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UserType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin;// 
+            this._settingContainer.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UserType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin || GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.OperatorAdmin;// 
 			// _settingQuality
 			// 
 			this._settingQuality.AutoSize = true;
@@ -1880,7 +1880,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
             this._settingSMS.Size = new System.Drawing.Size(105, 42);
             this._settingSMS.TabIndex = 1;
             this._settingSMS.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
-            this._settingSMS.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UserType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin;
+            this._settingSMS.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UserType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin|| GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.OperatorAdmin;
             
             
             // 
@@ -2040,7 +2040,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
             this._settingPersonnel.Size = new System.Drawing.Size(105, 42);
             this._settingPersonnel.TabIndex = 1;
             this._settingPersonnel.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
-            this._settingPersonnel.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UserType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin;
+            this._settingPersonnel.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UserType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin|| GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.OperatorAdmin;
             
              // 
             // LinkPersonnelTraining
@@ -2199,7 +2199,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
             this._settingProvider.Size = new System.Drawing.Size(105, 42);
             this._settingProvider.TabIndex = 1;
             this._settingProvider.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
-            this._settingProvider.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UserType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin;
+            this._settingProvider.Visible = GlobalObjects.CasEnvironment != null ? GlobalObjects.CasEnvironment.IdentityUser.UserType == UserType.Admin : GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin|| GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.OperatorAdmin;
             
              // 
             // LinkProvider
