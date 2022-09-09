@@ -23,6 +23,8 @@ namespace CAS.UI.UIControls.PersonnelControls
         public SpecializationListView()
         {
             InitializeComponent();
+            SortDirection = SortDirection.Desc;
+            OldColumnIndex = 1;
         }
 
 

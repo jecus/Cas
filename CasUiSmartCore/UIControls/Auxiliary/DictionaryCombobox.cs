@@ -237,7 +237,7 @@ namespace CAS.UI.UIControls.Auxiliary
                     comboBoxReason.SelectedItem = item;
                     break;
                 }
-                if(value.ItemId == -1)
+                if(value.ItemId == -1 && comboBoxReason.Items.Count > 0)
                     comboBoxReason.SelectedItem = comboBoxReason.Items[0];
                 _selectedItem = value;
             }
