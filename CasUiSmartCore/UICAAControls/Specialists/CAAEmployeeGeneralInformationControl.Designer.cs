@@ -736,7 +736,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.comboBoxOccupation.Name = "comboBoxOccupation";
 			this.comboBoxOccupation.Size = new System.Drawing.Size(350, 25);
 			this.comboBoxOccupation.TabIndex = 87;
-			this.comboBoxOccupation.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+			this.comboBoxOccupation.AutoCompleteMode = AutoCompleteMode.Suggest;
 			this.comboBoxOccupation.AutoCompleteSource = AutoCompleteSource.ListItems;
 			// 
 			// CAAEmployeeGeneralInformationControl
