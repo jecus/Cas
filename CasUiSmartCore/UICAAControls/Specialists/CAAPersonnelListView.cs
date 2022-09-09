@@ -67,7 +67,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			AddColumn("Department", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Qualification", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Operator", (int)(radGridView1.Width * 0.3f));
-			AddColumn("Privileges", (int)(radGridView1.Width * 0.5f));
+
 			AddColumn("Date of Birth", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Education", (int)(radGridView1.Width * 0.34f));
 			AddColumn("Position", (int)(radGridView1.Width * 0.2f));
@@ -88,22 +88,6 @@ namespace CAS.UI.UICAAControls.Specialists
 
 		protected override List<CustomCell> GetListViewSubItems(Specialist item)
 		{
-			var ratingString = "";
-			foreach (var license in item.Licenses)
-			{
-				if (license.LicenseRatings.Count == 0)
-					continue;
-
-				if (ratingString != "")
-					ratingString += " / ";
-
-				ratingString += license.AircraftType.ShortName;
-				ratingString += "-";
-
-				foreach (var rating in license.LicenseRatings.GroupBy(r => r.LicenseFunction))
-					ratingString += $"{rating.Key} ({string.Join(",", rating.Select(r => r.Rights.ShortName).ToArray())}) ";
-			}
-
 			var department = item.Occupation?.Department ??  Department.Unknown;
 			var author = GlobalObjects.CasEnvironment?.GetCorrector(item) ?? GlobalObjects.CaaEnvironment?.GetCorrector(item);
 			var phone = string.IsNullOrEmpty(item.Additional) ? item.Phone : $"{item.Phone} | Add.: {item.Additional}";
@@ -144,7 +128,7 @@ namespace CAS.UI.UICAAControls.Specialists
 				CreateRow(department.ToString(), department),
 				CreateRow(item.Qualification, item.Qualification),
 				CreateRow(op.ToString(), op),
-				CreateRow(ratingString, ratingString),
+
 				CreateRow(item.DateOfBirth.ToString("dd-MMMM-yyyy"), item.DateOfBirth),
 				CreateRow(item.Education.ToString(), item.Education),
 				CreateRow(item.Position.ToString(), item.Position),
