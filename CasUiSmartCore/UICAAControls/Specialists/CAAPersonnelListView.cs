@@ -28,8 +28,8 @@ namespace CAS.UI.UICAAControls.Specialists
 		public CAAPersonnelListView()
 		{
 			InitializeComponent();
-			SortDirection = SortDirection.Asc;
-			OldColumnIndex = 6;
+			SortDirection = SortDirection.Desc;
+			OldColumnIndex = 2;
 		}
 
         public int OperatorId { get; set; }
