@@ -10,6 +10,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls.CAAEducation.CoursePackage;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA.CAAEducation;
 using SmartCore.CAA.CAAWP;
@@ -662,7 +663,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			{
 				_directivesViewer.radGridView1.GroupDescriptors.Clear();
 				var descriptor = new GroupDescriptor();
-				foreach (var colName in new List<string>{ "First Name", "Last Name" })
+				foreach (var colName in new List<string>{ "Last Name", "First Name"  })
 					descriptor.GroupNames.Add(colName,  ListSortDirection.Ascending);
 				_directivesViewer.radGridView1.GroupDescriptors.Add(descriptor);
 			}
