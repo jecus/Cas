@@ -343,7 +343,7 @@ namespace CAS.UI.UICAAControls.Specialists
         {
 	        var op = comboBoxOperator.SelectedItem as AllOperators;
 
-	        var items = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().Cast<Occupation>().Where(i => i.OperatorId == op.ItemId).ToList();
+	        var items = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().Cast<Occupation>().Where(i => i.OperatorId == op.ItemId).OrderBy(i => i.FullName).ToList();
 	        items.Add(Occupation.Unknown);
 	        comboBoxOccupation.Items.Clear();
 	        comboBoxOccupation.Items.AddRange(items.ToArray());
