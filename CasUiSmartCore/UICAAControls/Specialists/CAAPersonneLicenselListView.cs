@@ -62,8 +62,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			AddColumn("Combination", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Personnel", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Licence Type", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Type Aircraft", (int)(radGridView1.Width * 0.24f));
-			
+
 			AddColumn("Validation", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Valid To", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Remain", (int)(radGridView1.Width * 0.24f));
@@ -78,7 +77,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			AddColumn("Special Remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Other Details", (int)(radGridView1.Width * 0.24f));
 			
-			AddColumn("Medical №", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Medical", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Valid To", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Remain", (int)(radGridView1.Width * 0.24f));
 			
@@ -102,9 +101,8 @@ namespace CAS.UI.UICAAControls.Specialists
 			
 			var licensePers = PersonnelCategory.UNK;
 			var licenseType = EmployeeLicenceType.UNK;
-			var licenseAir = AircraftModel.Unknown;
-			
-            var validationOther = "";
+
+			var validationOther = "";
             var validToOther = "";
             var remainOther = Lifelength.Null;
             
@@ -127,7 +125,7 @@ namespace CAS.UI.UICAAControls.Specialists
             {
 	            medical = item.MedicalRecord.ClassNumber.ToString();
 	            validToMedical = Convert.GetDateFormat(item.MedicalRecord.IssueDate);
-	            remainMedical = GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(item.MedicalRecord.IssueDate);
+	            remainMedical = GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(item.MedicalRecord.IssueDate, item.MedicalRecord.RepeatLifelength);
             }
             
             if (item.Licenses.Any())
@@ -135,8 +133,7 @@ namespace CAS.UI.UICAAControls.Specialists
 	            var license = item.Licenses.FirstOrDefault();
 	            
 	            licenseType = license.EmployeeLicenceType;
-	            licenseAir = license.AircraftType;
-	            
+
 	            if (license.CaaLicense.Any(c => c.CaaType == CaaType.Other))
 	            {
 		            var caa = license.CaaLicense.FirstOrDefault(c => c.CaaType == CaaType.Other);
@@ -148,7 +145,7 @@ namespace CAS.UI.UICAAControls.Specialists
 	            if (license.CaaLicense.Any(c => c.CaaType == CaaType.Licence))
 	            {
 		            var caa = license.CaaLicense.FirstOrDefault(c => c.CaaType == CaaType.Licence);
-		            licenseNo = $"{caa.CAANumber} {caa.Caa}";
+		            licenseNo = $"{caa.CAANumber} {caa.Caa.ShortName}";
 		            validToLicense = Convert.GetDateFormat(caa.ValidToDate);
 		            remainCaaLisence = GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(caa.ValidToDate);
 	            }
@@ -190,8 +187,7 @@ namespace CAS.UI.UICAAControls.Specialists
 				CreateRow(item.Combination, item.Combination),
 				CreateRow(licensePers.ToString(), licensePers),
 				CreateRow(licenseType.ToString(), licenseType),
-				CreateRow(licenseAir.ToString(), licenseAir),
-				
+
 				CreateRow(validationOther, validationOther),
 				CreateRow(validToOther, validToOther),
 				CreateRow(remainOther.ToString(), remainOther),

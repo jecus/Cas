@@ -7,8 +7,11 @@ namespace SmartCore.CAA.Repositories
     public class CaaPerformanceRepository : ICaaPerformanceRepository
     {
 
-	    public Lifelength CalcRemain(DateTime issueDateValidTo)
+	    public Lifelength CalcRemain(DateTime issueDateValidTo, Lifelength repeat = null)
 	    {
+		    if (repeat?.Days != null)
+			    issueDateValidTo = issueDateValidTo.AddDays(repeat.Days.Value);
+		    
 		    var t = issueDateValidTo - DateTime.Today;
 			return new Lifelength(t.Days, null, null);
 	    }
