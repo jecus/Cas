@@ -771,8 +771,8 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 			this._personnelReferenceContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._personnelReferenceContainer.Name = "_personnelReferenceContainer";
 			this._personnelReferenceContainer.ReferenceLink = this.LinkPersonnel;
-			this._personnelReferenceContainer.ReferenceLink02 = this.LinkEducationProcess;
-			this._personnelReferenceContainer.ReferenceLink03 = this.LinkPersonnelLicense;
+			this._personnelReferenceContainer.ReferenceLink02 = this.LinkPersonnelLicense;
+			this._personnelReferenceContainer.ReferenceLink03 = this.LinkEducationProcess;
 			this._personnelReferenceContainer.ReferenceLink04 = null;
 			this._personnelReferenceContainer.ReferenceLink05 = null;
 			this._personnelReferenceContainer.ReferenceLink06 = null;

@@ -308,9 +308,17 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				{
 					try
 					{
+						_license.Confirmation = false;
+						checkBoxConfirmation.Checked = false;
+						_license.CaaLicense.RemoveById(control.SpecialistCaa.ItemId);
+						
 						if(GlobalObjects.CasEnvironment != null)
 							GlobalObjects.CasEnvironment.Manipulator.Delete(control.SpecialistCaa, false);
-						else GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.SpecialistCaa, false);
+						else
+						{
+							GlobalObjects.CaaEnvironment.NewKeeper.Save(_license);
+							GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.SpecialistCaa, false);
+						}
 					}
 					catch (Exception ex)
 					{
@@ -318,6 +326,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 					}
 				}
 
+
+				
 				flowLayoutPanelCaa.Controls.Remove(control);
 				flowLayoutPanelCaa.Height -= 30;
 				control.Deleted -= Control_Deleted;
@@ -440,6 +450,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 						if(GlobalObjects.CasEnvironment != null)
 							GlobalObjects.CasEnvironment.Manipulator.Delete(control.LicenseRemark, false);
 						else GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.LicenseRemark, false);
+						
+						
 					}
 					catch (Exception ex)
 					{
