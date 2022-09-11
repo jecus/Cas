@@ -2,6 +2,7 @@
 using System.Reflection;
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
+using SmartCore.CAA.Repositories;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
@@ -13,7 +14,7 @@ namespace SmartCore.Entities.General.Personnel
 	[CAADto(typeof(CAASpecialistMedicalRecordDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
-	public class SpecialistMedicalRecord : BaseEntityObject
+	public class SpecialistMedicalRecord : BaseEntityObject, ILightRemain
 	{
 		private static Type _thisType;
 
@@ -82,5 +83,8 @@ namespace SmartCore.Entities.General.Personnel
 			return _thisType ?? (_thisType = typeof(SpecialistMedicalRecord));
 		}
 		#endregion
+
+		public Lifelength Remain { get; set; }
+		public ConditionState Condition { get; set; }
 	}
 }

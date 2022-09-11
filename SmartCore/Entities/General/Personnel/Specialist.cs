@@ -11,6 +11,8 @@ using Newtonsoft.Json;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.CAA;
+using SmartCore.CAA.Repositories;
+using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Atlbs;
@@ -679,6 +681,7 @@ namespace SmartCore.Entities.General.Personnel
 		}
 
 		public AllOperators Operator { get; set; }
+		public ConditionState Condition { get; set; }
 
 		#endregion
 
@@ -688,6 +691,7 @@ namespace SmartCore.Entities.General.Personnel
 			return _thisType ?? (_thisType = typeof(Specialist));
 		}
 		#endregion
+
 	}
 
     [JsonObject]

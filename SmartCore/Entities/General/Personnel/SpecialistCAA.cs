@@ -2,6 +2,7 @@
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Auxiliary;
+using SmartCore.CAA.Repositories;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
@@ -13,7 +14,7 @@ namespace SmartCore.Entities.General.Personnel
 	[CAADto(typeof(CAASpecialistCustomDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
-	public class SpecialistCAA : BaseEntityObject
+	public class SpecialistCAA : BaseEntityObject, ILightRemain
 	{
 
 		#region public Citizenship Caa { get; set; }
@@ -85,6 +86,9 @@ namespace SmartCore.Entities.General.Personnel
 			IssueDate = DateTime.Today;
 			SmartCoreObjectType = SmartCoreType.SpecialistCAA;
 		}
+
+		public Lifelength Remain { get; set; }
+		public ConditionState Condition { get; set; }
 	}
 
 	public enum CaaType : short

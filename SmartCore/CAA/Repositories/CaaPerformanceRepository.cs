@@ -6,7 +6,17 @@ namespace SmartCore.CAA.Repositories
 {
     public class CaaPerformanceRepository : ICaaPerformanceRepository
     {
-
+	    public void CalcRemain(ILightRemain parent, DateTime issueDateValidTo, Lifelength notify = null, Lifelength repeat = null)
+	    {
+		    if (repeat?.Days != null)
+			    issueDateValidTo = issueDateValidTo.AddDays(repeat.Days.Value);
+		    
+		    var t = issueDateValidTo - DateTime.Today;
+		    parent.Remain =  new Lifelength(t.Days, null, null);
+		    parent.Condition = computeConditionState(parent.Remain, parent.Remain, null, notify,
+			    x => x.IsOverdue());
+	    }
+	    
 	    public Lifelength CalcRemain(DateTime issueDateValidTo, Lifelength repeat = null)
 	    {
 		    if (repeat?.Days != null)

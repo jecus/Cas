@@ -149,18 +149,44 @@ namespace CAS.UI.UICAAControls.Specialists
 
 	                foreach (var specialist in _initialDocumentArray)
 	                {
+		                var list = new List<ConditionState>();
+		                
 		                specialist.MedicalRecord = medicalRecords.FirstOrDefault(i => i.SpecialistId == specialist.ItemId);
+		                if (specialist.MedicalRecord != null)
+		                {
+			                GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(specialist.MedicalRecord, specialist.MedicalRecord.IssueDate,specialist.MedicalRecord.NotifyLifelength, specialist.MedicalRecord.RepeatLifelength);
+			                list.Add(specialist.MedicalRecord.Condition);
+		                }
+		                
 		                specialist.LicenseDetails = new CommonCollection<SpecialistLicenseDetail>(det.Where(i => i.SpecialistId == specialist.ItemId));
 		                specialist.LicenseRemark = new CommonCollection<SpecialistLicenseRemark>(remarks.Where(i => i.SpecialistId == specialist.ItemId));
 		                
 		                foreach (var license in specialist.Licenses)
 		                {
 			                license.CaaLicense = new CommonCollection<SpecialistCAA>(caaLicense.Where(i => i.SpecialistLicenseId == license.ItemId));
+			                foreach (var caa in license.CaaLicense)
+			                {
+				                if (caa.CaaType == CaaType.Other)
+					                GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(caa, caa.ValidToDate, caa.NotifyLifelength);
+				                else GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(caa, license.ValidToDate, caa.NotifyLifelength);
+			                }
+			                
+			                list.Add(license.CaaLicense.FirstOrDefault(i => i.CaaType == CaaType.Other)?.Condition);
+			                list.Add(license.CaaLicense.FirstOrDefault(i => i.CaaType == CaaType.Licence)?.Condition);
+			                if (list.Any(i => i.ItemId == ConditionState.Overdue.ItemId))
+				                specialist.Condition = ConditionState.Overdue;
+			                else if (list.Any(i => i.ItemId == ConditionState.Notify.ItemId))
+				                specialist.Condition = ConditionState.Notify;
+			                else specialist.Condition = ConditionState.NotEstimated;
+				                
+			                
 			                license.LicenseDetails = new CommonCollection<SpecialistLicenseDetail>(caaLicenseDetails.Where(i => i.SpecialistLicenseId == license.ItemId));
 			                license.LicenseRatings = new CommonCollection<SpecialistLicenseRating>(specialistLicenseRating.Where(i => i.SpecialistLicenseId == license.ItemId));
 			                license.LicenseRemark = new CommonCollection<SpecialistLicenseRemark>(specialistLicenseRemark.Where(i => i.SpecialistLicenseId == license.ItemId));
 			                license.SpecialistInstrumentRatings = new CommonCollection<SpecialistInstrumentRating>(specialistInstrumentRating.Where(i => i.SpecialistLicenseId == license.ItemId));
 		                }
+		                
+		                
 		                
 	                }
 				}

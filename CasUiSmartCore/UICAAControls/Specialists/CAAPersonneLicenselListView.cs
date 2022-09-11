@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.NewGrid;
@@ -10,6 +12,7 @@ using SmartCore.CAA;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Personnel;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.Specialists
 {
@@ -125,7 +128,7 @@ namespace CAS.UI.UICAAControls.Specialists
             {
 	            medical = item.MedicalRecord.ClassNumber.ToString();
 	            validToMedical = Convert.GetDateFormat(item.MedicalRecord.IssueDate);
-	            remainMedical = GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(item.MedicalRecord.IssueDate, item.MedicalRecord.RepeatLifelength);
+	            remainMedical = item.MedicalRecord.Remain;
             }
             
             if (item.Licenses.Any())
@@ -139,7 +142,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		            var caa = license.CaaLicense.FirstOrDefault(c => c.CaaType == CaaType.Other);
 		            validationOther = $"{caa.CAANumber} {caa.Caa}";
 		            validToOther = Convert.GetDateFormat(caa.ValidToDate);
-		            remainOther = GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(caa.ValidToDate);
+		            remainOther = caa.Remain;
 	            }
 	            
 	            if (license.CaaLicense.Any(c => c.CaaType == CaaType.Licence))
@@ -147,7 +150,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		            var caa = license.CaaLicense.FirstOrDefault(c => c.CaaType == CaaType.Licence);
 		            licenseNo = $"{caa.CAANumber} {caa.Caa.ShortName}";
 		            validToLicense = Convert.GetDateFormat(license.ValidToDate);
-		            remainCaaLisence = GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(license.ValidToDate);
+		            remainCaaLisence = caa.Remain;
 	            }
 
 	            aircraftType = license.AircraftType;
@@ -228,6 +231,25 @@ namespace CAS.UI.UICAAControls.Specialists
 			}
 		}
 		#endregion
+		
+		protected override void SetItemColor(GridViewRowInfo listViewItem, Specialist item)
+		{
+			var itemBackColor = UsefulMethods.GetColor(item);
+			var itemForeColor = Color.Gray;
+
+			foreach (GridViewCellInfo cell in listViewItem.Cells)
+			{
+				cell.Style.DrawFill = true;
+				cell.Style.CustomizeFill = true;
+				cell.Style.BackColor = UsefulMethods.GetColor(item);
+
+				var listViewForeColor = cell.Style.ForeColor;
+
+				if (listViewForeColor != Color.MediumVioletRed)
+					cell.Style.ForeColor = itemForeColor;
+				cell.Style.BackColor = itemBackColor;
+			}
+		}
 
 		#endregion
 	}
