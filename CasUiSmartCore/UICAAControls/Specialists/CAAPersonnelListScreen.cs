@@ -171,8 +171,10 @@ namespace CAS.UI.UICAAControls.Specialists
 				                else GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(caa, license.ValidToDate, caa.NotifyLifelength);
 			                }
 			                
-			                list.Add(license.CaaLicense.FirstOrDefault(i => i.CaaType == CaaType.Other)?.Condition);
-			                list.Add(license.CaaLicense.FirstOrDefault(i => i.CaaType == CaaType.Licence)?.Condition);
+			                if(license.CaaLicense.Any(i => i.CaaType == CaaType.Other)) 
+				                list.Add(license.CaaLicense.FirstOrDefault(i => i.CaaType == CaaType.Other)?.Condition);
+			                if(license.CaaLicense.Any(i => i.CaaType == CaaType.Licence)) 
+								list.Add(license.CaaLicense.FirstOrDefault(i => i.CaaType == CaaType.Licence)?.Condition);
 			                if (list.Any(i => i.ItemId == ConditionState.Overdue.ItemId))
 				                specialist.Condition = ConditionState.Overdue;
 			                else if (list.Any(i => i.ItemId == ConditionState.Notify.ItemId))
