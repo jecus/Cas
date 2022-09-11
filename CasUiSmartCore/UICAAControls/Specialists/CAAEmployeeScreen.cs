@@ -274,6 +274,23 @@ namespace CAS.UI.UICAAControls.Specialists
 
 	            if (documents.Count > 0)
 	            {
+		            var docIds = documents.Select(i => i.ItemId);
+	                
+		            links = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+		            {
+			            new Filter("ParentId",docIds),
+			            new Filter("ParentTypeId",SmartCoreType.Document.ItemId)
+		            }, false);
+		            
+		            foreach (var document in documents)
+		            {
+			            GlobalObjects.CaaEnvironment.CaaPerformanceRepository.GetNextPerformance(document);
+			            document.Parent = _currentItem;
+			            document.Files = new CommonCollection<ItemFileLink>(links.Where(i => i.ParentId == document.ItemId));
+		            }
+		            
+		            
+		            
 		            if (_currentItem.MedicalRecord != null)
 					{
 						var crs = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Medical Records") as DocumentSubType;
