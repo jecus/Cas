@@ -6,6 +6,13 @@ namespace SmartCore.CAA.Repositories
 {
     public class CaaPerformanceRepository : ICaaPerformanceRepository
     {
+
+	    public Lifelength CalcRemain(DateTime issueDateValidTo)
+	    {
+		    var t = issueDateValidTo - DateTime.Today;
+			return new Lifelength(t.Days, null, null);
+	    }
+	    
         public void GetNextPerformance(SmartCore.Entities.General.Document directive)
 		{
 			// Если следующего выполнения нет - то все остальные данные не имеют смысла

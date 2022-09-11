@@ -104,13 +104,13 @@ namespace CAS.UI.UICAAControls.Specialists
 			var licenseType = EmployeeLicenceType.UNK;
 			var licenseAir = AircraftModel.Unknown;
 			
-            var validation = "";
-            var validTo = "";
-            var remainCaa = Lifelength.Null;
+            var validationOther = "";
+            var validToOther = "";
+            var remainOther = Lifelength.Null;
             
             var licenseNo = "";
-            var validToOther = "";
-            var remainCaaOther = Lifelength.Null;
+            var validToLicense = "";
+            var remainCaaLisence = Lifelength.Null;
             
             var medical = "";
             var validToMedical = "";
@@ -127,6 +127,7 @@ namespace CAS.UI.UICAAControls.Specialists
             {
 	            medical = item.MedicalRecord.ClassNumber.ToString();
 	            validToMedical = Convert.GetDateFormat(item.MedicalRecord.IssueDate);
+	            remainMedical = GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(item.MedicalRecord.IssueDate);
             }
             
             if (item.Licenses.Any())
@@ -139,15 +140,17 @@ namespace CAS.UI.UICAAControls.Specialists
 	            if (license.CaaLicense.Any(c => c.CaaType == CaaType.Other))
 	            {
 		            var caa = license.CaaLicense.FirstOrDefault(c => c.CaaType == CaaType.Other);
-		            validation = $"{caa.CAANumber} {caa.Caa}";
-		            validTo = Convert.GetDateFormat(caa.ValidToDate);
+		            validationOther = $"{caa.CAANumber} {caa.Caa}";
+		            validToOther = Convert.GetDateFormat(caa.ValidToDate);
+		            remainOther = GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(caa.ValidToDate);
 	            }
 	            
 	            if (license.CaaLicense.Any(c => c.CaaType == CaaType.Licence))
 	            {
 		            var caa = license.CaaLicense.FirstOrDefault(c => c.CaaType == CaaType.Licence);
 		            licenseNo = $"{caa.CAANumber} {caa.Caa}";
-		            validToOther = Convert.GetDateFormat(caa.ValidToDate);
+		            validToLicense = Convert.GetDateFormat(caa.ValidToDate);
+		            remainCaaLisence = GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(caa.ValidToDate);
 	            }
 
 	            aircraftType = license.AircraftType;
@@ -189,13 +192,13 @@ namespace CAS.UI.UICAAControls.Specialists
 				CreateRow(licenseType.ToString(), licenseType),
 				CreateRow(licenseAir.ToString(), licenseAir),
 				
-				CreateRow(validation, validation),
-				CreateRow(validTo, validTo),
-				CreateRow(remainCaa.ToString(), remainCaa),
+				CreateRow(validationOther, validationOther),
+				CreateRow(validToOther, validToOther),
+				CreateRow(remainOther.ToString(), remainOther),
 				
 				CreateRow(licenseNo, licenseNo),
-				CreateRow(validToOther, validToOther),
-				CreateRow(remainCaaOther.ToString(), remainCaaOther),
+				CreateRow(validToLicense, validToLicense),
+				CreateRow(remainCaaLisence.ToString(), remainCaaLisence),
 				
 				CreateRow(aircraftType.ToString(), aircraftType),
 				CreateRow(ratings, ratings),
@@ -204,7 +207,7 @@ namespace CAS.UI.UICAAControls.Specialists
 				CreateRow(details, details),
 				
 				CreateRow(medical, medical),
-				CreateRow(validToOther, validToMedical),
+				CreateRow(validToMedical, validToMedical),
 				CreateRow(remainMedical.ToString(), remainMedical),
 				
 				CreateRow(op.ToString(), op),
