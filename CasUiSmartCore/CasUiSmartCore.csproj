@@ -1358,6 +1358,12 @@
     <Compile Include="UICAAControls\Specialists\CAAEmployeeTraining.Designer.cs">
       <DependentUpon>CAAEmployeeTraining.cs</DependentUpon>
     </Compile>
+    <Compile Include="UICAAControls\Specialists\CAAPersonneLicenselListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UICAAControls\Specialists\CAAPersonneLicenselListView.Designer.cs">
+      <DependentUpon>CAAPersonneLicenselListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UICAAControls\Specialists\CAAPersonnelListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -6,11 +8,12 @@ using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.Dictionaries;
+using CAS.Entity.Models.DTO.General;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
-using CAS.UI.UIControls.PersonnelControls;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using Entity.Abstractions.Filters;
 using SmartCore.Entities.Collections;
@@ -20,6 +23,7 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
+using FilterType = Entity.Abstractions.Attributte.FilterType;
 
 namespace CAS.UI.UICAAControls.Specialists
 {
@@ -32,12 +36,13 @@ namespace CAS.UI.UICAAControls.Specialists
 
 		private Operator _currentOperator;
         private readonly int _operatorId;
+        private readonly bool _licenseView;
 
         private CommonCollection<Specialist> _initialDocumentArray = new CommonCollection<Specialist>();
 		private CommonCollection<Specialist> _resultDocumentArray = new CommonCollection<Specialist>();
 		private CommonFilterCollection _filter;
 
-		private CAAPersonnelListView _directivesViewer;
+		private BaseGridViewControl<Specialist> _directivesViewer;
 
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemHighlight;
@@ -67,7 +72,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public CAAPersonnelListScreen(Operator currentOperator, int operatorId)
+		public CAAPersonnelListScreen(Operator currentOperator, int operatorId, bool licenseView = false)
 			: this()
 		{
 			if (currentOperator == null)
@@ -75,6 +80,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			aircraftHeaderControl1.Operator = currentOperator;
 			_currentOperator = currentOperator;
             _operatorId = operatorId;
+            _licenseView = licenseView;
             statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 
@@ -121,6 +127,44 @@ namespace CAS.UI.UICAAControls.Specialists
 			}
 
 			var aircraftModels = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, AircraftModel>(new Filter("ModelingObjectTypeId", 7));
+
+
+			if (_licenseView)
+			{
+				var ids = _initialDocumentArray.SelectMany(i => i.Licenses).Select(i => i.ItemId);
+				var specIds = _initialDocumentArray.Select(i => i.ItemId);
+				if (ids.Any())
+				{
+					var caaLicense = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASpecialistCustomDTO, SpecialistCAA>(new Filter("SpecialistLicenseId", FilterType.In,ids));
+	                var caaLicenseDetails = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseDetailDTO, SpecialistLicenseDetail>(new Filter("SpecialistLicenseId", FilterType.In,ids));
+	                var specialistLicenseRating = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseRatingDTO, SpecialistLicenseRating>(new Filter("SpecialistLicenseId", FilterType.In,ids));
+	                var specialistLicenseRemark = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseRemarkDTO, SpecialistLicenseRemark>(new Filter("SpecialistLicenseId", FilterType.In,ids));
+	                var specialistInstrumentRating = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistInstrumentRatingDTO, SpecialistInstrumentRating>(new Filter("SpecialistLicenseId", FilterType.In,ids));
+
+	                var medicalRecords = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASpecialistMedicalRecordDTO, SpecialistMedicalRecord>(new Filter("SpecialistId", FilterType.In, specIds));
+	                
+	                var det = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseDetailDTO, SpecialistLicenseDetail>(new Filter("SpecialistId", FilterType.In,specIds), loadChild:true);
+	                var remarks = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistLicenseRemarkDTO, SpecialistLicenseRemark>(new Filter("SpecialistId", FilterType.In,specIds), loadChild:true);
+
+
+	                foreach (var specialist in _initialDocumentArray)
+	                {
+		                specialist.MedicalRecord = medicalRecords.FirstOrDefault(i => i.SpecialistId == specialist.ItemId);
+		                specialist.LicenseDetails = new CommonCollection<SpecialistLicenseDetail>(det.Where(i => i.SpecialistId == specialist.ItemId));
+		                specialist.LicenseRemark = new CommonCollection<SpecialistLicenseRemark>(remarks.Where(i => i.SpecialistId == specialist.ItemId));
+		                
+		                foreach (var license in specialist.Licenses)
+		                {
+			                license.CaaLicense = new CommonCollection<SpecialistCAA>(caaLicense.Where(i => i.SpecialistLicenseId == license.ItemId));
+			                license.LicenseDetails = new CommonCollection<SpecialistLicenseDetail>(caaLicenseDetails.Where(i => i.SpecialistLicenseId == license.ItemId));
+			                license.LicenseRatings = new CommonCollection<SpecialistLicenseRating>(specialistLicenseRating.Where(i => i.SpecialistLicenseId == license.ItemId));
+			                license.LicenseRemark = new CommonCollection<SpecialistLicenseRemark>(specialistLicenseRemark.Where(i => i.SpecialistLicenseId == license.ItemId));
+			                license.SpecialistInstrumentRatings = new CommonCollection<SpecialistInstrumentRating>(specialistInstrumentRating.Where(i => i.SpecialistLicenseId == license.ItemId));
+		                }
+		                
+	                }
+				}
+			}
 
 			foreach (var specialist in _initialDocumentArray)
 			{
@@ -239,9 +283,10 @@ namespace CAS.UI.UICAAControls.Specialists
 
 		private void InitListView()
 		{
-			_directivesViewer = new CAAPersonnelListView();
+			if(_licenseView)
+				_directivesViewer = new CAAPersonneLicenselListView(){OperatorId = _operatorId};
+			else _directivesViewer = new CAAPersonnelListView(){OperatorId = _operatorId};
 			_directivesViewer.TabIndex = 2;
-			_directivesViewer.OperatorId = _operatorId;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;

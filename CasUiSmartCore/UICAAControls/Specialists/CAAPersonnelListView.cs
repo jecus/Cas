@@ -3,7 +3,6 @@ using System.Linq;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.NewGrid;
-using CAS.UI.UIControls.PersonnelControls;
 using CASTerms;
 using SmartCore.CAA;
 using SmartCore.Entities.Dictionaries;
@@ -114,6 +113,7 @@ namespace CAS.UI.UICAAControls.Specialists
 
 			var subItems = new List<CustomCell>()
 			{
+				
 				CreateRow(item.Status.ToString(), item.Status),
 				CreateRow(item.FirstName, item.FirstName),
 				CreateRow(item.LastName, item.LastName),
@@ -127,7 +127,7 @@ namespace CAS.UI.UICAAControls.Specialists
 				
 				CreateRow(department.ToString(), department),
 				CreateRow(item.Qualification, item.Qualification),
-				CreateRow(op.ToString(), op),
+				CreateRow(op, op),
 
 				CreateRow(item.DateOfBirth.ToString("dd-MMMM-yyyy"), item.DateOfBirth),
 				CreateRow(item.Education.ToString(), item.Education),

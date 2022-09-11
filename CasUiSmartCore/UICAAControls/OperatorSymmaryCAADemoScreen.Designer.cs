@@ -98,6 +98,7 @@ namespace CAS.UI.UICAAControls
 			this.LinkSchedulePeriod = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this._personnelReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
             this.LinkPersonnel = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            this.LinkPersonnelLicense = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkGeneral = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkEvent = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkSystem = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -753,7 +754,7 @@ namespace CAS.UI.UICAAControls
 			this._personnelReferenceContainer.Name = "_personnelReferenceContainer";
 			this._personnelReferenceContainer.ReferenceLink = this.LinkPersonnel;
 			this._personnelReferenceContainer.ReferenceLink02 = this.LinkEducationProcess;
-			this._personnelReferenceContainer.ReferenceLink03 = null;
+			this._personnelReferenceContainer.ReferenceLink03 = this.LinkPersonnelLicense;
 			this._personnelReferenceContainer.ReferenceLink04 = null;
 			this._personnelReferenceContainer.ReferenceLink05 = null;
 			this._personnelReferenceContainer.ReferenceLink06 = null;
@@ -986,6 +987,32 @@ namespace CAS.UI.UICAAControls
 			this.LinkPersonnel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkPersonnel.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             this.LinkPersonnel.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkPersonnelDisplayerRequested);
+             // 
+			// LinkPersonnelLicense
+			// 
+			this.LinkPersonnelLicense.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkPersonnelLicense.Displayer = null;
+			this.LinkPersonnelLicense.DisplayerText = null;
+			this.LinkPersonnelLicense.Entity = null;
+			this.LinkPersonnelLicense.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.LinkPersonnelLicense.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkPersonnelLicense.ImageBackColor = System.Drawing.Color.Transparent;
+			this.LinkPersonnelLicense.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.LinkPersonnelLicense.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkPersonnelLicense.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.LinkPersonnelLicense.Location = new System.Drawing.Point(10, 0);
+			this.LinkPersonnelLicense.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.LinkPersonnelLicense.Name = "LinkPersonnel";
+			this.LinkPersonnelLicense.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.LinkPersonnelLicense.Size = new System.Drawing.Size(188, 20);
+			this.LinkPersonnelLicense.Status = AvControls.Statuses.Satisfactory;
+			this.LinkPersonnelLicense.TabIndex = 8;
+			this.LinkPersonnelLicense.Text = "Personnel License";
+			this.LinkPersonnelLicense.Visible = GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin ||
+			                                    GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.OperatorAdmin;
+			this.LinkPersonnelLicense.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.LinkPersonnelLicense.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkPersonnelLicense.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkPersonnelLicenseDisplayerRequested);
 			// 
 			// LinkSpecializations
 			// 
@@ -2421,6 +2448,7 @@ namespace CAS.UI.UICAAControls
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkFindingLevels;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRootCause;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPersonnel;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPersonnelLicense;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkSpecializations;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkAircraftStatus;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkFligthsPlanOPS;

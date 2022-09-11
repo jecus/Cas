@@ -140,6 +140,12 @@ namespace CAS.UI.UICAAControls
 
         #endregion
 
+        private void LinkPersonnelLicenseDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.DisplayerText = "Personnel";
+	        e.RequestedEntity = new CAAPersonnelListScreen(_currentOperator, -1, true){OperatorId = -1};
+        }
+        
 		private void Users_Click(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Users";
