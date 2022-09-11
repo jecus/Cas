@@ -146,8 +146,8 @@ namespace CAS.UI.UICAAControls.Specialists
 	            {
 		            var caa = license.CaaLicense.FirstOrDefault(c => c.CaaType == CaaType.Licence);
 		            licenseNo = $"{caa.CAANumber} {caa.Caa.ShortName}";
-		            validToLicense = Convert.GetDateFormat(caa.ValidToDate);
-		            remainCaaLisence = GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(caa.ValidToDate);
+		            validToLicense = Convert.GetDateFormat(license.ValidToDate);
+		            remainCaaLisence = GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(license.ValidToDate);
 	            }
 
 	            aircraftType = license.AircraftType;
