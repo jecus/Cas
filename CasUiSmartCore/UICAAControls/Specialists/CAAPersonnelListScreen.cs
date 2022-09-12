@@ -15,7 +15,9 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
+using Entity.Abstractions;
 using Entity.Abstractions.Filters;
+using SmartCore.CAA.Operators;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -45,6 +47,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		private BaseGridViewControl<Specialist> _directivesViewer;
 
 		private RadMenuItem _toolStripMenuItemOpen;
+		private RadMenuItem _toolStripMenuItemStatus;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 
@@ -223,6 +226,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		private void InitToolStripMenuItems()
 		{
 			_toolStripMenuItemOpen = new RadMenuItem();
+			_toolStripMenuItemStatus = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			// 
@@ -230,6 +234,19 @@ namespace CAS.UI.UICAAControls.Specialists
 			// 
 			_toolStripMenuItemOpen.Text = "Open";
 			_toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
+			// 
+			// toolStripMenuItemView
+			// 
+			_toolStripMenuItemStatus.Text = "License Status";
+			_toolStripMenuItemStatus.Items.Clear();
+
+			foreach (var status in OperatorStatus.Items)	
+			{
+				RadMenuItem item = new RadMenuItem(status.FullName);
+				item.Click += ChangeStatus;
+				item.Tag = status;
+				_toolStripMenuItemStatus.Items.Add(item);
+			}
 			// 
 			// toolStripMenuItemHighlight
 			// 
@@ -247,6 +264,20 @@ namespace CAS.UI.UICAAControls.Specialists
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
 		}
+
+		private void ChangeStatus(object sender, EventArgs e)
+		{
+			var status = (OperatorStatus)((RadMenuItem)sender).Tag;
+			foreach (var item in _directivesViewer.SelectedItems)
+			{
+				item.Settings.StatusId = status.ItemId;
+				if(GlobalObjects.CasEnvironment != null)
+					GlobalObjects.CasEnvironment.NewKeeper.Save(item);
+				else GlobalObjects.CaaEnvironment.NewKeeper.Save(item);
+			}
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
+
 		#endregion
 
 
@@ -324,7 +355,8 @@ namespace CAS.UI.UICAAControls.Specialists
 
 			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
 				_toolStripSeparator1,
-				_toolStripMenuItemHighlight);
+				_toolStripMenuItemHighlight,
+				_toolStripMenuItemStatus);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
@@ -332,6 +364,9 @@ namespace CAS.UI.UICAAControls.Specialists
 					return;
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
+
+
+					_toolStripMenuItemStatus.Enabled = GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType == CAAUserType.CAAAdmin;
 					_toolStripMenuItemOpen.Enabled = true;
 				}
 			};
