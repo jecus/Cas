@@ -433,9 +433,9 @@ namespace CAS.UI.UIControls.DocumentationControls
 			//При update Parent не проставляем только при создании
 		    if (_parent != null)
 		    {
-			    if(_currentDocument.ParentId >= 0)
+			    if(_currentDocument.ParentId <= 0)
 					_currentDocument.ParentId = _parent.ItemId;
-			    if(_currentDocument.ParentTypeId >= 0)
+			    if(_currentDocument.ParentTypeId <= 0)
 				    _currentDocument.ParentTypeId = _parent.SmartCoreObjectType.ItemId;
 			    if(_currentDocument.Parent == null)
 					_currentDocument.Parent = _parent;

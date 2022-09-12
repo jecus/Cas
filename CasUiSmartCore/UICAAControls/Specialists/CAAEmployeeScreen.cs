@@ -285,7 +285,6 @@ namespace CAS.UI.UICAAControls.Specialists
 		            foreach (var document in documents)
 		            {
 			            GlobalObjects.CaaEnvironment.CaaPerformanceRepository.GetNextPerformance(document);
-			            document.Parent = _currentItem;
 			            document.Files = new CommonCollection<ItemFileLink>(links.Where(i => i.ParentId == document.ItemId));
 		            }
 		            
@@ -413,8 +412,21 @@ namespace CAS.UI.UICAAControls.Specialists
 		            new Filter("OperatorId", _opearatorId),
 		            new Filter("SpecialistId", _currentItem.ItemId),
 	            }));
+
+
+            var edIds = _records.Select(i => i.ItemId);
+            if (edIds.Any())
+            {
+	            var documents = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ParentId", edIds), true);
+	            foreach (var document in documents)
+	            {
+		            document.Parent = _records.FirstOrDefault(i => i.ItemId == document.ParentId);
+		            _currentItem.EmployeeDocuments.Add(document);
+	            }
+	            
+            }
             
-            FillCollection(educations, _currentItem.Occupation, _currentItem,_records, false);
+	        FillCollection(educations, _currentItem.Occupation, _currentItem,_records, false);
             foreach (Occupation dict in occupation)
             {
 	            if (_currentItem.Combination != null && _currentItem.Combination.Contains(dict.FullName))
@@ -657,7 +669,7 @@ namespace CAS.UI.UICAAControls.Specialists
 					foreach (var specialistCaa in l.CaaLicense)
 					{
 						if(specialistCaa.Document != null)
-						specialistCaa.Document.OperatorId = _currentItem.OperatorId;
+							specialistCaa.Document.OperatorId = _currentItem.OperatorId;
 					}
 					
 					l.SpecialistId = _currentItem.ItemId;
