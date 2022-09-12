@@ -403,7 +403,13 @@ namespace CAS.UI.UICAAControls.Specialists
             _initialDocumentArray.Clear();
             var educations = new List<SmartCore.CAA.CAAEducation.CAAEducation>();
             _records.Clear();
-            var occupation = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray();
+
+            IEnumerable<Occupation> occupation = new List<Occupation>();
+            if(_opearatorId == -1)
+	            occupation = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().Cast<Occupation>();
+            else occupation = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().Cast<Occupation>().Where(i => i.OperatorId == _opearatorId);
+            
+
             educations.AddRange(GlobalObjects.CaaEnvironment.NewLoader
 	            .GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _opearatorId),loadChild:true));
             _records.AddRange(GlobalObjects.CaaEnvironment.NewLoader
