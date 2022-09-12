@@ -198,7 +198,9 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				{
 					try
 					{
-						GlobalObjects.CasEnvironment.Manipulator.Delete(control.LicenseRemark, false);
+						if(GlobalObjects.CasEnvironment != null)
+							GlobalObjects.CasEnvironment.Manipulator.Delete(control.LicenseRemark, false);
+						else GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.LicenseRemark, false)
 					}
 					catch (Exception ex)
 					{
@@ -239,7 +241,9 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				{
 					try
 					{
-						GlobalObjects.CasEnvironment.Manipulator.Delete(control.LicenseDetail, false);
+						if(GlobalObjects.CasEnvironment != null)
+							GlobalObjects.CasEnvironment.Manipulator.Delete(control.LicenseDetail, false);
+						else GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.LicenseDetail, false);
 					}
 					catch (Exception ex)
 					{
