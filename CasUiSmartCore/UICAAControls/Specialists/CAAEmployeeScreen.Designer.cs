@@ -270,7 +270,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			// 
 			this.employeeLicenceControl.Location = new System.Drawing.Point(3, 1759);
 			this.employeeLicenceControl.Name = "employeeLicenceControl";
-			this.employeeLicenceControl.Size = new System.Drawing.Size(1310, 852);
+			this.employeeLicenceControl.Size = new System.Drawing.Size(1310, 900);
 			this.employeeLicenceControl.TabIndex = 14;
 			this.employeeLicenceControl.Visible = false;
 			// 

@@ -52,6 +52,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.comboBoxGrade = new System.Windows.Forms.ComboBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.dateTimePickerGradeIssue = new System.Windows.Forms.DateTimePicker();
+			this.labelStatus = new System.Windows.Forms.Label();
+			this.comboBoxStatus = new System.Windows.Forms.ComboBox();
 			this.flowLayoutPanelRemark.SuspendLayout();
 			this.flowLayoutPanelOtherDetail.SuspendLayout();
 			this.flowLayoutPanelGeneralControl.SuspendLayout();
@@ -227,21 +229,25 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.tableLayoutPanel1.ColumnCount = 2;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 6);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelGeneralControl, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.labelPersonel, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.label4, 0, 4);
-			this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelOtherDetail, 1, 4);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelRemark, 1, 3);
-			this.tableLayoutPanel1.Controls.Add(this.linkLabelAddGeneralControl, 1, 2);
-			this.tableLayoutPanel1.Controls.Add(this.comboBoxPersonnel, 1, 0);
-			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 5);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 5);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 1, 6);
+			this.tableLayoutPanel1.Controls.Add(this.labelStatus, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.comboBoxStatus, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 7);
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelGeneralControl, 0, 2);
+			this.tableLayoutPanel1.Controls.Add(this.labelPersonel, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.label4, 0, 5);
+			this.tableLayoutPanel1.Controls.Add(this.label3, 0, 4);
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelOtherDetail, 1, 5);
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelRemark, 1, 4);
+			this.tableLayoutPanel1.Controls.Add(this.linkLabelAddGeneralControl, 1, 3);
+			this.tableLayoutPanel1.Controls.Add(this.comboBoxPersonnel, 1, 1);
+			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 6);
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 6);
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 1, 7);
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 31);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 7;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -336,13 +342,36 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.dateTimePickerGradeIssue.Size = new System.Drawing.Size(166, 22);
 			this.dateTimePickerGradeIssue.TabIndex = 51;
 			// 
+			// labelStatus
+			// 
+			this.labelStatus.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.labelStatus.AutoSize = true;
+			this.labelStatus.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelStatus.Location = new System.Drawing.Point(14, 834);
+			this.labelStatus.Name = "labelStatus";
+			this.labelStatus.Size = new System.Drawing.Size(103, 14);
+			this.labelStatus.TabIndex = 82;
+			this.labelStatus.Text = "Licence Status:";
+			// 
+			// comboBoxStatus
+			// 
+			this.comboBoxStatus.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.comboBoxStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.comboBoxStatus.FormattingEnabled = true;
+			this.comboBoxStatus.Location = new System.Drawing.Point(150, 829);
+			this.comboBoxStatus.Margin = new System.Windows.Forms.Padding(30, 3, 0, 3);
+			this.comboBoxStatus.Name = "comboBoxStatus";
+			this.comboBoxStatus.Size = new System.Drawing.Size(564, 25);
+			this.comboBoxStatus.TabIndex = 83;
+			// 
 			// EmployeeLicenceControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Name = "EmployeeLicenceControl";
-			this.Size = new System.Drawing.Size(1159, 854);
+			this.Size = new System.Drawing.Size(1159, 894);
 			this.flowLayoutPanelRemark.ResumeLayout(false);
 			this.flowLayoutPanelOtherDetail.ResumeLayout(false);
 			this.flowLayoutPanelGeneralControl.ResumeLayout(false);
@@ -354,6 +383,9 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.flowLayoutPanel2.PerformLayout();
 			this.ResumeLayout(false);
 		}
+
+		private System.Windows.Forms.Label labelStatus;
+		private System.Windows.Forms.ComboBox comboBoxStatus;
 
 		#endregion
 
@@ -371,7 +403,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-		private EmployeeLicenceGeneralControl employeeLicenceGeneralControl;
+		private CAS.UI.UIControls.PersonnelControls.EmployeeControls.EmployeeLicenceGeneralControl employeeLicenceGeneralControl;
 		private System.Windows.Forms.ComboBox comboBoxClass;
 		private System.Windows.Forms.Label labelIssue;
 		private System.Windows.Forms.DateTimePicker dateTimePickerClassIssue;
