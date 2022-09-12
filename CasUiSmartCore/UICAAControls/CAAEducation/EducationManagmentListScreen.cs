@@ -313,12 +313,27 @@ namespace CAS.UI.UICAAControls.CAAEducation
 	        
 	        var wp = (SmartCore.CAA.CAAWP.CoursePackage)((RadMenuItem)sender).Tag;
 	        var items = _directivesViewer.SelectedItems;
-	        if (!items.All(i => i.Education?.Task.ItemId == wp.Settings.TaskId))
+
+	        var first = items.FirstOrDefault();
+	        if(!items.All(i => i.Education?.Task.ItemId == first.Education?.TaskId))
 	        {
 		        MessageBox.Show("Not all educations has equality Task!", (string)new GlobalTermsProvider()["SystemName"],
 			        MessageBoxButtons.OK, MessageBoxIcon.Error);
 		        return;
 	        }
+
+	        if (!wp.Settings.TaskId.HasValue)
+	        {
+		        wp.Settings.TaskId = first.Education.TaskId;
+		        GlobalObjects.NewKeeper.Save(wp);
+	        }
+	        
+	        // if (!items.All(i => i.Education?.TaskId == wp.Settings.TaskId))
+	        // {
+		       //  MessageBox.Show("Not all educations has equality Task!", (string)new GlobalTermsProvider()["SystemName"],
+			      //   MessageBoxButtons.OK, MessageBoxIcon.Error);
+		       //  return;
+	        // }
 	        
 	        foreach (var item in items)
 	        {
