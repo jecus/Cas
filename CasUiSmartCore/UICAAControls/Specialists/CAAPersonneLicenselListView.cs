@@ -158,8 +158,8 @@ namespace CAS.UI.UICAAControls.Specialists
 	            
 	            if (license.LicenseRatings.Any())
 	            {
-		            var rating = license.LicenseRatings.FirstOrDefault();
-		            ratings = $"{rating.LicenseFunction} {rating.Rights}";
+		            var rating = license.LicenseRatings.Select(i => $"{i.LicenseFunction} {i.Rights}");
+		            ratings = string.Join(", ",rating);
 	            }
 	            
 	            if (license.SpecialistInstrumentRatings.Any())
@@ -168,16 +168,16 @@ namespace CAS.UI.UICAAControls.Specialists
 		            instrumentRatings = $"{instrument.Icao}";
 	            }
 	            
-	            if (license.LicenseRemark.Any())
+	            if (item.LicenseRemark.Any())
 	            {
-		            var remark = license.LicenseRemark.FirstOrDefault();
-		            remarks = $"{remark.LicenseRestriction} {remark.Rights}";
+		            var remark = item.LicenseRemark.Select(i => $"{i.LicenseRestriction} {i.Rights}");
+		            remarks = string.Join(", ",remark);
 	            }
 	            
-	            if (license.LicenseDetails.Any())
+	            if (item.LicenseDetails.Any())
 	            {
-		            var detail = license.LicenseDetails.FirstOrDefault();
-		            details = $"{detail.Description}";
+		            var detail = item.LicenseDetails.Select(i => $"{i.Description}");
+		            details = string.Join(", ",detail);
 	            }
             }
 
