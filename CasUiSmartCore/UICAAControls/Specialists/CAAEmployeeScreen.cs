@@ -414,13 +414,35 @@ namespace CAS.UI.UICAAControls.Specialists
 	            }));
 
 
-            var edIds = _records.Select(i => i.ItemId);
+            var edIds = _records.Select(i => i.ItemId).ToList();
+            var lastIds = _records
+	            .Where(i => i.Settings?.LastCompliances != null)
+	            .SelectMany(i => i.Settings.LastCompliances)
+	            .Where(i => i.DocumentId.HasValue)
+	            .Select(i => i.DocumentId.Value).ToList();
             if (edIds.Any())
             {
-	            var documents = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ParentId", edIds), true);
+	            var documents = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ParentId", edIds), true).ToList();
+	            var docIds = documents.Select(i => i.ItemId);
+
+	            var res = lastIds.Except(docIds);
+	            if (lastIds.Any())
+	            {
+		            var doc = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ItemId", res), true);
+		            documents.AddRange(doc);
+	            }
+	            
+	            var links = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+	            {
+		            new Filter("ParentId",docIds),
+		            new Filter("ParentTypeId",SmartCoreType.Document.ItemId)
+	            }, false);
+	            
 	            foreach (var document in documents)
 	            {
 		            document.Parent = _records.FirstOrDefault(i => i.ItemId == document.ParentId);
+		            document.Files = new CommonCollection<ItemFileLink>(links.Where(i => i.ParentId == document.ItemId));
+		            GlobalObjects.CaaEnvironment.CaaPerformanceRepository.GetNextPerformance(document);
 		            _currentItem.EmployeeDocuments.Add(document);
 	            }
 	            

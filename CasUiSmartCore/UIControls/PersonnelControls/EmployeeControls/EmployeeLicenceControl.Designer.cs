@@ -207,6 +207,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.employeeLicenceGeneralControl.AutoScroll = true;
 			this.employeeLicenceGeneralControl.Location = new System.Drawing.Point(3, 3);
 			this.employeeLicenceGeneralControl.Name = "employeeLicenceGeneralControl";
+			this.employeeLicenceGeneralControl.OperatorId = 0;
 			this.employeeLicenceGeneralControl.Size = new System.Drawing.Size(1090, 583);
 			this.employeeLicenceGeneralControl.TabIndex = 32;
 			// 
@@ -229,23 +230,23 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.tableLayoutPanel1.ColumnCount = 2;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.Controls.Add(this.labelStatus, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.comboBoxStatus, 1, 0);
-			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 7);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelGeneralControl, 0, 2);
-			this.tableLayoutPanel1.Controls.Add(this.labelPersonel, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.label4, 0, 5);
-			this.tableLayoutPanel1.Controls.Add(this.label3, 0, 4);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelOtherDetail, 1, 5);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelRemark, 1, 4);
-			this.tableLayoutPanel1.Controls.Add(this.linkLabelAddGeneralControl, 1, 3);
-			this.tableLayoutPanel1.Controls.Add(this.comboBoxPersonnel, 1, 1);
-			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 6);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 6);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 1, 7);
+			this.tableLayoutPanel1.Controls.Add(this.comboBoxStatus, 1, 8);
+			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 6);
+			this.tableLayoutPanel1.Controls.Add(this.labelStatus, 0, 8);
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelGeneralControl, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.labelPersonel, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.label4, 0, 4);
+			this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelOtherDetail, 1, 4);
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelRemark, 1, 3);
+			this.tableLayoutPanel1.Controls.Add(this.linkLabelAddGeneralControl, 1, 2);
+			this.tableLayoutPanel1.Controls.Add(this.comboBoxPersonnel, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 5);
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 5);
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 1, 6);
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 31);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 7;
+			this.tableLayoutPanel1.RowCount = 9;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -253,8 +254,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(1152, 816);
 			this.tableLayoutPanel1.TabIndex = 33;
 			// 
@@ -371,7 +372,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Name = "EmployeeLicenceControl";
-			this.Size = new System.Drawing.Size(1159, 894);
+			this.Size = new System.Drawing.Size(1159, 854);
 			this.flowLayoutPanelRemark.ResumeLayout(false);
 			this.flowLayoutPanelOtherDetail.ResumeLayout(false);
 			this.flowLayoutPanelGeneralControl.ResumeLayout(false);
