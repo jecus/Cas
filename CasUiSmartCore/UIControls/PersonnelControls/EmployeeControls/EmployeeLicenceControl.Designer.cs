@@ -230,20 +230,22 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.tableLayoutPanel1.ColumnCount = 2;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.Controls.Add(this.comboBoxStatus, 1, 8);
-			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 6);
-			this.tableLayoutPanel1.Controls.Add(this.labelStatus, 0, 8);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelGeneralControl, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.labelPersonel, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.label4, 0, 4);
-			this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelOtherDetail, 1, 4);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelRemark, 1, 3);
-			this.tableLayoutPanel1.Controls.Add(this.linkLabelAddGeneralControl, 1, 2);
-			this.tableLayoutPanel1.Controls.Add(this.comboBoxPersonnel, 1, 0);
-			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 5);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 5);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 1, 6);
+			this.tableLayoutPanel1.Controls.Add(this.comboBoxStatus, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.labelStatus, 0, 0);
+			
+			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 7);
+			
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelGeneralControl, 0, 2);
+			this.tableLayoutPanel1.Controls.Add(this.labelPersonel, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.label4, 0, 5);
+			this.tableLayoutPanel1.Controls.Add(this.label3, 0, 4);
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelOtherDetail, 1, 5);
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelRemark, 1, 4);
+			this.tableLayoutPanel1.Controls.Add(this.linkLabelAddGeneralControl, 1, 3);
+			this.tableLayoutPanel1.Controls.Add(this.comboBoxPersonnel, 1, 1);
+			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 6);
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 6);
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 1, 7);
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 31);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 9;

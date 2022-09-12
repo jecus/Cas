@@ -697,5 +697,6 @@ namespace SmartCore.Entities.General.Personnel
     [JsonObject]
     public class SpecialistSettings
     {
+	    public int  StatusId { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using SmartCore.CAA.Operators;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Personnel;
 
@@ -60,9 +61,13 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			comboBoxClass.Items.AddRange(ints);
 			comboBoxGrade.Items.Clear();
 			comboBoxGrade.Items.AddRange(ints);
+			
+			comboBoxStatus.Items.Clear();
+			comboBoxStatus.Items.AddRange(OperatorStatus.Items.ToArray());
 
 			comboBoxClass.SelectedItem = _currentItem.ClassNumber;
 			comboBoxGrade.SelectedItem = _currentItem.GradeNumber;
+			comboBoxStatus.SelectedItem = OperatorStatus.Items.GetItemById(_currentItem.Settings.StatusId) ?? OperatorStatus.Unknown;
 			dateTimePickerClassIssue.Value = _currentItem.ClassIssueDate;
 			dateTimePickerGradeIssue.Value = _currentItem.GradeIssueDate;
 			comboBoxPersonnel.SelectedItem = _currentItem.PersonnelCategory;
@@ -161,6 +166,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			_currentItem.GradeNumber = (int) comboBoxGrade.SelectedItem;
 			_currentItem.ClassIssueDate = dateTimePickerClassIssue.Value;
 			_currentItem.GradeIssueDate = dateTimePickerGradeIssue.Value;
+			_currentItem.Settings.StatusId = ((OperatorStatus)comboBoxStatus.SelectedItem).ItemId;
 
 			foreach (var control in flowLayoutPanelGeneralControl.Controls.OfType<EmployeeLicenceGeneralControl>())
 				control.ApplyChanges();
@@ -198,9 +204,9 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				{
 					try
 					{
-						if(GlobalObjects.CasEnvironment != null)
+						if (GlobalObjects.CasEnvironment != null)
 							GlobalObjects.CasEnvironment.Manipulator.Delete(control.LicenseRemark, false);
-						else GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.LicenseRemark, false)
+						else GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.LicenseRemark, false);
 					}
 					catch (Exception ex)
 					{

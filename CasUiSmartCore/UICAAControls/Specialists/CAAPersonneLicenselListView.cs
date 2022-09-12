@@ -9,6 +9,7 @@ using CAS.UI.UIControls.PersonnelControls;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.CAA;
+using SmartCore.CAA.Operators;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Personnel;
@@ -34,7 +35,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		{
 			InitializeComponent();
 			SortDirection = SortDirection.Desc;
-			OldColumnIndex = 2;
+			OldColumnIndex = 3;
 		}
 
         public int OperatorId { get; set; }
@@ -59,6 +60,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		protected override void SetHeaders()
 		{
 			AddColumn("Status", (int)(radGridView1.Width * 0.20f));
+			AddColumn("License Status", (int)(radGridView1.Width * 0.20f));
 			AddColumn("First Name", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Last Name", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Occupation", (int)(radGridView1.Width * 0.24f));
@@ -105,6 +107,8 @@ namespace CAS.UI.UICAAControls.Specialists
 			var licensePers = PersonnelCategory.UNK;
 			var licenseType = EmployeeLicenceType.UNK;
 
+			var statLicense = OperatorStatus.GetItemById(item.Settings.StatusId) ?? OperatorStatus.Unknown;
+			
 			var validationOther = "";
             var validToOther = "";
             var remainOther = Lifelength.Null;
@@ -184,6 +188,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			var subItems = new List<CustomCell>()
 			{
 				CreateRow(item.Status.ToString(), item.Status),
+				CreateRow(statLicense.ToString(), statLicense),
 				CreateRow(item.FirstName, item.FirstName),
 				CreateRow(item.LastName, item.LastName),
 				CreateRow(item.Occupation.ToString(), item.Occupation),
