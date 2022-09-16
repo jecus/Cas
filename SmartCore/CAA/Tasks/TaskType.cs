@@ -23,6 +23,13 @@ namespace SmartCore.CAA.Tasks
         public static TaskType Examination = new TaskType(7, "Examination", "Examination", "Examination");
         public static TaskType Review = new TaskType(8, "Review", "Review", "Review");
         public static TaskType Control = new TaskType(9, "Control", "Control", "Control");
+        public static TaskType SkillTest = new TaskType(10, "Skill test", "Skill test", "Skill test");
+        public static TaskType FlyingTraining = new TaskType(11, "Flying training", "Flying training", "Flying training");
+        public static TaskType PracticalTraining = new TaskType(12, "Practical training", "Practical training", "Practical training");
+        public static TaskType TrainingFlight = new TaskType(13, "Training Flight", "Training Flight", "Training Flight");
+        public static TaskType ProficiencyCheck = new TaskType(14, "Proficiency Check", "Proficiency Check", "Proficiency Check");
+        public static TaskType FlightInstruction = new TaskType(16, "Flight Instruction", "Flight Instruction", "Flight Instruction");
+        public static TaskType Assessments = new TaskType(16, "Assessments of competence", "Assessments of competence", "Assessments of competence");
 
         /*
          * Методы

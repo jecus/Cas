@@ -20,6 +20,9 @@ namespace SmartCore.CAA.Operators
         public static OperatorStatus Limiting = new OperatorStatus(4, "Limiting", "Limiting", "");
         public static OperatorStatus Suspending = new OperatorStatus(5, "Suspending", "Suspending", "");
         public static OperatorStatus Revoking = new OperatorStatus(6, "Revoking", "Revoking", "");
+        public static OperatorStatus Valid = new OperatorStatus(7, "Valid", "Valid", "");
+        public static OperatorStatus Revalidation = new OperatorStatus(8, "Revalidation", "Revalidation", "");
+        public static OperatorStatus Renewal = new OperatorStatus(9, "Renewal", "Renewal", "");
         public static OperatorStatus Unknown = new OperatorStatus(-1, "Unknown", "Unknown", "Unknown");
 
         /*

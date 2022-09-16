@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -10,9 +9,9 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
+using SmartCore.CAA;
 using SmartCore.CAA.CAAEducation;
 using SmartCore.Entities.General;
-using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UICAAControls.CAAEducation
@@ -73,8 +72,9 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		/// </summary>
 		protected override void SetHeaders()
 		{
+			AddColumn("Operator", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Last Name", (int)(radGridView1.Width * 0.20f));
             AddColumn("First Name", (int)(radGridView1.Width * 0.20f));
-            AddColumn("Last Name", (int)(radGridView1.Width * 0.20f));
             AddColumn("Occupation", (int)(radGridView1.Width * 0.20f));
             AddColumn("Combination", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Code", (int)(radGridView1.Width * 0.20f));
@@ -158,18 +158,27 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		protected override List<CustomCell> GetListViewSubItems(CAAEducationManagment item)
         {
+	        
 	        var corrector = GlobalObjects.CaaEnvironment?.GetCorrector(item.Specialist);
 	        var occupation = item.IsCombination ? null : item.Occupation;
 	        var combination = item.IsCombination ?  item.Occupation : null;
 
+	        var op = (GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(
+		        i => i.ItemId == item.Specialist.OperatorId) ?? AllOperators.Unknown).ToString();
+
+	        if (item.Specialist.IsCAA)
+		        op = "CAA";
+	        
 	        var next = item.Record == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat(item.Record?.Settings?.NextCompliance?.NextDate);
 	        var last = item.Record == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat(item.Record?.Settings?.LastCompliances?.LastOrDefault()?.LastDate);
 	        
 
 	        return  new List<CustomCell>()
 	        {
-		        CreateRow(item.Specialist.FirstName, item.Specialist.FirstName),
+		        CreateRow(op, op),
 		        CreateRow(item.Specialist.LastName,item.Specialist.LastName),
+		        CreateRow(item.Specialist.FirstName, item.Specialist.FirstName),
+		        
 		        CreateRow(occupation?.FullName, occupation?.FullName),
 		        CreateRow(combination?.FullName, combination?.FullName),
 		        CreateRow(item.Education?.Task?.Code, item.Education?.Task?.Code),

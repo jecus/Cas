@@ -35,7 +35,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		{
 			InitializeComponent();
 			SortDirection = SortDirection.Desc;
-			OldColumnIndex = 3;
+			OldColumnIndex = 2;
 		}
 
         public int OperatorId { get; set; }
@@ -61,8 +61,9 @@ namespace CAS.UI.UICAAControls.Specialists
 		{
 			AddColumn("Status", (int)(radGridView1.Width * 0.20f));
 			AddColumn("License Status", (int)(radGridView1.Width * 0.20f));
-			AddColumn("First Name", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Last Name", (int)(radGridView1.Width * 0.24f));
+			AddColumn("First Name", (int)(radGridView1.Width * 0.24f));
+			
 			AddColumn("Occupation", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Combination", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Personnel", (int)(radGridView1.Width * 0.24f));
@@ -189,8 +190,9 @@ namespace CAS.UI.UICAAControls.Specialists
 			{
 				CreateRow(item.Status.ToString(), item.Status),
 				CreateRow(statLicense.ToString(), statLicense),
-				CreateRow(item.FirstName, item.FirstName),
 				CreateRow(item.LastName, item.LastName),
+				CreateRow(item.FirstName, item.FirstName),
+				
 				CreateRow(item.Occupation.ToString(), item.Occupation),
 				CreateRow(item.Combination, item.Combination),
 				CreateRow(licensePers.ToString(), licensePers),
