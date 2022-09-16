@@ -19,6 +19,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
+using SmartCore.Entities.General.Personnel;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.Export;
 using Telerik.WinControls.UI;
@@ -1122,7 +1123,13 @@ namespace CAS.UI.UIControls.NewGrid
 						foreach (var o in pds)
 						{
 							if (o is IOperatable op)
-								op.OperatorId = ctr.OperatorId;
+							{
+								if (o is Specialist)
+								{
+									
+								}
+								else op.OperatorId = ctr.OperatorId;
+							}
 						}
 					}
 					

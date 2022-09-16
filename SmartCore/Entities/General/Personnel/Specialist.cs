@@ -645,6 +645,7 @@ namespace SmartCore.Entities.General.Personnel
             SmartCoreObjectType = SmartCoreType.Employee;
             Gender = Gender.Male;
             AGWCategory = null;
+            Settings = new SpecialistSettings();
 
             DateOfBirth = new DateTime(1970,1,1);
 			GradeIssueDate = DateTime.Today;
@@ -695,6 +696,7 @@ namespace SmartCore.Entities.General.Personnel
 	}
 
     [JsonObject]
+    [Serializable]
     public class SpecialistSettings
     {
 	    public int  StatusId { get; set; }

@@ -132,6 +132,21 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		        if (listViewForeColor != Color.MediumVioletRed)
 			        cell.Style.ForeColor = itemForeColor;
+
+
+		     //    if (item.Record != null)
+		     //    {
+			    //     if (cell.ColumnInfo.HeaderText == "Code")
+			    //     {
+				   //      if(item.Record.Settings.LastCompliances == null || !item.Record.Settings.LastCompliances.Any())
+					  //       cell.Style.ForeColor = Color.MediumVioletRed;
+				   //      else if(item.Record.Settings.LastCompliances.Any(i => !i.DocumentId.HasValue) )
+						 // cell.Style.ForeColor = Color.MediumVioletRed;
+			    //     }
+		     //    }
+		        
+		        
+		        
 		        cell.Style.BackColor = itemBackColor;
 	        }
         }
