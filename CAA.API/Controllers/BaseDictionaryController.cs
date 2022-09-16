@@ -55,7 +55,10 @@ namespace CAA.API.Controllers
 						GlobalObjects.Dictionaries[_type].Remove(find);
 						GlobalObjects.Dictionaries[_type].Add(entity);
 					}
-
+				}
+				else
+				{
+					GlobalObjects.Dictionaries.Add(_type, new List<IBaseDictionary>(){entity});
 				}
 
 				return Ok(res);
