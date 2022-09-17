@@ -261,16 +261,66 @@ namespace CAS.UI.UICAAControls.Specialists
 
                 _currentItem.MedicalRecord = GlobalObjects.CaaEnvironment.NewLoader.GetObject<CAASpecialistMedicalRecordDTO, SpecialistMedicalRecord>(new Filter("SpecialistId", _currentItem.ItemId));
 
-	            var types = new[]
+
+
+	            var documents = new List<SmartCore.Entities.General.Document>();
+
+	            if (_currentItem.SpecialistTrainings.Any())
 	            {
-		            SmartCoreType.SpecialistTraining.ItemId,
-		            SmartCoreType.SpecialistMedicalRecord.ItemId,
-		            SmartCoreType.SpecialistCAA.ItemId,
-		            SmartCoreType.SpecialistLicense.ItemId
+		            var ids = _currentItem.SpecialistTrainings.Select(i => i.ItemId);
+		            var traningDoc = GlobalObjects.CaaEnvironment.NewLoader
+			            .GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new List<Filter>()
+			            {
+				            new Filter("ParentTypeId", SmartCoreType.SpecialistTraining.ItemId),
+				            new Filter("ParentID", ids)
+			            }, loadChild:true);
 
-	            };
+		            documents.AddRange(traningDoc);
+	            }
+	            
+	            
+	            if (_currentItem.Licenses.Any())
+	            {
+		            var ids = _currentItem.Licenses.Select(i => i.ItemId);
+		            var lisenceDoc = GlobalObjects.CaaEnvironment.NewLoader
+			            .GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new List<Filter>()
+			            {
+				            new Filter("ParentTypeId", SmartCoreType.SpecialistLicense.ItemId),
+				            new Filter("ParentID", ids)
+			            }, loadChild:true);
 
-				var documents = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ParentTypeId", types), true);
+		            documents.AddRange(lisenceDoc);
+
+
+		            var caaIds = _currentItem.Licenses.SelectMany(i => i.CaaLicense).Select(i => i.ItemId);
+		            if (caaIds.Any())
+		            {
+			            var caaDoc = GlobalObjects.CaaEnvironment.NewLoader
+				            .GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new List<Filter>()
+				            {
+					            new Filter("ParentTypeId", SmartCoreType.SpecialistCAA.ItemId),
+					            new Filter("ParentID", caaIds)
+				            }, loadChild:true);
+
+			            documents.AddRange(caaDoc);
+		            }
+	            }
+	            
+	            if (_currentItem.MedicalRecord != null)
+	            {
+		            var medicalDoc = GlobalObjects.CaaEnvironment.NewLoader
+			            .GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new List<Filter>()
+			            {
+				            new Filter("ParentTypeId", SmartCoreType.SpecialistMedicalRecord.ItemId),
+				            new Filter("ParentID", _currentItem.MedicalRecord.ItemId)
+			            }, loadChild:true);
+		            
+		            documents.AddRange(medicalDoc);
+	            }
+	            
+	            
+
+				
 
 	            if (documents.Count > 0)
 	            {
@@ -303,6 +353,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		            foreach (var license in _currentItem.Licenses)
 		            {
 			            var q = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Personnel License") as DocumentSubType;
+			            var conf = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Confirmation") as DocumentSubType;
 			            var p = documents.FirstOrDefault(d => d.ParentId == license.ItemId && d.ParentTypeId == SmartCoreType.SpecialistLicense.ItemId && d.DocumentSubType.ItemId == q.ItemId);
 			            if (p != null)
 			            {
@@ -311,13 +362,27 @@ namespace CAS.UI.UICAAControls.Specialists
 			            }
 						foreach (var caa in license.CaaLicense)
 			            {
-				            var personalTraining = documents.FirstOrDefault(d => d.ParentId == caa.ItemId && d.ParentTypeId == SmartCoreType.SpecialistCAA.ItemId && d.DocumentSubType.ItemId == q.ItemId);
-				            if (personalTraining != null)
+				            if (caa.CaaType == CaaType.Licence)
 				            {
-					            caa.Document = personalTraining;
-					            caa.Document.Parent = caa;
+					            var personalTraining = documents.FirstOrDefault(d => d.ParentId == caa.ItemId && d.ParentTypeId == SmartCoreType.SpecialistLicense.ItemId && d.DocumentSubType.ItemId == q.ItemId);
+					            if (personalTraining != null)
+					            {
+						            caa.Document = personalTraining;
+						            caa.Document.Parent = caa;
+					            }
 				            }
-						}
+				            else
+				            {
+					            var personalTraining = documents.FirstOrDefault(d => d.ParentId == caa.ItemId && d.ParentTypeId == SmartCoreType.SpecialistCAA.ItemId && d.DocumentSubType.ItemId == conf.ItemId);
+					            if (personalTraining != null)
+					            {
+						            caa.Document = personalTraining;
+						            caa.Document.Parent = caa;
+					            }
+				            }
+
+
+			            }
 			            
 		            }
 					foreach (var training in _currentItem.SpecialistTrainings)
