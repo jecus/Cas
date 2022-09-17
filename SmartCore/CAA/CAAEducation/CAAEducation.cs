@@ -16,9 +16,9 @@ namespace SmartCore.CAA.CAAEducation
     {
         public int OperatorId { get; set; }
         
-        public int TaskId { get; set; }
+        public int? TaskId { get; set; }
         
-        public int OccupationId { get; set; }
+        public int? OccupationId { get; set; }
         public EducationPriority Priority { get; set; }
         
         public Occupation Occupation { get; set; }

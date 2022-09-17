@@ -16,10 +16,10 @@ namespace CAA.Entity.Models.DTO
 		public int OperatorId { get; set; }
 		
 		[Column("TaskId")]
-		public int TaskId { get; set; }
+		public int? TaskId { get; set; }
 		
 		[Column("OccupationId")]
-		public int OccupationId { get; set; }
+		public int? OccupationId { get; set; }
 		
 		[Column("PriorityId")]
 		public int PriorityId { get; set; }
