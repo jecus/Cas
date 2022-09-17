@@ -103,6 +103,10 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Personnel License") as DocumentSubType;
 			else docSubType = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Personnel License") as DocumentSubType;
 
+			
+			if(_specialistCaa.ItemId <= 0)
+				GlobalObjects.CaaEnvironment.NewKeeper.Save(_specialistCaa);
+			
 			return new Document
 			{
 				OperatorId = OperatorId,

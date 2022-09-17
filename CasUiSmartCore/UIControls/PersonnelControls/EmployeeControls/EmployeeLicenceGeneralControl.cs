@@ -149,6 +149,10 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Personnel License") as DocumentSubType;
 			else docSubType = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Personnel License") as DocumentSubType;
 
+			
+			if(_license.ItemId <= 0)
+				GlobalObjects.CaaEnvironment.NewKeeper.Save(_license);
+			
 			return new Document
 			{
 				OperatorId = OperatorId,
@@ -317,6 +321,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 						else
 						{
 							GlobalObjects.CaaEnvironment.NewKeeper.Save(_license);
+							if(control.SpecialistCaa.Document != null)
+								GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.SpecialistCaa.Document, false);
 							GlobalObjects.CaaEnvironment.NewKeeper.Delete(control.SpecialistCaa, false);
 						}
 					}
@@ -531,6 +537,10 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 		private void AddCaaControl(SpecialistCAA caa)
 		{
+
+			_license.Confirmation = true;
+			if(GlobalObjects.CaaEnvironment != null)
+				GlobalObjects.CaaEnvironment.NewKeeper.Save(_license);
 			var control = new EmployeeLicenceCaaControl { ShowButtonDelete = true, OperatorId = OperatorId };
 			control.Deleted += Control_Deleted;
 			control.Reload += ControlOnReload;

@@ -75,6 +75,9 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Medical Records") as DocumentSubType;
 			else docSubType = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Medical Records") as DocumentSubType;
 
+			if(_currentItem.ItemId <= 0)
+				GlobalObjects.CaaEnvironment.NewKeeper.Save(_currentItem);
+			
 			return new Document
 			{
 				OperatorId = OperatorId,

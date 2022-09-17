@@ -302,7 +302,11 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 						foreach (var remark in license.LicenseRemark)
 							GlobalObjects.CaaEnvironment.NewKeeper.Delete(remark);
 						foreach (var caa in license.CaaLicense)
+						{
+							if(caa.Document != null)
+								GlobalObjects.CaaEnvironment.NewKeeper.Delete(caa.Document, false);
 							GlobalObjects.CaaEnvironment.NewKeeper.Delete(caa);
+						}
 						foreach (var detail in license.LicenseDetails)
 							GlobalObjects.CaaEnvironment.NewKeeper.Delete(detail);
 						foreach (var rating in license.LicenseRatings)
@@ -310,6 +314,9 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 						foreach (var instrumentRating in license.SpecialistInstrumentRatings)
 							GlobalObjects.CaaEnvironment.NewKeeper.Delete(instrumentRating);
 
+						
+						if(license.Document != null)
+							GlobalObjects.CaaEnvironment.NewKeeper.Delete(license.Document, false);
 						GlobalObjects.CaaEnvironment.NewKeeper.Delete(license);
 					} 
 				}
