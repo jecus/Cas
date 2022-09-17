@@ -331,13 +331,12 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 						Program.Provider.Logger.Log("Error while removing data", ex);
 					}
 				}
-
-
 				
 				flowLayoutPanelCaa.Controls.Remove(control);
 				flowLayoutPanelCaa.Height -= 30;
 				control.Deleted -= Control_Deleted;
 				control.Dispose();
+				InvokeReload();
 			}
 		}
 
@@ -383,6 +382,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				flowLayoutPanelRating.Height -= 60;
 				control.Deleted -= RatingControl_Deleted;
 				control.Dispose();
+				InvokeReload();
 			}
 		}
 
@@ -474,6 +474,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				flowLayoutPanelRemark.Height -= 60;
 				control.Deleted -= RemarkControl_Deleted;
 				control.Dispose();
+				InvokeReload();
 			}
 		}
 
@@ -514,10 +515,12 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 						Program.Provider.Logger.Log("Error while removing data", ex);
 					}
 				}
+				
 				flowLayoutPanelOtherDetail.Controls.Remove(control);
 				flowLayoutPanelOtherDetail.Height -= 80;
 				control.Deleted -= OtherDetailControl_Deleted;
 				control.Dispose();
+				InvokeReload();
 			}
 		}
 

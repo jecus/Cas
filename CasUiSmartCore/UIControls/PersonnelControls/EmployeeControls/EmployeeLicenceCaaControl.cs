@@ -100,8 +100,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			
 			DocumentSubType docSubType;
 			if(GlobalObjects.CasEnvironment != null)
-				docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Personnel License") as DocumentSubType;
-			else docSubType = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Personnel License") as DocumentSubType;
+				docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Confirmation") as DocumentSubType;
+			else docSubType = GlobalObjects.CaaEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Confirmation") as DocumentSubType;
 
 			
 			if(_specialistCaa.ItemId <= 0)
