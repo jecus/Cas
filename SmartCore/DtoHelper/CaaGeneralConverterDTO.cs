@@ -156,7 +156,7 @@ namespace SmartCore.DtoHelper
 				OccupationId = task.OccupationId,
 				TaskId = task.TaskId,
 				Priority = EducationPriority.GetItemById(task.PriorityId),
-				Occupation = task.Occupation?.ConvertCAA(),
+				Occupation = task.Occupation?.ConvertCAA() ?? Occupation.Unknown,
 				Task = task.Task?.ConvertCAA(),
 			};
 		}
