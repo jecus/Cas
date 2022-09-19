@@ -493,11 +493,12 @@ namespace CAS.UI.UICAAControls.Specialists
 	            .Select(i => i.DocumentId.Value).ToList();
             if (edIds.Any())
             {
-	            var documents = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ParentId", edIds), true).ToList();
+	            var documents = GlobalObjects.CaaEnvironment.NewLoader
+		            .GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ParentId", edIds), true).ToList();
 	            var docIds = documents.Select(i => i.ItemId);
 
 	            var res = lastIds.Except(docIds);
-	            if (lastIds.Any())
+	            if (res.Any())
 	            {
 		            var doc = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ItemId", res), true);
 		            documents.AddRange(doc);
