@@ -86,5 +86,6 @@ namespace SmartCore.Entities.General.Personnel
 
 		public Lifelength Remain { get; set; }
 		public ConditionState Condition { get; set; }
+		public DateTime? ValidToDate { get; set; }
 	}
 }

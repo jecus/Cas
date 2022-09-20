@@ -132,7 +132,8 @@ namespace CAS.UI.UICAAControls.Specialists
             if(item.MedicalRecord != null)
             {
 	            medical = item.MedicalRecord.ClassNumber.ToString();
-	            validToMedical = Convert.GetDateFormat(item.MedicalRecord.IssueDate);
+	            if(item.MedicalRecord.ValidToDate.HasValue)
+		            validToMedical = Convert.GetDateFormat(item.MedicalRecord.ValidToDate);
 	            remainMedical = item.MedicalRecord.Remain;
             }
             
