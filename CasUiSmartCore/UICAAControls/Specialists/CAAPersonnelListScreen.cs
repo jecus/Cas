@@ -153,12 +153,17 @@ namespace CAS.UI.UICAAControls.Specialists
 
 	                foreach (var specialist in _initialDocumentArray)
 	                {
+
+		                
 		                var list = new List<ConditionState>();
 		                
 		                specialist.MedicalRecord = medicalRecords.FirstOrDefault(i => i.SpecialistId == specialist.ItemId);
 		                if (specialist.MedicalRecord != null)
 		                {
 			                GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(specialist.MedicalRecord, specialist.MedicalRecord.IssueDate,specialist.MedicalRecord.NotifyLifelength, specialist.MedicalRecord.RepeatLifelength);
+			                
+			                if(!specialist.MedicalRecord.RepeatLifelength.IsNullOrZero())
+								specialist.MedicalRecord.ValidToDate = specialist.MedicalRecord.IssueDate.AddDays(specialist.MedicalRecord.RepeatLifelength.Days.Value);
 			                list.Add(specialist.MedicalRecord.Condition);
 		                }
 		                
