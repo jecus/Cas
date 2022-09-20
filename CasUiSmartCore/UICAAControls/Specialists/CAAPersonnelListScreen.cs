@@ -134,6 +134,7 @@ namespace CAS.UI.UICAAControls.Specialists
 
 			if (_licenseView)
 			{
+				
 				var ids = _initialDocumentArray.SelectMany(i => i.Licenses).Select(i => i.ItemId);
 				var specIds = _initialDocumentArray.Select(i => i.ItemId);
 				if (ids.Any())
@@ -178,12 +179,6 @@ namespace CAS.UI.UICAAControls.Specialists
 				                list.Add(license.CaaLicense.FirstOrDefault(i => i.CaaType == CaaType.Other)?.Condition);
 			                if(license.CaaLicense.Any(i => i.CaaType == CaaType.Licence)) 
 								list.Add(license.CaaLicense.FirstOrDefault(i => i.CaaType == CaaType.Licence)?.Condition);
-			                if (list.Any(i => i.ItemId == ConditionState.Overdue.ItemId))
-				                specialist.Condition = ConditionState.Overdue;
-			                else if (list.Any(i => i.ItemId == ConditionState.Notify.ItemId))
-				                specialist.Condition = ConditionState.Notify;
-			                else specialist.Condition = ConditionState.NotEstimated;
-				                
 			                
 			                license.LicenseDetails = new CommonCollection<SpecialistLicenseDetail>(caaLicenseDetails.Where(i => i.SpecialistLicenseId == license.ItemId));
 			                license.LicenseRatings = new CommonCollection<SpecialistLicenseRating>(specialistLicenseRating.Where(i => i.SpecialistLicenseId == license.ItemId));
@@ -191,7 +186,11 @@ namespace CAS.UI.UICAAControls.Specialists
 			                license.SpecialistInstrumentRatings = new CommonCollection<SpecialistInstrumentRating>(specialistInstrumentRating.Where(i => i.SpecialistLicenseId == license.ItemId));
 		                }
 		                
-		                
+		                if (list.Any(i => i.ItemId == ConditionState.Overdue.ItemId))
+			                specialist.Condition = ConditionState.Overdue;
+		                else if (list.Any(i => i.ItemId == ConditionState.Notify.ItemId))
+			                specialist.Condition = ConditionState.Notify;
+		                else specialist.Condition = ConditionState.NotEstimated;
 		                
 	                }
 				}
