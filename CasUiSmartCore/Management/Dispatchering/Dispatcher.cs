@@ -7,7 +7,7 @@ using CASTerms;
 namespace CAS.UI.Management.Dispatchering
 {
     /// <summary>
-    /// Класс для отображения коллекции элементов управления,унаследованных от IDisplayer
+    /// РљР»Р°СЃСЃ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РєРѕР»Р»РµРєС†РёРё СЌР»РµРјРµРЅС‚РѕРІ СѓРїСЂР°РІР»РµРЅРёСЏ,СѓРЅР°СЃР»РµРґРѕРІР°РЅРЅС‹С… РѕС‚ IDisplayer
     /// </summary>
     internal class Dispatcher
     {
@@ -29,7 +29,7 @@ namespace CAS.UI.Management.Dispatchering
         /// Creates new instance of Dispathcer, for specified Proxy
         /// </summary>
         /// <param name="defaultProxy">Proxy, to be observed and dispatchered</param>
-        /// <param name="controlledForm">Контролируемая форма</param>
+        /// <param name="controlledForm">РљРѕРЅС‚СЂРѕР»РёСЂСѓРµРјР°СЏ С„РѕСЂРјР°</param>
         public Dispatcher(IDisplayerCollectionProxy defaultProxy, Form controlledForm)
         {
             _controlledForm = controlledForm;
@@ -43,7 +43,7 @@ namespace CAS.UI.Management.Dispatchering
 
         #region public ControlType ActionApplied
         /// <summary>
-        /// Тип действия над приложением
+        /// РўРёРї РґРµР№СЃС‚РІРёСЏ РЅР°Рґ РїСЂРёР»РѕР¶РµРЅРёРµРј
         /// </summary>
         public ControlType ActionApplied
         {
@@ -54,7 +54,7 @@ namespace CAS.UI.Management.Dispatchering
 
         #region public Form ControlledForm
         /// <summary>
-        /// Контролируемая форма
+        /// РљРѕРЅС‚СЂРѕР»РёСЂСѓРµРјР°СЏ С„РѕСЂРјР°
         /// </summary>
         public Form ControlledForm
         {
@@ -113,10 +113,10 @@ namespace CAS.UI.Management.Dispatchering
             {
                 if (c is IApplicationControlRequester)
                 {
-                    //Предватирельное отписание от события, что бы один и тот же подписчик
-                    //не подписывался на событие 2 и более раз
+                    //РџСЂРµРґРІР°С‚РёСЂРµР»СЊРЅРѕРµ РѕС‚РїРёСЃР°РЅРёРµ РѕС‚ СЃРѕР±С‹С‚РёСЏ, С‡С‚Рѕ Р±С‹ РѕРґРёРЅ Рё С‚РѕС‚ Р¶Рµ РїРѕРґРїРёСЃС‡РёРє
+                    //РЅРµ РїРѕРґРїРёСЃС‹РІР°Р»СЃСЏ РЅР° СЃРѕР±С‹С‚РёРµ 2 Рё Р±РѕР»РµРµ СЂР°Р·
                     (c as IApplicationControlRequester).ControlRequest -= DispatcherControlRequest;
-                    //Подписка на событие
+                    //РџРѕРґРїРёСЃРєР° РЅР° СЃРѕР±С‹С‚РёРµ
                     (c as IApplicationControlRequester).ControlRequest += DispatcherControlRequest;
                 }
                 ProcessControl(c);
@@ -165,9 +165,9 @@ namespace CAS.UI.Management.Dispatchering
                         e.Cancel = true;
                         return;
                     }
-                    //Оповещение о окончании удаления вкладки
+                    //РћРїРѕРІРµС‰РµРЅРёРµ Рѕ РѕРєРѕРЅС‡Р°РЅРёРё СѓРґР°Р»РµРЅРёСЏ РІРєР»Р°РґРєРё
                     displayer.OnDisplayerRemoved(arguments);
-                    //Если вкладка запросила отменить закрытие, операция прекращается
+                    //Р•СЃР»Рё РІРєР»Р°РґРєР° Р·Р°РїСЂРѕСЃРёР»Р° РѕС‚РјРµРЅРёС‚СЊ Р·Р°РєСЂС‹С‚РёРµ, РѕРїРµСЂР°С†РёСЏ РїСЂРµРєСЂР°С‰Р°РµС‚СЃСЏ
                     if (arguments.Cancel)
                     {
                         e.Cancel = true;
@@ -195,9 +195,9 @@ namespace CAS.UI.Management.Dispatchering
                         e.Cancel = true;
                         return;
                     }
-                    //Оповещение о окончании удаления вкладки
+                    //РћРїРѕРІРµС‰РµРЅРёРµ Рѕ РѕРєРѕРЅС‡Р°РЅРёРё СѓРґР°Р»РµРЅРёСЏ РІРєР»Р°РґРєРё
                     displayer.OnDisplayerRemoved(arguments);
-                    //Если вкладка запросила отменить закрытие, операция прекращается
+                    //Р•СЃР»Рё РІРєР»Р°РґРєР° Р·Р°РїСЂРѕСЃРёР»Р° РѕС‚РјРµРЅРёС‚СЊ Р·Р°РєСЂС‹С‚РёРµ, РѕРїРµСЂР°С†РёСЏ РїСЂРµРєСЂР°С‰Р°РµС‚СЃСЏ
                     if (arguments.Cancel)
                     {
                         e.Cancel = true;

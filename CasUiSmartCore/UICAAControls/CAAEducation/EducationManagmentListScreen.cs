@@ -160,9 +160,9 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			foreach (var specialist in specialists)
 			{
 				FillCollection(educations, specialist.Occupation, specialist,records, false);
-				foreach (Occupation dict in occupation)
+				foreach (Occupation dict in occupation.Where(i => !i.FullName.Equals(specialist.Occupation.FullName)))
 				{
-					if (specialist.Combination != null && specialist.Combination.Contains(dict.FullName) && dict.OperatorId == specialist.OperatorId)
+					if (specialist.Combination != null && specialist.Combination.Equals(dict.FullName) && dict.OperatorId == specialist.OperatorId)
 						FillCollection(educations, dict, specialist,records);
 				}
 			}

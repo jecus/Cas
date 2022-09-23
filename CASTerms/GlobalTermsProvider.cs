@@ -87,7 +87,7 @@ namespace CASTerms
             //hash.Add("RussianLanguage", "");
             //hash.Add("EnglishLanguage", "English");
             hash.Add("ProductVersion", "3.3");
-            hash.Add("ProductBuild", "1");//<<$SvnVersion$>>
+            hash.Add("ProductBuild", "2");//<<$SvnVersion$>>
             hash.Add("DateFormat","dd.MM.yyyy");
             hash.Add("DateFormatShort","dd.MM.yy");
             hash.Add("ReverseDateFormat","yyyy.MM.dd");

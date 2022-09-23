@@ -27,6 +27,7 @@ namespace CAS.UI.UIControls.PersonnelControls
             OldColumnIndex = 1;
         }
 
+        public int OperatorId { get; set; }
 
         #endregion
 
@@ -41,7 +42,7 @@ namespace CAS.UI.UIControls.PersonnelControls
             if (SelectedItem != null)
             {
                 e.Cancel = true;
-                var form = new CommonEditorForm(SelectedItem);
+                var form = new CommonEditorForm(SelectedItem, OperatorId);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
 					var subs = GetListViewSubItems(SelectedItem);

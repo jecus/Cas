@@ -217,6 +217,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 		private void InitListView()
 		{
 			_directivesViewer = new SpecializationListView();
+			_directivesViewer.OperatorId = _operatorId;
 			_directivesViewer.TabIndex = 2;
             _directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
