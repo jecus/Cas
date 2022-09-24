@@ -523,7 +523,11 @@ namespace CAS.UI.UICAAControls.Specialists
 	        FillCollection(educations, _currentItem.Occupation, _currentItem,_records, false);
             foreach (Occupation dict in occupation)
             {
-	            var comb = _currentItem.Combination.Split(',');
+	            var comb = new List<string>();
+	            if (_currentItem.Combination.Contains(","))
+		            comb = _currentItem.Combination.Split(',').ToList();
+	            else comb.Add(_currentItem.Combination);
+	            
 	            if (_currentItem.Combination != null && comb.Any(i => i == dict.FullName) && dict.OperatorId == _currentItem.OperatorId)
 		            FillCollection(educations, dict, _currentItem,_records);
             }

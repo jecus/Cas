@@ -162,7 +162,11 @@ namespace CAS.UI.UICAAControls.CAAEducation
 				FillCollection(educations, specialist.Occupation, specialist,records, false);
 				foreach (Occupation dict in occupation.Where(i => !i.FullName.Equals(specialist.Occupation.FullName)))
 				{
-					var comb = specialist.Combination.Split(',');
+					var comb = new List<string>();
+					if (specialist.Combination.Contains(","))
+						comb = specialist.Combination.Split(',').ToList();
+					else comb.Add(specialist.Combination);
+					
 					if (specialist.Combination != null && comb.Any(i => i == dict.FullName) && dict.OperatorId == specialist.OperatorId)
 						FillCollection(educations, dict, specialist,records);
 				}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -223,7 +224,11 @@ namespace CAS.UI.UIControls.PersonnelControls
 			checkedListBox1.Items.Clear();
 			checkedListBox1.Items.AddRange(GlobalObjects.CasEnvironment?.GetDictionary<Occupation>().ToArray() ?? GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray());
 
-			var comb = _currentItem.Combination.Split(',');
+			var comb = new List<string>();
+			if (_currentItem.Combination.Contains(","))
+				comb = _currentItem.Combination.Split(',').ToList();
+			else comb.Add(_currentItem.Combination);
+			
 			for (int i = 0; i < checkedListBox1.Items.Count; i++)
 			{
 				if(_currentItem.Combination!= null && comb.Any(c => c.Equals(checkedListBox1.Items[i].ToString())))
