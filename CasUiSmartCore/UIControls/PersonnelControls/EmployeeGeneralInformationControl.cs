@@ -3,6 +3,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using CAS.UI.Interfaces;
@@ -222,9 +223,10 @@ namespace CAS.UI.UIControls.PersonnelControls
 			checkedListBox1.Items.Clear();
 			checkedListBox1.Items.AddRange(GlobalObjects.CasEnvironment?.GetDictionary<Occupation>().ToArray() ?? GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray());
 
+			var comb = _currentItem.Combination.Split(',');
 			for (int i = 0; i < checkedListBox1.Items.Count; i++)
 			{
-				if(_currentItem.Combination!= null && _currentItem.Combination.Contains(checkedListBox1.Items[i].ToString()))
+				if(_currentItem.Combination!= null && comb.Any(c => c.Equals(checkedListBox1.Items[i].ToString())))
 					checkedListBox1.SetItemChecked(i,true);
 			}
 
@@ -340,7 +342,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 	        _currentItem.Combination = "";
 	        foreach (var item in checkedListBox1.CheckedItems)
 	        {
-		        _currentItem.Combination += $"{item} ";
+		        _currentItem.Combination += $"{item},";
 	        }
 
             if(fileControlPassportCopy.GetChangeStatus())

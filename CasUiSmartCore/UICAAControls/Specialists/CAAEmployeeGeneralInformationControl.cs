@@ -350,11 +350,11 @@ namespace CAS.UI.UICAAControls.Specialists
 	        comboBoxOccupation.SelectedItem = _currentItem.Occupation;
 	        checkedListBox1.Items.Clear();
 	        checkedListBox1.Items.AddRange(items.ToArray());
-	        
-	        
+
+	        var comb = _currentItem.Combination.Split(',');
 	        for (int i = 0; i < checkedListBox1.Items.Count; i++)
 	        {
-		        if(_currentItem.Combination!= null && _currentItem.Combination.Contains(checkedListBox1.Items[i].ToString()))
+		        if(_currentItem.Combination!= null && comb.Any(c => c.Equals(checkedListBox1.Items[i].ToString())))
 			        checkedListBox1.SetItemChecked(i,true);
 	        }
         }
@@ -415,7 +415,7 @@ namespace CAS.UI.UICAAControls.Specialists
 
 	        _currentItem.Combination = "";
 	        foreach (var item in checkedListBox1.CheckedItems)
-		        _currentItem.Combination += $"{item} ";
+		        _currentItem.Combination += $"{item},";
 	        
 	        
 	        
