@@ -154,7 +154,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         private void LinkDepartmentsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = $"{_currentOperator.ShortName} Departments";
-            e.RequestedEntity = new CAACommonListScreen(typeof(Department), new List<Filter>()
+            e.RequestedEntity = new CAACommonListScreen(typeof(Department),_currentOperator.ItemId, new List<Filter>()
             {
                 new Filter("OperatorId",_currentOperator.ItemId )
             }) { OperatorId = _currentOperator.ItemId };
@@ -167,7 +167,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         private void LinkNomenclaturesDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = $"{_currentOperator.ShortName} Nomenclatures";
-            e.RequestedEntity = new CAACommonListScreen(typeof(Nomenclatures), new List<Filter>()
+            e.RequestedEntity = new CAACommonListScreen(typeof(Nomenclatures),_currentOperator.ItemId, new List<Filter>()
                 {
                     new Filter("OperatorId",_currentOperator.ItemId )
                 })
@@ -184,7 +184,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         private void LinkRootCauseDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = $"{_currentOperator.ShortName} Root Cause";
-            e.RequestedEntity = new CAACommonListScreen(typeof(RootCause), new List<Filter>()
+            e.RequestedEntity = new CAACommonListScreen(typeof(RootCause),_currentOperator.ItemId, new List<Filter>()
                 {
                     new Filter("OperatorId",_currentOperator.ItemId )
                 })
@@ -318,7 +318,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         private void LinkEventsCategoriesRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = $"{_currentOperator.ShortName} Events Categories";
-	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventCategory), new List<Filter>()
+	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventCategory),_currentOperator.ItemId, new List<Filter>()
 		        {
 			        new Filter("OperatorId",_currentOperator.ItemId )
 		        })
@@ -328,7 +328,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         private void LinkEventsClassesRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = $"{_currentOperator.ShortName} Events Classes";
-	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventClass), new List<Filter>()
+	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventClass),_currentOperator.ItemId, new List<Filter>()
 		        {
 			        new Filter("OperatorId",_currentOperator.ItemId )
 		        })

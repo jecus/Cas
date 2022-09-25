@@ -6,10 +6,12 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
+using CAA.Entity.Models;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.Auxiliary.CAA;
 using CASTerms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -17,6 +19,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
+using SmartCore.Entities.General.Personnel;
 using Telerik.WinControls.Export;
 using Telerik.WinControls.UI;
 using CellFormattingEventArgs = Telerik.WinControls.UI.CellFormattingEventArgs;
@@ -918,6 +921,22 @@ namespace CAS.UI.UIControls.NewGrid
 
 				if (pds.Count > 0)
 				{
+					if (this.Parent.Parent is CAACommonListScreen ctr)
+					{
+						MessageBox.Show(ctr.OperatorId.ToString());
+						foreach (var o in pds)
+						{
+							if (o is IOperatable op)
+							{
+								if (o is Specialist)
+								{
+									
+								}
+								else op.OperatorId = ctr.OperatorId;
+							}
+						}
+					}
+					
 					GlobalObjects.NewKeeper.BulkInsert(pds.Cast<BaseEntityObject>().ToList());
 					InsertItems(pds.ToList());
 				}

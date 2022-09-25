@@ -96,12 +96,13 @@ namespace CAS.UI.UIControls.Auxiliary.CAA
 		///</summary>
 		///<param name="viewedType">Тип, объекты которого будут отображаться в списке</param>
 		///<param name="beginGroup"></param>
-		public CAACommonListScreen(Type viewedType, List<Filter> filters = null, PropertyInfo beginGroup = null)
+		public CAACommonListScreen(Type viewedType,int operatorId, List<Filter> filters = null, PropertyInfo beginGroup = null)
 			: this()
 		{
 			if (viewedType == null)
 				throw new ArgumentNullException("viewedType");
 
+			OperatorId = operatorId;
 			ViewedType = viewedType;
             _filters = filters;
             aircraftHeaderControl1.Operator = GlobalObjects.CaaEnvironment.Operators[0];

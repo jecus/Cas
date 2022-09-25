@@ -163,7 +163,7 @@ namespace CAS.UI.UICAAControls
 
         private void LinkDepartmentsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            e.RequestedEntity = new CAACommonListScreen(typeof(Department), new List<Filter>()
+            e.RequestedEntity = new CAACommonListScreen(typeof(Department), -1,new List<Filter>()
             {
                 new Filter("OperatorId",-1 )
             }){OperatorId = -1};
@@ -176,7 +176,7 @@ namespace CAS.UI.UICAAControls
         private void LinkNomenclaturesDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Nomenclatures";
-            e.RequestedEntity = new CAACommonListScreen(typeof(Nomenclatures), new List<Filter>()
+            e.RequestedEntity = new CAACommonListScreen(typeof(Nomenclatures),-1, new List<Filter>()
             {
                 new Filter("OperatorId",-1 )
             }){OperatorId = -1};
@@ -192,7 +192,7 @@ namespace CAS.UI.UICAAControls
         private void LinkRootCauseDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = "Root Cause";
-            e.RequestedEntity = new CAACommonListScreen(typeof(RootCause), new List<Filter>()
+            e.RequestedEntity = new CAACommonListScreen(typeof(RootCause),-1, new List<Filter>()
             {
                 new Filter("OperatorId",-1 )
             }){OperatorId = -1};
@@ -317,7 +317,7 @@ namespace CAS.UI.UICAAControls
         private void LinkEventsCategoriesRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Events Categories";
-	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventCategory), new List<Filter>()
+	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventCategory),-1, new List<Filter>()
 	        {
 		        new Filter("OperatorId",-1 )
 	        }){OperatorId = -1};
@@ -326,7 +326,7 @@ namespace CAS.UI.UICAAControls
         private void LinkEventsClassesRequested(object sender, ReferenceEventArgs e)
         {
 	        e.DisplayerText = "Events Classes";
-	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventClass), new List<Filter>()
+	        e.RequestedEntity = new CAACommonListScreen(typeof(CAAEventClass),-1,new List<Filter>()
 	        {
 		        new Filter("OperatorId",-1 )
 	        }){OperatorId = -1};
