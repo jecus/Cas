@@ -33,9 +33,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region Код, автоматически созданный конструктором компонентов
 
-        /// <summary> 
-        /// Обязательный метод для поддержки конструктора - не изменяйте 
-        /// содержимое данного метода при помощи редактора кода.
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -45,9 +45,7 @@ namespace CAS.UI.UIControls.Auxiliary
             // 
             // comboBoxReason
             // 
-            this.comboBoxReason.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            //this.comboBoxReason.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxReason.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxReason.FormattingEnabled = true;
             this.comboBoxReason.Location = new System.Drawing.Point(0, 0);
             this.comboBoxReason.Margin = new System.Windows.Forms.Padding(0);
@@ -55,12 +53,10 @@ namespace CAS.UI.UIControls.Auxiliary
             this.comboBoxReason.Size = new System.Drawing.Size(146, 21);
             this.comboBoxReason.TabIndex = 1;
             this.comboBoxReason.SelectedIndexChanged += new System.EventHandler(this.ComboBoxReasonSelectedIndexChanged);
-            this.comboBoxReason.TextUpdate += new System.EventHandler(ComboBoxReasonTextUpdate);
-            this.comboBoxReason.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
-			// 
-			// buttonEdit
-			// 
-			this.buttonEdit.Dock = System.Windows.Forms.DockStyle.Right;
+            // 
+            // buttonEdit
+            // 
+            this.buttonEdit.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonEdit.Location = new System.Drawing.Point(146, 0);
             this.buttonEdit.Margin = new System.Windows.Forms.Padding(0);
             this.buttonEdit.Name = "buttonEdit";
@@ -68,6 +64,7 @@ namespace CAS.UI.UIControls.Auxiliary
             this.buttonEdit.TabIndex = 2;
             this.buttonEdit.Text = "...";
             this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Visible = false;
             this.buttonEdit.Click += new System.EventHandler(this.ButtonEditClick);
             // 
             // DictionaryComboBox
@@ -79,7 +76,6 @@ namespace CAS.UI.UIControls.Auxiliary
             this.Name = "DictionaryComboBox";
             this.Size = new System.Drawing.Size(170, 20);
             this.ResumeLayout(false);
-
         }
 
         #endregion
