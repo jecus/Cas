@@ -125,10 +125,12 @@ namespace CAS.UI.UICAAControls.Document
 
 				var types = new List<int>()
 				{
+					SmartCoreType.Employee.ItemId,
 					SmartCoreType.SpecialistCAA.ItemId,
 					SmartCoreType.SpecialistTraining.ItemId,
 					SmartCoreType.SpecialistLicense.ItemId,
 					SmartCoreType.SpecialistMedicalRecord.ItemId,
+					SmartCoreType.CAAEducationRecord.ItemId,
 				};
 				
                 _initialDocumentArray.AddRange(GlobalObjects

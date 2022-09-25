@@ -116,7 +116,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			_resultDocumentArray.Clear();
 
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
-
+			GlobalObjects.CaaEnvironment.NewLoader.ReloadDictionary(typeof(Occupation), typeof(LocationsType), typeof(Department));
             if (_operatorId == -1)
             {
                 _initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader

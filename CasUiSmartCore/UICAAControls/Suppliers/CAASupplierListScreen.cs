@@ -164,7 +164,7 @@ namespace CAS.UI.UICAAControls.Suppliers
 
 			try
 			{
-				_initialDirectiveArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASupplierDTO, SmartCore.Purchase.Supplier>(new List<Filter>()
+				_initialDirectiveArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASupplierDTO, Supplier>(new List<Filter>()
 				{
 					new Filter("OperatorId", _operatorId)
 				},true));

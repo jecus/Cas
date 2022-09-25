@@ -107,6 +107,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			    _itemsArray.AddRange(GlobalObjects.CasEnvironment.GetDictionary<Occupation>());
             else
             {
+	            GlobalObjects.CaaEnvironment.NewLoader.ReloadDictionary( typeof(Department));
                 //_itemsArray.AddRange(GlobalObjects.CaaEnvironment.GetDictionary<Specialization>());
                 var res = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecializationDTO, Occupation>(
                     new Filter("OperatorId", OperatorId));

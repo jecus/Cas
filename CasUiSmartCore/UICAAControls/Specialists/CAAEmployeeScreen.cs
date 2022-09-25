@@ -163,7 +163,7 @@ namespace CAS.UI.UICAAControls.Specialists
 
             try
             {
-				GlobalObjects.CaaEnvironment.NewLoader.ReloadDictionary(typeof(Occupation), typeof(LocationsType));
+				GlobalObjects.CaaEnvironment.NewLoader.ReloadDictionary(typeof(Occupation), typeof(LocationsType), typeof(Department));
                 if (_currentItem.ItemId > 0)
 	                _currentItem = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO,Specialist>(_currentItem.ItemId, true);
 
