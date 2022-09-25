@@ -362,7 +362,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
 
         private void LinkProviderRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText = $"{_currentOperator.ShortName} Events Types";
+	        e.DisplayerText = $"{_currentOperator.ShortName} Provider";
 	        e.RequestedEntity = new CAASupplierListScreen(_getOperator(), _currentOperator.ItemId){OperatorId = _currentOperator.ItemId};
         }
         

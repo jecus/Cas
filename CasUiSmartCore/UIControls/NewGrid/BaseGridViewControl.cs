@@ -844,7 +844,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 			if (SelectedItems.Count <= 0)
 			{
-				_toolStripMenuItemPaste.Enabled = false;
+				_toolStripMenuItemPaste.Enabled = Clipboard.ContainsData(nameof(T));
 				_toolStripMenuItemCopy.Enabled = false;
 				_toolStripMenuItemDelete.Enabled = false;
 			}

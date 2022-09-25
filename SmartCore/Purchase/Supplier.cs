@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using CAA.Entity.Models;
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using SmartCore.Entities.Collections;
@@ -18,7 +19,7 @@ namespace SmartCore.Purchase
 	[CAADto(typeof(CAASupplierDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
-	public class Supplier : BaseEntityObject
+	public class Supplier : BaseEntityObject, IOperatable
 	{
 		private static Type _thisType;
 		/*
