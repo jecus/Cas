@@ -449,7 +449,14 @@ namespace CAS.UI.UIControls.Auxiliary
                                 _typeItemsCollection = res;
 
                             }
-                            else if (_type.Name == nameof(Occupation))
+                           if (_type.Name ==  nameof(Locations))
+                            {
+                                var res =  new CommonDictionaryCollection<Locations>( _typeItemsCollection.OfType<IOperatable>().Where(i => i.OperatorId == OperatorId).OfType<Locations>());
+                                res.Add(Locations.Unknown);
+                                _typeItemsCollection = res;
+
+                            }
+                           else if (_type.Name == nameof(Occupation))
                             {
                                 var res =  new CommonDictionaryCollection<Occupation>( _typeItemsCollection.OfType<IOperatable>().Where(i => i.OperatorId == OperatorId).OfType<Occupation>());
                                 res.Add(Occupation.Unknown);

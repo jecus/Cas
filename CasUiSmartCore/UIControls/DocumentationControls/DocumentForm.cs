@@ -104,6 +104,7 @@ namespace CAS.UI.UIControls.DocumentationControls
                 (parent as Specialist == null) && 
                 (parent as Supplier == null)) return;
 
+            
             _currentDocument = doc;
             _parent = parent;
 
@@ -665,21 +666,29 @@ namespace CAS.UI.UIControls.DocumentationControls
             Nomenclatures[] nomenclatures;
             if(GlobalObjects.CasEnvironment != null)
                 nomenclatures = GlobalObjects.CasEnvironment.GetDictionary<Nomenclatures>().Cast<Nomenclatures>().Where(i => i.Department?.ItemId == department.ItemId).ToArray();
-			else nomenclatures = GlobalObjects.CaaEnvironment.GetDictionary<Nomenclatures>().Cast<Nomenclatures>().Where(i => i.Department?.ItemId == department.ItemId).ToArray();
+			else nomenclatures = GlobalObjects.CaaEnvironment
+	            .GetDictionary<Nomenclatures>().Cast<Nomenclatures>()
+	            .Where(i => i.Department?.ItemId == department.ItemId && i.OperatorId == _currentDocument.OperatorId)
+	            .ToArray();
             comboBoxNomenclature.Items.Clear();
-			comboBoxNomenclature.Items.AddRange(nomenclatures);
+			comboBoxNomenclature.Items.AddRange(nomenclatures.OrderBy(i => i.FullName).ToArray());
 			comboBoxNomenclature.Items.Add(Nomenclatures.Unknown);
 			comboBoxNomenclature.SelectedItem = _currentDocument.Nomenсlature;
 
             Occupation[] specialization;
             if (GlobalObjects.CasEnvironment != null)
 				specialization = GlobalObjects.CasEnvironment.GetDictionary<Occupation>().Cast<Occupation>().Where(i => i.Department?.ItemId == department.ItemId).ToArray();
-			else specialization = GlobalObjects.CaaEnvironment.GetDictionary<Occupation>().Cast<Occupation>().Where(i => i.Department?.ItemId == department.ItemId).ToArray();
+			else specialization = GlobalObjects.CaaEnvironment.GetDictionary<Occupation>()
+	            .Cast<Occupation>()
+	            .Where(i => i.Department?.ItemId == department.ItemId && i.OperatorId == _currentDocument.OperatorId)
+	            .ToArray();
 			comboBoxResponsible.Items.Clear();
-			comboBoxResponsible.Items.AddRange(specialization);
+			comboBoxResponsible.Items.AddRange(specialization.OrderBy(i => i.FullName).ToArray());
 			comboBoxResponsible.Items.Add(Occupation.Unknown);
 			comboBoxResponsible.SelectedItem = _currentDocument.ResponsibleOccupation;
 
+			
+			dictionaryComboBoxLocation.OperatorId = _currentDocument.OperatorId;
 			dictionaryComboBoxLocation.Type = typeof(Locations);
 			dictionaryComboBoxLocation.SelectedItem = _currentDocument.Location;
 			Program.MainDispatcher.ProcessControl(dictionaryComboBoxLocation);

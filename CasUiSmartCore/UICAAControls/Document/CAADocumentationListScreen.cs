@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
@@ -125,7 +126,7 @@ namespace CAS.UI.UICAAControls.Document
                 _initialDocumentArray.AddRange(GlobalObjects
                     .CaaEnvironment
                     .NewLoader
-                    .GetObjectListAll<DocumentDTO, SmartCore.Entities.General.Document>(new Filter("OperatorId", FilterType.Equal, _operatorId), true));
+                    .GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("OperatorId", FilterType.Equal, _operatorId), true));
 			}
 			catch(Exception ex)
 			{
