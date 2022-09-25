@@ -163,6 +163,18 @@ namespace CAS.UI.UICAAControls.CAAEducation
 	        var occupation = item.IsCombination ? null : item.Occupation;
 	        var combination = item.IsCombination ?  item.Occupation : null;
 
+	        if (!item.IsCombination)
+	        {
+		        var comb = new List<string>();
+		        if (item.Specialist.Combination.Contains(","))
+			        comb = item.Specialist.Combination.Split(',').ToList();
+		        else comb.Add(item.Specialist.Combination);
+
+		        if (item.Specialist.Combination != null && comb.Any(i => i == occupation?.FullName))
+			        combination = item.Occupation;
+	        }
+	        
+
 	        var op = (GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(
 		        i => i.ItemId == item.Specialist.OperatorId) ?? AllOperators.Unknown).ToString();
 
