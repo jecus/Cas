@@ -143,7 +143,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 		private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
 	    {
 		    if (_currentDocument == null) return;
-
+		    GlobalObjects.CaaEnvironment.NewLoader.ReloadDictionary(typeof(Occupation), typeof(DocumentSubType), typeof(Department), typeof(Nomenclatures));
 		    parentDocs.Clear();
 			_suppliers.Clear();
 
@@ -339,7 +339,7 @@ namespace CAS.UI.UIControls.DocumentationControls
             IDictionaryItem[] departments;
             if (GlobalObjects.CasEnvironment != null)
 			    departments = GlobalObjects.CasEnvironment.GetDictionary<Department>().ToArray();
-			else departments = GlobalObjects.CaaEnvironment.GetDictionary<Department>().ToArray();
+			else departments = GlobalObjects.CaaEnvironment.GetDictionary<Department>().OfType<Department>().Where(i => i.OperatorId == _currentDocument.OperatorId).ToArray();
 			comboBoxDepartment.Items.Clear();
 			comboBoxDepartment.Items.AddRange(departments);
 			comboBoxDepartment.Items.Add(Department.Unknown);

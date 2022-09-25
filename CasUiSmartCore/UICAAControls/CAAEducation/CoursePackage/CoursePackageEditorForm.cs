@@ -14,6 +14,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 {
 	public partial class WorkPackageEditorForm : MetroForm
 	{
+		private readonly int _operatorId;
 		private readonly SmartCore.CAA.CAAWP.CoursePackage _currentWp;
 		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 
@@ -28,7 +29,7 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 		{
 			if(currentWp == null)
 				return;
-
+			_operatorId = currentWp.OperatorId;
 			DocumentControls.AddRange(new[] { documentControl1, documentControl2, documentControl3, documentControl4});
 			_currentWp = currentWp;
 			UpdateInformation();
@@ -40,7 +41,11 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 
 		private void UpdateInformation()
 		{
-			var providers = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASupplierDTO, Supplier>(new Filter("SupplierClassId", 100));
+			var providers = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASupplierDTO, Supplier>(new List<Filter>()
+			{
+				//new Filter("SupplierClassId", 100),
+				new Filter("OperatorId", _operatorId),
+			}  );
 			comboBoxProvider.Items.Clear();
 			comboBoxProvider.Items.AddRange(providers.ToArray());
 			comboBoxProvider.Items.Add(Supplier.Unknown);
