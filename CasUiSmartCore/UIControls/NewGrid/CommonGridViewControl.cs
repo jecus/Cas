@@ -38,6 +38,7 @@ namespace CAS.UI.UIControls.NewGrid
 		protected ICommonCollection _selectedItemsList;
 
 		private RadDropDownMenu _customMenu;
+		private RadMenuItem _toolStripMenuItemCopyWithoutMark;
 		private RadMenuItem _toolStripMenuItemCopy;
 		private RadMenuItem _toolStripMenuItemPaste;
 		private RadMenuItem _toolStripMenuItemDelete;
@@ -208,6 +209,7 @@ namespace CAS.UI.UIControls.NewGrid
 		public void DisableContectMenu()
 		{
 			_customMenu.Items.Remove(_toolStripMenuItemCopy);
+			_customMenu.Items.Remove(_toolStripMenuItemCopyWithoutMark);
 			_customMenu.Items.Remove(_toolStripMenuItemDelete);
 			_customMenu.Items.Remove(_toolStripMenuItemPaste);
 			_addBaseMenu = false;
@@ -225,6 +227,7 @@ namespace CAS.UI.UIControls.NewGrid
 			
 			_customMenu.Items.AddRange(_toolStripMenuItemDelete,
 				new RadMenuSeparatorItem(),
+				_toolStripMenuItemCopyWithoutMark,
 				_toolStripMenuItemCopy,
 				_toolStripMenuItemPaste
 			);
@@ -234,6 +237,7 @@ namespace CAS.UI.UIControls.NewGrid
 		{
 			_customMenu = new RadDropDownMenu();
 			_toolStripMenuItemDelete = new RadMenuItem();
+			_toolStripMenuItemCopyWithoutMark = new RadMenuItem();
 			_toolStripMenuItemCopy = new RadMenuItem();
 			_toolStripMenuItemPaste = new RadMenuItem();
 
@@ -248,6 +252,11 @@ namespace CAS.UI.UIControls.NewGrid
 			// 
 			_toolStripMenuItemCopy.Text = "Copy";
 			_toolStripMenuItemCopy.Click += CopyItemsClick;
+			// 
+			// toolStripMenuItemCopy
+			// 
+			_toolStripMenuItemCopyWithoutMark.Text = "Copy without mark";
+			_toolStripMenuItemCopyWithoutMark.Click += CopyWithoutMarkItemsClick;
 
 			// 
 			// toolStripMenuItemPaste
@@ -272,6 +281,12 @@ namespace CAS.UI.UIControls.NewGrid
 		{
 			CopyToClipboard();
 		}
+		
+		public virtual void CopyWithoutMarkItemsClick(object sender, EventArgs e)
+		{
+			CopyToClipboard(false);
+		}
+
 
 		public virtual void ButtonDeleteClick(object sender, EventArgs e)
 		{
@@ -861,7 +876,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#region Copy/Paste
 
-		private void CopyToClipboard()
+		private void CopyToClipboard(bool marked = true)
 		{
 			// регистрация формата данных либо получаем его, если он уже зарегистрирован
 			try
@@ -873,7 +888,7 @@ namespace CAS.UI.UIControls.NewGrid
 				foreach (var obj in SelectedItems)
 				{
 					var method = typeof(BaseEntityObject).GetMethods().FirstOrDefault(i => i.Name == "GetCopyUnsaved");
-					list.Add((BaseEntityObject)method.Invoke(obj,  new object[]{true}));
+					list.Add((BaseEntityObject)method.Invoke(obj,  new object[]{marked}));
 				}
 
 				//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
@@ -923,7 +938,6 @@ namespace CAS.UI.UIControls.NewGrid
 				{
 					if (this.Parent.Parent is CAACommonListScreen ctr)
 					{
-						MessageBox.Show(ctr.OperatorId.ToString());
 						foreach (var o in pds)
 						{
 							if (o is IOperatable op)

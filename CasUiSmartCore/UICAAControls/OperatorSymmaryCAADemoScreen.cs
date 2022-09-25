@@ -163,6 +163,7 @@ namespace CAS.UI.UICAAControls
 
         private void LinkDepartmentsDisplayerRequested(object sender, ReferenceEventArgs e)
         {
+	        e.DisplayerText = $"Departments";
             e.RequestedEntity = new CAACommonListScreen(typeof(Department), -1,new List<Filter>()
             {
                 new Filter("OperatorId",-1 )
