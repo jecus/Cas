@@ -495,6 +495,8 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.comboBoxNationality.Name = "comboBoxNationality";
 			this.comboBoxNationality.Size = new System.Drawing.Size(350, 25);
 			this.comboBoxNationality.TabIndex = 69;
+			this.comboBoxNationality.AutoCompleteMode = AutoCompleteMode.Suggest;
+			this.comboBoxNationality.AutoCompleteSource = AutoCompleteSource.ListItems;
 			// 
 			// labelPosition
 			// 

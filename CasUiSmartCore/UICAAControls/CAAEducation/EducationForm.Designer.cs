@@ -1,4 +1,5 @@
-﻿using CAS.UI.UIControls.Auxiliary.CAA;
+﻿using System.Windows.Forms;
+using CAS.UI.UIControls.Auxiliary.CAA;
 using SmartCore.CAA.Tasks;
 
 namespace CAS.UI.UICAAControls.CAAEducation
@@ -172,6 +173,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.comboBoxOccupation.Name = "comboBoxOccupation";
             this.comboBoxOccupation.Size = new System.Drawing.Size(250, 22);
             this.comboBoxOccupation.TabIndex = 335;
+            this.comboBoxOccupation.AutoCompleteMode = AutoCompleteMode.Suggest;
+            this.comboBoxOccupation.AutoCompleteSource = AutoCompleteSource.ListItems;
 // 
             // metroLabel2
             // 
@@ -192,7 +195,9 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.comboBoxPriority.Location = new System.Drawing.Point(1050, 379);
             this.comboBoxPriority.Name = "comboBoxPriority";
             this.comboBoxPriority.Size = new System.Drawing.Size(250, 22);
-            this.comboBoxPriority.TabIndex = 335;            
+            this.comboBoxPriority.TabIndex = 335;        
+            this.comboBoxPriority.AutoCompleteMode = AutoCompleteMode.Suggest;
+            this.comboBoxPriority.AutoCompleteSource = AutoCompleteSource.ListItems;
             // 
             // EducationForm
             // 
