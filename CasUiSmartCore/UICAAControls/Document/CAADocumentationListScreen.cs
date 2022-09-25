@@ -122,11 +122,24 @@ namespace CAS.UI.UICAAControls.Document
 			try
 			{
 				GlobalObjects.CaaEnvironment.NewLoader.ReloadDictionary(typeof(DocumentSubType), typeof(ServiceType), typeof(Nomenclatures), typeof(Department), typeof(Occupation));
-                
+
+				var types = new List<int>()
+				{
+					SmartCoreType.SpecialistCAA.ItemId,
+					SmartCoreType.SpecialistTraining.ItemId,
+					SmartCoreType.SpecialistLicense.ItemId,
+					SmartCoreType.SpecialistMedicalRecord.ItemId,
+				};
+				
                 _initialDocumentArray.AddRange(GlobalObjects
                     .CaaEnvironment
                     .NewLoader
-                    .GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("OperatorId", FilterType.Equal, _operatorId), true));
+                    .GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new List<Filter>()
+                    {
+	                    new Filter("OperatorId", FilterType.Equal, _operatorId),
+	                    new Filter("ParentTypeId", FilterType.NotIn, types)
+                    }, true));
+
 			}
 			catch(Exception ex)
 			{
