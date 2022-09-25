@@ -56,12 +56,12 @@ namespace CAS.UI.UICAAControls.CAAEducation
         private void UpdateInformation()
         {
             comboBoxOccupation.Items.Clear();
-            comboBoxOccupation.Items.AddRange(_occupation.ToArray());
+            comboBoxOccupation.Items.AddRange(_occupation.OrderBy(i => i.FullName).ToArray());
             comboBoxOccupation.Items.Add(Occupation.Unknown);
             comboBoxOccupation.SelectedItem = Occupation.Unknown;
             
             comboBoxPriority.Items.Clear();
-            comboBoxPriority.Items.AddRange(EducationPriority.Items.ToArray());
+            comboBoxPriority.Items.AddRange(EducationPriority.Items.OrderBy(i => i.FullName).ToArray());
             comboBoxPriority.Items.Add(EducationPriority.Unknown);
             comboBoxPriority.SelectedItem = EducationPriority.Unknown;
             
