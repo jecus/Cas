@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.Dictionary;
+using CAS.Entity.Models.DTO.Dictionaries;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
@@ -23,9 +25,8 @@ namespace CAS.UI.UIControls.PersonnelControls
 		#region Fields
 
 		private Operator _currentOperator;
-        private readonly int _operatorId;
 
-        private CommonDictionaryCollection<Occupation> _itemsArray = new CommonDictionaryCollection<Occupation>();
+		private CommonDictionaryCollection<Occupation> _itemsArray = new CommonDictionaryCollection<Occupation>();
 
 		private SpecializationListView _directivesViewer;
 
@@ -57,13 +58,14 @@ namespace CAS.UI.UIControls.PersonnelControls
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentOperator">ВС, которому принадлежат директивы</param>>
-		public SpecializationsListScreen(Operator currentOperator)
+		public SpecializationsListScreen(Operator currentOperator, int operatorId = 0)
 			: this()
 		{
 			if (currentOperator == null)
 				throw new ArgumentNullException("currentOperator");
 			aircraftHeaderControl1.Operator = currentOperator;
 			_currentOperator = currentOperator;
+			OperatorId = operatorId;
             statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 			buttonApplyFilter.Visible = false;
@@ -72,13 +74,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			InitListView();
 			UpdateInformation();
 		}
-
-
-        public SpecializationsListScreen(Operator currentOperator, int operatorId) 
-            : this(currentOperator)
-        {
-			_operatorId = operatorId;
-		}
+		
 
 		#endregion
 
@@ -113,11 +109,27 @@ namespace CAS.UI.UIControls.PersonnelControls
             {
                 //_itemsArray.AddRange(GlobalObjects.CaaEnvironment.GetDictionary<Specialization>());
                 var res = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAASpecializationDTO, Occupation>(
-                    new Filter("OperatorId", _operatorId));
+                    new Filter("OperatorId", OperatorId));
 
+                var depids = res.Select(i => i.DepartmentId).Distinct();
+                if (depids.Any())
+                {
+	                var deps = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAADepartmentDTO, Department>(new List<Filter>()
+		                {
+			                new Filter("OperatorId", OperatorId),
+			                new Filter("ItemId", depids),
+		                }
+		               );
+
+	                foreach (var specialization in res)
+	                {
+		                specialization.Department = deps.FirstOrDefault(i => i.ItemId == specialization.DepartmentId) ?? Department.Unknown;
+	                }
+                }
+                
                 foreach (var specialization in res)
                 {
-                    _itemsArray.Add(specialization);
+	                _itemsArray.Add(specialization);
                 }
 
             }
@@ -217,7 +229,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 		private void InitListView()
 		{
 			_directivesViewer = new SpecializationListView();
-			_directivesViewer.OperatorId = _operatorId;
+			_directivesViewer.OperatorId = OperatorId;
 			_directivesViewer.TabIndex = 2;
             _directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
@@ -278,8 +290,8 @@ namespace CAS.UI.UIControls.PersonnelControls
 		{
 			CommonEditorForm form = new CommonEditorForm(new Occupation()
             {
-				OperatorId = _operatorId
-            }, _operatorId);
+				OperatorId = OperatorId
+            }, OperatorId);
 
 			if (form.ShowDialog() == DialogResult.OK) 
 				AnimatedThreadWorker.RunWorkerAsync();
