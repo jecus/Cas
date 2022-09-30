@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using CAA.Entity.Models.DTO;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UICAAControls.CheckList;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using SmartCore.CAA.Check;
+using SmartCore.CAA.RoutineAudits;
 using SmartCore.Entities.General;
 
 namespace CAS.UI.UICAAControls.RoutineAudit
@@ -123,10 +126,25 @@ namespace CAS.UI.UICAAControls.RoutineAudit
 		{
 			if (SelectedItem != null)
             {
+	            var manuals = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<StandartManualDTO, SmartCore.CAA.StandartManual.StandartManual>(new []
+	            {
+		            new Filter("OperatorId", new []{OperatorId, -1}.Distinct()),
+		            new Filter("ProgramTypeId", SelectedItem.Settings.TypeId),
+	            });
 
-                e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(),OperatorId, CheckListType.Routine,SelectedItem.ItemId);
-                e.DisplayerText = $"Routine Audit: {SelectedItem.Title}";
-                e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+	            if (manuals == null || !manuals.Any())
+	            {
+		            e.Cancel = true;
+		            MessageBox.Show($"Please create Standart Manual for type {ProgramType.GetItemById(SelectedItem.Settings.TypeId)}", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+	            }
+	            else
+	            {
+		            e.RequestedEntity = new CheckListsScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(),OperatorId, CheckListType.Routine,SelectedItem.ItemId);
+		            e.DisplayerText = $"Routine Audit: {SelectedItem.Title}";
+		            e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+	            }
+
+                
 
             }
 		}

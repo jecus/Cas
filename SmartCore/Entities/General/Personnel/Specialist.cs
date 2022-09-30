@@ -647,6 +647,8 @@ namespace SmartCore.Entities.General.Personnel
             AGWCategory = null;
             Settings = new SpecialistSettings();
 
+            Combination = "";
+            
             DateOfBirth = new DateTime(1970,1,1);
 			GradeIssueDate = DateTime.Today;
 			ClassIssueDate = DateTime.Today;
