@@ -86,6 +86,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			AddColumn("Medical", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Valid To", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Remain", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Nationality", (int)(radGridView1.Width * 0.24f));
 			
 
 			AddColumn("Operator", (int)(radGridView1.Width * 0.3f));
@@ -216,6 +217,8 @@ namespace CAS.UI.UICAAControls.Specialists
 				CreateRow(medical, medical),
 				CreateRow(validToMedical, validToMedical),
 				CreateRow(remainMedical.ToString(), remainMedical),
+				
+				CreateRow(item.Citizenship.ToString(), item.Citizenship),
 				
 				CreateRow(op.ToString(), op),
 				CreateRow(author, author)
