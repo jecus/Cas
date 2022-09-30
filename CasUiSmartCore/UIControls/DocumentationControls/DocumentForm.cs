@@ -206,7 +206,7 @@ namespace CAS.UI.UIControls.DocumentationControls
                 {
                     new Filter("ParentId",_currentDocument.ItemId),
                     new Filter("ParentTypeId",_currentDocument.SmartCoreObjectType.ItemId)
-                }, true);
+                }, false);
 
                 var fileIds = links.Where(i => i.FileId.HasValue).Select(i => i.FileId.Value);
                 if (fileIds.Any())
