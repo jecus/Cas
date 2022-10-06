@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Abstractions;
 using CAA.Entity.Core;
 using CAA.Entity.Core.Repository;
 using Entity.Abstractions;
 using Entity.Abstractions.Filters;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace CAA.API.Controllers
@@ -14,11 +17,13 @@ namespace CAA.API.Controllers
 	[ApiController]
 	public class BaseController<T> : ControllerBase where  T : BaseEntity
 	{
+		private readonly DataContext _context;
 		protected readonly ILogger<BaseController<T>> _logger;
 		protected readonly Repository<T> _repository;
 
 		public BaseController(DataContext context, ILogger<BaseController<T>> logger)
 		{
+			_context = context;
 			_logger = logger;
 			_repository = new Repository<T>(context);
 		}
@@ -43,6 +48,40 @@ namespace CAA.API.Controllers
             var res = await _repository.GetObjectAsync(filters, loadChild, getDeleted, getAll);
             return Ok(res);
 		}
+		
+		[HttpGet("odata")]
+		public virtual async Task<IActionResult> GetAll(ODataQueryOptions<T> filter, bool no_count = false)
+		{
+			var prepFilter = filter
+				.SetDefaultPageSize()
+				.PrepareFilter();
+			var expands = Expand.GetExpandProperties<T>(filter);
+  
+			var query = _context.Set<T>().AsNoTracking();
+			
+			var queryable = prepFilter.ApplyTo<T>(query, AllowedQueryOptions.Expand
+			                                             | AllowedQueryOptions.Select);//игнорим Expand потому что изобрели свой велосипед(в odata expand не пашет без select)
+			var res = await queryable
+				.TagWith("odata")
+				.FixQuery()
+				.ToListAsync();
+  
+			if(no_count)
+				return Ok(new {Data = res, Count = 0});
+  
+			var count = await prepFilter.ApplyTo<T>(queryable, AllowedQueryOptions.Skip
+			                                                   | AllowedQueryOptions.Top
+			                                                   | AllowedQueryOptions.Expand
+			                                                   | AllowedQueryOptions.Select)
+				.TagWith("odata")
+				.FixQuery()
+				.CountAsync();
+
+			return Ok(new {Data = res, Count = count});
+		}
+
+
+		
 
 		[HttpPost("getlist")]
 		public virtual async Task<ActionResult<List<T>>> GetObjectList(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)

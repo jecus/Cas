@@ -31,6 +31,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Reference Include="OData.QueryBuilder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+	    <HintPath>..\DLL\OData.QueryBuilder.dll</HintPath>
+	  </Reference>
 	  <Reference Include="WorkerExtensions, Version=5.0.3.0, Culture=neutral, PublicKeyToken=null">
 	    <HintPath>DLL\WorkerExtensions.dll</HintPath>
 	  </Reference>
