@@ -14,17 +14,20 @@ using CASReports.Builders;
 using CASReports.ReportTemplates;
 using CASTerms;
 using CrystalDecisions.Shared;
+using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
+using SmartCore.Entities;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
+using SmartCore.Files;
 using Component = SmartCore.Entities.General.Accessory.Component;
 
 namespace CAS.UI.UIControls.WorkPakage
@@ -86,6 +89,29 @@ namespace CAS.UI.UIControls.WorkPakage
         private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
         {
             _animatedThreadWorker.ReportProgress(0, "load templates");
+
+            var links = new List<ItemFileLink>();
+            foreach (var d in _workPackage.WorkPakageRecords.Select(i => i.Task).Where(i => i is IFileContainer))
+            {
+	            var link = d as IFileContainer;
+	            if(link.Files != null)
+		            links.AddRange(link.Files);
+            }
+            
+             var fileIds = links.Where(i => i.FileId.HasValue).Select(i => i.FileId.Value);
+            if (fileIds.Any())
+            {
+	            var files = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AttachedFileDTO, AttachedFile>(new Filter("ItemId",values:fileIds));
+	            foreach (var file in links)
+	            {
+		            var f = files.FirstOrDefault(i => i.ItemId == file.FileId)?.GetCopyUnsaved(false);
+		            if (f == null) continue;
+		            f.ItemId = file.FileId.Value;
+		            file.File = (AttachedFile)f;
+            
+	            }
+            }
+            
 
             _animatedThreadWorker.ReportProgress(100, "binding complete");
         }
