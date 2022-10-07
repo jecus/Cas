@@ -735,7 +735,7 @@ namespace CAS.UI.UIControls.Auxiliary
                             TypeItemsCollection = null;
                         }
                     }
-                    else
+                    else if(GlobalObjects.CaaEnvironment != null)
                     {
                         if (GlobalObjects.CaaEnvironment.TempCollections.ContainsKey(key))
                         {
