@@ -197,8 +197,12 @@ namespace CAS.UI.UIControls.LDND
 			}
 			else if (item.Parent is ComponentDirective c)
 			{
-				if (!(bool) c.MaintenanceDirective?.HasTaskCardFile)
-					tcnColor = Color.MediumVioletRed;
+				if (c.MaintenanceDirective != null)
+				{
+					if (!(bool) c.MaintenanceDirective?.HasTaskCardFile)
+						tcnColor = Color.MediumVioletRed;
+				}
+				
 				description = item.Title;
 				title = c.MaintenanceDirective?.TaskNumberCheck ?? "";
 				card = c.MaintenanceDirective?.TaskCardNumber ?? "";
