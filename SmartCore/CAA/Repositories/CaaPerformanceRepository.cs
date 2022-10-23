@@ -1,6 +1,7 @@
 ﻿using System;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General.Personnel;
 
 namespace SmartCore.CAA.Repositories
 {
@@ -8,6 +9,17 @@ namespace SmartCore.CAA.Repositories
     {
 	    public void CalcRemain(ILightRemain parent, DateTime issueDateValidTo, Lifelength notify = null, Lifelength repeat = null)
 	    {
+		    if (parent is SpecialistMedicalRecord rec)
+		    {
+			    if (rec.ClassNumber == 0)
+			    {
+				    parent.Condition = ConditionState.UNK;
+				    parent.Remain = Lifelength.Null;
+				    return;
+			    }
+		    }
+		    
+		    
 		    if (repeat?.Days != null)
 			    issueDateValidTo = issueDateValidTo.AddDays(repeat.Days.Value);
 		    
