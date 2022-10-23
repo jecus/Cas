@@ -89,7 +89,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 				AddRemarkControl(instrumentRating);
 
 			comboBoxCategory.Items.Clear();
-			foreach (var aircraftModel in aircraftModels)
+			foreach (var aircraftModel in aircraftModels.OrderBy(i => i.FullName))
 				comboBoxCategory.Items.Add(aircraftModel);
 
 			comboBoxCategory.Items.Add(AircraftModel.Unknown);
