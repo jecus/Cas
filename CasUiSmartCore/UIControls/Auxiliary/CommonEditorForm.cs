@@ -875,6 +875,8 @@ namespace CAS.UI.UIControls.Auxiliary
                             if (controlHeight > 0)
                             {
                                 textBox.AutoSize = false;
+                                textBox.WordWrap = true;
+                                textBox.Multiline = true;
                                 textBox.Height = controlHeight;
                             }
 
