@@ -73,6 +73,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			AddColumn("Position", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Facility", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Sex", (int)(radGridView1.Width * 0.1f));
+			AddColumn("Key", (int)(radGridView1.Width * 0.1f));
 			AddColumn("Nationality", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Address", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Family Status", (int)(radGridView1.Width * 0.24f));
@@ -93,6 +94,8 @@ namespace CAS.UI.UICAAControls.Specialists
 			var phone = string.IsNullOrEmpty(item.Additional) ? item.Phone : $"{item.Phone} | Add.: {item.Additional}";
 
 
+			var occupation = item.Occupation ?? Occupation.Unknown;
+			
             var op = (GlobalObjects.CaaEnvironment.AllOperators.FirstOrDefault(
                 i => i.ItemId == item?.OperatorId) ?? AllOperators.Unknown).ToString();
 
@@ -136,6 +139,7 @@ namespace CAS.UI.UICAAControls.Specialists
 				CreateRow(item.Position.ToString(), item.Position),
 				CreateRow(item.Facility.ShortName, item.Facility),
 				CreateRow(item.Gender.ToString(), item.Gender),
+				CreateRow(occupation.KeyPersonel ? "Yes":"No", occupation.KeyPersonel),
 				CreateRow(item.Citizenship.ToString(), item.Citizenship),
 				CreateRow(item.Address, item.Address),
 				CreateRow(item.FamilyStatus.ToString(), item.FamilyStatus),
