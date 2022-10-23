@@ -1,4 +1,5 @@
-﻿using CAS.UI.Helpers;
+﻿using System.Windows.Forms;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 {
@@ -74,6 +75,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.comboBoxCAA.Name = "comboBoxCAA";
 			this.comboBoxCAA.Size = new System.Drawing.Size(342, 25);
 			this.comboBoxCAA.TabIndex = 38;
+			this.comboBoxCAA.AutoCompleteMode = AutoCompleteMode.Suggest;
+			this.comboBoxCAA.AutoCompleteSource = AutoCompleteSource.ListItems;
 			this.comboBoxCAA.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelCAA
