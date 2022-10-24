@@ -22,8 +22,8 @@
 
 		#region Component Designer generated code
 
-		/// <summary> 
-		/// Required method for Designer support - do not modify 
+		/// <summary>
+		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent()
@@ -75,8 +75,11 @@
 			this.labelGrade = new System.Windows.Forms.Label();
 			this.labelClassValue = new System.Windows.Forms.Label();
 			this.labelGradeValue = new System.Windows.Forms.Label();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.label4 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSign)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// labelFirstName
@@ -640,10 +643,35 @@
 			this.labelGradeValue.Text = "Data value";
 			this.labelGradeValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.BackColor = System.Drawing.Color.White;
+			this.pictureBox1.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
+			this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.pictureBox1.Location = new System.Drawing.Point(585, 356);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(205, 147);
+			this.pictureBox1.TabIndex = 107;
+			this.pictureBox1.TabStop = false;
+			// 
+			// label4
+			// 
+			this.label4.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.label4.Location = new System.Drawing.Point(503, 356);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(76, 30);
+			this.label4.TabIndex = 106;
+			this.label4.Text = "Stamp:";
+			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// EmployeeSummary
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.pictureBox1);
+			this.Controls.Add(this.label4);
 			this.Controls.Add(this.labelGradeValue);
 			this.Controls.Add(this.labelClassValue);
 			this.Controls.Add(this.labelGrade);
@@ -694,10 +722,13 @@
 			this.Size = new System.Drawing.Size(1356, 516);
 			((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSign)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
-
 		}
+
+		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.Label label4;
 
 		#endregion
 

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
+using CASTerms;
 using SmartCore.Entities.General.Personnel;
 using Convert = SmartCore.Auxiliary.Convert;
 
@@ -58,6 +59,15 @@ namespace CAS.UI.UIControls.PersonnelControls
 			labelSkypeValue.Text = _currentItem.Skype;
 			_pictureBoxTransparentLogotype.BackgroundImage = _currentItem.PhotoImage;
 			pictureBoxSign.BackgroundImage = _currentItem.SignImage;
+
+
+			if (GlobalObjects.CaaEnvironment == null)
+			{
+				pictureBox1.Visible = false;
+				label4.Visible = false;
+			}else pictureBox1.BackgroundImage = _currentItem.StampImage;
+			
+			
 
 			labelGradeValue.Text =_currentItem.GradeNumber.ToString();
 			labelClassValue.Text =_currentItem.ClassNumber.ToString();
