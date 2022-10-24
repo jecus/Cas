@@ -92,6 +92,9 @@ namespace CAA.Entity.Models.DTO
 		
 		[Column("Sign")]
 		public byte[] Sign { get; set; }
+		
+		[Column("Stamp")]
+		public byte[] Stamp { get; set; }
 
 		
 		[Column("FamilyStatus")]

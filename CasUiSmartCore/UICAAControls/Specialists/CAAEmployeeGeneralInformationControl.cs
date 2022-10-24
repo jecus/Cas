@@ -25,7 +25,7 @@ namespace CAS.UI.UICAAControls.Specialists
     {
         #region Fields
 
-        private bool _logotypeChanged, _signChanged;
+        private bool _logotypeChanged, _signChanged,_stampChanged;
         private const string TransparentFilter = "PNG (*.png)|*.png";
 
         private Specialist _currentItem;
@@ -127,7 +127,7 @@ namespace CAS.UI.UICAAControls.Specialists
                         (Occupation)comboBoxOccupation.SelectedItem != _currentItem.Occupation ||
                         fileControlPassportCopy.GetChangeStatus() ||
                         fileControlResume.GetChangeStatus() ||
-                        _logotypeChanged || _signChanged);
+                        _logotypeChanged || _signChanged || _stampChanged);
             return (textBoxFirstName.Text != "" ||
                     textBoxLastName.Text != "" ||
                     comboBoxGender.SelectedItem != null);
@@ -219,6 +219,7 @@ namespace CAS.UI.UICAAControls.Specialists
 
             _logotypeChanged = false;
 	        _signChanged = false;
+	        _stampChanged = false;
 
 			comboBoxGender.Items.Clear();
             foreach (object o in Enum.GetValues(typeof(Gender)))
@@ -332,6 +333,7 @@ namespace CAS.UI.UICAAControls.Specialists
 
             _pictureBoxTransparentLogotype.BackgroundImage = _currentItem.PhotoImage;
 	        pictureBoxSign.BackgroundImage = _currentItem.SignImage;
+	        pictureBoxStamp.BackgroundImage = _currentItem.StampImage;
 
             //dateTimePickerDateOfBirth.ValueChanged += DateTimePickerEffDateValueChanged;
             this.radioButtonCAA.CheckedChanged += new System.EventHandler(this.radioButtonCAA_CheckedChanged);
@@ -391,6 +393,12 @@ namespace CAS.UI.UICAAControls.Specialists
 	        if (_signChanged)
 		        _currentItem.SignImage = pictureBoxSign.BackgroundImage;
 	        _signChanged = false;
+	        
+	        if (_stampChanged)
+		        _currentItem.StampImage = pictureBoxStamp.BackgroundImage;
+	        _stampChanged = false;
+	        
+	        
 
 
 			//dateTimePickerDateOfBirth.ValueChanged -= DateTimePickerEffDateValueChanged;
@@ -581,6 +589,12 @@ namespace CAS.UI.UICAAControls.Specialists
         //    if (handler != null) handler(new DateChangedEventArgs(e));
         //}
         #endregion
+
+        private void pictureBoxStampClick(object sender, EventArgs e)
+        {
+	        if (sender == pictureBoxStamp)
+		        OpenFile(pictureBoxStamp, ref _stampChanged, TransparentFilter);
+        }
     }
 
     #region internal class EmployeeGeneralInformationControlDesigner : ControlDesigner

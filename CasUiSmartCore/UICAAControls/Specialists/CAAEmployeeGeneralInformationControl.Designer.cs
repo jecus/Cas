@@ -91,8 +91,11 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.label7 = new System.Windows.Forms.Label();
 			this.checkedListBoxQualification = new System.Windows.Forms.CheckedListBox();
 			this.comboBoxOccupation = new System.Windows.Forms.ComboBox();
+			this.label8 = new System.Windows.Forms.Label();
+			this.pictureBoxStamp = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSign)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxStamp)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// labelBirthDate
@@ -731,6 +734,8 @@ namespace CAS.UI.UICAAControls.Specialists
 			// 
 			// comboBoxOccupation
 			// 
+			this.comboBoxOccupation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+			this.comboBoxOccupation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
 			this.comboBoxOccupation.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.comboBoxOccupation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxOccupation.FormattingEnabled = true;
@@ -741,10 +746,36 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.comboBoxOccupation.AutoCompleteMode = AutoCompleteMode.Suggest;
 			this.comboBoxOccupation.AutoCompleteSource = AutoCompleteSource.ListItems;
 			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.label8.Location = new System.Drawing.Point(10, 544);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(89, 14);
+			this.label8.TabIndex = 88;
+			this.label8.Text = "Stamp (.png)";
+			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// pictureBoxStamp
+			// 
+			this.pictureBoxStamp.BackColor = System.Drawing.Color.White;
+			this.pictureBoxStamp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.pictureBoxStamp.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.pictureBoxStamp.Location = new System.Drawing.Point(115, 544);
+			this.pictureBoxStamp.Name = "pictureBoxStamp";
+			this.pictureBoxStamp.Size = new System.Drawing.Size(172, 120);
+			this.pictureBoxStamp.TabIndex = 89;
+			this.pictureBoxStamp.TabStop = false;
+			this.pictureBoxStamp.Click += new System.EventHandler(this.pictureBoxStampClick);
+			// 
 			// CAAEmployeeGeneralInformationControl
 			// 
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.Controls.Add(this.label8);
+			this.Controls.Add(this.pictureBoxStamp);
 			this.Controls.Add(this.comboBoxOccupation);
 			this.Controls.Add(this.label7);
 			this.Controls.Add(this.checkedListBoxQualification);
@@ -803,9 +834,13 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.Size = new System.Drawing.Size(988, 690);
 			((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSign)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxStamp)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.PictureBox pictureBoxStamp;
 
 		private System.Windows.Forms.ComboBox comboBoxOccupation;
 

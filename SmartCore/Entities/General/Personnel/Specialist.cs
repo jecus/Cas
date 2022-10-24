@@ -238,6 +238,20 @@ namespace SmartCore.Entities.General.Personnel
 
 			}
 		}
+		
+		public Image StampImage
+		{
+			get
+			{
+				return DbTypes.BytesToImage(Stamp);
+			}
+			set
+			{
+				Stamp = DbTypes.ImageToBytes(value, ImageFormat.Png);
+				OnPropertyChanged("SignImage");
+
+			}
+		}
 
 		#endregion
 
@@ -255,6 +269,25 @@ namespace SmartCore.Entities.General.Personnel
 			{
 				_sign = value;
 				OnPropertyChanged("Sign");
+			}
+		}
+		#endregion
+		
+		
+		#region public Byte[] Sign { get; set; }
+
+		private Byte[] _stamp;
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumn("Stamp")]
+		public Byte[] Stamp
+		{
+			get { return _stamp; }
+			set
+			{
+				_stamp = value;
+				OnPropertyChanged("Stamp");
 			}
 		}
 		#endregion
