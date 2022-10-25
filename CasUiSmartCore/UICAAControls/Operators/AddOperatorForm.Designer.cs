@@ -1472,6 +1472,7 @@ namespace CAS.UI.UICAAControls.Operators
             this.linkLabelRemoveStamp.TabStop = true;
             this.linkLabelRemoveStamp.Text = "Remove";
             this.linkLabelRemoveStamp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabelRemoveStamp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.RemoveLogotypeLinkClicked);
             // 
             // label15
             // 
@@ -1507,6 +1508,7 @@ namespace CAS.UI.UICAAControls.Operators
             this.linkLabelChangeStamp.TabStop = true;
             this.linkLabelChangeStamp.Text = "Change";
             this.linkLabelChangeStamp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabelChangeStamp.Click += new System.EventHandler(this.PictureBoxLogotypeClick);
             // 
             // AddOperatorFrom
             // 

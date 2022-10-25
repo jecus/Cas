@@ -402,7 +402,7 @@ namespace CAS.UI.UICAAControls.Operators
                 OpenFile(pictureBoxReportLogoLarge, ref _logotypeReportLargeChanged, WhiteBackgroundFilter);
                 UpdateRemoveLbl(pictureBoxReportLogoLarge, _linkDeleteChengeReportLogoLarge);
             }
-            else if (sender == pictureBoxStamp)
+            else if (sender == linkLabelChangeStamp)
             {
                 OpenFile(pictureBoxStamp, ref _logoStampChanged, TransparentFilter);
                 UpdateRemoveLbl(pictureBoxStamp, linkLabelRemoveStamp);
