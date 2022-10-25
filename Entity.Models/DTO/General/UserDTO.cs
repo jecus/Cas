@@ -38,7 +38,8 @@ namespace CAS.Entity.Models.DTO.General
 
 		[Column("PersonnelId")]
 		public int PersonnelId { get; set; }
-
+		
+		[NotMapped]
         public int OperatorId { get; set; }
 
         public override string ToString()
