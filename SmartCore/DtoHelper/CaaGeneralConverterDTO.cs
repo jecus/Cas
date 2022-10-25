@@ -1709,6 +1709,7 @@ namespace SmartCore.DtoHelper
 				LogoTypeWhite = oper.LogoTypeWhite,
 				LogotypeReportLarge = oper.LogotypeReportLarge,
 				LogotypeReportVeryLarge = oper.LogotypeReportVeryLarge,
+				Stamp = oper.Stamp,
 				Settings = new AllOperatorSettings()
 				{
 					IsCommertial = oper.IsCommertial,
@@ -1756,6 +1757,7 @@ namespace SmartCore.DtoHelper
 				LogoTypeWhite = operdto.LogoTypeWhite,
 				LogotypeReportLarge = operdto.LogotypeReportLarge,
 				LogotypeReportVeryLarge = operdto.LogotypeReportVeryLarge,
+				Stamp = operdto.Stamp,
 				IsCommertial = operdto.Settings.IsCommertial,
 				IsAEMS = operdto.Settings.IsAEMS,
 				IsAerodromOperator = operdto.Settings.IsAerodromOperator,

@@ -110,6 +110,10 @@ namespace CAS.UI.UICAAControls.Operators
             this.label13 = new System.Windows.Forms.Label();
             this.comboBoxStatus = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.linkLabelRemoveStamp = new System.Windows.Forms.LinkLabel();
+            this.label15 = new System.Windows.Forms.Label();
+            this.pictureBoxStamp = new System.Windows.Forms.PictureBox();
+            this.linkLabelChangeStamp = new System.Windows.Forms.LinkLabel();
             labelDescription = new System.Windows.Forms.Label();
             metroLabel1 = new System.Windows.Forms.Label();
             metroLabel2 = new System.Windows.Forms.Label();
@@ -125,6 +129,7 @@ namespace CAS.UI.UICAAControls.Operators
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxWhiteBackgroundLogotype)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStamp)).BeginInit();
             this.SuspendLayout();
             // 
             // labelDescription
@@ -710,7 +715,7 @@ namespace CAS.UI.UICAAControls.Operators
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(1297, 619);
+            this.buttonOk.Location = new System.Drawing.Point(1297, 723);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 297;
@@ -724,7 +729,7 @@ namespace CAS.UI.UICAAControls.Operators
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonCancel.Location = new System.Drawing.Point(1378, 619);
+            this.buttonCancel.Location = new System.Drawing.Point(1378, 723);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 33);
             this.buttonCancel.TabIndex = 296;
@@ -1456,11 +1461,62 @@ namespace CAS.UI.UICAAControls.Operators
             this.label14.TabIndex = 347;
             this.label14.Text = "Status";
             // 
+            // linkLabelRemoveStamp
+            // 
+            this.linkLabelRemoveStamp.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.linkLabelRemoveStamp.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.linkLabelRemoveStamp.Location = new System.Drawing.Point(397, 626);
+            this.linkLabelRemoveStamp.Name = "linkLabelRemoveStamp";
+            this.linkLabelRemoveStamp.Size = new System.Drawing.Size(85, 48);
+            this.linkLabelRemoveStamp.TabIndex = 351;
+            this.linkLabelRemoveStamp.TabStop = true;
+            this.linkLabelRemoveStamp.Text = "Remove";
+            this.linkLabelRemoveStamp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.label15.Location = new System.Drawing.Point(5, 626);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(184, 53);
+            this.label15.TabIndex = 348;
+            this.label15.Text = "Stamp:\r\n200 dpi,*.gif";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pictureBoxStamp
+            // 
+            this.pictureBoxStamp.BackColor = System.Drawing.Color.White;
+            this.pictureBoxStamp.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
+            this.pictureBoxStamp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBoxStamp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxStamp.Location = new System.Drawing.Point(195, 626);
+            this.pictureBoxStamp.Name = "pictureBoxStamp";
+            this.pictureBoxStamp.Size = new System.Drawing.Size(48, 48);
+            this.pictureBoxStamp.TabIndex = 349;
+            this.pictureBoxStamp.TabStop = false;
+            // 
+            // linkLabelChangeStamp
+            // 
+            this.linkLabelChangeStamp.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.linkLabelChangeStamp.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.linkLabelChangeStamp.Location = new System.Drawing.Point(320, 626);
+            this.linkLabelChangeStamp.Name = "linkLabelChangeStamp";
+            this.linkLabelChangeStamp.Size = new System.Drawing.Size(85, 48);
+            this.linkLabelChangeStamp.TabIndex = 350;
+            this.linkLabelChangeStamp.TabStop = true;
+            this.linkLabelChangeStamp.Text = "Change";
+            this.linkLabelChangeStamp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // AddOperatorFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1476, 675);
+            this.ClientSize = new System.Drawing.Size(1476, 779);
+            this.Controls.Add(this.linkLabelRemoveStamp);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.pictureBoxStamp);
+            this.Controls.Add(this.linkLabelChangeStamp);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.comboBoxStatus);
             this.Controls.Add(this.label13);
@@ -1550,9 +1606,15 @@ namespace CAS.UI.UICAAControls.Operators
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxWhiteBackgroundLogotype)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStamp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.LinkLabel linkLabelRemoveStamp;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.PictureBox pictureBoxStamp;
+        private System.Windows.Forms.LinkLabel linkLabelChangeStamp;
 
         private System.Windows.Forms.ComboBox comboBoxStatus;
         private System.Windows.Forms.Label label14;

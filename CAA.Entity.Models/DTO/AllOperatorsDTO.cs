@@ -46,6 +46,9 @@ namespace CAA.Entity.Models.DTO
 
         [Column("LogotypeReportVeryLarge", TypeName = "image")]
         public byte[] LogotypeReportVeryLarge { get; set; }
+        
+        [Column("Stamp", TypeName = "image")]
+        public byte[] Stamp { get; set; }
 
 
         [Column("SettingsJSON")]

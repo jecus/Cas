@@ -95,6 +95,21 @@ namespace SmartCore.CAA
                 OnPropertyChanged("LogotypeReportVeryLarge");
             }
         }
+        
+        
+        private Byte[] _stamp;
+        /// <summary>
+        /// Логопит оператора (очень широкий) для отчета
+        /// </summary>
+        public Byte[] Stamp
+        {
+            get { return _stamp ?? (_stamp = new byte[0]); }
+            set
+            {
+                _stamp = value;
+                OnPropertyChanged("Stamp");
+            }
+        }
         #endregion
 
         #region public Image LogoTypeWhiteImage { get; set; }
@@ -165,6 +180,19 @@ namespace SmartCore.CAA
             {
                 LogotypeReportVeryLarge = DbTypes.ImageToBytes(value, ImageFormat.Png);
                 OnPropertyChanged("LogotypeReportVeryLargeImage");
+            }
+        }
+        
+        public Image StampImage
+        {
+            get
+            {
+                return DbTypes.BytesToImage(Stamp);
+            }
+            set
+            {
+                Stamp = DbTypes.ImageToBytes(value, ImageFormat.Png);
+                OnPropertyChanged("StampImage");
             }
         }
         #endregion
