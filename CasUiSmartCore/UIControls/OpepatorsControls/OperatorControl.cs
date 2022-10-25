@@ -148,7 +148,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
                     _textBoxPhone.Text != _currentOperator.Phone ||
                     _textBoxFax.Text != _currentOperator.Fax ||
                     _textBoxEmail.Text != _currentOperator.Email ||
-                    _logotypeChanged || _logotypeWhiteChanged || _logotypeReportLargeChanged || _logotypeReportVeryLargeChanged);
+                    _logotypeChanged || _logotypeWhiteChanged || _logotypeReportLargeChanged || _logotypeReportVeryLargeChanged || _logoStampChanged);
         }
 
         #endregion
@@ -298,7 +298,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             }
             else if (sender == pictureBoxStamp)
             {
-                OpenFile(pictureBoxStamp, ref _logoStampChanged, WhiteBackgroundFilter);
+                OpenFile(pictureBoxStamp, ref _logoStampChanged, TransparentFilter);
                 UpdateRemoveLbl(pictureBoxStamp, linkLabelRemoveStamp);
             }
             else
@@ -333,7 +333,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             
             else if (sender == linkLabelChangeStamp)
             {
-                OpenFile(pictureBoxStamp, ref _logoStampChanged, WhiteBackgroundFilter);
+                OpenFile(pictureBoxStamp, ref _logoStampChanged, TransparentFilter);
                 UpdateRemoveLbl(pictureBoxStamp, linkLabelRemoveStamp);
             }
 

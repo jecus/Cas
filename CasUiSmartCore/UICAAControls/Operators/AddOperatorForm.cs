@@ -118,6 +118,7 @@ namespace CAS.UI.UICAAControls.Operators
             _logotypeWhiteChanged = false;
             _logotypeReportLargeChanged = false;
             _logotypeReportVeryLargeChanged = false;
+            _logoStampChanged = false;
 
             UpdateRemoveLbl(_pictureBoxTransparentLogotype, _linkDeleteTransparentLogotype);
             UpdateRemoveLbl(_pictureBoxWhiteBackgroundLogotype, _linkDeleteWhiteBackgroundLogotype);
@@ -281,7 +282,7 @@ namespace CAS.UI.UICAAControls.Operators
             }
             else if (sender == linkLabelChangeStamp)
             {
-                OpenFile(pictureBoxStamp, ref _logoStampChanged, WhiteBackgroundFilter);
+                OpenFile(pictureBoxStamp, ref _logoStampChanged, TransparentFilter);
                 UpdateRemoveLbl(pictureBoxStamp, linkLabelRemoveStamp);
             }
             else
@@ -403,7 +404,7 @@ namespace CAS.UI.UICAAControls.Operators
             }
             else if (sender == pictureBoxStamp)
             {
-                OpenFile(pictureBoxStamp, ref _logoStampChanged, WhiteBackgroundFilter);
+                OpenFile(pictureBoxStamp, ref _logoStampChanged, TransparentFilter);
                 UpdateRemoveLbl(pictureBoxStamp, linkLabelRemoveStamp);
             }
             else

@@ -412,7 +412,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this.linkLabelRemoveStamp.TabStop = true;
             this.linkLabelRemoveStamp.Text = "Remove";
             this.linkLabelRemoveStamp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabelRemoveStamp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelRemoveStamp_LinkClicked);
+            this.linkLabelRemoveStamp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.RemoveLogotypeLinkClicked);
             // 
             // label1
             // 
@@ -448,7 +448,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this.linkLabelChangeStamp.TabStop = true;
             this.linkLabelChangeStamp.Text = "Change";
             this.linkLabelChangeStamp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabelChangeStamp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelChangeStamp_LinkClicked);
+            this.linkLabelChangeStamp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLogotypeLinkClicked);
             // 
             // OperatorControl
             // 
