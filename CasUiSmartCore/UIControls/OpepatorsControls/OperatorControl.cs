@@ -331,7 +331,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
                 UpdateRemoveLbl(pictureBoxReportLogoLarge, _linkDeleteChengeReportLogoLarge);
             }
             
-            else if (sender == pictureBoxStamp)
+            else if (sender == linkLabelChangeStamp)
             {
                 OpenFile(pictureBoxStamp, ref _logoStampChanged, WhiteBackgroundFilter);
                 UpdateRemoveLbl(pictureBoxStamp, linkLabelRemoveStamp);
@@ -366,7 +366,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
                 RemovePicture(pictureBoxReportLogoLarge, ref _logotypeReportLargeChanged);
                 UpdateRemoveLbl(pictureBoxReportLogoLarge, _linkDeleteChengeReportLogoLarge);
             }
-            else if (sender == pictureBoxStamp)
+            else if (sender == linkLabelRemoveStamp)
             {
                 RemovePicture(pictureBoxStamp, ref _logoStampChanged);
                 UpdateRemoveLbl(pictureBoxStamp, linkLabelRemoveStamp);
