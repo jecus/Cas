@@ -21,6 +21,8 @@ namespace CAS.UI.UIControls.OpepatorsControls
         private bool _logotypeChanged;
         private bool _logotypeWhiteChanged;
         private bool _logotypeReportLargeChanged;
+        private bool _logoStampChanged;
+        private bool _logotypeStampChanged;
         private bool _logotypeReportVeryLargeChanged;
         private const string TransparentFilter = "PNG (*.png)|*.png";
         private const string WhiteBackgroundFilter = "GIF (*.gif)|*.gif";
@@ -167,6 +169,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             _pictureBoxTransparentLogotype.BackgroundImage = _currentOperator.LogoTypeImage;
             _pictureBoxWhiteBackgroundLogotype.BackgroundImage = _currentOperator.LogoTypeWhiteImage;
             pictureBoxReportLogoLarge.BackgroundImage = _currentOperator.LogotypeReportLargeImage;
+            pictureBoxStamp.BackgroundImage = _currentOperator.StampImage;
             pictureBoxReportLogoVeryLarge.BackgroundImage = _currentOperator.LogotypeReportVeryLargeImage;
             _logotypeChanged = false;
             _logotypeWhiteChanged = false;
@@ -176,6 +179,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             UpdateRemoveLbl(_pictureBoxTransparentLogotype, _linkDeleteTransparentLogotype);
             UpdateRemoveLbl(_pictureBoxWhiteBackgroundLogotype, _linkDeleteWhiteBackgroundLogotype);
             UpdateRemoveLbl(pictureBoxReportLogoLarge, _linkDeleteChengeReportLogoLarge);
+            UpdateRemoveLbl(pictureBoxStamp, linkLabelRemoveStamp);
             UpdateRemoveLbl(pictureBoxReportLogoVeryLarge, _linkDeleteReportLogoVeryLarge);
         }
 
@@ -206,6 +210,8 @@ namespace CAS.UI.UIControls.OpepatorsControls
                 _currentOperator.LogoTypeWhiteImage = _pictureBoxWhiteBackgroundLogotype.BackgroundImage;
             if (_logotypeReportLargeChanged)
                 _currentOperator.LogotypeReportLargeImage = pictureBoxReportLogoLarge.BackgroundImage;
+            if (_logoStampChanged)
+                _currentOperator.StampImage = pictureBoxStamp.BackgroundImage;
             if (_logotypeReportVeryLargeChanged)
                 _currentOperator.LogotypeReportVeryLargeImage = pictureBoxReportLogoVeryLarge.BackgroundImage;
 
@@ -236,6 +242,11 @@ namespace CAS.UI.UIControls.OpepatorsControls
                     return;
                 }
                 if (pictureBox == pictureBoxReportLogoLarge && (size > 1048576 || logotype.Width > 2000 || logotype.Height > 500))
+                {
+                    MessageBox.Show("Logotype shouldn't exceed 2000x500 px and 1024 Kb", (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                if (pictureBox == pictureBoxStamp && (size > 1048576 || logotype.Width > 2000 || logotype.Height > 500))
                 {
                     MessageBox.Show("Logotype shouldn't exceed 2000x500 px and 1024 Kb", (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
@@ -285,6 +296,11 @@ namespace CAS.UI.UIControls.OpepatorsControls
                 OpenFile(pictureBoxReportLogoLarge, ref _logotypeReportLargeChanged, WhiteBackgroundFilter);
                 UpdateRemoveLbl(pictureBoxReportLogoLarge, _linkDeleteChengeReportLogoLarge);
             }
+            else if (sender == pictureBoxStamp)
+            {
+                OpenFile(pictureBoxStamp, ref _logoStampChanged, WhiteBackgroundFilter);
+                UpdateRemoveLbl(pictureBoxStamp, linkLabelRemoveStamp);
+            }
             else
             {
                 OpenFile(pictureBoxReportLogoVeryLarge, ref _logotypeReportVeryLargeChanged, WhiteBackgroundFilter);
@@ -313,6 +329,12 @@ namespace CAS.UI.UIControls.OpepatorsControls
             {
                 OpenFile(pictureBoxReportLogoLarge, ref _logotypeReportLargeChanged, WhiteBackgroundFilter);
                 UpdateRemoveLbl(pictureBoxReportLogoLarge, _linkDeleteChengeReportLogoLarge);
+            }
+            
+            else if (sender == pictureBoxStamp)
+            {
+                OpenFile(pictureBoxStamp, ref _logoStampChanged, WhiteBackgroundFilter);
+                UpdateRemoveLbl(pictureBoxStamp, linkLabelRemoveStamp);
             }
 
             else
@@ -343,6 +365,11 @@ namespace CAS.UI.UIControls.OpepatorsControls
             {
                 RemovePicture(pictureBoxReportLogoLarge, ref _logotypeReportLargeChanged);
                 UpdateRemoveLbl(pictureBoxReportLogoLarge, _linkDeleteChengeReportLogoLarge);
+            }
+            else if (sender == pictureBoxStamp)
+            {
+                RemovePicture(pictureBoxStamp, ref _logoStampChanged);
+                UpdateRemoveLbl(pictureBoxStamp, linkLabelRemoveStamp);
             }
             else
             {

@@ -5622,7 +5622,8 @@ namespace SmartCore.DtoHelper
 				LogoTypeWhite = oper.LogoTypeWhite,
 				Email = oper.Email,
 				LogotypeReportLarge = oper.LogotypeReportLarge,
-				LogotypeReportVeryLarge = oper.LogotypeReportVeryLarge
+				LogotypeReportVeryLarge = oper.LogotypeReportVeryLarge,
+				Stamp = oper.Stamp,
 			};
 		}
 
@@ -5644,7 +5645,8 @@ namespace SmartCore.DtoHelper
 				LogoTypeWhite = operdto.LogoTypeWhite,
 				Email = operdto.Email,
 				LogotypeReportLarge = operdto.LogotypeReportLarge,
-				LogotypeReportVeryLarge = operdto.LogotypeReportVeryLarge
+				LogotypeReportVeryLarge = operdto.LogotypeReportVeryLarge,
+				Stamp = operdto.Stamp,
 			};
 		}
 

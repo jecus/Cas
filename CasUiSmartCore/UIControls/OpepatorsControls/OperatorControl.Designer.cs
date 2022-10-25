@@ -23,9 +23,9 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
         #region Код, автоматически созданный конструктором компонентов
 
-        /// <summary> 
-        /// Обязательный метод для поддержки конструктора - не изменяйте 
-        /// содержимое данного метода при помощи редактора кода.
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -57,10 +57,15 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this._linkDeleteWhiteBackgroundLogotype = new System.Windows.Forms.LinkLabel();
             this._linkDeleteChengeReportLogoLarge = new System.Windows.Forms.LinkLabel();
             this._linkDeleteReportLogoVeryLarge = new System.Windows.Forms.LinkLabel();
+            this.linkLabelRemoveStamp = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBoxStamp = new System.Windows.Forms.PictureBox();
+            this.linkLabelChangeStamp = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxWhiteBackgroundLogotype)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReportLogoLarge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReportLogoVeryLarge)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStamp)).BeginInit();
             this.SuspendLayout();
             // 
             // _labelName
@@ -396,12 +401,64 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this._linkDeleteReportLogoVeryLarge.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this._linkDeleteReportLogoVeryLarge.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.RemoveLogotypeLinkClicked);
             // 
+            // linkLabelRemoveStamp
+            // 
+            this.linkLabelRemoveStamp.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.linkLabelRemoveStamp.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.linkLabelRemoveStamp.Location = new System.Drawing.Point(412, 465);
+            this.linkLabelRemoveStamp.Name = "linkLabelRemoveStamp";
+            this.linkLabelRemoveStamp.Size = new System.Drawing.Size(85, 48);
+            this.linkLabelRemoveStamp.TabIndex = 19;
+            this.linkLabelRemoveStamp.TabStop = true;
+            this.linkLabelRemoveStamp.Text = "Remove";
+            this.linkLabelRemoveStamp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabelRemoveStamp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelRemoveStamp_LinkClicked);
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.label1.Location = new System.Drawing.Point(20, 465);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(184, 53);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Stamp:\r\n200 dpi,*.gif";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pictureBoxStamp
+            // 
+            this.pictureBoxStamp.BackColor = System.Drawing.Color.White;
+            this.pictureBoxStamp.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
+            this.pictureBoxStamp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBoxStamp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxStamp.Location = new System.Drawing.Point(210, 465);
+            this.pictureBoxStamp.Name = "pictureBoxStamp";
+            this.pictureBoxStamp.Size = new System.Drawing.Size(48, 48);
+            this.pictureBoxStamp.TabIndex = 16;
+            this.pictureBoxStamp.TabStop = false;
+            // 
+            // linkLabelChangeStamp
+            // 
+            this.linkLabelChangeStamp.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.linkLabelChangeStamp.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.linkLabelChangeStamp.Location = new System.Drawing.Point(335, 465);
+            this.linkLabelChangeStamp.Name = "linkLabelChangeStamp";
+            this.linkLabelChangeStamp.Size = new System.Drawing.Size(85, 48);
+            this.linkLabelChangeStamp.TabIndex = 18;
+            this.linkLabelChangeStamp.TabStop = true;
+            this.linkLabelChangeStamp.Text = "Change";
+            this.linkLabelChangeStamp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabelChangeStamp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelChangeStamp_LinkClicked);
+            // 
             // OperatorControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Controls.Add(this.linkLabelRemoveStamp);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBoxStamp);
+            this.Controls.Add(this.linkLabelChangeStamp);
             this.Controls.Add(this._linkDeleteReportLogoVeryLarge);
             this.Controls.Add(this._linkDeleteChengeReportLogoLarge);
             this.Controls.Add(this._linkDeleteWhiteBackgroundLogotype);
@@ -431,15 +488,20 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this.Controls.Add(this._linkChangeTransparentLogotype);
             this.Controls.Add(this._linkChangeWhiteBackgroundLogotype);
             this.Name = "OperatorControl";
-            this.Size = new System.Drawing.Size(513, 464);
+            this.Size = new System.Drawing.Size(513, 567);
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxWhiteBackgroundLogotype)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReportLogoLarge)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReportLogoVeryLarge)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStamp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.LinkLabel linkLabelRemoveStamp;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBoxStamp;
+        private System.Windows.Forms.LinkLabel linkLabelChangeStamp;
 
         #endregion
 

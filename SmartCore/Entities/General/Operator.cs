@@ -161,6 +161,21 @@ namespace SmartCore.Entities.General
                 OnPropertyChanged("LogotypeReportLarge");
             }
         }
+        
+        
+        private Byte[] _stamp;
+        /// <summary>
+        /// Логопит оператора (широкий) для отчета
+        /// </summary>
+        public Byte[] Stamp
+        {
+            get { return _stamp ?? (_stamp = new byte[0]); }
+            set
+            {
+                _stamp = value;
+                OnPropertyChanged("Stamp");
+            }
+        }
         #endregion
 
         #region public Byte[] LogotypeReportVeryLarge { get; set; }
@@ -230,6 +245,20 @@ namespace SmartCore.Entities.General
             {
                 LogotypeReportLarge = DbTypes.ImageToBytes(value, ImageFormat.Png);
                 OnPropertyChanged("LogotypeReportLargeImage");
+            }
+        }
+        
+        
+        public Image StampImage
+        {
+            get
+            {
+                return DbTypes.BytesToImage(Stamp);
+            }
+            set
+            {
+                Stamp = DbTypes.ImageToBytes(value, ImageFormat.Png);
+                OnPropertyChanged("StampImage");
             }
         }
         #endregion
