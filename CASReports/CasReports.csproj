@@ -909,6 +909,12 @@
       <DependentUpon>BaseDetailLogBookReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportTemplates\CAA\CAASpecReport.cs">
+      <DependentUpon>CAASpecReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="ReportTemplates\ComplianceListReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2250,6 +2256,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BaseDetailLogBookReport.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\CAA\CAASpecReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CAASpecReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportTemplates\ComplianceListReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ComplianceListReport.cs</LastGenOutput>
@@ -2715,6 +2725,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
