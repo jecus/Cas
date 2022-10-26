@@ -26,6 +26,7 @@ namespace SmartCore.CAA.CAAEducation
                 var last = record.Settings.LastCompliances.OrderBy(i => i.LastDate).Last();
                 if (last.IsRepeat)
                     repeat = last.Repeat;
+                else repeat = record.Education?.Task?.Repeat;
             }
             else repeat = record.Education?.Task?.Repeat;
             
