@@ -93,6 +93,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.comboBoxOccupation = new System.Windows.Forms.ComboBox();
 			this.label8 = new System.Windows.Forms.Label();
 			this.pictureBoxStamp = new System.Windows.Forms.PictureBox();
+			this.label9 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSign)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxStamp)).BeginInit();
@@ -770,10 +771,22 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.pictureBoxStamp.TabStop = false;
 			this.pictureBoxStamp.Click += new System.EventHandler(this.pictureBoxStampClick);
 			// 
+			// label9
+			// 
+			this.label9.AutoSize = true;
+			this.label9.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.label9.Location = new System.Drawing.Point(10, 159);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(94, 14);
+			this.label9.TabIndex = 90;
+			this.label9.Text = "Place of birth:";
+			// 
 			// CAAEmployeeGeneralInformationControl
 			// 
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.Controls.Add(this.label9);
 			this.Controls.Add(this.label8);
 			this.Controls.Add(this.pictureBoxStamp);
 			this.Controls.Add(this.comboBoxOccupation);
@@ -838,6 +851,8 @@ namespace CAS.UI.UICAAControls.Specialists
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+
+		private System.Windows.Forms.Label label9;
 
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.PictureBox pictureBoxStamp;
