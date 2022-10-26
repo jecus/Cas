@@ -33,13 +33,25 @@ namespace CAS.UI.UICAAControls.CAAEducation
         {
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label13;
+            MetroFramework.Controls.MetroLabel labelNomenclature;
+            MetroFramework.Controls.MetroLabel metroLabel1;
+            MetroFramework.Controls.MetroLabel metroLabel2;
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.metroTextBoxRemark = new MetroFramework.Controls.MetroTextBox();
             this.dateTimePickeValidTo = new System.Windows.Forms.DateTimePicker();
             this.documentControl1 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+            this.comboAircraft = new System.Windows.Forms.ComboBox();
+            this.comboBoxLevel = new System.Windows.Forms.ComboBox();
+            this.checkBoxAircraft = new MetroFramework.Controls.MetroCheckBox();
+            this.checkBoxLevel = new MetroFramework.Controls.MetroCheckBox();
+            this.lifelengthViewer = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
+            this.checkBoxRepeat = new MetroFramework.Controls.MetroCheckBox();
             label3 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
+            labelNomenclature = new MetroFramework.Controls.MetroLabel();
+            metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // label3
@@ -66,13 +78,46 @@ namespace CAS.UI.UICAAControls.CAAEducation
             label13.Text = "Last Compliance:";
             label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // labelNomenclature
+            // 
+            labelNomenclature.AutoSize = true;
+            labelNomenclature.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            labelNomenclature.Location = new System.Drawing.Point(3, 252);
+            labelNomenclature.Name = "labelNomenclature";
+            labelNomenclature.Size = new System.Drawing.Size(55, 19);
+            labelNomenclature.TabIndex = 339;
+            labelNomenclature.Text = "Aircraft:";
+            labelNomenclature.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // metroLabel1
+            // 
+            metroLabel1.AutoSize = true;
+            metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            metroLabel1.Location = new System.Drawing.Point(3, 279);
+            metroLabel1.Name = "metroLabel1";
+            metroLabel1.Size = new System.Drawing.Size(85, 19);
+            metroLabel1.TabIndex = 341;
+            metroLabel1.Text = "English Level:";
+            metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // metroLabel2
+            // 
+            metroLabel2.AutoSize = true;
+            metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            metroLabel2.Location = new System.Drawing.Point(3, 226);
+            metroLabel2.Name = "metroLabel2";
+            metroLabel2.Size = new System.Drawing.Size(53, 19);
+            metroLabel2.TabIndex = 347;
+            metroLabel2.Text = "Repeat:";
+            metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonOk.Location = new System.Drawing.Point(249, 261);
+            this.buttonOk.Location = new System.Drawing.Point(249, 357);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 33);
             this.buttonOk.TabIndex = 330;
@@ -86,7 +131,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.buttonCancel.Location = new System.Drawing.Point(330, 261);
+            this.buttonCancel.Location = new System.Drawing.Point(330, 357);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 33);
             this.buttonCancel.TabIndex = 329;
@@ -138,16 +183,109 @@ namespace CAS.UI.UICAAControls.CAAEducation
             // documentControl1
             // 
             this.documentControl1.CurrentDocument = null;
-            this.documentControl1.Location = new System.Drawing.Point(3, 194);
+            this.documentControl1.Location = new System.Drawing.Point(3, 304);
             this.documentControl1.Name = "documentControl1";
             this.documentControl1.Size = new System.Drawing.Size(402, 41);
             this.documentControl1.TabIndex = 338;
+            // 
+            // comboAircraft
+            // 
+            this.comboAircraft.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.comboAircraft.ForeColor = System.Drawing.Color.DimGray;
+            this.comboAircraft.FormattingEnabled = true;
+            this.comboAircraft.Location = new System.Drawing.Point(123, 250);
+            this.comboAircraft.Name = "comboAircraft";
+            this.comboAircraft.Size = new System.Drawing.Size(250, 21);
+            this.comboAircraft.TabIndex = 340;
+            // 
+            // comboBoxLevel
+            // 
+            this.comboBoxLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.comboBoxLevel.ForeColor = System.Drawing.Color.DimGray;
+            this.comboBoxLevel.FormattingEnabled = true;
+            this.comboBoxLevel.Location = new System.Drawing.Point(123, 277);
+            this.comboBoxLevel.Name = "comboBoxLevel";
+            this.comboBoxLevel.Size = new System.Drawing.Size(250, 21);
+            this.comboBoxLevel.TabIndex = 342;
+            // 
+            // checkBoxAircraft
+            // 
+            this.checkBoxAircraft.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxAircraft.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.checkBoxAircraft.Location = new System.Drawing.Point(98, 250);
+            this.checkBoxAircraft.Name = "checkBoxAircraft";
+            this.checkBoxAircraft.Size = new System.Drawing.Size(19, 25);
+            this.checkBoxAircraft.TabIndex = 343;
+            this.checkBoxAircraft.UseSelectable = true;
+            this.checkBoxAircraft.CheckedChanged += new System.EventHandler(this.checkBoxAircraft_CheckedChanged);
+            // 
+            // checkBoxLevel
+            // 
+            this.checkBoxLevel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxLevel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.checkBoxLevel.Location = new System.Drawing.Point(98, 273);
+            this.checkBoxLevel.Name = "checkBoxLevel";
+            this.checkBoxLevel.Size = new System.Drawing.Size(19, 25);
+            this.checkBoxLevel.TabIndex = 344;
+            this.checkBoxLevel.UseSelectable = true;
+            this.checkBoxLevel.CheckedChanged += new System.EventHandler(this.checkBoxLevel_CheckedChanged);
+            // 
+            // lifelengthViewer
+            // 
+            this.lifelengthViewer.AutoSize = true;
+            this.lifelengthViewer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.lifelengthViewer.CalendarApplicable = false;
+            this.lifelengthViewer.CyclesApplicable = false;
+            this.lifelengthViewer.EnabledCalendar = true;
+            this.lifelengthViewer.EnabledCycle = false;
+            this.lifelengthViewer.EnabledHours = false;
+            this.lifelengthViewer.FieldsBackColor = System.Drawing.SystemColors.Window;
+            this.lifelengthViewer.ForeColor = System.Drawing.Color.DimGray;
+            this.lifelengthViewer.HeaderCalendar = "";
+            this.lifelengthViewer.HeaderCycles = "";
+            this.lifelengthViewer.HeaderFormattedCalendar = "";
+            this.lifelengthViewer.HeaderHours = "";
+            this.lifelengthViewer.HoursApplicable = false;
+            this.lifelengthViewer.LeftHeader = "";
+            this.lifelengthViewer.Location = new System.Drawing.Point(123, 193);
+            this.lifelengthViewer.Margin = new System.Windows.Forms.Padding(2);
+            this.lifelengthViewer.Modified = false;
+            this.lifelengthViewer.Name = "lifelengthViewer";
+            this.lifelengthViewer.ReadOnly = false;
+            this.lifelengthViewer.ShowCalendar = true;
+            this.lifelengthViewer.ShowCalendarOnly = true;
+            this.lifelengthViewer.ShowFormattedCalendar = false;
+            this.lifelengthViewer.ShowMinutes = false;
+            this.lifelengthViewer.Size = new System.Drawing.Size(176, 52);
+            this.lifelengthViewer.SystemCalculated = true;
+            this.lifelengthViewer.TabIndex = 345;
+            this.lifelengthViewer.Visible = false;
+            // 
+            // checkBoxRepeat
+            // 
+            this.checkBoxRepeat.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxRepeat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.checkBoxRepeat.Location = new System.Drawing.Point(99, 220);
+            this.checkBoxRepeat.Name = "checkBoxRepeat";
+            this.checkBoxRepeat.Size = new System.Drawing.Size(19, 25);
+            this.checkBoxRepeat.TabIndex = 346;
+            this.checkBoxRepeat.UseSelectable = true;
+            this.checkBoxRepeat.CheckedChanged += new System.EventHandler(this.checkBoxRepeat_CheckedChanged);
             // 
             // EducationComplianceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 301);
+            this.ClientSize = new System.Drawing.Size(408, 397);
+            this.Controls.Add(metroLabel2);
+            this.Controls.Add(this.checkBoxRepeat);
+            this.Controls.Add(this.lifelengthViewer);
+            this.Controls.Add(this.checkBoxLevel);
+            this.Controls.Add(this.checkBoxAircraft);
+            this.Controls.Add(this.comboBoxLevel);
+            this.Controls.Add(metroLabel1);
+            this.Controls.Add(this.comboAircraft);
+            this.Controls.Add(labelNomenclature);
             this.Controls.Add(this.documentControl1);
             this.Controls.Add(label13);
             this.Controls.Add(this.dateTimePickeValidTo);
@@ -163,6 +301,16 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private MetroFramework.Controls.MetroCheckBox checkBoxRepeat;
+
+        private CAS.UI.UIControls.Auxiliary.LifelengthViewer lifelengthViewer;
+
+        private MetroFramework.Controls.MetroCheckBox checkBoxAircraft;
+        private MetroFramework.Controls.MetroCheckBox checkBoxLevel;
+
+        private System.Windows.Forms.ComboBox comboAircraft;
+        private System.Windows.Forms.ComboBox comboBoxLevel;
 
         private CAS.UI.UIControls.DocumentationControls.DocumentControl documentControl1;
 

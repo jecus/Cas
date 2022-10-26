@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using CAA.Entity.Models;
 using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
@@ -57,10 +58,10 @@ namespace SmartCore.CAA.CAAEducation
     {
 	    public CAAEducationRecordSettings()
 	    {
-		    LastCompliances = new List<LastCompliance>();
+		    LastCompliances = new List<CAAEducationLastCompliance>();
 	    }
 	    
-	    private List<LastCompliance> _lastCompliances;
+	    private List<CAAEducationLastCompliance> _lastCompliances;
 
 	    [JsonProperty]
 	    public bool IsCombination { get; set; }
@@ -70,9 +71,9 @@ namespace SmartCore.CAA.CAAEducation
 	    
 
 	    [JsonProperty]
-	    public List<LastCompliance> LastCompliances
+	    public List<CAAEducationLastCompliance> LastCompliances
 	    {
-		    get => _lastCompliances ?? (_lastCompliances = new List<LastCompliance>());
+		    get => _lastCompliances ?? (_lastCompliances = new List<CAAEducationLastCompliance>());
 		    set => _lastCompliances = value;
 	    }
 	    
@@ -107,16 +108,64 @@ namespace SmartCore.CAA.CAAEducation
 
 
     [Serializable]
-    public class LastCompliance  : BaseEntityObject
+    public class CAAEducationLastCompliance  : BaseEntityObject
     {
-    public LastCompliance()
-    {
-	    LastDate = DateTime.Now;
-    }
+	    
+	    private Lifelength _repeat;
+	    private byte[] _repeatByte;
+	    public CAAEducationLastCompliance()
+	    {
+		    LastDate = DateTime.Now;
+		    Repeat = Lifelength.Null;
+	    }
 
     [JsonProperty] public DateTime? LastDate { get; set; }
 
     [JsonProperty] public string Remark { get; set; }
+    
+    [JsonProperty] 
+    [DefaultValue(false)] 
+    public bool IsAircraft { get; set; }
+    
+    [JsonProperty] 
+    [DefaultValue(-1)] 
+    public int AircraftId { get; set; }
+    
+    
+    [JsonProperty] 
+    [DefaultValue(false)] 
+    public bool IsLevel { get; set; }
+    
+    [JsonProperty] 
+    [DefaultValue(-1)] 
+    public int LevelId { get; set; }
+    
+    [JsonProperty] 
+    [DefaultValue(false)] 
+    public bool IsRepeat { get; set; }
+    
+    [JsonProperty]
+    public byte[] RepeatByte
+    {
+	    get => _repeatByte;
+	    set
+	    {
+		    _repeatByte = value;
+		    _repeat = Lifelength.ConvertFromByteArray(value);
+	    }
+    }
+    
+    
+    [JsonIgnore]
+    public Lifelength Repeat
+    {
+	    get => _repeat;
+	    set
+	    {
+		    _repeat = value;
+		    _repeatByte = value.ConvertToByteArray();
+	    }
+    }
 
     [JsonProperty] public int? DocumentId { get; set; }
 
@@ -129,7 +178,7 @@ namespace SmartCore.CAA.CAAEducation
     public class LastComplianceView : BaseEntityObject
     {
 	    public CAAEducationRecord Record { get; set; }
-	    public LastCompliance  LastCompliance{ get; set; }
+	    public CAAEducationLastCompliance  LastCompliance{ get; set; }
 	    public string Group { get; set; }
 	    public string Course { get; set; }
 	    

@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using CAA.Entity.Models.DTO;
+using CAS.Entity.Models.DTO.Dictionaries;
 using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.CAAEducation;
 using SmartCore.Entities.Dictionaries;
@@ -12,9 +15,9 @@ namespace CAS.UI.UICAAControls.CAAEducation
     public partial class EducationComplianceForm : MetroForm
     {
         private readonly CAAEducationRecord _record;
-        private readonly LastCompliance _compliance;
+        private readonly CAAEducationLastCompliance _compliance;
 
-        public EducationComplianceForm(CAAEducationRecord record, LastCompliance compliance)
+        public EducationComplianceForm(CAAEducationRecord record, CAAEducationLastCompliance compliance)
         {
             _record = record;
             _compliance = compliance;
@@ -36,6 +39,28 @@ namespace CAS.UI.UICAAControls.CAAEducation
             {
                 dateTimePickeValidTo.Value = _compliance.LastDate.Value;
                 metroTextBoxRemark.Text = _compliance.Remark;
+                
+                checkBoxAircraft.Checked = _compliance.IsAircraft;
+                checkBoxRepeat.Checked = _compliance.IsRepeat;
+                checkBoxLevel.Checked = _compliance.IsLevel;
+                
+                var aircraftModels =  GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, AircraftModel>(new Filter("ModelingObjectTypeId", 7));
+                comboAircraft.Items.Clear();
+                foreach (var aircraftModel in aircraftModels.OrderBy(i => i.FullName))
+                    comboAircraft.Items.Add(aircraftModel);
+                comboAircraft.Items.Add(AircraftModel.Unknown);
+
+                comboAircraft.SelectedItem = aircraftModels.FirstOrDefault(i => i.ItemId == _compliance.AircraftId) ?? AircraftModel.Unknown;
+                
+                
+                comboBoxLevel.Items.Clear();
+                foreach (var level in EnglishLevel.Items)
+                    comboBoxLevel.Items.Add(level);
+                
+                comboBoxLevel.SelectedItem = EnglishLevel.Items.FirstOrDefault(i => i.ItemId == _compliance.LevelId) ?? EnglishLevel.Unknown;
+
+                lifelengthViewer.Lifelength = _compliance.Repeat;
+                
             }
             else
             {
@@ -71,6 +96,16 @@ namespace CAS.UI.UICAAControls.CAAEducation
         {
             _compliance.Remark = metroTextBoxRemark.Text;
             _compliance.LastDate = dateTimePickeValidTo.Value;
+            
+            _compliance.IsAircraft = checkBoxAircraft.Checked;
+            _compliance.IsRepeat = checkBoxRepeat.Checked;
+            _compliance.IsLevel = checkBoxLevel.Checked;
+            
+            _compliance.Repeat = lifelengthViewer.Lifelength;
+            _compliance.LevelId = (comboBoxLevel.SelectedItem as EnglishLevel).ItemId;
+            _compliance.AircraftId = (comboAircraft.SelectedItem as AircraftModel).ItemId;
+            
+            
             if (documentControl1.CurrentDocument != null)
                 _compliance.DocumentId = documentControl1.CurrentDocument.ItemId;
 
@@ -106,6 +141,21 @@ namespace CAS.UI.UICAAControls.CAAEducation
         private void AuditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void checkBoxRepeat_CheckedChanged(object sender, EventArgs e)
+        {
+            lifelengthViewer.Enabled = checkBoxRepeat.Checked;
+        }
+
+        private void checkBoxAircraft_CheckedChanged(object sender, EventArgs e)
+        {
+            comboAircraft.Enabled = checkBoxAircraft.Checked;
+        }
+
+        private void checkBoxLevel_CheckedChanged(object sender, EventArgs e)
+        {
+            comboBoxLevel.Enabled = checkBoxLevel.Checked;
         }
     }
 }

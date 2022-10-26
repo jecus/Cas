@@ -49,7 +49,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 {
                     Record = _record,
                     Course = managment.Education?.Task?.ShortName,
-                    LastCompliance = new LastCompliance()
+                    LastCompliance = new CAAEducationLastCompliance()
                     {
                         LastDate = _record.Settings.NextCompliance.NextDate
                     },
@@ -62,7 +62,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 {
                     Record = _record,
                     Course = managment.Education?.Task?.ShortName,
-                    LastCompliance = new LastCompliance()
+                    LastCompliance = new CAAEducationLastCompliance()
                     {
                         LastDate = DateTime.Now
                     },
@@ -77,7 +77,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
         
         private void ButtonAddOnClick(object sender, EventArgs e)
         {
-            var last = new LastComplianceView(){LastCompliance = new LastCompliance()};
+            var last = new LastComplianceView(){LastCompliance = new CAAEducationLastCompliance()};
             if(_record?.Settings?.NextCompliance?.NextDate != null)
                 last.LastCompliance.LastDate = _record?.Settings?.NextCompliance?.NextDate;
             

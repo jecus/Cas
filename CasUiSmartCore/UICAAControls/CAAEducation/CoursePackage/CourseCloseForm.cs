@@ -180,9 +180,9 @@ namespace CAS.UI.UICAAControls.CAAEducation.CoursePackage
 					    record.Parent.Record.Settings.BlockedWpId = null;
 
 					    if (record.Parent.Record.Settings.LastCompliances == null)
-						    record.Parent.Record.Settings.LastCompliances = new List<LastCompliance>();
+						    record.Parent.Record.Settings.LastCompliances = new List<CAAEducationLastCompliance>();
 					    
-					    record.Parent.Record.Settings.LastCompliances.Add(new LastCompliance()
+					    record.Parent.Record.Settings.LastCompliances.Add(new CAAEducationLastCompliance()
 					    {
 						    LastDate = _currentWp.Settings.ClosingDate,
 						    Remark = $"Closed by course package : {_currentWp.Settings.Number} - {_currentWp.Title}"
