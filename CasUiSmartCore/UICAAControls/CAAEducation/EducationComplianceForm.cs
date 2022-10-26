@@ -44,7 +44,11 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 checkBoxRepeat.Checked = _compliance.IsRepeat;
                 checkBoxLevel.Checked = _compliance.IsLevel;
                 
-                var aircraftModels =  GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, AircraftModel>(new Filter("ModelingObjectTypeId", 7));
+                lifelengthViewer.Enabled = checkBoxRepeat.Checked;
+                comboAircraft.Enabled = checkBoxAircraft.Checked;
+                comboBoxLevel.Enabled = checkBoxLevel.Checked;
+                
+                var aircraftModels =  GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, AircraftModel>(new Filter("ModelingObjectTypeId", 7));
                 comboAircraft.Items.Clear();
                 foreach (var aircraftModel in aircraftModels.OrderBy(i => i.FullName))
                     comboAircraft.Items.Add(aircraftModel);

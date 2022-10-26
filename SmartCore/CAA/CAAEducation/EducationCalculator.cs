@@ -20,7 +20,14 @@ namespace SmartCore.CAA.CAAEducation
             if(record.Settings.IsClosed)
                 return;
 
-            var repeat = record.Education?.Task?.Repeat;
+            var repeat = Lifelength.Null;
+            if (record.Settings.LastCompliances != null && record.Settings.LastCompliances.Any())
+            {
+                var last = record.Settings.LastCompliances.OrderBy(i => i.LastDate).Last();
+                if (last.IsRepeat)
+                    repeat = last.Repeat;
+            }
+            else repeat = record.Education?.Task?.Repeat;
             
             if (repeat != null && (bool)repeat?.Days.HasValue)
             {

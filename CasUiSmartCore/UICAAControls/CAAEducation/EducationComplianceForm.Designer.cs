@@ -216,7 +216,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.checkBoxAircraft.Name = "checkBoxAircraft";
             this.checkBoxAircraft.Size = new System.Drawing.Size(19, 25);
             this.checkBoxAircraft.TabIndex = 343;
-            this.checkBoxAircraft.UseSelectable = true;
             this.checkBoxAircraft.CheckedChanged += new System.EventHandler(this.checkBoxAircraft_CheckedChanged);
             // 
             // checkBoxLevel
@@ -227,7 +226,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.checkBoxLevel.Name = "checkBoxLevel";
             this.checkBoxLevel.Size = new System.Drawing.Size(19, 25);
             this.checkBoxLevel.TabIndex = 344;
-            this.checkBoxLevel.UseSelectable = true;
             this.checkBoxLevel.CheckedChanged += new System.EventHandler(this.checkBoxLevel_CheckedChanged);
             // 
             // lifelengthViewer
@@ -259,7 +257,6 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.lifelengthViewer.Size = new System.Drawing.Size(176, 52);
             this.lifelengthViewer.SystemCalculated = true;
             this.lifelengthViewer.TabIndex = 345;
-            this.lifelengthViewer.Visible = false;
             // 
             // checkBoxRepeat
             // 
@@ -306,8 +303,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
         private CAS.UI.UIControls.Auxiliary.LifelengthViewer lifelengthViewer;
 
-        private MetroFramework.Controls.MetroCheckBox checkBoxAircraft;
-        private MetroFramework.Controls.MetroCheckBox checkBoxLevel;
+        private System.Windows.Forms.CheckBox checkBoxAircraft;
+        private System.Windows.Forms.CheckBox checkBoxLevel;
 
         private System.Windows.Forms.ComboBox comboAircraft;
         private System.Windows.Forms.ComboBox comboBoxLevel;

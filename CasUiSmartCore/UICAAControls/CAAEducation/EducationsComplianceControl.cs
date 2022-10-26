@@ -39,8 +39,8 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 }
                 
                 
-                if((bool)_record.Education?.Task?.Repeat.IsNullOrZero())
-                    return;
+                // if((bool)_record.Education?.Task?.Repeat.IsNullOrZero())
+                //     return;
             }
             
             if (_record.Settings.NextCompliance != null)
@@ -56,7 +56,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
                     Group = "Need new compliance"
                 });
             }
-            else
+            else if(_record.Settings.LastCompliances == null || !_record.Settings.LastCompliances.Any())
             {
                 last.Add(new LastComplianceView()
                 {
