@@ -918,12 +918,6 @@
       <DependentUpon>BaseDetailLogBookReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ReportTemplates\CAA\CAASpecReportPart2.cs">
-      <DependentUpon>CAASpecReportPart2.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="ReportTemplates\CAA\CAASpecReportPart1.cs">
       <DependentUpon>CAASpecReportPart1.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -2281,10 +2275,6 @@
     <EmbeddedResource Include="ReportTemplates\BaseDetailLogBookReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BaseDetailLogBookReport.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ReportTemplates\CAA\CAASpecReportPart2.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CAASpecReportPart2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportTemplates\CAA\CAASpecReportPart1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
