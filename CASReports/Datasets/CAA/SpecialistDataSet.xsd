@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ATLBDataSet" targetNamespace="http://tempuri.org/ATLBDataSet.xsd" xmlns:mstns="http://tempuri.org/ATLBDataSet.xsd" xmlns="http://tempuri.org/ATLBDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ATLBDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="ATLBDataSet" msprop:Generator_UserDSName="ATLBDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Part1Table" msprop:Generator_UserTableName="Part1Table" msprop:Generator_RowEvArgName="Part1TableRowChangeEvent" msprop:Generator_TableVarName="tablePart1Table" msprop:Generator_TablePropName="Part1Table" msprop:Generator_RowDeletingName="Part1TableRowDeleting" msprop:Generator_RowChangingName="Part1TableRowChanging" msprop:Generator_RowDeletedName="Part1TableRowDeleted" msprop:Generator_RowEvHandlerName="Part1TableRowChangeEventHandler" msprop:Generator_TableClassName="Part1TableDataTable" msprop:Generator_RowChangedName="Part1TableRowChanged" msprop:Generator_RowClassName="Part1TableRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SignatureOfHolder" msdata:Caption="Logotype" msprop:Generator_ColumnVarNameInTable="columnSignatureOfHolder" msprop:Generator_ColumnPropNameInRow="SignatureOfHolder" msprop:Generator_ColumnPropNameInTable="SignatureOfHolderColumn" msprop:Generator_UserColumnName="SignatureOfHolder" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="LisenceNumber" msprop:Generator_ColumnVarNameInTable="columnLisenceNumber" msprop:Generator_ColumnPropNameInRow="LisenceNumber" msprop:Generator_ColumnPropNameInTable="LisenceNumberColumn" msprop:Generator_UserColumnName="LisenceNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
+              <xs:element name="DateOfBirth" msprop:Generator_ColumnVarNameInTable="columnDateOfBirth" msprop:Generator_ColumnPropNameInRow="DateOfBirth" msprop:Generator_ColumnPropNameInTable="DateOfBirthColumn" msprop:Generator_UserColumnName="DateOfBirth" type="xs:string" minOccurs="0" />
+              <xs:element name="PlaceOfBirth" msprop:Generator_ColumnVarNameInTable="columnPlaceOfBirth" msprop:Generator_ColumnPropNameInRow="PlaceOfBirth" msprop:Generator_ColumnPropNameInTable="PlaceOfBirthColumn" msprop:Generator_UserColumnName="PlaceOfBirth" type="xs:string" minOccurs="0" />
+              <xs:element name="Address" msprop:Generator_ColumnVarNameInTable="columnAddress" msprop:Generator_ColumnPropNameInRow="Address" msprop:Generator_ColumnPropNameInTable="AddressColumn" msprop:Generator_UserColumnName="Address" type="xs:string" minOccurs="0" />
+              <xs:element name="Nationality" msprop:Generator_ColumnVarNameInTable="columnNationality" msprop:Generator_ColumnPropNameInRow="Nationality" msprop:Generator_ColumnPropNameInTable="NationalityColumn" msprop:Generator_UserColumnName="Nationality" type="xs:string" minOccurs="0" />
+              <xs:element name="Issuing" msprop:Generator_ColumnVarNameInTable="columnIssuing" msprop:Generator_ColumnPropNameInRow="Issuing" msprop:Generator_ColumnPropNameInTable="IssuingColumn" msprop:Generator_UserColumnName="Issuing" type="xs:string" minOccurs="0" />
+              <xs:element name="Stamp" msprop:Generator_ColumnVarNameInTable="columnStamp" msprop:Generator_ColumnPropNameInRow="Stamp" msprop:Generator_ColumnPropNameInTable="StampColumn" msprop:Generator_UserColumnName="Stamp" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

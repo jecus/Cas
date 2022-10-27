@@ -377,6 +377,7 @@
   <ItemGroup>
     <Compile Include="Builders\AbstractReportBuilder.cs" />
     <Compile Include="Builders\AircraftGeneralDataReportBuilder.cs" />
+    <Compile Include="Builders\CAA\SpecialistBuilder.cs" />
     <Compile Include="Builders\ATLBBuilder.cs" />
     <Compile Include="Builders\AvailableComponentsBuilder.cs" />
     <Compile Include="Builders\ComplianceListBuilder.cs" />
@@ -501,6 +502,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AvailableComponentsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\CAA\SpecialistDataSet.cs">
+      <DependentUpon>SpecialistDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\CAA\SpecialistDataSet.Designer.cs">
+      <DependentUpon>SpecialistDataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Datasets\ComplianceListDataSet.cs">
       <DependentUpon>ComplianceListDataSet.xsd</DependentUpon>
@@ -913,6 +922,7 @@
       <DependentUpon>CAASpecReportPart2.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportTemplates\CAA\CAASpecReportPart1.cs">
       <DependentUpon>CAASpecReportPart1.rpt</DependentUpon>
@@ -1613,6 +1623,17 @@
     </None>
     <None Include="Datasets\BaseDetailLogBookDataSet.xss">
       <DependentUpon>BaseDetailLogBookDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\CAA\SpecialistDataSet.xsc">
+      <DependentUpon>SpecialistDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\CAA\SpecialistDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SpecialistDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\CAA\SpecialistDataSet.xss">
+      <DependentUpon>SpecialistDataSet.xsd</DependentUpon>
     </None>
     <None Include="Datasets\ComplianceListDataSet.xsc">
       <DependentUpon>ComplianceListDataSet.xsd</DependentUpon>
