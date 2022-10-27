@@ -9,7 +9,7 @@
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="ATLBDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="ATLBDataSet" msprop:Generator_UserDSName="ATLBDataSet">
+  <xs:element name="SpecialistDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="SpecialistDataSet" msprop:Generator_UserDSName="SpecialistDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element name="Part1Table" msprop:Generator_UserTableName="Part1Table" msprop:Generator_RowEvArgName="Part1TableRowChangeEvent" msprop:Generator_TableVarName="tablePart1Table" msprop:Generator_TablePropName="Part1Table" msprop:Generator_RowDeletingName="Part1TableRowDeleting" msprop:Generator_RowChangingName="Part1TableRowChanging" msprop:Generator_RowDeletedName="Part1TableRowDeleted" msprop:Generator_RowEvHandlerName="Part1TableRowChangeEventHandler" msprop:Generator_TableClassName="Part1TableDataTable" msprop:Generator_RowChangedName="Part1TableRowChanged" msprop:Generator_RowClassName="Part1TableRow">
