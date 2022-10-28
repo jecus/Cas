@@ -8,7 +8,9 @@ using CAA.Entity.Models.Dictionary;
 using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CASReports.Builders.CAA;
 using CASTerms;
 using Entity.Abstractions.Attributte;
 using Entity.Abstractions.Filters;
@@ -822,6 +824,12 @@ namespace CAS.UI.UICAAControls.Specialists
 
         private void ButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
         {
+	        SpecialistBuilder builder = new SpecialistBuilder(_currentItem);
+	        e.DisplayerText = "test";
+	        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+	        e.RequestedEntity = new ReportScreen(builder);
+        
+        
             //BaseDetail baseDetail = _currentItem.ParentBaseDetail;
             //if (baseDetail == null)
             //    return;
@@ -864,7 +872,7 @@ namespace CAS.UI.UICAAControls.Specialists
             //}
             //else
             //{
-                e.Cancel = true;
+                //e.Cancel = true;
             //}
         }
 
