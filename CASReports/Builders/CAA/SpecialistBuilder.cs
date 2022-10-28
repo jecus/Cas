@@ -52,7 +52,7 @@ namespace CASReports.Builders.CAA
 
         private void AddSpecialistInformation(SpecialistDataSet dataSet)
         {
-	        dataSet.Part1Table.AddPart1TableRow();
+	        //dataSet.Part1Table.AddPart1TableRow();
         }
 
         #endregion
