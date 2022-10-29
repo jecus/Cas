@@ -218,7 +218,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 				e.Cancel = true;
 			if (SelectedItem.Occupation != null && SelectedItem.Education != null)
 			{
-				e.DisplayerText = $"{SelectedItem.Specialist.ToString()} - {SelectedItem.Education?.Task?.FullName}";;
+				e.DisplayerText = $"{SelectedItem.Specialist.ToString()} - {SelectedItem.Education?.Task?.FullName} Education";;
 				e.RequestedEntity = new EducationScreen(CurrentOperator, SelectedItem);
 				e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			}
