@@ -57,11 +57,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 
 		#region Methods
 
-		protected override void CustomSort(int ColumnIndex)
-		{
-			base.CustomSort(ColumnIndex);
-		}
-
+		
 		protected override void GroupingItems()
 		{
 			// this.radGridView1.GroupDescriptors.Clear();

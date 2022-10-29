@@ -87,7 +87,9 @@ namespace CAS.UI.UICAAControls.Specialists
             statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 
-			_filter = new CommonFilterCollection(typeof(IEmployeeFilterParams));
+			if (_licenseView)
+				_filter = new CommonFilterCollection(typeof(ICAAEmployeeFilterParams));
+			else _filter = new CommonFilterCollection(typeof(IEmployeeFilterParams));
 
 			InitToolStripMenuItems();
 			InitListView();

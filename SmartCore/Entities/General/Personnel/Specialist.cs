@@ -33,7 +33,7 @@ namespace SmartCore.Entities.General.Personnel
     [CAADto(typeof(CAASpecialistDTO))]
 	[Condition("IsDeleted", "0")]
     [Serializable]
-    public class Specialist : BaseEntityObject, IFileContainer, IEmployeeFilterParams, IEmployeeWorkPackageFilterParams, IOperatable
+    public class Specialist : BaseEntityObject, IFileContainer, IEmployeeFilterParams, IEmployeeWorkPackageFilterParams, IOperatable,ICAAEmployeeFilterParams
 	{
 		private static Type _thisType;
 		/*
