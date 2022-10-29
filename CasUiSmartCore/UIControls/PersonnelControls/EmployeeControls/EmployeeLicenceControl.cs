@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using Entity.Abstractions;
 using SmartCore.CAA.Operators;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Personnel;
@@ -45,6 +46,9 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 		public void UpdateControl(Specialist currentItem, List<AircraftModel> aircraftModels)
 		{
+			if (GlobalObjects.CaaEnvironment != null)
+				comboBoxStatus.Enabled = GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType <= CAAUserType.CAA;
+			
 			if (currentItem == null)
 				return;
 
