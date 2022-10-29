@@ -10,6 +10,7 @@ using SmartCore.CAA.Audit;
 using SmartCore.CAA.CAAWP;
 using SmartCore.CAA.Check;
 using SmartCore.CAA.PEL;
+using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
@@ -525,6 +526,13 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
 				DateTime xValue = (DateTime)first.Tag;
 				DateTime yValue = (DateTime)second.Tag;
 				return SortMultiplier * DateTime.Compare(yValue, xValue);
+			}
+
+			if (first.Tag is Lifelength && second.Tag is Lifelength)
+			{
+				Lifelength xValue = (Lifelength)first.Tag;
+				Lifelength yValue = (Lifelength)second.Tag;
+				return SortMultiplier * (xValue.Minutes ?? 0 - yValue.Minutes ?? 0);
 			}
 			if (first.Tag is string && second.Tag is string)
 			{

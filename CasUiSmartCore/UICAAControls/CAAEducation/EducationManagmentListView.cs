@@ -11,6 +11,7 @@ using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.CAA;
 using SmartCore.CAA.CAAEducation;
+using SmartCore.Calculations;
 using SmartCore.Entities.General;
 using Telerik.WinControls.UI;
 
@@ -55,8 +56,12 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		#endregion
 
 		#region Methods
-		
-		
+
+		protected override void CustomSort(int ColumnIndex)
+		{
+			base.CustomSort(ColumnIndex);
+		}
+
 		protected override void GroupingItems()
 		{
 			// this.radGridView1.GroupDescriptors.Clear();
@@ -183,6 +188,20 @@ namespace CAS.UI.UICAAControls.CAAEducation
 	        
 	        var next = item.Record == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat(item.Record?.Settings?.NextCompliance?.NextDate);
 	        var last = item.Record == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat(item.Record?.Settings?.LastCompliances?.LastOrDefault()?.LastDate);
+
+	        var repeat = item?.Education?.Task?.Repeat ?? Lifelength.Null;
+	        if (item.Record != null)
+	        {
+		        if (item.Record.Settings.LastCompliances != null && item.Record.Settings.LastCompliances.Any())
+		        {
+			        var l = item.Record.Settings.LastCompliances.OrderBy(i => i.LastDate).Last();
+			        if (l.IsRepeat)
+				        repeat = l.Repeat;
+			        else repeat = item.Record.Education?.Task?.Repeat;
+		        }
+	        }
+	        
+	        
 	        
 
 	        return  new List<CustomCell>()
@@ -200,7 +219,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
 		        CreateRow(item.Education?.Task?.Description, item.Education?.Task?.Description),
 		        CreateRow(item.Education?.Task?.Level.ToString(), item.Education?.Task?.Level),
 		        CreateRow(item.Education?.Priority?.ToString(), item.Education?.Priority),
-		        CreateRow(item?.Education?.Task?.Repeat.ToRepeatIntervalsFormat(), item?.Education?.Task?.Repeat),
+		        CreateRow(repeat.ToRepeatIntervalsFormat(), repeat),
 		        CreateRow(next, item.Record?.Settings?.NextCompliance?.NextDate),
 		        CreateRow(item.Record?.Settings?.NextCompliance?.Remains?.ToRepeatIntervalsFormat(), item.Record?.Settings?.NextCompliance?.Remains),
 		        CreateRow(last, item.Record?.Settings?.LastCompliances?.LastOrDefault()?.LastDate),
