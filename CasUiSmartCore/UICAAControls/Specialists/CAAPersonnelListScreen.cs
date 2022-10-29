@@ -199,6 +199,11 @@ namespace CAS.UI.UICAAControls.Specialists
 		                
 	                }
 				}
+
+
+				var res =  _initialDocumentArray.Where(i => i.PersonnelCategory != PersonnelCategory.UNK).ToArray();
+				_initialDocumentArray.Clear();
+				_initialDocumentArray.AddRange(res);
 			}
 
 			foreach (var specialist in _initialDocumentArray)
