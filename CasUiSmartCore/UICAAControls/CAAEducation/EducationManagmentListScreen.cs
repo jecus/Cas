@@ -82,7 +82,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 
-			_filter = new CommonFilterCollection(typeof(CAAEducationManagment));
+			_filter = new CommonFilterCollection(typeof(ICAAEducationManagmentFilter));
 
 			InitToolStripMenuItems();
 			InitListView();

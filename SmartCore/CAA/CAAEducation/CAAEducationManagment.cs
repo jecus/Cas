@@ -1,12 +1,13 @@
 ﻿using System;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Personnel;
 
 namespace SmartCore.CAA.CAAEducation
 {
     [Serializable]
-    public class CAAEducationManagment : BaseEntityObject
+    public class CAAEducationManagment : BaseEntityObject,ICAAEducationManagmentFilter
     {
         public Specialist Specialist { get; set; }
         public Occupation Occupation { get; set; }
@@ -19,5 +20,14 @@ namespace SmartCore.CAA.CAAEducation
         {
             IsCombination = true;
         }
+
+        public ConditionState Condition => Record?.Settings?.NextCompliance?.Condition ?? ConditionState.NotEstimated;
+    }
+
+
+    public interface ICAAEducationManagmentFilter
+    {
+        [Filter("Condition:", Order = 1)]
+        ConditionState Condition { get; }
     }
 }
