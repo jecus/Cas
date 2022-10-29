@@ -235,7 +235,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		{
 			if (SelectedItem != null)
 			{
-				string regNumber = SelectedItem.FirstName + " " + SelectedItem.LastName;
+				var regNumber =  $"{SelectedItem.FirstName} {SelectedItem.LastName} License";
 				e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 				e.DisplayerText = regNumber;
 				e.RequestedEntity = new CAAEmployeeScreen(SelectedItem, OperatorId);
