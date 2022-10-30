@@ -30,7 +30,7 @@ namespace CASReports.Builders.CAA
         public override object GenerateReport()
         {
 	        CAASpecReportPart1 report = new CAASpecReportPart1();
-            report.SetDataSource(GenerateDataSet());
+           // report.SetDataSource(GenerateDataSet());
             return report;
         }
 

@@ -665,12 +665,12 @@ namespace CAS.UI.UICAAControls.Specialists
 
 			#region ButtonPrintContextMenu
 
-			_buttonPrintMenuStrip = new ContextMenuStrip();
-            _itemPrintReportRecords = new ToolStripMenuItem { Text = "Records" };
-            _itemPrintReportHistory = new ToolStripMenuItem { Text = "Compliance history" };
-            _buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintReportRecords, _itemPrintReportHistory });
-
-            ButtonPrintMenuStrip = _buttonPrintMenuStrip;
+			// _buttonPrintMenuStrip = new ContextMenuStrip();
+   //          _itemPrintReportRecords = new ToolStripMenuItem { Text = "Records" };
+   //          _itemPrintReportHistory = new ToolStripMenuItem { Text = "Compliance history" };
+   //          _buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintReportRecords, _itemPrintReportHistory });
+   //
+   //          ButtonPrintMenuStrip = _buttonPrintMenuStrip;
             
             #endregion
 
