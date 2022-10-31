@@ -34,8 +34,10 @@ namespace CAS.UI.UICAAControls.Specialists
         private Specialist _currentItem;
         private readonly int _opearatorId;
         private ContextMenuStrip _buttonPrintMenuStrip;
-        private ToolStripMenuItem _itemPrintReportRecords;
-        private ToolStripMenuItem _itemPrintReportHistory;
+        private ToolStripMenuItem _itemPrintFCL;
+        private ToolStripMenuItem _itemPrintAttachment;
+        private ToolStripMenuItem _itemPrintElectronic;
+        private ToolStripMenuItem _itemPrintCabinCrew;
 		private List<AircraftModel> aircraftModels = new List<AircraftModel>();
 		private List<SmartCore.Purchase.Supplier> _suppliers = new List<SmartCore.Purchase.Supplier>();
 		List<CAAEducationRecord> _records = new List<CAAEducationRecord>();
@@ -92,9 +94,11 @@ namespace CAS.UI.UICAAControls.Specialists
             CancelAsync();
 
             AnimatedThreadWorker.Dispose();
-
-            if (_itemPrintReportHistory != null) _itemPrintReportHistory.Dispose();
-            if (_itemPrintReportRecords != null) _itemPrintReportRecords.Dispose();
+            
+            if (_itemPrintFCL != null) _itemPrintFCL.Dispose();
+            if (_itemPrintAttachment != null) _itemPrintAttachment.Dispose();
+            if (_itemPrintElectronic != null) _itemPrintElectronic.Dispose();
+            if (_itemPrintCabinCrew != null) _itemPrintCabinCrew.Dispose();
             if (_buttonPrintMenuStrip != null) _buttonPrintMenuStrip.Dispose();
 
             _currentItem = null;
@@ -664,13 +668,15 @@ namespace CAS.UI.UICAAControls.Specialists
             _needReload = false;
 
 			#region ButtonPrintContextMenu
-
-			// _buttonPrintMenuStrip = new ContextMenuStrip();
-   //          _itemPrintReportRecords = new ToolStripMenuItem { Text = "Records" };
-   //          _itemPrintReportHistory = new ToolStripMenuItem { Text = "Compliance history" };
-   //          _buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintReportRecords, _itemPrintReportHistory });
-   //
-   //          ButtonPrintMenuStrip = _buttonPrintMenuStrip;
+			
+			_buttonPrintMenuStrip = new ContextMenuStrip();
+			_itemPrintFCL = new ToolStripMenuItem { Text = "License FCL" };
+			_itemPrintAttachment = new ToolStripMenuItem { Text = "Attachment to Licence" };
+			_itemPrintElectronic = new ToolStripMenuItem { Text = "Electronic Personnel Licence" };
+			_itemPrintCabinCrew = new ToolStripMenuItem { Text = "Cabin Crew Attestation" };
+            _buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintFCL, _itemPrintAttachment,_itemPrintElectronic,_itemPrintCabinCrew });
+   
+            ButtonPrintMenuStrip = _buttonPrintMenuStrip;
             
             #endregion
 
@@ -824,11 +830,17 @@ namespace CAS.UI.UICAAControls.Specialists
 
         private void ButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-	        SpecialistBuilder builder = new SpecialistBuilder(_currentItem);
-	        e.DisplayerText = "test";
-	        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-	        e.RequestedEntity = new ReportScreen(builder);
-        
+	       
+
+	        if (sender == _itemPrintFCL)
+	        {
+		        SpecialistBuilder builder = new SpecialistBuilder(_currentItem);
+		        e.DisplayerText = "test";
+		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+		        e.RequestedEntity = new ReportScreen(builder);
+	        }
+	        else e.Cancel = true;
+	        
         
             //BaseDetail baseDetail = _currentItem.ParentBaseDetail;
             //if (baseDetail == null)
