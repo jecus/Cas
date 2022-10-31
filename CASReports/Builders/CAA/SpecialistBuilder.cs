@@ -60,12 +60,12 @@ namespace CASReports.Builders.CAA
 	        var titleLicense = licenseCaa?.CAANumber ?? String.Empty;
 	        var licenceNumber = _license?.EmployeeLicenceType.ShortName ?? String.Empty;
 	        var name = $"{_spec.FirstName} {_spec.LastName}";
-	        var dateOfBirth = $"{_spec.DateOfBirth:d}";
+	        var dateOfBirth = $"{_spec.DateOfBirth:dd/mm/yyyy}";
 	        var placeOfBirth = _spec.Nationality;
 	        var adress = _spec.Address;
 	        var nationality = _spec.Citizenship.ShortName;
-	        var issuing = $"{_license?.IssueDate:d}" ?? String.Empty;
-	        var valid = $"{_license?.ValidToDate:d}" ?? String.Empty;
+	        var issuing = $"{_license?.IssueDate:dd/mm/yyyy}" ?? String.Empty;
+	        var valid = $"{_license?.ValidToDate:dd/mm/yyyy}" ?? String.Empty;
 	        var countryCode = licenseCaa.Caa.ShortName;
 	        
 	        dataSet.Part1Table
