@@ -199,7 +199,7 @@ namespace CASReports.Datasets.CAA {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "ATLBDataSet";
+            this.DataSetName = "SpecialistDataSet";
             this.Prefix = "";
             this.Namespace = "http://tempuri.org/ATLBDataSet.xsd";
             this.EnforceConstraints = true;
@@ -296,6 +296,12 @@ namespace CASReports.Datasets.CAA {
             private global::System.Data.DataColumn columnIssuing;
             
             private global::System.Data.DataColumn columnStamp;
+            
+            private global::System.Data.DataColumn columnValidity;
+            
+            private global::System.Data.DataColumn columnCountryCode;
+            
+            private global::System.Data.DataColumn columnLicenseTitle;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -404,6 +410,30 @@ namespace CASReports.Datasets.CAA {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ValidityColumn {
+                get {
+                    return this.columnValidity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CountryCodeColumn {
+                get {
+                    return this.columnCountryCode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn LicenseTitleColumn {
+                get {
+                    return this.columnLicenseTitle;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -439,7 +469,7 @@ namespace CASReports.Datasets.CAA {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Part1TableRow AddPart1TableRow(byte[] SignatureOfHolder, string LisenceNumber, string Name, string DateOfBirth, string PlaceOfBirth, string Address, string Nationality, string Issuing, byte[] Stamp) {
+            public Part1TableRow AddPart1TableRow(byte[] SignatureOfHolder, string LisenceNumber, string Name, string DateOfBirth, string PlaceOfBirth, string Address, string Nationality, string Issuing, byte[] Stamp, string Validity, string CountryCode, string LicenseTitle) {
                 Part1TableRow rowPart1TableRow = ((Part1TableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         SignatureOfHolder,
@@ -450,7 +480,10 @@ namespace CASReports.Datasets.CAA {
                         Address,
                         Nationality,
                         Issuing,
-                        Stamp};
+                        Stamp,
+                        Validity,
+                        CountryCode,
+                        LicenseTitle};
                 rowPart1TableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPart1TableRow);
                 return rowPart1TableRow;
@@ -482,6 +515,9 @@ namespace CASReports.Datasets.CAA {
                 this.columnNationality = base.Columns["Nationality"];
                 this.columnIssuing = base.Columns["Issuing"];
                 this.columnStamp = base.Columns["Stamp"];
+                this.columnValidity = base.Columns["Validity"];
+                this.columnCountryCode = base.Columns["CountryCode"];
+                this.columnLicenseTitle = base.Columns["LicenseTitle"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -505,6 +541,12 @@ namespace CASReports.Datasets.CAA {
                 base.Columns.Add(this.columnIssuing);
                 this.columnStamp = new global::System.Data.DataColumn("Stamp", typeof(byte[]), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnStamp);
+                this.columnValidity = new global::System.Data.DataColumn("Validity", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnValidity);
+                this.columnCountryCode = new global::System.Data.DataColumn("CountryCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCountryCode);
+                this.columnLicenseTitle = new global::System.Data.DataColumn("LicenseTitle", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLicenseTitle);
                 this.columnSignatureOfHolder.Caption = "Logotype";
             }
             
@@ -792,6 +834,54 @@ namespace CASReports.Datasets.CAA {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Validity {
+                get {
+                    try {
+                        return ((string)(this[this.tablePart1Table.ValidityColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Validity\' in table \'Part1Table\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePart1Table.ValidityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string CountryCode {
+                get {
+                    try {
+                        return ((string)(this[this.tablePart1Table.CountryCodeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CountryCode\' in table \'Part1Table\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePart1Table.CountryCodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string LicenseTitle {
+                get {
+                    try {
+                        return ((string)(this[this.tablePart1Table.LicenseTitleColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'LicenseTitle\' in table \'Part1Table\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePart1Table.LicenseTitleColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsSignatureOfHolderNull() {
                 return this.IsNull(this.tablePart1Table.SignatureOfHolderColumn);
             }
@@ -896,6 +986,42 @@ namespace CASReports.Datasets.CAA {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetStampNull() {
                 this[this.tablePart1Table.StampColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsValidityNull() {
+                return this.IsNull(this.tablePart1Table.ValidityColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetValidityNull() {
+                this[this.tablePart1Table.ValidityColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCountryCodeNull() {
+                return this.IsNull(this.tablePart1Table.CountryCodeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCountryCodeNull() {
+                this[this.tablePart1Table.CountryCodeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsLicenseTitleNull() {
+                return this.IsNull(this.tablePart1Table.LicenseTitleColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetLicenseTitleNull() {
+                this[this.tablePart1Table.LicenseTitleColumn] = global::System.Convert.DBNull;
             }
         }
         

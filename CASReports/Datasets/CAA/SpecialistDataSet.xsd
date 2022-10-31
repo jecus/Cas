@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="ATLBDataSet" targetNamespace="http://tempuri.org/ATLBDataSet.xsd" xmlns:mstns="http://tempuri.org/ATLBDataSet.xsd" xmlns="http://tempuri.org/ATLBDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+<xs:schema id="SpecialistDataSet" targetNamespace="http://tempuri.org/ATLBDataSet.xsd" xmlns:mstns="http://tempuri.org/ATLBDataSet.xsd" xmlns="http://tempuri.org/ATLBDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
@@ -24,6 +24,9 @@
               <xs:element name="Nationality" msprop:Generator_ColumnVarNameInTable="columnNationality" msprop:Generator_ColumnPropNameInRow="Nationality" msprop:Generator_ColumnPropNameInTable="NationalityColumn" msprop:Generator_UserColumnName="Nationality" type="xs:string" minOccurs="0" />
               <xs:element name="Issuing" msprop:Generator_ColumnVarNameInTable="columnIssuing" msprop:Generator_ColumnPropNameInRow="Issuing" msprop:Generator_ColumnPropNameInTable="IssuingColumn" msprop:Generator_UserColumnName="Issuing" type="xs:string" minOccurs="0" />
               <xs:element name="Stamp" msprop:Generator_ColumnVarNameInTable="columnStamp" msprop:Generator_ColumnPropNameInRow="Stamp" msprop:Generator_ColumnPropNameInTable="StampColumn" msprop:Generator_UserColumnName="Stamp" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="Validity" msprop:Generator_ColumnVarNameInTable="columnValidity" msprop:Generator_ColumnPropNameInRow="Validity" msprop:Generator_ColumnPropNameInTable="ValidityColumn" msprop:Generator_UserColumnName="Validity" type="xs:string" minOccurs="0" />
+              <xs:element name="CountryCode" msprop:Generator_ColumnVarNameInTable="columnCountryCode" msprop:Generator_ColumnPropNameInRow="CountryCode" msprop:Generator_ColumnPropNameInTable="CountryCodeColumn" msprop:Generator_UserColumnName="CountryCode" type="xs:string" minOccurs="0" />
+              <xs:element name="LicenseTitle" msprop:Generator_ColumnVarNameInTable="columnLicenseTitle" msprop:Generator_ColumnPropNameInRow="LicenseTitle" msprop:Generator_ColumnPropNameInTable="LicenseTitleColumn" msprop:Generator_UserColumnName="LicenseTitle" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

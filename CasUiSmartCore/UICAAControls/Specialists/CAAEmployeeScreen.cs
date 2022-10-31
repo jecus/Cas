@@ -679,16 +679,7 @@ namespace CAS.UI.UICAAControls.Specialists
             ButtonPrintMenuStrip = _buttonPrintMenuStrip;
             
             #endregion
-
-            //обновление нижней шапки(через базовый скрин)
-            //if (_currentItem.ParentBaseDetail != null)
-            //{
-            //    if (_currentItem.ParentBaseDetail.ParentAircraft != null)
-            //        CurrentAircraft = _currentItem.ParentBaseDetail.ParentAircraft;
-            //    else if (_currentItem.ParentBaseDetail.ParentStore != null)
-            //        CurrentStore = _currentItem.ParentBaseDetail.ParentStore;
-            //}
-
+            
             //обновление суммарной информацию по директиве и суммарную информацию по её подзадачам
             StatusTitle = "Personnel Status";  
   
@@ -840,52 +831,6 @@ namespace CAS.UI.UICAAControls.Specialists
 		        e.RequestedEntity = new ReportScreen(builder);
 	        }
 	        else e.Cancel = true;
-	        
-        
-            //BaseDetail baseDetail = _currentItem.ParentBaseDetail;
-            //if (baseDetail == null)
-            //    return;
-
-            //if (sender == _itemPrintReportRecords)
-            //{
-            //    string caption = "";
-            //    if (baseDetail.ParentAircraft != null)
-            //        caption = baseDetail.ParentAircraft.RegistrationNumber + ". ";
-            //    else if (baseDetail.ParentStore != null)
-            //        caption = baseDetail.ParentStore.Name + ". ";
-            //    caption += _currentDirective.WorkType + ". " + _currentDirective.MPDTaskNumber + ". Compliance List";
-
-            //    DirectiveTasksReportBuilder builder = new DirectiveTasksReportBuilder();
-            //    builder.ReportedBaseDetail = baseDetail;
-            //    String selection = "";
-            //    if (baseDetail.BaseDetailType == BaseDetailType.LandingGear)
-            //    {
-            //        selection = baseDetail.TransferRecords.GetLast().Position;
-            //        builder.ReportTitle = "LANDING GEAR RECORD";
-            //    }
-            //    if (baseDetail.BaseDetailType == BaseDetailType.Engine)
-            //    {
-            //        selection = BaseDetailType.Engine + " " + baseDetail.TransferRecords.GetLast().Position;
-            //        builder.ReportTitle = "ENGINE RECORD";
-            //    }
-            //    if (baseDetail.BaseDetailType == BaseDetailType.Apu)
-            //    {
-            //        selection = BaseDetailType.Apu.ToString();
-            //        builder.ReportTitle = "APU RECORD";
-            //    }
-            //    builder.LifelengthAircraftSinceNew =
-            //        GlobalObjects.CaaEnvironment.Calculator.GetClosingFlightLifelength(CurrentAircraft, DateTime.Today);
-            //    builder.FilterSelection = selection;
-            //    builder.AddDirectives(new [] { _currentDirective });
-            //    builder.ForecastData = null;
-            //    e.DisplayerText = caption;
-            //    e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-            //    e.RequestedEntity = new ReportScreen(builder);
-            //}
-            //else
-            //{
-                //e.Cancel = true;
-            //}
         }
 
         #endregion
