@@ -341,25 +341,20 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304">
+      <HintPath>..\DLL\CrystalReport\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\CrystalDecisions.ReportSource.dll</HintPath>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304">
+      <HintPath>..\DLL\CrystalReport\CrystalDecisions.ReportSource.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\CrystalDecisions.Shared.dll</HintPath>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304">
+      <HintPath>..\DLL\CrystalReport\CrystalDecisions.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\CrystalDecisions.Web.dll</HintPath>
+    <Reference Include="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304">
+      <HintPath>..\DLL\CrystalReport\CrystalDecisions.Web.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\CrystalDecisions.Windows.Forms.dll</HintPath>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304">
+      <HintPath>..\DLL\CrystalReport\CrystalDecisions.Windows.Forms.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -377,6 +372,7 @@
   <ItemGroup>
     <Compile Include="Builders\AbstractReportBuilder.cs" />
     <Compile Include="Builders\AircraftGeneralDataReportBuilder.cs" />
+    <Compile Include="Builders\CAA\SpecialistBuilder.cs" />
     <Compile Include="Builders\ATLBBuilder.cs" />
     <Compile Include="Builders\AvailableComponentsBuilder.cs" />
     <Compile Include="Builders\ComplianceListBuilder.cs" />
@@ -501,6 +497,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AvailableComponentsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\CAA\SpecialistDataSet.cs">
+      <DependentUpon>SpecialistDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\CAA\SpecialistDataSet.Designer.cs">
+      <DependentUpon>SpecialistDataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Datasets\ComplianceListDataSet.cs">
       <DependentUpon>ComplianceListDataSet.xsd</DependentUpon>
@@ -908,6 +912,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseDetailLogBookReport.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\CAA\CAASpecReportPart1.cs">
+      <DependentUpon>CAASpecReportPart1.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="ReportTemplates\ComplianceListReport.cs">
       <AutoGen>True</AutoGen>
@@ -1603,6 +1613,17 @@
     <None Include="Datasets\BaseDetailLogBookDataSet.xss">
       <DependentUpon>BaseDetailLogBookDataSet.xsd</DependentUpon>
     </None>
+    <None Include="Datasets\CAA\SpecialistDataSet.xsc">
+      <DependentUpon>SpecialistDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\CAA\SpecialistDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SpecialistDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\CAA\SpecialistDataSet.xss">
+      <DependentUpon>SpecialistDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Datasets\ComplianceListDataSet.xsc">
       <DependentUpon>ComplianceListDataSet.xsd</DependentUpon>
     </None>
@@ -2250,6 +2271,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BaseDetailLogBookReport.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\CAA\CAASpecReportPart1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CAASpecReportPart1.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportTemplates\ComplianceListReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ComplianceListReport.cs</LastGenOutput>
@@ -2715,6 +2740,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
