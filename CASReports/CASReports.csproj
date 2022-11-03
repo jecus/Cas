@@ -372,6 +372,7 @@
   <ItemGroup>
     <Compile Include="Builders\AbstractReportBuilder.cs" />
     <Compile Include="Builders\AircraftGeneralDataReportBuilder.cs" />
+    <Compile Include="Builders\CAA\SpecialisLicensetBuilder.cs" />
     <Compile Include="Builders\CAA\SpecialistBuilder.cs" />
     <Compile Include="Builders\ATLBBuilder.cs" />
     <Compile Include="Builders\AvailableComponentsBuilder.cs" />
@@ -912,6 +913,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseDetailLogBookReport.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\CAA\CAASpecLicence.cs">
+      <DependentUpon>CAASpecLicence.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="ReportTemplates\CAA\CAASpecReportPart1.cs">
       <DependentUpon>CAASpecReportPart1.rpt</DependentUpon>
@@ -2270,6 +2277,10 @@
     <EmbeddedResource Include="ReportTemplates\BaseDetailLogBookReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BaseDetailLogBookReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\CAA\CAASpecLicence.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CAASpecReportPart1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportTemplates\CAA\CAASpecReportPart1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
