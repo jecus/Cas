@@ -921,7 +921,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="ReportTemplates\CAA\CAASpecReportPart1.cs">
-      <DependentUpon>CAASpecLicence.rpt</DependentUpon>
+      <DependentUpon>CAASpecReportPart1.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
