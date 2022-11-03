@@ -830,6 +830,14 @@ namespace CAS.UI.UICAAControls.Specialists
 		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 		        e.RequestedEntity = new ReportScreen(builder);
 	        }
+
+	        if (sender == _itemPrintElectronic)
+	        {
+		        SpecialisLicensetBuilder builder = new SpecialisLicensetBuilder(_currentItem);
+		        e.DisplayerText = "test";
+		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+		        e.RequestedEntity = new ReportScreen(builder);
+	        }
 	        else e.Cancel = true;
         }
 

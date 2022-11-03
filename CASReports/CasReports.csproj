@@ -372,6 +372,7 @@
   <ItemGroup>
     <Compile Include="Builders\AbstractReportBuilder.cs" />
     <Compile Include="Builders\AircraftGeneralDataReportBuilder.cs" />
+    <Compile Include="Builders\CAA\SpecialisLicensetBuilder.cs" />
     <Compile Include="Builders\CAA\SpecialistBuilder.cs" />
     <Compile Include="Builders\ATLBBuilder.cs" />
     <Compile Include="Builders\AvailableComponentsBuilder.cs" />

@@ -16,14 +16,14 @@ namespace CASReports.ReportTemplates.CAA {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CAASpecReportPart1 : ReportClass {
+    public class CAASpecLicence : ReportClass {
         
-        public CAASpecReportPart1() {
+        public CAASpecLicence() {
         }
         
         public override string ResourceName {
             get {
-                return "CAASpecReportPart1.rpt";
+                return "CAASpecLicence.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace CASReports.ReportTemplates.CAA {
         
         public override string FullResourceName {
             get {
-                return "CASReports.ReportTemplates.CAA.CAASpecReportPart1.rpt";
+                return "CASReports.ReportTemplates.CAA.CAASpecLicence.rpt";
             }
             set {
                 // Do nothing
@@ -98,9 +98,9 @@ namespace CASReports.ReportTemplates.CAA {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCAASpecReportPart1 : Component, ICachedReport {
+    public class CachedCAASpecLicence : Component, ICachedReport {
         
-        public CachedCAASpecReportPart1() {
+        public CachedCAASpecLicence() {
         }
         
         [Browsable(false)]
@@ -137,7 +137,7 @@ namespace CASReports.ReportTemplates.CAA {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CAASpecReportPart1 rpt = new CAASpecReportPart1();
+            CAASpecLicence rpt = new CAASpecLicence();
             rpt.Site = this.Site;
             return rpt;
         }
