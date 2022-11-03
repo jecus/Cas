@@ -821,8 +821,6 @@ namespace CAS.UI.UICAAControls.Specialists
 
         private void ButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-	       
-
 	        if (sender == _itemPrintFCL)
 	        {
 		        SpecialistBuilder builder = new SpecialistBuilder(_currentItem);
@@ -830,8 +828,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 		        e.RequestedEntity = new ReportScreen(builder);
 	        }
-
-	        if (sender == _itemPrintElectronic)
+	        else if (sender == _itemPrintElectronic)
 	        {
 		        SpecialisLicensetBuilder builder = new SpecialisLicensetBuilder(_currentItem);
 		        e.DisplayerText = "test";
