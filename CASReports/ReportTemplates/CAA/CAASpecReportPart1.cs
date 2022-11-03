@@ -16,14 +16,14 @@ namespace CASReports.ReportTemplates.CAA {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CAASpecLicence : ReportClass {
+    public class CAASpecReportPart1 : ReportClass {
         
-        public CAASpecLicence() {
+        public CAASpecReportPart1() {
         }
         
         public override string ResourceName {
             get {
-                return "CAASpecLicence.rpt";
+                return "CAASpecReportPart1.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace CASReports.ReportTemplates.CAA {
         
         public override string FullResourceName {
             get {
-                return "CASReports.ReportTemplates.CAA.CAASpecLicence.rpt";
+                return "CASReports.ReportTemplates.CAA.CAASpecReportPart1.rpt";
             }
             set {
                 // Do nothing
@@ -74,7 +74,7 @@ namespace CASReports.ReportTemplates.CAA {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section DetailSection4 {
+        public CrystalDecisions.CrystalReports.Engine.Section DetailSection2 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,7 +82,7 @@ namespace CASReports.ReportTemplates.CAA {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section DetailSection2 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -90,41 +90,17 @@ namespace CASReports.ReportTemplates.CAA {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section DetailSection5 {
-            get {
-                return this.ReportDefinition.Sections[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section DetailSection6 {
-            get {
-                return this.ReportDefinition.Sections[6];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[7];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
-                return this.ReportDefinition.Sections[8];
+                return this.ReportDefinition.Sections[5];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCAASpecLicence : Component, ICachedReport {
+    public class CachedCAASpecReportPart1 : Component, ICachedReport {
         
-        public CachedCAASpecLicence() {
+        public CachedCAASpecReportPart1() {
         }
         
         [Browsable(false)]
@@ -161,7 +137,7 @@ namespace CASReports.ReportTemplates.CAA {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CAASpecLicence rpt = new CAASpecLicence();
+            CAASpecReportPart1 rpt = new CAASpecReportPart1();
             rpt.Site = this.Site;
             return rpt;
         }
