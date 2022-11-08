@@ -12,6 +12,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CASReports.Builders.CAA;
 using CASTerms;
+using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA.CAAEducation;
@@ -155,6 +156,8 @@ namespace CAS.UI.UICAAControls.Specialists
 
 	        employeeWorkPackageControl.CurrentItem = _currentItem;
 	        employeeWorkPackageControl.Reload += DocumentsControl_Reload;
+
+	        ButtonPrintMenuStrip.Visible = GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType < CAAUserType.OperatorAdmin;
 
         }
 		#endregion
