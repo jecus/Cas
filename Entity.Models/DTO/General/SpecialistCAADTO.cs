@@ -27,6 +27,9 @@ namespace CAS.Entity.Models.DTO.General
 		
 		[Column("ValidTo")]
 		public DateTime ValidTo { get; set; }
+		
+		[Column("IsValidTo")]
+		public bool IsValidTo { get; set; }
 
 		
 		[Column("SpecialistLicenseId")]

@@ -60,6 +60,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			dateTimePickerValidToCAA.Value = _specialistCaa.ValidToDate;
 			dateTimePickerIssueDate.Value = _specialistCaa.IssueDate;
 			lifelengthViewer1.Lifelength = _specialistCaa.NotifyLifelength;
+			checkBoxIsValid.Checked = _specialistCaa.IsValidTo;
 
 			documentControl1.CurrentDocument = _specialistCaa.Document;
 			documentControl1.Added += DocumentControl1_Added;
@@ -148,6 +149,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			       _specialistCaa.CAANumber != textBoxCAANumber.Text || 
 			       _specialistCaa.ValidToDate != dateTimePickerValidToCAA.Value ||
 			       _specialistCaa.IssueDate !=  dateTimePickerIssueDate.Value  ||
+			       _specialistCaa.IsValidTo != checkBoxIsValid.Checked||
 				   _specialistCaa.NotifyLifelength != lifelengthViewer1.Lifelength;
 		}
 
@@ -162,6 +164,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			_specialistCaa.ValidToDate = dateTimePickerValidToCAA.Value;
 			_specialistCaa.IssueDate = dateTimePickerIssueDate.Value;
 			_specialistCaa.NotifyLifelength = lifelengthViewer1.Lifelength;
+			_specialistCaa.IsValidTo = checkBoxIsValid.Checked;
 		}
 
 		#endregion
@@ -193,5 +196,10 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 
 		#endregion
+
+		private void checkBoxIsValid_CheckedChanged(object sender, EventArgs e)
+		{
+			lifelengthViewer1.Enabled = dateTimePickerValidToCAA.Enabled = checkBoxIsValid.Checked;
+		}
 	}
 }

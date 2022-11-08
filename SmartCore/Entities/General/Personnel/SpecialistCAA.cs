@@ -41,6 +41,8 @@ namespace SmartCore.Entities.General.Personnel
 		[TableColumn("ValidTo")]
 		public DateTime ValidToDate { get; set; }
 		#endregion
+		
+		public bool IsValidTo { get; set; }
 
 		#region public DateTime IssueDate { get; set; } 
 

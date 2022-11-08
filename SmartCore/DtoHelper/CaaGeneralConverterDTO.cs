@@ -1349,6 +1349,7 @@ namespace SmartCore.DtoHelper
 				CAAId = specialistCaa.Caa?.ItemId ?? -1,
 				CAAType = (int)specialistCaa.CaaType,
 				ValidTo = specialistCaa.ValidToDate,
+				IsValidTo = specialistCaa.IsValidTo,
 				SpecialistLicenseId = specialistCaa.SpecialistLicenseId,
 				Notify = specialistCaa.NotifyLifelength?.ConvertToByteArray(),
 				IssueDate = specialistCaa.IssueDate
@@ -1367,6 +1368,7 @@ namespace SmartCore.DtoHelper
 				Caa = Citizenship.Items.GetItemById(specialistCaa.CAAId),
 				CaaType = (CaaType)specialistCaa.CAAType,
 				ValidToDate = specialistCaa.ValidTo,
+				IsValidTo = specialistCaa.IsValidTo,
 				SpecialistLicenseId = specialistCaa.SpecialistLicenseId ?? -1,
 				NotifyLifelength = Lifelength.ConvertFromByteArray(specialistCaa.Notify),
 				IssueDate = specialistCaa.IssueDate ?? DateTimeExtend.GetCASMinDateTime()
