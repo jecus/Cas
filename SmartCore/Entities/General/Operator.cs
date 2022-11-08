@@ -372,6 +372,9 @@ namespace SmartCore.Entities.General
 	    
         [JsonProperty]
         public string Remarks { get; set; }
+        
+        [JsonProperty]
+        public string ShortName { get; set; }
     }
 
 }

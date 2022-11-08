@@ -143,6 +143,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
         public bool GetChangeStatus()
         {
             return (_textBoxName.Text != _currentOperator.Name ||
+                    textBoxShortName.Text != _currentOperator.Settings.ShortName ||
                     _textBoxIcao.Text != _currentOperator.ICAOCode ||
                     _textBoxAddress.Text != _currentOperator.Address ||
                     _textBoxPhone.Text != _currentOperator.Phone ||
@@ -161,6 +162,11 @@ namespace CAS.UI.UIControls.OpepatorsControls
         public void UpdateInformation()
         {
             _textBoxName.Text = _currentOperator.Name;
+
+            if (_currentOperator.Settings == null)
+                _currentOperator.Settings = new OperatorSettings();
+            
+            textBoxShortName.Text = _currentOperator.Settings.ShortName;
             _textBoxIcao.Text = _currentOperator.ICAOCode;
             _textBoxAddress.Text = _currentOperator.Address;
             _textBoxPhone.Text = _currentOperator.Phone;
@@ -194,6 +200,8 @@ namespace CAS.UI.UIControls.OpepatorsControls
         {
             if (_textBoxName.Text != _currentOperator.Name)
                 _currentOperator.Name = _textBoxName.Text;
+            if (textBoxShortName.Text != _currentOperator.Settings.ShortName)
+                _currentOperator.Settings.ShortName = textBoxShortName.Text;
             if (_textBoxIcao.Text != _currentOperator.ICAOCode)
                 _currentOperator.ICAOCode = _textBoxIcao.Text;
             if (_textBoxAddress.Text != _currentOperator.Address)

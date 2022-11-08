@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using CAA.Entity.Models.DTO;
 using CAS.Entity.Models.DTO.General;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
@@ -65,7 +66,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
             if (GlobalObjects.CasEnvironment != null)
                CurrentOperator =  GlobalObjects.CasEnvironment.NewLoader.GetObjectById<OperatorDTO, Operator>(CurrentOperator.ItemId);
-            else CurrentOperator = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<OperatorDTO, Operator>(CurrentOperator.ItemId);
+            else CurrentOperator = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAAOperatorDTO, Operator>(CurrentOperator.ItemId);
 
             OperatorControl.CurrentOperator = CurrentOperator;
         }

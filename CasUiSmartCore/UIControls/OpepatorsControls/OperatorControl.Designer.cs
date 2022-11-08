@@ -61,6 +61,8 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBoxStamp = new System.Windows.Forms.PictureBox();
             this.linkLabelChangeStamp = new System.Windows.Forms.LinkLabel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxShortName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxWhiteBackgroundLogotype)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReportLogoLarge)).BeginInit();
@@ -85,7 +87,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this._labelIcao.AutoSize = true;
             this._labelIcao.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._labelIcao.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._labelIcao.Location = new System.Drawing.Point(20, 50);
+            this._labelIcao.Location = new System.Drawing.Point(20, 82);
             this._labelIcao.Name = "_labelIcao";
             this._labelIcao.Size = new System.Drawing.Size(82, 17);
             this._labelIcao.TabIndex = 1;
@@ -97,7 +99,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this._labelAddress.AutoSize = true;
             this._labelAddress.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._labelAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._labelAddress.Location = new System.Drawing.Point(20, 81);
+            this._labelAddress.Location = new System.Drawing.Point(20, 113);
             this._labelAddress.Name = "_labelAddress";
             this._labelAddress.Size = new System.Drawing.Size(66, 17);
             this._labelAddress.TabIndex = 2;
@@ -109,7 +111,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this._labelPhone.AutoSize = true;
             this._labelPhone.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._labelPhone.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._labelPhone.Location = new System.Drawing.Point(20, 142);
+            this._labelPhone.Location = new System.Drawing.Point(20, 174);
             this._labelPhone.Name = "_labelPhone";
             this._labelPhone.Size = new System.Drawing.Size(51, 17);
             this._labelPhone.TabIndex = 3;
@@ -121,7 +123,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this._labelFax.AutoSize = true;
             this._labelFax.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._labelFax.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._labelFax.Location = new System.Drawing.Point(20, 173);
+            this._labelFax.Location = new System.Drawing.Point(20, 205);
             this._labelFax.Name = "_labelFax";
             this._labelFax.Size = new System.Drawing.Size(32, 17);
             this._labelFax.TabIndex = 4;
@@ -133,7 +135,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this._labelEmail.AutoSize = true;
             this._labelEmail.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._labelEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._labelEmail.Location = new System.Drawing.Point(20, 204);
+            this._labelEmail.Location = new System.Drawing.Point(20, 236);
             this._labelEmail.Name = "_labelEmail";
             this._labelEmail.Size = new System.Drawing.Size(44, 17);
             this._labelEmail.TabIndex = 5;
@@ -144,7 +146,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this._labelTransparentLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._labelTransparentLogotype.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._labelTransparentLogotype.Location = new System.Drawing.Point(20, 232);
+            this._labelTransparentLogotype.Location = new System.Drawing.Point(20, 274);
             this._labelTransparentLogotype.Name = "_labelTransparentLogotype";
             this._labelTransparentLogotype.Size = new System.Drawing.Size(184, 48);
             this._labelTransparentLogotype.TabIndex = 6;
@@ -155,7 +157,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this._labelWhiteBackgroundLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._labelWhiteBackgroundLogotype.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._labelWhiteBackgroundLogotype.Location = new System.Drawing.Point(20, 291);
+            this._labelWhiteBackgroundLogotype.Location = new System.Drawing.Point(20, 333);
             this._labelWhiteBackgroundLogotype.Name = "_labelWhiteBackgroundLogotype";
             this._labelWhiteBackgroundLogotype.Size = new System.Drawing.Size(184, 53);
             this._labelWhiteBackgroundLogotype.TabIndex = 7;
@@ -176,7 +178,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this._textBoxIcao.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._textBoxIcao.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._textBoxIcao.Location = new System.Drawing.Point(210, 47);
+            this._textBoxIcao.Location = new System.Drawing.Point(210, 79);
             this._textBoxIcao.MaxLength = 256;
             this._textBoxIcao.Name = "_textBoxIcao";
             this._textBoxIcao.Size = new System.Drawing.Size(300, 25);
@@ -186,7 +188,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this._textBoxAddress.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._textBoxAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._textBoxAddress.Location = new System.Drawing.Point(210, 78);
+            this._textBoxAddress.Location = new System.Drawing.Point(210, 110);
             this._textBoxAddress.MaxLength = 256;
             this._textBoxAddress.Multiline = true;
             this._textBoxAddress.Name = "_textBoxAddress";
@@ -197,7 +199,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this._textBoxPhone.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._textBoxPhone.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._textBoxPhone.Location = new System.Drawing.Point(210, 139);
+            this._textBoxPhone.Location = new System.Drawing.Point(210, 171);
             this._textBoxPhone.MaxLength = 256;
             this._textBoxPhone.Name = "_textBoxPhone";
             this._textBoxPhone.Size = new System.Drawing.Size(300, 25);
@@ -207,7 +209,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this._textBoxFax.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._textBoxFax.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._textBoxFax.Location = new System.Drawing.Point(210, 170);
+            this._textBoxFax.Location = new System.Drawing.Point(210, 202);
             this._textBoxFax.MaxLength = 256;
             this._textBoxFax.Name = "_textBoxFax";
             this._textBoxFax.Size = new System.Drawing.Size(300, 25);
@@ -217,7 +219,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this._textBoxEmail.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._textBoxEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this._textBoxEmail.Location = new System.Drawing.Point(210, 201);
+            this._textBoxEmail.Location = new System.Drawing.Point(210, 233);
             this._textBoxEmail.MaxLength = 256;
             this._textBoxEmail.Name = "_textBoxEmail";
             this._textBoxEmail.Size = new System.Drawing.Size(300, 25);
@@ -229,7 +231,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this._pictureBoxTransparentLogotype.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
             this._pictureBoxTransparentLogotype.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this._pictureBoxTransparentLogotype.Cursor = System.Windows.Forms.Cursors.Hand;
-            this._pictureBoxTransparentLogotype.Location = new System.Drawing.Point(210, 232);
+            this._pictureBoxTransparentLogotype.Location = new System.Drawing.Point(210, 274);
             this._pictureBoxTransparentLogotype.Name = "_pictureBoxTransparentLogotype";
             this._pictureBoxTransparentLogotype.Size = new System.Drawing.Size(48, 48);
             this._pictureBoxTransparentLogotype.TabIndex = 6;
@@ -242,7 +244,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this._pictureBoxWhiteBackgroundLogotype.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
             this._pictureBoxWhiteBackgroundLogotype.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this._pictureBoxWhiteBackgroundLogotype.Cursor = System.Windows.Forms.Cursors.Hand;
-            this._pictureBoxWhiteBackgroundLogotype.Location = new System.Drawing.Point(210, 291);
+            this._pictureBoxWhiteBackgroundLogotype.Location = new System.Drawing.Point(210, 333);
             this._pictureBoxWhiteBackgroundLogotype.Name = "_pictureBoxWhiteBackgroundLogotype";
             this._pictureBoxWhiteBackgroundLogotype.Size = new System.Drawing.Size(48, 48);
             this._pictureBoxWhiteBackgroundLogotype.TabIndex = 6;
@@ -253,7 +255,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this._linkChangeTransparentLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkChangeTransparentLogotype.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkChangeTransparentLogotype.Location = new System.Drawing.Point(335, 232);
+            this._linkChangeTransparentLogotype.Location = new System.Drawing.Point(335, 274);
             this._linkChangeTransparentLogotype.Name = "_linkChangeTransparentLogotype";
             this._linkChangeTransparentLogotype.Size = new System.Drawing.Size(85, 48);
             this._linkChangeTransparentLogotype.TabIndex = 8;
@@ -266,7 +268,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this._linkChangeWhiteBackgroundLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkChangeWhiteBackgroundLogotype.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkChangeWhiteBackgroundLogotype.Location = new System.Drawing.Point(335, 291);
+            this._linkChangeWhiteBackgroundLogotype.Location = new System.Drawing.Point(335, 333);
             this._linkChangeWhiteBackgroundLogotype.Name = "_linkChangeWhiteBackgroundLogotype";
             this._linkChangeWhiteBackgroundLogotype.Size = new System.Drawing.Size(85, 48);
             this._linkChangeWhiteBackgroundLogotype.TabIndex = 9;
@@ -279,7 +281,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this.labelReportLogoLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.labelReportLogoLarge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.labelReportLogoLarge.Location = new System.Drawing.Point(20, 351);
+            this.labelReportLogoLarge.Location = new System.Drawing.Point(20, 393);
             this.labelReportLogoLarge.Name = "labelReportLogoLarge";
             this.labelReportLogoLarge.Size = new System.Drawing.Size(184, 53);
             this.labelReportLogoLarge.TabIndex = 10;
@@ -292,7 +294,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this.pictureBoxReportLogoLarge.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
             this.pictureBoxReportLogoLarge.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBoxReportLogoLarge.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxReportLogoLarge.Location = new System.Drawing.Point(210, 351);
+            this.pictureBoxReportLogoLarge.Location = new System.Drawing.Point(210, 393);
             this.pictureBoxReportLogoLarge.Name = "pictureBoxReportLogoLarge";
             this.pictureBoxReportLogoLarge.Size = new System.Drawing.Size(48, 48);
             this.pictureBoxReportLogoLarge.TabIndex = 10;
@@ -303,7 +305,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this.linkLabelChengeReportLogoLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.linkLabelChengeReportLogoLarge.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.linkLabelChengeReportLogoLarge.Location = new System.Drawing.Point(335, 351);
+            this.linkLabelChengeReportLogoLarge.Location = new System.Drawing.Point(335, 393);
             this.linkLabelChengeReportLogoLarge.Name = "linkLabelChengeReportLogoLarge";
             this.linkLabelChengeReportLogoLarge.Size = new System.Drawing.Size(85, 48);
             this.linkLabelChengeReportLogoLarge.TabIndex = 11;
@@ -316,7 +318,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this.labelReportLogoVeryLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.labelReportLogoVeryLarge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.labelReportLogoVeryLarge.Location = new System.Drawing.Point(20, 411);
+            this.labelReportLogoVeryLarge.Location = new System.Drawing.Point(20, 453);
             this.labelReportLogoVeryLarge.Name = "labelReportLogoVeryLarge";
             this.labelReportLogoVeryLarge.Size = new System.Drawing.Size(184, 53);
             this.labelReportLogoVeryLarge.TabIndex = 10;
@@ -329,7 +331,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this.pictureBoxReportLogoVeryLarge.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
             this.pictureBoxReportLogoVeryLarge.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBoxReportLogoVeryLarge.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxReportLogoVeryLarge.Location = new System.Drawing.Point(210, 411);
+            this.pictureBoxReportLogoVeryLarge.Location = new System.Drawing.Point(210, 453);
             this.pictureBoxReportLogoVeryLarge.Name = "pictureBoxReportLogoVeryLarge";
             this.pictureBoxReportLogoVeryLarge.Size = new System.Drawing.Size(48, 48);
             this.pictureBoxReportLogoVeryLarge.TabIndex = 10;
@@ -340,7 +342,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this.linkLabelChengeReportLogoVeryLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.linkLabelChengeReportLogoVeryLarge.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.linkLabelChengeReportLogoVeryLarge.Location = new System.Drawing.Point(335, 411);
+            this.linkLabelChengeReportLogoVeryLarge.Location = new System.Drawing.Point(335, 453);
             this.linkLabelChengeReportLogoVeryLarge.Name = "linkLabelChengeReportLogoVeryLarge";
             this.linkLabelChengeReportLogoVeryLarge.Size = new System.Drawing.Size(85, 48);
             this.linkLabelChengeReportLogoVeryLarge.TabIndex = 11;
@@ -353,7 +355,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this._linkDeleteTransparentLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkDeleteTransparentLogotype.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkDeleteTransparentLogotype.Location = new System.Drawing.Point(412, 232);
+            this._linkDeleteTransparentLogotype.Location = new System.Drawing.Point(412, 274);
             this._linkDeleteTransparentLogotype.Name = "_linkDeleteTransparentLogotype";
             this._linkDeleteTransparentLogotype.Size = new System.Drawing.Size(85, 48);
             this._linkDeleteTransparentLogotype.TabIndex = 12;
@@ -366,7 +368,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this._linkDeleteWhiteBackgroundLogotype.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkDeleteWhiteBackgroundLogotype.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkDeleteWhiteBackgroundLogotype.Location = new System.Drawing.Point(412, 291);
+            this._linkDeleteWhiteBackgroundLogotype.Location = new System.Drawing.Point(412, 333);
             this._linkDeleteWhiteBackgroundLogotype.Name = "_linkDeleteWhiteBackgroundLogotype";
             this._linkDeleteWhiteBackgroundLogotype.Size = new System.Drawing.Size(85, 48);
             this._linkDeleteWhiteBackgroundLogotype.TabIndex = 13;
@@ -379,7 +381,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this._linkDeleteChengeReportLogoLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkDeleteChengeReportLogoLarge.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkDeleteChengeReportLogoLarge.Location = new System.Drawing.Point(412, 353);
+            this._linkDeleteChengeReportLogoLarge.Location = new System.Drawing.Point(412, 395);
             this._linkDeleteChengeReportLogoLarge.Name = "_linkDeleteChengeReportLogoLarge";
             this._linkDeleteChengeReportLogoLarge.Size = new System.Drawing.Size(85, 48);
             this._linkDeleteChengeReportLogoLarge.TabIndex = 14;
@@ -392,7 +394,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this._linkDeleteReportLogoVeryLarge.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this._linkDeleteReportLogoVeryLarge.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this._linkDeleteReportLogoVeryLarge.Location = new System.Drawing.Point(412, 411);
+            this._linkDeleteReportLogoVeryLarge.Location = new System.Drawing.Point(412, 453);
             this._linkDeleteReportLogoVeryLarge.Name = "_linkDeleteReportLogoVeryLarge";
             this._linkDeleteReportLogoVeryLarge.Size = new System.Drawing.Size(85, 48);
             this._linkDeleteReportLogoVeryLarge.TabIndex = 15;
@@ -405,7 +407,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this.linkLabelRemoveStamp.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.linkLabelRemoveStamp.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.linkLabelRemoveStamp.Location = new System.Drawing.Point(412, 465);
+            this.linkLabelRemoveStamp.Location = new System.Drawing.Point(412, 507);
             this.linkLabelRemoveStamp.Name = "linkLabelRemoveStamp";
             this.linkLabelRemoveStamp.Size = new System.Drawing.Size(85, 48);
             this.linkLabelRemoveStamp.TabIndex = 19;
@@ -418,7 +420,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this.label1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.label1.Location = new System.Drawing.Point(20, 465);
+            this.label1.Location = new System.Drawing.Point(20, 507);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(184, 53);
             this.label1.TabIndex = 17;
@@ -431,7 +433,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this.pictureBoxStamp.BackgroundImage = global::CAS.UI.Properties.Resources.EmptyLogotypeIcon;
             this.pictureBoxStamp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBoxStamp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxStamp.Location = new System.Drawing.Point(210, 465);
+            this.pictureBoxStamp.Location = new System.Drawing.Point(210, 507);
             this.pictureBoxStamp.Name = "pictureBoxStamp";
             this.pictureBoxStamp.Size = new System.Drawing.Size(48, 48);
             this.pictureBoxStamp.TabIndex = 16;
@@ -441,7 +443,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // 
             this.linkLabelChangeStamp.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.linkLabelChangeStamp.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.linkLabelChangeStamp.Location = new System.Drawing.Point(335, 465);
+            this.linkLabelChangeStamp.Location = new System.Drawing.Point(335, 507);
             this.linkLabelChangeStamp.Name = "linkLabelChangeStamp";
             this.linkLabelChangeStamp.Size = new System.Drawing.Size(85, 48);
             this.linkLabelChangeStamp.TabIndex = 18;
@@ -450,11 +452,35 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this.linkLabelChangeStamp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.linkLabelChangeStamp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLogotypeLinkClicked);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.label2.Location = new System.Drawing.Point(20, 51);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(92, 17);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Short Name";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBoxShortName
+            // 
+            this.textBoxShortName.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.textBoxShortName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.textBoxShortName.Location = new System.Drawing.Point(210, 48);
+            this.textBoxShortName.MaxLength = 256;
+            this.textBoxShortName.Name = "textBoxShortName";
+            this.textBoxShortName.Size = new System.Drawing.Size(300, 25);
+            this.textBoxShortName.TabIndex = 20;
+            // 
             // OperatorControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBoxShortName);
             this.Controls.Add(this.linkLabelRemoveStamp);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBoxStamp);
@@ -488,7 +514,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this.Controls.Add(this._linkChangeTransparentLogotype);
             this.Controls.Add(this._linkChangeWhiteBackgroundLogotype);
             this.Name = "OperatorControl";
-            this.Size = new System.Drawing.Size(513, 567);
+            this.Size = new System.Drawing.Size(513, 608);
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBoxWhiteBackgroundLogotype)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReportLogoLarge)).EndInit();
@@ -497,6 +523,9 @@ namespace CAS.UI.UIControls.OpepatorsControls
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxShortName;
 
         private System.Windows.Forms.LinkLabel linkLabelRemoveStamp;
         private System.Windows.Forms.Label label1;
