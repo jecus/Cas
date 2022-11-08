@@ -41,6 +41,10 @@ namespace CAS.Entity.Models.DTO.General
 		
 		[Column("ValidToDate")]
 		public DateTime? ValidToDate { get; set; }
+		
+		
+		[Column("IsValidTo")]
+		public bool IsValidTo { get; set; }
 
 		
 		[Include]

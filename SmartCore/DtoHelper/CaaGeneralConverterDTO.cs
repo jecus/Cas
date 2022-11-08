@@ -1165,6 +1165,7 @@ namespace SmartCore.DtoHelper
 				Notify = license.NotifyLifelength?.ConvertToByteArray(),
 				IssueDate = license.IssueDate,
 				ValidToDate = license.ValidToDate,
+				IsValidTo = license.IsValidTo,
 				CaaLicense = license.CaaLicense?.Select(i => i.ConvertCAA()) as ICollection<CAASpecialistCustomDTO>,
 				LicenseDetails = license.LicenseDetails?.Select(i => i.ConvertCAA()) as ICollection<CAASpecialistLicenseDetailDTO>,
 				LicenseRatings = license.LicenseRatings?.Select(i => i.ConvertCAA()) as ICollection<CAASpecialistLicenseRatingDTO>,
@@ -1188,6 +1189,7 @@ namespace SmartCore.DtoHelper
 				NotifyLifelength = Lifelength.ConvertFromByteArray(license.Notify),
 				IssueDate = license.IssueDate ?? DateTimeExtend.GetCASMinDateTime(),
 				ValidToDate = license.ValidToDate ?? DateTimeExtend.GetCASMinDateTime(),
+				IsValidTo = license.IsValidTo,
 				AircraftType = license.AircraftType?.ConvertToAircraftModelCAA()
 			};
 

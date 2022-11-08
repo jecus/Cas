@@ -41,6 +41,9 @@ namespace CAA.Entity.Models.DTO
 		
 		[Column("ValidToDate")]
 		public DateTime? ValidToDate { get; set; }
+		
+		[Column("IsValidTo")]
+		public bool IsValidTo { get; set; }
 
 		
 		[Include]

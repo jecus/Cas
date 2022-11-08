@@ -25,8 +25,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 		#region Component Designer generated code
 
-		/// <summary> 
-		/// Required method for Designer support - do not modify 
+		/// <summary>
+		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent()
@@ -63,6 +63,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.dateTimePickerValidToCAA = new System.Windows.Forms.DateTimePicker();
 			this.labelIssueBy = new System.Windows.Forms.Label();
 			this.delimiter1 = new CAS.UI.UIControls.Auxiliary.Delimiter();
+			this.checkBoxIsValid = new System.Windows.Forms.CheckBox();
 			this.flowLayoutPanelCaa.SuspendLayout();
 			this.flowLayoutPanelLicenceType.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -119,12 +120,12 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.comboBoxLicenceType.Size = new System.Drawing.Size(559, 25);
 			this.comboBoxLicenceType.TabIndex = 28;
 			this.comboBoxLicenceType.SelectedIndexChanged += new System.EventHandler(this.comboBoxLicenceType_SelectedIndexChanged);
-			this.comboBoxLicenceType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// employeeLicenceLicenseCaaControl
 			// 
 			this.employeeLicenceLicenseCaaControl.Location = new System.Drawing.Point(3, 38);
 			this.employeeLicenceLicenseCaaControl.Name = "employeeLicenceLicenseCaaControl";
+			this.employeeLicenceLicenseCaaControl.OperatorId = 0;
 			this.employeeLicenceLicenseCaaControl.Size = new System.Drawing.Size(905, 27);
 			this.employeeLicenceLicenseCaaControl.TabIndex = 29;
 			// 
@@ -233,6 +234,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			// 
 			// comboBoxCategory
 			// 
+			this.comboBoxCategory.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+			this.comboBoxCategory.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
 			this.comboBoxCategory.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.comboBoxCategory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxCategory.FormattingEnabled = true;
@@ -241,9 +244,6 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.comboBoxCategory.Name = "comboBoxCategory";
 			this.comboBoxCategory.Size = new System.Drawing.Size(562, 25);
 			this.comboBoxCategory.TabIndex = 69;
-			this.comboBoxCategory.AutoCompleteMode = AutoCompleteMode.Suggest;
-			this.comboBoxCategory.AutoCompleteSource = AutoCompleteSource.ListItems;
-			this.comboBoxCategory.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label1
 			// 
@@ -387,25 +387,27 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			// 
 			// tableLayoutPanel2
 			// 
-			this.tableLayoutPanel2.ColumnCount = 5;
+			this.tableLayoutPanel2.ColumnCount = 6;
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel2.Controls.Add(this.documentControl1, 0, 1);
-			this.tableLayoutPanel2.Controls.Add(this.lifelengthViewer1, 4, 0);
-			this.tableLayoutPanel2.Controls.Add(this.dateTimePickerIssueDate, 3, 0);
-			this.tableLayoutPanel2.Controls.Add(this.label2, 2, 0);
-			this.tableLayoutPanel2.Controls.Add(this.dateTimePickerValidToCAA, 1, 0);
-			this.tableLayoutPanel2.Controls.Add(this.labelIssueBy, 0, 0);
 			this.tableLayoutPanel2.Controls.Add(this.delimiter1, 0, 2);
+			this.tableLayoutPanel2.Controls.Add(this.labelIssueBy, 1, 0);
+			this.tableLayoutPanel2.Controls.Add(this.dateTimePickerValidToCAA, 2, 0);
+			this.tableLayoutPanel2.Controls.Add(this.label2, 3, 0);
+			this.tableLayoutPanel2.Controls.Add(this.dateTimePickerIssueDate, 4, 0);
+			this.tableLayoutPanel2.Controls.Add(this.checkBoxIsValid, 0, 0);
+			this.tableLayoutPanel2.Controls.Add(this.lifelengthViewer1, 5, 0);
 			this.tableLayoutPanel2.Location = new System.Drawing.Point(142, 141);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.RowCount = 3;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel2.Size = new System.Drawing.Size(908, 94);
 			this.tableLayoutPanel2.TabIndex = 78;
 			// 
@@ -435,7 +437,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.lifelengthViewer1.HeaderHours = "Hours";
 			this.lifelengthViewer1.HoursApplicable = false;
 			this.lifelengthViewer1.LeftHeader = "Notify";
-			this.lifelengthViewer1.Location = new System.Drawing.Point(464, 2);
+			this.lifelengthViewer1.Location = new System.Drawing.Point(492, 2);
 			this.lifelengthViewer1.Margin = new System.Windows.Forms.Padding(2);
 			this.lifelengthViewer1.Modified = false;
 			this.lifelengthViewer1.Name = "lifelengthViewer1";
@@ -445,7 +447,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.lifelengthViewer1.ShowFormattedCalendar = false;
 			this.lifelengthViewer1.ShowHeaders = false;
 			this.lifelengthViewer1.ShowMinutes = true;
-			this.lifelengthViewer1.Size = new System.Drawing.Size(225, 35);
+			this.lifelengthViewer1.Size = new System.Drawing.Size(416, 35);
 			this.lifelengthViewer1.SystemCalculated = true;
 			this.lifelengthViewer1.TabIndex = 81;
 			// 
@@ -453,7 +455,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			// 
 			this.dateTimePickerIssueDate.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateTimePickerIssueDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.dateTimePickerIssueDate.Location = new System.Drawing.Point(293, 7);
+			this.dateTimePickerIssueDate.Location = new System.Drawing.Point(321, 7);
 			this.dateTimePickerIssueDate.Margin = new System.Windows.Forms.Padding(3, 7, 3, 3);
 			this.dateTimePickerIssueDate.Name = "dateTimePickerIssueDate";
 			this.dateTimePickerIssueDate.Size = new System.Drawing.Size(166, 22);
@@ -464,7 +466,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.label2.AutoSize = true;
 			this.label2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label2.Location = new System.Drawing.Point(240, 0);
+			this.label2.Location = new System.Drawing.Point(268, 0);
 			this.label2.Name = "label2";
 			this.label2.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
 			this.label2.Size = new System.Drawing.Size(47, 24);
@@ -475,7 +477,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			// 
 			this.dateTimePickerValidToCAA.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateTimePickerValidToCAA.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.dateTimePickerValidToCAA.Location = new System.Drawing.Point(68, 7);
+			this.dateTimePickerValidToCAA.Location = new System.Drawing.Point(96, 7);
 			this.dateTimePickerValidToCAA.Margin = new System.Windows.Forms.Padding(3, 7, 3, 3);
 			this.dateTimePickerValidToCAA.Name = "dateTimePickerValidToCAA";
 			this.dateTimePickerValidToCAA.Size = new System.Drawing.Size(166, 22);
@@ -486,7 +488,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.labelIssueBy.AutoSize = true;
 			this.labelIssueBy.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelIssueBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelIssueBy.Location = new System.Drawing.Point(3, 0);
+			this.labelIssueBy.Location = new System.Drawing.Point(31, 0);
 			this.labelIssueBy.Name = "labelIssueBy";
 			this.labelIssueBy.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
 			this.labelIssueBy.Size = new System.Drawing.Size(59, 24);
@@ -503,6 +505,19 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.delimiter1.Size = new System.Drawing.Size(696, 2);
 			this.delimiter1.Style = CAS.UI.UIControls.Auxiliary.DelimiterStyle.Solid;
 			this.delimiter1.TabIndex = 83;
+			// 
+			// checkBoxIsValid
+			// 
+			this.checkBoxIsValid.AutoSize = true;
+			this.checkBoxIsValid.Font = new System.Drawing.Font("Verdana", 9F);
+			this.checkBoxIsValid.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.checkBoxIsValid.Location = new System.Drawing.Point(10, 10);
+			this.checkBoxIsValid.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
+			this.checkBoxIsValid.Name = "checkBoxIsValid";
+			this.checkBoxIsValid.Size = new System.Drawing.Size(15, 14);
+			this.checkBoxIsValid.TabIndex = 84;
+			this.checkBoxIsValid.UseVisualStyleBackColor = true;
+			this.checkBoxIsValid.CheckedChanged += checkBoxIsValid_CheckedChanged;
 			// 
 			// EmployeeLicenceGeneralControl
 			// 
@@ -523,8 +538,9 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.tableLayoutPanel2.ResumeLayout(false);
 			this.tableLayoutPanel2.PerformLayout();
 			this.ResumeLayout(false);
-
 		}
+
+		private System.Windows.Forms.CheckBox checkBoxIsValid;
 
 		#endregion
 
@@ -556,8 +572,8 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 		private System.Windows.Forms.DateTimePicker dateTimePickerValidToCAA;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.DateTimePicker dateTimePickerIssueDate;
-		private Auxiliary.LifelengthViewer lifelengthViewer1;
-		private DocumentationControls.DocumentControl documentControl1;
-		private Auxiliary.Delimiter delimiter1;
+		private CAS.UI.UIControls.Auxiliary.LifelengthViewer lifelengthViewer1;
+		private CAS.UI.UIControls.DocumentationControls.DocumentControl documentControl1;
+		private CAS.UI.UIControls.Auxiliary.Delimiter delimiter1;
 	}
 }

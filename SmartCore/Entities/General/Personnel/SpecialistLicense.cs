@@ -66,6 +66,8 @@ namespace SmartCore.Entities.General.Personnel
 		}
 
 		#endregion
+		
+		public bool IsValidTo { get; set; }
 
 		#region public DateTime IssueDate { get; set; } 
 

@@ -111,6 +111,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			dateTimePickerValidToCAA.Value = _license.ValidToDate;
 			dateTimePickerIssueDate.Value = _license.IssueDate;
 			lifelengthViewer1.Lifelength = _license.NotifyLifelength;
+			checkBoxIsValid.Checked = _license.IsValidTo;
 
 			documentControl1.CurrentDocument = _license.Document;
 			documentControl1.Added += DocumentControl1_Added;
@@ -236,6 +237,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			       _license.EmployeeLicenceType != (EmployeeLicenceType)comboBoxLicenceType.SelectedItem ||
 			       _license.AircraftType != (AircraftModel)comboBoxCategory.SelectedItem ||
 			       _license.ValidToDate != dateTimePickerValidToCAA.Value ||
+			       _license.IsValidTo != checkBoxIsValid.Checked ||
 			       _license.IssueDate != dateTimePickerIssueDate.Value ||
 			       _license.NotifyLifelength != lifelengthViewer1.Lifelength ||
 				   caaControls.Any(c => c.GetChangeStatus()) ||
@@ -258,6 +260,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			_license.ValidToDate = dateTimePickerValidToCAA.Value;
 			_license.IssueDate = dateTimePickerIssueDate.Value;
 			_license.NotifyLifelength = lifelengthViewer1.Lifelength;
+			_license.IsValidTo = checkBoxIsValid.Checked;
 
 			foreach (var control in flowLayoutPanelCaa.Controls.OfType<EmployeeLicenceCaaControl>())
 				control.ApplyChanges();
@@ -672,5 +675,10 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 
 		}
 		#endregion
+
+		private void checkBoxIsValid_CheckedChanged(object sender, EventArgs e)
+		{
+			lifelengthViewer1.Enabled = dateTimePickerValidToCAA.Enabled = checkBoxIsValid.Checked;
+		}
 	}
 }
