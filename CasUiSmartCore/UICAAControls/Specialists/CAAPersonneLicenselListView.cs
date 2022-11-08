@@ -128,6 +128,7 @@ namespace CAS.UI.UICAAControls.Specialists
             var instrumentRatings = "";
             var remarks = "";
             var details = "";
+            var isvalid = false;
             
             licensePers = item.PersonnelCategory;
             if(item.MedicalRecord != null)
@@ -141,7 +142,7 @@ namespace CAS.UI.UICAAControls.Specialists
             if (item.Licenses.Any())
             {
 	            var license = item.Licenses.FirstOrDefault();
-	            
+	            isvalid = license.IsValidTo;
 	            licenseType = license.EmployeeLicenceType;
 
 	            if (license.CaaLicense.Any(c => c.CaaType == CaaType.Other))
@@ -205,7 +206,7 @@ namespace CAS.UI.UICAAControls.Specialists
 				CreateRow(remainOther.ToString(), remainOther),
 				
 				CreateRow(licenseNo, licenseNo),
-				CreateRow(validToLicense, validToLicense),
+				CreateRow(isvalid ?validToLicense:"", validToLicense),
 				CreateRow(remainCaaLisence.ToString(), remainCaaLisence),
 				
 				CreateRow(aircraftType.ToString(), aircraftType),

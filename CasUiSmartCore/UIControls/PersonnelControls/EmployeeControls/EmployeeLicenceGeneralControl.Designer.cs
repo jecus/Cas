@@ -516,6 +516,7 @@ namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 			this.checkBoxIsValid.Size = new System.Drawing.Size(25, 33);
 			this.checkBoxIsValid.TabIndex = 84;
 			this.checkBoxIsValid.UseVisualStyleBackColor = true;
+			this.checkBoxIsValid.CheckedChanged += checkBoxIsValid_CheckedChanged;
 			// 
 			// EmployeeLicenceGeneralControl
 			// 

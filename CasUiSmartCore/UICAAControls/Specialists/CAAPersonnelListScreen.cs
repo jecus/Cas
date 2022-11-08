@@ -18,6 +18,7 @@ using CASTerms;
 using Entity.Abstractions;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA.Operators;
+using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -177,9 +178,16 @@ namespace CAS.UI.UICAAControls.Specialists
 			                license.CaaLicense = new CommonCollection<SpecialistCAA>(caaLicense.Where(i => i.SpecialistLicenseId == license.ItemId));
 			                foreach (var caa in license.CaaLicense)
 			                {
+				                if (!license.IsValidTo)
+				                {
+					                caa.Condition = ConditionState.UNK;
+					                caa.Remain = Lifelength.Null;
+					                continue;
+				                }
+				                
 				                if (caa.CaaType == CaaType.Other)
 					                GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(caa, caa.ValidToDate, caa.NotifyLifelength);
-				                else GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(caa, license.ValidToDate, caa.NotifyLifelength);
+				                else GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(caa, license.ValidToDate, license.NotifyLifelength);
 			                }
 			                
 			                if(license.CaaLicense.Any(i => i.CaaType == CaaType.Other)) 
