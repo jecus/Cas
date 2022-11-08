@@ -133,7 +133,7 @@ namespace SmartCore
             loadingState.CurrentPersentageDescription = "Loading Operators";
             backgroundWorker.ReportProgress(1, loadingState);
 
-            Operators = new OperatorCollection(_newLoader.GetObjectList<OperatorDTO, Operator>().ToArray());
+            Operators = new OperatorCollection(_newLoader.GetObjectList<CAAOperatorDTO, Operator>().ToArray());
 
             AllOperators = new List<AllOperators>(_newLoader.GetObjectList<AllOperatorsDTO, AllOperators>().ToArray());
 

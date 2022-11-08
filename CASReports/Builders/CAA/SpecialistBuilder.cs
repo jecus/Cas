@@ -1,15 +1,9 @@
 using System;
 using System.Linq;
-using Auxiliary;
-using CAA.Entity.Models.DTO;
 using CASReports.Datasets.CAA;
-using CASReports.ReportTemplates;
 using CASReports.ReportTemplates.CAA;
 using CASTerms;
-using SmartCore.Entities.General.Atlbs;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Personnel;
-using ATLBDataSet = CASReports.Datasets.ATLBDataSet;
 
 namespace CASReports.Builders.CAA
 {
@@ -19,12 +13,12 @@ namespace CASReports.Builders.CAA
     public class SpecialistBuilder : AbstractReportBuilder
     {
 	    private readonly Specialist _spec;
-	    private readonly int _reporterId;
+	    private readonly Specialist _reporter;
 
-	    public SpecialistBuilder(Specialist spec, int reporterId)
+	    public SpecialistBuilder(Specialist spec,  Specialist reporter)
 	    {
 		    _spec = spec;
-		    _reporterId = reporterId;
+		    _reporter = reporter;
 	    }
 
         #region Methods
@@ -54,8 +48,7 @@ namespace CASReports.Builders.CAA
         private void AddAdditionalInformation(SpecialistDataSet dataSet)
         {
 	        var caa = GlobalObjects.CaaEnvironment.Operators.FirstOrDefault();
-	        var reporter = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO,Specialist>(_reporterId);
-	        dataSet.AdditionalInfo.AddAdditionalInfoRow(caa.Name, caa.Settings?.ShortName ?? "",reporter.FirstName, reporter.LastName, reporter.Sign, reporter.Stamp);
+	        dataSet.AdditionalInfo.AddAdditionalInfoRow(caa.Name, caa.Settings?.ShortName ?? "",_reporter.FirstName, _reporter.LastName, _reporter.Sign, _reporter.Stamp);
         }
 
         #endregion
