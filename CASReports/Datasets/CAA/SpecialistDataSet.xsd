@@ -30,6 +30,18 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="AdditionalInfo" msprop:Generator_TableClassName="AdditionalInfoDataTable" msprop:Generator_TableVarName="tableAdditionalInfo" msprop:Generator_TablePropName="AdditionalInfo" msprop:Generator_RowDeletingName="AdditionalInfoRowDeleting" msprop:Generator_RowChangingName="AdditionalInfoRowChanging" msprop:Generator_RowEvHandlerName="AdditionalInfoRowChangeEventHandler" msprop:Generator_RowDeletedName="AdditionalInfoRowDeleted" msprop:Generator_UserTableName="AdditionalInfo" msprop:Generator_RowChangedName="AdditionalInfoRowChanged" msprop:Generator_RowEvArgName="AdditionalInfoRowChangeEvent" msprop:Generator_RowClassName="AdditionalInfoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CaaName" msprop:Generator_ColumnVarNameInTable="columnCaaName" msprop:Generator_ColumnPropNameInRow="CaaName" msprop:Generator_ColumnPropNameInTable="CaaNameColumn" msprop:Generator_UserColumnName="CaaName" type="xs:string" minOccurs="0" />
+              <xs:element name="CaaShortName" msprop:Generator_ColumnVarNameInTable="columnCaaShortName" msprop:Generator_ColumnPropNameInRow="CaaShortName" msprop:Generator_ColumnPropNameInTable="CaaShortNameColumn" msprop:Generator_UserColumnName="CaaShortName" type="xs:string" minOccurs="0" />
+              <xs:element name="FirstNameReporter" msprop:Generator_ColumnVarNameInTable="columnFirstNameReporter" msprop:Generator_ColumnPropNameInRow="FirstNameReporter" msprop:Generator_ColumnPropNameInTable="FirstNameReporterColumn" msprop:Generator_UserColumnName="FirstNameReporter" type="xs:string" minOccurs="0" />
+              <xs:element name="LastNameReporter" msprop:Generator_ColumnVarNameInTable="columnLastNameReporter" msprop:Generator_ColumnPropNameInRow="LastNameReporter" msprop:Generator_ColumnPropNameInTable="LastNameReporterColumn" msprop:Generator_UserColumnName="LastNameReporter" type="xs:string" minOccurs="0" />
+              <xs:element name="SignReporter" msprop:Generator_ColumnVarNameInTable="columnSignReporter" msprop:Generator_ColumnPropNameInRow="SignReporter" msprop:Generator_ColumnPropNameInTable="SignReporterColumn" msprop:Generator_UserColumnName="SignReporter" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="StampReporter" msprop:Generator_ColumnVarNameInTable="columnStampReporter" msprop:Generator_ColumnPropNameInRow="StampReporter" msprop:Generator_ColumnPropNameInTable="StampReporterColumn" msprop:Generator_UserColumnName="StampReporter" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

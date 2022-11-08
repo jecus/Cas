@@ -2711,6 +2711,10 @@
       <Project>{8988CAE1-D7C1-499B-B595-9B544FCCF7FB}</Project>
       <Name>Auxiliary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CAA.Entity.Models\CAA.Entity.Models.csproj">
+      <Project>{3f85bd51-a949-4ba4-a629-9f1bb5d4b924}</Project>
+      <Name>CAA.Entity.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CASTerms\CASGlobalTerms.csproj">
       <Project>{0e490ce9-c51f-408c-a6fb-39a8ce185817}</Project>
       <Name>CASGlobalTerms</Name>

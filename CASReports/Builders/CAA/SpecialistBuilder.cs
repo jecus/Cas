@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Auxiliary;
+using CAA.Entity.Models.DTO;
 using CASReports.Datasets.CAA;
 using CASReports.ReportTemplates;
 using CASReports.ReportTemplates.CAA;
@@ -18,10 +19,12 @@ namespace CASReports.Builders.CAA
     public class SpecialistBuilder : AbstractReportBuilder
     {
 	    private readonly Specialist _spec;
-	    
-	    public SpecialistBuilder(Specialist spec)
+	    private readonly int _reporterId;
+
+	    public SpecialistBuilder(Specialist spec, int reporterId)
 	    {
 		    _spec = spec;
+		    _reporterId = reporterId;
 	    }
 
         #region Methods
@@ -43,8 +46,16 @@ namespace CASReports.Builders.CAA
         {
 	        SpecialistDataSet dataSet = new SpecialistDataSet();
             AddSpecialistInformation(dataSet);
+            AddAdditionalInformation(dataSet);
             
             return dataSet;
+        }
+
+        private void AddAdditionalInformation(SpecialistDataSet dataSet)
+        {
+	        var caa = GlobalObjects.CaaEnvironment.Operators.FirstOrDefault();
+	        var reporter = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO,Specialist>(_reporterId);
+	        dataSet.AdditionalInfo.AddAdditionalInfoRow(caa.Name, caa.Settings?.ShortName ?? "",reporter.FirstName, reporter.LastName, reporter.Sign, reporter.Stamp);
         }
 
         #endregion
@@ -71,6 +82,9 @@ namespace CASReports.Builders.CAA
 	        dataSet.Part1Table
 		        .AddPart1TableRow(_spec.Sign, licenceNumber,name,dateOfBirth,placeOfBirth
 			        ,adress,nationality,issuing,null,valid,countryCode,titleLicense);
+
+
+	        
         }
 
         #endregion
