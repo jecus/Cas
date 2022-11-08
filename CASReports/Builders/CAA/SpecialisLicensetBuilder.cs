@@ -31,7 +31,7 @@ namespace CASReports.Builders.CAA
         public override object GenerateReport()
         {
 	        CAASpecLicence report = new CAASpecLicence();
-            //report.SetDataSource(GenerateDataSet());
+            report.SetDataSource(GenerateDataSet());
             return report;
         }
 
