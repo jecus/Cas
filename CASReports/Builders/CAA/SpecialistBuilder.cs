@@ -196,16 +196,8 @@ namespace CASReports.Builders.CAA
 			        level = $"English Level {lvl} validity: {next:dd.MM.yyyy}";
 		        }
 		        
-		        
-		        
-		        
-		       
 	        }
-
-
-
-
-
+	        
 	        dataSet.Part1Table
 		        .AddPart1TableRow(_spec.Sign, licenceNumber,name,dateOfBirth,placeOfBirth
 			        ,adress,nationality,issuing,null,valid,countryCode,titleLicense,privilages, level);

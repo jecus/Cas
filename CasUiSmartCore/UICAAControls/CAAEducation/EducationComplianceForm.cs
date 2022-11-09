@@ -8,6 +8,7 @@ using CASTerms;
 using Entity.Abstractions.Filters;
 using MetroFramework.Forms;
 using SmartCore.CAA.CAAEducation;
+using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 
 namespace CAS.UI.UICAAControls.CAAEducation
@@ -55,15 +56,13 @@ namespace CAS.UI.UICAAControls.CAAEducation
                 comboAircraft.Items.Add(AircraftModel.Unknown);
 
                 comboAircraft.SelectedItem = aircraftModels.FirstOrDefault(i => i.ItemId == _compliance.AircraftId) ?? AircraftModel.Unknown;
-                
+                lifelengthViewer.Lifelength = _compliance.Repeat;
                 
                 comboBoxLevel.Items.Clear();
                 foreach (var level in EnglishLevel.Items)
                     comboBoxLevel.Items.Add(level);
                 
                 comboBoxLevel.SelectedItem = EnglishLevel.Items.FirstOrDefault(i => i.ItemId == _compliance.LevelId) ?? EnglishLevel.Unknown;
-
-                lifelengthViewer.Lifelength = _compliance.Repeat;
                 
             }
             else
@@ -155,11 +154,36 @@ namespace CAS.UI.UICAAControls.CAAEducation
         private void checkBoxAircraft_CheckedChanged(object sender, EventArgs e)
         {
             comboAircraft.Enabled = checkBoxAircraft.Checked;
+            
+            if (checkBoxAircraft.Checked && checkBoxLevel.Checked)
+                checkBoxLevel.Checked = false;
         }
 
         private void checkBoxLevel_CheckedChanged(object sender, EventArgs e)
         {
             comboBoxLevel.Enabled = checkBoxLevel.Checked;
+            
+            if (checkBoxAircraft.Checked && checkBoxLevel.Checked)
+                checkBoxAircraft.Checked = false;
+            
+            if (checkBoxRepeat.Checked && checkBoxLevel.Checked)
+                checkBoxRepeat.Checked = false;
+        }
+
+        private void comboBoxLevel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var lvl = comboBoxLevel.SelectedItem as EnglishLevel;
+            var ll = Lifelength.Zero;
+            ll.CalendarType = CalendarTypes.Years;
+
+            if (lvl == EnglishLevel.Four)
+                ll.CalendarValue = 3;
+            else if (lvl == EnglishLevel.Five)
+                ll.CalendarValue = 5;
+            else if (lvl == EnglishLevel.Six)
+                ll = Lifelength.Null;
+
+            lifelengthViewer.Lifelength = ll;
         }
     }
 }

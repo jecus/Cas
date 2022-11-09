@@ -207,6 +207,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.comboBoxLevel.Name = "comboBoxLevel";
             this.comboBoxLevel.Size = new System.Drawing.Size(250, 21);
             this.comboBoxLevel.TabIndex = 342;
+            this.comboBoxLevel.SelectedIndexChanged += new System.EventHandler(this.comboBoxLevel_SelectedIndexChanged);
             // 
             // checkBoxAircraft
             // 

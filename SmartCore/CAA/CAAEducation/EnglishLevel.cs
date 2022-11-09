@@ -14,9 +14,9 @@ namespace SmartCore.CAA.CAAEducation
         private static CommonDictionaryCollection<EnglishLevel> _Items = new CommonDictionaryCollection<EnglishLevel>();
         #endregion
 
-        public static EnglishLevel One = new EnglishLevel(1, "1", "1", "1");
-        public static EnglishLevel Two = new EnglishLevel(2, "2", "2", "2");
-        public static EnglishLevel Three = new EnglishLevel(3, "3", "3", "3");
+        // public static EnglishLevel One = new EnglishLevel(1, "1", "1", "1");
+        // public static EnglishLevel Two = new EnglishLevel(2, "2", "2", "2");
+        // public static EnglishLevel Three = new EnglishLevel(3, "3", "3", "3");
         public static EnglishLevel Four = new EnglishLevel(4, "4", "4", "4");
         public static EnglishLevel Five = new EnglishLevel(5, "5", "5", "5");
         public static EnglishLevel Six = new EnglishLevel(6, "6", "6", "6");
