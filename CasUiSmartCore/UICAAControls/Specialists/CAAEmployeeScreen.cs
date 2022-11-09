@@ -827,7 +827,8 @@ namespace CAS.UI.UICAAControls.Specialists
 	        if (sender == _itemPrintFCL)
 	        {
 		        var reporter = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO,Specialist>(GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId);
-		        SpecialistBuilder builder = new SpecialistBuilder(_currentItem, reporter);
+		        SpecialistBuilder builder = new SpecialistBuilder(_currentItem, reporter, _records
+			        .Where(i => i.Education?.Task?.SubTaskCode == "5030").ToList());
 		        e.DisplayerText = "test";
 		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 		        e.RequestedEntity = new ReportScreen(builder);

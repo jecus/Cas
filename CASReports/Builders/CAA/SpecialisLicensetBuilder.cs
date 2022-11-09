@@ -66,11 +66,17 @@ namespace CASReports.Builders.CAA
 	        var nationality = _spec.Citizenship.ShortName;
 	        var issuing = $"{_license?.IssueDate:dd.MM.yyyy}" ?? String.Empty;
 	        var valid = $"{_license?.ValidToDate:dd.MM.yyyy}" ?? String.Empty;
-	        var countryCode = licenseCaa.Caa.ShortName;
+	        var countryCode = licenseCaa?.Caa.ShortName;
+	        var privilages = "";
+	        
+	        if (_spec.LicenseRemark.Any(i => i.LicenseRestriction.FullName.Contains("Radiotelephony operation in English")))
+	        {
+		        privilages = "This holder of this Licence demonstrated to operate R/T equipment on board aircraft in English";
+	        }
 	        
 	        dataSet.Part1Table
 		        .AddPart1TableRow(_spec.Sign, licenceNumber,name,dateOfBirth,placeOfBirth
-			        ,adress,nationality,issuing,null,valid,countryCode,titleLicense);
+			        ,adress,nationality,issuing,null,valid,countryCode,titleLicense, privilages, "");
         }
 
         #endregion

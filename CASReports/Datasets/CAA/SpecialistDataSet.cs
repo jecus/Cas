@@ -20,6 +20,10 @@ namespace CASReports.Datasets.CAA
 
 namespace CASReports.Datasets.CAA
 {
+}
+
+namespace CASReports.Datasets.CAA
+{
 
 
     public partial class ATLBDataSet
