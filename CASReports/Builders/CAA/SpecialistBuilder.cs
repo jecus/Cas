@@ -57,7 +57,10 @@ namespace CASReports.Builders.CAA
 	        var counteri = 1;
 	        var countere = 1;
 	        var countero = 1;
-	        foreach (var rating in _license.LicenseRatings)
+
+	        if (_license != null)
+	        {
+		         foreach (var rating in _license.LicenseRatings)
 	        {
 		        
 		        if (rating.Rights.FullName.ToLower().Contains("instructor"))
@@ -133,6 +136,9 @@ namespace CASReports.Builders.CAA
 			        countero++;
 		        }
 	        }
+	        }
+	        
+	       
 	        
 	        dataSet.TableData.AddTableDataRow(i1, i11, i2, i22, i3, i33, i4, i44,
 		        e1, e11, e2, e22, e3, e33, e4, e44,
@@ -164,11 +170,22 @@ namespace CASReports.Builders.CAA
 	        var nationality = _spec.Citizenship.ShortName;
 	        var issuing = $"{_license?.IssueDate:dd.MM.yyyy}" ?? String.Empty;
 	        var valid = $"{_license?.ValidToDate:dd.MM.yyyy}" ?? String.Empty;
-	        var countryCode = licenseCaa.Caa.ShortName;
+	        var countryCode = licenseCaa?.Caa.ShortName ?? "";
+	        var privilages = "";
+	        if (_license != null)
+	        {
+		        if (_license.LicenseRemark.Any(i => i.LicenseRestriction.FullName.Contains("Radiotelephony operation in English")))
+		        {
+			        privilages = "";
+		        }
+	        }
+	        
+	        
+	        
 	        
 	        dataSet.Part1Table
 		        .AddPart1TableRow(_spec.Sign, licenceNumber,name,dateOfBirth,placeOfBirth
-			        ,adress,nationality,issuing,null,valid,countryCode,titleLicense);
+			        ,adress,nationality,issuing,null,valid,countryCode,titleLicense,privilages);
 
 
 	        
