@@ -77,9 +77,12 @@
 			this.labelGradeValue = new System.Windows.Forms.Label();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.label4 = new System.Windows.Forms.Label();
+			this.pictureBoxQR = new System.Windows.Forms.PictureBox();
+			this.labelQR = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSign)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxQR)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// labelFirstName
@@ -666,10 +669,34 @@
 			this.label4.Text = "Stamp:";
 			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// pictureBoxQR
+			// 
+			this.pictureBoxQR.BackColor = System.Drawing.Color.White;
+			this.pictureBoxQR.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.pictureBoxQR.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.pictureBoxQR.Location = new System.Drawing.Point(863, 356);
+			this.pictureBoxQR.Name = "pictureBoxQR";
+			this.pictureBoxQR.Size = new System.Drawing.Size(250, 147);
+			this.pictureBoxQR.TabIndex = 109;
+			this.pictureBoxQR.TabStop = false;
+			// 
+			// labelQR
+			// 
+			this.labelQR.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelQR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelQR.Location = new System.Drawing.Point(811, 356);
+			this.labelQR.Name = "labelQR";
+			this.labelQR.Size = new System.Drawing.Size(46, 30);
+			this.labelQR.TabIndex = 108;
+			this.labelQR.Text = "QR:";
+			this.labelQR.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// EmployeeSummary
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.pictureBoxQR);
+			this.Controls.Add(this.labelQR);
 			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.labelGradeValue);
@@ -723,9 +750,13 @@
 			((System.ComponentModel.ISupportInitialize)(this._pictureBoxTransparentLogotype)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSign)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxQR)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+
+		private System.Windows.Forms.PictureBox pictureBoxQR;
+		private System.Windows.Forms.Label labelQR;
 
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.Label label4;

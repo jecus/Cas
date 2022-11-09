@@ -167,7 +167,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			// 
 			this.employeeSummary.Location = new System.Drawing.Point(3, 51);
 			this.employeeSummary.Name = "employeeSummary";
-			this.employeeSummary.Size = new System.Drawing.Size(1010, 499);
+			this.employeeSummary.Size = new System.Drawing.Size(1356, 499);
 			this.employeeSummary.TabIndex = 21;
 			// 
 			// extendableRichContainerGeneral

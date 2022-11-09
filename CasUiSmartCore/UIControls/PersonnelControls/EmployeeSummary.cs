@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using QRCoder;
 using SmartCore.Entities.General.Personnel;
 using Convert = SmartCore.Auxiliary.Convert;
 
@@ -65,7 +67,39 @@ namespace CAS.UI.UIControls.PersonnelControls
 			{
 				pictureBox1.Visible = false;
 				label4.Visible = false;
-			}else pictureBox1.BackgroundImage = _currentItem.StampImage;
+				labelQR.Visible = false;
+				pictureBoxQR.Visible = false;
+			}
+			else
+			{
+				pictureBox1.BackgroundImage = _currentItem.StampImage;
+
+				var text = $"First Name: {_currentItem.FirstName}\n" +
+				            $"Last Name: {_currentItem.LastName}\n" +
+				            $"Date of Birth: {Convert.GetDateFormat(_currentItem.DateOfBirth)}\n" +
+				            $"Sex: {_currentItem.Gender.ToString()}\n" +
+				            $"Nationality: {_currentItem.Citizenship}\n";
+
+				var licence = _currentItem.Licenses.FirstOrDefault();
+				
+				if (licence != null)
+				{
+					var licenseCaa = licence.CaaLicense.FirstOrDefault(c => c.CaaType == CaaType.Licence);
+					text += $"Issue by CAA:{licenseCaa?.Caa.ShortName} \n" +
+					        $"Licence Type: {licence.EmployeeLicenceType}\n" +
+					        $"Licence №: {licenseCaa?.CAANumber}\n" +
+					        $"Valid To: {licence?.ValidToDate:dd.MM.yyyy}\n";
+				}
+				
+
+				//text += $"Contact: {_currentItem.Email}";
+				
+				var qrGenerator = new QRCodeGenerator();
+				var qrCodeData = qrGenerator.CreateQrCode(text, QRCodeGenerator.ECCLevel.H);
+				var qrCode = new QRCode(qrCodeData);
+				var qrCodeImage = qrCode.GetGraphic(100);
+				pictureBoxQR.BackgroundImage = qrCodeImage;
+			}
 			
 			
 
