@@ -176,7 +176,7 @@ namespace CASReports.Builders.CAA
 	        {
 		        if (_license.LicenseRemark.Any(i => i.LicenseRestriction.FullName.Contains("Radiotelephony operation in English")))
 		        {
-			        privilages = "";
+			        privilages = "This holder of this Licence demonstrated to operate R/T equipment on board aircraft in English";
 		        }
 	        }
 	        
