@@ -23,7 +23,7 @@ namespace CAS.UI.Helpers
 
 		public ApiProvider(string serverName)
 		{
-			_httpClient = new HttpClient() {BaseAddress = new Uri(serverName)};
+			_httpClient = new HttpClient() {BaseAddress = new Uri(serverName), Timeout = TimeSpan.FromMinutes(2)};
 		}
 
 		#region Seuence
