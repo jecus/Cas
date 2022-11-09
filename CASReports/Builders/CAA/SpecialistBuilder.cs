@@ -41,8 +41,21 @@ namespace CASReports.Builders.CAA
 	        SpecialistDataSet dataSet = new SpecialistDataSet();
             AddSpecialistInformation(dataSet);
             AddAdditionalInformation(dataSet);
+            AddTableData(dataSet);
             
             return dataSet;
+        }
+
+        private void AddTableData(SpecialistDataSet dataSet)
+        {
+	        string i1= "", i11= "", i2= "", i22= "", i3= "", i33= "", i4= "", i44 = "";
+	        string e1= "", e11= "", e2= "", e22= "", e3= "", e33= "", e4= "", e44 = "";
+	        string o1= "", o11= "", o2= "", o22= "", o3= "", o33= "", o4= "", o44 = "";
+	        
+	        
+	        dataSet.TableData.AddTableDataRow(i1, i11, i2, i22, i3, i33, i4, i44,
+		        e1, e11, e2, e22, e3, e33, e4, e44,
+		        o1, o11, o2, o22, o3, o33, o4, o44 );
         }
 
         private void AddAdditionalInformation(SpecialistDataSet dataSet)
