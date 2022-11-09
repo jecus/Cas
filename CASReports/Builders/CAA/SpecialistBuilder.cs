@@ -176,7 +176,7 @@ namespace CASReports.Builders.CAA
 	        var adress = _spec.Address;
 	        var nationality = _spec.Citizenship.ShortName;
 	        var issuing = $"{_license?.IssueDate:dd.MM.yyyy}" ?? String.Empty;
-	        var valid = $"{_license?.ValidToDate:dd.MM.yyyy}" ?? String.Empty;
+	        var valid =  _license.IsValidTo ?   $"{_license?.ValidToDate:dd.MM.yyyy}" : "";
 	        var countryCode = licenseCaa?.Caa.ShortName ?? "";
 	        var privilages = "";
 

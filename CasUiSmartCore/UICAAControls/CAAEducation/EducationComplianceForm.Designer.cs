@@ -217,6 +217,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.checkBoxAircraft.Name = "checkBoxAircraft";
             this.checkBoxAircraft.Size = new System.Drawing.Size(19, 25);
             this.checkBoxAircraft.TabIndex = 343;
+            this.checkBoxAircraft.UseSelectable = true;
             this.checkBoxAircraft.CheckedChanged += new System.EventHandler(this.checkBoxAircraft_CheckedChanged);
             // 
             // checkBoxLevel
@@ -227,6 +228,7 @@ namespace CAS.UI.UICAAControls.CAAEducation
             this.checkBoxLevel.Name = "checkBoxLevel";
             this.checkBoxLevel.Size = new System.Drawing.Size(19, 25);
             this.checkBoxLevel.TabIndex = 344;
+            this.checkBoxLevel.UseSelectable = true;
             this.checkBoxLevel.CheckedChanged += new System.EventHandler(this.checkBoxLevel_CheckedChanged);
             // 
             // lifelengthViewer
