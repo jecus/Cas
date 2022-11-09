@@ -52,6 +52,87 @@ namespace CASReports.Builders.CAA
 	        string e1= "", e11= "", e2= "", e22= "", e3= "", e33= "", e4= "", e44 = "";
 	        string o1= "", o11= "", o2= "", o22= "", o3= "", o33= "", o4= "", o44 = "";
 	        
+	        var _license = _spec.Licenses.FirstOrDefault();
+	        
+	        var counteri = 1;
+	        var countere = 1;
+	        var countero = 1;
+	        foreach (var rating in _license.LicenseRatings)
+	        {
+		        
+		        if (rating.Rights.FullName.ToLower().Contains("instructor"))
+		        {
+			        if (counteri == 1)
+			        {
+				        i1 = _license?.AircraftType?.FullName ?? "";
+				        i11 = rating.Rights.ShortName;
+			        }
+			        else if (counteri == 2)
+			        {
+				        i2 = _license?.AircraftType?.FullName ?? "";
+				        i22 = rating.Rights.ShortName;
+			        }
+			        else if (counteri == 3)
+			        {
+				        i3 = _license?.AircraftType?.FullName ?? "";
+				        i33 = rating.Rights.ShortName;
+			        }
+			        else if (counteri == 4)
+			        {
+				        i4 = _license?.AircraftType?.FullName ?? "";
+				        i44 = rating.Rights.ShortName;
+			        }
+			        counteri++;
+		        }
+		        else if (rating.Rights.FullName.ToLower().Contains("examiner"))
+		        {
+			        if (countere == 1)
+			        {
+				        e1 = _license?.AircraftType?.FullName ?? "";
+				        e11 = rating.Rights.ShortName;
+			        }
+			        else if (countere == 2)
+			        {
+				        e2 = _license?.AircraftType?.FullName ?? "";
+				        e22 = rating.Rights.ShortName;
+			        }
+			        else if (countere == 3)
+			        {
+				        e3 = _license?.AircraftType?.FullName ?? "";
+				        e33 = rating.Rights.ShortName;
+			        }
+			        else if (countere == 4)
+			        {
+				        e4 = _license?.AircraftType?.FullName ?? "";
+				        e44 = rating.Rights.ShortName;
+			        }
+			        countere++;
+		        }
+		        else
+		        {
+			        if (countero == 1)
+			        {
+				        o1 = _license?.AircraftType?.FullName ?? "";
+				        o11 = rating.LicenseFunction.FullName;
+			        }
+			        else if (countero == 2)
+			        {
+				        o2 = _license?.AircraftType?.FullName ?? "";
+				        o22 = rating.LicenseFunction.FullName;
+			        }
+			        else if (countero == 3)
+			        {
+				        o3 = _license?.AircraftType?.FullName ?? "";
+				        o33 = rating.LicenseFunction.FullName;
+			        }
+			        else if (countero == 4)
+			        {
+				        o4 = _license?.AircraftType?.FullName ?? "";
+				        o44 = rating.LicenseFunction.FullName;
+			        }
+			        countero++;
+		        }
+	        }
 	        
 	        dataSet.TableData.AddTableDataRow(i1, i11, i2, i22, i3, i33, i4, i44,
 		        e1, e11, e2, e22, e3, e33, e4, e44,

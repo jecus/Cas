@@ -30,22 +30,22 @@ namespace SmartCore.Entities.Dictionaries
 
 
 		public static LicenseRights Instructors = new LicenseRights(15, "Instructors", "Instructors", PersonnelCategory.FlightCrewMembersPilots);
-		public static LicenseRights InstructorsMPL = new LicenseRights(16, "Instructors for the MPL", "Instructors for the MPL", PersonnelCategory.FlightCrewMembersPilots);
-		public static LicenseRights FlightInstructorsFi = new LicenseRights(17, "Flight instructor — FI", "Flight instructor — FI", PersonnelCategory.FlightCrewMembersPilots);
-		public static LicenseRights TypeRatingInstructorTRI = new LicenseRights(18, "Type rating instructor — TRI", "Type rating instructor — TRI", PersonnelCategory.FlightCrewMembersPilots);
-		public static LicenseRights ClassRatingInstructorCRI = new LicenseRights(19, "Class rating instructor — CRI", "Class rating instructor — CRI", PersonnelCategory.FlightCrewMembersPilots);
-		public static LicenseRights SyntheticFlightInstructorSFI = new LicenseRights(20, "Synthetic flight instructor — SFI", "Synthetic flight instructor — SFI", PersonnelCategory.FlightCrewMembersPilots);
-		public static LicenseRights MultiCrewCooperationInstructorMCCI = new LicenseRights(21, "Multi-crew cooperation instructor — MCCI", "Multi-crew cooperation instructor — MCCI", PersonnelCategory.FlightCrewMembersPilots);
-		public static LicenseRights SyntheticTrainingInstructorSTI = new LicenseRights(22, "Synthetic training instructor — STI", "Synthetic training instructor — STI", PersonnelCategory.FlightCrewMembersPilots);
-		public static LicenseRights MountainRratingInstructorMI = new LicenseRights(23, "Mountain rating instructor — MI", "Mountain rating instructor — MI", PersonnelCategory.FlightCrewMembersPilots);
-		public static LicenseRights FlightTestInstructorFTI = new LicenseRights(24, "Flight test instructor — FTI", "Flight test instructor — FTI", PersonnelCategory.FlightCrewMembersPilots);
+		public static LicenseRights InstructorsMPL = new LicenseRights(16, "MPL", "Instructors for the MPL", PersonnelCategory.FlightCrewMembersPilots);
+		public static LicenseRights FlightInstructorsFi = new LicenseRights(17, "FI", "Flight instructor — FI", PersonnelCategory.FlightCrewMembersPilots);
+		public static LicenseRights TypeRatingInstructorTRI = new LicenseRights(18, "TRI", "Type rating instructor — TRI", PersonnelCategory.FlightCrewMembersPilots);
+		public static LicenseRights ClassRatingInstructorCRI = new LicenseRights(19, "CRI", "Class rating instructor — CRI", PersonnelCategory.FlightCrewMembersPilots);
+		public static LicenseRights SyntheticFlightInstructorSFI = new LicenseRights(20, "SFI", "Synthetic flight instructor — SFI", PersonnelCategory.FlightCrewMembersPilots);
+		public static LicenseRights MultiCrewCooperationInstructorMCCI = new LicenseRights(21, "MCCI", "Multi-crew cooperation instructor — MCCI", PersonnelCategory.FlightCrewMembersPilots);
+		public static LicenseRights SyntheticTrainingInstructorSTI = new LicenseRights(22, "STI", "Synthetic training instructor — STI", PersonnelCategory.FlightCrewMembersPilots);
+		public static LicenseRights MountainRratingInstructorMI = new LicenseRights(23, "MI", "Mountain rating instructor — MI", PersonnelCategory.FlightCrewMembersPilots);
+		public static LicenseRights FlightTestInstructorFTI = new LicenseRights(24, "FTI", "Flight test instructor — FTI", PersonnelCategory.FlightCrewMembersPilots);
 		public static LicenseRights Examiners = new LicenseRights(25, "EXAMINERS", "EXAMINERS", PersonnelCategory.FlightCrewMembersPilots);
-		public static LicenseRights FlightExaminersFE = new LicenseRights(26, "Flight examiners — FE ", "Flight examiners — FE ", PersonnelCategory.FlightCrewMembersPilots);
-		public static LicenseRights TypeRatingExaminersTRE = new LicenseRights(27, "Type rating examiners — TRE", "Type rating examiners — TRE", PersonnelCategory.FlightCrewMembersPilots);
-		public static LicenseRights ClassRatingExaminerCRE = new LicenseRights(28, "Class Rating Examiner — CRE", "Class Rating Examiner — CRE", PersonnelCategory.FlightCrewMembersPilots);
-		public static LicenseRights InstrumentRatingExaminerIRE = new LicenseRights(29, "Instrument Rating Examiner — IRE", "Instrument Rating Examiner — IRE", PersonnelCategory.FlightCrewMembersPilots);
-		public static LicenseRights SyntheticFlightExaminerSFE = new LicenseRights(30, "Synthetic Flight Examiner — SFE", "Synthetic Flight Examiner — SFE", PersonnelCategory.FlightCrewMembersPilots);
-		public static LicenseRights FlightInstructorExaminerFIE = new LicenseRights(31, "Flight instructor examiner — FIE", "Flight instructor examiner — FIE", PersonnelCategory.FlightCrewMembersPilots);
+		public static LicenseRights FlightExaminersFE = new LicenseRights(26, "FE ", "Flight examiners — FE ", PersonnelCategory.FlightCrewMembersPilots);
+		public static LicenseRights TypeRatingExaminersTRE = new LicenseRights(27, "TRE", "Type rating examiners — TRE", PersonnelCategory.FlightCrewMembersPilots);
+		public static LicenseRights ClassRatingExaminerCRE = new LicenseRights(28, "CRE", "Class Rating Examiner — CRE", PersonnelCategory.FlightCrewMembersPilots);
+		public static LicenseRights InstrumentRatingExaminerIRE = new LicenseRights(29, "IRE", "Instrument Rating Examiner — IRE", PersonnelCategory.FlightCrewMembersPilots);
+		public static LicenseRights SyntheticFlightExaminerSFE = new LicenseRights(30, "SFE", "Synthetic Flight Examiner — SFE", PersonnelCategory.FlightCrewMembersPilots);
+		public static LicenseRights FlightInstructorExaminerFIE = new LicenseRights(31, "FIE", "Flight instructor examiner — FIE", PersonnelCategory.FlightCrewMembersPilots);
 
 		#region public static LicenseRights UNK = new LicenseRights(-1, "N/A", "N/A");
 		/// <summary>
