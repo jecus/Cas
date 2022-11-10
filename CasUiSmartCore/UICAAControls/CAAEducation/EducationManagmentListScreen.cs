@@ -148,7 +148,11 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			var specialists = new List<Specialist>();
 			var educations = new List<SmartCore.CAA.CAAEducation.CAAEducation>();
 			var records = new List<CAAEducationRecord>();
-			var occupation = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray();
+
+			var occupation = new List<Occupation>();
+			if(OperatorId == -1)
+				occupation = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray().Cast<Occupation>().ToList();
+			else occupation = GlobalObjects.CaaEnvironment?.GetDictionary<Occupation>().ToArray().Cast<Occupation>().Where(i => i.OperatorId == OperatorId).ToList();
 			educations.AddRange(GlobalObjects.CaaEnvironment.NewLoader
 					.GetObjectListAll<EducationDTO, SmartCore.CAA.CAAEducation.CAAEducation>(new Filter("OperatorId", _operatorId),loadChild:true));
 				specialists.AddRange(GlobalObjects.CaaEnvironment.NewLoader
@@ -160,14 +164,18 @@ namespace CAS.UI.UICAAControls.CAAEducation
 			foreach (var specialist in specialists)
 			{
 				FillCollection(educations, specialist.Occupation, specialist,records, false);
-				foreach (Occupation dict in occupation.Where(i => !i.FullName.Equals(specialist.Occupation.FullName)))
+				
+				if(string.IsNullOrEmpty(specialist.Combination))
+					continue;
+				
+				var comb = new List<string>();
+				if (specialist.Combination.Contains(","))
+					comb = specialist.Combination.Split(',').ToList();
+				else comb.Add(specialist.Combination);
+				
+				foreach (Occupation dict in occupation.Where(i => !i.FullName.Equals(specialist.Occupation.FullName) && comb.Contains(i.FullName) ))
 				{
-					var comb = new List<string>();
-					if (specialist.Combination.Contains(","))
-						comb = specialist.Combination.Split(',').ToList();
-					else comb.Add(specialist.Combination);
-					
-					if (specialist.Combination != null && comb.Any(i => i == dict.FullName) && dict.OperatorId == specialist.OperatorId)
+					if(dict.OperatorId == specialist.OperatorId)
 						FillCollection(educations, dict, specialist,records);
 				}
 			}
