@@ -142,7 +142,7 @@ namespace CAS.UI.UICAAControls
 
         private void LinkPersonnelLicenseDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText = "Personnel";
+	        e.DisplayerText = "Personnel Licence";
 	        e.RequestedEntity = new CAAPersonnelListScreen(_currentOperator, -1, true){OperatorId = -1};
         }
         

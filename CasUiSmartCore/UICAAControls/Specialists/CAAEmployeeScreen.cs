@@ -503,7 +503,11 @@ namespace CAS.UI.UICAAControls.Specialists
             if (edIds.Any())
             {
 	            var documents = GlobalObjects.CaaEnvironment.NewLoader
-		            .GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new Filter("ParentId", edIds), true).ToList();
+		            .GetObjectListAll<CAADocumentDTO, SmartCore.Entities.General.Document>(new List<Filter>()
+		            {
+			            new Filter("ParentId", edIds), 
+			            new Filter("ParentTypeId", SmartCoreType.CAAEducationRecord.ItemId), 
+		            }  , true).ToList();
 	            var docIds = documents.Select(i => i.ItemId);
 
 	            var res = lastIds.Except(docIds);

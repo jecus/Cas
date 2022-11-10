@@ -144,7 +144,7 @@ namespace CAS.UI.UICAAControls.CurrentOperator
         
         private void LinkPersonnelLicenseDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-	        e.DisplayerText = $"{_currentOperator.ShortName} Personnel";
+	        e.DisplayerText = $"{_currentOperator.ShortName} Personnel Licence";
 	        e.RequestedEntity = new CAAPersonnelListScreen(_getOperator(), _currentOperator.ItemId, true){OperatorId = _currentOperator.ItemId};
         }
 

@@ -97,7 +97,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 				var qrGenerator = new QRCodeGenerator();
 				var qrCodeData = qrGenerator.CreateQrCode(text, QRCodeGenerator.ECCLevel.H);
 				var qrCode = new QRCode(qrCodeData);
-				var qrCodeImage = qrCode.GetGraphic(100);
+				var qrCodeImage = qrCode.GetGraphic(15);
 				pictureBoxQR.BackgroundImage = qrCodeImage;
 			}
 			
