@@ -177,7 +177,7 @@ namespace CAS.UI.UICAAControls.Specialists
                 if (_currentItem.ItemId > 0)
 	                _currentItem = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO,Specialist>(_currentItem.ItemId, true);
                 
-                _currentItem.Images = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<SpecialistImagesDTO,SpecialistImages>(new Filter("SpecialistId", _currentItem.ItemId)).FirstOrDefault() ?? new SpecialistImages();
+                _currentItem.Images = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASpecialistImagesDTO,SpecialistImages>(new Filter("SpecialistId", _currentItem.ItemId)).FirstOrDefault() ?? new SpecialistImages();
                 
                 var links = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<CAAItemFileLinkDTO, ItemFileLink>(new List<Filter>()
                 {

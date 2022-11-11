@@ -1,15 +1,16 @@
-﻿using CAA.Entity.Core;
+﻿
+
+using CAA.Entity.Core;
 using CAA.Entity.Models.DTO;
-using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace CAA.API.Controllers.General
 {
-    
     [Route("specialistimages")]
-    public class SpecialistImagesController : BaseController<SpecialistImagesDTO>
+    public class SpecialistImagesController : BaseController<CAASpecialistImagesDTO>
     {
-        public SpecialistImagesController(DataContext context, ILogger<BaseController<SpecialistImagesDTO>> logger) : base(context, logger)
+        public SpecialistImagesController(DataContext context, ILogger<BaseController<CAASpecialistImagesDTO>> logger) : base(context, logger)
         {
         }
     }

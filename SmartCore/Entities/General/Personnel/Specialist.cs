@@ -741,7 +741,7 @@ namespace SmartCore.Entities.General.Personnel
 
 
     [Table("SpecialistImages", "dbo", "ItemId")]
-    [CAADto(typeof(SpecialistImagesDTO))]
+    [CAADto(typeof(CAASpecialistImagesDTO))]
     [Condition("IsDeleted", "0")]
     [Serializable]
     public class SpecialistImages : BaseEntityObject,IOperatable

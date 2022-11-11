@@ -6,7 +6,7 @@ namespace CAA.Entity.Models.DTO
 {
     [Table("SpecialistImages", Schema = "dbo")]
     [Condition("IsDeleted", 0)]
-    public class SpecialistImagesDTO : BaseEntity, IOperatable
+    public class CAASpecialistImagesDTO : BaseEntity, IOperatable
     {
         [Column("OperatorId")]
         public int OperatorId { get; set; }

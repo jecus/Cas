@@ -977,9 +977,9 @@ namespace SmartCore.DtoHelper
             };
         }
 
-        public static SpecialistImagesDTO ConvertCAA(this SpecialistImages specialist)
+        public static CAASpecialistImagesDTO ConvertCAA(this SpecialistImages specialist)
         {
-	        return new SpecialistImagesDTO()
+	        return new CAASpecialistImagesDTO()
 	        {
 		        ItemId = specialist.ItemId,
 		        IsDeleted = specialist.IsDeleted,
@@ -993,19 +993,19 @@ namespace SmartCore.DtoHelper
 	        };
         }
         
-        public static SpecialistImages ConvertCAA(this SpecialistImagesDTO specialist)
+        public static SpecialistImages ConvertCAA(this CAASpecialistImagesDTO caaSpecialist)
         {
 	        return new SpecialistImages()
 	        {
-		        ItemId = specialist.ItemId,
-		        IsDeleted = specialist.IsDeleted,
-		        Updated = specialist.Updated,
-		        CorrectorId = specialist.CorrectorId,
-		        OperatorId = specialist.OperatorId,
-		        Photo = specialist.Photo,
-		        Sign = specialist.Sign,
-		        Stamp = specialist.Stamp,
-		        SpecialistId = specialist.SpecialistId
+		        ItemId = caaSpecialist.ItemId,
+		        IsDeleted = caaSpecialist.IsDeleted,
+		        Updated = caaSpecialist.Updated,
+		        CorrectorId = caaSpecialist.CorrectorId,
+		        OperatorId = caaSpecialist.OperatorId,
+		        Photo = caaSpecialist.Photo,
+		        Sign = caaSpecialist.Sign,
+		        Stamp = caaSpecialist.Stamp,
+		        SpecialistId = caaSpecialist.SpecialistId
 	        };
         }
         
