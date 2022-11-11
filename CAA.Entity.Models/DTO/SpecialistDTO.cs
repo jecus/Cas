@@ -50,8 +50,8 @@ namespace CAA.Entity.Models.DTO
 		public string Address { get; set; }
 
 		
-		[Column("Photo")]
-		public byte[] Photo { get; set; }
+		// [Column("Photo")]
+		// public byte[] Photo { get; set; }
 
 		
 		[Column("PhoneMobile"), MaxLength(256)]
@@ -90,11 +90,11 @@ namespace CAA.Entity.Models.DTO
 		public short Position { get; set; }
 
 		
-		[Column("Sign")]
-		public byte[] Sign { get; set; }
-		
-		[Column("Stamp")]
-		public byte[] Stamp { get; set; }
+		// [Column("Sign")]
+		// public byte[] Sign { get; set; }
+		//
+		// [Column("Stamp")]
+		// public byte[] Stamp { get; set; }
 
 		
 		[Column("FamilyStatus")]

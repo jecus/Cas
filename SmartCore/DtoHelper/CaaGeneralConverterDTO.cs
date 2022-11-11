@@ -977,6 +977,38 @@ namespace SmartCore.DtoHelper
             };
         }
 
+        public static SpecialistImagesDTO ConvertCAA(this SpecialistImages specialist)
+        {
+	        return new SpecialistImagesDTO()
+	        {
+		        ItemId = specialist.ItemId,
+		        IsDeleted = specialist.IsDeleted,
+		        Updated = specialist.Updated,
+		        CorrectorId = specialist.CorrectorId,
+		        OperatorId = specialist.OperatorId,
+		        Photo = specialist.Photo,
+		        Sign = specialist.Sign,
+		        Stamp = specialist.Stamp,
+		        SpecialistId = specialist.SpecialistId
+	        };
+        }
+        
+        public static SpecialistImages ConvertCAA(this SpecialistImagesDTO specialist)
+        {
+	        return new SpecialistImages()
+	        {
+		        ItemId = specialist.ItemId,
+		        IsDeleted = specialist.IsDeleted,
+		        Updated = specialist.Updated,
+		        CorrectorId = specialist.CorrectorId,
+		        OperatorId = specialist.OperatorId,
+		        Photo = specialist.Photo,
+		        Sign = specialist.Sign,
+		        Stamp = specialist.Stamp,
+		        SpecialistId = specialist.SpecialistId
+	        };
+        }
+        
 		public static CAASpecialistDTO ConvertCAA(this Specialist specialist)
 		{
 			return new CAASpecialistDTO
@@ -994,7 +1026,7 @@ namespace SmartCore.DtoHelper
 				DateOfBirth = specialist.DateOfBirth,
 				Nationality = specialist.Nationality,
 				Address = specialist.Address,
-				Photo = specialist.Photo,
+				//Photo = specialist.Photo,
 				PhoneMobile = specialist.PhoneMobile,
 				Phone = specialist.Phone,
 				Email = specialist.Email,
@@ -1004,8 +1036,8 @@ namespace SmartCore.DtoHelper
 				Location = (short)(specialist.Facility?.ItemId ?? -1),
 				Status = (short)specialist.Status,
 				Position = (short)specialist.Position,
-				Sign = specialist.Sign,
-				Stamp = specialist.Stamp,
+				//Sign = specialist.Sign,
+				//Stamp = specialist.Stamp,
 				FamilyStatus = (short)(specialist.FamilyStatus?.ItemId ?? -1),
 				Citizenship = (short)(specialist.Citizenship?.ItemId ?? -1),
 				PersonnelCategoryId = specialist.PersonnelCategory?.ItemId ?? -1,
@@ -1044,7 +1076,7 @@ namespace SmartCore.DtoHelper
 				DateOfBirth = specialist.DateOfBirth ?? DateTimeExtend.GetCASMinDateTime(),
 				Nationality = specialist.Nationality,
 				Address = specialist.Address,
-				Photo = specialist.Photo,
+				//Photo = specialist.Photo,
 				PhoneMobile = specialist.PhoneMobile,
 				Phone = specialist.Phone,
 				Email = specialist.Email,
@@ -1053,8 +1085,8 @@ namespace SmartCore.DtoHelper
 				Education = Education.GetItemById(specialist.Education),
 				Status = (SpecialistStatus)specialist.Status,
 				Position = (SpecialistPosition)specialist.Position,
-				Sign = specialist.Sign,
-				Stamp = specialist.Stamp,
+				//Sign = specialist.Sign,
+				//Stamp = specialist.Stamp,
 				FamilyStatus = FamilyStatus.GetItemById(specialist.FamilyStatus),
 				Citizenship = Citizenship.GetItemById(specialist.Citizenship),
 				PersonnelCategory = PersonnelCategory.GetItemById(specialist.PersonnelCategoryId),

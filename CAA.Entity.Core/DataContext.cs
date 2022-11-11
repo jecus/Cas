@@ -55,6 +55,7 @@ namespace CAA.Entity.Core
         public DbSet<CAAEventCategorieDTO> CAAEventCategorieDto { get; set; }
         public DbSet<CAAEventClassDTO> CAAEventClassDto { get; set; }
         public DbSet<CAASmsEventTypeDTO> CAASmsEventTypeDto { get; set; }
+        public DbSet<SpecialistImagesDTO> SpecialistImagesDto { get; set; }
         public DbSet<CAAEventTypeRiskLevelChangeRecordDTO> CAAEventTypeRiskLevelChangeRecordDto { get; set; }
         
         public DbSet<CAAAircraftDTO> AircraftDtos { get; set; }

@@ -736,4 +736,23 @@ namespace SmartCore.Entities.General.Personnel
     {
 	    public int  StatusId { get; set; }
     }
+
+
+    [Table("SpecialistImages", "dbo", "ItemId")]
+    [CAADto(typeof(SpecialistImagesDTO))]
+    [Condition("IsDeleted", "0")]
+    [Serializable]
+    public class SpecialistImages : BaseEntityObject,IOperatable
+    {
+	    public int OperatorId { get; set; }
+	    
+	    public int SpecialistId { get; set; }
+
+	    public byte[] Sign { get; set; }
+	    
+	    public byte[] Stamp { get; set; }
+	    
+	    public byte[] Photo { get; set; }
+    }
+    
 }
