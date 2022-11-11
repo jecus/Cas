@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 namespace CAA.API.Controllers.General
 {
     
-    [Route("specialist-images")]
+    [Route("specialistimages")]
     public class SpecialistImagesController : BaseController<SpecialistImagesDTO>
     {
         public SpecialistImagesController(DataContext context, ILogger<BaseController<SpecialistImagesDTO>> logger) : base(context, logger)
