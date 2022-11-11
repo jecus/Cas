@@ -18,6 +18,10 @@ namespace SmartCore.Personnel
 		{
 			_casEnvironment.NewKeeper.Save(specialist);
 
+
+			specialist.Images.SpecialistId = specialist.ItemId;
+			_casEnvironment.NewKeeper.Save(specialist.Images);
+			
 			specialist.MedicalRecord.SpecialistId = specialist.ItemId;
 			_casEnvironment.NewKeeper.Save(specialist.MedicalRecord);
 

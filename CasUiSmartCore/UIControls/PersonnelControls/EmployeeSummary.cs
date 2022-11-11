@@ -59,8 +59,19 @@ namespace CAS.UI.UIControls.PersonnelControls
 			labelPhoneValue.Text = _currentItem.Phone;
 			labelEmailValue.Text = _currentItem.Email;
 			labelSkypeValue.Text = _currentItem.Skype;
-			_pictureBoxTransparentLogotype.BackgroundImage = _currentItem.PhotoImage;
-			pictureBoxSign.BackgroundImage = _currentItem.SignImage;
+
+			if (GlobalObjects.CaaEnvironment != null)
+			{
+				_pictureBoxTransparentLogotype.BackgroundImage = _currentItem.Images.PhotoImage;
+				pictureBoxSign.BackgroundImage = _currentItem.Images.SignImage;
+			}
+			else
+			{
+				_pictureBoxTransparentLogotype.BackgroundImage = _currentItem.PhotoImage;
+				pictureBoxSign.BackgroundImage = _currentItem.SignImage;
+			}
+			
+			
 
 
 			if (GlobalObjects.CaaEnvironment == null)
@@ -72,7 +83,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			}
 			else
 			{
-				pictureBox1.BackgroundImage = _currentItem.StampImage;
+				
 
 				var text = $"First Name: {_currentItem.FirstName}\n" +
 				            $"Last Name: {_currentItem.LastName}\n" +
@@ -98,11 +109,14 @@ namespace CAS.UI.UIControls.PersonnelControls
 				var qrCodeData = qrGenerator.CreateQrCode(text, QRCodeGenerator.ECCLevel.H);
 				var qrCode = new QRCode(qrCodeData);
 				var qrCodeImage = qrCode.GetGraphic(15);
+				
 				pictureBoxQR.BackgroundImage = qrCodeImage;
+				if (GlobalObjects.CaaEnvironment != null)
+					pictureBox1.BackgroundImage = _currentItem.Images.StampImage;
+				else pictureBox1.BackgroundImage = _currentItem.StampImage;
 			}
 			
 			
-
 			labelGradeValue.Text =_currentItem.GradeNumber.ToString();
 			labelClassValue.Text =_currentItem.ClassNumber.ToString();
 

@@ -331,9 +331,9 @@ namespace CAS.UI.UICAAControls.Specialists
                                      "This record does not contain a file proving the Resume",
                                      "Attached file proves the Resume.");
 
-            _pictureBoxTransparentLogotype.BackgroundImage = _currentItem.PhotoImage;
-	        pictureBoxSign.BackgroundImage = _currentItem.SignImage;
-	        pictureBoxStamp.BackgroundImage = _currentItem.StampImage;
+            _pictureBoxTransparentLogotype.BackgroundImage = _currentItem.Images.PhotoImage;
+	        pictureBoxSign.BackgroundImage = _currentItem.Images.SignImage;
+	        pictureBoxStamp.BackgroundImage = _currentItem.Images.StampImage;
 
             //dateTimePickerDateOfBirth.ValueChanged += DateTimePickerEffDateValueChanged;
             this.radioButtonCAA.CheckedChanged += new System.EventHandler(this.radioButtonCAA_CheckedChanged);
@@ -387,15 +387,15 @@ namespace CAS.UI.UICAAControls.Specialists
             }
 
             if (_logotypeChanged)
-                _currentItem.PhotoImage = _pictureBoxTransparentLogotype.BackgroundImage;
+                _currentItem.Images.PhotoImage = _pictureBoxTransparentLogotype.BackgroundImage;
             _logotypeChanged = false;
 
 	        if (_signChanged)
-		        _currentItem.SignImage = pictureBoxSign.BackgroundImage;
+		        _currentItem.Images.SignImage = pictureBoxSign.BackgroundImage;
 	        _signChanged = false;
 	        
 	        if (_stampChanged)
-		        _currentItem.StampImage = pictureBoxStamp.BackgroundImage;
+		        _currentItem.Images.StampImage = pictureBoxStamp.BackgroundImage;
 	        _stampChanged = false;
 	        
 	        

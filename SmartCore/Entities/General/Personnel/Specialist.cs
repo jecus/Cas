@@ -34,7 +34,9 @@ namespace SmartCore.Entities.General.Personnel
 	[Condition("IsDeleted", "0")]
     [Serializable]
     public class Specialist : BaseEntityObject, IFileContainer, IEmployeeFilterParams, IEmployeeWorkPackageFilterParams, IOperatable,ICAAEmployeeFilterParams
-	{
+    {
+	    public SpecialistImages Images { get; set; }
+
 		private static Type _thisType;
 		/*
 		*  Свойства
@@ -753,6 +755,40 @@ namespace SmartCore.Entities.General.Personnel
 	    public byte[] Stamp { get; set; }
 	    
 	    public byte[] Photo { get; set; }
+	    
+	    
+	    public Image PhotoImage
+	    {
+		    get => DbTypes.BytesToImage(Photo);
+		    set
+		    {
+			    Photo = DbTypes.ImageToBytes(value, ImageFormat.Png);
+			    OnPropertyChanged("PhotoImage");
+
+		    }
+	    }
+	    
+	    public Image SignImage
+	    {
+		    get => DbTypes.BytesToImage(Sign);
+		    set
+		    {
+			    Sign = DbTypes.ImageToBytes(value, ImageFormat.Png);
+			    OnPropertyChanged("SignImage");
+
+		    }
+	    }
+		
+	    public Image StampImage
+	    {
+		    get => DbTypes.BytesToImage(Stamp);
+		    set
+		    {
+			    Stamp = DbTypes.ImageToBytes(value, ImageFormat.Png);
+			    OnPropertyChanged("SignImage");
+
+		    }
+	    }
     }
     
 }
