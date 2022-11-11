@@ -76,7 +76,7 @@ namespace CASReports.Builders.CAA
 	        
 	        dataSet.Part1Table
 		        .AddPart1TableRow(_spec.Sign, licenceNumber,name,dateOfBirth,placeOfBirth
-			        ,adress,nationality,issuing,null,valid,countryCode,titleLicense, privilages, "");
+			        ,adress,nationality,issuing,null,valid,countryCode,titleLicense, privilages, "",  $"{DateTime.Today:dd.MM.yyyy}");
         }
 
         #endregion

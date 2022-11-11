@@ -176,7 +176,7 @@ namespace CASReports.Builders.CAA
 	        var adress = _spec.Address;
 	        var nationality = _spec.Citizenship.ShortName;
 	        var issuing = $"{_license?.IssueDate:dd.MM.yyyy}" ?? String.Empty;
-	        var valid =  _license.IsValidTo ?   $"{_license?.ValidToDate:dd.MM.yyyy}" : "";
+	        var valid =  _license.IsValidTo ?   $"{_license?.ValidToDate:dd.MM.yyyy}" : "unlimited";
 	        var countryCode = licenseCaa?.Caa.ShortName ?? "";
 	        var privilages = "";
 
@@ -200,7 +200,7 @@ namespace CASReports.Builders.CAA
 	        
 	        dataSet.Part1Table
 		        .AddPart1TableRow(_spec.Sign, licenceNumber,name,dateOfBirth,placeOfBirth
-			        ,adress,nationality,issuing,null,valid,countryCode,titleLicense,privilages, level);
+			        ,adress,nationality,issuing,null,valid,countryCode,titleLicense,privilages, level, $"{DateTime.Today:dd.MM.yyyy}");
 
 
 	        

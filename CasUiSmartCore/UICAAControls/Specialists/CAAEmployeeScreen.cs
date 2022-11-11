@@ -834,14 +834,14 @@ namespace CAS.UI.UICAAControls.Specialists
 		        var reporter = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO,Specialist>(GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId);
 		        SpecialistBuilder builder = new SpecialistBuilder(_currentItem, reporter, _records
 			        .Where(i => i.Education?.Task?.SubTaskCode == "5030").ToList());
-		        e.DisplayerText = "test";
+		        e.DisplayerText = $"FCL {_currentItem.FirstName}";
 		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 		        e.RequestedEntity = new ReportScreen(builder);
 	        }
 	        else if (sender == _itemPrintElectronic)
 	        {
 		        SpecialisLicensetBuilder builder = new SpecialisLicensetBuilder(_currentItem);
-		        e.DisplayerText = "test";
+		        e.DisplayerText = $"Licence {_currentItem.FirstName}";
 		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 		        e.RequestedEntity = new ReportScreen(builder);
 	        }
