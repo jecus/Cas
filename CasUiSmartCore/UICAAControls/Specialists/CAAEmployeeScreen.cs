@@ -157,7 +157,8 @@ namespace CAS.UI.UICAAControls.Specialists
 	        employeeWorkPackageControl.CurrentItem = _currentItem;
 	        employeeWorkPackageControl.Reload += DocumentsControl_Reload;
 
-	        ButtonPrintMenuStrip.Visible = GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType < CAAUserType.OperatorAdmin;
+	        headerControl.PrintButtonEnabled = 
+	        ButtonPrintMenuStrip.Visible = ButtonPrintMenuStrip.Enabled = GlobalObjects.CaaEnvironment.IdentityUser.CAAUserType < CAAUserType.OperatorAdmin;
 
         }
 		#endregion
