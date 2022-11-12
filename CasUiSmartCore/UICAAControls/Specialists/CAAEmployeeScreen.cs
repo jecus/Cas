@@ -835,6 +835,8 @@ namespace CAS.UI.UICAAControls.Specialists
 	        if (sender == _itemPrintFCL)
 	        {
 		        var reporter = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO,Specialist>(GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId);
+		        reporter.Images = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASpecialistImagesDTO,SpecialistImages>(new Filter("SpecialistId", reporter.ItemId)).FirstOrDefault() ?? new SpecialistImages();
+		        
 		        SpecialistBuilder builder = new SpecialistBuilder(_currentItem, reporter, _records
 			        .Where(i => i.Education?.Task?.SubTaskCode == "5030").ToList());
 		        e.DisplayerText = $"FCL {_currentItem.FirstName}";

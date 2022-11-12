@@ -155,7 +155,7 @@ namespace CASReports.Builders.CAA
         private void AddAdditionalInformation(SpecialistDataSet dataSet)
         {
 	        var caa = GlobalObjects.CaaEnvironment.Operators.FirstOrDefault();
-	        dataSet.AdditionalInfo.AddAdditionalInfoRow(caa.Name, caa.Settings?.ShortName ?? "",_reporter.FirstName, _reporter.LastName, _reporter.Sign, _reporter.Stamp);
+	        dataSet.AdditionalInfo.AddAdditionalInfoRow(caa.Name, caa.Settings?.ShortName ?? "",_reporter.FirstName, _reporter.LastName, _reporter.Images.Sign, _reporter.Images.Stamp);
         }
 
         #endregion
@@ -199,7 +199,7 @@ namespace CASReports.Builders.CAA
 	        }
 	        
 	        dataSet.Part1Table
-		        .AddPart1TableRow(_spec.Sign, licenceNumber,name,dateOfBirth,placeOfBirth
+		        .AddPart1TableRow(_spec.Images.Sign, licenceNumber,name,dateOfBirth,placeOfBirth
 			        ,adress,nationality,issuing,null,valid,countryCode,titleLicense,privilages, level, $"{DateTime.Today:dd.MM.yyyy}");
 
 
