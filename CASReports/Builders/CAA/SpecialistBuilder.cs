@@ -157,11 +157,8 @@ namespace CASReports.Builders.CAA
 	        var caa = GlobalObjects.CaaEnvironment.Operators.FirstOrDefault();
 	        dataSet.AdditionalInfo.AddAdditionalInfoRow(caa.Name, caa.Settings?.ShortName ?? "",_reporter.FirstName, _reporter.LastName, _reporter.Images.Sign, _reporter.Images.Stamp);
         }
-
-        #endregion
-
-        #region private void AddATLBInformation(ATLBDataSet dataSet)
-
+        
+        
         private void AddSpecialistInformation(SpecialistDataSet dataSet)
         {
 	        var _license = _spec.Licenses.FirstOrDefault();
@@ -207,6 +204,10 @@ namespace CASReports.Builders.CAA
         }
 
         #endregion
+        
+
+
+        
         
         #endregion
     }

@@ -845,7 +845,11 @@ namespace CAS.UI.UICAAControls.Specialists
 	        }
 	        else if (sender == _itemPrintElectronic)
 	        {
-		        SpecialisLicensetBuilder builder = new SpecialisLicensetBuilder(_currentItem);
+		        var reporter = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO,Specialist>(GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId);
+		        reporter.Images = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASpecialistImagesDTO,SpecialistImages>(new Filter("SpecialistId", reporter.ItemId)).FirstOrDefault() ?? new SpecialistImages();
+		        
+		        SpecialisLicensetBuilder builder = new SpecialisLicensetBuilder(_currentItem, reporter, _records
+			        .Where(i => i.Education?.Task?.SubTaskCode == "5030").ToList());
 		        e.DisplayerText = $"Licence {_currentItem.FirstName}";
 		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 		        e.RequestedEntity = new ReportScreen(builder);
