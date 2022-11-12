@@ -20,10 +20,14 @@ namespace CASReports.Builders.CAA
     public class SpecialisLicensetBuilder : AbstractReportBuilder
     {
 	    private readonly Specialist _spec;
+	    private readonly Specialist _reporter;
+	    private readonly List<CAAEducationRecord> _educations;
 	    
 	    public SpecialisLicensetBuilder(Specialist spec, Specialist reporter, List<CAAEducationRecord> educations)
 	    {
 		    _spec = spec;
+		    _reporter = reporter;
+		    _educations = educations;
 	    }
 
         #region Methods

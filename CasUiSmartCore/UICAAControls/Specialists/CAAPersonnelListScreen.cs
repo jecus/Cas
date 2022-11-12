@@ -156,8 +156,6 @@ namespace CAS.UI.UICAAControls.Specialists
 
 	                foreach (var specialist in _initialDocumentArray)
 	                {
-
-		                
 		                var list = new List<ConditionState>();
 		                
 		                specialist.MedicalRecord = medicalRecords.FirstOrDefault(i => i.SpecialistId == specialist.ItemId);
@@ -206,6 +204,13 @@ namespace CAS.UI.UICAAControls.Specialists
 		                else if (list.Any(i => i.ItemId == ConditionState.Notify.ItemId))
 			                specialist.Condition = ConditionState.Notify;
 		                else specialist.Condition = ConditionState.NotEstimated;
+
+		                if (specialist.Condition == ConditionState.Overdue && specialist.Settings.StatusId != OperatorStatus.Limiting.ItemId)
+		                {
+			                specialist.Settings.StatusId = OperatorStatus.Limiting.ItemId;
+			                GlobalObjects.CaaEnvironment.NewKeeper.Save(specialist);
+		                }
+		                //
 		                
 	                }
 				}
