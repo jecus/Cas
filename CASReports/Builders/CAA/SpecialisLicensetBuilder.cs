@@ -50,9 +50,27 @@ namespace CASReports.Builders.CAA
 	        SpecialistDataSet dataSet = new SpecialistDataSet();
 	        AddSpecialistInformation(dataSet);
 	        AddAdditionalInformation(dataSet);
+	        AddMedicalInformation(dataSet);
 	        AddTableData(dataSet);
             
             return dataSet;
+        }
+
+        private void AddMedicalInformation(SpecialistDataSet dataSet)
+        {
+	        var cl = "";
+	        var expire = "";
+	        var remarks = "";
+
+	        if (_spec.MedicalRecord != null)
+	        {
+		        cl = _spec.MedicalRecord.ClassNumber.ToString();
+		        remarks = _spec.MedicalRecord.Remarks;
+		        if(_spec.MedicalRecord.ValidToDate.HasValue)
+			        expire = $"{_spec.MedicalRecord.ValidToDate:dd.MM.yyyy}";
+	        }
+	        
+	        dataSet.MedicalData.AddMedicalDataRow(cl,expire,remarks);
         }
 
         #endregion
