@@ -109,7 +109,10 @@ namespace CAS.UI.UIControls.PersonnelControls
 				var qrCodeData = qrGenerator.CreateQrCode(text, QRCodeGenerator.ECCLevel.H);
 				var qrCode = new QRCode(qrCodeData);
 				var qrCodeImage = qrCode.GetGraphic(15);
-				
+
+				ImageConverter converter = new ImageConverter();
+				_currentItem.Images.QR = (byte[])converter.ConvertTo(qrCodeImage, typeof(byte[]));
+
 				pictureBoxQR.BackgroundImage = qrCodeImage;
 				if (GlobalObjects.CaaEnvironment != null)
 					pictureBox1.BackgroundImage = _currentItem.Images.StampImage;

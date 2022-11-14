@@ -756,6 +756,9 @@ namespace SmartCore.Entities.General.Personnel
 	    
 	    public byte[] Photo { get; set; }
 	    
+	    [JsonIgnore]
+	    public byte[] QR { get; set; }
+	    
 	    
 	    public Image PhotoImage
 	    {
