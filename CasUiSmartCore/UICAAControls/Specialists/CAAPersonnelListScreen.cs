@@ -210,6 +210,11 @@ namespace CAS.UI.UICAAControls.Specialists
 			                specialist.Settings.StatusId = OperatorStatus.Limiting.ItemId;
 			                GlobalObjects.CaaEnvironment.NewKeeper.Save(specialist);
 		                }
+		                else if (specialist.Condition != ConditionState.Overdue && specialist.Settings.StatusId == OperatorStatus.Limiting.ItemId)
+		                {
+		                    specialist.Settings.StatusId = OperatorStatus.Valid.ItemId;
+                            GlobalObjects.CaaEnvironment.NewKeeper.Save(specialist);
+		                }
 		                //
 		                
 	                }
