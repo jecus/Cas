@@ -16,6 +16,7 @@ using Entity.Abstractions;
 using Entity.Abstractions.Attributte;
 using Entity.Abstractions.Filters;
 using SmartCore.CAA.CAAEducation;
+using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -430,6 +431,41 @@ namespace CAS.UI.UICAAControls.Specialists
 		            if (license.AircraftTypeID > 0)
 			            license.AircraftType = aircraftModels.FirstOrDefault(a => a.ItemId == license.AircraftTypeID);
 	            }
+				
+				
+				var list = new List<ConditionState>();
+				if (_currentItem.MedicalRecord != null)
+				{
+					GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(_currentItem.MedicalRecord, _currentItem.MedicalRecord.IssueDate,_currentItem.MedicalRecord.NotifyLifelength, _currentItem.MedicalRecord.RepeatLifelength);
+			                
+					if(!_currentItem.MedicalRecord.RepeatLifelength.IsNullOrZero())
+						_currentItem.MedicalRecord.ValidToDate = _currentItem.MedicalRecord.IssueDate.AddDays(_currentItem.MedicalRecord.RepeatLifelength.Days.Value);
+					list.Add(_currentItem.MedicalRecord.Condition);
+				}
+
+				foreach (var license in _currentItem.Licenses)
+				{
+					foreach (var caa in license.CaaLicense)
+					{
+						if (!license.IsValidTo)
+						{
+							caa.Condition = ConditionState.UNK;
+							caa.Remain = Lifelength.Null;
+							continue;
+						}
+				                
+						if (caa.CaaType == CaaType.Other)
+							GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(caa, caa.ValidToDate, caa.NotifyLifelength);
+						else GlobalObjects.CaaEnvironment.CaaPerformanceRepository.CalcRemain(caa, license.ValidToDate, license.NotifyLifelength);
+					}
+					
+					if(license.CaaLicense.Any(i => i.CaaType == CaaType.Other)) 
+						list.Add(license.CaaLicense.FirstOrDefault(i => i.CaaType == CaaType.Other)?.Condition);
+					if(license.CaaLicense.Any(i => i.CaaType == CaaType.Licence)) 
+						list.Add(license.CaaLicense.FirstOrDefault(i => i.CaaType == CaaType.Licence)?.Condition);
+				}
+				
+				
             }
             catch (Exception ex)
             {
