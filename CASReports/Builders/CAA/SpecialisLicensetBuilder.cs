@@ -83,10 +83,6 @@ namespace CASReports.Builders.CAA
 	        
 	        var _license = _spec.Licenses.FirstOrDefault();
 	        
-	        var counteri = 1;
-	        var countere = 1;
-	        var countero = 1;
-
 	        if (_license != null)
 	        {
 		        i1 = string.Join(", ",_license.LicenseRatings
