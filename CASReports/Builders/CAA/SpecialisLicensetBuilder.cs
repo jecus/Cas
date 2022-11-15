@@ -150,7 +150,7 @@ namespace CASReports.Builders.CAA
 	        dataSet.Part1Table
 		        .AddPart1TableRow(_spec.Images.Sign, licenceNumber,name,dateOfBirth,placeOfBirth
 			        ,adress,nationality,issuing,null,valid,countryCode,titleLicense,privilages, level,
-			        $"{DateTime.Today:dd.MM.yyyy HH:mm}",_spec.Images.QR
+			        $"{DateTime.Now:dd.MM.yyyy HH:mm}",_spec.Images.QR
 			        , _spec.Images.Photo);
 
 
