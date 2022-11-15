@@ -175,7 +175,7 @@ namespace CASReports.Builders.CAA
 	        var issuing = $"{_license?.IssueDate:dd.MM.yyyy}" ?? String.Empty;
 	        var valid =  _license.IsValidTo ?   $"{_license?.ValidToDate:dd.MM.yyyy}" : "unlimited";
 	        var countryCode = licenseCaa?.Caa.ShortName ?? "";
-	        var privilages = "";
+	        var privilages = "Unlimited";
 
 	        if (_spec.LicenseRemark.Any(i => i.LicenseRestriction.FullName.Contains("Radiotelephony operation in English")))
 		        privilages = "This holder of this Licence demonstrated to operate R/T equipment on board aircraft in English";

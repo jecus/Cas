@@ -127,7 +127,7 @@ namespace CASReports.Builders.CAA
 	        var issuing = $"{_license?.IssueDate:dd.MM.yyyy}" ?? String.Empty;
 	        var valid =  _license.IsValidTo ?   $"{_license?.ValidToDate:dd.MM.yyyy}" : "unlimited";
 	        var countryCode = licenseCaa?.Caa.ShortName ?? "";
-	        var privilages = "";
+	        var privilages = "Unlimited";
 
 	        if (_spec.LicenseRemark.Any(i => i.LicenseRestriction.FullName.Contains("Radiotelephony operation in English")))
 		        privilages = "This holder of this Licence demonstrated to operate R/T equipment on board aircraft in English";
@@ -149,7 +149,8 @@ namespace CASReports.Builders.CAA
 	        
 	        dataSet.Part1Table
 		        .AddPart1TableRow(_spec.Images.Sign, licenceNumber,name,dateOfBirth,placeOfBirth
-			        ,adress,nationality,issuing,null,valid,countryCode,titleLicense,privilages, level, $"{DateTime.Today:dd.MM.yyyy}",_spec.Images.QR
+			        ,adress,nationality,issuing,null,valid,countryCode,titleLicense,privilages, level,
+			        $"{DateTime.Today:dd.MM.yyyy HH:mm}",_spec.Images.QR
 			        , _spec.Images.Photo);
 
 
