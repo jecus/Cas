@@ -89,85 +89,16 @@ namespace CASReports.Builders.CAA
 
 	        if (_license != null)
 	        {
-		        foreach (var rating in _license.LicenseRatings)
-		        {
-
-			        if (rating.Rights.FullName.ToLower().Contains("instructor"))
-			        {
-				        if (counteri == 1)
-				        {
-					        i1 = _license?.AircraftType?.FullName ?? "";
-					        i11 = rating.Rights.ShortName;
-				        }
-				        else if (counteri == 2)
-				        {
-					        i2 = _license?.AircraftType?.FullName ?? "";
-					        i22 = rating.Rights.ShortName;
-				        }
-				        else if (counteri == 3)
-				        {
-					        i3 = _license?.AircraftType?.FullName ?? "";
-					        i33 = rating.Rights.ShortName;
-				        }
-				        else if (counteri == 4)
-				        {
-					        i4 = _license?.AircraftType?.FullName ?? "";
-					        i44 = rating.Rights.ShortName;
-				        }
-
-				        counteri++;
-			        }
-			        else if (rating.Rights.FullName.ToLower().Contains("examiner"))
-			        {
-				        if (countere == 1)
-				        {
-					        e1 = _license?.AircraftType?.FullName ?? "";
-					        e11 = rating.Rights.ShortName;
-				        }
-				        else if (countere == 2)
-				        {
-					        e2 = _license?.AircraftType?.FullName ?? "";
-					        e22 = rating.Rights.ShortName;
-				        }
-				        else if (countere == 3)
-				        {
-					        e3 = _license?.AircraftType?.FullName ?? "";
-					        e33 = rating.Rights.ShortName;
-				        }
-				        else if (countere == 4)
-				        {
-					        e4 = _license?.AircraftType?.FullName ?? "";
-					        e44 = rating.Rights.ShortName;
-				        }
-
-				        countere++;
-			        }
-			        else
-			        {
-				        if (countero == 1)
-				        {
-					        o1 = _license?.AircraftType?.FullName ?? "";
-					        o11 = rating.LicenseFunction.FullName;
-				        }
-				        else if (countero == 2)
-				        {
-					        o2 = _license?.AircraftType?.FullName ?? "";
-					        o22 = rating.LicenseFunction.FullName;
-				        }
-				        else if (countero == 3)
-				        {
-					        o3 = _license?.AircraftType?.FullName ?? "";
-					        o33 = rating.LicenseFunction.FullName;
-				        }
-				        else if (countero == 4)
-				        {
-					        o4 = _license?.AircraftType?.FullName ?? "";
-					        o44 = rating.LicenseFunction.FullName;
-				        }
-
-				        countero++;
-			        }
-		        }
+		        i1 = string.Join(", ",_license.LicenseRatings
+			        .Where(i => i.Rights.FullName.ToLower().Contains("instructor"))
+			        .Select(i => $"{_license?.AircraftType?.FullName ?? ""} - {i.Rights.ShortName}"));
+		        e1 = string.Join(", ",_license.LicenseRatings
+			        .Where(i => i.Rights.FullName.ToLower().Contains("examiner"))
+			        .Select(i => $"{_license?.AircraftType?.FullName ?? ""} - {i.Rights.ShortName}"));
+		        o1 = string.Join(", ",_license.LicenseRatings
+			        .Where(i => !i.Rights.FullName.ToLower().Contains("examiner") && !i.Rights.FullName.ToLower().Contains("instructor"))
+			        .Select(i => $"{_license?.AircraftType?.FullName ?? ""} - {i.LicenseFunction.FullName}"));
+		        
 	        }
 
 
