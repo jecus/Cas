@@ -111,7 +111,7 @@ namespace CASReports.Builders.CAA
         private void AddAdditionalInformation(SpecialistDataSet dataSet)
         {
 	        var caa = GlobalObjects.CaaEnvironment.Operators.FirstOrDefault();
-	        dataSet.AdditionalInfo.AddAdditionalInfoRow(caa.Name, caa.Settings?.ShortName ?? "",_reporter.FirstName, _reporter.LastName, _reporter.Images.Sign, _reporter.Images.Stamp);
+	        dataSet.AdditionalInfo.AddAdditionalInfoRow(caa.Name, caa.Settings?.ShortName ?? "",_reporter.FirstName, _reporter.LastName, _reporter.Images.Sign, caa.Stamp);
         }
         
         
