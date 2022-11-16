@@ -135,10 +135,15 @@ namespace CAS.UI.UICAAControls.CheckList
 	            InitToolStripMenuItems();
 	            InitListView();
             }
+
+            if (_directivesViewer != null)
+            {
+	            _directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
+	            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
+	            _directivesViewer.Focus();
+            }
             
-			_directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
-			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
-			_directivesViewer.Focus();
+			
 		}
 
         #endregion

@@ -15,13 +15,14 @@ namespace SmartCore.CAA.RoutineAudits
         #endregion
 
         public static ProgramType IOSA = new ProgramType(1, "IOSA", "IOSA", "");
-        public static ProgramType EASA = new ProgramType(2, "EASA", "EASA", "");
+        public static ProgramType EASA = new ProgramType(2, "EASA Part-FCL", "EASA Part-FCL", "");
         public static ProgramType SAFA = new ProgramType(3, "SAFA", "SAFA", "");
         public static ProgramType SANAKG = new ProgramType(4, "SANA KG", "SANA KG", "");
         public static ProgramType CAAKG = new ProgramType(5, "CAA KG", "CAA KG", "");
         public static ProgramType ISAGO = new ProgramType(6, "ISAGO", "ISAGO", "");
         public static ProgramType SACA = new ProgramType(7, "SACA", "SACA", "");
         public static ProgramType ICAO = new ProgramType(8, "ICAO", "ICAO", "");
+        public static ProgramType EASAMed = new ProgramType(9, "EASA Part-Med", "EASA Part-Med", "");
         public static ProgramType Unknown = new ProgramType(-1, "Unknown", "Unknown", "Unknown");
 
         /*
