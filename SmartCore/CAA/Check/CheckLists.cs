@@ -165,7 +165,7 @@ namespace SmartCore.CAA.Check
         {
             get
             {
-                if (new[] { ProgramType.IOSA, ProgramType.ISAGO, ProgramType.CAAKG, }.Contains(ProgramType))
+                if (new[] { ProgramType.IOSA, ProgramType.ISAGO, ProgramType.CAAKG,ProgramType.EASA, ProgramType.EASAMed }.Contains(ProgramType))
                     return CheckUIType.Iosa;
                 if (new[] { ProgramType.SAFA, ProgramType.SACA, ProgramType.SANAKG, }.Contains(ProgramType))
                     return CheckUIType.Safa;
