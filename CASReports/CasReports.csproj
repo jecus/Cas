@@ -920,6 +920,12 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ReportTemplates\CAA\CAASpecMedical.cs">
+      <DependentUpon>CAASpecMedical.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="ReportTemplates\CAA\CAASpecReportPart1.cs">
       <DependentUpon>CAASpecReportPart1.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -2279,6 +2285,10 @@
       <LastGenOutput>BaseDetailLogBookReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportTemplates\CAA\CAASpecLicence.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CAASpecReportPart1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\CAA\CAASpecMedical.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CAASpecReportPart1.cs</LastGenOutput>
     </EmbeddedResource>
