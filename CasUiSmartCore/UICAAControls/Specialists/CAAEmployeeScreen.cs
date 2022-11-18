@@ -39,6 +39,7 @@ namespace CAS.UI.UICAAControls.Specialists
         private ToolStripMenuItem _itemPrintFCL;
         private ToolStripMenuItem _itemPrintAttachment;
         private ToolStripMenuItem _itemPrintElectronic;
+        private ToolStripMenuItem _itemMedicalSertificat;
         private ToolStripMenuItem _itemPrintCabinCrew;
 		private List<AircraftModel> aircraftModels = new List<AircraftModel>();
 		private List<SmartCore.Purchase.Supplier> _suppliers = new List<SmartCore.Purchase.Supplier>();
@@ -100,6 +101,7 @@ namespace CAS.UI.UICAAControls.Specialists
             if (_itemPrintFCL != null) _itemPrintFCL.Dispose();
             if (_itemPrintAttachment != null) _itemPrintAttachment.Dispose();
             if (_itemPrintElectronic != null) _itemPrintElectronic.Dispose();
+            if (_itemMedicalSertificat != null) _itemMedicalSertificat.Dispose();
             if (_itemPrintCabinCrew != null) _itemPrintCabinCrew.Dispose();
             if (_buttonPrintMenuStrip != null) _buttonPrintMenuStrip.Dispose();
 
@@ -720,8 +722,9 @@ namespace CAS.UI.UICAAControls.Specialists
 			_itemPrintFCL = new ToolStripMenuItem { Text = "License FCL" };
 			_itemPrintAttachment = new ToolStripMenuItem { Text = "Attachment to Licence" };
 			_itemPrintElectronic = new ToolStripMenuItem { Text = "Electronic Personnel Licence" };
+			_itemMedicalSertificat = new ToolStripMenuItem { Text = "Medical Sertificate" };
 			_itemPrintCabinCrew = new ToolStripMenuItem { Text = "Cabin Crew Attestation" };
-            _buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintFCL, _itemPrintAttachment,_itemPrintElectronic,_itemPrintCabinCrew });
+            _buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintFCL, _itemPrintAttachment,_itemPrintElectronic,_itemMedicalSertificat,_itemPrintCabinCrew });
    
             ButtonPrintMenuStrip = _buttonPrintMenuStrip;
             
@@ -873,7 +876,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		        var reporter = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO,Specialist>(GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId);
 		        reporter.Images = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASpecialistImagesDTO,SpecialistImages>(new Filter("SpecialistId", reporter.ItemId)).FirstOrDefault() ?? new SpecialistImages();
 		        
-		        SpecialistBuilder builder = new SpecialistBuilder(_currentItem, reporter, _records
+		        var builder = new SpecialistBuilder(_currentItem, reporter, _records
 			        .Where(i => i.Education?.Task?.SubTaskCode == "5030").ToList());
 		        e.DisplayerText = $"FCL {_currentItem.FirstName}";
 		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
@@ -884,11 +887,22 @@ namespace CAS.UI.UICAAControls.Specialists
 		        var reporter = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO,Specialist>(GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId);
 		        reporter.Images = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASpecialistImagesDTO,SpecialistImages>(new Filter("SpecialistId", reporter.ItemId)).FirstOrDefault() ?? new SpecialistImages();
 		        
-		        SpecialisLicensetBuilder builder = new SpecialisLicensetBuilder(_currentItem, reporter, _records
+		        var builder = new SpecialisLicensetBuilder(_currentItem, reporter, _records
 			        .Where(i => i.Education?.Task?.SubTaskCode == "5030").ToList());
 		        e.DisplayerText = $"Licence {_currentItem.FirstName}";
 		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 		        e.RequestedEntity = new ReportScreen(builder);
+	        }
+	        else if (sender == _itemMedicalSertificat)
+	        {
+		        var reporter = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO,Specialist>(GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId);
+		        reporter.Images = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASpecialistImagesDTO,SpecialistImages>(new Filter("SpecialistId", reporter.ItemId)).FirstOrDefault() ?? new SpecialistImages();
+
+		        var builder = new SpecialistMedicalBuilder(_currentItem, reporter);
+		        e.DisplayerText = $"Medical {_currentItem.FirstName}";
+		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+		        e.RequestedEntity = new ReportScreen(builder);
+
 	        }
 	        else e.Cancel = true;
         }

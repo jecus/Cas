@@ -28,25 +28,25 @@ namespace SmartCore.Entities.Dictionaries
 
 		#endregion
 
-		public static EmployeeLicenceType FlightNavigator  = new EmployeeLicenceType(1, "Flight navigator", "Flight navigator", PersonnelCategory.FlightCrewMembersOtherThanPilots);
-		public static EmployeeLicenceType FlightEngineer = new EmployeeLicenceType(2, "Flight engineer", "Flight engineer", PersonnelCategory.FlightCrewMembersOtherThanPilots);
-		public static EmployeeLicenceType FlightMechanic = new EmployeeLicenceType(3, "Flight mechanic", "Flight mechanic", PersonnelCategory.FlightCrewMembersOtherThanPilots);
-		public static EmployeeLicenceType FlightRadiotelephoneOperator  = new EmployeeLicenceType(4, "Flight radiotelephone operator", "Flight radiotelephone operator", PersonnelCategory.FlightCrewMembersOtherThanPilots);
-		public static EmployeeLicenceType FlightOperator = new EmployeeLicenceType(5, "Flight operator", "Flight operator", PersonnelCategory.FlightCrewMembersOtherThanPilots);
+		public static EmployeeLicenceType FlightNavigator  = new EmployeeLicenceType(1, "FN", "Flight navigator", PersonnelCategory.FlightCrewMembersOtherThanPilots);
+		public static EmployeeLicenceType FlightEngineer = new EmployeeLicenceType(2, "FE", "Flight engineer", PersonnelCategory.FlightCrewMembersOtherThanPilots);
+		public static EmployeeLicenceType FlightMechanic = new EmployeeLicenceType(3, "FM", "Flight mechanic", PersonnelCategory.FlightCrewMembersOtherThanPilots);
+		public static EmployeeLicenceType FlightRadiotelephoneOperator  = new EmployeeLicenceType(4, "FR", "Flight radiotelephone operator", PersonnelCategory.FlightCrewMembersOtherThanPilots);
+		public static EmployeeLicenceType FlightOperator = new EmployeeLicenceType(5, "FO", "Flight operator", PersonnelCategory.FlightCrewMembersOtherThanPilots);
 
 
-		public static EmployeeLicenceType AircraftMaintenanceTechnician = new EmployeeLicenceType(6, "Aircraft maintenance technician", "Aircraft maintenance technician", PersonnelCategory.OtherThanFlightCrewMembers);
-		public static EmployeeLicenceType AircraftMaintenanceEngineer = new EmployeeLicenceType(7, "Aircraft maintenance engineer", "Aircraft maintenance engineer", PersonnelCategory.OtherThanFlightCrewMembers);
-		public static EmployeeLicenceType AircraftMaintenanceMechanic = new EmployeeLicenceType(8, "Aircraft maintenance mechanic", "Aircraft maintenance mechanic", PersonnelCategory.OtherThanFlightCrewMembers);
-		public static EmployeeLicenceType Student = new EmployeeLicenceType(9, "Student air traffic controller", "Student air traffic controller", PersonnelCategory.OtherThanFlightCrewMembers);
-		public static EmployeeLicenceType AirTrafficController = new EmployeeLicenceType(10, "Air traffic controller", "Air traffic controller", PersonnelCategory.OtherThanFlightCrewMembers);
-		public static EmployeeLicenceType AirTrafficControllerRatings = new EmployeeLicenceType(11, "Air traffic controller ratings", "Air traffic controller ratings", PersonnelCategory.OtherThanFlightCrewMembers);
-		public static EmployeeLicenceType FlightOperations = new EmployeeLicenceType(12, "Flight operations officer/flight dispatcher", "Flight operations officer/flight dispatcher", PersonnelCategory.OtherThanFlightCrewMembers);
-		public static EmployeeLicenceType AeronauticalStation = new EmployeeLicenceType(13, "Aeronautical station operator", "Aeronautical station operator", PersonnelCategory.OtherThanFlightCrewMembers);
-		public static EmployeeLicenceType AeronauticalMeteorological = new EmployeeLicenceType(14, "Aeronautical meteorological personnel", "Aeronautical meteorological personnel", PersonnelCategory.OtherThanFlightCrewMembers);
+		public static EmployeeLicenceType AircraftMaintenanceTechnician = new EmployeeLicenceType(6, "GT", "Aircraft maintenance technician", PersonnelCategory.OtherThanFlightCrewMembers);
+		public static EmployeeLicenceType AircraftMaintenanceEngineer = new EmployeeLicenceType(7, "GE", "Aircraft maintenance engineer", PersonnelCategory.OtherThanFlightCrewMembers);
+		public static EmployeeLicenceType AircraftMaintenanceMechanic = new EmployeeLicenceType(8, "GM", "Aircraft maintenance mechanic", PersonnelCategory.OtherThanFlightCrewMembers);
+		public static EmployeeLicenceType Student = new EmployeeLicenceType(9, "", "Student air traffic controller", PersonnelCategory.OtherThanFlightCrewMembers);
+		public static EmployeeLicenceType AirTrafficController = new EmployeeLicenceType(10, "AC", "Air traffic controller", PersonnelCategory.OtherThanFlightCrewMembers);
+		public static EmployeeLicenceType AirTrafficControllerRatings = new EmployeeLicenceType(11, "", "Air traffic controller ratings", PersonnelCategory.OtherThanFlightCrewMembers);
+		public static EmployeeLicenceType FlightOperations = new EmployeeLicenceType(12, "FP", "Flight operations officer/flight dispatcher", PersonnelCategory.OtherThanFlightCrewMembers);
+		public static EmployeeLicenceType AeronauticalStation = new EmployeeLicenceType(13, "", "Aeronautical station operator", PersonnelCategory.OtherThanFlightCrewMembers);
+		public static EmployeeLicenceType AeronauticalMeteorological = new EmployeeLicenceType(14, "", "Aeronautical meteorological personnel", PersonnelCategory.OtherThanFlightCrewMembers);
 
 
-		public static EmployeeLicenceType FlightAttendant = new EmployeeLicenceType(15, "Flight attendant", "Flight attendant", PersonnelCategory.CabinCrew);
+		public static EmployeeLicenceType FlightAttendant = new EmployeeLicenceType(15, "", "Flight attendant", PersonnelCategory.CabinCrew);
 
 
 
@@ -109,7 +109,7 @@ namespace SmartCore.Entities.Dictionaries
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return FullName;
+			return $"{FullName} {ShortName}";
 		}
 		#endregion
 

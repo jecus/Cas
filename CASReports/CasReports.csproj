@@ -376,6 +376,7 @@
     <Compile Include="Builders\CAA\SpecialistBuilder.cs" />
     <Compile Include="Builders\ATLBBuilder.cs" />
     <Compile Include="Builders\AvailableComponentsBuilder.cs" />
+    <Compile Include="Builders\CAA\SpecialistMedicalBuilder.cs" />
     <Compile Include="Builders\ComplianceListBuilder.cs" />
     <Compile Include="Builders\ComponentAMLLPReportBuilder.cs" />
     <Compile Include="Builders\ComponentLLPReportBuilderNewLDG.cs" />
