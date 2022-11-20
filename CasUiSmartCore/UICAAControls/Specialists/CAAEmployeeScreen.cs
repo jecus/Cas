@@ -904,6 +904,19 @@ namespace CAS.UI.UICAAControls.Specialists
 		        e.RequestedEntity = new ReportScreen(builder);
 
 	        }
+	        else if (sender == _itemPrintCabinCrew)
+	        {
+		        
+			        
+		        var reporter = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<CAASpecialistDTO,Specialist>(GlobalObjects.CaaEnvironment.IdentityUser.PersonnelId);
+		        reporter.Images = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASpecialistImagesDTO,SpecialistImages>(new Filter("SpecialistId", reporter.ItemId)).FirstOrDefault() ?? new SpecialistImages();
+
+		        var builder = new AttestationtBuilder(_currentItem, reporter);
+		        e.DisplayerText = $"Attestation Cabin Crew {_currentItem.FirstName}";
+		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+		        e.RequestedEntity = new ReportScreen(builder);
+			        
+	        }
 	        else e.Cancel = true;
         }
 
