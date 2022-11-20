@@ -722,7 +722,7 @@ namespace CAS.UI.UICAAControls.Specialists
 			_itemPrintFCL = new ToolStripMenuItem { Text = "License FCL" };
 			_itemPrintAttachment = new ToolStripMenuItem { Text = "Attachment to Licence" };
 			_itemPrintElectronic = new ToolStripMenuItem { Text = "Electronic Personnel Licence" };
-			_itemMedicalSertificat = new ToolStripMenuItem { Text = "Medical Sertificate" };
+			_itemMedicalSertificat = new ToolStripMenuItem { Text = "Medical Certificate" };
 			_itemPrintCabinCrew = new ToolStripMenuItem { Text = "Cabin Crew Attestation" };
             _buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintFCL, _itemPrintAttachment,_itemPrintElectronic,_itemMedicalSertificat,_itemPrintCabinCrew });
    
@@ -888,7 +888,7 @@ namespace CAS.UI.UICAAControls.Specialists
 		        reporter.Images = GlobalObjects.CaaEnvironment.NewLoader.GetObjectList<CAASpecialistImagesDTO,SpecialistImages>(new Filter("SpecialistId", reporter.ItemId)).FirstOrDefault() ?? new SpecialistImages();
 		        
 		        var builder = new SpecialisLicensetBuilder(_currentItem, reporter, _records
-			        .Where(i => i.Education?.Task?.SubTaskCode == "5030").ToList());
+			        .Where(i => i.Education?.Task?.SubTaskCode == "5030").ToList(), _initialDocumentArray);
 		        e.DisplayerText = $"Licence {_currentItem.FirstName}";
 		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 		        e.RequestedEntity = new ReportScreen(builder);

@@ -7,6 +7,8 @@ using CASReports.ReportTemplates;
 using CASReports.ReportTemplates.CAA;
 using CASTerms;
 using SmartCore.CAA.CAAEducation;
+using SmartCore.Calculations;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Personnel;
@@ -22,12 +24,16 @@ namespace CASReports.Builders.CAA
 	    private readonly Specialist _spec;
 	    private readonly Specialist _reporter;
 	    private readonly List<CAAEducationRecord> _educations;
-	    
-	    public SpecialisLicensetBuilder(Specialist spec, Specialist reporter, List<CAAEducationRecord> educations)
+	    private readonly CommonCollection<CAAEducationManagment> _certificate;
+
+	    public SpecialisLicensetBuilder(Specialist spec, Specialist reporter,
+		    List<CAAEducationRecord> educations,
+		    CommonCollection<CAAEducationManagment> certificate)
 	    {
 		    _spec = spec;
 		    _reporter = reporter;
 		    _educations = educations;
+		    _certificate = certificate;
 	    }
 
         #region Methods
@@ -52,8 +58,26 @@ namespace CASReports.Builders.CAA
 	        AddAdditionalInformation(dataSet);
 	        AddMedicalInformation(dataSet);
 	        AddTableData(dataSet);
-            
+	        AddCertificateTableData(dataSet);
+	        
             return dataSet;
+        }
+        
+        
+        private void AddCertificateTableData(SpecialistDataSet dataSet)
+        {
+	        foreach (var cert in _certificate)
+	        {
+		        var repeat = cert?.Education?.Task?.Repeat ?? Lifelength.Null;
+		        if(repeat == Lifelength.Null)
+			        continue;
+
+		        var next = cert.Record == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat(cert.Record?.Settings?.NextCompliance?.NextDate);
+		        var last = cert.Record == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat(cert.Record?.Settings?.LastCompliances?.LastOrDefault()?.LastDate);
+		        dataSet.CertificatesData.AddCertificatesDataRow(cert.Education?.Task?.ShortName, next, last);
+	        }
+	        
+	        
         }
 
         private void AddMedicalInformation(SpecialistDataSet dataSet)
