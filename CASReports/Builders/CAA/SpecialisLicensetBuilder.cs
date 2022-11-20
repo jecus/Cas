@@ -58,27 +58,12 @@ namespace CASReports.Builders.CAA
 	        AddAdditionalInformation(dataSet);
 	        AddMedicalInformation(dataSet);
 	        AddTableData(dataSet);
-	        AddCertificateTableData(dataSet);
+
 	        
             return dataSet;
         }
         
         
-        private void AddCertificateTableData(SpecialistDataSet dataSet)
-        {
-	        foreach (var cert in _certificate)
-	        {
-		        var repeat = cert?.Education?.Task?.Repeat ?? Lifelength.Null;
-		        if(repeat == Lifelength.Null)
-			        continue;
-
-		        var next = cert.Record == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat(cert.Record?.Settings?.NextCompliance?.NextDate);
-		        var last = cert.Record == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat(cert.Record?.Settings?.LastCompliances?.LastOrDefault()?.LastDate);
-		        dataSet.CertificatesData.AddCertificatesDataRow(cert.Education?.Task?.ShortName, next, last);
-	        }
-	        
-	        
-        }
 
         private void AddMedicalInformation(SpecialistDataSet dataSet)
         {
@@ -151,6 +136,22 @@ namespace CASReports.Builders.CAA
 			        counter++;
 		        }
 		        
+	        }
+	        
+	        
+	        foreach (var cert in _certificate)
+	        {
+		        var repeat = cert?.Education?.Task?.Repeat ?? Lifelength.Null;
+		        if(repeat == Lifelength.Null)
+			        continue;
+		        
+		        var last = cert.Record == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat(cert.Record?.Settings?.LastCompliances?.LastOrDefault()?.LastDate);
+		        var next = cert.Record == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat(cert.Record?.Settings?.NextCompliance?.NextDate);
+		        o33 += $"{cert.Education?.Task?.ShortName}\n";
+		        o4 += $"{last}\n";
+		        o44 += $"{next}\n";
+		        
+		        dataSet.CertificatesData.AddCertificatesDataRow(cert.Education?.Task?.ShortName, next, last);
 	        }
 	        
 	        dataSet.TableData.AddTableDataRow(i1, i11, i2, i22, i3, i33, i4, i44,
