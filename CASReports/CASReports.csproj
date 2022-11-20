@@ -376,6 +376,7 @@
     <Compile Include="Builders\CAA\SpecialistBuilder.cs" />
     <Compile Include="Builders\ATLBBuilder.cs" />
     <Compile Include="Builders\AvailableComponentsBuilder.cs" />
+    <Compile Include="Builders\CAA\SpecialistMedicalBuilder.cs" />
     <Compile Include="Builders\ComplianceListBuilder.cs" />
     <Compile Include="Builders\ComponentAMLLPReportBuilder.cs" />
     <Compile Include="Builders\ComponentLLPReportBuilderNewLDG.cs" />
@@ -916,6 +917,12 @@
     </Compile>
     <Compile Include="ReportTemplates\CAA\CAASpecLicence.cs">
       <DependentUpon>CAASpecLicence.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\CAA\CAASpecMedical.cs">
+      <DependentUpon>CAASpecMedical.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -2279,6 +2286,10 @@
       <LastGenOutput>BaseDetailLogBookReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportTemplates\CAA\CAASpecLicence.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CAASpecReportPart1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\CAA\CAASpecMedical.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CAASpecReportPart1.cs</LastGenOutput>
     </EmbeddedResource>
