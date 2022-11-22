@@ -59,13 +59,17 @@ namespace SmartCore.Entities
 			if (value is IFileDTOContainer && saveAttachedFile)
 				SaveAttachedFileDTO(value as IFileDTOContainer);
 		}
-		public void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true)
+		public void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true, bool saveCorrector = true)
 		{
 			if (_casEnvironment.IdentityUser.UserType == UserType.ReadOnly)
 				return;
 
-			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
-			value.Updated = DateTime.Now;
+			if (saveCorrector)
+			{
+				value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+				value.Updated = DateTime.Now;
+			}
+			
 
 			var type = AuditOperation.Created;
 			if (value.ItemId > 0)
