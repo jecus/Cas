@@ -722,7 +722,14 @@ namespace CAS.UI.UICAAControls.Specialists
 			_itemPrintAttachment = new ToolStripMenuItem { Text = "Attachment to Licence" };
 			_itemPrintElectronic = new ToolStripMenuItem { Text = "Electronic Personnel Licence" };
 			_itemMedicalSertificat = new ToolStripMenuItem { Text = "Medical Certificate" };
-			_itemPrintCabinCrew = new ToolStripMenuItem { Text = "Cabin Crew Attestation" };
+			_itemPrintCabinCrew = new ToolStripMenuItem
+			{
+				Text = "Cabin Crew Attestation",
+				Enabled = _currentItem.PersonnelCategory.ItemId == PersonnelCategory.CabinCrew.ItemId 
+				          && _currentItem.Licenses != null
+				          && _currentItem.Licenses.Any(i => i.EmployeeLicenceType.ItemId == EmployeeLicenceType.FlightAttendant.ItemId)
+				
+			};
             _buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintFCL, _itemPrintAttachment,_itemPrintElectronic,_itemMedicalSertificat,_itemPrintCabinCrew });
    
             ButtonPrintMenuStrip = _buttonPrintMenuStrip;
