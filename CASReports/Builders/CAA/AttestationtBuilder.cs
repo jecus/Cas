@@ -67,7 +67,7 @@ namespace CASReports.Builders.CAA
 	        var dateOfBirth = $"{_spec.DateOfBirth:dd.MM.yyyy}";
 	        var placeOfBirth = _spec.Nationality;
 	        var adress = _spec.Address;
-	        var nationality = _spec.Citizenship.ShortName;
+	        var nationality = $"{_spec.Citizenship.FullName} ({_spec.Citizenship.ShortName})";
 	        var issuing = $"{_license?.IssueDate:dd.MM.yyyy}" ?? String.Empty;
 	        var valid =  _license.IsValidTo ?   $"{_license?.ValidToDate:dd.MM.yyyy}" : "unlimited";
 	        var countryCode = licenseCaa?.Caa.ShortName ?? "";
