@@ -24,7 +24,7 @@ namespace SmartCore.Entities.Dictionaries
 		/// <summary>
 		/// неизвестный
 		/// </summary>
-		public static EmployeeLicenceType UNK = new EmployeeLicenceType(-1, "N/A", "N/A", PersonnelCategory.UNK);
+		public static EmployeeLicenceType UNK = new EmployeeLicenceType(-1, "", "N/A", PersonnelCategory.UNK);
 
 		#endregion
 
@@ -46,7 +46,7 @@ namespace SmartCore.Entities.Dictionaries
 		public static EmployeeLicenceType AeronauticalMeteorological = new EmployeeLicenceType(14, "", "Aeronautical meteorological personnel", PersonnelCategory.OtherThanFlightCrewMembers);
 
 
-		public static EmployeeLicenceType FlightAttendant = new EmployeeLicenceType(15, "", "Flight attendant", PersonnelCategory.CabinCrew);
+		public static EmployeeLicenceType FlightAttendant = new EmployeeLicenceType(15, "FL", "Flight attendant", PersonnelCategory.CabinCrew);
 
 
 
@@ -109,7 +109,7 @@ namespace SmartCore.Entities.Dictionaries
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return $"{FullName} - {ShortName}";
+			return string.IsNullOrEmpty(ShortName) ? FullName : $"{FullName} - {ShortName}";
 		}
 		#endregion
 

@@ -215,6 +215,11 @@ namespace CAS.UI.UICAAControls.Specialists
 		                    specialist.Settings.StatusId = OperatorStatus.Valid.ItemId;
                             GlobalObjects.CaaEnvironment.NewKeeper.Save(specialist, saveCorrector:false);
 		                }
+		                else if (specialist.Settings.StatusId == OperatorStatus.Unknown.ItemId)
+		                {
+			                specialist.Settings.StatusId = OperatorStatus.Valid.ItemId;
+			                GlobalObjects.CaaEnvironment.NewKeeper.Save(specialist, saveCorrector:false);
+		                }
 		                //
 		                
 	                }
