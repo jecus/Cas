@@ -35,9 +35,9 @@ namespace SmartCore.Entities.Dictionaries
 		public static EmployeeLicenceType FlightOperator = new EmployeeLicenceType(5, "FO", "Flight operator", PersonnelCategory.FlightCrewMembersOtherThanPilots);
 
 
-		public static EmployeeLicenceType AircraftMaintenanceTechnician = new EmployeeLicenceType(6, "GT", "Aircraft maintenance technician", PersonnelCategory.OtherThanFlightCrewMembers);
-		public static EmployeeLicenceType AircraftMaintenanceEngineer = new EmployeeLicenceType(7, "GE", "Aircraft maintenance engineer", PersonnelCategory.OtherThanFlightCrewMembers);
-		public static EmployeeLicenceType AircraftMaintenanceMechanic = new EmployeeLicenceType(8, "GM", "Aircraft maintenance mechanic", PersonnelCategory.OtherThanFlightCrewMembers);
+		public static EmployeeLicenceType AircraftMaintenanceTechnician = new EmployeeLicenceType(6, "AMT", "Aircraft maintenance technician", PersonnelCategory.OtherThanFlightCrewMembers);
+		public static EmployeeLicenceType AircraftMaintenanceEngineer = new EmployeeLicenceType(7, "AME", "Aircraft maintenance engineer", PersonnelCategory.OtherThanFlightCrewMembers);
+		public static EmployeeLicenceType AircraftMaintenanceMechanic = new EmployeeLicenceType(8, "AMM", "Aircraft maintenance mechanic", PersonnelCategory.OtherThanFlightCrewMembers);
 		public static EmployeeLicenceType Student = new EmployeeLicenceType(9, "", "Student air traffic controller", PersonnelCategory.OtherThanFlightCrewMembers);
 		public static EmployeeLicenceType AirTrafficController = new EmployeeLicenceType(10, "AC", "Air traffic controller", PersonnelCategory.OtherThanFlightCrewMembers);
 		public static EmployeeLicenceType AirTrafficControllerRatings = new EmployeeLicenceType(11, "", "Air traffic controller ratings", PersonnelCategory.OtherThanFlightCrewMembers);
@@ -51,22 +51,22 @@ namespace SmartCore.Entities.Dictionaries
 
 
 		public static EmployeeLicenceType StudentPilot = new EmployeeLicenceType(16, "Student pilot", "Student pilot", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType LightAircraftPilot = new EmployeeLicenceType(17, "LAPL", "Light aircraft pilot — LAPL", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType LightAircraftPilotAeroplanes = new EmployeeLicenceType(18, "LAPL(A)", "Light aircraft pilot for aeroplanes — LAPL(A)", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType LightAircraftPilotHelicopters = new EmployeeLicenceType(19, "LAPL(H)", "Light aircraft pilot for helicopters — LAPL(H)", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType LightAircraftPilotBalloons = new EmployeeLicenceType(20, "LAPL(B)", "Light aircraft pilot for balloons — LAPL(B)", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType PrivatePilotLicence = new EmployeeLicenceType(21, "PPL", "Private pilot licence  - (PPL)", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType PrivatePilotAeroplanes = new EmployeeLicenceType(22, "PPL(A)", "Private pilot aeroplanes — PPL(A)", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType PrivatePilotHelicopters = new EmployeeLicenceType(23, "PPL(H)", "Private pilot helicopters — PPL(H)", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType PrivatePilotAirships = new EmployeeLicenceType(24, "PPL(As)", "Private pilot airships — PPL(As)", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType SailplanePilot = new EmployeeLicenceType(25, "SPL", "Sailplane pilot  - (SPL)", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType BalloonPilot = new EmployeeLicenceType(26, "BPL", "Balloon pilot - (BPL)", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType CommercialPilot = new EmployeeLicenceType(27, "CPL", "Commercial pilot — CPL", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType CommercialPilotAeroplaneCategory = new EmployeeLicenceType(28, "CPL(A)", "Commercial pilot aeroplane category — CPL(A)", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType LightAircraftPilot = new EmployeeLicenceType(17, "LAPL", "Light aircraft pilot ", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType LightAircraftPilotAeroplanes = new EmployeeLicenceType(18, "LAPL(A)", "Light aircraft pilot for aeroplanes", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType LightAircraftPilotHelicopters = new EmployeeLicenceType(19, "LAPL(H)", "Light aircraft pilot for helicopters", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType LightAircraftPilotBalloons = new EmployeeLicenceType(20, "LAPL(B)", "Light aircraft pilot for balloons", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType PrivatePilotLicence = new EmployeeLicenceType(21, "PPL", "Private pilot licence", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType PrivatePilotAeroplanes = new EmployeeLicenceType(22, "PPL(A)", "Private pilot aeroplanes", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType PrivatePilotHelicopters = new EmployeeLicenceType(23, "PPL(H)", "Private pilot helicopters", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType PrivatePilotAirships = new EmployeeLicenceType(24, "PPL(As)", "Private pilot airships", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType SailplanePilot = new EmployeeLicenceType(25, "SPL", "Sailplane pilot", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType BalloonPilot = new EmployeeLicenceType(26, "BPL", "Balloon pilot", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType CommercialPilot = new EmployeeLicenceType(27, "CPL", "Commercial pilot", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType CommercialPilotAeroplaneCategory = new EmployeeLicenceType(28, "CPL(A)", "Commercial pilot aeroplane category)", PersonnelCategory.FlightCrewMembersPilots);
 		public static EmployeeLicenceType MultiCrewPilot = new EmployeeLicenceType(29, "MPL", "Multi-crew pilot — MPL", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType AirlineTransportPilot = new EmployeeLicenceType(30, "ATPL", "Airline transport pilot — ATPL", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType AirlineTransportPilotAeroplane = new EmployeeLicenceType(31, "ATPL(A)", "Airline transport pilot for the aeroplane category — ATPL(A)", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType AirlineTransportPilotHelicopter = new EmployeeLicenceType(32, "ATPL(H)", "Airline transport pilot for the helicopter category — ATPL(H)", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType AirlineTransportPilot = new EmployeeLicenceType(30, "ATPL", "Airline transport pilot", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType AirlineTransportPilotAeroplane = new EmployeeLicenceType(31, "ATPL(A)", "Airline transport pilot for the aeroplane category", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType AirlineTransportPilotHelicopter = new EmployeeLicenceType(32, "ATPL(H)", "Airline transport pilot for the helicopter category", PersonnelCategory.FlightCrewMembersPilots);
 
 		/*
 		* Методы
@@ -109,7 +109,7 @@ namespace SmartCore.Entities.Dictionaries
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return $"{FullName} {ShortName}";
+			return $"{FullName} - {ShortName}";
 		}
 		#endregion
 
