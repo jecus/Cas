@@ -62,8 +62,8 @@ namespace SmartCore.Entities.Dictionaries
 		public static EmployeeLicenceType SailplanePilot = new EmployeeLicenceType(25, "SPL", "Sailplane pilot", PersonnelCategory.FlightCrewMembersPilots);
 		public static EmployeeLicenceType BalloonPilot = new EmployeeLicenceType(26, "BPL", "Balloon pilot", PersonnelCategory.FlightCrewMembersPilots);
 		public static EmployeeLicenceType CommercialPilot = new EmployeeLicenceType(27, "CPL", "Commercial pilot", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType CommercialPilotAeroplaneCategory = new EmployeeLicenceType(28, "CPL(A)", "Commercial pilot aeroplane category)", PersonnelCategory.FlightCrewMembersPilots);
-		public static EmployeeLicenceType MultiCrewPilot = new EmployeeLicenceType(29, "MPL", "Multi-crew pilot — MPL", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType CommercialPilotAeroplaneCategory = new EmployeeLicenceType(28, "CPL(A)", "Commercial pilot aeroplane category", PersonnelCategory.FlightCrewMembersPilots);
+		public static EmployeeLicenceType MultiCrewPilot = new EmployeeLicenceType(29, "MPL", "Multi-crew pilot", PersonnelCategory.FlightCrewMembersPilots);
 		public static EmployeeLicenceType AirlineTransportPilot = new EmployeeLicenceType(30, "ATPL", "Airline transport pilot", PersonnelCategory.FlightCrewMembersPilots);
 		public static EmployeeLicenceType AirlineTransportPilotAeroplane = new EmployeeLicenceType(31, "ATPL(A)", "Airline transport pilot for the aeroplane category", PersonnelCategory.FlightCrewMembersPilots);
 		public static EmployeeLicenceType AirlineTransportPilotHelicopter = new EmployeeLicenceType(32, "ATPL(H)", "Airline transport pilot for the helicopter category", PersonnelCategory.FlightCrewMembersPilots);
