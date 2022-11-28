@@ -95,6 +95,30 @@ namespace CAA.API.Controllers
 			return await base.BulkDelete(entity, batchSize);
 		}
 
+		public async override Task<ActionResult> BulkUpdate(IEnumerable<T> entity, int? batchSize = null)
+		{
+			try
+			{
+				await _repository.BulkUpdateAsync(entity, batchSize);
+				
+				if(GlobalObjects.Dictionaries.ContainsKey(_type))
+					GlobalObjects.Dictionaries[_type].AddRange(entity);
+				return Ok();
+			}
+			catch (Exception e)
+			{
+				_logger.LogError(e.Message);
+				foreach (var baseEntity in entity)
+				{
+					await _repository.SaveAsync(baseEntity);
+					if(GlobalObjects.Dictionaries.ContainsKey(_type))
+						GlobalObjects.Dictionaries[_type].Add(baseEntity);
+				}
+
+				return Ok();
+			}
+		}
+
 
 		#endregion
 	}
