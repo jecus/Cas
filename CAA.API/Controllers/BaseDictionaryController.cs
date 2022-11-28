@@ -95,15 +95,73 @@ namespace CAA.API.Controllers
 			return await base.BulkDelete(entity, batchSize);
 		}
 
-		public async override Task<ActionResult> BulkUpdate(IEnumerable<T> entity, int? batchSize = null)
+		public override async Task<ActionResult> BulkUpdate(IEnumerable<T> entity, int? batchSize = null)
 		{
 			try
 			{
 				await _repository.BulkUpdateAsync(entity, batchSize);
+
+				foreach (var baseEntity in entity)
+				{
+					if (GlobalObjects.Dictionaries.ContainsKey(_type))
+					{
+						var find = GlobalObjects.Dictionaries[_type].FirstOrDefault(i => i.ItemId == baseEntity.ItemId);
+						if (find == null)
+							GlobalObjects.Dictionaries[_type].Add(baseEntity);
+						else
+						{
+							GlobalObjects.Dictionaries[_type].Remove(find);
+							GlobalObjects.Dictionaries[_type].Add(baseEntity);
+						}
+					}
+					else
+					{
+						GlobalObjects.Dictionaries.Add(_type, new List<IBaseDictionary>(){baseEntity});
+					}
+				}
+				
+				
+				
+				return Ok();
+			}
+			catch (Exception e)
+			{
+				_logger.LogError(e.Message);
+				foreach (var baseEntity in entity)
+				{
+					await _repository.SaveAsync(baseEntity);
+					if (GlobalObjects.Dictionaries.ContainsKey(_type))
+					{
+						var find = GlobalObjects.Dictionaries[_type].FirstOrDefault(i => i.ItemId == baseEntity.ItemId);
+						if (find == null)
+							GlobalObjects.Dictionaries[_type].Add(baseEntity);
+						else
+						{
+							GlobalObjects.Dictionaries[_type].Remove(find);
+							GlobalObjects.Dictionaries[_type].Add(baseEntity);
+						}
+					}
+					else
+					{
+						GlobalObjects.Dictionaries.Add(_type, new List<IBaseDictionary>(){baseEntity});
+					}
+					
+				}
+
+				return Ok();
+			}
+		}
+
+		public override async Task<ActionResult<Dictionary<string, int>>> BulkInsert(IEnumerable<T> entity, int? batchSize = null)
+		{
+			try
+			{
+				await _repository.BulkInsertASync(entity, batchSize);
 				
 				if(GlobalObjects.Dictionaries.ContainsKey(_type))
 					GlobalObjects.Dictionaries[_type].AddRange(entity);
-				return Ok();
+				
+				return Ok(entity.ToDictionary(i => i.Guid, i => i.ItemId));
 			}
 			catch (Exception e)
 			{
@@ -115,8 +173,11 @@ namespace CAA.API.Controllers
 						GlobalObjects.Dictionaries[_type].Add(baseEntity);
 				}
 
-				return Ok();
+				return Ok(entity.ToDictionary(i => i.Guid, i => i.ItemId));
 			}
+			
+			
+			
 		}
 
 
