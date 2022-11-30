@@ -119,11 +119,7 @@ namespace CAS.UI.UICAAControls
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
-        {         
-	        
-	        
-
-	        
+        {
 	        _currentOperator = GlobalObjects.CaaEnvironment.NewLoader.GetObjectById<OperatorDTO, Operator>(CurrentOperator.ItemId);
 	        
 		}

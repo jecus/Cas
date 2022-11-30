@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
+using CAS.UI.UICAAControls.CurrentOperator;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
@@ -119,10 +121,9 @@ namespace CAS.UI.UICAAControls.Operators
 		{
 			if (SelectedItem != null)
 			{
-                var form = new AddOperatorFrom(SelectedItem);
-                if (form.ShowDialog() == DialogResult.OK)
-                    _animatedThreadWorker.RunWorkerAsync();
-                e.Cancel = true;
+				e.RequestedEntity = new CurrentOperatorSymmaryCAADemoScreen(SelectedItem);
+				e.DisplayerText = SelectedItem.ShortName;
+				e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			}
 		}
 		#endregion

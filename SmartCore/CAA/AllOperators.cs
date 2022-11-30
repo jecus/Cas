@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -20,16 +21,26 @@ namespace SmartCore.CAA
 
     public enum Type
     {
-        AirOperator,
-        AMO,
-        CAMO,
-        CAO,
-        AerodromOperator,
-        ATCANS,
-        Fuel,
-        AeMC,
-        ATO,
-        None
+        [Description("Air Operator")]
+        AirOperator = 0,
+        [Description("AMO")]
+        AMO = 1,
+        [Description("CAMO")]
+        CAMO = 2,
+        [Description("CAO")]
+        CAO = 3,
+        [Description("Aerodrom Operator")]
+        AerodromOperator = 4,
+        [Description("ATCANS")]
+        ATCANS = 5,
+        [Description("Fuel")]
+        Fuel = 6,
+        [Description("AeMC")]
+        AeMC = 7,
+        [Description("ATO")]
+        ATO = 8,
+        [Description("None")]
+        None = 9
 
     }
 
@@ -240,7 +251,7 @@ namespace SmartCore.CAA
         public bool IsOther { get; set; }
 
 
-        public string TypeString => TypeFilter.ToString();
+        public string TypeString => TypeFilter.DisplayName();
 
         public Type TypeFilter
         {

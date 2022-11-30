@@ -10,6 +10,7 @@ using CAS.UI.UICAAControls.Specialists;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
+using Entity.Abstractions.Filters;
 using SmartCore.CAA;
 using SmartCore.CAA.Operators;
 using SmartCore.Entities.Collections;
@@ -18,6 +19,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
+using Type = SmartCore.CAA.Type;
 
 namespace CAS.UI.UICAAControls.Operators
 {
@@ -26,6 +28,8 @@ namespace CAS.UI.UICAAControls.Operators
 	[ToolboxItem(false)]
 	public partial class CAAOperatorlListScreen : ScreenControl
 	{
+		private readonly int? _typeId;
+
 		#region Fields
 
 		private Operator _currentOperator;
@@ -36,7 +40,7 @@ namespace CAS.UI.UICAAControls.Operators
 
 		private CAAOperatorlListView _directivesViewer;
 
-		private RadMenuItem _toolStripMenuItemOpen;
+		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 
@@ -77,6 +81,12 @@ namespace CAS.UI.UICAAControls.Operators
 			InitListView();
 			UpdateInformation();
 		}
+		
+		
+		public CAAOperatorlListScreen(Operator currentOperator, int typeId) : this(currentOperator)
+		{
+			_typeId = typeId;
+		}
 
 		#endregion
 
@@ -101,9 +111,21 @@ namespace CAS.UI.UICAAControls.Operators
 
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
-			_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<AllOperatorsDTO, AllOperators>(loadChild:true));
-            
+			if (!_typeId.HasValue)
+				_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<AllOperatorsDTO, AllOperators>(loadChild:true));
+			else
+			{
+				if(_typeId.Value == -1)
+					_initialDocumentArray.AddRange(GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<AllOperatorsDTO, AllOperators>(loadChild:true));
+				else
+				{
+					var type = (Type)_typeId.Value;
+					var operators = GlobalObjects.CaaEnvironment.NewLoader.GetObjectListAll<AllOperatorsDTO, AllOperators>(loadChild: true);
+					_initialDocumentArray.AddRange(operators.Where(i => i.TypeFilter == type));
+				}
+			}
 
+			
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
 
 			AnimatedThreadWorker.ReportProgress(70, "filter directives");
@@ -118,14 +140,14 @@ namespace CAS.UI.UICAAControls.Operators
 
 		private void InitToolStripMenuItems()
 		{
-			_toolStripMenuItemOpen = new RadMenuItem();
+			_toolStripMenuItemEdit = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			// 
 			// toolStripMenuItemView
 			// 
-			_toolStripMenuItemOpen.Text = "Open";
-			_toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
+			_toolStripMenuItemEdit.Text = "Edit";
+			_toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
 			// 
 			// toolStripMenuItemHighlight
 			// 
@@ -165,9 +187,14 @@ namespace CAS.UI.UICAAControls.Operators
 
 		#region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 
-		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
+		private void ToolStripMenuItemEditClick(object sender, EventArgs e)
 		{
+			if(_directivesViewer.SelectedItem == null)
+				return;
 			
+			var form = new AddOperatorFrom(_directivesViewer.SelectedItem);
+			if (form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
 		}
 
 		#endregion
@@ -210,7 +237,7 @@ namespace CAS.UI.UICAAControls.Operators
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
-			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
+			_directivesViewer.AddMenuItems(_toolStripMenuItemEdit,
 				_toolStripSeparator1,
 				_toolStripMenuItemHighlight);
 
@@ -220,7 +247,7 @@ namespace CAS.UI.UICAAControls.Operators
 					return;
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
-					_toolStripMenuItemOpen.Enabled = true;
+					_toolStripMenuItemEdit.Enabled = true;
 				}
 			};
 

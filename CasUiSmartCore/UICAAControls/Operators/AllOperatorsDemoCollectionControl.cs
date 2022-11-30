@@ -10,8 +10,10 @@ using CAS.UI.UICAAControls.CurrentOperator;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Microsoft.VisualBasic.Devices;
+using SmartCore;
 using SmartCore.CAA;
 using SmartCore.Entities.Collections;
+using Type = SmartCore.CAA.Type;
 
 namespace CAS.UI.UICAAControls.Operators
 {
@@ -82,11 +84,40 @@ namespace CAS.UI.UICAAControls.Operators
         /// </summary>
         public void FillUiElementsFromCollection()
         {
-            if (_itemsCollection == null) return;
-            int count = _itemsCollection.Count;
+            if (_itemsCollection == null) 
+                return;
             _controlItems = new List<ReferenceStatusImageLinkLabel>();
             flowLayoutPanelAircrafts.Controls.Clear();
-            for (int i = 0; i < count; i++)
+            
+            var dict = _itemsCollection.GroupBy(i => i.TypeFilter).Select(i => new
+            {
+                TypeFilter = i.Key.DisplayName(),
+                TypeFilterId = (int)i.Key,
+                Count = i.Count()
+            });
+            
+            var all = new ReferenceStatusImageLinkLabel
+            {
+                ActiveLinkColor = Color.FromArgb(62, 155, 246),
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                //Font = new Font("Verdana", 14F, FontStyle.Regular, GraphicsUnit.Pixel),
+                HoveredLinkColor = Color.FromArgb(62, 155, 246),
+                LinkColor = Color.FromArgb(62, 155, 246),
+                MaximumSize = new Size(250, 20),
+                Size = new Size(250, 20),
+                Tag = -1,
+                Text = $"All ({_itemsCollection.Count})",
+                TextAlign = ContentAlignment.MiddleLeft,
+                TextFont = new Font("Verdana", 14.25F, FontStyle.Regular, GraphicsUnit.Pixel, 204),
+
+                Enabled = true,
+                Status = Statuses.Satisfactory
+            };
+            all.DisplayerRequested += TempButtonDisplayerRequested;
+            _controlItems.Add(all);
+            
+            foreach (var type in dict)
             {
                 var tempLabel = new ReferenceStatusImageLinkLabel
                 {
@@ -98,49 +129,43 @@ namespace CAS.UI.UICAAControls.Operators
                     LinkColor = Color.FromArgb(62, 155, 246),
                     MaximumSize = new Size(250, 20),
                     Size = new Size(250, 20),
-                    Tag = _itemsCollection[i],
-                    Text = _itemsCollection[i].ShortName,
+                    Tag = type.TypeFilterId,
+                    Text =$"{type.TypeFilter} ({type.Count})" ,
                     TextAlign = ContentAlignment.MiddleLeft,
                     TextFont = new Font("Verdana", 14.25F, FontStyle.Regular, GraphicsUnit.Pixel, 204),
 
                     Enabled = true,
                     Status = Statuses.Satisfactory
                 };
-
+                
                 _controlItems.Add(tempLabel);
-                if (GlobalObjects.CaaEnvironment.Operators.Count == 1)
-                    tempLabel.DisplayerText = _itemsCollection[i].FullName;
-                else
-                    tempLabel.DisplayerText =
-                        GlobalObjects.CaaEnvironment.Operators.First(o => o.ItemId == _itemsCollection[i].ItemId)
-                            .Name + ". " + _itemsCollection[i].FullName;
-
-                _controlItems.Add(tempLabel);
-
                 tempLabel.DisplayerRequested += TempButtonDisplayerRequested;
-
-
             }
+            
 
             extendableRichContainer.Caption = _itemsCollection.Count + " Operator/Provider";
-            _controlItems.Sort((x, y) => string.Compare(x.Text, y.Text));
+            //_controlItems.Sort((x, y) => string.Compare(x.Text, y.Text));
             flowLayoutPanelAircrafts.Controls.AddRange(_controlItems.ToArray());
             flowLayoutPanelAircrafts.Controls.Add(panelButtons);
         }
 
         private void TempButtonDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            var op = ((ReferenceStatusImageLinkLabel)sender).Tag as AllOperators;
-
-            if (op == null)
-                e.Cancel = true;
+            var id = (int)((ReferenceStatusImageLinkLabel)sender).Tag;
             
-            Keyboard k = new Keyboard();
-            if (k.ShiftKeyDown)
+            var k = new Keyboard();
+            //if (k.ShiftKeyDown)
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-            else e.TypeOfReflection = ReflectionTypes.DisplayInCurrent;
-            e.DisplayerText = op.ShortName;
-            e.RequestedEntity = new CurrentOperatorSymmaryCAADemoScreen(op);
+            //else e.TypeOfReflection = ReflectionTypes.DisplayInCurrent;
+            
+            if(id == -1)
+                e.DisplayerText = "All Operator/Provider";
+            else
+            {
+                var type = (Type)id;
+                e.DisplayerText = type.DisplayName() + " Operator/Provider";
+            }
+            e.RequestedEntity = new CAAOperatorlListScreen(GlobalObjects.CaaEnvironment.Operators.FirstOrDefault(), id);
         }
 
         #endregion
