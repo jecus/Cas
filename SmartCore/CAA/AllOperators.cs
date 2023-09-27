@@ -31,7 +31,7 @@ namespace SmartCore.CAA
         CAO = 3,
         [Description("Aerodrom Operator")]
         AerodromOperator = 4,
-        [Description("ATCANS")]
+        [Description("ATC/ANS")]
         ATCANS = 5,
         [Description("Fuel")]
         Fuel = 6,
@@ -39,7 +39,7 @@ namespace SmartCore.CAA
         AeMC = 7,
         [Description("ATO")]
         ATO = 8,
-        [Description("None")]
+        [Description("Other")]
         None = 9
 
     }

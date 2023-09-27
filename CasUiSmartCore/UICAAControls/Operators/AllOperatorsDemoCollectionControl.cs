@@ -94,7 +94,7 @@ namespace CAS.UI.UICAAControls.Operators
                 TypeFilter = i.Key.DisplayName(),
                 TypeFilterId = (int)i.Key,
                 Count = i.Count()
-            });
+            }).OrderBy(i => i.TypeFilter);
             
             var all = new ReferenceStatusImageLinkLabel
             {
