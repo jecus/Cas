@@ -33,8 +33,7 @@ namespace CAA.Entity.Core.Repository
 
 		public async Task<IList<int>> GetSelectColumnOnlyAsync(IEnumerable<Filter> filters, string selectProperty)
 		{
-			using (_context)
-			{
+
 				IQueryable<T> query = _dbset;
 
 				var conditionAttributes = typeof(T).GetCustomAttributes(typeof(ConditionAttribute), false).Cast<ConditionAttribute>().ToList();
@@ -60,18 +59,17 @@ namespace CAA.Entity.Core.Repository
 					return await query.AsNoTracking().Select(selectProperty).ToListAsync();
 
 				return new List<int>();
-			}
 		}
 
 		public async Task<T> GetObjectByIdAsync(int id, bool loadChild = false)
 		{
-			using (_context)
+			
 				return await getAllQueryable(new[] { new Filter("ItemId", id) }, loadChild).AsNoTracking().FirstOrDefaultAsync();
 		}
 
 		public async Task<T> GetObjectAsync(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
 		{
-			using (_context)
+			
 				return await getAllQueryable(filters, loadChild, getDeleted, getAll).AsNoTracking().FirstOrDefaultAsync();
 		}
 
@@ -79,7 +77,7 @@ namespace CAA.Entity.Core.Repository
 		{
             try
             {
-                using (_context)
+                
                     return await getAllQueryable(filters, loadChild, getDeleted).AsNoTracking().ToListAsync();
 			}
             catch (Exception e)
@@ -92,7 +90,7 @@ namespace CAA.Entity.Core.Repository
 
 		public async Task<IList<T>> GetObjectListAllAsync(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
-			using (_context)
+			
 				return await getAllQueryable(filters, loadChild, getDeleted, true).AsNoTracking().ToListAsync();
 		}
 

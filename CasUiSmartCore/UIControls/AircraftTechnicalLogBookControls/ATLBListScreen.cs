@@ -122,7 +122,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 			_itemsArray.AddRange(GlobalObjects.AircraftFlightsCore.GetATLBsByAircraftId(CurrentAircraft.ItemId, true));
 
-#if SCAT
+#if AQUILINE
 			GlobalObjects.AircraftFlightsCore.LoadAircraftFlights(CurrentAircraft.ItemId);
 #endif
 
