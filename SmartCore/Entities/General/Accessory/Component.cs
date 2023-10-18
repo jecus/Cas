@@ -20,7 +20,7 @@ using SmartCore.Purchase;
 namespace SmartCore.Entities.General.Accessory
 {
 	/// <summary>
-	/// Класс описывает компонент
+	/// РљР»Р°СЃСЃ РѕРїРёСЃС‹РІР°РµС‚ РєРѕРјРїРѕРЅРµРЅС‚
 	/// </summary>
 	[Serializable]
 	[Table("Components", "dbo", "ItemId")]
@@ -38,7 +38,7 @@ namespace SmartCore.Entities.General.Accessory
 		private double _costNew;
 		
 		/*
-		*  Свойства
+		*  РЎРІРѕР№СЃС‚РІР°
 		*/
 
 		#region Implement IAccessory
@@ -47,7 +47,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private Product _product;
 		/// <summary>
-		/// Описание агрегата
+		/// РћРїРёСЃР°РЅРёРµ Р°РіСЂРµРіР°С‚Р°
 		/// </summary>
 		//[TableColumn("AccessoryDescriptionId")]
 		public override Product Product
@@ -94,7 +94,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private GoodStandart _standart;
 		/// <summary>
-		/// Чертёжный номер агрегата
+		/// Р§РµСЂС‚С‘Р¶РЅС‹Р№ РЅРѕРјРµСЂ Р°РіСЂРµРіР°С‚Р°
 		/// </summary>
 		[ListViewData(0.1f, "Standart", 1)]
 		[Filter("Standart:", Order = 1)]
@@ -127,7 +127,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private string _partNumber;
 		/// <summary>
-		/// Чертёжный номер агрегата
+		/// Р§РµСЂС‚С‘Р¶РЅС‹Р№ РЅРѕРјРµСЂ Р°РіСЂРµРіР°С‚Р°
 		/// </summary>
 		[TableColumn("PartNumber")]
 		[Filter("Part. Number:", Order = 1)]
@@ -142,7 +142,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private string _serialNumber;
 		/// <summary>
-		/// Серийный номер агреагата
+		/// РЎРµСЂРёР№РЅС‹Р№ РЅРѕРјРµСЂ Р°РіСЂРµР°РіР°С‚Р°
 		/// </summary>
 		[TableColumn("SerialNumber")]
 		[Filter("Serial Number:", Order = 2)]
@@ -157,7 +157,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private string _batchNumber;
 		/// <summary>
-		/// Пакетный номер
+		/// РџР°РєРµС‚РЅС‹Р№ РЅРѕРјРµСЂ
 		/// </summary>
 		[TableColumn("BatchNumber")]
 		public override String BatchNumber
@@ -178,7 +178,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private string _description;
 		/// <summary>
-		/// Описание агрегата
+		/// РћРїРёСЃР°РЅРёРµ Р°РіСЂРµРіР°С‚Р°
 		/// </summary>
 		[TableColumn("Description")]
 		[Filter("Description:", Order = 3)]
@@ -193,7 +193,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private string _manufacturer;
 		/// <summary>
-		/// Производитель
+		/// РџСЂРѕРёР·РІРѕРґРёС‚РµР»СЊ
 		/// </summary>
 		[TableColumn("Manufacturer")]
 		[Filter("Manufacturer:", Order = 4)]
@@ -208,7 +208,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private string _remarks;
 		/// <summary>
-		/// Дополнительные заметки
+		/// Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ Р·Р°РјРµС‚РєРё
 		/// </summary>
 		[TableColumn("Remarks")]
 		public override String Remarks
@@ -221,14 +221,14 @@ namespace SmartCore.Entities.General.Accessory
 		#region public NDTType NDTType { get; set; }
 
 		/// <summary>
-		/// Тип производимого Non-Destructive-Test
+		/// РўРёРї РїСЂРѕРёР·РІРѕРґРёРјРѕРіРѕ Non-Destructive-Test
 		/// </summary>
 		public  NDTType NDTType { get; set; }
 		#endregion
 
 		#region public override Double CostNew { get; set; }
 		/// <summary>
-		/// Цена новой детали
+		/// Р¦РµРЅР° РЅРѕРІРѕР№ РґРµС‚Р°Р»Рё
 		/// </summary>
 		[TableColumn("Cost"), MinMaxValueAttribute(0, 1000000000)]
 		public override Double CostNew { get; set; }
@@ -280,7 +280,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private Measure _measure;
 		/// <summary>
-		/// Единица измерения
+		/// Р•РґРёРЅРёС†Р° РёР·РјРµСЂРµРЅРёСЏ
 		/// </summary>
 		[TableColumn("Measure")]
 		public override Measure Measure
@@ -299,7 +299,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public override string ParentString { get; }
 		/// <summary>
-		/// Строковое описание родителя
+		/// РЎС‚СЂРѕРєРѕРІРѕРµ РѕРїРёСЃР°РЅРёРµ СЂРѕРґРёС‚РµР»СЏ
 		/// </summary>
 		public override string ParentString
 		{
@@ -311,7 +311,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private SupplierCollection _suppliers;
 		/// <summary>
-		/// Поставщики данной детали
+		/// РџРѕСЃС‚Р°РІС‰РёРєРё РґР°РЅРЅРѕР№ РґРµС‚Р°Р»Рё
 		/// </summary>
 		[Child(typeof(KitSuppliersRelation), "KitId", "ParentTypeId", new[]{5,6}, "SupplierId")]
 		[Filter("Suppliers:")]
@@ -336,7 +336,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private CommonCollection<KitSuppliersRelation> _supplierRelations;
 		/// <summary>
-		/// связи с поставщиками данного KIT-а
+		/// СЃРІСЏР·Рё СЃ РїРѕСЃС‚Р°РІС‰РёРєР°РјРё РґР°РЅРЅРѕРіРѕ KIT-Р°
 		/// </summary>
 		[Child(RelationType.OneToMany, "KitId", "ParentTypeId", new[] { 5, 6 }, "Accessory")]
 		public override CommonCollection<KitSuppliersRelation> SupplierRelations
@@ -415,7 +415,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public String IdNumber { get; set; }
 		/// <summary>
-		/// Идентификационный (инвентарный) номер
+		/// РРґРµРЅС‚РёС„РёРєР°С†РёРѕРЅРЅС‹Р№ (РёРЅРІРµРЅС‚Р°СЂРЅС‹Р№) РЅРѕРјРµСЂ
 		/// </summary>
 		[TableColumn("IdNumber")]
 		public String IdNumber { get; set; }
@@ -423,7 +423,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public String Code { get; set; }
 		/// <summary>
-		/// Код продукта
+		/// РљРѕРґ РїСЂРѕРґСѓРєС‚Р°
 		/// </summary>
 		[TableColumn("Code")]
 		public String Code { get; set; }
@@ -431,7 +431,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public AtaChapter ATAChapter { get; set; }
 		/// <summary>
-		/// Внешний ключ на идентификатор записи со справочной информацией
+		/// Р’РЅРµС€РЅРёР№ РєР»СЋС‡ РЅР° РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ Р·Р°РїРёСЃРё СЃРѕ СЃРїСЂР°РІРѕС‡РЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРµР№
 		/// </summary>
 		[TableColumn("AtaChapter")]
 		[Filter("Ata Chapter:", Order = 5)]
@@ -440,7 +440,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public MaintenanceControlProcess MaintenanceControlProcess { get; set; }
 		/// <summary>
-		/// Идентификатор записи с типом технического обслуживания
+		/// РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ Р·Р°РїРёСЃРё СЃ С‚РёРїРѕРј С‚РµС…РЅРёС‡РµСЃРєРѕРіРѕ РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ
 		/// </summary>
 		[TableColumn("MaintenanceType")]
 		[Filter("Maint. Proc.:", Order = 6)]
@@ -451,7 +451,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private ComponentModel _componentModel;
 		/// <summary>
-		/// Модель агрегата
+		/// РњРѕРґРµР»СЊ Р°РіСЂРµРіР°С‚Р°
 		/// </summary>
 		[TableColumn("Model")]
 		[Child(true)]
@@ -473,7 +473,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public DateTime ManufactureDate { get; set; }
 		/// <summary>
-		/// Дата выпуска
+		/// Р”Р°С‚Р° РІС‹РїСѓСЃРєР°
 		/// </summary>
 		[TableColumn("ManufactureDate")]
 		public DateTime ManufactureDate
@@ -491,7 +491,7 @@ namespace SmartCore.Entities.General.Accessory
 		#region public DateTime DeliveryDate { get; set; }
 
 		/// <summary>
-		/// Дата доставки
+		/// Р”Р°С‚Р° РґРѕСЃС‚Р°РІРєРё
 		/// </summary>
 		[TableColumn("DeliveryDate")]
 		public DateTime DeliveryDate
@@ -509,7 +509,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region internal Lifelength Lifelength { get; set; }
 		/// <summary>
-		/// Наработка агрегата (осталась еще от Proxy типов старой системы
+		/// РќР°СЂР°Р±РѕС‚РєР° Р°РіСЂРµРіР°С‚Р° (РѕСЃС‚Р°Р»Р°СЃСЊ РµС‰Рµ РѕС‚ Proxy С‚РёРїРѕРІ СЃС‚Р°СЂРѕР№ СЃРёСЃС‚РµРјС‹
 		/// </summary>
 		[TableColumn("Lifelength")]
 		internal Lifelength Lifelength { get; set; }
@@ -517,7 +517,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public Boolean IsBaseComponent { get; set; }
 		/// <summary>
-		/// Флаг, показывающий, является ли агрегат базовым
+		/// Р¤Р»Р°Рі, РїРѕРєР°Р·С‹РІР°СЋС‰РёР№, СЏРІР»СЏРµС‚СЃСЏ Р»Рё Р°РіСЂРµРіР°С‚ Р±Р°Р·РѕРІС‹Рј
 		/// </summary>
 		[TableColumn("IsBaseComponent")]
 		public bool IsBaseComponent { get; set; }
@@ -531,7 +531,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public Boolean LLPMark { get; set; }
 		/// <summary>
-		/// Отметка LLP
+		/// РћС‚РјРµС‚РєР° LLP
 		/// </summary>
 		[TableColumn("LLPMark")]
 		public Boolean LLPMark { get; set; }
@@ -545,7 +545,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public Boolean LLPCategories { get; set; }
 		/// <summary>
-		/// Отметка о том, что наработка по LLP ведется согласно LLP категориям
+		/// РћС‚РјРµС‚РєР° Рѕ С‚РѕРј, С‡С‚Рѕ РЅР°СЂР°Р±РѕС‚РєР° РїРѕ LLP РІРµРґРµС‚СЃСЏ СЃРѕРіР»Р°СЃРЅРѕ LLP РєР°С‚РµРіРѕСЂРёСЏРј
 		/// </summary>
 		[TableColumn("LLPCategories")]
 		public Boolean LLPCategories { get; set; }
@@ -553,7 +553,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public LandingGearMarkType LandingGear { get; set; }
 		/// <summary>
-		/// Отметка Landing Gear
+		/// РћС‚РјРµС‚РєР° Landing Gear
 		/// </summary>
 		[TableColumn("LandingGear")]
 		public LandingGearMarkType LandingGear { get; set; }
@@ -561,7 +561,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public AvionicsInventoryMarkType AvionicsInventory { get; set; }
 		/// <summary>
-		/// Отметка Avionics Inventory
+		/// РћС‚РјРµС‚РєР° Avionics Inventory
 		/// </summary>
 		[TableColumn("AvionicsInventory")]
 		public AvionicsInventoryMarkType AvionicsInventory { get; set; }
@@ -583,7 +583,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public String MTOGW { get; set; }
 		/// <summary>
-		/// Максимальный взлетный вес
+		/// РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РІР·Р»РµС‚РЅС‹Р№ РІРµСЃ
 		/// </summary>
 		[TableColumn("MTOGW")]
 		public String MTOGW { get; set; }
@@ -641,7 +641,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public Lifelength Warranty { get; set; }
 		/// <summary>
-		/// Гарантийный срок на деталь 
+		/// Р“Р°СЂР°РЅС‚РёР№РЅС‹Р№ СЃСЂРѕРє РЅР° РґРµС‚Р°Р»СЊ 
 		/// </summary>
 		[TableColumn("Warranty")]
 		public Lifelength Warranty
@@ -653,7 +653,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public Lifelength WarrantyNotify { get; set; }
 		/// <summary>
-		/// Предупреждение об истечении гарантии
+		/// РџСЂРµРґСѓРїСЂРµР¶РґРµРЅРёРµ РѕР± РёСЃС‚РµС‡РµРЅРёРё РіР°СЂР°РЅС‚РёРё
 		/// </summary>
 		[TableColumn("WarrantyNotify")]
 		public Lifelength WarrantyNotify
@@ -718,7 +718,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public Highlight Highlight { get; set; }
 		/// <summary>
-		/// Подсветка
+		/// РџРѕРґСЃРІРµС‚РєР°
 		/// </summary>
 		[TableColumn("Highlight")]
 		public Highlight Highlight { get; set; }
@@ -761,7 +761,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public Lifelength LifeLimit { get; set; }
 		/// <summary>
-		/// Ограничение срока эксплуатации агрегата
+		/// РћРіСЂР°РЅРёС‡РµРЅРёРµ СЃСЂРѕРєР° СЌРєСЃРїР»СѓР°С‚Р°С†РёРё Р°РіСЂРµРіР°С‚Р°
 		/// </summary>
 		[TableColumn("LifeLimit")]
 		public Lifelength LifeLimit
@@ -773,7 +773,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public Lifelength LifeLimitNotify { get; set; }
 		/// <summary>
-		/// Уведомление до ограничения срока эксплуатации агрегата
+		/// РЈРІРµРґРѕРјР»РµРЅРёРµ РґРѕ РѕРіСЂР°РЅРёС‡РµРЅРёСЏ СЃСЂРѕРєР° СЌРєСЃРїР»СѓР°С‚Р°С†РёРё Р°РіСЂРµРіР°С‚Р°
 		/// </summary>
 		[TableColumn("LifeLimitNotify")]
 		public Lifelength LifeLimitNotify
@@ -787,7 +787,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private ComponentLLPDataCollection _componentLLPDataCollection;
 		/// <summary>
-		/// Данные о наработке и ресурсе агрегата по LLP категориям
+		/// Р”Р°РЅРЅС‹Рµ Рѕ РЅР°СЂР°Р±РѕС‚РєРµ Рё СЂРµСЃСѓСЂСЃРµ Р°РіСЂРµРіР°С‚Р° РїРѕ LLP РєР°С‚РµРіРѕСЂРёСЏРј
 		/// </summary>
 		[Child(RelationType.OneToMany, "ComponentId")]
 		public ComponentLLPDataCollection LLPData
@@ -819,7 +819,7 @@ namespace SmartCore.Entities.General.Accessory
 		#region public int ParentAircraftId
 
 		/// <summary>
-		/// Воздушное судно, где установлен агрегат - см. также ParentStore - одно из двух свойств ParentAircraft либо ParentStore == null
+		/// Р’РѕР·РґСѓС€РЅРѕРµ СЃСѓРґРЅРѕ, РіРґРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅ Р°РіСЂРµРіР°С‚ - СЃРј. С‚Р°РєР¶Рµ ParentStore - РѕРґРЅРѕ РёР· РґРІСѓС… СЃРІРѕР№СЃС‚РІ ParentAircraft Р»РёР±Рѕ ParentStore == null
 		/// </summary>
 
 		public int ParentAircraftId { get; set; }
@@ -843,7 +843,7 @@ namespace SmartCore.Entities.General.Accessory
 		#region public int ParentStoreId { get; }
 
 		/// <summary>
-		/// Склад, где находится агрегат - см. также ParentAircraft - одно из двух свойств ParentAircraft либо ParentStore == null
+		/// РЎРєР»Р°Рґ, РіРґРµ РЅР°С…РѕРґРёС‚СЃСЏ Р°РіСЂРµРіР°С‚ - СЃРј. С‚Р°РєР¶Рµ ParentAircraft - РѕРґРЅРѕ РёР· РґРІСѓС… СЃРІРѕР№СЃС‚РІ ParentAircraft Р»РёР±Рѕ ParentStore == null
 		/// </summary>
 		public int ParentStoreId { get; set; }
 
@@ -851,7 +851,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public Operator ParentOperator { get; set; }
 		/// <summary>
-		/// Оператор, которому пренадлежит агрегат - см. также ParentAircraft и ParentStore - одно из свойств ParentAircraft либо ParentStore либо ParentOperator != null
+		/// РћРїРµСЂР°С‚РѕСЂ, РєРѕС‚РѕСЂРѕРјСѓ РїСЂРµРЅР°РґР»РµР¶РёС‚ Р°РіСЂРµРіР°С‚ - СЃРј. С‚Р°РєР¶Рµ ParentAircraft Рё ParentStore - РѕРґРЅРѕ РёР· СЃРІРѕР№СЃС‚РІ ParentAircraft Р»РёР±Рѕ ParentStore Р»РёР±Рѕ ParentOperator != null
 		/// </summary>
 		public Operator ParentOperator { get; set; }
 		#endregion
@@ -861,9 +861,9 @@ namespace SmartCore.Entities.General.Accessory
 		[NonSerialized]
 		private BaseComponent _parentBaseComponent;
 		/// <summary>
-		/// Получает базовый агрегат, на котором установлен агрегат
+		/// РџРѕР»СѓС‡Р°РµС‚ Р±Р°Р·РѕРІС‹Р№ Р°РіСЂРµРіР°С‚, РЅР° РєРѕС‚РѕСЂРѕРј СѓСЃС‚Р°РЅРѕРІР»РµРЅ Р°РіСЂРµРіР°С‚
 		/// </summary>
-		[Filter("Base Detail:", Order = 7)]//TODO:(Evgenii Babak) Переименовать Detail в Component 
+		[Filter("Base Detail:", Order = 7)]//TODO:(Evgenii Babak) РџРµСЂРµРёРјРµРЅРѕРІР°С‚СЊ Detail РІ Component 
 		public BaseComponent ParentBaseComponent
 		{
 			get { return _parentBaseComponent; }
@@ -891,7 +891,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private ComponentThreshold _threshold;
 		/// <summary>
-		/// порог первого и посделующего выполнений
+		/// РїРѕСЂРѕРі РїРµСЂРІРѕРіРѕ Рё РїРѕСЃРґРµР»СѓСЋС‰РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёР№
 		/// </summary>
 		public ComponentThreshold Threshold
 		{
@@ -902,7 +902,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public double Current { get; set; }
 		/// <summary>
-		/// Текущее кол-во комплектующего на складе
+		/// РўРµРєСѓС‰РµРµ РєРѕР»-РІРѕ РєРѕРјРїР»РµРєС‚СѓСЋС‰РµРіРѕ РЅР° СЃРєР»Р°РґРµ
 		/// </summary>
 		[ListViewData(0.05f, "Current")]
 		public double Current { get; set; }
@@ -910,7 +910,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public double Amount { get; set; }
 		/// <summary>
-		/// Минимальное кол-во комплектующего на скаде
+		/// РњРёРЅРёРјР°Р»СЊРЅРѕРµ РєРѕР»-РІРѕ РєРѕРјРїР»РµРєС‚СѓСЋС‰РµРіРѕ РЅР° СЃРєР°РґРµ
 		/// </summary>
 		[ListViewData(0.05f, "Should be on stock")]
 		public double ShouldBeOnStock { get; set; }
@@ -956,7 +956,7 @@ namespace SmartCore.Entities.General.Accessory
 		public string Name => Product?.Name;
 
 
-		//TODO:временное свойство(какое кол-во продукта нужно из раб пакета)
+		//TODO:РІСЂРµРјРµРЅРЅРѕРµ СЃРІРѕР№СЃС‚РІРѕ(РєР°РєРѕРµ РєРѕР»-РІРѕ РїСЂРѕРґСѓРєС‚Р° РЅСѓР¶РЅРѕ РёР· СЂР°Р± РїР°РєРµС‚Р°)
 		public double NeedWpQuantity { get; set; }
 
 		#region Implement of IWorkPackageItemFilterParams
@@ -1029,17 +1029,17 @@ namespace SmartCore.Entities.General.Accessory
 		}
 
 		/*
-		*  Методы 
+		*  РњРµС‚РѕРґС‹ 
 		*/
 
 		#region public Component()
 		/// <summary>
-		/// Создает компонент без дополнительной информации
+		/// РЎРѕР·РґР°РµС‚ РєРѕРјРїРѕРЅРµРЅС‚ Р±РµР· РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё
 		/// </summary>
 		public Component()
 		{
 			SmartCoreObjectType = SmartCoreType.Component;
-			// Отрицательный индекс свидетельствует о том, что агрегат не сохранен в базе данных
+			// РћС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Р№ РёРЅРґРµРєСЃ СЃРІРёРґРµС‚РµР»СЊСЃС‚РІСѓРµС‚ Рѕ С‚РѕРј, С‡С‚Рѕ Р°РіСЂРµРіР°С‚ РЅРµ СЃРѕС…СЂР°РЅРµРЅ РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С…
 			ItemId = -1;
 			
 			// Ata Chapter = 21 (Not Applicable)
@@ -1047,32 +1047,32 @@ namespace SmartCore.Entities.General.Accessory
 
 			IsBaseComponent = false;
 			_componentStatus = ComponentStatus.New;
-			// Все ресурсы должны быть заполнеными - иначе исключение при сохранении в базу данных
+			// Р’СЃРµ СЂРµСЃСѓСЂСЃС‹ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ Р·Р°РїРѕР»РЅРµРЅС‹РјРё - РёРЅР°С‡Рµ РёСЃРєР»СЋС‡РµРЅРёРµ РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С…
 			_threshold = new ComponentThreshold();
 			Lifelength = Lifelength.Null;
 			StartLifelength = Lifelength.Null;
-			// Все даты тоже должны быть заполнены - иначе исключение при сохранении в базу данных
+			// Р’СЃРµ РґР°С‚С‹ С‚РѕР¶Рµ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ Р·Р°РїРѕР»РЅРµРЅС‹ - РёРЅР°С‡Рµ РёСЃРєР»СЋС‡РµРЅРёРµ РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С…
 			DeliveryDate = DateTimeExtend.GetCASMinDateTime();
 			manufactureDate = DateTimeExtend.GetCASMinDateTime();
 			ExpirationDate = DateTimeExtend.GetCASMinDateTime();
 			NotificationDate = DateTimeExtend.GetCASMinDateTime();
 			StartDate = DateTimeExtend.GetCASMinDateTime();
-			// Задаем Maintenance Type
+			// Р—Р°РґР°РµРј Maintenance Type
 			MaintenanceControlProcess = MaintenanceControlProcess.OC;
 			PrintInWorkPackage = true;
 
-			// String тоже не должны быть равны null
+			// String С‚РѕР¶Рµ РЅРµ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ СЂР°РІРЅС‹ null
 			_partNumber = _description = _serialNumber = _remarks = _manufacturer = ALTPartNumber = MTOGW = HushKit = ShelfLife
 				= _batchNumber = IdNumber = MPDItem = HiddenRemarks = KitRequired = "";
 			_measure = Measure.Unit;
-			// Создаем все коллекции
+			// РЎРѕР·РґР°РµРј РІСЃРµ РєРѕР»Р»РµРєС†РёРё
 			ChangeLLPCategoryRecords = new BaseRecordCollection<ComponentLLPCategoryChangeRecord>();
 		}
 		#endregion
 
 		#region public Component(TemplateComponent templateComponent) : this()
 		/// <summary>
-		/// Создает воздушное судно без дополнительной информации
+		/// РЎРѕР·РґР°РµС‚ РІРѕР·РґСѓС€РЅРѕРµ СЃСѓРґРЅРѕ Р±РµР· РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё
 		/// </summary>
 		public Component(TemplateComponent templateComponent) : this()
 		{
@@ -1114,7 +1114,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public Component(Component copyComponent) : this()
 		/// <summary>
-		/// Создает деталь на основе другой детали
+		/// РЎРѕР·РґР°РµС‚ РґРµС‚Р°Р»СЊ РЅР° РѕСЃРЅРѕРІРµ РґСЂСѓРіРѕР№ РґРµС‚Р°Р»Рё
 		/// </summary>
 		public Component(Component copyComponent) : this()
 		{
@@ -1153,7 +1153,7 @@ namespace SmartCore.Entities.General.Accessory
 			MTOGW = copyComponent.MTOGW;
 			NotificationDate = copyComponent.NotificationDate;
 			ParentAircraftId = copyComponent.ParentAircraftId;
-			ParentBaseComponent = copyComponent.ParentBaseComponent;//TODO:(Evgenii Babak) заменить на использование ComponentCore 
+			ParentBaseComponent = copyComponent.ParentBaseComponent;//TODO:(Evgenii Babak) Р·Р°РјРµРЅРёС‚СЊ РЅР° РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ ComponentCore 
 			_partNumber = copyComponent.PartNumber;
 			_quantity = copyComponent.Quantity;
 			_remarks = copyComponent.Remarks;
@@ -1268,7 +1268,7 @@ namespace SmartCore.Entities.General.Accessory
 		}
 
 		/// <summary>
-		/// Перегружаем для отладки
+		/// РџРµСЂРµРіСЂСѓР¶Р°РµРј РґР»СЏ РѕС‚Р»Р°РґРєРё
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()
@@ -1289,17 +1289,17 @@ namespace SmartCore.Entities.General.Accessory
 		#endregion
 
 		/*
-		 * Математичесский аппарат
+		 * РњР°С‚РµРјР°С‚РёС‡РµСЃСЃРєРёР№ Р°РїРїР°СЂР°С‚
 		 */
 		#region Implement of IEngineeringDirective
-		//Своиства интерфеися IMathData, они содержат вычисления мат аппарата для объектов
-		//у всех директив, деталей чеков и т.д. можно вычислить их текущее сотояние
-		// дату след. выполнения и наработку на которой это выполнение произоидет
+		//РЎРІРѕРёСЃС‚РІР° РёРЅС‚РµСЂС„РµРёСЃСЏ IMathData, РѕРЅРё СЃРѕРґРµСЂР¶Р°С‚ РІС‹С‡РёСЃР»РµРЅРёСЏ РјР°С‚ Р°РїРїР°СЂР°С‚Р° РґР»СЏ РѕР±СЉРµРєС‚РѕРІ
+		//Сѓ РІСЃРµС… РґРёСЂРµРєС‚РёРІ, РґРµС‚Р°Р»РµР№ С‡РµРєРѕРІ Рё С‚.Рґ. РјРѕР¶РЅРѕ РІС‹С‡РёСЃР»РёС‚СЊ РёС… С‚РµРєСѓС‰РµРµ СЃРѕС‚РѕСЏРЅРёРµ
+		// РґР°С‚Сѓ СЃР»РµРґ. РІС‹РїРѕР»РЅРµРЅРёСЏ Рё РЅР°СЂР°Р±РѕС‚РєСѓ РЅР° РєРѕС‚РѕСЂРѕР№ СЌС‚Рѕ РІС‹РїРѕР»РЅРµРЅРёРµ РїСЂРѕРёР·РѕРёРґРµС‚
 
 		#region String Title { get; }
 
 		/// <summary>
-		/// Название директивы
+		/// РќР°Р·РІР°РЅРёРµ РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>
 		public String Title
 		{
@@ -1309,14 +1309,14 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region String Zone { get; }
 		/// <summary>
-		/// Зона
+		/// Р—РѕРЅР°
 		/// </summary>
 		public String Zone { get; set; }
 		#endregion
 
 		#region String Access { get; }
 		/// <summary>
-		/// Доступ
+		/// Р”РѕСЃС‚СѓРї
 		/// </summary>
 		public String Access { get; set; }
 		#endregion
@@ -1324,7 +1324,7 @@ namespace SmartCore.Entities.General.Accessory
 		#region public MaintenanceDirectiveProgramType Program { get; }
 
 		/// <summary>
-		/// Программа обслуживания
+		/// РџСЂРѕРіСЂР°РјРјР° РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ
 		/// </summary>
 		public MaintenanceDirectiveProgramType Program
 		{
@@ -1334,14 +1334,14 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public StaticDictionary WorkType { get; }
 		/// <summary>
-		/// Тип/Вид Работ
+		/// РўРёРї/Р’РёРґ Р Р°Р±РѕС‚
 		/// </summary>
 		public StaticDictionary WorkType { get { return ComponentRecordType.Remove; }}
 		#endregion
 
 		#region public String Phase { get; }
 		/// <summary>
-		/// Фаза
+		/// Р¤Р°Р·Р°
 		/// </summary>
 		public String Phase { get; set; }
 		#endregion
@@ -1371,7 +1371,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region BaseSmartCoreObject LifeLenghtParent { get; }
 		/// <summary>
-		/// Возвращает объект, для которого можно расчитать текущую наработку. Обычно Aircraft, BaseComponent или Component
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РѕР±СЉРµРєС‚, РґР»СЏ РєРѕС‚РѕСЂРѕРіРѕ РјРѕР¶РЅРѕ СЂР°СЃС‡РёС‚Р°С‚СЊ С‚РµРєСѓС‰СѓСЋ РЅР°СЂР°Р±РѕС‚РєСѓ. РћР±С‹С‡РЅРѕ Aircraft, BaseComponent РёР»Рё Component
 		/// </summary>
 		public BaseEntityObject LifeLengthParent
 		{
@@ -1381,7 +1381,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region IThreshold IDirective.Threshold { get; set; }
 		/// <summary>
-		/// порог первого и посделующего выполнений
+		/// РїРѕСЂРѕРі РїРµСЂРІРѕРіРѕ Рё РїРѕСЃРґРµР»СѓСЋС‰РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёР№
 		/// </summary>
 		IThreshold IDirective.Threshold
 		{
@@ -1392,8 +1392,8 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region IRecordCollection IDirective.PerformanceRecords { get; }
 		/// <summary>
-		/// Коллекция содержит все записи о выполнении директивы
-		/// <br/>Для детали вернет записи о перемещении или null
+		/// РљРѕР»Р»РµРєС†РёСЏ СЃРѕРґРµСЂР¶РёС‚ РІСЃРµ Р·Р°РїРёСЃРё Рѕ РІС‹РїРѕР»РЅРµРЅРёРё РґРёСЂРµРєС‚РёРІС‹
+		/// <br/>Р”Р»СЏ РґРµС‚Р°Р»Рё РІРµСЂРЅРµС‚ Р·Р°РїРёСЃРё Рѕ РїРµСЂРµРјРµС‰РµРЅРёРё РёР»Рё null
 		/// </summary>
 		IRecordCollection IDirective.PerformanceRecords
 		{
@@ -1403,7 +1403,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region AbstractPerformanceRecord IDirective.LastPerformance { get; }
 		/// <summary>
-		/// Доступ к последней записи о выполнении задачи, всегда Null
+		/// Р”РѕСЃС‚СѓРї Рє РїРѕСЃР»РµРґРЅРµР№ Р·Р°РїРёСЃРё Рѕ РІС‹РїРѕР»РЅРµРЅРёРё Р·Р°РґР°С‡Рё, РІСЃРµРіРґР° Null
 		/// </summary>
 		AbstractPerformanceRecord IDirective.LastPerformance { get { return null; } }
 		#endregion
@@ -1412,7 +1412,7 @@ namespace SmartCore.Entities.General.Accessory
 		[NonSerialized]
 		private List<NextPerformance> _nextPerformances;
 		/// <summary>
-		/// Список последующих выполнений задачи
+		/// РЎРїРёСЃРѕРє РїРѕСЃР»РµРґСѓСЋС‰РёС… РІС‹РїРѕР»РЅРµРЅРёР№ Р·Р°РґР°С‡Рё
 		/// </summary>
 		public List<NextPerformance> NextPerformances
 		{
@@ -1422,7 +1422,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public NextPerformance NextPerformance { get; }
 		/// <summary>
-		/// След. выполнение задачи
+		/// РЎР»РµРґ. РІС‹РїРѕР»РЅРµРЅРёРµ Р·Р°РґР°С‡Рё
 		/// </summary>
 		public NextPerformance NextPerformance
 		{
@@ -1437,7 +1437,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public ConditionState Condition { get; }
 		/// <summary>
-		/// Возвращает состояние ближайшего выполнения задачи (если оно расчитано) или ConditionState.NotEstimated
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃРѕСЃС‚РѕСЏРЅРёРµ Р±Р»РёР¶Р°Р№С€РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё (РµСЃР»Рё РѕРЅРѕ СЂР°СЃС‡РёС‚Р°РЅРѕ) РёР»Рё ConditionState.NotEstimated
 		/// </summary>
 		[Filter("Condition:")]
 		public ConditionState Condition
@@ -1455,7 +1455,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private ComponentStatus _componentStatus;
 		/// <summary>
-		/// Статус Компоненте (новый, после ТО, после ремонта, после кап.ремонта)
+		/// РЎС‚Р°С‚СѓСЃ РљРѕРјРїРѕРЅРµРЅС‚Рµ (РЅРѕРІС‹Р№, РїРѕСЃР»Рµ РўРћ, РїРѕСЃР»Рµ СЂРµРјРѕРЅС‚Р°, РїРѕСЃР»Рµ РєР°Рї.СЂРµРјРѕРЅС‚Р°)
 		/// </summary>
 		[TableColumn("Status")]
 		public ComponentStatus ComponentStatus
@@ -1477,13 +1477,13 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public DirectiveStatus Status { get; }
 		/// <summary>
-		/// Статус директивы
+		/// РЎС‚Р°С‚СѓСЃ РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>
 		public DirectiveStatus Status
 		{
 			get
 			{
-				if (IsClosed) return DirectiveStatus.Closed; //директива принудительно закрыта пользователем
+				if (IsClosed) return DirectiveStatus.Closed; //РґРёСЂРµРєС‚РёРІР° РїСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕ Р·Р°РєСЂС‹С‚Р° РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј
 				if (LifeLimit.IsNullOrZero()) return DirectiveStatus.Closed;
 
 				return DirectiveStatus.Open;
@@ -1494,7 +1494,7 @@ namespace SmartCore.Entities.General.Accessory
 		#region public Lifelength NextCompliance { get; }
 
 		/// <summary>
-		/// Возвращает ресурс ближайшего выполнения задачи (если оно расчитано) или Lifelength.Null
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЂРµСЃСѓСЂСЃ Р±Р»РёР¶Р°Р№С€РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё (РµСЃР»Рё РѕРЅРѕ СЂР°СЃС‡РёС‚Р°РЅРѕ) РёР»Рё Lifelength.Null
 		/// </summary>
 		public Lifelength NextPerformanceSource
 		{
@@ -1508,7 +1508,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public Lifelength Remains { get; }
 		/// <summary>
-		/// Возвращает остаток ресурса до ближайшего выполнения задачи (если оно расчитано) или Lifelength.Null
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РѕСЃС‚Р°С‚РѕРє СЂРµСЃСѓСЂСЃР° РґРѕ Р±Р»РёР¶Р°Р№С€РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё (РµСЃР»Рё РѕРЅРѕ СЂР°СЃС‡РёС‚Р°РЅРѕ) РёР»Рё Lifelength.Null
 		/// </summary>
 		public Lifelength Remains
 		{
@@ -1522,7 +1522,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public Lifelength BeforeForecastResourceRemain { get; }
 		/// <summary>
-		/// Остаток ресурса до прогноза (вычисляется только в прогнозе)
+		/// РћСЃС‚Р°С‚РѕРє СЂРµСЃСѓСЂСЃР° РґРѕ РїСЂРѕРіРЅРѕР·Р° (РІС‹С‡РёСЃР»СЏРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РІ РїСЂРѕРіРЅРѕР·Рµ)
 		/// </summary>
 		public Lifelength BeforeForecastResourceRemain
 		{
@@ -1535,20 +1535,20 @@ namespace SmartCore.Entities.General.Accessory
 		#endregion
 
 		#region public Lifelength ForecastLifelength { get; set; }
-		//ресурс прогноза
+		//СЂРµСЃСѓСЂСЃ РїСЂРѕРіРЅРѕР·Р°
 		public Lifelength ForecastLifelength { get; set; }
 		#endregion
 
 		#region public Lifelength AfterForecastResourceRemain { get; set; }
 		/// <summary>
-		/// Остаток ресурса после прогноза (вычисляется только в прогнозе)
+		/// РћСЃС‚Р°С‚РѕРє СЂРµСЃСѓСЂСЃР° РїРѕСЃР»Рµ РїСЂРѕРіРЅРѕР·Р° (РІС‹С‡РёСЃР»СЏРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РІ РїСЂРѕРіРЅРѕР·Рµ)
 		/// </summary>
 		public Lifelength AfterForecastResourceRemain { get; set; }
 		#endregion
 
 		#region public DateTime? NextComplianceDate{ get; set; }
 		/// <summary>
-		/// Возвращает прблизительную дату ближайшего выполнения задачи (если оно расчитано) или null
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РїСЂР±Р»РёР·РёС‚РµР»СЊРЅСѓСЋ РґР°С‚Сѓ Р±Р»РёР¶Р°Р№С€РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё (РµСЃР»Рё РѕРЅРѕ СЂР°СЃС‡РёС‚Р°РЅРѕ) РёР»Рё null
 		/// </summary>
 		public DateTime? NextPerformanceDate
 		{
@@ -1563,14 +1563,14 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public double? Percents { get; set; }
 		/// <summary>
-		/// Насколько процентов NextCompliance превосходит точку прогноза
+		/// РќР°СЃРєРѕР»СЊРєРѕ РїСЂРѕС†РµРЅС‚РѕРІ NextCompliance РїСЂРµРІРѕСЃС…РѕРґРёС‚ С‚РѕС‡РєСѓ РїСЂРѕРіРЅРѕР·Р°
 		/// </summary>
 		public double? Percents { get; set; }
 		#endregion
 
 		#region public string TimesToString { get; }
 		/// <summary>
-		/// Возвращает строковое представление количества "след. выполнений"
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃС‚СЂРѕРєРѕРІРѕРµ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РєРѕР»РёС‡РµСЃС‚РІР° "СЃР»РµРґ. РІС‹РїРѕР»РЅРµРЅРёР№"
 		/// </summary>
 		public string TimesToString
 		{
@@ -1580,7 +1580,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public Int32 Times { get;}
 		/// <summary>
-		/// Сколько раз выполнится директива (применяетмя только в прогнозах)
+		/// РЎРєРѕР»СЊРєРѕ СЂР°Р· РІС‹РїРѕР»РЅРёС‚СЃСЏ РґРёСЂРµРєС‚РёРІР° (РїСЂРёРјРµРЅСЏРµС‚РјСЏ С‚РѕР»СЊРєРѕ РІ РїСЂРѕРіРЅРѕР·Р°С…)
 		/// </summary>
 		public Int32 Times
 		{
@@ -1590,7 +1590,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public Double ManHours { get; set; }
 		/// <summary>
-		/// Параметр трудозатрат
+		/// РџР°СЂР°РјРµС‚СЂ С‚СЂСѓРґРѕР·Р°С‚СЂР°С‚
 		/// </summary>
 		[TableColumn("ManHours"), MinMaxValueAttribute(0, 1000000)]
 		public Double ManHours { get; set; }
@@ -1603,14 +1603,14 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region Double Elapsed { get; set; }
 		/// <summary>
-		/// Параметр полных трудозатрат 
+		/// РџР°СЂР°РјРµС‚СЂ РїРѕР»РЅС‹С… С‚СЂСѓРґРѕР·Р°С‚СЂР°С‚ 
 		/// </summary>
 		public Double Elapsed { get; set; }
 		#endregion
 
 		#region public int Mans { get; set; }
 		/// <summary>
-		/// Количество сотрудников для выполнения задачи
+		/// РљРѕР»РёС‡РµСЃС‚РІРѕ СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ РґР»СЏ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё
 		/// </summary>
 		public int Mans { get; set; }
 		#endregion
@@ -1629,14 +1629,14 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public Boolean IsClosed { get; set; }
 		/// <summary>
-		/// Логический флаг, показывающий, закрыта ли директива
+		/// Р›РѕРіРёС‡РµСЃРєРёР№ С„Р»Р°Рі, РїРѕРєР°Р·С‹РІР°СЋС‰РёР№, Р·Р°РєСЂС‹С‚Р° Р»Рё РґРёСЂРµРєС‚РёРІР°
 		/// </summary>
 		public Boolean IsClosed { get; set; }
 		#endregion
 
 		#region public Boolean NextPerformanceIsBlocked { get; }
 		///
-		/// Логический флаг, показывающий, заблокировано ли след. выполенение директивы рабочим пакетом
+		/// Р›РѕРіРёС‡РµСЃРєРёР№ С„Р»Р°Рі, РїРѕРєР°Р·С‹РІР°СЋС‰РёР№, Р·Р°Р±Р»РѕРєРёСЂРѕРІР°РЅРѕ Р»Рё СЃР»РµРґ. РІС‹РїРѕР»РµРЅРµРЅРёРµ РґРёСЂРµРєС‚РёРІС‹ СЂР°Р±РѕС‡РёРј РїР°РєРµС‚РѕРј
 		/// 
 		public Boolean NextPerformanceIsBlocked
 		{
@@ -1662,7 +1662,7 @@ namespace SmartCore.Entities.General.Accessory
 		#region public Lifelength LLPRemains { get; set; }
 
 		/// <summary>
-		/// Возвращает остаток ресурса до ближайшего выполнения задачи (если оно расчитано) или Lifelength.Null
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РѕСЃС‚Р°С‚РѕРє СЂРµСЃСѓСЂСЃР° РґРѕ Р±Р»РёР¶Р°Р№С€РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё (РµСЃР»Рё РѕРЅРѕ СЂР°СЃС‡РёС‚Р°РЅРѕ) РёР»Рё Lifelength.Null
 		/// </summary>
 		public Lifelength LLPRemains
 		{
@@ -1684,7 +1684,7 @@ namespace SmartCore.Entities.General.Accessory
 		#region public ConditionState LLPCondition { get; set; }
 
 		/// <summary>
-		/// Возвращает состояние ближайшего выполнения задачи (если оно расчитано) или ConditionState.NotEstimated
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃРѕСЃС‚РѕСЏРЅРёРµ Р±Р»РёР¶Р°Р№С€РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё (РµСЃР»Рё РѕРЅРѕ СЂР°СЃС‡РёС‚Р°РЅРѕ) РёР»Рё ConditionState.NotEstimated
 		/// </summary>
 		public ConditionState LLPCondition { get; set; }
 		#endregion
@@ -1708,7 +1708,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public string KitParentString { get; }
 		/// <summary>
-		/// Возвращает строку для описания родителя КИТа
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃС‚СЂРѕРєСѓ РґР»СЏ РѕРїРёСЃР°РЅРёСЏ СЂРѕРґРёС‚РµР»СЏ РљРРўР°
 		/// </summary>
 		public string KitParentString
 		{
@@ -1748,7 +1748,7 @@ namespace SmartCore.Entities.General.Accessory
 		#region Lifelength FirstPerformanceSinceNew { get; }
 
 		/// <summary>
-		/// Возвращает порог первого выполнения задачи
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РїРѕСЂРѕРі РїРµСЂРІРѕРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё
 		/// </summary>
 		public Lifelength FirstPerformanceSinceNew
 		{
@@ -1759,7 +1759,7 @@ namespace SmartCore.Entities.General.Accessory
 		#region public Lifelength Interval { get; }
 
 		/// <summary>
-		/// Возвращает интервал повторного выполнения задачи или Lifelength.Null
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёРЅС‚РµСЂРІР°Р» РїРѕРІС‚РѕСЂРЅРѕРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё РёР»Рё Lifelength.Null
 		/// </summary>
 		public Lifelength Interval { get { return Lifelength.Null; } }
 
@@ -1767,7 +1767,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public ComponentRecordType DirectiveType { get; }
 		/// <summary>
-		/// Тип директивы
+		/// РўРёРї РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>
 		public ComponentRecordType DirectiveType
 		{
@@ -1781,20 +1781,20 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public bool PrintInWorkPackage { get; set; }
 		/// <summary>
-		/// Возвращает или задает значение, показвающее настройку печати элемента в Рабочем пакете
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·РІР°СЋС‰РµРµ РЅР°СЃС‚СЂРѕР№РєСѓ РїРµС‡Р°С‚Рё СЌР»РµРјРµРЅС‚Р° РІ Р Р°Р±РѕС‡РµРј РїР°РєРµС‚Рµ
 		/// </summary>
 		public bool PrintInWorkPackage { get; set; }
 
 		#region public bool WorkPackageACCPrintTitle { get; set; }
 		/// <summary>
-		/// Возвращает или задает значение, показвающее печать НАЗВАНИЯ задачи в AccountabilitySheet рабочего пакета
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·РІР°СЋС‰РµРµ РїРµС‡Р°С‚СЊ РќРђР—Р’РђРќРРЇ Р·Р°РґР°С‡Рё РІ AccountabilitySheet СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 		/// </summary>
 		public bool WorkPackageACCPrintTitle { get; set; }
 		#endregion
 
 		#region public bool WorkPackageACCPrintTaskCard { get; set; }
 		/// <summary>
-		/// Возвращает или задает значение, показвающее печать РАБОЧЕЙ КАРТЫ задачи в AccountabilitySheet рабочего пакета
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·РІР°СЋС‰РµРµ РїРµС‡Р°С‚СЊ Р РђР‘РћР§Р•Р™ РљРђР РўР« Р·Р°РґР°С‡Рё РІ AccountabilitySheet СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 		/// </summary>
 		public bool WorkPackageACCPrintTaskCard { get; set; }
 		#endregion
@@ -1807,7 +1807,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private ActualStateRecordCollection _actualStates;
 		/// <summary>
-		/// Список актуальных состояний базового агрегата
+		/// РЎРїРёСЃРѕРє Р°РєС‚СѓР°Р»СЊРЅС‹С… СЃРѕСЃС‚РѕСЏРЅРёР№ Р±Р°Р·РѕРІРѕРіРѕ Р°РіСЂРµРіР°С‚Р°
 		/// </summary>
 		[Child(RelationType.OneToMany, "ComponentId", "ParentComponent")]
 		public ActualStateRecordCollection ActualStateRecords
@@ -1832,7 +1832,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private TransferRecordCollection _transferRecords;
 		/// <summary>
-		/// Список перемещений агрегата, всегда NotNull
+		/// РЎРїРёСЃРѕРє РїРµСЂРµРјРµС‰РµРЅРёР№ Р°РіСЂРµРіР°С‚Р°, РІСЃРµРіРґР° NotNull
 		/// </summary>
 		[Child(RelationType.OneToMany, "ParentId", "ParentComponent")]
 		public TransferRecordCollection TransferRecords
@@ -1857,7 +1857,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private CommonCollection<ComponentDirective> _componentDirectives;
 		/// <summary>
-		/// Список директив базового агрегата
+		/// РЎРїРёСЃРѕРє РґРёСЂРµРєС‚РёРІ Р±Р°Р·РѕРІРѕРіРѕ Р°РіСЂРµРіР°С‚Р°
 		/// </summary>
 		[Child(RelationType.OneToMany, "ComponentId", "ParentComponent")]
 		public CommonCollection<ComponentDirective> ComponentDirectives
@@ -1879,25 +1879,25 @@ namespace SmartCore.Entities.General.Accessory
 		#endregion
 
 		#region public BaseRecordCollection<ComponentLLPCategoryChangeRecord> ChangeLLPCategoryRecords { get; set; }
-		private BaseRecordCollection<ComponentLLPCategoryChangeRecord> _сhangeLLPCategoryRecords;
+		private BaseRecordCollection<ComponentLLPCategoryChangeRecord> _СЃhangeLLPCategoryRecords;
 		private Locations _location;
 
 
 		/// <summary>
-		/// Список записей о переводе агрегата меджу различными LLP категоиями
+		/// РЎРїРёСЃРѕРє Р·Р°РїРёСЃРµР№ Рѕ РїРµСЂРµРІРѕРґРµ Р°РіСЂРµРіР°С‚Р° РјРµРґР¶Сѓ СЂР°Р·Р»РёС‡РЅС‹РјРё LLP РєР°С‚РµРіРѕРёСЏРјРё
 		/// </summary>
 		[Child(RelationType.OneToMany, "ParentId", "Parent")]
 		public BaseRecordCollection<ComponentLLPCategoryChangeRecord> ChangeLLPCategoryRecords
 		{
-			get { return _сhangeLLPCategoryRecords ?? (_сhangeLLPCategoryRecords = new BaseRecordCollection<ComponentLLPCategoryChangeRecord>()); }
+			get { return _СЃhangeLLPCategoryRecords ?? (_СЃhangeLLPCategoryRecords = new BaseRecordCollection<ComponentLLPCategoryChangeRecord>()); }
 			set
 			{
-				if (_сhangeLLPCategoryRecords != value)
+				if (_СЃhangeLLPCategoryRecords != value)
 				{
-					if (_сhangeLLPCategoryRecords != null)
-						_сhangeLLPCategoryRecords.Clear();
+					if (_СЃhangeLLPCategoryRecords != null)
+						_СЃhangeLLPCategoryRecords.Clear();
 					if (value != null)
-						_сhangeLLPCategoryRecords = value;
+						_СЃhangeLLPCategoryRecords = value;
 
 					OnPropertyChanged("ChangeLLPCategoryRecords");
 				}
@@ -1949,13 +1949,23 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public DateTime FromSupplierReciveDate { get; set; }
 
+		public DateTime _fromSupplierReciveDate;
 		[TableColumn("FromSupplierReciveDate")]
-		public DateTime FromSupplierReciveDate { get; set; }
+		public DateTime FromSupplierReciveDate 
+		{
+			get { return _fromSupplierReciveDate > DateTimeExtend.GetCASMinDateTime() ? _fromSupplierReciveDate : DateTimeExtend.GetCASMinDateTime(); }
+			set
+			{
+				var min = DateTimeExtend.GetCASMinDateTime();
+				if (_fromSupplierReciveDate < min || _fromSupplierReciveDate != value)
+					_fromSupplierReciveDate = value < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : value;
+			}
+		}
 
 		#endregion
 
 		#region public new Component GetCopyUnsaved()
-		//TODO(Evenii Babak):Выяснить почему new вместо override
+		//TODO(Evenii Babak):Р’С‹СЏСЃРЅРёС‚СЊ РїРѕС‡РµРјСѓ new РІРјРµСЃС‚Рѕ override
 		public new Component GetCopyUnsaved(bool marked = true)
 		{
 			return GetCopyUnsaved(-1, marked);
@@ -2034,13 +2044,13 @@ namespace SmartCore.Entities.General.Accessory
 				component._componentDirectives.Add(newObject);
 			}
 
-			component._сhangeLLPCategoryRecords = new BaseRecordCollection<ComponentLLPCategoryChangeRecord>();
+			component._СЃhangeLLPCategoryRecords = new BaseRecordCollection<ComponentLLPCategoryChangeRecord>();
 			foreach (var componentLLPCategoryChangeRecord in ChangeLLPCategoryRecords)
 			{
 				var newObject = componentLLPCategoryChangeRecord.GetCopyUnsaved(marked);
 				newObject.ParentComponent = component;
 				newObject.ParentId = component.ItemId;
-				component._сhangeLLPCategoryRecords.Add(newObject);
+				component._СЃhangeLLPCategoryRecords.Add(newObject);
 			}
 
 

@@ -143,7 +143,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 		private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
 	    {
 		    if (_currentDocument == null) return;
-		    GlobalObjects.CaaEnvironment.NewLoader.ReloadDictionary(typeof(Occupation), typeof(DocumentSubType), typeof(Department), typeof(Nomenclatures));
+		    GlobalObjects.CasEnvironment.NewLoader.ReloadDictionary(typeof(Occupation), typeof(DocumentSubType), typeof(Department), typeof(Nomenclatures));
 		    parentDocs.Clear();
 			_suppliers.Clear();
 

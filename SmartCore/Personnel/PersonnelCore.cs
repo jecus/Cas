@@ -19,11 +19,21 @@ namespace SmartCore.Personnel
 			_casEnvironment.NewKeeper.Save(specialist);
 
 
-			specialist.Images.SpecialistId = specialist.ItemId;
-			_casEnvironment.NewKeeper.Save(specialist.Images);
+			if(specialist.Images != null)
+			{
+                specialist.Images.SpecialistId = specialist.ItemId;
+                _casEnvironment.NewKeeper.Save(specialist.Images);
+            }
 			
-			specialist.MedicalRecord.SpecialistId = specialist.ItemId;
-			_casEnvironment.NewKeeper.Save(specialist.MedicalRecord);
+			
+			if(specialist.MedicalRecord != null)
+			{
+                specialist.MedicalRecord.SpecialistId = specialist.ItemId;
+                _casEnvironment.NewKeeper.Save(specialist.MedicalRecord);
+            }
+
+
+		
 
 			foreach (CategoryRecord categoryRecord in specialist.CategoriesRecords)
 			{
